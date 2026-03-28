@@ -1,39 +1,1315 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로또번호 생성기</title>
-  <link href="style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해석학 I — 한·영 대조 개념 정리</title>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffef9;
+    --ink: #1a1612;
+    --ink-soft: #3d3528;
+    --ink-faint: #7a6e60;
+    --rule: #d4cabb;
+    --rule-light: #e8e2d6;
+    --accent: #8b3a1c;
+    --accent-soft: #c4623a;
+    --accent-pale: #f5ede7;
+    --def-bg: #f7f3ee;
+    --thm-bg: #f0ede8;
+    --thm-border: #9b4e2a;
+    --tag-bg: #1a1612;
+    --tag-fg: #faf8f4;
+    --en-bg: #f0f4f8;
+    --en-border: #4a6fa5;
+    --en-accent: #2c4a7c;
+    --en-pale: #e8eef5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', 'Libre Baskerville', Georgia, serif;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px);
+  }
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: .9rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 span {
+    display: block;
+    font-size: .65em;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,.55);
+    margin-top: .35rem;
+  }
+  header .chapter-tag {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: .28rem .9rem;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 2px;
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .12em;
+    color: rgba(250,248,244,.65);
+    position: relative;
+  }
+  .lang-badge {
+    display: inline-flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  .lang-badge span {
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    font-size: .7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .08em;
+  }
+  .lang-badge .ko { background: rgba(139,58,28,.7); color: #fff; }
+  .lang-badge .en { background: rgba(44,74,124,.7); color: #fff; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle-bar {
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+    padding: .7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-toggle-bar label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+  .lang-toggle-bar input[type=checkbox] { accent-color: var(--en-border); cursor: pointer; }
+  .lang-toggle-bar .sep { color: var(--rule); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-title {
+    margin: 3.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title h2 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); }
+
+  /* ── CARD HEAD ── */
+  .def-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .def-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .def-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .def-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  .thm-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--thm-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .thm-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .thm-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ── BILINGUAL BODY ── */
+  .card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .ko-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    border-right: 1px solid var(--rule-light);
+  }
+  .en-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: #fcfdff;
+    transition: opacity .2s;
+  }
+  @media (max-width: 720px) {
+    .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  }
+
+  /* hide/show english panel */
+  body.hide-en .en-panel { display: none; }
+  body.hide-en .card-body { grid-template-columns: 1fr; }
+  body.hide-ko .ko-panel { display: none; }
+  body.hide-ko .card-body { grid-template-columns: 1fr; }
+
+  /* ── PANEL LABELS ── */
+  .panel-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .14rem .45rem;
+    border-radius: 2px;
+    margin-bottom: .7rem;
+  }
+  .panel-label.ko-label { background: rgba(139,58,28,.12); color: var(--accent); }
+  .panel-label.en-label { background: rgba(44,74,124,.12); color: var(--en-accent); }
+
+  /* ── FORMAL BLOCK (KO) ── */
+  .formal {
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .94rem;
+  }
+  .formal p { margin-bottom: .4rem; }
+  .formal p:last-child { margin-bottom: 0; }
+
+  /* ── EN FORMAL BLOCK ── */
+  .en-formal {
+    background: var(--en-pale);
+    border-left: 3px solid var(--en-border);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .91rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .en-formal p { margin-bottom: .4rem; }
+  .en-formal p:last-child { margin-bottom: 0; }
+
+  /* ── DISPLAY MATH ── */
+  .math-display {
+    text-align: center;
+    padding: .65rem .5rem;
+    margin: .5rem 0;
+    overflow-x: auto;
+    font-size: 1.02rem;
+  }
+
+  /* ── EASY (KO) ── */
+  .easy {
+    border-top: 1px dashed var(--rule);
+    padding-top: .8rem;
+    margin-top: .8rem;
+    font-size: .9rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .easy-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .63rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .35rem;
+  }
+
+  /* ── EN NOTE ── */
+  .en-note {
+    border-top: 1px dashed #c5d0de;
+    padding-top: .8rem;
+    margin-top: .8rem;
+    font-size: .88rem;
+    color: #3a4e65;
+    line-height: 1.75;
+    font-style: italic;
+  }
+  .en-note-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .63rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--en-accent);
+    margin-bottom: .35rem;
+    font-style: normal;
+  }
+
+  /* ── PROOF BLOCK ── */
+  .proof-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    padding: .22rem .6rem;
+    border-radius: 2px;
+    background: none;
+    margin-top: .55rem;
+    transition: all .15s;
+  }
+  .proof-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .proof-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .proof-toggle.open .arrow { transform: rotate(90deg); }
+  .proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #f5f2ec;
+    border-left: 2px solid var(--rule);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .proof-content.visible { display: block; }
+  .proof-content p { margin-bottom: .5rem; }
+  .qed { text-align: right; font-size: 1.1rem; color: var(--ink-faint); margin-top: .4rem; }
+
+  .en-proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #edf1f7;
+    border-left: 2px solid #a3b8d4;
+    font-size: .86rem;
+    color: #3a4e65;
+    line-height: 1.8;
+    font-family: 'Libre Baskerville', Georgia, serif;
+  }
+  .en-proof-content.visible { display: block; }
+  .en-proof-content p { margin-bottom: .5rem; }
+
+  /* ── AXIOM LIST ── */
+  .axiom-group { margin: .5rem 0 .4rem; }
+  .axiom-group-title {
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .45rem;
+    padding-bottom: .28rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .en-axiom-group-title {
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--en-accent);
+    margin-bottom: .45rem;
+    padding-bottom: .28rem;
+    border-bottom: 1px solid #c5d0de;
+  }
+  .axiom-list { list-style: none; padding: 0; }
+  .axiom-list li {
+    display: flex;
+    gap: .65rem;
+    padding: .28rem 0;
+    font-size: .9rem;
+    border-bottom: 1px dotted var(--rule-light);
+    align-items: flex-start;
+  }
+  .axiom-list li:last-child { border-bottom: none; }
+  .ax-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    color: var(--ink-faint);
+    min-width: 1.4rem;
+    padding-top: .12rem;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--def-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: .9rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem .5rem;
+  }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc ol li a {
+    font-size: .83rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+    transition: color .15s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+  .toc ol li a .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .67rem;
+    color: var(--ink-faint);
+    min-width: 3rem;
+  }
+
+  /* ── UTILITY ── */
+  p { margin-bottom: .5rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+  .en-panel strong { color: var(--en-accent); }
+
+  @media (max-width: 600px) {
+    .ko-panel, .en-panel { padding: .85rem .95rem .95rem; }
+    header { padding: 2.5rem 1.2rem 2.2rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <button id="themeToggle" onclick="toggleTheme()" aria-label="테마 전환"></button>
-    <h1>로또번호 생성기</h1>
-    <p class="subtitle">행운의 번호를 뽑아보세요!</p>
 
-    <div class="controls">
-      <label for="setCount">생성 세트 수</label>
-      <select id="setCount">
-        <option value="1">1세트</option>
-        <option value="3">3세트</option>
-        <option value="5" selected>5세트</option>
-        <option value="10">10세트</option>
-      </select>
+<header>
+  <p class="subtitle">Real Analysis · Chapter 1</p>
+  <h1>해석학 I 한·영 대조 개념 정리<span>Real Number System — Bilingual Study Guide</span></h1>
+  <span class="chapter-tag">Definitions 1.1 – 1.33 · Kim, Ildoo</span>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 요약 &nbsp;·&nbsp; 오른쪽: 원문 (Rudin 기반 강의노트)</span>
+</div>
+
+<main>
+
+<!-- TOC -->
+<nav class="toc">
+  <h3>목차 · Contents</h3>
+  <ol>
+    <li><a href="#d11"><span class="toc-num">Def 1.1</span>순서쌍 Ordered Pair</a></li>
+    <li><a href="#d14"><span class="toc-num">Def 1.4</span>데카르트 곱 Cartesian Product</a></li>
+    <li><a href="#d15"><span class="toc-num">Def 1.5</span>관계 Relation</a></li>
+    <li><a href="#d17"><span class="toc-num">Def 1.7</span>순서 Order</a></li>
+    <li><a href="#d18"><span class="toc-num">Def 1.8</span>순서 집합 Ordered Set</a></li>
+    <li><a href="#d19"><span class="toc-num">Def 1.9</span>최댓값 / 최솟값</a></li>
+    <li><a href="#d110"><span class="toc-num">Def 1.10</span>유계 Bounded</a></li>
+    <li><a href="#d111"><span class="toc-num">Def 1.11</span>상한 Supremum</a></li>
+    <li><a href="#d113"><span class="toc-num">Def 1.13</span>하한 Infimum</a></li>
+    <li><a href="#d114"><span class="toc-num">Def 1.14</span>유리수 Rational Numbers</a></li>
+    <li><a href="#d116"><span class="toc-num">Def 1.16</span>최소상계 성질</a></li>
+    <li><a href="#t118"><span class="toc-num">Thm 1.18</span>상한·하한 관계</a></li>
+    <li><a href="#d120"><span class="toc-num">Def 1.20</span>함수 Function</a></li>
+    <li><a href="#d121"><span class="toc-num">Def 1.21</span>연산 Operation</a></li>
+    <li><a href="#d122"><span class="toc-num">Def 1.22</span>체 Field</a></li>
+    <li><a href="#d124"><span class="toc-num">Def 1.24</span>순서체 Ordered Field</a></li>
+    <li><a href="#t125"><span class="toc-num">Thm 1.25</span>실수계의 존재</a></li>
+    <li><a href="#t126"><span class="toc-num">Thm 1.26</span>아르키메데스 성질</a></li>
+    <li><a href="#d128"><span class="toc-num">Def 1.28</span>확장된 실수계</a></li>
+    <li><a href="#t133"><span class="toc-num">Thm 1.33</span>코시-슈바르츠</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>기본 집합론적 개념 · Set-Theoretic Foundations</h2></div>
+
+<!-- Def 1.1 -->
+<div class="card def-card" id="d11">
+  <div class="card-head">
+    <span class="def-num">DEF 1.1</span>
+    <span class="def-title">순서쌍 <em>Ordered Pair</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 원소 $x, y$에 대하여 순서쌍을 다음과 같이 정의한다:</p>
+        <div class="math-display">$$(x, y) \;:=\; \bigl\{\{x\},\; \{x, y\}\bigr\}$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>순서가 중요한 두 원소의 묶음이다. 집합에서는 $\{x, y\} = \{y, x\}$이지만, 순서쌍에서는 $(x, y) \neq (y, x)$이다. 이 차이를 집합론적으로 엄밀히 정의한 것이다.</p>
+      </div>
     </div>
-
-    <button id="generateBtn" onclick="generate()">번호 생성</button>
-
-    <div id="results"></div>
-
-    <div id="history" class="history-section" style="display:none;">
-      <h2>생성 기록</h2>
-      <button class="clear-btn" onclick="clearHistory()">기록 삭제</button>
-      <div id="historyList"></div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $x$ and $y$ be elements. We define</p>
+        <div class="math-display">$$(x, y) := \{\{x\}, \{x, y\}\}$$</div>
+        <p>and call it an <strong>ordered pair</strong> or ordered 2-tuple.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Exercise 1.2</span>
+        <p>Let $x$ and $y$ be elements and assume that $x \neq y$. Prove that $(x,y) \neq (y,x)$.</p>
+      </div>
     </div>
   </div>
+</div>
 
-  <script type="text/javascript" src="main.js"></script>
+<!-- Def 1.4 -->
+<div class="card def-card" id="d14">
+  <div class="card-head">
+    <span class="def-num">DEF 1.4</span>
+    <span class="def-title">데카르트 곱 <em>Cartesian Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 집합 $S, T$에 대하여 데카르트 곱을 다음과 같이 정의한다:</p>
+        <div class="math-display">$$S \times T \;:=\; \{(x, y) \mid x \in S,\; y \in T\}$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>두 집합의 원소들을 하나씩 뽑아 짝지어 만들 수 있는 모든 경우의 수를 모아둔 집합이다. 예를 들어 좌표평면은 $\mathbb{R} \times \mathbb{R}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ and $T$ be sets. The <strong>Cartesian Product</strong> $S \times T$ is the set of all ordered pairs $(x, y)$ such that $x \in S$ and $y \in T$. In other words,</p>
+        <div class="math-display">$$S \times T := \{(x, y) : x \in S,\; y \in T\}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.5 -->
+<div class="card def-card" id="d15">
+  <div class="card-head">
+    <span class="def-num">DEF 1.5</span>
+    <span class="def-title">관계 <em>Relation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $S$ 위의 이항 관계(binary relation)는 데카르트 곱 $S \times S$의 부분집합이다. 관계 $\mathcal{R}$에 대해</p>
+        <div class="math-display">$$(x, y) \in \mathcal{R} \;\Longleftrightarrow\; x \sim y$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>집합 내의 두 원소가 서로 어떤 연관성을 가지는지 정의하는 수학적 도구이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be a set. A (binary) <strong>relation</strong> on $S$ is a subset of the Cartesian product $S \times S$. Let $R$ be a relation on $S$. We say that the relation $R$ is denoted by $\sim$ if</p>
+        <div class="math-display">$$(x, y) \in R \;\Leftrightarrow\; x \sim y.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>순서와 유계 · Order and Boundedness</h2></div>
+
+<!-- Def 1.7 -->
+<div class="card def-card" id="d17">
+  <div class="card-head">
+    <span class="def-num">DEF 1.7</span>
+    <span class="def-title">순서 <em>Order</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $S$ 위의 관계 $<$가 순서(order)이려면 다음 두 조건을 만족해야 한다:</p>
+        <p><strong>(i) 삼분율(Trichotomy).</strong> 임의의 $x, y \in S$에 대해 다음 셋 중 정확히 하나만 성립한다:</p>
+        <div class="math-display">$$x < y, \qquad x = y, \qquad y < x$$</div>
+        <p><strong>(ii) 추이성(Transitivity).</strong> $x, y, z \in S$에 대해</p>
+        <div class="math-display">$$x < y \;\text{ 이고 }\; y < z \;\Longrightarrow\; x < z$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>원소들끼리 줄을 세울 수 있는 명확한 대소 관계 규칙이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be a set. An <strong>order</strong> on $S$ is a relation on $S$, denoted by $<$, with the following two properties:</p>
+        <p><strong>(i)</strong> If $x \in S$ and $y \in S$ then one and only one of the statements $x < y,\; x = y,\; y < x$ is true.</p>
+        <p><strong>(ii)</strong> Let $x, y, z \in S$. If $x < y$ and $y < z$, then $x < z$.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Remark</span>
+        <p>It is often convenient to write $y > x$ in place of $x < y$. The notation $x \leq y$ indicates that $x < y$ or $x = y$. Due to (i), $x \leq y$ is the negation of $x > y$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.8 -->
+<div class="card def-card" id="d18">
+  <div class="card-head">
+    <span class="def-num">DEF 1.8</span>
+    <span class="def-title">순서 집합 <em>Ordered Set</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>순서(order)가 정의된 집합 $S$를 <strong>순서 집합</strong>이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>An <strong>ordered set</strong> is a set $S$ in which an order is defined.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.9 -->
+<div class="card def-card" id="d19">
+  <div class="card-head">
+    <span class="def-num">DEF 1.9</span>
+    <span class="def-title">최댓값과 최솟값 <em>Maximum and Minimum</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>순서 집합 $S$와 $E \subset S$에 대해</p>
+        <p><strong>(i)</strong> $a \in E$이고 모든 $e \in E$에 대해 $e \leq a$이면 $a$를 $E$의 <strong>최댓값(maximum)</strong>이라 한다.</p>
+        <p><strong>(ii)</strong> $a \in E$이고 모든 $e \in E$에 대해 $a \leq e$이면 $a$를 $E$의 <strong>최솟값(minimum)</strong>이라 한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>집합 안에 실제로 포함되어 있는 가장 큰 원소(최댓값)와 가장 작은 원소(최솟값)이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be an ordered set and $E \subset S$.</p>
+        <p><strong>(i)</strong> We say that $a$ is the <strong>largest member</strong>, the <strong>greatest member</strong>, or the <strong>maximum</strong> of $E$ if $a \in E$ and $e \leq a$ for all $e \in E$.</p>
+        <p><strong>(ii)</strong> We say that $a$ is the <strong>smallest member</strong>, the <strong>least member</strong>, or the <strong>minimum</strong> of $E$ if $a \in E$ and $a \leq e$ for all $e \in E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.10 -->
+<div class="card def-card" id="d110">
+  <div class="card-head">
+    <span class="def-num">DEF 1.10</span>
+    <span class="def-title">위로/아래로 유계 <em>Bounded Above / Below</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>순서 집합 $S$와 $E \subset S$에 대해</p>
+        <p><strong>(i)</strong> 어떤 $\beta \in S$가 존재하여 모든 $x \in E$에 대해 $x \leq \beta$이면 $E$는 <strong>위로 유계(bounded above)</strong>이고, $\beta$를 <strong>상계(upper bound)</strong>라 한다.</p>
+        <p><strong>(ii)</strong> 어떤 $\beta \in S$가 존재하여 모든 $x \in E$에 대해 $x \geq \beta$이면 $E$는 <strong>아래로 유계(bounded below)</strong>이고, $\beta$를 <strong>하계(lower bound)</strong>라 한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>집합이 무한히 커지거나 작아지지 않고, 일종의 천장(상계)이나 바닥(하계)에 막혀 있다는 뜻이다. 천장이나 바닥은 여러 개일 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be an ordered set and $E \subset S$.</p>
+        <p><strong>(i)</strong> If there exists a $\beta \in S$ such that $x \leq \beta$ for all $x \in E$, then we say that $E$ is <strong>bounded above</strong>, and call $\beta$ an <strong>upper bound</strong> of $E$.</p>
+        <p><strong>(ii)</strong> If there exists a $\beta \in S$ such that $x \geq \beta$ for all $x \in E$, then we say that $E$ is <strong>bounded below</strong>, and call $\beta$ a <strong>lower bound</strong> of $E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 3 ═══════════ -->
+<div class="section-title"><h2>상한과 하한 · Supremum and Infimum</h2></div>
+
+<!-- Def 1.11 -->
+<div class="card def-card" id="d111">
+  <div class="card-head">
+    <span class="def-num">DEF 1.11</span>
+    <span class="def-title">상한 <em>Supremum / Least Upper Bound</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>위로 유계인 $E \subset S$에 대해 $\alpha \in S$가 다음 두 조건을 만족하면</p>
+        <p><strong>(i)</strong> $\alpha$는 $E$의 상계이다.</p>
+        <p><strong>(ii)</strong> $\gamma < \alpha$이면 $\gamma$는 $E$의 상계가 아니다.</p>
+        <p>$\alpha$를 $E$의 <strong>최소상계(least upper bound)</strong> 또는 <strong>상한(supremum)</strong>이라 하고 $\alpha = \sup E$로 표기한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>무수히 많은 천장들 중에서 가장 낮은 천장이다. 최댓값과 비슷하지만, 상한은 그 집합에 포함되지 않아도 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be an ordered set and $E \subset S$. Assume that $E$ is bounded above and there exists an $\alpha \in S$ with the following properties:</p>
+        <p><strong>(i)</strong> $\alpha$ is an upper bound of $E$.</p>
+        <p><strong>(ii)</strong> If $\gamma < \alpha$ then $\gamma$ is not an upper bound of $E$.</p>
+        <p>Then $\alpha$ is called the <strong>least upper bound</strong> of $E$ or the <strong>supremum</strong> of $E$, written $\alpha = \sup E$.</p>
+        <p>In other words, $\sup E$ is the smallest member of the set of all upper bounds of $E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.13 -->
+<div class="card def-card" id="d113">
+  <div class="card-head">
+    <span class="def-num">DEF 1.13</span>
+    <span class="def-title">하한 <em>Infimum / Greatest Lower Bound</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래로 유계인 $E \subset S$에 대해 $\alpha \in S$가 다음 두 조건을 만족하면</p>
+        <p><strong>(i)</strong> $\alpha$는 $E$의 하계이다.</p>
+        <p><strong>(ii)</strong> $\gamma > \alpha$이면 $\gamma$는 $E$의 하계가 아니다.</p>
+        <p>$\alpha$를 $E$의 <strong>최대하계(greatest lower bound)</strong> 또는 <strong>하한(infimum)</strong>이라 하고 $\alpha = \inf E$로 표기한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>무수히 많은 바닥들 중에서 가장 높은 바닥이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be an ordered set and $E \subset S$. Assume that $E$ is bounded below and there exists an $\alpha \in S$ with the following properties:</p>
+        <p><strong>(i)</strong> $\alpha$ is a lower bound of $E$.</p>
+        <p><strong>(ii)</strong> If $\gamma > \alpha$ then $\gamma$ is not a lower bound of $E$.</p>
+        <p>Then $\alpha$ is called the <strong>greatest lower bound</strong> of $E$ or the <strong>infimum</strong> of $E$, written $\alpha = \inf E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.14 -->
+<div class="card def-card" id="d114">
+  <div class="card-head">
+    <span class="def-num">DEF 1.14</span>
+    <span class="def-title">유리수 <em>Rational Numbers</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유리수 체계 $\mathbb{Q}$는 $m, n$이 정수이고 $n \neq 0$일 때 $\dfrac{m}{n}$ 꼴로 나타낼 수 있는 모든 수의 집합이다:</p>
+        <div class="math-display">$$\mathbb{Q} \;=\; \left\{\frac{m}{n} \;\middle|\; m, n \in \mathbb{Z},\; n \neq 0\right\}$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>우리가 잘 아는 분수들의 집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>The <strong>rational number system</strong> denoted by $\mathbb{Q}$ is the set of all numbers of the form $\tfrac{m}{n}$ with $m, n$ integers and $n \neq 0$:</p>
+        <div class="math-display">$$\mathbb{Q} = \left\{\frac{m}{n} : m, n \text{ are integers},\; n \neq 0\right\}$$</div>
+        <p>An element of $\mathbb{Q}$ is called a <strong>rational number</strong>.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Example 1.15</span>
+        <p>Let $A = \{p \in \mathbb{Q} : p > 0,\; p^2 < 2\}$. Since $A$ has upper bounds but $B = \{p \in \mathbb{Q}: p>0, p^2>2\}$ has no smallest member, $A$ has <em>no least upper bound in $\mathbb{Q}$</em> — a key motivation for $\mathbb{R}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 4 ═══════════ -->
+<div class="section-title"><h2>최소상계 성질과 실수계 · The Least-Upper-Bound Property &amp; ℝ</h2></div>
+
+<!-- Def 1.16 -->
+<div class="card def-card" id="d116">
+  <div class="card-head">
+    <span class="def-num">DEF 1.16</span>
+    <span class="def-title">최소상계 성질 <em>Least-Upper-Bound Property</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>순서 집합 $S$가 <strong>최소상계 성질(least-upper-bound property)</strong>을 가진다는 것은 다음을 의미한다:</p>
+        <p>$E \subset S$가 공집합이 아니고 위로 유계이면</p>
+        <div class="math-display">$$\sup E \;\text{ 가 } S \text{ 안에 존재한다.}$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>수 체계에 빈 구멍이 없다는 의미이다. 유리수 $\mathbb{Q}$는 이 성질이 없어서 ($\sqrt{2}$ 같은 빈 구멍이 존재함) 실수 $\mathbb{R}$이 필요해진다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>An ordered set $S$ is said to have the <strong>least-upper-bound property</strong> if the following is true:</p>
+        <p>If $E \subset S$, $E$ is not empty, and $E$ is bounded above, then $\sup E$ exists in $S$.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Note</span>
+        <p>$\mathbb{Q}$ does <em>not</em> have this property (Example 1.15). This gap is precisely why we construct $\mathbb{R}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 1.18 -->
+<div class="card thm-card" id="t118">
+  <div class="card-head">
+    <span class="thm-num">THM 1.18</span>
+    <span class="thm-title">상한과 하한의 관계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$가 최소상계 성질을 가지는 순서 집합이고, $B \subset S$가 공집합이 아니며 아래로 유계라 하자. $L$을 $B$의 모든 하계들의 집합이라 하면:</p>
+        <div class="math-display">$$\sup L \;\text{ 이 } S \text{ 안에 존재하고 }\; \sup L = \inf B$$</div>
+        <p>특히, $\inf B$가 $S$ 안에 존재한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> 증명 보기 (한국어)
+      </button>
+      <div class="proof-content">
+        <p>$B$가 아래로 유계이므로 $L$은 공집합이 아니다. $L$이 $B$의 모든 하계들의 집합이므로, 임의의 $y \in L$과 $x \in B$에 대해 $y \leq x$가 성립한다.</p>
+        <p>따라서 모든 $x \in B$는 $L$의 상계이다. $L \subset S$이고 $S$는 최소상계 성질을 가지므로, $\sup L$이 $S$ 안에 존재한다.</p>
+        <p>이제 $\alpha = \sup L$로 놓자. $\gamma < \alpha$이면 $\gamma$는 $L$의 상계가 아니므로 $\gamma \notin B$이다. 대우를 취하면 $\gamma \in B$이면 $\gamma \geq \alpha$이므로 $\alpha \in L$이다.</p>
+        <p>마지막으로 $B$의 임의의 하계 $\beta$가 $\beta \leq \alpha$를 만족함을 보인다. 만약 $\beta > \alpha$이면 $\beta \notin L$이므로 $\alpha = \inf B$이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>집합 $B$의 모든 하계를 모은 집합 $L$의 상한이 곧 $B$의 하한과 같다. 즉, 최소상계 성질(위쪽 구멍 없음)만 있으면 최대하계 성질(아래쪽 구멍 없음)은 덤으로 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be an ordered set with the least-upper-bound property and $B \subset S$. Assume that $B$ is not empty and $B$ is bounded below. Let $L$ denote the set of all lower bounds of $B$. Then $\sup L$ exists in $S$ and</p>
+        <div class="math-display">$$\sup L = \inf B.$$</div>
+        <p>In particular, $\inf B$ exists in $S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Since $B$ is bounded below, $L$ is not empty. Since $L$ is the set of all lower bounds of $B$, $y \leq x$ for all $y \in L$, $x \in B$. Thus every $x \in B$ is an upper bound of $L$.</p>
+        <p>Since $L \subset S$ and $S$ has the least-upper-bound property, $\sup L$ exists. Set $\alpha = \sup L$.</p>
+        <p>If $\gamma < \alpha$, then $\gamma$ is not an upper bound of $L$, thus $\gamma \notin B$. Taking the contrapositive: if $\gamma \in B$, then $\gamma \geq \alpha$, so $\alpha \in L$.</p>
+        <p>Now let $\beta > \alpha$. Since $\alpha$ is an upper bound of $L$, $\gamma \leq \alpha < \beta$ for all $\gamma \in L$, so $\beta \notin L$. Therefore $\alpha = \inf B$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 5 ═══════════ -->
+<div class="section-title"><h2>함수와 연산, 대수 구조 · Functions, Operations, Algebraic Structure</h2></div>
+
+<!-- Def 1.20 -->
+<div class="card def-card" id="d120">
+  <div class="card-head">
+    <span class="def-num">DEF 1.20</span>
+    <span class="def-title">함수 <em>Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $A$의 각 원소 $x$에 집합 $B$의 원소 $f(x)$를 대응시키는 규칙을</p>
+        <div class="math-display">$$f : A \longrightarrow B$$</div>
+        <p>라 하고, $A$를 <strong>정의역(domain)</strong>, $B$를 <strong>공역(target space)</strong>이라 한다. $f(A) = \{f(x) \mid x \in A\}$를 <strong>치역(range)</strong>이라 한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>입력값을 넣으면 그에 맞는 출력값을 하나씩 내놓는 자판기이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A$ and $B$ be sets. Assume that for each element $x$ of $A$, there is an associated element of $B$, denoted $f(x)$. Then $f$ is said to be a <strong>function</strong> from $A$ to $B$.</p>
+        <p>The set $A$ is called the <strong>domain</strong>, $B$ is the <strong>target space</strong>, and the elements $f(x)$ are the <strong>values</strong> of $f$. The set of all values of $f$ is called the <strong>range</strong> of $f$.</p>
+        <p>If $f(A) = B$, we say $f$ maps $A$ <em>onto</em> $B$. We say $f$ is a <strong>1-1 mapping</strong> if $f(x_1) \neq f(x_2)$ whenever $x_1 \neq x_2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.21 -->
+<div class="card def-card" id="d121">
+  <div class="card-head">
+    <span class="def-num">DEF 1.21</span>
+    <span class="def-title">연산 <em>Operation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $S$ 위의 이항 연산(binary operation)은 다음과 같은 함수이다:</p>
+        <div class="math-display">$$S \times S \longrightarrow S$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>두 개의 원소를 재료로 넣어서 같은 집합 내의 새로운 원소 하나를 만들어내는 규칙이다. (예: 덧셈)</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $S$ be a set. A (binary) <strong>operation</strong> on $S$ is a function from $S \times S$ to $S$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.22 -->
+<div class="card def-card" id="d122">
+  <div class="card-head">
+    <span class="def-num">DEF 1.22</span>
+    <span class="def-title">체 <em>Field</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $F$ 위에 덧셈과 곱셈이 정의되어 다음 공리들을 만족할 때 $F$를 <strong>체(field)</strong>라 한다.</p>
+      </div>
+      <div class="axiom-group">
+        <div class="axiom-group-title">(A) 덧셈 공리</div>
+        <ul class="axiom-list">
+          <li><span class="ax-num">A1</span><span>교환법칙: $x + y = y + x$</span></li>
+          <li><span class="ax-num">A2</span><span>결합법칙: $(x + y) + z = x + (y + z)$</span></li>
+          <li><span class="ax-num">A3</span><span>항등원 존재: $\exists\, 0 \in F,\; 0 + x = x$</span></li>
+          <li><span class="ax-num">A4</span><span>역원 존재: $x + (-x) = 0$을 만족하는 $-x \in F$ 존재</span></li>
+        </ul>
+      </div>
+      <div class="axiom-group">
+        <div class="axiom-group-title">(M) 곱셈 공리</div>
+        <ul class="axiom-list">
+          <li><span class="ax-num">M1</span><span>교환법칙: $xy = yx$</span></li>
+          <li><span class="ax-num">M2</span><span>결합법칙: $(xy)z = x(yz)$</span></li>
+          <li><span class="ax-num">M3</span><span>항등원 존재: $\exists\, 1 \in F,\; 1 \neq 0,\; 1 \cdot x = x$</span></li>
+          <li><span class="ax-num">M4</span><span>역원 존재: $x \neq 0$이면 $x \cdot \frac{1}{x} = 1$인 $\frac{1}{x} \in F$ 존재</span></li>
+        </ul>
+      </div>
+      <div class="axiom-group">
+        <div class="axiom-group-title">(D) 분배 법칙</div>
+        <div class="math-display">$$x(y + z) = xy + xz \qquad \forall\, x, y, z \in F$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>0으로 나누는 것을 제외한 사칙연산이 자유롭게 가능한 세계이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A <strong>field</strong> is a set $F$ with two operations, called addition and multiplication, which satisfy the following "field axioms" (A), (M), and (D):</p>
+      </div>
+      <div class="axiom-group">
+        <div class="en-axiom-group-title">(A) Axioms for Addition</div>
+        <ul class="axiom-list">
+          <li><span class="ax-num" style="color:var(--en-accent)">A1</span><span>$x + y = y + x$ for all $x, y \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">A2</span><span>$(x + y) + z = x + (y + z)$ for all $x, y, z \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">A3</span><span>$F$ contains $0$ such that $0 + x = x$ for all $x \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">A4</span><span>To every $x \in F$, there exists $-x \in F$ such that $x + (-x) = 0$</span></li>
+        </ul>
+      </div>
+      <div class="axiom-group">
+        <div class="en-axiom-group-title">(M) Axioms for Multiplication</div>
+        <ul class="axiom-list">
+          <li><span class="ax-num" style="color:var(--en-accent)">M1</span><span>$xy = yx$ for all $x, y \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">M2</span><span>$(xy)z = x(yz)$ for all $x, y, z \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">M3</span><span>$F$ contains $1 \neq 0$ such that $1x = x$ for all $x \in F$</span></li>
+          <li><span class="ax-num" style="color:var(--en-accent)">M4</span><span>If $x \neq 0$, there exists $\frac{1}{x} \in F$ such that $x \cdot \frac{1}{x} = 1$</span></li>
+        </ul>
+      </div>
+      <div class="axiom-group">
+        <div class="en-axiom-group-title">(D) Distributive Law</div>
+        <div class="math-display">$$x(y + z) = xy + xz \quad \forall\, x, y, z \in F$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.24 -->
+<div class="card def-card" id="d124">
+  <div class="card-head">
+    <span class="def-num">DEF 1.24</span>
+    <span class="def-title">순서체 <em>Ordered Field</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>체 $F$가 동시에 순서 집합이며, 다음 호환 조건을 만족할 때 <strong>순서체(ordered field)</strong>라 한다:</p>
+        <p><strong>(i)</strong> $y < z$이면 모든 $x \in F$에 대해 $x + y < x + z$</p>
+        <p><strong>(ii)</strong> $x > 0$이고 $y > 0$이면 $xy > 0$</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>대소 비교도 가능하고 사칙연산도 가능하며, 부등식의 성질이 자연스럽게 성립하는 수 체계이다. $\mathbb{Q}$와 $\mathbb{R}$이 대표적인 순서체이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>An <strong>ordered field</strong> is a field $F$ which is also an ordered set such that:</p>
+        <p><strong>(i)</strong> $x + y < x + z$ if $x, y, z \in F$ and $y < z$.</p>
+        <p><strong>(ii)</strong> $xy > 0$ if $x, y \in F$, $x > 0$, and $y > 0$.</p>
+        <p>If $x > 0$, we call $x$ <em>positive</em>; if $x < 0$, $x$ is called <em>negative</em>. For example, the rational number system $\mathbb{Q}$ is an ordered field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 1.25 -->
+<div class="card thm-card" id="t125">
+  <div class="card-head">
+    <span class="thm-num">THM 1.25</span>
+    <span class="thm-title">실수계의 존재 · Existence of ℝ</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>최소상계 성질을 가지며 $\mathbb{Q}$를 포함하는 순서체(ordered field) $\mathbb{R}$이 존재한다.</p>
+        <div class="math-display">$$\mathbb{Q} \;\subset\; \mathbb{R}, \quad \mathbb{R} \text{ 은 최소상계 성질을 가지는 순서체}$$</div>
+        <p>$\mathbb{R}$을 <strong>실수계(real number system)</strong> 또는 <strong>실수(real numbers)</strong>라 부른다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>유리수 체계는 $\sqrt{2}$ 같은 무리수 자리에 구멍이 있다. 이 정리는 그 구멍들을 완벽하게 메워서 빈틈이 전혀 없는 거대한 수 체계(실수)가 수학적으로 존재함을 선언한다. 이것이 해석학의 가장 든든한 토대이다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>There exists an ordered field $\mathbb{R}$ which has the <strong>least-upper-bound property</strong> and contains $\mathbb{Q}$.</p>
+        <p>We call $\mathbb{R}$ the <strong>real number system</strong> or the <strong>real numbers</strong>. The members of $\mathbb{R}$ are called <strong>real numbers</strong>.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Note</span>
+        <p>For the proof of this theorem, see [Rudin, Appendix, Chapter 1]. Exercise 1.27 asks one to show that $\mathbb{R}$ is the <em>unique</em> such ordered field in a suitable sense.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 6 ═══════════ -->
+<div class="section-title"><h2>아르키메데스 성질과 확장 실수계 · Archimedean Property &amp; Extended Reals</h2></div>
+
+<!-- Thm 1.26 -->
+<div class="card thm-card" id="t126">
+  <div class="card-head">
+    <span class="thm-num">THM 1.26</span>
+    <span class="thm-title">아르키메데스 성질 &amp; 유리수의 조밀성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 아르키메데스 성질(Archimedean property).</strong> $x, y \in \mathbb{R}$이고 $x > 0$이면</p>
+        <div class="math-display">$$\exists\, n \in \mathbb{N} \text{ 이고 } nx > y$$</div>
+        <p><strong>(b) 유리수의 조밀성(Density of $\mathbb{Q}$ in $\mathbb{R}$).</strong> $x, y \in \mathbb{R}$이고 $x < y$이면</p>
+        <div class="math-display">$$\exists\, p \in \mathbb{Q} \text{ 이고 } x < p < y$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> 증명 보기 (한국어)
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $A_x = \{nx \in \mathbb{R} : n \in \mathbb{N}\}$으로 놓자. $nx > y$를 만족하는 $n$이 없다고 가정하면, $y$는 $A_x$의 상계이다. 최소상계 성질에 의해 $\alpha = \sup A_x$가 존재한다.</p>
+        <p>$x > 0$이므로 $\alpha - x < \alpha$이고, $\alpha - x$는 $A_x$의 상계가 아니다. 따라서 $\alpha - x < mx$를 만족하는 $m \in \mathbb{N}$이 존재한다. 즉 $\alpha < (m+1)x$인데, $(m+1)x \in A_x$이므로 $\alpha$가 상계라는 사실에 모순이다.</p>
+        <p><strong>(b)</strong> $x < y$이면 $0 < y - x$이고, (a)에 의해 $n(y-x) > 1$, 즉 $ny > 1 + nx$를 만족하는 $n \in \mathbb{N}$이 존재한다. 다시 (a)를 적용하면 $m - 1 \leq nx < m$을 만족하는 정수 $m$이 존재한다. 이를 합치면 $nx < m \leq 1 + nx < ny$이므로 $x < \frac{m}{n} < y$이고, $p = \frac{m}{n} \in \mathbb{Q}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p><strong>(a)</strong> 아무리 작은 양수 $x$라도 계속 더하다 보면 언젠가는 반드시 임의의 실수 $y$를 넘어선다.</p>
+        <p><strong>(b)</strong> 아무리 가까운 두 실수 사이에도 반드시 유리수가 하나 낀다. 수직선에서 유리수는 빽빽하게(조밀하게) 박혀있다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> If $x \in \mathbb{R}$, $y \in \mathbb{R}$, and $x > 0$, then there is a positive integer $n$ such that $nx > y$. (Archimedean property)</p>
+        <p><strong>(b)</strong> If $x \in \mathbb{R}$, $y \in \mathbb{R}$, and $x < y$, then there exists a $p \in \mathbb{Q}$ such that $x < p < y$. ($\mathbb{Q}$ is dense in $\mathbb{R}$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Let $A_x := \{nx \in \mathbb{R} : n \in \mathbb{N}\}$. Assume for contradiction that $nx \leq y$ for all $n \in \mathbb{N}$. Then $y$ is an upper bound of $A_x$, so $\alpha = \sup A_x$ exists. Since $x > 0$, $\alpha - x < \alpha$, so $\alpha - x$ is not an upper bound: $\alpha - x < mx$ for some $m$. Then $\alpha < (m+1)x \in A_x$, contradicting $\alpha$ being an upper bound. $\square$</p>
+        <p><strong>(b)</strong> Since $0 < y - x$, by (a) there exists $n$ with $n(y-x) > 1$, so $ny > 1 + nx$. By (a) again, pick integers $m_1 > nx$ and $m_2 > -nx$, giving an integer $m$ with $m-1 \leq nx < m$. Then $nx < m \leq 1 + nx < ny$, so $x < m/n < y$. Set $p = m/n \in \mathbb{Q}$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 1.28 -->
+<div class="card def-card" id="d128">
+  <div class="card-head">
+    <span class="def-num">DEF 1.28</span>
+    <span class="def-title">확장된 실수계 <em>Extended Real Number System</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>확장된 실수계 $\overline{\mathbb{R}}$은 실수계 $\mathbb{R}$에 두 기호 $+\infty$와 $-\infty$를 추가한 체계이다:</p>
+        <div class="math-display">$$\overline{\mathbb{R}} \;=\; \mathbb{R} \cup \{-\infty,\; +\infty\}$$</div>
+        <p>순서는 모든 $x \in \mathbb{R}$에 대해 $-\infty < x < +\infty$로 확장된다. 관례적으로:</p>
+        <div class="math-display">$$x + (+\infty) = +\infty, \quad x - \infty = -\infty, \quad \frac{x}{\pm\infty} = 0 \quad (x \in \mathbb{R})$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>상한이나 하한이 무한히 커지거나 작아지는 상황을 편리하게 표기하기 위해 도입한 개념적 기호이다. 일반적인 연산 법칙이 통하지 않으므로 체(field)는 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>The <strong>extended real number system</strong> consists of $\mathbb{R}$ and two symbols $+\infty$ and $-\infty$ satisfying $-\infty < x < +\infty$ for all $x \in \mathbb{R}$.</p>
+        <div class="math-display">$$\bar{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$$</div>
+        <p>Conventions (if $x$ is real): $x + (+\infty) = +\infty$,&nbsp; $x - \infty = -\infty$,&nbsp; $\frac{x}{\pm\infty} = 0$.</p>
+        <p>If $x > 0$: $x \cdot (+\infty) = +\infty$, $x \cdot (-\infty) = -\infty$. If $x < 0$: signs reverse.</p>
+      </div>
+      <div class="en-note">
+        <span class="en-note-label">Remarks</span>
+        <p>Every nonempty $E \subset \bar{\mathbb{R}}$ has a least upper bound: $\sup E = +\infty$ if $E$ is not bounded above in $\mathbb{R}$. It is natural to define $\sup \emptyset = -\infty$ and $\inf \emptyset = +\infty$. The extended real number system does <em>not</em> form a field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 7 ═══════════ -->
+<div class="section-title"><h2>유클리드 공간 · Euclidean Space</h2></div>
+
+<!-- Thm 1.33 -->
+<div class="card thm-card" id="t133">
+  <div class="card-head">
+    <span class="thm-num">THM 1.33</span>
+    <span class="thm-title">코시-슈바르츠 부등식 &amp; 삼각 부등식 · Cauchy-Schwarz &amp; Triangle Inequalities</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유클리드 공간 $\mathbb{R}^k$의 벡터 $x, y, z$에 대해 내적과 노름을 각각</p>
+        <div class="math-display">$$x \cdot y = \sum_{i=1}^{k} x_i y_i, \qquad |x| = \left(\sum_{i=1}^{k} x_i^2\right)^{1/2}$$</div>
+        <p>으로 정의하면 다음이 성립한다.</p>
+        <p><strong>(i) 코시-슈바르츠 부등식:</strong> $|x \cdot y| \leq |x||y|$</p>
+        <p><strong>(ii) 삼각 부등식:</strong> $|x + y| \leq |x| + |y|$</p>
+        <p><strong>(iii)</strong> $|x - z| \leq |x - y| + |y - z|$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> 증명 보기 (한국어)
+      </button>
+      <div class="proof-content">
+        <p><strong>(i) 증명.</strong> $y = 0$이면 자명하다. $y \neq 0$으로 가정하고 임의의 $\alpha \in \mathbb{R}$에 대해</p>
+        <div class="math-display">$$0 \;\leq\; |x - \alpha y|^2 \;=\; |x|^2 - 2\alpha(x \cdot y) + \alpha^2 |y|^2$$</div>
+        <p>$\alpha = \dfrac{x \cdot y}{|y|^2}$로 놓으면 $0 \leq |x|^2 - \frac{(x \cdot y)^2}{|y|^2}$이므로 (i)이 성립한다.</p>
+        <p><strong>(ii) 증명.</strong></p>
+        <div class="math-display">$$|x+y|^2 = |x|^2 + 2(x \cdot y) + |y|^2 \;\leq\; |x|^2 + 2|x||y| + |y|^2 = (|x|+|y|)^2$$</div>
+        <p><strong>(iii)</strong>은 $\tilde{x} = x - y$, $\tilde{y} = y - z$로 놓고 (ii)를 적용하면 얻는다.</p>
+        <div class="qed">□</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p><strong>(i)</strong> 두 벡터를 내적한 값의 크기는 각 벡터의 길이의 곱보다 클 수 없다.</p>
+        <p><strong>(ii), (iii)</strong> A에서 B로 직선으로 가는 거리는 중간에 점 C를 거쳐 가는 거리보다 항상 짧거나 같다. 삼각형의 두 변의 합이 나머지 한 변보다 크다는 원리가 $n$차원에서도 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $x, y, z \in \mathbb{R}^k$. Then</p>
+        <p><strong>(i) Cauchy-Schwarz inequality:</strong></p>
+        <div class="math-display">$$|x \cdot y| \leq |x||y|$$</div>
+        <p><strong>(ii) Triangle inequality:</strong></p>
+        <div class="math-display">$$|x + y| \leq |x| + |y|$$</div>
+        <p><strong>(iii)</strong></p>
+        <div class="math-display">$$|x - z| \leq |x - y| + |y - z|$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">▶</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(i)</strong> Assume $y \neq 0$. For any $\alpha \in \mathbb{R}$: $0 \leq |x - \alpha y|^2 = |x|^2 - 2\alpha(x \cdot y) + \alpha^2|y|^2$. Setting $\alpha = \frac{x \cdot y}{|y|^2}$ gives $0 \leq |x|^2 - \frac{(x\cdot y)^2}{|y|^2}$, i.e. $|x \cdot y|^2 \leq |x|^2|y|^2$. $\square$</p>
+        <p><strong>(ii)</strong> $|x+y|^2 = |x|^2 + 2x\cdot y + |y|^2 \leq |x|^2 + 2|x||y| + |y|^2 = (|x|+|y|)^2$. $\square$</p>
+        <p><strong>(iii)</strong> Set $\tilde{x} = x-y$ and $\tilde{y} = y-z$. Apply (ii) to $\tilde{x}$ and $\tilde{y}$: $|x-z| = |\tilde{x}+\tilde{y}| \leq |\tilde{x}| + |\tilde{y}| = |x-y|+|y-z|$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function toggleLang() {
+  const showKo = document.getElementById('toggle-ko').checked;
+  const showEn = document.getElementById('toggle-en').checked;
+  document.body.classList.toggle('hide-ko', !showKo);
+  document.body.classList.toggle('hide-en', !showEn);
+}
+
+function toggleProof(btn) {
+  btn.classList.toggle('open');
+  const arrow = btn.querySelector('.arrow');
+  // Determine if this is an English proof button
+  const isEn = btn.closest('.en-panel') !== null;
+  // Find next sibling content block
+  let content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  const isVisible = content.classList.contains('visible');
+
+  // Rebuild button text
+  btn.innerHTML = '';
+  btn.appendChild(arrow);
+  if (isEn) {
+    btn.append(' ' + (isVisible ? 'Hide Proof' : 'Proof (English)'));
+  } else {
+    btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
+  }
+}
+</script>
 </body>
 </html>
