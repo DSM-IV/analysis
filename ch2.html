@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해석학 I Ch.2 — 한·영 대조 개념 정리 | Basic Topology Bilingual Study Guide</title>
+<meta name="description" content="해석학(Real Analysis) Chapter 2 핵심 개념을 한국어·영어 대조로 정리한 학습 가이드. 거리 공간, 열린·닫힌 집합, 콤팩트 집합, 하이네-보렐 정리를 증명과 직관적 설명으로 다룹니다.">
+<meta name="keywords" content="해석학, Real Analysis, 수학, mathematics, Rudin, 거리 공간, metric space, 콤팩트, compact, 하이네-보렐, Heine-Borel, topology, 증명, proof, 학습 가이드">
+<meta name="author" content="DSM-IV">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dsm-iv.github.io/analysis/ch2.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="해석학 I Ch.2 — 한·영 대조 개념 정리">
+<meta property="og:description" content="Real Analysis Chapter 2 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://dsm-iv.github.io/analysis/ch2.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "해석학 I Ch.2 한·영 대조 개념 정리 — Basic Topology Bilingual Study Guide",
+  "author": { "@type": "Organization", "name": "DSM-IV" },
+  "publisher": { "@type": "Organization", "name": "DSM-IV" },
+  "description": "Real Analysis Chapter 2 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드. Definitions 2.1–2.86.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://dsm-iv.github.io/analysis/ch2.html",
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-03-29",
+  "mainEntityOfPage": "https://dsm-iv.github.io/analysis/ch2.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffef9;
+    --ink: #1a1612;
+    --ink-soft: #3d3528;
+    --ink-faint: #7a6e60;
+    --rule: #d4cabb;
+    --rule-light: #e8e2d6;
+    --accent: #8b3a1c;
+    --accent-soft: #c4623a;
+    --accent-pale: #f5ede7;
+    --def-bg: #f7f3ee;
+    --thm-bg: #f0ede8;
+    --thm-border: #9b4e2a;
+    --tag-bg: #1a1612;
+    --tag-fg: #faf8f4;
+    --en-bg: #f0f4f8;
+    --en-border: #4a6fa5;
+    --en-accent: #2c4a7c;
+    --en-pale: #e8eef5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', 'Libre Baskerville', Georgia, serif;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px);
+  }
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: .9rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 span {
+    display: block;
+    font-size: .65em;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,.55);
+    margin-top: .35rem;
+  }
+  header .chapter-tag {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: .28rem .9rem;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 2px;
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .12em;
+    color: rgba(250,248,244,.65);
+    position: relative;
+  }
+  .lang-badge {
+    display: inline-flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  .lang-badge span {
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    font-size: .7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .08em;
+  }
+  .lang-badge .ko { background: rgba(139,58,28,.7); color: #fff; }
+  .lang-badge .en { background: rgba(44,74,124,.7); color: #fff; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle-bar {
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+    padding: .7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-toggle-bar label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+  .lang-toggle-bar input[type=checkbox] { accent-color: var(--en-border); cursor: pointer; }
+  .lang-toggle-bar .sep { color: var(--rule); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-title {
+    margin: 3.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title h2 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); }
+
+  /* ── CARD HEAD ── */
+  .def-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .def-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .def-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .def-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  .thm-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--thm-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .thm-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .thm-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ── BILINGUAL BODY ── */
+  .card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .ko-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    border-right: 1px solid var(--rule-light);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .en-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: #fcfdff;
+    transition: opacity .2s;
+    min-width: 0;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  }
+
+  /* hide/show english panel */
+  body.hide-en .en-panel { display: none; }
+  body.hide-en .card-body { grid-template-columns: 1fr; }
+  body.hide-ko .ko-panel { display: none; }
+  body.hide-ko .card-body { grid-template-columns: 1fr; }
+
+  /* ── PANEL LABELS ── */
+  .panel-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .14rem .45rem;
+    border-radius: 2px;
+    margin-bottom: .7rem;
+  }
+  .panel-label.ko-label { background: rgba(139,58,28,.12); color: var(--accent); }
+  .panel-label.en-label { background: rgba(44,74,124,.12); color: var(--en-accent); }
+
+  /* ── FORMAL BLOCK (KO) ── */
+  .formal {
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .94rem;
+  }
+  .formal p { margin-bottom: .4rem; }
+  .formal p:last-child { margin-bottom: 0; }
+
+  /* ── EN FORMAL BLOCK ── */
+  .en-formal {
+    background: var(--en-pale);
+    border-left: 3px solid var(--en-border);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .91rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .en-formal p { margin-bottom: .4rem; }
+  .en-formal p:last-child { margin-bottom: 0; }
+
+  /* ── DISPLAY MATH ── */
+  .math-display {
+    text-align: center;
+    padding: .65rem .5rem;
+    margin: .5rem 0;
+    overflow-x: auto;
+    font-size: 1.02rem;
+  }
+
+  /* ── EASY (KO) ── */
+  .easy {
+    border-top: 1px dashed var(--rule);
+    padding-top: .8rem;
+    margin-top: .8rem;
+    font-size: .9rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .easy-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .63rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .35rem;
+  }
+
+  /* ── EN NOTE ── */
+  .en-note {
+    border-top: 1px dashed #c5d0de;
+    padding-top: .8rem;
+    margin-top: .8rem;
+    font-size: .88rem;
+    color: #3a4e65;
+    line-height: 1.75;
+    font-style: italic;
+  }
+  .en-note-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .63rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--en-accent);
+    margin-bottom: .35rem;
+    font-style: normal;
+  }
+
+  /* ── PROOF BLOCK ── */
+  .proof-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    padding: .22rem .6rem;
+    border-radius: 2px;
+    background: none;
+    margin-top: .55rem;
+    transition: all .15s;
+  }
+  .proof-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .proof-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .proof-toggle.open .arrow { transform: rotate(90deg); }
+  .proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #f5f2ec;
+    border-left: 2px solid var(--rule);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .proof-content.visible { display: block; }
+  .proof-content p { margin-bottom: .5rem; }
+  .qed { text-align: right; font-size: 1.1rem; color: var(--ink-faint); margin-top: .4rem; }
+
+  .en-proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #edf1f7;
+    border-left: 2px solid #a3b8d4;
+    font-size: .86rem;
+    color: #3a4e65;
+    line-height: 1.8;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: auto;
+  }
+  .en-proof-content.visible { display: block; }
+  .en-proof-content p { margin-bottom: .5rem; }
+
+  /* ── AXIOM LIST ── */
+  .axiom-group { margin: .5rem 0 .4rem; }
+  .axiom-group-title {
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .45rem;
+    padding-bottom: .28rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .en-axiom-group-title {
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--en-accent);
+    margin-bottom: .45rem;
+    padding-bottom: .28rem;
+    border-bottom: 1px solid #c5d0de;
+  }
+  .axiom-list { list-style: none; padding: 0; }
+  .axiom-list li {
+    display: flex;
+    gap: .65rem;
+    padding: .28rem 0;
+    font-size: .9rem;
+    border-bottom: 1px dotted var(--rule-light);
+    align-items: flex-start;
+  }
+  .axiom-list li:last-child { border-bottom: none; }
+  .ax-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    color: var(--ink-faint);
+    min-width: 1.4rem;
+    padding-top: .12rem;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--def-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: .9rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem .5rem;
+  }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc ol li a {
+    font-size: .83rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+    transition: color .15s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+  .toc ol li a .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .67rem;
+    color: var(--ink-faint);
+    min-width: 3rem;
+  }
+
+  /* ── UTILITY ── */
+  p { margin-bottom: .5rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+  .en-panel strong { color: var(--en-accent); }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    background: var(--ink);
+    padding: .6rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+  }
+  .site-nav a { color: #ccc; text-decoration: none; letter-spacing: .05em; transition: color .15s; }
+  .site-nav a:hover { color: #fff; }
+  .site-nav a.active { color: var(--accent-soft); }
+
+  /* ── SKIP LINK ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: auto;
+    padding: .5rem 1rem; background: var(--accent); color: #fff;
+    font-size: .85rem; z-index: 1000; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: #aaa;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: 3rem;
+  }
+  .site-footer a { color: #ccc; text-decoration: none; margin: 0 .8rem; transition: color .15s; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer .footer-copy { margin-top: 1rem; font-size: .72rem; color: #666; }
+  .site-footer .footer-desc { margin-top: .5rem; font-size: .7rem; color: #555; }
+
+  @media (max-width: 600px) {
+    .ko-panel, .en-panel { padding: .85rem .95rem .95rem; }
+    header { padding: 2.5rem 1.2rem 2.2rem; }
+    .site-nav { gap: 1rem; font-size: .68rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="index.html">홈</a>
+  <a href="ch1.html">Ch1 개념</a>
+  <a href="ch1-ex.html">Ch1 예제</a>
+  <a class="active" href="ch2.html">Ch2 개념</a>
+  <a href="ch2-ex.html">Ch2 예제</a>
+  <a href="about.html">소개</a>
+  <a href="privacy.html">개인정보처리방침</a>
+  <a href="disclaimer.html">면책조항</a>
+</nav>
+
+<header>
+  <p class="subtitle">Real Analysis · Chapter 2</p>
+  <h1>해석학 I 한·영 대조 개념 정리<span>Basic Topology — Bilingual Study Guide</span></h1>
+  <span class="chapter-tag">Definitions 2.1 – 2.86</span>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 요약 &nbsp;·&nbsp; 오른쪽: 원문 (Rudin 기반 강의노트)</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Contents</h3>
+  <ol>
+    <li><a href="#d21"><span class="toc-num">Def 2.1</span>대등 Cardinality</a></li>
+    <li><a href="#d23"><span class="toc-num">Def 2.3</span>가산/비가산 Countable</a></li>
+    <li><a href="#t213"><span class="toc-num">Thm 2.13</span>무한 부분집합은 가산</a></li>
+    <li><a href="#t217"><span class="toc-num">Thm 2.17</span>가산 합집합</a></li>
+    <li><a href="#c218"><span class="toc-num">Cor 2.18</span>기껏해야 가산 합집합</a></li>
+    <li><a href="#t221"><span class="toc-num">Thm 2.21</span>$n$-tuple 가산</a></li>
+    <li><a href="#c222"><span class="toc-num">Cor 2.22</span>$\mathbb{Q}$는 가산</a></li>
+    <li><a href="#t223"><span class="toc-num">Thm 2.23</span>Cantor 대각선 논법</a></li>
+    <li><a href="#d226"><span class="toc-num">Def 2.26</span>거리 공간 Metric Space</a></li>
+    <li><a href="#d229"><span class="toc-num">Def 2.29</span>구간, 공, 볼록</a></li>
+    <li><a href="#d231"><span class="toc-num">Def 2.31</span>근방, 극한점, 열림/닫힘</a></li>
+    <li><a href="#t233"><span class="toc-num">Thm 2.33</span>근방은 열린 집합</a></li>
+    <li><a href="#t234"><span class="toc-num">Thm 2.34</span>극한점과 무한성</a></li>
+    <li><a href="#t235"><span class="toc-num">Thm 2.35</span>유한 부분집합</a></li>
+    <li><a href="#l239"><span class="toc-num">Lem 2.39</span>근방과 분리</a></li>
+    <li><a href="#t240"><span class="toc-num">Thm 2.40</span>열림 iff 여집합 닫힘</a></li>
+    <li><a href="#c241"><span class="toc-num">Cor 2.41</span>닫힘 iff 여집합 열림</a></li>
+    <li><a href="#l242"><span class="toc-num">Lem 2.42</span>드 모르간 법칙</a></li>
+    <li><a href="#t243"><span class="toc-num">Thm 2.43</span>합집합/교집합</a></li>
+    <li><a href="#t245"><span class="toc-num">Thm 2.45</span>가산 교집합 반례</a></li>
+    <li><a href="#d247"><span class="toc-num">Def 2.47</span>폐포 Closure</a></li>
+    <li><a href="#l248"><span class="toc-num">Lem 2.48</span>폐포 보조정리</a></li>
+    <li><a href="#c249"><span class="toc-num">Cor 2.49</span>폐포 따름정리</a></li>
+    <li><a href="#t251"><span class="toc-num">Thm 2.51</span>폐포의 성질</a></li>
+    <li><a href="#d253"><span class="toc-num">Def 2.53</span>상대적 열림</a></li>
+    <li><a href="#t255"><span class="toc-num">Thm 2.55</span>상대적 열림 특성화</a></li>
+    <li><a href="#d257"><span class="toc-num">Def 2.57</span>열린 덮개 Open Cover</a></li>
+    <li><a href="#d258"><span class="toc-num">Def 2.58</span>콤팩트 Compact</a></li>
+    <li><a href="#t262"><span class="toc-num">Thm 2.62</span>상대적 콤팩트</a></li>
+    <li><a href="#t263"><span class="toc-num">Thm 2.63</span>콤팩트이면 닫힘</a></li>
+    <li><a href="#t265"><span class="toc-num">Thm 2.65</span>닫힌 부분집합 콤팩트</a></li>
+    <li><a href="#c266"><span class="toc-num">Cor 2.66</span>$F \cap K$ 콤팩트</a></li>
+    <li><a href="#t267"><span class="toc-num">Thm 2.67</span>유한 교집합 성질</a></li>
+    <li><a href="#c270"><span class="toc-num">Cor 2.70</span>감소 콤팩트 수열</a></li>
+    <li><a href="#t272"><span class="toc-num">Thm 2.72</span>콤팩트의 극한점</a></li>
+    <li><a href="#t273"><span class="toc-num">Thm 2.73</span>축소 구간 정리</a></li>
+    <li><a href="#t275"><span class="toc-num">Thm 2.75</span>축소 $k$-cell</a></li>
+    <li><a href="#t276"><span class="toc-num">Thm 2.76</span>$k$-cell은 콤팩트</a></li>
+    <li><a href="#l277"><span class="toc-num">Lem 2.77</span>극한점 판정</a></li>
+    <li><a href="#l278"><span class="toc-num">Lem 2.78</span>유한 합집합 극한점</a></li>
+    <li><a href="#t280"><span class="toc-num">Thm 2.80</span>극한점과 수렴 수열</a></li>
+    <li><a href="#l283"><span class="toc-num">Lem 2.83</span>발산 수열 극한점</a></li>
+    <li><a href="#t284"><span class="toc-num">Thm 2.84</span>하이네-보렐 정리</a></li>
+    <li><a href="#t286"><span class="toc-num">Thm 2.86</span>바이어슈트라스 정리</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>유한, 가산, 비가산 집합 · Finite, Countable, Uncountable Sets</h2></div>
+
+<!-- Def 2.1 -->
+<div class="card def-card" id="d21">
+  <div class="card-head">
+    <span class="def-num">DEF 2.1</span>
+    <span class="def-title">대등 <em>Cardinality / Equivalence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$와 $B$가 집합이라 하자. $A$에서 $B$로의 1-1 사상이 존재하면 $A$와 $B$가 같은 기수(cardinality)를 가진다고 하고, $A$와 $B$가 <strong>대등</strong>(equivalent)하다고 한다. $A \sim B$로 표기한다.</p>
+        <p>다음 세 성질이 성립함을 쉽게 확인할 수 있다:</p>
+        <p><strong>(i)</strong> 반사적: $A \sim A$</p>
+        <p><strong>(ii)</strong> 대칭적: $A \sim B$이면 $B \sim A$</p>
+        <p><strong>(iii)</strong> 추이적: $A \sim B$이고 $B \sim C$이면 $A \sim C$</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>두 집합의 크기를 비교하는 개념. 일대일 대응이 존재하면 같은 크기로 본다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A$ and $B$ be sets. If there exists a 1-1 mapping from $A$ onto $B$, we say $A$ and $B$ have the same <strong>cardinal number</strong> (or cardinality), or briefly, $A$ and $B$ are <strong>equivalent</strong>. We write $A \sim B$.</p>
+        <p><strong>(i)</strong> Reflexive: $A \sim A$</p>
+        <p><strong>(ii)</strong> Symmetric: If $A \sim B$ then $B \sim A$</p>
+        <p><strong>(iii)</strong> Transitive: If $A \sim B$ and $B \sim C$ then $A \sim C$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 2.3 -->
+<div class="card def-card" id="d23">
+  <div class="card-head">
+    <span class="def-num">DEF 2.3</span>
+    <span class="def-title">유한·가산·비가산 <em>Countable / Uncountable</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{N}$을 자연수 전체의 집합이라 하자. $J_n$을 원소가 $1, 2, \ldots, n$인 집합이라 하자. 임의의 집합 $A$에 대해:</p>
+        <p><strong>(a)</strong> 어떤 $n \in \mathbb{N}$에 대해 $A \sim J_n$이거나 $A = \emptyset$이면 $A$는 <strong>유한</strong>(finite)</p>
+        <p><strong>(b)</strong> $A$가 유한이 아니면 <strong>무한</strong>(infinite)</p>
+        <p><strong>(c)</strong> $A \sim \mathbb{N}$이면 <strong>가산</strong>(countable)</p>
+        <p><strong>(d)</strong> $A$가 유한도 아니고 가산도 아니면 <strong>비가산</strong>(uncountable)</p>
+        <p><strong>(e)</strong> $A$가 유한이거나 가산이면 <strong>기껏해야 가산</strong>(at most countable)</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>자연수와 일대일 대응시킬 수 있으면 가산, 그조차 불가능하면 비가산이다. 자연수, 정수, 유리수는 가산이고, 실수는 비가산이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\mathbb{N}$ be the natural number system. By $J_n$ we denote the set whose elements are $1,2,\ldots,n$. For any set $A$:</p>
+        <p><strong>(a)</strong> $A$ is <strong>finite</strong> if $A \sim J_n$ for some $n \in \mathbb{N}$ or $A = \emptyset$</p>
+        <p><strong>(b)</strong> $A$ is <strong>infinite</strong> if $A$ is not finite</p>
+        <p><strong>(c)</strong> $A$ is <strong>countable</strong> if $A \sim \mathbb{N}$</p>
+        <p><strong>(d)</strong> $A$ is <strong>uncountable</strong> if $A$ is neither finite nor countable</p>
+        <p><strong>(e)</strong> $A$ is <strong>at most countable</strong> if $A$ is finite or countable</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.13 -->
+<div class="card thm-card" id="t213">
+  <div class="card-head">
+    <span class="thm-num">THM 2.13</span>
+    <span class="thm-title">가산 집합의 무한 부분집합은 가산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>가산 집합의 모든 무한 부분집합은 가산이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A$를 가산 집합, $E \subset A$를 무한 부분집합이라 하자. $A$의 원소를 수열 $(x_n)$으로 나열한다.</p>
+        <p>$n_1$을 $x_{n_1} \in E$인 가장 작은 양의 정수라 하자. 귀납적으로 $k = 2,3,\ldots$에 대해 $n_k$를 $n_{k-1}$보다 크고 $x_{n_k} \in E$인 가장 작은 정수로 택한다.</p>
+        <p>$E$가 무한이므로 이 과정은 모든 $k$에 대해 가능하다. $f(k) = x_{n_k}$로 놓으면 $f$는 $\mathbb{N}$에서 $E$로의 1-1 대응이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>가산 집합에서 무한히 많은 원소를 골라도 여전히 자연수로 번호를 매길 수 있다. 무한에도 '크기'가 다를 수 있다는 이야기의 출발점이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Every infinite subset of a countable set is countable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Let $A$ be countable, $E \subset A$ infinite. Arrange elements of $A$ in a sequence $(x_n)$. Let $n_1$ be the smallest positive integer with $x_{n_1} \in E$. Inductively, let $n_k$ be the smallest integer greater than $n_{k-1}$ with $x_{n_k} \in E$. This is possible for all $k$ since $E$ is infinite. By putting $f(k) = x_{n_k}$, we obtain a 1-1 correspondence between $\mathbb{N}$ and $E$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.17 -->
+<div class="card thm-card" id="t217">
+  <div class="card-head">
+    <span class="thm-num">THM 2.17</span>
+    <span class="thm-title">가산 집합들의 가산 합집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{E_n\}$을 가산 집합들의 수열이라 하면, $\bigcup_{n=1}^{\infty} E_n$은 가산이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>각 $E_n$이 가산이므로 수열로 나열할 수 있다: $E_n = \{x_{n,k}\}$ ($k = 1,2,3,\ldots$).</p>
+        <p>대각선 논법으로 모든 원소를 하나의 수열로 나열할 수 있다. 공통 원소가 있을 수 있으므로, 부분집합 $T \sim \mathbb{N}$가 존재하여 $\bigcup E_n$과 대응된다.</p>
+        <p>$E_0$가 무한이므로 $\bigcup E_n$도 무한이고, Thm 2.13에 의해 가산이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>가산 개의 가산 집합을 합쳐도 여전히 가산이다. 대각선 배열로 모든 원소를 하나의 수열로 나열할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{E_n\}$ be a sequence of countable sets. Then $\bigcup_{n=1}^{\infty} E_n$ is countable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Since each $E_n$ is countable, arrange as $E_n = \{x_{n,k}\}$. We can count all elements using the diagonal arrangement. There exists $T \sim \mathbb{N}$ such that $\bigcup E_n$ corresponds to $T$. Since $E_0$ is infinite, $\bigcup E_n$ is infinite, hence countable by Thm 2.13. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.18 -->
+<div class="card thm-card" id="c218">
+  <div class="card-head">
+    <span class="thm-num">COR 2.18</span>
+    <span class="thm-title">기껏해야 가산인 집합들의 합집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 기껏해야 가산인 집합이라 하자. 각 $\alpha \in A$에 대해 $B_\alpha$가 기껏해야 가산이면, $\bigcup_{\alpha \in A} B_\alpha$는 기껏해야 가산이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>기껏해야 가산 개의 기껏해야 가산 집합을 합쳐도 기껏해야 가산이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A$ be at most countable. Assume that for each $\alpha \in A$, there exists an at most countable set $B_\alpha$. Then $\bigcup_{\alpha \in A} B_\alpha$ is at most countable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.21 -->
+<div class="card thm-card" id="t221">
+  <div class="card-head">
+    <span class="thm-num">THM 2.21</span>
+    <span class="thm-title">가산 집합의 $n$-tuple</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 가산 집합이라 하고, $B_n$을 모든 $n$-tuple $(a_1, \ldots, a_n)$ ($a_k \in A$, $k = 1, \ldots, n$, $n \in \mathbb{N}$)의 집합이라 하자. 그러면 $B_n$은 가산이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>귀납법. $B_1 = A$는 가산이다. $B_{n-1}$이 가산이라고 가정하자.</p>
+        <p>$B_n$의 원소는 $(b, a)$ ($b \in B_{n-1}$, $a \in A$) 형태이다. 따라서 $B_n = \bigcup_{a \in A} \{(b,a) : b \in B_{n-1}\}$이므로 가산 집합들의 가산 합집합이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>가산 집합에서 유한 개를 뽑아 순서를 매긴 모든 경우의 수는 여전히 가산이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A$ be a countable set and $B_n$ be the set of all $n$-tuples $(a_1,\ldots,a_n)$ where $a_k \in A$ for all $k = 1,\ldots,n$. Then $B_n$ is countable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>By induction. $B_1 = A$ is countable. Assume $B_{n-1}$ countable. Elements of $B_n$ are $(b, a)$ where $b \in B_{n-1}$, $a \in A$. So $B_n = \bigcup_{a \in A} \{(b,a) : b \in B_{n-1}\}$, a countable union of countable sets. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.22 -->
+<div class="card thm-card" id="c222">
+  <div class="card-head">
+    <span class="thm-num">COR 2.22</span>
+    <span class="thm-title">$\mathbb{Q}$는 가산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{Q}$는 가산이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\mathbb{Z}$는 가산이다 (Example 2.9). Thm 2.21에 의해 $\mathbb{Z} \times \mathbb{Z}$는 가산이다.</p>
+        <p>모든 유리수는 $a/b$ ($a,b \in \mathbb{Z}$, $b \neq 0$) 형태이므로, $A \subset \mathbb{Z} \times \mathbb{Z}$가 존재하여 $A \sim \mathbb{Q}$. $\mathbb{Q}$가 무한이므로 Thm 2.13에 의해 가산이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>유리수는 두 정수의 비로 표현되므로, 정수 쌍을 세는 것으로 모든 유리수를 셀 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$\mathbb{Q}$ is countable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$\mathbb{Z}$ is countable (Example 2.9). By Thm 2.21, $\mathbb{Z} \times \mathbb{Z}$ is countable. Every rational is $a/b$ where $a,b \in \mathbb{Z}$, $b \neq 0$. So $A \subset \mathbb{Z} \times \mathbb{Z}$ with $A \sim \mathbb{Q}$. Since $\mathbb{Q}$ is infinite, it's countable by Thm 2.13. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.23 -->
+<div class="card thm-card" id="t223">
+  <div class="card-head">
+    <span class="thm-num">THM 2.23</span>
+    <span class="thm-title">Cantor의 대각선 논법</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원소가 숫자 0과 1인 모든 수열들의 집합 $A$는 비가산이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>귀류법. $A$가 가산이라 가정하면 수열 $(s_n)$으로 나열 가능. 각 $s_n = (s_{n,k})$.</p>
+        <p>새 수열 $\bar{s}$를 $\bar{s}_n \neq s_{n,n}$으로 정의하면, 모든 $n$에 대해 $\bar{s} \neq s_n$이지만 $\bar{s} \in A$. 모순.</p>
+        <p>이것이 Cantor의 대각선 논법이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>0과 1로 이루어진 무한 수열을 아무리 나열해도, 대각선을 뒤집어 만든 새 수열은 목록에 없다. 따라서 실수는 자연수보다 '많다'.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A$ be the set of all sequences whose elements are the digits 0 and 1. Then $A$ is uncountable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose $A$ is countable, arranged as $(s_n)$. Define $\bar{s}$ by $\bar{s}_n \neq s_{n,n}$. Then $\bar{s} \in A$ but $\bar{s} \neq s_n$ for all $n$, contradiction. This is Cantor's diagonal process. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>거리 공간 · Metric Spaces</h2></div>
+
+<!-- Def 2.26 -->
+<div class="card def-card" id="d226">
+  <div class="card-head">
+    <span class="def-num">DEF 2.26</span>
+    <span class="def-title">거리 공간 <em>Metric Space</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $X$가 <strong>거리 공간</strong>(metric space)이라 함은 $X$의 임의의 두 원소 $p, q$에 대해 <strong>거리</strong>(distance) $d(p,q)$라 불리는 실수가 대응되는 함수 $d: X \times X \to \mathbb{R}$이 존재하여 다음을 만족하는 것이다:</p>
+        <p><strong>(a)</strong> $d(p,p) = 0$ for all $p \in X$</p>
+        <p><strong>(b)</strong> $d(p,q) > 0$ if $p \neq q$</p>
+        <p><strong>(c)</strong> $d(p,q) = d(q,p)$ for all $p,q \in X$</p>
+        <p><strong>(d)</strong> 삼각부등식: $d(p,q) \leq d(p,r) + d(r,q)$ for all $p,q,r \in X$</p>
+        <p>이 성질을 만족하는 함수를 거리(metric) 또는 거리함수(distance function)라 한다. $(X, d)$가 거리 공간이라고도 쓴다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>거리 공간은 두 점 사이의 '거리'를 잴 수 있는 공간이다. 유클리드 공간이 가장 흔한 예시.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A set $X$ is said to be a <strong>metric space</strong> if there exists a function $d: X \times X \to \mathbb{R}$ such that:</p>
+        <p><strong>(a)</strong> $d(p,p) = 0$ for all $p \in X$</p>
+        <p><strong>(b)</strong> $d(p,q) > 0$ if $p \neq q$</p>
+        <p><strong>(c)</strong> $d(p,q) = d(q,p)$ for all $p,q \in X$</p>
+        <p><strong>(d)</strong> Triangle inequality: $d(p,q) \leq d(p,r) + d(r,q)$ for all $p,q,r \in X$</p>
+        <p>Any function satisfying these is called a <strong>metric</strong> or <strong>distance function</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 2.29 -->
+<div class="card def-card" id="d229">
+  <div class="card-head">
+    <span class="def-num">DEF 2.29</span>
+    <span class="def-title">구간, 셀, 공, 볼록 <em>Segments, Cells, Balls, Convex</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(i)</strong> $a < b$일 때, 선분(segment) $(a,b)$은 $a < x < b$인 모든 실수 $x$의 집합이며 열린 구간(open interval)이라고도 한다. 구간(interval) $[a,b]$는 $a \leq x \leq b$인 모든 실수 $x$의 집합이며 닫힌 구간(closed interval)이다. 반열린 구간도 비슷하게 정의.</p>
+        <p><strong>(ii)</strong> $a_i < b_i$ ($i=1,\ldots,k$)일 때, $a_i \leq x_i \leq b_i$를 만족하는 모든 점 $x = (x_1,\ldots,x_k) \in \mathbb{R}^k$의 집합을 $k$-cell이라 한다.</p>
+        <p><strong>(iii)</strong> $x \in \mathbb{R}^k$, $r > 0$일 때, 열린 공(open ball) $B(x,r) = \{y \in \mathbb{R}^k : |y - x| < r\}$, 닫힌 공(closed ball) $\bar{B}(x,r) = \{y \in \mathbb{R}^k : |y - x| \leq r\}$.</p>
+        <p><strong>(iv)</strong> $E \subset \mathbb{R}^k$가 <strong>볼록</strong>(convex)이란 $\lambda x + (1-\lambda)y \in E$ for all $x,y \in E$, $0 < \lambda < 1$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>구간은 수직선 위의 연속적인 구간, $k$-cell은 고차원 직사각형, 공은 고차원 원(구), 볼록 집합은 두 점을 잇는 선분이 항상 집합 안에 있는 집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p><strong>(i)</strong> Segment $(a,b)$ = open interval, interval $[a,b]$ = closed interval.</p>
+        <p><strong>(ii)</strong> A $k$-cell is the set of all $x=(x_1,\ldots,x_k) \in \mathbb{R}^k$ with $a_i \leq x_i \leq b_i$.</p>
+        <p><strong>(iii)</strong> Open ball $B(x,r) = \{y \in \mathbb{R}^k : |y-x| < r\}$, closed ball $\bar{B}(x,r) = \{y \in \mathbb{R}^k : |y-x| \leq r\}$.</p>
+        <p><strong>(iv)</strong> $E \subset \mathbb{R}^k$ is <strong>convex</strong> if $\lambda x + (1-\lambda)y \in E$ for all $x,y \in E$, $0 < \lambda < 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 3 ═══════════ -->
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>근방, 극한점, 열린·닫힌 집합 · Neighborhoods, Limit Points, Open/Closed Sets</h2></div>
+
+<!-- Def 2.31 -->
+<div class="card def-card" id="d231">
+  <div class="card-head">
+    <span class="def-num">DEF 2.31</span>
+    <span class="def-title">근방, 극한점, 내점, 열림, 닫힘 <em>Neighborhood, Limit Point, Open, Closed</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간이라 하자. $E \subset X$에 대해:</p>
+        <p><strong>(a)</strong> $r > 0$일 때, 점 $p$의 <strong>근방</strong>(neighborhood) $N_r(p) = \{q \in X : d(p,q) < r\}$. $r$을 반지름, $p$를 중심이라 한다.</p>
+        <p><strong>(b)</strong> $p$가 $E$의 <strong>극한점</strong>(limit point)이란 $p$의 모든 근방이 $p \neq q$인 $q \in E$를 포함하는 것.</p>
+        <p><strong>(c)</strong> $p \in E$이고 $p$가 $E$의 극한점이 아니면 $p$를 $E$의 <strong>고립점</strong>(isolated point)이라 한다.</p>
+        <p><strong>(d)</strong> 모든 극한점이 $E$에 속하면 $E$는 <strong>닫혀있다</strong>(closed).</p>
+        <p><strong>(e)</strong> $p \in E$에 대해 $N_r(p) \subset E$인 $r > 0$이 존재하면 $p$는 $E$의 <strong>내점</strong>(interior point).</p>
+        <p><strong>(f)</strong> $E$의 모든 점이 내점이면 $E$는 <strong>열려있다</strong>(open).</p>
+        <p><strong>(g)</strong> $E$의 여집합 $E^c = \{p \in X : p \notin E\}$.</p>
+        <p><strong>(h)</strong> $E$가 닫혀있고 모든 점이 극한점이면 $E$는 <strong>완전</strong>(perfect).</p>
+        <p><strong>(i)</strong> $M > 0$이 존재하여 모든 $p, q \in E$에 대해 $d(p,q) < M$이면 $E$는 <strong>유계</strong>(bounded).</p>
+        <p><strong>(j)</strong> $E$가 $X$에서 <strong>조밀</strong>(dense)이란 $X$의 모든 점이 $E$의 극한점이거나 $E$의 점인 것.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>열린 집합은 경계를 포함하지 않는 집합, 닫힌 집합은 경계까지 포함하는 집합이다. 극한점은 아무리 가까이 다가가도 주변에 항상 집합의 원소가 있는 점이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $E \subset X$:</p>
+        <p><strong>(a)</strong> Neighborhood $N_r(p) = \{q \in X : d(p,q) < r\}$.</p>
+        <p><strong>(b)</strong> $p$ is a <strong>limit point</strong> of $E$ if every neighborhood of $p$ contains a point $q \neq p$ such that $q \in E$.</p>
+        <p><strong>(c)</strong> If $p \in E$ and $p$ is not a limit point, $p$ is an <strong>isolated point</strong>.</p>
+        <p><strong>(d)</strong> $E$ is <strong>closed</strong> if every limit point of $E$ is a point of $E$.</p>
+        <p><strong>(e)</strong> $p$ is an <strong>interior point</strong> of $E$ if there is a $N_r(p) \subset E$.</p>
+        <p><strong>(f)</strong> $E$ is <strong>open</strong> if every point of $E$ is an interior point.</p>
+        <p><strong>(g)</strong> Complement $E^c = X - E$.</p>
+        <p><strong>(h)</strong> $E$ is <strong>perfect</strong> if $E$ is closed and every point of $E$ is a limit point.</p>
+        <p><strong>(i)</strong> $E$ is <strong>bounded</strong> if there is $M > 0$ with $d(p,q) < M$ for all $p,q \in E$.</p>
+        <p><strong>(j)</strong> $E$ is <strong>dense</strong> in $X$ if every point of $X$ is a limit point of $E$, or a point of $E$ (or both).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.33 -->
+<div class="card thm-card" id="t233">
+  <div class="card-head">
+    <span class="thm-num">THM 2.33</span>
+    <span class="thm-title">모든 근방은 열린 집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리 공간에서 모든 근방은 열린 집합이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$E = N_r(p)$라 하자. $q \in N_r(p)$이면 $h = r - d(p,q) > 0$이다.</p>
+        <p>$s \in N_h(q)$이면 삼각부등식에 의해 $d(p,s) \leq d(p,q) + d(q,s) < d(p,q) + h = r$이다.</p>
+        <p>따라서 $N_h(q) \subset N_r(p)$이므로 $q$는 내점이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>열린 공의 안쪽 점에서는 항상 더 작은 공을 그릴 수 있다. 따라서 경계에 닿지 않으므로 열린 집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space. Then every neighborhood in $X$ is an open set.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Let $E = N_r(p)$. Let $q \in N_r(p)$. Set $h = r - d(p,q) > 0$. For all $s \in N_h(q)$, by triangle inequality $d(p,s) \leq d(p,q) + d(q,s) < d(p,q) + h = r$. So $N_h(q) \subset N_r(p)$, meaning $q$ is an interior point. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.34 -->
+<div class="card thm-card" id="t234">
+  <div class="card-head">
+    <span class="thm-num">THM 2.34</span>
+    <span class="thm-title">극한점의 근방에는 무한히 많은 점</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리 공간 $(X,d)$에서 $E \subset X$이고 $p$가 $E$의 극한점이면, $p$의 모든 근방은 $E$의 무한히 많은 점을 포함한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>어떤 $N_r(p)$가 $p$와 다른 $E$의 점을 유한 개 $q_1,\ldots,q_n$만 포함한다고 가정하자.</p>
+        <p>$r' = \min\{d(p,q_i)\}$로 놓으면 $N_{r'}(p)$는 $p$ 이외의 $E$의 점을 포함하지 않으므로, $p$가 극한점인 것에 모순이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>극한점 주변에 유한 개만 있다면, 가장 가까운 점보다 더 작은 근방을 잡으면 아무 점도 없게 되어 모순이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $E \subset X$, and $p$ a limit point of $E$. Then every neighborhood of $p$ contains infinitely many points of $E$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose some $N_r(p)$ contains only finitely many points $q_1,\ldots,q_n$ of $E$ distinct from $p$. Let $r' = \min\{d(p,q_i)\}$. Then $N_{r'}(p)$ contains no point of $E$ other than possibly $p$, contradicting $p$ being a limit point. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.35 -->
+<div class="card thm-card" id="t235">
+  <div class="card-head">
+    <span class="thm-num">THM 2.35</span>
+    <span class="thm-title">유한 부분집합의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리 공간의 유한 부분집합 $E$에 대해:</p>
+        <p><strong>(i)</strong> $E$는 유계</p>
+        <p><strong>(ii)</strong> $E$는 극한점을 갖지 않는다</p>
+        <p><strong>(iii)</strong> $E$는 닫혀있다</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>유한 개의 점은 유한한 공간에 담기고, 어떤 점 주변에도 무한히 가까이 접근하는 점이 없으므로 극한점이 없다. 극한점이 없으니 자동으로 닫혀있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $X$ be a metric space and $E$ be a finite subset of $X$. Then:</p>
+        <p><strong>(i)</strong> $E$ is bounded</p>
+        <p><strong>(ii)</strong> $E$ has no limit points</p>
+        <p><strong>(iii)</strong> $E$ is closed</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 2.39 -->
+<div class="card thm-card" id="l239">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.39</span>
+    <span class="thm-title">$E$와 분리되는 근방</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $E \subset X$, $x \in X$라 하자. $x$가 $E$의 극한점이 아니고 $x \notin E$이면, $N_r(x) \cap E = \emptyset$인 $r > 0$이 존재한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>$E$에 속하지도 않고 극한점도 아닌 점 주변에는 $E$의 원소가 전혀 없는 작은 공을 잡을 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $E \subset X$, and $x$ a point in $X$. Assume that $x \notin E$ and $x$ is not a limit point of $E$. Then there exists $r > 0$ such that $N_r(x) \cap E = \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.40 -->
+<div class="card thm-card" id="t240">
+  <div class="card-head">
+    <span class="thm-num">THM 2.40</span>
+    <span class="thm-title">열림 $\iff$ 여집합 닫힘</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $E$는 열려있다 $\iff$ $E^c$는 닫혀있다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>($\Rightarrow$)</strong> $E^c$가 닫혀있음을 보인다. $x$가 $E^c$의 극한점이라 하자. $x \in E$이면 $x$는 $E$의 내점이므로 $N_r(x) \subset E$인 $r$이 존재하고, $N_r(x) \cap E^c = \emptyset$이 되어 $x$가 극한점인 것에 모순. 따라서 $x \in E^c$.</p>
+        <p><strong>($\Leftarrow$)</strong> $E$가 열려있음을 보인다. $x \in E$이면 $x \notin E^c$. $E^c$가 닫혀있으므로 $x$는 $E^c$의 극한점이 아니다. Lem 2.39에 의해 $N_r(x) \cap E^c = \emptyset$인 $r$이 존재. 즉 $N_r(x) \subset E$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>열린 집합의 바깥(여집합)은 경계를 모두 포함하므로 닫혀있고, 그 역도 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A set $E$ is open if and only if $E^c$ is closed.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p><strong>($\Rightarrow$)</strong> Suppose $E$ is open. Let $x$ be a limit point of $E^c$. If $x \in E$, then $x$ is interior to $E$, so $N_r(x) \subset E$ for some $r$, meaning $N_r(x) \cap E^c = \emptyset$, contradicting $x$ being a limit point. Thus $x \in E^c$.</p>
+        <p><strong>($\Leftarrow$)</strong> Suppose $E^c$ is closed. Let $x \in E$. Then $x \notin E^c$ and $x$ is not a limit point of $E^c$. By Lem 2.39, $N_r(x) \cap E^c = \emptyset$ for some $r$. Hence $N_r(x) \subset E$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.41 -->
+<div class="card thm-card" id="c241">
+  <div class="card-head">
+    <span class="thm-num">COR 2.41</span>
+    <span class="thm-title">닫힘 $\iff$ 여집합 열림</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $F$가 닫혀있다 $\iff$ $F^c$가 열려있다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>Thm 2.40의 직접적인 결과. 열림과 닫힘은 여집합을 통해 완벽하게 쌍대적이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A set $F$ is closed if and only if $F^c$ is open.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 2.42 -->
+<div class="card thm-card" id="l242">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.42</span>
+    <span class="thm-title">일반화된 드 모르간 법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(일반화된 드 모르간 법칙) $A$를 첨자 집합이라 하고 각 $\alpha \in A$에 대해 집합 $E_\alpha$가 주어지면:</p>
+        <div class="math-display">$$\left(\bigcup_{\alpha \in A} E_\alpha\right)^c = \bigcap_{\alpha \in A} E_\alpha^c$$</div>
+        <div class="math-display">$$\left(\bigcap_{\alpha \in A} E_\alpha\right)^c = \bigcup_{\alpha \in A} E_\alpha^c$$</div>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>합집합의 여집합은 여집합의 교집합, 교집합의 여집합은 여집합의 합집합. 여집합을 취하면 합집합과 교집합이 뒤바뀐다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>(Generalization of De Morgan's law) For any index set $A$ and collection $\{E_\alpha\}$:</p>
+        <div class="math-display">$$\left(\bigcup E_\alpha\right)^c = \bigcap E_\alpha^c \quad\text{and}\quad \left(\bigcap E_\alpha\right)^c = \bigcup E_\alpha^c$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.43 -->
+<div class="card thm-card" id="t243">
+  <div class="card-head">
+    <span class="thm-num">THM 2.43</span>
+    <span class="thm-title">열린/닫힌 집합의 합집합·교집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a)</strong> 열린 집합들의 합집합은 열려있다.</p>
+        <p><strong>(b)</strong> 닫힌 집합들의 교집합은 닫혀있다.</p>
+        <p><strong>(c)</strong> 유한 개의 열린 집합의 교집합은 열려있다.</p>
+        <p><strong>(d)</strong> 유한 개의 닫힌 집합의 합집합은 닫혀있다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>열린 집합을 아무리 많이 합쳐도 열려있지만, 무한히 교집합하면 열림이 깨질 수 있다 (Thm 2.45 참고). 닫힌 집합은 그 반대.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> Any union of open sets is open.</p>
+        <p><strong>(b)</strong> Any intersection of closed sets is closed.</p>
+        <p><strong>(c)</strong> A finite intersection of open sets is open.</p>
+        <p><strong>(d)</strong> A finite union of closed sets is closed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.45 -->
+<div class="card thm-card" id="t245">
+  <div class="card-head">
+    <span class="thm-num">THM 2.45</span>
+    <span class="thm-title">열린 집합의 가산 교집합 반례</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>열린 집합들의 가산 교집합이 반드시 열린 것은 아니다.</p>
+        <p>반례: $G_n = (-1/n, 1/n)$이면 각 $G_n$은 열려있지만 $\bigcap_{n=1}^{\infty} G_n = \{0\}$은 열려있지 않다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>점점 좁아지는 열린 구간을 무한히 교집합하면 한 점만 남게 되어 열린 집합이 아니게 된다. 무한 교집합이 유한 교집합과 다르게 행동하는 중요한 예시.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A countable intersection of open sets need not be open.</p>
+        <p>Counterexample: $G_n = (-1/n, 1/n)$ are open but $\bigcap G_n = \{0\}$ is not open.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 2.47 -->
+<div class="card def-card" id="d247">
+  <div class="card-head">
+    <span class="def-num">DEF 2.47</span>
+    <span class="def-title">폐포 <em>Closure</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간이라 하자.</p>
+        <p><strong>(a)</strong> $E'$로 $E$의 모든 극한점의 집합을 나타낸다.</p>
+        <p><strong>(b)</strong> $E$의 <strong>폐포</strong>(closure)는 $\bar{E} = E \cup E'$로 정의된다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>폐포는 집합에 모든 극한점을 추가하여 '닫히게' 만든 것이다. 열린 구간 $(0,1)$의 폐포는 닫힌 구간 $[0,1]$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> By $E'$ we denote the set of all limit points of $E$ in $X$.</p>
+        <p><strong>(b)</strong> The <strong>closure</strong> of $E$ is defined as $\bar{E} = E \cup E'$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 2.48 -->
+<div class="card thm-card" id="l248">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.48</span>
+    <span class="thm-title">근방과 극한점 집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \cap N_r(x) = \emptyset$이면 $E' \cap N_r(x) = \emptyset$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>근방 안에 $E$의 원소가 하나도 없으면, 그 근방에 $E$의 극한점도 있을 수 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $E \cap N_r(x) = \emptyset$ then $E' \cap N_r(x) = \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.49 -->
+<div class="card thm-card" id="c249">
+  <div class="card-head">
+    <span class="thm-num">COR 2.49</span>
+    <span class="thm-title">폐포와 분리되는 근방</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $E \subset X$, $x \in X$라 하자. $x \notin E$이고 $x$가 $E$의 극한점이 아니면, $N_r(x) \cap E = \emptyset$인 $r > 0$이 존재한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $E \subset X$, and $x \in X$. Assume that $x \notin E$ and $x$ is not a limit point of $E$. Then there exists $r > 0$ such that $N_r(x) \cap E = \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.51 -->
+<div class="card thm-card" id="t251">
+  <div class="card-head">
+    <span class="thm-num">THM 2.51</span>
+    <span class="thm-title">폐포의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X$를 거리 공간, $E \subset X$이면:</p>
+        <p><strong>(a)</strong> $\bar{E}$는 닫혀있다.</p>
+        <p><strong>(b)</strong> $E = \bar{E}$ $\iff$ $E$는 닫혀있다.</p>
+        <p><strong>(c)</strong> 닫힌 집합 $F$에 대해 $E \subset F$이면 $\bar{E} \subset F$.</p>
+        <p>즉 $\bar{E}$는 $E$를 포함하는 가장 작은 닫힌 집합이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>폐포는 집합을 감싸는 가장 타이트한 닫힌 집합이다. 이미 닫혀있으면 폐포는 자기 자신이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $X$ be a metric space and $E \subset X$. Then:</p>
+        <p><strong>(a)</strong> $\bar{E}$ is closed.</p>
+        <p><strong>(b)</strong> $E = \bar{E}$ iff $E$ is closed.</p>
+        <p><strong>(c)</strong> For every closed set $F$ with $E \subset F$, we have $\bar{E} \subset F$. That is, $\bar{E}$ is the smallest closed set containing $E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 4 ═══════════ -->
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>상대적 열림·닫힘 · Relative Topology</h2></div>
+
+<!-- Def 2.53 -->
+<div class="card def-card" id="d253">
+  <div class="card-head">
+    <span class="def-num">DEF 2.53</span>
+    <span class="def-title">상대적 열림 <em>Open Relative to Y</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $Y \subset X$라 하자. $(Y,d)$도 거리 공간이다.</p>
+        <p>$E \subset Y$가 $Y$에서 열려있다(open relative to $Y$)는 것은 모든 $y \in E$에 대해 $N_r^Y(y) \subset E$인 $r > 0$이 존재하는 것. 즉, $Y$에서의 근방 $N_r^Y(p) = \{q \in Y : d(p,q) < r\}$를 사용.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>부분 공간 $Y$의 관점에서만 보면 열려있는 집합이다. 전체 공간 $X$에서는 열려있지 않을 수도 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $Y \subset X$. We say a set $E$ is <strong>open relative to $Y$</strong> if for each $y \in E$, there exists $r > 0$ with $N_r^Y(y) \subset E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.55 -->
+<div class="card thm-card" id="t255">
+  <div class="card-head">
+    <span class="thm-num">THM 2.55</span>
+    <span class="thm-title">상대적 열림의 특성화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $Y \subset X$라 하자.</p>
+        <p>$E \subset Y$가 $Y$에 대해 열려있다 $\iff$ $E = Y \cap G$인 $X$에서 열린 집합 $G$가 존재한다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>$Y$ 안에서 열린 집합은 항상 전체 공간의 열린 집합을 $Y$와 교집합한 형태로 표현할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$E$ is open relative to $Y$ iff there exists an open set $G$ in $X$ such that $E = G \cap Y$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 5 ═══════════ -->
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>콤팩트 집합 · Compact Sets</h2></div>
+
+<!-- Def 2.57 -->
+<div class="card def-card" id="d257">
+  <div class="card-head">
+    <span class="def-num">DEF 2.57</span>
+    <span class="def-title">열린 덮개 <em>Open Cover</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X$를 거리 공간, $E \subset X$라 하자. $E$의 <strong>열린 덮개</strong>(open cover)란 $E \subset \bigcup_{\alpha \in A} G_\alpha$를 만족하는 $X$의 열린 집합들의 모임 $\{G_\alpha : \alpha \in A\}$이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>열린 집합들로 대상 집합을 빈틈없이 덮는 것이다. 여러 장의 천으로 물건을 완전히 덮는 것에 비유할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>An <strong>open cover</strong> of $E$ is a collection $\{G_\alpha\}$ of open subsets of $X$ such that $E \subset \bigcup G_\alpha$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 2.58 -->
+<div class="card def-card" id="d258">
+  <div class="card-head">
+    <span class="def-num">DEF 2.58</span>
+    <span class="def-title">콤팩트 <em>Compact</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$K \subset X$가 <strong>콤팩트</strong>(compact)란 $K$의 모든 열린 덮개가 유한 부분 덮개를 가지는 것이다.</p>
+        <p>즉, $K$의 임의의 열린 덮개 $\{G_\alpha\}$에 대해, 유한 개의 $G_{\alpha_1}, \ldots, G_{\alpha_n}$이 존재하여 $K \subset G_{\alpha_1} \cup \cdots \cup G_{\alpha_n}$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>콤팩트 집합은 '유한 개로 덮을 수 있는' 집합이다. 유클리드 공간에서는 닫혀있고 유계인 집합이 콤팩트이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$K \subset X$ is <strong>compact</strong> if every open cover of $K$ has a finite subcover. That is, for any open cover $\{G_\alpha\}$ of $K$, there exist $\alpha_1,\ldots,\alpha_n$ such that $K \subset G_{\alpha_1} \cup \cdots \cup G_{\alpha_n}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.62 -->
+<div class="card thm-card" id="t262">
+  <div class="card-head">
+    <span class="thm-num">THM 2.62</span>
+    <span class="thm-title">상대적 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$K$는 $X$에 대해 콤팩트 $\iff$ $K$는 $Y$에 대해 콤팩트 ($K \subset Y \subset X$).</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>콤팩트성은 어느 공간에서 보든 동일하다. 부분 공간으로 옮겨도 콤팩트성이 보존된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$K$ is compact relative to $X$ if and only if $K$ is compact relative to $Y$ (where $K \subset Y \subset X$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.63 -->
+<div class="card thm-card" id="t263">
+  <div class="card-head">
+    <span class="thm-num">THM 2.63</span>
+    <span class="thm-title">콤팩트이면 닫혀있다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리 공간의 콤팩트 부분집합은 닫혀있다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>콤팩트 집합은 모든 극한점을 포함한다. 만약 극한점이 밖에 있으면 그 점 주변에서 유한 부분 덮개를 구성할 수 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $X$ be a metric space and $K \subset X$. Assume that $K$ is compact. Then $K$ is closed. In other words, compact subsets of metric spaces are closed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.65 -->
+<div class="card thm-card" id="t265">
+  <div class="card-head">
+    <span class="thm-num">THM 2.65</span>
+    <span class="thm-title">콤팩트의 닫힌 부분집합은 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>콤팩트 집합의 닫힌 부분집합은 콤팩트이다. 즉, $F$가 닫혀있고 $K$가 콤팩트이며 $F \subset K$이면 $F$는 콤팩트이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>콤팩트한 집합의 일부를 닫힌 조건으로 잘라내면, 잘려 나온 부분도 여전히 콤팩트하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $X$ be a metric space and $F \subset K \subset X$. Assume that $F$ is closed and $K$ is compact. Then $F$ is compact. In other words, closed subsets of compact sets are compact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.66 -->
+<div class="card thm-card" id="c266">
+  <div class="card-head">
+    <span class="thm-num">COR 2.66</span>
+    <span class="thm-title">$F \cap K$는 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$F$가 닫혀있고 $K$가 콤팩트이면, $F \cap K$는 콤팩트이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>닫힌 집합과 콤팩트 집합의 교집합은 콤팩트 집합의 닫힌 부분집합이므로 콤팩트이다 (Thm 2.65의 직접 적용).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $F$ is closed and $K$ is compact, then $F \cap K$ is compact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.67 -->
+<div class="card thm-card" id="t267">
+  <div class="card-head">
+    <span class="thm-num">THM 2.67</span>
+    <span class="thm-title">유한 교집합 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{K_\alpha : \alpha \in A\}$를 거리 공간 $X$의 콤팩트 부분집합들의 모임이라 하자. 모든 (비어있지 않은) 유한 부분 모임의 교집합이 공집합이 아니면, $\bigcap_{\alpha \in A} K_\alpha \neq \emptyset$이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>유한 교집합 성질(FIP): 유한 개를 아무리 골라 교집합해도 공집합이 아니면, 전체 교집합도 공집합이 아니다. 콤팩트성이 이를 보장한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{K_\alpha\}$ be a collection of compact subsets of $X$. Assume that the intersection of every finite subcollection is nonempty. Then $\bigcap K_\alpha \neq \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 2.70 -->
+<div class="card thm-card" id="c270">
+  <div class="card-head">
+    <span class="thm-num">COR 2.70</span>
+    <span class="thm-title">감소하는 콤팩트 집합의 교집합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$K_1 \supset K_2 \supset \cdots$가 공집합이 아닌 콤팩트 집합들의 수열이면, $\bigcap_{n=1}^{\infty} K_n \neq \emptyset$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>점점 작아지더라도 콤팩트하고 비어있지 않은 집합들의 교집합에는 반드시 공통 원소가 남는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $K_1, K_2, \ldots$ be a sequence of nonempty compact sets such that $K_n \supset K_{n+1}$. Then $\bigcap K_n \neq \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.72 -->
+<div class="card thm-card" id="t272">
+  <div class="card-head">
+    <span class="thm-num">THM 2.72</span>
+    <span class="thm-title">콤팩트 집합의 무한 부분집합은 극한점을 가진다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>콤팩트 집합 $K$의 무한 부분집합 $E$는 $K$ 안에 극한점을 가진다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>콤팩트 집합 안에 무한히 많은 점이 있으면, 반드시 어딘가에 점들이 쌓이는 곳(극한점)이 있고, 그 점은 $K$ 안에 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $E$ be an infinite subset of a compact set $K$. Then $E$ has a limit point in $K$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.73 -->
+<div class="card thm-card" id="t273">
+  <div class="card-head">
+    <span class="thm-num">THM 2.73</span>
+    <span class="thm-title">축소 구간 정리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$I_1, I_2, \ldots$가 $\mathbb{R}$의 닫힌 구간의 수열이고 $I_n \supset I_{n+1}$이면, $\bigcap_{n=1}^{\infty} I_n \neq \emptyset$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>점점 좁아지는 닫힌 구간들의 교집합에는 반드시 공통점이 존재한다. 실수의 완비성이 이를 보장한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $I_1, I_2, \ldots$ be a sequence of closed intervals in $\mathbb{R}$. Assume that $I_n \supset I_{n+1}$ for all $n \in \mathbb{N}$. Then $\bigcap I_n \neq \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.75 -->
+<div class="card thm-card" id="t275">
+  <div class="card-head">
+    <span class="thm-num">THM 2.75</span>
+    <span class="thm-title">축소 $k$-cell 정리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$이고 $I_1, I_2, \ldots$가 $k$-cell들의 수열이며 $I_n \supset I_{n+1}$이면, $\bigcap_{n=1}^{\infty} I_n \neq \emptyset$.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>축소 구간 정리의 고차원 일반화. 점점 작아지는 $k$차원 직사각형들도 공통점을 가진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $k \in \mathbb{N}$ and $I_1, I_2, \ldots$ be a sequence of $k$-cells. Assume that $I_n \supset I_{n+1}$. Then $\bigcap I_n \neq \emptyset$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.76 -->
+<div class="card thm-card" id="t276">
+  <div class="card-head">
+    <span class="thm-num">THM 2.76</span>
+    <span class="thm-title">모든 $k$-cell은 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $k$-cell은 콤팩트이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>고차원 닫힌 직사각형은 항상 콤팩트하다. 하이네-보렐 정리(Thm 2.84)로 가는 핵심 단계이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Every $k$-cell is compact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 6 ═══════════ -->
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>극한점과 수열 · Limit Points &amp; Sequences in $\mathbb{R}^k$</h2></div>
+
+<!-- Lem 2.77 -->
+<div class="card thm-card" id="l277">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.77</span>
+    <span class="thm-title">극한점이 아닌 조건</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$, $E \subset \mathbb{R}^k$, $x \in \mathbb{R}^k$이라 하자. 상수 $\epsilon > 0$이 존재하여 모든 $z \in E$에 대해 $|x - z| \geq \epsilon$이면, $x$는 $E$의 극한점이 아니다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>$E$의 모든 점으로부터 일정 거리 이상 떨어져 있으면 극한점이 될 수 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $k \in \mathbb{N}$, $E \subset \mathbb{R}^k$, and $x \in \mathbb{R}^k$. Assume there exists $\epsilon > 0$ such that $|x - z| \geq \epsilon$ for all $z \in E$. Then $x$ is not a limit point of $E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 2.78 -->
+<div class="card thm-card" id="l278">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.78</span>
+    <span class="thm-title">유한 합집합과 극한점</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$, $E_1 \subset \mathbb{R}^k$, $E_2 \subset \mathbb{R}^k$, $E = E_1 \cup E_2$이고 $x$가 $E$의 극한점이라 하자. $E_1$이 유한이면, $x$는 $E_2$의 극한점이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>합집합의 극한점인데 한쪽이 유한이면, 무한히 가까이 오는 점들은 모두 다른 쪽에서 와야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $E = E_1 \cup E_2$, $x$ a limit point of $E$. If $E_1$ is finite, then $x$ is a limit point of $E_2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.80 -->
+<div class="card thm-card" id="t280">
+  <div class="card-head">
+    <span class="thm-num">THM 2.80</span>
+    <span class="thm-title">극한점과 수렴 수열</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $E \subset \mathbb{R}^k$, $x$가 $E$의 극한점이라 하자.</p>
+        <p>그러면 $E$ 안에 수열 $x_1, x_2, \ldots$가 존재하여 $x_i \neq x_j$ ($i \neq j$)이고 $|x - x_n| < 1/n$ ($\forall n$).</p>
+        <p>또한 집합 $S = \{x_1, x_2, \ldots\}$의 극한점이 $y$이면 $x = y$이다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>극한점에는 $E$의 점들이 수렴하는 수열이 존재하고, 그 수열의 극한점은 유일하게 $x$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $k \in \mathbb{N}$, $E \subset \mathbb{R}^k$, and $x$ a limit point of $E$. Then there exists a sequence $x_1, x_2, \ldots$ such that $x_i \neq x_j$ for $i \neq j$, $x_n \in E$, and $|x - x_n| < 1/n$ for all $n$.</p>
+        <p>Moreover, if $S = \{x_1,x_2,\ldots\}$ has a limit point $y$, then $x = y$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 2.83 -->
+<div class="card thm-card" id="l283">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.83</span>
+    <span class="thm-title">발산 수열은 극한점이 없다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$이고 $\mathbb{R}^k$에서의 수열 $x_1, x_2, \ldots$가 $|x_n| > n$ ($\forall n$)을 만족하면, 집합 $S = \{x_1, x_2, \ldots\}$는 $\mathbb{R}^k$에서 극한점을 갖지 않는다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>원점에서 점점 멀어지는 수열은 어디에도 쌓이지 않으므로 극한점이 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $k \in \mathbb{N}$ and $x_1, x_2, \ldots$ be a sequence in $\mathbb{R}^k$ with $|x_n| > n$ for all $n$. Then $S = \{x_1,x_2,\ldots\}$ has no limit point in $\mathbb{R}^k$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.84 -->
+<div class="card thm-card" id="t284">
+  <div class="card-head">
+    <span class="thm-num">THM 2.84</span>
+    <span class="thm-title">하이네-보렐 정리 <em>Heine-Borel Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(하이네-보렐 정리) $k \in \mathbb{N}$이고 $E \subset \mathbb{R}^k$이면, 다음 세 조건은 동치이다:</p>
+        <p><strong>(a)</strong> $E$는 닫혀있고 유계</p>
+        <p><strong>(b)</strong> $E$는 콤팩트</p>
+        <p><strong>(c)</strong> $E$의 모든 무한 부분집합은 $E$ 안에 극한점을 가진다</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>하이네-보렐 정리는 유클리드 공간에서 콤팩트성의 완벽한 특성화를 제공한다: 닫혀있고 유계 &#10234; 콤팩트. 해석학에서 가장 중요한 정리 중 하나이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>(Heine-Borel Theorem) Let $k \in \mathbb{N}$ and $E \subset \mathbb{R}^k$. The following three properties are equivalent:</p>
+        <p><strong>(a)</strong> $E$ is closed and bounded</p>
+        <p><strong>(b)</strong> $E$ is compact</p>
+        <p><strong>(c)</strong> Every infinite subset of $E$ has a limit point in $E$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 2.86 -->
+<div class="card thm-card" id="t286">
+  <div class="card-head">
+    <span class="thm-num">THM 2.86</span>
+    <span class="thm-title">바이어슈트라스 정리 <em>Weierstrass Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(바이어슈트라스 정리) $k \in \mathbb{N}$이고 $E \subset \mathbb{R}^k$가 유계인 무한집합이면, $E$는 $\mathbb{R}^k$에서 극한점을 가진다.</p>
+      </div>
+      <div class="easy">
+        <span class="easy-label">직관적 이해</span>
+        <p>유계인 공간에 무한히 많은 점이 있으면 반드시 어딘가에 쌓인다. 하이네-보렐 정리의 직접적인 결과이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>(Weierstrass Theorem) Let $k \in \mathbb{N}$ and $E \subset \mathbb{R}^k$. Assume that $E$ is bounded and infinite. Then $E$ has a limit point in $\mathbb{R}^k$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: end of content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="index.html">홈</a>
+    <a href="ch1.html">Ch1 개념</a>
+    <a href="ch1-ex.html">Ch1 예제</a>
+    <a href="ch2.html">Ch2 개념</a>
+    <a href="ch2-ex.html">Ch2 예제</a>
+    <a href="about.html">소개 About</a>
+    <a href="privacy.html">개인정보처리방침 Privacy</a>
+    <a href="disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025–2026 DSM-IV. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script>
+function toggleLang() {
+  const showKo = document.getElementById('toggle-ko').checked;
+  const showEn = document.getElementById('toggle-en').checked;
+  document.body.classList.toggle('hide-ko', !showKo);
+  document.body.classList.toggle('hide-en', !showEn);
+}
+
+function toggleProof(btn) {
+  btn.classList.toggle('open');
+  const arrow = btn.querySelector('.arrow');
+  // Determine if this is an English proof button
+  const isEn = btn.closest('.en-panel') !== null;
+  // Find next sibling content block
+  let content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  const isVisible = content.classList.contains('visible');
+
+  // Rebuild button text
+  btn.innerHTML = '';
+  btn.appendChild(arrow);
+  if (isEn) {
+    btn.append(' ' + (isVisible ? 'Hide Proof' : 'Proof (English)'));
+  } else {
+    btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
+  }
+}
+</script>
+</body>
+</html>
