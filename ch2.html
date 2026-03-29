@@ -555,6 +555,31 @@ MathJax = {
     header { padding: 2.5rem 1.2rem 2.2rem; }
     .site-nav { gap: 1rem; font-size: .68rem; flex-wrap: wrap; }
   }
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s, transform .2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scroll-top.visible { opacity: .85; visibility: visible; }
+  .scroll-top:hover { opacity: 1; transform: translateY(-2px); }
 </style>
 </head>
 <body>
@@ -2103,6 +2128,12 @@ function toggleProof(btn) {
     btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
   }
 }
+</script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+});
 </script>
 </body>
 </html>
