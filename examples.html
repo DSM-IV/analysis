@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해석학 I — 한·영 대조 예제 풀이 | Real Analysis Chapter 1 Examples</title>
+<meta name="description" content="해석학(Real Analysis) Chapter 1 예제를 한국어·영어 대조로 풀이한 학습 가이드. 실수계, 상한, 하한, 아르키메데스 성질 관련 예제와 증명.">
+<meta name="keywords" content="해석학, Real Analysis, 예제, examples, 증명, proof, supremum, infimum, Archimedean, 실수계">
+<meta name="author" content="DSM-IV">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dsm-iv.github.io/analysis/examples.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="해석학 I — 한·영 대조 예제 풀이">
+<meta property="og:description" content="Real Analysis Chapter 1 예제를 한국어·영어 대조로 풀이한 교육용 학습 가이드.">
+<meta property="og:url" content="https://dsm-iv.github.io/analysis/examples.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "해석학 I 한·영 대조 예제 풀이 — Real Analysis Chapter 1 Examples",
+  "author": { "@type": "Organization", "name": "DSM-IV" },
+  "publisher": { "@type": "Organization", "name": "DSM-IV" },
+  "description": "Real Analysis Chapter 1 예제를 한국어·영어 대조로 풀이한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://dsm-iv.github.io/analysis/examples.html",
+  "datePublished": "2026-03-29",
+  "dateModified": "2026-03-29",
+  "mainEntityOfPage": "https://dsm-iv.github.io/analysis/examples.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffef9;
+    --ink: #1a1612;
+    --ink-soft: #3d3528;
+    --ink-faint: #7a6e60;
+    --rule: #d4cabb;
+    --rule-light: #e8e2d6;
+    --accent: #8b3a1c;
+    --accent-soft: #c4623a;
+    --accent-pale: #f5ede7;
+    --def-bg: #f7f3ee;
+    --thm-bg: #f0ede8;
+    --thm-border: #9b4e2a;
+    --tag-bg: #1a1612;
+    --tag-fg: #faf8f4;
+    --en-bg: #f0f4f8;
+    --en-border: #4a6fa5;
+    --en-accent: #2c4a7c;
+    --en-pale: #e8eef5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', 'Libre Baskerville', Georgia, serif;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px);
+  }
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: .9rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 span {
+    display: block;
+    font-size: .65em;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,.55);
+    margin-top: .35rem;
+  }
+  header .chapter-tag {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: .28rem .9rem;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 2px;
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .12em;
+    color: rgba(250,248,244,.65);
+    position: relative;
+  }
+  .lang-badge {
+    display: inline-flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  .lang-badge span {
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    font-size: .7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .08em;
+  }
+  .lang-badge .ko { background: rgba(139,58,28,.7); color: #fff; }
+  .lang-badge .en { background: rgba(44,74,124,.7); color: #fff; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle-bar {
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+    padding: .7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-toggle-bar label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+  .lang-toggle-bar input[type=checkbox] { accent-color: var(--en-border); cursor: pointer; }
+  .lang-toggle-bar .sep { color: var(--rule); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-title {
+    margin: 3.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title h2 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); }
+
+  /* ── CARD HEAD ── */
+  .ex-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--thm-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ex-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .ex-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ── BILINGUAL BODY ── */
+  .card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .ko-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    border-right: 1px solid var(--rule-light);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .en-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: #fcfdff;
+    transition: opacity .2s;
+    min-width: 0;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  }
+
+  body.hide-en .en-panel { display: none; }
+  body.hide-en .card-body { grid-template-columns: 1fr; }
+  body.hide-ko .ko-panel { display: none; }
+  body.hide-ko .card-body { grid-template-columns: 1fr; }
+
+  /* ── PANEL LABELS ── */
+  .panel-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .14rem .45rem;
+    border-radius: 2px;
+    margin-bottom: .7rem;
+  }
+  .panel-label.ko-label { background: rgba(139,58,28,.12); color: var(--accent); }
+  .panel-label.en-label { background: rgba(44,74,124,.12); color: var(--en-accent); }
+
+  /* ── FORMAL BLOCK (KO) ── */
+  .formal {
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .94rem;
+  }
+  .formal p { margin-bottom: .4rem; }
+  .formal p:last-child { margin-bottom: 0; }
+
+  /* ── EN FORMAL BLOCK ── */
+  .en-formal {
+    background: var(--en-pale);
+    border-left: 3px solid var(--en-border);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .91rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .en-formal p { margin-bottom: .4rem; }
+  .en-formal p:last-child { margin-bottom: 0; }
+
+  /* ── DISPLAY MATH ── */
+  .math-display {
+    text-align: center;
+    padding: .65rem .5rem;
+    margin: .5rem 0;
+    overflow-x: auto;
+    font-size: 1.02rem;
+  }
+
+  /* ── PROOF BLOCK ── */
+  .proof-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    padding: .22rem .6rem;
+    border-radius: 2px;
+    background: none;
+    margin-top: .55rem;
+    transition: all .15s;
+  }
+  .proof-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .proof-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .proof-toggle.open .arrow { transform: rotate(90deg); }
+  .proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #f5f2ec;
+    border-left: 2px solid var(--rule);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .proof-content.visible { display: block; }
+  .proof-content p { margin-bottom: .5rem; }
+  .qed { text-align: right; font-size: 1.1rem; color: var(--ink-faint); margin-top: .4rem; }
+
+  .en-proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #edf1f7;
+    border-left: 2px solid #a3b8d4;
+    font-size: .86rem;
+    color: #3a4e65;
+    line-height: 1.8;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: auto;
+  }
+  .en-proof-content.visible { display: block; }
+  .en-proof-content p { margin-bottom: .5rem; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--def-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: .9rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem .5rem;
+  }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc ol li a {
+    font-size: .83rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+    transition: color .15s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+  .toc ol li a .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .67rem;
+    color: var(--ink-faint);
+    min-width: 3rem;
+  }
+
+  /* ── UTILITY ── */
+  p { margin-bottom: .5rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+  .en-panel strong { color: var(--en-accent); }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    background: var(--ink);
+    padding: .6rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+  }
+  .site-nav a { color: #ccc; text-decoration: none; letter-spacing: .05em; transition: color .15s; }
+  .site-nav a:hover { color: #fff; }
+  .site-nav a.active { color: var(--accent-soft); }
+
+  /* ── SKIP LINK ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: auto;
+    padding: .5rem 1rem; background: var(--accent); color: #fff;
+    font-size: .85rem; z-index: 1000; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: #aaa;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: 3rem;
+  }
+  .site-footer a { color: #ccc; text-decoration: none; margin: 0 .8rem; transition: color .15s; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer .footer-copy { margin-top: 1rem; font-size: .72rem; color: #666; }
+  .site-footer .footer-desc { margin-top: .5rem; font-size: .7rem; color: #555; }
+
+  @media (max-width: 600px) {
+    .ko-panel, .en-panel { padding: .85rem .95rem .95rem; }
+    header { padding: 2.5rem 1.2rem 2.2rem; }
+    .site-nav { gap: 1rem; font-size: .68rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="index.html">개념</a>
+  <a class="active" href="examples.html">예제</a>
+  <a href="about.html">소개</a>
+  <a href="privacy.html">개인정보처리방침</a>
+  <a href="disclaimer.html">면책조항</a>
+</nav>
+
+<header>
+  <p class="subtitle">Real Analysis · Chapter 1 · Examples</p>
+  <h1>해석학 I 한·영 대조 예제 풀이<span>Real Number System — Worked Examples</span></h1>
+  <span class="chapter-tag">Chapter 1 Examples &amp; Proofs</span>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 풀이 &nbsp;·&nbsp; 오른쪽: English Solution</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>예제 목차 · Table of Exercises</h3>
+  <ol>
+    <li><a href="#ex102"><span class="toc-num">1.2</span> 순서쌍의 비대칭성</a></li>
+    <li><a href="#ex103"><span class="toc-num">1.3</span> 순서 $n$-tuple의 정의</a></li>
+    <li><a href="#ex106"><span class="toc-num">1.6</span> 집합 사이의 관계 정의</a></li>
+    <li><a href="#ex112"><span class="toc-num">1.12</span> $\sup E$의 유일성</a></li>
+    <li><a href="#ex115"><span class="toc-num">1.15</span> $\mathbb{Q}$에서의 상한·하한 예시</a></li>
+    <li><a href="#ex117"><span class="toc-num">1.17</span> 최대하계 성질의 정의</a></li>
+    <li><a href="#ex119"><span class="toc-num">1.19</span> GLB 성질 $\Rightarrow$ LUB 성질</a></li>
+    <li><a href="#ex127"><span class="toc-num">1.27</span> 실수체의 유일성 (Difficult)</a></li>
+    <li><a href="#ex130"><span class="toc-num">1.30</span> $\inf \emptyset = \infty$의 자연스러움</a></li>
+    <li><a href="#ex131"><span class="toc-num">1.31</span> 확장된 실수에서의 하한 존재성</a></li>
+    <li><a href="#ex134"><span class="toc-num">1.34</span> $\mathbb{R}^2$의 순서와 순서체 (Difficult)</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>집합과 순서쌍 · Sets & Ordered Pairs</h2></div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex102">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">순서쌍의 비대칭성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $x$와 $y$가 원소이고 $x \neq y$라 가정하자. $(x, y) \neq (y, x)$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> Kuratowski 정의에 의해 순서쌍은 다음과 같이 정의된다:</p>
+        <div class="math-display">$$(x, y) = \{\{x\}, \{x, y\}\}, \quad (y, x) = \{\{y\}, \{y, x\}\}$$</div>
+        <p>$(x, y) = (y, x)$라 가정하면, $\{\{x\}, \{x, y\}\} = \{\{y\}, \{y, x\}\}$이다.</p>
+        <p>$\{x\} \in \{\{y\}, \{y, x\}\}$이므로, $\{x\} = \{y\}$ 또는 $\{x\} = \{y, x\}$이다.</p>
+        <p>$\{x\} = \{y\}$이면 $x = y$이므로 $x \neq y$에 모순이다.</p>
+        <p>$\{x\} = \{y, x\}$이면 $y \in \{x\}$이므로 $y = x$이고, 역시 모순이다.</p>
+        <p>따라서 $(x, y) \neq (y, x)$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $x$ and $y$ be elements and assume that $x \neq y$. Prove that $(x, y) \neq (y, x)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> By Kuratowski's definition:</p>
+        <div class="math-display">$$(x,y) = \{\{x\},\{x,y\}\}, \quad (y,x) = \{\{y\},\{y,x\}\}.$$</div>
+        <p>Suppose $(x,y) = (y,x)$. Then $\{\{x\},\{x,y\}\} = \{\{y\},\{y,x\}\}$.</p>
+        <p>Since $\{x\} \in \{\{y\},\{y,x\}\}$, either $\{x\} = \{y\}$ or $\{x\} = \{y,x\}$.</p>
+        <p>If $\{x\} = \{y\}$, then $x = y$, contradicting $x \neq y$.</p>
+        <p>If $\{x\} = \{y,x\}$, then $y \in \{x\}$, so $y = x$, again a contradiction.</p>
+        <p>Therefore $(x,y) \neq (y,x)$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex103">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">순서 $n$-tuple의 정의</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $n$을 양의 정수(자연수)라 하자. 순서 $n$-tuple을 정의하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 순서 $n$-tuple을 귀납적으로 정의한다.</p>
+        <p><strong>기저:</strong> $n = 1$일 때, 순서 $1$-tuple $(x_1)$은 그냥 $x_1$ 자체이다.</p>
+        <p><strong>귀납 단계:</strong> 순서 $(n-1)$-tuple이 정의되었다고 가정하자. 순서 $n$-tuple은 다음과 같이 정의한다:</p>
+        <div class="math-display">$$(x_1, x_2, \ldots, x_n) = ((x_1, x_2, \ldots, x_{n-1}),\, x_n)$$</div>
+        <p>즉, 순서 $n$-tuple은 순서 $(n-1)$-tuple과 $x_n$의 순서쌍으로 정의된다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $n$ be a positive integer (natural number). Define ordered $n$-tuples.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Define ordered $n$-tuples inductively.</p>
+        <p><strong>Base case:</strong> For $n = 1$, the ordered $1$-tuple $(x_1)$ is simply $x_1$ itself.</p>
+        <p><strong>Inductive step:</strong> Assuming ordered $(n{-}1)$-tuples are defined, set:</p>
+        <div class="math-display">$$(x_1, x_2, \ldots, x_n) = ((x_1, x_2, \ldots, x_{n-1}),\, x_n).$$</div>
+        <p>That is, an ordered $n$-tuple is the ordered pair of the ordered $(n{-}1)$-tuple $(x_1,\ldots,x_{n-1})$ and the element $x_n$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.6 -->
+<div class="card ex-card" id="ex106">
+  <div class="card-head">
+    <span class="ex-num">EX 1.6</span>
+    <span class="ex-title">집합 사이의 관계 정의</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $S$와 $T$를 집합이라 하자. $S$와 $T$ 사이의 관계를 수학적으로 어떻게 정의할 수 있는가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S$와 $T$ 사이의 <strong>관계</strong>(relation)란 카르테시안 곱 $S \times T$의 부분집합 $R$을 말한다:</p>
+        <div class="math-display">$$R \subset S \times T = \{(s, t) : s \in S,\; t \in T\}$$</div>
+        <p>$(s, t) \in R$일 때 "$s$는 $t$와 관계 $R$에 있다"고 말하며, $sRt$로 표기한다.</p>
+        <p>특별한 경우로 $S = T$이면 $R$을 $S$ 위의 관계라 한다. 순서 관계, 동치 관계 등이 이 정의의 특수한 경우이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $S$ and $T$ be sets. How can we define a relation between $S$ and $T$ mathematically?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> A <strong>relation</strong> between $S$ and $T$ is a subset $R$ of the Cartesian product $S \times T$:</p>
+        <div class="math-display">$$R \subset S \times T = \{(s,t) : s \in S,\; t \in T\}.$$</div>
+        <p>When $(s,t) \in R$, we say "$s$ is related to $t$ by $R$" and write $sRt$.</p>
+        <p>When $S = T$, we call $R$ a relation on $S$. Order relations and equivalence relations are special cases of this definition. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>상한과 하한 · Supremum & Infimum</h2></div>
+
+<!-- Exercise 1.12 -->
+<div class="card ex-card" id="ex112">
+  <div class="card-head">
+    <span class="ex-num">EX 1.12</span>
+    <span class="ex-title">$\sup E$의 유일성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\sup E$가 존재하면 유일함을 보여라. 아래로 유계인 집합 $E$의 최대하계(infimum)도 같은 방법으로 유일하게 정의됨을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\alpha$와 $\beta$가 모두 $\sup E$라 가정하자.</p>
+        <p>$\alpha$는 $E$의 상계이고 $\beta$는 최소상계이므로, $\beta \leq \alpha$이다.</p>
+        <p>반대로, $\beta$는 $E$의 상계이고 $\alpha$는 최소상계이므로, $\alpha \leq \beta$이다.</p>
+        <p>따라서 $\alpha = \beta$이다.</p>
+        <p>$\inf E$의 유일성도 동일하다: $\gamma, \delta$가 모두 $\inf E$이면, $\gamma$는 하계이고 $\delta$는 최대하계이므로 $\gamma \leq \delta$이다. 마찬가지로 $\delta \leq \gamma$이므로 $\gamma = \delta$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Show that $\sup E$ is unique. The greatest lower bound, or infimum, of a set $E$ which is bounded below is defined in the same manner.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Suppose $\alpha$ and $\beta$ are both suprema of $E$.</p>
+        <p>Since $\alpha$ is an upper bound and $\beta$ is the <em>least</em> upper bound, $\beta \leq \alpha$.</p>
+        <p>Since $\beta$ is an upper bound and $\alpha$ is the <em>least</em> upper bound, $\alpha \leq \beta$.</p>
+        <p>Therefore $\alpha = \beta$.</p>
+        <p>Uniqueness of $\inf E$ follows identically: if $\gamma, \delta$ are both infima, then $\gamma \leq \delta$ and $\delta \leq \gamma$, so $\gamma = \delta$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.15 -->
+<div class="card ex-card" id="ex115">
+  <div class="card-head">
+    <span class="ex-num">EX 1.15</span>
+    <span class="ex-title">$\mathbb{Q}$에서의 상한·하한 예시</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제 (a).</strong> $A = \{p \in \mathbb{Q} : p > 0 \text{ and } p^2 < 2\}$, $B = \{p \in \mathbb{Q} : p > 0 \text{ and } p^2 > 2\}$로 놓자. $A$와 $B$의 상한·하한 성질을 $\mathbb{Q}$ 안에서 논하라.</p>
+        <p><strong>문제 (b).</strong> $\alpha = \sup E$이면 $\alpha$가 $E$의 원소일 수도, 아닐 수도 있음을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이 (a).</strong> $A$는 상계를 가진다. 사실, $B$의 모든 원소가 $A$의 상계이다. $B$는 공집합이 아닌 원소를 가지므로(예: $2 \in B$), $A$는 위로 유계이다.</p>
+        <p>그러나 $A$에는 가장 큰 원소가 없다: 임의의 $p \in A$에 대해, Rudin의 구성에 의해 $p < q$이고 $q \in A$인 유리수 $q$가 항상 존재한다.</p>
+        <p>마찬가지로 $B$에는 가장 작은 원소가 없다.</p>
+        <p>핵심: $A$는 $\mathbb{Q}$ 안에서 최소상계를 <strong>갖지 않는다</strong>. $\sup A = \sqrt{2}$이지만 $\sqrt{2} \notin \mathbb{Q}$이기 때문이다. 이것이 $\mathbb{Q}$가 최소상계 성질을 갖지 않는 이유이다.</p>
+        <p><strong>풀이 (b).</strong> $E_1 = \{r \in \mathbb{Q} : r < 0\}$, $E_2 = \{r \in \mathbb{Q} : r \leq 0\}$으로 놓으면, $\sup E_1 = \sup E_2 = 0$이다. $0 \notin E_1$이지만 $0 \in E_2$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem (a).</strong> Let $A = \{p \in \mathbb{Q} : p > 0 \text{ and } p^2 < 2\}$ and $B = \{p \in \mathbb{Q} : p > 0 \text{ and } p^2 > 2\}$. Discuss the sup/inf properties of $A$ and $B$ within $\mathbb{Q}$.</p>
+        <p><strong>Problem (b).</strong> If $\alpha = \sup E$ exists, then $\alpha$ may or may not be a member of $E$. Give examples.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution (a).</strong> Since $A$ has upper bounds (every member of $B$ is an upper bound of $A$, and $B$ is nonempty since $2 \in B$), $A$ is bounded above.</p>
+        <p>But $A$ contains no largest member: for any $p \in A$, by Rudin's construction, there exists $q \in A$ with $q > p$. Similarly, $B$ contains no smallest member.</p>
+        <p>The key point: $A$ has <strong>no least upper bound in $\mathbb{Q}$</strong>. We have $\sup A = \sqrt{2}$, but $\sqrt{2} \notin \mathbb{Q}$. This shows $\mathbb{Q}$ does not have the least-upper-bound property.</p>
+        <p><strong>Solution (b).</strong> Let $E_1 = \{r \in \mathbb{Q} : r < 0\}$ and $E_2 = \{r \in \mathbb{Q} : r \leq 0\}$. Then $\sup E_1 = \sup E_2 = 0$, but $0 \notin E_1$ while $0 \in E_2$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: mid-content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 3 ═══════════ -->
+<div class="section-title"><h2>최소상계·최대하계 성질 · LUB & GLB Properties</h2></div>
+
+<!-- Exercise 1.17 -->
+<div class="card ex-card" id="ex117">
+  <div class="card-head">
+    <span class="ex-num">EX 1.17</span>
+    <span class="ex-title">최대하계 성질의 정의</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 최대하계 성질(greatest-lower-bound property)을 정의하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>정의.</strong> 순서 집합 $S$가 <strong>최대하계 성질</strong>(greatest-lower-bound property)을 가진다는 것은 다음을 의미한다:</p>
+        <p>$S$의 공집합이 아닌 부분집합 $E$가 아래로 유계이면, $\inf E$가 $S$ 안에 존재한다.</p>
+        <p>즉, 아래로 유계인 모든 비어있지 않은 부분집합이 $S$ 안에서 최대하계를 가진다.</p>
+        <p><strong>비고.</strong> Theorem 1.18에 의해, 최소상계 성질을 가진 순서 집합은 자동으로 최대하계 성질도 가진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Define the greatest-lower-bound property.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Definition.</strong> An ordered set $S$ has the <strong>greatest-lower-bound property</strong> if:</p>
+        <p>Every nonempty subset $E \subset S$ that is bounded below has $\inf E \in S$.</p>
+        <p><strong>Remark.</strong> By Theorem 1.18, an ordered set with the least-upper-bound property automatically has the greatest-lower-bound property. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.19 -->
+<div class="card ex-card" id="ex119">
+  <div class="card-head">
+    <span class="ex-num">EX 1.19</span>
+    <span class="ex-title">GLB 성질 $\Rightarrow$ LUB 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 최대하계 성질이 최소상계 성질을 함의함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $S$가 최대하계 성질을 가지는 순서 집합이라 하자. $E \subset S$가 공집합이 아니고 위로 유계임을 가정한다. $\sup E$가 $S$ 안에 존재함을 보여야 한다.</p>
+        <p>$U$를 $E$의 모든 상계의 집합이라 하자. $E$가 위로 유계이므로 $U \neq \emptyset$이다.</p>
+        <p>임의의 $x \in E$에 대해, $x \leq u$가 모든 $u \in U$에 대해 성립한다. 따라서 $U$는 아래로 유계이다($E$의 모든 원소가 $U$의 하계).</p>
+        <p>$S$가 최대하계 성질을 가지므로, $\alpha = \inf U$가 $S$ 안에 존재한다.</p>
+        <p>$\alpha$가 $\sup E$임을 보이자:</p>
+        <p>(i) 임의의 $x \in E$에 대해, $x$는 $U$의 하계이므로 $x \leq \alpha = \inf U$이다. 따라서 $\alpha$는 $E$의 상계이다.</p>
+        <p>(ii) $\gamma < \alpha$이면, $\gamma$는 $U$의 하계가 아니다($\alpha$가 최대하계이므로). 따라서 $\gamma < u$인 $u \in U$가 존재하므로, $\gamma$는 $E$의 상계가 아니다... 이것은 올바르지 않다. 더 정확히:</p>
+        <p>$\gamma$가 $E$의 상계이면 $\gamma \in U$이므로 $\alpha = \inf U \leq \gamma$이다. 따라서 $\alpha$보다 작은 어떤 수도 $E$의 상계가 될 수 없으므로, $\alpha = \sup E$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove that the greatest-lower-bound property implies the least-upper-bound property.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Suppose $S$ has the greatest-lower-bound property. Let $E \subset S$ be nonempty and bounded above. We show $\sup E$ exists in $S$.</p>
+        <p>Let $U$ be the set of all upper bounds of $E$. Since $E$ is bounded above, $U \neq \emptyset$. Every $x \in E$ satisfies $x \leq u$ for all $u \in U$, so $U$ is bounded below.</p>
+        <p>By the GLB property, $\alpha = \inf U$ exists in $S$.</p>
+        <p>We claim $\alpha = \sup E$:</p>
+        <p>(i) $\alpha$ is an upper bound of $E$: for any $x \in E$, $x$ is a lower bound of $U$, so $x \leq \inf U = \alpha$.</p>
+        <p>(ii) $\alpha$ is the <em>least</em> upper bound: if $\gamma$ is any upper bound of $E$, then $\gamma \in U$, so $\alpha = \inf U \leq \gamma$.</p>
+        <p>Therefore $\alpha = \sup E \in S$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 4 ═══════════ -->
+<div class="section-title"><h2>순서체와 실수의 유일성 · Ordered Fields & Uniqueness of $\mathbb{R}$</h2></div>
+
+<!-- Exercise 1.27 -->
+<div class="card ex-card" id="ex127">
+  <div class="card-head">
+    <span class="ex-num">EX 1.27</span>
+    <span class="ex-title">실수체의 유일성 <em>(Difficult)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\mathbb{R}_1$과 $\mathbb{R}_2$가 최소상계 성질을 가지고 $\mathbb{Q}$를 포함하는 순서체라 하자. $\mathbb{R}_1$과 $\mathbb{R}_2$를 어떤 의미에서 동일시할 수 있음을 보여라. 즉, $\mathbb{R}$은 최소상계 성질을 가지고 $\mathbb{Q}$를 포함하는 유일한 순서체임을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명 스케치.</strong> $\varphi: \mathbb{R}_1 \to \mathbb{R}_2$를 다음과 같이 정의한다: 각 $x \in \mathbb{R}_1$에 대해,</p>
+        <div class="math-display">$$\varphi(x) = \sup_{\mathbb{R}_2}\{q \in \mathbb{Q} : q < x \text{ in } \mathbb{R}_1\}$$</div>
+        <p>즉, $\mathbb{R}_1$에서 $x$보다 작은 유리수들의 집합을 $\mathbb{R}_2$에서의 상한으로 보낸다.</p>
+        <p><strong>잘 정의됨:</strong> $\mathbb{Q}$의 아르키메데스 성질에 의해, 위 집합은 공집합이 아니고 위로 유계이다. $\mathbb{R}_2$가 최소상계 성질을 가지므로 $\sup$이 존재한다.</p>
+        <p><strong>$\varphi$가 순서체 동형사상임을 보인다:</strong></p>
+        <p>(1) $\varphi$는 단사(injective): $x < y$이면 $\{q \in \mathbb{Q} : q < x\} \subsetneq \{q \in \mathbb{Q} : q < y\}$이므로 $\varphi(x) < \varphi(y)$.</p>
+        <p>(2) $\varphi$는 전사(surjective): 임의의 $y \in \mathbb{R}_2$에 대해, $x = \sup_{\mathbb{R}_1}\{q \in \mathbb{Q} : q < y\}$로 놓으면 $\varphi(x) = y$.</p>
+        <p>(3) $\varphi$는 체 연산을 보존: $\varphi(x + y) = \varphi(x) + \varphi(y)$, $\varphi(xy) = \varphi(x)\varphi(y)$.</p>
+        <p>따라서 $\mathbb{R}_1 \cong \mathbb{R}_2$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem (Difficult).</strong> Let $\mathbb{R}_1$ and $\mathbb{R}_2$ be ordered fields which have the least-upper-bound property and contain $\mathbb{Q}$. Show that we can identify $\mathbb{R}_1$ and $\mathbb{R}_2$ in a certain sense. In other words, show that $\mathbb{R}$ is the unique ordered field which has the least-upper-bound property and contains $\mathbb{Q}$ in a certain sense.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof sketch.</strong> Define $\varphi: \mathbb{R}_1 \to \mathbb{R}_2$ by:</p>
+        <div class="math-display">$$\varphi(x) = \sup_{\mathbb{R}_2}\{q \in \mathbb{Q} : q < x \text{ in } \mathbb{R}_1\}.$$</div>
+        <p><strong>Well-defined:</strong> By the Archimedean property, the set above is nonempty and bounded above, so the supremum exists in $\mathbb{R}_2$.</p>
+        <p><strong>$\varphi$ is an ordered field isomorphism:</strong></p>
+        <p>(1) Injective: $x < y$ implies the Dedekind cuts are strictly nested, so $\varphi(x) < \varphi(y)$.</p>
+        <p>(2) Surjective: for any $y \in \mathbb{R}_2$, set $x = \sup_{\mathbb{R}_1}\{q \in \mathbb{Q} : q < y\}$; then $\varphi(x) = y$.</p>
+        <p>(3) Preserves field operations: $\varphi(x+y) = \varphi(x)+\varphi(y)$ and $\varphi(xy) = \varphi(x)\varphi(y)$.</p>
+        <p>Therefore $\mathbb{R}_1 \cong \mathbb{R}_2$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 5 ═══════════ -->
+<div class="section-title"><h2>확장된 실수 체계 · Extended Real Number System</h2></div>
+
+<!-- Exercise 1.30 -->
+<div class="card ex-card" id="ex130">
+  <div class="card-head">
+    <span class="ex-num">EX 1.30</span>
+    <span class="ex-title">$\inf \emptyset = \infty$의 자연스러움</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\inf \emptyset = \infty$로 정의하는 것이 자연스러운가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 자연스럽다. 그 이유는 다음과 같다:</p>
+        <p>$\inf E$의 정의는 "$E$의 하계 중 가장 큰 것"이다. $\emptyset$의 경우, <strong>모든</strong> 실수가 $\emptyset$의 하계이다 (공허하게 참이므로).</p>
+        <p>확장된 실수 $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$에서, 모든 원소 $x$에 대해 $x \leq +\infty$이므로 $+\infty$도 $\emptyset$의 하계이다.</p>
+        <p>하계 중 가장 큰 것은 $+\infty$이므로, $\inf \emptyset = +\infty$로 정의하는 것이 자연스럽다.</p>
+        <p>직관적으로: 집합에 원소가 없으면 "아래에서 제한하는 것이 없으므로" 하한이 가능한 한 가장 큰 값을 가진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Is it natural to define $\inf \emptyset = \infty$?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Yes. By definition, $\inf E$ is the greatest lower bound of $E$. For $E = \emptyset$, <strong>every</strong> real number is vacuously a lower bound of $\emptyset$.</p>
+        <p>In $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, $+\infty$ is also a lower bound (vacuously). The greatest lower bound is therefore $+\infty$.</p>
+        <p>Intuitively: with no elements to constrain from below, the infimum is as large as possible. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.31 -->
+<div class="card ex-card" id="ex131">
+  <div class="card-head">
+    <span class="ex-num">EX 1.31</span>
+    <span class="ex-title">$\overline{\mathbb{R}}$에서의 하한 존재성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\inf \emptyset = \infty$, $\sup \emptyset = -\infty$로 정의하자. $\overline{\mathbb{R}}$의 모든 부분집합이 최대하계를 가짐을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $E \subset \overline{\mathbb{R}}$를 임의의 부분집합이라 하자. 다음 경우를 나누어 증명한다:</p>
+        <p><strong>경우 1:</strong> $E = \emptyset$이면, 정의에 의해 $\inf E = +\infty \in \overline{\mathbb{R}}$이다.</p>
+        <p><strong>경우 2:</strong> $E \neq \emptyset$이고 $E$가 $\mathbb{R}$에서 아래로 유계이면 (즉, 어떤 실수 $m$이 모든 $x \in E \cap \mathbb{R}$에 대해 $m \leq x$를 만족), $-\infty \in E$이면 $\inf E = -\infty$이다. $-\infty \notin E$이면 $\mathbb{R}$의 최대하계 성질에 의해 $\inf E \in \mathbb{R} \subset \overline{\mathbb{R}}$이다.</p>
+        <p><strong>경우 3:</strong> $E$가 아래로 유계가 아니면, $-\infty \in E$이거나 $E$가 임의로 작은 실수를 포함하므로, $\inf E = -\infty \in \overline{\mathbb{R}}$이다.</p>
+        <p>모든 경우에 $\inf E \in \overline{\mathbb{R}}$이므로, $\overline{\mathbb{R}}$의 모든 부분집합은 최대하계를 가진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Define $\inf \emptyset = \infty$ and $\sup \emptyset = -\infty$. Show that every subset of $\overline{\mathbb{R}}$ has a greatest lower bound.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $E \subset \overline{\mathbb{R}}$ be arbitrary.</p>
+        <p><strong>Case 1:</strong> $E = \emptyset$. By definition, $\inf E = +\infty \in \overline{\mathbb{R}}$.</p>
+        <p><strong>Case 2:</strong> $E \neq \emptyset$ and $E$ is bounded below in $\mathbb{R}$. If $-\infty \in E$, then $\inf E = -\infty$. Otherwise, by the GLB property of $\mathbb{R}$, $\inf E \in \mathbb{R} \subset \overline{\mathbb{R}}$.</p>
+        <p><strong>Case 3:</strong> $E$ is not bounded below. Then either $-\infty \in E$ or $E$ contains arbitrarily small reals, so $\inf E = -\infty \in \overline{\mathbb{R}}$.</p>
+        <p>In all cases $\inf E \in \overline{\mathbb{R}}$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.34 -->
+<div class="card ex-card" id="ex134">
+  <div class="card-head">
+    <span class="ex-num">EX 1.34</span>
+    <span class="ex-title">$\mathbb{R}^2$의 순서와 순서체 <em>(Difficult)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제 (a).</strong> $\mathbb{R}^2$에 순서를 줄 수 있는가?</p>
+        <p><strong>문제 (b).</strong> $\mathbb{R}^2$를 순서체로 만들 수 있는가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이 (a).</strong> 가능하다. <strong>사전식 순서</strong>(lexicographic order)를 정의하면 된다:</p>
+        <div class="math-display">$$(a_1, a_2) < (b_1, b_2) \iff a_1 < b_1, \text{ 또는 } (a_1 = b_1 \text{ 이고 } a_2 < b_2)$$</div>
+        <p>이것이 전순서(total order)임을 확인할 수 있다: 임의의 두 원소 $(a_1, a_2)$와 $(b_1, b_2)$에 대해, 세 관계 $<$, $=$, $>$ 중 정확히 하나가 성립한다.</p>
+        <p><strong>풀이 (b).</strong> 불가능하다. $\mathbb{R}^2$를 순서체로 만들 수 없다.</p>
+        <p>귀류법: $\mathbb{R}^2$가 순서체라 가정하자. 순서체에서 $x^2 \geq 0$이 모든 원소에 대해 성립해야 한다.</p>
+        <p>$i = (0, 1)$로 놓으면, $i^2 = i \cdot i$가 정의되어야 한다. 순서체의 성질에 의해 $i^2 > 0$이거나 $i^2 = 0$이거나 $i = 0$이어야 한다.</p>
+        <p>그런데 $\mathbb{R}^2$의 어떤 곱셈 구조를 주더라도, $\mathbb{R}^2$가 체가 되려면 $\mathbb{C}$와 동형이어야 한다. $\mathbb{C}$에서 $i^2 = -1 < 0$이므로 순서체의 조건 $x^2 \geq 0$에 모순이다.</p>
+        <p>더 일반적으로, $\mathbb{R}^2$를 체로 만들면 $x^2 + 1 = 0$의 해가 존재하게 되어 순서체가 될 수 없다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem (Difficult). (a)</strong> Can we give an order on $\mathbb{R}^2$?</p>
+        <p><strong>(b)</strong> Can we make $\mathbb{R}^2$ an ordered field?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution (a).</strong> Yes. Define the <strong>lexicographic order</strong>:</p>
+        <div class="math-display">$$(a_1,a_2) < (b_1,b_2) \iff a_1 < b_1, \text{ or } (a_1 = b_1 \text{ and } a_2 < b_2).$$</div>
+        <p>This is a total order on $\mathbb{R}^2$.</p>
+        <p><strong>Solution (b).</strong> No. Suppose $\mathbb{R}^2$ is an ordered field. In any ordered field, $x^2 \geq 0$ for all $x$.</p>
+        <p>Any field structure on $\mathbb{R}^2$ (as a 2-dimensional $\mathbb{R}$-algebra that is a field) is isomorphic to $\mathbb{C}$. In $\mathbb{C}$, $i^2 = -1 < 0$, contradicting $x^2 \geq 0$.</p>
+        <p>More generally, any field containing $\mathbb{R}$ as a subfield with $[\mathbb{R}^2:\mathbb{R}] = 2$ must have a root of $x^2 + 1 = 0$, making it impossible to be an ordered field. $\square$</p>
+      </div>
+    </div>
+  </div>
+<!-- Ad: bottom -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="index.html">개념</a>
+    <a href="examples.html">예제 Examples</a>
+    <a href="about.html">소개 About</a>
+    <a href="privacy.html">개인정보처리방침 Privacy</a>
+    <a href="disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025–2026 DSM-IV. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script>
+function toggleLang() {
+  const showKo = document.getElementById('toggle-ko').checked;
+  const showEn = document.getElementById('toggle-en').checked;
+  document.body.classList.toggle('hide-ko', !showKo);
+  document.body.classList.toggle('hide-en', !showEn);
+}
+
+function toggleProof(btn) {
+  btn.classList.toggle('open');
+  const arrow = btn.querySelector('.arrow');
+  const isEn = btn.closest('.en-panel') !== null;
+  let content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  const isVisible = content.classList.contains('visible');
+
+  btn.innerHTML = '';
+  btn.appendChild(arrow);
+  if (isEn) {
+    btn.append(' ' + (isVisible ? 'Hide Proof' : 'Proof'));
+  } else {
+    btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
+  }
+}
+</script>
+</body>
+</html>
