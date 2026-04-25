@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해석학 I Ch.3 — 한·영 대조 개념 정리 | Numerical Sequences Bilingual Study Guide</title>
+<meta name="description" content="해석학(Real Analysis) Chapter 3 핵심 개념을 한국어·영어 대조로 정리한 학습 가이드. 수열의 수렴, 부분수열, 콤팩트성, 코시 수열, 완비성, 상·하극한, 급수를 증명과 함께 다룹니다.">
+<meta name="keywords" content="해석학, Real Analysis, 수학, mathematics, Rudin, 수열, sequence, 수렴, convergence, 코시, Cauchy, 완비, complete, 상극한, limsup, 급수, series, 증명, proof">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dsm-iv.github.io/analysis/ch3.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="해석학 I Ch.3 — 한·영 대조 개념 정리">
+<meta property="og:description" content="Real Analysis Chapter 3 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://dsm-iv.github.io/analysis/ch3.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "해석학 I Ch.3 한·영 대조 개념 정리 — Numerical Sequences and Series",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Real Analysis Chapter 3 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드. Definitions 3.1–3.53.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://dsm-iv.github.io/analysis/ch3.html",
+  "datePublished": "2026-04-16",
+  "dateModified": "2026-04-16",
+  "mainEntityOfPage": "https://dsm-iv.github.io/analysis/ch3.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffef9;
+    --ink: #1a1612;
+    --ink-soft: #3d3528;
+    --ink-faint: #7a6e60;
+    --rule: #d4cabb;
+    --rule-light: #e8e2d6;
+    --accent: #8b3a1c;
+    --accent-soft: #c4623a;
+    --accent-pale: #f5ede7;
+    --def-bg: #f7f3ee;
+    --thm-bg: #f0ede8;
+    --thm-border: #9b4e2a;
+    --tag-bg: #1a1612;
+    --tag-fg: #faf8f4;
+    --en-bg: #f0f4f8;
+    --en-border: #4a6fa5;
+    --en-accent: #2c4a7c;
+    --en-pale: #e8eef5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', 'Libre Baskerville', Georgia, serif;
+    line-height: 1.85;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px);
+  }
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: .9rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 span {
+    display: block;
+    font-size: .65em;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,.55);
+    margin-top: .35rem;
+  }
+  header .chapter-tag {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: .28rem .9rem;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 2px;
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .12em;
+    color: rgba(250,248,244,.65);
+    position: relative;
+  }
+  .lang-badge {
+    display: inline-flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  .lang-badge span {
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    font-size: .7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .08em;
+  }
+  .lang-badge .ko { background: rgba(139,58,28,.7); color: #fff; }
+  .lang-badge .en { background: rgba(44,74,124,.7); color: #fff; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle-bar {
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+    padding: .7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-toggle-bar label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+  .lang-toggle-bar input[type=checkbox] { accent-color: var(--en-border); cursor: pointer; }
+  .lang-toggle-bar .sep { color: var(--rule); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-title {
+    margin: 3.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title h2 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); }
+
+  /* ── CARD HEAD ── */
+  .def-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .def-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .def-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .def-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  .thm-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--thm-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .thm-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .thm-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .rem-card .card-head,
+  .exam-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--en-pale);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .rem-num, .exam-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--en-accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .rem-title, .exam-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--en-accent);
+  }
+  .rem-title em, .exam-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  /* ── BILINGUAL BODY ── */
+  .card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .ko-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    border-right: 1px solid var(--rule-light);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .en-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: #fcfdff;
+    transition: opacity .2s;
+    min-width: 0;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  }
+
+  body.hide-en .en-panel { display: none; }
+  body.hide-en .card-body { grid-template-columns: 1fr; }
+  body.hide-ko .ko-panel { display: none; }
+  body.hide-ko .card-body { grid-template-columns: 1fr; }
+
+  /* ── PANEL LABELS ── */
+  .panel-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .14rem .45rem;
+    border-radius: 2px;
+    margin-bottom: .7rem;
+  }
+  .panel-label.ko-label { background: rgba(139,58,28,.12); color: var(--accent); }
+  .panel-label.en-label { background: rgba(44,74,124,.12); color: var(--en-accent); }
+
+  /* ── FORMAL BLOCK (KO) ── */
+  .formal {
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .94rem;
+  }
+  .formal p { margin-bottom: .4rem; }
+  .formal p:last-child { margin-bottom: 0; }
+
+  /* ── EN FORMAL BLOCK ── */
+  .en-formal {
+    background: var(--en-pale);
+    border-left: 3px solid var(--en-border);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .91rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .en-formal p { margin-bottom: .4rem; }
+  .en-formal p:last-child { margin-bottom: 0; }
+
+  /* ── DISPLAY MATH ── */
+  .math-display {
+    text-align: center;
+    padding: .65rem .5rem;
+    margin: .5rem 0;
+    overflow-x: auto;
+    font-size: 1.02rem;
+    max-width: 100%;
+  }
+
+  /* ── PROOF BLOCK ── */
+  .proof-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    padding: .22rem .6rem;
+    border-radius: 2px;
+    background: none;
+    margin-top: .55rem;
+    transition: all .15s;
+  }
+  .proof-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .proof-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .proof-toggle.open .arrow { transform: rotate(90deg); }
+  .proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #f5f2ec;
+    border-left: 2px solid var(--rule);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .proof-content.visible { display: block; }
+  .proof-content p { margin-bottom: .5rem; }
+  .qed { text-align: right; font-size: 1.1rem; color: var(--ink-faint); margin-top: .4rem; }
+
+  .en-proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #edf1f7;
+    border-left: 2px solid #a3b8d4;
+    font-size: .86rem;
+    color: #3a4e65;
+    line-height: 1.8;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: auto;
+  }
+  .en-proof-content.visible { display: block; }
+  .en-proof-content p { margin-bottom: .5rem; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--def-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: .9rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem .5rem;
+  }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc ol li a {
+    font-size: .83rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+    transition: color .15s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+  .toc ol li a .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .67rem;
+    color: var(--ink-faint);
+    min-width: 3.2rem;
+  }
+
+  /* ── UTILITY ── */
+  p { margin-bottom: .5rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+  .en-panel strong { color: var(--en-accent); }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    background: var(--ink);
+    padding: .6rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-nav a { color: #ccc; text-decoration: none; letter-spacing: .05em; transition: color .15s; white-space: nowrap; }
+  .site-nav a:hover { color: #fff; }
+  .site-nav a.active { color: var(--accent-soft); }
+
+  /* ── SKIP LINK ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: auto;
+    padding: .5rem 1rem; background: var(--accent); color: #fff;
+    font-size: .85rem; z-index: 1000; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: #aaa;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: 3rem;
+  }
+  .site-footer a { color: #ccc; text-decoration: none; margin: 0 .8rem; transition: color .15s; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer .footer-copy { margin-top: 1rem; font-size: .72rem; color: #666; }
+  .site-footer .footer-desc { margin-top: .5rem; font-size: .7rem; color: #555; }
+
+  @media (max-width: 600px) {
+    .ko-panel, .en-panel { padding: .85rem .95rem .95rem; }
+    header { padding: 2.5rem 1.2rem 2.2rem; }
+    .site-nav { gap: 1rem; font-size: .68rem; flex-wrap: wrap; }
+  }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s, transform .2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scroll-top.visible { opacity: .85; visibility: visible; }
+  .scroll-top:hover { opacity: 1; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="index.html">홈</a>
+  <a href="ch1.html">Ch1 개념</a>
+  <a href="ch1-ex.html">Ch1 예제</a>
+  <a href="ch2.html">Ch2 개념</a>
+  <a href="ch2-ex.html">Ch2 예제</a>
+  <a class="active" href="ch3.html">Ch3 개념</a>
+  <a href="ch3-ex.html">Ch3 예제</a>
+  <a href="ch4.html">Ch4 개념</a>
+  <a href="ch4-ex.html">Ch4 예제</a>
+</nav>
+
+<header>
+  <p class="subtitle">Real Analysis · Chapter 3</p>
+  <h1>해석학 I 한·영 대조 개념 정리<span>Numerical Sequences and Series — Bilingual Study Guide</span></h1>
+  <span class="chapter-tag">Definitions 3.1 – 3.53</span>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 요약 &nbsp;·&nbsp; 오른쪽: 원문 (Rudin 기반 강의노트)</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Contents</h3>
+  <ol>
+    <li><a href="#d31"><span class="toc-num">Def 3.1</span>수열의 수렴</a></li>
+    <li><a href="#r32"><span class="toc-num">Rem 3.2</span>극한 표기</a></li>
+    <li><a href="#e33"><span class="toc-num">Exam 3.3</span>상수 수열</a></li>
+    <li><a href="#t34"><span class="toc-num">Thm 3.4</span>수렴 수열의 기본 성질</a></li>
+    <li><a href="#t36"><span class="toc-num">Thm 3.6</span>극한점과 수렴 수열</a></li>
+    <li><a href="#r37"><span class="toc-num">Rem 3.7</span>상수 수열의 치역</a></li>
+    <li><a href="#d39"><span class="toc-num">Def 3.9</span>부분수열</a></li>
+    <li><a href="#d313"><span class="toc-num">Def 3.13</span>점열적 콤팩트</a></li>
+    <li><a href="#t314"><span class="toc-num">Thm 3.14</span>콤팩트이면 점열적 콤팩트</a></li>
+    <li><a href="#c315"><span class="toc-num">Cor 3.15</span>$\mathbb{R}^k$의 유계 수열</a></li>
+    <li><a href="#l318"><span class="toc-num">Lem 3.18</span>수렴 비교</a></li>
+    <li><a href="#t319"><span class="toc-num">Thm 3.19</span>부분열 극한들의 집합은 닫힘</a></li>
+    <li><a href="#d320"><span class="toc-num">Def 3.20</span>코시 수열</a></li>
+    <li><a href="#t322"><span class="toc-num">Thm 3.22</span>수렴이면 코시</a></li>
+    <li><a href="#l323"><span class="toc-num">Lem 3.23</span>코시 수열은 유계</a></li>
+    <li><a href="#l324"><span class="toc-num">Lem 3.24</span>유계 집합의 폐포</a></li>
+    <li><a href="#l325"><span class="toc-num">Lem 3.25</span>폐포 원소의 근사</a></li>
+    <li><a href="#t327"><span class="toc-num">Thm 3.27</span>콤팩트 공간에서 코시 수렴</a></li>
+    <li><a href="#c330"><span class="toc-num">Cor 3.30</span>$\mathbb{R}^k$의 코시 수열 수렴</a></li>
+    <li><a href="#d332"><span class="toc-num">Def 3.32</span>완비 <em>Complete</em></a></li>
+    <li><a href="#e333"><span class="toc-num">Exam 3.33</span>완비 공간 예시</a></li>
+    <li><a href="#d335"><span class="toc-num">Def 3.35</span>상·하극한</a></li>
+    <li><a href="#r336"><span class="toc-num">Rem 3.36</span>확장 실수계 존재</a></li>
+    <li><a href="#l337"><span class="toc-num">Lem 3.37</span>상한·하한 근사</a></li>
+    <li><a href="#t339"><span class="toc-num">Thm 3.39</span>상·하극한 달성 부분열</a></li>
+    <li><a href="#c340"><span class="toc-num">Cor 3.40</span>수렴이면 상=하극한</a></li>
+    <li><a href="#d343"><span class="toc-num">Def 3.43</span>단조 수열</a></li>
+    <li><a href="#d345"><span class="toc-num">Def 3.45</span>부분합과 급수</a></li>
+    <li><a href="#t347"><span class="toc-num">Thm 3.47</span>급수 코시 판정법</a></li>
+    <li><a href="#c349"><span class="toc-num">Cor 3.49</span>절대수렴 → 수렴</a></li>
+    <li><a href="#d351"><span class="toc-num">Def 3.51</span>재배열</a></li>
+    <li><a href="#t352"><span class="toc-num">Thm 3.52</span>절대수렴의 재배열 불변</a></li>
+    <li><a href="#r353"><span class="toc-num">Rem 3.53</span>조건 수렴의 재배열</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>수열의 수렴 · Convergent Sequences</h2></div>
+
+<!-- Def 3.1 -->
+<div class="card def-card" id="d31">
+  <div class="card-head">
+    <span class="def-num">DEF 3.1</span>
+    <span class="def-title">수열의 수렴 <em>Convergence of a Sequence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$를 거리 공간, $\{p_n\}$을 $X$ 안의 수열, $p \in X$라 하자. 수열 $\{p_n\}$이 $p$에 <strong>수렴</strong>(converge)한다는 것은 임의의 $\varepsilon &gt; 0$에 대해 양의 정수 $N$이 존재하여 모든 $n \geq N$에 대해</p>
+        <div class="math-display">$$d(p_n, p) &lt; \varepsilon$$</div>
+        <p>이 성립하는 것이다. 이때 $p$를 $\{p_n\}$의 <strong>극한</strong>(limit)이라 하고,</p>
+        <div class="math-display">$$\lim_{n \to \infty} p_n = p \quad \text{또는} \quad p_n \to p$$</div>
+        <p>로 표기한다. 수렴하지 않는 수열은 <strong>발산</strong>(diverge)한다고 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $\{p_n\}$ a sequence in $X$, and $p \in X$. We say $\{p_n\}$ <strong>converges</strong> to $p$ if for every $\varepsilon &gt; 0$ there exists a positive integer $N$ such that for all $n \geq N$,</p>
+        <div class="math-display">$$d(p_n, p) &lt; \varepsilon.$$</div>
+        <p>We call $p$ the <strong>limit</strong> of $\{p_n\}$ and write $\lim_{n \to \infty} p_n = p$ or $p_n \to p$. A sequence that does not converge is said to <strong>diverge</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rem 3.2 -->
+<div class="card rem-card" id="r32">
+  <div class="card-head">
+    <span class="rem-num">REM 3.2</span>
+    <span class="rem-title">근방을 이용한 표현 <em>Neighborhood Characterization</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>수렴 조건 $d(p_n, p) &lt; \varepsilon$은 $p_n \in N_\varepsilon(p)$와 동치이다. 따라서 DEF 3.1은 다음과 같이도 쓸 수 있다: 임의의 $\varepsilon &gt; 0$에 대해 $N$이 존재하여 모든 $n \geq N$에 대해 $p_n \in N_\varepsilon(p)$.</p>
+        <p>수렴은 공간 $X$에 의존한다. 예를 들어 $p_n = 1/n$은 $X = \mathbb{R}$에서는 $0$에 수렴하지만, $X = (0, \infty)$에서는 수렴하지 않는다 (극한 후보 $0$이 $X$에 없기 때문).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>The condition $d(p_n, p) &lt; \varepsilon$ is equivalent to $p_n \in N_\varepsilon(p)$. So DEF 3.1 says: for every $\varepsilon &gt; 0$ there exists $N$ with $p_n \in N_\varepsilon(p)$ for all $n \geq N$.</p>
+        <p>Convergence depends on $X$: $p_n = 1/n$ converges in $\mathbb{R}$ but not in $(0,\infty)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exam 3.3 -->
+<div class="card exam-card" id="e33">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.3</span>
+    <span class="exam-title">상수 수열 <em>Constant Sequence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간이고 $p \in X$라 하자. 모든 $n \in \mathbb{N}$에 대해 $p_n := p$로 정의하면, 모든 $\varepsilon &gt; 0$과 $n \in \mathbb{N}$에 대해 $d(p_n, p) = 0 &lt; \varepsilon$이므로 $\lim_{n\to\infty} p_n = p$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $p \in X$ and define $p_n := p$ for all $n \in \mathbb{N}$. For any $\varepsilon &gt; 0$ and any $n$, $d(p_n, p) = 0 &lt; \varepsilon$, so $p_n \to p$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.4 -->
+<div class="card thm-card" id="t34">
+  <div class="card-head">
+    <span class="thm-num">THM 3.4</span>
+    <span class="thm-title">수렴 수열의 기본 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간이고 $\{p_n\}$이 $X$ 안의 수열이라 하자.</p>
+        <p><strong>(a)</strong> $\{p_n\}$이 $p \in X$에 수렴할 필요충분조건은 $p$의 모든 근방이 $\{p_n\}$의 모든 항을 유한 개를 제외하고 포함하는 것이다.</p>
+        <p><strong>(b)</strong> $p, p' \in X$에 대해 $\lim p_n = p$이고 $\lim p_n = p'$이면 $p = p'$이다 (극한의 유일성).</p>
+        <p><strong>(c)</strong> $\{p_n\}$이 수렴하면 집합 $\{p_n : n \in \mathbb{N}\}$은 유계이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a) ($\Rightarrow$)</strong> $V$를 $p$의 근방이라 하자. 근방의 정의에 의해 $V = N_\varepsilon(p)$인 $\varepsilon &gt; 0$이 존재한다. $\lim p_n = p$이므로 $N$이 존재하여 모든 $n \geq N$에 대해 $d(p_n, p) &lt; \varepsilon$, 즉 $p_n \in N_\varepsilon(p) = V$. 따라서 $\{p_n : p_n \notin V\} \subset \{p_1, \ldots, p_{N-1}\}$는 유한 집합.</p>
+        <p><strong>($\Leftarrow$)</strong> $\varepsilon &gt; 0$을 임의로 주자. $N_\varepsilon(p)$는 $p$의 근방이므로 가정에 의해 $\{p_n : p_n \notin N_\varepsilon(p)\} = \{p_{n_1}, \ldots, p_{n_m}\}$은 유한. $N &gt; \max\{n_1, \ldots, n_m\}$으로 택하면 모든 $n \geq N$에 대해 $p_n \in N_\varepsilon(p)$, 즉 $d(p_n, p) &lt; \varepsilon$.</p>
+        <p><strong>(b)</strong> $\varepsilon &gt; 0$을 주자. $\lim p_n = p$, $\lim p_n = p'$이므로 $N_1, N_2$가 존재하여 $n \geq N_1$이면 $d(p_n, p) &lt; \varepsilon$, $n \geq N_2$이면 $d(p_n, p') &lt; \varepsilon$. $N := \max\{N_1, N_2\}$로 놓으면 $n \geq N$에서 삼각부등식에 의해 $d(p, p') \leq d(p_n, p) + d(p_n, p') &lt; 2\varepsilon$. $\varepsilon$이 임의이므로 $d(p, p') = 0$, 즉 $p = p'$.</p>
+        <p><strong>(c)</strong> $p = \lim p_n$이라 하자. $\varepsilon = 1$을 잡으면 $N$이 존재하여 $n \geq N$이면 $d(p_n, p) &lt; 1$. $r := \max\{1, d(p, p_1), \ldots, d(p, p_{N-1})\}$로 놓으면 모든 $n \in \mathbb{N}$에 대해 $d(p_n, p) \leq r &lt; r + 1$. 따라서 $\{p_n : n \in \mathbb{N}\}$은 유계.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $\{p_n\}$ a sequence in $X$.</p>
+        <p><strong>(a)</strong> $\{p_n\}$ converges to $p \in X$ iff every neighborhood of $p$ contains all but finitely many of the terms of $\{p_n\}$.</p>
+        <p><strong>(b)</strong> If $\lim p_n = p$ and $\lim p_n = p'$, then $p = p'$.</p>
+        <p><strong>(c)</strong> If $\{p_n\}$ converges, then $\{p_n : n \in \mathbb{N}\}$ is bounded.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a) ($\Rightarrow$)</strong> Let $V$ be a neighborhood of $p$, so $V = N_\varepsilon(p)$ for some $\varepsilon &gt; 0$. Since $\lim p_n = p$, there exists $N$ such that $d(p_n, p) &lt; \varepsilon$, i.e. $p_n \in V$, for all $n \geq N$. Thus $\{p_n : p_n \notin V\} \subset \{p_1, \ldots, p_{N-1}\}$ is finite.</p>
+        <p><strong>($\Leftarrow$)</strong> Given $\varepsilon &gt; 0$, $N_\varepsilon(p)$ is a neighborhood of $p$. By hypothesis, $\{p_n : p_n \notin N_\varepsilon(p)\} = \{p_{n_1}, \ldots, p_{n_m}\}$. Take $N &gt; \max\{n_1,\ldots,n_m\}$; then $p_n \in N_\varepsilon(p)$ and $d(p_n, p) &lt; \varepsilon$ for all $n \geq N$.</p>
+        <p><strong>(b)</strong> Given $\varepsilon &gt; 0$, pick $N_1, N_2$ with $d(p_n, p) &lt; \varepsilon$ for $n \geq N_1$ and $d(p_n, p') &lt; \varepsilon$ for $n \geq N_2$. For $n \geq N := \max\{N_1, N_2\}$, $d(p, p') \leq d(p_n, p) + d(p_n, p') &lt; 2\varepsilon$. Since $\varepsilon$ arbitrary, $d(p, p') = 0$, so $p = p'$.</p>
+        <p><strong>(c)</strong> Let $p = \lim p_n$. With $\varepsilon = 1$, $N$ exists so $d(p_n, p) &lt; 1$ for $n \geq N$. Put $r = \max\{1, d(p, p_1),\ldots,d(p, p_{N-1})\}$. Then $d(p_n, p) \leq r &lt; r+1$ for all $n$, so $\{p_n : n \in \mathbb{N}\}$ is bounded. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.6 -->
+<div class="card thm-card" id="t36">
+  <div class="card-head">
+    <span class="thm-num">THM 3.6</span>
+    <span class="thm-title">극한점과 수렴 수열</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $E \subset X$, $p \in X$라 하자. $p$가 $E$의 극한점이면, $E$ 안의 수열 $\{p_n\}$이 존재하여 $\lim_{n\to\infty} p_n = p$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$p$가 $E$의 극한점이므로 각 $n \in \mathbb{N}$에 대해 $p_n \in E$, $p_n \neq p$, $d(p, p_n) &lt; 1/n$인 $p_n$을 택할 수 있다.</p>
+        <p>$\{p_n\}$이 $p$에 수렴함을 보이자. $\varepsilon &gt; 0$을 임의로 주자. 아르키메데스 성질에 의해 $1/N &lt; \varepsilon$인 $N$이 존재한다. 모든 $n \geq N$에 대해</p>
+        <div class="math-display">$$d(p, p_n) &lt; \frac{1}{n} \leq \frac{1}{N} &lt; \varepsilon.$$</div>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space, $E \subset X$, $p \in X$. If $p$ is a limit point of $E$, then there exists a sequence $\{p_n\}$ in $E$ with $\lim p_n = p$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>For each $n \in \mathbb{N}$, pick $p_n \in E$ with $p_n \neq p$ and $d(p, p_n) &lt; 1/n$. Given $\varepsilon &gt; 0$, choose $N$ with $1/N &lt; \varepsilon$. For $n \geq N$, $d(p, p_n) &lt; 1/n \leq 1/N &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rem 3.7 -->
+<div class="card rem-card" id="r37">
+  <div class="card-head">
+    <span class="rem-num">REM 3.7</span>
+    <span class="rem-title">상수 수열의 치역은 극한점이 없다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $p \in X$이고 $p_n := p$로 정의하면 (EXAM 3.3에 의해) $\lim p_n = p$이다. 그러나 집합 $\{p_n : n \in \mathbb{N}\} = \{p\}$는 $X$에서 극한점을 갖지 않는다. 즉, THM 3.6의 역은 일반적으로 성립하지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>For $p \in X$ and $p_n := p$ we have $\lim p_n = p$, but $\{p_n : n \in \mathbb{N}\} = \{p\}$ has no limit point in $X$. So the converse of THM 3.6 fails in general.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>부분수열 · Subsequences</h2></div>
+
+<!-- Def 3.9 -->
+<div class="card def-card" id="d39">
+  <div class="card-head">
+    <span class="def-num">DEF 3.9</span>
+    <span class="def-title">부분수열 <em>Subsequence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{p_n\}$을 거리 공간 $X$ 안의 수열이라 하자. 양의 정수들의 수열 $\{n_i : i \in \mathbb{N}\}$이 $n_1 &lt; n_2 &lt; n_3 &lt; \cdots$를 만족하면, 수열 $\{p_{n_i} : i \in \mathbb{N}\}$을 $\{p_n\}$의 <strong>부분수열</strong>(subsequence)이라 한다.</p>
+        <p>$p \in X$에 대해 $\lim_{i \to \infty} p_{n_i} = p$이면, $p$를 $\{p_n : n \in \mathbb{N}\}$의 <strong>부분수열 극한</strong>(subsequential limit)이라 한다. $\{p_n\}$이 어떤 부분수열 극한을 가지면 <strong>수렴하는 부분수열을 포함한다</strong>고 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{p_n\}$ be a sequence in $X$. Consider an increasing sequence $n_1 &lt; n_2 &lt; n_3 &lt; \cdots$ of positive integers. Then $\{p_{n_i} : i \in \mathbb{N}\}$ is called a <strong>subsequence</strong> of $\{p_n\}$. If $\lim_{i \to \infty} p_{n_i} = p$, then $p$ is called a <strong>subsequential limit</strong> of $\{p_n\}$. We say $\{p_n\}$ contains a convergent subsequence if $\{p_n\}$ has a subsequential limit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 3.13 -->
+<div class="card def-card" id="d313">
+  <div class="card-head">
+    <span class="def-num">DEF 3.13</span>
+    <span class="def-title">점열적 콤팩트 <em>Sequentially Compact</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $K \subset X$라 하자. $K$가 <strong>점열적 콤팩트</strong>(sequentially compact)라는 것은 $K$ 안의 모든 수열 $\{p_n\}$이 $K$ 안의 부분수열 극한을 가지는 것이다. 즉, 어떤 부분수열 $\{p_{n_i}\}$와 점 $p \in K$가 존재하여 $\lim_{i\to\infty} p_{n_i} = p$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $K \subset X$. $K$ is <strong>sequentially compact</strong> iff every sequence $\{p_n\}$ in $K$ has a subsequential limit in $K$; i.e. for any sequence $\{p_n\}$ in $K$, there exist a subsequence $\{p_{n_i}\}$ and $p \in K$ with $\lim p_{n_i} = p$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.14 -->
+<div class="card thm-card" id="t314">
+  <div class="card-head">
+    <span class="thm-num">THM 3.14</span>
+    <span class="thm-title">콤팩트 ⇒ 점열적 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $K \subset X$가 콤팩트이면 $K$는 점열적 콤팩트이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\{p_n\}$을 $K$ 안의 수열이라 하자. $K$ 안의 수렴하는 부분수열 $\{p_{n_i}\}$를 찾으면 된다.</p>
+        <p><strong>(Case 1)</strong> 집합 $\{p_n : n \in \mathbb{N}\}$이 유한. 그러면 $\tilde p_1, \ldots, \tilde p_N \in K$이 존재하여 $\{p_n : n \in \mathbb{N}\} = \{\tilde p_1, \ldots, \tilde p_N\}$. 비둘기집 원리에 의해 어떤 $k$에 대해 $\tilde p_k = p_j$가 무한히 많은 $j$에 대해 성립. 따라서 $p_{n_i} = \tilde p_k$인 부분수열이 존재하고 $\lim p_{n_i} = \tilde p_k \in K$.</p>
+        <p><strong>(Case 2)</strong> 집합 $\{p_n : n \in \mathbb{N}\}$이 무한. $K$가 콤팩트이므로 THM 2.72에 의해 $\{p_n\}$은 $K$에서 극한점 $p$를 가진다. THM 3.6에 의해 $\{p_n : n \in \mathbb{N}\}$ 안의 수열 $\{\tilde p_n\}$이 존재하여 $\lim \tilde p_n = p$. 이로부터 $\{p_n\}$의 부분수열 $\{p_{n_i}\}$를 뽑을 수 있으며 $\lim p_{n_i} = p \in K$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $K \subset X$ compact. Then $K$ is sequentially compact.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\{p_n\}$ be a sequence in $K$.</p>
+        <p><strong>(Case 1)</strong> $\{p_n : n \in \mathbb{N}\}$ is finite. Then $\{p_n : n \in \mathbb{N}\} = \{\tilde p_1, \ldots, \tilde p_N\} \subset K$. By pigeonhole, some $\tilde p_k$ equals $p_j$ for infinitely many $j$. We extract $\{p_{n_i}\}$ with $p_{n_i} = \tilde p_k$, so $\lim p_{n_i} = \tilde p_k \in K$.</p>
+        <p><strong>(Case 2)</strong> $\{p_n : n \in \mathbb{N}\}$ is infinite. As an infinite subset of the compact $K$, by THM 2.72 it has a limit point $p \in K$. By THM 3.6, there is a sequence $\{\tilde p_n\}$ in $\{p_n\}$ with $\lim \tilde p_n = p$, giving a subsequence $\{p_{n_i}\}$ of $\{p_n\}$ with $\lim p_{n_i} = p \in K$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 3.15 -->
+<div class="card thm-card" id="c315">
+  <div class="card-head">
+    <span class="thm-num">COR 3.15</span>
+    <span class="thm-title">$\mathbb{R}^k$의 유계 수열 (볼차노-바이어슈트라스)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$이고 $\{p_n\}$이 $\mathbb{R}^k$ 안의 수열이라 하자. 집합 $\{p_n : n \in \mathbb{N}\}$이 유계이면 $\{p_n\}$은 수렴하는 부분수열을 포함한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\{p_n : n \in \mathbb{N}\}$이 유계이므로 $k$-cell $I$가 존재하여 $\{p_n : n \in \mathbb{N}\} \subset I$. THM 2.76에 의해 $I$는 콤팩트이고, THM 3.14에 의해 $I$는 점열적 콤팩트이다. 따라서 $\{p_n\}$은 $I$ 안에서 수렴하는 부분수열을 가진다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $k \in \mathbb{N}$ and $\{p_n\}$ be a sequence in $\mathbb{R}^k$. Assume $\{p_n : n \in \mathbb{N}\}$ is bounded. Then $\{p_n\}$ contains a convergent subsequence.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$\{p_n\} \subset I$ for some $k$-cell $I$. $I$ is compact (THM 2.76), so sequentially compact (THM 3.14). Hence a convergent subsequence exists. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 3.18 -->
+<div class="card thm-card" id="l318">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.18</span>
+    <span class="thm-title">수렴 비교 원리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $p \in X$, $\{q_n\}, \{p_n\}$이 $X$ 안의 수열이라 하자. $\lim_{n\to\infty} p_n = p$이고 모든 $n$에 대해 $d(p_n, q_n) &lt; 1/n$이면 $\lim_{n\to\infty} q_n = p$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon &gt; 0$을 주자. $\lim p_n = p$이므로 $N_1$이 존재하여 $n \geq N_1$이면 $d(p_n, p) &lt; \varepsilon/2$. $1/n \to 0$이므로 $N_2$가 존재하여 $n \geq N_2$이면 $1/n &lt; \varepsilon/2$. $N := \max\{N_1, N_2\}$로 놓으면 $n \geq N$에서 삼각부등식에 의해</p>
+        <div class="math-display">$$d(q_n, p) \leq d(q_n, p_n) + d(p_n, p) &lt; \frac{1}{n} + \frac{\varepsilon}{2} &lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $p \in X$ and $\{q_n\}, \{p_n\}$ be sequences in $X$. If $\lim p_n = p$ and $d(p_n, q_n) &lt; 1/n$ for all $n$, then $\lim q_n = p$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Given $\varepsilon &gt; 0$, pick $N_1$ with $d(p_n, p) &lt; \varepsilon/2$ for $n \geq N_1$ and $N_2$ with $1/n &lt; \varepsilon/2$ for $n \geq N_2$. For $n \geq N := \max\{N_1,N_2\}$: $d(q_n, p) \leq d(q_n, p_n) + d(p_n, p) &lt; 1/n + \varepsilon/2 &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.19 -->
+<div class="card thm-card" id="t319">
+  <div class="card-head">
+    <span class="thm-num">THM 3.19</span>
+    <span class="thm-title">부분수열 극한들의 집합은 닫혀있다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $\{p_n\}$이 $X$ 안의 수열이라 하자. $\{p_n\}$의 모든 부분수열 극한의 집합을 $E$라 하자:</p>
+        <div class="math-display">$$E = \{p \in X : \exists \text{ 부분수열 } \{p_{n_i}\} \text{ such that } \lim_{i\to\infty} p_{n_i} = p\}.$$</div>
+        <p>그러면 $E$는 닫혀있다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$q$를 $E$의 극한점이라 하자. $q \in E$임을 보이면 된다 (즉, $\{p_n\}$의 어떤 부분수열이 $q$에 수렴).</p>
+        <p>THM 3.6에 의해 $E$ 안의 수열 $\{q_k\}$가 존재하여 $\lim_{k\to\infty} q_k = q$. 각 $q_k \in E$이므로 $\{p_n\}$의 부분수열 $\{p_{n_i} : i \in \mathbb{N}\}$이 있어 $\lim_{i\to\infty} p_{n_i} = q_k$. 이 부분수열은 $k$에 의존하므로 $p_{k, n_i}$로 표기한다. 각 $k$에 대해 $N_k \in \mathbb{N}$이 존재하여 $i \geq N_k$이면</p>
+        <div class="math-display">$$d(p_{k, n_i}, q_k) &lt; \frac{1}{k}.$$</div>
+        <p>$m \geq N_1$을 골라서 $d(p_{1, n_m}, q_1) &lt; 1$. 이를 $p_{m_1} := p_{1, n_m}$로 놓는다.</p>
+        <p>다음으로 $m \geq N_2$를 충분히 크게 잡으면 $m_2 &gt; m_1$이 되도록 $p_{m_2} := p_{2, n_m}$을 택할 수 있으며 $d(p_{m_2}, q_2) &lt; 1/2$.</p>
+        <p>귀납적으로 $m_1 &lt; m_2 &lt; \cdots$인 양의 정수들을 택하여 $d(p_{m_i}, q_i) &lt; 1/i$. LEM 3.18에 의해 $\lim q_k = q$와 $d(p_{m_i}, q_i) &lt; 1/i$로부터 $\lim p_{m_i} = q$. 따라서 $q \in E$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $\{p_n\}$ a sequence. Define $E$ as the set of all subsequential limits of $\{p_n\}$:</p>
+        <div class="math-display">$$p \in E \iff \exists \text{ subseq } \{p_{n_i}\} \text{ with } \lim p_{n_i} = p.$$</div>
+        <p>Then $E$ is closed.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Let $q$ be a limit point of $E$. By THM 3.6, there is $\{q_k\}$ in $E$ with $\lim q_k = q$. Each $q_k \in E$: there is a subsequence $\{p_{n_i}\}$ (depending on $k$, write $p_{k, n_i}$) with $\lim_i p_{k, n_i} = q_k$, so $N_k$ exists with $d(p_{k, n_i}, q_k) &lt; 1/k$ for $i \geq N_k$.</p>
+        <p>Choose $m \geq N_1$ and set $p_{m_1} := p_{1, n_m}$; $d(p_{m_1}, q_1) &lt; 1$. Pick $m \geq N_2$ large enough so $m_2 &gt; m_1$ and $p_{m_2} := p_{2, n_m}$ with $d(p_{m_2}, q_2) &lt; 1/2$. Inductively obtain $m_1 &lt; m_2 &lt; \cdots$ with $d(p_{m_i}, q_i) &lt; 1/i$. By LEM 3.18, $\lim p_{m_i} = q$, so $q \in E$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>코시 수열 · Cauchy Sequences</h2></div>
+
+<!-- Def 3.20 -->
+<div class="card def-card" id="d320">
+  <div class="card-head">
+    <span class="def-num">DEF 3.20</span>
+    <span class="def-title">코시 수열 <em>Cauchy Sequence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리 공간 $X$ 안의 수열 $\{p_n\}$이 <strong>코시 수열</strong>(Cauchy sequence)이라는 것은 임의의 $\varepsilon &gt; 0$에 대해 양의 정수 $N$이 존재하여 모든 $n, m \geq N$에 대해</p>
+        <div class="math-display">$$d(p_n, p_m) &lt; \varepsilon$$</div>
+        <p>이 성립하는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A sequence $\{p_n\}$ in a metric space $X$ is a <strong>Cauchy sequence</strong> if for every $\varepsilon &gt; 0$ there exists $N$ such that $d(p_n, p_m) &lt; \varepsilon$ for all $n, m \geq N$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.22 -->
+<div class="card thm-card" id="t322">
+  <div class="card-head">
+    <span class="thm-num">THM 3.22</span>
+    <span class="thm-title">수렴 수열은 코시 수열</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $\{p_n\}$이 $X$ 안의 수열이라 하자. $\{p_n\}$이 수렴하면 $\{p_n\}$은 코시 수열이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon &gt; 0$을 주자. $\{p_n\}$이 수렴하므로 $p \in X$, $\lim p_n = p$인 $p$가 존재. $N$이 존재하여 $n \geq N$이면 $d(p_n, p) &lt; \varepsilon/2$. 삼각부등식에 의해 모든 $n, m \geq N$에 대해</p>
+        <div class="math-display">$$d(p_n, p_m) \leq d(p_n, p) + d(p_m, p) &lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\{p_n\}$ converges in $(X,d)$, then $\{p_n\}$ is Cauchy.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Given $\varepsilon &gt; 0$, with $\lim p_n = p$, pick $N$ so $d(p_n, p) &lt; \varepsilon/2$ for $n \geq N$. Then $d(p_n, p_m) \leq d(p_n, p) + d(p_m, p) &lt; \varepsilon$ for $n, m \geq N$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 3.23 -->
+<div class="card thm-card" id="l323">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.23</span>
+    <span class="thm-title">코시 수열은 유계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $\{p_n\}$이 코시 수열이면 집합 $\{p_n : n \in \mathbb{N}\}$은 유계이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\{p_n\}$이 코시이므로 $N$이 존재하여 $n, m \geq N$이면 $d(p_n, p_m) &lt; 1$. 특히 모든 $n \geq N$에 대해 $d(p_n, p_N) &lt; 1$. $M := \max\{1, d(p_1, p_N), \ldots, d(p_{N-1}, p_N)\}$로 놓으면 모든 $n \in \mathbb{N}$에 대해 $d(p_n, p_N) &lt; M + 1$. 따라서 $\{p_n : n \in \mathbb{N}\}$은 유계.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\{p_n\}$ is Cauchy, then $\{p_n : n \in \mathbb{N}\}$ is bounded.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Pick $N$ so $d(p_n, p_m) &lt; 1$ for $n, m \geq N$. Then $d(p_n, p_N) &lt; 1$ for $n \geq N$. Put $M = \max\{1, d(p_1, p_N), \ldots, d(p_{N-1}, p_N)\}$. Then $d(p_n, p_N) &lt; M + 1$ for all $n$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 3.24 -->
+<div class="card thm-card" id="l324">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.24</span>
+    <span class="thm-title">유계 집합의 폐포는 유계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $E \subset X$가 유계이면 $E$의 폐포 $\overline{E}$도 유계이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$E$가 유계이므로 $M &gt; 0$, $x_0 \in E$가 존재하여 $d(x, x_0) &lt; M$ ($\forall x \in E$).</p>
+        <p>$\overline{E}$가 유계가 아니라 가정하자. 그러면 $y \in \overline{E}$가 존재하여 $d(y, x_0) \geq 2M$. $\overline{E} = E \cup E'$이므로 $y \in E$이면 $d(y, x_0) &lt; M$이어야 모순. 따라서 $y \in E'$, 즉 $y$는 $E$의 극한점. 그러면 $z \in E$가 존재하여 $d(y, z) &lt; M/2$. 삼각부등식에 의해</p>
+        <div class="math-display">$$d(z, x_0) \geq d(x_0, y) - d(y, z) \geq 2M - \frac{M}{2} = \frac{3M}{2}.$$</div>
+        <p>이는 $z \in E$에 대해 $d(z, x_0) &lt; M$임에 모순.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $E \subset X$ is bounded, then $\overline{E}$ is bounded.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$d(x, x_0) &lt; M$ for $x \in E$. Suppose $\overline{E}$ not bounded: $\exists y \in \overline{E}$ with $d(y, x_0) \geq 2M$. As $\overline{E} = E \cup E'$ and $y \notin E$ (else $d(y, x_0) &lt; M$), $y \in E'$. Choose $z \in E$ with $d(y, z) &lt; M/2$. Then $d(z, x_0) \geq d(x_0, y) - d(y, z) \geq 3M/2 &gt; M$ — contradiction. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 3.25 -->
+<div class="card thm-card" id="l325">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.25</span>
+    <span class="thm-title">폐포 원소의 $\varepsilon$-근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $E \subset X$, $p \in X$라 하자. $p \in \overline{E}$이면 임의의 $\varepsilon &gt; 0$에 대해 $q \in E$가 존재하여 $d(p, q) &lt; \varepsilon$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon &gt; 0$을 주자. $p \in \overline{E} = E \cup E'$이므로 두 경우를 생각한다.</p>
+        <p><strong>(Case 1)</strong> $p \in E$. $q := p$로 놓으면 $d(p, q) = 0 &lt; \varepsilon$.</p>
+        <p><strong>(Case 2)</strong> $p \in E'$. $p$가 $E$의 극한점이므로 $q \in N_\varepsilon(p)$ ($q \neq p$, $q \in E$)가 존재. 따라서 $d(p, q) &lt; \varepsilon$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $p \in \overline{E}$, then for every $\varepsilon &gt; 0$ there exists $q \in E$ with $d(p, q) &lt; \varepsilon$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$\overline{E} = E \cup E'$. If $p \in E$, take $q = p$. If $p \in E'$, $p$ is a limit point, so $\exists q \in N_\varepsilon(p) \cap E$ with $q \neq p$, giving $d(p, q) &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.27 -->
+<div class="card thm-card" id="t327">
+  <div class="card-head">
+    <span class="thm-num">THM 3.27</span>
+    <span class="thm-title">콤팩트 공간에서 코시 수열 수렴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X,d)$가 거리 공간, $\{p_n\}$이 $X$ 안의 수열이라 하자. $X$가 콤팩트이고 $\{p_n\}$이 코시 수열이면 $\{p_n\}$은 수렴한다. 즉, 콤팩트 거리 공간에서 모든 코시 수열은 수렴한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$E_n := \{p_n, p_{n+1}, p_{n+2}, \ldots\}$로 정의한다. THM 2.51에 의해 $\overline{E_n}$은 닫힘. $X$가 콤팩트이므로 THM 2.65에 의해 $\overline{E_n}$은 콤팩트. 또한 $\overline{E_n} \supset \overline{E_{n+1}}$ ($\forall n$).</p>
+        <p>COR 2.70에 의해 $\bigcap_{n=1}^\infty \overline{E_n} \neq \emptyset$이므로 $p \in \bigcap_{n=1}^\infty \overline{E_n}$을 택한다.</p>
+        <p>$\varepsilon &gt; 0$을 주자. $\{p_n\}$이 코시이므로 $N$이 존재하여 $n, m \geq N$이면 $d(p_n, p_m) &lt; \varepsilon/2$.</p>
+        <p>$p \in \overline{E_N}$이므로 LEM 3.25에 의해 $p_{n_0} \in E_N$ ($n_0 \geq N$)이 존재하여 $d(p, p_{n_0}) &lt; \varepsilon/2$. 모든 $n \geq N$에 대해</p>
+        <div class="math-display">$$d(p, p_n) \leq d(p, p_{n_0}) + d(p_{n_0}, p_n) &lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <p>따라서 $\lim p_n = p$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d)$ be a metric space and $\{p_n\}$ a sequence in $X$. If $X$ is compact and $\{p_n\}$ is Cauchy, then $\{p_n\}$ converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Define $E_n := \{p_n, p_{n+1}, \ldots\}$. $\overline{E_n}$ is closed (THM 2.51), hence compact (THM 2.65 in compact $X$), and $\overline{E_n} \supset \overline{E_{n+1}}$. By COR 2.70, $\bigcap \overline{E_n} \neq \emptyset$; choose $p$ in the intersection.</p>
+        <p>Given $\varepsilon &gt; 0$, Cauchy gives $N$ with $d(p_n, p_m) &lt; \varepsilon/2$ for $n, m \geq N$. Since $p \in \overline{E_N}$, LEM 3.25 gives $p_{n_0} \in E_N$ ($n_0 \geq N$) with $d(p, p_{n_0}) &lt; \varepsilon/2$. Then for $n \geq N$: $d(p, p_n) \leq d(p, p_{n_0}) + d(p_{n_0}, p_n) &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 3.30 -->
+<div class="card thm-card" id="c330">
+  <div class="card-head">
+    <span class="thm-num">COR 3.30</span>
+    <span class="thm-title">$\mathbb{R}^k$의 코시 수열은 수렴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$이고 $\{p_n\}$이 $\mathbb{R}^k$ 안의 코시 수열이면 $\{p_n\}$은 수렴한다. 즉, $\mathbb{R}^k$ 안의 모든 코시 수열은 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Every Cauchy sequence in $\mathbb{R}^k$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 3.32 -->
+<div class="card def-card" id="d332">
+  <div class="card-head">
+    <span class="def-num">DEF 3.32</span>
+    <span class="def-title">완비 거리 공간 <em>Complete</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 코시 수열이 수렴하는 거리 공간을 <strong>완비</strong>(complete)라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A metric space in which every Cauchy sequence converges is said to be <strong>complete</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exam 3.33 -->
+<div class="card exam-card" id="e333">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.33</span>
+    <span class="exam-title">완비 공간 예시</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>THM 3.27에 의해 모든 콤팩트 거리 공간은 완비이다. COR 3.30에 의해 $\mathbb{R}^k$는 완비 거리 공간이다. 그러나 유리수계 $\mathbb{Q}$는 완비 거리 공간이 <strong>아니다</strong>.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>By THM 3.27 every compact metric space is complete. By COR 3.30 $\mathbb{R}^k$ is complete. However $\mathbb{Q}$ is not complete.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>상·하극한 · Upper and Lower Limits</h2></div>
+
+<!-- Def 3.35 -->
+<div class="card def-card" id="d335">
+  <div class="card-head">
+    <span class="def-num">DEF 3.35</span>
+    <span class="def-title">상극한·하극한 <em>Lim Sup and Lim Inf</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$을 $\mathbb{R}$ 안의 수열이라 하자. 다음을 정의한다:</p>
+        <div class="math-display">$$\limsup_{n \to \infty} a_n := \inf_{k \geq 1} \left\{ \sup_{n \geq k} \{a_n\} \right\} = \inf\{\sup\{a_n : n \geq k\} : k \in \mathbb{N}\}$$</div>
+        <div class="math-display">$$\liminf_{n \to \infty} a_n := \sup_{k \geq 1} \left\{ \inf_{n \geq k} \{a_n\} \right\} = \sup\{\inf\{a_n : n \geq k\} : k \in \mathbb{N}\}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{a_n\}$ be a sequence in $\mathbb{R}$. Define $\limsup a_n := \inf_{k \geq 1}\{\sup_{n \geq k} a_n\}$ and $\liminf a_n := \sup_{k \geq 1}\{\inf_{n \geq k} a_n\}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rem 3.36 -->
+<div class="card rem-card" id="r336">
+  <div class="card-head">
+    <span class="rem-num">REM 3.36</span>
+    <span class="rem-title">확장 실수계에서 항상 존재</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\limsup a_n$과 $\liminf a_n$은 확장 실수계 $\overline{\mathbb{R}}$ ($= \mathbb{R} \cup \{-\infty, +\infty\}$)에서 항상 존재한다. 왜냐하면 $\overline{\mathbb{R}}$에서 모든 $A \subset \overline{\mathbb{R}}$의 $\sup A$, $\inf A$가 존재하기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$\limsup a_n$ and $\liminf a_n$ always exist in the extended real number system $\overline{\mathbb{R}}$ since $\sup A, \inf A$ exist in $\overline{\mathbb{R}}$ for any $A \subset \overline{\mathbb{R}}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 3.37 -->
+<div class="card thm-card" id="l337">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.37</span>
+    <span class="thm-title">상한·하한 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \subset \mathbb{R}$, $A \neq \emptyset$이라 하자.</p>
+        <p><strong>(a)</strong> $\sup A \in \mathbb{R}$이면 임의의 $\varepsilon &gt; 0$에 대해 $a \in A$가 존재하여 $\sup A - \varepsilon &lt; a$.</p>
+        <p><strong>(b)</strong> $\inf A \in \mathbb{R}$이면 임의의 $\varepsilon &gt; 0$에 대해 $b \in A$가 존재하여 $b &lt; \inf A + \varepsilon$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(a)만 증명 (b는 대칭). $\varepsilon &gt; 0$을 주고, $\sup A - \varepsilon &lt; a$인 $a \in A$가 없다고 하자. 그러면 모든 $a \in A$에 대해 $\sup A - \varepsilon \geq a$. 이는 $\sup A - \varepsilon$이 $A$의 상계라는 뜻. $\sup A$는 최소 상계이므로 $\sup A \leq \sup A - \varepsilon$, 모순.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $A \subset \mathbb{R}$, $A \neq \emptyset$. <strong>(a)</strong> If $\sup A \in \mathbb{R}$, for every $\varepsilon &gt; 0$ $\exists a \in A$ with $\sup A - \varepsilon &lt; a$. <strong>(b)</strong> If $\inf A \in \mathbb{R}$, for every $\varepsilon &gt; 0$ $\exists b \in A$ with $b &lt; \inf A + \varepsilon$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>(a) If no such $a$, then $\sup A - \varepsilon \geq a$ for all $a \in A$, so $\sup A - \varepsilon$ is an upper bound. But $\sup A$ is the least upper bound, giving $\sup A \leq \sup A - \varepsilon$ — contradiction. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.39 -->
+<div class="card thm-card" id="t339">
+  <div class="card-head">
+    <span class="thm-num">THM 3.39</span>
+    <span class="thm-title">상·하극한을 달성하는 부분수열</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}$ 안의 수열이라 하자.</p>
+        <p><strong>(a)</strong> $\limsup_{n\to\infty} a_n \in \mathbb{R}$이면, 부분수열 $\{a_{n_k}\}$가 존재하여 $\lim_{k\to\infty} a_{n_k} = \limsup_{n\to\infty} a_n$.</p>
+        <p><strong>(b)</strong> $\liminf_{n\to\infty} a_n \in \mathbb{R}$이면, 부분수열 $\{a_{n_k}\}$가 존재하여 $\lim_{k\to\infty} a_{n_k} = \liminf_{n\to\infty} a_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(a)만 증명한다. $L := \limsup a_n = \inf_{k\geq 1}\{\sup_{n\geq k} a_n\}$.</p>
+        <p>LEM 3.37에 의해 $K_1 \in \mathbb{N}$이 존재하여 $\sup_{n \geq K_1}\{a_n\} &lt; L + 1$. 다시 LEM 3.37로 $n_1 \geq K_1$이 존재하여 $\sup_{n \geq K_1}\{a_n\} - 1 \leq a_{n_1}$. 따라서</p>
+        <div class="math-display">$$L - 1 \leq a_{n_1} \leq L + 1.$$</div>
+        <p>유사하게 $\tilde K_2 \in \mathbb{N}$이 존재하여 $\sup_{n \geq \tilde K_2}\{a_n\} &lt; L + 1/2$. $K_2 := \max\{\tilde K_2, n_1\} + 1$로 놓으면 $\sup_{n \geq K_2}\{a_n\} \leq \sup_{n \geq \tilde K_2}\{a_n\} &lt; L + 1/2$이고 $K_2 &gt; n_1$. LEM 3.37로 $n_2 \geq K_2$가 존재하여 $\sup_{n \geq K_2}\{a_n\} - 1/2 \leq a_{n_2}$. 즉</p>
+        <div class="math-display">$$L - \frac{1}{2} \leq a_{n_2} \leq L + \frac{1}{2}, \quad n_2 &gt; n_1.$$</div>
+        <p>귀납적으로 $n_1 &lt; n_2 &lt; \cdots$가 존재하여 모든 $k$에 대해 $|a_{n_k} - L| \leq 1/k$. $1/k \to 0$이므로 $\lim a_{n_k} = L$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{a_n\}$ be in $\mathbb{R}$. <strong>(a)</strong> If $\limsup a_n \in \mathbb{R}$, $\exists$ subsequence $a_{n_k}$ with $\lim a_{n_k} = \limsup a_n$. <strong>(b)</strong> Similarly for $\liminf$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Set $L = \limsup a_n$. By LEM 3.37, pick $K_1$ with $\sup_{n \geq K_1} a_n &lt; L + 1$, then $n_1 \geq K_1$ with $\sup_{n \geq K_1} a_n - 1 \leq a_{n_1}$, giving $L - 1 \leq a_{n_1} \leq L + 1$.</p>
+        <p>Choose $\tilde K_2$ with $\sup_{n \geq \tilde K_2} a_n &lt; L + 1/2$; set $K_2 = \max\{\tilde K_2, n_1\} + 1$. Pick $n_2 \geq K_2$ (so $n_2 &gt; n_1$) with $|a_{n_2} - L| \leq 1/2$. Inductively, $n_1 &lt; n_2 &lt; \cdots$ with $|a_{n_k} - L| \leq 1/k$, so $\lim a_{n_k} = L$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 3.40 -->
+<div class="card thm-card" id="c340">
+  <div class="card-head">
+    <span class="thm-num">COR 3.40</span>
+    <span class="thm-title">수렴이면 상극한 = 하극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}$ 안의 수열이고 수렴하면 $\limsup_{n\to\infty} a_n = \liminf_{n\to\infty} a_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$a := \lim a_n$으로 놓자. 모든 부분수열은 $a$에 수렴한다. THM 3.4(c)에 의해 $\{a_n\}$은 유계이므로 $-M \leq a_n \leq M$인 $M &gt; 0$이 존재. 따라서</p>
+        <div class="math-display">$$-M \leq \limsup a_n \leq M, \quad -M \leq \liminf a_n \leq M.$$</div>
+        <p>THM 3.39로 부분수열 $\{a_{n_k}\}$, $\{a_{\tilde n_k}\}$가 존재하여 $\lim a_{n_k} = \limsup a_n$, $\lim a_{\tilde n_k} = \liminf a_n$. 모든 부분수열이 $a$에 수렴하므로</p>
+        <div class="math-display">$$\limsup a_n = a = \liminf a_n.$$</div>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\{a_n\}$ in $\mathbb{R}$ converges, then $\limsup a_n = \liminf a_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Put $a = \lim a_n$. Every subsequence converges to $a$. By THM 3.4(c), $\{a_n\}$ is bounded in $[-M, M]$, hence so are $\limsup, \liminf$. By THM 3.39, a subsequence achieves $\limsup$ (and another $\liminf$); both limits equal $a$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 3.43 -->
+<div class="card def-card" id="d343">
+  <div class="card-head">
+    <span class="def-num">DEF 3.43</span>
+    <span class="def-title">단조 수열 <em>Monotonic Sequence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}$ 안의 수열 $\{a_n\}$이 다음을 만족하면:</p>
+        <p><strong>(1)</strong> 모든 $n \in \mathbb{N}$에 대해 $a_n \leq a_{n+1}$ &rarr; <strong>단조증가</strong>(monotonic increasing)</p>
+        <p><strong>(2)</strong> 모든 $n \in \mathbb{N}$에 대해 $a_n \geq a_{n+1}$ &rarr; <strong>단조감소</strong>(monotonic decreasing)</p>
+        <p><strong>(3)</strong> $\{a_n\}$이 단조증가 또는 단조감소 &rarr; <strong>단조</strong>(monotonic)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>A sequence $\{a_n\}$ in $\mathbb{R}$ is <strong>monotonic increasing</strong> if $a_n \leq a_{n+1}$ for all $n$; <strong>monotonic decreasing</strong> if $a_n \geq a_{n+1}$ for all $n$; <strong>monotonic</strong> if either holds.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>급수 · Series</h2></div>
+
+<!-- Def 3.45 -->
+<div class="card def-card" id="d345">
+  <div class="card-head">
+    <span class="def-num">DEF 3.45</span>
+    <span class="def-title">부분합과 급수 <em>Partial Sums and Series</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$k \in \mathbb{N}$이고 $\{a_n\}$이 $\mathbb{R}^k$ 안의 수열이라 하자. 양의 정수 $n \leq m$에 대해</p>
+        <div class="math-display">$$\sum_{k=n}^m a_k := a_n + a_{n+1} + \cdots + a_m, \quad s_n := a_1 + a_2 + \cdots + a_n.$$</div>
+        <p>수열 $\{s_n\}$을 <strong>부분합</strong>(partial sums)이라 한다.</p>
+        <p>• $s_n$이 $s \in \mathbb{R}^k$로 수렴하면 $\sum_{n=1}^\infty a_n = s$로 쓰고, 급수 $\sum_{n=1}^\infty a_n$이 $s$로 <strong>수렴</strong>한다고 한다.</p>
+        <p>• 급수 $\sum_{n=1}^\infty |a_n|$이 수렴하면 $\sum_{n=1}^\infty a_n$이 <strong>절대수렴</strong>(absolutely converges)한다고 한다.</p>
+        <p>• $k \in \mathbb{N}$에 대해, $n \to \infty$일 때 $\tilde s_n := s_{k+n} - s_k$가 $s$로 수렴하면 $\sum_{i=k+1}^\infty a_n = s$로 쓴다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>For $\{a_n\}$ in $\mathbb{R}^k$, $\sum_{k=n}^m a_k := a_n + \cdots + a_m$ and partial sums $s_n := a_1 + \cdots + a_n$. If $s_n \to s$, write $\sum_{n=1}^\infty a_n = s$; the series <strong>converges</strong>. If $\sum |a_n|$ converges, $\sum a_n$ <strong>absolutely converges</strong>. For $k \in \mathbb{N}$, $\sum_{i=k+1}^\infty a_n = s$ iff $\tilde s_n := s_{k+n} - s_k \to s$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.47 -->
+<div class="card thm-card" id="t347">
+  <div class="card-head">
+    <span class="thm-num">THM 3.47</span>
+    <span class="thm-title">급수의 코시 판정법 <em>Cauchy Criterion</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}^k$ 안의 수열이라 하자. 급수 $\sum_{n=1}^\infty a_n$이 수렴할 필요충분조건은 임의의 $\varepsilon &gt; 0$에 대해 양의 정수 $N$이 존재하여 모든 $m \geq n \geq N$에 대해</p>
+        <div class="math-display">$$\left| \sum_{k=n}^m a_k \right| &lt; \varepsilon.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>급수의 수렴 정의에 의해 $\sum a_n$이 수렴 $\iff$ 부분합 $\{s_n\}$이 수렴. $\mathbb{R}^k$가 완비(COR 3.30)이므로 $\{s_n\}$이 수렴 $\iff$ $\{s_n\}$이 $\mathbb{R}^k$ 안의 코시 수열.</p>
+        <p>$\{s_n\}$이 코시일 조건은 임의의 $\varepsilon &gt; 0$에 대해 $N$이 존재하여 모든 $m \geq n \geq N$에 대해 $|s_m - s_{n-1}| &lt; \varepsilon$이며, 이는 $\left|\sum_{k=n}^m a_k\right| &lt; \varepsilon$과 동치.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$\sum a_n$ converges iff for every $\varepsilon &gt; 0$ $\exists N$ such that $\left| \sum_{k=n}^m a_k \right| &lt; \varepsilon$ for all $m \geq n \geq N$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$\sum a_n$ converges iff $\{s_n\}$ converges iff $\{s_n\}$ is Cauchy (since $\mathbb{R}^k$ complete by COR 3.30). Cauchy $\iff$ $\left|\sum_{k=n}^m a_k\right| &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 3.49 -->
+<div class="card thm-card" id="c349">
+  <div class="card-head">
+    <span class="thm-num">COR 3.49</span>
+    <span class="thm-title">절대수렴 ⇒ 수렴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}^k$ 안의 수열이고 $\sum_{n=1}^\infty a_n$이 절대수렴하면 $\sum_{n=1}^\infty a_n$이 수렴한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\sum |a_n|$이 수렴이므로 THM 3.47에 의해 임의의 $\varepsilon &gt; 0$에 대해 $N$이 존재하여 $m \geq n \geq N$에서 $\sum_{k=n}^m |a_k| &lt; \varepsilon$. 삼각부등식에 의해</p>
+        <div class="math-display">$$\left| \sum_{k=n}^m a_k \right| \leq \sum_{k=n}^m |a_k| &lt; \varepsilon.$$</div>
+        <p>다시 THM 3.47에 의해 $\sum a_n$이 수렴.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\sum a_n$ absolutely converges, it converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>By THM 3.47 applied to $\sum |a_n|$, $\sum_{k=n}^m |a_k| &lt; \varepsilon$. Triangle inequality: $|\sum_{k=n}^m a_k| \leq \sum |a_k| &lt; \varepsilon$. Apply THM 3.47 again. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 3.51 -->
+<div class="card def-card" id="d351">
+  <div class="card-head">
+    <span class="def-num">DEF 3.51</span>
+    <span class="def-title">재배열 <em>Rearrangement</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}^k$ 안의 수열, $\{k_n\}$이 $\mathbb{N}$ 안의 수열이고 사상 $k_n : \mathbb{N} \to \mathbb{N}$이 1-1 대응이라 하자. $a'_n := a_{k_n}$으로 놓으면 급수 $\sum_{n=1}^\infty a'_n$을 $\sum_{n=1}^\infty a_n$의 <strong>재배열</strong>(rearrangement)이라 한다.</p>
+        <p>직관적으로 재배열은 항 $a_n$들의 순서를 바꾸는 합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $\{a_n\}$ be a sequence in $\mathbb{R}^k$ and $\{k_n\}$ a sequence in $\mathbb{N}$ with $k_n : \mathbb{N} \to \mathbb{N}$ bijective. Put $a'_n := a_{k_n}$. The series $\sum a'_n$ is a <strong>rearrangement</strong> of $\sum a_n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 3.52 -->
+<div class="card thm-card" id="t352">
+  <div class="card-head">
+    <span class="thm-num">THM 3.52</span>
+    <span class="thm-title">절대수렴의 재배열은 같은 합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}^k$ 안의 수열이고 $s \in \mathbb{R}^k$라 하자. $\sum_{n=1}^\infty a_n$이 절대수렴하고 $\sum_{n=1}^\infty a_n = s$이면, $\sum a_n$의 모든 재배열 $\sum_{n=1}^\infty a'_n$ 또한 $s$로 수렴한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\sum a'_n$을 재배열이라 하고 $\{k_n\}$이 1-1 대응이라 하자. $\varepsilon &gt; 0$을 주자. $\sum a_n$이 절대수렴하므로 $N \in \mathbb{N}$이 존재하여</p>
+        <div class="math-display">$$\left| \sum_{n=1}^N a_n - s \right| = \left| \sum_{n=N+1}^\infty a_n \right| \leq \sum_{n=N+1}^\infty |a_n| &lt; \varepsilon.$$</div>
+        <p>$k_n$이 전단사이므로 $k_{n_1} = 1, k_{n_2} = 2, \ldots, k_{n_N} = N$인 서로 다른 $n_1, \ldots, n_N$이 존재. $M := \max\{n_1, \ldots, n_N\}$로 놓으면 $\{a_1, \ldots, a_N\} = \{a'_{n_1}, \ldots, a'_{n_N}\} \subset \{a'_1, \ldots, a'_M\}$.</p>
+        <p>모든 $k \geq M$에 대해</p>
+        <div class="math-display">$$\left| \sum_{n=1}^k a'_n - s \right| = \left| \sum_{n=1}^k a'_n - \sum_{n=1}^\infty a_n \right| \leq \sum_{n=N+1}^\infty |a_n| &lt; \varepsilon.$$</div>
+        <p>(항 $a_1,\ldots,a_N$은 양쪽에서 상쇄; 남는 항은 모두 $|a_n|$ ($n \geq N+1$)으로 bound됨.)</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\sum a_n$ absolutely converges to $s$, then every rearrangement $\sum a'_n$ also converges to $s$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Given $\varepsilon &gt; 0$, pick $N$ with $|\sum_{n=1}^N a_n - s| \leq \sum_{n=N+1}^\infty |a_n| &lt; \varepsilon$. Since $k_n$ is bijective, there are $n_1,\ldots,n_N$ with $k_{n_i}=i$. Set $M = \max n_i$. For $k \geq M$, $\{a_1,\ldots,a_N\} \subset \{a'_1,\ldots,a'_M\}$, so $|\sum_{n=1}^k a'_n - s| \leq \sum_{n=N+1}^\infty |a_n| &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rem 3.53 -->
+<div class="card rem-card" id="r353">
+  <div class="card-head">
+    <span class="rem-num">REM 3.53</span>
+    <span class="rem-title">조건수렴의 재배열은 다를 수 있다</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유한합에서는 항의 순서가 중요하지 않지만, 무한합(급수)에서는 중요할 수 있다. 예를 들어</p>
+        <div class="math-display">$$1 - \frac{1}{2} + \frac{1}{2} - \frac{1}{3} + \frac{1}{3} - \cdots = 1$$</div>
+        <p>이지만 홀수 항을 먼저 모으면</p>
+        <div class="math-display">$$1 + \frac{1}{2} + \frac{1}{3} + \cdots = \infty.$$</div>
+        <p>THM 3.52에 의해 $\sum a_n$이 <strong>절대수렴</strong>하는 경우에는 항의 순서를 자유롭게 바꿔도 합이 같다. 특히 모든 $a_n$이 비음수이면 재배열이 자유롭다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Orders of finite summation don't matter, but orders of infinite summation can: $1 - 1/2 + 1/2 - 1/3 + 1/3 - \cdots = 1$, but collecting odd terms first gives $1 + 1/2 + 1/3 + \cdots = \infty$. THM 3.52 says one can reorder freely if $\sum a_n$ absolutely converges; in particular for non-negative terms.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: end of content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="index.html">홈</a>
+    <a href="ch1.html">Ch1 개념</a>
+    <a href="ch1-ex.html">Ch1 예제</a>
+    <a href="ch2.html">Ch2 개념</a>
+    <a href="ch2-ex.html">Ch2 예제</a>
+    <a href="ch3.html">Ch3 개념</a>
+    <a href="ch3-ex.html">Ch3 예제</a>
+    <a href="ch4.html">Ch4 개념</a>
+    <a href="ch4-ex.html">Ch4 예제</a>
+    <a href="about.html">소개 About</a>
+    <a href="privacy.html">개인정보처리방침 Privacy</a>
+    <a href="disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script>
+function toggleLang() {
+  const showKo = document.getElementById('toggle-ko').checked;
+  const showEn = document.getElementById('toggle-en').checked;
+  document.body.classList.toggle('hide-ko', !showKo);
+  document.body.classList.toggle('hide-en', !showEn);
+}
+
+function toggleProof(btn) {
+  btn.classList.toggle('open');
+  const arrow = btn.querySelector('.arrow');
+  const isEn = btn.closest('.en-panel') !== null;
+  let content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  const isVisible = content.classList.contains('visible');
+
+  btn.innerHTML = '';
+  btn.appendChild(arrow);
+  if (isEn) {
+    btn.append(' ' + (isVisible ? 'Hide Proof' : 'Proof (English)'));
+  } else {
+    btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
+  }
+}
+</script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+});
+</script>
+</body>
+</html>

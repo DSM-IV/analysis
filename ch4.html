@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해석학 I Ch.4 — 한·영 대조 개념 정리 | Continuity Bilingual Study Guide</title>
+<meta name="description" content="해석학(Real Analysis) Chapter 4 핵심 개념을 한국어·영어 대조로 정리한 학습 가이드. 함수의 극한, 연속성, 콤팩트에서의 연속, 극값 정리, 균등연속을 증명과 함께 다룹니다.">
+<meta name="keywords" content="해석학, Real Analysis, 수학, mathematics, Rudin, 연속, continuity, 함수 극한, limit, 균등연속, uniform continuity, 극값 정리, extreme value, 증명, proof">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dsm-iv.github.io/analysis/ch4.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="해석학 I Ch.4 — 한·영 대조 개념 정리">
+<meta property="og:description" content="Real Analysis Chapter 4 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://dsm-iv.github.io/analysis/ch4.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "해석학 I Ch.4 한·영 대조 개념 정리 — Continuity",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Real Analysis Chapter 4 핵심 개념을 한국어·영어 대조로 정리한 교육용 학습 가이드. Definitions 4.1–4.36.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://dsm-iv.github.io/analysis/ch4.html",
+  "datePublished": "2026-04-16",
+  "dateModified": "2026-04-16",
+  "mainEntityOfPage": "https://dsm-iv.github.io/analysis/ch4.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffef9;
+    --ink: #1a1612;
+    --ink-soft: #3d3528;
+    --ink-faint: #7a6e60;
+    --rule: #d4cabb;
+    --rule-light: #e8e2d6;
+    --accent: #8b3a1c;
+    --accent-soft: #c4623a;
+    --accent-pale: #f5ede7;
+    --def-bg: #f7f3ee;
+    --thm-bg: #f0ede8;
+    --thm-border: #9b4e2a;
+    --tag-bg: #1a1612;
+    --tag-fg: #faf8f4;
+    --en-bg: #f0f4f8;
+    --en-border: #4a6fa5;
+    --en-accent: #2c4a7c;
+    --en-pale: #e8eef5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', 'Libre Baskerville', Georgia, serif;
+    line-height: 1.85;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px);
+  }
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: .9rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 span {
+    display: block;
+    font-size: .65em;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,.55);
+    margin-top: .35rem;
+  }
+  header .chapter-tag {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: .28rem .9rem;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 2px;
+    font-size: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .12em;
+    color: rgba(250,248,244,.65);
+    position: relative;
+  }
+  .lang-badge {
+    display: inline-flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  .lang-badge span {
+    padding: .2rem .6rem;
+    border-radius: 2px;
+    font-size: .7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .08em;
+  }
+  .lang-badge .ko { background: rgba(139,58,28,.7); color: #fff; }
+  .lang-badge .en { background: rgba(44,74,124,.7); color: #fff; }
+
+  .lang-toggle-bar {
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+    padding: .7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-toggle-bar label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+  .lang-toggle-bar input[type=checkbox] { accent-color: var(--en-border); cursor: pointer; }
+  .lang-toggle-bar .sep { color: var(--rule); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  .section-title {
+    margin: 3.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title h2 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.09); }
+
+  .def-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--def-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .def-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .def-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .def-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  .thm-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--thm-bg);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .thm-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .thm-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .rem-card .card-head,
+  .exam-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem 1.2rem .6rem;
+    background: var(--en-pale);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .rem-num, .exam-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .18rem .55rem;
+    background: var(--en-accent);
+    color: #fff;
+    border-radius: 2px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .rem-title, .exam-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--en-accent);
+  }
+  .rem-title em, .exam-title em { font-style: italic; color: var(--ink-soft); font-weight: 400; font-size: .88rem; }
+
+  .card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .ko-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    border-right: 1px solid var(--rule-light);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .en-panel {
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: #fcfdff;
+    transition: opacity .2s;
+    min-width: 0;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  }
+
+  body.hide-en .en-panel { display: none; }
+  body.hide-en .card-body { grid-template-columns: 1fr; }
+  body.hide-ko .ko-panel { display: none; }
+  body.hide-ko .card-body { grid-template-columns: 1fr; }
+
+  .panel-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .14rem .45rem;
+    border-radius: 2px;
+    margin-bottom: .7rem;
+  }
+  .panel-label.ko-label { background: rgba(139,58,28,.12); color: var(--accent); }
+  .panel-label.en-label { background: rgba(44,74,124,.12); color: var(--en-accent); }
+
+  .formal {
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .94rem;
+  }
+  .formal p { margin-bottom: .4rem; }
+  .formal p:last-child { margin-bottom: 0; }
+
+  .en-formal {
+    background: var(--en-pale);
+    border-left: 3px solid var(--en-border);
+    border-radius: 0 2px 2px 0;
+    padding: .85rem 1.1rem;
+    margin: .5rem 0 .7rem;
+    font-size: .91rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .en-formal p { margin-bottom: .4rem; }
+  .en-formal p:last-child { margin-bottom: 0; }
+
+  .math-display {
+    text-align: center;
+    padding: .65rem .5rem;
+    margin: .5rem 0;
+    overflow-x: auto;
+    font-size: 1.02rem;
+    max-width: 100%;
+  }
+
+  .proof-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    padding: .22rem .6rem;
+    border-radius: 2px;
+    background: none;
+    margin-top: .55rem;
+    transition: all .15s;
+  }
+  .proof-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .proof-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .proof-toggle.open .arrow { transform: rotate(90deg); }
+  .proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #f5f2ec;
+    border-left: 2px solid var(--rule);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .proof-content.visible { display: block; }
+  .proof-content p { margin-bottom: .5rem; }
+  .qed { text-align: right; font-size: 1.1rem; color: var(--ink-faint); margin-top: .4rem; }
+
+  .en-proof-content {
+    display: none;
+    margin-top: .75rem;
+    padding: .85rem 1rem;
+    background: #edf1f7;
+    border-left: 2px solid #a3b8d4;
+    font-size: .86rem;
+    color: #3a4e65;
+    line-height: 1.8;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: auto;
+  }
+  .en-proof-content.visible { display: block; }
+  .en-proof-content p { margin-bottom: .5rem; }
+
+  .toc {
+    background: var(--def-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 3px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: .72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: .9rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem .5rem;
+  }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc ol li a {
+    font-size: .83rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+    transition: color .15s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+  .toc ol li a .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .67rem;
+    color: var(--ink-faint);
+    min-width: 3.2rem;
+  }
+
+  p { margin-bottom: .5rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+  .en-panel strong { color: var(--en-accent); }
+
+  .site-nav {
+    background: var(--ink);
+    padding: .6rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-nav a { color: #ccc; text-decoration: none; letter-spacing: .05em; transition: color .15s; white-space: nowrap; }
+  .site-nav a:hover { color: #fff; }
+  .site-nav a.active { color: var(--accent-soft); }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: auto;
+    padding: .5rem 1rem; background: var(--accent); color: #fff;
+    font-size: .85rem; z-index: 1000; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  .site-footer {
+    background: var(--ink);
+    color: #aaa;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: 3rem;
+  }
+  .site-footer a { color: #ccc; text-decoration: none; margin: 0 .8rem; transition: color .15s; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer .footer-copy { margin-top: 1rem; font-size: .72rem; color: #666; }
+  .site-footer .footer-desc { margin-top: .5rem; font-size: .7rem; color: #555; }
+
+  @media (max-width: 600px) {
+    .ko-panel, .en-panel { padding: .85rem .95rem .95rem; }
+    header { padding: 2.5rem 1.2rem 2.2rem; }
+    .site-nav { gap: 1rem; font-size: .68rem; flex-wrap: wrap; }
+  }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s, transform .2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scroll-top.visible { opacity: .85; visibility: visible; }
+  .scroll-top:hover { opacity: 1; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="index.html">홈</a>
+  <a href="ch1.html">Ch1 개념</a>
+  <a href="ch1-ex.html">Ch1 예제</a>
+  <a href="ch2.html">Ch2 개념</a>
+  <a href="ch2-ex.html">Ch2 예제</a>
+  <a href="ch3.html">Ch3 개념</a>
+  <a href="ch3-ex.html">Ch3 예제</a>
+  <a class="active" href="ch4.html">Ch4 개념</a>
+  <a href="ch4-ex.html">Ch4 예제</a>
+</nav>
+
+<header>
+  <p class="subtitle">Real Analysis · Chapter 4</p>
+  <h1>해석학 I 한·영 대조 개념 정리<span>Continuity — Bilingual Study Guide</span></h1>
+  <span class="chapter-tag">Definitions 4.1 – 4.36</span>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 요약 &nbsp;·&nbsp; 오른쪽: 원문 (Rudin 기반 강의노트)</span>
+</div>
+
+<main id="main-content" role="main">
+
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Contents</h3>
+  <ol>
+    <li><a href="#d41"><span class="toc-num">Def 4.1</span>함수의 극한</a></li>
+    <li><a href="#t42"><span class="toc-num">Thm 4.2</span>수열에 의한 극한</a></li>
+    <li><a href="#c46"><span class="toc-num">Cor 4.6</span>극한의 유일성</a></li>
+    <li><a href="#d47"><span class="toc-num">Def 4.7</span>연속</a></li>
+    <li><a href="#t48"><span class="toc-num">Thm 4.8</span>연속과 극한</a></li>
+    <li><a href="#c410"><span class="toc-num">Cor 4.10</span>수열에 의한 연속</a></li>
+    <li><a href="#t412"><span class="toc-num">Thm 4.12</span>합성함수의 연속성</a></li>
+    <li><a href="#t413"><span class="toc-num">Thm 4.13</span>열린집합 역상의 연속</a></li>
+    <li><a href="#c414"><span class="toc-num">Cor 4.14</span>닫힌집합 역상</a></li>
+    <li><a href="#d415"><span class="toc-num">Def 4.15</span>유계 사상</a></li>
+    <li><a href="#t417"><span class="toc-num">Thm 4.17</span>콤팩트의 연속상</a></li>
+    <li><a href="#c418"><span class="toc-num">Cor 4.18</span>콤팩트에서 연속은 유계</a></li>
+    <li><a href="#d420"><span class="toc-num">Def 4.20</span>무한 극한</a></li>
+    <li><a href="#l421"><span class="toc-num">Lem 4.21</span>sup/inf 근접 수열</a></li>
+    <li><a href="#l422"><span class="toc-num">Lem 4.22</span>$a_n \leq M$과 극한</a></li>
+    <li><a href="#l425"><span class="toc-num">Lem 4.25</span>$\sup E, \inf E \in \overline{E}$</a></li>
+    <li><a href="#t427"><span class="toc-num">Thm 4.27</span>극값 정리 <em>EVT</em></a></li>
+    <li><a href="#c430"><span class="toc-num">Cor 4.30</span>콤팩트에서 최대·최소</a></li>
+    <li><a href="#t432"><span class="toc-num">Thm 4.32</span>연속 역함수 정리</a></li>
+    <li><a href="#d433"><span class="toc-num">Def 4.33</span>균등연속</a></li>
+    <li><a href="#r434"><span class="toc-num">Rem 4.34</span>연속 vs 균등연속</a></li>
+    <li><a href="#e435"><span class="toc-num">Exam 4.35</span>지수·로그 함수</a></li>
+  </ol>
+</nav>
+
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>함수의 극한 · Limits of Functions</h2></div>
+
+<!-- Def 4.1 -->
+<div class="card def-card" id="d41">
+  <div class="card-head">
+    <span class="def-num">DEF 4.1</span>
+    <span class="def-title">함수의 극한 <em>Limit of a Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X)$와 $(Y, d_Y)$가 거리 공간이라 하자. $E \subset X$, $f: E \to Y$가 사상이고 $p$가 $E$의 극한점이라 하자. $x \to p$일 때 $f$가 극한 $q$를 가진다는 것은 ($f(x) \to q$ 또는 $\lim_{x \to p} f(x) = q$로 표기) 어떤 $q \in Y$가 존재하여 임의의 $\varepsilon &gt; 0$에 대해 $\delta &gt; 0$이 존재하고 $x \in E$가</p>
+        <div class="math-display">$$0 &lt; d_X(x, p) &lt; \delta$$</div>
+        <p>를 만족하면 $d_Y(f(x), q) &lt; \varepsilon$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, $E \subset X$, $f: E \to Y$, and $p$ a limit point of $E$. We say $f$ has limit $q$ at $p$ (and write $\lim_{x \to p} f(x) = q$) if there is $q \in Y$ such that for every $\varepsilon &gt; 0$ there exists $\delta &gt; 0$ with $d_Y(f(x), q) &lt; \varepsilon$ for all $x \in E$ satisfying $0 &lt; d_X(x, p) &lt; \delta$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.2 -->
+<div class="card thm-card" id="t42">
+  <div class="card-head">
+    <span class="thm-num">THM 4.2</span>
+    <span class="thm-title">수열에 의한 함수 극한의 특성화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $E \subset X$, $f: E \to Y$, $p$가 $E$의 극한점이라 하자.</p>
+        <div class="math-display">$$\lim_{x \to p} f(x) = q$$</div>
+        <p>일 필요충분조건은 $p_n \neq p$이고 $\lim_{n \to \infty} p_n = p$인 $E$ 안의 모든 수열 $\{p_n\}$에 대해 $\lim_{n \to \infty} f(p_n) = q$인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>($\Rightarrow$)</strong> $\{p_n\}$이 $p_n \neq p$, $\lim p_n = p$를 만족한다 하자. $\varepsilon &gt; 0$을 주자. $\lim_{x \to p} f(x) = q$이므로 $\delta &gt; 0$이 존재하여 $x \in E$, $0 &lt; d_X(x, p) &lt; \delta$이면 $d_Y(f(x), q) &lt; \varepsilon$.</p>
+        <p>$\lim p_n = p$이므로 $N \in \mathbb{N}$이 존재하여 $n \geq N$이면 $d_X(p_n, p) &lt; \delta$. $p_n \neq p$이므로 $0 &lt; d_X(p_n, p) &lt; \delta$. 따라서 $d_Y(f(p_n), q) &lt; \varepsilon$. $\lim f(p_n) = q$.</p>
+        <p><strong>($\Leftarrow$)</strong> 귀류법. $\lim_{x \to p} f(x) \neq q$라 하자. 그러면 $\varepsilon_0 &gt; 0$이 존재하여 모든 $\delta &gt; 0$에 대해 $p_\delta \in X$가 존재하여 $d_Y(f(p_\delta), q) \geq \varepsilon_0$이고 $0 &lt; d_X(p_\delta, p) &lt; \delta$.</p>
+        <p>특히 $n \in \mathbb{N}$에 대해 $\delta = 1/n$을 취하면 $p_n \in E$가 존재하여 $d_Y(f(p_n), q) \geq \varepsilon_0$, $0 &lt; d_X(p_n, p) &lt; 1/n$.</p>
+        <p>$0 &lt; d_X(p_n, p)$이므로 $p_n \neq p$. EX 3.17에 의해 $\lim p_n = p$. 그러나 $f(p_n)$은 $q$로 수렴하지 않는다 ($d_Y(f(p_n), q) \geq \varepsilon_0$). 이는 가정에 모순.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $(X,d_X), (Y,d_Y)$ be metric spaces, $E \subset X$, $f: E \to Y$, $p$ a limit point. Then $\lim_{x \to p} f(x) = q$ iff $\lim f(p_n) = q$ for every sequence $\{p_n\}$ in $E$ with $p_n \neq p$ and $\lim p_n = p$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p><strong>($\Rightarrow$)</strong> Given $\varepsilon &gt; 0$, find $\delta$; then $N$ with $d_X(p_n, p) &lt; \delta$ (and $\neq 0$) for $n \geq N$, yielding $d_Y(f(p_n), q) &lt; \varepsilon$.</p>
+        <p><strong>($\Leftarrow$)</strong> Contrapositive: if $\lim_{x \to p} f \neq q$, find $\varepsilon_0$ and $p_n$ with $0 &lt; d_X(p_n, p) &lt; 1/n$ but $d_Y(f(p_n), q) \geq \varepsilon_0$. Then $p_n \to p$ by EX 3.17, $p_n \neq p$, but $f(p_n) \not\to q$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 4.6 -->
+<div class="card thm-card" id="c46">
+  <div class="card-head">
+    <span class="thm-num">COR 4.6</span>
+    <span class="thm-title">함수 극한의 유일성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $E \subset X$, $f: E \to Y$, $p$가 $E$의 극한점이라 하자. $\lim_{x \to p} f(x) = q_1$이고 $\lim_{x \to p} f(x) = q_2$이면 $q_1 = q_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$p$가 극한점이므로 THM 3.6에 의해 $E$ 안의 수열 $\{p_n\}$이 존재하여 $p_n \neq p$, $\lim p_n = p$. (더 정확하게는 수열을 $p_n \neq p$로 선택할 수 있다.)</p>
+        <p>THM 4.2에 의해 $\lim f(p_n) = q_1$이고 $\lim f(p_n) = q_2$. THM 3.4(b) (수열 극한의 유일성)에 의해 $q_1 = q_2$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\lim_{x \to p} f(x) = q_1$ and $= q_2$, then $q_1 = q_2$. The limit at $p$ is unique.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Take $p_n \in E$, $p_n \neq p$, $p_n \to p$ (THM 3.6). By THM 4.2, $f(p_n) \to q_1$ and $\to q_2$; by THM 3.4(b), $q_1 = q_2$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연속 · Continuity</h2></div>
+
+<!-- Def 4.7 -->
+<div class="card def-card" id="d47">
+  <div class="card-head">
+    <span class="def-num">DEF 4.7</span>
+    <span class="def-title">연속 <em>Continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $E \subset X$, $f: E \to Y$, $p \in E$라 하자. $f$가 $p$에서 <strong>연속</strong>(continuous)이라는 것은 임의의 $\varepsilon &gt; 0$에 대해 $\delta &gt; 0$이 존재하여 모든 $x \in E$에 대해 $d_X(x, p) &lt; \delta$이면 $d_Y(f(x), f(p)) &lt; \varepsilon$인 것이다.</p>
+        <p>$f$가 $E$의 모든 점에서 연속이면 $f$가 $E$에서 연속이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f$ is <strong>continuous at $p \in E$</strong> if for every $\varepsilon &gt; 0$ there exists $\delta &gt; 0$ such that $d_Y(f(x), f(p)) &lt; \varepsilon$ for all $x \in E$ with $d_X(x, p) &lt; \delta$. $f$ is continuous on $E$ if continuous at every $p \in E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.8 -->
+<div class="card thm-card" id="t48">
+  <div class="card-head">
+    <span class="thm-num">THM 4.8</span>
+    <span class="thm-title">극한점에서 연속 ⟺ 극한 = 함숫값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $E \subset X$, $f: E \to Y$, $p$가 $E$의 극한점이라 하자. 그러면 $f$가 $p$에서 연속일 필요충분조건은 $\lim_{x \to p} f(x) = f(p)$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $p$ is a limit point of $E$, then $f$ continuous at $p$ iff $\lim_{x \to p} f(x) = f(p)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 4.10 -->
+<div class="card thm-card" id="c410">
+  <div class="card-head">
+    <span class="thm-num">COR 4.10</span>
+    <span class="thm-title">수열에 의한 연속 특성화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$p$가 $E$의 극한점이라 하자. 그러면 $f$가 $p$에서 연속일 필요충분조건은 $\lim p_n = p$인 $E$ 안의 모든 수열 $\{p_n\}$에 대해 $\lim f(p_n) = f(p)$인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>THM 4.8에 의해 $f$가 $p$에서 연속 $\iff$ $\lim_{x\to p} f(x) = f(p)$. THM 4.2에 의해 이는 $p_n \neq p$, $\lim p_n = p$인 모든 $\{p_n\}$에 대해 $\lim f(p_n) = f(p)$와 동치.</p>
+        <p>$p_n = p$이면 $f(p_n) = f(p)$이므로 $f(p_n) \to f(p)$는 자동. 따라서 조건은 "모든 $\{p_n\}$ ($p_n \to p$)에 대해 $f(p_n) \to f(p)$"와 동치. ($p_n \neq p$ 조건 제거 가능.)</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $p$ is a limit point of $E$, $f$ continuous at $p$ iff $\lim f(p_n) = f(p)$ for every sequence $\{p_n\}$ in $E$ with $\lim p_n = p$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>THM 4.8 + THM 4.2 give the version with $p_n \neq p$. If $p_n = p$ then $f(p_n) = f(p)$ trivially, so the constraint is removable. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.12 -->
+<div class="card thm-card" id="t412">
+  <div class="card-head">
+    <span class="thm-num">THM 4.12</span>
+    <span class="thm-title">합성함수의 연속성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y), (Z, d_Z)$가 거리 공간, $E \subset X$, $p \in E$, $f: E \to Y$, $g: f(E) \to Z$라 하자. $h(x) := g(f(x))$ ($x \in E$)로 정의하자. $f$가 $p$에서 연속이고 $g$가 $f(p)$에서 연속이면 $h$는 $p$에서 연속이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon &gt; 0$을 주자. $g$가 $f(p)$에서 연속이므로 $\delta_0 &gt; 0$이 존재하여 모든 $y \in f(E)$에 대해 $d_Y(y, f(p)) &lt; \delta_0$이면 $d_Z(g(y), g(f(p))) &lt; \varepsilon$.</p>
+        <p>$f$가 $p$에서 연속이므로 $\delta &gt; 0$이 존재하여 모든 $x \in E$에 대해 $d_X(x, p) &lt; \delta$이면 $d_Y(f(x), f(p)) &lt; \delta_0$.</p>
+        <p>$x \in E$, $d_X(x, p) &lt; \delta$이면 $f(x) \in f(E)$이고 $d_Y(f(x), f(p)) &lt; \delta_0$, 따라서 $d_Z(h(x), h(p)) = d_Z(g(f(x)), g(f(p))) &lt; \varepsilon$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $f: E \to Y$, $g: f(E) \to Z$, $h = g \circ f$. If $f$ continuous at $p$ and $g$ continuous at $f(p)$, then $h$ continuous at $p$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Given $\varepsilon$, pick $\delta_0$ from $g$'s continuity, then $\delta$ from $f$'s so $d_Y(f(x), f(p)) &lt; \delta_0$. Then $d_Z(h(x), h(p)) &lt; \varepsilon$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.13 -->
+<div class="card thm-card" id="t413">
+  <div class="card-head">
+    <span class="thm-num">THM 4.13</span>
+    <span class="thm-title">연속 ⟺ 열린 집합의 역상이 열림</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $f: X \to Y$라 하자. $f$가 $X$에서 연속일 필요충분조건은 $Y$의 모든 열린 집합 $V$에 대해 $f^{-1}(V) := \{x \in X : f(x) \in V\}$가 $X$에서 열린 집합인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>($\Rightarrow$) $f$가 연속이라 하자. $V$가 $Y$에서 열림, $p \in f^{-1}(V)$라 하자. $f(p) \in V$이고 $V$가 열림이므로 $\varepsilon_0 &gt; 0$이 존재하여 $N_{\varepsilon_0}(f(p)) \subset V$.</p>
+        <p>$f$가 $p$에서 연속이므로 $\delta &gt; 0$이 존재하여 모든 $x \in X$, $d_X(x,p) &lt; \delta$이면 $d_Y(f(x), f(p)) &lt; \varepsilon_0$.</p>
+        <p>$N_\delta(p) \subset f^{-1}(V)$를 보인다. $z \in N_\delta(p)$이면 $d(z, p) &lt; \delta$, 즉 $f(z) \in N_{\varepsilon_0}(f(p)) \subset V$, 즉 $z \in f^{-1}(V)$. 따라서 $p$는 $f^{-1}(V)$의 내부점, 즉 $f^{-1}(V)$가 열림.</p>
+        <p>($\Leftarrow$) $p \in X$, $\varepsilon &gt; 0$을 주자. $N_\varepsilon(f(p))$은 THM 2.33에 의해 열림. 가정에 의해 $f^{-1}(N_\varepsilon(f(p)))$는 열림. $p \in f^{-1}(N_\varepsilon(f(p)))$ ($f(p) \in N_\varepsilon(f(p))$이므로)이므로 $\delta &gt; 0$이 존재하여 $N_\delta(p) \subset f^{-1}(N_\varepsilon(f(p)))$.</p>
+        <p>모든 $x$, $d_X(x, p) &lt; \delta$에 대해 $x \in N_\delta(p) \subset f^{-1}(N_\varepsilon(f(p)))$, 즉 $f(x) \in N_\varepsilon(f(p))$, 즉 $d_Y(f(x), f(p)) &lt; \varepsilon$. 따라서 $f$는 $p$에서 연속.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f: X \to Y$ is continuous on $X$ iff $f^{-1}(V)$ is open in $X$ for every open $V \subset Y$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>($\Rightarrow$) $f(p) \in V$ open gives $\varepsilon_0$; continuity gives $\delta$ with $f(N_\delta(p)) \subset N_{\varepsilon_0}(f(p)) \subset V$, so $N_\delta(p) \subset f^{-1}(V)$.</p>
+        <p>($\Leftarrow$) For $p \in X$, $\varepsilon &gt; 0$, apply to $N_\varepsilon(f(p))$ open; $f^{-1}(\cdot)$ open, contains $p$, so $\exists \delta$ giving continuity. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 4.14 -->
+<div class="card thm-card" id="c414">
+  <div class="card-head">
+    <span class="thm-num">COR 4.14</span>
+    <span class="thm-title">연속 ⟺ 닫힌 집합의 역상이 닫힘</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $f: X \to Y$라 하자. $f$가 $X$에서 연속일 필요충분조건은 $Y$의 모든 닫힌 집합 $C$에 대해 $f^{-1}(C)$가 $X$에서 닫힌 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>COR 2.41에 의해 $C$가 닫힘 $\iff$ $C^c$가 열림. 유사하게 $f^{-1}(C)$가 닫힘 $\iff$ $(f^{-1}(C))^c = f^{-1}(C^c)$가 열림.</p>
+        <p>따라서 $f^{-1}(C)$가 모든 닫힌 $C$에 대해 닫힘 $\iff$ $f^{-1}(C^c)$가 모든 $C$에 대해 열림 $\iff$ $f^{-1}(V)$가 모든 열린 $V$에 대해 열림 $\iff$ $f$ 연속 (THM 4.13).</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f$ continuous iff $f^{-1}(C)$ closed for every closed $C \subset Y$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Via complements: $(f^{-1}(C))^c = f^{-1}(C^c)$, open iff closed preimage condition equivalent to THM 4.13. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Def 4.15 -->
+<div class="card def-card" id="d415">
+  <div class="card-head">
+    <span class="def-num">DEF 4.15</span>
+    <span class="def-title">유계 사상 <em>Bounded Mapping</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X)$가 거리 공간, $E \subset X$, $k \in \mathbb{N}$이라 하자. $f: E \to \mathbb{R}^k$가 $E$에서 <strong>유계</strong>(bounded)라는 것은 양수 $M$이 존재하여</p>
+        <div class="math-display">$$|f(x)| \leq M \quad \forall x \in E$$</div>
+        <p>가 성립하는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f: E \to \mathbb{R}^k$ is <strong>bounded</strong> on $E$ if there is $M &gt; 0$ with $|f(x)| \leq M$ for all $x \in E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>콤팩트에서의 연속 · Continuity on Compact Sets</h2></div>
+
+<!-- Thm 4.17 -->
+<div class="card thm-card" id="t417">
+  <div class="card-head">
+    <span class="thm-num">THM 4.17</span>
+    <span class="thm-title">콤팩트 집합의 연속상은 콤팩트</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $f: X \to Y$라 하자. $f$가 $X$에서 연속이고 $X$가 콤팩트이면 $f(X)$는 콤팩트이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\{V_\alpha : \alpha \in A\}$를 $f(X)$의 열린 덮개라 하자. 유한 부분 덮개를 찾으면 된다.</p>
+        <p>$f$가 연속이므로 THM 4.13에 의해 각 $\alpha$에 대해 $f^{-1}(V_\alpha)$는 $X$에서 열림.</p>
+        <p>$f(X) \subset \bigcup_\alpha V_\alpha$이므로</p>
+        <div class="math-display">$$X = f^{-1}(f(X)) \subset f^{-1}\left(\bigcup_\alpha V_\alpha\right) = \bigcup_\alpha f^{-1}(V_\alpha).$$</div>
+        <p>$\{f^{-1}(V_\alpha)\}$는 $X$의 열린 덮개. $X$가 콤팩트이므로 유한 부분 덮개 $\{f^{-1}(V_{\alpha_1}), \ldots, f^{-1}(V_{\alpha_N})\}$이 존재하여 $X \subset \bigcup_{n=1}^N f^{-1}(V_{\alpha_n})$. 따라서</p>
+        <div class="math-display">$$f(X) \subset f\left(\bigcup_{n=1}^N f^{-1}(V_{\alpha_n})\right) = \bigcup_{n=1}^N f(f^{-1}(V_{\alpha_n})) \subset \bigcup_{n=1}^N V_{\alpha_n}.$$</div>
+        <p>$\{V_{\alpha_1}, \ldots, V_{\alpha_N}\}$이 유한 부분 덮개.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $f: X \to Y$ is continuous and $X$ compact, then $f(X)$ is compact.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\{V_\alpha\}$ cover $f(X)$. By THM 4.13, $\{f^{-1}(V_\alpha)\}$ covers $X$; compactness gives finite subcover $\{f^{-1}(V_{\alpha_i})\}$. Then $f(X) \subset \bigcup V_{\alpha_i}$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 4.18 -->
+<div class="card thm-card" id="c418">
+  <div class="card-head">
+    <span class="thm-num">COR 4.18</span>
+    <span class="thm-title">콤팩트에서의 연속 함수는 유계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d)$가 거리 공간, $k \in \mathbb{N}$, $f: X \to \mathbb{R}^k$가 연속이고 $X$가 콤팩트이면 $f$는 $X$에서 유계이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>THM 4.17에 의해 $f(X)$는 콤팩트. 하이네-보렐 정리(THM 2.84)에 의해 $\mathbb{R}^k$에서 $f(X)$는 닫혀있고 유계. 유계이므로 $y_0 \in \mathbb{R}^k$과 $M_0 &gt; 0$이 존재하여 $|y - y_0| &lt; M_0$ ($\forall y \in f(X)$).</p>
+        <p>$M := M_0 + |y_0|$으로 놓자. $y = f(x) \in f(X)$에 대해 삼각부등식으로</p>
+        <div class="math-display">$$|f(x)| = |y| \leq |y - y_0| + |y_0| &lt; M_0 + |y_0| = M.$$</div>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $f: X \to \mathbb{R}^k$ continuous and $X$ compact, $f$ is bounded.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$f(X)$ compact (THM 4.17), so bounded in $\mathbb{R}^k$ by Heine–Borel (THM 2.84): $|y - y_0| &lt; M_0$. Take $M = M_0 + |y_0|$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>실수열의 극한과 sup/inf · Real Sequences and Supremum/Infimum</h2></div>
+
+<!-- Def 4.20 -->
+<div class="card def-card" id="d420">
+  <div class="card-head">
+    <span class="def-num">DEF 4.20</span>
+    <span class="def-title">무한 극한 <em>Infinite Limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{p_n\}$이 $\mathbb{R}$ 안의 수열이라 하자.</p>
+        <div class="math-display">$$\lim_{n \to \infty} p_n = \infty$$</div>
+        <p>란 모든 $M &gt; 0$에 대해 $N \in \mathbb{N}$이 존재하여 모든 $n \geq N$에 대해 $p_n \geq M$인 것이다. 유사하게</p>
+        <div class="math-display">$$\lim_{n \to \infty} p_n = -\infty$$</div>
+        <p>란 모든 $M &lt; 0$에 대해 $N \in \mathbb{N}$이 존재하여 모든 $n \geq N$에 대해 $p_n \leq M$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$\lim p_n = \infty$ iff $\forall M &gt; 0$ $\exists N$: $p_n \geq M$ for $n \geq N$. Similarly $\lim p_n = -\infty$ iff $\forall M &lt; 0$ $\exists N$: $p_n \leq M$ for $n \geq N$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 4.21 -->
+<div class="card thm-card" id="l421">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.21</span>
+    <span class="thm-title">sup/inf로 수렴하는 수열 존재</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이 공집합이 아니라 하자.</p>
+        <p><strong>(a)</strong> $E$ 안의 수열 $\{p_n\}$이 존재하여 $\lim p_n = \sup E$ (확장 실수계에서).</p>
+        <p><strong>(b)</strong> $E$ 안의 수열 $\{q_n\}$이 존재하여 $\lim q_n = \inf E$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(a)만 증명 (b 대칭).</p>
+        <p><strong>(Case 1)</strong> $\sup E \in \mathbb{R}$. 각 $n \in \mathbb{N}$에 대해 LEM 3.37(a)로 $p_n \in E$가 존재하여 $\sup E - 1/n &lt; p_n \leq \sup E$. 따라서 $|p_n - \sup E| &lt; 1/n$이고 EX 3.17에 의해 $\lim p_n = \sup E$.</p>
+        <p><strong>(Case 2)</strong> $\sup E \notin \mathbb{R}$. $E \neq \emptyset$이므로 $\sup E = +\infty$ (만약 $\sup E = -\infty$이면 $E = \emptyset$에 모순). 따라서 임의의 $n \in \mathbb{N}$에 대해 $p_n \in E$가 존재하여 $p_n &gt; n$ (왜냐하면 $n$은 $E$의 상계가 아님). 모든 $M &gt; 0$에 대해 $n \geq M$이면 $p_n &gt; n \geq M$, 즉 $\lim p_n = \infty$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Let $E \subset \mathbb{R}$, $E \neq \emptyset$. <strong>(a)</strong> $\exists \{p_n\}$ in $E$ with $\lim p_n = \sup E$. <strong>(b)</strong> $\exists \{q_n\}$ in $E$ with $\lim q_n = \inf E$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>(a) If $\sup E \in \mathbb{R}$, pick $p_n \in E$ with $\sup E - 1/n &lt; p_n$ (LEM 3.37); EX 3.17 gives limit. If $\sup E = +\infty$, pick $p_n &gt; n$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 4.22 -->
+<div class="card thm-card" id="l422">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.22</span>
+    <span class="thm-title">$a_n \leq M$이면 $\lim a_n \leq M$</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{a_n\}$이 $\mathbb{R}$ 안의 수열이고 $M \in \mathbb{R}$이라 하자. $\{a_n\}$이 $\mathbb{R}$에서 수렴하고 모든 $n$에 대해 $a_n \leq M$이면 $\lim a_n \leq M$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>귀류법. $a := \lim a_n &gt; M$이라 하자. $\varepsilon_0 := a - M &gt; 0$.</p>
+        <p>$\lim a_n = a$이므로 $N$이 존재하여 $n \geq N$이면 $|a_n - a| &lt; \varepsilon_0$, 즉 $a_n - a &gt; -\varepsilon_0$, 즉</p>
+        <div class="math-display">$$a_n = (a_n - a) + a &gt; -\varepsilon_0 + a = M.$$</div>
+        <p>이는 $a_n \leq M$에 모순.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $\{a_n\}$ converges in $\mathbb{R}$ and $a_n \leq M$ for all $n$, then $\lim a_n \leq M$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose $a := \lim a_n &gt; M$. With $\varepsilon_0 = a - M$, $|a_n - a| &lt; \varepsilon_0$ for $n \geq N$ gives $a_n &gt; M$ — contradiction. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lem 4.25 -->
+<div class="card thm-card" id="l425">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.25</span>
+    <span class="thm-title">$\sup E, \inf E \in \overline{E}$</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이 공집합이 아니고 $\sup E, \inf E \in \mathbb{R}$이라 하자. 그러면 $\sup E, \inf E \in \overline{E}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\sup E \in \overline{E}$만 증명.</p>
+        <p>LEM 4.21에 의해 $E$ 안의 수열 $\{a_n\}$이 존재하여 $\lim a_n = \sup E$.</p>
+        <p><strong>(Case 1)</strong> 집합 $\{a_n : n \in \mathbb{N}\}$이 무한. 그러면 $\sup E$는 $\{a_n\}$의 극한이고 $\{a_n\} \subset E$이므로 $\sup E$는 $E$의 극한점 (EX 4.24의 내용). 따라서 $\sup E \in E' \subset \overline{E}$.</p>
+        <p><strong>(Case 2)</strong> $\{a_n : n \in \mathbb{N}\}$이 유한. $\{a_n : n\in\mathbb{N}\} = \{\tilde a_1, \ldots, \tilde a_N\}$. 어떤 $n_0$에 대해 $\max\{\tilde a_1,\ldots,\tilde a_N\} = a_{n_0}$. $\{\tilde a_i\} \subset E$이므로 $\max \leq \sup E$. 한편 $a_n \to \sup E$이고 $a_n \leq \max\{\tilde a_i\}$이므로 LEM 4.22에 의해 $\sup E \leq \max\{\tilde a_i\}$. 따라서 $\sup E = \max\{\tilde a_i\} = a_{n_0} \in E \subset \overline{E}$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $E \subset \mathbb{R}$, $E \neq \emptyset$, and $\sup E, \inf E \in \mathbb{R}$, then $\sup E, \inf E \in \overline{E}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>By LEM 4.21 $\exists \{a_n\} \subset E$ with $a_n \to \sup E$. If range infinite, $\sup E$ is a limit point (EX 4.24). If finite, $\sup E$ equals max, which is in $E$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.27 -->
+<div class="card thm-card" id="t427">
+  <div class="card-head">
+    <span class="thm-num">THM 4.27</span>
+    <span class="thm-title">극값 정리 <em>Extreme Value Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X$가 공집합이 아닌 거리 공간, $f: X \to \mathbb{R}$이라 하자.</p>
+        <div class="math-display">$$M := \sup_{p \in X} f(p) := \sup\{f(p) : p \in X\}, \quad m := \inf_{p \in X} f(p).$$</div>
+        <p>$f$가 $X$에서 연속이고 $X$가 콤팩트이면 $p, q \in X$가 존재하여</p>
+        <div class="math-display">$$f(p) = M, \quad f(q) = m.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$f(p) = M$만 증명.</p>
+        <p>THM 4.17에 의해 $f(X) \subset \mathbb{R}$은 콤팩트. 하이네-보렐 정리에 의해 $f(X)$는 닫히고 유계. $f(X)$가 닫힘이므로 $f(X) = \overline{f(X)}$.</p>
+        <p>$f(X)$가 유계이므로 $M = \sup f(X) \in \mathbb{R}$. LEM 4.25에 의해 $M \in \overline{f(X)} = f(X)$. 따라서 $f(p) = M$인 $p \in X$가 존재.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $f: X \to \mathbb{R}$ continuous, $X$ nonempty compact, then $\exists p, q \in X$ with $f(p) = \sup f$, $f(q) = \inf f$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>$f(X)$ compact (THM 4.17), closed and bounded. $M = \sup f(X) \in \overline{f(X)} = f(X)$ by LEM 4.25. So $M = f(p)$ for some $p$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cor 4.30 -->
+<div class="card thm-card" id="c430">
+  <div class="card-head">
+    <span class="thm-num">COR 4.30</span>
+    <span class="thm-title">콤팩트 거리 공간에서 최대·최소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X$가 콤팩트 거리 공간이고 $f$가 $X$에서 $\mathbb{R}$로의 연속 사상이라 하자. 그러면 $\max\{f(x) : x \in X\}$와 $\min\{f(x) : x \in X\}$가 모두 존재한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $X$ compact metric, $f: X \to \mathbb{R}$ continuous, then $\max f$ and $\min f$ exist.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thm 4.32 -->
+<div class="card thm-card" id="t432">
+  <div class="card-head">
+    <span class="thm-num">THM 4.32</span>
+    <span class="thm-title">연속 역함수 정리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X, Y$가 거리 공간, $f: X \to Y$가 onto라 하자. $X$가 콤팩트, $f$가 1-1이고 $X$에서 연속이면 역사상 $f^{-1}: Y \to X$ (단, $f^{-1}(f(x)) = x$)는 $Y$에서 $X$로의 연속 사상이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>COR 4.14에 의해 $f^{-1}$의 연속성을 증명하려면 $X$의 모든 닫힌 집합 $C$에 대해 $(f^{-1})^{-1}(C)$가 $Y$에서 닫힘임을 보이면 된다.</p>
+        <p>$(f^{-1})^{-1}(C) = \{y \in Y : f^{-1}(y) \in C\} = \{f(x) : x \in C\} = f(C)$.</p>
+        <p>$C$가 닫힘이고 $X \subset X$가 콤팩트이므로 THM 2.65에 의해 $C$는 콤팩트. THM 4.17에 의해 $f(C)$도 콤팩트. THM 2.63에 의해 $f(C)$는 닫힘.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>If $X$ compact, $f: X \to Y$ bijective and continuous, then $f^{-1}$ is continuous.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof (English)
+      </button>
+      <div class="en-proof-content">
+        <p>By COR 4.14, show $(f^{-1})^{-1}(C) = f(C)$ closed for closed $C$. Closed subset $C$ of compact $X$ is compact (THM 2.65); image $f(C)$ is compact (THM 4.17), hence closed (THM 2.63). $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>균등연속 · Uniform Continuity</h2></div>
+
+<!-- Def 4.33 -->
+<div class="card def-card" id="d433">
+  <div class="card-head">
+    <span class="def-num">DEF 4.33</span>
+    <span class="def-title">균등연속 <em>Uniform Continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X), (Y, d_Y)$가 거리 공간, $f: X \to Y$라 하자. $f$가 $X$에서 <strong>균등연속</strong>(uniformly continuous)이라는 것은 임의의 $\varepsilon &gt; 0$에 대해 $\delta &gt; 0$이 존재하여 $d_X(p, q) &lt; \delta$를 만족하는 모든 $p, q \in X$에 대해</p>
+        <div class="math-display">$$d_Y(f(p), f(q)) &lt; \varepsilon$$</div>
+        <p>이 성립하는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f: X \to Y$ is <strong>uniformly continuous</strong> on $X$ if for every $\varepsilon &gt; 0$ there exists $\delta &gt; 0$ such that $d_Y(f(p), f(q)) &lt; \varepsilon$ for all $p, q \in X$ with $d_X(p, q) &lt; \delta$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rem 4.34 -->
+<div class="card rem-card" id="r434">
+  <div class="card-head">
+    <span class="rem-num">REM 4.34</span>
+    <span class="rem-title">연속과 균등연속의 차이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $X$에서 연속이면 임의의 $p \in X$와 $\varepsilon &gt; 0$에 대해 $\delta(\varepsilon, p) &gt; 0$이 존재하여 $d_X(p, q) &lt; \delta$이면 $d_Y(f(p), f(q)) &lt; \varepsilon$이다. 여기서 $\delta$는 $\varepsilon$과 <strong>점 $p$ 모두에</strong> 의존할 수 있다.</p>
+        <p>반면 DEF 4.33에서 $\delta &gt; 0$은 $\varepsilon$에만 의존하고, 점 $p \in X$와는 <strong>독립</strong>이다. 이것이 "균등(uniform)"의 의미이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>Continuity: $\delta = \delta(\varepsilon, p)$ depends on both $\varepsilon$ and $p$. Uniform continuity: $\delta = \delta(\varepsilon)$ depends only on $\varepsilon$, independent of points. "Uniform" = same $\delta$ works everywhere.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exam 4.35 -->
+<div class="card exam-card" id="e435">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.35</span>
+    <span class="exam-title">지수함수와 로그함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = x$ ($\forall x \in \mathbb{R}$)로 정의하면 $f$는 $\mathbb{R}$에서 균등연속이다 ($\delta = \varepsilon$).</p>
+        <p>잘 알려져 있듯이 지수함수</p>
+        <div class="math-display">$$e^x := \sum_{i=0}^\infty \frac{x^i}{i!}$$</div>
+        <p>는 $\mathbb{R}$에서 $(0, \infty)$로의 연속 1-1 대응이다. THM 4.32에 의해 역함수는 $(0, \infty)$에서 $\mathbb{R}$로의 연속 사상이며, 이를 <strong>로그함수</strong>(logarithm function)라 하고 $\ln x$ 또는 $\log x$로 쓴다. $\log x$는 $(0, \infty)$에서 연속이지만 $(0, \infty)$에서 <strong>균등연속이 아니다</strong>.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English (Lecture Note)</span>
+      <div class="en-formal">
+        <p>$f(x) = x$ is uniformly continuous on $\mathbb{R}$ ($\delta = \varepsilon$). The exponential $e^x = \sum x^i/i!$ is continuous bijection $\mathbb{R} \to (0, \infty)$; its inverse $\log x$ is continuous on $(0, \infty)$ (by THM 4.32) but not uniformly continuous.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: end of content -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="index.html">홈</a>
+    <a href="ch1.html">Ch1 개념</a>
+    <a href="ch1-ex.html">Ch1 예제</a>
+    <a href="ch2.html">Ch2 개념</a>
+    <a href="ch2-ex.html">Ch2 예제</a>
+    <a href="ch3.html">Ch3 개념</a>
+    <a href="ch3-ex.html">Ch3 예제</a>
+    <a href="ch4.html">Ch4 개념</a>
+    <a href="ch4-ex.html">Ch4 예제</a>
+    <a href="about.html">소개 About</a>
+    <a href="privacy.html">개인정보처리방침 Privacy</a>
+    <a href="disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script>
+function toggleLang() {
+  const showKo = document.getElementById('toggle-ko').checked;
+  const showEn = document.getElementById('toggle-en').checked;
+  document.body.classList.toggle('hide-ko', !showKo);
+  document.body.classList.toggle('hide-en', !showEn);
+}
+
+function toggleProof(btn) {
+  btn.classList.toggle('open');
+  const arrow = btn.querySelector('.arrow');
+  const isEn = btn.closest('.en-panel') !== null;
+  let content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  const isVisible = content.classList.contains('visible');
+
+  btn.innerHTML = '';
+  btn.appendChild(arrow);
+  if (isEn) {
+    btn.append(' ' + (isVisible ? 'Hide Proof' : 'Proof (English)'));
+  } else {
+    btn.append(' ' + (isVisible ? '증명 접기' : '증명 보기'));
+  }
+}
+</script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+});
+</script>
+</body>
+</html>
