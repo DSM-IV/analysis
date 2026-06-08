@@ -529,6 +529,8 @@ MathJax = {
 <nav class="toc" aria-label="목차">
   <h3>예제 목차 · Table of Exercises</h3>
   <ol>
+    <li><a href="#ex302"><span class="toc-num">3.2</span> 수렴은 공간에 의존</a></li>
+    <li><a href="#ex303"><span class="toc-num">3.3</span> $a&lt;\varepsilon$($\forall\varepsilon$)이면 $a=0$</a></li>
     <li><a href="#ex305"><span class="toc-num">3.5</span> THM 3.4(a)의 오류 찾기</a></li>
     <li><a href="#ex308"><span class="toc-num">3.8</span> 수렴수열의 극한점 판정</a></li>
     <li><a href="#ex310"><span class="toc-num">3.10</span> $\min A$의 존재</a></li>
@@ -554,6 +556,90 @@ MathJax = {
 
 <!-- ═══════════ SECTION 1 ═══════════ -->
 <div class="section-title"><h2>수렴 수열 · Convergent Sequences</h2></div>
+
+<!-- Exercise 3.2 -->
+<div class="card ex-card" id="ex302">
+  <div class="card-head">
+    <span class="ex-num">EX 3.2</span>
+    <span class="ex-title">수렴은 거리 공간에 의존</span>
+    <a href="ch3.html#d31" class="ref-link">→ DEF 3.1</a>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $X_1 = \mathbb{R}$, $X_2 = (0, \infty)$, 그리고 모든 $n \in \mathbb{N}$에 대해 $p_n = \tfrac{1}{n}$이라 하자. 수열 $\{p_n\}$이 $X_1$에서는 수렴하지만 $X_2$에서는 발산함을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 거리는 두 공간 모두에서 $d(x,y) = |x-y|$로 같다.</p>
+        <p><strong>($X_1$에서 수렴).</strong> $0 \in X_1 = \mathbb{R}$. $\varepsilon &gt; 0$을 임의로 주자. 아르키메데스 성질에 의해 $\tfrac{1}{N} &lt; \varepsilon$인 $N \in \mathbb{N}$이 존재한다. 모든 $n \geq N$에 대해</p>
+        <div class="math-display">$$d(p_n, 0) = \left|\tfrac{1}{n}\right| = \tfrac{1}{n} \leq \tfrac{1}{N} &lt; \varepsilon.$$</div>
+        <p>따라서 $X_1$에서 $\lim p_n = 0$.</p>
+        <p><strong>($X_2$에서 발산).</strong> 귀류법. $X_2 = (0, \infty)$에서 $\{p_n\}$이 어떤 $p \in X_2$에 수렴한다고 하자. $p &gt; 0$이다. $\varepsilon = \tfrac{p}{2} &gt; 0$을 잡으면 $N$이 존재하여 모든 $n \geq N$에 대해</p>
+        <div class="math-display">$$\left|\tfrac{1}{n} - p\right| &lt; \tfrac{p}{2}.$$</div>
+        <p>특히 $\tfrac{1}{n} &gt; p - \tfrac{p}{2} = \tfrac{p}{2}$, 즉 $n &lt; \tfrac{2}{p}$. 이는 충분히 큰 $n$ ($n \geq \tfrac{2}{p}$)에 대해 모순. 따라서 $X_2$에서 수렴하지 않는다.</p>
+        <p><em>참고.</em> $X_1$에서의 극한 $0$이 $X_2$에 속하지 않기 때문에 같은 수열이 더 작은 공간에서 발산하는 것이다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $X_1 = \mathbb{R}$, $X_2 = (0, \infty)$, and $p_n = \tfrac{1}{n}$ for all $n \in \mathbb{N}$. Show that $\{p_n\}$ converges in $X_1$ but diverges in $X_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The metric $d(x,y) = |x-y|$ is the same in both.</p>
+        <p><strong>(Converges in $X_1$).</strong> Take limit $0 \in X_1$. For $\varepsilon &gt; 0$, by Archimedes pick $N$ with $1/N &lt; \varepsilon$; then $d(p_n, 0) = 1/n \leq 1/N &lt; \varepsilon$ for $n \geq N$.</p>
+        <p><strong>(Diverges in $X_2$).</strong> Suppose $p_n \to p \in X_2 = (0,\infty)$, so $p &gt; 0$. With $\varepsilon = p/2$, $|1/n - p| &lt; p/2$ forces $1/n &gt; p/2$, i.e. $n &lt; 2/p$ — fails for large $n$. So no limit exists in $X_2$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.3 -->
+<div class="card ex-card" id="ex303">
+  <div class="card-head">
+    <span class="ex-num">EX 3.3</span>
+    <span class="ex-title">$a &lt; \varepsilon$(모든 $\varepsilon$)이면 $a = 0$</span>
+    <a href="ch3.html#d31" class="ref-link">→ DEF 3.1</a>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $a$가 음이 아닌 상수라 하자. 모든 $\varepsilon &gt; 0$에 대해 $a &lt; \varepsilon$이면 $a = 0$임을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 귀류법. $a \neq 0$이라 하자. $a \geq 0$이므로 $a &gt; 0$.</p>
+        <p>$\varepsilon := a &gt; 0$을 택할 수 있다. 가정에 의해 $a &lt; \varepsilon = a$, 즉 $a &lt; a$. 모순.</p>
+        <p>(보다 부드러운 방식: $\varepsilon := \tfrac{a}{2} &gt; 0$을 택하면 $a &lt; \tfrac{a}{2}$, 양변에서 $\tfrac{a}{2}$를 빼면 $\tfrac{a}{2} &lt; 0$, 이는 $a &gt; 0$에 모순.)</p>
+        <p>따라서 $a = 0$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $a$ be a nonnegative constant. Assume that for all $\varepsilon &gt; 0$, $a &lt; \varepsilon$. Show that $a = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Suppose $a &gt; 0$. Taking $\varepsilon = a/2 &gt; 0$ in the hypothesis yields $a &lt; a/2$, hence $a/2 &lt; 0$ — contradicting $a &gt; 0$. So $a = 0$. $\square$</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Exercise 3.5 -->
 <div class="card ex-card" id="ex305">
@@ -725,10 +811,12 @@ MathJax = {
         <span class="arrow">&#9654;</span> 풀이 보기
       </button>
       <div class="proof-content">
-        <p><strong>풀이.</strong> $\varepsilon &gt; 0$을 주자. $\lim \tilde p_n = p$이므로 $K$가 존재하여 $k \geq K$이면 $d(\tilde p_k, p) &lt; \varepsilon$.</p>
-        <p>부분수열을 귀납적으로 구성한다. 각 $\tilde p_k \in \{p_n : n \in \mathbb{N}\}$이므로 $\tilde p_k = p_{m_k}$인 $m_k \in \mathbb{N}$이 존재한다. 집합 $\{\tilde p_n\}$이 무한이므로 $\{m_k\}$도 무한 값을 가진다 (만약 유한이면 치역도 유한).</p>
-        <p>구체적으로, $n_1 \in \mathbb{N}$을 $p_{n_1} = \tilde p_{k_1}$로 잡는다 ($k_1$은 임의). 다음으로 $k_2 &gt; k_1$을 충분히 크게 잡으면 $p_{n_2} = \tilde p_{k_2}$인 $n_2 &gt; n_1$을 찾을 수 있다 (치역이 무한이므로 $n_1$보다 큰 인덱스를 무한히 많이 가진다). 귀납적으로 $n_1 &lt; n_2 &lt; \cdots$와 $k_1 &lt; k_2 &lt; \cdots$를 얻으며 $p_{n_i} = \tilde p_{k_i}$, $k_i \geq i$.</p>
-        <p>$\lim \tilde p_n = p$이고 $k_i \to \infty$이므로 $\lim_i \tilde p_{k_i} = p$. 따라서 $\lim p_{n_i} = p$.</p>
+        <p><strong>풀이.</strong> 각 $k \in \mathbb{N}$에 대해 $\tilde p_k \in \{p_n : n \in \mathbb{N}\}$이므로 집합</p>
+        <div class="math-display">$$S_k := \{n \in \mathbb{N} : p_n = \tilde p_k\}$$</div>
+        <p>은 공집합이 아니다. EX 3.10에 의해 $m_k := \min S_k$가 존재. 따라서 $p_{m_k} = \tilde p_k$.</p>
+        <p><strong>주장: $\{m_k : k \in \mathbb{N}\}$은 유계가 아니다.</strong> 귀류법으로 $m_k \leq M$ ($\forall k$, 어떤 $M \in \mathbb{N}$)이면 $\tilde p_k = p_{m_k} \in \{p_1, \ldots, p_M\}$ ($\forall k$)이 되어 $\{\tilde p_n : n \in \mathbb{N}\} \subset \{p_1, \ldots, p_M\}$이 유한. 가정($\{\tilde p_n\}$이 무한 치역)에 모순.</p>
+        <p><strong>증가 부분수열 추출.</strong> $\{m_k\}$가 유계가 아니므로 귀납적으로 $k_1 &lt; k_2 &lt; \cdots$를 다음과 같이 택할 수 있다: $k_1 := 1$. $k_i$가 정해졌으면 $\{m_k : k \in \mathbb{N}\}$이 유계가 아니므로 $m_{k_{i+1}} &gt; m_{k_i}$인 $k_{i+1} &gt; k_i$가 존재 (사실은 $\{k : m_k &gt; m_{k_i}\}$의 최소원소를 EX 3.10으로 잡으면 됨; $k_{i+1} &gt; k_i$가 되도록 동시에 조절). $n_i := m_{k_i}$로 놓으면 $n_1 &lt; n_2 &lt; \cdots$.</p>
+        <p>그러면 $\{p_{n_i}\}$는 $\{p_n\}$의 부분수열이고, $p_{n_i} = p_{m_{k_i}} = \tilde p_{k_i}$. $\{k_i\}$는 강증가하는 자연수 수열이므로 $k_i \to \infty$. 따라서 $\{\tilde p_{k_i}\}$는 수렴 수열 $\{\tilde p_k\}$의 부분수열이고 같은 극한 $p$로 수렴. 즉 $\lim_i p_{n_i} = p$.</p>
         <div class="qed">&#9633;</div>
       </div>
     </div>
@@ -741,7 +829,7 @@ MathJax = {
         <span class="arrow">&#9654;</span> Proof
       </button>
       <div class="en-proof-content">
-        <p>For each $\tilde p_k = p_{m_k}$. Since the range is infinite, we can pick increasing $k_1 &lt; k_2 &lt; \cdots$ and corresponding $n_1 &lt; n_2 &lt; \cdots$ with $p_{n_i} = \tilde p_{k_i}$. As $\tilde p_{k_i} \to p$, $p_{n_i} \to p$. $\square$</p>
+        <p>For each $k$, $S_k := \{n : p_n = \tilde p_k\}$ is nonempty; set $m_k := \min S_k$ (EX 3.10), so $p_{m_k} = \tilde p_k$. The set $\{m_k\}$ is unbounded: otherwise $\{\tilde p_k\} \subset \{p_1, \ldots, p_M\}$ would be finite, contradicting the infinite-range assumption. Recursively pick $k_1 &lt; k_2 &lt; \cdots$ with $m_{k_1} &lt; m_{k_2} &lt; \cdots$; let $n_i := m_{k_i}$. Then $\{p_{n_i}\}$ is a subsequence of $\{p_n\}$, with $p_{n_i} = \tilde p_{k_i} \to p$ (subsequence of a convergent sequence). $\square$</p>
       </div>
     </div>
   </div>
@@ -1291,11 +1379,16 @@ MathJax = {
         <span class="arrow">&#9654;</span> 풀이 보기
       </button>
       <div class="proof-content">
-        <p><strong>증명.</strong> $\{s_n\}$이 코시 $\iff$ $\forall \varepsilon &gt; 0, \exists N, \forall n_1, n_2 \geq N$: $|s_{n_1} - s_{n_2}| &lt; \varepsilon$.</p>
-        <p>WLOG $n_1 \geq n_2$로 놓자. $n_1 = n_2$이면 $|s_{n_1} - s_{n_2}| = 0 &lt; \varepsilon$이므로 자명. $n_1 &gt; n_2$이면 $n := n_2 + 1$, $m := n_1$로 놓으면 $m \geq n \geq N + 1$이고</p>
-        <div class="math-display">$$s_{n_1} - s_{n_2} = \sum_{k=n_2+1}^{n_1} a_k = \sum_{k=n}^m a_k.$$</div>
-        <p>($\Rightarrow$) $\{s_n\}$ 코시 $\Rightarrow$ $\varepsilon &gt; 0$에 $\tilde N$이 존재하여 $m \geq n \geq \tilde N + 1$이면 $|\sum_{k=n}^m a_k| &lt; \varepsilon$. $N := \tilde N + 1$로 놓자. 모든 $m \geq n \geq N$에 대해 $|\sum_{k=n}^m a_k| &lt; \varepsilon$ ($m = n$이면 $|a_n|$이 작은가? 사실 $s_n - s_{n-1} = a_n$이므로 $n-1 \geq \tilde N$이어야 함; 항상 $N$을 충분히 큰 값으로 잡으면 됨).</p>
-        <p>($\Leftarrow$) 역방향: 조건이 성립하면 $n_1 &gt; n_2 \geq N - 1$에서 $|s_{n_1} - s_{n_2}| = |\sum_{k=n_2+1}^{n_1} a_k| &lt; \varepsilon$. ($N' := N$로 놓으면 $n_1, n_2 \geq N'$에서 $|s_{n_1} - s_{n_2}| &lt; \varepsilon$.)</p>
+        <p><strong>핵심 관찰.</strong> $m \geq n \geq 1$에 대해</p>
+        <div class="math-display">$$\sum_{k=n}^m a_k = (a_1 + \cdots + a_m) - (a_1 + \cdots + a_{n-1}) = s_m - s_{n-1}$$</div>
+        <p>($s_0 := 0$ 약속).</p>
+        <p><strong>($\Rightarrow$) $\{s_n\}$ 코시 $\Rightarrow$ 조건.</strong> $\varepsilon &gt; 0$이 주어졌다. 코시 정의로 $M \in \mathbb{N}$이 존재하여 $i, j \geq M$이면 $|s_i - s_j| &lt; \varepsilon$. $N := M + 1$로 놓자. 모든 $m \geq n \geq N$에 대해 $m \geq N \geq M$이고 $n - 1 \geq N - 1 = M$이므로</p>
+        <div class="math-display">$$\left|\sum_{k=n}^m a_k\right| = |s_m - s_{n-1}| &lt; \varepsilon.$$</div>
+        <p><strong>($\Leftarrow$) 조건 $\Rightarrow$ $\{s_n\}$ 코시.</strong> $\varepsilon &gt; 0$이 주어졌다. 가정으로 $N \in \mathbb{N}$이 존재하여 $m \geq n \geq N$이면 $|\sum_{k=n}^m a_k| &lt; \varepsilon$. 임의의 $i, j \geq N$에 대해 WLOG $i \geq j$.</p>
+        <p>• $i = j$이면 $|s_i - s_j| = 0 &lt; \varepsilon$.</p>
+        <p>• $i &gt; j$이면 $m := i$, $n := j + 1$로 놓자. $m = i \geq j + 1 = n$이고 $n = j + 1 \geq N + 1 \geq N$이므로 조건이 적용되어</p>
+        <div class="math-display">$$|s_i - s_j| = |s_m - s_{n-1}| = \left|\sum_{k=n}^m a_k\right| &lt; \varepsilon.$$</div>
+        <p>따라서 $\{s_n\}$은 코시.</p>
         <div class="qed">&#9633;</div>
       </div>
     </div>
@@ -1308,7 +1401,7 @@ MathJax = {
         <span class="arrow">&#9654;</span> Proof
       </button>
       <div class="en-proof-content">
-        <p>For $n_1 &gt; n_2$, $s_{n_1} - s_{n_2} = \sum_{k=n_2+1}^{n_1} a_k$. Equivalence follows by adjusting the index $N$ appropriately. $\square$</p>
+        <p>Key: $\sum_{k=n}^m a_k = s_m - s_{n-1}$ ($s_0 := 0$). ($\Rightarrow$) Cauchy gives $M$ with $|s_i - s_j| &lt; \varepsilon$ for $i, j \geq M$. Take $N := M + 1$; for $m \geq n \geq N$, both $m \geq M$ and $n-1 \geq M$. ($\Leftarrow$) From the condition with $N$, given $i, j \geq N$ (WLOG $i \geq j$), set $m = i$, $n = j + 1 \geq N$; then $|s_i - s_j| = |\sum_{k=n}^m a_k| &lt; \varepsilon$. $\square$</p>
       </div>
     </div>
   </div>
