@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03. 기저와 차원 (Bases and Dimension) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 03단원 기저와 차원(Bases and Dimension) 예제·심화 문제 모음. 기저, 차원, 부분공간의 차원, 직합, 몫공간의 차원을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 기저, basis, 차원, dimension, 부분공간, subspace, 직합, direct sum, 몫공간, quotient space, 생성집합, generating set, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03. 기저와 차원 (Bases and Dimension) — 선형대수학 한·영 대조">
+<meta property="og:description" content="기저와 차원 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "03. 기저와 차원 (Bases and Dimension) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 기저와 차원 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch03.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html" class="active">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 03</p>
+  <h1>03. 기저와 차원<span>Bases and Dimension</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 기저 여부 판정</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> 행렬공간의 기저 세 개</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> 다섯 벡터에서 기저 찾기</a></li>
+    <li><a href="#ex1-3"><span class="toc-num">EX 1.3</span> 기저로부터 새 기저 구성</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 부분공간의 기저와 차원</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 행렬 부분공간의 차원</a></li>
+    <li><a href="#ex2-2"><span class="toc-num">EX 2.2</span> 유한 지지 수열의 공간</a></li>
+    <li><a href="#ex2-3"><span class="toc-num">EX 2.3</span> 다항식 부분공간의 차원</a></li>
+    <li><a href="#ex3"><span class="toc-num">EX 3</span> 교집합 차원이 같을 조건</a></li>
+    <li><a href="#ex3-1"><span class="toc-num">EX 3.1</span> 생성공간 차원 불변 조건</a></li>
+    <li><a href="#pr1"><span class="toc-num">PR 1</span> 생성집합이 유한한 공간</a></li>
+    <li><a href="#pr2"><span class="toc-num">PR 2</span> 도함수로 이루어진 다항식 기저</a></li>
+    <li><a href="#pr3"><span class="toc-num">PR 3</span> 기저와 무한차원 공간</a></li>
+    <li><a href="#pr4"><span class="toc-num">PR 4</span> 복소벡터공간의 실차원</a></li>
+    <li><a href="#pr5"><span class="toc-num">PR 5</span> 부분공간 합의 차원 공식</a></li>
+    <li><a href="#pr6"><span class="toc-num">PR 6</span> 보충부분공간의 존재성</a></li>
+    <li><a href="#pr7"><span class="toc-num">PR 7</span> 몫공간의 차원</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">기저 여부 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 집합들이 벡터공간 $V$의 기저인지 판정하라.</p>
+        <ol type="a">
+          <li>$\{(1,0,-1),(2,5,1),(0,-4,3)\}$, $V = \mathbb{R}^3$</li>
+          <li>$\{(1,4,-6),(1,5,8),(2,1,1),(0,1,0)\}$, $V = \mathbb{R}^3$</li>
+          <li>$\{1+2x+x^2, 3+x^2, x+x^2\}$, $V = P_2(\mathbb{R})$</li>
+          <li>$\{x^3-2x^2+1, 4x^2-x+3, 3x-2\}$, $V = P_3(\mathbb{R})$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 각 경우 $V$의 차원과 벡터 개수를 비교하고, 필요하면 일차독립성을 판정한다.</p>
+        <p>(a) $\dim \mathbb{R}^3 = 3$이고 주어진 벡터가 3개이므로, 기저가 되는 것과 일차독립인 것은 동치이다. 계수행렬
+        $$\begin{pmatrix} 1 & 0 & -1 \\ 2 & 5 & 1 \\ 0 & -4 & 3 \end{pmatrix}$$
+        의 행렬식은 $1(15+4) - 0 + (-1)(-8-0) = 19+8 = 27 \neq 0$이므로 세 벡터는 일차독립이다. 따라서 이 집합은 $\mathbb{R}^3$의 기저이다.</p>
+        <p>(b) 벡터가 4개인데 $\dim \mathbb{R}^3 = 3 \lt 4$이므로, 이 집합은 반드시 일차종속이다 (차원보다 많은 개수의 벡터는 항상 일차종속이다). 따라서 기저가 될 수 없다.</p>
+        <p>(c) $\dim P_2(\mathbb{R}) = 3$이고 벡터가 3개이므로, 일차독립성만 확인하면 된다. 계수벡터 $(1,2,1), (3,0,1), (0,1,1)$로 이루어진 행렬의 행렬식은 $1(0-1) - 2(3-0) + 1(3-0) = -1-6+3 = -4 \neq 0$이므로 일차독립이다. 따라서 이 집합은 $P_2(\mathbb{R})$의 기저이다.</p>
+        <p>(d) $\dim P_3(\mathbb{R}) = 4$인데 벡터가 3개뿐이므로, 이 집합은 $P_3(\mathbb{R})$을 생성할 수 없다 (차원보다 적은 개수의 벡터로는 생성집합이 될 수 없다). 따라서 기저가 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Determine whether the following sets are bases for a vector space $V$.</p>
+        <ol type="a">
+          <li>$\{(1,0,-1),(2,5,1),(0,-4,3)\}$, $V = \mathbb{R}^3$</li>
+          <li>$\{(1,4,-6),(1,5,8),(2,1,1),(0,1,0)\}$, $V = \mathbb{R}^3$</li>
+          <li>$\{1+2x+x^2, 3+x^2, x+x^2\}$, $V = P_2(\mathbb{R})$</li>
+          <li>$\{x^3-2x^2+1, 4x^2-x+3, 3x-2\}$, $V = P_3(\mathbb{R})$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In each case, compare the number of given vectors with $\dim V$, and check linear independence when needed.</p>
+        <p>(a) Since $\dim \mathbb{R}^3 = 3$ and there are $3$ given vectors, being a basis is equivalent to being linearly independent. The determinant of
+        $$\begin{pmatrix} 1 & 0 & -1 \\ 2 & 5 & 1 \\ 0 & -4 & 3 \end{pmatrix}$$
+        is $1(15+4) - 0 + (-1)(-8-0) = 19+8 = 27 \neq 0$, so the three vectors are linearly independent. Hence this set is a basis of $\mathbb{R}^3$.</p>
+        <p>(b) There are $4$ vectors while $\dim \mathbb{R}^3 = 3 \lt 4$, so the set must be linearly dependent (any set of more vectors than the dimension is automatically dependent). Hence it cannot be a basis.</p>
+        <p>(c) $\dim P_2(\mathbb{R}) = 3$ and there are $3$ vectors, so it suffices to check linear independence. Using coordinate vectors $(1,2,1), (3,0,1), (0,1,1)$, the determinant is $1(0-1) - 2(3-0) + 1(3-0) = -1-6+3 = -4 \neq 0$, so the set is linearly independent. Hence it is a basis of $P_2(\mathbb{R})$.</p>
+        <p>(d) $\dim P_3(\mathbb{R}) = 4$ but there are only $3$ vectors, so this set cannot generate $P_3(\mathbb{R})$ (a generating set must have at least as many vectors as the dimension). Hence it is not a basis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">행렬공간의 기저 세 개</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $M_{2\times 2}(F)$의 서로 다른 기저 세 개를 제시하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\dim M_{2\times 2}(F) = 4$이므로, 원소 4개로 이루어진 일차독립 집합은 모두 기저이다.</p>
+        <p>1. 표준기저 $\beta_1 = \{E^{11}, E^{12}, E^{21}, E^{22}\}$.</p>
+        <p>2. $\beta_2 = \{E^{11},\ E^{11}+E^{12},\ E^{11}+E^{12}+E^{21},\ E^{11}+E^{12}+E^{21}+E^{22}\}$. $c_1 E^{11} + c_2(E^{11}+E^{12}) + c_3(E^{11}+E^{12}+E^{21}) + c_4(E^{11}+E^{12}+E^{21}+E^{22}) = O$이면, $(1,1)$-성분에서 $c_1+c_2+c_3+c_4=0$, $(1,2)$-성분에서 $c_2+c_3+c_4=0$, $(2,1)$-성분에서 $c_3+c_4=0$, $(2,2)$-성분에서 $c_4=0$을 얻는다. 아래에서부터 차례로 대입하면 $c_4=c_3=c_2=c_1=0$이므로 $\beta_2$는 일차독립이다.</p>
+        <p>3. $\beta_3 = \{I,\ E^{12},\ E^{21},\ E^{11}-E^{22}\}$. $aI + bE^{12}+cE^{21}+d(E^{11}-E^{22}) = \begin{pmatrix} a+d & b \\ c & a-d\end{pmatrix} = O$이면 $b=c=0$이고 $a+d=0=a-d$에서 $a=d=0$이므로 $\beta_3$은 일차독립이다.</p>
+        <p>세 집합 모두 원소 4개로 이루어진 일차독립 집합이므로 $M_{2\times 2}(F)$의 기저이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Give three different bases for $M_{2\times 2}(F)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\dim M_{2\times 2}(F) = 4$, any linearly independent set of $4$ matrices is a basis.</p>
+        <p>1. The standard basis $\beta_1 = \{E^{11}, E^{12}, E^{21}, E^{22}\}$.</p>
+        <p>2. $\beta_2 = \{E^{11},\ E^{11}+E^{12},\ E^{11}+E^{12}+E^{21},\ E^{11}+E^{12}+E^{21}+E^{22}\}$. If $c_1E^{11}+c_2(E^{11}+E^{12})+c_3(E^{11}+E^{12}+E^{21})+c_4(E^{11}+E^{12}+E^{21}+E^{22}) = O$, comparing entries gives $c_1+c_2+c_3+c_4=0$ (entry $(1,1)$), $c_2+c_3+c_4=0$ (entry $(1,2)$), $c_3+c_4=0$ (entry $(2,1)$), and $c_4=0$ (entry $(2,2)$). Substituting from the bottom up yields $c_4=c_3=c_2=c_1=0$, so $\beta_2$ is linearly independent.</p>
+        <p>3. $\beta_3 = \{I,\ E^{12},\ E^{21},\ E^{11}-E^{22}\}$. If $aI+bE^{12}+cE^{21}+d(E^{11}-E^{22}) = \begin{pmatrix} a+d & b \\ c & a-d \end{pmatrix} = O$, then $b=c=0$ and $a+d=0=a-d$, so $a=d=0$; thus $\beta_3$ is linearly independent.</p>
+        <p>Each set consists of $4$ linearly independent matrices, so all three are bases of $M_{2\times 2}(F)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">다섯 벡터에서 기저 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다섯 개의 벡터 $u_1 = (2,-3,1)$, $u_2 = (1,4,-2)$, $u_3 = (-8,12,-4)$, $u_4 = (1,37,-17)$, $u_5 = (-3,-5,8)$을 생각하자. $\{(u_1, u_2, u_3, u_4, u_5)\}$의 부분집합 중 $\mathbb{R}^3$의 기저가 되는 것을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 다섯 벡터 사이의 관계를 계산한다.</p>
+        <p>$u_3 = -4(2,-3,1) = -4u_1$이므로 $u_3$은 $u_1$에 종속된다.</p>
+        <p>$au_1+bu_2=u_4$를 풀면 ($2a+b=1$, $-3a+4b=37$, $a-2b=-17$) $a=-3$, $b=7$이 나오고 세 방정식을 모두 만족하므로 $u_4 = -3u_1+7u_2$이다.</p>
+        <p>반면 $au_1+bu_2=u_5$는 해가 없다 (처음 두 방정식에서 $a=-7/11$, 첫째와 셋째 방정식에서 $a=2/5$가 나와 모순이다). 따라서 $u_5 \notin \operatorname{span}(\{u_1,u_2\})$이다.</p>
+        <p>$u_1$과 $u_2$는 서로 스칼라배가 아니므로 일차독립이고, $u_5$가 $\operatorname{span}(\{u_1,u_2\})$에 속하지 않으므로 $\{u_1,u_2,u_5\}$는 일차독립이다. 실제로
+        $$\det\begin{pmatrix} 2 & -3 & 1 \\ 1 & 4 & -2 \\ -3 & -5 & 8\end{pmatrix} = 2(32-10)+3(8-6)+1(-5+12) = 44+6+7=57 \neq 0$$
+        이므로 일차독립임이 다시 확인된다. $\dim \mathbb{R}^3 = 3$이므로 일차독립인 세 벡터는 $\mathbb{R}^3$의 기저이다.</p>
+        <p>따라서 $\{u_1, u_2, u_5\}$가 구하는 기저이다 ($u_3 = -4u_1$, $u_4=-3u_1+7u_2$는 나머지 벡터들의 일차결합이므로 제외된다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Consider five vectors $u_1 = (2,-3,1)$, $u_2 = (1,4,-2)$, $u_3 = (-8,12,-4)$, $u_4 = (1,37,-17)$, and $u_5 = (-3,-5,8)$. Find a subset of $\{(u_1, u_2, u_3, u_4, u_5)\}$ which is a basis of $\mathbb{R}^3$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First compute the relations among the five vectors.</p>
+        <p>$u_3 = -4(2,-3,1) = -4u_1$, so $u_3$ is dependent on $u_1$.</p>
+        <p>Solving $au_1+bu_2=u_4$ (i.e. $2a+b=1$, $-3a+4b=37$, $a-2b=-17$) gives $a=-3$, $b=7$, which satisfies all three equations, so $u_4 = -3u_1+7u_2$.</p>
+        <p>On the other hand, $au_1+bu_2=u_5$ has no solution (the first two equations give $a=-7/11$ while the first and third give $a=2/5$, a contradiction). Hence $u_5 \notin \operatorname{span}(\{u_1,u_2\})$.</p>
+        <p>Since $u_1$ and $u_2$ are not scalar multiples of each other, they are linearly independent, and since $u_5 \notin \operatorname{span}(\{u_1,u_2\})$, the set $\{u_1,u_2,u_5\}$ is linearly independent. Indeed,
+        $$\det\begin{pmatrix} 2 & -3 & 1 \\ 1 & 4 & -2 \\ -3 & -5 & 8\end{pmatrix} = 2(32-10)+3(8-6)+1(-5+12) = 44+6+7=57 \neq 0,$$
+        confirming independence. Since $\dim \mathbb{R}^3 = 3$, three linearly independent vectors form a basis of $\mathbb{R}^3$.</p>
+        <p>Hence $\{u_1, u_2, u_5\}$ is the desired basis ($u_3 = -4u_1$ and $u_4=-3u_1+7u_2$ are linear combinations of the other vectors, so they are excluded).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex1-3">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">기저로부터 새 기저 구성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $u, v, w$를 $V$의 서로 다른 벡터, $a, b$를 영이 아닌 스칼라라 하자.</p>
+        <ol type="a">
+          <li>$\{u, v\}$가 $V$의 기저이면 $\{u+v, au\}$와 $\{au, bv\}$도 $V$의 기저임을 증명하라.</li>
+          <li>$\{u, v, w\}$가 $V$의 기저이면 $\{u+v+w, v+w, w\}$도 $V$의 기저임을 증명하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(a) $\{u,v\}$가 $V$의 기저이므로 $\dim V = 2$이고, $\{u,v\}$는 일차독립이다.</p>
+        <p>$c_1(u+v) + c_2(au) = 0$이라 하자. 이는 $(c_1+c_2a)u + c_1 v = 0$이므로, $\{u,v\}$의 일차독립성에 의해 $c_1=0$이고 $c_1+c_2a=0$이다. $c_1=0$이므로 $c_2a=0$이고, $a\neq0$이므로 $c_2=0$이다. 따라서 $\{u+v,au\}$는 일차독립이며, $\dim V=2$이므로 원소 2개짜리 일차독립 집합은 $V$의 기저이다.</p>
+        <p>다음으로 $c_1(au)+c_2(bv)=0$이라 하자. 이는 $(c_1a)u+(c_2b)v=0$이므로 $c_1a=0$, $c_2b=0$이다. $a,b\neq0$이므로 $c_1=c_2=0$이다. 따라서 $\{au,bv\}$도 일차독립이고, 같은 이유로 $V$의 기저이다.</p>
+        <p>(b) $\{u,v,w\}$가 $V$의 기저이므로 $\dim V=3$이고 일차독립이다. $c_1(u+v+w)+c_2(v+w)+c_3w=0$이라 하면
+        $$c_1u + (c_1+c_2)v + (c_1+c_2+c_3)w = 0$$
+        이므로 $c_1=0$, $c_1+c_2=0$, $c_1+c_2+c_3=0$을 얻는다. 차례로 대입하면 $c_1=c_2=c_3=0$이므로 $\{u+v+w,v+w,w\}$는 일차독립이다. $\dim V=3$이므로 이 집합은 $V$의 기저이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $u, v, w$ be distinct vectors of a vector space $V$ and let $a, b$ be nonzero scalars.</p>
+        <ol type="a">
+          <li>Show that if $\{u, v\}$ is a basis for $V$, then $\{u+v, au\}$ and $\{au, bv\}$ are bases for $V$.</li>
+          <li>Show that if $\{u, v, w\}$ is a basis for $V$, then $\{u+v+w, v+w, w\}$ is a basis for $V$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(a) Since $\{u,v\}$ is a basis of $V$, $\dim V = 2$ and $\{u,v\}$ is linearly independent.</p>
+        <p>Suppose $c_1(u+v)+c_2(au)=0$. This gives $(c_1+c_2a)u+c_1v=0$, so by the linear independence of $\{u,v\}$, $c_1=0$ and $c_1+c_2a=0$. Since $c_1=0$, $c_2a=0$, and since $a\neq0$, $c_2=0$. Hence $\{u+v,au\}$ is linearly independent, and since $\dim V=2$, a linearly independent set of $2$ vectors is a basis of $V$.</p>
+        <p>Next, suppose $c_1(au)+c_2(bv)=0$. This gives $(c_1a)u+(c_2b)v=0$, so $c_1a=0$ and $c_2b=0$. Since $a,b\neq0$, $c_1=c_2=0$. Hence $\{au,bv\}$ is also linearly independent, and by the same reasoning is a basis of $V$.</p>
+        <p>(b) Since $\{u,v,w\}$ is a basis of $V$, $\dim V=3$ and $\{u,v,w\}$ is linearly independent. Suppose $c_1(u+v+w)+c_2(v+w)+c_3w=0$. Then
+        $$c_1u+(c_1+c_2)v+(c_1+c_2+c_3)w=0,$$
+        so $c_1=0$, $c_1+c_2=0$, and $c_1+c_2+c_3=0$. Substituting successively gives $c_1=c_2=c_3=0$, so $\{u+v+w,v+w,w\}$ is linearly independent. Since $\dim V=3$, this set is a basis of $V$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">부분공간의 기저와 차원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = \{(x_1, x_2, x_3) \in \mathbb{R}^3 : x_1 - 2x_2 + x_3 = 0, 2x_1 - 3x_2 + x_3 = 0\}$이라 하자.</p>
+        <ol>
+          <li>$V$가 $\mathbb{R}^3$의 부분공간임을 증명하라.</li>
+          <li>$V$의 기저를 구하라.</li>
+          <li>$\dim V$를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $V$는 두 개의 동차 일차방정식의 해집합이다. 영벡터 $(0,0,0)$은 두 방정식을 모두 만족하므로 $(0,0,0)\in V$이다. $x=(x_1,x_2,x_3), y=(y_1,y_2,y_3) \in V$이고 $c\in\mathbb{R}$이라 하자. 각 방정식의 좌변이 성분에 대해 선형이므로 $x+y$, $cx$의 성분도 두 방정식을 만족한다. 예를 들어
+        $$(x_1+y_1) - 2(x_2+y_2)+(x_3+y_3) = (x_1-2x_2+x_3)+(y_1-2y_2+y_3) = 0+0=0$$
+        이고, 다른 방정식과 $cx$에 대해서도 마찬가지로 성립한다. 따라서 $V$는 $\mathbb{R}^3$의 부분공간이다.</p>
+        <p>(2)-(3) 연립방정식을 풀면, 첫 식에서 $x_1 = 2x_2-x_3$이고 이를 둘째 식에 대입하면
+        $$2(2x_2-x_3) - 3x_2+x_3 = x_2 - x_3 = 0$$
+        이므로 $x_2=x_3$이고 $x_1=2x_3-x_3=x_3$이다. 즉 $x_1=x_2=x_3=t$ ($t\in\mathbb{R}$)이므로
+        $$V = \{t(1,1,1) : t \in \mathbb{R}\} = \operatorname{span}(\{(1,1,1)\}).$$
+        $(1,1,1)\neq 0$이므로 $\{(1,1,1)\}$은 일차독립이고 $V$를 생성하므로 $V$의 기저이다. 따라서 $\dim V = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V = \{(x_1, x_2, x_3) \in \mathbb{R}^3 : x_1 - 2x_2 + x_3 = 0, 2x_1 - 3x_2 + x_3 = 0\}$.</p>
+        <ol>
+          <li>Show that $V$ is a subspace of $\mathbb{R}^3$.</li>
+          <li>Find a basis of $V$.</li>
+          <li>Find $\dim V$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $V$ is the solution set of two homogeneous linear equations. The zero vector $(0,0,0)$ satisfies both equations, so $(0,0,0)\in V$. Let $x=(x_1,x_2,x_3), y=(y_1,y_2,y_3)\in V$ and $c\in\mathbb{R}$. Since the left-hand side of each equation is linear in the coordinates, the coordinates of $x+y$ and $cx$ also satisfy both equations. For instance,
+        $$(x_1+y_1)-2(x_2+y_2)+(x_3+y_3) = (x_1-2x_2+x_3)+(y_1-2y_2+y_3)=0+0=0,$$
+        and similarly for the other equation and for $cx$. Hence $V$ is a subspace of $\mathbb{R}^3$.</p>
+        <p>(2)-(3) Solving the system, the first equation gives $x_1=2x_2-x_3$; substituting into the second equation,
+        $$2(2x_2-x_3)-3x_2+x_3 = x_2-x_3 = 0,$$
+        so $x_2=x_3$ and $x_1=2x_3-x_3=x_3$. That is, $x_1=x_2=x_3=t$ for some $t\in\mathbb{R}$, so
+        $$V=\{t(1,1,1):t\in\mathbb{R}\}=\operatorname{span}(\{(1,1,1)\}).$$
+        Since $(1,1,1)\neq0$, $\{(1,1,1)\}$ is linearly independent and generates $V$, so it is a basis of $V$. Hence $\dim V=1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">행렬 부분공간의 차원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $M_{n\times n}(F)$의 다음 부분공간들의 차원을 구하라.</p>
+        <ol type="a">
+          <li>대각합이 0인 모든 $n \times n$ 행렬의 집합</li>
+          <li>모든 $n \times n$ 상삼각행렬의 집합</li>
+          <li>모든 $n \times n$ 반대칭행렬의 집합</li>
+        </ol>
+        <p>(정사각행렬 $A$가 $A^t = -A$를 만족하면 반대칭행렬임을 상기하라.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $E^{ij}$를 $(i,j)$-성분만 1이고 나머지는 0인 $n\times n$ 행렬이라 하자. $\{E^{ij} : 1\le i,j\le n\}$은 $M_{n\times n}(F)$의 표준기저이고 $\dim M_{n\times n}(F) = n^2$이다.</p>
+        <p>(a) 대각합이 0인 행렬들의 집합을 $W$라 하자.
+        $$\beta = \{E^{ij} : i \neq j\} \cup \{E^{ii}-E^{nn} : 1 \le i \le n-1\}$$
+        이 $W$의 기저임을 보인다. $A=(a_{ij}) \in W$이면 $a_{nn} = -\sum_{i=1}^{n-1} a_{ii}$이므로
+        $$A = \sum_{i\neq j} a_{ij}E^{ij} + \sum_{i=1}^{n-1} a_{ii}(E^{ii}-E^{nn})$$
+        이 성립하여 $\beta$는 $W$를 생성한다. $\sum_{i\neq j} c_{ij}E^{ij} + \sum_{i=1}^{n-1} d_i(E^{ii}-E^{nn}) = O$이면, $i\neq j$인 $(i,j)$-성분을 비교하여 $c_{ij}=0$을, $1\le i\le n-1$인 $(i,i)$-성분을 비교하여 $d_i=0$을 얻으므로 $\beta$는 일차독립이다. $|\beta| = (n^2-n)+(n-1) = n^2-1$이므로 $\dim W = n^2-1$이다.</p>
+        <p>(b) $\{E^{ij} : 1\le i\le j\le n\}$은 표준기저의 부분집합이므로 일차독립이고, 임의의 상삼각행렬 $A=(a_{ij})$는 $A=\sum_{i\le j} a_{ij}E^{ij}$로 쓸 수 있으므로 이 집합은 모든 상삼각행렬의 공간을 생성한다. $1\le i\le j\le n$인 순서쌍 $(i,j)$의 개수는 $n+(n-1)+\cdots+1=n(n+1)/2$이므로 차원은 $n(n+1)/2$이다.</p>
+        <p>(c) $\operatorname{char} F \neq 2$인 체 $F$를 가정한다 (그렇지 않으면 대각성분이 반드시 0이라고 할 수 없다). 반대칭행렬 $A=(a_{ij})$는 $a_{ii}=-a_{ii}$에서 $a_{ii}=0$이고 $i \lt j$일 때 $a_{ji}=-a_{ij}$를 만족하므로 $A = \sum_{i \lt j} a_{ij}(E^{ij}-E^{ji})$로 쓸 수 있다. 즉 $\{E^{ij}-E^{ji} : 1\le i \lt j \le n\}$은 모든 반대칭행렬의 공간을 생성한다. $\sum_{i \lt j} c_{ij}(E^{ij}-E^{ji}) = O$이면, 서로 다른 순서쌍 $(i,j)$는 겹치지 않는 성분에 기여하므로 각 $i \lt j$의 $(i,j)$-성분을 비교하여 $c_{ij}=0$을 얻어 일차독립이다. 원소 개수는 $\binom{n}{2}=n(n-1)/2$이므로 차원은 $n(n-1)/2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the dimensions of the given subspaces of $M_{n\times n}(F)$.</p>
+        <ol type="a">
+          <li>the set of all $n \times n$ matrices having trace equal to zero</li>
+          <li>the set of all $n \times n$ upper triangular matrices</li>
+          <li>the set of all $n \times n$ skew-symmetric matrices</li>
+        </ol>
+        <p>(Recall that a square matrix $A$ is skew-symmetric if $A^t = -A$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $E^{ij}$ denote the $n\times n$ matrix whose $(i,j)$-entry is $1$ and all other entries are $0$. Then $\{E^{ij} : 1\le i,j\le n\}$ is the standard basis of $M_{n\times n}(F)$, and $\dim M_{n\times n}(F)=n^2$.</p>
+        <p>(a) Let $W$ be the set of matrices with trace zero. We claim
+        $$\beta=\{E^{ij}: i\neq j\}\cup\{E^{ii}-E^{nn} : 1\le i \le n-1\}$$
+        is a basis of $W$. For $A=(a_{ij})\in W$, since $a_{nn}=-\sum_{i=1}^{n-1}a_{ii}$,
+        $$A=\sum_{i\neq j}a_{ij}E^{ij}+\sum_{i=1}^{n-1}a_{ii}(E^{ii}-E^{nn}),$$
+        so $\beta$ generates $W$. If $\sum_{i\neq j}c_{ij}E^{ij}+\sum_{i=1}^{n-1}d_i(E^{ii}-E^{nn})=O$, comparing the $(i,j)$-entry for $i\neq j$ gives $c_{ij}=0$, and comparing the $(i,i)$-entry for $1\le i\le n-1$ gives $d_i=0$; hence $\beta$ is linearly independent. Since $|\beta| = (n^2-n)+(n-1)=n^2-1$, we get $\dim W = n^2-1$.</p>
+        <p>(b) The set $\{E^{ij} : 1\le i\le j\le n\}$ is a subset of the standard basis, hence linearly independent, and it generates the space of upper triangular matrices since any upper triangular $A=(a_{ij})$ equals $\sum_{i\le j}a_{ij}E^{ij}$. The number of pairs $(i,j)$ with $1\le i\le j\le n$ is $n+(n-1)+\cdots+1=n(n+1)/2$, so the dimension is $n(n+1)/2$.</p>
+        <p>(c) Assume $\operatorname{char} F\neq 2$ (otherwise the diagonal entries need not vanish). A skew-symmetric matrix $A=(a_{ij})$ satisfies $a_{ii}=0$ (from $a_{ii}=-a_{ii}$) and $a_{ji}=-a_{ij}$ for $i \lt j$, so $A=\sum_{i \lt j}a_{ij}(E^{ij}-E^{ji})$; hence $\{E^{ij}-E^{ji} : 1\le i \lt j\le n\}$ generates the space of skew-symmetric matrices. If $\sum_{i \lt j}c_{ij}(E^{ij}-E^{ji})=O$, the $(i,j)$-entry for each pair $i \lt j$ gives $c_{ij}=0$, since distinct pairs contribute to disjoint entries; hence the set is linearly independent. Its size is $\binom{n}{2}=n(n-1)/2$, so the dimension is $n(n-1)/2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.2 -->
+<div class="card ex-card" id="ex2-2">
+  <div class="card-head">
+    <span class="ex-num">EX 2.2</span>
+    <span class="ex-title">유한 지지 수열의 공간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 $F$에서의 모든 수열들의 벡터공간이라 하자. $W$를 유한개의 항만 0이 아닌 $F$에서의 수열들의 집합이라 하자.</p>
+        <ol type="a">
+          <li>$W$가 $V$의 부분공간임을 증명하라.</li>
+          <li>$W$의 기저를 구하라.</li>
+          <li>$\dim W$를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(a) $W$가 $V$의 부분공간임을 보이자. 영수열은 (공허하게) 유한개의 항만 0이 아니므로 $W$에 속한다. $x=(x_n), y=(y_n) \in W$라 하고 $c\in F$라 하자. $x$가 0이 아닌 항들의 첨자 집합을 $S_x$, $y$의 것을 $S_y$라 하면 둘 다 유한집합이다. $x+y$가 0이 아닌 항의 첨자 집합은 $S_x\cup S_y$에 포함되므로 유한집합이고, $cx$가 0이 아닌 항의 첨자 집합은 $S_x$에 포함되므로 역시 유한집합이다. 따라서 $x+y, cx \in W$이고, $W$는 $V$의 부분공간이다.</p>
+        <p>(b) 각 $i=1,2,3,\ldots$에 대해 $e_i$를 $i$번째 항이 1이고 나머지 항은 모두 0인 수열이라 하자. $\beta = \{e_1,e_2,e_3,\ldots\}$가 $W$의 기저임을 보인다. $w=(w_1,w_2,\ldots)\in W$는 유한개의 항 $w_{i_1},\ldots,w_{i_m}$만 0이 아니므로 $w = w_{i_1}e_{i_1}+\cdots+w_{i_m}e_{i_m}$로 $\beta$의 원소들의 (유한) 일차결합으로 쓸 수 있다. 즉 $\beta$는 $W$를 생성한다. 또한 $\beta$의 임의의 유한 부분집합 $\{e_{i_1},\ldots,e_{i_m}\}$에 대해 $c_1e_{i_1}+\cdots+c_me_{i_m}=0$이면 $i_k$번째 항을 비교하여 각 $k$에 대해 $c_k=0$을 얻으므로 $\beta$는 일차독립이다. 따라서 $\beta$는 $W$의 기저이다. (일차독립성과 생성은 정의상 항상 유한 부분집합에 대해서만 검사하므로, $\beta$가 무한집합이라는 사실은 문제가 되지 않는다.)</p>
+        <p>(c) $\beta$는 무한집합이며, $W$는 유한개의 벡터로 생성될 수 없다. $\beta$의 임의의 유한 부분집합 $\{e_{i_1},\ldots,e_{i_m}\}$의 생성공간은 첨자 $i_1,\ldots,i_m$ 이외의 항이 모두 0인 수열들로만 이루어지므로, $\{i_1,\ldots,i_m\}$에 속하지 않는 첨자에서 0이 아닌 $W$의 원소(예를 들어 $j \notin \{i_1,\ldots,i_m\}$에 대한 $e_j$)를 생성하지 못한다. 따라서 $W$는 무한차원이다. 즉 $\dim W = \infty$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be the vector space of all sequences in $F$. Let $W$ be the set of sequences in $F$ that have only a finite number of nonzero terms.</p>
+        <ol type="a">
+          <li>Show that $W$ is a subspace of $V$.</li>
+          <li>Find a basis of $W$.</li>
+          <li>Find $\dim W$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(a) We show $W$ is a subspace of $V$. The zero sequence has (vacuously) only finitely many nonzero terms, so it lies in $W$. Let $x=(x_n), y=(y_n)\in W$ and $c\in F$. Let $S_x, S_y$ be the (finite) sets of indices where $x,y$ are nonzero, respectively. The set of indices where $x+y$ is nonzero is contained in $S_x\cup S_y$, which is finite, and the set of indices where $cx$ is nonzero is contained in $S_x$, also finite. Hence $x+y, cx\in W$, so $W$ is a subspace of $V$.</p>
+        <p>(b) For each $i=1,2,3,\ldots$, let $e_i$ be the sequence whose $i$-th term is $1$ and all other terms are $0$. We show $\beta=\{e_1,e_2,e_3,\ldots\}$ is a basis of $W$. Any $w=(w_1,w_2,\ldots)\in W$ has only finitely many nonzero terms $w_{i_1},\ldots,w_{i_m}$, so $w=w_{i_1}e_{i_1}+\cdots+w_{i_m}e_{i_m}$ is a (finite) linear combination of elements of $\beta$; hence $\beta$ generates $W$. Also, for any finite subset $\{e_{i_1},\ldots,e_{i_m}\}\subseteq\beta$, if $c_1e_{i_1}+\cdots+c_me_{i_m}=0$, comparing the $i_k$-th term gives $c_k=0$ for each $k$, so $\beta$ is linearly independent. Hence $\beta$ is a basis of $W$. (Since linear independence and generation are always tested against finite subsets by definition, the fact that $\beta$ is infinite causes no difficulty.)</p>
+        <p>(c) $\beta$ is infinite, and $W$ cannot be generated by finitely many vectors: the span of any finite subset $\{e_{i_1},\ldots,e_{i_m}\}\subset\beta$ consists of sequences that vanish outside the indices $i_1,\ldots,i_m$, so it cannot produce an element of $W$ that is nonzero at some index outside $\{i_1,\ldots,i_m\}$ (e.g., $e_j$ for $j\notin\{i_1,\ldots,i_m\}$). Hence $W$ is infinite-dimensional, i.e. $\dim W=\infty$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.3 -->
+<div class="card ex-card" id="ex2-3">
+  <div class="card-head">
+    <span class="ex-num">EX 2.3</span>
+    <span class="ex-title">다항식 부분공간의 차원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $a \in \mathbb{R}$을 고정하자. 다음과 같이 정의된 $P_n(\mathbb{R})$의 부분공간의 차원을 구하라.</p>
+        <p>$$\{f \in P_n(\mathbb{R}) : f(a) = 0\}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\gamma = \{1, (x-a), (x-a)^2, \ldots, (x-a)^n\}$이 $P_n(\mathbb{R})$의 기저임을 먼저 보이자. $\gamma$는 원소 $n+1$개로 이루어져 있고 $\dim P_n(\mathbb{R}) = n+1$이므로, 일차독립성만 보이면 충분하다. $\sum_{k=0}^n c_k(x-a)^k = 0$ (영다항식)이라 하자. 차수가 $n$인 항은 $k=n$인 항뿐이므로 $c_n=0$이어야 하고, 이를 귀납적으로 차수를 낮추어 가며 반복하면 $c_{n-1}=\cdots=c_0=0$을 얻는다. 따라서 $\gamma$는 일차독립이고 $P_n(\mathbb{R})$의 기저이다.</p>
+        <p>$W = \{f\in P_n(\mathbb{R}) : f(a)=0\}$이라 하자. 임의의 $f\in P_n(\mathbb{R})$을 $\gamma$에 대해 $f = \sum_{k=0}^n c_k(x-a)^k$로 유일하게 표현하면, $x=a$를 대입할 때 $k\ge1$인 항은 모두 0이 되므로 $f(a) = c_0$이다. 따라서
+        $$f \in W \iff c_0 = 0 \iff f \in \operatorname{span}(\{(x-a), (x-a)^2, \ldots, (x-a)^n\}).$$
+        즉 $\beta = \{(x-a),(x-a)^2,\ldots,(x-a)^n\}$은 $W$를 생성한다. 또한 $\beta \subset \gamma$이고 $\gamma$가 일차독립이므로 $\beta$도 일차독립이다. 따라서 $\beta$는 $n$개의 원소로 이루어진 $W$의 기저이고, $\dim W = n$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Fix $a \in \mathbb{R}$. Find the dimension of the subspace of $P_n(\mathbb{R})$ defined by</p>
+        <p>$$\{f \in P_n(\mathbb{R}) : f(a) = 0\}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First we show $\gamma=\{1,(x-a),(x-a)^2,\ldots,(x-a)^n\}$ is a basis of $P_n(\mathbb{R})$. It has $n+1$ elements and $\dim P_n(\mathbb{R})=n+1$, so it suffices to show linear independence. Suppose $\sum_{k=0}^n c_k(x-a)^k=0$ as a polynomial. The only term of degree $n$ comes from $k=n$, forcing $c_n=0$; proceeding inductively by decreasing degree gives $c_{n-1}=\cdots=c_0=0$. Hence $\gamma$ is linearly independent and is a basis of $P_n(\mathbb{R})$.</p>
+        <p>Let $W=\{f\in P_n(\mathbb{R}):f(a)=0\}$. Writing any $f\in P_n(\mathbb{R})$ uniquely as $f=\sum_{k=0}^n c_k(x-a)^k$ with respect to $\gamma$, every term with $k\ge1$ vanishes at $x=a$, so $f(a)=c_0$. Hence
+        $$f\in W \iff c_0=0 \iff f\in\operatorname{span}(\{(x-a),(x-a)^2,\ldots,(x-a)^n\}).$$
+        So $\beta=\{(x-a),(x-a)^2,\ldots,(x-a)^n\}$ generates $W$. Since $\beta\subset\gamma$ and $\gamma$ is linearly independent, $\beta$ is also linearly independent. Hence $\beta$ is a basis of $W$ consisting of $n$ elements, so $\dim W = n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="ex3">
+  <div class="card-head">
+    <span class="ex-num">EX 3</span>
+    <span class="ex-title">교집합 차원이 같을 조건</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $W_1$과 $W_2$를 $V$의 부분공간이라 하자. $\dim(W_1 \cap W_2) = \dim W_2$가 성립하기 위한 $W_1$과 $W_2$에 대한 필요충분조건을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 필요충분조건은 $W_2 \subseteq W_1$이다 (단, $\dim W_2 \lt \infty$이다).</p>
+        <p>($\Leftarrow$) $W_2\subseteq W_1$이면 $W_1\cap W_2 = W_2$이므로 $\dim(W_1\cap W_2) = \dim W_2$가 자명하게 성립한다.</p>
+        <p>($\Rightarrow$) $\dim(W_1\cap W_2) = \dim W_2$라 하자. $W_1\cap W_2$는 $W_2$의 부분공간이고, $W_2$가 유한차원이며 두 공간의 차원이 같으므로, 유한차원 벡터공간의 부분공간이 전체와 같은 차원을 가지면 그 부분공간은 전체와 같다는 정리에 의해 $W_1\cap W_2 = W_2$이다. 따라서 $W_2 \subseteq W_1\cap W_2 \subseteq W_1$이므로 $W_2\subseteq W_1$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$. Find a necessary and sufficient conditions on $W_1$ and $W_2$ so that $\dim(W_1 \cap W_2) = \dim W_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The necessary and sufficient condition is $W_2\subseteq W_1$ (assuming $\dim W_2 \lt \infty$).</p>
+        <p>($\Leftarrow$) If $W_2\subseteq W_1$, then $W_1\cap W_2=W_2$, so $\dim(W_1\cap W_2)=\dim W_2$ holds trivially.</p>
+        <p>($\Rightarrow$) Suppose $\dim(W_1\cap W_2)=\dim W_2$. Since $W_1\cap W_2$ is a subspace of $W_2$, $W_2$ is finite-dimensional, and the two have equal dimension, the theorem that a subspace of a finite-dimensional space with the same dimension equals the whole space gives $W_1\cap W_2=W_2$. Hence $W_2\subseteq W_1\cap W_2\subseteq W_1$, so $W_2\subseteq W_1$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.1 -->
+<div class="card ex-card" id="ex3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 3.1</span>
+    <span class="ex-title">생성공간 차원 불변 조건</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $v_1, v_2, \cdots, v_k, v \in V$를 취하자. $W_1 = \operatorname{span}(\{v_1, v_2, \cdots, v_k\})$, $W_2 = \operatorname{span}(\{v_1, v_2, \cdots, v_k, v\})$라 하자. $\dim W_1 = \dim W_2$가 성립하기 위한 $v$에 대한 필요충분조건을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 필요충분조건은 $v \in \operatorname{span}(\{v_1,v_2,\cdots,v_k\}) = W_1$이다.</p>
+        <p>($\Leftarrow$) $v\in W_1$이면 $v$는 $v_1,\ldots,v_k$의 일차결합이므로 $\operatorname{span}(\{v_1,\ldots,v_k,v\}) = \operatorname{span}(\{v_1,\ldots,v_k\})$, 즉 $W_2 = W_1$이다. 따라서 $\dim W_1 = \dim W_2$가 자명하게 성립한다.</p>
+        <p>($\Rightarrow$) $\dim W_1 = \dim W_2$라 하자. $W_1$은 $k$개의 벡터로 생성되므로 유한차원이고, $W_1 \subseteq W_2$이며 두 공간의 차원이 같으므로 $W_2$ 역시 유한차원이다. 유한차원 벡터공간의 부분공간이 전체와 같은 차원을 가지면 그 부분공간은 전체와 같다는 정리에 의해 $W_1 = W_2$이다. 따라서 $v \in W_2 = W_1 = \operatorname{span}(\{v_1,\ldots,v_k\})$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and take $v_1, v_2, \cdots, v_k, v \in V$. Let $W_1 = \operatorname{span}(\{v_1, v_2, \cdots, v_k\})$ and $W_2 = \operatorname{span}(\{v_1, v_2, \cdots, v_k, v\})$. Find a necessary and sufficient conditions on $v$ so that $\dim W_1 = \dim W_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The necessary and sufficient condition is $v\in\operatorname{span}(\{v_1,v_2,\cdots,v_k\})=W_1$.</p>
+        <p>($\Leftarrow$) If $v\in W_1$, then $v$ is a linear combination of $v_1,\ldots,v_k$, so $\operatorname{span}(\{v_1,\ldots,v_k,v\})=\operatorname{span}(\{v_1,\ldots,v_k\})$, i.e. $W_2=W_1$. Hence $\dim W_1=\dim W_2$ holds trivially.</p>
+        <p>($\Rightarrow$) Suppose $\dim W_1=\dim W_2$. Since $W_1$ is generated by $k$ vectors it is finite-dimensional, and $W_1\subseteq W_2$ with equal dimension, so $W_2$ is finite-dimensional as well. By the theorem that a subspace of a finite-dimensional space with the same dimension equals the whole space, $W_1=W_2$. Hence $v\in W_2=W_1=\operatorname{span}(\{v_1,\ldots,v_k\})$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>심화 문제 · Problems</h2></div>
+
+<!-- Problem 1 -->
+<div class="card pr-card" id="pr1">
+  <div class="card-head">
+    <span class="pr-num">PR 1</span>
+    <span class="ex-title">생성집합이 유한한 공간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 생성집합을 유한개만 갖는 모든 벡터공간 $V$를 구하라. (힌트. $F$가 유한한 경우와 무한한 경우를 나누어 생각하라.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find all vector spaces $V$ which have only a finite number of generating sets. (Hint. Consider the case $F$ is finite and the case $F$ is infinite separately.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 2 -->
+<div class="card pr-card" id="pr2">
+  <div class="card-head">
+    <span class="pr-num">PR 2</span>
+    <span class="ex-title">도함수로 이루어진 다항식 기저</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $f(x)$를 $P_n(\mathbb{R})$에서 차수가 $n$인 다항식이라 하자. $\{f(x), f'(x), \cdots, f^{(n)}(x)\}$가 $P_n(\mathbb{R})$의 기저임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $f(x)$ be a polynomial of degree $n$ in $P_n(\mathbb{R})$. Show that $\{f(x), f'(x), \cdots, f^{(n)}(x)\}$ is a basis of $P_n(\mathbb{R})$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 3 -->
+<div class="card pr-card" id="pr3">
+  <div class="card-head">
+    <span class="pr-num">PR 3</span>
+    <span class="ex-title">기저와 무한차원 공간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$V$를 차원이 $n$인 벡터공간이라 하고 $S$를 $V$의 생성집합이라 하자. $S$의 부분집합 중 $V$의 기저가 되는 것이 존재함을 증명하라.</li>
+          <li>벡터공간이 무한차원인 것과 무한 일차독립 부분집합을 포함하는 것은 동치임을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $V$ be a vector space of dimension $n$ and let $S$ be a generating set of $V$. Show that there is a subset of $S$ which is a basis of $V$.</li>
+          <li>Prove that a vector space is infinite-dimensional if and only if it contains an infinite linearly independent subset.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 4 -->
+<div class="card pr-card" id="pr4">
+  <div class="card-head">
+    <span class="pr-num">PR 4</span>
+    <span class="ex-title">복소벡터공간의 실차원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$가 $\mathbb{C}$ 위에서 차원이 $n$인 벡터공간이면, $V$는 $\mathbb{R}$ 위에서 차원이 $2n$인 벡터공간임을 증명하라. (여기서 $n$은 음이 아닌 정수이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Show that if $V$ is a vector space over $\mathbb{C}$ of dimension $n$, then $V$ is a vector space over $\mathbb{R}$ of dimension $2n$. (Here, $n$ is a nonnegative integer.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 5 -->
+<div class="card pr-card" id="pr5">
+  <div class="card-head">
+    <span class="pr-num">PR 5</span>
+    <span class="ex-title">부분공간 합의 차원 공식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $W_1$과 $W_2$를 $V$의 유한차원 부분공간이라 하자. 다음을 증명하라.</p>
+        <ol>
+          <li>$\dim(W_1 + W_2) = \dim W_1 + \dim W_2 - \dim(W_1 \cap W_2)$</li>
+          <li>$V = W_1 \oplus W_2$인 것과 $V = W_1 + W_2$이고 $\dim V = \dim W_1 + \dim W_2$인 것은 동치이다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and let $W_1$ and $W_2$ be finite-dimensional subspaces of $V$. Show the following.</p>
+        <ol>
+          <li>$\dim(W_1 + W_2) = \dim W_1 + \dim W_2 - \dim(W_1 \cap W_2)$</li>
+          <li>$V = W_1 \oplus W_2$ if and only if $V = W_1 + W_2$ and $\dim V = \dim W_1 + \dim W_2$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 6 -->
+<div class="card pr-card" id="pr6">
+  <div class="card-head">
+    <span class="pr-num">PR 6</span>
+    <span class="ex-title">보충부분공간의 존재성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 유한차원 벡터공간이라 하고 $W$를 $V$의 부분공간이라 하자.</p>
+        <ol>
+          <li>$V = W \oplus W'$을 만족하는 $V$의 부분공간 $W'$이 존재함을 증명하라.</li>
+          <li>(1)의 $W'$은 유일하지 않을 수 있음을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a finite-dimensional vector space and let $W$ be a subspace of $V$.</p>
+        <ol>
+          <li>Show that there exists a subspace $W'$ of $V$ such that $V = W \oplus W'$.</li>
+          <li>Show that $W'$ in (1) may not be unique.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 7 -->
+<div class="card pr-card" id="pr7">
+  <div class="card-head">
+    <span class="pr-num">PR 7</span>
+    <span class="ex-title">몫공간의 차원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 유한차원 벡터공간이라 하고 $W$를 $V$의 부분공간이라 하자. $\dim(V/W) = \dim V - \dim W$임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a finite-dimensional vector space and let $W$ be a subspace of $V$. Show that $\dim(V/W) = \dim V - \dim W$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

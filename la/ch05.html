@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05. 선형변환 (Linear Transformation) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 05단원 선형변환(Linear Transformation) 예제·심화 문제 모음. 선형사상, 핵과 상, 계수와 퇴화차수, 사영, 제한사상을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 선형변환, linear transformation, 선형사상, linear map, 핵, kernel, 상, image, 계수, rank, 사영, projection, 제한사상, restriction, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch05.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05. 선형변환 (Linear Transformation) — 선형대수학 한·영 대조">
+<meta property="og:description" content="선형변환 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch05.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "05. 선형변환 (Linear Transformation) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 선형변환 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch05.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch05.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html" class="active">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 05</p>
+  <h1>05. 선형변환<span>Linear Transformation</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 함수의 선형성 판정</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> $T(2,3)$ 구하기</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> $xy$평면에 대한 반사</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 퇴화차수·계수·단사성·전사성</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 실수열 위의 이동연산자</a></li>
+    <li><a href="#ex2-2"><span class="toc-num">EX 2.2</span> 핵과 상이 같은 서로 다른 사상</a></li>
+    <li><a href="#ex2-3"><span class="toc-num">EX 2.3</span> 원상과 핵의 잉여류</a></li>
+    <li><a href="#pr1"><span class="toc-num">PR 1</span> $F^n$ 위의 선형범함수</a></li>
+    <li><a href="#pr2"><span class="toc-num">PR 2</span> 부분공간을 따른 사영</a></li>
+    <li><a href="#pr3"><span class="toc-num">PR 3</span> $T$-불변 부분공간과 제한</a></li>
+    <li><a href="#pr4"><span class="toc-num">PR 4</span> 가법적 함수와 선형성</a></li>
+    <li><a href="#pr5"><span class="toc-num">PR 5</span> 핵과 상의 합 분해</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">함수의 선형성 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 함수가 선형인지 판정하라.</p>
+        <ol type="a">
+          <li>$T : \mathbb{R}^3 \to \mathbb{R}^2$, $T(a_1, a_2, a_3) = (a_1 - a_2, 2a_3)$</li>
+          <li>$T : P_2(\mathbb{R}) \to P_3(\mathbb{R})$, $T(f(x)) = xf(x) + f'(x)$</li>
+          <li>$T : M_{n\times n}(F) \to F$, $T(A) = \operatorname{tr}(A)$</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^2$, $T(a_1, a_2) = (a_1 + 1, a_2)$</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^2$, $T(a_1, a_2) = (\sin a_1, 0)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 각 함수의 선형성을 가법성과 동차성으로 직접 확인한다.</p>
+        <ol type="a">
+          <li>$T(a_1,a_2,a_3)=(a_1-a_2,2a_3)$는 <strong>선형</strong>이다. $x=(a_1,a_2,a_3)$, $y=(b_1,b_2,b_3)$라 하면
+          $$T(x+y) = ((a_1+b_1)-(a_2+b_2),\, 2(a_3+b_3)) = (a_1-a_2,2a_3)+(b_1-b_2,2b_3) = T(x)+T(y),$$
+          $$T(cx) = (ca_1-ca_2,\, 2ca_3) = c(a_1-a_2,2a_3) = cT(x)$$
+          이므로 가법성과 동차성이 모두 성립한다.</li>
+          <li>$T(f(x)) = xf(x)+f'(x)$는 <strong>선형</strong>이다. $f,g\in P_2(\mathbb{R})$, $c\in\mathbb{R}$에 대해
+          $$T(f+g) = x(f+g)(x)+(f+g)'(x) = \big(xf(x)+f'(x)\big)+\big(xg(x)+g'(x)\big) = T(f)+T(g),$$
+          $$T(cf) = x(cf)(x)+(cf)'(x) = c\big(xf(x)+f'(x)\big) = cT(f)$$
+          이므로 선형이다.</li>
+          <li>$T(A)=\operatorname{tr}(A)$는 <strong>선형</strong>이다. 대각합은 대각성분의 합이므로 $\operatorname{tr}(A+B)=\operatorname{tr}(A)+\operatorname{tr}(B)$, $\operatorname{tr}(cA)=c\operatorname{tr}(A)$가 성립하여 가법성과 동차성을 모두 만족한다.</li>
+          <li>$T(a_1,a_2)=(a_1+1,a_2)$는 <strong>선형이 아니다</strong>. $T(0,0)=(1,0)\ne(0,0)$이므로 선형변환이라면 성립해야 할 $T(0)=0$이 깨진다. (직접 확인: $T(1,0)+T(1,0)=(2,0)+(2,0)=(4,0)$인데 $T((1,0)+(1,0))=T(2,0)=(3,0)$이므로 가법성도 실패한다.)</li>
+          <li>$T(a_1,a_2)=(\sin a_1,0)$은 <strong>선형이 아니다</strong>. $x=(\pi/2,0)$, $c=2$라 하면
+          $$T(cx) = T(\pi,0) = (\sin\pi,0)=(0,0), \qquad cT(x) = 2(\sin(\pi/2),0)=(2,0)$$
+          이므로 $T(cx)\ne cT(x)$가 되어 동차성이 실패한다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Determine whether the following functions are linear.</p>
+        <ol type="a">
+          <li>$T : \mathbb{R}^3 \to \mathbb{R}^2$, $T(a_1, a_2, a_3) = (a_1 - a_2, 2a_3)$</li>
+          <li>$T : P_2(\mathbb{R}) \to P_3(\mathbb{R})$, $T(f(x)) = xf(x) + f'(x)$</li>
+          <li>$T : M_{n\times n}(F) \to F$, $T(A) = \operatorname{tr}(A)$</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^2$, $T(a_1, a_2) = (a_1 + 1, a_2)$</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^2$, $T(a_1, a_2) = (\sin a_1, 0)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We check additivity and homogeneity directly for each function.</p>
+        <ol type="a">
+          <li>$T(a_1,a_2,a_3)=(a_1-a_2,2a_3)$ is <strong>linear</strong>. For $x=(a_1,a_2,a_3)$, $y=(b_1,b_2,b_3)$,
+          $$T(x+y) = ((a_1+b_1)-(a_2+b_2),\, 2(a_3+b_3)) = (a_1-a_2,2a_3)+(b_1-b_2,2b_3) = T(x)+T(y),$$
+          $$T(cx) = (ca_1-ca_2,\, 2ca_3) = c(a_1-a_2,2a_3) = cT(x),$$
+          so both additivity and homogeneity hold.</li>
+          <li>$T(f(x)) = xf(x)+f'(x)$ is <strong>linear</strong>. For $f,g\in P_2(\mathbb{R})$, $c\in\mathbb{R}$,
+          $$T(f+g) = x(f+g)(x)+(f+g)'(x) = \big(xf(x)+f'(x)\big)+\big(xg(x)+g'(x)\big) = T(f)+T(g),$$
+          $$T(cf) = x(cf)(x)+(cf)'(x) = c\big(xf(x)+f'(x)\big) = cT(f).$$</li>
+          <li>$T(A)=\operatorname{tr}(A)$ is <strong>linear</strong>, since the trace is the sum of the diagonal entries, so $\operatorname{tr}(A+B)=\operatorname{tr}(A)+\operatorname{tr}(B)$ and $\operatorname{tr}(cA)=c\operatorname{tr}(A)$.</li>
+          <li>$T(a_1,a_2)=(a_1+1,a_2)$ is <strong>not linear</strong>. Since $T(0,0)=(1,0)\ne(0,0)$, the necessary condition $T(0)=0$ fails. (Directly: $T(1,0)+T(1,0)=(2,0)+(2,0)=(4,0)$ while $T\big((1,0)+(1,0)\big)=T(2,0)=(3,0)$, so additivity also fails.)</li>
+          <li>$T(a_1,a_2)=(\sin a_1,0)$ is <strong>not linear</strong>. Taking $x=(\pi/2,0)$ and $c=2$,
+          $$T(cx) = T(\pi,0) = (\sin\pi,0)=(0,0), \qquad cT(x) = 2(\sin(\pi/2),0)=(2,0),$$
+          so $T(cx)\ne cT(x)$ and homogeneity fails.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">$T(2,3)$ 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : \mathbb{R}^2 \to \mathbb{R}^2$가 선형이라 하자. $T(1,0) = (1,4)$이고 $T(1,1) = (2,5)$일 때, $T(2,3)$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $(2,3)$을 $(1,0)$과 $(1,1)$의 일차결합으로 나타내면 된다. $(2,3) = a(1,0)+b(1,1) = (a+b,\,b)$라 하면 $b=3$, $a+b=2$이므로 $a=-1$이다. 즉
+        $$(2,3) = -(1,0) + 3(1,1).$$
+        $T$가 선형이므로
+        $$T(2,3) = -T(1,0) + 3T(1,1) = -(1,4) + 3(2,5) = (-1,-4)+(6,15) = (5,11).$$
+        따라서 $T(2,3) = (5,11)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Suppose that $T : \mathbb{R}^2 \to \mathbb{R}^2$ is linear. Suppose that $T(1,0) = (1,4)$ and $T(1,1) = (2,5)$. Find the value of $T(2,3)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Write $(2,3)$ as a linear combination of $(1,0)$ and $(1,1)$. Setting $(2,3)=a(1,0)+b(1,1)=(a+b,\,b)$ gives $b=3$ and $a+b=2$, so $a=-1$, i.e.,
+        $$(2,3) = -(1,0) + 3(1,1).$$
+        Since $T$ is linear,
+        $$T(2,3) = -T(1,0) + 3T(1,1) = -(1,4) + 3(2,5) = (-1,-4)+(6,15) = (5,11).$$
+        Hence $T(2,3) = (5,11)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">$xy$평면에 대한 반사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $xy$평면에 대한 반사에 대응하는 선형변환 $T : \mathbb{R}^3 \to \mathbb{R}^3$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $xy$평면은 $z$좌표가 $0$인 점들의 집합이므로, 이 평면에 대한 반사는 $x, y$좌표는 그대로 두고 $z$좌표의 부호만 바꾸는 변환이다. 즉
+        $$T(a,b,c) = (a, b, -c).$$
+        이는 좌표별 일차식이므로 선형이다: $T(x+y) = T(x)+T(y)$와 $T(cx)=cT(x)$가 각 성분에서 자명하게 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the linear transform $T : \mathbb{R}^3 \to \mathbb{R}^3$, which corresponds to the reflection about the $xy$-plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The $xy$-plane consists of the points with $z$-coordinate $0$, so reflection about this plane keeps the $x$- and $y$-coordinates fixed and negates the $z$-coordinate. That is,
+        $$T(a,b,c) = (a, b, -c).$$
+        This is linear, since $T(x+y)=T(x)+T(y)$ and $T(cx)=cT(x)$ hold componentwise trivially.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">퇴화차수·계수·단사성·전사성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 예제 1의 각 선형변환 $T$에 대해 $T$의 퇴화차수(nullity)와 계수(rank)를 구하고, $T$가 단사인지 전사인지 판정하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 1에서 선형인 것은 (a), (b), (c)뿐이므로 이 셋에 대해서만 계산한다. (d), (e)는 선형변환이 아니므로 해당 없음.</p>
+        <ol type="a">
+          <li>$T(a_1,a_2,a_3)=(a_1-a_2,2a_3)$. $\operatorname{Ker}(T) = \{(a,a,0): a\in\mathbb{R}\} = \operatorname{span}\{(1,1,0)\}$이므로 퇴화차수는 $1$이다. 차원정리에 의해 계수는 $3-1=2$이며, 이는 공역 $\mathbb{R}^2$의 차원과 같으므로 $T$는 전사이다. 그러나 $\operatorname{Ker}(T)\ne 0$이므로 단사가 아니다.</li>
+          <li>$T(f(x))=xf(x)+f'(x)$. $f(x)=a+bx+cx^2$에 대해 $T(f) = b + (a+2c)x + bx^2 + cx^3$이다. $T(f)=0$이면 $b=0$, $c=0$, $a+2c=0$에서 $a=0$이므로 $\operatorname{Ker}(T)=0$, 퇴화차수는 $0$이다. 계수는 $3-0=3$이며, 공역 $P_3(\mathbb{R})$의 차원은 $4$이므로 $T$는 전사가 아니다. $\operatorname{Ker}(T)=0$이므로 $T$는 단사이다.</li>
+          <li>$T(A)=\operatorname{tr}(A)$. $\operatorname{Ker}(T)$는 대각합이 $0$인 행렬 전체이며 차원은 $n^2-1$이므로 퇴화차수는 $n^2-1$이다. 계수는 $n^2-(n^2-1)=1$이며 공역 $F$의 차원과 같으므로(예: $\operatorname{tr}(E_{11})=1$이 $F$를 생성) $T$는 전사이다. $n\ge 2$이면 $\operatorname{Ker}(T)\ne 0$이므로 단사가 아니다. ($n=1$인 경우는 $T$가 자명한 동형사상이다.)</li>
+          <li>해당 없음 (선형이 아님).</li>
+          <li>해당 없음 (선형이 아님).</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> For each linear transform $T$ in Exercise 1, compute the nullity and rank of $T$ and determine whether $T$ is injective or surjective.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Only (a), (b), (c) of Exercise 1 are linear, so we compute for those; (d) and (e) are not linear and hence not applicable.</p>
+        <ol type="a">
+          <li>$T(a_1,a_2,a_3)=(a_1-a_2,2a_3)$. $\operatorname{Ker}(T) = \{(a,a,0): a\in\mathbb{R}\} = \operatorname{span}\{(1,1,0)\}$, so the nullity is $1$. By the dimension theorem the rank is $3-1=2$, which equals the dimension of the codomain $\mathbb{R}^2$, so $T$ is onto. But $\operatorname{Ker}(T)\ne 0$, so $T$ is not one-to-one.</li>
+          <li>$T(f(x))=xf(x)+f'(x)$. For $f(x)=a+bx+cx^2$, $T(f) = b + (a+2c)x + bx^2 + cx^3$. If $T(f)=0$ then $b=0$, $c=0$, and $a+2c=0$ gives $a=0$, so $\operatorname{Ker}(T)=0$ and the nullity is $0$. The rank is $3-0=3$, while the codomain $P_3(\mathbb{R})$ has dimension $4$, so $T$ is not onto. Since $\operatorname{Ker}(T)=0$, $T$ is one-to-one.</li>
+          <li>$T(A)=\operatorname{tr}(A)$. $\operatorname{Ker}(T)$ consists of the traceless matrices, of dimension $n^2-1$, so the nullity is $n^2-1$. The rank is $n^2-(n^2-1)=1$, which equals the dimension of the codomain $F$ (e.g., $\operatorname{tr}(E_{11})=1$ generates $F$), so $T$ is onto. For $n\ge 2$, $\operatorname{Ker}(T)\ne 0$, so $T$ is not one-to-one. (For $n=1$, $T$ is the trivial isomorphism.)</li>
+          <li>Not applicable (not linear).</li>
+          <li>Not applicable (not linear).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">실수열 위의 이동연산자</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 실수열 전체의 공간이라 하자. $T, U : V \to V$를 다음과 같이 정의하자.</p>
+        <p>$$T(a_1, a_2, \cdots) = (a_2, a_3, \cdots), \ \ U(a_1, a_2, \cdots) = (0, a_1, a_2, \cdots)$$</p>
+        <ol>
+          <li>$T, U$가 선형임을 증명하라.</li>
+          <li>$T$는 전사이지만 단사가 아님을 증명하라.</li>
+          <li>$U$는 단사이지만 전사가 아님을 증명하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <ol>
+          <li>$x=(a_1,a_2,\cdots)$, $y=(b_1,b_2,\cdots)\in V$, $c\in\mathbb{R}$라 하자.
+          $$T(x+y) = (a_2+b_2,a_3+b_3,\cdots) = (a_2,a_3,\cdots)+(b_2,b_3,\cdots) = T(x)+T(y), \quad T(cx) = (ca_2,ca_3,\cdots) = cT(x)$$
+          이므로 $T$는 선형이다. 마찬가지로
+          $$U(x+y) = (0,a_1+b_1,a_2+b_2,\cdots) = (0,a_1,a_2,\cdots)+(0,b_1,b_2,\cdots) = U(x)+U(y), \quad U(cx) = (0,ca_1,ca_2,\cdots) = cU(x)$$
+          이므로 $U$도 선형이다.</li>
+          <li>$T$가 전사임을 보이자. 임의의 $y=(b_1,b_2,\cdots)\in V$에 대해 $x=(0,b_1,b_2,\cdots)\in V$라 하면 $T(x) = (b_1,b_2,\cdots) = y$이므로 $T$는 전사이다. 한편 $x_0=(1,0,0,\cdots)\ne 0$에 대해 $T(x_0) = (0,0,\cdots) = 0$이므로 $x_0\in\operatorname{Ker}(T)$, $x_0 \ne 0$이다. 즉 $\operatorname{Ker}(T)\ne 0$이므로 $T$는 단사가 아니다.</li>
+          <li>$U$가 단사임을 보이자. $U(x)=0$이라 하면 $x=(a_1,a_2,\cdots)$에 대해 $(0,a_1,a_2,\cdots)=(0,0,0,\cdots)$이므로 모든 $i$에 대해 $a_i=0$, 즉 $x=0$이다. 따라서 $\operatorname{Ker}(U)=0$이고 $U$는 단사이다. 한편 $y_0=(1,0,0,\cdots)\in V$를 생각하면 $U(x)$의 첫 좌표는 항상 $0$이므로 어떤 $x\in V$에 대해서도 $U(x)=y_0$일 수 없다. 즉 $U$는 전사가 아니다.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be the space of real sequences. Define $T, U : V \to V$ as follows.</p>
+        <p>$$T(a_1, a_2, \cdots) = (a_2, a_3, \cdots), \ \ U(a_1, a_2, \cdots) = (0, a_1, a_2, \cdots)$$</p>
+        <ol>
+          <li>Show that $T, U$ are linear.</li>
+          <li>Show that $T$ is onto but not one-to-one.</li>
+          <li>Show that $U$ is one-to-one but not onto.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <ol>
+          <li>Let $x=(a_1,a_2,\cdots)$, $y=(b_1,b_2,\cdots)\in V$ and $c\in\mathbb{R}$.
+          $$T(x+y) = (a_2+b_2,a_3+b_3,\cdots) = (a_2,a_3,\cdots)+(b_2,b_3,\cdots) = T(x)+T(y), \quad T(cx) = (ca_2,ca_3,\cdots) = cT(x),$$
+          so $T$ is linear. Likewise,
+          $$U(x+y) = (0,a_1+b_1,a_2+b_2,\cdots) = (0,a_1,a_2,\cdots)+(0,b_1,b_2,\cdots) = U(x)+U(y), \quad U(cx) = (0,ca_1,ca_2,\cdots) = cU(x),$$
+          so $U$ is linear as well.</li>
+          <li>We show $T$ is onto. For any $y=(b_1,b_2,\cdots)\in V$, let $x=(0,b_1,b_2,\cdots)\in V$; then $T(x) = (b_1,b_2,\cdots) = y$, so $T$ is onto. On the other hand, for $x_0=(1,0,0,\cdots)\ne 0$ we have $T(x_0) = (0,0,\cdots) = 0$, so $x_0\in\operatorname{Ker}(T)$ with $x_0\ne 0$. Hence $\operatorname{Ker}(T)\ne 0$ and $T$ is not one-to-one.</li>
+          <li>We show $U$ is one-to-one. Suppose $U(x)=0$ for $x=(a_1,a_2,\cdots)$; then $(0,a_1,a_2,\cdots)=(0,0,0,\cdots)$, so $a_i=0$ for all $i$, i.e., $x=0$. Thus $\operatorname{Ker}(U)=0$ and $U$ is one-to-one. On the other hand, consider $y_0=(1,0,0,\cdots)\in V$. Since the first coordinate of $U(x)$ is always $0$, no $x\in V$ satisfies $U(x)=y_0$. Hence $U$ is not onto.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.2 -->
+<div class="card ex-card" id="ex2-2">
+  <div class="card-head">
+    <span class="ex-num">EX 2.2</span>
+    <span class="ex-title">핵과 상이 같은 서로 다른 사상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\operatorname{Ker}(T) = \operatorname{Ker}(U)$이고 $\operatorname{Im}(T) = \operatorname{Im}(U)$를 만족하는 서로 다른 두 선형변환 $T, U : \mathbb{R}^2 \to \mathbb{R}^2$의 예를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $T,U:\mathbb{R}^2\to\mathbb{R}^2$를
+        $$T(a,b) = (a,0), \qquad U(a,b) = (2a,0)$$
+        로 정의하자. $T$는 좌표사영이므로 선형이고, $U = 2T$는 선형변환의 스칼라배이므로 역시 선형이다.</p>
+        <p>$\operatorname{Ker}(T) = \{(0,b): b\in\mathbb{R}\}$이고 $\operatorname{Ker}(U) = \{(a,b): 2a=0\} = \{(0,b): b\in\mathbb{R}\}$이므로 $\operatorname{Ker}(T)=\operatorname{Ker}(U)$이다.</p>
+        <p>$\operatorname{Im}(T) = \{(a,0): a\in\mathbb{R}\}$이고 $\operatorname{Im}(U) = \{(2a,0): a\in\mathbb{R}\} = \{(a,0): a\in\mathbb{R}\}$이므로 $\operatorname{Im}(T)=\operatorname{Im}(U)$이다.</p>
+        <p>그러나 $T(1,0)=(1,0)\ne(2,0)=U(1,0)$이므로 $T\ne U$이다. 따라서 이 $T,U$는 조건을 모두 만족하는 서로 다른 두 선형변환이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find an example of two distinct linear transforms $T, U : \mathbb{R}^2 \to \mathbb{R}^2$ such that $\operatorname{Ker}(T) = \operatorname{Ker}(U)$ and $\operatorname{Im}(T) = \operatorname{Im}(U)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Define $T,U:\mathbb{R}^2\to\mathbb{R}^2$ by
+        $$T(a,b) = (a,0), \qquad U(a,b) = (2a,0).$$
+        $T$ is linear as a coordinate projection, and $U=2T$ is a scalar multiple of a linear transform, hence also linear.</p>
+        <p>$\operatorname{Ker}(T) = \{(0,b): b\in\mathbb{R}\}$ and $\operatorname{Ker}(U) = \{(a,b): 2a=0\} = \{(0,b): b\in\mathbb{R}\}$, so $\operatorname{Ker}(T)=\operatorname{Ker}(U)$.</p>
+        <p>$\operatorname{Im}(T) = \{(a,0): a\in\mathbb{R}\}$ and $\operatorname{Im}(U) = \{(2a,0): a\in\mathbb{R}\} = \{(a,0): a\in\mathbb{R}\}$, so $\operatorname{Im}(T)=\operatorname{Im}(U)$.</p>
+        <p>However, $T(1,0)=(1,0)\ne(2,0)=U(1,0)$, so $T\ne U$. Thus these $T,U$ are distinct linear transforms satisfying both conditions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.3 -->
+<div class="card ex-card" id="ex2-3">
+  <div class="card-head">
+    <span class="ex-num">EX 2.3</span>
+    <span class="ex-title">원상과 핵의 잉여류</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : V \to W$를 선형변환이라 하자.</p>
+        <ol>
+          <li>$T^{-1}(0) = \operatorname{Ker}(T)$임을 증명하라.</li>
+          <li>$T(x) = y$이면 $T^{-1}(y) = x + \operatorname{Ker}(T)$임을 증명하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <ol>
+          <li>$T^{-1}(0) = \operatorname{Ker}(T)$임을 보이자. $v\in T^{-1}(0)$이면 원상의 정의에 의해 $T(v)=0$이므로 $v\in\operatorname{Ker}(T)$이다. 역으로 $v\in\operatorname{Ker}(T)$이면 $T(v)=0$이므로 $v\in T^{-1}(0)$이다. 두 포함관계가 모두 성립하므로 $T^{-1}(0)=\operatorname{Ker}(T)$이다.</li>
+          <li>$T(x)=y$라 하고 $T^{-1}(y) = x+\operatorname{Ker}(T)$임을 보이자.
+          ($\subseteq$) $z\in T^{-1}(y)$라 하면 $T(z)=y=T(x)$이므로 $T$의 선형성에 의해 $T(z-x) = T(z)-T(x) = 0$이다. 따라서 $z-x\in\operatorname{Ker}(T)$이고 $z = x+(z-x)\in x+\operatorname{Ker}(T)$이다.
+          ($\supseteq$) $z\in x+\operatorname{Ker}(T)$라 하면 $z=x+k$인 $k\in\operatorname{Ker}(T)$가 존재한다. $T$의 선형성에 의해 $T(z) = T(x)+T(k) = y+0 = y$이므로 $z\in T^{-1}(y)$이다.
+          두 포함관계로부터 $T^{-1}(y) = x+\operatorname{Ker}(T)$이다.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to W$ be a linear transform.</p>
+        <ol>
+          <li>Show that $T^{-1}(0) = \operatorname{Ker}(T)$.</li>
+          <li>Show that if $T(x) = y$, then $T^{-1}(y) = x + \operatorname{Ker}(T)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <ol>
+          <li>We show $T^{-1}(0) = \operatorname{Ker}(T)$. If $v\in T^{-1}(0)$, then by definition of the preimage $T(v)=0$, so $v\in\operatorname{Ker}(T)$. Conversely, if $v\in\operatorname{Ker}(T)$, then $T(v)=0$, so $v\in T^{-1}(0)$. Both inclusions hold, so $T^{-1}(0)=\operatorname{Ker}(T)$.</li>
+          <li>Suppose $T(x)=y$; we show $T^{-1}(y) = x+\operatorname{Ker}(T)$.
+          ($\subseteq$) Let $z\in T^{-1}(y)$. Then $T(z)=y=T(x)$, so by linearity of $T$, $T(z-x) = T(z)-T(x) = 0$. Hence $z-x\in\operatorname{Ker}(T)$ and $z = x+(z-x)\in x+\operatorname{Ker}(T)$.
+          ($\supseteq$) Let $z\in x+\operatorname{Ker}(T)$, so $z=x+k$ for some $k\in\operatorname{Ker}(T)$. By linearity, $T(z) = T(x)+T(k) = y+0 = y$, so $z\in T^{-1}(y)$.
+          Both inclusions give $T^{-1}(y) = x+\operatorname{Ker}(T)$.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>심화 문제 · Problems</h2></div>
+
+<!-- Problem 1 -->
+<div class="card pr-card" id="pr1">
+  <div class="card-head">
+    <span class="pr-num">PR 1</span>
+    <span class="ex-title">$F^n$ 위의 선형범함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : F^n \to F$를 선형변환이라 하자. 모든 $x_1, \cdots, x_n \in F$에 대해 $T(x_1, \cdots, x_n) = a_1 x_1 + \cdots + a_n x_n$을 만족하는 $a_1, \cdots, a_n \in F$가 존재함을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : F^n \to F$ be a linear transform. Show that there exist $a_1, \cdots, a_n \in F$ such that $T(x_1, \cdots, x_n) = a_1 x_1 + \cdots + a_n x_n$ for all $x_1, \cdots, x_n \in F$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 2 -->
+<div class="card pr-card" id="pr2">
+  <div class="card-head">
+    <span class="pr-num">PR 2</span>
+    <span class="ex-title">부분공간을 따른 사영</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $W_1, W_2$를 $V = W_1 \oplus W_2$를 만족하는 $V$의 부분공간이라 하자. $x_1 \in W_1, x_2 \in W_2$에 대해 $T(x_1 + x_2) = x_1$로 정의되는 함수 $T : V \to V$를 $W_2$를 따라 $W_1$ 위로의 $V$의 <strong>사영</strong>(projection)이라 한다.</p>
+        <ol>
+          <li>$T(a,b,c) = (a-c, b, 0)$으로 정의되는 $T : \mathbb{R}^3 \to \mathbb{R}^3$가 직선 $L = \{(a, 0, a) : a \in \mathbb{R}\}$를 따라 $xy$평면 위로의 사영임을 증명하라.</li>
+          <li>$T$가 직선 $L = \{(s, s) : s \in \mathbb{R}\}$를 따라 $y$축 위로의 사영을 나타내는 선형변환 $T : \mathbb{R}^2 \to \mathbb{R}^2$를 구하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and $W_1, W_2$ be subspaces of $V$ such that $V = W_1 \oplus W_2$. The function $T : V \to V$ defined by $T(x_1 + x_2) = x_1$ for $x_1 \in W_1, x_2 \in W_2$ is called the <strong>projection</strong> of $V$ on $W_1$ (along $W_2$).</p>
+        <ol>
+          <li>Show that $T : \mathbb{R}^3 \to \mathbb{R}^3$ defined by $T(a,b,c) = (a-c, b, 0)$ is the projection on the $xy$-plane along the line $L = \{(a, 0, a) : a \in \mathbb{R}\}$.</li>
+          <li>Find the linear transform $T : \mathbb{R}^2 \to \mathbb{R}^2$ where $T$ represents the projection on the $y$-axis along the line $L = \{(s, s) : s \in \mathbb{R}\}$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 3 -->
+<div class="card pr-card" id="pr3">
+  <div class="card-head">
+    <span class="pr-num">PR 3</span>
+    <span class="ex-title">$T$-불변 부분공간과 제한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : V \to V$를 선형변환이라 하자. $V$의 부분공간 $W$가 모든 $x \in W$에 대해 $T(x) \in W$를 만족하면 $W$를 <strong>$T$-불변</strong>($T$-invariant)이라 한다. 이 경우 $T|_W(x) = T(x)$로 정의되는 $T|_W : W \to W$를 $W$ 위로의 $T$의 <strong>제한</strong>(restriction)이라 한다.</p>
+        <ol>
+          <li>$T : V \to V$를 선형변환이라 하자. $0, V, \operatorname{Ker}(T), \operatorname{Im}(T)$가 $V$의 $T$-불변 부분공간임을 증명하라.</li>
+          <li>$T : V \to V$가 $W_2$를 따라 $W_1$ 위로의 사영이라 하자. $W_1$이 $T$-불변임을 증명하라.</li>
+          <li>$T : V \to V$를 선형변환이라 하고 $W$를 $V$의 $T$-불변 부분공간이라 하자. $\operatorname{Ker}(T|_W) = \operatorname{Ker}(T) \cap W$이고 $\operatorname{Im}(T|_W) = T(W)$임을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be a linear transform. A subspace $W$ of $V$ is called <strong>$T$-invariant</strong> if $T(x) \in W$ for all $x \in W$. In this case, $T|_W : W \to W$ defined by $T|_W(x) = T(x)$ is called the <strong>restriction</strong> of $T$ on $W$.</p>
+        <ol>
+          <li>Let $T : V \to V$ be a linear transform. Show that $0, V, \operatorname{Ker}(T), \operatorname{Im}(T)$ are $T$-invariant subspaces of $V$.</li>
+          <li>Let $T : V \to V$ be the projection on $W_1$ along $W_2$. Show that $W_1$ is $T$-invariant.</li>
+          <li>Let $T : V \to V$ be a linear transform and let $W$ be a $T$-invariant subspace of $V$. Show that $\operatorname{Ker}(T|_W) = \operatorname{Ker}(T) \cap W$ and $\operatorname{Im}(T|_W) = T(W)$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 4 -->
+<div class="card pr-card" id="pr4">
+  <div class="card-head">
+    <span class="pr-num">PR 4</span>
+    <span class="ex-title">가법적 함수와 선형성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 벡터공간 사이의 함수 $T : V \to W$가 모든 $x, y \in V$에 대해 $T(x+y) = T(x) + T(y)$를 만족하면 <strong>가법적</strong>(additive)이라 한다.</p>
+        <ol>
+          <li>$V, W$가 $\mathbb{Q}$ 위의 벡터공간이고 $T : V \to W$가 가법적이면 $T$가 선형임을 증명하라.</li>
+          <li>선형이 아닌 가법적 함수의 예를 구하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> A function $T : V \to W$ between vector spaces is called <strong>additive</strong> if $T(x+y) = T(x) + T(y)$ for all $x, y \in V$.</p>
+        <ol>
+          <li>Show that if $V, W$ are vector spaces over $\mathbb{Q}$ and $T : V \to W$ is additive, then $T$ is linear.</li>
+          <li>Find an additive function that is not linear.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 5 -->
+<div class="card pr-card" id="pr5">
+  <div class="card-head">
+    <span class="pr-num">PR 5</span>
+    <span class="ex-title">핵과 상의 합 분해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 유한차원 벡터공간이라 하고 $T : V \to V$를 선형변환이라 하자. $V = \operatorname{Ker}(T) + \operatorname{Im}(T)$인 것과 $\operatorname{Ker}(T) \cap \operatorname{Im}(T) = 0$인 것이 동치임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a finite-dimensional vector space and let $T : V \to V$ be a linear transform. Show that $V = \operatorname{Ker}(T) + \operatorname{Im}(T)$ if and only if $\operatorname{Ker}(T) \cap \operatorname{Im}(T) = 0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

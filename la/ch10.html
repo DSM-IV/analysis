@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10. 연립일차방정식 (System of Linear Equations) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 10단원 연립일차방정식(System of Linear Equations) 예제 모음. 행렬 방정식, 역행렬을 이용한 풀이, 가우스 소거법, 기약행 사다리꼴, 해공간과 기저를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 연립일차방정식, system of linear equations, 행렬 방정식, matrix equation, 가우스 소거법, Gaussian elimination, 기약행 사다리꼴, reduced row echelon form, 역행렬, inverse matrix, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch10.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. 연립일차방정식 (System of Linear Equations) — 선형대수학 한·영 대조">
+<meta property="og:description" content="연립일차방정식 예제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch10.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "10. 연립일차방정식 (System of Linear Equations) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 연립일차방정식 예제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch10.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch10.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html" class="active">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 10</p>
+  <h1>10. 연립일차방정식<span>System of Linear Equations</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 행렬방정식과 모든 해</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> 역행렬을 이용한 풀이</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> 선형사상의 원상</a></li>
+    <li><a href="#ex1-3"><span class="toc-num">EX 1.3</span> 해의 존재성과 상</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 가우스 소거법으로 풀기</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 해의 존재성과 기약행사다리꼴</a></li>
+    <li><a href="#ex3"><span class="toc-num">EX 3</span> 기약행사다리꼴로부터 행렬 복원</a></li>
+    <li><a href="#ex3-1"><span class="toc-num">EX 3.1</span> 대칭행렬 집합의 기저</a></li>
+    <li><a href="#ex3-2"><span class="toc-num">EX 3.2</span> 기저로의 확장</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">행렬방정식과 모든 해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 연립일차방정식을 생각하자.</p>
+        <p>$$\begin{aligned} x_1 + x_2 - x_3 &= 0 \\ 4x_1 + x_2 - 2x_3 &= 0 \end{aligned}$$</p>
+        <ol>
+          <li>이 연립방정식을 하나의 행렬방정식으로 나타내라.</li>
+          <li>이 연립방정식의 모든 해를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol>
+          <li>주어진 연립방정식은 다음 행렬방정식과 동치이다.
+            $$\begin{pmatrix} 1 & 1 & -1 \\ 4 & 1 & -2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.$$
+          </li>
+          <li>첨가행렬에 기본행연산 $R_2 \to R_2 - 4R_1$을 적용하면
+            $$\begin{pmatrix} 1 & 1 & -1 & 0 \\ 4 & 1 & -2 & 0 \end{pmatrix} \ \longrightarrow\ \begin{pmatrix} 1 & 1 & -1 & 0 \\ 0 & -3 & 2 & 0 \end{pmatrix}$$
+            을 얻는다. 둘째 행에서 $-3x_2 + 2x_3 = 0$, 즉 $x_2 = \frac{2}{3}x_3$이다. $x_3 = t$ ($t \in \mathbb{R}$)로 두면 $x_2 = \frac{2}{3}t$이고, 첫째 행에서 $x_1 = x_3 - x_2 = t - \frac{2}{3}t = \frac{1}{3}t$이다. 따라서 모든 해는
+            $$(x_1, x_2, x_3) = \frac{1}{3}t\,(1, 2, 3), \qquad t \in \mathbb{R}$$
+            로 주어지며, 매개변수를 $s = t/3$로 바꾸면 해집합은
+            $$\{\, s(1,2,3) : s \in \mathbb{R} \,\} = \operatorname{span}\{(1,2,3)\}$$
+            이다. 실제로 $(x_1,x_2,x_3)=(1,2,3)$을 대입하면 $1+2-3=0$, $4(1)+2-2(3)=4+2-6=0$이 되어 해임이 확인된다.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Consider the following system of linear equations.</p>
+        <p>$$\begin{aligned} x_1 + x_2 - x_3 &= 0 \\ 4x_1 + x_2 - 2x_3 &= 0 \end{aligned}$$</p>
+        <ol>
+          <li>Express the system as a single matrix equation.</li>
+          <li>Find all solutions to the system.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol>
+          <li>The system is equivalent to the single matrix equation
+            $$\begin{pmatrix} 1 & 1 & -1 \\ 4 & 1 & -2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.$$
+          </li>
+          <li>Applying the elementary row operation $R_2 \to R_2 - 4R_1$ to the augmented matrix gives
+            $$\begin{pmatrix} 1 & 1 & -1 & 0 \\ 4 & 1 & -2 & 0 \end{pmatrix} \ \longrightarrow\ \begin{pmatrix} 1 & 1 & -1 & 0 \\ 0 & -3 & 2 & 0 \end{pmatrix}.$$
+            The second row gives $-3x_2 + 2x_3 = 0$, i.e. $x_2 = \frac{2}{3}x_3$. Setting $x_3 = t$ ($t \in \mathbb{R}$) yields $x_2 = \frac{2}{3}t$, and the first row gives $x_1 = x_3 - x_2 = t - \frac{2}{3}t = \frac{1}{3}t$. Hence every solution has the form
+            $$(x_1, x_2, x_3) = \frac{1}{3}t\,(1, 2, 3), \qquad t \in \mathbb{R},$$
+            and reparametrizing with $s = t/3$, the solution set is
+            $$\{\, s(1,2,3) : s \in \mathbb{R} \,\} = \operatorname{span}\{(1,2,3)\}.$$
+            Indeed, substituting $(x_1,x_2,x_3) = (1,2,3)$ gives $1+2-3=0$ and $4(1)+2-2(3)=4+2-6=0$, confirming that it is a solution.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">역행렬을 이용한 풀이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 연립일차방정식을 생각하자.</p>
+        <p>$$\begin{aligned} x_1 + 2x_2 - x_3 &= 5 \\ x_1 + x_2 + x_3 &= 1 \\ 2x_1 - 2x_2 + x_3 &= 4 \end{aligned}$$</p>
+        <ol>
+          <li>이 연립방정식을 하나의 행렬방정식으로 나타내라.</li>
+          <li>계수행렬의 역행렬을 이용하여 연립방정식을 풀라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol>
+          <li>주어진 연립방정식은 다음 행렬방정식과 동치이다.
+            $$A\mathbf{x} = \begin{pmatrix} 1 & 2 & -1 \\ 1 & 1 & 1 \\ 2 & -2 & 1 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 5 \\ 1 \\ 4 \end{pmatrix} = \mathbf{b}.$$
+          </li>
+          <li>$(A \mid I)$에 기본행연산을 적용하여 $A^{-1}$을 구하자.
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 1 & 1 & 1 & 0 & 1 & 0 \\ 2 & -2 & 1 & 0 & 0 & 1 \end{array}\right)$$
+            에 $R_2 \to R_2 - R_1$, $R_3 \to R_3 - 2R_1$을 적용하면
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & -1 & 2 & -1 & 1 & 0 \\ 0 & -6 & 3 & -2 & 0 & 1 \end{array}\right)$$
+            이고, $R_3 \to R_3 - 6R_2$를 적용하면
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & -1 & 2 & -1 & 1 & 0 \\ 0 & 0 & -9 & 4 & -6 & 1 \end{array}\right)$$
+            을 얻는다. $R_2 \to -R_2$, $R_3 \to -\frac{1}{9}R_3$으로 피벗을 $1$로 만들면
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & 1 & -2 & 1 & -1 & 0 \\ 0 & 0 & 1 & -\frac{4}{9} & \frac{2}{3} & -\frac{1}{9} \end{array}\right)$$
+            이고, 마지막으로 $R_2 \to R_2 + 2R_3$, $R_1 \to R_1 + R_3$, $R_1 \to R_1 - 2R_2$를 차례로 적용하면
+            $$\left(\begin{array}{ccc|ccc} 1 & 0 & 0 & \frac{1}{3} & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{1}{9} & \frac{1}{3} & -\frac{2}{9} \\ 0 & 0 & 1 & -\frac{4}{9} & \frac{2}{3} & -\frac{1}{9} \end{array}\right)$$
+            을 얻는다. 즉
+            $$A^{-1} = \begin{pmatrix} \frac13 & 0 & \frac13 \\ \frac19 & \frac13 & -\frac29 \\ -\frac49 & \frac23 & -\frac19 \end{pmatrix}$$
+            이다. 그러므로
+            $$\mathbf{x} = A^{-1}\mathbf{b} = \begin{pmatrix} \frac13 & 0 & \frac13 \\ \frac19 & \frac13 & -\frac29 \\ -\frac49 & \frac23 & -\frac19 \end{pmatrix}\begin{pmatrix} 5 \\ 1 \\ 4 \end{pmatrix} = \begin{pmatrix} \frac{5}{3}+\frac{4}{3} \\ \frac{5}{9}+\frac{3}{9}-\frac{8}{9} \\ -\frac{20}{9}+\frac{6}{9}-\frac{4}{9} \end{pmatrix} = \begin{pmatrix} 3 \\ 0 \\ -2 \end{pmatrix}$$
+            즉 $x_1=3,\ x_2=0,\ x_3=-2$이다. 실제로 대입하면 $3+2(0)-(-2)=5$, $3+0+(-2)=1$, $2(3)-2(0)+(-2)=4$가 모두 성립하여 이 해가 옳음을 확인할 수 있다.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Consider the following system of linear equations.</p>
+        <p>$$\begin{aligned} x_1 + 2x_2 - x_3 &= 5 \\ x_1 + x_2 + x_3 &= 1 \\ 2x_1 - 2x_2 + x_3 &= 4 \end{aligned}$$</p>
+        <ol>
+          <li>Express the system as a single matrix equation.</li>
+          <li>Solve the system using the inverse of the coefficient matrix.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol>
+          <li>The system is equivalent to the matrix equation
+            $$A\mathbf{x} = \begin{pmatrix} 1 & 2 & -1 \\ 1 & 1 & 1 \\ 2 & -2 & 1 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 5 \\ 1 \\ 4 \end{pmatrix} = \mathbf{b}.$$
+          </li>
+          <li>We find $A^{-1}$ by row-reducing $(A \mid I)$.
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 1 & 1 & 1 & 0 & 1 & 0 \\ 2 & -2 & 1 & 0 & 0 & 1 \end{array}\right)$$
+            Applying $R_2 \to R_2 - R_1$, $R_3 \to R_3 - 2R_1$ gives
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & -1 & 2 & -1 & 1 & 0 \\ 0 & -6 & 3 & -2 & 0 & 1 \end{array}\right),$$
+            and $R_3 \to R_3 - 6R_2$ gives
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & -1 & 2 & -1 & 1 & 0 \\ 0 & 0 & -9 & 4 & -6 & 1 \end{array}\right).$$
+            Scaling the pivots to $1$ via $R_2 \to -R_2$, $R_3 \to -\frac{1}{9}R_3$ gives
+            $$\left(\begin{array}{ccc|ccc} 1 & 2 & -1 & 1 & 0 & 0 \\ 0 & 1 & -2 & 1 & -1 & 0 \\ 0 & 0 & 1 & -\frac{4}{9} & \frac{2}{3} & -\frac{1}{9} \end{array}\right),$$
+            and finally applying $R_2 \to R_2 + 2R_3$, $R_1 \to R_1 + R_3$, $R_1 \to R_1 - 2R_2$ in turn gives
+            $$\left(\begin{array}{ccc|ccc} 1 & 0 & 0 & \frac{1}{3} & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{1}{9} & \frac{1}{3} & -\frac{2}{9} \\ 0 & 0 & 1 & -\frac{4}{9} & \frac{2}{3} & -\frac{1}{9} \end{array}\right).$$
+            That is,
+            $$A^{-1} = \begin{pmatrix} \frac13 & 0 & \frac13 \\ \frac19 & \frac13 & -\frac29 \\ -\frac49 & \frac23 & -\frac19 \end{pmatrix}.$$
+            Therefore
+            $$\mathbf{x} = A^{-1}\mathbf{b} = \begin{pmatrix} \frac13 & 0 & \frac13 \\ \frac19 & \frac13 & -\frac29 \\ -\frac49 & \frac23 & -\frac19 \end{pmatrix}\begin{pmatrix} 5 \\ 1 \\ 4 \end{pmatrix} = \begin{pmatrix} \frac{5}{3}+\frac{4}{3} \\ \frac{5}{9}+\frac{3}{9}-\frac{8}{9} \\ -\frac{20}{9}+\frac{6}{9}-\frac{4}{9} \end{pmatrix} = \begin{pmatrix} 3 \\ 0 \\ -2 \end{pmatrix},$$
+            i.e. $x_1=3,\ x_2=0,\ x_3=-2$. Substituting back, $3+2(0)-(-2)=5$, $3+0+(-2)=1$, and $2(3)-2(0)+(-2)=4$ all hold, confirming this solution.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">선형사상의 원상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : \mathbb{R}^3 \to \mathbb{R}^2$를 $T(a, b, c) = (a + b, 2a - c)$로 정의하자. $T^{-1}(1, 11)$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $T^{-1}(1,11) = \{(a,b,c) \in \mathbb{R}^3 : T(a,b,c) = (1,11)\}$이므로, 다음 연립일차방정식을 풀면 된다.</p>
+        <p>$$\begin{aligned} a + b &= 1 \\ 2a - c &= 11 \end{aligned}$$</p>
+        <p>미지수가 3개, 방정식이 2개인 연립방정식이므로 해는 매개변수 하나로 표현된다. $a = t$ ($t \in \mathbb{R}$)로 두면 첫째 식에서 $b = 1-t$이고, 둘째 식에서 $c = 2t - 11$이다. 따라서</p>
+        <p>$$T^{-1}(1,11) = \{\, (t,\ 1-t,\ 2t-11) : t \in \mathbb{R} \,\} = (0,1,-11) + t(1,-1,2), \qquad t \in \mathbb{R}.$$</p>
+        <p>실제로 $T(t, 1-t, 2t-11) = \big(t+(1-t),\ 2t-(2t-11)\big) = (1, 11)$이 모든 $t$에 대해 성립하므로, 이는 $T^{-1}(1,11)$의 올바른 매개변수 표현이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Define $T : \mathbb{R}^3 \to \mathbb{R}^2$ by $T(a, b, c) = (a + b, 2a - c)$. Determine $T^{-1}(1, 11)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $T^{-1}(1,11) = \{(a,b,c) \in \mathbb{R}^3 : T(a,b,c) = (1,11)\}$, it suffices to solve the system</p>
+        <p>$$\begin{aligned} a + b &= 1 \\ 2a - c &= 11. \end{aligned}$$</p>
+        <p>Since there are $3$ unknowns and only $2$ equations, the solution set has one free parameter. Setting $a = t$ ($t \in \mathbb{R}$), the first equation gives $b = 1-t$ and the second gives $c = 2t-11$. Hence</p>
+        <p>$$T^{-1}(1,11) = \{\, (t,\ 1-t,\ 2t-11) : t \in \mathbb{R} \,\} = (0,1,-11) + t(1,-1,2), \qquad t \in \mathbb{R}.$$</p>
+        <p>Indeed $T(t, 1-t, 2t-11) = \big(t+(1-t),\ 2t-(2t-11)\big) = (1, 11)$ for every $t$, confirming this parametrization of $T^{-1}(1,11)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex1-3">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">해의 존재성과 상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>연립일차방정식 $Ax = b$가 해를 가질 필요충분조건이 $b \in \operatorname{Im}(L_A)$임을 증명하라.</li>
+          <li>$T : \mathbb{R}^3 \to \mathbb{R}^3$를 $T(a, b, c) = (a + b, b - 2c, a + 2c)$로 정의하자. $(1, 3, -2) \in \operatorname{Im}T$인지 판정하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <ol>
+          <li>$L_A : F^n \to F^m$은 $L_A(x) = Ax$로 정의되는 왼쪽곱변환이며, 정의에 의해 $\operatorname{Im}(L_A) = \{L_A(x) : x \in F^n\} = \{Ax : x \in F^n\}$이다.
+            <p>($\Rightarrow$) $Ax=b$가 해 $x_0$을 가지면 $Ax_0=b$이므로 $L_A(x_0)=b$이고, 따라서 $b \in \operatorname{Im}(L_A)$이다.</p>
+            <p>($\Leftarrow$) 역으로 $b \in \operatorname{Im}(L_A)$이면 어떤 $x_0 \in F^n$이 존재하여 $L_A(x_0)=b$, 즉 $Ax_0=b$이다. 이는 $x_0$이 연립방정식 $Ax=b$의 해임을 뜻하므로 $Ax=b$는 해를 갖는다.</p>
+            <p>따라서 $Ax=b$가 해를 가질 필요충분조건은 $b \in \operatorname{Im}(L_A)$이다.</p>
+          </li>
+          <li>(1)에 의해 $(1,3,-2) \in \operatorname{Im}\,T$인지는 연립방정식 $T(a,b,c)=(1,3,-2)$, 즉
+            $$\begin{aligned} a + b &= 1 \\ b - 2c &= 3 \\ a + 2c &= -2 \end{aligned}$$
+            가 해를 갖는지로 판정할 수 있다. 첫째 식에서 셋째 식을 빼면 $b-2c=3$이 되어 둘째 식과 정확히 일치하므로, 셋째 식은 첫째·둘째 식으로부터 자동으로 성립한다. 실제로 $c=0$으로 두면 둘째 식에서 $b=3$, 첫째 식에서 $a=1-b=-2$를 얻고, 셋째 식도 $a+2c=-2+0=-2$로 성립한다. 즉 $(a,b,c)=(-2,3,0)$은
+            $$T(-2,3,0) = (-2+3,\ 3-2(0),\ -2+2(0)) = (1,3,-2)$$
+            을 만족하므로, $(1,3,-2) \in \operatorname{Im}\,T$이다.
+          </li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Prove that the system of linear equations $Ax = b$ has a solution if and only if $b \in \operatorname{Im}(L_A)$.</li>
+          <li>Define $T : \mathbb{R}^3 \to \mathbb{R}^3$ by $T(a, b, c) = (a + b, b - 2c, a + 2c)$. Determine whether $(1, 3, -2) \in \operatorname{Im}T$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <ol>
+          <li>Let $L_A : F^n \to F^m$ be the left-multiplication transformation $L_A(x) = Ax$; by definition, $\operatorname{Im}(L_A) = \{L_A(x) : x \in F^n\} = \{Ax : x \in F^n\}$.
+            <p>($\Rightarrow$) If $Ax=b$ has a solution $x_0$, then $Ax_0=b$, so $L_A(x_0)=b$ and hence $b \in \operatorname{Im}(L_A)$.</p>
+            <p>($\Leftarrow$) Conversely, if $b \in \operatorname{Im}(L_A)$, there exists $x_0 \in F^n$ with $L_A(x_0)=b$, i.e. $Ax_0=b$. Then $x_0$ is a solution of $Ax=b$, so $Ax=b$ has a solution.</p>
+            <p>Hence $Ax=b$ has a solution if and only if $b \in \operatorname{Im}(L_A)$.</p>
+          </li>
+          <li>By (1), whether $(1,3,-2) \in \operatorname{Im}\,T$ can be decided by checking whether the system $T(a,b,c)=(1,3,-2)$, namely
+            $$\begin{aligned} a + b &= 1 \\ b - 2c &= 3 \\ a + 2c &= -2 \end{aligned}$$
+            has a solution. Subtracting the third equation from the first gives $b-2c=3$, which is exactly the second equation, so the third equation follows automatically from the first two. Indeed, taking $c=0$, the second equation gives $b=3$ and the first gives $a=1-b=-2$, and the third equation also holds: $a+2c=-2+0=-2$. Thus $(a,b,c)=(-2,3,0)$ satisfies
+            $$T(-2,3,0) = (-2+3,\ 3-2(0),\ -2+2(0)) = (1,3,-2),$$
+            so $(1,3,-2) \in \operatorname{Im}\,T$.
+          </li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">가우스 소거법으로 풀기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 가우스 소거법을 이용하여 다음 연립일차방정식을 풀라.</p>
+        <p>$$\begin{aligned} 3x_1 - x_2 + x_3 - x_4 + 2x_5 &= 5 \\ x_1 - x_2 - x_3 - 2x_4 - x_5 &= 2 \\ 5x_1 - 2x_2 + x_3 - 3x_4 + 3x_5 &= 10 \\ 2x_1 - x_2 - 2x_4 + x_5 &= 5 \end{aligned}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 첨가행렬은</p>
+        <p>$$\left(\begin{array}{ccccc|c} 3 & -1 & 1 & -1 & 2 & 5 \\ 1 & -1 & -1 & -2 & -1 & 2 \\ 5 & -2 & 1 & -3 & 3 & 10 \\ 2 & -1 & 0 & -2 & 1 & 5 \end{array}\right)$$</p>
+        <p>이다. $R_1 \leftrightarrow R_2$로 피벗을 $1$로 만든 뒤 $R_2 \to R_2-3R_1$, $R_3 \to R_3-5R_1$, $R_4 \to R_4-2R_1$을 적용하면</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & -1 & -1 & -2 & -1 & 2 \\ 0 & 2 & 4 & 5 & 5 & -1 \\ 0 & 3 & 6 & 7 & 8 & 0 \\ 0 & 1 & 2 & 2 & 3 & 1 \end{array}\right)$$</p>
+        <p>을 얻는다. $R_2 \leftrightarrow R_4$로 둘째 행의 피벗을 $1$로 만든 뒤 $R_3 \to R_3-3R_2$, $R_4 \to R_4-2R_2$를 적용하면</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & -1 & -1 & -2 & -1 & 2 \\ 0 & 1 & 2 & 2 & 3 & 1 \\ 0 & 0 & 0 & 1 & -1 & -3 \\ 0 & 0 & 0 & 1 & -1 & -3 \end{array}\right)$$</p>
+        <p>이 되는데, 셋째 행과 넷째 행이 같으므로 $R_4 \to R_4-R_3$을 적용하면 넷째 행은 영행이 되어 사라진다. 즉 계수행렬의 실질적인 계수(rank)는 $3$이고, 피벗은 $x_1, x_2, x_4$ 열에 있으며 $x_3, x_5$는 자유변수이다. 나머지 행에 $R_1 \to R_1+2R_3$, $R_2 \to R_2-2R_3$, 이어서 $R_1 \to R_1+R_2$를 적용하여 기약행사다리꼴로 정리하면</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & 0 & 1 & 0 & 2 & 3 \\ 0 & 1 & 2 & 0 & 5 & 7 \\ 0 & 0 & 0 & 1 & -1 & -3 \end{array}\right)$$</p>
+        <p>을 얻는다. 이는 다음 방정식과 같다.</p>
+        <p>$$\begin{aligned} x_1 + x_3 + 2x_5 &= 3 \\ x_2 + 2x_3 + 5x_5 &= 7 \\ x_4 - x_5 &= -3 \end{aligned}$$</p>
+        <p>$x_3 = s$, $x_5 = t$ ($s,t \in \mathbb{R}$)로 두면 $x_1 = 3-s-2t$, $x_2 = 7-2s-5t$, $x_4 = -3+t$이므로, 모든 해는 다음과 같은 매개변수 벡터형으로 주어진다.</p>
+        <p>$$(x_1,x_2,x_3,x_4,x_5) = (3,7,0,-3,0) + s(-1,-2,1,0,0) + t(-2,-5,0,1,1), \qquad s,t \in \mathbb{R}.$$</p>
+        <p>검산: $s=t=0$일 때 $(3,7,0,-3,0)$을 원래 방정식에 대입하면 $3(3)-7+0-(-3)+2(0)=9-7+3=5$, $3-7-0-2(-3)-0=3-7+6=2$, $5(3)-2(7)+0-3(-3)+3(0)=15-14+9=10$, $2(3)-7-2(-3)+0=6-7+6=5$로 네 식 모두 성립한다. 방향벡터 $(-1,-2,1,0,0)$과 $(-2,-5,0,1,1)$을 각각 동차방정식(우변을 모두 $0$으로 바꾼 식)에 대입해도 네 식이 모두 $0$이 됨을 확인할 수 있으므로, 위 해집합이 옳다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Use Gaussian elimination to solve the following system of linear equations.</p>
+        <p>$$\begin{aligned} 3x_1 - x_2 + x_3 - x_4 + 2x_5 &= 5 \\ x_1 - x_2 - x_3 - 2x_4 - x_5 &= 2 \\ 5x_1 - 2x_2 + x_3 - 3x_4 + 3x_5 &= 10 \\ 2x_1 - x_2 - 2x_4 + x_5 &= 5 \end{aligned}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The augmented matrix is</p>
+        <p>$$\left(\begin{array}{ccccc|c} 3 & -1 & 1 & -1 & 2 & 5 \\ 1 & -1 & -1 & -2 & -1 & 2 \\ 5 & -2 & 1 & -3 & 3 & 10 \\ 2 & -1 & 0 & -2 & 1 & 5 \end{array}\right).$$</p>
+        <p>Swapping $R_1 \leftrightarrow R_2$ to get a pivot of $1$ and applying $R_2 \to R_2-3R_1$, $R_3 \to R_3-5R_1$, $R_4 \to R_4-2R_1$ gives</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & -1 & -1 & -2 & -1 & 2 \\ 0 & 2 & 4 & 5 & 5 & -1 \\ 0 & 3 & 6 & 7 & 8 & 0 \\ 0 & 1 & 2 & 2 & 3 & 1 \end{array}\right).$$</p>
+        <p>Swapping $R_2 \leftrightarrow R_4$ to get a pivot of $1$ in row $2$ and applying $R_3 \to R_3-3R_2$, $R_4 \to R_4-2R_2$ gives</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & -1 & -1 & -2 & -1 & 2 \\ 0 & 1 & 2 & 2 & 3 & 1 \\ 0 & 0 & 0 & 1 & -1 & -3 \\ 0 & 0 & 0 & 1 & -1 & -3 \end{array}\right),$$</p>
+        <p>and since the third and fourth rows agree, $R_4 \to R_4-R_3$ turns the fourth row into a zero row, which we discard. Thus the coefficient matrix has rank $3$, with pivots in the $x_1, x_2, x_4$ columns, and $x_3, x_5$ are free. Applying $R_1 \to R_1+2R_3$, $R_2 \to R_2-2R_3$, and then $R_1 \to R_1+R_2$ to reach reduced row echelon form gives</p>
+        <p>$$\left(\begin{array}{ccccc|c} 1 & 0 & 1 & 0 & 2 & 3 \\ 0 & 1 & 2 & 0 & 5 & 7 \\ 0 & 0 & 0 & 1 & -1 & -3 \end{array}\right),$$</p>
+        <p>which corresponds to the equations</p>
+        <p>$$\begin{aligned} x_1 + x_3 + 2x_5 &= 3 \\ x_2 + 2x_3 + 5x_5 &= 7 \\ x_4 - x_5 &= -3. \end{aligned}$$</p>
+        <p>Setting $x_3 = s$, $x_5 = t$ ($s,t \in \mathbb{R}$) gives $x_1 = 3-s-2t$, $x_2 = 7-2s-5t$, $x_4 = -3+t$, so every solution has the parametric vector form</p>
+        <p>$$(x_1,x_2,x_3,x_4,x_5) = (3,7,0,-3,0) + s(-1,-2,1,0,0) + t(-2,-5,0,1,1), \qquad s,t \in \mathbb{R}.$$</p>
+        <p>Check: for $s=t=0$, substituting $(3,7,0,-3,0)$ into the original equations gives $3(3)-7+0-(-3)+2(0)=9-7+3=5$, $3-7-0-2(-3)-0=3-7+6=2$, $5(3)-2(7)+0-3(-3)+3(0)=15-14+9=10$, and $2(3)-7-2(-3)+0=6-7+6=5$, so all four equations hold. Substituting the direction vectors $(-1,-2,1,0,0)$ and $(-2,-5,0,1,1)$ into the corresponding homogeneous system (all right-hand sides set to $0$) also yields $0$ in every equation, confirming the solution set above.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">해의 존재성과 기약행사다리꼴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>첨가행렬 $(A|b)$가 기약행사다리꼴이라고 하자. $Ax = b$가 해를 갖는다(consistent)는 것은 $(A|b)$가 마지막 열에만 0이 아닌 성분을 갖는 행을 포함하는 것과 동치임을 보여라.</li>
+          <li>아래 연립방정식이 해를 갖는지(consistent) 판정하라.
+            <p>$$\begin{aligned} x_1 + 2x_2 - x_3 + x_4 &= 2 \\ 2x_1 + x_2 + x_3 - x_4 &= 3 \\ x_1 + 2x_2 - 3x_3 + 2x_4 &= 2 \end{aligned}$$</p>
+          </li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p><em>역주.</em> 원문의 "해를 갖는다(consistent)"는 "해를 갖지 않는다(inconsistent)"의 오기로 보인다. 아래는 수정된 명제, 즉 기약행사다리꼴 $(A|b)$에 대하여 $Ax=b$가 해를 갖지 않을 필요충분조건은 $(A|b)$가 0이 아닌 성분이 마지막 열뿐인 행을 갖는 것임을 증명한다.</p>
+        <ol>
+          <li>$(A|b)$가 $m \times (n+1)$ 기약행사다리꼴이라 하자.
+            <p>($\Leftarrow$) $(A|b)$의 어떤 행이 마지막 열(즉 $b$에 해당하는 열)에만 $0$이 아닌 성분을 갖는다고 하자. 그 성분을 $c \neq 0$이라 하면, 이 행은 방정식 $0\cdot x_1 + \cdots + 0\cdot x_n = c$, 즉 $0 = c$를 나타낸다. 이는 어떤 $x$에 대해서도 성립할 수 없으므로 $Ax=b$는 해를 갖지 않는다.</p>
+            <p>($\Rightarrow$) 역으로 $(A|b)$의 어떤 행도 마지막 열에만 $0$이 아닌 성분을 갖지 않는다고 가정하자. 즉 영행이 아닌 모든 행은 $1$부터 $n$번째 열 중 어딘가에 선행 $1$(피벗)을 갖는다. 이제 다음과 같이 해를 구성하자. $A$의 피벗열에 대응하는 변수는 그 피벗이 있는 행의 마지막 열 성분(즉 $b$의 해당 성분) 값으로 두고, 피벗이 없는 열(자유변수)에 대응하는 변수는 모두 $0$으로 둔다. $(A|b)$가 기약행사다리꼴이므로 각 피벗열은 피벗이 있는 행에서 $1$, 다른 모든 행에서 $0$인 표준기저벡터 꼴이다. 따라서 이렇게 정의한 $x$는 영행이 아닌 모든 행의 방정식을 만족시키고, 영행인 행은 $0=0$으로 자동으로 성립한다. 그러므로 이 $x$는 $Ax=b$의 해이며, $Ax=b$는 해를 갖는다. 대우를 취하면, $Ax=b$가 해를 갖지 않으면 $(A|b)$는 마지막 열에만 $0$이 아닌 성분을 갖는 행을 가짐을 알 수 있다.</p>
+            <p>따라서 두 조건은 동치이다.</p>
+          </li>
+          <li>첨가행렬
+            $$\left(\begin{array}{cccc|c} 1 & 2 & -1 & 1 & 2 \\ 2 & 1 & 1 & -1 & 3 \\ 1 & 2 & -3 & 2 & 2 \end{array}\right)$$
+            에 $R_2 \to R_2-2R_1$, $R_3 \to R_3-R_1$을 적용하면
+            $$\left(\begin{array}{cccc|c} 1 & 2 & -1 & 1 & 2 \\ 0 & -3 & 3 & -3 & -1 \\ 0 & 0 & -2 & 1 & 0 \end{array}\right)$$
+            을 얻는다. 셋째 행은 $-2x_3+x_4=0$을 나타내며, 마지막 열에만 $0$이 아닌 성분을 갖는 행도 아니고 영행도 아니다. 실제로 이 행렬을 기약행사다리꼴로 완전히 정리하면
+            $$\left(\begin{array}{cccc|c} 1 & 0 & 0 & -\frac12 & \frac43 \\ 0 & 1 & 0 & \frac12 & \frac13 \\ 0 & 0 & 1 & -\frac12 & 0 \end{array}\right)$$
+            이 되어, 마지막 열에만 $0$이 아닌 성분을 갖는 행이 존재하지 않는다. 따라서 (1)에 의해 이 연립방정식은 해를 갖는다. 실제로 $x_4=0$으로 두면 $x_1=\frac43,\ x_2=\frac13,\ x_3=0$을 얻고, 이를 원래 방정식에 대입하면 $\frac43+\frac23-0+0=2$, $\frac83+\frac13+0-0=3$, $\frac43+\frac23-0+0=2$가 모두 성립하여 해임이 확인된다.
+          </li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Suppose that the augmented matrix $(A|b)$ is a reduced row echelon form. Show that $Ax = b$ is consistent if and only if $(A|b)$ contains a row in which the only nonzero entry lies in the last column.</li>
+          <li>Determine whether the system below is consistent.
+            <p>$$\begin{aligned} x_1 + 2x_2 - x_3 + x_4 &= 2 \\ 2x_1 + x_2 + x_3 - x_4 &= 3 \\ x_1 + 2x_2 - 3x_3 + 2x_4 &= 2 \end{aligned}$$</p>
+          </li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p><em>Note.</em> The statement's "consistent" appears to be a typo for "inconsistent". We prove the corrected claim: for $(A|b)$ in reduced row echelon form, $Ax=b$ is inconsistent if and only if $(A|b)$ contains a row whose only nonzero entry lies in the last column.</p>
+        <ol>
+          <li>Let $(A|b)$ be an $m \times (n+1)$ matrix in reduced row echelon form.
+            <p>($\Leftarrow$) Suppose some row of $(A|b)$ has its only nonzero entry in the last column (the column corresponding to $b$), say this entry is $c \neq 0$. Then this row represents the equation $0\cdot x_1 + \cdots + 0\cdot x_n = c$, i.e. $0 = c$, which no $x$ can satisfy. Hence $Ax=b$ is inconsistent.</p>
+            <p>($\Rightarrow$) Conversely, suppose no row of $(A|b)$ has its only nonzero entry in the last column, i.e. every nonzero row has a leading $1$ (pivot) in one of the first $n$ columns. We construct a solution as follows: for each pivot column of $A$, set the corresponding variable equal to the entry in the last column of the row containing that pivot; set every variable corresponding to a non-pivot (free) column to $0$. Since $(A|b)$ is in reduced row echelon form, each pivot column is a standard basis vector, with a $1$ in the row containing the pivot and $0$ in every other row. Hence the $x$ defined this way satisfies the equation given by every nonzero row, while every zero row gives the trivial equation $0=0$. Thus this $x$ solves $Ax=b$, so $Ax=b$ is consistent. Taking the contrapositive: if $Ax=b$ is inconsistent, then $(A|b)$ has a row whose only nonzero entry lies in the last column.</p>
+            <p>Hence the two conditions are equivalent.</p>
+          </li>
+          <li>Row-reduce the augmented matrix
+            $$\left(\begin{array}{cccc|c} 1 & 2 & -1 & 1 & 2 \\ 2 & 1 & 1 & -1 & 3 \\ 1 & 2 & -3 & 2 & 2 \end{array}\right).$$
+            Applying $R_2 \to R_2-2R_1$, $R_3 \to R_3-R_1$ gives
+            $$\left(\begin{array}{cccc|c} 1 & 2 & -1 & 1 & 2 \\ 0 & -3 & 3 & -3 & -1 \\ 0 & 0 & -2 & 1 & 0 \end{array}\right).$$
+            The third row represents $-2x_3+x_4=0$; it is neither a zero row nor a row whose only nonzero entry lies in the last column. Reducing fully to reduced row echelon form gives
+            $$\left(\begin{array}{cccc|c} 1 & 0 & 0 & -\frac12 & \frac43 \\ 0 & 1 & 0 & \frac12 & \frac13 \\ 0 & 0 & 1 & -\frac12 & 0 \end{array}\right),$$
+            which contains no row whose only nonzero entry lies in the last column. By (1), the system is therefore consistent. Indeed, setting $x_4=0$ gives $x_1=\frac43$, $x_2=\frac13$, $x_3=0$, and substituting into the original equations gives $\frac43+\frac23-0+0=2$, $\frac83+\frac13+0-0=3$, and $\frac43+\frac23-0+0=2$, all of which hold, confirming this is a solution.
+          </li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="ex3">
+  <div class="card-head">
+    <span class="ex-num">EX 3</span>
+    <span class="ex-title">기약행사다리꼴로부터 행렬 복원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 행렬 $A$의 기약행사다리꼴이 다음과 같다.</p>
+        <p>$$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}.$$</p>
+        <ol>
+          <li>$A$의 첫째, 둘째, 넷째 열이 다음과 같을 때 $A$를 구하라.
+            <p>$$\begin{pmatrix} 1 \\ -1 \\ 3 \end{pmatrix}, \quad \begin{pmatrix} 0 \\ -1 \\ 1 \end{pmatrix}, \quad \begin{pmatrix} 1 \\ -2 \\ 0 \end{pmatrix}.$$</p>
+          </li>
+          <li>(1)의 벡터들이 $A$의 첫째, 둘째, 다섯째 열일 때 $A$를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 행렬 $A$와 그 기약행사다리꼴 $R$은 같은 동차연립방정식의 해집합, 즉 같은 영공간을 가지므로 $A$의 열들 사이에 성립하는 일차관계는 $R$의 대응하는 열들 사이의 일차관계와 정확히 같다. $R$에서 피벗열은 첫째, 둘째, 넷째 열이고, 나머지 두 열은 피벗열들의 다음과 같은 일차결합이다.</p>
+        <p>$$R\text{의 셋째 열} = 2(R\text{의 첫째 열}) - 5(R\text{의 둘째 열}), \qquad R\text{의 다섯째 열} = -2(R\text{의 첫째 열}) - 3(R\text{의 둘째 열}) + 6(R\text{의 넷째 열}).$$</p>
+        <p>$A$의 $i$번째 열을 $a_i$라 하면, 위와 같은 계수로</p>
+        <p>$$a_3 = 2a_1 - 5a_2, \qquad a_5 = -2a_1 - 3a_2 + 6a_4$$</p>
+        <p>가 성립한다.</p>
+        <ol>
+          <li>$a_1=(1,-1,3)$, $a_2=(0,-1,1)$, $a_4=(1,-2,0)$이 $A$의 첫째, 둘째, 넷째 열이므로
+            $$a_3 = 2(1,-1,3) - 5(0,-1,1) = (2,-2,6)-(0,-5,5) = (2,3,1),$$
+            $$a_5 = -2(1,-1,3) - 3(0,-1,1) + 6(1,-2,0) = (-2,2,-6)+(0,3,-3)+(6,-12,0) = (4,-7,-9)$$
+            이다. 따라서
+            $$A = \begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ -1 & -1 & 3 & -2 & -7 \\ 3 & 1 & 1 & 0 & -9 \end{pmatrix}.$$
+            <em>검산.</em> $R_2\to R_2+R_1$, $R_3\to R_3-3R_1$을 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & -1 & 5 & -1 & -3 \\ 0 & 1 & -5 & -3 & -21 \end{pmatrix}$$
+            이고, $R_3\to R_3+R_2$를 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & -1 & 5 & -1 & -3 \\ 0 & 0 & 0 & -4 & -24 \end{pmatrix}$$
+            를 얻는다. $R_2 \to -R_2$, $R_3 \to -\frac14 R_3$로 피벗을 $1$로 만들면
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & 1 & -5 & 1 & 3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}$$
+            이고, 마지막으로 $R_1 \to R_1 - R_3$, $R_2 \to R_2 - R_3$을 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}$$
+            이 되어, 주어진 $R$과 정확히 일치한다.
+          </li>
+          <li>이번에는 $a_1=(1,-1,3)$, $a_2=(0,-1,1)$은 그대로이지만, 세 번째로 주어진 벡터 $(1,-2,0)$이 $A$의 다섯째 열, 즉 $a_5=(1,-2,0)$이다. $a_3=2a_1-5a_2$는 $a_1,a_2$만으로 결정되므로 (1)에서와 같이 $a_3=(2,3,1)$이다. 반면 $a_4$는 미지수이며, $a_5=-2a_1-3a_2+6a_4$로부터
+            $$a_4 = \frac16\big(a_5+2a_1+3a_2\big) = \frac16\big((1,-2,0)+(2,-2,6)+(0,-3,3)\big) = \frac16(3,-7,9) = \left(\frac12,\,-\frac76,\,\frac32\right)$$
+            로 구해진다. 따라서
+            $$A = \begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ -1 & -1 & 3 & -\frac76 & -2 \\ 3 & 1 & 1 & \frac32 & 0 \end{pmatrix}.$$
+            <em>검산.</em> $R_2\to R_2+R_1$, $R_3\to R_3-3R_1$을 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & -1 & 5 & -\frac23 & -1 \\ 0 & 1 & -5 & 0 & -3 \end{pmatrix}$$
+            이고, $R_3\to R_3+R_2$를 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & -1 & 5 & -\frac23 & -1 \\ 0 & 0 & 0 & -\frac23 & -4 \end{pmatrix}$$
+            를 얻는다. $R_2 \to -R_2$, $R_3 \to -\frac32 R_3$로 피벗을 $1$로 만들면
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & 1 & -5 & \frac23 & 1 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}$$
+            이고, 마지막으로 $R_1 \to R_1 - \frac12 R_3$, $R_2 \to R_2 - \frac23 R_3$를 적용하면
+            $$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}$$
+            이 되어, 역시 주어진 $R$과 정확히 일치한다.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> The reduced row echelon form of a matrix $A$ is</p>
+        <p>$$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix}.$$</p>
+        <ol>
+          <li>Find $A$ if the first, second, and fourth columns of $A$ are
+            <p>$$\begin{pmatrix} 1 \\ -1 \\ 3 \end{pmatrix}, \quad \begin{pmatrix} 0 \\ -1 \\ 1 \end{pmatrix}, \quad \begin{pmatrix} 1 \\ -2 \\ 0 \end{pmatrix}.$$</p>
+          </li>
+          <li>Find $A$ if the vectors in (1) are the first, second, and fifth columns of $A$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $A$ and its reduced row echelon form $R$ have the same null space (the solution set of the homogeneous system), the linear relations among the columns of $A$ are exactly the same as the linear relations among the corresponding columns of $R$. In $R$, the pivot columns are the first, second, and fourth, and the remaining two columns are the following combinations of the pivot columns.</p>
+        <p>$$R\text{'s third column} = 2(R\text{'s first column}) - 5(R\text{'s second column}), \qquad R\text{'s fifth column} = -2(R\text{'s first column}) - 3(R\text{'s second column}) + 6(R\text{'s fourth column}).$$</p>
+        <p>Writing $a_i$ for the $i$-th column of $A$, the same coefficients give</p>
+        <p>$$a_3 = 2a_1 - 5a_2, \qquad a_5 = -2a_1 - 3a_2 + 6a_4.$$</p>
+        <ol>
+          <li>Since $a_1=(1,-1,3)$, $a_2=(0,-1,1)$, $a_4=(1,-2,0)$ are the first, second, and fourth columns of $A$,
+            $$a_3 = 2(1,-1,3) - 5(0,-1,1) = (2,-2,6)-(0,-5,5) = (2,3,1),$$
+            $$a_5 = -2(1,-1,3) - 3(0,-1,1) + 6(1,-2,0) = (-2,2,-6)+(0,3,-3)+(6,-12,0) = (4,-7,-9).$$
+            Hence
+            $$A = \begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ -1 & -1 & 3 & -2 & -7 \\ 3 & 1 & 1 & 0 & -9 \end{pmatrix}.$$
+            <em>Check.</em> Applying $R_2\to R_2+R_1$, $R_3\to R_3-3R_1$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & -1 & 5 & -1 & -3 \\ 0 & 1 & -5 & -3 & -21 \end{pmatrix},$$
+            and $R_3\to R_3+R_2$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & -1 & 5 & -1 & -3 \\ 0 & 0 & 0 & -4 & -24 \end{pmatrix}.$$
+            Scaling the pivots to $1$ via $R_2 \to -R_2$, $R_3 \to -\frac14 R_3$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & 1 & 4 \\ 0 & 1 & -5 & 1 & 3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix},$$
+            and finally $R_1 \to R_1 - R_3$, $R_2 \to R_2 - R_3$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix},$$
+            which matches the given $R$ exactly.
+          </li>
+          <li>Now $a_1=(1,-1,3)$ and $a_2=(0,-1,1)$ are as before, but the third given vector $(1,-2,0)$ is the fifth column of $A$, i.e. $a_5=(1,-2,0)$. Since $a_3=2a_1-5a_2$ depends only on $a_1,a_2$, we still get $a_3=(2,3,1)$ as in (1). However $a_4$ is now unknown, and solving $a_5=-2a_1-3a_2+6a_4$ for $a_4$ gives
+            $$a_4 = \frac16\big(a_5+2a_1+3a_2\big) = \frac16\big((1,-2,0)+(2,-2,6)+(0,-3,3)\big) = \frac16(3,-7,9) = \left(\frac12,\,-\frac76,\,\frac32\right).$$
+            Hence
+            $$A = \begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ -1 & -1 & 3 & -\frac76 & -2 \\ 3 & 1 & 1 & \frac32 & 0 \end{pmatrix}.$$
+            <em>Check.</em> Applying $R_2\to R_2+R_1$, $R_3\to R_3-3R_1$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & -1 & 5 & -\frac23 & -1 \\ 0 & 1 & -5 & 0 & -3 \end{pmatrix},$$
+            and $R_3\to R_3+R_2$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & -1 & 5 & -\frac23 & -1 \\ 0 & 0 & 0 & -\frac23 & -4 \end{pmatrix}.$$
+            Scaling the pivots to $1$ via $R_2 \to -R_2$, $R_3 \to -\frac32 R_3$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & \frac12 & 1 \\ 0 & 1 & -5 & \frac23 & 1 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix},$$
+            and finally $R_1 \to R_1 - \frac12 R_3$, $R_2 \to R_2 - \frac23 R_3$ gives
+            $$\begin{pmatrix} 1 & 0 & 2 & 0 & -2 \\ 0 & 1 & -5 & 0 & -3 \\ 0 & 0 & 0 & 1 & 6 \end{pmatrix},$$
+            which again matches the given $R$ exactly.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.1 -->
+<div class="card ex-card" id="ex3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 3.1</span>
+    <span class="ex-title">대칭행렬 집합의 기저</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $W$를 $\mathbb{R}$ 위의 $2 \times 2$ 대칭행렬들의 공간이라 하자. 다음 집합을 생각하자.</p>
+        <p>$$S = \left\{ \begin{pmatrix} 0 & -1 \\ -1 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}, \begin{pmatrix} 2 & 1 \\ 1 & 9 \end{pmatrix}, \begin{pmatrix} 1 & -2 \\ -2 & 4 \end{pmatrix}, \begin{pmatrix} -1 & 2 \\ 2 & -1 \end{pmatrix} \right\}.$$</p>
+        <p>$S$의 부분집합 중 $W$의 기저가 되는 것을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $2\times2$ 대칭행렬 $\begin{pmatrix}a&b\\b&d\end{pmatrix}$을 좌표벡터 $(a,b,d)\in\mathbb{R}^3$에 대응시키면 $W \cong \mathbb{R}^3$이고, 이때 $\dim W = 3$이다. $S$의 다섯 원소를 이 대응에 따라 순서대로 $A_1,\ldots,A_5$라 하면 그 좌표벡터는</p>
+        <p>$$A_1 = (0,-1,1), \quad A_2 = (1,2,3), \quad A_3 = (2,1,9), \quad A_4=(1,-2,4), \quad A_5=(-1,2,-1)$$</p>
+        <p>이다. 이 좌표벡터들을 열로 하는 행렬을 기본행연산으로 정리하여, $S$의 어느 원소들이 $W$의 기저를 이루는지 판정하자.</p>
+        <p>$$\begin{pmatrix} 0&1&2&1&-1\\-1&2&1&-2&2\\1&3&9&4&-1 \end{pmatrix}$$</p>
+        <p>에서 첫째, 둘째 행을 교환하고 부호를 바꾸면 ($R_1 \leftrightarrow R_2$, $R_1 \to -R_1$)</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\1&3&9&4&-1 \end{pmatrix}$$</p>
+        <p>이고, $R_3 \to R_3 - R_1$을 적용하면</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\0&5&10&2&1 \end{pmatrix}$$</p>
+        <p>이며, $R_3 \to R_3 - 5R_2$를 적용하면</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\0&0&0&-3&6 \end{pmatrix}$$</p>
+        <p>을 얻는다. 피벗은 첫째, 둘째, 넷째 열에 있으므로 (즉 셋째 열에는 새 피벗이 생기지 않으므로) $A_1, A_2, A_4$가 열공간, 즉 $W$의 기저를 이루고, $A_3, A_5$는 각각 $A_1,A_2$ 및 $A_1,A_2,A_4$의 일차결합이다.</p>
+        <p>이를 직접 확인하면 다음과 같다. $A_1,A_2$는 서로 스칼라배가 아니므로 일차독립이다. $A_4 = xA_1+yA_2$라 하면 첫째 성분에서 $y=1$, 둘째 성분에서 $-x+2y=-2 \Rightarrow x=4$인데, 셋째 성분은 $x+3y=4+3=7\ne4$가 되어 모순이므로 $A_4 \notin \operatorname{span}\{A_1,A_2\}$이다. 즉 $\{A_1,A_2,A_4\}$는 일차독립이고, $\dim W=3$이므로 이는 $W$의 기저이다.</p>
+        <p>따라서 $S$의 부분집합</p>
+        <p>$$\left\{ \begin{pmatrix} 0 & -1 \\ -1 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}, \begin{pmatrix} 1 & -2 \\ -2 & 4 \end{pmatrix} \right\}$$</p>
+        <p>이 $W$의 기저이다.</p>
+        <p>(참고: 이렇게 $W$의 기저가 되는 $S$의 부분집합은 유일하지 않다. 예컨대 $\{A_1,A_2,A_5\}$도 $W$의 기저이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $W$ be the space of $2 \times 2$ symmetric matrices over $\mathbb{R}$. Consider the set</p>
+        <p>$$S = \left\{ \begin{pmatrix} 0 & -1 \\ -1 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}, \begin{pmatrix} 2 & 1 \\ 1 & 9 \end{pmatrix}, \begin{pmatrix} 1 & -2 \\ -2 & 4 \end{pmatrix}, \begin{pmatrix} -1 & 2 \\ 2 & -1 \end{pmatrix} \right\}.$$</p>
+        <p>Find a subset of $S$ that is a basis for $W$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Identifying a $2\times2$ symmetric matrix $\begin{pmatrix}a&b\\b&d\end{pmatrix}$ with its coordinate vector $(a,b,d)\in\mathbb{R}^3$ gives $W \cong \mathbb{R}^3$, so $\dim W = 3$. Labeling the five elements of $S$ in order as $A_1,\ldots,A_5$, their coordinate vectors are</p>
+        <p>$$A_1 = (0,-1,1), \quad A_2 = (1,2,3), \quad A_3 = (2,1,9), \quad A_4=(1,-2,4), \quad A_5=(-1,2,-1).$$</p>
+        <p>Form the matrix whose columns are these coordinate vectors, and row-reduce to determine which elements of $S$ form a basis for $W$.</p>
+        <p>$$\begin{pmatrix} 0&1&2&1&-1\\-1&2&1&-2&2\\1&3&9&4&-1 \end{pmatrix}$$</p>
+        <p>Swapping the first two rows and negating ($R_1 \leftrightarrow R_2$, $R_1 \to -R_1$) gives</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\1&3&9&4&-1 \end{pmatrix},$$</p>
+        <p>and $R_3 \to R_3 - R_1$ gives</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\0&5&10&2&1 \end{pmatrix},$$</p>
+        <p>and $R_3 \to R_3 - 5R_2$ gives</p>
+        <p>$$\begin{pmatrix} 1&-2&-1&2&-2\\0&1&2&1&-1\\0&0&0&-3&6 \end{pmatrix}.$$</p>
+        <p>The pivots lie in columns $1$, $2$, $4$ (no new pivot appears in column $3$), so $A_1, A_2, A_4$ form a basis for the column space, which is $W$, while $A_3$ and $A_5$ are linear combinations of $A_1,A_2$ and of $A_1,A_2,A_4$, respectively.</p>
+        <p>To confirm this directly: $A_1,A_2$ are not scalar multiples of each other, hence linearly independent. If $A_4 = xA_1+yA_2$, the first coordinate forces $y=1$ and the second forces $-x+2y=-2 \Rightarrow x=4$, but then the third coordinate would require $x+3y=4+3=7$, not $4$ — a contradiction, so $A_4 \notin \operatorname{span}\{A_1,A_2\}$. Hence $\{A_1,A_2,A_4\}$ is linearly independent, and since $\dim W=3$, it is a basis for $W$.</p>
+        <p>Therefore the subset of $S$</p>
+        <p>$$\left\{ \begin{pmatrix} 0 & -1 \\ -1 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}, \begin{pmatrix} 1 & -2 \\ -2 & 4 \end{pmatrix} \right\}$$</p>
+        <p>is a basis for $W$.</p>
+        <p>(Note: such a basis subset of $S$ is not unique; for example, $\{A_1,A_2,A_5\}$ is also a basis for $W$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.2 -->
+<div class="card ex-card" id="ex3-2">
+  <div class="card-head">
+    <span class="ex-num">EX 3.2</span>
+    <span class="ex-title">기저로의 확장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 다음 연립일차방정식의 모든 해로 이루어진 공간이라 하자.</p>
+        <p>$$\begin{aligned} x_1 - x_2 + 2x_4 - 3x_5 + x_6 &= 0 \\ 2x_1 - x_2 - x_3 + 3x_4 - 4x_5 + 4x_6 &= 0 \end{aligned}$$</p>
+        <p>$S = \{(0, -1, 0, 1, 1, 0), (1, 0, 1, 1, 1, 0)\}$를 $V$의 기저로 확장하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 $V$의 기저를 구하자. 계수행렬에 기본행연산 $R_2 \to R_2-2R_1$을 적용하면</p>
+        <p>$$\begin{pmatrix} 1&-1&0&2&-3&1\\2&-1&-1&3&-4&4 \end{pmatrix} \ \longrightarrow\ \begin{pmatrix} 1&-1&0&2&-3&1\\0&1&-1&-1&2&2 \end{pmatrix}$$</p>
+        <p>이고, $R_1 \to R_1+R_2$를 적용하면 기약행사다리꼴</p>
+        <p>$$\begin{pmatrix} 1&0&-1&1&-1&3\\0&1&-1&-1&2&2 \end{pmatrix}$$</p>
+        <p>를 얻는다. 계수행렬의 계수(rank)는 $2$이므로, 미지수가 $6$개인 이 동차연립방정식의 해공간 $V$의 차원은 $6-2=4$이다. 피벗은 $x_1,x_2$ 열에 있고 $x_3,x_4,x_5,x_6$이 자유변수이며,</p>
+        <p>$$x_1 = x_3-x_4+x_5-3x_6, \qquad x_2 = x_3+x_4-2x_5-2x_6$$</p>
+        <p>이다. $(x_3,x_4,x_5,x_6)=(1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1)$을 각각 대입하면 $V$의 기저</p>
+        <p>$$v_1=(1,1,1,0,0,0),\ v_2=(-1,1,0,1,0,0),\ v_3=(1,-2,0,0,1,0),\ v_4=(-3,-2,0,0,0,1)$$</p>
+        <p>를 얻는다. (검산: 예컨대 $v_1$을 원래 방정식에 대입하면 $1-1+0-0+0=0$, $2-1-1+0-0+0=0$이 성립하고, 나머지 $v_2,v_3,v_4$도 마찬가지로 두 방정식을 모두 만족시킨다.)</p>
+        <p>이제 $S=\{s_1,s_2\}=\{(0,-1,0,1,1,0),(1,0,1,1,1,0)\}$를 확장하자. 먼저 $s_1,s_2\in V$임을 확인하면, $s_1$에 대해 $0-(-1)+2(1)-3(1)+0=0$, $0-(-1)-0+3(1)-4(1)+0=0$이 성립하고, $s_2$에 대해 $1-0+2(1)-3(1)+0=0$, $2(1)-0-1+3(1)-4(1)+0=0$이 성립하여 $s_1,s_2\in V$이다.</p>
+        <p>$\{s_1,s_2,v_3,v_4\}$가 $V$의 기저가 되는지 판정하기 위해, 이 네 벡터를 행으로 하는 $4\times6$ 행렬에 기본행연산을 적용하자.</p>
+        <p>$$\begin{pmatrix} 0&-1&0&1&1&0\\1&0&1&1&1&0\\1&-2&0&0&1&0\\-3&-2&0&0&0&1 \end{pmatrix}$$</p>
+        <p>에서 첫째, 둘째 행을 교환하면</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\1&-2&0&0&1&0\\-3&-2&0&0&0&1 \end{pmatrix}$$</p>
+        <p>이고, $R_3 \to R_3-R_1$, $R_4 \to R_4+3R_1$을 적용하면</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&-2&-1&-1&0&0\\0&-2&3&3&3&1 \end{pmatrix}$$</p>
+        <p>이며, $R_3 \to R_3-2R_2$, $R_4 \to R_4-2R_2$를 적용하면</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&0&-1&-3&-2&0\\0&0&3&1&1&1 \end{pmatrix}$$</p>
+        <p>이 되고, 마지막으로 $R_4 \to R_4+3R_3$을 적용하면</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&0&-1&-3&-2&0\\0&0&0&-8&-5&1 \end{pmatrix}$$</p>
+        <p>를 얻는다. 선행성분이 각각 $1,-1,-1,-8$인 네 개의 피벗이 존재하므로 이 $4\times6$ 행렬의 계수는 $4$이고, 따라서 $s_1,s_2,v_3,v_4$는 일차독립이다. $\dim V=4$이므로, $\{s_1,s_2,v_3,v_4\}$는 $V$의 기저이다.</p>
+        <p>따라서 $S$는 다음과 같이 $V$의 기저로 확장된다.</p>
+        <p>$$\{(0,-1,0,1,1,0),\ (1,0,1,1,1,0),\ (1,-2,0,0,1,0),\ (-3,-2,0,0,0,1)\}.$$</p>
+        <p>(참고: $\dim V=4$인 공간에 두 벡터를 더 추가하는 것이므로, 이러한 기저로의 확장은 유일하지 않다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be the space of all solutions to the system of linear equations</p>
+        <p>$$\begin{aligned} x_1 - x_2 + 2x_4 - 3x_5 + x_6 &= 0 \\ 2x_1 - x_2 - x_3 + 3x_4 - 4x_5 + 4x_6 &= 0 \end{aligned}$$</p>
+        <p>Extend $S = \{(0, -1, 0, 1, 1, 0), (1, 0, 1, 1, 1, 0)\}$ to a basis for $V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First we find a basis for $V$. Applying $R_2 \to R_2-2R_1$ to the coefficient matrix gives</p>
+        <p>$$\begin{pmatrix} 1&-1&0&2&-3&1\\2&-1&-1&3&-4&4 \end{pmatrix} \ \longrightarrow\ \begin{pmatrix} 1&-1&0&2&-3&1\\0&1&-1&-1&2&2 \end{pmatrix},$$</p>
+        <p>and applying $R_1 \to R_1+R_2$ gives the reduced row echelon form</p>
+        <p>$$\begin{pmatrix} 1&0&-1&1&-1&3\\0&1&-1&-1&2&2 \end{pmatrix}.$$</p>
+        <p>The coefficient matrix has rank $2$, so the solution space $V$ of this homogeneous system in $6$ unknowns has dimension $6-2=4$. The pivots lie in the $x_1,x_2$ columns, and $x_3,x_4,x_5,x_6$ are free, with</p>
+        <p>$$x_1 = x_3-x_4+x_5-3x_6, \qquad x_2 = x_3+x_4-2x_5-2x_6.$$</p>
+        <p>Substituting $(x_3,x_4,x_5,x_6)=(1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1)$ in turn gives the basis for $V$</p>
+        <p>$$v_1=(1,1,1,0,0,0),\ v_2=(-1,1,0,1,0,0),\ v_3=(1,-2,0,0,1,0),\ v_4=(-3,-2,0,0,0,1).$$</p>
+        <p>(Check: substituting $v_1$ into the original equations gives $1-1+0-0+0=0$ and $2-1-1+0-0+0=0$, and $v_2,v_3,v_4$ likewise satisfy both equations.)</p>
+        <p>Now we extend $S=\{s_1,s_2\}=\{(0,-1,0,1,1,0),(1,0,1,1,1,0)\}$. First, $s_1,s_2 \in V$: for $s_1$, $0-(-1)+2(1)-3(1)+0=0$ and $0-(-1)-0+3(1)-4(1)+0=0$; for $s_2$, $1-0+2(1)-3(1)+0=0$ and $2(1)-0-1+3(1)-4(1)+0=0$. So indeed $s_1,s_2\in V$.</p>
+        <p>To determine whether $\{s_1,s_2,v_3,v_4\}$ is a basis of $V$, row-reduce the $4\times6$ matrix with these four vectors as rows.</p>
+        <p>$$\begin{pmatrix} 0&-1&0&1&1&0\\1&0&1&1&1&0\\1&-2&0&0&1&0\\-3&-2&0&0&0&1 \end{pmatrix}$$</p>
+        <p>Swapping the first two rows gives</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\1&-2&0&0&1&0\\-3&-2&0&0&0&1 \end{pmatrix},$$</p>
+        <p>and applying $R_3 \to R_3-R_1$, $R_4 \to R_4+3R_1$ gives</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&-2&-1&-1&0&0\\0&-2&3&3&3&1 \end{pmatrix},$$</p>
+        <p>and applying $R_3 \to R_3-2R_2$, $R_4 \to R_4-2R_2$ gives</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&0&-1&-3&-2&0\\0&0&3&1&1&1 \end{pmatrix},$$</p>
+        <p>and finally $R_4 \to R_4+3R_3$ gives</p>
+        <p>$$\begin{pmatrix} 1&0&1&1&1&0\\0&-1&0&1&1&0\\0&0&-1&-3&-2&0\\0&0&0&-8&-5&1 \end{pmatrix}.$$</p>
+        <p>There are four pivots, with leading entries $1,-1,-1,-8$, so this $4\times6$ matrix has rank $4$, and hence $s_1,s_2,v_3,v_4$ are linearly independent. Since $\dim V=4$, the set $\{s_1,s_2,v_3,v_4\}$ is a basis for $V$.</p>
+        <p>Thus $S$ extends to the following basis for $V$.</p>
+        <p>$$\{(0,-1,0,1,1,0),\ (1,0,1,1,1,0),\ (1,-2,0,0,1,0),\ (-3,-2,0,0,0,1)\}.$$</p>
+        <p>(Note: since we adjoin two more vectors to a space of dimension $\dim V=4$, this extension to a basis is not unique.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

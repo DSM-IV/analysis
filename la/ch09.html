@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09. 기본행렬연산 (Elementary Matrix Operation) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 09단원 기본행렬연산(Elementary Matrix Operation) 예제·심화 문제 모음. 기본행렬 연산, 역행렬, 계수(rank), 행렬의 기본행렬 곱 분해를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 기본행렬연산, elementary matrix operation, 기본행렬, elementary matrix, 기본행연산, elementary row operation, 역행렬, inverse matrix, 계수, rank, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch09.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="09. 기본행렬연산 (Elementary Matrix Operation) — 선형대수학 한·영 대조">
+<meta property="og:description" content="기본행렬연산 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch09.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "09. 기본행렬연산 (Elementary Matrix Operation) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 기본행렬연산 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch09.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch09.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html" class="active">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 09</p>
+  <h1>09. 기본행렬연산<span>Elementary Matrix Operation</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 기본연산과 항등행렬로의 변형</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> 기본행렬의 역행렬</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> 상삼각행렬로의 변형</a></li>
+    <li><a href="#ex1-3"><span class="toc-num">EX 1.3</span> 제2형·제3형으로 제1형 구성</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 행렬의 계수</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 계수표준형 $PDQ$</a></li>
+    <li><a href="#ex2-2"><span class="toc-num">EX 2.2</span> 스칼라배의 계수</a></li>
+    <li><a href="#ex3"><span class="toc-num">EX 3</span> 역행렬이 존재하면 구하기</a></li>
+    <li><a href="#ex3-1"><span class="toc-num">EX 3.1</span> 선형변환의 역변환</a></li>
+    <li><a href="#ex3-2"><span class="toc-num">EX 3.2</span> 기본행렬의 곱</a></li>
+    <li><a href="#ex4"><span class="toc-num">EX 4</span> 행렬 곱의 계수</a></li>
+    <li><a href="#ex4-1"><span class="toc-num">EX 4.1</span> 계수 1 행렬의 합으로 표현</a></li>
+    <li><a href="#ex4-2"><span class="toc-num">EX 4.2</span> 최대계수 행렬 곱의 계수</a></li>
+    <li><a href="#pr1"><span class="toc-num">PR 1</span> 행동치는 동치관계</a></li>
+    <li><a href="#pr2"><span class="toc-num">PR 2</span> 전치행렬과 열연산</a></li>
+    <li><a href="#pr3"><span class="toc-num">PR 3</span> 행렬 합의 계수</a></li>
+    <li><a href="#pr4"><span class="toc-num">PR 4</span> 계수와 일방향 역행렬</a></li>
+    <li><a href="#pr5"><span class="toc-num">PR 5</span> $AB = O$의 최대계수</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">기본연산과 항등행렬로의 변형</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A = \begin{pmatrix} 1 & 2 & 3 \\ 1 & 0 & 1 \\ 1 & -1 & 1 \end{pmatrix}$, $B = \begin{pmatrix} 1 & 0 & 3 \\ 1 & -2 & 1 \\ 1 & -3 & 1 \end{pmatrix}$라 하자.</p>
+        <ol>
+          <li>$A$를 $B$로 바꾸는 기본연산을 구하라.</li>
+          <li>기본행연산을 수행하여 $B$를 $I_3$으로 변형하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol>
+          <li>$A$의 제1열과 제3열은 $B$의 대응하는 열과 각각 같고 제2열만 다르다. $A$의 제2열에서 제1열의 $2$배를 빼면 $$\begin{pmatrix}2\\0\\-1\end{pmatrix}-2\begin{pmatrix}1\\1\\1\end{pmatrix}=\begin{pmatrix}0\\-2\\-3\end{pmatrix}$$ 이 되어 $B$의 제2열과 일치하므로, $A$를 $B$로 바꾸는 기본연산은 기본열연산 $C_2 \to C_2-2C_1$이다.</li>
+          <li>$B$에 $R_2 \to R_2-R_1$, $R_3 \to R_3-R_1$을 적용하면 $$\begin{pmatrix}1&0&3\\1&-2&1\\1&-3&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&3\\0&-2&-2\\0&-3&-2\end{pmatrix}$$ 을 얻는다. 이어서 $R_2 \to -\frac12R_2$, $R_3 \to R_3+3R_2$를 적용하면 $$\begin{pmatrix}1&0&3\\0&-2&-2\\0&-3&-2\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&3\\0&1&1\\0&0&1\end{pmatrix}$$ 이고, 마지막으로 $R_1 \to R_1-3R_3$, $R_2 \to R_2-R_3$을 적용하면 $$\begin{pmatrix}1&0&3\\0&1&1\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3$$ 을 얻는다. 즉 여섯 번의 기본행연산 $R_2\to R_2-R_1,\ R_3\to R_3-R_1,\ R_2\to-\frac12R_2,\ R_3\to R_3+3R_2,\ R_1\to R_1-3R_3,\ R_2\to R_2-R_3$을 차례로 적용하면 $B$가 $I_3$으로 변형된다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A = \begin{pmatrix} 1 & 2 & 3 \\ 1 & 0 & 1 \\ 1 & -1 & 1 \end{pmatrix}$, $B = \begin{pmatrix} 1 & 0 & 3 \\ 1 & -2 & 1 \\ 1 & -3 & 1 \end{pmatrix}$.</p>
+        <ol>
+          <li>Find an elementary operation that transforms $A$ into $B$.</li>
+          <li>Perform elementary row operations to transform $B$ into $I_3$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol>
+          <li>Columns 1 and 3 of $A$ agree with the corresponding columns of $B$, and only column 2 differs. Subtracting twice column 1 from column 2 of $A$ gives $$\begin{pmatrix}2\\0\\-1\end{pmatrix}-2\begin{pmatrix}1\\1\\1\end{pmatrix}=\begin{pmatrix}0\\-2\\-3\end{pmatrix},$$ which matches column 2 of $B$. Hence the elementary operation transforming $A$ into $B$ is the column operation $C_2 \to C_2-2C_1$.</li>
+          <li>Applying $R_2 \to R_2-R_1$, $R_3 \to R_3-R_1$ to $B$ gives $$\begin{pmatrix}1&0&3\\1&-2&1\\1&-3&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&3\\0&-2&-2\\0&-3&-2\end{pmatrix}.$$ Applying $R_2 \to -\frac12R_2$, $R_3 \to R_3+3R_2$ then gives $$\begin{pmatrix}1&0&3\\0&-2&-2\\0&-3&-2\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&3\\0&1&1\\0&0&1\end{pmatrix},$$ and finally applying $R_1 \to R_1-3R_3$, $R_2 \to R_2-R_3$ gives $$\begin{pmatrix}1&0&3\\0&1&1\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3.$$ Thus the six elementary row operations $R_2\to R_2-R_1,\ R_3\to R_3-R_1,\ R_2\to-\frac12R_2,\ R_3\to R_3+3R_2,\ R_1\to R_1-3R_3,\ R_2\to R_2-R_3$, applied in order, transform $B$ into $I_3$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">기본행렬의 역행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 행렬의 역행렬을 구하라.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ -2 & 0 & 1 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol type="a">
+          <li>$\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$는 $I_3$의 제1행과 제3행을 교환하여 얻은 제1형 기본행렬이다. 같은 교환을 두 번 적용하면 원래대로 돌아오므로, 이 행렬은 자기 자신의 역행렬이다: $$\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}^{-1}=\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}.$$ 실제로 두 행렬을 곱하면 $I_3$이 됨을 바로 확인할 수 있다.</li>
+          <li>$\begin{pmatrix}1&0&0\\0&3&0\\0&0&1\end{pmatrix}$는 $I_3$의 제2행을 $3$배 하여 얻은 제2형 기본행렬이다. 이 연산의 역연산은 제2행을 $\frac13$배 하는 것이므로 $$\begin{pmatrix}1&0&0\\0&3&0\\0&0&1\end{pmatrix}^{-1}=\begin{pmatrix}1&0&0\\0&\frac13&0\\0&0&1\end{pmatrix}$$ 이다. 실제로 두 대각행렬을 곱하면 $\operatorname{diag}(1,\,3\cdot\tfrac13,\,1)=I_3$이다.</li>
+          <li>$\begin{pmatrix}1&0&0\\0&1&0\\-2&0&1\end{pmatrix}$는 $I_3$에 $R_3 \to R_3-2R_1$을 적용하여 얻은 제3형 기본행렬이다. 이 연산의 역연산은 $R_3 \to R_3+2R_1$이므로 $$\begin{pmatrix}1&0&0\\0&1&0\\-2&0&1\end{pmatrix}^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\2&0&1\end{pmatrix}$$ 이다. 실제로 곱하면 제3행이 $(-2+2,\,0,\,1)=(0,0,1)$이 되어 $I_3$을 얻는다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the inverse of the following matrices.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ -2 & 0 & 1 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol type="a">
+          <li>$\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$ is the elementary matrix of type 1 obtained from $I_3$ by interchanging rows 1 and 3. Performing the same interchange twice returns the original matrix, so this matrix is its own inverse: $$\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}^{-1}=\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}.$$ Indeed, multiplying the two matrices immediately gives $I_3$.</li>
+          <li>$\begin{pmatrix}1&0&0\\0&3&0\\0&0&1\end{pmatrix}$ is the elementary matrix of type 2 obtained from $I_3$ by scaling row 2 by $3$. The inverse operation scales row 2 by $\frac13$, so $$\begin{pmatrix}1&0&0\\0&3&0\\0&0&1\end{pmatrix}^{-1}=\begin{pmatrix}1&0&0\\0&\frac13&0\\0&0&1\end{pmatrix}.$$ Indeed, multiplying the two diagonal matrices gives $\operatorname{diag}(1,\,3\cdot\tfrac13,\,1)=I_3$.</li>
+          <li>$\begin{pmatrix}1&0&0\\0&1&0\\-2&0&1\end{pmatrix}$ is the elementary matrix of type 3 obtained from $I_3$ by applying $R_3 \to R_3-2R_1$. The inverse operation is $R_3 \to R_3+2R_1$, so $$\begin{pmatrix}1&0&0\\0&1&0\\-2&0&1\end{pmatrix}^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\2&0&1\end{pmatrix}.$$ Indeed, multiplying the two matrices gives row 3 equal to $(-2+2,\,0,\,1)=(0,0,1)$, so the product is $I_3$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">상삼각행렬로의 변형</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 제1형과 제3형 기본행연산을 순서대로 적용하여 $m \times n$ 행렬 $A$를 상삼각행렬로 변형할 수 있음을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $m\times n$ 행렬 $A=(a_{ij})$에 대해, (직사각행렬에 대한) 상삼각행렬이란 $i>j$인 모든 $i,j$에서 $(i,j)$ 성분이 $0$인 행렬을 뜻한다. 행의 개수 $m$에 대한 수학적 귀납법으로 증명한다.</p>
+        <p>$m=1$이면 $A$ 아래에 놓인 행이 없으므로 $A$는 자명하게 상삼각행렬이다.</p>
+        <p>$m>1$이라 하고, 행의 개수가 $m$보다 작은 모든 행렬에 대해 명제가 성립한다고 가정하자.</p>
+        <p><em>경우 1: $A$의 제1열이 영벡터인 경우.</em> 이때 제1열은 이미 조건($i>1$인 모든 $i$에서 $(i,1)$ 성분이 $0$)을 만족한다. 제2행부터 제$m$행, 제2열부터 제$n$열로 이루어진 $(m-1)\times(n-1)$ 부분행렬에 귀납가정을 적용하면, 제1형과 제3형 기본행연산을 (제1행에는 적용하지 않고 제2행부터 제$m$행에만) 순서대로 적용하여 이 부분행렬을 상삼각행렬로 변형할 수 있다. 이 연산들은 제1열의 성분(모두 $0$)에 전혀 영향을 주지 않으므로, 결과적으로 $A$ 전체가 상삼각행렬이 된다.</p>
+        <p><em>경우 2: $A$의 제1열이 영벡터가 아닌 경우.</em> $a_{i_01}\neq0$인 $i_0$이 존재한다. $i_0\neq1$이면 제1형 기본행연산으로 제1행과 제$i_0$행을 교환하여 $(1,1)$ 성분이 $0$이 아니게 만들 수 있다. 이제 $j=2,\dots,m$에 대해 제3형 기본행연산 $R_j \to R_j - \dfrac{a_{j1}}{a_{11}}R_1$을 차례로 적용하면 제1열의 제1행 아래 성분이 모두 $0$이 된다. 그 다음 제2행부터 제$m$행, 제2열부터 제$n$열로 이루어진 $(m-1)\times(n-1)$ 부분행렬에 귀납가정을 적용하여, 제1형과 제3형 연산을 (제2행부터 제$m$행에만) 순서대로 적용하면 이 부분행렬을 상삼각행렬로 변형할 수 있다. 이러한 연산들은 이미 $0$인 제1열의 성분을 다시 바꾸지 않으므로, 결과적으로 $A$ 전체에서 $i>j$인 모든 $(i,j)$의 성분이 $0$이 되어 상삼각행렬을 얻는다.</p>
+        <p>두 경우 모두 사용된 연산이 제1형과 제3형뿐이므로, 귀납법에 의해 임의의 $m\times n$ 행렬은 제1형과 제3형 기본행연산을 순서대로 적용하여 상삼각행렬로 변형될 수 있다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove that there is a sequence of elementary row operations of type 1 and 3 that transforms an $m \times n$ matrix $A$ into an upper triangular matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> For an $m\times n$ matrix $A=(a_{ij})$, call $A$ upper triangular (for a rectangular matrix) if the $(i,j)$ entry is $0$ whenever $i>j$. We induct on the number of rows $m$.</p>
+        <p>If $m=1$, there are no rows below $A$'s single row, so $A$ is trivially upper triangular.</p>
+        <p>Suppose $m>1$ and the statement holds for every matrix with fewer than $m$ rows.</p>
+        <p><em>Case 1: column 1 of $A$ is the zero vector.</em> Then column 1 already satisfies the required condition (the $(i,1)$ entry is $0$ for every $i>1$). Applying the induction hypothesis to the $(m-1)\times(n-1)$ submatrix formed by rows $2,\dots,m$ and columns $2,\dots,n$, there is a sequence of type 1 and type 3 elementary row operations (applied only to rows $2,\dots,m$, leaving row 1 untouched) that transforms this submatrix into upper triangular form. These operations do not affect the entries of column 1 (which are all $0$), so the entire matrix $A$ becomes upper triangular.</p>
+        <p><em>Case 2: column 1 of $A$ is not the zero vector.</em> Then there is some $i_0$ with $a_{i_01}\neq0$. If $i_0\neq1$, a type 1 operation interchanging rows $1$ and $i_0$ makes the $(1,1)$ entry nonzero. Now, for $j=2,\dots,m$, applying the type 3 operations $R_j \to R_j - \dfrac{a_{j1}}{a_{11}}R_1$ in succession makes every entry of column 1 below row 1 equal to $0$. Applying the induction hypothesis to the $(m-1)\times(n-1)$ submatrix formed by rows $2,\dots,m$ and columns $2,\dots,n$, a sequence of type 1 and type 3 operations (applied only to rows $2,\dots,m$) transforms this submatrix into upper triangular form. These operations do not disturb the already-zero entries of column 1, so the entire matrix $A$ ends up with $(i,j)$ entry equal to $0$ whenever $i>j$, i.e. $A$ is upper triangular.</p>
+        <p>In both cases only type 1 and type 3 operations were used, so by induction every $m\times n$ matrix can be transformed into upper triangular form by a sequence of elementary row operations of type 1 and 3.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex1-3">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">제2형·제3형으로 제1형 구성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 제1형 기본행연산은 제2형과 제3형 기본행연산을 순서대로 적용하여 얻을 수 있음을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 서로 다른 두 행 번호 $i\neq j$에 대해, $R_i$와 $R_j$를 교환하는 제1형 기본행연산이 다음과 같이 제2형·제3형 기본행연산의 합성으로 얻어짐을 보이자 (다른 행은 전혀 바뀌지 않는다). $R_i,R_j$의 초깃값을 각각 $a,b$라 하자.</p>
+        <ol>
+          <li>$R_i \to R_i+R_j$ (제3형)를 적용하면 $(R_i,R_j)=(a+b,\ b)$.</li>
+          <li>$R_j \to R_j-R_i$ (제3형)를 적용하면 $(R_i,R_j)=(a+b,\ b-(a+b))=(a+b,\ -a)$.</li>
+          <li>$R_i \to R_i+R_j$ (제3형)를 적용하면 $(R_i,R_j)=((a+b)+(-a),\ -a)=(b,\ -a)$.</li>
+          <li>$R_j \to -R_j$ (제2형)를 적용하면 $(R_i,R_j)=(b,\ a)$.</li>
+        </ol>
+        <p>네 단계를 거친 뒤 $(R_i,R_j)$가 $(a,b)$에서 $(b,a)$로 바뀌었으므로, 두 행이 정확히 교환되었다. 각 단계는 $R_i$ 또는 $R_j$가 아닌 행에는 전혀 영향을 주지 않으므로, 다른 모든 행은 그대로 유지된다. 따라서 제1형 기본행연산(두 행의 교환)은 제3형, 제3형, 제3형, 제2형 순서로 네 번의 기본행연산을 합성하여 얻어진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove that an elementary row operation of type 1 can be obtained by a succession of elementary row operations of type 2 and 3.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Fix distinct row indices $i\neq j$. We show that the type 1 operation interchanging $R_i$ and $R_j$ is obtained by the following succession of type 2 and type 3 operations (all other rows are left unchanged). Let $a,b$ denote the initial values of $R_i,R_j$.</p>
+        <ol>
+          <li>Apply $R_i \to R_i+R_j$ (type 3): $(R_i,R_j)=(a+b,\ b)$.</li>
+          <li>Apply $R_j \to R_j-R_i$ (type 3): $(R_i,R_j)=(a+b,\ b-(a+b))=(a+b,\ -a)$.</li>
+          <li>Apply $R_i \to R_i+R_j$ (type 3): $(R_i,R_j)=((a+b)+(-a),\ -a)=(b,\ -a)$.</li>
+          <li>Apply $R_j \to -R_j$ (type 2): $(R_i,R_j)=(b,\ a)$.</li>
+        </ol>
+        <p>After these four steps $(R_i,R_j)$ has changed from $(a,b)$ to $(b,a)$, so the two rows have been exactly interchanged. Each step affects only rows $i$ and $j$, so every other row remains unchanged throughout. Hence the type 1 operation (interchanging two rows) is obtained by composing four elementary row operations in the order type 3, type 3, type 3, type 2.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">행렬의 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 행렬의 계수(rank)를 구하라.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 1 & 1 & 0 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 2 \\ 1 & 1 & 4 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 3 & 1 & 1 \\ 1 & 4 & 0 & 1 & 2 \\ 0 & 2 & -3 & 0 & 1 \\ 1 & 0 & 0 & 0 & 0 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol type="a">
+          <li>$R_3 \to R_3-R_1$을 적용하면 $$\begin{pmatrix}1&1&0\\0&1&1\\1&1&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&1&0\\0&1&1\\0&0&0\end{pmatrix}$$ 을 얻는다. 이는 행사다리꼴이고 영이 아닌 행이 $2$개이므로 계수는 $2$이다.</li>
+          <li>$R_2 \to R_2-R_1$을 적용하면 $$\begin{pmatrix}1&0&2\\1&1&4\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&2\\0&1&2\end{pmatrix}$$ 을 얻는다. 두 행 모두 영이 아니고 행사다리꼴이므로 계수는 $2$이다 (행이 두 개뿐이므로 최대계수).</li>
+          <li>$R_2 \to R_2-R_1$, $R_4 \to R_4-R_1$을 적용하면 $$\begin{pmatrix}1&2&3&1&1\\1&4&0&1&2\\0&2&-3&0&1\\1&0&0&0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&2&-3&0&1\\0&-2&-3&-1&-1\end{pmatrix}$$ 을 얻는다. 이어서 $R_3 \to R_3-R_2$, $R_4 \to R_4+R_2$를 적용하면 $$\begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&2&-3&0&1\\0&-2&-3&-1&-1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&0&0&0&0\\0&0&-6&-1&0\end{pmatrix}$$ 을 얻는다. 제3행과 제4행을 교환($R_3 \leftrightarrow R_4$)하면 $$\begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&0&-6&-1&0\\0&0&0&0&0\end{pmatrix}$$ 이라는 행사다리꼴을 얻고, 영이 아닌 행이 $3$개이므로 계수는 $3$이다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the rank of the following matrices.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 1 & 1 & 0 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 0 & 2 \\ 1 & 1 & 4 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 3 & 1 & 1 \\ 1 & 4 & 0 & 1 & 2 \\ 0 & 2 & -3 & 0 & 1 \\ 1 & 0 & 0 & 0 & 0 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol type="a">
+          <li>Applying $R_3 \to R_3-R_1$ gives $$\begin{pmatrix}1&1&0\\0&1&1\\1&1&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&1&0\\0&1&1\\0&0&0\end{pmatrix}.$$ This is in row echelon form with $2$ nonzero rows, so the rank is $2$.</li>
+          <li>Applying $R_2 \to R_2-R_1$ gives $$\begin{pmatrix}1&0&2\\1&1&4\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&2\\0&1&2\end{pmatrix}.$$ Both rows are nonzero and the matrix is in row echelon form, so the rank is $2$ (the maximum possible, since there are only two rows).</li>
+          <li>Applying $R_2 \to R_2-R_1$, $R_4 \to R_4-R_1$ gives $$\begin{pmatrix}1&2&3&1&1\\1&4&0&1&2\\0&2&-3&0&1\\1&0&0&0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&2&-3&0&1\\0&-2&-3&-1&-1\end{pmatrix}.$$ Applying $R_3 \to R_3-R_2$, $R_4 \to R_4+R_2$ then gives $$\begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&2&-3&0&1\\0&-2&-3&-1&-1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&0&0&0&0\\0&0&-6&-1&0\end{pmatrix}.$$ Interchanging rows 3 and 4 ($R_3 \leftrightarrow R_4$) gives the row echelon form $$\begin{pmatrix}1&2&3&1&1\\0&2&-3&0&1\\0&0&-6&-1&0\\0&0&0&0&0\end{pmatrix},$$ which has $3$ nonzero rows, so the rank is $3$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">계수표준형 $PDQ$</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A = \begin{pmatrix} 2 & 1 \\ -1 & 2 \\ 2 & 1 \end{pmatrix}$를 $A = PDQ$ 꼴로 분해하라. 단, $P, Q$는 가역행렬이고 $D = \begin{pmatrix} I & O \\ O & O \end{pmatrix}$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 $A=\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}$의 계수를 구하자. $R_3 \to R_3-R_1$을 적용하면 제3행이 영벡터가 되고, 남은 두 행 $(2,1),(-1,2)$는 $2\cdot2-1\cdot(-1)=5\neq0$이므로 일차독립이다. 따라서 $\operatorname{rank}(A)=2=\min(3,2)$이고, $D=\begin{pmatrix}I_2\\O\end{pmatrix}=\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}$이며 열에 대한 기본연산은 필요 없다 ($Q=I_2$).</p>
+        <p>$A$에 $R_3 \to R_3-R_1$을 적용하면 $$\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}2&1\\-1&2\\0&0\end{pmatrix}$$ 이고, $R_2 \to R_2+\frac12R_1$을 적용하면 $$\begin{pmatrix}2&1\\-1&2\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}2&1\\0&\frac52\\0&0\end{pmatrix}$$ 이다. $R_1 \to \frac12R_1$, $R_2 \to \frac25R_2$를 적용하면 $$\begin{pmatrix}2&1\\0&\frac52\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&\frac12\\0&1\\0&0\end{pmatrix}$$ 이고, 마지막으로 $R_1 \to R_1-\frac12R_2$를 적용하면 $$\begin{pmatrix}1&\frac12\\0&1\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}=D$$ 를 얻는다.</p>
+        <p>$I_3$에 위와 같은 순서로 다섯 번의 기본행연산을 적용하면, $A$를 $D$로 바꾸는 기본행렬들의 곱 $E$를 직접 얻는다: $$E=\begin{pmatrix}\frac25&-\frac15&0\\\frac15&\frac25&0\\-1&0&1\end{pmatrix},\qquad EA=D$$ (직접 곱하여 확인할 수 있다). $E$의 역행렬을 구하면 $$P:=E^{-1}=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix}$$ 이고, $\det(P)$를 제3열에 대해 여인수전개하면 $\det(P)=1\cdot\det\begin{pmatrix}2&1\\-1&2\end{pmatrix}=5\neq0$이므로 $P$는 가역행렬이다.</p>
+        <p>$Q=I_2$로 두면 $$PDQ=PD=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix}\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}=\begin{pmatrix}2\cdot1+1\cdot0+0\cdot0&2\cdot0+1\cdot1+0\cdot0\\-1\cdot1+2\cdot0+0\cdot0&-1\cdot0+2\cdot1+0\cdot0\\2\cdot1+1\cdot0+1\cdot0&2\cdot0+1\cdot1+1\cdot0\end{pmatrix}=\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}=A$$ 이므로 $$A=PDQ,\qquad P=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix},\quad D=\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix},\quad Q=I_2$$ 가 원하는 분해이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Decompose $A = \begin{pmatrix} 2 & 1 \\ -1 & 2 \\ 2 & 1 \end{pmatrix}$ into the form $A = PDQ$ where $P, Q$ are invertible matrices and $D = \begin{pmatrix} I & O \\ O & O \end{pmatrix}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We first find the rank of $A=\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}$. Applying $R_3 \to R_3-R_1$ makes row 3 the zero vector, and the remaining two rows $(2,1),(-1,2)$ are linearly independent since $2\cdot2-1\cdot(-1)=5\neq0$. Hence $\operatorname{rank}(A)=2=\min(3,2)$, so $D=\begin{pmatrix}I_2\\O\end{pmatrix}=\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}$ and no column operations are needed ($Q=I_2$).</p>
+        <p>Applying $R_3 \to R_3-R_1$ to $A$ gives $$\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}2&1\\-1&2\\0&0\end{pmatrix},$$ and applying $R_2 \to R_2+\frac12R_1$ gives $$\begin{pmatrix}2&1\\-1&2\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}2&1\\0&\frac52\\0&0\end{pmatrix}.$$ Applying $R_1 \to \frac12R_1$, $R_2 \to \frac25R_2$ gives $$\begin{pmatrix}2&1\\0&\frac52\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&\frac12\\0&1\\0&0\end{pmatrix},$$ and finally applying $R_1 \to R_1-\frac12R_2$ gives $$\begin{pmatrix}1&\frac12\\0&1\\0&0\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}=D.$$</p>
+        <p>Applying the same five row operations, in the same order, to $I_3$ directly produces the product $E$ of the corresponding elementary matrices, which transforms $A$ into $D$: $$E=\begin{pmatrix}\frac25&-\frac15&0\\\frac15&\frac25&0\\-1&0&1\end{pmatrix},\qquad EA=D$$ (verified directly by multiplying $E$ and $A$). Computing the inverse of $E$ gives $$P:=E^{-1}=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix},$$ and expanding $\det(P)$ along column 3 gives $\det(P)=1\cdot\det\begin{pmatrix}2&1\\-1&2\end{pmatrix}=5\neq0$, so $P$ is invertible.</p>
+        <p>Taking $Q=I_2$, $$PDQ=PD=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix}\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}=\begin{pmatrix}2\cdot1+1\cdot0+0\cdot0&2\cdot0+1\cdot1+0\cdot0\\-1\cdot1+2\cdot0+0\cdot0&-1\cdot0+2\cdot1+0\cdot0\\2\cdot1+1\cdot0+1\cdot0&2\cdot0+1\cdot1+1\cdot0\end{pmatrix}=\begin{pmatrix}2&1\\-1&2\\2&1\end{pmatrix}=A,$$ so $$A=PDQ,\qquad P=\begin{pmatrix}2&1&0\\-1&2&0\\2&1&1\end{pmatrix},\quad D=\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix},\quad Q=I_2$$ is the desired decomposition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.2 -->
+<div class="card ex-card" id="ex2-2">
+  <div class="card-head">
+    <span class="ex-num">EX 2.2</span>
+    <span class="ex-title">스칼라배의 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A$를 $m \times n$ 행렬이라 하자. $c$가 $0$이 아닌 스칼라이면 $\operatorname{rank}(cA) = \operatorname{rank}(A)$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $L_A:F^n\to F^m$을 $L_A(x)=Ax$로 정의되는 왼쪽곱변환이라 하면, 행렬의 계수는 $\operatorname{rank}(A):=\dim(\operatorname{Im}(L_A))$로 정의된다. $c\neq0$인 스칼라에 대해 $L_{cA}(x)=(cA)x=c(Ax)=cL_A(x)$이므로 $L_{cA}=cL_A$이고, 따라서 $$\operatorname{Im}(L_{cA})=\{cL_A(x):x\in F^n\}=\{cy:y\in\operatorname{Im}(L_A)\}.$$</p>
+        <p>$\operatorname{Im}(L_A)$는 부분공간이므로 스칼라곱에 닫혀 있어 $\{cy:y\in\operatorname{Im}(L_A)\}\subseteq\operatorname{Im}(L_A)$이다. 역으로 임의의 $w\in\operatorname{Im}(L_A)$에 대해 $c\neq0$이므로 $w=c(c^{-1}w)$이고 $c^{-1}w\in\operatorname{Im}(L_A)$이므로 $w\in\{cy:y\in\operatorname{Im}(L_A)\}$이다. 그러므로 $$\operatorname{Im}(L_{cA})=\{cy:y\in\operatorname{Im}(L_A)\}=\operatorname{Im}(L_A)$$ 이고, 따라서 $$\operatorname{rank}(cA)=\dim(\operatorname{Im}(L_{cA}))=\dim(\operatorname{Im}(L_A))=\operatorname{rank}(A)$$ 이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A$ be an $m \times n$ matrix. Prove that if $c$ is a nonzero scalar, then $\operatorname{rank}(cA) = \operatorname{rank}(A)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $L_A:F^n\to F^m$ be the left-multiplication transformation $L_A(x)=Ax$, so that the rank of a matrix is defined by $\operatorname{rank}(A):=\dim(\operatorname{Im}(L_A))$. For a nonzero scalar $c$, $L_{cA}(x)=(cA)x=c(Ax)=cL_A(x)$, so $L_{cA}=cL_A$ and hence $$\operatorname{Im}(L_{cA})=\{cL_A(x):x\in F^n\}=\{cy:y\in\operatorname{Im}(L_A)\}.$$</p>
+        <p>Since $\operatorname{Im}(L_A)$ is a subspace, it is closed under scalar multiplication, so $\{cy:y\in\operatorname{Im}(L_A)\}\subseteq\operatorname{Im}(L_A)$. Conversely, for any $w\in\operatorname{Im}(L_A)$, since $c\neq0$ we have $w=c(c^{-1}w)$ with $c^{-1}w\in\operatorname{Im}(L_A)$, so $w\in\{cy:y\in\operatorname{Im}(L_A)\}$. Therefore $$\operatorname{Im}(L_{cA})=\{cy:y\in\operatorname{Im}(L_A)\}=\operatorname{Im}(L_A),$$ and consequently $$\operatorname{rank}(cA)=\dim(\operatorname{Im}(L_{cA}))=\dim(\operatorname{Im}(L_A))=\operatorname{rank}(A).$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="ex3">
+  <div class="card-head">
+    <span class="ex-num">EX 3</span>
+    <span class="ex-title">역행렬이 존재하면 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 역행렬이 존재하면 구하라.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 1 & 2 \\ 1 & 1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 1 \\ 1 & 3 & 4 \\ 2 & 3 & -1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 1 & 0 \\ 2 & 5 & 5 & 1 \\ -2 & -3 & 0 & 3 \\ 3 & 4 & -2 & -3 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol type="a">
+          <li>$(A\mid I)$에서 시작하여 $$\left(\begin{array}{cc|cc}1&2&1&0\\1&1&0&1\end{array}\right)$$ 에 $R_2 \to R_2-R_1$을 적용하면 $$\left(\begin{array}{cc|cc}1&2&1&0\\0&-1&-1&1\end{array}\right)$$ 이고, $R_2 \to -R_2$를 적용하면 $$\left(\begin{array}{cc|cc}1&2&1&0\\0&1&1&-1\end{array}\right)$$ 이며, 마지막으로 $R_1 \to R_1-2R_2$를 적용하면 $$\left(\begin{array}{cc|cc}1&0&-1&2\\0&1&1&-1\end{array}\right)$$ 을 얻는다. 따라서 $$\begin{pmatrix}1&2\\1&1\end{pmatrix}^{-1}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}$$ 이다. 실제로 $$\begin{pmatrix}1&2\\1&1\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}=\begin{pmatrix}-1+2&2-2\\-1+1&2-1\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}$$ 이므로 확인된다.</li>
+          <li>$(A\mid I)$에서 시작하여 $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\1&3&4&0&1&0\\2&3&-1&0&0&1\end{array}\right)$$ 에 $R_2 \to R_2-R_1$, $R_3 \to R_3-2R_1$을 적용하면 $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\0&1&3&-1&1&0\\0&-1&-3&-2&0&1\end{array}\right)$$ 을 얻는다. 이어서 $R_3 \to R_3+R_2$를 적용하면 $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\0&1&3&-1&1&0\\0&0&0&-3&1&1\end{array}\right)$$ 이 되어, 왼쪽 블록의 제3행이 영벡터가 된다. 실제로 원래 행렬 $A$의 행 사이에 $$-3(1,2,1)+(1,3,4)+(2,3,-1)=(0,0,0),\qquad\text{즉}\quad R_3=3R_1-R_2$$ 라는 일차종속 관계가 존재하므로, $\operatorname{rank}(A)\leq2$이며 이는 $3$보다 작다. 정사각행렬의 계수가 행의 개수보다 작으면 그 행렬은 가역이 아니므로, $A$의 역행렬은 존재하지 않는다.</li>
+          <li>$(A\mid I)$에서 시작하여 $$\left(\begin{array}{cccc|cccc}1&2&1&0&1&0&0&0\\2&5&5&1&0&1&0&0\\-2&-3&0&3&0&0&1&0\\3&4&-2&-3&0&0&0&1\end{array}\right)$$ 에 $R_2 \to R_2-2R_1$, $R_3 \to R_3+2R_1$, $R_4 \to R_4-3R_1$을 적용하면 $$\left(\begin{array}{cccc|cccc}1&2&1&0&1&0&0&0\\0&1&3&1&-2&1&0&0\\0&1&2&3&2&0&1&0\\0&-2&-5&-3&-3&0&0&1\end{array}\right)$$ 을 얻는다. 이어서 $R_1 \to R_1-2R_2$, $R_3 \to R_3-R_2$, $R_4 \to R_4+2R_2$를 적용하면 $$\left(\begin{array}{cccc|cccc}1&0&-5&-2&5&-2&0&0\\0&1&3&1&-2&1&0&0\\0&0&-1&2&4&-1&1&0\\0&0&1&-1&-7&2&0&1\end{array}\right)$$ 이고, $R_3 \to -R_3$으로 피벗을 $1$로 만들면 $$\left(\begin{array}{cccc|cccc}1&0&-5&-2&5&-2&0&0\\0&1&3&1&-2&1&0&0\\0&0&1&-2&-4&1&-1&0\\0&0&1&-1&-7&2&0&1\end{array}\right)$$ 이다. $R_1 \to R_1+5R_3$, $R_2 \to R_2-3R_3$, $R_4 \to R_4-R_3$을 적용하면 $$\left(\begin{array}{cccc|cccc}1&0&0&-12&-15&3&-5&0\\0&1&0&7&10&-2&3&0\\0&0&1&-2&-4&1&-1&0\\0&0&0&1&-3&1&1&1\end{array}\right)$$ 을 얻고, 마지막으로 $R_1 \to R_1+12R_4$, $R_2 \to R_2-7R_4$, $R_3 \to R_3+2R_4$를 적용하면 $$\left(\begin{array}{cccc|cccc}1&0&0&0&-51&15&7&12\\0&1&0&0&31&-9&-4&-7\\0&0&1&0&-10&3&1&2\\0&0&0&1&-3&1&1&1\end{array}\right)$$ 을 얻는다. 따라서 $$A^{-1}=\begin{pmatrix}-51&15&7&12\\31&-9&-4&-7\\-10&3&1&2\\-3&1&1&1\end{pmatrix}$$ 이다.</li>
+        </ol>
+        <p>검산 삼아 $A^{-1}$의 제1열과 제4열에 대해 $AA^{-1}=I_4$를 확인하자. $A$의 각 행과 $A^{-1}$의 제1열 $(-51,31,-10,-3)^t$의 내적을 계산하면 $$(1,2,1,0)\cdot(-51,31,-10,-3)=-51+62-10+0=1,$$ $$(2,5,5,1)\cdot(-51,31,-10,-3)=-102+155-50-3=0,$$ $$(-2,-3,0,3)\cdot(-51,31,-10,-3)=102-93+0-9=0,$$ $$(3,4,-2,-3)\cdot(-51,31,-10,-3)=-153+124+20+9=0,$$ 이므로 이는 정확히 $e_1=(1,0,0,0)^t$이다. 같은 방식으로 $A^{-1}$의 제4열 $(12,-7,2,1)^t$에 대해서도 $$(1,2,1,0)\cdot(12,-7,2,1)=12-14+2+0=0,\quad(2,5,5,1)\cdot(12,-7,2,1)=24-35+10+1=0,$$ $$(-2,-3,0,3)\cdot(12,-7,2,1)=-24+21+0+3=0,\quad(3,4,-2,-3)\cdot(12,-7,2,1)=36-28-4-3=1$$ 을 얻어 정확히 $e_4=(0,0,0,1)^t$이 되므로, 두 열 모두에서 $AA^{-1}=I_4$가 확인된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the inverse if it exists.</p>
+        <ol type="a">
+          <li>$\begin{pmatrix} 1 & 2 \\ 1 & 1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 1 \\ 1 & 3 & 4 \\ 2 & 3 & -1 \end{pmatrix}$</li>
+          <li>$\begin{pmatrix} 1 & 2 & 1 & 0 \\ 2 & 5 & 5 & 1 \\ -2 & -3 & 0 & 3 \\ 3 & 4 & -2 & -3 \end{pmatrix}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol type="a">
+          <li>Starting from $(A\mid I)$, $$\left(\begin{array}{cc|cc}1&2&1&0\\1&1&0&1\end{array}\right)$$ applying $R_2 \to R_2-R_1$ gives $$\left(\begin{array}{cc|cc}1&2&1&0\\0&-1&-1&1\end{array}\right),$$ applying $R_2 \to -R_2$ gives $$\left(\begin{array}{cc|cc}1&2&1&0\\0&1&1&-1\end{array}\right),$$ and finally applying $R_1 \to R_1-2R_2$ gives $$\left(\begin{array}{cc|cc}1&0&-1&2\\0&1&1&-1\end{array}\right).$$ Hence $$\begin{pmatrix}1&2\\1&1\end{pmatrix}^{-1}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}.$$ Indeed $$\begin{pmatrix}1&2\\1&1\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}=\begin{pmatrix}-1+2&2-2\\-1+1&2-1\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix},$$ confirming this.</li>
+          <li>Starting from $(A\mid I)$, $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\1&3&4&0&1&0\\2&3&-1&0&0&1\end{array}\right)$$ applying $R_2 \to R_2-R_1$, $R_3 \to R_3-2R_1$ gives $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\0&1&3&-1&1&0\\0&-1&-3&-2&0&1\end{array}\right).$$ Applying $R_3 \to R_3+R_2$ then gives $$\left(\begin{array}{ccc|ccc}1&2&1&1&0&0\\0&1&3&-1&1&0\\0&0&0&-3&1&1\end{array}\right),$$ so row 3 of the left block becomes the zero vector. Indeed, the rows of the original matrix $A$ satisfy $$-3(1,2,1)+(1,3,4)+(2,3,-1)=(0,0,0),\qquad\text{i.e.}\quad R_3=3R_1-R_2,$$ a linear dependence relation. Hence $\operatorname{rank}(A)\leq2$, which is less than $3$. Since a square matrix whose rank is less than its number of rows is not invertible, $A$ has no inverse.</li>
+          <li>Starting from $(A\mid I)$, $$\left(\begin{array}{cccc|cccc}1&2&1&0&1&0&0&0\\2&5&5&1&0&1&0&0\\-2&-3&0&3&0&0&1&0\\3&4&-2&-3&0&0&0&1\end{array}\right)$$ applying $R_2 \to R_2-2R_1$, $R_3 \to R_3+2R_1$, $R_4 \to R_4-3R_1$ gives $$\left(\begin{array}{cccc|cccc}1&2&1&0&1&0&0&0\\0&1&3&1&-2&1&0&0\\0&1&2&3&2&0&1&0\\0&-2&-5&-3&-3&0&0&1\end{array}\right).$$ Applying $R_1 \to R_1-2R_2$, $R_3 \to R_3-R_2$, $R_4 \to R_4+2R_2$ then gives $$\left(\begin{array}{cccc|cccc}1&0&-5&-2&5&-2&0&0\\0&1&3&1&-2&1&0&0\\0&0&-1&2&4&-1&1&0\\0&0&1&-1&-7&2&0&1\end{array}\right),$$ and applying $R_3 \to -R_3$ to make the pivot $1$ gives $$\left(\begin{array}{cccc|cccc}1&0&-5&-2&5&-2&0&0\\0&1&3&1&-2&1&0&0\\0&0&1&-2&-4&1&-1&0\\0&0&1&-1&-7&2&0&1\end{array}\right).$$ Applying $R_1 \to R_1+5R_3$, $R_2 \to R_2-3R_3$, $R_4 \to R_4-R_3$ gives $$\left(\begin{array}{cccc|cccc}1&0&0&-12&-15&3&-5&0\\0&1&0&7&10&-2&3&0\\0&0&1&-2&-4&1&-1&0\\0&0&0&1&-3&1&1&1\end{array}\right),$$ and finally applying $R_1 \to R_1+12R_4$, $R_2 \to R_2-7R_4$, $R_3 \to R_3+2R_4$ gives $$\left(\begin{array}{cccc|cccc}1&0&0&0&-51&15&7&12\\0&1&0&0&31&-9&-4&-7\\0&0&1&0&-10&3&1&2\\0&0&0&1&-3&1&1&1\end{array}\right).$$ Hence $$A^{-1}=\begin{pmatrix}-51&15&7&12\\31&-9&-4&-7\\-10&3&1&2\\-3&1&1&1\end{pmatrix}.$$</li>
+        </ol>
+        <p>As a check, we verify $AA^{-1}=I_4$ on columns 1 and 4 of $A^{-1}$. Taking the dot product of each row of $A$ with column 1 of $A^{-1}$, namely $(-51,31,-10,-3)^t$, gives $$(1,2,1,0)\cdot(-51,31,-10,-3)=-51+62-10+0=1,$$ $$(2,5,5,1)\cdot(-51,31,-10,-3)=-102+155-50-3=0,$$ $$(-2,-3,0,3)\cdot(-51,31,-10,-3)=102-93+0-9=0,$$ $$(3,4,-2,-3)\cdot(-51,31,-10,-3)=-153+124+20+9=0,$$ which is exactly $e_1=(1,0,0,0)^t$. Likewise, for column 4 of $A^{-1}$, namely $(12,-7,2,1)^t$, $$(1,2,1,0)\cdot(12,-7,2,1)=12-14+2+0=0,\quad(2,5,5,1)\cdot(12,-7,2,1)=24-35+10+1=0,$$ $$(-2,-3,0,3)\cdot(12,-7,2,1)=-24+21+0+3=0,\quad(3,4,-2,-3)\cdot(12,-7,2,1)=36-28-4-3=1,$$ which is exactly $e_4=(0,0,0,1)^t$. Thus $AA^{-1}=I_4$ is confirmed on both columns.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.1 -->
+<div class="card ex-card" id="ex3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 3.1</span>
+    <span class="ex-title">선형변환의 역변환</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 주어진 선형변환의 역변환이 존재하면 구하라.</p>
+        <ol>
+          <li>$T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$, $T(f(x)) = f''(x) + 2f'(x) - f(x)$</li>
+          <li>$T : M_{2\times 2}(\mathbb{R}) \to \mathbb{R}^4$, $T(A) = (\operatorname{tr}(A), \operatorname{tr}(A^t), \operatorname{tr}(EA), \operatorname{tr}(AE))$, 단 $$E = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.$$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <ol>
+          <li>표준기저 $\{1,x,x^2\}$에 대해 $T(1)=-1$, $T(x)=2-x$, $T(x^2)=2+4x-x^2$이므로 $T$의 행렬표현은 $$M:=[T]_\beta=\begin{pmatrix}-1&2&2\\0&-1&4\\0&0&-1\end{pmatrix}$$ 이다. $M$은 상삼각행렬이고 대각성분이 모두 $-1\neq0$이므로 $\det(M)=(-1)^3=-1\neq0$이고, 따라서 $T$는 가역이다. $(M\mid I)$에 $R_1 \to -R_1$, $R_2 \to -R_2$, $R_3 \to -R_3$를 적용하면 $$\left(\begin{array}{ccc|ccc}1&-2&-2&-1&0&0\\0&1&-4&0&-1&0\\0&0&1&0&0&-1\end{array}\right)$$ 이고, $R_2 \to R_2+4R_3$, $R_1 \to R_1+2R_3$를 적용하면 $$\left(\begin{array}{ccc|ccc}1&-2&0&-1&0&-2\\0&1&0&0&-1&-4\\0&0&1&0&0&-1\end{array}\right)$$ 이며, 마지막으로 $R_1 \to R_1+2R_2$를 적용하면 $$\left(\begin{array}{ccc|ccc}1&0&0&-1&-2&-10\\0&1&0&0&-1&-4\\0&0&1&0&0&-1\end{array}\right)$$ 을 얻는다. 따라서 $$M^{-1}=\begin{pmatrix}-1&-2&-10\\0&-1&-4\\0&0&-1\end{pmatrix}$$ 이고, $T^{-1}(1)=-1$, $T^{-1}(x)=-2-x$, $T^{-1}(x^2)=-10-4x-x^2$이다. 즉 $f(x)=a+bx+cx^2$에 대해 $$T^{-1}(f)=-(a+2b+10c)-(b+4c)x-cx^2$$ 이다. 검산: $$T(-10-4x-x^2)=(-2)+2(-4-2x)+(10+4x+x^2)=x^2$$ 이 성립하므로 옳게 계산되었음을 확인할 수 있다.</li>
+          <li>$A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$라 하면 $\operatorname{tr}(A)=a+d$이고 $A^t=\begin{pmatrix}a&c\\b&d\end{pmatrix}$이므로 $\operatorname{tr}(A^t)=a+d=\operatorname{tr}(A)$이다. 또한 $$EA=\begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}a&b\\c&d\end{pmatrix}=\begin{pmatrix}c&d\\a&b\end{pmatrix},\qquad AE=\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}=\begin{pmatrix}b&a\\d&c\end{pmatrix}$$ 이므로 $\operatorname{tr}(EA)=b+c=\operatorname{tr}(AE)$이다. 따라서 $$T(A)=(a+d,\ a+d,\ b+c,\ b+c)$$ 이고, 표준기저행렬 $E_{11},E_{12},E_{21},E_{22}$에 대해 $T(E_{11})=T(E_{22})=(1,1,0,0)$, $T(E_{12})=T(E_{21})=(0,0,1,1)$이므로 $T$의 상은 정확히 $2$차원 부분공간 $\{(s,s,t,t):s,t\in\mathbb{R}\}$과 같다. 즉 $\operatorname{rank}(T)=2\neq4=\dim\mathbb{R}^4$이므로 $T$는 전사가 아니다. 정의역 $M_{2\times2}(\mathbb{R})$이 $4$차원이므로 계수·퇴화차수 정리에 의해 $\operatorname{nullity}(T)=4-2=2>0$이 되어 $T$는 단사도 아니다. 따라서 $T$는 전단사가 아니므로 역변환이 존재하지 않는다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find the inverse of the given linear transform if it exists.</p>
+        <ol>
+          <li>$T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$, $T(f(x)) = f''(x) + 2f'(x) - f(x)$</li>
+          <li>$T : M_{2\times 2}(\mathbb{R}) \to \mathbb{R}^4$, $T(A) = (\operatorname{tr}(A), \operatorname{tr}(A^t), \operatorname{tr}(EA), \operatorname{tr}(AE))$ where $$E = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.$$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <ol>
+          <li>With respect to the standard basis $\{1,x,x^2\}$, $T(1)=-1$, $T(x)=2-x$, $T(x^2)=2+4x-x^2$, so the matrix representation of $T$ is $$M:=[T]_\beta=\begin{pmatrix}-1&2&2\\0&-1&4\\0&0&-1\end{pmatrix}.$$ $M$ is upper triangular with all diagonal entries equal to $-1\neq0$, so $\det(M)=(-1)^3=-1\neq0$ and $T$ is invertible. Applying $R_1 \to -R_1$, $R_2 \to -R_2$, $R_3 \to -R_3$ to $(M\mid I)$ gives $$\left(\begin{array}{ccc|ccc}1&-2&-2&-1&0&0\\0&1&-4&0&-1&0\\0&0&1&0&0&-1\end{array}\right),$$ applying $R_2 \to R_2+4R_3$, $R_1 \to R_1+2R_3$ gives $$\left(\begin{array}{ccc|ccc}1&-2&0&-1&0&-2\\0&1&0&0&-1&-4\\0&0&1&0&0&-1\end{array}\right),$$ and finally applying $R_1 \to R_1+2R_2$ gives $$\left(\begin{array}{ccc|ccc}1&0&0&-1&-2&-10\\0&1&0&0&-1&-4\\0&0&1&0&0&-1\end{array}\right).$$ Hence $$M^{-1}=\begin{pmatrix}-1&-2&-10\\0&-1&-4\\0&0&-1\end{pmatrix},$$ so $T^{-1}(1)=-1$, $T^{-1}(x)=-2-x$, $T^{-1}(x^2)=-10-4x-x^2$. That is, for $f(x)=a+bx+cx^2$, $$T^{-1}(f)=-(a+2b+10c)-(b+4c)x-cx^2.$$ As a check, $$T(-10-4x-x^2)=(-2)+2(-4-2x)+(10+4x+x^2)=x^2,$$ confirming the computation.</li>
+          <li>Let $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$. Then $\operatorname{tr}(A)=a+d$, and since $A^t=\begin{pmatrix}a&c\\b&d\end{pmatrix}$, $\operatorname{tr}(A^t)=a+d=\operatorname{tr}(A)$. Also $$EA=\begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}a&b\\c&d\end{pmatrix}=\begin{pmatrix}c&d\\a&b\end{pmatrix},\qquad AE=\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}=\begin{pmatrix}b&a\\d&c\end{pmatrix},$$ so $\operatorname{tr}(EA)=b+c=\operatorname{tr}(AE)$. Hence $$T(A)=(a+d,\ a+d,\ b+c,\ b+c),$$ and for the standard basis matrices $E_{11},E_{12},E_{21},E_{22}$ we get $T(E_{11})=T(E_{22})=(1,1,0,0)$ and $T(E_{12})=T(E_{21})=(0,0,1,1)$, so the range of $T$ is exactly the $2$-dimensional subspace $\{(s,s,t,t):s,t\in\mathbb{R}\}$. Thus $\operatorname{rank}(T)=2\neq4=\dim\mathbb{R}^4$, so $T$ is not onto. Since the domain $M_{2\times2}(\mathbb{R})$ is $4$-dimensional, the rank-nullity theorem gives $\operatorname{nullity}(T)=4-2=2>0$, so $T$ is not one-to-one either. Hence $T$ is not bijective, and no inverse transformation exists.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.2 -->
+<div class="card ex-card" id="ex3-2">
+  <div class="card-head">
+    <span class="ex-num">EX 3.2</span>
+    <span class="ex-title">기본행렬의 곱</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\begin{pmatrix} 1 & 2 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 2 \end{pmatrix}$을 기본행렬들의 곱으로 나타내라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $A=\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}$에 다음과 같이 기본행연산을 순서대로 적용하여 $I_3$을 얻는다.</p>
+        <p>$R_2 \to R_2-R_1$, $R_3 \to R_3-R_1$을 적용하면 $$\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix}$$ 이고, $R_2 \to -\frac12R_2$를 적용하면 $$\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}$$ 이다. $R_3 \to R_3+R_2$를 적용하면 $$\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}$$ 이고, 마지막으로 $R_1 \to R_1-2R_2$, $R_1 \to R_1-R_3$를 차례로 적용하면 $$\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3$$ 을 얻는다.</p>
+        <p>이 여섯 번의 기본행연산에 대응하는 기본행렬을 적용한 순서대로 $E_1,\dots,E_6$이라 하면 $E_6E_5E_4E_3E_2E_1A=I_3$이므로 $$A=E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}$$ 이다. 각 연산과 그 역연산에 대응하는 기본행렬은 다음과 같다.</p>
+        <p>$$E_1^{-1}=\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\ (R_2\to R_2+R_1),\qquad E_2^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\ (R_3\to R_3+R_1),$$ $$E_3^{-1}=\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\ (R_2\to -2R_2),\qquad E_4^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\ (R_3\to R_3-R_2),$$ $$E_5^{-1}=\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\ (R_1\to R_1+2R_2),\qquad E_6^{-1}=\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}\ (R_1\to R_1+R_3).$$</p>
+        <p>따라서 $$A=E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}=\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}$$ 이다.</p>
+        <p>검산 삼아 오른쪽부터 차례로 곱해 보자. $$\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix},\qquad\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix},$$ $$\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix},\qquad\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&-2&0\\1&1&2\end{pmatrix},$$ $$\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&-2&0\\1&1&2\end{pmatrix}=\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}=A$$ 이므로, 위 분해가 정확함이 확인된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Express $\begin{pmatrix} 1 & 2 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 2 \end{pmatrix}$ as a product of elementary matrices.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We transform $A=\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}$ into $I_3$ by the following sequence of elementary row operations.</p>
+        <p>Applying $R_2 \to R_2-R_1$, $R_3 \to R_3-R_1$ gives $$\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix},$$ and applying $R_2 \to -\frac12R_2$ gives $$\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}.$$ Applying $R_3 \to R_3+R_2$ gives $$\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix},$$ and finally applying $R_1 \to R_1-2R_2$, $R_1 \to R_1-R_3$ in succession gives $$\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}\ \longrightarrow\ \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3.$$</p>
+        <p>Let $E_1,\dots,E_6$ denote the elementary matrices corresponding to these six operations, in the order applied, so that $E_6E_5E_4E_3E_2E_1A=I_3$ and hence $$A=E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}.$$ The elementary matrices for each operation and its inverse operation are as follows.</p>
+        <p>$$E_1^{-1}=\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\ (R_2\to R_2+R_1),\qquad E_2^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\ (R_3\to R_3+R_1),$$ $$E_3^{-1}=\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\ (R_2\to -2R_2),\qquad E_4^{-1}=\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\ (R_3\to R_3-R_2),$$ $$E_5^{-1}=\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\ (R_1\to R_1+2R_2),\qquad E_6^{-1}=\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}\ (R_1\to R_1+R_3).$$</p>
+        <p>Hence $$A=E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}=\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}.$$</p>
+        <p>As a check, we multiply from the right. $$\begin{pmatrix}1&2&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix},\qquad\begin{pmatrix}1&0&0\\0&1&0\\0&-1&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix},$$ $$\begin{pmatrix}1&0&0\\0&-2&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&1&0\\0&-1&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix},\qquad\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&-2&0\\0&-1&1\end{pmatrix}=\begin{pmatrix}1&2&1\\0&-2&0\\1&1&2\end{pmatrix},$$ $$\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&2&1\\0&-2&0\\1&1&2\end{pmatrix}=\begin{pmatrix}1&2&1\\1&0&1\\1&1&2\end{pmatrix}=A,$$ confirming that the decomposition above is correct.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4 -->
+<div class="card ex-card" id="ex4">
+  <div class="card-head">
+    <span class="ex-num">EX 4</span>
+    <span class="ex-title">행렬 곱의 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음을 증명하라.</p>
+        <ol>
+          <li>$A$가 계수 $1$인 $3 \times 1$ 행렬이고 $B$가 계수 $1$인 $1 \times 3$ 행렬이면, $AB$의 계수는 많아야 $1$이다.</li>
+          <li>$C$가 계수 $1$인 $3 \times 3$ 행렬이면, 계수 $1$인 $3 \times 1$ 행렬 $A$와 계수 $1$인 $1 \times 3$ 행렬 $B$가 존재하여 $C = AB$이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <ol>
+          <li>$A=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}$ ($3\times1$, $A\neq O$), $B=(b_1,b_2,b_3)$ ($1\times3$, $B\neq O$)라 하자. $AB$는 $3\times3$ 행렬이고 $(AB)_{ij}=a_ib_j$이므로 $AB$의 제$i$행은 $$(\,a_ib_1,\ a_ib_2,\ a_ib_3\,)=a_i\,B$$ 로 $B$의 스칼라배이다. 따라서 $AB$의 세 행이 모두 하나의 벡터 $B$의 스칼라배이므로 $AB$의 행공간은 $\{B\}$로 생성되어 차원이 많아야 $1$이다. 그러므로 $\operatorname{rank}(AB)\leq1$이다.</li>
+          <li>$\operatorname{rank}(C)=1$이므로 $C\neq O$이고, $C$의 행공간은 $1$차원이다. $C$의 영이 아닌 한 행을 $B$라 하면 $B\neq O$이므로 $B$는 계수 $1$인 $1\times3$ 행렬이다. $C$의 행공간이 $1$차원이고 $B$가 그 행공간에 속하는 영이 아닌 벡터이므로 $B$는 행공간을 생성하며, 따라서 $C$의 각 행은 $B$의 스칼라배이다: 어떤 스칼라 $a_1,a_2,a_3$가 존재하여 $C$의 제$i$행이 $a_iB$이다 ($i=1,2,3$). $A:=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}$라 하면 $C\neq O$이므로 $a_1,a_2,a_3$ 중 적어도 하나는 $0$이 아니어서 $A\neq O$이고, 따라서 $A$는 계수 $1$인 $3\times1$ 행렬이다. $(AB)_{ij}=a_ib_j$가 정확히 $C$의 제$i$행 제$j$열 성분과 같으므로 $C=AB$이다.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove the following.</p>
+        <ol>
+          <li>If $A$ is a $3 \times 1$ matrix of rank 1 and $B$ is a $1 \times 3$ matrix of rank 1, then $AB$ has rank at most 1.</li>
+          <li>If $C$ is a $3 \times 3$ matrix of rank 1, then there exist a $3 \times 1$ matrix $A$ of rank 1 and $1 \times 3$ matrix $B$ of rank 1 such that $C = AB$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <ol>
+          <li>Let $A=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}$ ($3\times1$, $A\neq O$) and $B=(b_1,b_2,b_3)$ ($1\times3$, $B\neq O$). Then $AB$ is a $3\times3$ matrix with $(AB)_{ij}=a_ib_j$, so row $i$ of $AB$ is $$(\,a_ib_1,\ a_ib_2,\ a_ib_3\,)=a_i\,B,$$ a scalar multiple of $B$. Since all three rows of $AB$ are scalar multiples of the single vector $B$, the row space of $AB$ is spanned by $\{B\}$ and hence has dimension at most $1$. Therefore $\operatorname{rank}(AB)\leq1$.</li>
+          <li>Since $\operatorname{rank}(C)=1$, $C\neq O$ and the row space of $C$ is $1$-dimensional. Let $B$ be a nonzero row of $C$; then $B\neq O$, so $B$ is a $1\times3$ matrix of rank $1$. Since the row space of $C$ is $1$-dimensional and $B$ is a nonzero vector in that row space, $B$ spans the row space, so every row of $C$ is a scalar multiple of $B$: there exist scalars $a_1,a_2,a_3$ such that row $i$ of $C$ equals $a_iB$ ($i=1,2,3$). Let $A:=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}$. Since $C\neq O$, at least one of $a_1,a_2,a_3$ is nonzero, so $A\neq O$ and hence $A$ is a $3\times1$ matrix of rank $1$. Since $(AB)_{ij}=a_ib_j$ equals exactly the $(i,j)$ entry of $C$, we get $C=AB$.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.1 -->
+<div class="card ex-card" id="ex4-1">
+  <div class="card-head">
+    <span class="ex-num">EX 4.1</span>
+    <span class="ex-title">계수 1 행렬의 합으로 표현</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A$를 $m \times n$ 행렬, $B$를 $n \times p$ 행렬이라 하자. $AB$가 계수가 많아야 $1$인 $n$개의 행렬의 합으로 나타낼 수 있음을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $A$의 제$k$열을 $\vec a_k$ ($m\times1$, $k=1,\dots,n$), $B$의 제$k$행을 $\vec b_k^t$ ($1\times p$, $k=1,\dots,n$)라 하자. $AB$의 $(i,j)$ 성분은 $$(AB)_{ij}=\sum_{k=1}^nA_{ik}B_{kj}=\sum_{k=1}^n(\vec a_k)_i(\vec b_k^t)_j=\sum_{k=1}^n(\vec a_k\vec b_k^t)_{ij}$$ 이므로 $$AB=\sum_{k=1}^n\vec a_k\,\vec b_k^t$$ 이다.</p>
+        <p>각 $k$에 대해 $\vec a_k\vec b_k^t$는 $m\times p$ 행렬이다. $\vec a_k=O$ 또는 $\vec b_k=O$이면 $\vec a_k\vec b_k^t=O$이므로 계수는 $0$이다. 그렇지 않으면 $\vec a_k\vec b_k^t$의 제$i$행은 $(\vec a_k)_i\cdot\vec b_k^t$로 $\vec b_k^t$의 스칼라배이므로, 모든 행이 하나의 벡터 $\vec b_k^t$로 생성되어 행공간의 차원이 $1$이다. 즉 어느 경우든 $\vec a_k\vec b_k^t$의 계수는 많아야 $1$이다. 그러므로 $AB=\sum_{k=1}^n\vec a_k\vec b_k^t$는 계수가 많아야 $1$인 $n$개의 행렬의 합으로 나타난다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A$ be an $m \times n$ matrix and let $B$ be an $n \times p$ matrix. Show that $AB$ can be written as a sum of $n$ matrices of rank at most one.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $\vec a_k$ denote column $k$ of $A$ ($m\times1$, $k=1,\dots,n$) and let $\vec b_k^t$ denote row $k$ of $B$ ($1\times p$, $k=1,\dots,n$). The $(i,j)$ entry of $AB$ is $$(AB)_{ij}=\sum_{k=1}^nA_{ik}B_{kj}=\sum_{k=1}^n(\vec a_k)_i(\vec b_k^t)_j=\sum_{k=1}^n(\vec a_k\vec b_k^t)_{ij},$$ so $$AB=\sum_{k=1}^n\vec a_k\,\vec b_k^t.$$</p>
+        <p>For each $k$, $\vec a_k\vec b_k^t$ is an $m\times p$ matrix. If $\vec a_k=O$ or $\vec b_k=O$, then $\vec a_k\vec b_k^t=O$, which has rank $0$. Otherwise, row $i$ of $\vec a_k\vec b_k^t$ is $(\vec a_k)_i\cdot\vec b_k^t$, a scalar multiple of $\vec b_k^t$, so every row is spanned by the single vector $\vec b_k^t$ and the row space has dimension $1$. In either case, $\vec a_k\vec b_k^t$ has rank at most $1$. Hence $AB=\sum_{k=1}^n\vec a_k\vec b_k^t$ is written as a sum of $n$ matrices, each of rank at most one.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.2 -->
+<div class="card ex-card" id="ex4-2">
+  <div class="card-head">
+    <span class="ex-num">EX 4.2</span>
+    <span class="ex-title">최대계수 행렬 곱의 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A$를 계수가 $m$인 $m \times n$ 행렬, $B$를 계수가 $n$인 $n \times p$ 행렬이라 하자. $AB$의 계수를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $L_A:F^n\to F^m$, $L_B:F^p\to F^n$을 각각 $A,B$에 대응하는 왼쪽곱변환이라 하면 $\operatorname{rank}(A)=\dim(\operatorname{Im}(L_A))$, $\operatorname{rank}(B)=\dim(\operatorname{Im}(L_B))$이다.</p>
+        <p>$\operatorname{rank}(B)=n=\dim F^n$이고 $\operatorname{Im}(L_B)$는 $F^n$의 부분공간이므로, 차원이 전체공간의 차원과 같은 부분공간은 전체공간과 일치하여 $\operatorname{Im}(L_B)=F^n$이다. 즉 $L_B$는 전사이다. 마찬가지로 $\operatorname{rank}(A)=m=\dim F^m$이므로 $\operatorname{Im}(L_A)=F^m$이고 $L_A$도 전사이다.</p>
+        <p>$AB$에 대응하는 왼쪽곱변환은 합성 $L_A\circ L_B:F^p\to F^m$이다. $L_B$가 전사이므로 $\operatorname{Im}(L_B)=F^n$이고, 따라서 $$\operatorname{Im}(L_A\circ L_B)=L_A(\operatorname{Im}(L_B))=L_A(F^n)=\operatorname{Im}(L_A)=F^m$$ 이다. 즉 $L_A\circ L_B$도 전사이므로 $$\operatorname{rank}(AB)=\dim\big(\operatorname{Im}(L_A\circ L_B)\big)=\dim F^m=m$$ 이다. 따라서 $AB$의 계수는 $m$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A$ be an $m \times n$ matrix of rank $m$ and let $B$ be an $n \times p$ matrix of rank $n$. Find the rank of $AB$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $L_A:F^n\to F^m$ and $L_B:F^p\to F^n$ be the left-multiplication transformations corresponding to $A$ and $B$, so that $\operatorname{rank}(A)=\dim(\operatorname{Im}(L_A))$ and $\operatorname{rank}(B)=\dim(\operatorname{Im}(L_B))$.</p>
+        <p>Since $\operatorname{rank}(B)=n=\dim F^n$ and $\operatorname{Im}(L_B)$ is a subspace of $F^n$, a subspace whose dimension equals the dimension of the whole space must equal the whole space, so $\operatorname{Im}(L_B)=F^n$; that is, $L_B$ is onto. Likewise, since $\operatorname{rank}(A)=m=\dim F^m$, we get $\operatorname{Im}(L_A)=F^m$, so $L_A$ is also onto.</p>
+        <p>The left-multiplication transformation corresponding to $AB$ is the composition $L_A\circ L_B:F^p\to F^m$. Since $L_B$ is onto, $\operatorname{Im}(L_B)=F^n$, so $$\operatorname{Im}(L_A\circ L_B)=L_A(\operatorname{Im}(L_B))=L_A(F^n)=\operatorname{Im}(L_A)=F^m.$$ Hence $L_A\circ L_B$ is also onto, so $$\operatorname{rank}(AB)=\dim\big(\operatorname{Im}(L_A\circ L_B)\big)=\dim F^m=m.$$ Therefore the rank of $AB$ is $m$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>심화 문제 · Problems</h2></div>
+
+<!-- Problem 1 -->
+<div class="card pr-card" id="pr1">
+  <div class="card-head">
+    <span class="pr-num">PR 1</span>
+    <span class="ex-title">행동치는 동치관계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 이 문제에서, 행렬 $P$에 기본행연산을 순서대로 적용하여 행렬 $Q$를 얻을 수 있으면 두 행렬 $P$와 $Q$가 <strong>동치</strong>(equivalent)라고 하자. 이 관계가 실제로 동치관계임을 증명하라. 즉, 다음 세 명제를 증명하라.</p>
+        <ul>
+          <li>$P$와 $P$는 항상 동치이다.</li>
+          <li>$P$와 $Q$가 동치이면 $Q$와 $P$도 동치이다.</li>
+          <li>$P$와 $Q$가 동치이고 $Q$와 $S$가 동치이면 $P$와 $S$도 동치이다.</li>
+        </ul>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> In this problem, say that two matrices $P$ and $Q$ are <strong>equivalent</strong> if a matrix $Q$ can be obtained from a matrix $P$ by a succession of elementary row operations. Show that the relation is indeed an equivalence relation. In other words, prove the following three statements.</p>
+        <ul>
+          <li>$P$ and $P$ are always equivalent.</li>
+          <li>If $P$ and $Q$ are equivalent, then $Q$ and $P$ are equivalent.</li>
+          <li>If $P$ and $Q$ are equivalent and $Q$ and $S$ are equivalent, then $P$ and $S$ are equivalent.</li>
+        </ul>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 2 -->
+<div class="card pr-card" id="pr2">
+  <div class="card-head">
+    <span class="pr-num">PR 2</span>
+    <span class="ex-title">전치행렬과 열연산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 행렬 $Q$가 $P$에 기본행연산을 순서대로 적용하여 얻어지면, $Q^t$는 $P^t$에 기본열연산을 순서대로 적용하여 얻어짐을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Show that if a matrix $Q$ is obtained from $P$ by a succession of elementary row operations, then $Q^t$ is obtained from $P^t$ by a succession of elementary column operations.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 3 -->
+<div class="card pr-card" id="pr3">
+  <div class="card-head">
+    <span class="pr-num">PR 3</span>
+    <span class="ex-title">행렬 합의 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $m \times n$ 행렬 $A$, $B$에 대하여 $\operatorname{rank}(A + B) \leq \operatorname{rank}(A) + \operatorname{rank}(B)$임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> For $m \times n$ matrices $A$ and $B$, show that $\operatorname{rank}(A + B) \leq \operatorname{rank}(A) + \operatorname{rank}(B)$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 4 -->
+<div class="card pr-card" id="pr4">
+  <div class="card-head">
+    <span class="pr-num">PR 4</span>
+    <span class="ex-title">계수와 일방향 역행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음을 증명하라.</p>
+        <ol>
+          <li>$A$가 계수 $m$인 $m \times n$ 행렬이면, $AB = I_m$을 만족하는 $n \times m$ 행렬 $B$가 존재한다.</li>
+          <li>$B$가 계수 $m$인 $n \times m$ 행렬이면, $AB = I_m$을 만족하는 $m \times n$ 행렬 $A$가 존재한다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove the following.</p>
+        <ol>
+          <li>If $A$ is an $m \times n$ matrix of rank $m$, then there is an $n \times m$ matrix $B$ such that $AB = I_m$.</li>
+          <li>If $B$ is an $n \times m$ matrix of rank $m$, then there is an $m \times n$ matrix $A$ such that $AB = I_m$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 5 -->
+<div class="card pr-card" id="pr5">
+  <div class="card-head">
+    <span class="pr-num">PR 5</span>
+    <span class="ex-title">$AB = O$의 최대계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $$A = \begin{pmatrix} 1 & 0 & -1 & 2 & 1 \\ -1 & 1 & 3 & -1 & 0 \\ -2 & 1 & 4 & -1 & 3 \\ 3 & -1 & -5 & 1 & -6 \end{pmatrix}$$라 하자. $AB = O$를 만족하는 $5 \times 5$ 행렬 $B$의 최대계수를 구하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $$A = \begin{pmatrix} 1 & 0 & -1 & 2 & 1 \\ -1 & 1 & 3 & -1 & 0 \\ -2 & 1 & 4 & -1 & 3 \\ 3 & -1 & -5 & 1 & -6 \end{pmatrix}.$$ Find the largest rank of a $5 \times 5$ matrix $B$ such that $AB = O$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06. 선형변환과 행렬 (Linear Transformation and Matrix) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 06단원 선형변환과 행렬(Linear Transformation and Matrix) 예제·심화 문제 모음. 선형변환의 행렬 표현, 행렬 곱, 가역성, 동형사상, 제1동형정리를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 선형변환, linear transformation, 행렬, matrix, 행렬 표현, matrix representation, 가역성, invertible, 동형사상, isomorphism, 제1동형정리, first isomorphism theorem, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06. 선형변환과 행렬 (Linear Transformation and Matrix) — 선형대수학 한·영 대조">
+<meta property="og:description" content="선형변환과 행렬 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch06.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "06. 선형변환과 행렬 (Linear Transformation and Matrix) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 선형변환과 행렬 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch06.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch06.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html" class="active">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 06</p>
+  <h1>06. 선형변환과 행렬<span>Linear Transformation and Matrix</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 선형변환의 행렬</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> $E^{ij}$ 기저를 이용한 행렬표현</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> 복소켤레의 행렬</a></li>
+    <li><a href="#ex1-3"><span class="toc-num">EX 1.3</span> 이동변환의 행렬</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 미분연산자의 일차독립성</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 서로소인 상의 일차독립성</a></li>
+    <li><a href="#ex3"><span class="toc-num">EX 3</span> 행렬의 곱과 일차결합</a></li>
+    <li><a href="#ex3-1"><span class="toc-num">EX 3.1</span> 행렬 곱의 성립 가능성</a></li>
+    <li><a href="#ex3-2"><span class="toc-num">EX 3.2</span> 영이 아닌 행렬의 곱이 영행렬</a></li>
+    <li><a href="#ex3-3"><span class="toc-num">EX 3.3</span> 대각합 항등식과 교환자</a></li>
+    <li><a href="#ex4"><span class="toc-num">EX 4</span> 두 변환의 합성</a></li>
+    <li><a href="#ex4-1"><span class="toc-num">EX 4.1</span> 기하학적 변환의 행렬</a></li>
+    <li><a href="#ex4-2"><span class="toc-num">EX 4.2</span> 좌표행렬로부터의 변환</a></li>
+    <li><a href="#ex5"><span class="toc-num">EX 5</span> 선형변환의 가역성</a></li>
+    <li><a href="#ex5-1"><span class="toc-num">EX 5.1</span> 동형인 벡터공간 쌍</a></li>
+    <li><a href="#ex5-2"><span class="toc-num">EX 5.2</span> $F^3$으로의 동형사상 구성</a></li>
+    <li><a href="#ex6"><span class="toc-num">EX 6</span> 역행렬의 성질</a></li>
+    <li><a href="#ex6-1"><span class="toc-num">EX 6.1</span> 가역성과 영행렬 곱</a></li>
+    <li><a href="#ex6-2"><span class="toc-num">EX 6.2</span> 켤레변환은 동형사상</a></li>
+    <li><a href="#pr1"><span class="toc-num">PR 1</span> 블록 상삼각행렬 형태</a></li>
+    <li><a href="#pr2"><span class="toc-num">PR 2</span> 사영의 대각행렬</a></li>
+    <li><a href="#pr3"><span class="toc-num">PR 3</span> 핵과 상의 직합</a></li>
+    <li><a href="#pr4"><span class="toc-num">PR 4</span> 멱등원은 사영</a></li>
+    <li><a href="#pr5"><span class="toc-num">PR 5</span> 행렬 곱의 가역성</a></li>
+    <li><a href="#pr6"><span class="toc-num">PR 6</span> 유한수열과 다항식</a></li>
+    <li><a href="#pr7"><span class="toc-num">PR 7</span> 제1동형정리</a></li>
+    <li><a href="#pr8"><span class="toc-num">PR 8</span> 기저 위의 자유벡터공간</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">선형변환의 행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 각 선형변환 $T : \mathbb{R}^n \to \mathbb{R}^m$과 $\mathbb{R}^n$, $\mathbb{R}^m$의 순서기저 $\beta$, $\gamma$에 대하여 $[T]_\beta^\gamma$를 구하라.</p>
+        <ol>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (2a_1 - a_2, 3a_1 + 4a_2, a_1)$, $\beta$와 $\gamma$는 표준순서기저이다.</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (a_1 - a_2, a_1, 2a_1 + a_2)$, $\beta = \{(1,2), (2,3)\}$, $\gamma = \{(1,1,1), (0,1,1), (2,2,3)\}$이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $\beta, \gamma$가 표준순서기저이므로 각 기저벡터의 상의 좌표벡터는 그 벡터 자신이다.</p>
+        <p>$$T(1,0) = (2, 3, 1), \quad T(0,1) = (-1, 4, 0)$$</p>
+        <p>이 벡터들을 열로 나열하면</p>
+        <p>$$[T]_\beta^\gamma = \begin{pmatrix} 2 & -1 \\ 3 & 4 \\ 1 & 0 \end{pmatrix}$$</p>
+        <p>(2) $\beta = \{(1,2),(2,3)\}$, $\gamma = \{(1,1,1),(0,1,1),(2,2,3)\}$이다. 우선</p>
+        <p>$$T(1,2) = (1-2,\, 1,\, 2+2) = (-1,1,4), \quad T(2,3) = (2-3,\, 2,\, 4+3) = (-1,2,7)$$</p>
+        <p>$(-1,1,4) = a(1,1,1)+b(0,1,1)+c(2,2,3)$라 하면 $a+2c=-1$, $a+b+2c=1$, $a+b+3c=4$이고, 풀면 $a=-7$, $b=2$, $c=3$이다. 즉 $T(1,2) = -7(1,1,1)+2(0,1,1)+3(2,2,3)$이다.</p>
+        <p>$(-1,2,7) = a(1,1,1)+b(0,1,1)+c(2,2,3)$라 하면 $a+2c=-1$, $a+b+2c=2$, $a+b+3c=7$이고, 풀면 $a=-11$, $b=3$, $c=5$이다.</p>
+        <p>따라서</p>
+        <p>$$[T]_\beta^\gamma = \begin{pmatrix} -7 & -11 \\ 2 & 3 \\ 3 & 5 \end{pmatrix}$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> For each linear transform $T : \mathbb{R}^n \to \mathbb{R}^m$ and bases $\beta$ and $\gamma$ of $\mathbb{R}^n$ and $\mathbb{R}^m$ below, compute $[T]_\beta^\gamma$.</p>
+        <ol>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (2a_1 - a_2, 3a_1 + 4a_2, a_1)$, $\beta$ and $\gamma$ are standard ordered bases.</li>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (a_1 - a_2, a_1, 2a_1 + a_2)$, $\beta = \{(1,2), (2,3)\}$ and $\gamma = \{(1,1,1), (0,1,1), (2,2,3)\}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Since $\beta, \gamma$ are the standard ordered bases, the coordinate vector of each image is the vector itself.</p>
+        <p>$$T(1,0) = (2, 3, 1), \quad T(0,1) = (-1, 4, 0)$$</p>
+        <p>Listing these as columns gives</p>
+        <p>$$[T]_\beta^\gamma = \begin{pmatrix} 2 & -1 \\ 3 & 4 \\ 1 & 0 \end{pmatrix}$$</p>
+        <p>(2) Here $\beta = \{(1,2),(2,3)\}$ and $\gamma = \{(1,1,1),(0,1,1),(2,2,3)\}$. First,</p>
+        <p>$$T(1,2) = (1-2,\, 1,\, 2+2) = (-1,1,4), \quad T(2,3) = (2-3,\, 2,\, 4+3) = (-1,2,7)$$</p>
+        <p>Writing $(-1,1,4) = a(1,1,1)+b(0,1,1)+c(2,2,3)$ gives $a+2c=-1$, $a+b+2c=1$, $a+b+3c=4$, and solving yields $a=-7$, $b=2$, $c=3$. Thus $T(1,2) = -7(1,1,1)+2(0,1,1)+3(2,2,3)$.</p>
+        <p>Writing $(-1,2,7) = a(1,1,1)+b(0,1,1)+c(2,2,3)$ gives $a+2c=-1$, $a+b+2c=2$, $a+b+3c=7$, and solving yields $a=-11$, $b=3$, $c=5$.</p>
+        <p>Hence</p>
+        <p>$$[T]_\beta^\gamma = \begin{pmatrix} -7 & -11 \\ 2 & 3 \\ 3 & 5 \end{pmatrix}$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">$E^{ij}$ 기저를 이용한 행렬표현</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $E^{ij}$를 $i$행 $j$열 성분만 1이고 나머지 성분은 모두 0인 행렬이라 하자. 다음을 살펴보자.</p>
+        <p>$$\alpha = \{E^{11}, E^{12}, E^{21}, E^{22}\}, \quad \beta = \{1, x, x^2\}, \quad \gamma = \{1\}$$</p>
+        <ol>
+          <li>$T : M_{2\times 2}(F) \to M_{2\times 2}(F)$를 $T(A) = A^t$로 정의하자. $[T]_\alpha$를 구하라.</li>
+          <li>$T : M_{2\times 2}(F) \to F$를 $T(A) = \operatorname{tr}(A)$로 정의하자. $[T]_\alpha^\gamma$를 구하라.</li>
+          <li>$T : P_2(\mathbb{R}) \to M_{2\times 2}(\mathbb{R})$를 $T(f(x)) = \begin{pmatrix} f'(0) & 2f(1) \\ 0 & f''(3) \end{pmatrix}$로 정의하자. $[T]_\beta^\alpha$를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\alpha = \{E^{11}, E^{12}, E^{21}, E^{22}\}$ 순서로 좌표를 잡는다.</p>
+        <p>(1) $T(A) = A^t$이므로 $T(E^{11}) = E^{11}$, $T(E^{12}) = E^{21}$, $T(E^{21}) = E^{12}$, $T(E^{22}) = E^{22}$이다. 각 상을 $\alpha$의 좌표벡터로 나타내면 $(1,0,0,0)$, $(0,0,1,0)$, $(0,1,0,0)$, $(0,0,0,1)$이므로</p>
+        <p>$$[T]_\alpha = \begin{pmatrix} 1&0&0&0 \\ 0&0&1&0 \\ 0&1&0&0 \\ 0&0&0&1 \end{pmatrix}$$</p>
+        <p>(2) $T(A) = \operatorname{tr}(A)$이므로 $T(E^{11})=1$, $T(E^{12})=0$, $T(E^{21})=0$, $T(E^{22})=1$이고, $\gamma=\{1\}$에 대한 좌표는 그 값 자신이다. 따라서</p>
+        <p>$$[T]_\alpha^\gamma = \begin{pmatrix} 1 & 0 & 0 & 1 \end{pmatrix}$$</p>
+        <p>(3) $\beta = \{1,x,x^2\}$에 대하여 $f'(0)$, $f(1)$, $f''(3)$을 계산한다.</p>
+        <p>$f(x)=1$이면 $f'=0$, $f(1)=1$, $f''=0$이므로 $T(1) = \begin{pmatrix} 0&2\\0&0\end{pmatrix}$, $\alpha$-좌표는 $(0,2,0,0)$이다.</p>
+        <p>$f(x)=x$이면 $f'=1$, $f(1)=1$, $f''=0$이므로 $T(x) = \begin{pmatrix} 1&2\\0&0\end{pmatrix}$, $\alpha$-좌표는 $(1,2,0,0)$이다.</p>
+        <p>$f(x)=x^2$이면 $f'(0)=0$, $f(1)=1$, $f''(3)=2$이므로 $T(x^2) = \begin{pmatrix} 0&2\\0&2\end{pmatrix}$, $\alpha$-좌표는 $(0,2,0,2)$이다.</p>
+        <p>이 좌표벡터들을 열로 나열하면</p>
+        <p>$$[T]_\beta^\alpha = \begin{pmatrix} 0&1&0 \\ 2&2&2 \\ 0&0&0 \\ 0&0&2 \end{pmatrix}$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $E^{ij}$ be the matrix whose only nonzero entry is 1 in the $i$th row and $j$th column. Consider the following.</p>
+        <p>$$\alpha = \{E^{11}, E^{12}, E^{21}, E^{22}\}, \quad \beta = \{1, x, x^2\}, \quad \gamma = \{1\}$$</p>
+        <ol>
+          <li>Define $T : M_{2\times 2}(F) \to M_{2\times 2}(F)$ by $T(A) = A^t$. Compute $[T]_\alpha$.</li>
+          <li>Define $T : M_{2\times 2}(F) \to F$ by $T(A) = \operatorname{tr}(A)$. Compute $[T]_\alpha^\gamma$.</li>
+          <li>Define $T : P_2(\mathbb{R}) \to M_{2\times 2}(\mathbb{R})$ by $T(f(x)) = \begin{pmatrix} f'(0) & 2f(1) \\ 0 & f''(3) \end{pmatrix}$. Compute $[T]_\beta^\alpha$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Order the coordinates by $\alpha = \{E^{11}, E^{12}, E^{21}, E^{22}\}$.</p>
+        <p>(1) Since $T(A)=A^t$, we have $T(E^{11})=E^{11}$, $T(E^{12})=E^{21}$, $T(E^{21})=E^{12}$, $T(E^{22})=E^{22}$. Their $\alpha$-coordinate vectors are $(1,0,0,0)$, $(0,0,1,0)$, $(0,1,0,0)$, $(0,0,0,1)$, so</p>
+        <p>$$[T]_\alpha = \begin{pmatrix} 1&0&0&0 \\ 0&0&1&0 \\ 0&1&0&0 \\ 0&0&0&1 \end{pmatrix}$$</p>
+        <p>(2) Since $T(A)=\operatorname{tr}(A)$, we get $T(E^{11})=1$, $T(E^{12})=0$, $T(E^{21})=0$, $T(E^{22})=1$, and the coordinate with respect to $\gamma=\{1\}$ is just the value itself. Hence</p>
+        <p>$$[T]_\alpha^\gamma = \begin{pmatrix} 1 & 0 & 0 & 1 \end{pmatrix}$$</p>
+        <p>(3) For $\beta=\{1,x,x^2\}$, compute $f'(0)$, $f(1)$, $f''(3)$.</p>
+        <p>For $f(x)=1$: $f'=0$, $f(1)=1$, $f''=0$, so $T(1) = \begin{pmatrix} 0&2\\0&0\end{pmatrix}$, with $\alpha$-coordinates $(0,2,0,0)$.</p>
+        <p>For $f(x)=x$: $f'=1$, $f(1)=1$, $f''=0$, so $T(x) = \begin{pmatrix} 1&2\\0&0\end{pmatrix}$, with $\alpha$-coordinates $(1,2,0,0)$.</p>
+        <p>For $f(x)=x^2$: $f'(0)=0$, $f(1)=1$, $f''(3)=2$, so $T(x^2) = \begin{pmatrix} 0&2\\0&2\end{pmatrix}$, with $\alpha$-coordinates $(0,2,0,2)$.</p>
+        <p>Listing these coordinate vectors as columns gives</p>
+        <p>$$[T]_\beta^\alpha = \begin{pmatrix} 0&1&0 \\ 2&2&2 \\ 0&0&0 \\ 0&0&2 \end{pmatrix}$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">복소켤레의 행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = \mathbb{C}$를 $\mathbb{R}$ 위의 벡터공간으로 보고, $\beta = \{1, i\}$를 $V$의 기저라 하자. $T : V \to V$를 $T(z) = \overline{z}$로 정의하자. $[T]_\beta$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $T(1) = \overline{1} = 1 = 1\cdot 1 + 0 \cdot i$이고 $T(i) = \overline{i} = -i = 0\cdot 1 + (-1)\cdot i$이다. 따라서 $\beta$에 대한 좌표벡터는 각각 $(1,0)$, $(0,-1)$이므로</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V = \mathbb{C}$ regarded as a vector space over $\mathbb{R}$ and let $\beta = \{1, i\}$ be a basis for $V$. Define $T : V \to V$ by $T(z) = \overline{z}$. Compute $[T]_\beta$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $T(1) = \overline{1} = 1 = 1\cdot 1 + 0\cdot i$ and $T(i) = \overline{i} = -i = 0\cdot 1 + (-1)\cdot i$. So the $\beta$-coordinate vectors are $(1,0)$ and $(0,-1)$, and</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex1-3">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">이동변환의 행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $\beta = \{v_1, \cdots, v_n\}$을 $V$의 기저라 하자. $v_0 = 0$일 때 $i = 1, \cdots, n$에 대하여 $T(v_i) = v_i + v_{i-1}$로 선형변환 $T : V \to V$를 정의하자. $[T]_\beta$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $v_0 = 0$이므로 $T(v_1) = v_1 + v_0 = v_1$이고, $i \geq 2$에 대하여 $T(v_i) = v_i + v_{i-1}$이다. 따라서 $\beta$에 대한 $T(v_i)$의 좌표벡터는 $i=1$일 때 $i$번째 성분만 $1$이고, $i \geq 2$일 때는 $(i-1)$번째와 $i$번째 성분이 $1$이며 나머지는 모두 $0$이다. 이 좌표벡터들을 열로 나열하면 $[T]_\beta$는 대각성분과 대각성분 바로 위 성분이 모두 $1$이고 나머지는 $0$인 $n \times n$ 행렬이다.</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 1&1&0&\cdots&0 \\ 0&1&1& &0 \\ \vdots& &\ddots&\ddots&\vdots \\ 0&0& &1&1 \\ 0&0&\cdots&0&1 \end{pmatrix}$$</p>
+        <p>즉 $(i,j)$ 성분은 $i=j$ 또는 $j=i+1$일 때 $1$이고, 그 외에는 $0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and let $\beta = \{v_1, \cdots, v_n\}$ be a basis for $V$. Define a linear transform $T : V \to V$ by $T(v_i) = v_i + v_{i-1}$ for $i = 1, \cdots, n$ where $v_0 = 0$. Compute $[T]_\beta$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $v_0=0$, $T(v_1)=v_1+v_0=v_1$, and for $i\geq 2$, $T(v_i)=v_i+v_{i-1}$. Hence the $\beta$-coordinate vector of $T(v_i)$ has a $1$ in position $i$ only when $i=1$, and $1$'s in positions $i-1$ and $i$ when $i \geq 2$, with all other entries $0$. Listing these as columns, $[T]_\beta$ is the $n \times n$ matrix whose diagonal entries and entries immediately above the diagonal are all $1$, and all other entries are $0$.</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 1&1&0&\cdots&0 \\ 0&1&1& &0 \\ \vdots& &\ddots&\ddots&\vdots \\ 0&0& &1&1 \\ 0&0&\cdots&0&1 \end{pmatrix}$$</p>
+        <p>That is, the $(i,j)$ entry is $1$ if $i=j$ or $j=i+1$, and $0$ otherwise.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">미분연산자의 일차독립성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = P(\mathbb{R})$이라 하고, $j \geq 1$인 각 $j$에 대하여 $T_j : V \to V$를 $T_j(f(x)) = f^{(j)}(x)$로 정의하자. $\{T_j : j \geq 1\}$이 $\mathcal{L}(V)$의 일차독립인 부분집합임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $n \geq 1$과 스칼라 $c_1, \ldots, c_n \in \mathbb{R}$이</p>
+        <p>$$c_1 T_1 + c_2 T_2 + \cdots + c_n T_n = T_0$$</p>
+        <p>을 만족한다고 하자 (여기서 $T_0$는 $\mathcal{L}(V)$의 영변환이다). 이 등식을 $f(x) = x^n \in V$에 적용하면, $j \leq n$에 대하여 $T_j(x^n) = f^{(j)}(x) = \dfrac{n!}{(n-j)!}x^{n-j}$이므로</p>
+        <p>$$0 = \sum_{j=1}^{n} c_j \frac{n!}{(n-j)!} x^{n-j}$$</p>
+        <p>이는 $x$에 대한 다항식 항등식이다. $x^{n-1}, x^{n-2}, \ldots, x^0$은 서로 다른 차수의 다항식이므로 $P(\mathbb{R})$에서 일차독립이고, 따라서 위 등식이 성립하려면 각 계수가 $0$이어야 한다. 즉 모든 $j = 1, \ldots, n$에 대하여 $c_j \cdot \dfrac{n!}{(n-j)!} = 0$이다. $\dfrac{n!}{(n-j)!} \neq 0$이므로 $c_j = 0$이다. 이는 $\{T_j : 1 \leq j \leq n\}$이 일차독립임을 보이며, $n$은 임의였으므로 $\{T_j : j \geq 1\}$의 모든 유한부분집합이 일차독립이다. 따라서 $\{T_j : j \geq 1\}$은 $\mathcal{L}(V)$의 일차독립인 부분집합이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V = P(\mathbb{R})$ and define $T_j : V \to V$ by $T_j(f(x)) = f^{(j)}(x)$ for each $j \geq 1$. Show that $\{T_j : j \geq 1\}$ is a linearly independent subset of $\mathcal{L}(V)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Suppose $n \geq 1$ and scalars $c_1, \ldots, c_n \in \mathbb{R}$ satisfy</p>
+        <p>$$c_1 T_1 + c_2 T_2 + \cdots + c_n T_n = T_0$$</p>
+        <p>where $T_0$ is the zero transformation in $\mathcal{L}(V)$. Applying this equation to $f(x) = x^n \in V$, and using that $T_j(x^n) = f^{(j)}(x) = \dfrac{n!}{(n-j)!}x^{n-j}$ for $j \leq n$, we get</p>
+        <p>$$0 = \sum_{j=1}^{n} c_j \frac{n!}{(n-j)!} x^{n-j}$$</p>
+        <p>as an identity of polynomials in $x$. Since $x^{n-1}, x^{n-2}, \ldots, x^0$ are polynomials of distinct degrees, they are linearly independent in $P(\mathbb{R})$, so every coefficient above must vanish: $c_j \cdot \dfrac{n!}{(n-j)!} = 0$ for each $j = 1, \ldots, n$. As $\dfrac{n!}{(n-j)!} \neq 0$, we get $c_j = 0$. This shows $\{T_j : 1 \leq j \leq n\}$ is linearly independent, and since $n$ was arbitrary, every finite subset of $\{T_j : j \geq 1\}$ is linearly independent. Hence $\{T_j : j \geq 1\}$ is a linearly independent subset of $\mathcal{L}(V)$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">서로소인 상의 일차독립성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T, U : V \to W$를 영이 아닌 선형변환이라 하자. $\operatorname{Im}T \cap \operatorname{Im}U = 0$이면 $\{T, U\}$가 $\mathcal{L}(V, W)$의 일차독립인 부분집합임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $a, b$가 스칼라이고 $aT + bU = T_0$ (영변환)이라 하자. 모든 $v \in V$에 대하여</p>
+        <p>$$aT(v) = -bU(v)$$</p>
+        <p>이다. $\operatorname{Im}T$와 $\operatorname{Im}U$는 부분공간이므로 좌변 $aT(v) \in \operatorname{Im}T$이고 우변 $-bU(v) \in \operatorname{Im}U$이다. 두 값이 같으므로 이 값은 $\operatorname{Im}T \cap \operatorname{Im}U = 0$에 속하고, 따라서 모든 $v \in V$에 대하여 $aT(v) = 0$이고 $bU(v) = 0$이다.</p>
+        <p>$T$가 영이 아니므로 $T(v_0) \neq 0$인 $v_0 \in V$가 존재하고, $aT(v_0) = 0$이므로 $a = 0$이다. 마찬가지로 $U$가 영이 아니므로 $b = 0$이다. 따라서 $\{T, U\}$는 $\mathcal{L}(V, W)$의 일차독립인 부분집합이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T, U : V \to W$ be nonzero linear transforms. Show that if $\operatorname{Im}T \cap \operatorname{Im}U = 0$, then $\{T, U\}$ is a linearly independent subset of $\mathcal{L}(V, W)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $a, b$ be scalars with $aT + bU = T_0$ (the zero transformation). For every $v \in V$,</p>
+        <p>$$aT(v) = -bU(v)$$</p>
+        <p>Since $\operatorname{Im}T$ and $\operatorname{Im}U$ are subspaces, the left side lies in $\operatorname{Im}T$ and the right side lies in $\operatorname{Im}U$. As these are equal, this common value lies in $\operatorname{Im}T \cap \operatorname{Im}U = 0$, so $aT(v) = 0$ and $bU(v) = 0$ for every $v \in V$.</p>
+        <p>Since $T$ is nonzero, there is $v_0 \in V$ with $T(v_0) \neq 0$, and $aT(v_0)=0$ forces $a=0$. Likewise, since $U$ is nonzero, $b=0$. Hence $\{T, U\}$ is a linearly independent subset of $\mathcal{L}(V,W)$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="ex3">
+  <div class="card-head">
+    <span class="ex-num">EX 3</span>
+    <span class="ex-title">행렬의 곱과 일차결합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음과 같다고 하자.</p>
+        <p>$$A = \begin{pmatrix} 1 & 3 \\ 2 & -1 \end{pmatrix}, \quad B = \begin{pmatrix} 1 & 0 & -3 \\ 4 & 1 & 2 \end{pmatrix}, \quad C = \begin{pmatrix} 1 & 1 & 4 \\ -1 & -2 & 0 \end{pmatrix}$$</p>
+        <ol>
+          <li>$A(2B + 3C)$를 계산하라.</li>
+          <li>$C^t A$를 계산하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) 먼저</p>
+        <p>$$2B = \begin{pmatrix} 2&0&-6\\8&2&4\end{pmatrix}, \quad 3C = \begin{pmatrix} 3&3&12\\-3&-6&0\end{pmatrix}, \quad 2B+3C = \begin{pmatrix} 5&3&6\\5&-4&4\end{pmatrix}$$</p>
+        <p>이다. 따라서</p>
+        <p>$$A(2B+3C) = \begin{pmatrix} 1&3\\2&-1\end{pmatrix}\begin{pmatrix} 5&3&6\\5&-4&4\end{pmatrix} = \begin{pmatrix} 20&-9&18\\5&10&8\end{pmatrix}$$</p>
+        <p>(2) $C^t = \begin{pmatrix} 1&-1\\1&-2\\4&0\end{pmatrix}$이므로</p>
+        <p>$$C^tA = \begin{pmatrix} 1&-1\\1&-2\\4&0\end{pmatrix}\begin{pmatrix} 1&3\\2&-1\end{pmatrix} = \begin{pmatrix} -1&4\\-3&5\\4&12\end{pmatrix}$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let</p>
+        <p>$$A = \begin{pmatrix} 1 & 3 \\ 2 & -1 \end{pmatrix}, \quad B = \begin{pmatrix} 1 & 0 & -3 \\ 4 & 1 & 2 \end{pmatrix}, \quad C = \begin{pmatrix} 1 & 1 & 4 \\ -1 & -2 & 0 \end{pmatrix}$$</p>
+        <ol>
+          <li>Compute $A(2B + 3C)$.</li>
+          <li>Compute $C^t A$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) First,</p>
+        <p>$$2B = \begin{pmatrix} 2&0&-6\\8&2&4\end{pmatrix}, \quad 3C = \begin{pmatrix} 3&3&12\\-3&-6&0\end{pmatrix}, \quad 2B+3C = \begin{pmatrix} 5&3&6\\5&-4&4\end{pmatrix}$$</p>
+        <p>Hence</p>
+        <p>$$A(2B+3C) = \begin{pmatrix} 1&3\\2&-1\end{pmatrix}\begin{pmatrix} 5&3&6\\5&-4&4\end{pmatrix} = \begin{pmatrix} 20&-9&18\\5&10&8\end{pmatrix}$$</p>
+        <p>(2) Since $C^t = \begin{pmatrix} 1&-1\\1&-2\\4&0\end{pmatrix}$,</p>
+        <p>$$C^tA = \begin{pmatrix} 1&-1\\1&-2\\4&0\end{pmatrix}\begin{pmatrix} 1&3\\2&-1\end{pmatrix} = \begin{pmatrix} -1&4\\-3&5\\4&12\end{pmatrix}$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.1 -->
+<div class="card ex-card" id="ex3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 3.1</span>
+    <span class="ex-title">행렬 곱의 성립 가능성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 행렬 $A, B, C$의 크기가 각각 $5 \times 6$, $5 \times 6$, $6 \times 3$이라 하자. 다음 곱셈이 성립하는지 판정하라. 성립한다면 그 크기를 구하라.</p>
+        <ol>
+          <li>$B + AB$</li>
+          <li>$A^t B$</li>
+          <li>$B^t AC$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $A, B$는 $5\times 6$, $C$는 $6\times 3$ 행렬이다.</p>
+        <p>(1) $AB$가 성립하려면 $A$의 열의 수($6$)와 $B$의 행의 수($5$)가 같아야 하는데 $6 \neq 5$이므로 $AB$는 정의되지 않고, 따라서 $B + AB$도 성립하지 않는다.</p>
+        <p>(2) $A^t$는 $6 \times 5$ 행렬이고 $B$는 $5 \times 6$ 행렬이므로 $A^tB$는 성립하며 크기는 $6 \times 6$이다.</p>
+        <p>(3) $B^t$는 $6 \times 5$, $A$는 $5 \times 6$이므로 $B^tA$는 성립하고 크기는 $6 \times 6$이다. 이어서 $C$가 $6 \times 3$이므로 $(B^tA)C$도 성립하며 크기는 $6 \times 3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> The matrices $A, B, C$ are of size $5 \times 6$, $5 \times 6$, $6 \times 3$, respectively. Determine whether the given multiplication is possible. If possible, compute its size.</p>
+        <ol>
+          <li>$B + AB$</li>
+          <li>$A^t B$</li>
+          <li>$B^t AC$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $A, B$ are $5\times 6$ and $C$ is $6\times 3$.</p>
+        <p>(1) For $AB$ to be defined, the number of columns of $A$ ($6$) must equal the number of rows of $B$ ($5$), but $6 \neq 5$, so $AB$ is undefined, and hence $B+AB$ is not possible.</p>
+        <p>(2) $A^t$ is $6 \times 5$ and $B$ is $5 \times 6$, so $A^tB$ is possible, of size $6 \times 6$.</p>
+        <p>(3) $B^t$ is $6 \times 5$ and $A$ is $5 \times 6$, so $B^tA$ is possible, of size $6 \times 6$. Then, since $C$ is $6 \times 3$, $(B^tA)C$ is also possible, of size $6 \times 3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.2 -->
+<div class="card ex-card" id="ex3-2">
+  <div class="card-head">
+    <span class="ex-num">EX 3.2</span>
+    <span class="ex-title">영이 아닌 행렬의 곱이 영행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$AB = O$이지만 $A \neq O$이고 $B \neq O$인 행렬 $A, B$를 구하라.</li>
+          <li>$A^2 = O$인 영이 아닌 행렬 $A$를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $A = \begin{pmatrix} 1&0\\0&0\end{pmatrix}$, $B = \begin{pmatrix} 0&0\\1&0\end{pmatrix}$이라 하면 $A \neq O$, $B \neq O$이고</p>
+        <p>$$AB = \begin{pmatrix} 1&0\\0&0\end{pmatrix}\begin{pmatrix} 0&0\\1&0\end{pmatrix} = \begin{pmatrix} 0&0\\0&0\end{pmatrix} = O$$</p>
+        <p>(2) $A = \begin{pmatrix} 0&1\\0&0\end{pmatrix}$이라 하면 $A \neq O$이고</p>
+        <p>$$A^2 = \begin{pmatrix} 0&1\\0&0\end{pmatrix}\begin{pmatrix} 0&1\\0&0\end{pmatrix} = \begin{pmatrix} 0&0\\0&0\end{pmatrix} = O$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find matrices $A, B$ such that $AB = O$ but $A \neq O$ and $B \neq O$.</li>
+          <li>Find a nonzero matrix $A$ such that $A^2 = O$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Let $A = \begin{pmatrix} 1&0\\0&0\end{pmatrix}$ and $B = \begin{pmatrix} 0&0\\1&0\end{pmatrix}$. Then $A \neq O$, $B \neq O$, and</p>
+        <p>$$AB = \begin{pmatrix} 1&0\\0&0\end{pmatrix}\begin{pmatrix} 0&0\\1&0\end{pmatrix} = \begin{pmatrix} 0&0\\0&0\end{pmatrix} = O$$</p>
+        <p>(2) Let $A = \begin{pmatrix} 0&1\\0&0\end{pmatrix}$. Then $A \neq O$ and</p>
+        <p>$$A^2 = \begin{pmatrix} 0&1\\0&0\end{pmatrix}\begin{pmatrix} 0&1\\0&0\end{pmatrix} = \begin{pmatrix} 0&0\\0&0\end{pmatrix} = O$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.3 -->
+<div class="card ex-card" id="ex3-3">
+  <div class="card-head">
+    <span class="ex-num">EX 3.3</span>
+    <span class="ex-title">대각합 항등식과 교환자</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A, B$를 $n \times n$ 행렬이라 하자.</p>
+        <ol>
+          <li>$\operatorname{tr}(AB) = \operatorname{tr}(BA)$임을 증명하라.</li>
+          <li>$\operatorname{tr}(A^t) = \operatorname{tr}(A)$임을 증명하라.</li>
+          <li>$AB - BA = I$인 행렬 $A, B$가 존재하지 않음을 증명하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $A = (a_{ij})$, $B = (b_{ij})$가 $n \times n$ 행렬이라 하자.</p>
+        <p>(1) $(AB)_{ii} = \sum_{k=1}^n a_{ik}b_{ki}$이므로</p>
+        <p>$$\operatorname{tr}(AB) = \sum_{i=1}^n \sum_{k=1}^n a_{ik}b_{ki} = \sum_{k=1}^n \sum_{i=1}^n b_{ki}a_{ik} = \sum_{k=1}^n (BA)_{kk} = \operatorname{tr}(BA)$$</p>
+        <p>(2) $A^t$의 $(i,i)$ 성분은 $A$의 $(i,i)$ 성분과 같다. 즉 $(A^t)_{ii} = a_{ii}$이므로</p>
+        <p>$$\operatorname{tr}(A^t) = \sum_{i=1}^n (A^t)_{ii} = \sum_{i=1}^n a_{ii} = \operatorname{tr}(A)$$</p>
+        <p>(3) $AB - BA = I$인 $n \times n$ 행렬 $A, B$가 존재한다고 가정하자 (여기서 스칼라는 $\mathbb{R}$ 또는 $\mathbb{C}$이다). 양변에 대각합을 취하면 (1)에 의하여</p>
+        <p>$$\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = 0$$</p>
+        <p>인 반면 $\operatorname{tr}(I) = n$이다. 따라서 $n = 0$이어야 하는데, 이는 $\mathbb{R}$ 또는 $\mathbb{C}$가 표수(characteristic) $0$인 체이고 $n \geq 1$이므로 모순이다. 따라서 그러한 $A, B$는 존재하지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A, B$ be $n \times n$ matrices.</p>
+        <ol>
+          <li>Show that $\operatorname{tr}(AB) = \operatorname{tr}(BA)$.</li>
+          <li>Show that $\operatorname{tr}(A^t) = \operatorname{tr}(A)$.</li>
+          <li>Show that there are no matrices $A, B$ such that $AB - BA = I$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $A = (a_{ij})$, $B = (b_{ij})$ be $n \times n$ matrices.</p>
+        <p>(1) Since $(AB)_{ii} = \sum_{k=1}^n a_{ik}b_{ki}$,</p>
+        <p>$$\operatorname{tr}(AB) = \sum_{i=1}^n \sum_{k=1}^n a_{ik}b_{ki} = \sum_{k=1}^n \sum_{i=1}^n b_{ki}a_{ik} = \sum_{k=1}^n (BA)_{kk} = \operatorname{tr}(BA)$$</p>
+        <p>(2) The $(i,i)$ entry of $A^t$ equals the $(i,i)$ entry of $A$, i.e., $(A^t)_{ii} = a_{ii}$, so</p>
+        <p>$$\operatorname{tr}(A^t) = \sum_{i=1}^n (A^t)_{ii} = \sum_{i=1}^n a_{ii} = \operatorname{tr}(A)$$</p>
+        <p>(3) Suppose there exist $n \times n$ matrices $A, B$ (with scalars in $\mathbb{R}$ or $\mathbb{C}$) such that $AB - BA = I$. Taking the trace of both sides and using (1),</p>
+        <p>$$\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = 0$$</p>
+        <p>while $\operatorname{tr}(I) = n$. Hence $n = 0$, which is a contradiction since $\mathbb{R}$ and $\mathbb{C}$ have characteristic $0$ and $n \geq 1$. Therefore no such $A, B$ exist.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4 -->
+<div class="card ex-card" id="ex4">
+  <div class="card-head">
+    <span class="ex-num">EX 4</span>
+    <span class="ex-title">두 변환의 합성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$와 $U : P_2(\mathbb{R}) \to \mathbb{R}^3$를 다음과 같이 정의하자.</p>
+        <p>$$T(f(x)) = f'(x)(3 + x) + 2f(x), \quad U(a + bx + cx^2) = (a + b, c, a - b).$$</p>
+        <p>$\beta, \gamma$를 각각 $P_2(\mathbb{R}), \mathbb{R}^3$의 표준순서기저라 하자.</p>
+        <ol>
+          <li>$[U]_\beta^\gamma$, $[T]_\beta$, $[UT]_\beta^\gamma$를 구하라. 이들 사이의 관계를 구하라.</li>
+          <li>$h(x) = 3 - 2x + x^2$라 하자. $[U]_\beta^\gamma$, $[h(x)]_\beta$, $[U(h(x))]_\gamma$를 구하라. 이들 사이의 관계를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $\beta = \{1, x, x^2\}$, $\gamma$는 $\mathbb{R}^3$의 표준순서기저이다.</p>
+        <p>$U(1) = U(1+0x+0x^2) = (1,0,1)$, $U(x) = U(0+1x+0x^2) = (1,0,-1)$, $U(x^2) = U(0+0x+1x^2) = (0,1,0)$이므로</p>
+        <p>$$[U]_\beta^\gamma = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}$$</p>
+        <p>$T(1) = 0\cdot(3+x) + 2\cdot 1 = 2$, $T(x) = 1\cdot(3+x) + 2x = 3+3x$, $T(x^2) = 2x(3+x)+2x^2 = 6x+4x^2$이므로 $\beta$-좌표는 각각 $(2,0,0)$, $(3,3,0)$, $(0,6,4)$이고</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 2&3&0\\0&3&6\\0&0&4 \end{pmatrix}$$</p>
+        <p>이제 $[U]_\beta^\gamma [T]_\beta$를 계산하면</p>
+        <p>$$[U]_\beta^\gamma[T]_\beta = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}\begin{pmatrix} 2&3&0\\0&3&6\\0&0&4 \end{pmatrix} = \begin{pmatrix} 2&6&6\\0&0&4\\2&0&-6 \end{pmatrix}$$</p>
+        <p>한편 $(UT)(f) = U(T(f))$이므로 $UT(1) = U(2) = (2,0,2)$, $UT(x) = U(3+3x) = (6,0,0)$, $UT(x^2) = U(6x+4x^2) = (6,4,-6)$이고, 이를 열로 나열하면</p>
+        <p>$$[UT]_\beta^\gamma = \begin{pmatrix} 2&6&6\\0&0&4\\2&0&-6 \end{pmatrix}$$</p>
+        <p>따라서 $[UT]_\beta^\gamma = [U]_\beta^\gamma[T]_\beta$가 성립한다.</p>
+        <p>(2) $h(x) = 3-2x+x^2$이므로 $[h(x)]_\beta = (3,-2,1)$이다. $U(h(x)) = U(3-2x+x^2)$은 $a=3, b=-2, c=1$에 대응하므로 $U(h(x)) = (3-2,\, 1,\, 3+2) = (1,1,5)$이고 $[U(h(x))]_\gamma = (1,1,5)$이다. 실제로</p>
+        <p>$$[U]_\beta^\gamma[h(x)]_\beta = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}\begin{pmatrix} 3\\-2\\1 \end{pmatrix} = \begin{pmatrix} 1\\1\\5 \end{pmatrix} = [U(h(x))]_\gamma$$</p>
+        <p>이므로 $[U(h(x))]_\gamma = [U]_\beta^\gamma[h(x)]_\beta$가 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Define $T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$ and $U : P_2(\mathbb{R}) \to \mathbb{R}^3$ by</p>
+        <p>$$T(f(x)) = f'(x)(3 + x) + 2f(x), \quad U(a + bx + cx^2) = (a + b, c, a - b).$$</p>
+        <p>Let $\beta, \gamma$ be the standard ordered bases of $P_2(\mathbb{R}), \mathbb{R}^3$, respectively.</p>
+        <ol>
+          <li>Compute $[U]_\beta^\gamma$, $[T]_\beta$, $[UT]_\beta^\gamma$. Find a relation among these.</li>
+          <li>Let $h(x) = 3 - 2x + x^2$. Compute $[U]_\beta^\gamma$, $[h(x)]_\beta$, $[U(h(x))]_\gamma$. Find a relation among these.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Let $\beta = \{1, x, x^2\}$ and let $\gamma$ be the standard ordered basis of $\mathbb{R}^3$.</p>
+        <p>Since $U(1) = U(1+0x+0x^2) = (1,0,1)$, $U(x) = U(0+1x+0x^2) = (1,0,-1)$, $U(x^2) = U(0+0x+1x^2) = (0,1,0)$,</p>
+        <p>$$[U]_\beta^\gamma = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}$$</p>
+        <p>Since $T(1) = 0\cdot(3+x) + 2\cdot 1 = 2$, $T(x) = 1\cdot(3+x) + 2x = 3+3x$, $T(x^2) = 2x(3+x)+2x^2 = 6x+4x^2$, the $\beta$-coordinates are $(2,0,0)$, $(3,3,0)$, $(0,6,4)$, respectively, so</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 2&3&0\\0&3&6\\0&0&4 \end{pmatrix}$$</p>
+        <p>Computing the product $[U]_\beta^\gamma [T]_\beta$,</p>
+        <p>$$[U]_\beta^\gamma[T]_\beta = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}\begin{pmatrix} 2&3&0\\0&3&6\\0&0&4 \end{pmatrix} = \begin{pmatrix} 2&6&6\\0&0&4\\2&0&-6 \end{pmatrix}$$</p>
+        <p>On the other hand, since $(UT)(f) = U(T(f))$, we have $UT(1) = U(2) = (2,0,2)$, $UT(x) = U(3+3x) = (6,0,0)$, $UT(x^2) = U(6x+4x^2) = (6,4,-6)$, and listing these as columns,</p>
+        <p>$$[UT]_\beta^\gamma = \begin{pmatrix} 2&6&6\\0&0&4\\2&0&-6 \end{pmatrix}$$</p>
+        <p>Hence $[UT]_\beta^\gamma = [U]_\beta^\gamma[T]_\beta$.</p>
+        <p>(2) Since $h(x) = 3-2x+x^2$, $[h(x)]_\beta = (3,-2,1)$. Here $U(h(x)) = U(3-2x+x^2)$ corresponds to $a=3, b=-2, c=1$, so $U(h(x)) = (3-2,\, 1,\, 3+2) = (1,1,5)$ and $[U(h(x))]_\gamma = (1,1,5)$. Indeed,</p>
+        <p>$$[U]_\beta^\gamma[h(x)]_\beta = \begin{pmatrix} 1&1&0\\0&0&1\\1&-1&0 \end{pmatrix}\begin{pmatrix} 3\\-2\\1 \end{pmatrix} = \begin{pmatrix} 1\\1\\5 \end{pmatrix} = [U(h(x))]_\gamma$$</p>
+        <p>so $[U(h(x))]_\gamma = [U]_\beta^\gamma[h(x)]_\beta$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.1 -->
+<div class="card ex-card" id="ex4-1">
+  <div class="card-head">
+    <span class="ex-num">EX 4.1</span>
+    <span class="ex-title">기하학적 변환의 행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 표준기저에 대하여 다음 각 선형변환에 대응하는 행렬 $A$를 구하라. 각 $A^2$에 대응하는 선형변환을 서술하라.</p>
+        <ol>
+          <li>원점을 중심으로 각 $\theta$만큼 시계방향으로 회전하는 변환 $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+          <li>$y$축에 대한 반사 $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+          <li>$y$축 위로의 사영 $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) 원점을 중심으로 각 $\theta$만큼 시계방향으로 회전하는 변환의 표준행렬은</p>
+        <p>$$A = \begin{pmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{pmatrix}$$</p>
+        <p>이다. 이때</p>
+        <p>$$A^2 = \begin{pmatrix} \cos^2\theta-\sin^2\theta & 2\sin\theta\cos\theta \\ -2\sin\theta\cos\theta & \cos^2\theta-\sin^2\theta \end{pmatrix} = \begin{pmatrix} \cos2\theta & \sin2\theta \\ -\sin2\theta & \cos2\theta \end{pmatrix}$$</p>
+        <p>이므로 $A^2$은 원점을 중심으로 각 $2\theta$만큼 시계방향으로 회전하는 변환에 대응한다.</p>
+        <p>(2) $y$축에 대한 반사는 $T(x,y) = (-x,y)$이므로</p>
+        <p>$$A = \begin{pmatrix} -1&0\\0&1 \end{pmatrix}, \quad A^2 = \begin{pmatrix} -1&0\\0&1 \end{pmatrix}\begin{pmatrix} -1&0\\0&1 \end{pmatrix} = \begin{pmatrix} 1&0\\0&1 \end{pmatrix} = I$$</p>
+        <p>이므로 $A^2$은 항등변환에 대응한다.</p>
+        <p>(3) $y$축 위로의 사영은 $T(x,y) = (0,y)$이므로</p>
+        <p>$$A = \begin{pmatrix} 0&0\\0&1 \end{pmatrix}, \quad A^2 = \begin{pmatrix} 0&0\\0&1 \end{pmatrix}\begin{pmatrix} 0&0\\0&1 \end{pmatrix} = \begin{pmatrix} 0&0\\0&1 \end{pmatrix} = A$$</p>
+        <p>이므로 $A^2$은 $A$와 같은 변환, 즉 $y$축 위로의 사영 그 자체에 대응한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find a matrix $A$ corresponding to each linear transform with respect to the standard bases. Describe the linear transform corresponding to each $A^2$.</p>
+        <ol>
+          <li>clockwise rotation by $\theta$ around the origin $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+          <li>reflection about the $y$-axis $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+          <li>projection on the $y$-axis $T : \mathbb{R}^2 \to \mathbb{R}^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) The standard matrix of clockwise rotation by $\theta$ around the origin is</p>
+        <p>$$A = \begin{pmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{pmatrix}$$</p>
+        <p>Then</p>
+        <p>$$A^2 = \begin{pmatrix} \cos^2\theta-\sin^2\theta & 2\sin\theta\cos\theta \\ -2\sin\theta\cos\theta & \cos^2\theta-\sin^2\theta \end{pmatrix} = \begin{pmatrix} \cos2\theta & \sin2\theta \\ -\sin2\theta & \cos2\theta \end{pmatrix}$$</p>
+        <p>so $A^2$ corresponds to clockwise rotation by $2\theta$ around the origin.</p>
+        <p>(2) Reflection about the $y$-axis is $T(x,y) = (-x,y)$, so</p>
+        <p>$$A = \begin{pmatrix} -1&0\\0&1 \end{pmatrix}, \quad A^2 = \begin{pmatrix} -1&0\\0&1 \end{pmatrix}\begin{pmatrix} -1&0\\0&1 \end{pmatrix} = \begin{pmatrix} 1&0\\0&1 \end{pmatrix} = I$$</p>
+        <p>so $A^2$ corresponds to the identity transformation.</p>
+        <p>(3) Projection on the $y$-axis is $T(x,y) = (0,y)$, so</p>
+        <p>$$A = \begin{pmatrix} 0&0\\0&1 \end{pmatrix}, \quad A^2 = \begin{pmatrix} 0&0\\0&1 \end{pmatrix}\begin{pmatrix} 0&0\\0&1 \end{pmatrix} = \begin{pmatrix} 0&0\\0&1 \end{pmatrix} = A$$</p>
+        <p>so $A^2$ corresponds to the same transformation as $A$, namely the projection on the $y$-axis itself.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.2 -->
+<div class="card ex-card" id="ex4-2">
+  <div class="card-head">
+    <span class="ex-num">EX 4.2</span>
+    <span class="ex-title">좌표행렬로부터의 변환</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\beta = \{(1,0), (1,1)\}$, $\gamma = \{(0,1), (2,1)\}$이라 하자. $[T]_\beta^\gamma = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$인 선형변환 $T : \mathbb{R}^2 \to \mathbb{R}^2$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $[T]_\beta^\gamma$의 열은 $T(\beta$의 각 벡터$)$의 $\gamma$-좌표벡터이다. 첫 번째 열 $(1,0)$은 $T(1,0) = 1\cdot(0,1)+0\cdot(2,1) = (0,1)$을 뜻하고, 두 번째 열 $(1,1)$은 $T(1,1) = 1\cdot(0,1)+1\cdot(2,1) = (2,2)$를 뜻한다.</p>
+        <p>임의의 $(x,y) \in \mathbb{R}^2$를 $\beta$의 일차결합으로 나타내면 $(x,y) = a(1,0)+b(1,1)$에서 $a+b=x$, $b=y$이므로 $a = x-y$, $b=y$이다. $T$가 선형이므로</p>
+        <p>$$T(x,y) = aT(1,0) + bT(1,1) = (x-y)(0,1) + y(2,2) = (2y,\ x-y+2y) = (2y,\ x+y)$$</p>
+        <p>즉 $T(x,y) = (2y, x+y)$이다. 검산: $T(1,0)=(0,1)$의 $\gamma$-좌표는 $(0,1)=1\cdot(0,1)+0\cdot(2,1)$이므로 $(1,0)$이고, $T(1,1)=(2,2)$의 $\gamma$-좌표는 $(2,2)=1\cdot(0,1)+1\cdot(2,1)$이므로 $(1,1)$이다. 이는 주어진 $[T]_\beta^\gamma$의 두 열과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $\beta = \{(1,0), (1,1)\}$ and $\gamma = \{(0,1), (2,1)\}$. Find a linear transform $T : \mathbb{R}^2 \to \mathbb{R}^2$ such that $[T]_\beta^\gamma = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The columns of $[T]_\beta^\gamma$ are the $\gamma$-coordinate vectors of the images of the vectors in $\beta$. The first column $(1,0)$ means $T(1,0) = 1\cdot(0,1)+0\cdot(2,1) = (0,1)$, and the second column $(1,1)$ means $T(1,1) = 1\cdot(0,1)+1\cdot(2,1) = (2,2)$.</p>
+        <p>Write an arbitrary $(x,y) \in \mathbb{R}^2$ as a linear combination of $\beta$: $(x,y) = a(1,0)+b(1,1)$ gives $a+b=x$, $b=y$, so $a=x-y$, $b=y$. Since $T$ is linear,</p>
+        <p>$$T(x,y) = aT(1,0) + bT(1,1) = (x-y)(0,1) + y(2,2) = (2y,\ x-y+2y) = (2y,\ x+y)$$</p>
+        <p>That is, $T(x,y) = (2y, x+y)$. Check: the $\gamma$-coordinate of $T(1,0)=(0,1)$ is $(1,0)$ since $(0,1)=1\cdot(0,1)+0\cdot(2,1)$, and the $\gamma$-coordinate of $T(1,1)=(2,2)$ is $(1,1)$ since $(2,2)=1\cdot(0,1)+1\cdot(2,1)$. These match the two columns of the given $[T]_\beta^\gamma$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 5 -->
+<div class="card ex-card" id="ex5">
+  <div class="card-head">
+    <span class="ex-num">EX 5</span>
+    <span class="ex-title">선형변환의 가역성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 선형변환 $T$가 가역인지 판정하라.</p>
+        <ol>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (a_1 - 2a_2, a_2, 3a_1 + 4a_2)$.</li>
+          <li>$T : \mathbb{R}^3 \to \mathbb{R}^3$, $T(a_1, a_2, a_3) = (3a_1 - 2a_3, a_2, 3a_1 + 4a_2)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $T : \mathbb{R}^2 \to \mathbb{R}^3$은 $\dim \mathbb{R}^2 = 2 \lt 3 = \dim \mathbb{R}^3$이므로 전사가 될 수 없다 (계수가 많아야 $2$이므로 상이 $\mathbb{R}^3$ 전체가 될 수 없다). 따라서 $T$는 전단사가 아니므로 가역이 아니다.</p>
+        <p>(2) $T : \mathbb{R}^3 \to \mathbb{R}^3$의 표준행렬은</p>
+        <p>$$A = \begin{pmatrix} 3&0&-2\\0&1&0\\3&4&0 \end{pmatrix}$$</p>
+        <p>이다. $\operatorname{Ker}T$를 구하면, $T(a_1,a_2,a_3)=(3a_1-2a_3,\,a_2,\,3a_1+4a_2)=(0,0,0)$일 때 $a_2=0$이고, $3a_1+4a_2=3a_1=0$에서 $a_1=0$이며, $3a_1-2a_3=-2a_3=0$에서 $a_3=0$이다. 따라서 $\operatorname{Ker}T = 0$이므로 $T$는 단사이고, $\dim\mathbb{R}^3=\dim\mathbb{R}^3$이므로 $T$는 전사이기도 하다. 따라서 $T$는 가역이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Determine whether the given linear transformation $T$ is invertible.</p>
+        <ol>
+          <li>$T : \mathbb{R}^2 \to \mathbb{R}^3$, $T(a_1, a_2) = (a_1 - 2a_2, a_2, 3a_1 + 4a_2)$.</li>
+          <li>$T : \mathbb{R}^3 \to \mathbb{R}^3$, $T(a_1, a_2, a_3) = (3a_1 - 2a_3, a_2, 3a_1 + 4a_2)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) For $T : \mathbb{R}^2 \to \mathbb{R}^3$, since $\dim \mathbb{R}^2 = 2 \lt 3 = \dim \mathbb{R}^3$, $T$ cannot be onto (its rank is at most $2$, so its image cannot be all of $\mathbb{R}^3$). Hence $T$ is not bijective, so $T$ is not invertible.</p>
+        <p>(2) The standard matrix of $T : \mathbb{R}^3 \to \mathbb{R}^3$ is</p>
+        <p>$$A = \begin{pmatrix} 3&0&-2\\0&1&0\\3&4&0 \end{pmatrix}$$</p>
+        <p>To find $\operatorname{Ker}T$: if $T(a_1,a_2,a_3)=(3a_1-2a_3,\,a_2,\,3a_1+4a_2)=(0,0,0)$, then $a_2=0$; from $3a_1+4a_2=3a_1=0$ we get $a_1=0$; and from $3a_1-2a_3=-2a_3=0$ we get $a_3=0$. So $\operatorname{Ker}T=0$, hence $T$ is one-to-one, and since $\dim\mathbb{R}^3=\dim\mathbb{R}^3$, $T$ is also onto. Therefore $T$ is invertible.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 5.1 -->
+<div class="card ex-card" id="ex5-1">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1</span>
+    <span class="ex-title">동형인 벡터공간 쌍</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음 벡터공간 쌍 중 동형인 것은 무엇인가?</p>
+        <ol>
+          <li>$F^3$과 $P_3(F)$</li>
+          <li>$V = \{A \in M_{2\times 2}(\mathbb{R}) : \operatorname{tr}(A) = 0\}$과 $\mathbb{R}^3$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 두 유한차원 벡터공간이 동형일 필요충분조건은 차원이 같은 것이다.</p>
+        <p>(1) $\dim F^3 = 3$이고 $\dim P_3(F) = 4$이다 ($P_3(F)$의 기저는 $\{1,x,x^2,x^3\}$). $3 \neq 4$이므로 $F^3$과 $P_3(F)$는 동형이 아니다.</p>
+        <p>(2) $V = \{A \in M_{2\times 2}(\mathbb{R}) : \operatorname{tr}(A)=0\}$은 $\operatorname{tr}$이라는 하나의 일차조건을 만족하는 부분공간이므로 $\dim V = \dim M_{2\times 2}(\mathbb{R}) - 1 = 4-1 = 3$이다 (실제로 $\left\{\begin{pmatrix}1&0\\0&-1\end{pmatrix}, \begin{pmatrix}0&1\\0&0\end{pmatrix}, \begin{pmatrix}0&0\\1&0\end{pmatrix}\right\}$가 $V$의 기저이다). $\dim \mathbb{R}^3 = 3$이므로 $\dim V = \dim \mathbb{R}^3$이고, 따라서 $V$와 $\mathbb{R}^3$은 동형이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Which of the following pairs of vector spaces are isomorphic?</p>
+        <ol>
+          <li>$F^3$ and $P_3(F)$</li>
+          <li>$V = \{A \in M_{2\times 2}(\mathbb{R}) : \operatorname{tr}(A) = 0\}$ and $\mathbb{R}^3$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Two finite-dimensional vector spaces are isomorphic if and only if they have the same dimension.</p>
+        <p>(1) $\dim F^3 = 3$ and $\dim P_3(F) = 4$ (a basis for $P_3(F)$ is $\{1,x,x^2,x^3\}$). Since $3 \neq 4$, $F^3$ and $P_3(F)$ are not isomorphic.</p>
+        <p>(2) $V = \{A \in M_{2\times 2}(\mathbb{R}) : \operatorname{tr}(A)=0\}$ is a subspace defined by a single linear condition, so $\dim V = \dim M_{2\times 2}(\mathbb{R}) - 1 = 4-1=3$ (indeed, $\left\{\begin{pmatrix}1&0\\0&-1\end{pmatrix}, \begin{pmatrix}0&1\\0&0\end{pmatrix}, \begin{pmatrix}0&0\\1&0\end{pmatrix}\right\}$ is a basis for $V$). Since $\dim\mathbb{R}^3=3$, $\dim V = \dim \mathbb{R}^3$, so $V$ and $\mathbb{R}^3$ are isomorphic.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 5.2 -->
+<div class="card ex-card" id="ex5-2">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2</span>
+    <span class="ex-title">$F^3$으로의 동형사상 구성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = \left\{ \begin{pmatrix} a & a+b \\ 0 & c \end{pmatrix} : a, b, c \in F \right\}$에서 $F^3$으로의 동형사상을 구성하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\Phi : V \to F^3$을 다음과 같이 정의하자.</p>
+        <p>$$\Phi\left( \begin{pmatrix} a & a+b \\ 0 & c \end{pmatrix} \right) = (a,b,c)$$</p>
+        <p>$V$의 원소 $\begin{pmatrix}a&a+b\\0&c\end{pmatrix}$의 $(1,1)$ 성분이 $a$, $(2,2)$ 성분이 $c$, $(1,2)$ 성분에서 $a$를 뺀 값이 $b$이므로 $a,b,c$는 행렬에 의해 유일하게 결정되고, 따라서 $\Phi$는 잘 정의된다.</p>
+        <p><em>선형성.</em> $M_1 = \begin{pmatrix}a_1&a_1+b_1\\0&c_1\end{pmatrix}$, $M_2 = \begin{pmatrix}a_2&a_2+b_2\\0&c_2\end{pmatrix} \in V$, $t \in F$라 하면</p>
+        <p>$$M_1 + tM_2 = \begin{pmatrix} a_1+ta_2 & (a_1+ta_2)+(b_1+tb_2) \\ 0 & c_1+tc_2 \end{pmatrix} \in V$$</p>
+        <p>이므로</p>
+        <p>$$\Phi(M_1+tM_2) = (a_1+ta_2,\, b_1+tb_2,\, c_1+tc_2) = (a_1,b_1,c_1)+t(a_2,b_2,c_2) = \Phi(M_1)+t\Phi(M_2)$$</p>
+        <p>따라서 $\Phi$는 선형변환이다.</p>
+        <p><em>단사성.</em> $\Phi(M)=0$이면 $a=b=c=0$이므로 $M = O$이다. 즉 $\operatorname{Ker}\Phi=0$이므로 $\Phi$는 단사이다.</p>
+        <p><em>전사성.</em> 임의의 $(a,b,c) \in F^3$에 대하여 $M = \begin{pmatrix}a&a+b\\0&c\end{pmatrix} \in V$이면 $\Phi(M)=(a,b,c)$이므로 $\Phi$는 전사이다.</p>
+        <p>따라서 $\Phi$는 선형이고 전단사이므로 $V$에서 $F^3$으로의 동형사상이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Construct an isomorphism from $V = \left\{ \begin{pmatrix} a & a+b \\ 0 & c \end{pmatrix} : a, b, c \in F \right\}$ to $F^3$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Define $\Phi : V \to F^3$ by</p>
+        <p>$$\Phi\left( \begin{pmatrix} a & a+b \\ 0 & c \end{pmatrix} \right) = (a,b,c)$$</p>
+        <p>Since the $(1,1)$ entry of $\begin{pmatrix}a&a+b\\0&c\end{pmatrix}$ is $a$, the $(2,2)$ entry is $c$, and $b$ is the $(1,2)$ entry minus $a$, the triple $a,b,c$ is uniquely determined by the matrix, so $\Phi$ is well defined.</p>
+        <p><em>Linearity.</em> Let $M_1 = \begin{pmatrix}a_1&a_1+b_1\\0&c_1\end{pmatrix}$, $M_2 = \begin{pmatrix}a_2&a_2+b_2\\0&c_2\end{pmatrix} \in V$, $t \in F$. Then</p>
+        <p>$$M_1 + tM_2 = \begin{pmatrix} a_1+ta_2 & (a_1+ta_2)+(b_1+tb_2) \\ 0 & c_1+tc_2 \end{pmatrix} \in V$$</p>
+        <p>so</p>
+        <p>$$\Phi(M_1+tM_2) = (a_1+ta_2,\, b_1+tb_2,\, c_1+tc_2) = (a_1,b_1,c_1)+t(a_2,b_2,c_2) = \Phi(M_1)+t\Phi(M_2)$$</p>
+        <p>Hence $\Phi$ is linear.</p>
+        <p><em>Injectivity.</em> If $\Phi(M)=0$, then $a=b=c=0$, so $M=O$. Hence $\operatorname{Ker}\Phi=0$ and $\Phi$ is one-to-one.</p>
+        <p><em>Surjectivity.</em> For any $(a,b,c) \in F^3$, $M = \begin{pmatrix}a&a+b\\0&c\end{pmatrix} \in V$ satisfies $\Phi(M)=(a,b,c)$, so $\Phi$ is onto.</p>
+        <p>Hence $\Phi$ is linear and bijective, so it is an isomorphism from $V$ to $F^3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 6 -->
+<div class="card ex-card" id="ex6">
+  <div class="card-head">
+    <span class="ex-num">EX 6</span>
+    <span class="ex-title">역행렬의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A, B \in M_{n\times n}(F)$가 가역행렬이라 하자. 다음을 증명하라.</p>
+        <ol>
+          <li>$(A^{-1})^{-1} = A$</li>
+          <li>$(AB)^{-1} = B^{-1}A^{-1}$</li>
+          <li>$(A^t)^{-1} = (A^{-1})^t$</li>
+          <li>$n \in \mathbb{Z}^{\geq 0}$에 대하여 $(A^{-1})^n = (A^n)^{-1}$</li>
+          <li>$c \in F - \{0\}$에 대하여 $(cA)^{-1} = c^{-1}A^{-1}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> (1) 역행렬의 정의에 의하여 $AA^{-1}=A^{-1}A=I$이다. 이 등식은 $A$가 $A^{-1}$의 양쪽 역원임을 뜻하므로, 역원의 유일성에 의해 $(A^{-1})^{-1}=A$이다.</p>
+        <p>(2)</p>
+        <p>$$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I$$</p>
+        <p>$$(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I$$</p>
+        <p>따라서 $B^{-1}A^{-1}$은 $AB$의 양쪽 역원이므로 역원의 유일성에 의해 $(AB)^{-1}=B^{-1}A^{-1}$이다.</p>
+        <p>(3) $AA^{-1}=I$의 양변에 전치를 취하면 $(A^{-1})^tA^t = I^t = I$이고, $A^{-1}A=I$의 양변에 전치를 취하면 $A^t(A^{-1})^t = I$이다. 따라서 $(A^{-1})^t$는 $A^t$의 양쪽 역원이므로 $(A^t)^{-1}=(A^{-1})^t$이다.</p>
+        <p>(4) $n$에 대한 귀납법으로 $A^n(A^{-1})^n = I = (A^{-1})^nA^n$임을 보인다. $n=0$일 때 $A^0(A^{-1})^0 = I \cdot I = I$이므로 성립한다. $n=k$일 때 $A^k(A^{-1})^k=I=(A^{-1})^kA^k$가 성립한다고 하자. 그러면</p>
+        <p>$$A^{k+1}(A^{-1})^{k+1} = A\big(A^k(A^{-1})^k\big)A^{-1} = A\cdot I \cdot A^{-1} = AA^{-1} = I$$</p>
+        <p>$$(A^{-1})^{k+1}A^{k+1} = A^{-1}\big((A^{-1})^kA^k\big)A = A^{-1}\cdot I \cdot A = A^{-1}A = I$$</p>
+        <p>이므로 $n=k+1$일 때도 성립한다. 따라서 모든 $n \in \mathbb{Z}^{\geq 0}$에 대하여 $A^n(A^{-1})^n=I=(A^{-1})^nA^n$이고, 역원의 유일성에 의해 $(A^n)^{-1}=(A^{-1})^n$이다.</p>
+        <p>(5) $c \in F-\{0\}$이면 $c^{-1} \in F$가 존재하고</p>
+        <p>$$(cA)(c^{-1}A^{-1}) = (cc^{-1})(AA^{-1}) = 1\cdot I = I, \quad (c^{-1}A^{-1})(cA) = (c^{-1}c)(A^{-1}A) = 1\cdot I = I$$</p>
+        <p>이므로 역원의 유일성에 의해 $(cA)^{-1}=c^{-1}A^{-1}$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A, B \in M_{n\times n}(F)$ be invertible. Prove the following statements.</p>
+        <ol>
+          <li>$(A^{-1})^{-1} = A$</li>
+          <li>$(AB)^{-1} = B^{-1}A^{-1}$</li>
+          <li>$(A^t)^{-1} = (A^{-1})^t$</li>
+          <li>$(A^{-1})^n = (A^n)^{-1}$ for $n \in \mathbb{Z}^{\geq 0}$</li>
+          <li>$(cA)^{-1} = c^{-1}A^{-1}$ for $c \in F - \{0\}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> (1) By definition of the inverse, $AA^{-1}=A^{-1}A=I$. This equation shows $A$ is a two-sided inverse of $A^{-1}$, so by uniqueness of inverses, $(A^{-1})^{-1}=A$.</p>
+        <p>(2)</p>
+        <p>$$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I$$</p>
+        <p>$$(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I$$</p>
+        <p>So $B^{-1}A^{-1}$ is a two-sided inverse of $AB$, and by uniqueness of inverses, $(AB)^{-1}=B^{-1}A^{-1}$.</p>
+        <p>(3) Taking the transpose of $AA^{-1}=I$ gives $(A^{-1})^tA^t = I^t = I$, and taking the transpose of $A^{-1}A=I$ gives $A^t(A^{-1})^t = I$. Hence $(A^{-1})^t$ is a two-sided inverse of $A^t$, so $(A^t)^{-1}=(A^{-1})^t$.</p>
+        <p>(4) We prove by induction on $n$ that $A^n(A^{-1})^n = I = (A^{-1})^nA^n$. For $n=0$, $A^0(A^{-1})^0 = I \cdot I = I$, so the claim holds. Suppose it holds for $n=k$, i.e., $A^k(A^{-1})^k=I=(A^{-1})^kA^k$. Then</p>
+        <p>$$A^{k+1}(A^{-1})^{k+1} = A\big(A^k(A^{-1})^k\big)A^{-1} = A\cdot I \cdot A^{-1} = AA^{-1} = I$$</p>
+        <p>$$(A^{-1})^{k+1}A^{k+1} = A^{-1}\big((A^{-1})^kA^k\big)A = A^{-1}\cdot I \cdot A = A^{-1}A = I$$</p>
+        <p>so the claim also holds for $n=k+1$. Hence $A^n(A^{-1})^n=I=(A^{-1})^nA^n$ for all $n \in \mathbb{Z}^{\geq 0}$, and by uniqueness of inverses, $(A^n)^{-1}=(A^{-1})^n$.</p>
+        <p>(5) For $c \in F-\{0\}$, $c^{-1} \in F$ exists, and</p>
+        <p>$$(cA)(c^{-1}A^{-1}) = (cc^{-1})(AA^{-1}) = 1\cdot I = I, \quad (c^{-1}A^{-1})(cA) = (c^{-1}c)(A^{-1}A) = 1\cdot I = I$$</p>
+        <p>so by uniqueness of inverses, $(cA)^{-1}=c^{-1}A^{-1}$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 6.1 -->
+<div class="card ex-card" id="ex6-1">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1</span>
+    <span class="ex-title">가역성과 영행렬 곱</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 다음을 증명하라.</p>
+        <ol>
+          <li>$A$가 가역이고 $AB = O$이면 $B = O$이다.</li>
+          <li>영이 아닌 어떤 행렬 $B$에 대하여 $AB = O$이면 $A$는 가역이 아니다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> (1) $A$가 가역이고 $AB=O$라 하자. 양변의 왼쪽에 $A^{-1}$를 곱하면</p>
+        <p>$$A^{-1}(AB) = A^{-1}O \ \Longrightarrow\ (A^{-1}A)B = O \ \Longrightarrow\ IB = O \ \Longrightarrow\ B = O$$</p>
+        <p>(2) 영이 아닌 어떤 행렬 $B$에 대하여 $AB=O$라 하자. $A$가 가역이라고 가정하면 (1)에 의해 $B=O$인데, 이는 $B \neq O$라는 가정에 모순이다. 따라서 $A$는 가역이 아니다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Prove the following.</p>
+        <ol>
+          <li>If $A$ is invertible and $AB = O$, then $B = O$.</li>
+          <li>If $AB = O$ for some nonzero matrix $B$, then $A$ is not invertible.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> (1) Suppose $A$ is invertible and $AB=O$. Multiplying both sides on the left by $A^{-1}$,</p>
+        <p>$$A^{-1}(AB) = A^{-1}O \ \Longrightarrow\ (A^{-1}A)B = O \ \Longrightarrow\ IB = O \ \Longrightarrow\ B = O$$</p>
+        <p>(2) Suppose $AB=O$ for some nonzero matrix $B$. If $A$ were invertible, then by (1) $B=O$, contradicting $B \neq O$. Hence $A$ is not invertible.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 6.2 -->
+<div class="card ex-card" id="ex6-2">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2</span>
+    <span class="ex-title">켤레변환은 동형사상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $B$를 $n \times n$ 가역행렬이라 하자. $\Phi(A) = B^{-1}AB$로 정의된 $\Phi : M_{n\times n}(F) \to M_{n\times n}(F)$가 동형사상임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $B$가 $n \times n$ 가역행렬이고 $\Phi(A) = B^{-1}AB$라 하자.</p>
+        <p><em>선형성.</em> $A_1, A_2 \in M_{n\times n}(F)$, $t \in F$에 대하여</p>
+        <p>$$\Phi(A_1+tA_2) = B^{-1}(A_1+tA_2)B = B^{-1}A_1B + tB^{-1}A_2B = \Phi(A_1)+t\Phi(A_2)$$</p>
+        <p>이므로 $\Phi$는 선형변환이다.</p>
+        <p><em>전단사성.</em> $\Psi(A) = BAB^{-1}$로 정의하면 $\Psi : M_{n\times n}(F) \to M_{n\times n}(F)$이고</p>
+        <p>$$\Phi(\Psi(A)) = B^{-1}(BAB^{-1})B = (B^{-1}B)A(B^{-1}B) = A, \quad \Psi(\Phi(A)) = B(B^{-1}AB)B^{-1} = (BB^{-1})A(BB^{-1}) = A$$</p>
+        <p>이므로 $\Psi = \Phi^{-1}$이고 $\Phi$는 전단사이다. 따라서 $\Phi$는 선형이고 전단사이므로 동형사상이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $B$ be an $n \times n$ invertible matrix. Show that $\Phi : M_{n\times n}(F) \to M_{n\times n}(F)$ defined by $\Phi(A) = B^{-1}AB$ is an isomorphism.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $B$ be an $n \times n$ invertible matrix and $\Phi(A) = B^{-1}AB$.</p>
+        <p><em>Linearity.</em> For $A_1, A_2 \in M_{n\times n}(F)$ and $t \in F$,</p>
+        <p>$$\Phi(A_1+tA_2) = B^{-1}(A_1+tA_2)B = B^{-1}A_1B + tB^{-1}A_2B = \Phi(A_1)+t\Phi(A_2)$$</p>
+        <p>so $\Phi$ is linear.</p>
+        <p><em>Bijectivity.</em> Define $\Psi(A) = BAB^{-1}$, a map $\Psi : M_{n\times n}(F) \to M_{n\times n}(F)$. Then</p>
+        <p>$$\Phi(\Psi(A)) = B^{-1}(BAB^{-1})B = (B^{-1}B)A(B^{-1}B) = A, \quad \Psi(\Phi(A)) = B(B^{-1}AB)B^{-1} = (BB^{-1})A(BB^{-1}) = A$$</p>
+        <p>so $\Psi = \Phi^{-1}$ and $\Phi$ is bijective. Hence $\Phi$ is linear and bijective, so it is an isomorphism.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>심화 문제 · Problems</h2></div>
+
+<!-- Problem 1 -->
+<div class="card pr-card" id="pr1">
+  <div class="card-head">
+    <span class="pr-num">PR 1</span>
+    <span class="ex-title">블록 상삼각행렬 형태</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : V \to V$를 선형변환이라 하고 $W$를 $V$의 $T$-불변 부분공간이라 하자. $\dim V = n$, $\dim W = k$라 하자. $[T]_\beta$가 다음 형태가 되도록 하는 $V$의 기저 $\beta$를 구하라.</p>
+        <p>$$\begin{pmatrix} A & B \\ O & C \end{pmatrix}$$</p>
+        <p>여기서 $A$는 크기 $k$의 정사각행렬이고 $O$는 크기 $(n-k) \times k$의 영행렬이다.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be a linear transform and let $W$ be a $T$-invariant subspace of $V$. Let $\dim V = n$ and $\dim W = k$. Find a basis $\beta$ for $V$ such that $[T]_\beta$ is of the form</p>
+        <p>$$\begin{pmatrix} A & B \\ O & C \end{pmatrix}$$</p>
+        <p>where $A$ is a square matrix of size $k$ and $O$ is the zero matrix of size $(n-k) \times k$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 2 -->
+<div class="card pr-card" id="pr2">
+  <div class="card-head">
+    <span class="pr-num">PR 2</span>
+    <span class="ex-title">사영의 대각행렬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = W \oplus W'$일 때 $T : V \to V$를 $W'$을 따라 $W$ 위로의 사영이라 하자. $[T]_\beta$가 대각행렬이 되도록 하는 $V$의 기저 $\beta$를 구하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be the projection on $W$ along $W'$ where $V = W \oplus W'$. Find a basis $\beta$ for $V$ such that $[T]_\beta$ is a diagonal matrix.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 3 -->
+<div class="card pr-card" id="pr3">
+  <div class="card-head">
+    <span class="pr-num">PR 3</span>
+    <span class="ex-title">핵과 상의 직합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 유한차원 벡터공간이라 하고 $T : V \to V$를 선형변환이라 하자.</p>
+        <ol>
+          <li>$\operatorname{rank}(T) = \operatorname{rank}(T^2)$이면 $V = \ker(T) \oplus \operatorname{Im}(T)$임을 증명하라.</li>
+          <li>어떤 양의 정수 $k$에 대하여 $V = \ker(T^k) \oplus \operatorname{Im}(T^k)$임을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be a linear transform where $V$ is a finite-dimensional vector space.</p>
+        <ol>
+          <li>Show that if $\operatorname{rank}(T) = \operatorname{rank}(T^2)$, then $V = \ker(T) \oplus \operatorname{Im}(T)$</li>
+          <li>Show that $V = \ker(T^k) \oplus \operatorname{Im}(T^k)$ for some positive integer $k$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 4 -->
+<div class="card pr-card" id="pr4">
+  <div class="card-head">
+    <span class="pr-num">PR 4</span>
+    <span class="ex-title">멱등원은 사영</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T : V \to V$를 선형변환이라 하자. $T = T^2$일 필요충분조건은 $T$가 사영인 것임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be a linear transform. Show that $T = T^2$ if and only if $T$ is a projection.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 5 -->
+<div class="card pr-card" id="pr5">
+  <div class="card-head">
+    <span class="pr-num">PR 5</span>
+    <span class="ex-title">행렬 곱의 가역성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $A, B$를 $n \times n$ 행렬이라 하자. 다음을 증명하라.</p>
+        <ol>
+          <li>$AB$가 가역이면 $A$와 $B$ 모두 가역이다.</li>
+          <li>$AB = I$이면 $BA = I$이다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $A, B$ be $n \times n$ matrices. Prove the following statements.</p>
+        <ol>
+          <li>If $AB$ is invertible, then $A$ and $B$ are invertible.</li>
+          <li>If $AB = I$, then $BA = I$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 6 -->
+<div class="card pr-card" id="pr6">
+  <div class="card-head">
+    <span class="pr-num">PR 6</span>
+    <span class="ex-title">유한수열과 다항식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $F$의 항 중 영이 아닌 항이 유한개뿐인 모든 수열의 공간과 $P_n(F)$ 사이의 동형사상을 구하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find an isomorphism between the space of all sequences in $F$ that have only a finite number of nonzero terms and $P_n(F)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 7 -->
+<div class="card pr-card" id="pr7">
+  <div class="card-head">
+    <span class="pr-num">PR 7</span>
+    <span class="ex-title">제1동형정리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> (<strong>제1동형정리</strong>(First Isomorphism Theorem))</p>
+        <p>$T : V \to W$를 선형변환이라 하자. 다음과 같이 정의하자.</p>
+        <p>$$\overline{T} : V/\operatorname{Ker}T \to \operatorname{Im}T, \quad \overline{T}(v + \operatorname{Ker}T) = T(v).$$</p>
+        <ol>
+          <li>$\overline{T}$가 잘 정의된 동형사상임을 증명하라.</li>
+          <li>$P : V \to V/\operatorname{Ker}T$가 $P(v) = v + \operatorname{Ker}T$로 정의될 때 $T = \overline{T} \circ P$임을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> (<strong>First Isomorphism Theorem</strong>)</p>
+        <p>Let $T : V \to W$ be a linear transform. Define</p>
+        <p>$$\overline{T} : V/\operatorname{Ker}T \to \operatorname{Im}T, \quad \overline{T}(v + \operatorname{Ker}T) = T(v).$$</p>
+        <ol>
+          <li>Show that $\overline{T}$ is a well-defined isomorphism.</li>
+          <li>Show that $T = \overline{T} \circ P$ where $P : V \to V/\operatorname{Ker}T$ is defined by $P(v) = v + \operatorname{Ker}T$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 8 -->
+<div class="card pr-card" id="pr8">
+  <div class="card-head">
+    <span class="pr-num">PR 8</span>
+    <span class="ex-title">기저 위의 자유벡터공간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 벡터공간이라 하고 $S$를 그 기저라 하자. $C(S, F)$를 유한개의 $s \in S$를 제외한 모든 $s$에 대하여 $f(s) = 0$인 함수 $f : S \to F$의 공간이라 하자. 다음과 같이 정의된 $\Psi : C(S, F) \to V$가</p>
+        <p>$$\Psi(f) = \sum_{s \in S} f(s)s$$</p>
+        <p>동형사상임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a vector space and let $S$ be its basis. Let $C(S, F)$ be the space of functions $f : S \to F$ such that $f(s) = 0$ for all but a finite number of $s \in S$. Show that $\Psi : C(S, F) \to V$ defined by</p>
+        <p>$$\Psi(f) = \sum_{s \in S} f(s)s$$</p>
+        <p>is an isomorphism.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

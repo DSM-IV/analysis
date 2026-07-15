@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08. 쌍대공간 (Dual Space) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 08단원 쌍대공간(Dual Space) 예제·심화 문제 모음. 쌍대기저, 선형범함수, 이중쌍대공간, 전치사상, 소멸자(annihilator)를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 쌍대공간, dual space, 쌍대기저, dual basis, 선형범함수, linear functional, 이중쌍대공간, double dual, 전치사상, transpose, 소멸자, annihilator, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. 쌍대공간 (Dual Space) — 선형대수학 한·영 대조">
+<meta property="og:description" content="쌍대공간 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "08. 쌍대공간 (Dual Space) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 쌍대공간 예제·심화 문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch08.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html" class="active">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 08</p>
+  <h1>08. 쌍대공간<span>Dual Space</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> $\mathbb{R}^3$의 쌍대기저</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> 선형범함수 판정</a></li>
+    <li><a href="#ex1-2"><span class="toc-num">EX 1.2</span> 영공간이 주어진 선형범함수</a></li>
+    <li><a href="#ex1-3"><span class="toc-num">EX 1.3</span> 값매김범함수의 기저</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 선형변환의 전치사상</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 이중쌍대공간으로의 표준사상</a></li>
+    <li><a href="#pr1"><span class="toc-num">PR 1</span> 부분집합의 소멸자</a></li>
+    <li><a href="#pr2"><span class="toc-num">PR 2</span> 전치사상의 영공간과 계수</a></li>
+    <li><a href="#pr3"><span class="toc-num">PR 3</span> 전치사상과 전사·단사</a></li>
+    <li><a href="#pr4"><span class="toc-num">PR 4</span> 불변 부분공간과 전치사상</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">$\mathbb{R}^3$의 쌍대기저</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = \mathbb{R}^3$라 하자.</p>
+        <ol>
+          <li>$\beta = \{(1, 0, 1), (1, 2, 1), (0, 0, 1)\}$라 하자. $V^*$의 쌍대기저 $\beta^*$를 구하라.</li>
+          <li>$f_1, f_2, f_3 \in V^*$를 다음과 같이 정의하자.
+            <p>$$f_1(x, y, z) = x - 2y, \quad f_2(x, y, z) = x + y + z, \quad f_3(x, y, z) = y - 3z.$$</p>
+            $\{f_1, f_2, f_3\}$가 $V^*$의 기저임을 증명하고, 그 쌍대기저가 $\{f_1, f_2, f_3\}$인 $V$의 기저를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> (1) $f(x,y,z) = ax+by+cz$ 꼴의 범함수에 대하여 쌍대기저의 정의 $f_i(v_j)=\delta_{ij}$ ($v_1=(1,0,1)$, $v_2=(1,2,1)$, $v_3=(0,0,1)$)를 만족하는 계수 $a,b,c$를 각각 구하면 된다.</p>
+        <p>$f_1$: $f_1(v_1)=a+c=1$, $f_1(v_2)=a+2b+c=0$, $f_1(v_3)=c=0$을 연립하면 $c=0$, $a=1$, $b=-\frac12$이므로</p>
+        <p>$$f_1(x,y,z) = x - \frac12 y.$$</p>
+        <p>$f_2$: $f_2(v_1)=a+c=0$, $f_2(v_2)=a+2b+c=1$, $f_2(v_3)=c=0$을 연립하면 $c=0$, $a=0$, $b=\frac12$이므로</p>
+        <p>$$f_2(x,y,z) = \frac12 y.$$</p>
+        <p>$f_3$: $f_3(v_1)=a+c=0$, $f_3(v_2)=a+2b+c=0$, $f_3(v_3)=c=1$을 연립하면 $c=1$, $a=-1$, $b=0$이므로</p>
+        <p>$$f_3(x,y,z) = -x+z.$$</p>
+        <p>각 $f_i$가 $f_i(v_j)=\delta_{ij}$를 만족함은 직접 대입하여 확인되므로 $\beta^* = \{f_1,f_2,f_3\}$이다.</p>
+        <p>(2) 표준기저의 쌍대기저를 $\{e_1^*,e_2^*,e_3^*\}$라 하면 $f_1=e_1^*-2e_2^*$, $f_2=e_1^*+e_2^*+e_3^*$, $f_3=e_2^*-3e_3^*$이므로, $f_1,f_2,f_3$의 $\{e_1^*,e_2^*,e_3^*\}$에 대한 좌표를 행으로 갖는 행렬은</p>
+        <p>$$A = \begin{pmatrix} 1 & -2 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & -3 \end{pmatrix}$$</p>
+        <p>이다. $\det A = -10 \neq 0$이므로 $A$의 행벡터, 즉 $f_1,f_2,f_3$의 좌표벡터는 일차독립이고, 따라서 $f_1,f_2,f_3$ 자신도 $V^*$에서 일차독립이다. $\dim V^* = 3$이므로 $\{f_1,f_2,f_3\}$는 $V^*$의 기저이다.</p>
+        <p>쌍대기저가 $\{f_1,f_2,f_3\}$인 $V$의 기저 $\{v_1,v_2,v_3\}$를 구하려면 $f_i(v_j)=\delta_{ij}$, 즉 $A[v_j] = e_j$를 풀면 되므로 $[v_j] = A^{-1}e_j$, 곧 $A^{-1}$의 $j$번째 열이 $v_j$의 좌표이다. 계산하면</p>
+        <p>$$A^{-1} = \frac{1}{10}\begin{pmatrix} 4 & 6 & 2 \\ -3 & 3 & 1 \\ -1 & 1 & -3 \end{pmatrix}$$</p>
+        <p>이므로</p>
+        <p>$$v_1 = \left(\frac{2}{5}, -\frac{3}{10}, -\frac{1}{10}\right), \quad v_2 = \left(\frac{3}{5}, \frac{3}{10}, \frac{1}{10}\right), \quad v_3 = \left(\frac{1}{5}, \frac{1}{10}, -\frac{3}{10}\right)$$</p>
+        <p>이다. $f_i(v_j)=\delta_{ij}$임은 직접 대입으로 확인되고, $A^{-1}$이 가역이므로 $\{v_1,v_2,v_3\}$는 $V$의 기저이다. 그 쌍대기저는 정의에 의해 바로 $\{f_1,f_2,f_3\}$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V = \mathbb{R}^3$.</p>
+        <ol>
+          <li>Let $\beta = \{(1, 0, 1), (1, 2, 1), (0, 0, 1)\}$. Find the dual basis $\beta^*$ of $V^*$.</li>
+          <li>Define $f_1, f_2, f_3 \in V^*$ as follows.
+            <p>$$f_1(x, y, z) = x - 2y, \quad f_2(x, y, z) = x + y + z, \quad f_3(x, y, z) = y - 3z.$$</p>
+            Prove that $\{f_1, f_2, f_3\}$ is a basis for $V^*$ and find the basis of $V$ whose dual basis is $\{f_1, f_2, f_3\}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> (1) For a functional of the form $f(x,y,z)=ax+by+cz$, it suffices to solve for the coefficients $a,b,c$ satisfying the defining relations $f_i(v_j)=\delta_{ij}$ ($v_1=(1,0,1)$, $v_2=(1,2,1)$, $v_3=(0,0,1)$).</p>
+        <p>For $f_1$: $f_1(v_1)=a+c=1$, $f_1(v_2)=a+2b+c=0$, $f_1(v_3)=c=0$ give $c=0$, $a=1$, $b=-\frac12$, so</p>
+        <p>$$f_1(x,y,z) = x - \frac12 y.$$</p>
+        <p>For $f_2$: $f_2(v_1)=a+c=0$, $f_2(v_2)=a+2b+c=1$, $f_2(v_3)=c=0$ give $c=0$, $a=0$, $b=\frac12$, so</p>
+        <p>$$f_2(x,y,z) = \frac12 y.$$</p>
+        <p>For $f_3$: $f_3(v_1)=a+c=0$, $f_3(v_2)=a+2b+c=0$, $f_3(v_3)=c=1$ give $c=1$, $a=-1$, $b=0$, so</p>
+        <p>$$f_3(x,y,z) = -x+z.$$</p>
+        <p>Direct substitution confirms $f_i(v_j)=\delta_{ij}$ for each $i,j$, so $\beta^* = \{f_1,f_2,f_3\}$.</p>
+        <p>(2) Let $\{e_1^*,e_2^*,e_3^*\}$ be the dual basis of the standard basis. Since $f_1=e_1^*-2e_2^*$, $f_2=e_1^*+e_2^*+e_3^*$, $f_3=e_2^*-3e_3^*$, the matrix whose rows are the coordinates of $f_1,f_2,f_3$ relative to $\{e_1^*,e_2^*,e_3^*\}$ is</p>
+        <p>$$A = \begin{pmatrix} 1 & -2 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & -3 \end{pmatrix}.$$</p>
+        <p>Since $\det A = -10 \neq 0$, the rows of $A$ — the coordinate vectors of $f_1,f_2,f_3$ — are linearly independent, hence $f_1,f_2,f_3$ themselves are linearly independent in $V^*$. As $\dim V^* = 3$, $\{f_1,f_2,f_3\}$ is a basis for $V^*$.</p>
+        <p>To find a basis $\{v_1,v_2,v_3\}$ of $V$ whose dual basis is $\{f_1,f_2,f_3\}$, we solve $f_i(v_j)=\delta_{ij}$, i.e. $A[v_j]=e_j$, so $[v_j]=A^{-1}e_j$; that is, the $j$-th column of $A^{-1}$ gives the coordinates of $v_j$. Computing,</p>
+        <p>$$A^{-1} = \frac{1}{10}\begin{pmatrix} 4 & 6 & 2 \\ -3 & 3 & 1 \\ -1 & 1 & -3 \end{pmatrix},$$</p>
+        <p>so</p>
+        <p>$$v_1 = \left(\frac{2}{5}, -\frac{3}{10}, -\frac{1}{10}\right), \quad v_2 = \left(\frac{3}{5}, \frac{3}{10}, \frac{1}{10}\right), \quad v_3 = \left(\frac{1}{5}, \frac{1}{10}, -\frac{3}{10}\right).$$</p>
+        <p>Direct substitution confirms $f_i(v_j)=\delta_{ij}$, and since $A^{-1}$ is invertible, $\{v_1,v_2,v_3\}$ is a basis of $V$. By definition, its dual basis is exactly $\{f_1,f_2,f_3\}$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">선형범함수 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> 벡터공간 $V$ 위에서 $f$가 선형범함수인지 판정하라.</p>
+        <ol>
+          <li>$V = P(\mathbb{R})$, $f(p(x)) = 2p'(0) + p''(1)$.</li>
+          <li>$V = \mathbb{R}^3$, $f(x, y, z) = x^2 + y^2 + z^2$.</li>
+          <li>$V = \mathbb{R}^2$, $f(x, y) = (2x, 4y)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $f(p(x)) = 2p'(0)+p''(1)$은 선형범함수이다. 임의의 $p,q \in P(\mathbb{R})$와 스칼라 $c$에 대하여 미분의 선형성에 의해 $(p+cq)'(0) = p'(0)+cq'(0)$, $(p+cq)''(1) = p''(1)+cq''(1)$이므로</p>
+        <p>$$f(p+cq) = 2(p'(0)+cq'(0)) + (p''(1)+cq''(1)) = \bigl(2p'(0)+p''(1)\bigr) + c\bigl(2q'(0)+q''(1)\bigr) = f(p)+cf(q)$$</p>
+        <p>이다. 따라서 $f$는 선형범함수이다.</p>
+        <p>(2) $f(x,y,z)=x^2+y^2+z^2$은 선형범함수가 아니다. 예를 들어 $f(1,0,0)=1$이지만 $f(2,0,0)=4 \neq 2f(1,0,0)=2$이므로 스칼라곱을 보존하지 않는다. 따라서 $f$는 선형범함수가 아니다.</p>
+        <p>(3) $f(x,y)=(2x,4y)$는 선형범함수가 아니다. 선형범함수는 $V$에서 스칼라체 $F$로 가는 선형변환으로 정의되는데, 이 $f$는 $\mathbb{R}^2$에서 $\mathbb{R}^2$로 가는 사상이지 $\mathbb{R}$로 가는 사상이 아니다. 사상 자체는 선형이지만 공역이 $F=\mathbb{R}$가 아니므로, $f$는 정의상 선형범함수가 될 수 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Determine whether $f$ is a linear functional on a vector space $V$.</p>
+        <ol>
+          <li>$V = P(\mathbb{R})$, $f(p(x)) = 2p'(0) + p''(1)$.</li>
+          <li>$V = \mathbb{R}^3$, $f(x, y, z) = x^2 + y^2 + z^2$.</li>
+          <li>$V = \mathbb{R}^2$, $f(x, y) = (2x, 4y)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) $f(p(x)) = 2p'(0)+p''(1)$ is a linear functional. For any $p,q \in P(\mathbb{R})$ and scalar $c$, linearity of differentiation gives $(p+cq)'(0) = p'(0)+cq'(0)$ and $(p+cq)''(1) = p''(1)+cq''(1)$, so</p>
+        <p>$$f(p+cq) = 2(p'(0)+cq'(0)) + (p''(1)+cq''(1)) = \bigl(2p'(0)+p''(1)\bigr) + c\bigl(2q'(0)+q''(1)\bigr) = f(p)+cf(q).$$</p>
+        <p>Hence $f$ is a linear functional.</p>
+        <p>(2) $f(x,y,z)=x^2+y^2+z^2$ is not a linear functional. For instance, $f(1,0,0)=1$ but $f(2,0,0)=4 \neq 2f(1,0,0)=2$, so $f$ fails to preserve scalar multiplication. Hence $f$ is not a linear functional.</p>
+        <p>(3) $f(x,y)=(2x,4y)$ is not a linear functional. A linear functional on $V$ is by definition a linear transformation from $V$ into the scalar field $F$, but this $f$ maps $\mathbb{R}^2$ into $\mathbb{R}^2$, not into $\mathbb{R}$. The map itself is linear, but its codomain is $\mathbb{R}^2 \neq F$, so by definition $f$ cannot be a linear functional.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.2 -->
+<div class="card ex-card" id="ex1-2">
+  <div class="card-head">
+    <span class="ex-num">EX 1.2</span>
+    <span class="ex-title">영공간이 주어진 선형범함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\{u, v\}$를 $\mathbb{R}^3$의 일차독립인 집합이라 하자. 영공간이 평면 $\{su + tv : s, t \in \mathbb{R}\}$인 $(\mathbb{R}^3)^*$의 벡터를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $u=(u_1,u_2,u_3)$, $v=(v_1,v_2,v_3)$라 하고,</p>
+        <p>$$f(x,y,z) = \det\begin{pmatrix} x & y & z \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \end{pmatrix} = (u_2v_3-u_3v_2)x - (u_1v_3-u_3v_1)y + (u_1v_2-u_2v_1)z$$</p>
+        <p>로 정의하자. 행렬식은 각 행에 대하여 선형이므로 $f$는 $\mathbb{R}^3$ 위의 선형범함수이다. $\{u,v\}$가 일차독립이므로 $(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1) = u \times v \neq (0,0,0)$이고, 따라서 $f \neq 0$이다.</p>
+        <p>$f(u)$와 $f(v)$는 각각 첫 번째 행이 두 번째 행 또는 세 번째 행과 같은 행렬식이므로 $f(u)=f(v)=0$이다. 즉 $\operatorname{span}\{u,v\} \subseteq \operatorname{Ker}(f)$이다. 한편 $f \neq 0$이므로 $\dim(\operatorname{Ker} f) = 3 - \operatorname{rank}(f) = 3-1=2$이고, $\{u,v\}$가 일차독립이므로 $\dim(\operatorname{span}\{u,v\})=2$이다. 두 부분공간의 차원이 같고 하나가 다른 하나에 포함되므로</p>
+        <p>$$\operatorname{Ker}(f) = \operatorname{span}\{u,v\}$$</p>
+        <p>이다. 따라서 이 $f$가 원하는 범함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $\{u, v\}$ be a linearly independent set in $\mathbb{R}^3$. Find a vector in $(\mathbb{R}^3)^*$ whose null space is the plane $\{su + tv : s, t \in \mathbb{R}\}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Write $u=(u_1,u_2,u_3)$, $v=(v_1,v_2,v_3)$, and define</p>
+        <p>$$f(x,y,z) = \det\begin{pmatrix} x & y & z \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \end{pmatrix} = (u_2v_3-u_3v_2)x - (u_1v_3-u_3v_1)y + (u_1v_2-u_2v_1)z.$$</p>
+        <p>Since the determinant is linear in each row, $f$ is a linear functional on $\mathbb{R}^3$. As $\{u,v\}$ is linearly independent, $(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1) = u \times v \neq (0,0,0)$, so $f \neq 0$.</p>
+        <p>Since $f(u)$ and $f(v)$ are determinants with a repeated row, $f(u)=f(v)=0$, so $\operatorname{span}\{u,v\} \subseteq \operatorname{Ker}(f)$. On the other hand, since $f \neq 0$, $\dim(\operatorname{Ker} f) = 3 - \operatorname{rank}(f) = 3-1=2$, and since $\{u,v\}$ is linearly independent, $\dim(\operatorname{span}\{u,v\})=2$. As the two subspaces have equal dimension and one contains the other,</p>
+        <p>$$\operatorname{Ker}(f) = \operatorname{span}\{u,v\},$$</p>
+        <p>so this $f$ is the desired functional.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.3 -->
+<div class="card ex-card" id="ex1-3">
+  <div class="card-head">
+    <span class="ex-num">EX 1.3</span>
+    <span class="ex-title">값매김범함수의 기저</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V = P_n(F)$라 하고 $c_0, \cdots, c_n$을 $F$의 서로 다른 스칼라라 하자. $f_i(p(x)) = p(c_i)$ $(0 \leq i \leq n)$로 $f_i \in V^*$를 정의하자. $\{f_0, \cdots, f_n\}$가 $V^*$의 기저임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 각 $i=0,\ldots,n$에 대하여</p>
+        <p>$$p_i(x) = \prod_{j\neq i} \frac{x-c_j}{c_i-c_j} \in P_n(F)$$</p>
+        <p>로 라그랑주 보간다항식을 정의하자. $j \neq i$이면 $p_i(c_j) = 0$이고 $p_i(c_i)=1$이므로 $f_i(p_j) = p_j(c_i) = \delta_{ij}$이다.</p>
+        <p>먼저 $\{p_0,\ldots,p_n\}$이 $P_n(F)$의 일차독립인 집합임을 보이자. $\sum_{j=0}^n a_j p_j = 0$이라 하면, 양변에 $f_i$를 적용하여</p>
+        <p>$$0 = f_i\Bigl(\sum_{j=0}^n a_j p_j\Bigr) = \sum_{j=0}^n a_j f_i(p_j) = \sum_{j=0}^n a_j \delta_{ij} = a_i$$</p>
+        <p>를 얻으므로 모든 $i$에 대하여 $a_i=0$이다. 따라서 $\{p_0,\ldots,p_n\}$은 일차독립이다. $\dim P_n(F) = n+1$이고 $n+1$개의 일차독립인 벡터가 있으므로 $\gamma = \{p_0,\ldots,p_n\}$은 $P_n(F)$의 기저이다.</p>
+        <p>이제 $f_i(p_j)=\delta_{ij}$는 정확히 $\{f_0,\ldots,f_n\}$이 기저 $\gamma$의 쌍대기저 $\gamma^*$가 되기 위한 정의 관계식이므로, $\{f_0,\ldots,f_n\} = \gamma^*$이다. 유한차원 벡터공간에서 기저의 쌍대기저는 항상 쌍대공간의 기저이므로 $\{f_0,\ldots,f_n\}$은 $V^* = P_n(F)^*$의 기저이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V = P_n(F)$ and let $c_0, \cdots, c_n$ be distinct scalars in $F$. Define $f_i \in V^*$ by $f_i(p(x)) = p(c_i)$. $(0 \leq i \leq n)$. Show that $\{f_0, \cdots, f_n\}$ is a basis for $V^*$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> For each $i=0,\ldots,n$, define the Lagrange interpolating polynomial</p>
+        <p>$$p_i(x) = \prod_{j\neq i} \frac{x-c_j}{c_i-c_j} \in P_n(F).$$</p>
+        <p>If $j \neq i$ then $p_i(c_j)=0$, and $p_i(c_i)=1$, so $f_i(p_j) = p_j(c_i) = \delta_{ij}$.</p>
+        <p>We first show that $\{p_0,\ldots,p_n\}$ is a linearly independent subset of $P_n(F)$. Suppose $\sum_{j=0}^n a_j p_j = 0$. Applying $f_i$ to both sides gives</p>
+        <p>$$0 = f_i\Bigl(\sum_{j=0}^n a_j p_j\Bigr) = \sum_{j=0}^n a_j f_i(p_j) = \sum_{j=0}^n a_j \delta_{ij} = a_i$$</p>
+        <p>for every $i$, so all $a_i=0$. Hence $\{p_0,\ldots,p_n\}$ is linearly independent. Since $\dim P_n(F) = n+1$ and we have $n+1$ linearly independent vectors, $\gamma = \{p_0,\ldots,p_n\}$ is a basis for $P_n(F)$.</p>
+        <p>Now $f_i(p_j)=\delta_{ij}$ is precisely the defining relation for $\{f_0,\ldots,f_n\}$ to be the dual basis $\gamma^*$ of $\gamma$, so $\{f_0,\ldots,f_n\} = \gamma^*$. Since the dual basis of a basis of a finite-dimensional vector space is always a basis of the dual space, $\{f_0,\ldots,f_n\}$ is a basis for $V^* = P_n(F)^*$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">선형변환의 전치사상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $T(x, y) = (3x + 2y, x)$로 $T : \mathbb{R}^2 \to \mathbb{R}^2$를 정의하고, $f(x, y) = 2x + y$로 $f : \mathbb{R}^2 \to \mathbb{R}$를 정의하자.</p>
+        <ol>
+          <li>$T^t(f)$를 계산하라.</li>
+          <li>$\beta$를 $\mathbb{R}^2$의 표준기저라 할 때 $[T]_\beta$와 $[T^t]_{\beta^*}$를 계산하라. 이 둘 사이의 관계를 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) 전치사상의 정의에 의해 $T^t(f) = f \circ T$이므로</p>
+        <p>$$T^t(f)(x,y) = f(T(x,y)) = f(3x+2y, x) = 2(3x+2y)+x = 7x+4y$$</p>
+        <p>이다. 따라서 $T^t(f)(x,y) = 7x+4y$이다.</p>
+        <p>(2) $\beta = \{e_1,e_2\}$를 표준기저라 하면 $T(e_1)=T(1,0)=(3,1)$, $T(e_2)=T(0,1)=(2,0)$이므로</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 3 & 2 \\ 1 & 0 \end{pmatrix}$$</p>
+        <p>이다. $\beta^* = \{e_1^*,e_2^*\}$를 표준쌍대기저라 하면 $e_1^*(x,y)=x$, $e_2^*(x,y)=y$이고,</p>
+        <p>$$(T^t(e_1^*))(x,y) = e_1^*(3x+2y,x) = 3x+2y = 3e_1^*(x,y)+2e_2^*(x,y),$$</p>
+        <p>$$(T^t(e_2^*))(x,y) = e_2^*(3x+2y,x) = x = e_1^*(x,y)$$</p>
+        <p>이므로 $T^t(e_1^*) = 3e_1^*+2e_2^*$, $T^t(e_2^*) = e_1^*$이다. 따라서</p>
+        <p>$$[T^t]_{\beta^*} = \begin{pmatrix} 3 & 1 \\ 2 & 0 \end{pmatrix}$$</p>
+        <p>이다. $([T]_\beta)^t = \begin{pmatrix} 3 & 1 \\ 2 & 0 \end{pmatrix}$이므로</p>
+        <p>$$[T^t]_{\beta^*} = ([T]_\beta)^t$$</p>
+        <p>임을 확인할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Define $T : \mathbb{R}^2 \to \mathbb{R}^2$ by $T(x, y) = (3x + 2y, x)$ and $f : \mathbb{R}^2 \to \mathbb{R}$ by $f(x, y) = 2x + y$.</p>
+        <ol>
+          <li>Compute $T^t(f)$.</li>
+          <li>Compute $[T]_\beta$ and $[T^t]_{\beta^*}$ where $\beta$ is the standard basis for $\mathbb{R}^2$. Find a relation between them.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) By the definition of the transpose, $T^t(f) = f \circ T$, so</p>
+        <p>$$T^t(f)(x,y) = f(T(x,y)) = f(3x+2y, x) = 2(3x+2y)+x = 7x+4y.$$</p>
+        <p>Hence $T^t(f)(x,y) = 7x+4y$.</p>
+        <p>(2) Let $\beta = \{e_1,e_2\}$ be the standard basis. Since $T(e_1)=T(1,0)=(3,1)$ and $T(e_2)=T(0,1)=(2,0)$,</p>
+        <p>$$[T]_\beta = \begin{pmatrix} 3 & 2 \\ 1 & 0 \end{pmatrix}.$$</p>
+        <p>Let $\beta^* = \{e_1^*,e_2^*\}$ be the standard dual basis, so $e_1^*(x,y)=x$ and $e_2^*(x,y)=y$. Then</p>
+        <p>$$(T^t(e_1^*))(x,y) = e_1^*(3x+2y,x) = 3x+2y = 3e_1^*(x,y)+2e_2^*(x,y),$$</p>
+        <p>$$(T^t(e_2^*))(x,y) = e_2^*(3x+2y,x) = x = e_1^*(x,y),$$</p>
+        <p>so $T^t(e_1^*) = 3e_1^*+2e_2^*$ and $T^t(e_2^*) = e_1^*$. Hence</p>
+        <p>$$[T^t]_{\beta^*} = \begin{pmatrix} 3 & 1 \\ 2 & 0 \end{pmatrix}.$$</p>
+        <p>Since $([T]_\beta)^t = \begin{pmatrix} 3 & 1 \\ 2 & 0 \end{pmatrix}$, we confirm that</p>
+        <p>$$[T^t]_{\beta^*} = ([T]_\beta)^t.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">이중쌍대공간으로의 표준사상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 유한차원 벡터공간이라 하고 $\beta$를 그 기저라 하자. $\psi(x)(f) = f(x)$로 정의된 $\psi : V \to V^{**}$를 생각하자. $\psi(\beta) = \beta^{**}$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\dim V = n$이라 하고 $\beta = \{v_1,\ldots,v_n\}$, $\beta^* = \{f_1,\ldots,f_n\}$을 그 쌍대기저라 하자. $V$가 유한차원이므로 $V^*$도 유한차원이고 $\beta^*$는 $V^*$의 기저이며, 따라서 $\beta^*$ 역시 쌍대기저 $\beta^{**} = \{f_1^*,\ldots,f_n^*\} \subseteq V^{**}$를 가진다. 이때 $\beta^{**}$는 $f_i^*(f_j) = \delta_{ij}$ $(1 \leq i,j \leq n)$로 유일하게 특정된다.</p>
+        <p>$\psi(\beta) = \{\psi(v_1),\ldots,\psi(v_n)\}$이 $\beta^{**}$와 같음을 보이려면, 각 $i$에 대하여 $\psi(v_i)$가 $f_i^*$의 정의 관계식을 만족함을 보이면 충분하다. 임의의 $j=1,\ldots,n$에 대하여 $\psi$의 정의에 의해</p>
+        <p>$$\psi(v_i)(f_j) = f_j(v_i) = \delta_{ji} = \delta_{ij}$$</p>
+        <p>이다. (두 번째 등호는 $\beta^*$가 $\beta$의 쌍대기저라는 사실, 즉 $f_j(v_i)=\delta_{ji}$에서 나온다.) 이는 바로 $f_i^*$가 만족해야 하는 관계식과 일치하고, 쌍대기저는 이 관계식으로 유일하게 결정되므로</p>
+        <p>$$\psi(v_i) = f_i^* \quad (i=1,\ldots,n)$$</p>
+        <p>이다. 따라서</p>
+        <p>$$\psi(\beta) = \{\psi(v_1),\ldots,\psi(v_n)\} = \{f_1^*,\ldots,f_n^*\} = \beta^{**}$$</p>
+        <p>이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a finite dimensional vector space and let $\beta$ be its basis. Consider $\psi : V \to V^{**}$ defined by $\psi(x)(f) = f(x)$. Show that $\psi(\beta) = \beta^{**}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $\dim V = n$ and let $\beta = \{v_1,\ldots,v_n\}$ with dual basis $\beta^* = \{f_1,\ldots,f_n\}$. Since $V$ is finite-dimensional, $V^*$ is finite-dimensional as well and $\beta^*$ is a basis for $V^*$, so $\beta^*$ in turn has a dual basis $\beta^{**} = \{f_1^*,\ldots,f_n^*\} \subseteq V^{**}$, uniquely characterized by $f_i^*(f_j) = \delta_{ij}$ $(1 \leq i,j \leq n)$.</p>
+        <p>To show $\psi(\beta) = \{\psi(v_1),\ldots,\psi(v_n)\}$ equals $\beta^{**}$, it suffices to show that $\psi(v_i)$ satisfies the defining relation of $f_i^*$ for each $i$. For any $j=1,\ldots,n$, by the definition of $\psi$,</p>
+        <p>$$\psi(v_i)(f_j) = f_j(v_i) = \delta_{ji} = \delta_{ij}.$$</p>
+        <p>(The second equality holds because $\beta^*$ is the dual basis of $\beta$, i.e., $f_j(v_i)=\delta_{ji}$.) This is exactly the relation that $f_i^*$ must satisfy, and since a dual basis is uniquely determined by this relation,</p>
+        <p>$$\psi(v_i) = f_i^* \quad (i=1,\ldots,n).$$</p>
+        <p>Therefore</p>
+        <p>$$\psi(\beta) = \{\psi(v_1),\ldots,\psi(v_n)\} = \{f_1^*,\ldots,f_n^*\} = \beta^{**}.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>심화 문제 · Problems</h2></div>
+
+<!-- Problem 1 -->
+<div class="card pr-card" id="pr1">
+  <div class="card-head">
+    <span class="pr-num">PR 1</span>
+    <span class="ex-title">부분집합의 소멸자</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V$를 $F$ 위의 유한차원 벡터공간이라 하자. $V$의 부분집합 $S$에 대하여, $S$의 <strong>소멸자</strong>(annihilator)는 다음과 같이 정의된다.</p>
+        <p>$$S^\perp = \{f \in V^* : f(x) = 0 \text{ for all } x \in S\}.$$</p>
+        <ol>
+          <li>$S^\perp$가 $V^*$의 부분공간임을 증명하라.</li>
+          <li>$(S^\perp)^\perp$가 $\operatorname{span}(S)$와 자연스럽게 동일시됨을 증명하라.</li>
+          <li>부분공간 $W_1, W_2$에 대하여, $W_1 = W_2$일 필요충분조건은 $W_1^\perp = W_2^\perp$임을 증명하라.</li>
+          <li>부분공간 $W_1, W_2$에 대하여, $(W_1 + W_2)^\perp = W_1^\perp \cap W_2^\perp$임을 증명하라.</li>
+          <li>$V$의 부분공간 $W$에 대하여, $\dim(W) + \dim(W^\perp) = \dim(V)$임을 증명하라.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $V$ be a finite-dimensional vector space over $F$. For a subset $S$ of $V$, the <strong>annihilator</strong> of $S$ is defined by</p>
+        <p>$$S^\perp = \{f \in V^* : f(x) = 0 \text{ for all } x \in S\}.$$</p>
+        <ol>
+          <li>Prove that $S^\perp$ is a subspace of $V^*$.</li>
+          <li>Prove that $(S^\perp)^\perp$ is naturally identified with $\operatorname{span}(S)$.</li>
+          <li>For subspaces $W_1, W_2$, prove that $W_1 = W_2$ if and only if $W_1^\perp = W_2^\perp$.</li>
+          <li>For subspaces $W_1, W_2$, prove that $(W_1 + W_2)^\perp = W_1^\perp \cap W_2^\perp$.</li>
+          <li>For a subspace $W$ of $V$, prove that $\dim(W) + \dim(W^\perp) = \dim(V)$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 2 -->
+<div class="card pr-card" id="pr2">
+  <div class="card-head">
+    <span class="pr-num">PR 2</span>
+    <span class="ex-title">전치사상의 영공간과 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V, W$가 $F$ 위의 유한차원 벡터공간이고 $T : V \to W$가 선형변환이라 하자. 다음을 증명하라.</p>
+        <ol>
+          <li>$\operatorname{Ker}(T^t) = (\operatorname{Im}(T))^\perp$</li>
+          <li>$\operatorname{rank}(T) = \operatorname{rank}(T^t)$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to W$ be a linear transform where $V, W$ are finite-dimensional vector spaces over $F$. Prove the following.</p>
+        <ol>
+          <li>$\operatorname{Ker}(T^t) = (\operatorname{Im}(T))^\perp$</li>
+          <li>$\operatorname{rank}(T) = \operatorname{rank}(T^t)$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 3 -->
+<div class="card pr-card" id="pr3">
+  <div class="card-head">
+    <span class="pr-num">PR 3</span>
+    <span class="ex-title">전치사상과 전사·단사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $V, W$가 $F$ 위의 영이 아닌 유한차원 벡터공간이고 $T : V \to W$가 선형변환이라 하자. 다음을 증명하라.</p>
+        <ol>
+          <li>$T$가 전사일 필요충분조건은 $T^t$가 단사인 것이다.</li>
+          <li>$T$가 단사일 필요충분조건은 $T^t$가 전사인 것이다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to W$ be a linear transform where $V, W$ are nonzero finite-dimensional vector spaces over $F$. Prove the following.</p>
+        <ol>
+          <li>$T$ is surjective if and only if $T^t$ is injective.</li>
+          <li>$T$ is injective if and only if $T^t$ is surjective.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Problem 4 -->
+<div class="card pr-card" id="pr4">
+  <div class="card-head">
+    <span class="pr-num">PR 4</span>
+    <span class="ex-title">불변 부분공간과 전치사상</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\dim V < \infty$이고 $T : V \to V$가 선형변환이며 $W$가 $V$의 부분공간이라 하자. $W$가 $T$-불변 부분공간일 필요충분조건은 $W^\perp$가 $T^t$-불변 부분공간인 것임을 증명하라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $T : V \to V$ be a linear transform where $\dim V < \infty$ and let $W$ be a subspace of $V$. Prove that $W$ is $T$-invariant if and only if $W^\perp$ is $T^t$-invariant.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

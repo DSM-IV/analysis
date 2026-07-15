@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04. 기저의 존재성 (Existence of a Basis) | 선형대수학 학습 가이드</title>
+<meta name="description" content="선형대수학 04단원 기저의 존재성(Existence of a Basis) 예제 모음. 극대원소와 사슬, 일차독립 집합의 기저 확장, 무한차원 벡터공간을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학, Linear Algebra, 기저, basis, 기저의 존재성, existence of a basis, 극대원소, maximal element, 사슬, chain, 일차독립, linearly independent, 무한차원, infinite-dimensional, 예제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/la/ch04.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04. 기저의 존재성 (Existence of a Basis) — 선형대수학 한·영 대조">
+<meta property="og:description" content="기저의 존재성 예제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/la/ch04.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "04. 기저의 존재성 (Existence of a Basis) — 선형대수학 한·영 대조 예제",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 기저의 존재성 예제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/la/ch04.html",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/la/ch04.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="index.html">선형대수학</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html" class="active">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra — Unit 04</p>
+  <h1>04. 기저의 존재성<span>Existence of a Basis</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex1"><span class="toc-num">EX 1</span> 극대원소와 최장 사슬</a></li>
+    <li><a href="#ex1-1"><span class="toc-num">EX 1.1</span> 유한 사슬만 갖는 무한 모임</a></li>
+    <li><a href="#ex2"><span class="toc-num">EX 2</span> 독립집합과 생성집합의 기저</a></li>
+    <li><a href="#ex2-1"><span class="toc-num">EX 2.1</span> 기저의 확장</a></li>
+    <li><a href="#ex3"><span class="toc-num">EX 3</span> 수렴하는 수열의 무한차원 공간</a></li>
+    <li><a href="#ex3-1"><span class="toc-num">EX 3.1</span> $\mathbb{Q}$ 위 $\mathbb{R}$의 무한차원성</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제 · Exercises</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="ex1">
+  <div class="card-head">
+    <span class="ex-num">EX 1</span>
+    <span class="ex-title">극대원소와 최장 사슬</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $S = \{1, \cdots, 4\}$의 부분집합 $T$ 중 $T$의 원소의 합이 홀수인 것들의 모임을 $\mathcal{F}$라 하자.</p>
+        <ol>
+          <li>$\mathcal{F}$의 모든 극대원소를 구하라.</li>
+          <li>$\mathcal{F}$에서 원소의 개수가 가장 많은 사슬을 구하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S=\{1,2,3,4\}$의 부분집합을 원소의 합의 홀짝에 따라 분류하면, $\mathcal{F}$에 속하는 것은 다음 여덟 개이다.</p>
+        <p>$$\{1\},\ \{3\},\ \{1,2\},\ \{1,4\},\ \{2,3\},\ \{3,4\},\ \{1,2,4\},\ \{2,3,4\}.$$</p>
+        <p>(공집합과 $S$ 자신은 원소의 합이 각각 $0, 10$으로 짝수이므로 $\mathcal{F}$에 속하지 않는다.)</p>
+        <ol>
+          <li>포함관계를 살펴보면, 위 여덟 개의 집합 중 $\{1\},\{1,2\},\{1,4\}$는 각각 $\{1,2,4\}$에 포함되고, $\{3\},\{2,3\},\{3,4\}$는 각각 $\{2,3,4\}$에 포함된다. 한편 $\{1,2,4\}$와 $\{2,3,4\}$를 진부분집합으로 포함하는 $\mathcal{F}$의 원소는 $S$ 자신뿐인데 $S \notin \mathcal{F}$이므로, $\{1,2,4\}$와 $\{2,3,4\}$는 각각 $\mathcal{F}$의 극대원소이다. 따라서 $\mathcal{F}$의 극대원소는 정확히 $\{1,2,4\}$와 $\{2,3,4\}$ 두 개이다.</li>
+          <li>$\mathcal{F}$의 원소는 공집합과 $S$ 자신을 제외한 것들이므로 그 크기는 $1,2,3$ 중 하나이다. 사슬은 포함관계로 완전히 순서가 매겨진 집합들의 모임이므로 서로 다른 원소들은 크기가 반드시 달라야 하고, 가능한 크기가 세 가지($1,2,3$)뿐이므로 사슬의 길이는 최대 3이다. 실제로 $$\{1\} \subset \{1,2\} \subset \{1,2,4\}$$ 는 $\mathcal{F}$에서 원소가 3개인 사슬이므로, 이것이 원소의 개수가 가장 많은 사슬이다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $\mathcal{F}$ be a family of subsets $T$ of $S = \{1, \cdots, 4\}$ such that the sum of elements of $T$ is odd.</p>
+        <ol>
+          <li>Find all maximal elements in $\mathcal{F}$.</li>
+          <li>Find a chain in $\mathcal{F}$ which has the largest number of elements.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Classifying the subsets of $S = \{1,2,3,4\}$ by the parity of the sum of their elements, the members of $\mathcal{F}$ are exactly the following eight sets.</p>
+        <p>$$\{1\},\ \{3\},\ \{1,2\},\ \{1,4\},\ \{2,3\},\ \{3,4\},\ \{1,2,4\},\ \{2,3,4\}.$$</p>
+        <p>(The empty set and $S$ itself have element sums $0$ and $10$, respectively, both even, so neither belongs to $\mathcal{F}$.)</p>
+        <ol>
+          <li>Among these eight sets, $\{1\}, \{1,2\}, \{1,4\}$ are each contained in $\{1,2,4\}$, and $\{3\}, \{2,3\}, \{3,4\}$ are each contained in $\{2,3,4\}$. The only member of $\mathcal{F}$ that could properly contain $\{1,2,4\}$ or $\{2,3,4\}$ is $S$ itself, and $S \notin \mathcal{F}$; hence $\{1,2,4\}$ and $\{2,3,4\}$ are each maximal elements of $\mathcal{F}$. Thus $\mathcal{F}$ has exactly two maximal elements, $\{1,2,4\}$ and $\{2,3,4\}$.</li>
+          <li>Every element of $\mathcal{F}$ has size $1$, $2$, or $3$, since the empty set and $S$ itself are excluded. In a chain, distinct sets are pairwise comparable, so their sizes are strictly increasing; as only three sizes are available, a chain in $\mathcal{F}$ has at most $3$ elements. The chain $$\{1\} \subset \{1,2\} \subset \{1,2,4\}$$ has $3$ elements in $\mathcal{F}$, so it is a chain with the largest possible number of elements.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.1 -->
+<div class="card ex-card" id="ex1-1">
+  <div class="card-head">
+    <span class="ex-num">EX 1.1</span>
+    <span class="ex-title">유한 사슬만 갖는 무한 모임</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\mathcal{F}$는 무한집합이지만 $\mathcal{F}$의 모든 사슬은 유한집합이 되는 집합들의 모임 $\mathcal{F}$의 예를 제시하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathcal{F} = \{\{n\} : n \in \mathbb{N}\}$, 즉 자연수의 모든 한원소 부분집합들의 모임을 생각하자.</p>
+        <p>$\mathcal{F}$는 각 자연수 $n$마다 서로 다른 원소 $\{n\}$을 하나씩 가지므로 무한집합이다. 한편 $n \neq m$이면 $\{n\} \not\subset \{m\}$이고 $\{m\} \not\subset \{n\}$이므로, $\mathcal{F}$의 서로 다른 두 원소는 결코 비교 가능하지 않다. 따라서 $\mathcal{F}$의 사슬은 원소를 많아야 하나만 가질 수 있으며, 특히 모든 사슬은 유한집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Find an example of a family $\mathcal{F}$ of sets such that $\mathcal{F}$ is infinite but every chain in $\mathcal{F}$ is finite.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Consider $\mathcal{F} = \{\{n\} : n \in \mathbb{N}\}$, the family of all singleton subsets of $\mathbb{N}$.</p>
+        <p>$\mathcal{F}$ is infinite, since it contains a distinct element $\{n\}$ for each natural number $n$. If $n \neq m$, then neither $\{n\} \subset \{m\}$ nor $\{m\} \subset \{n\}$ holds, so any two distinct elements of $\mathcal{F}$ are incomparable. Hence any chain in $\mathcal{F}$ can contain at most one element, and in particular every chain in $\mathcal{F}$ is finite.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="ex2">
+  <div class="card-head">
+    <span class="ex-num">EX 2</span>
+    <span class="ex-title">독립집합과 생성집합의 기저</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $S_1, S_2$를 벡터공간 $V$의 부분집합이라 하자. $S_1$이 일차독립이고 $S_2$가 $V$를 생성하면, $S_1 \cup S_2'$가 $V$의 기저가 되는 $S_2$의 부분집합 $S_2'$가 존재함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathcal{F} = \{A \subset S_2 : S_1 \cup A \text{는 일차독립}\}$이라 하고, $\mathcal{F}$에 포함관계로 순서를 주자.</p>
+        <p>$S_1$이 일차독립이므로 $S_1 \cup \emptyset = S_1$은 일차독립이고, 따라서 $\emptyset \in \mathcal{F}$이므로 $\mathcal{F} \neq \emptyset$이다.</p>
+        <p>$\mathcal{C}$를 $\mathcal{F}$의 임의의 사슬이라 하자. $\mathcal{C} = \emptyset$이면 $\emptyset \in \mathcal{F}$가 $\mathcal{C}$의 상계이다. $\mathcal{C} \neq \emptyset$이면 $U = \bigcup_{A \in \mathcal{C}} A$라 하고, $U \in \mathcal{F}$임을 보이자. $\{v_1, \ldots, v_n\}$이 $S_1 \cup U$의 임의의 유한부분집합이고 $\sum_{i=1}^n c_i v_i = 0$이라 하자. $v_i \in U$인 각 $i$에 대해 $v_i \in A_i$인 $A_i \in \mathcal{C}$를 택하자. 이러한 $A_i$는 유한개뿐이고 $\mathcal{C}$는 공집합이 아닌 사슬이므로, 그중 나머지를 모두 포함하는 것 $A_{i_0}$가 존재한다 (어떤 $v_i$도 $U$에 속하지 않으면 $A_{i_0}$를 $\mathcal{C}$의 임의의 원소로 택한다). 그러면 $\{v_1,\ldots,v_n\} \subset S_1 \cup A_{i_0}$이다. $U$에 속하는 각 $v_i$는 어떤 $A_i \subset A_{i_0}$에 속하고, $S_1$에 속하는 각 $v_i$는 $S_1$에 속하기 때문이다. $A_{i_0} \in \mathcal{C} \subset \mathcal{F}$이므로 $S_1 \cup A_{i_0}$는 일차독립이고, 따라서 $c_1 = \cdots = c_n = 0$이다. 이는 $S_1 \cup U$의 모든 유한부분집합이 일차독립임을, 즉 $S_1 \cup U$가 일차독립임을 보이므로 $U \in \mathcal{F}$이고, $U$는 $\mathcal{C}$의 상계이다.</p>
+        <p>그러므로 $\mathcal{F}$의 모든 사슬은 $\mathcal{F}$ 안에 상계를 가지므로, 초른 보조정리에 의해 $\mathcal{F}$는 극대원소 $S_2'$를 갖는다. $\beta = S_1 \cup S_2'$라 하면 $S_2' \in \mathcal{F}$이므로 $\beta$는 일차독립이다.</p>
+        <p>$\beta$가 $V$를 생성함을 보이자. $S_2$가 $V$를 생성하므로 $S_2 \subset \operatorname{span}(\beta)$임을 보이면 충분하다. 그렇지 않다고 가정하면 어떤 $v \in S_2$가 $v \notin \operatorname{span}(\beta)$를 만족한다. 이때 $v \notin S_2'$이다 ($S_2' \subset \beta \subset \operatorname{span}(\beta)$이므로). $\beta \cup \{v\}$가 일차종속이라면, $\beta$가 일차독립이므로 이 종속관계에서 $v$의 계수는 $0$이 아니어야 하고, 이는 $v \in \operatorname{span}(\beta)$를 뜻하여 모순이다. 그러므로 $\beta \cup \{v\} = S_1 \cup (S_2' \cup \{v\})$는 일차독립이고, $S_2' \cup \{v\} \subset S_2$이므로 $S_2' \cup \{v\} \in \mathcal{F}$이다. 그런데 $S_2' \subsetneq S_2' \cup \{v\}$이므로 이는 $S_2'$가 $\mathcal{F}$의 극대원소라는 사실에 모순이다.</p>
+        <p>따라서 $S_2 \subset \operatorname{span}(\beta)$이고, $V = \operatorname{span}(S_2) \subset \operatorname{span}(\beta) \subset V$이므로 $\beta$는 $V$를 생성한다. 일차독립이면서 $V$를 생성하는 $\beta = S_1 \cup S_2'$는 $V$의 기저이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Let $S_1, S_2$ be subsets of a vector space $V$. Show that if $S_1$ is linearly independent and $S_2$ generates $V$, then there exists a subset $S_2'$ of $S_2$ such that $S_1 \cup S_2'$ is a basis of $V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $\mathcal{F} = \{A \subset S_2 : S_1 \cup A \text{ is linearly independent}\}$, partially ordered by inclusion.</p>
+        <p>Since $S_1$ is linearly independent, $S_1 \cup \emptyset = S_1$ is linearly independent, so $\emptyset \in \mathcal{F}$ and $\mathcal{F} \neq \emptyset$.</p>
+        <p>Let $\mathcal{C}$ be an arbitrary chain in $\mathcal{F}$. If $\mathcal{C} = \emptyset$, then $\emptyset \in \mathcal{F}$ is an upper bound for $\mathcal{C}$. Otherwise, let $U = \bigcup_{A \in \mathcal{C}} A$; we show $U \in \mathcal{F}$. Let $\{v_1, \ldots, v_n\}$ be any finite subset of $S_1 \cup U$ and suppose $\sum_{i=1}^n c_i v_i = 0$. For each $i$ with $v_i \in U$, choose $A_i \in \mathcal{C}$ with $v_i \in A_i$; only finitely many such $A_i$ occur, and since $\mathcal{C}$ is a nonempty chain, one of them—say $A_{i_0}$—contains all the others (if no $v_i$ lies in $U$, let $A_{i_0}$ be any member of $\mathcal{C}$). Then $\{v_1, \ldots, v_n\} \subset S_1 \cup A_{i_0}$: each $v_i \in U$ lies in some $A_i \subset A_{i_0}$, and each $v_i \in S_1$ lies in $S_1$. Since $A_{i_0} \in \mathcal{C} \subset \mathcal{F}$, the set $S_1 \cup A_{i_0}$ is linearly independent. Hence $c_1 = \cdots = c_n = 0$. As every finite subset of $S_1 \cup U$ is independent, $S_1 \cup U$ is linearly independent, so $U \in \mathcal{F}$, and $U$ is an upper bound for $\mathcal{C}$.</p>
+        <p>Thus every chain in $\mathcal{F}$ has an upper bound in $\mathcal{F}$, so by Zorn's Lemma $\mathcal{F}$ has a maximal element $S_2'$. Let $\beta = S_1 \cup S_2'$; since $S_2' \in \mathcal{F}$, $\beta$ is linearly independent.</p>
+        <p>We show $\beta$ generates $V$. Since $S_2$ generates $V$, it suffices to show $S_2 \subset \operatorname{span}(\beta)$. Suppose not; then there is $v \in S_2$ with $v \notin \operatorname{span}(\beta)$. Note $v \notin S_2'$, since $S_2' \subset \beta \subset \operatorname{span}(\beta)$. If $\beta \cup \{v\}$ were linearly dependent, then, since $\beta$ is independent, the coefficient of $v$ in the dependence relation would have to be nonzero, which would give $v \in \operatorname{span}(\beta)$, a contradiction. Hence $\beta \cup \{v\} = S_1 \cup (S_2' \cup \{v\})$ is linearly independent, and since $S_2' \cup \{v\} \subset S_2$, this means $S_2' \cup \{v\} \in \mathcal{F}$. But $S_2' \subsetneq S_2' \cup \{v\}$, contradicting the maximality of $S_2'$ in $\mathcal{F}$.</p>
+        <p>Therefore $S_2 \subset \operatorname{span}(\beta)$, and $V = \operatorname{span}(S_2) \subset \operatorname{span}(\beta) \subset V$, so $\beta$ generates $V$. Since $\beta = S_1 \cup S_2'$ is linearly independent and generates $V$, it is a basis for $V$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.1 -->
+<div class="card ex-card" id="ex2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 2.1</span>
+    <span class="ex-title">기저의 확장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>벡터공간 $V$의 부분공간을 $W$라 하자. $W$의 임의의 기저는 $W$의 기저로 확장될 수 있음을 증명하라.</li>
+          <li>$S_1, S_2$를 벡터공간 $V$의 부분집합으로 $S_1 \subset S_2$라 하자. $S_1$이 일차독립이고 $S_2$가 $V$를 생성하면, $S_1 \subset \beta \subset S_2$인 $V$의 기저 $\beta$가 존재함을 증명하라.</li>
+          <li>$\beta$를 벡터공간 $V$의 기저라 하고, $S$를 $V$의 일차독립인 부분집합이라 하자. $S \cup S_1$이 $V$의 기저가 되는 $\beta$의 부분집합 $S_1$이 존재함을 증명하라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p><em>역주.</em> 문제의 두 번째 "$W$의 기저"는 "$V$의 기저"의 오기로 보이며, 아래는 $W$의 기저를 $V$의 기저로 확장하는 것으로 증명한다.</p>
+        <ol>
+          <li>$\beta_W$를 $W$의 기저라 하자. $\beta_W \subset W \subset V$이고 $\beta_W$는 일차독립이다. 한편 $V$ 자신은 자명하게 $V$를 생성하므로, $S_1 = \beta_W$, $S_2 = V$에 EX 2를 적용하면 $V$의 부분집합 $S_2'$가 존재하여 $\beta_W \cup S_2'$가 $V$의 기저가 된다. 이는 $\beta_W$를 $V$의 기저로 확장한 것이다.</li>
+          <li>$S_1$이 일차독립이고 $S_2$가 $V$를 생성하므로, EX 2에 의해 $S_1 \cup S_2' = \beta$가 $V$의 기저가 되는 $S_2$의 부분집합 $S_2'$가 존재한다. $S_1 \subset S_2$이고 $S_2' \subset S_2$이므로 $\beta = S_1 \cup S_2' \subset S_2$이고, 또한 $S_1 \subset \beta$이다. 따라서 $S_1 \subset \beta \subset S_2$인 $V$의 기저 $\beta$가 존재한다.</li>
+          <li>$\beta$는 $V$의 기저이므로 특히 $V$를 생성하고, $S$는 일차독립이다. EX 2를 (일차독립집합) $S$와 (생성집합) $\beta$에 적용하면, $\beta$의 부분집합 $S_1$이 존재하여 $S \cup S_1$이 $V$의 기저가 된다.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $W$ be a subspace of a vector space $V$. Show that any basis for $W$ can be extended to a basis for $W$.</li>
+          <li>Let $S_1, S_2$ be subsets of a vector space $V$ such that $S_1 \subset S_2$. Show that if $S_1$ is linearly independent and $S_2$ generates $V$, then there is a basis $\beta$ of $V$ such that $S_1 \subset \beta \subset S_2$.</li>
+          <li>Let $\beta$ be a basis of a vector space $V$ and let $S$ be a linearly independent subset of $V$. Show that there exists a subset $S_1$ of $\beta$ such that $S \cup S_1$ is a basis of $V$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p><em>Note.</em> The second "$W$" in the statement appears to be a typo for "$V$"; the proof below extends a basis of $W$ to a basis of $V$.</p>
+        <ol>
+          <li>Let $\beta_W$ be a basis for $W$. Then $\beta_W \subset W \subset V$ and $\beta_W$ is linearly independent. Since $V$ itself trivially generates $V$, applying EX 2 with $S_1 = \beta_W$ and $S_2 = V$ gives a subset $S_2'$ of $V$ such that $\beta_W \cup S_2'$ is a basis for $V$. This extends $\beta_W$ to a basis for $V$.</li>
+          <li>Since $S_1$ is linearly independent and $S_2$ generates $V$, EX 2 gives a subset $S_2'$ of $S_2$ such that $\beta = S_1 \cup S_2'$ is a basis for $V$. As $S_1 \subset S_2$ and $S_2' \subset S_2$, we have $\beta = S_1 \cup S_2' \subset S_2$, and also $S_1 \subset \beta$. Hence there is a basis $\beta$ of $V$ with $S_1 \subset \beta \subset S_2$.</li>
+          <li>Since $\beta$ is a basis of $V$, it generates $V$, and $S$ is linearly independent. Applying EX 2 with the independent set $S$ and the generating set $\beta$ gives a subset $S_1$ of $\beta$ such that $S \cup S_1$ is a basis of $V$.</li>
+        </ol>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="ex3">
+  <div class="card-head">
+    <span class="ex-num">EX 3</span>
+    <span class="ex-title">수렴하는 수열의 무한차원 공간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\mathbb{R}$에서 수렴하는 수열들의 집합은 $\mathbb{R}$ 위의 무한차원 벡터공간임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $c$를 $\mathbb{R}$에서 수렴하는 모든 실수열의 집합이라 하자.</p>
+        <p><em>(벡터공간임)</em> $c$는 모든 실수열의 공간 $\mathcal{F}(\mathbb{N}, \mathbb{R})$의 부분집합이다. 두 수열 $(a_n), (b_n)$이 각각 $a, b$로 수렴하면 극한의 성질에 의해 $(a_n + b_n)$은 $a+b$로 수렴하고, 임의의 스칼라 $k$에 대해 $(ka_n)$은 $ka$로 수렴한다. 또한 항상 $0$인 수열은 $0$으로 수렴한다. 따라서 $c$는 $\mathcal{F}(\mathbb{N},\mathbb{R})$의 부분공간이므로 그 자체로 $\mathbb{R}$ 위의 벡터공간이다.</p>
+        <p><em>(무한차원임)</em> 각 $n \in \mathbb{N}$에 대하여 수열 $e_n = (e_n(k))_{k=1}^\infty$을 $e_n(n) = 1$이고 $k \neq n$이면 $e_n(k) = 0$인 수열로 정의하자. $e_n$은 $n$번째 항을 제외한 모든 항이 $0$이므로 $0$으로 수렴하고, 따라서 $e_n \in c$이다.</p>
+        <p>임의의 $n \in \mathbb{N}$에 대해 $\{e_1, \ldots, e_n\}$이 일차독립임을 보이자. $\sum_{i=1}^n c_i e_i = 0$ (영수열)이라 하면, 이 등식의 $k$번째 항($1 \le k \le n$)을 비교하면 $\sum_{i=1}^n c_i e_i(k) = c_k = 0$이다. 따라서 $c_1 = \cdots = c_n = 0$이므로 $\{e_1,\ldots,e_n\}$은 일차독립이다.</p>
+        <p>이제 $c$가 유한차원이라고 가정하면 $\dim c = d$인 어떤 자연수 $d$가 존재하는데, 유한차원 벡터공간에서 일차독립인 집합의 원소의 개수는 항상 차원 이하이어야 한다. 그런데 $\{e_1, \ldots, e_{d+1}\}$은 $c$에서 원소가 $d+1$개인 일차독립집합이므로 모순이다. 따라서 $c$는 무한차원이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Show that the set of convergent sequences in $\mathbb{R}$ is an infinite-dimensional vector space over $\mathbb{R}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $c$ denote the set of all real sequences that converge in $\mathbb{R}$.</p>
+        <p><em>(It is a vector space.)</em> $c$ is a subset of the space $\mathcal{F}(\mathbb{N}, \mathbb{R})$ of all real sequences. If $(a_n) \to a$ and $(b_n) \to b$, then by the limit laws $(a_n + b_n) \to a + b$, and for any scalar $k$, $(ka_n) \to ka$. Also the zero sequence converges to $0$. Hence $c$ is a subspace of $\mathcal{F}(\mathbb{N}, \mathbb{R})$, and so is itself a vector space over $\mathbb{R}$.</p>
+        <p><em>(It is infinite-dimensional.)</em> For each $n \in \mathbb{N}$, define the sequence $e_n = (e_n(k))_{k=1}^\infty$ by $e_n(n) = 1$ and $e_n(k) = 0$ for $k \neq n$. All terms of $e_n$ except the $n$-th are $0$, so $e_n \to 0$, and in particular $e_n \in c$.</p>
+        <p>For each $n \in \mathbb{N}$, we show $\{e_1, \ldots, e_n\}$ is linearly independent. If $\sum_{i=1}^n c_i e_i = 0$ (the zero sequence), comparing the $k$-th term for $1 \le k \le n$ gives $\sum_{i=1}^n c_i e_i(k) = c_k = 0$. Hence $c_1 = \cdots = c_n = 0$, so $\{e_1, \ldots, e_n\}$ is linearly independent.</p>
+        <p>Now suppose $c$ were finite-dimensional, say $\dim c = d$. In a finite-dimensional vector space, every linearly independent set has at most $\dim c$ elements. But $\{e_1, \ldots, e_{d+1}\}$ is a linearly independent subset of $c$ with $d+1$ elements, a contradiction. Hence $c$ is infinite-dimensional.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.1 -->
+<div class="card ex-card" id="ex3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 3.1</span>
+    <span class="ex-title">$\mathbb{Q}$ 위 $\mathbb{R}$의 무한차원성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>문제.</strong> $\mathbb{R}$은 $\mathbb{Q}$ 위의 무한차원 벡터공간임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\dim_{\mathbb{Q}} \mathbb{R}$이 유한하다고 가정하고 $n = \dim_{\mathbb{Q}} \mathbb{R}$이라 하자.</p>
+        <p>같은 체 위의 두 벡터공간이 같은 유한차원을 가지면 서로 동형이므로, $\mathbb{R}$과 $\mathbb{Q}^n$은 $\mathbb{Q}$-벡터공간으로서 동형이다. 즉 전단사 선형변환 $T : \mathbb{R} \to \mathbb{Q}^n$이 존재한다.</p>
+        <p>$\mathbb{Q}$는 가산집합이므로 $\mathbb{Q}^n$은 가산집합들의 유한 곱으로서 가산집합이다. 그런데 $T$가 전단사이므로 $\mathbb{R}$은 $\mathbb{Q}^n$과 같은 기수를 가져야 하고, 따라서 $\mathbb{R}$도 가산집합이어야 한다. 이는 $\mathbb{R}$이 비가산집합이라는 사실(칸토어의 대각선 논법)에 모순이다.</p>
+        <p>따라서 $\dim_{\mathbb{Q}} \mathbb{R}$은 유한할 수 없으며, $\mathbb{R}$은 $\mathbb{Q}$ 위의 무한차원 벡터공간이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Problem.</strong> Show that $\mathbb{R}$ is an infinite-dimensional vector space over $\mathbb{Q}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Suppose $\dim_{\mathbb{Q}} \mathbb{R}$ is finite, and let $n = \dim_{\mathbb{Q}} \mathbb{R}$.</p>
+        <p>Two vector spaces over the same field with the same finite dimension are isomorphic, so $\mathbb{R}$ and $\mathbb{Q}^n$ are isomorphic as $\mathbb{Q}$-vector spaces; that is, there exists a bijective linear transformation $T : \mathbb{R} \to \mathbb{Q}^n$.</p>
+        <p>Since $\mathbb{Q}$ is countable, $\mathbb{Q}^n$, being a finite product of countable sets, is countable. Since $T$ is a bijection, $\mathbb{R}$ has the same cardinality as $\mathbb{Q}^n$, so $\mathbb{R}$ would also be countable. This contradicts the fact that $\mathbb{R}$ is uncountable (by Cantor's diagonal argument).</p>
+        <p>Hence $\dim_{\mathbb{Q}} \mathbb{R}$ cannot be finite, so $\mathbb{R}$ is an infinite-dimensional vector space over $\mathbb{Q}$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="index.html">선형대수학 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
