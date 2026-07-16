@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06. 로피탈 정리 (L'Hôpital's Rule) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 06단원 로피탈 정리(L'Hôpital's Rule) 예제·유제·문제 모음. 부정형(0/0, ∞/∞, 0·∞, ∞−∞, 1^∞, ∞^0) 극한, 코시의 평균값 정리, 함수의 증가율 비교, o·O 표기, 로그평균을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 로피탈 정리, L'Hôpital's Rule, 부정형, indeterminate form, 코시의 평균값 정리, Cauchy's Mean Value Theorem, 증가율, growth rate, o 표기, O 표기, little-o, big-O, 로그평균, logarithmic mean, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06. 로피탈 정리 (L'Hôpital's Rule) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="로피탈 정리 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch06.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "06. 로피탈 정리 (L'Hôpital's Rule) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 로피탈 정리 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch06.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch06.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html" class="active">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 06</p>
+  <h1>06. 로피탈 정리<span>L'Hôpital's Rule</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 0/0 꼴 극한 계산</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 삼각함수의 0/0 극한</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> ∞/∞ 꼴 극한</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 곱·차 꼴 부정형 극한</a></li>
+    <li><a href="#yu01-4"><span class="toc-num">유제 01-4</span> 지수 꼴 부정형 극한</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 극한이 0이 되는 계수 결정</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 수평점근선 찾기</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 지수함수의 연속과 최댓값</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 코시 평균값 정리로 c 찾기</a></li>
+    <li><a href="#yu03"><span class="toc-num">유제 03</span> 곡선의 접선벡터와 평행</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 함수의 증가율 비교</a></li>
+    <li><a href="#yu04"><span class="toc-num">유제 04</span> 증가율 비교</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> o·O 표기 판정</a></li>
+    <li><a href="#yu05"><span class="toc-num">유제 05</span> o·O 명제의 참·거짓</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 로그평균 부등식</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 지수 방정식의 해</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 지수 꼴 극한 계산</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 지수·로그와 다항함수 증가율</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">0/0 꼴 극한 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \frac{3x - \sin x}{x}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1 - x/2}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{x - \sin x}{x^3}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 모두 $x \to 0$일 때 $0/0$ 꼴이므로 로피탈 정리를 적용한다.</p>
+        <p>(1) $\displaystyle\lim_{x \to 0} \frac{3x - \sin x}{x} = \lim_{x \to 0} \frac{3 - \cos x}{1} = 3 - 1 = 2$이다.</p>
+        <p>(2) $\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x} = \lim_{x \to 0} \frac{1/(2\sqrt{1+x})}{1} = \frac{1}{2}$이다.</p>
+        <p>(3) $f(x) = \sqrt{1+x} - 1 - x/2$, $g(x) = x^2$라 하면 $f(0) = g(0) = 0$이고, $f'(x) = \dfrac{1}{2\sqrt{1+x}} - \dfrac{1}{2}$, $g'(x) = 2x$도 $f'(0) = g'(0) = 0$이므로 로피탈 정리를 한 번 더 적용해야 한다. $f''(x) = -\dfrac{1}{4}(1+x)^{-3/2}$, $g''(x) = 2$이므로
+        $$\lim_{x \to 0} \frac{\sqrt{1+x} - 1 - x/2}{x^2} = \lim_{x \to 0} \frac{f''(x)}{g''(x)} = \frac{-1/4}{2} = -\frac{1}{8}$$
+        이다.</p>
+        <p>(4) $f(x) = x - \sin x$, $g(x) = x^3$이라 하면 $f'(x) = 1 - \cos x$, $g'(x) = 3x^2$도 $0/0$ 꼴이고, $f''(x) = \sin x$, $g''(x) = 6x$도 $0/0$ 꼴이므로 로피탈 정리를 세 번 적용한다. $f'''(x) = \cos x$, $g'''(x) = 6$이므로
+        $$\lim_{x \to 0} \frac{x - \sin x}{x^3} = \lim_{x \to 0} \frac{\cos x}{6} = \frac{1}{6}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \frac{3x - \sin x}{x}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1 - x/2}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{x - \sin x}{x^3}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Each limit is of the form $0/0$ as $x \to 0$, so we apply L'Hôpital's Rule.</p>
+        <p>(1) $\displaystyle\lim_{x \to 0} \frac{3x - \sin x}{x} = \lim_{x \to 0} \frac{3 - \cos x}{1} = 3 - 1 = 2$.</p>
+        <p>(2) $\displaystyle\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x} = \lim_{x \to 0} \frac{1/(2\sqrt{1+x})}{1} = \frac{1}{2}$.</p>
+        <p>(3) Let $f(x) = \sqrt{1+x} - 1 - x/2$ and $g(x) = x^2$. Then $f(0) = g(0) = 0$, and $f'(x) = \dfrac{1}{2\sqrt{1+x}} - \dfrac{1}{2}$, $g'(x) = 2x$ again give $f'(0) = g'(0) = 0$, so we apply L'Hôpital's Rule once more. Since $f''(x) = -\dfrac{1}{4}(1+x)^{-3/2}$ and $g''(x) = 2$,
+        $$\lim_{x \to 0} \frac{\sqrt{1+x} - 1 - x/2}{x^2} = \lim_{x \to 0} \frac{f''(x)}{g''(x)} = \frac{-1/4}{2} = -\frac{1}{8}.$$</p>
+        <p>(4) Let $f(x) = x - \sin x$ and $g(x) = x^3$. Since $f'(x) = 1 - \cos x$, $g'(x) = 3x^2$ is again $0/0$, and $f''(x) = \sin x$, $g''(x) = 6x$ is again $0/0$, we apply L'Hôpital's Rule three times. Since $f'''(x) = \cos x$ and $g'''(x) = 6$,
+        $$\lim_{x \to 0} \frac{x - \sin x}{x^3} = \lim_{x \to 0} \frac{\cos x}{6} = \frac{1}{6}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">삼각함수의 0/0 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x + x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0+} \frac{\sin x}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0-} \frac{\sin x}{x^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x \to 0$일 때 $0/0$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to 0} \frac{1 - \cos x}{x + x^2} = \lim_{x \to 0} \frac{\sin x}{1 + 2x} = \frac{0}{1} = 0$$
+        이다.</p>
+        <p>(2), (3) $x \to 0$일 때 $\sin x \to 0$이므로 $0/0$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to 0} \frac{\sin x}{x^2} = \lim_{x \to 0} \frac{\cos x}{2x}$$
+        인데, $x \to 0+$이면 분자 $\cos x \to 1 \gt 0$이고 분모 $2x \to 0+$이므로 극한은 $+\infty$이고, $x \to 0-$이면 분모 $2x \to 0-$이므로 극한은 $-\infty$이다. 따라서
+        $$\lim_{x \to 0+} \frac{\sin x}{x^2} = +\infty, \qquad \lim_{x \to 0-} \frac{\sin x}{x^2} = -\infty$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x + x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0+} \frac{\sin x}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0-} \frac{\sin x}{x^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) As $x \to 0$ this is of the form $0/0$, so by L'Hôpital's Rule,
+        $$\lim_{x \to 0} \frac{1 - \cos x}{x + x^2} = \lim_{x \to 0} \frac{\sin x}{1 + 2x} = \frac{0}{1} = 0.$$</p>
+        <p>(2), (3) Since $\sin x \to 0$ as $x \to 0$, this is of the form $0/0$. By L'Hôpital's Rule,
+        $$\lim_{x \to 0} \frac{\sin x}{x^2} = \lim_{x \to 0} \frac{\cos x}{2x}.$$
+        As $x \to 0+$, the numerator $\cos x \to 1 \gt 0$ while the denominator $2x \to 0+$, so the limit is $+\infty$; as $x \to 0-$, the denominator $2x \to 0-$, so the limit is $-\infty$. Hence
+        $$\lim_{x \to 0+} \frac{\sin x}{x^2} = +\infty, \qquad \lim_{x \to 0-} \frac{\sin x}{x^2} = -\infty.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">∞/∞ 꼴 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \pi/2} \frac{\sec x}{1 + \tan x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{\ln x}{2\sqrt{x}}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{e^x}{x^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x \to \pi/2$일 때 $\sec x \to \infty$, $1 + \tan x \to \infty$이므로 $\infty/\infty$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to \pi/2} \frac{\sec x}{1 + \tan x} = \lim_{x \to \pi/2} \frac{\sec x \tan x}{\sec^2 x} = \lim_{x \to \pi/2} \frac{\tan x}{\sec x} = \lim_{x \to \pi/2} \sin x = 1$$
+        이다.</p>
+        <p>(2) $x \to \infty$일 때 $\infty/\infty$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \infty} \frac{\ln x}{2\sqrt{x}} = \lim_{x \to \infty} \frac{1/x}{1/\sqrt{x}} = \lim_{x \to \infty} \frac{1}{\sqrt{x}} = 0$$
+        이다.</p>
+        <p>(3) $x \to \infty$일 때 $\infty/\infty$ 꼴이므로 로피탈 정리를 두 번 적용하면
+        $$\lim_{x \to \infty} \frac{e^x}{x^2} = \lim_{x \to \infty} \frac{e^x}{2x} = \lim_{x \to \infty} \frac{e^x}{2} = \infty$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \pi/2} \frac{\sec x}{1 + \tan x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{\ln x}{2\sqrt{x}}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{e^x}{x^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) As $x \to \pi/2$, both $\sec x \to \infty$ and $1 + \tan x \to \infty$, so this is of the form $\infty/\infty$. By L'Hôpital's Rule,
+        $$\lim_{x \to \pi/2} \frac{\sec x}{1 + \tan x} = \lim_{x \to \pi/2} \frac{\sec x \tan x}{\sec^2 x} = \lim_{x \to \pi/2} \frac{\tan x}{\sec x} = \lim_{x \to \pi/2} \sin x = 1.$$</p>
+        <p>(2) As $x \to \infty$ this is of the form $\infty/\infty$, so by L'Hôpital's Rule,
+        $$\lim_{x \to \infty} \frac{\ln x}{2\sqrt{x}} = \lim_{x \to \infty} \frac{1/x}{1/\sqrt{x}} = \lim_{x \to \infty} \frac{1}{\sqrt{x}} = 0.$$</p>
+        <p>(3) As $x \to \infty$ this is of the form $\infty/\infty$; applying L'Hôpital's Rule twice,
+        $$\lim_{x \to \infty} \frac{e^x}{x^2} = \lim_{x \to \infty} \frac{e^x}{2x} = \lim_{x \to \infty} \frac{e^x}{2} = \infty.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">곱·차 꼴 부정형 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} \left(x \sin \frac{1}{x}\right)$</li>
+          <li>$\displaystyle\lim_{x \to 0+} \sqrt{x}\,\ln x$</li>
+          <li>$\displaystyle\lim_{x \to 0} \left(\frac{1}{\sin x} - \frac{1}{x}\right)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $t = 1/x$로 치환하면 $x \to \infty$일 때 $t \to 0$이고 $0/0$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \infty} x \sin \frac{1}{x} = \lim_{t \to 0} \frac{\sin t}{t} = \lim_{t \to 0} \frac{\cos t}{1} = 1$$
+        이다.</p>
+        <p>(2) $0 \cdot (-\infty)$ 꼴이므로
+        $$\sqrt{x}\,\ln x = \frac{\ln x}{x^{-1/2}}$$
+        로 바꾸면 $x \to 0+$일 때 $-\infty/\infty$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to 0+} \sqrt{x}\,\ln x = \lim_{x \to 0+} \frac{1/x}{-\frac12 x^{-3/2}} = \lim_{x \to 0+} (-2\sqrt{x}) = 0$$
+        이다.</p>
+        <p>(3) $\infty - \infty$ 꼴이므로 통분하여
+        $$\frac{1}{\sin x} - \frac{1}{x} = \frac{x - \sin x}{x \sin x}$$
+        로 바꾸면 $x \to 0$일 때 $0/0$ 꼴이다. 로피탈 정리를 두 번 적용하면
+        $$\lim_{x \to 0} \frac{x - \sin x}{x \sin x} = \lim_{x \to 0} \frac{1 - \cos x}{\sin x + x\cos x} = \lim_{x \to 0} \frac{\sin x}{2\cos x - x \sin x} = \frac{0}{2} = 0$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} \left(x \sin \frac{1}{x}\right)$</li>
+          <li>$\displaystyle\lim_{x \to 0+} \sqrt{x}\,\ln x$</li>
+          <li>$\displaystyle\lim_{x \to 0} \left(\frac{1}{\sin x} - \frac{1}{x}\right)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $t = 1/x$, as $x \to \infty$ we have $t \to 0$, and the limit is of the form $0/0$, so by L'Hôpital's Rule,
+        $$\lim_{x \to \infty} x \sin \frac{1}{x} = \lim_{t \to 0} \frac{\sin t}{t} = \lim_{t \to 0} \frac{\cos t}{1} = 1.$$</p>
+        <p>(2) This is of the form $0 \cdot (-\infty)$. Rewriting,
+        $$\sqrt{x}\,\ln x = \frac{\ln x}{x^{-1/2}},$$
+        which is of the form $-\infty/\infty$ as $x \to 0+$. By L'Hôpital's Rule,
+        $$\lim_{x \to 0+} \sqrt{x}\,\ln x = \lim_{x \to 0+} \frac{1/x}{-\frac12 x^{-3/2}} = \lim_{x \to 0+} (-2\sqrt{x}) = 0.$$</p>
+        <p>(3) This is of the form $\infty - \infty$. Combining the fractions,
+        $$\frac{1}{\sin x} - \frac{1}{x} = \frac{x - \sin x}{x \sin x},$$
+        which is of the form $0/0$ as $x \to 0$. Applying L'Hôpital's Rule twice,
+        $$\lim_{x \to 0} \frac{x - \sin x}{x \sin x} = \lim_{x \to 0} \frac{1 - \cos x}{\sin x + x\cos x} = \lim_{x \to 0} \frac{\sin x}{2\cos x - x \sin x} = \frac{0}{2} = 0.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-4 -->
+<div class="card ex-card" id="yu01-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-4</span>
+    <span class="ex-title">지수 꼴 부정형 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} (1+x)^{1/x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} x^{1/x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $1^{\infty}$ 꼴이므로 $y = (1+x)^{1/x}$라 하면 $\ln y = \dfrac{\ln(1+x)}{x}$이고, $x \to 0+$일 때 $0/0$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to 0+} \ln y = \lim_{x \to 0+} \frac{1/(1+x)}{1} = 1$$
+        이므로 $\displaystyle\lim_{x \to 0+} (1+x)^{1/x} = e^1 = e$이다.</p>
+        <p>(2) $\infty^0$ 꼴이므로 $y = x^{1/x}$라 하면 $\ln y = \dfrac{\ln x}{x}$이고, $x \to \infty$일 때 $\infty/\infty$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to \infty} \ln y = \lim_{x \to \infty} \frac{1/x}{1} = 0$$
+        이므로 $\displaystyle\lim_{x \to \infty} x^{1/x} = e^0 = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} (1+x)^{1/x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} x^{1/x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) This is of the form $1^{\infty}$. Let $y = (1+x)^{1/x}$, so $\ln y = \dfrac{\ln(1+x)}{x}$, which is of the form $0/0$ as $x \to 0+$. By L'Hôpital's Rule,
+        $$\lim_{x \to 0+} \ln y = \lim_{x \to 0+} \frac{1/(1+x)}{1} = 1,$$
+        so $\displaystyle\lim_{x \to 0+} (1+x)^{1/x} = e^1 = e$.</p>
+        <p>(2) This is of the form $\infty^0$. Let $y = x^{1/x}$, so $\ln y = \dfrac{\ln x}{x}$, which is of the form $\infty/\infty$ as $x \to \infty$. By L'Hôpital's Rule,
+        $$\lim_{x \to \infty} \ln y = \lim_{x \to \infty} \frac{1/x}{1} = 0,$$
+        so $\displaystyle\lim_{x \to \infty} x^{1/x} = e^0 = 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">극한이 0이 되는 계수 결정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\lim_{x \to 0} \left(\frac{\tan 2x}{x^3} + \frac{a}{x^2} + \frac{\sin bx}{x}\right) = 0$이 성립하도록 하는 $a, b$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\tan u$의 매클로린 전개 $\tan u = u + \dfrac{u^3}{3} + O(u^5)$에서 $u = 2x$를 대입하면
+        $$\tan 2x = 2x + \frac{8x^3}{3} + O(x^5)$$
+        이므로
+        $$\frac{\tan 2x}{x^3} = \frac{2}{x^2} + \frac{8}{3} + O(x^2)$$
+        이다. 또한 $\sin bx = bx - \dfrac{b^3x^3}{6} + O(x^5)$이므로
+        $$\frac{\sin bx}{x} = b - \frac{b^3x^2}{6} + O(x^4)$$
+        이다. 이를 모두 더하면
+        $$\frac{\tan 2x}{x^3} + \frac{a}{x^2} + \frac{\sin bx}{x} = \frac{2+a}{x^2} + \left(\frac{8}{3} + b\right) + O(x^2)$$
+        이다. $x \to 0$일 때 이 값이 $0$으로 수렴하려면 $1/x^2$의 계수와 상수항이 모두 $0$이어야 하므로
+        $$2 + a = 0, \qquad \frac{8}{3} + b = 0$$
+        을 얻는다. 따라서 $a = -2$, $b = -\dfrac{8}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $a, b$ such that $\displaystyle\lim_{x \to 0} \left(\frac{\tan 2x}{x^3} + \frac{a}{x^2} + \frac{\sin bx}{x}\right) = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> From the Maclaurin expansion $\tan u = u + \dfrac{u^3}{3} + O(u^5)$ with $u = 2x$,
+        $$\tan 2x = 2x + \frac{8x^3}{3} + O(x^5),$$
+        so
+        $$\frac{\tan 2x}{x^3} = \frac{2}{x^2} + \frac{8}{3} + O(x^2).$$
+        Also $\sin bx = bx - \dfrac{b^3x^3}{6} + O(x^5)$, so
+        $$\frac{\sin bx}{x} = b - \frac{b^3x^2}{6} + O(x^4).$$
+        Adding all three terms,
+        $$\frac{\tan 2x}{x^3} + \frac{a}{x^2} + \frac{\sin bx}{x} = \frac{2+a}{x^2} + \left(\frac{8}{3} + b\right) + O(x^2).$$
+        For this to converge to $0$ as $x \to 0$, both the coefficient of $1/x^2$ and the constant term must vanish:
+        $$2 + a = 0, \qquad \frac{8}{3} + b = 0.$$
+        Hence $a = -2$ and $b = -\dfrac{8}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">수평점근선 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 함수의 수평점근선을 찾으시오.</p>
+        <ol>
+          <li>$y = x \tan \dfrac{1}{x}$</li>
+          <li>$y = \dfrac{3x + e^{2x}}{2x + e^{3x}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $t = 1/x$로 치환하면 $x \to \pm\infty$일 때 $t \to 0$이고 $0/0$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \pm\infty} x \tan \frac{1}{x} = \lim_{t \to 0} \frac{\tan t}{t} = \lim_{t \to 0} \frac{\sec^2 t}{1} = 1$$
+        이다. 따라서 $x \to \infty$, $x \to -\infty$ 양쪽 모두 수평점근선은 $y = 1$이다.</p>
+        <p>(2) $x \to \infty$일 때 분자, 분모 모두 $\infty$로 발산하므로 로피탈 정리를 두 번 적용하면
+        $$\lim_{x \to \infty} \frac{3x + e^{2x}}{2x + e^{3x}} = \lim_{x \to \infty} \frac{3 + 2e^{2x}}{2 + 3e^{3x}} = \lim_{x \to \infty} \frac{4e^{2x}}{9e^{3x}} = \lim_{x \to \infty} \frac{4}{9}e^{-x} = 0$$
+        이다. $x \to -\infty$일 때는 $e^{2x} \to 0$, $e^{3x} \to 0$이므로
+        $$\lim_{x \to -\infty} \frac{3x + e^{2x}}{2x + e^{3x}} = \lim_{x \to -\infty} \frac{3 + 2e^{2x}}{2 + 3e^{3x}} = \frac{3}{2}$$
+        이다 (분자, 분모 모두 $-\infty$로 발산하므로 로피탈 정리를 적용했다). 따라서 $x \to \infty$일 때 수평점근선은 $y = 0$이고, $x \to -\infty$일 때 수평점근선은 $y = 3/2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the horizontal asymptotes of the following functions.</p>
+        <ol>
+          <li>$y = x \tan \dfrac{1}{x}$</li>
+          <li>$y = \dfrac{3x + e^{2x}}{2x + e^{3x}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $t = 1/x$, as $x \to \pm\infty$ we have $t \to 0$, and the limit is of the form $0/0$, so by L'Hôpital's Rule,
+        $$\lim_{x \to \pm\infty} x \tan \frac{1}{x} = \lim_{t \to 0} \frac{\tan t}{t} = \lim_{t \to 0} \frac{\sec^2 t}{1} = 1.$$
+        Hence the horizontal asymptote is $y = 1$ both as $x \to \infty$ and as $x \to -\infty$.</p>
+        <p>(2) As $x \to \infty$, both the numerator and denominator diverge to $\infty$; applying L'Hôpital's Rule twice,
+        $$\lim_{x \to \infty} \frac{3x + e^{2x}}{2x + e^{3x}} = \lim_{x \to \infty} \frac{3 + 2e^{2x}}{2 + 3e^{3x}} = \lim_{x \to \infty} \frac{4e^{2x}}{9e^{3x}} = \lim_{x \to \infty} \frac{4}{9}e^{-x} = 0.$$
+        As $x \to -\infty$, $e^{2x} \to 0$ and $e^{3x} \to 0$, and since numerator and denominator both diverge to $-\infty$ we again apply L'Hôpital's Rule once to get
+        $$\lim_{x \to -\infty} \frac{3x + e^{2x}}{2x + e^{3x}} = \lim_{x \to -\infty} \frac{3 + 2e^{2x}}{2 + 3e^{3x}} = \frac{3}{2}.$$
+        Hence the horizontal asymptote is $y = 0$ as $x \to \infty$, and $y = 3/2$ as $x \to -\infty$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">지수함수의 연속과 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \begin{cases} (\sin x)^x & (x \gt 0) \\ a & (x = 0) \end{cases}$이라 하자.</p>
+        <ol>
+          <li>$y = f(x)$가 $x = 0$에서 연속이 되도록 하는 $a$의 값을 구하시오.</li>
+          <li>$[0, \pi]$에서 $y = f(x)$의 최댓값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x \to 0+$일 때 $y = (\sin x)^x$의 극한을 구하자. $\ln y = x \ln \sin x$는 $0 \cdot (-\infty)$ 꼴이므로
+        $$\ln y = \frac{\ln \sin x}{1/x}$$
+        로 바꾸면 $-\infty/\infty$ 꼴이다. 로피탈 정리에 의해
+        $$\lim_{x \to 0+} \ln y = \lim_{x \to 0+} \frac{\cot x}{-1/x^2} = \lim_{x \to 0+} \left(-x^2 \cot x\right) = \lim_{x \to 0+} \left(-x \cdot \frac{x}{\sin x} \cdot \cos x\right) = -0 \cdot 1 \cdot 1 = 0$$
+        이다. 따라서 $\displaystyle\lim_{x \to 0+}(\sin x)^x = e^0 = 1$이므로, $y = f(x)$가 $x = 0$에서 연속이 되려면 $a = 1$이어야 한다.</p>
+        <p>(2) $x \in (0, \pi)$에서 $0 \lt \sin x \leq 1$이므로 $\ln \sin x \leq 0$이고, $x \gt 0$이므로
+        $$\ln f(x) = x \ln \sin x \leq 0$$
+        이다. 즉 $f(x) \leq 1$이다. 등호는 $\ln \sin x = 0$, 즉 $\sin x = 1$일 때, 다시 말해 $x = \pi/2$일 때 성립한다 ($f(\pi/2) = 1^{\pi/2} = 1$). 한편 $x = \pi$에서는 $f(\pi) = 0^{\pi} = 0 \lt 1$이고, (1)에 의해 $f(0) = a = 1$이다. 따라서 $[0, \pi]$에서 $y = f(x)$의 최댓값은 $1$이고, $x = 0$과 $x = \pi/2$에서 이 값을 얻는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x) = \begin{cases} (\sin x)^x & (x \gt 0) \\ a & (x = 0) \end{cases}$.</p>
+        <ol>
+          <li>Find the value of $a$ such that $y = f(x)$ is continuous at $x = 0$.</li>
+          <li>Find the maximum value of $y = f(x)$ on $[0, \pi]$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) We find the limit of $y = (\sin x)^x$ as $x \to 0+$. Since $\ln y = x \ln \sin x$ is of the form $0 \cdot (-\infty)$, rewrite it as
+        $$\ln y = \frac{\ln \sin x}{1/x},$$
+        which is of the form $-\infty/\infty$. By L'Hôpital's Rule,
+        $$\lim_{x \to 0+} \ln y = \lim_{x \to 0+} \frac{\cot x}{-1/x^2} = \lim_{x \to 0+} \left(-x^2 \cot x\right) = \lim_{x \to 0+} \left(-x \cdot \frac{x}{\sin x} \cdot \cos x\right) = -0 \cdot 1 \cdot 1 = 0.$$
+        Hence $\displaystyle\lim_{x \to 0+}(\sin x)^x = e^0 = 1$, so $y = f(x)$ is continuous at $x = 0$ exactly when $a = 1$.</p>
+        <p>(2) For $x \in (0, \pi)$ we have $0 \lt \sin x \leq 1$, so $\ln \sin x \leq 0$; since $x \gt 0$,
+        $$\ln f(x) = x \ln \sin x \leq 0,$$
+        i.e., $f(x) \leq 1$. Equality holds when $\ln \sin x = 0$, i.e., $\sin x = 1$, which occurs at $x = \pi/2$ (where $f(\pi/2) = 1^{\pi/2} = 1$). Meanwhile at $x = \pi$ we have $f(\pi) = 0^{\pi} = 0 \lt 1$, and by part (1), $f(0) = a = 1$. Hence the maximum value of $y = f(x)$ on $[0, \pi]$ is $1$, attained at both $x = 0$ and $x = \pi/2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">코시 평균값 정리로 c 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 함수와 주어진 구간에서 코시의 평균값 정리를 만족하는 $c$를 찾으시오.</p>
+        <ol>
+          <li>$f(x) = x$, $g(x) = x^2$, $(a, b) = (-2, 0)$</li>
+          <li>$f(x) = x^3/3 - 4x$, $g(x) = x^2$, $(a, b) = (0, 3)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 코시의 평균값 정리에 의해 $\dfrac{f(b) - f(a)}{g(b) - g(a)} = \dfrac{f'(c)}{g'(c)}$를 만족하는 $c \in (a, b)$가 존재한다.</p>
+        <p>(1) $f(x) = x$, $g(x) = x^2$, $(a, b) = (-2, 0)$일 때
+        $$\frac{f(0) - f(-2)}{g(0) - g(-2)} = \frac{0 - (-2)}{0 - 4} = -\frac{1}{2}$$
+        이고 $f'(c) = 1$, $g'(c) = 2c$이므로
+        $$\frac{1}{2c} = -\frac{1}{2}$$
+        에서 $c = -1$이다. $c = -1 \in (-2, 0)$이므로 조건을 만족한다.</p>
+        <p>(2) $f(x) = x^3/3 - 4x$, $g(x) = x^2$, $(a, b) = (0, 3)$일 때
+        $$\frac{f(3) - f(0)}{g(3) - g(0)} = \frac{(9 - 12) - 0}{9 - 0} = -\frac{1}{3}$$
+        이고 $f'(c) = c^2 - 4$, $g'(c) = 2c$이므로
+        $$\frac{c^2 - 4}{2c} = -\frac{1}{3}$$
+        에서 $3c^2 + 2c - 12 = 0$, 즉
+        $$c = \frac{-2 \pm \sqrt{4 + 144}}{6} = \frac{-1 \pm \sqrt{37}}{3}$$
+        이다. 이 중 $(0, 3)$에 속하는 것은 $c = \dfrac{-1 + \sqrt{37}}{3}$ ($\approx 1.69$)뿐이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $c$ satisfying Cauchy's Mean Value Theorem for the given functions on the given interval.</p>
+        <ol>
+          <li>$f(x) = x$, $g(x) = x^2$, $(a, b) = (-2, 0)$</li>
+          <li>$f(x) = x^3/3 - 4x$, $g(x) = x^2$, $(a, b) = (0, 3)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By Cauchy's Mean Value Theorem, there exists $c \in (a, b)$ such that $\dfrac{f(b) - f(a)}{g(b) - g(a)} = \dfrac{f'(c)}{g'(c)}$.</p>
+        <p>(1) For $f(x) = x$, $g(x) = x^2$, $(a, b) = (-2, 0)$,
+        $$\frac{f(0) - f(-2)}{g(0) - g(-2)} = \frac{0 - (-2)}{0 - 4} = -\frac{1}{2},$$
+        and $f'(c) = 1$, $g'(c) = 2c$, so
+        $$\frac{1}{2c} = -\frac{1}{2}$$
+        gives $c = -1$. Since $c = -1 \in (-2, 0)$, this satisfies the condition.</p>
+        <p>(2) For $f(x) = x^3/3 - 4x$, $g(x) = x^2$, $(a, b) = (0, 3)$,
+        $$\frac{f(3) - f(0)}{g(3) - g(0)} = \frac{(9 - 12) - 0}{9 - 0} = -\frac{1}{3},$$
+        and $f'(c) = c^2 - 4$, $g'(c) = 2c$, so
+        $$\frac{c^2 - 4}{2c} = -\frac{1}{3}$$
+        gives $3c^2 + 2c - 12 = 0$, i.e.,
+        $$c = \frac{-2 \pm \sqrt{4 + 144}}{6} = \frac{-1 \pm \sqrt{37}}{3}.$$
+        Of these, only $c = \dfrac{-1 + \sqrt{37}}{3}$ ($\approx 1.69$) lies in $(0, 3)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03 -->
+<div class="card ex-card" id="yu03">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03</span>
+    <span class="ex-title">곡선의 접선벡터와 평행</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 함수 $f, g, h : [a, b] \to \mathbb{R}$이 $[a, b]$에서 연속이고 $(a, b)$에서 미분가능하다고 하자.</p>
+        <ol>
+          <li>평면곡선 $X(t) = (f(t), g(t))$에 대해 벡터 $X(b) - X(a)$와 평행하도록 하는 접선벡터 $X'(c) = (f'(c), g'(c))$, $a \lt c \lt b$가 존재함을 보이시오.</li>
+          <li>공간곡선 $X(t) = (f(t), g(t), h(t))$에 대해 벡터 $X(b) - X(a)$와 평행하도록 하는 접선벡터 $X'(c) = (f'(c), g'(c), h'(c))$, $a \lt c \lt b$가 항상 존재하지는 않음을 보이시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기"><span class="arrow">&#9654;</span> 증명 보기</button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) $v = X(b) - X(a) = (f(b) - f(a),\, g(b) - g(a))$라 하고
+        $$\varphi(t) = f(t)\bigl(g(b) - g(a)\bigr) - g(t)\bigl(f(b) - f(a)\bigr)$$
+        이라 하자. $\varphi$는 $[a, b]$에서 연속이고 $(a, b)$에서 미분가능하다. 계산하면
+        $$\varphi(a) = f(a)g(b) - f(a)g(a) - g(a)f(b) + g(a)f(a) = f(a)g(b) - g(a)f(b),$$
+        $$\varphi(b) = f(b)g(b) - f(b)g(a) - g(b)f(b) + g(b)f(a) = f(a)g(b) - g(a)f(b)$$
+        이므로 $\varphi(a) = \varphi(b)$이다. 롤의 정리에 의해 $\varphi'(c) = 0$을 만족하는 $c \in (a, b)$가 존재하고,
+        $$\varphi'(c) = f'(c)\bigl(g(b) - g(a)\bigr) - g'(c)\bigl(f(b) - f(a)\bigr) = 0$$
+        이다. 이는 벡터 $X'(c) = (f'(c), g'(c))$와 $v = X(b) - X(a)$의 외적(스칼라)이 $0$임을 뜻하므로, $X'(c)$는 $v$와 평행하다.</p>
+        <p>(2) $f(t) = \cos t$, $g(t) = \sin t$, $h(t) = t$, $(a, b) = (0, 2\pi)$인 경우를 생각하자. 이들은 $[0, 2\pi]$에서 연속이고 $(0, 2\pi)$에서 미분가능하다.
+        $$X(2\pi) - X(0) = (\cos 2\pi - \cos 0,\ \sin 2\pi - \sin 0,\ 2\pi - 0) = (0, 0, 2\pi)$$
+        이므로 $X'(c) = (-\sin c, \cos c, 1)$이 $(0, 0, 2\pi)$와 평행하려면
+        $$-\sin c = 0, \qquad \cos c = 0$$
+        이 동시에 성립해야 한다. 그러나 $\sin^2 c + \cos^2 c = 1$이므로 $\sin c = \cos c = 0$을 동시에 만족하는 $c$는 존재하지 않는다. 따라서 이 경우 $X'(c)$가 $X(b) - X(a)$와 평행하도록 하는 $c \in (a, b)$는 존재하지 않으며, 공간곡선에서는 그러한 $c$가 항상 존재하지는 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let two functions $f, g, h : [a, b] \to \mathbb{R}$ be continuous on $[a, b]$ and differentiable on $(a, b)$.</p>
+        <ol>
+          <li>For the plane curve $X(t) = (f(t), g(t))$, show that there exists a tangent vector $X'(c) = (f'(c), g'(c))$, $a \lt c \lt b$, parallel to the vector $X(b) - X(a)$.</li>
+          <li>For the space curve $X(t) = (f(t), g(t), h(t))$, show that a tangent vector $X'(c) = (f'(c), g'(c), h'(c))$, $a \lt c \lt b$, parallel to the vector $X(b) - X(a)$ does not always exist.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof"><span class="arrow">&#9654;</span> Proof</button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $v = X(b) - X(a) = (f(b) - f(a),\, g(b) - g(a))$, and define
+        $$\varphi(t) = f(t)\bigl(g(b) - g(a)\bigr) - g(t)\bigl(f(b) - f(a)\bigr).$$
+        Then $\varphi$ is continuous on $[a, b]$ and differentiable on $(a, b)$. Computing,
+        $$\varphi(a) = f(a)g(b) - f(a)g(a) - g(a)f(b) + g(a)f(a) = f(a)g(b) - g(a)f(b),$$
+        $$\varphi(b) = f(b)g(b) - f(b)g(a) - g(b)f(b) + g(b)f(a) = f(a)g(b) - g(a)f(b),$$
+        so $\varphi(a) = \varphi(b)$. By Rolle's Theorem, there exists $c \in (a, b)$ with $\varphi'(c) = 0$, i.e.,
+        $$\varphi'(c) = f'(c)\bigl(g(b) - g(a)\bigr) - g'(c)\bigl(f(b) - f(a)\bigr) = 0.$$
+        This means the (scalar) cross product of $X'(c) = (f'(c), g'(c))$ and $v = X(b) - X(a)$ is $0$, so $X'(c)$ is parallel to $v$.</p>
+        <p>(2) Consider $f(t) = \cos t$, $g(t) = \sin t$, $h(t) = t$, $(a, b) = (0, 2\pi)$, which are continuous on $[0, 2\pi]$ and differentiable on $(0, 2\pi)$. Then
+        $$X(2\pi) - X(0) = (\cos 2\pi - \cos 0,\ \sin 2\pi - \sin 0,\ 2\pi - 0) = (0, 0, 2\pi),$$
+        so for $X'(c) = (-\sin c, \cos c, 1)$ to be parallel to $(0, 0, 2\pi)$ we would need
+        $$-\sin c = 0 \quad \text{and} \quad \cos c = 0$$
+        simultaneously. But since $\sin^2 c + \cos^2 c = 1$, no $c$ satisfies $\sin c = \cos c = 0$ at once. Hence no $c \in (a, b)$ makes $X'(c)$ parallel to $X(b) - X(a)$ in this case, so for space curves such a $c$ does not always exist.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">함수의 증가율 비교</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x \to \infty$일 때 두 함수의 증가율을 비교하시오.</p>
+        <ol>
+          <li>$f(x) = e^x$, $g(x) = x^2$</li>
+          <li>$f(x) = 3^x$, $g(x) = 2^x$</li>
+          <li>$f(x) = x^2$, $g(x) = \ln x$</li>
+          <li>$f(x) = \ln x$, $g(x) = x^{1/n}$ (단, $n$은 자연수)</li>
+          <li>$f(x) = a^x$, $g(x) = b^x$ (단, $a \gt b \gt 0$)</li>
+          <li>$f(x) = \log_a x$, $g(x) = \log_b x$ (단, $a \gt b \gt 1$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x \to \infty$일 때 두 함수의 비의 극한을 조사한다.</p>
+        <p>(1) $\displaystyle\lim_{x \to \infty} \frac{e^x}{x^2}$는 $\infty/\infty$ 꼴이므로 로피탈 정리를 두 번 적용하면
+        $$\lim_{x \to \infty} \frac{e^x}{x^2} = \lim_{x \to \infty} \frac{e^x}{2x} = \lim_{x \to \infty} \frac{e^x}{2} = \infty$$
+        이다. 따라서 $f(x) = e^x$는 $g(x) = x^2$보다 빠르게 증가한다.</p>
+        <p>(2) $\displaystyle\lim_{x \to \infty} \frac{3^x}{2^x} = \lim_{x \to \infty} \left(\frac{3}{2}\right)^x = \infty$이다 ($3/2 \gt 1$이므로). 따라서 $f(x) = 3^x$는 $g(x) = 2^x$보다 빠르게 증가한다.</p>
+        <p>(3) $\displaystyle\lim_{x \to \infty} \frac{x^2}{\ln x}$는 $\infty/\infty$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \infty} \frac{x^2}{\ln x} = \lim_{x \to \infty} \frac{2x}{1/x} = \lim_{x \to \infty} 2x^2 = \infty$$
+        이다. 따라서 $f(x) = x^2$는 $g(x) = \ln x$보다 빠르게 증가한다.</p>
+        <p>(4) $\displaystyle\lim_{x \to \infty} \frac{\ln x}{x^{1/n}}$는 $\infty/\infty$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \infty} \frac{\ln x}{x^{1/n}} = \lim_{x \to \infty} \frac{1/x}{\frac{1}{n}x^{1/n - 1}} = \lim_{x \to \infty} n x^{-1/n} = 0$$
+        이다. 따라서 $g(x) = x^{1/n}$은 $f(x) = \ln x$보다 빠르게 증가한다 (즉 로그함수는 임의의 양의 거듭제곱보다 느리게 증가한다).</p>
+        <p>(5) $a \gt b \gt 0$이므로 $a/b \gt 1$이고,
+        $$\lim_{x \to \infty} \frac{a^x}{b^x} = \lim_{x \to \infty} \left(\frac{a}{b}\right)^x = \infty$$
+        이다. 따라서 $f(x) = a^x$는 $g(x) = b^x$보다 빠르게 증가한다.</p>
+        <p>(6) 밑을 바꾸면 $\log_a x = \dfrac{\ln x}{\ln a}$, $\log_b x = \dfrac{\ln x}{\ln b}$이므로
+        $$\frac{f(x)}{g(x)} = \frac{\log_a x}{\log_b x} = \frac{\ln b}{\ln a}$$
+        는 $x$에 무관한 상수이다 ($a \gt b \gt 1$이므로 $\ln a \gt \ln b \gt 0$이고 이 상수는 $0$과 $1$ 사이의 값). 따라서 $f(x) = \log_a x$와 $g(x) = \log_b x$는 같은 증가율을 가지며, $\log_b x = \dfrac{\ln a}{\ln b}\log_a x$로 비례 관계에 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compare the growth rates of the two functions as $x \to \infty$.</p>
+        <ol>
+          <li>$f(x) = e^x$, $g(x) = x^2$</li>
+          <li>$f(x) = 3^x$, $g(x) = 2^x$</li>
+          <li>$f(x) = x^2$, $g(x) = \ln x$</li>
+          <li>$f(x) = \ln x$, $g(x) = x^{1/n}$ (where $n$ is a natural number)</li>
+          <li>$f(x) = a^x$, $g(x) = b^x$ (where $a \gt b \gt 0$)</li>
+          <li>$f(x) = \log_a x$, $g(x) = \log_b x$ (where $a \gt b \gt 1$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We examine the limit of the ratio of the two functions as $x \to \infty$.</p>
+        <p>(1) $\displaystyle\lim_{x \to \infty} \frac{e^x}{x^2}$ is of the form $\infty/\infty$; applying L'Hôpital's Rule twice,
+        $$\lim_{x \to \infty} \frac{e^x}{x^2} = \lim_{x \to \infty} \frac{e^x}{2x} = \lim_{x \to \infty} \frac{e^x}{2} = \infty.$$
+        Hence $f(x) = e^x$ grows faster than $g(x) = x^2$.</p>
+        <p>(2) $\displaystyle\lim_{x \to \infty} \frac{3^x}{2^x} = \lim_{x \to \infty} \left(\frac{3}{2}\right)^x = \infty$ since $3/2 \gt 1$. Hence $f(x) = 3^x$ grows faster than $g(x) = 2^x$.</p>
+        <p>(3) $\displaystyle\lim_{x \to \infty} \frac{x^2}{\ln x}$ is of the form $\infty/\infty$, so by L'Hôpital's Rule,
+        $$\lim_{x \to \infty} \frac{x^2}{\ln x} = \lim_{x \to \infty} \frac{2x}{1/x} = \lim_{x \to \infty} 2x^2 = \infty.$$
+        Hence $f(x) = x^2$ grows faster than $g(x) = \ln x$.</p>
+        <p>(4) $\displaystyle\lim_{x \to \infty} \frac{\ln x}{x^{1/n}}$ is of the form $\infty/\infty$, so by L'Hôpital's Rule,
+        $$\lim_{x \to \infty} \frac{\ln x}{x^{1/n}} = \lim_{x \to \infty} \frac{1/x}{\frac{1}{n}x^{1/n - 1}} = \lim_{x \to \infty} n x^{-1/n} = 0.$$
+        Hence $g(x) = x^{1/n}$ grows faster than $f(x) = \ln x$ (that is, a logarithm grows slower than any positive power of $x$).</p>
+        <p>(5) Since $a \gt b \gt 0$, we have $a/b \gt 1$, and
+        $$\lim_{x \to \infty} \frac{a^x}{b^x} = \lim_{x \to \infty} \left(\frac{a}{b}\right)^x = \infty.$$
+        Hence $f(x) = a^x$ grows faster than $g(x) = b^x$.</p>
+        <p>(6) Changing base, $\log_a x = \dfrac{\ln x}{\ln a}$ and $\log_b x = \dfrac{\ln x}{\ln b}$, so
+        $$\frac{f(x)}{g(x)} = \frac{\log_a x}{\log_b x} = \frac{\ln b}{\ln a}$$
+        is a constant independent of $x$ (since $a \gt b \gt 1$, $\ln a \gt \ln b \gt 0$, and this constant lies between $0$ and $1$). Hence $f(x) = \log_a x$ and $g(x) = \log_b x$ have the same growth rate, related proportionally by $\log_b x = \dfrac{\ln a}{\ln b}\log_a x$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04 -->
+<div class="card ex-card" id="yu04">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04</span>
+    <span class="ex-title">증가율 비교</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x \to \infty$일 때 주어진 함수들의 증가율을 비교하시오.</p>
+        <ol>
+          <li>$f(x) = \sqrt{x^2 + 5}$, $g(x) = (2\sqrt{x} - 1)^2$</li>
+          <li>$f(x) = \ln(x + 999)$, $g(x) = \ln x$</li>
+          <li>$f(x) = \log_2(x^2)$, $g(x) = \log_{10}(10x)$, $h(x) = 1/\sqrt{x}$, $r(x) = 1/x^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x \to \infty$일 때 $\sqrt{x^2+5} = x\sqrt{1 + 5/x^2}$이고, $g(x) = (2\sqrt{x}-1)^2 = 4x - 4\sqrt{x} + 1$이다.
+        $$\lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{x\sqrt{1+5/x^2}}{4x - 4\sqrt{x}+1} = \lim_{x \to \infty} \frac{\sqrt{1+5/x^2}}{4 - 4/\sqrt{x} + 1/x} = \frac{1}{4}$$
+        로 $0$이 아닌 유한한 상수이므로, $f(x) = \sqrt{x^2+5}$와 $g(x) = (2\sqrt{x}-1)^2$은 같은 증가율을 갖는다 ($g$가 $f$보다 항상 약 $4$배 크다).</p>
+        <p>(2) $\ln(x+999) = \ln x + \ln\!\left(1 + \dfrac{999}{x}\right)$이고 $x \to \infty$일 때 $\infty/\infty$ 꼴이므로 로피탈 정리에 의해
+        $$\lim_{x \to \infty} \frac{\ln(x+999)}{\ln x} = \lim_{x \to \infty} \frac{1/(x+999)}{1/x} = \lim_{x \to \infty} \frac{x}{x+999} = 1$$
+        이다. 따라서 $f(x) = \ln(x+999)$와 $g(x) = \ln x$는 같은 증가율을 가지며, 사실상 점근적으로 같다.</p>
+        <p>(3) 먼저 $f(x) = \log_2(x^2) = \dfrac{2\ln x}{\ln 2}$, $g(x) = \log_{10}(10x) = 1 + \dfrac{\ln x}{\ln 10} \sim \dfrac{\ln x}{\ln 10}$이므로
+        $$\lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{2\ln x/\ln 2}{\ln x/\ln 10} = \frac{2\ln 10}{\ln 2}$$
+        는 $0$이 아닌 유한한 상수이다. 따라서 $f, g$는 같은 증가율(둘 다 $\ln x$의 상수배)을 갖는다.</p>
+        <p>한편 $h(x) = 1/\sqrt{x} \to 0$, $r(x) = 1/x^2 \to 0$이고
+        $$\lim_{x \to \infty} \frac{r(x)}{h(x)} = \lim_{x \to \infty} \frac{1/x^2}{1/\sqrt{x}} = \lim_{x \to \infty} x^{-3/2} = 0$$
+        이므로 $r(x)$가 $h(x)$보다 더 빠르게 $0$으로 수렴한다. 즉 $h(x)$는 $r(x)$보다 느리게 감소한다. 정리하면, $f, g$는 (발산 방향으로) 같은 증가율을 갖고, $h, r$은 모두 $0$으로 수렴하되 $h$가 $r$보다 느리게 감소한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compare the growth rates of the given functions as $x \to \infty$.</p>
+        <ol>
+          <li>$f(x) = \sqrt{x^2 + 5}$, $g(x) = (2\sqrt{x} - 1)^2$</li>
+          <li>$f(x) = \ln(x + 999)$, $g(x) = \ln x$</li>
+          <li>$f(x) = \log_2(x^2)$, $g(x) = \log_{10}(10x)$, $h(x) = 1/\sqrt{x}$, $r(x) = 1/x^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) As $x \to \infty$, $\sqrt{x^2+5} = x\sqrt{1 + 5/x^2}$, and $g(x) = (2\sqrt{x}-1)^2 = 4x - 4\sqrt{x} + 1$.
+        $$\lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{x\sqrt{1+5/x^2}}{4x - 4\sqrt{x}+1} = \lim_{x \to \infty} \frac{\sqrt{1+5/x^2}}{4 - 4/\sqrt{x} + 1/x} = \frac{1}{4},$$
+        a nonzero finite constant. Hence $f(x) = \sqrt{x^2+5}$ and $g(x) = (2\sqrt{x}-1)^2$ have the same growth rate ($g$ is consistently about $4$ times $f$).</p>
+        <p>(2) Since $\ln(x+999) = \ln x + \ln\!\left(1 + \dfrac{999}{x}\right)$, and this is of the form $\infty/\infty$ as $x \to \infty$, by L'Hôpital's Rule,
+        $$\lim_{x \to \infty} \frac{\ln(x+999)}{\ln x} = \lim_{x \to \infty} \frac{1/(x+999)}{1/x} = \lim_{x \to \infty} \frac{x}{x+999} = 1.$$
+        Hence $f(x) = \ln(x+999)$ and $g(x) = \ln x$ have the same growth rate, and are in fact asymptotically equal.</p>
+        <p>(3) First, $f(x) = \log_2(x^2) = \dfrac{2\ln x}{\ln 2}$ and $g(x) = \log_{10}(10x) = 1 + \dfrac{\ln x}{\ln 10} \sim \dfrac{\ln x}{\ln 10}$, so
+        $$\lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{2\ln x/\ln 2}{\ln x/\ln 10} = \frac{2\ln 10}{\ln 2},$$
+        a nonzero finite constant. Hence $f, g$ have the same growth rate (both are constant multiples of $\ln x$).</p>
+        <p>Meanwhile $h(x) = 1/\sqrt{x} \to 0$ and $r(x) = 1/x^2 \to 0$, and
+        $$\lim_{x \to \infty} \frac{r(x)}{h(x)} = \lim_{x \to \infty} \frac{1/x^2}{1/\sqrt{x}} = \lim_{x \to \infty} x^{-3/2} = 0,$$
+        so $r(x)$ converges to $0$ faster than $h(x)$; that is, $h(x)$ decreases more slowly than $r(x)$. In summary, $f, g$ have the same growth rate (as they diverge), while $h, r$ both converge to $0$ with $h$ decreasing more slowly than $r$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">o·O 표기 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 함수 $f(x), g(x)$에 대해 $f(x) = o(g(x))$인지 판단하고 $f(x) = O(g(x))$인지 판단하시오.</p>
+        <ol>
+          <li>$f(x) = x$, $g(x) = \ln x$</li>
+          <li>$f(x) = x^2$, $g(x) = x^3 + 1$</li>
+          <li>$f(x) = x + \sin x$, $g(x) = x$</li>
+          <li>$f(x) = e^x + x^2$, $g(x) = e^x$</li>
+          <li>$f(x) = x$, $g(x) = e^x$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x \to \infty$일 때를 기준으로 판단한다. $f = o(g)$는 $\displaystyle\lim \frac{f(x)}{g(x)} = 0$을, $f = O(g)$는 $x$가 충분히 클 때 $\left|\dfrac{f(x)}{g(x)}\right|$가 유계임을 뜻한다.</p>
+        <p>(1) $\displaystyle\frac{x}{\ln x} \to \infty$이므로 ($x$가 $\ln x$보다 빠르게 증가) $x = o(\ln x)$는 거짓이고, 비가 유계가 아니므로 $x = O(\ln x)$도 거짓이다.</p>
+        <p>(2) $\displaystyle\frac{x^2}{x^3+1} \to 0$이므로 $x^2 = o(x^3+1)$은 참이다. $o$이면 자동으로 $O$이므로 $x^2 = O(x^3+1)$도 참이다.</p>
+        <p>(3) $\displaystyle\frac{x+\sin x}{x} = 1 + \frac{\sin x}{x} \to 1 \neq 0$이므로 $x + \sin x = o(x)$는 거짓이다. 그러나 이 비가 $1$로 수렴하여 (유계이므로) $x + \sin x = O(x)$는 참이다.</p>
+        <p>(4) $\displaystyle\frac{e^x+x^2}{e^x} = 1 + \frac{x^2}{e^x} \to 1 \neq 0$이므로 $e^x+x^2 = o(e^x)$는 거짓이다. 비가 $1$로 수렴하므로 $e^x+x^2 = O(e^x)$는 참이다.</p>
+        <p>(5) $\displaystyle\frac{x}{e^x} \to 0$이므로 $x = o(e^x)$는 참이고, 따라서 $x = O(e^x)$도 참이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the two functions $f(x), g(x)$, determine whether $f(x) = o(g(x))$ and whether $f(x) = O(g(x))$.</p>
+        <ol>
+          <li>$f(x) = x$, $g(x) = \ln x$</li>
+          <li>$f(x) = x^2$, $g(x) = x^3 + 1$</li>
+          <li>$f(x) = x + \sin x$, $g(x) = x$</li>
+          <li>$f(x) = e^x + x^2$, $g(x) = e^x$</li>
+          <li>$f(x) = x$, $g(x) = e^x$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We take the limit to be $x \to \infty$ throughout. Recall $f = o(g)$ means $\displaystyle\lim \frac{f(x)}{g(x)} = 0$, and $f = O(g)$ means $\left|\dfrac{f(x)}{g(x)}\right|$ stays bounded for $x$ sufficiently large.</p>
+        <p>(1) Since $\displaystyle\frac{x}{\ln x} \to \infty$ ($x$ grows faster than $\ln x$), $x = o(\ln x)$ is false; since the ratio is unbounded, $x = O(\ln x)$ is also false.</p>
+        <p>(2) Since $\displaystyle\frac{x^2}{x^3+1} \to 0$, $x^2 = o(x^3+1)$ is true. Since $o$ implies $O$, $x^2 = O(x^3+1)$ is also true.</p>
+        <p>(3) Since $\displaystyle\frac{x+\sin x}{x} = 1 + \frac{\sin x}{x} \to 1 \neq 0$, $x + \sin x = o(x)$ is false. But since this ratio converges to $1$ (hence is bounded), $x + \sin x = O(x)$ is true.</p>
+        <p>(4) Since $\displaystyle\frac{e^x+x^2}{e^x} = 1 + \frac{x^2}{e^x} \to 1 \neq 0$, $e^x+x^2 = o(e^x)$ is false. Since the ratio converges to $1$, $e^x+x^2 = O(e^x)$ is true.</p>
+        <p>(5) Since $\displaystyle\frac{x}{e^x} \to 0$, $x = o(e^x)$ is true, and hence $x = O(e^x)$ is also true.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05 -->
+<div class="card ex-card" id="yu05">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05</span>
+    <span class="ex-title">o·O 명제의 참·거짓</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 명제의 참 거짓을 판정하시오.</p>
+        <ol>
+          <li>$x = O(2x)$</li>
+          <li>$e^x = o(e^{2x})$</li>
+          <li>$\dfrac{1}{x+3} = O\left(\dfrac{1}{x}\right)$</li>
+          <li>$\ln x = o(\ln(x^2 + 1))$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 이전 문제와 같이 $x \to \infty$일 때를 기준으로 판단한다.</p>
+        <p>(1) $\displaystyle\frac{x}{2x} = \frac{1}{2}$은 모든 $x$에 대해 일정한 상수이므로 유계이다. 따라서 $x = O(2x)$는 참이다.</p>
+        <p>(2) $\displaystyle\frac{e^x}{e^{2x}} = e^{-x} \to 0$이므로 $e^x = o(e^{2x})$는 참이다.</p>
+        <p>(3) $\displaystyle\frac{1/(x+3)}{1/x} = \frac{x}{x+3} \to 1$로 유계이므로 $\dfrac{1}{x+3} = O\!\left(\dfrac{1}{x}\right)$는 참이다.</p>
+        <p>(4) $x \to \infty$일 때 $\ln(x^2+1) \sim \ln(x^2) = 2\ln x$이므로
+        $$\lim_{x \to \infty} \frac{\ln x}{\ln(x^2+1)} = \lim_{x \to \infty} \frac{\ln x}{2\ln x + \ln(1+1/x^2)} = \frac{1}{2}$$
+        이다. 이 극한이 $0$이 아니라 $1/2$이므로 $\ln x = o(\ln(x^2+1))$은 거짓이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the given statements are true or false.</p>
+        <ol>
+          <li>$x = O(2x)$</li>
+          <li>$e^x = o(e^{2x})$</li>
+          <li>$\dfrac{1}{x+3} = O\left(\dfrac{1}{x}\right)$</li>
+          <li>$\ln x = o(\ln(x^2 + 1))$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> As before, we take the limit to be $x \to \infty$.</p>
+        <p>(1) $\displaystyle\frac{x}{2x} = \frac{1}{2}$ is a constant for all $x$, hence bounded. So $x = O(2x)$ is true.</p>
+        <p>(2) $\displaystyle\frac{e^x}{e^{2x}} = e^{-x} \to 0$, so $e^x = o(e^{2x})$ is true.</p>
+        <p>(3) $\displaystyle\frac{1/(x+3)}{1/x} = \frac{x}{x+3} \to 1$, which is bounded, so $\dfrac{1}{x+3} = O\!\left(\dfrac{1}{x}\right)$ is true.</p>
+        <p>(4) As $x \to \infty$, $\ln(x^2+1) \sim \ln(x^2) = 2\ln x$, so
+        $$\lim_{x \to \infty} \frac{\ln x}{\ln(x^2+1)} = \lim_{x \to \infty} \frac{\ln x}{2\ln x + \ln(1+1/x^2)} = \frac{1}{2}.$$
+        Since this limit is $1/2 \neq 0$, $\ln x = o(\ln(x^2+1))$ is false.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">로그평균 부등식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$y = e^x$이 아래로 볼록임을 보이시오.</li>
+          <li>$0 \lt a \lt b$에 대해 다음이 성립함을 설명하시오.
+            $$e^{(\ln a + \ln b)/2}(\ln b - \ln a) \lt \int_{\ln a}^{\ln b} e^x\,dx \lt \frac{e^{\ln a} + e^{\ln b}}{2}(\ln b - \ln a)$$
+          </li>
+          <li>(2)를 이용하여 $0 \lt a \lt b$에 대해 다음이 성립함을 설명하시오.
+            $$\sqrt{ab} \lt \frac{b - a}{\ln b - \ln a} \lt \frac{a + b}{2}$$
+          </li>
+        </ol>
+        <p>이때 $\dfrac{b - a}{\ln b - \ln a}$를 $a, b$의 <strong>로그평균(logarithmic mean)</strong>이라 한다.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $y = e^x$ is convex.</li>
+          <li>For $0 \lt a \lt b$, explain why the following holds.
+            $$e^{(\ln a + \ln b)/2}(\ln b - \ln a) \lt \int_{\ln a}^{\ln b} e^x\,dx \lt \frac{e^{\ln a} + e^{\ln b}}{2}(\ln b - \ln a)$$
+          </li>
+          <li>Using (2), explain why the following holds for $0 \lt a \lt b$.
+            $$\sqrt{ab} \lt \frac{b - a}{\ln b - \ln a} \lt \frac{a + b}{2}$$
+          </li>
+        </ol>
+        <p>The quantity $\dfrac{b - a}{\ln b - \ln a}$ is called the <strong>logarithmic mean</strong> of $a, b$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">지수 방정식의 해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x^{x^x} = (x^x)^x$의 해를 구하시오. (단, $x \gt 0$)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the solutions of $x^{x^x} = (x^x)^x$. (Here, $x \gt 0$.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">지수 꼴 극한 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} (\cos \sqrt{x})^{1/x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} (x + e^x)^{2/x}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} (\cos \sqrt{x})^{1/x}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} (x + e^x)^{2/x}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">지수·로그와 다항함수 증가율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = e^x$는 다항함수 $h(x) = a_n x^n + \cdots + a_0$보다 빠르게 증가함을 보이시오. (단, $a_n \gt 0$)</li>
+          <li>$g(x) = \ln x$는 다항함수 $h(x) = a_n x^n + \cdots + a_0$보다 느리게 증가함을 보이시오. (단, $a_n \gt 0$, $n \geq 1$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $f(x) = e^x$ grows faster than the polynomial $h(x) = a_n x^n + \cdots + a_0$. (Here, $a_n \gt 0$.)</li>
+          <li>Show that $g(x) = \ln x$ grows slower than the polynomial $h(x) = a_n x^n + \cdots + a_0$. (Here, $a_n \gt 0$, $n \geq 1$.)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

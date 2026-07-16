@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14. 테일러 급수 (Taylor Series) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 14단원 테일러 급수(Taylor Series) 예제·유제·문제 모음. 테일러·매클로린 급수, 테일러 다항식과 나머지항, 이항급수, 오일러 공식과 복소지수, 제1종 완전타원적분, 라이프니츠 공식을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 테일러 급수, Taylor series, 매클로린 급수, Maclaurin series, 테일러 다항식, Taylor polynomial, 나머지항, remainder, 이항급수, binomial series, 오일러 공식, Euler's formula, 복소지수, 완전타원적분, complete elliptic integral, 라이프니츠 공식, Leibniz's formula, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch14.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14. 테일러 급수 (Taylor Series) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="테일러 급수 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch14.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "14. 테일러 급수 (Taylor Series) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 테일러 급수 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch14.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch14.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html" class="active">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 14</p>
+  <h1>14. 테일러 급수<span>Taylor Series</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 1/x의 테일러 급수와 수렴범위</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 지수·코사인의 매클로린 급수</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 다항식·지수함수의 테일러 급수</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 지수함수 급수의 수렴 증명</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 사인·코사인 급수의 수렴 증명</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> sin x 근사의 오차 범위</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> cos x 근사의 오차 한계</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 멱급수·곱함수의 테일러 급수</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 합성함수의 테일러 급수</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> sin(x²) 적분의 급수 근사</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 이항급수 전개</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 테일러 다항식 구하기</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 제1종 완전타원적분</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 테일러 급수로 극한 계산</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 테일러 급수로 극한 계산</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 극한 수렴 조건 구하기</a></li>
+    <li><a href="#ex06"><span class="toc-num">예제 06</span> 복소지수의 계산</a></li>
+    <li><a href="#yu06-1"><span class="toc-num">유제 06-1</span> 오일러 공식 증명</a></li>
+    <li><a href="#yu06-2"><span class="toc-num">유제 06-2</span> 복소지수의 지수법칙</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 해석함수가 아닌 매끄러운 함수</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 테일러 다항식의 특성화</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 이계도함수 판정법 증명</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> P+sin P의 근사 정밀도</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> n계 미분계수 구하기</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 대칭성과 매클로린 계수</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 라이프니츠 공식</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 급수로 정의한 지수함수</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 급수로 정의한 사인·코사인</a></li>
+    <li><a href="#pr10"><span class="toc-num">문제 10</span> 일반화된 이항계수 (임용21A-7)</a></li>
+    <li><a href="#pr11"><span class="toc-num">문제 11</span> 매클로린 급수로 극한 (임용08-12)</a></li>
+    <li><a href="#pr12"><span class="toc-num">문제 12</span> 복소지수의 미분·적분</a></li>
+    <li><a href="#pr13"><span class="toc-num">문제 13</span> 테일러 정리의 세 응용 (임용12(2차)-2)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">1/x의 테일러 급수와 수렴범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \dfrac{1}{x}$의 $x = 2$에서의 테일러 급수를 구하시오. 이때 급수가 $f(x)$로 수렴하도록 하는 $x$의 범위를 찾으시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x)=1/x$의 $n$계 도함수는 $f^{(n)}(x) = (-1)^n n!\, x^{-(n+1)}$이므로 $f^{(n)}(2) = (-1)^n n! \cdot 2^{-(n+1)}$이다. 따라서 $x=2$에서의 테일러 급수는
+        $$\sum_{n=0}^\infty \frac{f^{(n)}(2)}{n!}(x-2)^n = \sum_{n=0}^\infty \frac{(-1)^n}{2^{n+1}}(x-2)^n$$
+        이다.</p>
+        <p>이 급수는 첫째항이 $1/2$, 공비가 $r=-\dfrac{x-2}{2}$인 등비급수이므로 $|r|\lt1$, 즉 $|x-2|\lt2$일 때 수렴하고 그 합은
+        $$\frac{1/2}{1-r} = \frac{1/2}{1+\dfrac{x-2}{2}} = \frac{1}{2+(x-2)} = \frac{1}{x} = f(x)$$
+        이다. 따라서 급수가 $f(x)$로 수렴하는 $x$의 범위는 $|x-2|\lt2$, 즉 $0\lt x\lt4$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the Taylor series of $f(x) = \dfrac{1}{x}$ at $x = 2$. Then find the range of $x$ for which the series converges to $f(x)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The $n$th derivative of $f(x)=1/x$ is $f^{(n)}(x) = (-1)^n n!\, x^{-(n+1)}$, so $f^{(n)}(2) = (-1)^n n! \cdot 2^{-(n+1)}$. Hence the Taylor series at $x=2$ is
+        $$\sum_{n=0}^\infty \frac{f^{(n)}(2)}{n!}(x-2)^n = \sum_{n=0}^\infty \frac{(-1)^n}{2^{n+1}}(x-2)^n.$$</p>
+        <p>This is a geometric series with first term $1/2$ and common ratio $r=-\dfrac{x-2}{2}$, so it converges when $|r|\lt1$, i.e., $|x-2|\lt2$, with sum
+        $$\frac{1/2}{1-r} = \frac{1/2}{1+\dfrac{x-2}{2}} = \frac{1}{2+(x-2)} = \frac{1}{x} = f(x).$$
+        Hence the series converges to $f(x)$ exactly when $|x-2|\lt2$, i.e., $0\lt x\lt4$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">지수·코사인의 매클로린 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = e^x$의 $x = 0$에서의 테일러 급수와 $n$차 테일러 다항식을 구하시오.</li>
+          <li>$f(x) = \cos x$의 $x = 0$에서의 테일러 급수와 $n$차 테일러 다항식을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x)=e^x$이면 모든 $n$에 대해 $f^{(n)}(x)=e^x$이므로 $f^{(n)}(0)=1$이다. 따라서 테일러 급수는
+        $$\sum_{n=0}^\infty \frac{x^n}{n!}$$
+        이고, $n$차 테일러 다항식은
+        $$P_n(x) = \sum_{k=0}^n \frac{x^k}{k!} = 1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}$$
+        이다.</p>
+        <p>(2) $f(x)=\cos x$이면 $f^{(n)}(0)$은 $n=0,1,2,3,4,\ldots$에 대해 $1,0,-1,0,1,\ldots$을 순환하므로, $n=2k$일 때 $f^{(n)}(0)=(-1)^k$이고 $n$이 홀수일 때 $f^{(n)}(0)=0$이다. 따라서 테일러 급수는
+        $$\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}$$
+        이고, $n$차 테일러 다항식은 $\lfloor n/2\rfloor$까지의 짝수차항만 남으므로
+        $$P_n(x) = \sum_{k=0}^{\lfloor n/2\rfloor} \frac{(-1)^k x^{2k}}{(2k)!}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the Taylor series and the $n$th-degree Taylor polynomial of $f(x) = e^x$ at $x = 0$.</li>
+          <li>Find the Taylor series and the $n$th-degree Taylor polynomial of $f(x) = \cos x$ at $x = 0$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) For $f(x)=e^x$, $f^{(n)}(x)=e^x$ for every $n$, so $f^{(n)}(0)=1$. Hence the Taylor series is
+        $$\sum_{n=0}^\infty \frac{x^n}{n!},$$
+        and the $n$th-degree Taylor polynomial is
+        $$P_n(x) = \sum_{k=0}^n \frac{x^k}{k!} = 1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}.$$</p>
+        <p>(2) For $f(x)=\cos x$, the values $f^{(n)}(0)$ for $n=0,1,2,3,4,\ldots$ cycle through $1,0,-1,0,1,\ldots$, so $f^{(n)}(0)=(-1)^k$ when $n=2k$ and $f^{(n)}(0)=0$ when $n$ is odd. Hence the Taylor series is
+        $$\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!},$$
+        and since only the even-degree terms up to $\lfloor n/2\rfloor$ survive, the $n$th-degree Taylor polynomial is
+        $$P_n(x) = \sum_{k=0}^{\lfloor n/2\rfloor} \frac{(-1)^k x^{2k}}{(2k)!}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">다항식·지수함수의 테일러 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = x^4 + x^2 + 1$의 $x = -2$에서의 테일러 급수를 구하시오.</li>
+          <li>$f(x) = e^x$의 $x = 2$에서의 테일러 급수를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x)=x^4+x^2+1$이라 하면
+        $$f(x)=x^4+x^2+1,\quad f'(x)=4x^3+2x,\quad f''(x)=12x^2+2,\quad f'''(x)=24x,\quad f^{(4)}(x)=24$$
+        이고 $f^{(n)}(x)=0$ ($n\geq5$)이다. $x=-2$에서
+        $$f(-2)=21,\ f'(-2)=-36,\ f''(-2)=50,\ f'''(-2)=-48,\ f^{(4)}(-2)=24$$
+        이므로
+        $$\frac{f(-2)}{0!}=21,\ \frac{f'(-2)}{1!}=-36,\ \frac{f''(-2)}{2!}=25,\ \frac{f'''(-2)}{3!}=-8,\ \frac{f^{(4)}(-2)}{4!}=1$$
+        이다. $f$는 4차 다항식이므로 5계 이상의 도함수는 모두 $0$이고, 따라서 테일러 급수는 (유한합인) 다항식
+        $$f(x) = 21-36(x+2)+25(x+2)^2-8(x+2)^3+(x+2)^4$$
+        이다.</p>
+        <p>(2) $f(x)=e^x$의 모든 계도함수는 $f^{(n)}(x)=e^x$이므로 $f^{(n)}(2)=e^2$이다. 따라서 $x=2$에서의 테일러 급수는
+        $$\sum_{n=0}^\infty \frac{e^2}{n!}(x-2)^n = e^2\sum_{n=0}^\infty \frac{(x-2)^n}{n!}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the Taylor series of $f(x) = x^4 + x^2 + 1$ at $x = -2$.</li>
+          <li>Find the Taylor series of $f(x) = e^x$ at $x = 2$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) For $f(x)=x^4+x^2+1$,
+        $$f(x)=x^4+x^2+1,\quad f'(x)=4x^3+2x,\quad f''(x)=12x^2+2,\quad f'''(x)=24x,\quad f^{(4)}(x)=24,$$
+        and $f^{(n)}(x)=0$ for $n\geq5$. At $x=-2$,
+        $$f(-2)=21,\ f'(-2)=-36,\ f''(-2)=50,\ f'''(-2)=-48,\ f^{(4)}(-2)=24,$$
+        so
+        $$\frac{f(-2)}{0!}=21,\ \frac{f'(-2)}{1!}=-36,\ \frac{f''(-2)}{2!}=25,\ \frac{f'''(-2)}{3!}=-8,\ \frac{f^{(4)}(-2)}{4!}=1.$$
+        Since $f$ is a degree-$4$ polynomial, all derivatives of order $5$ and higher vanish, so the Taylor series is the (finite) polynomial
+        $$f(x) = 21-36(x+2)+25(x+2)^2-8(x+2)^3+(x+2)^4.$$</p>
+        <p>(2) Every derivative of $f(x)=e^x$ is $f^{(n)}(x)=e^x$, so $f^{(n)}(2)=e^2$. Hence the Taylor series at $x=2$ is
+        $$\sum_{n=0}^\infty \frac{e^2}{n!}(x-2)^n = e^2\sum_{n=0}^\infty \frac{(x-2)^n}{n!}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">지수함수 급수의 수렴 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = e^x$의 $x = 0$에서의 테일러 급수가 모든 실수 $x$에 대해 $f(x)$로 수렴함을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f(x)=e^x$의 $n$계 도함수는 $f^{(n)}(x)=e^x$이다. 테일러 정리에 의해 각 $n$에 대해 $0$과 $x$ 사이의 어떤 $c$가 있어
+        $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!}x^k + R_n(x),\qquad R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}=\frac{e^c}{(n+1)!}x^{n+1}$$
+        이 성립한다.</p>
+        <p>$c$가 $0$과 $x$ 사이에 있으므로 $e^c\leq e^{|x|}$이고, 따라서
+        $$|R_n(x)| \leq e^{|x|}\frac{|x|^{n+1}}{(n+1)!}$$
+        이다.</p>
+        <p>$x$를 고정하고 $a_n=|x|^n/n!$이라 하면 $\dfrac{a_{n+1}}{a_n}=\dfrac{|x|}{n+1}\to0$이므로 비판정법에 의해 $\sum a_n$이 수렴하고, 따라서 $a_n\to0$이다. 그러므로 $n\to\infty$일 때 $|R_n(x)|\to0$이고, 이는 모든 실수 $x$에 대해 성립한다.</p>
+        <p>따라서
+        $$\sum_{k=0}^n \frac{f^{(k)}(0)}{k!}x^k = f(x)-R_n(x) \xrightarrow{n\to\infty} f(x)-0=f(x)$$
+        이므로 $e^x$의 $x=0$에서의 테일러 급수는 모든 실수 $x$에 대해 $f(x)$로 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the Taylor series of $f(x) = e^x$ at $x = 0$ converges to $f(x)$ for every real number $x$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The $n$th derivative of $f(x)=e^x$ is $f^{(n)}(x)=e^x$. By Taylor's Theorem, for each $n$ there exists some $c$ between $0$ and $x$ such that
+        $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(0)}{k!}x^k + R_n(x),\qquad R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}=\frac{e^c}{(n+1)!}x^{n+1}.$$</p>
+        <p>Since $c$ lies between $0$ and $x$, $e^c\leq e^{|x|}$, so
+        $$|R_n(x)| \leq e^{|x|}\frac{|x|^{n+1}}{(n+1)!}.$$</p>
+        <p>Fix $x$ and let $a_n=|x|^n/n!$. Then $\dfrac{a_{n+1}}{a_n}=\dfrac{|x|}{n+1}\to0$, so by the Ratio Test $\sum a_n$ converges, hence $a_n\to0$. Thus $|R_n(x)|\to0$ as $n\to\infty$, for every real number $x$.</p>
+        <p>Therefore
+        $$\sum_{k=0}^n \frac{f^{(k)}(0)}{k!}x^k = f(x)-R_n(x) \xrightarrow{n\to\infty} f(x)-0=f(x),$$
+        so the Taylor series of $e^x$ at $x=0$ converges to $f(x)$ for every real number $x$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">사인·코사인 급수의 수렴 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \sin x$의 $x = 0$에서의 테일러 급수가 모든 실수 $x$에 대해 $f(x)$로 수렴함을 보이시오.</li>
+          <li>$f(x) = \cos x$의 $x = 0$에서의 테일러 급수가 모든 실수 $x$에 대해 $f(x)$로 수렴함을 보이시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) $f(x)=\sin x$이면 $f^{(n)}(x)$는 $\pm\sin x,\pm\cos x$ 중 하나이므로 모든 $n,x$에 대해 $|f^{(n)}(x)|\leq1$이다. 테일러 정리에 의해 각 $n$에 대해 $0$과 $x$ 사이의 어떤 $c$가 있어 나머지항이 $R_n(x)=\dfrac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}$이고,
+        $$|R_n(x)| \leq \frac{|x|^{n+1}}{(n+1)!}$$
+        이다. 예제 02와 같은 논증(비판정법)에 의해 고정된 $x$에 대해 $\dfrac{|x|^{n+1}}{(n+1)!}\to0$이므로 $R_n(x)\to0$이다. 따라서 $\sin x$의 $x=0$에서의 테일러 급수는 모든 실수 $x$에 대해 $f(x)$로 수렴한다.</p>
+        <p>(2) $f(x)=\cos x$인 경우도 마찬가지로 $f^{(n)}(x)$가 $\pm\sin x,\pm\cos x$ 중 하나이므로 $|f^{(n)}(x)|\leq1$이고, 같은 논증으로 $R_n(x)\to0$이다. 따라서 $\cos x$의 $x=0$에서의 테일러 급수는 모든 실수 $x$에 대해 $f(x)$로 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that the Taylor series of $f(x) = \sin x$ at $x = 0$ converges to $f(x)$ for every real number $x$.</li>
+          <li>Show that the Taylor series of $f(x) = \cos x$ at $x = 0$ converges to $f(x)$ for every real number $x$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) For $f(x)=\sin x$, $f^{(n)}(x)$ is always one of $\pm\sin x,\pm\cos x$, so $|f^{(n)}(x)|\leq1$ for all $n$ and $x$. By Taylor's Theorem, for each $n$ there is some $c$ between $0$ and $x$ with remainder $R_n(x)=\dfrac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}$, so
+        $$|R_n(x)| \leq \frac{|x|^{n+1}}{(n+1)!}.$$
+        By the same argument as in Example 02 (the Ratio Test), $\dfrac{|x|^{n+1}}{(n+1)!}\to0$ for fixed $x$, so $R_n(x)\to0$. Hence the Taylor series of $\sin x$ at $x=0$ converges to $f(x)$ for every real number $x$.</p>
+        <p>(2) For $f(x)=\cos x$, likewise $f^{(n)}(x)$ is always one of $\pm\sin x,\pm\cos x$, so $|f^{(n)}(x)|\leq1$, and the same argument gives $R_n(x)\to0$. Hence the Taylor series of $\cos x$ at $x=0$ converges to $f(x)$ for every real number $x$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">sin x 근사의 오차 범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$|x| \lt R$인 범위에서 $\sin x$를 $x - \dfrac{x^3}{3!}$으로 근사할 때 오차가 $3 \times 10^{-4}$보다 작도록 하는 $R \gt 0$을 하나 찾으시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\sin x = x-\dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots$이므로 $x-\dfrac{x^3}{3!}$은 $\sin x$의 4차 테일러 다항식과도 같다 ($x^4$의 계수가 $0$이기 때문). 따라서 나머지항은
+        $$R_4(x) = \frac{f^{(5)}(c)}{5!}x^5$$
+        이고, $f^{(5)}(x)=\cos x$이므로 $|f^{(5)}(c)|\leq1$이다. 즉
+        $$\left|\sin x - \left(x-\frac{x^3}{3!}\right)\right| = |R_4(x)| \leq \frac{|x|^5}{5!}$$
+        이다.</p>
+        <p>$|x|\lt R$인 범위에서 오차가 $3\times10^{-4}$보다 작으려면 $\dfrac{R^5}{5!}\leq3\times10^{-4}$이면 충분하다. $R=\dfrac12$로 두면
+        $$\frac{(1/2)^5}{5!} = \frac{1/32}{120} = \frac{1}{3840} \approx 2.6\times10^{-4} \lt 3\times10^{-4}$$
+        이므로 $R=\dfrac12$는 조건을 만족한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find some $R \gt 0$ such that, when approximating $\sin x$ by $x - \dfrac{x^3}{3!}$ on the range $|x| \lt R$, the error is less than $3 \times 10^{-4}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\sin x = x-\dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots$, the polynomial $x-\dfrac{x^3}{3!}$ is also the 4th-degree Taylor polynomial of $\sin x$ (its $x^4$ coefficient is $0$). Hence the remainder term is
+        $$R_4(x) = \frac{f^{(5)}(c)}{5!}x^5,$$
+        and since $f^{(5)}(x)=\cos x$, $|f^{(5)}(c)|\leq1$. That is,
+        $$\left|\sin x - \left(x-\frac{x^3}{3!}\right)\right| = |R_4(x)| \leq \frac{|x|^5}{5!}.$$</p>
+        <p>For the error to be less than $3\times10^{-4}$ on $|x|\lt R$, it suffices to have $\dfrac{R^5}{5!}\leq3\times10^{-4}$. Taking $R=\dfrac12$,
+        $$\frac{(1/2)^5}{5!} = \frac{1/32}{120} = \frac{1}{3840} \approx 2.6\times10^{-4} \lt 3\times10^{-4},$$
+        so $R=\dfrac12$ satisfies the requirement.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">cos x 근사의 오차 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$|x| \lt \dfrac{1}{2}$에서 $\cos x$를 $1 - \dfrac{x^2}{2}$로 근사할 때 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\cos x = 1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}-\cdots$이므로 $1-\dfrac{x^2}{2}$는 $\cos x$의 3차 테일러 다항식과 같다 ($x^3$의 계수가 $0$이기 때문). 나머지항은
+        $$R_3(x) = \frac{f^{(4)}(c)}{4!}x^4$$
+        이고 $f^{(4)}(x)=\cos x$이므로 $|f^{(4)}(c)|\leq1$이다. 따라서
+        $$\left|\cos x - \left(1-\frac{x^2}{2}\right)\right| = |R_3(x)| \leq \frac{|x|^4}{4!}$$
+        이다.</p>
+        <p>$|x|\lt\dfrac12$이므로 오차의 한계는
+        $$\frac{(1/2)^4}{4!} = \frac{1/16}{24} = \frac{1}{384} \approx 0.0026$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find a bound on the error when approximating $\cos x$ by $1 - \dfrac{x^2}{2}$ on $|x| \lt \dfrac{1}{2}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\cos x = 1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}-\cdots$, the polynomial $1-\dfrac{x^2}{2}$ is also the 3rd-degree Taylor polynomial of $\cos x$ (its $x^3$ coefficient is $0$). The remainder term is
+        $$R_3(x) = \frac{f^{(4)}(c)}{4!}x^4,$$
+        and since $f^{(4)}(x)=\cos x$, $|f^{(4)}(c)|\leq1$. Hence
+        $$\left|\cos x - \left(1-\frac{x^2}{2}\right)\right| = |R_3(x)| \leq \frac{|x|^4}{4!}.$$</p>
+        <p>Since $|x|\lt\dfrac12$, the bound on the error is
+        $$\frac{(1/2)^4}{4!} = \frac{1/16}{24} = \frac{1}{384} \approx 0.0026.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">멱급수·곱함수의 테일러 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>멱급수 $\displaystyle f(x) = \sum_{n=0}^{\infty} a_n x^n$가 $|x| \lt R$에서 수렴하면 $f(x)$의 테일러 급수는 자기 자신임을 보이시오.</li>
+          <li>$f(x) = \dfrac{1}{3}(2x + x\cos x)$의 $x = 0$에서의 테일러 급수를 구하시오.</li>
+          <li>$f(x) = e^x \cos x$의 $x = 0$에서의 테일러 급수를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 멱급수 $\displaystyle f(x)=\sum_{n=0}^\infty a_n x^n$가 $|x|\lt R$에서 수렴한다고 하자. 멱급수는 수렴범위 내부에서 항별로 미분할 수 있으므로, 각 $k\geq0$에 대해
+        $$f^{(k)}(x) = \sum_{n=k}^\infty n(n-1)\cdots(n-k+1)\,a_n x^{n-k}, \qquad |x|\lt R$$
+        이 성립한다. $x=0$을 대입하면 우변에서 $n=k$인 항만 남아
+        $$f^{(k)}(0) = k!\,a_k$$
+        이다. 따라서 $a_k = \dfrac{f^{(k)}(0)}{k!}$이고, 이는 $f(x)$의 테일러 급수 $\displaystyle\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n$가 원래 급수 $\displaystyle\sum_{n=0}^\infty a_n x^n$과 계수별로 일치함을 뜻한다. 즉 $f(x)$의 테일러 급수는 $f(x)$ 자기 자신이다.</p>
+        <p>(2) $\cos x = \displaystyle\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}$이므로
+        $$x\cos x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!} = x - \frac{x^3}{2!}+\frac{x^5}{4!}-\cdots$$
+        이고
+        $$2x+x\cos x = 2x + x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!} = 3x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!}$$
+        이다. 따라서
+        $$f(x) = \frac13(2x+x\cos x) = x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{3(2n)!} = x-\frac{x^3}{6}+\frac{x^5}{72}-\frac{x^7}{2160}+\cdots$$
+        이다.</p>
+        <p>(3) $e^{ix}=\cos x+i\sin x$이므로 $e^x\cos x = \operatorname{Re}\!\left(e^x e^{ix}\right) = \operatorname{Re}\!\left(e^{(1+i)x}\right)$이다. $1+i=\sqrt2\,e^{i\pi/4}$이므로 $(1+i)^n = 2^{n/2}\left(\cos\dfrac{n\pi}{4}+i\sin\dfrac{n\pi}{4}\right)$이고,
+        $$e^{(1+i)x} = \sum_{n=0}^\infty \frac{(1+i)^n}{n!}x^n$$
+        의 실수부를 취하면
+        $$e^x\cos x = \sum_{n=0}^\infty \frac{2^{n/2}\cos(n\pi/4)}{n!}x^n = \sum_{n=0}^\infty \frac{(\sqrt2)^n\cos(n\pi/4)}{n!}x^n$$
+        이다. $n=0,1,2,3,4$에 대한 계수를 계산하면 $1,\ 1,\ 0,\ -\dfrac13,\ -\dfrac16$이므로
+        $$e^x\cos x = 1+x-\frac{x^3}{3}-\frac{x^4}{6}+\cdots$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that if the power series $\displaystyle f(x) = \sum_{n=0}^{\infty} a_n x^n$ converges on $|x| \lt R$, then the Taylor series of $f(x)$ is itself.</li>
+          <li>Find the Taylor series of $f(x) = \dfrac{1}{3}(2x + x\cos x)$ at $x = 0$.</li>
+          <li>Find the Taylor series of $f(x) = e^x \cos x$ at $x = 0$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Suppose the power series $\displaystyle f(x)=\sum_{n=0}^\infty a_n x^n$ converges for $|x|\lt R$. A power series may be differentiated term by term within its interval of convergence, so for each $k\geq0$,
+        $$f^{(k)}(x) = \sum_{n=k}^\infty n(n-1)\cdots(n-k+1)\,a_n x^{n-k}, \qquad |x|\lt R.$$
+        Setting $x=0$, only the $n=k$ term on the right survives, giving
+        $$f^{(k)}(0) = k!\,a_k.$$
+        Hence $a_k = \dfrac{f^{(k)}(0)}{k!}$, which means the Taylor series $\displaystyle\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n$ agrees term by term with the original series $\displaystyle\sum_{n=0}^\infty a_n x^n$. That is, the Taylor series of $f(x)$ is $f(x)$ itself.</p>
+        <p>(2) Since $\cos x = \displaystyle\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}$,
+        $$x\cos x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!} = x - \frac{x^3}{2!}+\frac{x^5}{4!}-\cdots,$$
+        so
+        $$2x+x\cos x = 2x + x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!} = 3x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{(2n)!}.$$
+        Hence
+        $$f(x) = \frac13(2x+x\cos x) = x + \sum_{n=1}^\infty \frac{(-1)^n x^{2n+1}}{3(2n)!} = x-\frac{x^3}{6}+\frac{x^5}{72}-\frac{x^7}{2160}+\cdots.$$</p>
+        <p>(3) Since $e^{ix}=\cos x+i\sin x$, $e^x\cos x = \operatorname{Re}\!\left(e^x e^{ix}\right) = \operatorname{Re}\!\left(e^{(1+i)x}\right)$. Writing $1+i=\sqrt2\,e^{i\pi/4}$, we get $(1+i)^n = 2^{n/2}\left(\cos\dfrac{n\pi}{4}+i\sin\dfrac{n\pi}{4}\right)$, and taking the real part of
+        $$e^{(1+i)x} = \sum_{n=0}^\infty \frac{(1+i)^n}{n!}x^n$$
+        gives
+        $$e^x\cos x = \sum_{n=0}^\infty \frac{2^{n/2}\cos(n\pi/4)}{n!}x^n = \sum_{n=0}^\infty \frac{(\sqrt2)^n\cos(n\pi/4)}{n!}x^n.$$
+        Computing the coefficients for $n=0,1,2,3,4$ gives $1,\ 1,\ 0,\ -\dfrac13,\ -\dfrac16$, so
+        $$e^x\cos x = 1+x-\frac{x^3}{3}-\frac{x^4}{6}+\cdots.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">합성함수의 테일러 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 함수의 $x = 0$에서의 테일러 급수를 구하시오.</p>
+        <ol>
+          <li>$e^{-x^2 + \ln 5}$</li>
+          <li>$\cos^2 x$</li>
+          <li>$\ln\left(\dfrac{1+x}{1-x}\right)$</li>
+          <li>$x \tan^{-1} x^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $e^{-x^2+\ln5} = e^{\ln5}\cdot e^{-x^2} = 5e^{-x^2}$이고 $e^{-x^2} = \displaystyle\sum_{n=0}^\infty \frac{(-x^2)^n}{n!} = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{n!}$이므로
+        $$e^{-x^2+\ln5} = 5\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{n!}$$
+        이다.</p>
+        <p>(2) $\cos^2x = \dfrac{1+\cos2x}{2}$이고 $\cos2x = \displaystyle\sum_{n=0}^\infty \frac{(-1)^n(2x)^{2n}}{(2n)!} = \sum_{n=0}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!}$이므로
+        $$\cos^2x = \frac12+\frac12\sum_{n=0}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!} = \frac12+\frac12+\frac12\sum_{n=1}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!} = 1+\sum_{n=1}^\infty \frac{(-1)^n2^{2n-1}x^{2n}}{(2n)!}$$
+        이다.</p>
+        <p>(3) $\ln(1+x) = \displaystyle\sum_{n=1}^\infty \frac{(-1)^{n-1}x^n}{n}$이고 $\ln(1-x) = -\displaystyle\sum_{n=1}^\infty \frac{x^n}{n}$이므로
+        $$\ln\!\left(\frac{1+x}{1-x}\right) = \ln(1+x)-\ln(1-x) = \sum_{n=1}^\infty \frac{\left[(-1)^{n-1}+1\right]x^n}{n}$$
+        이다. $n$이 짝수이면 $(-1)^{n-1}+1=0$이고 $n$이 홀수이면 $(-1)^{n-1}+1=2$이므로, $n=2k+1$로 치환하면
+        $$\ln\!\left(\frac{1+x}{1-x}\right) = \sum_{k=0}^\infty \frac{2x^{2k+1}}{2k+1}$$
+        이다.</p>
+        <p>(4) $\tan^{-1}u = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nu^{2n+1}}{2n+1}$에 $u=x^2$을 대입하면 $\tan^{-1}x^2 = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nx^{4n+2}}{2n+1}$이므로
+        $$x\tan^{-1}x^2 = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+3}}{2n+1}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the Taylor series at $x = 0$ of each of the following functions.</p>
+        <ol>
+          <li>$e^{-x^2 + \ln 5}$</li>
+          <li>$\cos^2 x$</li>
+          <li>$\ln\left(\dfrac{1+x}{1-x}\right)$</li>
+          <li>$x \tan^{-1} x^2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $e^{-x^2+\ln5} = e^{\ln5}\cdot e^{-x^2} = 5e^{-x^2}$, and $e^{-x^2} = \displaystyle\sum_{n=0}^\infty \frac{(-x^2)^n}{n!} = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{n!}$, so
+        $$e^{-x^2+\ln5} = 5\sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{n!}.$$</p>
+        <p>(2) $\cos^2x = \dfrac{1+\cos2x}{2}$, and $\cos2x = \displaystyle\sum_{n=0}^\infty \frac{(-1)^n(2x)^{2n}}{(2n)!} = \sum_{n=0}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!}$, so
+        $$\cos^2x = \frac12+\frac12\sum_{n=0}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!} = \frac12+\frac12+\frac12\sum_{n=1}^\infty \frac{(-1)^n2^{2n}x^{2n}}{(2n)!} = 1+\sum_{n=1}^\infty \frac{(-1)^n2^{2n-1}x^{2n}}{(2n)!}.$$</p>
+        <p>(3) $\ln(1+x) = \displaystyle\sum_{n=1}^\infty \frac{(-1)^{n-1}x^n}{n}$ and $\ln(1-x) = -\displaystyle\sum_{n=1}^\infty \frac{x^n}{n}$, so
+        $$\ln\!\left(\frac{1+x}{1-x}\right) = \ln(1+x)-\ln(1-x) = \sum_{n=1}^\infty \frac{\left[(-1)^{n-1}+1\right]x^n}{n}.$$
+        This vanishes for even $n$ and equals $2x^n/n$ for odd $n$, so substituting $n=2k+1$,
+        $$\ln\!\left(\frac{1+x}{1-x}\right) = \sum_{k=0}^\infty \frac{2x^{2k+1}}{2k+1}.$$</p>
+        <p>(4) Substituting $u=x^2$ into $\tan^{-1}u = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nu^{2n+1}}{2n+1}$ gives $\tan^{-1}x^2 = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nx^{4n+2}}{2n+1}$, so
+        $$x\tan^{-1}x^2 = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+3}}{2n+1}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">sin(x²) 적분의 급수 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\displaystyle\int \sin(x^2)\,dx$를 멱급수 형태로 표현하시오.</li>
+          <li>$\displaystyle\int_0^1 \sin(x^2)\,dx$의 값을 $0.001$보다 작은 오차를 갖도록 근사하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\sin u = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nu^{2n+1}}{(2n+1)!}$에 $u=x^2$을 대입하면
+        $$\sin(x^2) = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+2}}{(2n+1)!}$$
+        이므로 각 항을 적분하면
+        $$\int\sin(x^2)\,dx = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+3}}{(4n+3)(2n+1)!}+C$$
+        이다.</p>
+        <p>(2) $x=0$에서 위 급수의 각 항은 $0$이므로
+        $$\int_0^1\sin(x^2)\,dx = \sum_{n=0}^\infty \frac{(-1)^n}{(4n+3)(2n+1)!}$$
+        이다. 처음 몇 항을 계산하면
+        $$\frac{1}{3\cdot1!}=\frac13,\quad \frac{1}{7\cdot3!}=\frac1{42},\quad \frac{1}{11\cdot5!}=\frac1{1320},\quad \frac{1}{15\cdot7!}=\frac1{75600}$$
+        이다. 이는 항의 절댓값이 단조감소하며 $0$으로 수렴하는 교대급수이므로, 부분합의 오차는 다음 항의 절댓값보다 작다. 따라서 처음 세 항까지 더하면
+        $$\int_0^1\sin(x^2)\,dx \approx \frac13-\frac1{42}+\frac1{1320} \approx 0.3103$$
+        이고 오차는 $\dfrac1{75600}\approx1.3\times10^{-5}\lt0.001$이므로 원하는 정밀도를 만족한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Express $\displaystyle\int \sin(x^2)\,dx$ as a power series.</li>
+          <li>Approximate the value of $\displaystyle\int_0^1 \sin(x^2)\,dx$ with an error less than $0.001$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $u=x^2$ into $\sin u = \displaystyle\sum_{n=0}^\infty \frac{(-1)^nu^{2n+1}}{(2n+1)!}$ gives
+        $$\sin(x^2) = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+2}}{(2n+1)!},$$
+        so integrating term by term,
+        $$\int\sin(x^2)\,dx = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+3}}{(4n+3)(2n+1)!}+C.$$</p>
+        <p>(2) Every term of the series above vanishes at $x=0$, so
+        $$\int_0^1\sin(x^2)\,dx = \sum_{n=0}^\infty \frac{(-1)^n}{(4n+3)(2n+1)!}.$$
+        Computing the first few terms,
+        $$\frac{1}{3\cdot1!}=\frac13,\quad \frac{1}{7\cdot3!}=\frac1{42},\quad \frac{1}{11\cdot5!}=\frac1{1320},\quad \frac{1}{15\cdot7!}=\frac1{75600}.$$
+        This is an alternating series whose terms decrease monotonically to $0$, so the error of a partial sum is bounded by the magnitude of the next term. Summing the first three terms,
+        $$\int_0^1\sin(x^2)\,dx \approx \frac13-\frac1{42}+\frac1{1320} \approx 0.3103,$$
+        with error at most $\dfrac1{75600}\approx1.3\times10^{-5}\lt0.001$, which meets the required precision.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">이항급수 전개</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\dbinom{-1}{k} = (-1)^k$임을 보이고 $\displaystyle (1+x)^{-1} = \sum_{n=0}^{\infty} (-1)^n x^n$임을 보이시오.</li>
+          <li>$(1+x)^{1/2}$의 테일러 급수를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 일반화된 이항계수의 정의에 의해
+        $$\binom{-1}{k} = \frac{(-1)(-2)(-3)\cdots(-1-k+1)}{k!} = \frac{(-1)(-2)\cdots(-k)}{k!} = \frac{(-1)^kk!}{k!} = (-1)^k$$
+        이다.</p>
+        <p>한편 $|x|\lt1$일 때 등비급수에 의해
+        $$\frac{1}{1+x} = \sum_{n=0}^\infty(-x)^n = \sum_{n=0}^\infty(-1)^nx^n = \sum_{n=0}^\infty\binom{-1}{n}x^n$$
+        이므로 $(1+x)^{-1} = \displaystyle\sum_{n=0}^\infty(-1)^nx^n$이다.</p>
+        <p>(2) $f(x)=(1+x)^{1/2}$라 하면 $n\geq1$에 대해
+        $$f^{(n)}(x) = \frac12\left(\frac12-1\right)\left(\frac12-2\right)\cdots\left(\frac12-n+1\right)(1+x)^{1/2-n}$$
+        이므로
+        $$f^{(n)}(0) = \frac12\left(-\frac12\right)\left(-\frac32\right)\cdots\left(\frac12-n+1\right)$$
+        이다. 따라서 테일러 계수는 $a_n=f^{(n)}(0)/n!=\dbinom{1/2}{n}$이고, $a_0=1,\ a_1=\dfrac12,\ a_2=-\dfrac18,\ a_3=\dfrac1{16},\ldots$이므로
+        $$(1+x)^{1/2} = \sum_{n=0}^\infty\binom{1/2}{n}x^n = 1+\frac12x-\frac18x^2+\frac1{16}x^3-\cdots$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\dbinom{-1}{k} = (-1)^k$, and show that $\displaystyle (1+x)^{-1} = \sum_{n=0}^{\infty} (-1)^n x^n$.</li>
+          <li>Find the Taylor series of $(1+x)^{1/2}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) By the definition of the generalized binomial coefficient,
+        $$\binom{-1}{k} = \frac{(-1)(-2)(-3)\cdots(-1-k+1)}{k!} = \frac{(-1)(-2)\cdots(-k)}{k!} = \frac{(-1)^kk!}{k!} = (-1)^k.$$</p>
+        <p>On the other hand, for $|x|\lt1$, the geometric series gives
+        $$\frac{1}{1+x} = \sum_{n=0}^\infty(-x)^n = \sum_{n=0}^\infty(-1)^nx^n = \sum_{n=0}^\infty\binom{-1}{n}x^n,$$
+        so $(1+x)^{-1} = \displaystyle\sum_{n=0}^\infty(-1)^nx^n$.</p>
+        <p>(2) Let $f(x)=(1+x)^{1/2}$. For $n\geq1$,
+        $$f^{(n)}(x) = \frac12\left(\frac12-1\right)\left(\frac12-2\right)\cdots\left(\frac12-n+1\right)(1+x)^{1/2-n},$$
+        so
+        $$f^{(n)}(0) = \frac12\left(-\frac12\right)\left(-\frac32\right)\cdots\left(\frac12-n+1\right).$$
+        Hence the Taylor coefficients are $a_n=f^{(n)}(0)/n!=\dbinom{1/2}{n}$, with $a_0=1,\ a_1=\dfrac12,\ a_2=-\dfrac18,\ a_3=\dfrac1{16},\ldots$, so
+        $$(1+x)^{1/2} = \sum_{n=0}^\infty\binom{1/2}{n}x^n = 1+\frac12x-\frac18x^2+\frac1{16}x^3-\cdots.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">테일러 다항식 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \dfrac{x}{\sqrt[3]{1+x}}$의 3차 테일러 다항식을 구하시오.</li>
+          <li>$f(x) = \sin^{-1} x$의 8차 테일러 다항식을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x)=\dfrac{x}{\sqrt[3]{1+x}} = x(1+x)^{-1/3}$이다. 이항급수에 의해
+        $$(1+x)^{-1/3} = \sum_{n=0}^\infty\binom{-1/3}{n}x^n$$
+        이고
+        $$\binom{-1/3}{0}=1,\quad \binom{-1/3}{1}=-\frac13,\quad \binom{-1/3}{2}=\frac{(-1/3)(-4/3)}{2!}=\frac29$$
+        이므로
+        $$(1+x)^{-1/3} = 1-\frac13x+\frac29x^2-\cdots$$
+        이다. 양변에 $x$를 곱하면
+        $$f(x) = x-\frac13x^2+\frac29x^3-\cdots$$
+        이므로 $f(x)$의 3차 테일러 다항식은
+        $$P_3(x) = x-\frac13x^2+\frac29x^3$$
+        이다.</p>
+        <p>(2) $f(x)=\sin^{-1}x$이면 $f'(x)=(1-x^2)^{-1/2}$이다. 이항급수에 $u=-x^2$을 대입하면
+        $$(1-x^2)^{-1/2} = \sum_{n=0}^\infty\binom{-1/2}{n}(-x^2)^n = \sum_{n=0}^\infty\binom{-1/2}{n}(-1)^nx^{2n}$$
+        이고,
+        $$\binom{-1/2}{n} = \frac{(-1/2)(-3/2)\cdots(-1/2-n+1)}{n!} = \frac{(-1)^n(2n-1)!!}{2^nn!}$$
+        이므로
+        $$\binom{-1/2}{n}(-1)^n = \frac{(2n-1)!!}{2^nn!} = \frac{(2n)!}{4^n(n!)^2}$$
+        이다 (마지막 등식은 $(2n-1)!!=\dfrac{(2n)!}{2^nn!}$을 이용한다). 따라서
+        $$(1-x^2)^{-1/2} = \sum_{n=0}^\infty \frac{(2n)!}{4^n(n!)^2}x^{2n}$$
+        이고, $\sin^{-1}0=0$이므로 이를 항별로 적분하면
+        $$\sin^{-1}x = \sum_{n=0}^\infty \frac{(2n)!}{4^n(n!)^2(2n+1)}x^{2n+1}$$
+        이다. $n=0,1,2,3$의 계수를 계산하면
+        $$1,\quad \frac16,\quad \frac3{40},\quad \frac{5}{112}$$
+        이므로
+        $$\sin^{-1}x = x+\frac{x^3}6+\frac{3x^5}{40}+\frac{5x^7}{112}+\cdots$$
+        이다. $\sin^{-1}x$는 기함수이므로 짝수차항의 계수는 모두 $0$이고, 따라서 8차 테일러 다항식은
+        $$P_8(x) = x+\frac{x^3}6+\frac{3x^5}{40}+\frac{5x^7}{112}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the 3rd-degree Taylor polynomial of $f(x) = \dfrac{x}{\sqrt[3]{1+x}}$.</li>
+          <li>Find the 8th-degree Taylor polynomial of $f(x) = \sin^{-1} x$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $f(x)=\dfrac{x}{\sqrt[3]{1+x}} = x(1+x)^{-1/3}$. By the binomial series,
+        $$(1+x)^{-1/3} = \sum_{n=0}^\infty\binom{-1/3}{n}x^n,$$
+        and
+        $$\binom{-1/3}{0}=1,\quad \binom{-1/3}{1}=-\frac13,\quad \binom{-1/3}{2}=\frac{(-1/3)(-4/3)}{2!}=\frac29,$$
+        so
+        $$(1+x)^{-1/3} = 1-\frac13x+\frac29x^2-\cdots.$$
+        Multiplying by $x$,
+        $$f(x) = x-\frac13x^2+\frac29x^3-\cdots,$$
+        so the 3rd-degree Taylor polynomial of $f(x)$ is
+        $$P_3(x) = x-\frac13x^2+\frac29x^3.$$</p>
+        <p>(2) For $f(x)=\sin^{-1}x$, $f'(x)=(1-x^2)^{-1/2}$. Substituting $u=-x^2$ into the binomial series,
+        $$(1-x^2)^{-1/2} = \sum_{n=0}^\infty\binom{-1/2}{n}(-x^2)^n = \sum_{n=0}^\infty\binom{-1/2}{n}(-1)^nx^{2n},$$
+        and
+        $$\binom{-1/2}{n} = \frac{(-1/2)(-3/2)\cdots(-1/2-n+1)}{n!} = \frac{(-1)^n(2n-1)!!}{2^nn!},$$
+        so
+        $$\binom{-1/2}{n}(-1)^n = \frac{(2n-1)!!}{2^nn!} = \frac{(2n)!}{4^n(n!)^2}$$
+        (the last equality uses $(2n-1)!!=\dfrac{(2n)!}{2^nn!}$). Hence
+        $$(1-x^2)^{-1/2} = \sum_{n=0}^\infty \frac{(2n)!}{4^n(n!)^2}x^{2n},$$
+        and since $\sin^{-1}0=0$, integrating term by term gives
+        $$\sin^{-1}x = \sum_{n=0}^\infty \frac{(2n)!}{4^n(n!)^2(2n+1)}x^{2n+1}.$$
+        Computing the coefficients for $n=0,1,2,3$ gives
+        $$1,\quad \frac16,\quad \frac3{40},\quad \frac{5}{112},$$
+        so
+        $$\sin^{-1}x = x+\frac{x^3}6+\frac{3x^5}{40}+\frac{5x^7}{112}+\cdots.$$
+        Since $\sin^{-1}x$ is an odd function, all its even-degree coefficients vanish, so the 8th-degree Taylor polynomial is
+        $$P_8(x) = x+\frac{x^3}6+\frac{3x^5}{40}+\frac{5x^7}{112}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">제1종 완전타원적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle K = \int_0^{\pi/2} \dfrac{d\theta}{\sqrt{1 - k^2 \sin^2\theta}}$ 를 <strong>제1종 완전타원적분(complete elliptic integral of the first kind)</strong>이라 한다. 다음이 성립함을 보이시오. (단, $|k| \lt 1$)</p>
+        <p>$$K = \dfrac{\pi}{2}\left[1 + \left(\dfrac{1}{2}\right)^2 k^2 + \left(\dfrac{1\cdot3}{2\cdot4}\right)^2 k^4 + \left(\dfrac{1\cdot3\cdot5}{2\cdot4\cdot6}\right)^2 k^6 + \cdots\right]$$</p>
+        <p>단, 다음이 성립함이 알려져 있다.</p>
+        <div class="formal-box">리만적분가능함수 $f_n : [a, b] \to \mathbb{R}$에 대해 $M_n \gt 0$이 있어 $|f_n| \leq M_n$이고 $\displaystyle\sum_{n=0}^{\infty} M_n \lt \infty$가 성립한다고 하자. 이때 $\displaystyle\int_a^b \sum_{n=0}^{\infty} f_n(x)\,dx = \sum_{n=0}^{\infty} \int_a^b f_n(x)\,dx$가 성립한다.</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 이항급수에 $\alpha=-1/2$를 대입하면
+        $$(1-u)^{-1/2} = \sum_{n=0}^\infty\binom{-1/2}{n}(-u)^n$$
+        이고, 유제 04-1(2)에서 계산한 것과 같이
+        $$\binom{-1/2}{n}(-1)^n = \frac{(2n-1)!!}{(2n)!!}$$
+        이므로
+        $$(1-u)^{-1/2} = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}u^n, \qquad |u|\lt1$$
+        이다.</p>
+        <p>$u = k^2\sin^2\theta$로 두면 $|k|\lt1$이므로 $|u|\leq k^2\lt1$이고,
+        $$\frac{1}{\sqrt{1-k^2\sin^2\theta}} = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}k^{2n}\sin^{2n}\theta$$
+        이다. $f_n(\theta) = \dfrac{(2n-1)!!}{(2n)!!}k^{2n}\sin^{2n}\theta$라 하면 $0\leq\theta\leq\pi/2$에서 $|f_n(\theta)|\leq M_n := \dfrac{(2n-1)!!}{(2n)!!}k^{2n}$이고, $\displaystyle\sum_{n=0}^\infty M_n = (1-k^2)^{-1/2}\lt\infty$이다. 따라서 주어진 사실(항별적분)에 의해
+        $$K = \int_0^{\pi/2}\sum_{n=0}^\infty f_n(\theta)\,d\theta = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}k^{2n}\int_0^{\pi/2}\sin^{2n}\theta\,d\theta$$
+        이다.</p>
+        <p>왈리스 공식에 의해 $\displaystyle\int_0^{\pi/2}\sin^{2n}\theta\,d\theta = \dfrac{(2n-1)!!}{(2n)!!}\cdot\dfrac\pi2$이므로
+        $$K = \sum_{n=0}^\infty \left[\frac{(2n-1)!!}{(2n)!!}\right]^2 k^{2n}\cdot\frac\pi2 = \frac\pi2\left[1+\left(\frac12\right)^2k^2+\left(\frac{1\cdot3}{2\cdot4}\right)^2k^4+\left(\frac{1\cdot3\cdot5}{2\cdot4\cdot6}\right)^2k^6+\cdots\right]$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\displaystyle K = \int_0^{\pi/2} \dfrac{d\theta}{\sqrt{1 - k^2 \sin^2\theta}}$ is called the <strong>complete elliptic integral of the first kind</strong>. Show that the following holds. (Here, $|k| \lt 1$.)</p>
+        <p>$$K = \dfrac{\pi}{2}\left[1 + \left(\dfrac{1}{2}\right)^2 k^2 + \left(\dfrac{1\cdot3}{2\cdot4}\right)^2 k^4 + \left(\dfrac{1\cdot3\cdot5}{2\cdot4\cdot6}\right)^2 k^6 + \cdots\right]$$</p>
+        <p>You may use the following fact.</p>
+        <div class="formal-box">Let $f_n : [a, b] \to \mathbb{R}$ be Riemann integrable functions, and suppose there exist $M_n \gt 0$ with $|f_n| \leq M_n$ and $\displaystyle\sum_{n=0}^{\infty} M_n \lt \infty$. Then $\displaystyle\int_a^b \sum_{n=0}^{\infty} f_n(x)\,dx = \sum_{n=0}^{\infty} \int_a^b f_n(x)\,dx$.</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Substituting $\alpha=-1/2$ into the binomial series,
+        $$(1-u)^{-1/2} = \sum_{n=0}^\infty\binom{-1/2}{n}(-u)^n,$$
+        and, as computed in Exercise 04-1(2),
+        $$\binom{-1/2}{n}(-1)^n = \frac{(2n-1)!!}{(2n)!!},$$
+        so
+        $$(1-u)^{-1/2} = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}u^n, \qquad |u|\lt1.$$</p>
+        <p>Setting $u = k^2\sin^2\theta$, since $|k|\lt1$ we have $|u|\leq k^2\lt1$, so
+        $$\frac{1}{\sqrt{1-k^2\sin^2\theta}} = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}k^{2n}\sin^{2n}\theta.$$
+        Let $f_n(\theta) = \dfrac{(2n-1)!!}{(2n)!!}k^{2n}\sin^{2n}\theta$. Then $|f_n(\theta)|\leq M_n := \dfrac{(2n-1)!!}{(2n)!!}k^{2n}$ for $0\leq\theta\leq\pi/2$, and $\displaystyle\sum_{n=0}^\infty M_n = (1-k^2)^{-1/2}\lt\infty$. Hence, by the given fact (term-by-term integration),
+        $$K = \int_0^{\pi/2}\sum_{n=0}^\infty f_n(\theta)\,d\theta = \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!!}k^{2n}\int_0^{\pi/2}\sin^{2n}\theta\,d\theta.$$</p>
+        <p>By Wallis' formula, $\displaystyle\int_0^{\pi/2}\sin^{2n}\theta\,d\theta = \dfrac{(2n-1)!!}{(2n)!!}\cdot\dfrac\pi2$, so
+        $$K = \sum_{n=0}^\infty \left[\frac{(2n-1)!!}{(2n)!!}\right]^2 k^{2n}\cdot\frac\pi2 = \frac\pi2\left[1+\left(\frac12\right)^2k^2+\left(\frac{1\cdot3}{2\cdot4}\right)^2k^4+\left(\frac{1\cdot3\cdot5}{2\cdot4\cdot6}\right)^2k^6+\cdots\right].$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">테일러 급수로 극한 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\lim_{x \to 1} \dfrac{\ln x}{x - 1}$의 값을 $x = 1$에서의 $\ln x$의 테일러 급수를 이용하여 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\ln x$의 $x=1$에서의 테일러 급수를 구하기 위해 $t=x-1$로 치환하면
+        $$\ln(1+t) = t-\frac{t^2}2+\frac{t^3}3-\cdots$$
+        이므로
+        $$\ln x = (x-1)-\frac{(x-1)^2}2+\frac{(x-1)^3}3-\cdots$$
+        이다. 따라서
+        $$\frac{\ln x}{x-1} = 1-\frac{x-1}2+\frac{(x-1)^2}3-\cdots$$
+        이고, $x\to1$이면 $x-1\to0$이므로
+        $$\lim_{x\to1}\frac{\ln x}{x-1} = 1$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the value of $\displaystyle\lim_{x \to 1} \dfrac{\ln x}{x - 1}$ using the Taylor series of $\ln x$ at $x = 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> To find the Taylor series of $\ln x$ at $x=1$, substitute $t=x-1$:
+        $$\ln(1+t) = t-\frac{t^2}2+\frac{t^3}3-\cdots,$$
+        so
+        $$\ln x = (x-1)-\frac{(x-1)^2}2+\frac{(x-1)^3}3-\cdots.$$
+        Hence
+        $$\frac{\ln x}{x-1} = 1-\frac{x-1}2+\frac{(x-1)^2}3-\cdots,$$
+        and as $x\to1$, $x-1\to0$, so
+        $$\lim_{x\to1}\frac{\ln x}{x-1} = 1.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">테일러 급수로 극한 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 테일러 급수를 이용하여 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{\sin x - \tan x}{x^3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \left(\dfrac{1}{\sin x} - \dfrac{1}{x}\right)$</li>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{e^x - (1+x)}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{\ln(1 + x^2)}{1 - \cos x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\sin x = x-\dfrac{x^3}6+O(x^5)$이고 $\cos x = 1-\dfrac{x^2}2+O(x^4)$이므로
+        $$\frac1{\cos x} = 1+\frac{x^2}2+O(x^4)$$
+        이다 (등비급수 $\frac1{1-u}=1+u+O(u^2)$에 $u=\frac{x^2}2+O(x^4)$를 대입). 따라서
+        $$\tan x = \sin x\cdot\frac1{\cos x} = \left(x-\frac{x^3}6+O(x^5)\right)\left(1+\frac{x^2}2+O(x^4)\right) = x+\frac{x^3}2-\frac{x^3}6+O(x^5) = x+\frac{x^3}3+O(x^5)$$
+        이다. 그러므로
+        $$\sin x-\tan x = \left(x-\frac{x^3}6\right)-\left(x+\frac{x^3}3\right)+O(x^5) = -\frac{x^3}2+O(x^5)$$
+        이고
+        $$\lim_{x\to0}\frac{\sin x-\tan x}{x^3} = -\frac12$$
+        이다.</p>
+        <p>(2)
+        $$\frac1{\sin x}-\frac1x = \frac{x-\sin x}{x\sin x}$$
+        이다. $x-\sin x = \dfrac{x^3}6+O(x^5)$이고 $x\sin x = x^2+O(x^4)$이므로
+        $$\frac{x-\sin x}{x\sin x} = \frac{x^3/6+O(x^5)}{x^2+O(x^4)} = \frac x6+O(x^3)$$
+        이다. 따라서
+        $$\lim_{x\to0}\left(\frac1{\sin x}-\frac1x\right) = 0$$
+        이다.</p>
+        <p>(3) $e^x = 1+x+\dfrac{x^2}2+O(x^3)$이므로
+        $$e^x-(1+x) = \frac{x^2}2+O(x^3)$$
+        이고
+        $$\lim_{x\to0}\frac{e^x-(1+x)}{x^2} = \frac12$$
+        이다.</p>
+        <p>(4) $\ln(1+x^2) = x^2+O(x^4)$이고 $1-\cos x = \dfrac{x^2}2+O(x^4)$이므로
+        $$\frac{\ln(1+x^2)}{1-\cos x} = \frac{x^2+O(x^4)}{x^2/2+O(x^4)} = \frac{1+O(x^2)}{1/2+O(x^2)} \to \frac1{1/2}=2$$
+        이다. 따라서
+        $$\lim_{x\to0}\frac{\ln(1+x^2)}{1-\cos x} = 2$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find each of the following limits using Taylor series.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{\sin x - \tan x}{x^3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \left(\dfrac{1}{\sin x} - \dfrac{1}{x}\right)$</li>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{e^x - (1+x)}{x^2}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \dfrac{\ln(1 + x^2)}{1 - \cos x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\sin x = x-\dfrac{x^3}6+O(x^5)$ and $\cos x = 1-\dfrac{x^2}2+O(x^4)$,
+        $$\frac1{\cos x} = 1+\frac{x^2}2+O(x^4)$$
+        (substituting $u=\frac{x^2}2+O(x^4)$ into the geometric series $\frac1{1-u}=1+u+O(u^2)$). Hence
+        $$\tan x = \sin x\cdot\frac1{\cos x} = \left(x-\frac{x^3}6+O(x^5)\right)\left(1+\frac{x^2}2+O(x^4)\right) = x+\frac{x^3}2-\frac{x^3}6+O(x^5) = x+\frac{x^3}3+O(x^5).$$
+        Therefore
+        $$\sin x-\tan x = \left(x-\frac{x^3}6\right)-\left(x+\frac{x^3}3\right)+O(x^5) = -\frac{x^3}2+O(x^5),$$
+        so
+        $$\lim_{x\to0}\frac{\sin x-\tan x}{x^3} = -\frac12.$$</p>
+        <p>(2)
+        $$\frac1{\sin x}-\frac1x = \frac{x-\sin x}{x\sin x}.$$
+        Since $x-\sin x = \dfrac{x^3}6+O(x^5)$ and $x\sin x = x^2+O(x^4)$,
+        $$\frac{x-\sin x}{x\sin x} = \frac{x^3/6+O(x^5)}{x^2+O(x^4)} = \frac x6+O(x^3),$$
+        so
+        $$\lim_{x\to0}\left(\frac1{\sin x}-\frac1x\right) = 0.$$</p>
+        <p>(3) Since $e^x = 1+x+\dfrac{x^2}2+O(x^3)$,
+        $$e^x-(1+x) = \frac{x^2}2+O(x^3),$$
+        so
+        $$\lim_{x\to0}\frac{e^x-(1+x)}{x^2} = \frac12.$$</p>
+        <p>(4) Since $\ln(1+x^2) = x^2+O(x^4)$ and $1-\cos x = \dfrac{x^2}2+O(x^4)$,
+        $$\frac{\ln(1+x^2)}{1-\cos x} = \frac{x^2+O(x^4)}{x^2/2+O(x^4)} = \frac{1+O(x^2)}{1/2+O(x^2)} \to \frac1{1/2}=2,$$
+        so
+        $$\lim_{x\to0}\frac{\ln(1+x^2)}{1-\cos x} = 2.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">극한 수렴 조건 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\lim_{x \to 0} \dfrac{\sin(ax) - \sin x - x}{x^3}$이 수렴하도록 하는 $a$의 값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\sin u = u-\dfrac{u^3}6+O(u^5)$이므로
+        $$\sin(ax) = ax-\frac{a^3x^3}6+O(x^5)$$
+        이다. 따라서
+        $$\sin(ax)-\sin x-x = \left(ax-\frac{a^3x^3}6\right)-\left(x-\frac{x^3}6\right)-x+O(x^5) = (a-2)x+\frac{1-a^3}6x^3+O(x^5)$$
+        이고
+        $$\frac{\sin(ax)-\sin x-x}{x^3} = \frac{a-2}{x^2}+\frac{1-a^3}6+O(x^2)$$
+        이다.</p>
+        <p>$x\to0$일 때 이 식이 수렴하려면 $\dfrac1{x^2}$ 항이 발산하지 않아야 하므로 $a-2=0$, 즉 $a=2$여야 한다. (이는 필요조건이며, $a=2$이면 $\dfrac1{x^2}$항이 사라지고 나머지 항이 $\dfrac{1-a^3}6+O(x^2)\to\dfrac{1-a^3}6$로 수렴하므로 충분조건이기도 하다.)</p>
+        <p>따라서 구하는 값은 $a=2$이고, 이때 극한값은
+        $$\frac{1-2^3}6 = \frac{1-8}6 = -\frac76$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the value of $a$ for which $\displaystyle\lim_{x \to 0} \dfrac{\sin(ax) - \sin x - x}{x^3}$ converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\sin u = u-\dfrac{u^3}6+O(u^5)$,
+        $$\sin(ax) = ax-\frac{a^3x^3}6+O(x^5).$$
+        Hence
+        $$\sin(ax)-\sin x-x = \left(ax-\frac{a^3x^3}6\right)-\left(x-\frac{x^3}6\right)-x+O(x^5) = (a-2)x+\frac{1-a^3}6x^3+O(x^5),$$
+        so
+        $$\frac{\sin(ax)-\sin x-x}{x^3} = \frac{a-2}{x^2}+\frac{1-a^3}6+O(x^2).$$</p>
+        <p>For this to converge as $x\to0$, the $\dfrac1{x^2}$ term must not blow up, so we need $a-2=0$, i.e., $a=2$. (This is necessary, and it is also sufficient: when $a=2$ the $\dfrac1{x^2}$ term vanishes, and the remaining term converges to $\dfrac{1-a^3}6$.)</p>
+        <p>So $a=2$, and the resulting limit is
+        $$\frac{1-2^3}6 = \frac{1-8}6 = -\frac76.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 06 -->
+<div class="card ex-card" id="ex06">
+  <div class="card-head">
+    <span class="ex-num">예제 06</span>
+    <span class="ex-title">복소지수의 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$e^{-i\pi}$</li>
+          <li>$e^{i\pi/4}$</li>
+          <li>$e^{1 - i\pi/2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 오일러 공식에 의해
+        $$e^{-i\pi} = \cos(-\pi)+i\sin(-\pi) = -1+0 = -1$$
+        이다.</p>
+        <p>(2)
+        $$e^{i\pi/4} = \cos\frac\pi4+i\sin\frac\pi4 = \frac{\sqrt2}2+i\frac{\sqrt2}2 = \frac{\sqrt2}2(1+i)$$
+        이다.</p>
+        <p>(3)
+        $$e^{1-i\pi/2} = e\cdot e^{-i\pi/2} = e\left(\cos\left(-\frac\pi2\right)+i\sin\left(-\frac\pi2\right)\right) = e(0-i) = -ie$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute each of the following.</p>
+        <ol>
+          <li>$e^{-i\pi}$</li>
+          <li>$e^{i\pi/4}$</li>
+          <li>$e^{1 - i\pi/2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) By Euler's formula,
+        $$e^{-i\pi} = \cos(-\pi)+i\sin(-\pi) = -1+0 = -1.$$</p>
+        <p>(2)
+        $$e^{i\pi/4} = \cos\frac\pi4+i\sin\frac\pi4 = \frac{\sqrt2}2+i\frac{\sqrt2}2 = \frac{\sqrt2}2(1+i).$$</p>
+        <p>(3)
+        $$e^{1-i\pi/2} = e\cdot e^{-i\pi/2} = e\left(\cos\left(-\frac\pi2\right)+i\sin\left(-\frac\pi2\right)\right) = e(0-i) = -ie.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-1 -->
+<div class="card ex-card" id="yu06-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-1</span>
+    <span class="ex-title">오일러 공식 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실수 $\theta$에 대해 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\cos\theta = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$</li>
+          <li>$\sin\theta = \dfrac{e^{i\theta} - e^{-i\theta}}{2i}$</li>
+          <li>$\cosh i\theta = \cos\theta$</li>
+          <li>$\sinh i\theta = i\sin\theta$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 오일러 공식에 의해 $e^{i\theta}=\cos\theta+i\sin\theta$이고, $\cos$은 우함수, $\sin$은 기함수이므로
+        $$e^{-i\theta} = \cos(-\theta)+i\sin(-\theta) = \cos\theta-i\sin\theta$$
+        이다.</p>
+        <p>(1)
+        $$\frac{e^{i\theta}+e^{-i\theta}}2 = \frac{(\cos\theta+i\sin\theta)+(\cos\theta-i\sin\theta)}2 = \frac{2\cos\theta}2 = \cos\theta$$
+        이다.</p>
+        <p>(2)
+        $$\frac{e^{i\theta}-e^{-i\theta}}{2i} = \frac{(\cos\theta+i\sin\theta)-(\cos\theta-i\sin\theta)}{2i} = \frac{2i\sin\theta}{2i} = \sin\theta$$
+        이다.</p>
+        <p>(3) 복소수 $z$에 대해 $\cosh z := \dfrac{e^z+e^{-z}}2$로 정의되므로, (1)에 의해
+        $$\cosh i\theta = \frac{e^{i\theta}+e^{-i\theta}}2 = \cos\theta$$
+        이다.</p>
+        <p>(4) 복소수 $z$에 대해 $\sinh z := \dfrac{e^z-e^{-z}}2$로 정의되므로,
+        $$\sinh i\theta = \frac{e^{i\theta}-e^{-i\theta}}2 = i\cdot\frac{e^{i\theta}-e^{-i\theta}}{2i} = i\sin\theta$$
+        이고, 마지막 등식은 (2)에 의한 것이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the following hold for every real number $\theta$.</p>
+        <ol>
+          <li>$\cos\theta = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$</li>
+          <li>$\sin\theta = \dfrac{e^{i\theta} - e^{-i\theta}}{2i}$</li>
+          <li>$\cosh i\theta = \cos\theta$</li>
+          <li>$\sinh i\theta = i\sin\theta$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> By Euler's formula, $e^{i\theta}=\cos\theta+i\sin\theta$, and since $\cos$ is even and $\sin$ is odd,
+        $$e^{-i\theta} = \cos(-\theta)+i\sin(-\theta) = \cos\theta-i\sin\theta.$$</p>
+        <p>(1)
+        $$\frac{e^{i\theta}+e^{-i\theta}}2 = \frac{(\cos\theta+i\sin\theta)+(\cos\theta-i\sin\theta)}2 = \frac{2\cos\theta}2 = \cos\theta.$$</p>
+        <p>(2)
+        $$\frac{e^{i\theta}-e^{-i\theta}}{2i} = \frac{(\cos\theta+i\sin\theta)-(\cos\theta-i\sin\theta)}{2i} = \frac{2i\sin\theta}{2i} = \sin\theta.$$</p>
+        <p>(3) For a complex number $z$, $\cosh z := \dfrac{e^z+e^{-z}}2$ by definition, so by part (1),
+        $$\cosh i\theta = \frac{e^{i\theta}+e^{-i\theta}}2 = \cos\theta.$$</p>
+        <p>(4) For a complex number $z$, $\sinh z := \dfrac{e^z-e^{-z}}2$ by definition, so
+        $$\sinh i\theta = \frac{e^{i\theta}-e^{-i\theta}}2 = i\cdot\frac{e^{i\theta}-e^{-i\theta}}{2i} = i\sin\theta,$$
+        where the last equality follows from part (2).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-2 -->
+<div class="card ex-card" id="yu06-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-2</span>
+    <span class="ex-title">복소지수의 지수법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>복소수 $z, w$와 양수 $x, y \gt 0$에 대해 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$x^z x^w = x^{z+w}$</li>
+          <li>$x^z / x^w = x^{z-w}$</li>
+          <li>$(x^c)^w = x^{cw}$ (단, $c$는 실수)</li>
+          <li>$(xy)^z = x^z y^z$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $x,y\gt0$이고 $z,w$가 복소수일 때 $x^z := e^{z\ln x}$로 정의된다 (여기서 $\ln x$는 실수).</p>
+        <p>(1)
+        $$x^zx^w = e^{z\ln x}e^{w\ln x} = e^{z\ln x+w\ln x} = e^{(z+w)\ln x} = x^{z+w}$$
+        이다 (세 번째 등식은 복소지수함수의 성질 $e^ae^b=e^{a+b}$에 의한다).</p>
+        <p>(2) $e^{-w\ln x}e^{w\ln x}=e^0=1$이므로 $e^{-w\ln x}=1/e^{w\ln x}=1/x^w$이다. 따라서
+        $$\frac{x^z}{x^w} = x^z\cdot\frac1{x^w} = e^{z\ln x}\cdot e^{-w\ln x} = e^{(z-w)\ln x} = x^{z-w}$$
+        이다.</p>
+        <p>(3) $c$가 실수이므로 $x^c=e^{c\ln x}$는 양의 실수이고, 실수 로그의 성질에 의해 $\ln(x^c)=c\ln x$이다. 따라서
+        $$(x^c)^w = e^{w\ln(x^c)} = e^{w\cdot c\ln x} = e^{cw\ln x} = x^{cw}$$
+        이다.</p>
+        <p>(4) 실수 로그의 성질에 의해 $\ln(xy)=\ln x+\ln y$이므로
+        $$(xy)^z = e^{z\ln(xy)} = e^{z(\ln x+\ln y)} = e^{z\ln x+z\ln y} = e^{z\ln x}e^{z\ln y} = x^zy^z$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the following hold for complex numbers $z, w$ and positive numbers $x, y \gt 0$.</p>
+        <ol>
+          <li>$x^z x^w = x^{z+w}$</li>
+          <li>$x^z / x^w = x^{z-w}$</li>
+          <li>$(x^c)^w = x^{cw}$ (where $c$ is a real number)</li>
+          <li>$(xy)^z = x^z y^z$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> For $x,y\gt0$ and complex numbers $z,w$, define $x^z := e^{z\ln x}$ (where $\ln x$ is the real natural logarithm).</p>
+        <p>(1)
+        $$x^zx^w = e^{z\ln x}e^{w\ln x} = e^{z\ln x+w\ln x} = e^{(z+w)\ln x} = x^{z+w}$$
+        (the third equality uses the property $e^ae^b=e^{a+b}$ of the complex exponential function).</p>
+        <p>(2) Since $e^{-w\ln x}e^{w\ln x}=e^0=1$, we have $e^{-w\ln x}=1/e^{w\ln x}=1/x^w$. Hence
+        $$\frac{x^z}{x^w} = x^z\cdot\frac1{x^w} = e^{z\ln x}\cdot e^{-w\ln x} = e^{(z-w)\ln x} = x^{z-w}.$$</p>
+        <p>(3) Since $c$ is real, $x^c=e^{c\ln x}$ is a positive real number, and by the property of the real logarithm, $\ln(x^c)=c\ln x$. Hence
+        $$(x^c)^w = e^{w\ln(x^c)} = e^{w\cdot c\ln x} = e^{cw\ln x} = x^{cw}.$$</p>
+        <p>(4) By the property of the real logarithm, $\ln(xy)=\ln x+\ln y$, so
+        $$(xy)^z = e^{z\ln(xy)} = e^{z(\ln x+\ln y)} = e^{z\ln x+z\ln y} = e^{z\ln x}e^{z\ln y} = x^zy^z.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">해석함수가 아닌 매끄러운 함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x)$를 다음과 같이 정의하자.</p>
+        <p>$$f(x) = \begin{cases} e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</p>
+        <ol>
+          <li>$f$가 $x = 0$에서 미분가능함을 보이고 $f(x)$의 도함수를 찾으시오.</li>
+          <li>수학적 귀납법을 이용해 각 자연수 $n$에 대해 다항식 $p_n$이 있어 다음이 성립함을 보이시오.
+            $$f^{(n)}(x) = \begin{cases} p_n(1/x)\, e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</li>
+          <li>$f(x) = e^{-1/x^2}$의 테일러 급수가 $0$임을 보이시오. 따라서 $f(x)$는 해석함수가 아니다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Define a function $f(x)$ as follows.</p>
+        <p>$$f(x) = \begin{cases} e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</p>
+        <ol>
+          <li>Show that $f$ is differentiable at $x = 0$, and find the derivative of $f(x)$.</li>
+          <li>Using mathematical induction, show that for each natural number $n$ there exists a polynomial $p_n$ such that
+            $$f^{(n)}(x) = \begin{cases} p_n(1/x)\, e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</li>
+          <li>Show that the Taylor series of $f(x) = e^{-1/x^2}$ is $0$. Hence $f(x)$ is not an analytic function.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">테일러 다항식의 특성화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x)$가 $x = a$에서 무한번 미분가능하고 $g(x) = b_0 + b_1(x - a) + \cdots + b_n(x - a)^n$이라 하자.</p>
+        <p>오차함수 $E(x) = f(x) - g(x)$를 정의할 때 다음 두 가지 조건을 만족하면 $g(x)$는 $f(x)$의 $n$차 테일러 다항식임을 보이시오. (단, 역은 성립하지 않음에 주의하자.)</p>
+        <ol>
+          <li>$E(a) = 0$</li>
+          <li>$\displaystyle\lim_{x \to a} \dfrac{E(x)}{(x - a)^n} = 0$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $f(x)$ is infinitely differentiable at $x = a$, and let $g(x) = b_0 + b_1(x - a) + \cdots + b_n(x - a)^n$.</p>
+        <p>Define the error function $E(x) = f(x) - g(x)$. Show that if the following two conditions hold, then $g(x)$ is the $n$th-degree Taylor polynomial of $f(x)$. (Note that the converse does not hold.)</p>
+        <ol>
+          <li>$E(a) = 0$</li>
+          <li>$\displaystyle\lim_{x \to a} \dfrac{E(x)}{(x - a)^n} = 0$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">이계도함수 판정법 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>테일러 정리를 이용해 이계도함수 판정법을 증명하시오. 즉, $f$가 $a$를 포함한 열린 구간 $I$에서 이계도함수가 존재하고 연속이며 $f'(a) = 0$일 때 다음을 보이시오.</p>
+        <ol>
+          <li>$I$에서 $f'' \leq 0$이면 $f$가 $x = a$에서 극댓값을 가진다.</li>
+          <li>$I$에서 $f'' \geq 0$이면 $f$가 $x = a$에서 극솟값을 가진다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use Taylor's Theorem to prove the Second Derivative Test. That is, suppose $f$ has a continuous second derivative on an open interval $I$ containing $a$ and $f'(a) = 0$. Show the following.</p>
+        <ol>
+          <li>If $f'' \leq 0$ on $I$, then $f$ has a local maximum at $x = a$.</li>
+          <li>If $f'' \geq 0$ on $I$, then $f$ has a local minimum at $x = a$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">P+sin P의 근사 정밀도</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실수 $P$가 $\pi$를 소수점 아래 $n$번째 자리까지 정확하게 근사한다고 가정하자. 이때 $P + \sin P$는 $\pi$를 소수점 아래 $3n$번째 자리까지 정확하게 근사함을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose a real number $P$ approximates $\pi$ accurately to $n$ decimal places. Show that $P + \sin P$ approximates $\pi$ accurately to $3n$ decimal places.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">n계 미분계수 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 함수 $f(x)$에 대해 $f^{(n)}(0)$의 값을 구하시오.</p>
+        <ol>
+          <li>$f(x) = \tan^{-1} x$</li>
+          <li>$f(x) = \sin^{-1} x$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each given function $f(x)$, find the value of $f^{(n)}(0)$.</p>
+        <ol>
+          <li>$f(x) = \tan^{-1} x$</li>
+          <li>$f(x) = \sin^{-1} x$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">대칭성과 매클로린 계수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x)$가 $y$축 대칭이면 $f(x)$의 매클로린 급수의 홀수차항의 계수는 $0$임을 보이시오.</li>
+          <li>$f(x)$가 원점 대칭이면 $f(x)$의 매클로린 급수의 짝수차항의 계수는 $0$임을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that if $f(x)$ is symmetric about the $y$-axis, then the coefficients of the odd-degree terms in the Maclaurin series of $f(x)$ are $0$.</li>
+          <li>Show that if $f(x)$ is symmetric about the origin, then the coefficients of the even-degree terms in the Maclaurin series of $f(x)$ are $0$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">라이프니츠 공식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\dfrac{1}{1+t^2} = 1 - t^2 + t^4 - \cdots + (-1)^n t^{2n} + \dfrac{(-1)^{n+1} t^{2n+2}}{1 + t^2}$임을 보이시오.</li>
+          <li>$f(x) = \tan^{-1} x$의 $(2n+1)$차 나머지항은 $\displaystyle R_{2n+1} f(x) = \int_0^x \dfrac{(-1)^{n+1} t^{2n+2}}{1 + t^2}\,dt$임을 보이시오.</li>
+          <li>$|x| \leq 1$일 때 $\displaystyle \tan^{-1} x = \sum_{n=0}^{\infty} \dfrac{(-1)^n x^{2n+1}}{2n+1}$임을 보이시오.</li>
+          <li>$\displaystyle \dfrac{\pi}{4} = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{2n+1}$임을 보이시오. 이를 <strong>라이프니츠 공식(Leibniz's formula)</strong>이라 한다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\dfrac{1}{1+t^2} = 1 - t^2 + t^4 - \cdots + (-1)^n t^{2n} + \dfrac{(-1)^{n+1} t^{2n+2}}{1 + t^2}$.</li>
+          <li>Show that the $(2n+1)$th-degree remainder term of $f(x) = \tan^{-1} x$ is $\displaystyle R_{2n+1} f(x) = \int_0^x \dfrac{(-1)^{n+1} t^{2n+2}}{1 + t^2}\,dt$.</li>
+          <li>Show that $\displaystyle \tan^{-1} x = \sum_{n=0}^{\infty} \dfrac{(-1)^n x^{2n+1}}{2n+1}$ for $|x| \leq 1$.</li>
+          <li>Show that $\displaystyle \dfrac{\pi}{4} = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{2n+1}$. This is called <strong>Leibniz's formula</strong>.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">급수로 정의한 지수함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>모든 실수 $x$에 대해 $\displaystyle f(x) = \sum_{n=0}^{\infty} \dfrac{x^n}{n!}$가 수렴함을 보이시오.</li>
+          <li>$g(x) = e^{-x} f(x)$라 할 때 $g'(x) = 0$임을 보이시오.</li>
+          <li>(2)를 이용해 모든 실수 $x$에 대해 $f(x) = e^x$가 성립함을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\displaystyle f(x) = \sum_{n=0}^{\infty} \dfrac{x^n}{n!}$ converges for every real number $x$.</li>
+          <li>Let $g(x) = e^{-x} f(x)$. Show that $g'(x) = 0$.</li>
+          <li>Using (2), show that $f(x) = e^x$ for every real number $x$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">급수로 정의한 사인·코사인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>모든 실수 $x$에 대해 $\displaystyle f(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{(2n+1)!} x^{2n+1}$, $\displaystyle g(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{(2n)!} x^{2n}$이 수렴함을 보이시오.</li>
+          <li>$h(x) = (f(x) - \sin x)^2 + (g(x) - \cos x)^2$이라 할 때, $h'(x) = 0$임을 보이시오.</li>
+          <li>(2)를 이용해 모든 실수 $x$에 대해 $f(x) = \sin x$, $g(x) = \cos x$임을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\displaystyle f(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{(2n+1)!} x^{2n+1}$ and $\displaystyle g(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^n}{(2n)!} x^{2n}$ converge for every real number $x$.</li>
+          <li>Let $h(x) = (f(x) - \sin x)^2 + (g(x) - \cos x)^2$. Show that $h'(x) = 0$.</li>
+          <li>Using (2), show that $f(x) = \sin x$ and $g(x) = \cos x$ for every real number $x$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="card pr-card" id="pr10">
+  <div class="card-head">
+    <span class="pr-num">문제 10</span>
+    <span class="ex-title">일반화된 이항계수 (임용21A-7)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>일반화된 이항계수 $\dbinom{-\frac{1}{2}}{n}$이 $\dbinom{2n}{n} = f(n) \times \dbinom{-\frac{1}{2}}{n}$을 만족할 때, $f(n)$과 $\displaystyle\sum_{n=0}^{\infty} \dbinom{2n}{n} \left(-\dfrac{1}{8}\right)^n$의 값을 풀이 과정과 함께 쓰시오. (단, $n$은 음이 아닌 정수이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the generalized binomial coefficient $\dbinom{-\frac{1}{2}}{n}$ satisfies $\dbinom{2n}{n} = f(n) \times \dbinom{-\frac{1}{2}}{n}$. Find $f(n)$ and the value of $\displaystyle\sum_{n=0}^{\infty} \dbinom{2n}{n} \left(-\dfrac{1}{8}\right)^n$, along with the process. (Here, $n$ is a non-negative integer.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 11 -->
+<div class="card pr-card" id="pr11">
+  <div class="card-head">
+    <span class="pr-num">문제 11</span>
+    <span class="ex-title">매클로린 급수로 극한 (임용08-12)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>매클로린(Maclaurin) 급수를 이용하여 다음 극한값을 구하시오.</p>
+        <p>$$\lim_{x \to 0} \dfrac{\sin x - x + x^3/6}{(x^2 \cos x)^{5/2}}$$</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the following limit using the Maclaurin series.</p>
+        <p>$$\lim_{x \to 0} \dfrac{\sin x - x + x^3/6}{(x^2 \cos x)^{5/2}}$$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 12 -->
+<div class="card pr-card" id="pr12">
+  <div class="card-head">
+    <span class="pr-num">문제 12</span>
+    <span class="ex-title">복소지수의 미분·적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f : \mathbb{R} \to \mathbb{C}$를 $f(x) = u(x) + iv(x)$ $(u, v : \mathbb{R} \to \mathbb{R})$로 표현할 때 $u, v$가 $x = a$에서 미분가능하면 $f$가 $x = a$에서 <strong>미분가능</strong>하다고 하고 $f'(a) = u'(a) + iv'(a)$로 정의한다. 따라서 $u, v$의 부정적분 $U, V$가 존재하면 $F(x) = U(x) + iV(x)$는 $f(x)$의 <strong>부정적분</strong>이다.</p>
+        <ol>
+          <li>복소수 $z$에 대해 $\dfrac{d}{dx}(e^{zx}) = ze^{zx}$가 성립함을 보이시오.</li>
+          <li>복소수 $z$에 대해 $\displaystyle\int e^{zx}\,dx = \dfrac{1}{z} e^{zx} + C$가 성립함을 보이시오. (단, $C$는 복소수인 적분상수)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Write a function $f : \mathbb{R} \to \mathbb{C}$ as $f(x) = u(x) + iv(x)$ $(u, v : \mathbb{R} \to \mathbb{R})$. If $u, v$ are differentiable at $x = a$, we say $f$ is <strong>differentiable</strong> at $x = a$ and define $f'(a) = u'(a) + iv'(a)$. Consequently, if indefinite integrals $U, V$ of $u, v$ exist, then $F(x) = U(x) + iV(x)$ is an <strong>indefinite integral</strong> of $f(x)$.</p>
+        <ol>
+          <li>Show that $\dfrac{d}{dx}(e^{zx}) = ze^{zx}$ holds for a complex number $z$.</li>
+          <li>Show that $\displaystyle\int e^{zx}\,dx = \dfrac{1}{z} e^{zx} + C$ holds for a complex number $z$. (Here, $C$ is a complex integration constant.)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 13 -->
+<div class="card pr-card" id="pr13">
+  <div class="card-head">
+    <span class="pr-num">문제 13</span>
+    <span class="ex-title">테일러 정리의 세 응용 (임용12(2차)-2)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래의 명제는 함수의 극소, 곡선의 볼록, 급수의 수렴에 대한 성질을 나타낸다. 테일러(Taylor) 정리를 이용하여 명제 (1), (2), (3)이 참임을 각각 증명하시오.</p>
+        <div class="formal-box">
+          <p>실수 전체의 집합을 $\mathbb{R}$라 하고, $(a, b)$를 $\mathbb{R}$의 열린 구간이라 하자.</p>
+          <p>(1) 함수 $f : (a, b) \to \mathbb{R}$가 $(a, b)$에서 $C^4$급 함수이고 $c \in (a, b)$에 대하여 $f'(c) = f''(c) = f^{(3)}(c) = 0,\ f^{(4)}(c) \gt 0$이면 $f$는 $x = c$에서 극솟값(local minimum)을 갖는다.</p>
+          <p>(2) 함수 $f : (a, b) \to \mathbb{R}$가 $(a, b)$에서 2계도함수를 갖고 모든 $x \in (a, b)$에 대하여 $f''(x) \geq 0$이면 $f$는 $(a, b)$에서 볼록함수(convex function)이다.</p>
+          <p>(3) 함수 $f : (a, b) \to \mathbb{R}$가 $(a, b)$에서 $C^\infty$급 함수이고 $c \in (a, b)$라 하자. 임의의 자연수 $k$에 대하여 모든 $t \in (a, b)$에서 $|f^{(k)}(t)| \leq 2^k$이면 임의의 $x \in (a, b)$에 대하여 다음 식이 성립한다.</p>
+          <p>$$f(x) = \sum_{k=0}^{\infty} \dfrac{f^{(k)}(c)}{k!}(x - c)^k$$</p>
+        </div>
+        <p>아래의 정리는 증명 없이 사용한다.</p>
+        <div class="formal-box">
+          <p>[테일러 정리]</p>
+          <p>함수 $f : (a, b) \to \mathbb{R}$가 $(a, b)$에서 $(n+1)$계도함수 $f^{(n+1)}$을 가질 때, $c \in (a, b)$에 대하여 $\displaystyle p_n(x) = \sum_{k=0}^{n} \dfrac{f^{(k)}(c)}{k!}(x - c)^k$이라 하자. 그러면 임의의 $x \in (a, b)$에 대하여 다음 식을 만족하는 점 $t_x$가 $x$와 $c$ 사이에 존재한다.</p>
+          <p>$$f(x) = p_n(x) + \dfrac{f^{(n+1)}(t_x)}{(n+1)!}(x - c)^{n+1}$$</p>
+        </div>
+        <div class="formal-box">
+          <p>[참고]</p>
+          <ul>
+            <li>함수 $f : (a, b) \to \mathbb{R}$가 자연수 $n$에 대하여 $(a, b)$에서 $C^n$급 함수라는 것은 $(a, b)$에서 $n$계도함수 $f^{(n)}$이 존재하고 $f^{(n)}$이 연속임을 뜻한다.</li>
+            <li>함수 $f : (a, b) \to \mathbb{R}$가 $0 \leq t \leq 1$을 만족하는 임의의 실수 $t$와 $(a, b)$의 임의의 두 점 $x_1, x_2$에 대하여 다음을 만족하면 $f$를 $(a, b)$에서 볼록함수라 한다.
+              $$f((1-t)x_1 + tx_2) \leq (1-t)f(x_1) + tf(x_2)$$</li>
+            <li>함수 $f : (a, b) \to \mathbb{R}$가 $(a, b)$에서 $C^\infty$급 함수라는 것은 모든 자연수 $n$에 대하여 $(a, b)$에서 $n$계도함수 $f^{(n)}$이 존재하고 $f^{(n)}$이 연속임을 뜻한다.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The propositions below describe properties concerning local minima of functions, convexity of curves, and convergence of series. Using Taylor's Theorem, prove that propositions (1), (2), and (3) are each true.</p>
+        <div class="formal-box">
+          <p>Let $\mathbb{R}$ denote the set of all real numbers, and let $(a, b)$ be an open interval in $\mathbb{R}$.</p>
+          <p>(1) If a function $f : (a, b) \to \mathbb{R}$ is a $C^4$-class function on $(a, b)$ and $c \in (a, b)$ satisfies $f'(c) = f''(c) = f^{(3)}(c) = 0,\ f^{(4)}(c) \gt 0$, then $f$ has a local minimum at $x = c$.</p>
+          <p>(2) If a function $f : (a, b) \to \mathbb{R}$ has a second derivative on $(a, b)$ and $f''(x) \geq 0$ for all $x \in (a, b)$, then $f$ is a convex function on $(a, b)$.</p>
+          <p>(3) Let a function $f : (a, b) \to \mathbb{R}$ be a $C^\infty$-class function on $(a, b)$, and let $c \in (a, b)$. If for every natural number $k$, $|f^{(k)}(t)| \leq 2^k$ holds for all $t \in (a, b)$, then the following equality holds for every $x \in (a, b)$.</p>
+          <p>$$f(x) = \sum_{k=0}^{\infty} \dfrac{f^{(k)}(c)}{k!}(x - c)^k$$</p>
+        </div>
+        <p>The theorem below may be used without proof.</p>
+        <div class="formal-box">
+          <p>[Taylor's Theorem]</p>
+          <p>Suppose a function $f : (a, b) \to \mathbb{R}$ has an $(n+1)$th derivative $f^{(n+1)}$ on $(a, b)$, and for $c \in (a, b)$ let $\displaystyle p_n(x) = \sum_{k=0}^{n} \dfrac{f^{(k)}(c)}{k!}(x - c)^k$. Then for every $x \in (a, b)$, there exists a point $t_x$ between $x$ and $c$ satisfying the following equality.</p>
+          <p>$$f(x) = p_n(x) + \dfrac{f^{(n+1)}(t_x)}{(n+1)!}(x - c)^{n+1}$$</p>
+        </div>
+        <div class="formal-box">
+          <p>[Remark]</p>
+          <ul>
+            <li>For a natural number $n$, a function $f : (a, b) \to \mathbb{R}$ being a $C^n$-class function on $(a, b)$ means that the $n$th derivative $f^{(n)}$ exists on $(a, b)$ and $f^{(n)}$ is continuous.</li>
+            <li>A function $f : (a, b) \to \mathbb{R}$ is called a convex function on $(a, b)$ if, for every real number $t$ satisfying $0 \leq t \leq 1$ and any two points $x_1, x_2 \in (a, b)$, the following holds.
+              $$f((1-t)x_1 + tx_2) \leq (1-t)f(x_1) + tf(x_2)$$</li>
+            <li>A function $f : (a, b) \to \mathbb{R}$ being a $C^\infty$-class function on $(a, b)$ means that for every natural number $n$, the $n$th derivative $f^{(n)}$ exists on $(a, b)$ and $f^{(n)}$ is continuous.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01. 극한의 엄밀한 정의 (Precise Definition of a Limit) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 01단원 극한의 엄밀한 정의(Precise Definition of a Limit) 예제·유제·문제 모음. ε-δ 논법, 한쪽극한, 무한대에서의 극한과 점근선, 디리클레 자 함수, 고정점 정리를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 극한, limit, 엄밀한 정의, precise definition, epsilon-delta, 한쪽극한, one-sided limit, 점근선, asymptote, 디리클레 자 함수, Dirichlet ruler function, 고정점 정리, fixed point theorem, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch01.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. 극한의 엄밀한 정의 (Precise Definition of a Limit) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="극한의 엄밀한 정의 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch01.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "01. 극한의 엄밀한 정의 (Precise Definition of a Limit) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 극한의 엄밀한 정의 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch01.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch01.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html" class="active">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 01</p>
+  <h1>01. 극한의 엄밀한 정의<span>Precise Definition of a Limit</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 부등식으로 x의 범위 구하기</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 제곱근함수의 δ 찾기</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 일차함수의 δ 찾기</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> ε-δ로 극한값 증명</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 유리식 극한 구하고 증명</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 제곱근·조각함수 극한 증명</a></li>
+    <li><a href="#yu03"><span class="toc-num">유제 03</span> 극한 구하고 ε-δ 증명</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 극한값이 아님을 증명</a></li>
+    <li><a href="#yu04"><span class="toc-num">유제 04</span> 극한의 발산 증명</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 우극한의 엄밀한 증명</a></li>
+    <li><a href="#yu05"><span class="toc-num">유제 05</span> 바닥함수의 좌·우극한</a></li>
+    <li><a href="#ex06"><span class="toc-num">예제 06</span> 삼각함수 합성의 극한</a></li>
+    <li><a href="#yu06"><span class="toc-num">유제 06</span> 삼각함수 극한 계산</a></li>
+    <li><a href="#ex07"><span class="toc-num">예제 07</span> 무한대에서의 극한 증명</a></li>
+    <li><a href="#yu07"><span class="toc-num">유제 07</span> 무한대 극한의 정의 증명</a></li>
+    <li><a href="#ex08"><span class="toc-num">예제 08</span> 유리함수의 점근선</a></li>
+    <li><a href="#yu08"><span class="toc-num">유제 08</span> 점근선 모두 구하기</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 극한·연속의 동치 조건</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 유리수·무리수 함수의 연속성</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 디리클레 자 함수</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 고정점 정리</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 연속함수의 부호 보존</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 적분에 대한 평균값 (임용06-14)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">부등식으로 x의 범위 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$y = 2x - 1$이라 하자.</p>
+        <ol>
+          <li>$|y-7| \lt 2$를 만족시키는 $x$의 범위를 구하시오.</li>
+          <li>$|y-7| \lt 1$를 만족시키는 $x$의 범위를 구하시오.</li>
+          <li>양수 $\epsilon \gt 0$에 대해 $|y-7| \lt \epsilon$을 만족시키는 $x$의 범위를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $y = 2x-1$이므로 $y-7 = 2x-8 = 2(x-4)$이다.</p>
+        <p>(1) $|y-7| \lt 2 \Leftrightarrow |2(x-4)| \lt 2 \Leftrightarrow |x-4| \lt 1$이므로 $x$의 범위는 $3 \lt x \lt 5$이다.</p>
+        <p>(2) $|y-7| \lt 1 \Leftrightarrow |2(x-4)| \lt 1 \Leftrightarrow |x-4| \lt \dfrac{1}{2}$이므로 $x$의 범위는 $3.5 \lt x \lt 4.5$이다.</p>
+        <p>(3) $|y-7| \lt \epsilon \Leftrightarrow |2(x-4)| \lt \epsilon \Leftrightarrow |x-4| \lt \dfrac{\epsilon}{2}$이므로 $x$의 범위는 $4-\dfrac{\epsilon}{2} \lt x \lt 4+\dfrac{\epsilon}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $y = 2x - 1$.</p>
+        <ol>
+          <li>Find the range of $x$ satisfying $|y-7| \lt 2$.</li>
+          <li>Find the range of $x$ satisfying $|y-7| \lt 1$.</li>
+          <li>For a positive number $\epsilon \gt 0$, find the range of $x$ satisfying $|y-7| \lt \epsilon$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $y = 2x-1$, we have $y-7 = 2x-8 = 2(x-4)$.</p>
+        <p>(1) $|y-7| \lt 2 \Leftrightarrow |2(x-4)| \lt 2 \Leftrightarrow |x-4| \lt 1$, so the range of $x$ is $3 \lt x \lt 5$.</p>
+        <p>(2) $|y-7| \lt 1 \Leftrightarrow |2(x-4)| \lt 1 \Leftrightarrow |x-4| \lt \dfrac{1}{2}$, so the range of $x$ is $3.5 \lt x \lt 4.5$.</p>
+        <p>(3) $|y-7| \lt \epsilon \Leftrightarrow |2(x-4)| \lt \epsilon \Leftrightarrow |x-4| \lt \dfrac{\epsilon}{2}$, so the range of $x$ is $4-\dfrac{\epsilon}{2} \lt x \lt 4+\dfrac{\epsilon}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">제곱근함수의 δ 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$y = \sqrt{x}$라 하자.</p>
+        <ol>
+          <li>$|y-2| \lt 1$를 만족시키는 $x$의 범위를 구하시오.</li>
+          <li>$|x-4| \lt \delta$이면 $|y-2| \lt 1$를 만족시킬 수 있도록 하는 $\delta \gt 0$를 하나 찾으시오.</li>
+          <li>$|y-1| \lt 0.5$를 만족시키는 $x$의 범위를 구하시오.</li>
+          <li>$|x-1| \lt \delta$이면 $|y-1| \lt 0.5$를 만족시킬 수 있도록 하는 $\delta \gt 0$를 하나 찾으시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $y = \sqrt{x}$이다.</p>
+        <p>(1) $|y-2| \lt 1 \Leftrightarrow 1 \lt \sqrt{x} \lt 3 \Leftrightarrow 1 \lt x \lt 9$이다.</p>
+        <p>(2) (1)에서 $x$의 범위가 $1 \lt x \lt 9$이므로, $|x-4| \lt \delta$일 때 이 범위에 포함되려면 $4-\delta \geq 1$이고 $4+\delta \leq 9$이면 충분하다. 즉 $\delta \leq 3$이고 $\delta \leq 5$이면 되므로 $\delta = 3$으로 잡으면 $|x-4| \lt 3 \Rightarrow 1 \lt x \lt 7 \subset (1,9) \Rightarrow |y-2| \lt 1$이 성립한다.</p>
+        <p>(3) $|y-1| \lt 0.5 \Leftrightarrow 0.5 \lt \sqrt{x} \lt 1.5 \Leftrightarrow 0.25 \lt x \lt 2.25$이다.</p>
+        <p>(4) (3)에서 $x$의 범위가 $0.25 \lt x \lt 2.25$이므로, $1-\delta \geq 0.25$이고 $1+\delta \leq 2.25$이면 충분하다. 즉 $\delta \leq 0.75$이고 $\delta \leq 1.25$이면 되므로 $\delta = 0.75$로 잡으면 $|x-1| \lt 0.75 \Rightarrow 0.25 \lt x \lt 1.75 \subset (0.25, 2.25) \Rightarrow |y-1| \lt 0.5$가 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $y = \sqrt{x}$.</p>
+        <ol>
+          <li>Find the range of $x$ satisfying $|y-2| \lt 1$.</li>
+          <li>Find a $\delta \gt 0$ such that $|x-4| \lt \delta$ implies $|y-2| \lt 1$.</li>
+          <li>Find the range of $x$ satisfying $|y-1| \lt 0.5$.</li>
+          <li>Find a $\delta \gt 0$ such that $|x-1| \lt \delta$ implies $|y-1| \lt 0.5$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $y = \sqrt{x}$.</p>
+        <p>(1) $|y-2| \lt 1 \Leftrightarrow 1 \lt \sqrt{x} \lt 3 \Leftrightarrow 1 \lt x \lt 9$.</p>
+        <p>(2) By (1), the range of $x$ is $1 \lt x \lt 9$, so it suffices to have $4-\delta \geq 1$ and $4+\delta \leq 9$ whenever $|x-4| \lt \delta$, i.e., $\delta \leq 3$ and $\delta \leq 5$. Taking $\delta = 3$ gives $|x-4| \lt 3 \Rightarrow 1 \lt x \lt 7 \subset (1,9) \Rightarrow |y-2| \lt 1$.</p>
+        <p>(3) $|y-1| \lt 0.5 \Leftrightarrow 0.5 \lt \sqrt{x} \lt 1.5 \Leftrightarrow 0.25 \lt x \lt 2.25$.</p>
+        <p>(4) By (3), the range of $x$ is $0.25 \lt x \lt 2.25$, so it suffices to have $1-\delta \geq 0.25$ and $1+\delta \leq 2.25$, i.e., $\delta \leq 0.75$ and $\delta \leq 1.25$. Taking $\delta = 0.75$ gives $|x-1| \lt 0.75 \Rightarrow 0.25 \lt x \lt 1.75 \subset (0.25, 2.25) \Rightarrow |y-1| \lt 0.5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">일차함수의 δ 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$y = mx + b$라 하자. ($m, b$는 상수이고 $m \gt 0$)</p>
+        <p>$|x - 1/2| \lt \delta$이면 $|y - ((m/2)+b)| \lt 1/2$를 만족시킬 수 있도록 하는 $\delta \gt 0$를 하나 찾으시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $y = mx+b$이고 $m \gt 0$이다.</p>
+        <p>$y - \left(\dfrac{m}{2}+b\right) = mx+b-\dfrac{m}{2}-b = m\left(x-\dfrac{1}{2}\right)$이므로, $|x-\frac12| \lt \delta$이면 $\left|y-\left(\dfrac{m}{2}+b\right)\right| = m\left|x-\dfrac{1}{2}\right| \lt m\delta$이다.</p>
+        <p>따라서 $m\delta \leq \dfrac{1}{2}$, 즉 $\delta = \dfrac{1}{2m}$으로 잡으면 $|x-\frac12| \lt \delta \Rightarrow \left|y-\left(\dfrac{m}{2}+b\right)\right| \lt \dfrac{1}{2}$이 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $y = mx + b$. ($m, b$ are constants and $m \gt 0$)</p>
+        <p>Find a $\delta \gt 0$ such that $|x - 1/2| \lt \delta$ implies $|y - ((m/2)+b)| \lt 1/2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $y = mx+b$ with $m \gt 0$.</p>
+        <p>Since $y - \left(\dfrac{m}{2}+b\right) = mx+b-\dfrac{m}{2}-b = m\left(x-\dfrac{1}{2}\right)$, if $|x-\frac12| \lt \delta$ then $\left|y-\left(\dfrac{m}{2}+b\right)\right| = m\left|x-\dfrac{1}{2}\right| \lt m\delta$.</p>
+        <p>Hence taking $\delta = \dfrac{1}{2m}$ (so that $m\delta \leq \dfrac{1}{2}$) gives $|x-\frac12| \lt \delta \Rightarrow \left|y-\left(\dfrac{m}{2}+b\right)\right| \lt \dfrac{1}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">ε-δ로 극한값 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음이 성립함을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 1}(5x-3) = 2$</li>
+          <li>$\displaystyle\lim_{x \to c} x = c$</li>
+          <li>$\displaystyle\lim_{x \to c} k = k$ (단, $k$는 상수)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \dfrac{\epsilon}{5}$로 잡으면, $0 \lt |x-1| \lt \delta$일 때 $|(5x-3)-2| = |5x-5| = 5|x-1| \lt 5\delta = \epsilon$이다.</p>
+        <p>(2) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \epsilon$으로 잡으면, $0 \lt |x-c| \lt \delta$일 때 $|x-c| \lt \delta = \epsilon$이다.</p>
+        <p>(3) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = 1$로 잡으면 ($k$가 상수이므로 $\delta$는 어떻게 잡아도 무방하다), $0 \lt |x-c| \lt \delta$일 때 $|k-k| = 0 \lt \epsilon$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that the following hold.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 1}(5x-3) = 2$</li>
+          <li>$\displaystyle\lim_{x \to c} x = c$</li>
+          <li>$\displaystyle\lim_{x \to c} k = k$ (where $k$ is a constant)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $\delta = \dfrac{\epsilon}{5}$. If $0 \lt |x-1| \lt \delta$, then $|(5x-3)-2| = |5x-5| = 5|x-1| \lt 5\delta = \epsilon$.</p>
+        <p>(2) Let $\epsilon \gt 0$ be given. Take $\delta = \epsilon$. If $0 \lt |x-c| \lt \delta$, then $|x-c| \lt \delta = \epsilon$.</p>
+        <p>(3) Let $\epsilon \gt 0$ be given. Take $\delta = 1$ (since $k$ is constant, any $\delta$ works). If $0 \lt |x-c| \lt \delta$, then $|k-k| = 0 \lt \epsilon$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">유리식 극한 구하고 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 극한을 구하고 이를 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 2} \frac{x^2-4}{x-2}$</li>
+          <li>$\displaystyle\lim_{x \to -5} \frac{x^2+6x+5}{x+5}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) $x \neq 2$일 때 $\dfrac{x^2-4}{x-2} = \dfrac{(x-2)(x+2)}{x-2} = x+2$이므로, $\displaystyle\lim_{x \to 2} \frac{x^2-4}{x-2} = 4$로 추측할 수 있다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \epsilon$으로 잡으면, $0 \lt |x-2| \lt \delta$일 때 $\left|\dfrac{x^2-4}{x-2}-4\right| = |(x+2)-4| = |x-2| \lt \delta = \epsilon$이다.</p>
+        <p>(2) $x \neq -5$일 때 $x^2+6x+5 = (x+5)(x+1)$이므로 $\dfrac{x^2+6x+5}{x+5} = x+1$이고, $\displaystyle\lim_{x \to -5} \frac{x^2+6x+5}{x+5} = -4$로 추측할 수 있다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \epsilon$으로 잡으면, $0 \lt |x-(-5)| \lt \delta$일 때 $\left|\dfrac{x^2+6x+5}{x+5}-(-4)\right| = |(x+1)+4| = |x+5| \lt \delta = \epsilon$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the given limit and prove it.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 2} \frac{x^2-4}{x-2}$</li>
+          <li>$\displaystyle\lim_{x \to -5} \frac{x^2+6x+5}{x+5}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) For $x \neq 2$, $\dfrac{x^2-4}{x-2} = \dfrac{(x-2)(x+2)}{x-2} = x+2$, which suggests $\displaystyle\lim_{x \to 2} \frac{x^2-4}{x-2} = 4$. Let $\epsilon \gt 0$ be given. Take $\delta = \epsilon$. If $0 \lt |x-2| \lt \delta$, then $\left|\dfrac{x^2-4}{x-2}-4\right| = |(x+2)-4| = |x-2| \lt \delta = \epsilon$.</p>
+        <p>(2) For $x \neq -5$, $x^2+6x+5 = (x+5)(x+1)$, so $\dfrac{x^2+6x+5}{x+5} = x+1$, which suggests $\displaystyle\lim_{x \to -5} \frac{x^2+6x+5}{x+5} = -4$. Let $\epsilon \gt 0$ be given. Take $\delta = \epsilon$. If $0 \lt |x-(-5)| \lt \delta$, then $\left|\dfrac{x^2+6x+5}{x+5}-(-4)\right| = |(x+1)+4| = |x+5| \lt \delta = \epsilon$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">제곱근·조각함수 극한 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음이 성립함을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 5} \sqrt{x-1} = 2$</li>
+          <li>$\displaystyle\lim_{x \to 2} f(x) = 4$ (단, $f(x) = \begin{cases} x^2 & (x \neq 2) \\ 1 & (x = 2) \end{cases}$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \min(1, 3\epsilon)$으로 잡자. $0 \lt |x-5| \lt \delta \leq 1$이면 $4 \lt x \lt 6$이므로 $3 \lt x-1 \lt 5$이고, 따라서 $\sqrt{x-1} \gt \sqrt{3} \gt 1$이므로 $\sqrt{x-1}+2 \gt 3$이다. 이때</p>
+        <p>$$|\sqrt{x-1}-2| = \frac{|(x-1)-4|}{\sqrt{x-1}+2} = \frac{|x-5|}{\sqrt{x-1}+2} \lt \frac{|x-5|}{3} \lt \frac{\delta}{3} \leq \epsilon$$</p>
+        <p>이다.</p>
+        <p>(2) $f(x) = x^2\ (x \neq 2)$, $f(2)=1$이므로, $0 \lt |x-2| \lt \delta$인 $x$에 대해서는 $f(x) = x^2$이다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \min\left(1, \dfrac{\epsilon}{5}\right)$으로 잡자. $0 \lt |x-2| \lt \delta \leq 1$이면 $1 \lt x \lt 3$이므로 $|x+2| \lt 5$이고, 따라서</p>
+        <p>$$|f(x)-4| = |x^2-4| = |x-2||x+2| \lt 5\delta \leq \epsilon$$</p>
+        <p>이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that the following hold.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 5} \sqrt{x-1} = 2$</li>
+          <li>$\displaystyle\lim_{x \to 2} f(x) = 4$ (where $f(x) = \begin{cases} x^2 & (x \neq 2) \\ 1 & (x = 2) \end{cases}$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $\delta = \min(1, 3\epsilon)$. If $0 \lt |x-5| \lt \delta \leq 1$, then $4 \lt x \lt 6$, so $3 \lt x-1 \lt 5$, hence $\sqrt{x-1} \gt \sqrt{3} \gt 1$ and $\sqrt{x-1}+2 \gt 3$. Then</p>
+        <p>$$|\sqrt{x-1}-2| = \frac{|(x-1)-4|}{\sqrt{x-1}+2} = \frac{|x-5|}{\sqrt{x-1}+2} \lt \frac{|x-5|}{3} \lt \frac{\delta}{3} \leq \epsilon.$$</p>
+        <p>(2) Since $f(x) = x^2$ for $x \neq 2$ and $f(2)=1$, for $x$ with $0 \lt |x-2| \lt \delta$ we have $f(x) = x^2$. Let $\epsilon \gt 0$ be given. Take $\delta = \min\left(1, \dfrac{\epsilon}{5}\right)$. If $0 \lt |x-2| \lt \delta \leq 1$, then $1 \lt x \lt 3$, so $|x+2| \lt 5$, hence</p>
+        <p>$$|f(x)-4| = |x^2-4| = |x-2||x+2| \lt 5\delta \leq \epsilon.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03 -->
+<div class="card ex-card" id="yu03">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03</span>
+    <span class="ex-title">극한 구하고 ε-δ 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 극한을 구하고 이를 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \sqrt{3}} \frac{1}{x^2} = \frac{1}{3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} x \sin \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to 1} f(x) = 2$ (단, $f(x) = \begin{cases} 4-2x & (x \lt 1) \\ 6x-4 & (x \geq 1) \end{cases}$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \min\left(\dfrac{\sqrt{3}}{2}, \dfrac{3\sqrt{3}}{10}\epsilon\right)$으로 잡자. $0 \lt |x-\sqrt{3}| \lt \delta \leq \dfrac{\sqrt{3}}{2}$이면 $\dfrac{\sqrt{3}}{2} \lt x \lt \dfrac{3\sqrt{3}}{2}$이므로 $x^2 \gt \dfrac{3}{4}$, 즉 $3x^2 \gt \dfrac{9}{4}$이고, $x+\sqrt{3} \lt \dfrac{5\sqrt{3}}{2}$이다. 따라서</p>
+        <p>$$\left|\frac{1}{x^2}-\frac{1}{3}\right| = \frac{|x-\sqrt3||x+\sqrt3|}{3x^2} \lt \frac{|x-\sqrt3|\cdot\frac{5\sqrt3}{2}}{\frac{9}{4}} = |x-\sqrt3|\cdot\frac{10\sqrt3}{9} \lt \delta \cdot \frac{10\sqrt3}{9} \leq \epsilon$$</p>
+        <p>이다.</p>
+        <p>(2) 모든 $x \neq 0$에 대해 $|\sin(1/x)| \leq 1$이므로, $\displaystyle\lim_{x \to 0} x\sin\frac1x = 0$으로 추측할 수 있다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \epsilon$으로 잡으면, $0 \lt |x-0| \lt \delta$일 때 $\left|x\sin\dfrac1x - 0\right| = |x|\left|\sin\dfrac1x\right| \leq |x| \lt \delta = \epsilon$이다.</p>
+        <p>(3) $x=1$에서 $f(1) = 6(1)-4 = 2$이다. $x \lt 1$일 때 $|f(x)-2| = |(4-2x)-2| = 2|x-1|$이고, $x \geq 1$일 때 $|f(x)-2| = |(6x-4)-2| = 6|x-1|$이므로, 두 경우 모두 $|f(x)-2| \leq 6|x-1|$이다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \dfrac{\epsilon}{6}$으로 잡으면, $0 \lt |x-1| \lt \delta$일 때 $|f(x)-2| \leq 6|x-1| \lt 6\delta = \epsilon$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the given limit and prove it.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \sqrt{3}} \frac{1}{x^2} = \frac{1}{3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} x \sin \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to 1} f(x) = 2$ (where $f(x) = \begin{cases} 4-2x & (x \lt 1) \\ 6x-4 & (x \geq 1) \end{cases}$)</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $\delta = \min\left(\dfrac{\sqrt{3}}{2}, \dfrac{3\sqrt{3}}{10}\epsilon\right)$. If $0 \lt |x-\sqrt{3}| \lt \delta \leq \dfrac{\sqrt{3}}{2}$, then $\dfrac{\sqrt{3}}{2} \lt x \lt \dfrac{3\sqrt{3}}{2}$, so $x^2 \gt \dfrac{3}{4}$, i.e., $3x^2 \gt \dfrac{9}{4}$, and $x+\sqrt{3} \lt \dfrac{5\sqrt{3}}{2}$. Hence</p>
+        <p>$$\left|\frac{1}{x^2}-\frac{1}{3}\right| = \frac{|x-\sqrt3||x+\sqrt3|}{3x^2} \lt \frac{|x-\sqrt3|\cdot\frac{5\sqrt3}{2}}{\frac{9}{4}} = |x-\sqrt3|\cdot\frac{10\sqrt3}{9} \lt \delta \cdot \frac{10\sqrt3}{9} \leq \epsilon.$$</p>
+        <p>(2) Since $|\sin(1/x)| \leq 1$ for all $x \neq 0$, this suggests $\displaystyle\lim_{x \to 0} x\sin\frac1x = 0$. Let $\epsilon \gt 0$ be given. Take $\delta = \epsilon$. If $0 \lt |x-0| \lt \delta$, then $\left|x\sin\dfrac1x - 0\right| = |x|\left|\sin\dfrac1x\right| \leq |x| \lt \delta = \epsilon$.</p>
+        <p>(3) Note $f(1) = 6(1)-4 = 2$. For $x \lt 1$, $|f(x)-2| = |(4-2x)-2| = 2|x-1|$, and for $x \geq 1$, $|f(x)-2| = |(6x-4)-2| = 6|x-1|$; in both cases $|f(x)-2| \leq 6|x-1|$. Let $\epsilon \gt 0$ be given. Take $\delta = \dfrac{\epsilon}{6}$. If $0 \lt |x-1| \lt \delta$, then $|f(x)-2| \leq 6|x-1| \lt 6\delta = \epsilon$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">극한값이 아님을 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \begin{cases} x & (x \lt 1) \\ x+1 & (x \gt 1) \end{cases}$이라 하자. 다음을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 1} f(x) \neq 2$</li>
+          <li>$\displaystyle\lim_{x \to 1} f(x) \neq 1.5$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 극한의 정의를 부정하여 증명한다. 즉, 어떤 $\epsilon_0 \gt 0$이 있어 모든 $\delta \gt 0$에 대해 $0 \lt |x-1| \lt \delta$이고 $|f(x)-L| \geq \epsilon_0$인 $x$가 존재함을 보이면 된다.</p>
+        <p>(1) $\epsilon_0 = \dfrac12$로 두자. 임의의 $\delta \gt 0$에 대해 $x = 1-\dfrac{\delta}{2}$로 잡으면 $x \lt 1$이고 $0 \lt |x-1| = \dfrac{\delta}{2} \lt \delta$이다. 이때 $f(x) = x = 1-\dfrac{\delta}{2}$이므로</p>
+        <p>$$|f(x)-2| = \left|1-\frac{\delta}{2}-2\right| = 1+\frac{\delta}{2} \gt 1 \gt \frac12 = \epsilon_0$$</p>
+        <p>이다. 따라서 $\displaystyle\lim_{x \to 1} f(x) \neq 2$이다.</p>
+        <p>(2) $\epsilon_0 = \dfrac12$로 두자. 임의의 $\delta \gt 0$에 대해 (1)과 같이 $x = 1-\dfrac{\delta}{2}$로 잡으면 $x \lt 1$이고 $0 \lt |x-1| \lt \delta$이며, $f(x) = 1-\dfrac{\delta}{2}$이므로</p>
+        <p>$$|f(x)-1.5| = \left|1-\frac{\delta}{2}-1.5\right| = 0.5+\frac{\delta}{2} \gt 0.5 = \epsilon_0$$</p>
+        <p>이다. 따라서 $\displaystyle\lim_{x \to 1} f(x) \neq 1.5$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x) = \begin{cases} x & (x \lt 1) \\ x+1 & (x \gt 1) \end{cases}$. Prove the following.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 1} f(x) \neq 2$</li>
+          <li>$\displaystyle\lim_{x \to 1} f(x) \neq 1.5$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> We argue by negating the definition of the limit: it suffices to find $\epsilon_0 \gt 0$ such that for every $\delta \gt 0$ there exists $x$ with $0 \lt |x-1| \lt \delta$ and $|f(x)-L| \geq \epsilon_0$.</p>
+        <p>(1) Let $\epsilon_0 = \dfrac12$. For any $\delta \gt 0$, take $x = 1-\dfrac{\delta}{2}$; then $x \lt 1$ and $0 \lt |x-1| = \dfrac{\delta}{2} \lt \delta$. Since $f(x) = x = 1-\dfrac{\delta}{2}$,</p>
+        <p>$$|f(x)-2| = \left|1-\frac{\delta}{2}-2\right| = 1+\frac{\delta}{2} \gt 1 \gt \frac12 = \epsilon_0.$$</p>
+        <p>Hence $\displaystyle\lim_{x \to 1} f(x) \neq 2$.</p>
+        <p>(2) Let $\epsilon_0 = \dfrac12$. For any $\delta \gt 0$, take $x = 1-\dfrac{\delta}{2}$ as in (1); then $x \lt 1$, $0 \lt |x-1| \lt \delta$, and $f(x) = 1-\dfrac{\delta}{2}$, so</p>
+        <p>$$|f(x)-1.5| = \left|1-\frac{\delta}{2}-1.5\right| = 0.5+\frac{\delta}{2} \gt 0.5 = \epsilon_0.$$</p>
+        <p>Hence $\displaystyle\lim_{x \to 1} f(x) \neq 1.5$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04 -->
+<div class="card ex-card" id="yu04">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04</span>
+    <span class="ex-title">극한의 발산 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$h(x) = \begin{cases} x^2 & (x \lt 2) \\ 3 & (x = 2) \\ 2 & (x \gt 2) \end{cases}$라 하자. 이때 $\displaystyle\lim_{x \to 2} h(x)$는 발산함을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 좌극한과 우극한을 각각 구하여 서로 다름을 보인다.</p>
+        <p>(좌극한) $\displaystyle\lim_{x \to 2-} h(x) = 4$임을 보이자. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \min\left(1, \dfrac{\epsilon}{4}\right)$으로 잡자. $2-\delta \lt x \lt 2$이면 $\delta \leq 1$이므로 $1 \lt x \lt 2$, 즉 $3 \lt x+2 \lt 4$이고 $h(x)=x^2$이다. 따라서</p>
+        <p>$$|h(x)-4| = |x-2||x+2| \lt 4\delta \leq \epsilon$$</p>
+        <p>이다.</p>
+        <p>(우극한) $\displaystyle\lim_{x \to 2+} h(x) = 2$임을 보이자. $x \gt 2$이면 $h(x) = 2$이므로, 임의의 $\epsilon \gt 0$에 대해 $\delta = 1$로 잡으면 $2 \lt x \lt 2+\delta$일 때 $|h(x)-2| = 0 \lt \epsilon$이다.</p>
+        <p>두 극한이 존재하려면 좌극한과 우극한이 일치해야 하는데 $4 \neq 2$이므로 $\displaystyle\lim_{x \to 2} h(x)$는 존재하지 않는다. 즉 발산한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $h(x) = \begin{cases} x^2 & (x \lt 2) \\ 3 & (x = 2) \\ 2 & (x \gt 2) \end{cases}$. Show that $\displaystyle\lim_{x \to 2} h(x)$ diverges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> We compute the left-hand and right-hand limits and show they disagree.</p>
+        <p>(Left-hand limit) We show $\displaystyle\lim_{x \to 2-} h(x) = 4$. Let $\epsilon \gt 0$ be given. Take $\delta = \min\left(1, \dfrac{\epsilon}{4}\right)$. If $2-\delta \lt x \lt 2$, then since $\delta \leq 1$ we have $1 \lt x \lt 2$, so $3 \lt x+2 \lt 4$ and $h(x)=x^2$. Hence</p>
+        <p>$$|h(x)-4| = |x-2||x+2| \lt 4\delta \leq \epsilon.$$</p>
+        <p>(Right-hand limit) We show $\displaystyle\lim_{x \to 2+} h(x) = 2$. For $x \gt 2$, $h(x) = 2$, so for any $\epsilon \gt 0$, taking $\delta = 1$ gives $|h(x)-2| = 0 \lt \epsilon$ whenever $2 \lt x \lt 2+\delta$.</p>
+        <p>For the two-sided limit to exist, the left-hand and right-hand limits must agree; since $4 \neq 2$, $\displaystyle\lim_{x \to 2} h(x)$ does not exist, i.e., it diverges.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">우극한의 엄밀한 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} \sqrt{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to 2+} \frac{x-2}{|x-2|} = 1$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = \epsilon^2$으로 잡으면, $0 \lt x \lt \delta$일 때 $\sqrt{x} \lt \sqrt{\delta} = \epsilon$이므로 $|\sqrt{x}-0| = \sqrt{x} \lt \epsilon$이다.</p>
+        <p>(2) $x \gt 2$이면 $x-2 \gt 0$이므로 $|x-2| = x-2$이고, 따라서 $\dfrac{x-2}{|x-2|} = 1$이다. 임의의 $\epsilon \gt 0$에 대해 $\delta = 1$로 잡으면, $2 \lt x \lt 2+\delta$일 때 $\left|\dfrac{x-2}{|x-2|}-1\right| = |1-1| = 0 \lt \epsilon$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove the following.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 0+} \sqrt{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to 2+} \frac{x-2}{|x-2|} = 1$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $\delta = \epsilon^2$. If $0 \lt x \lt \delta$, then $\sqrt{x} \lt \sqrt{\delta} = \epsilon$, so $|\sqrt{x}-0| = \sqrt{x} \lt \epsilon$.</p>
+        <p>(2) For $x \gt 2$, $x-2 \gt 0$, so $|x-2| = x-2$ and hence $\dfrac{x-2}{|x-2|} = 1$. For any $\epsilon \gt 0$, taking $\delta = 1$ gives $\left|\dfrac{x-2}{|x-2|}-1\right| = |1-1| = 0 \lt \epsilon$ whenever $2 \lt x \lt 2+\delta$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05 -->
+<div class="card ex-card" id="yu05">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05</span>
+    <span class="ex-title">바닥함수의 좌·우극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 극한을 구하고 이를 증명하시오. (단, $\lfloor x \rfloor$는 $x$보다 크지 않은 최대의 정수이다.)</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 400+} \lfloor x \rfloor$</li>
+          <li>$\displaystyle\lim_{x \to 400-} \lfloor x \rfloor$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $400 \leq x \lt 401$이면 $\lfloor x \rfloor = 400$이고, $399 \leq x \lt 400$이면 $\lfloor x \rfloor = 399$이다.</p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = 1$로 잡으면, $400 \lt x \lt 400+\delta = 401$일 때 $\lfloor x \rfloor = 400$이므로 $|\lfloor x \rfloor - 400| = 0 \lt \epsilon$이다. 따라서 $\displaystyle\lim_{x \to 400+} \lfloor x \rfloor = 400$이다.</p>
+        <p>(2) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $\delta = 1$로 잡으면, $400-\delta = 399 \lt x \lt 400$일 때 $\lfloor x \rfloor = 399$이므로 $|\lfloor x \rfloor - 399| = 0 \lt \epsilon$이다. 따라서 $\displaystyle\lim_{x \to 400-} \lfloor x \rfloor = 399$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the given limit and prove it. (Here $\lfloor x \rfloor$ denotes the greatest integer not exceeding $x$.)</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to 400+} \lfloor x \rfloor$</li>
+          <li>$\displaystyle\lim_{x \to 400-} \lfloor x \rfloor$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Note $\lfloor x \rfloor = 400$ for $400 \leq x \lt 401$, and $\lfloor x \rfloor = 399$ for $399 \leq x \lt 400$.</p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $\delta = 1$. If $400 \lt x \lt 400+\delta = 401$, then $\lfloor x \rfloor = 400$, so $|\lfloor x \rfloor - 400| = 0 \lt \epsilon$. Hence $\displaystyle\lim_{x \to 400+} \lfloor x \rfloor = 400$.</p>
+        <p>(2) Let $\epsilon \gt 0$ be given. Take $\delta = 1$. If $400-\delta = 399 \lt x \lt 400$, then $\lfloor x \rfloor = 399$, so $|\lfloor x \rfloor - 399| = 0 \lt \epsilon$. Hence $\displaystyle\lim_{x \to 400-} \lfloor x \rfloor = 399$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 06 -->
+<div class="card ex-card" id="ex06">
+  <div class="card-head">
+    <span class="ex-num">예제 06</span>
+    <span class="ex-title">삼각함수 합성의 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\lim_{x \to \pi/2} \cos\left(2x + \sin\left(\frac{3\pi}{2} + x\right)\right)$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 삼각함수의 덧셈정리에 의해</p>
+        <p>$$\sin\left(\frac{3\pi}{2}+x\right) = \sin\frac{3\pi}{2}\cos x + \cos\frac{3\pi}{2}\sin x = -\cos x$$</p>
+        <p>이므로 주어진 식은 $\cos(2x-\cos x)$이다. $\cos$과 $\sin$은 모든 실수에서 연속이고 그 합성도 연속이므로, 극한값은 $x=\pi/2$에서의 함숫값과 같다. $x = \pi/2$일 때 $2x = \pi$, $\cos(\pi/2) = 0$이므로</p>
+        <p>$$\lim_{x \to \pi/2} \cos\left(2x + \sin\left(\frac{3\pi}{2}+x\right)\right) = \cos(\pi - 0) = \cos\pi = -1$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $\displaystyle\lim_{x \to \pi/2} \cos\left(2x + \sin\left(\frac{3\pi}{2} + x\right)\right)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By the angle addition formula,</p>
+        <p>$$\sin\left(\frac{3\pi}{2}+x\right) = \sin\frac{3\pi}{2}\cos x + \cos\frac{3\pi}{2}\sin x = -\cos x,$$</p>
+        <p>so the given expression is $\cos(2x-\cos x)$. Since $\cos$ and $\sin$ are continuous everywhere and their composition is continuous, the limit equals the function value at $x=\pi/2$. At $x = \pi/2$, $2x = \pi$ and $\cos(\pi/2) = 0$, so</p>
+        <p>$$\lim_{x \to \pi/2} \cos\left(2x + \sin\left(\frac{3\pi}{2}+x\right)\right) = \cos(\pi - 0) = \cos\pi = -1.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06 -->
+<div class="card ex-card" id="yu06">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06</span>
+    <span class="ex-title">삼각함수 극한 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극한을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{t \to 0} \sin\left(\frac{\pi}{2} \cos(\tan t)\right)$</li>
+          <li>$\displaystyle\lim_{x \to \pi/6} \sqrt{\csc^2 x + 5\sqrt{3}\tan x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\tan, \cos, \sin$은 $t=0$ 근방에서 모두 연속이므로 합성함수의 극한은 함숫값과 같다. $\tan 0 = 0$, $\cos 0 = 1$이므로</p>
+        <p>$$\lim_{t \to 0} \sin\left(\frac{\pi}{2}\cos(\tan t)\right) = \sin\left(\frac{\pi}{2}\cdot 1\right) = \sin\frac{\pi}{2} = 1$$</p>
+        <p>이다.</p>
+        <p>(2) $\csc x$와 $\tan x$는 $x = \pi/6$에서 연속이므로 극한은 함숫값과 같다. $\sin(\pi/6) = 1/2$이므로 $\csc(\pi/6) = 2$, $\csc^2(\pi/6) = 4$이고, $\tan(\pi/6) = 1/\sqrt3$이므로 $5\sqrt3\tan(\pi/6) = 5\sqrt3 \cdot \dfrac{1}{\sqrt3} = 5$이다. 따라서</p>
+        <p>$$\lim_{x \to \pi/6} \sqrt{\csc^2 x + 5\sqrt{3}\tan x} = \sqrt{4+5} = \sqrt9 = 3$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the following limits.</p>
+        <ol>
+          <li>$\displaystyle\lim_{t \to 0} \sin\left(\frac{\pi}{2} \cos(\tan t)\right)$</li>
+          <li>$\displaystyle\lim_{x \to \pi/6} \sqrt{\csc^2 x + 5\sqrt{3}\tan x}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\tan, \cos, \sin$ are all continuous near $t=0$, the limit of the composition equals its value. As $\tan 0 = 0$ and $\cos 0 = 1$,</p>
+        <p>$$\lim_{t \to 0} \sin\left(\frac{\pi}{2}\cos(\tan t)\right) = \sin\left(\frac{\pi}{2}\cdot 1\right) = \sin\frac{\pi}{2} = 1.$$</p>
+        <p>(2) Since $\csc x$ and $\tan x$ are continuous at $x = \pi/6$, the limit equals the function value. As $\sin(\pi/6) = 1/2$, $\csc(\pi/6) = 2$ and $\csc^2(\pi/6) = 4$; and $\tan(\pi/6) = 1/\sqrt3$, so $5\sqrt3\tan(\pi/6) = 5\sqrt3 \cdot \dfrac{1}{\sqrt3} = 5$. Hence</p>
+        <p>$$\lim_{x \to \pi/6} \sqrt{\csc^2 x + 5\sqrt{3}\tan x} = \sqrt{4+5} = \sqrt9 = 3.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 07 -->
+<div class="card ex-card" id="ex07">
+  <div class="card-head">
+    <span class="ex-num">예제 07</span>
+    <span class="ex-title">무한대에서의 극한 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to -\infty} \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{5x^2 + 8x - 3}{3x^2 + 2} = \frac{5}{3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1}{x^2} = \infty$</li>
+          <li>$\displaystyle\lim_{x \to -2+} \frac{x+3}{x+2} = \infty$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $N = \dfrac{1}{\epsilon}$으로 잡으면, $x \gt N$일 때 $\left|\dfrac1x - 0\right| = \dfrac1x \lt \dfrac1N = \epsilon$이다.</p>
+        <p>(2) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $N = \dfrac{1}{\epsilon}$으로 잡으면, $x \lt -N$일 때 $x \lt 0$이므로 $-x \gt N \gt 0$이고, 따라서 $\left|\dfrac1x - 0\right| = \dfrac{1}{-x} \lt \dfrac1N = \epsilon$이다.</p>
+        <p>(3) $\dfrac{5x^2+8x-3}{3x^2+2} - \dfrac53 = \dfrac{3(5x^2+8x-3)-5(3x^2+2)}{3(3x^2+2)} = \dfrac{24x-19}{3(3x^2+2)}$이다. $x \geq 1$이면 $|24x-19| \leq 24x+19 \leq 24x+19x = 43x$이고 $3(3x^2+2) \geq 9x^2$이므로</p>
+        <p>$$\left|\frac{5x^2+8x-3}{3x^2+2} - \frac53\right| \leq \frac{43x}{9x^2} = \frac{43}{9x}$$</p>
+        <p>이다. 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $N = \max\left(1, \dfrac{43}{9\epsilon}\right)$으로 잡으면, $x \gt N$일 때 위 부등식이 성립하고 $\dfrac{43}{9x} \lt \dfrac{43}{9N} \leq \epsilon$이므로 $\left|\dfrac{5x^2+8x-3}{3x^2+2} - \dfrac53\right| \lt \epsilon$이다.</p>
+        <p>(4) 임의의 $M \gt 0$이 주어졌다고 하자. $\delta = \dfrac{1}{\sqrt{M}}$으로 잡으면, $0 \lt |x| \lt \delta$일 때 $x^2 \lt \delta^2 = \dfrac1M$이므로 $\dfrac{1}{x^2} \gt M$이다.</p>
+        <p>(5) 임의의 $M \gt 0$이 주어졌다고 하자. $\delta = \min\left(1, \dfrac1M\right)$으로 잡자. $-2 \lt x \lt -2+\delta$이면 $\delta \leq 1$이므로 $x \in (-2,-1)$, 즉 $0 \lt x+2 \lt \delta$이고 $x+3 \in (1,2)$이므로 $x+3 \gt 1$이다. $x+2 \gt 0$이므로</p>
+        <p>$$\frac{x+3}{x+2} \geq \frac{1}{x+2} \gt \frac{1}{\delta} \geq M$$</p>
+        <p>이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove the following.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to -\infty} \frac{1}{x} = 0$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \frac{5x^2 + 8x - 3}{3x^2 + 2} = \frac{5}{3}$</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1}{x^2} = \infty$</li>
+          <li>$\displaystyle\lim_{x \to -2+} \frac{x+3}{x+2} = \infty$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $N = \dfrac{1}{\epsilon}$. If $x \gt N$, then $\left|\dfrac1x - 0\right| = \dfrac1x \lt \dfrac1N = \epsilon$.</p>
+        <p>(2) Let $\epsilon \gt 0$ be given. Take $N = \dfrac{1}{\epsilon}$. If $x \lt -N$, then $x \lt 0$, so $-x \gt N \gt 0$, and hence $\left|\dfrac1x - 0\right| = \dfrac{1}{-x} \lt \dfrac1N = \epsilon$.</p>
+        <p>(3) We have $\dfrac{5x^2+8x-3}{3x^2+2} - \dfrac53 = \dfrac{3(5x^2+8x-3)-5(3x^2+2)}{3(3x^2+2)} = \dfrac{24x-19}{3(3x^2+2)}$. For $x \geq 1$, $|24x-19| \leq 24x+19 \leq 24x+19x = 43x$ and $3(3x^2+2) \geq 9x^2$, so</p>
+        <p>$$\left|\frac{5x^2+8x-3}{3x^2+2} - \frac53\right| \leq \frac{43x}{9x^2} = \frac{43}{9x}.$$</p>
+        <p>Let $\epsilon \gt 0$ be given. Take $N = \max\left(1, \dfrac{43}{9\epsilon}\right)$. If $x \gt N$, the above inequality holds and $\dfrac{43}{9x} \lt \dfrac{43}{9N} \leq \epsilon$, so $\left|\dfrac{5x^2+8x-3}{3x^2+2} - \dfrac53\right| \lt \epsilon$.</p>
+        <p>(4) Let $M \gt 0$ be given. Take $\delta = \dfrac{1}{\sqrt{M}}$. If $0 \lt |x| \lt \delta$, then $x^2 \lt \delta^2 = \dfrac1M$, so $\dfrac{1}{x^2} \gt M$.</p>
+        <p>(5) Let $M \gt 0$ be given. Take $\delta = \min\left(1, \dfrac1M\right)$. If $-2 \lt x \lt -2+\delta$, then since $\delta \leq 1$, $x \in (-2,-1)$, so $0 \lt x+2 \lt \delta$ and $x+3 \in (1,2)$, hence $x+3 \gt 1$. Since $x+2 \gt 0$,</p>
+        <p>$$\frac{x+3}{x+2} \geq \frac{1}{x+2} \gt \frac{1}{\delta} \geq M.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 07 -->
+<div class="card ex-card" id="yu07">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 07</span>
+    <span class="ex-title">무한대 극한의 정의 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 극한의 정의를 이용해 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} k = k$ ($k$는 상수)</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1}{|x|} = \infty$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 임의의 $\epsilon \gt 0$이 주어졌다고 하자. $N = 1$로 잡으면 ($k$가 상수이므로 $N$은 어떻게 잡아도 무방하다), $x \gt N$일 때 $|k-k| = 0 \lt \epsilon$이다.</p>
+        <p>(2) 임의의 $M \gt 0$이 주어졌다고 하자. $\delta = \dfrac1M$으로 잡으면, $0 \lt |x| \lt \delta$일 때 $|x| \lt \dfrac1M$이므로 $\dfrac{1}{|x|} \gt M$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove the following using the definition of a limit.</p>
+        <ol>
+          <li>$\displaystyle\lim_{x \to \infty} k = k$ ($k$ is a constant)</li>
+          <li>$\displaystyle\lim_{x \to 0} \frac{1}{|x|} = \infty$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Let $\epsilon \gt 0$ be given. Take $N = 1$ (since $k$ is constant, any $N$ works). If $x \gt N$, then $|k-k| = 0 \lt \epsilon$.</p>
+        <p>(2) Let $M \gt 0$ be given. Take $\delta = \dfrac1M$. If $0 \lt |x| \lt \delta$, then $|x| \lt \dfrac1M$, so $\dfrac{1}{|x|} \gt M$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 08 -->
+<div class="card ex-card" id="ex08">
+  <div class="card-head">
+    <span class="ex-num">예제 08</span>
+    <span class="ex-title">유리함수의 점근선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \dfrac{x^2 - 3}{2x - 4}$의 점근선을 모두 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 분모가 $0$이 되는 $x=2$에서 분자는 $2^2-3=1 \neq 0$이므로 $x=2$는 수직점근선이다.</p>
+        <p>다항식 나눗셈에 의해 $x^2-3 = (2x-4)\left(\dfrac{x}{2}+1\right)+1$이므로</p>
+        <p>$$f(x) = \frac{x}{2}+1+\frac{1}{2x-4}$$</p>
+        <p>이다. $x \to \pm\infty$일 때 $\dfrac{1}{2x-4} \to 0$이므로 $\displaystyle\lim_{x\to\pm\infty}\left[f(x)-\left(\frac{x}{2}+1\right)\right] = 0$이고, 사선점근선은 $y = \dfrac{x}{2}+1$이다. (분자와 분모의 차수 차가 $1$이므로 수평점근선은 없다.)</p>
+        <p>따라서 점근선은 수직점근선 $x=2$, 사선점근선 $y = \dfrac{x}{2}+1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all asymptotes of $f(x) = \dfrac{x^2 - 3}{2x - 4}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The denominator vanishes at $x=2$, where the numerator is $2^2-3=1 \neq 0$, so $x=2$ is a vertical asymptote.</p>
+        <p>By polynomial division, $x^2-3 = (2x-4)\left(\dfrac{x}{2}+1\right)+1$, so</p>
+        <p>$$f(x) = \frac{x}{2}+1+\frac{1}{2x-4}.$$</p>
+        <p>As $x \to \pm\infty$, $\dfrac{1}{2x-4} \to 0$, so $\displaystyle\lim_{x\to\pm\infty}\left[f(x)-\left(\frac{x}{2}+1\right)\right] = 0$, giving the oblique asymptote $y = \dfrac{x}{2}+1$. (Since the degrees of the numerator and denominator differ by $1$, there is no horizontal asymptote.)</p>
+        <p>Hence the asymptotes are the vertical asymptote $x=2$ and the oblique asymptote $y = \dfrac{x}{2}+1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 08 -->
+<div class="card ex-card" id="yu08">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 08</span>
+    <span class="ex-title">점근선 모두 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \dfrac{x^3 + 1}{x^2}$의 점근선을 모두 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 분모가 $0$이 되는 $x=0$에서 분자는 $0^3+1=1 \neq 0$이므로 $x=0$은 수직점근선이다.</p>
+        <p>$x^3+1 = x^2\cdot x + 1$이므로</p>
+        <p>$$f(x) = x+\frac{1}{x^2}$$</p>
+        <p>이다. $x \to \pm\infty$일 때 $\dfrac{1}{x^2} \to 0$이므로 $\displaystyle\lim_{x\to\pm\infty}[f(x)-x] = 0$이고, 사선점근선은 $y=x$이다. (분자와 분모의 차수 차가 $1$이므로 수평점근선은 없다.)</p>
+        <p>따라서 점근선은 수직점근선 $x=0$, 사선점근선 $y = x$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all asymptotes of $f(x) = \dfrac{x^3 + 1}{x^2}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The denominator vanishes at $x=0$, where the numerator is $0^3+1=1 \neq 0$, so $x=0$ is a vertical asymptote.</p>
+        <p>Since $x^3+1 = x^2\cdot x + 1$,</p>
+        <p>$$f(x) = x+\frac{1}{x^2}.$$</p>
+        <p>As $x \to \pm\infty$, $\dfrac{1}{x^2} \to 0$, so $\displaystyle\lim_{x\to\pm\infty}[f(x)-x] = 0$, giving the oblique asymptote $y=x$. (Since the degrees of the numerator and denominator differ by $1$, there is no horizontal asymptote.)</p>
+        <p>Hence the asymptotes are the vertical asymptote $x=0$ and the oblique asymptote $y = x$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">극한·연속의 동치 조건</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\displaystyle\lim_{x \to c} f(x) = L$일 필요충분조건은 $\displaystyle\lim_{h \to 0} f(c+h) = L$임을 보이시오.</li>
+          <li>$f$가 $c$에서 연속일 필요충분조건은 $\displaystyle\lim_{h \to 0} f(c+h) = f(c)$임을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\displaystyle\lim_{x \to c} f(x) = L$ if and only if $\displaystyle\lim_{h \to 0} f(c+h) = L$.</li>
+          <li>Show that $f$ is continuous at $c$ if and only if $\displaystyle\lim_{h \to 0} f(c+h) = f(c)$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">유리수·무리수 함수의 연속성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \begin{cases} 1 & (x\text{는 유리수}) \\ 0 & (x\text{는 무리수}) \end{cases}$라 하자. $f$는 모든 점에서 불연속임을 보이시오.</li>
+          <li>$f(x) = \begin{cases} x & (x\text{는 유리수}) \\ 0 & (x\text{는 무리수}) \end{cases}$라 하자. $f$는 $x = 0$에서 연속이지만 그 외의 점에서는 모두 불연속임을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $f(x) = \begin{cases} 1 & (x \text{ is rational}) \\ 0 & (x \text{ is irrational}) \end{cases}$. Show that $f$ is discontinuous at every point.</li>
+          <li>Let $f(x) = \begin{cases} x & (x \text{ is rational}) \\ 0 & (x \text{ is irrational}) \end{cases}$. Show that $f$ is continuous at $x = 0$ but discontinuous at every other point.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">디리클레 자 함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = \begin{cases} 1/n & (x = m/n,\ m, n \in \mathbb{Z},\ m\text{과 } n\text{은 서로소}) \\ 0 & (x\text{는 무리수}) \end{cases}$라 하자.</p>
+        <p>$f$는 모든 유리수 점에서 불연속이지만 모든 무리수 점에서는 연속임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x) = \begin{cases} 1/n & (x = m/n,\ m, n \in \mathbb{Z},\ m \text{ and } n \text{ are coprime}) \\ 0 & (x \text{ is irrational}) \end{cases}$.</p>
+        <p>Show that $f$ is discontinuous at every rational point but continuous at every irrational point.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">고정점 정리</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[0, 1]$에서 연속이고 모든 $x \in [0, 1]$에 대해 $0 \leq f(x) \leq 1$가 성립한다고 하자. 그러면 $f(c) = c$를 만족하는 $0 \leq c \leq 1$가 존재함을 보이시오.</p>
+        <div class="formal-box">(Hint. $g(x) = f(x) - x$에 대해 사잇값 정리를 활용할 것)</div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $f$ is continuous on $[0, 1]$ and $0 \leq f(x) \leq 1$ holds for every $x \in [0, 1]$. Show that there exists $0 \leq c \leq 1$ such that $f(c) = c$.</p>
+        <div class="formal-box">(Hint. Apply the Intermediate Value Theorem to $g(x) = f(x) - x$.)</div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">연속함수의 부호 보존</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>열린 구간 $(a, b)$에서 정의된 함수 $f$에 대해 $c \in (a, b)$가 있어 $f(c) \neq 0$를 만족한다고 하자. 그러면 $\delta \gt 0$가 있어 $|x-c| \lt \delta$이면 $f(x)$는 $f(c)$와 같은 부호를 가지게 할 수 있음을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a function defined on the open interval $(a, b)$, and suppose there exists $c \in (a, b)$ such that $f(c) \neq 0$. Show that there exists $\delta \gt 0$ such that $|x-c| \lt \delta$ implies $f(x)$ has the same sign as $f(c)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">적분에 대한 평균값 (임용06-14)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실수 집합을 $\mathbb{R}$이라 하자. $n$차 다항식 $x^n$이 주어질 때, 함수 $f : [0, 1] \to \mathbb{R}$가 연속이면 다음 식을 만족하는 $c \in [0, 1]$가 존재함을 보이시오.</p>
+        <p>$$(n+1)\int_0^1 f(x)x^n\,dx = f(c)$$</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbb{R}$ denote the set of real numbers. Given the degree-$n$ polynomial $x^n$, show that if $f : [0, 1] \to \mathbb{R}$ is continuous, then there exists $c \in [0, 1]$ satisfying the following equation.</p>
+        <p>$$(n+1)\int_0^1 f(x)x^n\,dx = f(c)$$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

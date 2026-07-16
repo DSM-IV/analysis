@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09. 수치적분 (Numerical Integration) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 09단원 수치적분(Numerical Integration) 예제·유제·문제 모음. 사다리꼴 근사, 심프슨 공식, 오차의 한계, 오차함수(error function), 사인적분함수(sine-integral function)를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 수치적분, numerical integration, 사다리꼴 근사, Trapezoidal Rule, 심프슨 공식, Simpson's Rule, 오차의 한계, error bound, 오차함수, error function, 사인적분함수, sine-integral function, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch09.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="09. 수치적분 (Numerical Integration) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="수치적분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch09.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "09. 수치적분 (Numerical Integration) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 수치적분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch09.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch09.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html" class="active">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 09</p>
+  <h1>09. 수치적분<span>Numerical Integration</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 사다리꼴 근사로 정적분 근사</a></li>
+    <li><a href="#yu01"><span class="toc-num">유제 01</span> 사인함수의 사다리꼴 근사</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 심프슨 공식으로 정적분 근사</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 오차함수 erf(1) 근사</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 심프슨 공식의 오차의 한계</a></li>
+    <li><a href="#yu03"><span class="toc-num">유제 03</span> erf(1) 근사의 오차의 한계</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 수영장 부피 근사</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 사인적분함수의 수렴속도 비교</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 타원의 길이 근사</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 적분의 사다리꼴·심프슨 극한 표현</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">사다리꼴 근사로 정적분 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사다리꼴 근사를 이용하여 $\displaystyle\int_1^2 x^2\,dx$의 값을 근사하고자 한다.</p>
+        <ol>
+          <li>구간을 4등분하여 직접 계산해 근사하시오.</li>
+          <li>구간을 100등분하여 컴퓨터를 이용해 근삿값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 구간 $[1,2]$를 4등분하면 $h = \dfrac{2-1}{4} = \dfrac14$이고, 분점은 $x_0=1, x_1=1.25, x_2=1.5, x_3=1.75, x_4=2$이다. $f(x)=x^2$의 값은 다음과 같다.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x_k$</th><td>1</td><td>1.25</td><td>1.5</td><td>1.75</td><td>2</td></tr>
+              <tr><th>$f(x_k)$</th><td>1</td><td>1.5625</td><td>2.25</td><td>3.0625</td><td>4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>사다리꼴 근사 공식 $T_n = h\left[\dfrac{f_0}{2} + f_1 + f_2 + \cdots + f_{n-1} + \dfrac{f_n}{2}\right]$에 대입하면
+        $$T_4 = \frac14\left[\frac12 + 1.5625 + 2.25 + 3.0625 + \frac42\right] = \frac14 \cdot 9.375 = 2.34375 = \frac{75}{32}$$
+        이다. 실제값 $\displaystyle\int_1^2 x^2\,dx = \left[\frac{x^3}{3}\right]_1^2 = \frac73 \approx 2.3333$과 비교하면 근사가 잘 이루어졌음을 알 수 있다.</p>
+        <p>(2) 구간을 100등분하면 $h=0.01$이고, 컴퓨터를 이용해 계산하면
+        $$T_{100} \approx 2.333350$$
+        이다. 이는 실제값 $\frac73 \approx 2.333333$에 훨씬 가까운 근삿값으로, $n$이 커질수록 사다리꼴 근사의 정확도가 향상됨을 확인할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We wish to approximate the value of $\displaystyle\int_1^2 x^2\,dx$ using the Trapezoidal Rule.</p>
+        <ol>
+          <li>Divide the interval into 4 equal subintervals and compute the approximation by hand.</li>
+          <li>Divide the interval into 100 equal subintervals and find the approximate value using a computer.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Dividing $[1,2]$ into 4 equal subintervals gives $h = \dfrac{2-1}{4} = \dfrac14$, with partition points $x_0=1, x_1=1.25, x_2=1.5, x_3=1.75, x_4=2$. The values of $f(x)=x^2$ are as follows.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x_k$</th><td>1</td><td>1.25</td><td>1.5</td><td>1.75</td><td>2</td></tr>
+              <tr><th>$f(x_k)$</th><td>1</td><td>1.5625</td><td>2.25</td><td>3.0625</td><td>4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Substituting into the Trapezoidal Rule $T_n = h\left[\dfrac{f_0}{2} + f_1 + f_2 + \cdots + f_{n-1} + \dfrac{f_n}{2}\right]$,
+        $$T_4 = \frac14\left[\frac12 + 1.5625 + 2.25 + 3.0625 + \frac42\right] = \frac14 \cdot 9.375 = 2.34375 = \frac{75}{32}.$$
+        Comparing with the exact value $\displaystyle\int_1^2 x^2\,dx = \left[\frac{x^3}{3}\right]_1^2 = \frac73 \approx 2.3333$, we see that the approximation is quite accurate.</p>
+        <p>(2) Dividing the interval into 100 equal subintervals gives $h=0.01$, and computing with a computer yields
+        $$T_{100} \approx 2.333350,$$
+        which is much closer to the exact value $\frac73 \approx 2.333333$, confirming that the accuracy of the Trapezoidal Rule improves as $n$ increases.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01 -->
+<div class="card ex-card" id="yu01">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01</span>
+    <span class="ex-title">사인함수의 사다리꼴 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\int_0^\pi \sin t\,dt$의 근삿값을 사다리꼴 근사를 이용해 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 등분 개수 $n$이 주어지지 않았으므로 $n=4$로 사다리꼴 근사를 계산한다. 구간 $[0,\pi]$를 4등분하면 $h = \dfrac{\pi}{4}$이고, 분점은 $x_0=0, x_1=\frac{\pi}{4}, x_2=\frac{\pi}{2}, x_3=\frac{3\pi}{4}, x_4=\pi$이다. $f(t)=\sin t$의 값은 다음과 같다.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$t_k$</th><td>0</td><td>$\pi/4$</td><td>$\pi/2$</td><td>$3\pi/4$</td><td>$\pi$</td></tr>
+              <tr><th>$f(t_k)$</th><td>0</td><td>$\sqrt2/2$</td><td>1</td><td>$\sqrt2/2$</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>사다리꼴 근사 공식에 대입하면
+        $$T_4 = \frac{\pi}{4}\left[\frac{0}{2} + \frac{\sqrt2}{2} + 1 + \frac{\sqrt2}{2} + \frac{0}{2}\right] = \frac{\pi}{4}(1+\sqrt2) \approx 1.896119$$
+        이다. 실제값 $\displaystyle\int_0^\pi \sin t\,dt = [-\cos t]_0^\pi = 2$와 비교하면 다소 오차가 있는데, $\sin t$가 $[0,\pi]$에서 위로 볼록(concave down)이므로 사다리꼴 근사가 실제값보다 작게 나오는 것과 일치하는 결과이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the approximate value of $\displaystyle\int_0^\pi \sin t\,dt$ using the Trapezoidal Rule.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since the number of subintervals $n$ is not specified, we compute the Trapezoidal Rule with $n=4$. Dividing $[0,\pi]$ into 4 equal subintervals gives $h = \dfrac{\pi}{4}$, with partition points $x_0=0, x_1=\frac{\pi}{4}, x_2=\frac{\pi}{2}, x_3=\frac{3\pi}{4}, x_4=\pi$. The values of $f(t)=\sin t$ are as follows.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$t_k$</th><td>0</td><td>$\pi/4$</td><td>$\pi/2$</td><td>$3\pi/4$</td><td>$\pi$</td></tr>
+              <tr><th>$f(t_k)$</th><td>0</td><td>$\sqrt2/2$</td><td>1</td><td>$\sqrt2/2$</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Substituting into the Trapezoidal Rule,
+        $$T_4 = \frac{\pi}{4}\left[\frac{0}{2} + \frac{\sqrt2}{2} + 1 + \frac{\sqrt2}{2} + \frac{0}{2}\right] = \frac{\pi}{4}(1+\sqrt2) \approx 1.896119.$$
+        Comparing with the exact value $\displaystyle\int_0^\pi \sin t\,dt = [-\cos t]_0^\pi = 2$, there is some error; since $\sin t$ is concave (concave down) on $[0,\pi]$, the Trapezoidal Rule underestimating the true value is consistent with this result.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">심프슨 공식으로 정적분 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>심프슨 공식을 이용하여 $\displaystyle\int_0^2 5x^4\,dx$의 값을 근사하고자 한다.</p>
+        <ol>
+          <li>구간을 4등분하여 직접 계산해 근사하시오.</li>
+          <li>구간을 100등분하여 컴퓨터를 이용해 근삿값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 구간 $[0,2]$를 4등분하면 $h=\dfrac{2-0}{4}=\dfrac12$이고, 분점은 $x_0=0,x_1=0.5,x_2=1,x_3=1.5,x_4=2$이다. $f(x)=5x^4$의 값은 다음과 같다.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x_k$</th><td>0</td><td>0.5</td><td>1</td><td>1.5</td><td>2</td></tr>
+              <tr><th>$f(x_k)$</th><td>0</td><td>0.3125</td><td>5</td><td>25.3125</td><td>80</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>심프슨 공식 $S_n = \dfrac{h}{3}\left[f_0+4f_1+2f_2+4f_3+\cdots+4f_{n-1}+f_n\right]$에 대입하면
+        $$S_4 = \frac{1}{6}\left[0+4(0.3125)+2(5)+4(25.3125)+80\right] = \frac16(192.5) = 32.083333\cdots = \frac{385}{12}$$
+        이다. 실제값 $\displaystyle\int_0^2 5x^4\,dx = \left[x^5\right]_0^2 = 32$와 비교하면 오차가 매우 작음을 알 수 있다.</p>
+        <p>(2) 구간을 100등분하면 $h=0.02$이고, 컴퓨터로 계산하면
+        $$S_{100} \approx 32.0000002$$
+        이다. 실제값 $32$과 사실상 일치하며, 심프슨 공식이 사다리꼴 근사보다 훨씬 빠르게 수렴함을 확인할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We wish to approximate the value of $\displaystyle\int_0^2 5x^4\,dx$ using Simpson's Rule.</p>
+        <ol>
+          <li>Divide the interval into 4 equal subintervals and compute the approximation by hand.</li>
+          <li>Divide the interval into 100 equal subintervals and find the approximate value using a computer.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Dividing $[0,2]$ into 4 equal subintervals gives $h=\dfrac{2-0}{4}=\dfrac12$, with partition points $x_0=0,x_1=0.5,x_2=1,x_3=1.5,x_4=2$. The values of $f(x)=5x^4$ are as follows.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x_k$</th><td>0</td><td>0.5</td><td>1</td><td>1.5</td><td>2</td></tr>
+              <tr><th>$f(x_k)$</th><td>0</td><td>0.3125</td><td>5</td><td>25.3125</td><td>80</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Substituting into Simpson's Rule $S_n = \dfrac{h}{3}\left[f_0+4f_1+2f_2+4f_3+\cdots+4f_{n-1}+f_n\right]$,
+        $$S_4 = \frac{1}{6}\left[0+4(0.3125)+2(5)+4(25.3125)+80\right] = \frac16(192.5) = 32.083333\cdots = \frac{385}{12}.$$
+        Comparing with the exact value $\displaystyle\int_0^2 5x^4\,dx = \left[x^5\right]_0^2 = 32$, the error is very small.</p>
+        <p>(2) Dividing the interval into 100 equal subintervals gives $h=0.02$, and computing with a computer yields
+        $$S_{100} \approx 32.0000002,$$
+        which is essentially equal to the exact value $32$, confirming that Simpson's Rule converges much faster than the Trapezoidal Rule.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">오차함수 erf(1) 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $\displaystyle\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}\,dt$를 <strong>오차함수(error function)</strong>라 한다.</p>
+        <p>심프슨 공식을 이용하여 $\operatorname{erf}(1)$의 근삿값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 등분 개수가 주어지지 않았으므로 $n=10$으로 심프슨 공식을 계산한다. 구간 $[0,1]$을 10등분하면 $h=0.1$이고, 분점 $t_k = 0.1k\ (k=0,1,\dots,10)$에서 $f(t)=e^{-t^2}$의 값은 다음과 같다.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$t_k$</th><td>0</td><td>0.1</td><td>0.2</td><td>0.3</td><td>0.4</td><td>0.5</td><td>0.6</td><td>0.7</td><td>0.8</td><td>0.9</td><td>1.0</td></tr>
+              <tr><th>$f(t_k)$</th><td>1</td><td>0.990050</td><td>0.960789</td><td>0.913931</td><td>0.852144</td><td>0.778801</td><td>0.697676</td><td>0.612626</td><td>0.527292</td><td>0.444858</td><td>0.367879</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>심프슨 공식에 대입하면
+        $$\int_0^1 e^{-t^2}\,dt \approx \frac{0.1}{3}\Big[(f_0+f_{10}) + 4(f_1+f_3+f_5+f_7+f_9) + 2(f_2+f_4+f_6+f_8)\Big]$$
+        $$= \frac{0.1}{3}\big[1.367879 + 4(3.740266) + 2(3.037901)\big] = \frac{0.1}{3}(22.404745) \approx 0.746825$$
+        이다. 따라서
+        $$\operatorname{erf}(1) = \frac{2}{\sqrt\pi}\int_0^1 e^{-t^2}\,dt \approx \frac{2}{\sqrt\pi}(0.746825) \approx 0.842702$$
+        이다. (참값은 $\operatorname{erf}(1)=0.8427008\cdots$로, 심프슨 근삿값 $0.842702$의 오차는 약 $10^{-6}$ 수준이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The function $\displaystyle\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}\,dt$ is called the <strong>error function</strong>.</p>
+        <p>Find the approximate value of $\operatorname{erf}(1)$ using Simpson's Rule.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since the number of subintervals is not specified, we compute Simpson's Rule with $n=10$. Dividing $[0,1]$ into 10 equal subintervals gives $h=0.1$, and at the partition points $t_k = 0.1k\ (k=0,1,\dots,10)$, the values of $f(t)=e^{-t^2}$ are as follows.</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$t_k$</th><td>0</td><td>0.1</td><td>0.2</td><td>0.3</td><td>0.4</td><td>0.5</td><td>0.6</td><td>0.7</td><td>0.8</td><td>0.9</td><td>1.0</td></tr>
+              <tr><th>$f(t_k)$</th><td>1</td><td>0.990050</td><td>0.960789</td><td>0.913931</td><td>0.852144</td><td>0.778801</td><td>0.697676</td><td>0.612626</td><td>0.527292</td><td>0.444858</td><td>0.367879</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Substituting into Simpson's Rule,
+        $$\int_0^1 e^{-t^2}\,dt \approx \frac{0.1}{3}\Big[(f_0+f_{10}) + 4(f_1+f_3+f_5+f_7+f_9) + 2(f_2+f_4+f_6+f_8)\Big]$$
+        $$= \frac{0.1}{3}\big[1.367879 + 4(3.740266) + 2(3.037901)\big] = \frac{0.1}{3}(22.404745) \approx 0.746825.$$
+        Therefore,
+        $$\operatorname{erf}(1) = \frac{2}{\sqrt\pi}\int_0^1 e^{-t^2}\,dt \approx \frac{2}{\sqrt\pi}(0.746825) \approx 0.842702.$$
+        (The true value is $\operatorname{erf}(1)=0.8427008\cdots$, so the Simpson approximation $0.842702$ is accurate to about $10^{-6}$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">심프슨 공식의 오차의 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>심프슨 공식을 이용하여 구간을 4등분해 $\displaystyle\int_0^2 5x^4\,dx$의 값을 근사할 때, 오차의 한계를 구하시오.</li>
+          <li>심프슨 공식을 이용하여 구간을 $n$등분해 $\displaystyle\int_0^2 5x^4\,dx$의 값을 근사할 때, 오차의 한계가 $10^{-4}$보다 작아지도록 하는 $n$의 값을 하나 구하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 심프슨 공식의 오차의 한계 공식은 $|E| \leq \dfrac{M(b-a)^5}{180n^4}$이다. 여기서 $M$은 $[a,b]$에서 $|f^{(4)}(x)|$의 최댓값이다.</p>
+        <p>$f(x)=5x^4$에 대해 $f'(x)=20x^3$, $f''(x)=60x^2$, $f'''(x)=120x$, $f^{(4)}(x)=120$이므로 $M=120$이다.</p>
+        <p>(1) $n=4$, $a=0,b=2$일 때
+        $$|E| \leq \frac{120 \cdot 2^5}{180 \cdot 4^4} = \frac{120 \cdot 32}{180 \cdot 256} = \frac{3840}{46080} = \frac{1}{12} \approx 0.0833$$
+        이다.</p>
+        <p>(2) 오차의 한계가 $10^{-4}$보다 작아지려면
+        $$\frac{120\cdot 32}{180 n^4} \lt 10^{-4}$$
+        이어야 하므로
+        $$n^4 \gt \frac{3840}{180 \times 10^{-4}} = 213333.3\cdots$$
+        이다. $n$이 자연수이므로 $n^4$도 정수이어야 하고, 따라서 $n^4 \geq 213334$이다. $21^4=194481 \lt 213334$이고 $22^4=234256 \geq 213334$이므로, 조건을 만족하는 짝수 중 최소값은 $n=22$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the error bound when approximating the value of $\displaystyle\int_0^2 5x^4\,dx$ using Simpson's Rule, dividing the interval into 4 equal subintervals.</li>
+          <li>Find a value of $n$ such that the error bound is less than $10^{-4}$ when approximating the value of $\displaystyle\int_0^2 5x^4\,dx$ using Simpson's Rule, dividing the interval into $n$ equal subintervals.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The error bound formula for Simpson's Rule is $|E| \leq \dfrac{M(b-a)^5}{180n^4}$, where $M$ is the maximum value of $|f^{(4)}(x)|$ on $[a,b]$.</p>
+        <p>For $f(x)=5x^4$, we have $f'(x)=20x^3$, $f''(x)=60x^2$, $f'''(x)=120x$, $f^{(4)}(x)=120$, so $M=120$.</p>
+        <p>(1) With $n=4$, $a=0,b=2$,
+        $$|E| \leq \frac{120 \cdot 2^5}{180 \cdot 4^4} = \frac{120 \cdot 32}{180 \cdot 256} = \frac{3840}{46080} = \frac{1}{12} \approx 0.0833.$$</p>
+        <p>(2) For the error bound to be less than $10^{-4}$, we need
+        $$\frac{120\cdot 32}{180 n^4} \lt 10^{-4},$$
+        which gives
+        $$n^4 \gt \frac{3840}{180 \times 10^{-4}} = 213333.3\cdots.$$
+        Since $n$ is a natural number, $n^4$ must also be an integer, so $n^4 \geq 213334$. Since $21^4=194481 \lt 213334$ and $22^4=234256 \geq 213334$, the smallest even $n$ satisfying the condition is $n=22$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03 -->
+<div class="card ex-card" id="yu03">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03</span>
+    <span class="ex-title">erf(1) 근사의 오차의 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[0, 1]$에서 $\displaystyle\left|\frac{d^4}{dt^4}\left(e^{-t^2}\right)\right| \leq 12$가 성립한다.</p>
+        <p>이때 심프슨 공식을 이용하여 구간을 10등분해 $\operatorname{erf}(1)$의 값을 근사할 때 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\operatorname{erf}(1) = \dfrac{2}{\sqrt\pi}\displaystyle\int_0^1 e^{-t^2}\,dt$이므로, 심프슨 공식으로 $\displaystyle\int_0^1 e^{-t^2}\,dt$를 근사할 때의 오차의 한계에 $\dfrac{2}{\sqrt\pi}$를 곱하면 $\operatorname{erf}(1)$의 오차의 한계를 얻는다.</p>
+        <p>문제에서 $[0,1]$에서 $\left|\dfrac{d^4}{dt^4}\left(e^{-t^2}\right)\right| \leq 12$이므로 $M=12$이고, $n=10$, $a=0,b=1$이다. 심프슨 공식의 오차의 한계 공식 $|E| \leq \dfrac{M(b-a)^5}{180n^4}$에 대입하면
+        $$\left|\int_0^1 e^{-t^2}\,dt - S_{10}\right| \leq \frac{12 \cdot 1^5}{180 \cdot 10^4} = \frac{12}{1800000}$$
+        이다. 따라서
+        $$|E_{\operatorname{erf}}| \leq \frac{2}{\sqrt\pi}\cdot\frac{12}{1800000} = \frac{24}{1.8\times10^6\sqrt\pi} \approx 7.52\times10^{-6}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>On $[0, 1]$, $\displaystyle\left|\frac{d^4}{dt^4}\left(e^{-t^2}\right)\right| \leq 12$ holds.</p>
+        <p>Find the error bound when approximating the value of $\operatorname{erf}(1)$ using Simpson's Rule, dividing the interval into 10 equal subintervals.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\operatorname{erf}(1) = \dfrac{2}{\sqrt\pi}\displaystyle\int_0^1 e^{-t^2}\,dt$, multiplying the error bound for approximating $\displaystyle\int_0^1 e^{-t^2}\,dt$ by Simpson's Rule by $\dfrac{2}{\sqrt\pi}$ gives the error bound for $\operatorname{erf}(1)$.</p>
+        <p>Since $\left|\dfrac{d^4}{dt^4}\left(e^{-t^2}\right)\right| \leq 12$ on $[0,1]$, we have $M=12$, with $n=10$, $a=0,b=1$. Substituting into the error bound formula $|E| \leq \dfrac{M(b-a)^5}{180n^4}$ for Simpson's Rule,
+        $$\left|\int_0^1 e^{-t^2}\,dt - S_{10}\right| \leq \frac{12 \cdot 1^5}{180 \cdot 10^4} = \frac{12}{1800000}.$$
+        Therefore,
+        $$|E_{\operatorname{erf}}| \leq \frac{2}{\sqrt\pi}\cdot\frac{12}{1800000} = \frac{24}{1.8\times10^6\sqrt\pi} \approx 7.52\times10^{-6}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">수영장 부피 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>너비 5m, 길이 10m인 직사각형 모양의 수영장이 있다. 길이가 $x$m인 지점에서의 수영장의 깊이 $h(x)$(m)가 다음 표와 같이 주어졌을 때 수영장의 부피를 (1) 사다리꼴 방법을 이용해 (2) 심프슨 공식을 이용해 근사하여라. ($0 \leq x \leq 10$)</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+              <tr><th>$h(x)$</th><td>1.20</td><td>1.64</td><td>1.82</td><td>1.98</td><td>2.10</td><td>2.20</td><td>2.30</td><td>2.38</td><td>2.46</td><td>2.54</td><td>2.60</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>There is a rectangular swimming pool 5 m wide and 10 m long. Given that the depth $h(x)$ (m) of the pool at the point $x$ m along its length is as shown in the table below, approximate the volume of the pool (1) using the Trapezoidal Rule and (2) using Simpson's Rule. ($0 \leq x \leq 10$)</p>
+        <div class="table-pair">
+          <table class="formal-table">
+            <tbody>
+              <tr><th>$x$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+              <tr><th>$h(x)$</th><td>1.20</td><td>1.64</td><td>1.82</td><td>1.98</td><td>2.10</td><td>2.20</td><td>2.30</td><td>2.38</td><td>2.46</td><td>2.54</td><td>2.60</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">사인적분함수의 수렴속도 비교</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $\displaystyle\operatorname{Si}(x) = \int_0^x \frac{\sin t}{t}\,dt$를 <strong>사인적분함수(sine-integral function)</strong>라 한다.</p>
+        <p>$\displaystyle\int_0^{\pi/2} \frac{\sin t}{t}\,dt$의 근삿값을 사다리꼴 근사와 심프슨 공식을 이용해 구하고 그 수렴속도를 비교하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The function $\displaystyle\operatorname{Si}(x) = \int_0^x \frac{\sin t}{t}\,dt$ is called the <strong>sine-integral function</strong>.</p>
+        <p>Find the approximate value of $\displaystyle\int_0^{\pi/2} \frac{\sin t}{t}\,dt$ using the Trapezoidal Rule and Simpson's Rule, and compare their rate of convergence.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">타원의 길이 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>타원 $\displaystyle x^2 + \frac{y^2}{4} = 1$의 길이의 근삿값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the approximate value of the length of the ellipse $\displaystyle x^2 + \frac{y^2}{4} = 1$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">적분의 사다리꼴·심프슨 극한 표현</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연속함수 $f(x)$에 대해 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\displaystyle\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{k=1}^n \frac{f(x_{k-1}) + f(x_k)}{2}\,\Delta x$ &nbsp;(단, $x_k = a + k\Delta x$, $\Delta x = \dfrac{b-a}{n}$)</li>
+          <li>$\displaystyle\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{k=1}^n \frac{f(x_{2k-2}) + 4f(x_{2k-1}) + f(x_{2k})}{3}\,\Delta x$ &nbsp;(단, $x_k = a + k\Delta x$, $\Delta x = \dfrac{b-a}{2n}$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the following holds for a continuous function $f(x)$.</p>
+        <ol>
+          <li>$\displaystyle\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{k=1}^n \frac{f(x_{k-1}) + f(x_k)}{2}\,\Delta x$ &nbsp;(where $x_k = a + k\Delta x$, $\Delta x = \dfrac{b-a}{n}$)</li>
+          <li>$\displaystyle\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{k=1}^n \frac{f(x_{2k-2}) + 4f(x_{2k-1}) + f(x_{2k})}{3}\,\Delta x$ &nbsp;(where $x_k = a + k\Delta x$, $\Delta x = \dfrac{b-a}{2n}$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

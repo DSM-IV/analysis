@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10. 이상적분 (Improper Integrals) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 10단원 이상적분(Improper Integrals) 예제·유제·문제 모음. 제1종·제2종 이상적분의 수렴 판정, 비교판정법, 감마함수와 스털링 공식, 임용 기출을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 이상적분, improper integral, 특이적분, 수렴 판정, 비교판정법, comparison test, 극한비교판정법, 감마함수, Gamma function, 스털링 공식, Stirling's formula, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch10.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. 이상적분 (Improper Integrals) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="이상적분의 수렴 판정과 비교판정법, 감마함수·스털링 공식 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch10.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "10. 이상적분 (Improper Integrals) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 이상적분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch10.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch10.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html" class="active">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 10</p>
+  <h1>10. 이상적분<span>Improper Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 무한구간 아래 밑넓이</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 제1종 이상적분 판정</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 대칭적분과 발산</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 지수함수 적분과 오차한계</a></li>
+    <li><a href="#yu01-4"><span class="toc-num">유제 01-4</span> 수렴하게 하는 a</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 특이점에서의 밑넓이</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 제2종 이상적분 판정</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 수렴하는 p의 범위</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 비교판정으로 수렴 판정</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 이상적분 수렴 판정</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 사인적분과 가우스적분</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 1/x 곡선의 넓이와 부피</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 감마함수와 스털링 공식</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 이상적분·적분가능성 (임용12-27)</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 수렴하는 이상적분 (임용13-22)</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 이상적분과 급수의 합 (임용16A-3)</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 극한과 이상적분 (임용18A-3)</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 역함수와 이상적분 (임용23B-7)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">무한구간 아래 밑넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡선 $y = e^{-x/2}$ ($x \geq 0$)의 밑넓이를 구하시오.</li>
+          <li>곡선 $\displaystyle y = \frac{\ln x}{x^2}$ ($x \geq 1$)의 밑넓이를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\displaystyle\int_0^\infty e^{-x/2}\,dx = \lim_{b\to\infty}\int_0^b e^{-x/2}\,dx = \lim_{b\to\infty}\left[-2e^{-x/2}\right]_0^b = \lim_{b\to\infty}\left(2-2e^{-b/2}\right) = 2$이다.</p>
+        <p>(2) 부분적분법을 사용한다. $u=\ln x$, $dv=x^{-2}\,dx$라 하면 $du=dx/x$, $v=-1/x$이므로
+        $$\int \frac{\ln x}{x^2}\,dx = -\frac{\ln x}{x} + \int \frac{dx}{x^2} = -\frac{\ln x}{x} - \frac1x + C$$
+        이다. 따라서
+        $$\int_1^\infty \frac{\ln x}{x^2}\,dx = \lim_{b\to\infty}\left[-\frac{\ln x}{x}-\frac1x\right]_1^b = \lim_{b\to\infty}\left(1-\frac{\ln b}{b}-\frac1b\right) = 1$$
+        이다. (단, $\lim_{b\to\infty}\dfrac{\ln b}{b}=0$은 로피탈 정리로 확인된다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the area under the curve $y = e^{-x/2}$ ($x \geq 0$).</li>
+          <li>Find the area under the curve $\displaystyle y = \frac{\ln x}{x^2}$ ($x \geq 1$).</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $\displaystyle\int_0^\infty e^{-x/2}\,dx = \lim_{b\to\infty}\int_0^b e^{-x/2}\,dx = \lim_{b\to\infty}\left[-2e^{-x/2}\right]_0^b = \lim_{b\to\infty}\left(2-2e^{-b/2}\right) = 2$.</p>
+        <p>(2) Use integration by parts with $u=\ln x$, $dv=x^{-2}\,dx$, so $du=dx/x$, $v=-1/x$:
+        $$\int \frac{\ln x}{x^2}\,dx = -\frac{\ln x}{x} + \int \frac{dx}{x^2} = -\frac{\ln x}{x} - \frac1x + C.$$
+        Hence
+        $$\int_1^\infty \frac{\ln x}{x^2}\,dx = \lim_{b\to\infty}\left[-\frac{\ln x}{x}-\frac1x\right]_1^b = \lim_{b\to\infty}\left(1-\frac{\ln b}{b}-\frac1b\right) = 1,$$
+        where $\lim_{b\to\infty}\dfrac{\ln b}{b}=0$ follows from L'Hôpital's Rule.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">제1종 이상적분 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하는지 판정하고 수렴한다면 그 값을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_{-\infty}^{\infty} \frac{dx}{1+x^2}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{dx}{x^p}$ ($p$는 실수)</li>
+          <li>$\displaystyle\int_{-\infty}^{2} \frac{2\,dx}{x^2+4}$</li>
+          <li>$\displaystyle\int_{-\infty}^{\infty} \frac{x\,dx}{(x^2+4)^{3/2}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\displaystyle\int_{-\infty}^\infty \frac{dx}{1+x^2}$는 $x=0$을 기준으로 나누어 각 반쪽이 수렴하는지 확인한다. $\displaystyle\int_0^\infty\frac{dx}{1+x^2}=\lim_{b\to\infty}[\arctan x]_0^b=\frac\pi2$, $\displaystyle\int_{-\infty}^0\frac{dx}{1+x^2}=\lim_{a\to-\infty}[\arctan x]_a^0=\frac\pi2$이므로 둘 다 수렴하고, 원래 적분은 수렴하며 그 값은 $\dfrac\pi2+\dfrac\pi2=\pi$이다.</p>
+        <p>(2) $p\neq1$일 때 $\displaystyle\int_1^b x^{-p}\,dx=\left[\frac{x^{1-p}}{1-p}\right]_1^b=\frac{b^{1-p}-1}{1-p}$이다. $p\gt1$이면 $1-p\lt0$이므로 $b^{1-p}\to0$ ($b\to\infty$)이고, 적분은 $\dfrac{1}{p-1}$로 수렴한다. $p\lt1$이면 $1-p\gt0$이므로 $b^{1-p}\to\infty$이고 발산한다. $p=1$이면 $\displaystyle\int_1^b\frac{dx}{x}=\ln b\to\infty$이므로 발산한다. 따라서 $p\gt1$일 때만 수렴하고 그 값은 $\dfrac{1}{p-1}$이다.</p>
+        <p>(3) $\displaystyle\int_{-\infty}^2\frac{2\,dx}{x^2+4}=\lim_{a\to-\infty}\left[\arctan\frac x2\right]_a^2=\arctan1-\lim_{a\to-\infty}\arctan\frac a2=\frac\pi4-\left(-\frac\pi2\right)=\frac{3\pi}4$이다.</p>
+        <p>(4) $x=0$을 기준으로 나눈다. $u=x^2+4$로 치환하면 $du=2x\,dx$이므로
+        $$\int\frac{x\,dx}{(x^2+4)^{3/2}}=\frac12\int u^{-3/2}\,du=-u^{-1/2}=-\frac1{\sqrt{x^2+4}}$$
+        이다. $\displaystyle\int_0^\infty\frac{x\,dx}{(x^2+4)^{3/2}}=\lim_{b\to\infty}\left[-\frac1{\sqrt{x^2+4}}\right]_0^b=0-\left(-\frac12\right)=\frac12$이고, $\displaystyle\int_{-\infty}^0\frac{x\,dx}{(x^2+4)^{3/2}}=\lim_{a\to-\infty}\left[-\frac1{\sqrt{x^2+4}}\right]_a^0=-\frac12-0=-\frac12$이다. 두 반쪽이 각각 수렴하므로 원래 적분은 수렴하고, 그 값은 $\dfrac12+\left(-\dfrac12\right)=0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether each of the following improper integrals converges, and if it converges, find its value.</p>
+        <ol>
+          <li>$\displaystyle\int_{-\infty}^{\infty} \frac{dx}{1+x^2}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{dx}{x^p}$ ($p$ is a real number)</li>
+          <li>$\displaystyle\int_{-\infty}^{2} \frac{2\,dx}{x^2+4}$</li>
+          <li>$\displaystyle\int_{-\infty}^{\infty} \frac{x\,dx}{(x^2+4)^{3/2}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Split $\displaystyle\int_{-\infty}^\infty \frac{dx}{1+x^2}$ at $x=0$ and check that each half converges. $\displaystyle\int_0^\infty\frac{dx}{1+x^2}=\lim_{b\to\infty}[\arctan x]_0^b=\frac\pi2$ and $\displaystyle\int_{-\infty}^0\frac{dx}{1+x^2}=\lim_{a\to-\infty}[\arctan x]_a^0=\frac\pi2$, so both converge and the original integral converges to $\dfrac\pi2+\dfrac\pi2=\pi$.</p>
+        <p>(2) For $p\neq1$, $\displaystyle\int_1^b x^{-p}\,dx=\left[\frac{x^{1-p}}{1-p}\right]_1^b=\frac{b^{1-p}-1}{1-p}$. If $p\gt1$, then $1-p\lt0$, so $b^{1-p}\to0$ as $b\to\infty$, and the integral converges to $\dfrac{1}{p-1}$. If $p\lt1$, then $1-p\gt0$, so $b^{1-p}\to\infty$ and it diverges. If $p=1$, $\displaystyle\int_1^b\frac{dx}{x}=\ln b\to\infty$, so it diverges. Hence the integral converges only for $p\gt1$, with value $\dfrac1{p-1}$.</p>
+        <p>(3) $\displaystyle\int_{-\infty}^2\frac{2\,dx}{x^2+4}=\lim_{a\to-\infty}\left[\arctan\frac x2\right]_a^2=\arctan1-\lim_{a\to-\infty}\arctan\frac a2=\frac\pi4-\left(-\frac\pi2\right)=\frac{3\pi}4$.</p>
+        <p>(4) Split at $x=0$. Substituting $u=x^2+4$, $du=2x\,dx$,
+        $$\int\frac{x\,dx}{(x^2+4)^{3/2}}=\frac12\int u^{-3/2}\,du=-u^{-1/2}=-\frac1{\sqrt{x^2+4}}.$$
+        Then $\displaystyle\int_0^\infty\frac{x\,dx}{(x^2+4)^{3/2}}=\lim_{b\to\infty}\left[-\frac1{\sqrt{x^2+4}}\right]_0^b=0-\left(-\frac12\right)=\frac12$ and $\displaystyle\int_{-\infty}^0\frac{x\,dx}{(x^2+4)^{3/2}}=\lim_{a\to-\infty}\left[-\frac1{\sqrt{x^2+4}}\right]_a^0=-\frac12-0=-\frac12$. Both halves converge, so the original integral converges, with value $\dfrac12+\left(-\dfrac12\right)=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">대칭적분과 발산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\lim_{b\to\infty}\int_{-b}^{b} \frac{2x\,dx}{x^2+1} = 0$이지만 $\displaystyle\int_0^{\infty} \frac{2x\,dx}{x^2+1}$은 발산함을 설명하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>$b\gt0$에 대해
+        $$\int_{-b}^b \frac{2x\,dx}{x^2+1} = \left[\ln(x^2+1)\right]_{-b}^b = \ln(b^2+1)-\ln(b^2+1) = 0$$
+        이므로 $\displaystyle\lim_{b\to\infty}\int_{-b}^b\frac{2x\,dx}{x^2+1}=0$이다. 이는 피적분함수가 기함수이기 때문에 대칭구간에서 항상 성립하는 등식으로, 이 극한을 <strong>코시 주값(Cauchy principal value)</strong>이라 부른다.</p>
+        <p>한편 $\displaystyle\int_0^\infty\frac{2x\,dx}{x^2+1}=\lim_{b\to\infty}\left[\ln(x^2+1)\right]_0^b=\lim_{b\to\infty}\ln(b^2+1)=\infty$이므로 발산한다.</p>
+        <p>이상적분 $\displaystyle\int_{-\infty}^\infty f(x)\,dx$는 어느 한 점(여기서는 $x=0$)을 기준으로 나눈 두 반쪽 $\displaystyle\int_{-\infty}^0 f(x)\,dx$와 $\displaystyle\int_0^\infty f(x)\,dx$가 <strong>각각 독립적으로</strong> 수렴할 때에만 수렴하도록 정의된다. 그런데 $\displaystyle\int_0^\infty\frac{2x\,dx}{x^2+1}$이 발산하므로(같은 이유로 $\displaystyle\int_{-\infty}^0\frac{2x\,dx}{x^2+1}$도 발산한다), 정의에 따라 $\displaystyle\int_{-\infty}^\infty\frac{2x\,dx}{x^2+1}$은 발산한다. 즉 대칭구간에서 취한 극한(코시 주값)이 존재하고 유한하다는 사실이 이상적분 자체의 수렴을 보장하지는 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Explain why $\displaystyle\lim_{b\to\infty}\int_{-b}^{b} \frac{2x\,dx}{x^2+1} = 0$, yet $\displaystyle\int_0^{\infty} \frac{2x\,dx}{x^2+1}$ diverges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>For $b\gt0$,
+        $$\int_{-b}^b \frac{2x\,dx}{x^2+1} = \left[\ln(x^2+1)\right]_{-b}^b = \ln(b^2+1)-\ln(b^2+1) = 0,$$
+        so $\displaystyle\lim_{b\to\infty}\int_{-b}^b\frac{2x\,dx}{x^2+1}=0$. This holds automatically on any symmetric interval because the integrand is an odd function; such a symmetric limit is called the <strong>Cauchy principal value</strong>.</p>
+        <p>On the other hand, $\displaystyle\int_0^\infty\frac{2x\,dx}{x^2+1}=\lim_{b\to\infty}\left[\ln(x^2+1)\right]_0^b=\lim_{b\to\infty}\ln(b^2+1)=\infty$, so it diverges.</p>
+        <p>The improper integral $\displaystyle\int_{-\infty}^\infty f(x)\,dx$ is defined to converge only when the two halves obtained by splitting at some point (here $x=0$), $\displaystyle\int_{-\infty}^0 f(x)\,dx$ and $\displaystyle\int_0^\infty f(x)\,dx$, <strong>each converge independently</strong>. Since $\displaystyle\int_0^\infty\frac{2x\,dx}{x^2+1}$ diverges (and by the same reasoning so does $\displaystyle\int_{-\infty}^0\frac{2x\,dx}{x^2+1}$), the integral $\displaystyle\int_{-\infty}^\infty\frac{2x\,dx}{x^2+1}$ diverges by definition. Thus the existence of a finite symmetric limit (the Cauchy principal value) does not guarantee convergence of the improper integral itself.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">지수함수 적분과 오차한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\displaystyle\int_3^{\infty} e^{-3x}\,dx$를 계산하시오.</li>
+          <li>$\displaystyle\int_0^{\infty} e^{-x^2}\,dx$를 $\displaystyle\int_0^3 e^{-x^2}\,dx$로 근사하여 계산할 때 오차의 한계를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\displaystyle\int_3^\infty e^{-3x}\,dx=\lim_{b\to\infty}\left[-\frac13e^{-3x}\right]_3^b=\lim_{b\to\infty}\left(-\frac13e^{-3b}+\frac13e^{-9}\right)=\frac{e^{-9}}3$이다.</p>
+        <p>(2) 오차는 $\displaystyle\int_0^\infty e^{-x^2}\,dx-\int_0^3e^{-x^2}\,dx=\int_3^\infty e^{-x^2}\,dx$이다. $x\geq3$에서 $x^2\geq3x$이므로 $e^{-x^2}\leq e^{-3x}$이고, 비교판정법과 (1)의 결과에 의해
+        $$\int_3^\infty e^{-x^2}\,dx\leq\int_3^\infty e^{-3x}\,dx=\frac{e^{-9}}3$$
+        이다. 따라서 오차의 한계는 $\dfrac{e^{-9}}3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Compute $\displaystyle\int_3^{\infty} e^{-3x}\,dx$.</li>
+          <li>Find the error bound when $\displaystyle\int_0^{\infty} e^{-x^2}\,dx$ is approximated by $\displaystyle\int_0^3 e^{-x^2}\,dx$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $\displaystyle\int_3^\infty e^{-3x}\,dx=\lim_{b\to\infty}\left[-\frac13e^{-3x}\right]_3^b=\lim_{b\to\infty}\left(-\frac13e^{-3b}+\frac13e^{-9}\right)=\frac{e^{-9}}3$.</p>
+        <p>(2) The error is $\displaystyle\int_0^\infty e^{-x^2}\,dx-\int_0^3e^{-x^2}\,dx=\int_3^\infty e^{-x^2}\,dx$. Since $x^2\geq3x$ for $x\geq3$, we have $e^{-x^2}\leq e^{-3x}$, so by the Comparison Test and part (1),
+        $$\int_3^\infty e^{-x^2}\,dx\leq\int_3^\infty e^{-3x}\,dx=\frac{e^{-9}}3.$$
+        Hence the error bound is $\dfrac{e^{-9}}3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-4 -->
+<div class="card ex-card" id="yu01-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-4</span>
+    <span class="ex-title">수렴하게 하는 a</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\int_1^{\infty}\left(\frac{ax}{x^2+1} - \frac{1}{2x}\right)dx$가 수렴하도록 하는 $a$의 값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x$가 클 때 $\dfrac{ax}{x^2+1}\sim\dfrac ax$이므로, 피적분함수는
+        $$\frac{ax}{x^2+1}-\frac1{2x}=\frac{2ax^2-(x^2+1)}{2x(x^2+1)}=\frac{(2a-1)x^2-1}{2x(x^2+1)}$$
+        로 쓸 수 있고, $x\to\infty$일 때 이는 $\dfrac{2a-1}{2x}$에 극한비교된다. $a\neq\dfrac12$이면 $2a-1\neq0$이고 $\displaystyle\int_1^\infty\frac{dx}{2x}$는 발산하므로, 극한비교판정법에 의해 주어진 적분도 발산한다. 따라서 수렴하려면 $a=\dfrac12$이어야 한다.</p>
+        <p>$a=\dfrac12$일 때,
+        $$\int_1^\infty\left(\frac x{2(x^2+1)}-\frac1{2x}\right)dx=\lim_{b\to\infty}\left[\frac14\ln(x^2+1)-\frac12\ln x\right]_1^b=\lim_{b\to\infty}\left(\frac14\ln\frac{b^2+1}{b^2}-\frac14\ln2\right)$$
+        이다. $b\to\infty$일 때 $\dfrac{b^2+1}{b^2}\to1$이므로 $\ln\dfrac{b^2+1}{b^2}\to0$이고, 따라서 적분값은 $-\dfrac{\ln2}4$로 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the value of $a$ for which $\displaystyle\int_1^{\infty}\left(\frac{ax}{x^2+1} - \frac{1}{2x}\right)dx$ converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> For large $x$, $\dfrac{ax}{x^2+1}\sim\dfrac ax$, so the integrand can be written as
+        $$\frac{ax}{x^2+1}-\frac1{2x}=\frac{2ax^2-(x^2+1)}{2x(x^2+1)}=\frac{(2a-1)x^2-1}{2x(x^2+1)},$$
+        which is asymptotically comparable to $\dfrac{2a-1}{2x}$ as $x\to\infty$. If $a\neq\dfrac12$, then $2a-1\neq0$, and since $\displaystyle\int_1^\infty\frac{dx}{2x}$ diverges, the Limit Comparison Test shows the given integral also diverges. Hence convergence requires $a=\dfrac12$.</p>
+        <p>When $a=\dfrac12$,
+        $$\int_1^\infty\left(\frac x{2(x^2+1)}-\frac1{2x}\right)dx=\lim_{b\to\infty}\left[\frac14\ln(x^2+1)-\frac12\ln x\right]_1^b=\lim_{b\to\infty}\left(\frac14\ln\frac{b^2+1}{b^2}-\frac14\ln2\right).$$
+        As $b\to\infty$, $\dfrac{b^2+1}{b^2}\to1$, so $\ln\dfrac{b^2+1}{b^2}\to0$, and the integral converges to $-\dfrac{\ln2}4$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">특이점에서의 밑넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\displaystyle y = \frac{1}{\sqrt{x}}$ ($0 \lt x \leq 1$)의 밑넓이를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\displaystyle\int_0^1\frac{dx}{\sqrt x}=\lim_{a\to0^+}\int_a^1 x^{-1/2}\,dx=\lim_{a\to0^+}\left[2\sqrt x\right]_a^1=\lim_{a\to0^+}\left(2-2\sqrt a\right)=2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the area under the curve $\displaystyle y = \frac{1}{\sqrt{x}}$ ($0 \lt x \leq 1$).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\displaystyle\int_0^1\frac{dx}{\sqrt x}=\lim_{a\to0^+}\int_a^1 x^{-1/2}\,dx=\lim_{a\to0^+}\left[2\sqrt x\right]_a^1=\lim_{a\to0^+}\left(2-2\sqrt a\right)=2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">제2종 이상적분 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하는지 판정하고 수렴한다면 그 값을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_0^1 \frac{1}{1-x}\,dx$</li>
+          <li>$\displaystyle\int_0^3 \frac{dx}{(x-1)^{2/3}}$</li>
+          <li>$\displaystyle\int_0^{\infty} \frac{dx}{(1+x)\sqrt{x}}$</li>
+          <li>$\displaystyle\int_0^1 \frac{4r\,dr}{\sqrt{1-r^4}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\displaystyle\int_0^1\frac{dx}{1-x}=\lim_{b\to1^-}\left[-\ln(1-x)\right]_0^b=\lim_{b\to1^-}\left(-\ln(1-b)\right)=\infty$이므로 발산한다.</p>
+        <p>(2) $x=1$에서 특이점을 가지므로 $\displaystyle\int_0^1$과 $\displaystyle\int_1^3$으로 나눈다. $\displaystyle\int(x-1)^{-2/3}\,dx=3(x-1)^{1/3}$이므로,
+        $$\int_0^1(x-1)^{-2/3}\,dx=\lim_{a\to1^-}\left[3(x-1)^{1/3}\right]_0^a=0-3(-1)=3,$$
+        $$\int_1^3(x-1)^{-2/3}\,dx=\lim_{a\to1^+}\left[3(x-1)^{1/3}\right]_a^3=3\sqrt[3]2-0=3\sqrt[3]2$$
+        이다. 두 반쪽이 모두 수렴하므로 원래 적분은 수렴하고, 값은 $3+3\sqrt[3]2=3(1+\sqrt[3]2)$이다.</p>
+        <p>(3) $u=\sqrt x$로 치환하면 $x=u^2$, $dx=2u\,du$이고,
+        $$\frac{dx}{(1+x)\sqrt x}=\frac{2u\,du}{(1+u^2)u}=\frac{2\,du}{1+u^2}$$
+        이다. $x:0\to\infty$일 때 $u:0\to\infty$이므로
+        $$\int_0^\infty\frac{dx}{(1+x)\sqrt x}=\int_0^\infty\frac{2\,du}{1+u^2}=2\left[\arctan u\right]_0^\infty=2\cdot\frac\pi2=\pi$$
+        이다.</p>
+        <p>(4) $u=r^2$으로 치환하면 $du=2r\,dr$이고,
+        $$\frac{4r\,dr}{\sqrt{1-r^4}}=\frac{2\,du}{\sqrt{1-u^2}}$$
+        이다. $r:0\to1$일 때 $u:0\to1$이므로
+        $$\int_0^1\frac{4r\,dr}{\sqrt{1-r^4}}=\int_0^1\frac{2\,du}{\sqrt{1-u^2}}=2\left[\arcsin u\right]_0^1=2\cdot\frac\pi2=\pi$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether each of the following improper integrals converges, and if it converges, find its value.</p>
+        <ol>
+          <li>$\displaystyle\int_0^1 \frac{1}{1-x}\,dx$</li>
+          <li>$\displaystyle\int_0^3 \frac{dx}{(x-1)^{2/3}}$</li>
+          <li>$\displaystyle\int_0^{\infty} \frac{dx}{(1+x)\sqrt{x}}$</li>
+          <li>$\displaystyle\int_0^1 \frac{4r\,dr}{\sqrt{1-r^4}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $\displaystyle\int_0^1\frac{dx}{1-x}=\lim_{b\to1^-}\left[-\ln(1-x)\right]_0^b=\lim_{b\to1^-}\left(-\ln(1-b)\right)=\infty$, so it diverges.</p>
+        <p>(2) The integrand has a singularity at $x=1$, so split into $\displaystyle\int_0^1$ and $\displaystyle\int_1^3$. Since $\displaystyle\int(x-1)^{-2/3}\,dx=3(x-1)^{1/3}$,
+        $$\int_0^1(x-1)^{-2/3}\,dx=\lim_{a\to1^-}\left[3(x-1)^{1/3}\right]_0^a=0-3(-1)=3,$$
+        $$\int_1^3(x-1)^{-2/3}\,dx=\lim_{a\to1^+}\left[3(x-1)^{1/3}\right]_a^3=3\sqrt[3]2-0=3\sqrt[3]2.$$
+        Both halves converge, so the original integral converges to $3+3\sqrt[3]2=3(1+\sqrt[3]2)$.</p>
+        <p>(3) Substituting $u=\sqrt x$, so $x=u^2$, $dx=2u\,du$,
+        $$\frac{dx}{(1+x)\sqrt x}=\frac{2u\,du}{(1+u^2)u}=\frac{2\,du}{1+u^2}.$$
+        As $x$ ranges over $0\to\infty$, $u$ ranges over $0\to\infty$, so
+        $$\int_0^\infty\frac{dx}{(1+x)\sqrt x}=\int_0^\infty\frac{2\,du}{1+u^2}=2\left[\arctan u\right]_0^\infty=2\cdot\frac\pi2=\pi.$$</p>
+        <p>(4) Substituting $u=r^2$, $du=2r\,dr$,
+        $$\frac{4r\,dr}{\sqrt{1-r^4}}=\frac{2\,du}{\sqrt{1-u^2}}.$$
+        As $r$ ranges over $0\to1$, $u$ ranges over $0\to1$, so
+        $$\int_0^1\frac{4r\,dr}{\sqrt{1-r^4}}=\int_0^1\frac{2\,du}{\sqrt{1-u^2}}=2\left[\arcsin u\right]_0^1=2\cdot\frac\pi2=\pi.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">수렴하는 p의 범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하도록 하는 $p$의 범위를 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_1^2 \frac{dx}{x(\ln x)^p}$</li>
+          <li>$\displaystyle\int_2^{\infty} \frac{dx}{x(\ln x)^p}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $u=\ln x$로 치환하면 $du=dx/x$이고, $x:1\to2$일 때 $u:0\to\ln2$이므로
+        $$\int_1^2\frac{dx}{x(\ln x)^p}=\int_0^{\ln2}u^{-p}\,du$$
+        이다. 이는 $u=0$에서 특이점을 갖는 $p$-적분이며, $\displaystyle\int_0^a u^{-p}\,du$ ($a\gt0$)는 $p\lt1$일 때만 수렴한다. 따라서 원래 적분이 수렴하도록 하는 $p$의 범위는 $p\lt1$이다.</p>
+        <p>(2) 마찬가지로 $u=\ln x$로 치환하면, $x:2\to\infty$일 때 $u:\ln2\to\infty$이므로
+        $$\int_2^\infty\frac{dx}{x(\ln x)^p}=\int_{\ln2}^\infty u^{-p}\,du$$
+        이다. $\ln2\gt0$이므로 우변은 무한구간 $p$-적분이고, $p\gt1$일 때만 수렴한다. 따라서 원래 적분이 수렴하도록 하는 $p$의 범위는 $p\gt1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the range of $p$ for which each of the following improper integrals converges.</p>
+        <ol>
+          <li>$\displaystyle\int_1^2 \frac{dx}{x(\ln x)^p}$</li>
+          <li>$\displaystyle\int_2^{\infty} \frac{dx}{x(\ln x)^p}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $u=\ln x$, $du=dx/x$; as $x$ ranges over $1\to2$, $u$ ranges over $0\to\ln2$, so
+        $$\int_1^2\frac{dx}{x(\ln x)^p}=\int_0^{\ln2}u^{-p}\,du.$$
+        This is a $p$-integral with a singularity at $u=0$, and $\displaystyle\int_0^a u^{-p}\,du$ ($a\gt0$) converges only when $p\lt1$. Hence the original integral converges for $p\lt1$.</p>
+        <p>(2) Similarly, substituting $u=\ln x$, as $x$ ranges over $2\to\infty$, $u$ ranges over $\ln2\to\infty$, so
+        $$\int_2^\infty\frac{dx}{x(\ln x)^p}=\int_{\ln2}^\infty u^{-p}\,du.$$
+        Since $\ln2\gt0$, the right-hand side is a $p$-integral over an infinite interval, which converges only when $p\gt1$. Hence the original integral converges for $p\gt1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">비교판정으로 수렴 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하는지 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_1^{\infty} \frac{\sin^2 x}{x^2}\,dx$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1}{\sqrt{x^2-0.1}}\,dx$</li>
+          <li>$\displaystyle\int_0^{\pi/2} \frac{\cos x}{\sqrt{x}}\,dx$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{dx}{1+x^2}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1-e^{-x}}{x}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 모든 $x$에 대해 $0\leq\sin^2x\leq1$이므로 $\displaystyle0\leq\frac{\sin^2x}{x^2}\leq\frac1{x^2}$ ($x\geq1$)이다. $\displaystyle\int_1^\infty\frac{dx}{x^2}$는 $p$-적분($p=2\gt1$)으로 수렴하므로, 비교판정법에 의해 $\displaystyle\int_1^\infty\frac{\sin^2x}{x^2}\,dx$는 수렴한다.</p>
+        <p>(2) $x\to\infty$일 때 $\dfrac1{\sqrt{x^2-0.1}}\sim\dfrac1x$이다. $\displaystyle\lim_{x\to\infty}\frac{1/\sqrt{x^2-0.1}}{1/x}=\lim_{x\to\infty}\frac x{\sqrt{x^2-0.1}}=1$이고, $\displaystyle\int_1^\infty\frac{dx}x$는 발산하므로, 극한비교판정법에 의해 $\displaystyle\int_1^\infty\frac{dx}{\sqrt{x^2-0.1}}$은 발산한다.</p>
+        <p>(3) $x=0$에서 특이점을 갖는다. $[0,\pi/2]$에서 $\cos x\geq0$이고 $0\leq\cos x\leq1$이므로 $0\leq\dfrac{\cos x}{\sqrt x}\leq\dfrac1{\sqrt x}$ ($0\lt x\leq\pi/2$)이다. $\displaystyle\int_0^{\pi/2}\frac{dx}{\sqrt x}$는 $p$-적분($p=1/2\lt1$)으로 수렴하므로, 비교판정법에 의해 $\displaystyle\int_0^{\pi/2}\frac{\cos x}{\sqrt x}\,dx$는 수렴한다.</p>
+        <p>(4) $\displaystyle\int_1^\infty\frac{dx}{1+x^2}=\lim_{b\to\infty}[\arctan x]_1^b=\frac\pi2-\frac\pi4=\frac\pi4$로 직접 계산되어 수렴한다.</p>
+        <p>(5) $x\to\infty$일 때 $1-e^{-x}\to1$이므로 $\dfrac{1-e^{-x}}x\sim\dfrac1x$이다. $\displaystyle\lim_{x\to\infty}\frac{(1-e^{-x})/x}{1/x}=\lim_{x\to\infty}(1-e^{-x})=1$이고, $\displaystyle\int_1^\infty\frac{dx}x$는 발산하므로, 극한비교판정법에 의해 $\displaystyle\int_1^\infty\frac{1-e^{-x}}x\,dx$는 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether each of the following improper integrals converges.</p>
+        <ol>
+          <li>$\displaystyle\int_1^{\infty} \frac{\sin^2 x}{x^2}\,dx$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1}{\sqrt{x^2-0.1}}\,dx$</li>
+          <li>$\displaystyle\int_0^{\pi/2} \frac{\cos x}{\sqrt{x}}\,dx$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{dx}{1+x^2}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1-e^{-x}}{x}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) For all $x$, $0\leq\sin^2x\leq1$, so $\displaystyle0\leq\frac{\sin^2x}{x^2}\leq\frac1{x^2}$ for $x\geq1$. Since $\displaystyle\int_1^\infty\frac{dx}{x^2}$ is a convergent $p$-integral ($p=2\gt1$), the Comparison Test shows $\displaystyle\int_1^\infty\frac{\sin^2x}{x^2}\,dx$ converges.</p>
+        <p>(2) As $x\to\infty$, $\dfrac1{\sqrt{x^2-0.1}}\sim\dfrac1x$. Since $\displaystyle\lim_{x\to\infty}\frac{1/\sqrt{x^2-0.1}}{1/x}=\lim_{x\to\infty}\frac x{\sqrt{x^2-0.1}}=1$ and $\displaystyle\int_1^\infty\frac{dx}x$ diverges, the Limit Comparison Test shows $\displaystyle\int_1^\infty\frac{dx}{\sqrt{x^2-0.1}}$ diverges.</p>
+        <p>(3) The integrand has a singularity at $x=0$. On $[0,\pi/2]$, $\cos x\geq0$ and $0\leq\cos x\leq1$, so $0\leq\dfrac{\cos x}{\sqrt x}\leq\dfrac1{\sqrt x}$ for $0\lt x\leq\pi/2$. Since $\displaystyle\int_0^{\pi/2}\frac{dx}{\sqrt x}$ is a convergent $p$-integral ($p=1/2\lt1$), the Comparison Test shows $\displaystyle\int_0^{\pi/2}\frac{\cos x}{\sqrt x}\,dx$ converges.</p>
+        <p>(4) Directly, $\displaystyle\int_1^\infty\frac{dx}{1+x^2}=\lim_{b\to\infty}[\arctan x]_1^b=\frac\pi2-\frac\pi4=\frac\pi4$, so it converges.</p>
+        <p>(5) As $x\to\infty$, $1-e^{-x}\to1$, so $\dfrac{1-e^{-x}}x\sim\dfrac1x$. Since $\displaystyle\lim_{x\to\infty}\frac{(1-e^{-x})/x}{1/x}=\lim_{x\to\infty}(1-e^{-x})=1$ and $\displaystyle\int_1^\infty\frac{dx}x$ diverges, the Limit Comparison Test shows $\displaystyle\int_1^\infty\frac{1-e^{-x}}x\,dx$ diverges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">이상적분 수렴 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하는지 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_{1/2}^2 \frac{dx}{x\ln x}$</li>
+          <li>$\displaystyle\int_0^{\pi/2} \tan\theta\,d\theta$</li>
+          <li>$\displaystyle\int_4^{\infty} \frac{2\,dt}{t^{3/2}-1}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1}{e^x - 2^x}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 피적분함수는 $x=1$에서 특이점을 갖는다($\ln1=0$). $\displaystyle\lim_{x\to1}\frac{1/(x\ln x)}{1/(x-1)}=\lim_{x\to1}\frac{x-1}{x\ln x}$인데, 로피탈 정리에 의해 $\displaystyle=\lim_{x\to1}\frac1{\ln x+1}=1$이다. $\displaystyle\int_{1/2}^1\frac{dx}{x-1}$과 $\displaystyle\int_1^2\frac{dx}{x-1}$은 모두 $x=1$ 근방에서 발산하므로($u=x-1$로 놓으면 $\int u^{-1}du$ 꼴), 극한비교판정법에 의해 $\displaystyle\int_{1/2}^1\frac{dx}{x\ln x}$와 $\displaystyle\int_1^2\frac{dx}{x\ln x}$도 각각 발산한다. 따라서 $\displaystyle\int_{1/2}^2\frac{dx}{x\ln x}$는 발산한다.</p>
+        <p>(2) $\tan\theta$는 $\theta=\pi/2$에서 특이점을 갖는다. $\theta\to(\pi/2)^-$일 때 $\varepsilon=\pi/2-\theta\to0^+$라 하면 $\tan\theta=\cot\varepsilon=\dfrac{\cos\varepsilon}{\sin\varepsilon}$이고,
+        $$\lim_{\theta\to(\pi/2)^-}\frac{\tan\theta}{1/(\pi/2-\theta)}=\lim_{\varepsilon\to0^+}\varepsilon\cdot\frac{\cos\varepsilon}{\sin\varepsilon}=\lim_{\varepsilon\to0^+}\cos\varepsilon\cdot\frac\varepsilon{\sin\varepsilon}=1$$
+        이다. $\displaystyle\int_0^{\pi/2}\frac{d\theta}{\pi/2-\theta}$는 $\theta=\pi/2$ 근방에서 발산하므로, 극한비교판정법에 의해 $\displaystyle\int_0^{\pi/2}\tan\theta\,d\theta$도 발산한다.</p>
+        <p>(3) $t\to\infty$일 때 $t^{3/2}-1\sim t^{3/2}$이므로 $\dfrac2{t^{3/2}-1}\sim\dfrac2{t^{3/2}}$이다. $\displaystyle\lim_{t\to\infty}\frac{2/(t^{3/2}-1)}{2/t^{3/2}}=\lim_{t\to\infty}\frac{t^{3/2}}{t^{3/2}-1}=1$이고, $\displaystyle\int_4^\infty\frac{2\,dt}{t^{3/2}}$는 $p$-적분($p=3/2\gt1$)으로 수렴하므로, 극한비교판정법에 의해 $\displaystyle\int_4^\infty\frac{2\,dt}{t^{3/2}-1}$은 수렴한다.</p>
+        <p>(4) $e\gt2$이므로 $x\gt0$에서 $(e/2)^x\gt1$, 즉 $e^x\gt2^x$이고, $x\geq1$에서 $e^x-2^x\gt0$이므로 피적분함수는 특이점이 없다. $x\to\infty$일 때
+        $$\lim_{x\to\infty}\frac{1/(e^x-2^x)}{e^{-x}}=\lim_{x\to\infty}\frac{e^x}{e^x-2^x}=\lim_{x\to\infty}\frac1{1-(2/e)^x}=1$$
+        이다(단, $2/e\lt1$이므로 $(2/e)^x\to0$). $\displaystyle\int_1^\infty e^{-x}\,dx$는 수렴하므로, 극한비교판정법에 의해 $\displaystyle\int_1^\infty\frac{dx}{e^x-2^x}$는 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether each of the following improper integrals converges.</p>
+        <ol>
+          <li>$\displaystyle\int_{1/2}^2 \frac{dx}{x\ln x}$</li>
+          <li>$\displaystyle\int_0^{\pi/2} \tan\theta\,d\theta$</li>
+          <li>$\displaystyle\int_4^{\infty} \frac{2\,dt}{t^{3/2}-1}$</li>
+          <li>$\displaystyle\int_1^{\infty} \frac{1}{e^x - 2^x}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) The integrand has a singularity at $x=1$ (since $\ln1=0$). Since $\displaystyle\lim_{x\to1}\frac{1/(x\ln x)}{1/(x-1)}=\lim_{x\to1}\frac{x-1}{x\ln x}$, and by L'Hôpital's Rule this equals $\displaystyle\lim_{x\to1}\frac1{\ln x+1}=1$. Both $\displaystyle\int_{1/2}^1\frac{dx}{x-1}$ and $\displaystyle\int_1^2\frac{dx}{x-1}$ diverge near $x=1$ (substituting $u=x-1$ gives $\int u^{-1}\,du$), so by the Limit Comparison Test, $\displaystyle\int_{1/2}^1\frac{dx}{x\ln x}$ and $\displaystyle\int_1^2\frac{dx}{x\ln x}$ each diverge as well. Hence $\displaystyle\int_{1/2}^2\frac{dx}{x\ln x}$ diverges.</p>
+        <p>(2) $\tan\theta$ has a singularity at $\theta=\pi/2$. Writing $\varepsilon=\pi/2-\theta\to0^+$ as $\theta\to(\pi/2)^-$, we have $\tan\theta=\cot\varepsilon=\dfrac{\cos\varepsilon}{\sin\varepsilon}$, so
+        $$\lim_{\theta\to(\pi/2)^-}\frac{\tan\theta}{1/(\pi/2-\theta)}=\lim_{\varepsilon\to0^+}\varepsilon\cdot\frac{\cos\varepsilon}{\sin\varepsilon}=\lim_{\varepsilon\to0^+}\cos\varepsilon\cdot\frac\varepsilon{\sin\varepsilon}=1.$$
+        Since $\displaystyle\int_0^{\pi/2}\frac{d\theta}{\pi/2-\theta}$ diverges near $\theta=\pi/2$, the Limit Comparison Test shows $\displaystyle\int_0^{\pi/2}\tan\theta\,d\theta$ diverges as well.</p>
+        <p>(3) As $t\to\infty$, $t^{3/2}-1\sim t^{3/2}$, so $\dfrac2{t^{3/2}-1}\sim\dfrac2{t^{3/2}}$. Since $\displaystyle\lim_{t\to\infty}\frac{2/(t^{3/2}-1)}{2/t^{3/2}}=\lim_{t\to\infty}\frac{t^{3/2}}{t^{3/2}-1}=1$ and $\displaystyle\int_4^\infty\frac{2\,dt}{t^{3/2}}$ is a convergent $p$-integral ($p=3/2\gt1$), the Limit Comparison Test shows $\displaystyle\int_4^\infty\frac{2\,dt}{t^{3/2}-1}$ converges.</p>
+        <p>(4) Since $e\gt2$, $(e/2)^x\gt1$ for $x\gt0$, i.e., $e^x\gt2^x$, so $e^x-2^x\gt0$ for $x\geq1$ and the integrand has no singularity. As $x\to\infty$,
+        $$\lim_{x\to\infty}\frac{1/(e^x-2^x)}{e^{-x}}=\lim_{x\to\infty}\frac{e^x}{e^x-2^x}=\lim_{x\to\infty}\frac1{1-(2/e)^x}=1$$
+        (since $2/e\lt1$, $(2/e)^x\to0$). Since $\displaystyle\int_1^\infty e^{-x}\,dx$ converges, the Limit Comparison Test shows $\displaystyle\int_1^\infty\frac{dx}{e^x-2^x}$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">사인적분과 가우스적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이상적분이 수렴하는지 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_0^{\infty} \frac{\sin t}{t}\,dt$</li>
+          <li>$\displaystyle\int_0^{\infty} e^{-t^2}\,dt$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $t\to0^+$일 때 $\dfrac{\sin t}t\to1$이므로 $t=0$은 실제로는 특이점이 아니며(제거가능한 불연속), $\displaystyle\int_0^1\frac{\sin t}t\,dt$는 보통의 정적분으로 유한하다. 문제는 $t\to\infty$쪽이다. 부분적분법을 적용하면, $u=1/t$, $dv=\sin t\,dt$일 때 $du=-t^{-2}\,dt$, $v=-\cos t$이므로
+        $$\int_1^b\frac{\sin t}t\,dt=\left[-\frac{\cos t}t\right]_1^b-\int_1^b\frac{\cos t}{t^2}\,dt=\cos1-\frac{\cos b}b-\int_1^b\frac{\cos t}{t^2}\,dt$$
+        이다. $b\to\infty$일 때 $\left|\dfrac{\cos b}b\right|\leq\dfrac1b\to0$이고, $\left|\dfrac{\cos t}{t^2}\right|\leq\dfrac1{t^2}$이며 $\displaystyle\int_1^\infty\frac{dt}{t^2}$가 수렴하므로 비교판정법에 의해 $\displaystyle\int_1^\infty\frac{\cos t}{t^2}\,dt$도 (절대)수렴한다. 따라서 위 등식의 우변이 $b\to\infty$일 때 극한을 가지므로 $\displaystyle\int_1^\infty\frac{\sin t}t\,dt$는 수렴하고, 이를 $[0,1]$ 위의 정적분과 합하면 $\displaystyle\int_0^\infty\frac{\sin t}t\,dt$는 수렴한다. (단, $\displaystyle\int_1^\infty\left|\frac{\sin t}t\right|dt$는 발산함이 알려져 있으므로 이 수렴은 절대수렴이 아닌 조건수렴이다.)</p>
+        <p>(2) $t\geq1$에서 $t^2\geq t$이므로 $e^{-t^2}\leq e^{-t}$이고, $\displaystyle\int_1^\infty e^{-t}\,dt$는 수렴하므로 비교판정법에 의해 $\displaystyle\int_1^\infty e^{-t^2}\,dt$는 수렴한다. $\displaystyle\int_0^1 e^{-t^2}\,dt$는 유한한 정적분이므로, 이를 합한 $\displaystyle\int_0^\infty e^{-t^2}\,dt$는 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether each of the following improper integrals converges.</p>
+        <ol>
+          <li>$\displaystyle\int_0^{\infty} \frac{\sin t}{t}\,dt$</li>
+          <li>$\displaystyle\int_0^{\infty} e^{-t^2}\,dt$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) As $t\to0^+$, $\dfrac{\sin t}t\to1$, so $t=0$ is not actually a singularity (a removable discontinuity), and $\displaystyle\int_0^1\frac{\sin t}t\,dt$ is an ordinary, finite definite integral. The issue is at $t\to\infty$. Integrating by parts with $u=1/t$, $dv=\sin t\,dt$, so $du=-t^{-2}\,dt$, $v=-\cos t$,
+        $$\int_1^b\frac{\sin t}t\,dt=\left[-\frac{\cos t}t\right]_1^b-\int_1^b\frac{\cos t}{t^2}\,dt=\cos1-\frac{\cos b}b-\int_1^b\frac{\cos t}{t^2}\,dt.$$
+        As $b\to\infty$, $\left|\dfrac{\cos b}b\right|\leq\dfrac1b\to0$, and $\left|\dfrac{\cos t}{t^2}\right|\leq\dfrac1{t^2}$ with $\displaystyle\int_1^\infty\frac{dt}{t^2}$ convergent, so by the Comparison Test, $\displaystyle\int_1^\infty\frac{\cos t}{t^2}\,dt$ converges (absolutely) as well. Hence the right-hand side has a limit as $b\to\infty$, so $\displaystyle\int_1^\infty\frac{\sin t}t\,dt$ converges, and combined with the definite integral on $[0,1]$, $\displaystyle\int_0^\infty\frac{\sin t}t\,dt$ converges. (Since $\displaystyle\int_1^\infty\left|\frac{\sin t}t\right|dt$ is known to diverge, this convergence is conditional, not absolute.)</p>
+        <p>(2) Since $t^2\geq t$ for $t\geq1$, $e^{-t^2}\leq e^{-t}$, and $\displaystyle\int_1^\infty e^{-t}\,dt$ converges, so by the Comparison Test, $\displaystyle\int_1^\infty e^{-t^2}\,dt$ converges. Since $\displaystyle\int_0^1 e^{-t^2}\,dt$ is a finite definite integral, combining gives that $\displaystyle\int_0^\infty e^{-t^2}\,dt$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">1/x 곡선의 넓이와 부피</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $C: \displaystyle y = \frac{1}{x}$ ($x \geq 1$)에 대해 다음 물음에 답하시오.</p>
+        <ol>
+          <li>곡선 $C$ 아래 밑넓이는 무한대로 발산함을 보이시오.</li>
+          <li>곡선 $C$를 $x$축을 중심으로 회전시켰을 때 회전면의 넓이는 무한대로 발산함을 보이시오.</li>
+          <li>곡선 $C$ 아래 영역을 $x$축을 중심으로 회전시켰을 때 회전체의 부피는 수렴함을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the curve $C: \displaystyle y = \frac{1}{x}$ ($x \geq 1$), answer the following.</p>
+        <ol>
+          <li>Show that the area under the curve $C$ diverges to infinity.</li>
+          <li>Show that when $C$ is revolved about the $x$-axis, the area of the resulting surface of revolution diverges to infinity.</li>
+          <li>Show that when the region under $C$ is revolved about the $x$-axis, the volume of the resulting solid of revolution converges.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">감마함수와 스털링 공식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $\displaystyle \Gamma(x) = \int_0^{\infty} t^{x-1}e^{-t}\,dt$ ($x \gt 0$)를 <strong>감마함수(Gamma function)</strong>라 한다.</p>
+        <ol>
+          <li>$n$이 0 이상의 정수일 때 $\Gamma(n+1) = n!$임을 보이시오. (Hint. 수학적 귀납법을 이용할 것)</li>
+          <li>
+            <strong>스털링 공식(Stirling's formula)</strong>에 의하면 극한
+            $$\lim_{x\to\infty} \frac{\Gamma(x)}{\left(\dfrac{x}{e}\right)^x \sqrt{\dfrac{2\pi}{x}}} = 1$$
+            이 성립함이 알려져 있다. 즉, $x\to\infty$일 때 $\Gamma(x) \approx \left(\dfrac{x}{e}\right)^x \sqrt{\dfrac{2\pi}{x}}$가 성립한다. 이때 자연수 $n$에 대해 $n\to\infty$일 때 다음 근사들이 성립함을 보이시오.
+            $$n! \approx \left(\frac{n}{e}\right)^n \sqrt{2n\pi}, \qquad \sqrt[n]{n!} \approx \frac{n}{e}$$
+            (Hint. $\displaystyle\lim_{n\to\infty} n^{1/n} = 1$이 성립함을 보이시오)
+          </li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The function $\displaystyle \Gamma(x) = \int_0^{\infty} t^{x-1}e^{-t}\,dt$ ($x \gt 0$) is called the <strong>Gamma function</strong>.</p>
+        <ol>
+          <li>Show that $\Gamma(n+1) = n!$ when $n$ is a nonnegative integer. (Hint. Use mathematical induction.)</li>
+          <li>
+            <strong>Stirling's formula</strong> states that the limit
+            $$\lim_{x\to\infty} \frac{\Gamma(x)}{\left(\dfrac{x}{e}\right)^x \sqrt{\dfrac{2\pi}{x}}} = 1$$
+            is known to hold. That is, as $x\to\infty$, $\Gamma(x) \approx \left(\dfrac{x}{e}\right)^x \sqrt{\dfrac{2\pi}{x}}$ holds. Show that, for a natural number $n$, the following approximations hold as $n\to\infty$.
+            $$n! \approx \left(\frac{n}{e}\right)^n \sqrt{2n\pi}, \qquad \sqrt[n]{n!} \approx \frac{n}{e}$$
+            (Hint. Show that $\displaystyle\lim_{n\to\infty} n^{1/n} = 1$.)
+          </li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">이상적분·적분가능성 (임용12-27)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>옳은 것만을 &lt;보기&gt;에서 있는 대로 고른 것은?</p>
+        <div class="formal-box">
+          <p>ㄱ. 특이적분(이상적분, improper integral) $\displaystyle\int_0^1 \ln x\,dx$가 수렴한다.</p>
+          <p>ㄴ. 닫힌구간 $[0, 1]$에서 정의된 함수 $f(x) = \begin{cases} 1 & (x \in [0,1] \cap \mathbb{Q}) \\ 0 & (x \in [0,1] - \mathbb{Q}) \end{cases}$는 $[0,1]$에서 리만(Riemann)적분가능하다.</p>
+          <p>ㄷ. $[0,1]$에서 적분가능한 함수 $f$에 대하여 $\displaystyle F(x) = \int_0^x f(y)\,dy$로 정의된 함수 $F$는 열린구간 $(0,1)$에서 미분가능하다.</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄴ &nbsp;&nbsp;&nbsp; ③ ㄷ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄴ, ㄷ</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Choose all correct statements from &lt;List&gt;.</p>
+        <div class="formal-box">
+          <p>ㄱ. The improper integral $\displaystyle\int_0^1 \ln x\,dx$ converges.</p>
+          <p>ㄴ. The function $f(x) = \begin{cases} 1 & (x \in [0,1] \cap \mathbb{Q}) \\ 0 & (x \in [0,1] - \mathbb{Q}) \end{cases}$ defined on the closed interval $[0, 1]$ is Riemann integrable on $[0,1]$.</p>
+          <p>ㄷ. For a function $f$ integrable on $[0,1]$, the function $F$ defined by $\displaystyle F(x) = \int_0^x f(y)\,dy$ is differentiable on the open interval $(0,1)$.</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄴ &nbsp;&nbsp;&nbsp; ③ ㄷ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄴ, ㄷ</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">수렴하는 이상적분 (임용13-22)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>수렴하는 이상적분(특이적분, improper integral)만을 &lt;보기&gt;에서 있는 대로 고른 것은?</p>
+        <div class="formal-box">
+          <p>ㄱ. $\displaystyle\int_1^{\infty} \frac{x+1}{x\sqrt{x^4+1}}\,dx$</p>
+          <p>ㄴ. $\displaystyle\int_2^{\infty} \frac{1}{\ln x}\,dx$</p>
+          <p>ㄷ. $\displaystyle\int_0^{\pi/2} \frac{1}{\cos x + \sqrt{1-\sin x}}\,dx$</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄴ &nbsp;&nbsp;&nbsp; ③ ㄷ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄴ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄷ</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Choose all improper integrals that converge from &lt;List&gt;.</p>
+        <div class="formal-box">
+          <p>ㄱ. $\displaystyle\int_1^{\infty} \frac{x+1}{x\sqrt{x^4+1}}\,dx$</p>
+          <p>ㄴ. $\displaystyle\int_2^{\infty} \frac{1}{\ln x}\,dx$</p>
+          <p>ㄷ. $\displaystyle\int_0^{\pi/2} \frac{1}{\cos x + \sqrt{1-\sin x}}\,dx$</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄴ &nbsp;&nbsp;&nbsp; ③ ㄷ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄴ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄷ</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">이상적분과 급수의 합 (임용16A-3)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이차함수 $\displaystyle f(x) = \frac{1}{2}(x-10)^2$과 양의 정수 $n$에 대하여 $a_n$을 특이적분(이상적분, improper integral) $\displaystyle\int_1^{\infty} (f(n))^t\,dt$의 수렴 또는 발산에 따라 다음과 같이 정의하자.</p>
+        <p>$$a_n = \begin{cases} \displaystyle\int_1^{\infty} (f(n))^t\,dt & \left(\displaystyle\int_1^{\infty} (f(n))^t\,dt\text{가 수렴}\right) \\[2mm] 0 & \left(\displaystyle\int_1^{\infty} (f(n))^t\,dt\text{가 발산}\right) \end{cases}$$</p>
+        <p>$\displaystyle\sum_{n=1}^{\infty} a_n$의 값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\displaystyle f(x) = \frac{1}{2}(x-10)^2$ be a quadratic function, and for a positive integer $n$, define $a_n$ according to whether the improper integral $\displaystyle\int_1^{\infty} (f(n))^t\,dt$ converges or diverges, as follows.</p>
+        <p>$$a_n = \begin{cases} \displaystyle\int_1^{\infty} (f(n))^t\,dt & \left(\displaystyle\int_1^{\infty} (f(n))^t\,dt\text{ converges}\right) \\[2mm] 0 & \left(\displaystyle\int_1^{\infty} (f(n))^t\,dt\text{ diverges}\right) \end{cases}$$</p>
+        <p>Find the value of $\displaystyle\sum_{n=1}^{\infty} a_n$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">극한과 이상적분 (임용18A-3)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>자연수 $n$에 대하여 함수 $f_n : [0, \infty) \to \mathbb{R}$를 $\displaystyle f_n(x) = \max\left\{0,\ \frac{1}{n}\left(1 - \frac{1}{n}|x-2n|\right)\right\}$으로 정의할 때, $\displaystyle\lim_{n\to\infty}\int_0^{\infty} f_n(x)\,dx + \int_0^{\infty}\left(\lim_{n\to\infty} f_n(x)\right)dx$의 값을 구하시오. (단, $\max\{a, b\}$는 $a$와 $b$ 중 작지 않은 수이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a natural number $n$, define the function $f_n : [0, \infty) \to \mathbb{R}$ by $\displaystyle f_n(x) = \max\left\{0,\ \frac{1}{n}\left(1 - \frac{1}{n}|x-2n|\right)\right\}$. Find the value of $\displaystyle\lim_{n\to\infty}\int_0^{\infty} f_n(x)\,dx + \int_0^{\infty}\left(\lim_{n\to\infty} f_n(x)\right)dx$. (Here, $\max\{a, b\}$ denotes the number that is not less than $a$ and $b$.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">역함수와 이상적분 (임용23B-7)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구간 $\left(\dfrac{\pi}{2}, \dfrac{3\pi}{2}\right)$에서 정의된 함수 $f(x) = \tan x$의 역함수를 $g : \mathbb{R} \to \left(\dfrac{\pi}{2}, \dfrac{3\pi}{2}\right)$라 하자. $\displaystyle\lim_{n\to\infty} n\left(g\left(1 + \frac{3}{n}\right) - g(1)\right)$의 값을 풀이 과정과 함께 쓰시오. 또한 $\displaystyle\int_0^{\infty} \frac{g(x)}{1+x^2}\,dx$의 값을 풀이 과정과 함께 쓰시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $g : \mathbb{R} \to \left(\dfrac{\pi}{2}, \dfrac{3\pi}{2}\right)$ be the inverse function of $f(x) = \tan x$ defined on the interval $\left(\dfrac{\pi}{2}, \dfrac{3\pi}{2}\right)$. Write the value of $\displaystyle\lim_{n\to\infty} n\left(g\left(1 + \frac{3}{n}\right) - g(1)\right)$ together with the solution process. Also write the value of $\displaystyle\int_0^{\infty} \frac{g(x)}{1+x^2}\,dx$ together with the solution process.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

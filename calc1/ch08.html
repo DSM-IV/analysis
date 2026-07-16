@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08. 적분의 계산 (Techniques of Integration) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 08단원 적분의 계산(Techniques of Integration) 예제·유제·문제 모음. 부분적분법, 점화공식, 삼각함수 곱의 적분, 삼각치환, 부분분수, 반각치환(z=tan(x/2))을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 적분의 계산, techniques of integration, 부분적분법, integration by parts, 점화공식, reduction formula, 삼각치환, trigonometric substitution, 부분분수, partial fractions, 반각치환, Weierstrass substitution, 삼각함수 곱의 적분, 성망형, astroid, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. 적분의 계산 (Techniques of Integration) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="적분의 계산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "08. 적분의 계산 (Techniques of Integration) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 적분의 계산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch08.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html" class="active">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 08</p>
+  <h1>08. 적분의 계산<span>Techniques of Integration</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 부분적분과 역함수의 적분</a></li>
+    <li><a href="#yu01"><span class="toc-num">유제 01</span> 부분적분 점화공식 증명</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 삼각함수 곱의 적분</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 세 사인 곱의 적분</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 삼각치환 적분</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 치환을 이용한 적분</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 세 가지 방법의 적분</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 적분으로 정의된 함수의 미분 (임용11-23)</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 부분분수 적분</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 반각치환 적분</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 적분과 극한</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 성망형의 회전면 넓이</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 적분으로 정의된 곡선의 길이</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 적분 부등식 증명</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">부분적분과 역함수의 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int (1+3x^3)e^{x^3}\,dx$</li>
+          <li>$\displaystyle\int x^2 e^x\,dx$</li>
+          <li>$\displaystyle\int \cos^{-1} x\,dx$</li>
+          <li>$\displaystyle\int \sinh^{-1} x\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\dfrac{d}{dx}\left(xe^{x^3}\right) = e^{x^3}+x\cdot3x^2e^{x^3} = (1+3x^3)e^{x^3}$이므로
+        $$\int (1+3x^3)e^{x^3}\,dx = xe^{x^3}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left(xe^{x^3}+C\right) = (1+3x^3)e^{x^3}$이므로 옳다.)</p>
+        <p>(2) $u=x^2, dv=e^x\,dx$로 부분적분하면 $du=2x\,dx, v=e^x$이므로
+        $$\int x^2e^x\,dx = x^2e^x-2\int xe^x\,dx$$
+        이고, 다시 $u=x, dv=e^x\,dx$로 부분적분하면 $\int xe^x\,dx = xe^x-e^x+C$이다. 따라서
+        $$\int x^2e^x\,dx = x^2e^x-2(xe^x-e^x)+C = (x^2-2x+2)e^x+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[(x^2-2x+2)e^x\right] = (2x-2)e^x+(x^2-2x+2)e^x = x^2e^x$이므로 옳다.)</p>
+        <p>(3) $u=\cos^{-1}x, dv=dx$로 부분적분하면 $du=-\dfrac1{\sqrt{1-x^2}}\,dx, v=x$이고 $\displaystyle\int \frac{x}{\sqrt{1-x^2}}\,dx = -\sqrt{1-x^2}+C$이므로
+        $$\int \cos^{-1}x\,dx = x\cos^{-1}x+\int \frac{x}{\sqrt{1-x^2}}\,dx = x\cos^{-1}x-\sqrt{1-x^2}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[x\cos^{-1}x-\sqrt{1-x^2}\right] = \cos^{-1}x-\dfrac{x}{\sqrt{1-x^2}}+\dfrac{x}{\sqrt{1-x^2}} = \cos^{-1}x$이므로 옳다.)</p>
+        <p>(4) $u=\sinh^{-1}x, dv=dx$로 부분적분하면 $du=\dfrac1{\sqrt{1+x^2}}\,dx, v=x$이므로
+        $$\int \sinh^{-1}x\,dx = x\sinh^{-1}x-\int \frac{x}{\sqrt{1+x^2}}\,dx = x\sinh^{-1}x-\sqrt{1+x^2}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[x\sinh^{-1}x-\sqrt{1+x^2}\right] = \sinh^{-1}x+\dfrac{x}{\sqrt{1+x^2}}-\dfrac{x}{\sqrt{1+x^2}} = \sinh^{-1}x$이므로 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int (1+3x^3)e^{x^3}\,dx$</li>
+          <li>$\displaystyle\int x^2 e^x\,dx$</li>
+          <li>$\displaystyle\int \cos^{-1} x\,dx$</li>
+          <li>$\displaystyle\int \sinh^{-1} x\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\dfrac{d}{dx}\left(xe^{x^3}\right) = e^{x^3}+x\cdot3x^2e^{x^3} = (1+3x^3)e^{x^3}$,
+        $$\int (1+3x^3)e^{x^3}\,dx = xe^{x^3}+C.$$
+        (Check: $\dfrac{d}{dx}\left(xe^{x^3}+C\right) = (1+3x^3)e^{x^3}$.)</p>
+        <p>(2) By parts with $u=x^2, dv=e^x\,dx$, so $du=2x\,dx, v=e^x$,
+        $$\int x^2e^x\,dx = x^2e^x-2\int xe^x\,dx,$$
+        and by parts again, $\int xe^x\,dx = xe^x-e^x+C$. Hence
+        $$\int x^2e^x\,dx = x^2e^x-2(xe^x-e^x)+C = (x^2-2x+2)e^x+C.$$
+        (Check: $\dfrac{d}{dx}\left[(x^2-2x+2)e^x\right] = (2x-2)e^x+(x^2-2x+2)e^x = x^2e^x$.)</p>
+        <p>(3) By parts with $u=\cos^{-1}x, dv=dx$, so $du=-\dfrac1{\sqrt{1-x^2}}\,dx, v=x$, and using $\displaystyle\int \frac{x}{\sqrt{1-x^2}}\,dx = -\sqrt{1-x^2}+C$,
+        $$\int \cos^{-1}x\,dx = x\cos^{-1}x+\int \frac{x}{\sqrt{1-x^2}}\,dx = x\cos^{-1}x-\sqrt{1-x^2}+C.$$
+        (Check: $\dfrac{d}{dx}\left[x\cos^{-1}x-\sqrt{1-x^2}\right] = \cos^{-1}x-\dfrac{x}{\sqrt{1-x^2}}+\dfrac{x}{\sqrt{1-x^2}} = \cos^{-1}x$.)</p>
+        <p>(4) By parts with $u=\sinh^{-1}x, dv=dx$, so $du=\dfrac1{\sqrt{1+x^2}}\,dx, v=x$,
+        $$\int \sinh^{-1}x\,dx = x\sinh^{-1}x-\int \frac{x}{\sqrt{1+x^2}}\,dx = x\sinh^{-1}x-\sqrt{1+x^2}+C.$$
+        (Check: $\dfrac{d}{dx}\left[x\sinh^{-1}x-\sqrt{1+x^2}\right] = \sinh^{-1}x+\dfrac{x}{\sqrt{1+x^2}}-\dfrac{x}{\sqrt{1+x^2}} = \sinh^{-1}x$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01 -->
+<div class="card ex-card" id="yu01">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01</span>
+    <span class="ex-title">부분적분 점화공식 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부분적분법을 이용하여 다음을 증명하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \cos^n x\,dx = \frac{\cos^{n-1} x \sin x}{n} + \frac{n-1}{n}\int \cos^{n-2} x\,dx$</li>
+          <li>$\displaystyle\int \sin^n x \cos^m x\,dx = -\frac{\sin^{n-1} x \cos^{m+1} x}{m+n} + \frac{n-1}{m+n}\int \sin^{n-2} x \cos^m x\,dx \quad (n \geq 2)$</li>
+          <li>$\displaystyle\int (\ln x)^n\,dx = x(\ln x)^n - n\int (\ln x)^{n-1}\,dx$</li>
+          <li>$\displaystyle\int_a^b \left(\int_x^b f(t)\,dt\right)dx = \int_a^b (x-a) f(x)\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기"><span class="arrow">&#9654;</span> 증명 보기</button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) $\cos^n x = \cos^{n-1}x\cdot\cos x$로 쓰고 $u=\cos^{n-1}x, dv=\cos x\,dx$로 부분적분하면 $du=-(n-1)\cos^{n-2}x\sin x\,dx, v=\sin x$이므로
+        $$\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\sin^2x\,dx$$
+        이다. $\sin^2x=1-\cos^2x$를 대입하면
+        $$\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\,dx-(n-1)\int \cos^n x\,dx$$
+        이므로, 좌변으로 $\int \cos^n x\,dx$ 항을 모으면
+        $$n\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\,dx$$
+        즉
+        $$\int \cos^n x\,dx = \frac{\cos^{n-1}x\sin x}{n}+\frac{n-1}{n}\int \cos^{n-2}x\,dx$$
+        이다.</p>
+        <p>(2) $\sin^nx\cos^mx = \sin^{n-1}x\cdot(\sin x\cos^mx)$로 쓰고 $u=\sin^{n-1}x, dv=\sin x\cos^mx\,dx$로 부분적분하자. $du=(n-1)\sin^{n-2}x\cos x\,dx$이고 $v=\displaystyle\int \sin x\cos^mx\,dx = -\frac{\cos^{m+1}x}{m+1}$이므로
+        $$I:=\int \sin^nx\cos^mx\,dx = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}\int \sin^{n-2}x\cos^{m+2}x\,dx$$
+        이다. $\cos^{m+2}x=\cos^mx(1-\sin^2x)$이므로
+        $$\int \sin^{n-2}x\cos^{m+2}x\,dx = \underbrace{\int \sin^{n-2}x\cos^mx\,dx}_{=:J}-I$$
+        이고, 이를 대입하면
+        $$I = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}(J-I)$$
+        이다. $I$ 항을 좌변으로 모으면
+        $$I\left(1+\frac{n-1}{m+1}\right) = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}J$$
+        이고, $1+\dfrac{n-1}{m+1}=\dfrac{m+n}{m+1}$이므로 양변에 $\dfrac{m+1}{m+n}$을 곱하면
+        $$I = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+n}+\frac{n-1}{m+n}J = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+n}+\frac{n-1}{m+n}\int \sin^{n-2}x\cos^mx\,dx$$
+        이다.</p>
+        <p>(3) $u=(\ln x)^n, dv=dx$로 부분적분하면 $du=n(\ln x)^{n-1}\cdot\dfrac1x\,dx, v=x$이므로
+        $$\int (\ln x)^n\,dx = x(\ln x)^n-\int x\cdot n(\ln x)^{n-1}\cdot\frac1x\,dx = x(\ln x)^n-n\int (\ln x)^{n-1}\,dx$$
+        이다.</p>
+        <p>(4) $F(x):=\displaystyle\int_x^b f(t)\,dt$라 하면 $F'(x)=-f(x)$이다. $u=F(x), dv=dx$로 부분적분하되 $v=x-a$로 잡으면 (상수를 이렇게 택해도 $dv=dx$를 만족한다)
+        $$\int_a^b F(x)\,dx = \Big[(x-a)F(x)\Big]_a^b - \int_a^b (x-a)F'(x)\,dx = \Big[(x-a)F(x)\Big]_a^b + \int_a^b (x-a)f(x)\,dx$$
+        이다. 그런데 $x=b$에서 $(b-a)F(b)=(b-a)\displaystyle\int_b^bf(t)\,dt=0$이고, $x=a$에서 $(a-a)F(a)=0$이므로 경계항은 $0$이다. 따라서
+        $$\int_a^b\left(\int_x^bf(t)\,dt\right)dx = \int_a^b(x-a)f(x)\,dx$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using integration by parts, prove the following.</p>
+        <ol>
+          <li>$\displaystyle\int \cos^n x\,dx = \frac{\cos^{n-1} x \sin x}{n} + \frac{n-1}{n}\int \cos^{n-2} x\,dx$</li>
+          <li>$\displaystyle\int \sin^n x \cos^m x\,dx = -\frac{\sin^{n-1} x \cos^{m+1} x}{m+n} + \frac{n-1}{m+n}\int \sin^{n-2} x \cos^m x\,dx \quad (n \geq 2)$</li>
+          <li>$\displaystyle\int (\ln x)^n\,dx = x(\ln x)^n - n\int (\ln x)^{n-1}\,dx$</li>
+          <li>$\displaystyle\int_a^b \left(\int_x^b f(t)\,dt\right)dx = \int_a^b (x-a) f(x)\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof"><span class="arrow">&#9654;</span> Proof</button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Write $\cos^n x = \cos^{n-1}x\cdot\cos x$ and integrate by parts with $u=\cos^{n-1}x, dv=\cos x\,dx$, so $du=-(n-1)\cos^{n-2}x\sin x\,dx, v=\sin x$. Then
+        $$\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\sin^2x\,dx.$$
+        Substituting $\sin^2x=1-\cos^2x$,
+        $$\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\,dx-(n-1)\int \cos^n x\,dx,$$
+        so collecting the $\int \cos^n x\,dx$ terms on the left gives
+        $$n\int \cos^n x\,dx = \cos^{n-1}x\sin x+(n-1)\int \cos^{n-2}x\,dx,$$
+        that is,
+        $$\int \cos^n x\,dx = \frac{\cos^{n-1}x\sin x}{n}+\frac{n-1}{n}\int \cos^{n-2}x\,dx.$$</p>
+        <p>(2) Write $\sin^nx\cos^mx = \sin^{n-1}x\cdot(\sin x\cos^mx)$ and integrate by parts with $u=\sin^{n-1}x, dv=\sin x\cos^mx\,dx$. Then $du=(n-1)\sin^{n-2}x\cos x\,dx$ and $v=\displaystyle\int \sin x\cos^mx\,dx = -\frac{\cos^{m+1}x}{m+1}$, so
+        $$I:=\int \sin^nx\cos^mx\,dx = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}\int \sin^{n-2}x\cos^{m+2}x\,dx.$$
+        Since $\cos^{m+2}x=\cos^mx(1-\sin^2x)$,
+        $$\int \sin^{n-2}x\cos^{m+2}x\,dx = \underbrace{\int \sin^{n-2}x\cos^mx\,dx}_{=:J}-I,$$
+        and substituting this in gives
+        $$I = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}(J-I).$$
+        Collecting the $I$ terms on the left,
+        $$I\left(1+\frac{n-1}{m+1}\right) = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+1}+\frac{n-1}{m+1}J,$$
+        and since $1+\dfrac{n-1}{m+1}=\dfrac{m+n}{m+1}$, multiplying both sides by $\dfrac{m+1}{m+n}$ gives
+        $$I = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+n}+\frac{n-1}{m+n}J = -\frac{\sin^{n-1}x\cos^{m+1}x}{m+n}+\frac{n-1}{m+n}\int \sin^{n-2}x\cos^mx\,dx.$$</p>
+        <p>(3) Integrate by parts with $u=(\ln x)^n, dv=dx$, so $du=n(\ln x)^{n-1}\cdot\dfrac1x\,dx, v=x$. Then
+        $$\int (\ln x)^n\,dx = x(\ln x)^n-\int x\cdot n(\ln x)^{n-1}\cdot\frac1x\,dx = x(\ln x)^n-n\int (\ln x)^{n-1}\,dx.$$</p>
+        <p>(4) Let $F(x):=\displaystyle\int_x^b f(t)\,dt$, so $F'(x)=-f(x)$. Integrate by parts with $u=F(x), dv=dx$, choosing $v=x-a$ (any constant works since $dv=dx$). Then
+        $$\int_a^b F(x)\,dx = \Big[(x-a)F(x)\Big]_a^b - \int_a^b (x-a)F'(x)\,dx = \Big[(x-a)F(x)\Big]_a^b + \int_a^b (x-a)f(x)\,dx.$$
+        At $x=b$, $(b-a)F(b)=(b-a)\displaystyle\int_b^bf(t)\,dt=0$, and at $x=a$, $(a-a)F(a)=0$, so the boundary term vanishes. Hence
+        $$\int_a^b\left(\int_x^bf(t)\,dt\right)dx = \int_a^b(x-a)f(x)\,dx.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">삼각함수 곱의 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \sin 3x \cos 5x\,dx$</li>
+          <li>$\displaystyle\int_{-\pi/2}^{\pi/2} \cos x \cos 7x\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 곱을 합으로 바꾸는 공식 $\sin A\cos B=\dfrac12\left[\sin(A+B)+\sin(A-B)\right]$에 의해
+        $$\sin3x\cos5x = \frac12\left[\sin8x+\sin(-2x)\right] = \frac12(\sin8x-\sin2x)$$
+        이므로
+        $$\int \sin3x\cos5x\,dx = \frac12\int(\sin8x-\sin2x)\,dx = \frac12\left(-\frac{\cos8x}8+\frac{\cos2x}2\right)+C = \frac{\cos2x}4-\frac{\cos8x}{16}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[\dfrac{\cos2x}4-\dfrac{\cos8x}{16}\right] = -\dfrac{\sin2x}2+\dfrac{\sin8x}2 = \dfrac12(\sin8x-\sin2x) = \sin3x\cos5x$이므로 옳다.)</p>
+        <p>(2) 곱을 합으로 바꾸는 공식 $\cos A\cos B=\dfrac12\left[\cos(A-B)+\cos(A+B)\right]$에 의해
+        $$\cos x\cos7x = \frac12(\cos6x+\cos8x)$$
+        이므로
+        $$\int_{-\pi/2}^{\pi/2}\cos x\cos7x\,dx = \left[\frac{\sin6x}{12}+\frac{\sin8x}{16}\right]_{-\pi/2}^{\pi/2}$$
+        이다. $x=\pi/2$에서 $\sin(3\pi)=0, \sin(4\pi)=0$이고 $x=-\pi/2$에서도 $\sin(-3\pi)=0, \sin(-4\pi)=0$이므로 양 끝값이 모두 $0$이다. 따라서
+        $$\int_{-\pi/2}^{\pi/2}\cos x\cos7x\,dx = 0-0 = 0$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int \sin 3x \cos 5x\,dx$</li>
+          <li>$\displaystyle\int_{-\pi/2}^{\pi/2} \cos x \cos 7x\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) By the product-to-sum formula $\sin A\cos B=\dfrac12\left[\sin(A+B)+\sin(A-B)\right]$,
+        $$\sin3x\cos5x = \frac12\left[\sin8x+\sin(-2x)\right] = \frac12(\sin8x-\sin2x),$$
+        so
+        $$\int \sin3x\cos5x\,dx = \frac12\int(\sin8x-\sin2x)\,dx = \frac12\left(-\frac{\cos8x}8+\frac{\cos2x}2\right)+C = \frac{\cos2x}4-\frac{\cos8x}{16}+C.$$
+        (Check: $\dfrac{d}{dx}\left[\dfrac{\cos2x}4-\dfrac{\cos8x}{16}\right] = -\dfrac{\sin2x}2+\dfrac{\sin8x}2 = \dfrac12(\sin8x-\sin2x) = \sin3x\cos5x$.)</p>
+        <p>(2) By the product-to-sum formula $\cos A\cos B=\dfrac12\left[\cos(A-B)+\cos(A+B)\right]$,
+        $$\cos x\cos7x = \frac12(\cos6x+\cos8x),$$
+        so
+        $$\int_{-\pi/2}^{\pi/2}\cos x\cos7x\,dx = \left[\frac{\sin6x}{12}+\frac{\sin8x}{16}\right]_{-\pi/2}^{\pi/2}.$$
+        At $x=\pi/2$, $\sin(3\pi)=0$ and $\sin(4\pi)=0$; at $x=-\pi/2$, $\sin(-3\pi)=0$ and $\sin(-4\pi)=0$ as well, so both endpoint values are $0$. Hence
+        $$\int_{-\pi/2}^{\pi/2}\cos x\cos7x\,dx = 0-0 = 0.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">세 사인 곱의 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\int \sin\theta \sin 2\theta \sin 3\theta\,d\theta$를 계산하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 $\sin A\sin B=\dfrac12\left[\cos(A-B)-\cos(A+B)\right]$에 의해
+        $$\sin\theta\sin3\theta = \frac12(\cos2\theta-\cos4\theta)$$
+        이므로
+        $$\sin\theta\sin2\theta\sin3\theta = \sin2\theta\cdot\frac12(\cos2\theta-\cos4\theta) = \frac12\sin2\theta\cos2\theta-\frac12\sin2\theta\cos4\theta$$
+        이다. 이제 $\sin2\theta\cos2\theta=\dfrac12\sin4\theta$이고, $\sin2\theta\cos4\theta=\dfrac12\left[\sin6\theta+\sin(-2\theta)\right]=\dfrac12(\sin6\theta-\sin2\theta)$이므로
+        $$\sin\theta\sin2\theta\sin3\theta = \frac14\sin4\theta-\frac14(\sin6\theta-\sin2\theta) = \frac14\sin2\theta+\frac14\sin4\theta-\frac14\sin6\theta$$
+        이다. 각 항을 적분하면
+        $$\int \sin\theta\sin2\theta\sin3\theta\,d\theta = -\frac{\cos2\theta}8-\frac{\cos4\theta}{16}+\frac{\cos6\theta}{24}+C$$
+        이다. (검산: $\dfrac{d}{d\theta}\left[-\dfrac{\cos2\theta}8-\dfrac{\cos4\theta}{16}+\dfrac{\cos6\theta}{24}\right] = \dfrac{\sin2\theta}4+\dfrac{\sin4\theta}4-\dfrac{\sin6\theta}4 = \sin\theta\sin2\theta\sin3\theta$이므로 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\displaystyle\int \sin\theta \sin 2\theta \sin 3\theta\,d\theta$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By $\sin A\sin B=\dfrac12\left[\cos(A-B)-\cos(A+B)\right]$,
+        $$\sin\theta\sin3\theta = \frac12(\cos2\theta-\cos4\theta),$$
+        so
+        $$\sin\theta\sin2\theta\sin3\theta = \sin2\theta\cdot\frac12(\cos2\theta-\cos4\theta) = \frac12\sin2\theta\cos2\theta-\frac12\sin2\theta\cos4\theta.$$
+        Now $\sin2\theta\cos2\theta=\dfrac12\sin4\theta$, and $\sin2\theta\cos4\theta=\dfrac12\left[\sin6\theta+\sin(-2\theta)\right]=\dfrac12(\sin6\theta-\sin2\theta)$, so
+        $$\sin\theta\sin2\theta\sin3\theta = \frac14\sin4\theta-\frac14(\sin6\theta-\sin2\theta) = \frac14\sin2\theta+\frac14\sin4\theta-\frac14\sin6\theta.$$
+        Integrating term by term,
+        $$\int \sin\theta\sin2\theta\sin3\theta\,d\theta = -\frac{\cos2\theta}8-\frac{\cos4\theta}{16}+\frac{\cos6\theta}{24}+C.$$
+        (Check: $\dfrac{d}{d\theta}\left[-\dfrac{\cos2\theta}8-\dfrac{\cos4\theta}{16}+\dfrac{\cos6\theta}{24}\right] = \dfrac{\sin2\theta}4+\dfrac{\sin4\theta}4-\dfrac{\sin6\theta}4 = \sin\theta\sin2\theta\sin3\theta$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">삼각치환 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{\sqrt{4+x^2}}$</li>
+          <li>$\displaystyle\int \frac{x^2\,dx}{\sqrt{9-x^2}}$</li>
+          <li>$\displaystyle\int \frac{dx}{\sqrt{25x^2-4}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x=2\tan\theta$로 치환하면 $dx=2\sec^2\theta\,d\theta$, $\sqrt{4+x^2}=2\sec\theta$이므로
+        $$\int \frac{dx}{\sqrt{4+x^2}} = \int \frac{2\sec^2\theta\,d\theta}{2\sec\theta} = \int \sec\theta\,d\theta = \ln|\sec\theta+\tan\theta|+C$$
+        이다. $\tan\theta=\dfrac x2, \sec\theta=\dfrac{\sqrt{4+x^2}}2$이므로
+        $$\int \frac{dx}{\sqrt{4+x^2}} = \ln\left(\frac{x+\sqrt{4+x^2}}2\right)+C = \ln\left(x+\sqrt{4+x^2}\right)+C = \sinh^{-1}\frac x2+C$$
+        이다. (검산: $\dfrac{d}{dx}\sinh^{-1}\dfrac x2 = \dfrac{1/2}{\sqrt{1+x^2/4}} = \dfrac1{\sqrt{4+x^2}}$이므로 옳다.)</p>
+        <p>(2) $x=3\sin\theta$로 치환하면 $dx=3\cos\theta\,d\theta$, $\sqrt{9-x^2}=3\cos\theta$이므로
+        $$\int \frac{x^2\,dx}{\sqrt{9-x^2}} = \int \frac{9\sin^2\theta\cdot3\cos\theta}{3\cos\theta}\,d\theta = 9\int \sin^2\theta\,d\theta = \frac92\int(1-\cos2\theta)\,d\theta = \frac92\theta-\frac94\sin2\theta+C$$
+        이다. $\sin2\theta=2\sin\theta\cos\theta$이고 $\theta=\sin^{-1}\dfrac x3, \sin\theta=\dfrac x3, \cos\theta=\dfrac{\sqrt{9-x^2}}3$이므로
+        $$\frac94\sin2\theta = \frac94\cdot2\cdot\frac x3\cdot\frac{\sqrt{9-x^2}}3 = \frac{x\sqrt{9-x^2}}2$$
+        이고, 따라서
+        $$\int \frac{x^2\,dx}{\sqrt{9-x^2}} = \frac92\sin^{-1}\frac x3-\frac x2\sqrt{9-x^2}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[\dfrac92\sin^{-1}\dfrac x3-\dfrac x2\sqrt{9-x^2}\right] = \dfrac{9/2}{\sqrt{9-x^2}}+\dfrac{x^2-9/2}{\sqrt{9-x^2}} = \dfrac{x^2}{\sqrt{9-x^2}}$이므로 옳다.)</p>
+        <p>(3) $25x^2-4=4\left(\dfrac{25x^2}4-1\right)$이므로 $u=5x$로 치환하면 $du=5\,dx$이고
+        $$\int \frac{dx}{\sqrt{25x^2-4}} = \int \frac{du/5}{\sqrt{u^2-4}} = \frac15\int \frac{du}{\sqrt{u^2-4}} = \frac15\cosh^{-1}\frac u2+C = \frac15\cosh^{-1}\frac{5x}2+C$$
+        이다. $\cosh^{-1}\dfrac{5x}2=\ln\left(\dfrac{5x+\sqrt{25x^2-4}}2\right)$이므로 이는
+        $$\int \frac{dx}{\sqrt{25x^2-4}} = \frac15\ln\left|5x+\sqrt{25x^2-4}\right|+C$$
+        로도 쓸 수 있다. (검산: $\dfrac{d}{dx}\left[\dfrac15\ln\left|5x+\sqrt{25x^2-4}\right|\right] = \dfrac15\cdot\dfrac{5+\frac{25x}{\sqrt{25x^2-4}}}{5x+\sqrt{25x^2-4}} = \dfrac15\cdot\dfrac{5\left(\sqrt{25x^2-4}+5x\right)}{\sqrt{25x^2-4}\left(5x+\sqrt{25x^2-4}\right)} = \dfrac1{\sqrt{25x^2-4}}$이므로 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{\sqrt{4+x^2}}$</li>
+          <li>$\displaystyle\int \frac{x^2\,dx}{\sqrt{9-x^2}}$</li>
+          <li>$\displaystyle\int \frac{dx}{\sqrt{25x^2-4}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $x=2\tan\theta$ gives $dx=2\sec^2\theta\,d\theta$, $\sqrt{4+x^2}=2\sec\theta$, so
+        $$\int \frac{dx}{\sqrt{4+x^2}} = \int \frac{2\sec^2\theta\,d\theta}{2\sec\theta} = \int \sec\theta\,d\theta = \ln|\sec\theta+\tan\theta|+C.$$
+        Since $\tan\theta=\dfrac x2$ and $\sec\theta=\dfrac{\sqrt{4+x^2}}2$,
+        $$\int \frac{dx}{\sqrt{4+x^2}} = \ln\left(\frac{x+\sqrt{4+x^2}}2\right)+C = \ln\left(x+\sqrt{4+x^2}\right)+C = \sinh^{-1}\frac x2+C.$$
+        (Check: $\dfrac{d}{dx}\sinh^{-1}\dfrac x2 = \dfrac{1/2}{\sqrt{1+x^2/4}} = \dfrac1{\sqrt{4+x^2}}$.)</p>
+        <p>(2) Substituting $x=3\sin\theta$ gives $dx=3\cos\theta\,d\theta$, $\sqrt{9-x^2}=3\cos\theta$, so
+        $$\int \frac{x^2\,dx}{\sqrt{9-x^2}} = \int \frac{9\sin^2\theta\cdot3\cos\theta}{3\cos\theta}\,d\theta = 9\int \sin^2\theta\,d\theta = \frac92\int(1-\cos2\theta)\,d\theta = \frac92\theta-\frac94\sin2\theta+C.$$
+        Since $\sin2\theta=2\sin\theta\cos\theta$ and $\theta=\sin^{-1}\dfrac x3, \sin\theta=\dfrac x3, \cos\theta=\dfrac{\sqrt{9-x^2}}3$,
+        $$\frac94\sin2\theta = \frac94\cdot2\cdot\frac x3\cdot\frac{\sqrt{9-x^2}}3 = \frac{x\sqrt{9-x^2}}2,$$
+        and therefore
+        $$\int \frac{x^2\,dx}{\sqrt{9-x^2}} = \frac92\sin^{-1}\frac x3-\frac x2\sqrt{9-x^2}+C.$$
+        (Check: $\dfrac{d}{dx}\left[\dfrac92\sin^{-1}\dfrac x3-\dfrac x2\sqrt{9-x^2}\right] = \dfrac{9/2}{\sqrt{9-x^2}}+\dfrac{x^2-9/2}{\sqrt{9-x^2}} = \dfrac{x^2}{\sqrt{9-x^2}}$.)</p>
+        <p>(3) Since $25x^2-4=4\left(\dfrac{25x^2}4-1\right)$, substituting $u=5x$ gives $du=5\,dx$, so
+        $$\int \frac{dx}{\sqrt{25x^2-4}} = \int \frac{du/5}{\sqrt{u^2-4}} = \frac15\int \frac{du}{\sqrt{u^2-4}} = \frac15\cosh^{-1}\frac u2+C = \frac15\cosh^{-1}\frac{5x}2+C.$$
+        Since $\cosh^{-1}\dfrac{5x}2=\ln\left(\dfrac{5x+\sqrt{25x^2-4}}2\right)$, this can also be written as
+        $$\int \frac{dx}{\sqrt{25x^2-4}} = \frac15\ln\left|5x+\sqrt{25x^2-4}\right|+C.$$
+        (Check: $\dfrac{d}{dx}\left[\dfrac15\ln\left|5x+\sqrt{25x^2-4}\right|\right] = \dfrac15\cdot\dfrac{5+\frac{25x}{\sqrt{25x^2-4}}}{5x+\sqrt{25x^2-4}} = \dfrac15\cdot\dfrac{5\left(\sqrt{25x^2-4}+5x\right)}{\sqrt{25x^2-4}\left(5x+\sqrt{25x^2-4}\right)} = \dfrac1{\sqrt{25x^2-4}}$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">치환을 이용한 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{\sqrt{1-(\ln x)^2}}{x \ln x}\,dx$</li>
+          <li>$\displaystyle\int \sqrt{\frac{4-x}{x}}\,dx$</li>
+          <li>$\displaystyle\int \sqrt{\frac{x}{1-x^3}}\,dx$</li>
+          <li>$\displaystyle\int \frac{1}{\sqrt{x^2-2x+5}}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $u=\ln x$로 치환하면 $du=\dfrac1x\,dx$이므로
+        $$\int \frac{\sqrt{1-(\ln x)^2}}{x\ln x}\,dx = \int \frac{\sqrt{1-u^2}}u\,du$$
+        이다. 다시 $u=\sin\phi$로 치환하면 $du=\cos\phi\,d\phi, \sqrt{1-u^2}=\cos\phi$이므로
+        $$\int \frac{\sqrt{1-u^2}}u\,du = \int \frac{\cos^2\phi}{\sin\phi}\,d\phi = \int\left(\csc\phi-\sin\phi\right)d\phi = \ln|\csc\phi-\cot\phi|+\cos\phi+C$$
+        이다. $\sin\phi=u, \cos\phi=\sqrt{1-u^2}$이므로 $\csc\phi-\cot\phi=\dfrac{1-\sqrt{1-u^2}}u=\dfrac u{1+\sqrt{1-u^2}}$이고, 로그 안을 정리하면
+        $$\int \frac{\sqrt{1-u^2}}u\,du = \sqrt{1-u^2}-\ln\left|\frac{1+\sqrt{1-u^2}}u\right|+C$$
+        이다. $u=\ln x$를 대입하면
+        $$\int \frac{\sqrt{1-(\ln x)^2}}{x\ln x}\,dx = \sqrt{1-(\ln x)^2}-\ln\left|\frac{1+\sqrt{1-(\ln x)^2}}{\ln x}\right|+C$$
+        이다. (검산: $\dfrac{d}{du}\left[\sqrt{1-u^2}-\ln\left(1+\sqrt{1-u^2}\right)+\ln|u|\right] = \dfrac{-u}{\sqrt{1-u^2}}+\dfrac u{\sqrt{1-u^2}\left(1+\sqrt{1-u^2}\right)}+\dfrac1u = \dfrac{-u}{1+\sqrt{1-u^2}}+\dfrac1u = \dfrac{\sqrt{1-u^2}}u$이고, $u=\ln x$이므로 연쇄법칙에 의해 $\dfrac{d}{dx}[\cdots] = \dfrac{\sqrt{1-(\ln x)^2}}{\ln x}\cdot\dfrac1x = \dfrac{\sqrt{1-(\ln x)^2}}{x\ln x}$이므로 옳다.)</p>
+        <p>(2) $x=4\sin^2\theta$ $(0\lt\theta\lt\pi/2)$로 치환하면 $dx=8\sin\theta\cos\theta\,d\theta$이고 $4-x=4\cos^2\theta$이므로
+        $$\sqrt{\frac{4-x}x} = \sqrt{\frac{4\cos^2\theta}{4\sin^2\theta}} = \frac{\cos\theta}{\sin\theta}$$
+        이다. 따라서
+        $$\int \sqrt{\frac{4-x}x}\,dx = \int \frac{\cos\theta}{\sin\theta}\cdot8\sin\theta\cos\theta\,d\theta = 8\int \cos^2\theta\,d\theta = 4\theta+4\sin\theta\cos\theta+C$$
+        이다. $\sin\theta=\dfrac{\sqrt x}2, \cos\theta=\dfrac{\sqrt{4-x}}2, \theta=\sin^{-1}\dfrac{\sqrt x}2$이므로 $4\sin\theta\cos\theta=\sqrt{x(4-x)}$이고, 따라서
+        $$\int \sqrt{\frac{4-x}x}\,dx = 4\sin^{-1}\frac{\sqrt x}2+\sqrt{x(4-x)}+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[4\sin^{-1}\dfrac{\sqrt x}2\right] = \dfrac2{\sqrt{x(4-x)}}$이고 $\dfrac{d}{dx}\sqrt{x(4-x)} = \dfrac{2-x}{\sqrt{x(4-x)}}$이므로 두 도함수의 합은 $\dfrac{4-x}{\sqrt{x(4-x)}} = \sqrt{\dfrac{4-x}x}$이므로 옳다.)</p>
+        <p>(3) $u=x^{3/2}$로 치환하면 $du=\dfrac32\sqrt x\,dx$, 즉 $\sqrt x\,dx=\dfrac23\,du$이고 $u^2=x^3$이므로
+        $$\int \sqrt{\frac x{1-x^3}}\,dx = \int \frac{\sqrt x\,dx}{\sqrt{1-x^3}} = \int \frac{(2/3)\,du}{\sqrt{1-u^2}} = \frac23\sin^{-1}u+C = \frac23\sin^{-1}\left(x^{3/2}\right)+C$$
+        이다. (검산: $\dfrac{d}{dx}\left[\dfrac23\sin^{-1}\left(x^{3/2}\right)\right] = \dfrac23\cdot\dfrac{(3/2)x^{1/2}}{\sqrt{1-x^3}} = \dfrac{\sqrt x}{\sqrt{1-x^3}} = \sqrt{\dfrac x{1-x^3}}$이므로 옳다.)</p>
+        <p>(4) $x^2-2x+5=(x-1)^2+4$로 완전제곱꼴로 바꾸고 $w=x-1$로 치환하면
+        $$\int \frac1{\sqrt{x^2-2x+5}}\,dx = \int \frac{dw}{\sqrt{w^2+4}} = \sinh^{-1}\frac w2+C = \sinh^{-1}\frac{x-1}2+C$$
+        이다. 이는 $\ln\left|w+\sqrt{w^2+4}\right|+C = \ln\left|x-1+\sqrt{x^2-2x+5}\right|+C$로도 쓸 수 있다. (검산: $\dfrac{d}{dx}\ln\left|x-1+\sqrt{x^2-2x+5}\right| = \dfrac{1+\frac{x-1}{\sqrt{x^2-2x+5}}}{x-1+\sqrt{x^2-2x+5}} = \dfrac{\sqrt{x^2-2x+5}+x-1}{\sqrt{x^2-2x+5}\left(x-1+\sqrt{x^2-2x+5}\right)} = \dfrac1{\sqrt{x^2-2x+5}}$이므로 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{\sqrt{1-(\ln x)^2}}{x \ln x}\,dx$</li>
+          <li>$\displaystyle\int \sqrt{\frac{4-x}{x}}\,dx$</li>
+          <li>$\displaystyle\int \sqrt{\frac{x}{1-x^3}}\,dx$</li>
+          <li>$\displaystyle\int \frac{1}{\sqrt{x^2-2x+5}}\,dx$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Substituting $u=\ln x$ gives $du=\dfrac1x\,dx$, so
+        $$\int \frac{\sqrt{1-(\ln x)^2}}{x\ln x}\,dx = \int \frac{\sqrt{1-u^2}}u\,du.$$
+        Substituting again $u=\sin\phi$ gives $du=\cos\phi\,d\phi, \sqrt{1-u^2}=\cos\phi$, so
+        $$\int \frac{\sqrt{1-u^2}}u\,du = \int \frac{\cos^2\phi}{\sin\phi}\,d\phi = \int\left(\csc\phi-\sin\phi\right)d\phi = \ln|\csc\phi-\cot\phi|+\cos\phi+C.$$
+        Since $\sin\phi=u, \cos\phi=\sqrt{1-u^2}$, we have $\csc\phi-\cot\phi=\dfrac{1-\sqrt{1-u^2}}u=\dfrac u{1+\sqrt{1-u^2}}$, and simplifying inside the logarithm,
+        $$\int \frac{\sqrt{1-u^2}}u\,du = \sqrt{1-u^2}-\ln\left|\frac{1+\sqrt{1-u^2}}u\right|+C.$$
+        Substituting $u=\ln x$,
+        $$\int \frac{\sqrt{1-(\ln x)^2}}{x\ln x}\,dx = \sqrt{1-(\ln x)^2}-\ln\left|\frac{1+\sqrt{1-(\ln x)^2}}{\ln x}\right|+C.$$
+        (Check: $\dfrac{d}{du}\left[\sqrt{1-u^2}-\ln\left(1+\sqrt{1-u^2}\right)+\ln|u|\right] = \dfrac{-u}{\sqrt{1-u^2}}+\dfrac u{\sqrt{1-u^2}\left(1+\sqrt{1-u^2}\right)}+\dfrac1u = \dfrac{-u}{1+\sqrt{1-u^2}}+\dfrac1u = \dfrac{\sqrt{1-u^2}}u$, and since $u=\ln x$, the chain rule gives $\dfrac{d}{dx}[\cdots] = \dfrac{\sqrt{1-(\ln x)^2}}{\ln x}\cdot\dfrac1x = \dfrac{\sqrt{1-(\ln x)^2}}{x\ln x}$.)</p>
+        <p>(2) Substituting $x=4\sin^2\theta$ $(0\lt\theta\lt\pi/2)$ gives $dx=8\sin\theta\cos\theta\,d\theta$ and $4-x=4\cos^2\theta$, so
+        $$\sqrt{\frac{4-x}x} = \sqrt{\frac{4\cos^2\theta}{4\sin^2\theta}} = \frac{\cos\theta}{\sin\theta}.$$
+        Hence
+        $$\int \sqrt{\frac{4-x}x}\,dx = \int \frac{\cos\theta}{\sin\theta}\cdot8\sin\theta\cos\theta\,d\theta = 8\int \cos^2\theta\,d\theta = 4\theta+4\sin\theta\cos\theta+C.$$
+        Since $\sin\theta=\dfrac{\sqrt x}2, \cos\theta=\dfrac{\sqrt{4-x}}2, \theta=\sin^{-1}\dfrac{\sqrt x}2$, we have $4\sin\theta\cos\theta=\sqrt{x(4-x)}$, so
+        $$\int \sqrt{\frac{4-x}x}\,dx = 4\sin^{-1}\frac{\sqrt x}2+\sqrt{x(4-x)}+C.$$
+        (Check: $\dfrac{d}{dx}\left[4\sin^{-1}\dfrac{\sqrt x}2\right] = \dfrac2{\sqrt{x(4-x)}}$ and $\dfrac{d}{dx}\sqrt{x(4-x)} = \dfrac{2-x}{\sqrt{x(4-x)}}$, so the sum of the two derivatives is $\dfrac{4-x}{\sqrt{x(4-x)}} = \sqrt{\dfrac{4-x}x}$.)</p>
+        <p>(3) Substituting $u=x^{3/2}$ gives $du=\dfrac32\sqrt x\,dx$, i.e. $\sqrt x\,dx=\dfrac23\,du$, and $u^2=x^3$, so
+        $$\int \sqrt{\frac x{1-x^3}}\,dx = \int \frac{\sqrt x\,dx}{\sqrt{1-x^3}} = \int \frac{(2/3)\,du}{\sqrt{1-u^2}} = \frac23\sin^{-1}u+C = \frac23\sin^{-1}\left(x^{3/2}\right)+C.$$
+        (Check: $\dfrac{d}{dx}\left[\dfrac23\sin^{-1}\left(x^{3/2}\right)\right] = \dfrac23\cdot\dfrac{(3/2)x^{1/2}}{\sqrt{1-x^3}} = \dfrac{\sqrt x}{\sqrt{1-x^3}} = \sqrt{\dfrac x{1-x^3}}$.)</p>
+        <p>(4) Completing the square, $x^2-2x+5=(x-1)^2+4$, and substituting $w=x-1$,
+        $$\int \frac1{\sqrt{x^2-2x+5}}\,dx = \int \frac{dw}{\sqrt{w^2+4}} = \sinh^{-1}\frac w2+C = \sinh^{-1}\frac{x-1}2+C.$$
+        This can also be written as $\ln\left|w+\sqrt{w^2+4}\right|+C = \ln\left|x-1+\sqrt{x^2-2x+5}\right|+C$. (Check: $\dfrac{d}{dx}\ln\left|x-1+\sqrt{x^2-2x+5}\right| = \dfrac{1+\frac{x-1}{\sqrt{x^2-2x+5}}}{x-1+\sqrt{x^2-2x+5}} = \dfrac{\sqrt{x^2-2x+5}+x-1}{\sqrt{x^2-2x+5}\left(x-1+\sqrt{x^2-2x+5}\right)} = \dfrac1{\sqrt{x^2-2x+5}}$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">세 가지 방법의 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\int x^3\sqrt{1-x^2}\,dx$를 부분적분법, 치환적분법, 삼각치환법의 세 가지 방법으로 각각 계산하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기"><span class="arrow">&#9654;</span> 풀이 보기</button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 세 가지 방법의 결과가 모두 일치함을 확인한다.</p>
+        <p><strong>(방법 1: 치환적분법)</strong> $u=1-x^2$로 치환하면 $du=-2x\,dx$, $x^2=1-u$이므로
+        $$x^3\sqrt{1-x^2}\,dx = x^2\sqrt{1-x^2}\cdot x\,dx = (1-u)\sqrt u\left(-\frac{du}2\right) = \left(-\frac12u^{1/2}+\frac12u^{3/2}\right)du$$
+        이고, 따라서
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac13u^{3/2}+\frac15u^{5/2}+C = \frac{(1-x^2)^{5/2}}5-\frac{(1-x^2)^{3/2}}3+C$$
+        이다.</p>
+        <p><strong>(방법 2: 부분적분법)</strong> $u=x^2, dv=x\sqrt{1-x^2}\,dx$로 놓으면 $du=2x\,dx$이고 $v=\displaystyle\int x\sqrt{1-x^2}\,dx=-\dfrac13(1-x^2)^{3/2}$이므로
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac{x^2}3(1-x^2)^{3/2}+\frac23\int x(1-x^2)^{3/2}\,dx$$
+        이다. $\displaystyle\int x(1-x^2)^{3/2}\,dx=-\dfrac15(1-x^2)^{5/2}+C$이므로
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac{x^2}3(1-x^2)^{3/2}-\frac2{15}(1-x^2)^{5/2}+C$$
+        이다. $x^2=1-(1-x^2)$를 대입해 정리하면 이는 방법 1의 결과 $\dfrac{(1-x^2)^{5/2}}5-\dfrac{(1-x^2)^{3/2}}3+C$와 완전히 같은 식임을 확인할 수 있다.</p>
+        <p><strong>(방법 3: 삼각치환법)</strong> $x=\sin\theta$로 치환하면 $dx=\cos\theta\,d\theta, \sqrt{1-x^2}=\cos\theta$이므로
+        $$\int x^3\sqrt{1-x^2}\,dx = \int \sin^3\theta\cos^2\theta\,d\theta = \int \sin\theta\left(\cos^2\theta-\cos^4\theta\right)d\theta$$
+        이다. $c=\cos\theta$로 치환하면 $dc=-\sin\theta\,d\theta$이므로
+        $$\int \sin\theta\left(\cos^2\theta-\cos^4\theta\right)d\theta = -\int\left(c^2-c^4\right)dc = -\frac{c^3}3+\frac{c^5}5+C = \frac{\cos^5\theta}5-\frac{\cos^3\theta}3+C$$
+        이고, $\cos\theta=\sqrt{1-x^2}$이므로
+        $$\int x^3\sqrt{1-x^2}\,dx = \frac{(1-x^2)^{5/2}}5-\frac{(1-x^2)^{3/2}}3+C$$
+        로 방법 1, 2와 동일한 결과를 얻는다.</p>
+        <p>(검산: $\dfrac{d}{dx}\left[\dfrac{(1-x^2)^{5/2}}5-\dfrac{(1-x^2)^{3/2}}3\right] = -x(1-x^2)^{3/2}+x(1-x^2)^{1/2} = x(1-x^2)^{1/2}\left[1-(1-x^2)\right] = x^3\sqrt{1-x^2}$이므로 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\displaystyle\int x^3\sqrt{1-x^2}\,dx$ in three ways: by integration by parts, by substitution, and by trigonometric substitution.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution"><span class="arrow">&#9654;</span> Solution</button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We check that all three methods give the same result.</p>
+        <p><strong>(Method 1: substitution)</strong> Substituting $u=1-x^2$ gives $du=-2x\,dx$, $x^2=1-u$, so
+        $$x^3\sqrt{1-x^2}\,dx = x^2\sqrt{1-x^2}\cdot x\,dx = (1-u)\sqrt u\left(-\frac{du}2\right) = \left(-\frac12u^{1/2}+\frac12u^{3/2}\right)du,$$
+        and hence
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac13u^{3/2}+\frac15u^{5/2}+C = \frac{(1-x^2)^{5/2}}5-\frac{(1-x^2)^{3/2}}3+C.$$</p>
+        <p><strong>(Method 2: integration by parts)</strong> Let $u=x^2, dv=x\sqrt{1-x^2}\,dx$, so $du=2x\,dx$ and $v=\displaystyle\int x\sqrt{1-x^2}\,dx=-\dfrac13(1-x^2)^{3/2}$. Then
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac{x^2}3(1-x^2)^{3/2}+\frac23\int x(1-x^2)^{3/2}\,dx.$$
+        Since $\displaystyle\int x(1-x^2)^{3/2}\,dx=-\dfrac15(1-x^2)^{5/2}+C$,
+        $$\int x^3\sqrt{1-x^2}\,dx = -\frac{x^2}3(1-x^2)^{3/2}-\frac2{15}(1-x^2)^{5/2}+C.$$
+        Substituting $x^2=1-(1-x^2)$ and simplifying shows this is exactly the same expression as the result of Method 1, $\dfrac{(1-x^2)^{5/2}}5-\dfrac{(1-x^2)^{3/2}}3+C$.</p>
+        <p><strong>(Method 3: trigonometric substitution)</strong> Substituting $x=\sin\theta$ gives $dx=\cos\theta\,d\theta, \sqrt{1-x^2}=\cos\theta$, so
+        $$\int x^3\sqrt{1-x^2}\,dx = \int \sin^3\theta\cos^2\theta\,d\theta = \int \sin\theta\left(\cos^2\theta-\cos^4\theta\right)d\theta.$$
+        Substituting $c=\cos\theta$ gives $dc=-\sin\theta\,d\theta$, so
+        $$\int \sin\theta\left(\cos^2\theta-\cos^4\theta\right)d\theta = -\int\left(c^2-c^4\right)dc = -\frac{c^3}3+\frac{c^5}5+C = \frac{\cos^5\theta}5-\frac{\cos^3\theta}3+C,$$
+        and since $\cos\theta=\sqrt{1-x^2}$,
+        $$\int x^3\sqrt{1-x^2}\,dx = \frac{(1-x^2)^{5/2}}5-\frac{(1-x^2)^{3/2}}3+C,$$
+        the same result as Methods 1 and 2.</p>
+        <p>(Check: $\dfrac{d}{dx}\left[\dfrac{(1-x^2)^{5/2}}5-\dfrac{(1-x^2)^{3/2}}3\right] = -x(1-x^2)^{3/2}+x(1-x^2)^{1/2} = x(1-x^2)^{1/2}\left[1-(1-x^2)\right] = x^3\sqrt{1-x^2}$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">적분으로 정의된 함수의 미분 (임용11-23)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f : \mathbb{R} \to \mathbb{R}$를 $f(x) = \displaystyle\int_{1+2x}^{1-2x} \left(1 - t^3\sqrt{1+3t^2}\right)dt$로 정의할 때, $f'(0)$의 값은? (단, $\mathbb{R}$은 실수 전체의 집합이다.)</p>
+        <div class="formal-box">① 4 &nbsp;&nbsp; ② 5 &nbsp;&nbsp; ③ 6 &nbsp;&nbsp; ④ 7 &nbsp;&nbsp; ⑤ 8</div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Define $f : \mathbb{R} \to \mathbb{R}$ by $f(x) = \displaystyle\int_{1+2x}^{1-2x} \left(1 - t^3\sqrt{1+3t^2}\right)dt$. What is the value of $f'(0)$? (Here $\mathbb{R}$ denotes the set of all real numbers.)</p>
+        <div class="formal-box">① 4 &nbsp;&nbsp; ② 5 &nbsp;&nbsp; ③ 6 &nbsp;&nbsp; ④ 7 &nbsp;&nbsp; ⑤ 8</div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">부분분수 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 적분을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{-2x+4}{(x^2+1)(x-1)^2}\,dx$</li>
+          <li>$\displaystyle\int \frac{dx}{x(x^2+1)^2}$</li>
+          <li>$\displaystyle\int \frac{1}{x(x^4+1)}\,dx$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following integrals.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{-2x+4}{(x^2+1)(x-1)^2}\,dx$</li>
+          <li>$\displaystyle\int \frac{dx}{x(x^2+1)^2}$</li>
+          <li>$\displaystyle\int \frac{1}{x(x^4+1)}\,dx$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">반각치환 적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z = \tan\dfrac{x}{2}$로의 치환을 이용하여 다음 적분을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{1 - \sin x}$</li>
+          <li>$\displaystyle\int \frac{dx}{1 + \sin x + \cos x}$</li>
+          <li>$\displaystyle\int_{\pi/2}^{2\pi/3} \frac{\cos\theta\,d\theta}{\sin\theta\cos\theta + \sin\theta}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using the substitution $z = \tan\dfrac{x}{2}$, compute the following integrals.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{1 - \sin x}$</li>
+          <li>$\displaystyle\int \frac{dx}{1 + \sin x + \cos x}$</li>
+          <li>$\displaystyle\int_{\pi/2}^{2\pi/3} \frac{\cos\theta\,d\theta}{\sin\theta\cos\theta + \sin\theta}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">적분과 극한</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{x(x+1)(x+2)\cdots(x+m)}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \int_{-x}^{x} \sin t\,dt$</li>
+          <li>$\displaystyle\lim_{n \to \infty} \sum_{k=1}^{n} \ln \sqrt[n]{1 + \frac{k}{n}}$</li>
+          <li>$\displaystyle\lim_{n \to \infty} \sum_{k=0}^{n-1} \frac{1}{\sqrt{n^2 - k^2}}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int \frac{dx}{x(x+1)(x+2)\cdots(x+m)}$</li>
+          <li>$\displaystyle\lim_{x \to \infty} \int_{-x}^{x} \sin t\,dt$</li>
+          <li>$\displaystyle\lim_{n \to \infty} \sum_{k=1}^{n} \ln \sqrt[n]{1 + \frac{k}{n}}$</li>
+          <li>$\displaystyle\lim_{n \to \infty} \sum_{k=0}^{n-1} \frac{1}{\sqrt{n^2 - k^2}}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">성망형의 회전면 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>성망형(astroid)</strong> $x^{2/3} + y^{2/3} = 1$을 $x$축을 중심으로 회전시킨 회전면의 넓이를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the area of the surface of revolution obtained by rotating the <strong>astroid</strong> $x^{2/3} + y^{2/3} = 1$ about the $x$-axis.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">적분으로 정의된 곡선의 길이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $y = \displaystyle\int_1^x \sqrt{\sqrt{t} - 1}\,dt \ \ (1 \leq x \leq 16)$의 길이를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the length of the curve $y = \displaystyle\int_1^x \sqrt{\sqrt{t} - 1}\,dt \ \ (1 \leq x \leq 16)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">적분 부등식 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a \gt 0$에 대해 $f$가 $[0, a]$에서 연속미분가능하고 $f(a) = f(0) = b$가 성립한다고 하자. 이때 다음이 성립함을 보이시오.</p>
+        <p>$$\int_0^a (f'(x))^2\,dx \geq 2\int_0^a f(x)\,dx - \left(2ab + \frac{a^3}{12}\right)$$</p>
+        <div class="formal-box">(Hint. $\displaystyle\int_0^a \left(f'(x) + x - \frac{a}{2}\right)^2 dx \geq 0$임을 이용할 것)</div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $a \gt 0$, $f$ is continuously differentiable on $[0, a]$, and $f(a) = f(0) = b$. Show that the following holds.</p>
+        <p>$$\int_0^a (f'(x))^2\,dx \geq 2\int_0^a f(x)\,dx - \left(2ab + \frac{a^3}{12}\right)$$</p>
+        <div class="formal-box">(Hint. Use the fact that $\displaystyle\int_0^a \left(f'(x) + x - \frac{a}{2}\right)^2 dx \geq 0$.)</div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

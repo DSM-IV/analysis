@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12. 급수 판정법 (Convergence Tests for Series) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 12단원 급수 판정법(Convergence Tests for Series) 예제·유제·문제 모음. 조화급수·p-급수, 적분판정법, 비교판정법, 비판정법, 근판정법, 교대급수판정법, 절대수렴과 조건수렴, 코시 응집 판정법, 라비 판정법, 오일러 상수를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 급수, series, 급수 판정법, convergence test, 조화급수, harmonic series, p-급수, p-series, 적분판정법, integral test, 비교판정법, comparison test, 비판정법, ratio test, 근판정법, root test, 교대급수, alternating series, 절대수렴, absolute convergence, 조건수렴, conditional convergence, 코시 응집 판정법, Cauchy condensation test, 라비 판정법, Raabe's test, 오일러 상수, Euler's constant, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch12.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12. 급수 판정법 (Convergence Tests for Series) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="급수 판정법 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch12.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "12. 급수 판정법 (Convergence Tests for Series) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 급수 판정법 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch12.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch12.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html" class="active">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 12</p>
+  <h1>12. 급수 판정법<span>Convergence Tests for Series</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 조화급수의 발산</a></li>
+    <li><a href="#yu01"><span class="toc-num">유제 01</span> p=2 급수의 수렴</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> p-급수 수렴 판정</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 급수의 수렴 판정</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 로그 급수의 수렴 범위</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 적분판정 오차의 한계</a></li>
+    <li><a href="#yu02-4"><span class="toc-num">유제 02-4</span> 수렴시키는 a의 값</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 비교판정법 종합</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 비교·적분판정 종합</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 양항급수의 파생급수</a></li>
+    <li><a href="#yu03-3"><span class="toc-num">유제 03-3</span> 로그·거듭제곱 수렴 범위</a></li>
+    <li><a href="#yu03-4"><span class="toc-num">유제 03-4</span> 소수 전개 급수의 수렴</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 비판정·근판정 종합</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 조각정의 수열의 급수</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 비판정·근판정 종합</a></li>
+    <li><a href="#yu04-3"><span class="toc-num">유제 04-3</span> 점화식 수열의 급수</a></li>
+    <li><a href="#yu04-4"><span class="toc-num">유제 04-4</span> 극한 4/5 수열의 급수</a></li>
+    <li><a href="#yu04-5"><span class="toc-num">유제 04-5</span> 극한 1/3 수열의 급수</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 교대급수 판정</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 교대급수 수렴 판정</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 절대·조건수렴 조사</a></li>
+    <li><a href="#yu05-3"><span class="toc-num">유제 05-3</span> 교대 p-급수의 수렴성</a></li>
+    <li><a href="#yu05-4"><span class="toc-num">유제 05-4</span> 절대수렴의 성질</a></li>
+    <li><a href="#yu05-5"><span class="toc-num">유제 05-5</span> 교대급수 오차의 한계</a></li>
+    <li><a href="#yu05-6"><span class="toc-num">유제 05-6</span> 오차 0.001 이내 항수</a></li>
+    <li><a href="#ex06"><span class="toc-num">예제 06</span> 재배열로 같은 합</a></li>
+    <li><a href="#yu06"><span class="toc-num">유제 06</span> 조각정의 교대급수의 합</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 오일러 상수</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 코시 응집 판정법</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 라비 판정법</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 급수 수렴 여부 종합</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 수렴급수의 파생급수</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 응집급수와 발산</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 비판정법 적용 (임용05-12)</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 교대급수판정법 (임용07-8)</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 수렴급수 보기 판정 (임용13-21)</a></li>
+    <li><a href="#pr10"><span class="toc-num">문제 10</span> 적분수열의 급수 (2024(A)-10)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">조화급수의 발산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부분합이 위로 유계가 아님을 이용하여 <strong>조화급수(harmonic series)</strong> $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$가 발산함을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 부분합을 $\displaystyle s_n = \sum_{k=1}^n \frac{1}{k}$이라 하자. 자연수 $k$에 대해 $2^{k-1}$개의 항 $\dfrac{1}{2^{k-1}+1}, \dfrac{1}{2^{k-1}+2}, \ldots, \dfrac{1}{2^k}$은 각각 $\dfrac{1}{2^k}$ 이상이므로
+        $$s_{2^k} - s_{2^{k-1}} = \sum_{n=2^{k-1}+1}^{2^k} \frac{1}{n} \geq 2^{k-1}\cdot\frac{1}{2^k} = \frac{1}{2}$$
+        이다. $s_1=1$이므로 귀납적으로
+        $$s_{2^k} = s_1 + \sum_{j=1}^k (s_{2^j}-s_{2^{j-1}}) \geq 1 + \frac{k}{2}$$
+        이다. $k\to\infty$이면 $1+k/2\to\infty$이므로 부분수열 $\{s_{2^k}\}$은 위로 유계가 아니고, $\{s_n\}$은 증가수열이므로 $\{s_n\}$ 전체도 위로 유계가 아니다. 따라서 조화급수 $\displaystyle\sum_{n=1}^\infty \frac1n$은 발산한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the <strong>harmonic series</strong> $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$ diverges by using the fact that its partial sums are not bounded above.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $\displaystyle s_n = \sum_{k=1}^n \frac{1}{k}$ denote the $n$th partial sum. For each natural number $k$, the $2^{k-1}$ terms $\dfrac{1}{2^{k-1}+1}, \dfrac{1}{2^{k-1}+2}, \ldots, \dfrac{1}{2^k}$ are each at least $\dfrac{1}{2^k}$, so
+        $$s_{2^k} - s_{2^{k-1}} = \sum_{n=2^{k-1}+1}^{2^k} \frac{1}{n} \geq 2^{k-1}\cdot\frac{1}{2^k} = \frac{1}{2}.$$
+        Since $s_1=1$, induction gives
+        $$s_{2^k} = s_1 + \sum_{j=1}^k (s_{2^j}-s_{2^{j-1}}) \geq 1 + \frac{k}{2}.$$
+        As $k\to\infty$, $1+k/2\to\infty$, so the subsequence $\{s_{2^k}\}$ is not bounded above, and since $\{s_n\}$ is increasing, $\{s_n\}$ itself is not bounded above. Hence the harmonic series $\displaystyle\sum_{n=1}^\infty \frac1n$ diverges.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01 -->
+<div class="card ex-card" id="yu01">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01</span>
+    <span class="ex-title">p=2 급수의 수렴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부분합이 위로 유계임을 이용하여 급수 $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$가 수렴함을 보이시오.</p>
+        <div class="formal-box">(Hint. $n \geq 2$이면 $\dfrac{1}{n^2} \leq \dfrac{1}{n(n-1)}$)</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 부분합을 $\displaystyle s_n = \sum_{k=1}^n \frac{1}{k^2}$이라 하자. $k\geq2$이면 힌트에 의해 $\dfrac{1}{k^2}\leq\dfrac{1}{k(k-1)}=\dfrac{1}{k-1}-\dfrac1k$이므로
+        $$s_n = 1+\sum_{k=2}^n \frac{1}{k^2} \leq 1+\sum_{k=2}^n \left(\frac{1}{k-1}-\frac1k\right) = 1+\left(1-\frac1n\right) = 2-\frac1n \lt 2$$
+        이다 (마지막 합은 텔레스코핑으로 소거된다). 각 항이 양수이므로 $\{s_n\}$은 증가수열이고 위 부등식에 의해 위로 유계이므로, 단조수렴정리에 의해 $\{s_n\}$은 수렴한다. 따라서 급수 $\displaystyle\sum_{n=1}^\infty \frac{1}{n^2}$은 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the series $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ converges by using the fact that its partial sums are bounded above.</p>
+        <div class="formal-box">(Hint. If $n \geq 2$, then $\dfrac{1}{n^2} \leq \dfrac{1}{n(n-1)}$)</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $\displaystyle s_n = \sum_{k=1}^n \frac{1}{k^2}$ denote the $n$th partial sum. For $k\geq2$, the hint gives $\dfrac{1}{k^2}\leq\dfrac{1}{k(k-1)}=\dfrac{1}{k-1}-\dfrac1k$, so
+        $$s_n = 1+\sum_{k=2}^n \frac{1}{k^2} \leq 1+\sum_{k=2}^n \left(\frac{1}{k-1}-\frac1k\right) = 1+\left(1-\frac1n\right) = 2-\frac1n \lt 2$$
+        (the last sum telescopes). Since all terms are positive, $\{s_n\}$ is increasing, and by the inequality above it is bounded above; hence by the Monotone Convergence Theorem $\{s_n\}$ converges. Therefore the series $\displaystyle\sum_{n=1}^\infty \frac{1}{n^2}$ converges.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">p-급수 수렴 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>$p$-급수($p$-series)</strong> $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$가 수렴할 필요충분조건은 $p \gt 1$임을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f(x)=1/x^p$은 $[1,\infty)$에서 양의 값을 갖고 연속이며 단조감소하므로 적분판정법을 적용할 수 있다.</p>
+        <p>$p\neq1$이면
+        $$\int_1^{\infty} \frac{1}{x^p}\,dx = \lim_{b\to\infty}\left[\frac{x^{1-p}}{1-p}\right]_1^b = \lim_{b\to\infty}\frac{b^{1-p}-1}{1-p}$$
+        이다. $p\gt1$이면 $1-p\lt0$이므로 $b^{1-p}\to0$이고 적분값은 $\dfrac{1}{p-1}$로 수렴하며, $p\lt1$이면 $1-p\gt0$이므로 $b^{1-p}\to\infty$이고 적분은 발산한다. $p=1$이면 $\displaystyle\int_1^\infty \frac1x\,dx=\lim_{b\to\infty}\ln b=\infty$이므로 발산한다.</p>
+        <p>따라서 $\displaystyle\int_1^\infty \frac{1}{x^p}\,dx$는 $p\gt1$일 때만 수렴하고, 적분판정법에 의해 $p$-급수 $\displaystyle\sum_{n=1}^\infty \frac{1}{n^p}$도 $p\gt1$일 때만 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the <strong>$p$-series</strong> $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$ converges if and only if $p \gt 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The function $f(x)=1/x^p$ is positive, continuous, and monotonically decreasing on $[1,\infty)$, so the Integral Test applies.</p>
+        <p>For $p\neq1$,
+        $$\int_1^{\infty} \frac{1}{x^p}\,dx = \lim_{b\to\infty}\left[\frac{x^{1-p}}{1-p}\right]_1^b = \lim_{b\to\infty}\frac{b^{1-p}-1}{1-p}.$$
+        If $p\gt1$, then $1-p\lt0$, so $b^{1-p}\to0$ and the integral converges to $\dfrac{1}{p-1}$; if $p\lt1$, then $1-p\gt0$, so $b^{1-p}\to\infty$ and the integral diverges. If $p=1$, $\displaystyle\int_1^\infty \frac1x\,dx=\lim_{b\to\infty}\ln b=\infty$, so it diverges.</p>
+        <p>Hence $\displaystyle\int_1^\infty \frac{1}{x^p}\,dx$ converges only when $p\gt1$, and by the Integral Test the $p$-series $\displaystyle\sum_{n=1}^\infty \frac{1}{n^p}$ also converges only when $p\gt1$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">급수의 수렴 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} n e^{-n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^{\ln n}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $0\lt \dfrac{1}{n^2+1}\lt\dfrac{1}{n^2}$이고 $\displaystyle\sum_{n=1}^\infty\frac{1}{n^2}$은 $p$-급수($p=2\gt1$)로 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1}{n^2+1}$은 수렴한다.</p>
+        <p>(2) $f(x)=xe^{-x^2}$이라 하면 $f'(x)=e^{-x^2}(1-2x^2)$이므로 $x\geq1$에서 $f$는 양의 값을 갖고 단조감소한다.
+        $$\int_1^\infty xe^{-x^2}\,dx = \left[-\frac12e^{-x^2}\right]_1^\infty = \frac{1}{2e}$$
+        로 수렴하므로, <strong>적분판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty ne^{-n^2}$은 수렴한다.</p>
+        <p>(3) $2^{\ln n}=e^{\ln2\ln n}=n^{\ln2}$이므로 $\dfrac{1}{2^{\ln n}}=\dfrac{1}{n^{\ln2}}$이다. 이는 $p=\ln2\approx0.693\lt1$인 $p$-급수이므로 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} n e^{-n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^{\ln n}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $0\lt \dfrac{1}{n^2+1}\lt\dfrac{1}{n^2}$ and $\displaystyle\sum_{n=1}^\infty\frac{1}{n^2}$ is a $p$-series with $p=2\gt1$, hence convergent, the <strong>Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\frac{1}{n^2+1}$ converges.</p>
+        <p>(2) Let $f(x)=xe^{-x^2}$; then $f'(x)=e^{-x^2}(1-2x^2)$, so $f$ is positive and monotonically decreasing on $x\geq1$.
+        $$\int_1^\infty xe^{-x^2}\,dx = \left[-\frac12e^{-x^2}\right]_1^\infty = \frac{1}{2e}$$
+        converges, so by the <strong>Integral Test</strong>, $\displaystyle\sum_{n=1}^\infty ne^{-n^2}$ converges.</p>
+        <p>(3) Since $2^{\ln n}=e^{\ln2\ln n}=n^{\ln2}$, we have $\dfrac{1}{2^{\ln n}}=\dfrac{1}{n^{\ln2}}$, a $p$-series with $p=\ln2\approx0.693\lt1$, so it diverges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">로그 급수의 수렴 범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n(\ln n)^p}$이 수렴하도록 하는 $p$의 범위를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x)=\dfrac{1}{x(\ln x)^p}$은 $x\geq2$에서 양의 값을 갖고, 분모가 증가하므로 단조감소한다. $u=\ln x$로 치환하면 $du=dx/x$이므로
+        $$\int_2^\infty \frac{dx}{x(\ln x)^p} = \int_{\ln2}^\infty \frac{du}{u^p}$$
+        이다. $\ln2\gt0$이므로 우변은 $p$-적분의 형태이고, $p\gt1$일 때만 수렴한다. <strong>적분판정법</strong>에 의해 원래 급수도 $p\gt1$일 때만 수렴한다. 따라서 급수가 수렴하도록 하는 $p$의 범위는 $p\gt1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the range of $p$ for which the series $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n(\ln n)^p}$ converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $f(x)=\dfrac{1}{x(\ln x)^p}$ is positive for $x\geq2$ and monotonically decreasing since its denominator increases. Substituting $u=\ln x$, $du=dx/x$,
+        $$\int_2^\infty \frac{dx}{x(\ln x)^p} = \int_{\ln2}^\infty \frac{du}{u^p}.$$
+        Since $\ln2\gt0$, the right-hand side is a $p$-integral, which converges only when $p\gt1$. By the <strong>Integral Test</strong>, the original series also converges only when $p\gt1$. Hence the range of $p$ for which the series converges is $p\gt1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">적분판정 오차의 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$을 $\displaystyle\sum_{k=1}^{10} \frac{1}{k^2}$으로 근사한다고 할 때 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x)=1/x^2$은 양의 값을 갖고 단조감소하므로, 적분판정법의 오차 추정에 의해
+        $$0 \lt \sum_{n=1}^\infty \frac{1}{n^2} - \sum_{k=1}^{10}\frac{1}{k^2} = \sum_{n=11}^\infty \frac1{n^2} \leq \int_{10}^\infty \frac{1}{x^2}\,dx$$
+        이 성립한다.
+        $$\int_{10}^\infty \frac{1}{x^2}\,dx = \left[-\frac1x\right]_{10}^\infty = \frac{1}{10}$$
+        이므로 오차의 한계는 $\dfrac{1}{10}=0.1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the error bound when $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ is approximated by $\displaystyle\sum_{k=1}^{10} \frac{1}{k^2}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f(x)=1/x^2$ is positive and monotonically decreasing, the error estimate for the Integral Test gives
+        $$0 \lt \sum_{n=1}^\infty \frac{1}{n^2} - \sum_{k=1}^{10}\frac{1}{k^2} = \sum_{n=11}^\infty \frac1{n^2} \leq \int_{10}^\infty \frac{1}{x^2}\,dx.$$
+        Since
+        $$\int_{10}^\infty \frac{1}{x^2}\,dx = \left[-\frac1x\right]_{10}^\infty = \frac{1}{10},$$
+        the error bound is $\dfrac{1}{10}=0.1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-4 -->
+<div class="card ex-card" id="yu02-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-4</span>
+    <span class="ex-title">수렴시키는 a의 값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=1}^{\infty} \left( \frac{a}{n+2} - \frac{1}{n+4} \right)$가 수렴하도록 하는 $a$의 값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 일반항을 $t_n=\dfrac{a}{n+2}-\dfrac1{n+4}$라 하면 $n\to\infty$일 때
+        $$n\,t_n = \frac{an}{n+2}-\frac{n}{n+4} \longrightarrow a-1$$
+        이다. $a\neq1$이면 <strong>극한비교판정법</strong>에 의해 $\displaystyle\lim_{n\to\infty}\frac{t_n}{1/n}=a-1\neq0$이므로 $\sum t_n$은 조화급수 $\sum 1/n$과 같이 발산한다. 따라서 급수가 수렴하려면 $a=1$이어야 한다.</p>
+        <p>$a=1$이면 $t_n=\dfrac1{n+2}-\dfrac1{n+4}$이고, 부분합은 텔레스코핑으로
+        $$\sum_{n=1}^N t_n = \sum_{m=3}^{N+2}\frac1m - \sum_{m=5}^{N+4}\frac1m = \frac13+\frac14-\frac1{N+3}-\frac1{N+4} \xrightarrow{N\to\infty} \frac13+\frac14=\frac{7}{12}$$
+        이므로 실제로 수렴한다. 따라서 구하는 값은 $a=1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the value of $a$ for which the series $\displaystyle\sum_{n=1}^{\infty} \left( \frac{a}{n+2} - \frac{1}{n+4} \right)$ converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $t_n=\dfrac{a}{n+2}-\dfrac1{n+4}$ be the general term. As $n\to\infty$,
+        $$n\,t_n = \frac{an}{n+2}-\frac{n}{n+4} \longrightarrow a-1.$$
+        If $a\neq1$, the <strong>Limit Comparison Test</strong> gives $\displaystyle\lim_{n\to\infty}\frac{t_n}{1/n}=a-1\neq0$, so $\sum t_n$ diverges just as the harmonic series $\sum 1/n$ does. Hence convergence requires $a=1$.</p>
+        <p>When $a=1$, $t_n=\dfrac1{n+2}-\dfrac1{n+4}$, and the partial sums telescope:
+        $$\sum_{n=1}^N t_n = \sum_{m=3}^{N+2}\frac1m - \sum_{m=5}^{N+4}\frac1m = \frac13+\frac14-\frac1{N+3}-\frac1{N+4} \xrightarrow{N\to\infty} \frac13+\frac14=\frac{7}{12},$$
+        so the series does converge in this case. Hence the desired value is $a=1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">비교판정법 종합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{5}{5n-1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n+\sqrt{n}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2n+1}{(n+1)^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n-1}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{1+n\ln n}{n^2+5}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\displaystyle\lim_{n\to\infty}\frac{5/(5n-1)}{1/n}=\lim_{n\to\infty}\frac{5n}{5n-1}=1$이므로 <strong>극한비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{5}{5n-1}$은 조화급수 $\sum 1/n$과 같이 발산한다.</p>
+        <p>(2) $a_n=1/n!$이라 하면 $\dfrac{a_{n+1}}{a_n}=\dfrac{n!}{(n+1)!}=\dfrac1{n+1}\to0\lt1$이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1}{n!}$은 수렴한다.</p>
+        <p>(3) $0\lt\dfrac{1}{2^n+\sqrt n}\lt\dfrac1{2^n}$이고 $\sum 1/2^n$은 공비 $1/2$인 등비급수로 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1}{2^n+\sqrt n}$은 수렴한다.</p>
+        <p>(4) $\displaystyle\lim_{n\to\infty}\frac{(2n+1)/(n+1)^2}{1/n}=\lim_{n\to\infty}\frac{n(2n+1)}{(n+1)^2}=2$이므로 <strong>극한비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{2n+1}{(n+1)^2}$은 조화급수와 같이 발산한다.</p>
+        <p>(5) $n\geq1$이면 $2^n-1\geq2^{n-1}$이므로 $0\lt\dfrac1{2^n-1}\leq\dfrac{1}{2^{n-1}}=2\cdot\dfrac1{2^n}$이고 $\sum 2/2^n$은 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1}{2^n-1}$은 수렴한다.</p>
+        <p>(6) $n\geq3$이면 $\ln n\gt1$이므로 $\dfrac{\ln n}{n}\gt\dfrac1n$이고, $\sum 1/n$이 발산하므로 <strong>비교판정법</strong>에 의해 $\displaystyle\sum\frac{\ln n}{n}$도 발산한다. 한편
+        $$\lim_{n\to\infty}\frac{(1+n\ln n)/(n^2+5)}{(\ln n)/n} = \lim_{n\to\infty}\frac{n+n^2\ln n}{(n^2+5)\ln n} = 1$$
+        이므로 <strong>극한비교판정법</strong>에 의해 $\displaystyle\sum_{n=2}^\infty\frac{1+n\ln n}{n^2+5}$은 $\sum(\ln n)/n$과 같이 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{5}{5n-1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n+\sqrt{n}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2n+1}{(n+1)^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n-1}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{1+n\ln n}{n^2+5}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\displaystyle\lim_{n\to\infty}\frac{5/(5n-1)}{1/n}=\lim_{n\to\infty}\frac{5n}{5n-1}=1$, the <strong>Limit Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\frac{5}{5n-1}$ diverges, just like the harmonic series $\sum 1/n$.</p>
+        <p>(2) Let $a_n=1/n!$; then $\dfrac{a_{n+1}}{a_n}=\dfrac{n!}{(n+1)!}=\dfrac1{n+1}\to0\lt1$, so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{1}{n!}$ converges.</p>
+        <p>(3) Since $0\lt\dfrac{1}{2^n+\sqrt n}\lt\dfrac1{2^n}$ and $\sum 1/2^n$ is a geometric series with ratio $1/2$, hence convergent, the <strong>Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\frac{1}{2^n+\sqrt n}$ converges.</p>
+        <p>(4) Since $\displaystyle\lim_{n\to\infty}\frac{(2n+1)/(n+1)^2}{1/n}=\lim_{n\to\infty}\frac{n(2n+1)}{(n+1)^2}=2$, the <strong>Limit Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\frac{2n+1}{(n+1)^2}$ diverges, like the harmonic series.</p>
+        <p>(5) For $n\geq1$, $2^n-1\geq2^{n-1}$, so $0\lt\dfrac1{2^n-1}\leq\dfrac{1}{2^{n-1}}=2\cdot\dfrac1{2^n}$, and $\sum 2/2^n$ converges, so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{1}{2^n-1}$ converges.</p>
+        <p>(6) For $n\geq3$, $\ln n\gt1$, so $\dfrac{\ln n}{n}\gt\dfrac1n$, and since $\sum 1/n$ diverges, the <strong>Comparison Test</strong> shows $\displaystyle\sum\frac{\ln n}{n}$ also diverges. Meanwhile,
+        $$\lim_{n\to\infty}\frac{(1+n\ln n)/(n^2+5)}{(\ln n)/n} = \lim_{n\to\infty}\frac{n+n^2\ln n}{(n^2+5)\ln n} = 1,$$
+        so by the <strong>Limit Comparison Test</strong>, $\displaystyle\sum_{n=2}^\infty\frac{1+n\ln n}{n^2+5}$ diverges, just as $\sum(\ln n)/n$ does.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">비교·적분판정 종합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\ln n}{n^{3/2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\cos^2 n}{n^{3/2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \sqrt{\frac{n+1}{n^2+2}}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{1}{\ln n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \ln\left(1+\frac{1}{n^2}\right)$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\tan^{-1} n}{n^{1.1}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 로그의 증가율에 의해 $\displaystyle\lim_{n\to\infty}\frac{\ln n}{n^{1/4}}=0$이므로 충분히 큰 $n$에 대해 $\ln n\lt n^{1/4}$이고, 따라서 $\dfrac{\ln n}{n^{3/2}}\lt\dfrac{n^{1/4}}{n^{3/2}}=\dfrac1{n^{5/4}}$이다. $\sum 1/n^{5/4}$은 $p$-급수($p=5/4\gt1$)로 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{\ln n}{n^{3/2}}$은 수렴한다.</p>
+        <p>(2) $0\leq\cos^2n\leq1$이므로 $0\leq\dfrac{\cos^2n}{n^{3/2}}\leq\dfrac1{n^{3/2}}$이고 $\sum 1/n^{3/2}$은 $p$-급수($p=3/2\gt1$)로 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{\cos^2n}{n^{3/2}}$은 수렴한다.</p>
+        <p>(3)
+        $$\lim_{n\to\infty}\frac{\sqrt{(n+1)/(n^2+2)}}{1/\sqrt n} = \lim_{n\to\infty}\sqrt{\frac{n(n+1)}{n^2+2}} = 1$$
+        이므로 <strong>극한비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\sqrt{\frac{n+1}{n^2+2}}$은 $\sum 1/\sqrt n$($p=1/2\lt1$)과 같이 발산한다.</p>
+        <p>(4) 모든 $n\geq2$에 대해 $\ln n\lt n$이므로 $\dfrac1{\ln n}\gt\dfrac1n$이고, $\sum 1/n$이 발산하므로 <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=2}^\infty\frac1{\ln n}$도 발산한다.</p>
+        <p>(5) $\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{x}=1$이므로
+        $$\lim_{n\to\infty}\frac{\ln(1+1/n^2)}{1/n^2}=1$$
+        이고, $\sum 1/n^2$이 수렴하므로 <strong>극한비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\ln\left(1+\frac1{n^2}\right)$은 수렴한다.</p>
+        <p>(6) 모든 $n$에 대해 $0\lt\tan^{-1}n\lt\pi/2$이므로 $0\lt\dfrac{\tan^{-1}n}{n^{1.1}}\lt\dfrac{\pi/2}{n^{1.1}}$이고 $\sum(\pi/2)/n^{1.1}$은 $p$-급수($p=1.1\gt1$)로 수렴하므로, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{\tan^{-1}n}{n^{1.1}}$은 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\ln n}{n^{3/2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\cos^2 n}{n^{3/2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \sqrt{\frac{n+1}{n^2+2}}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{1}{\ln n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \ln\left(1+\frac{1}{n^2}\right)$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\tan^{-1} n}{n^{1.1}}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\displaystyle\lim_{n\to\infty}\frac{\ln n}{n^{1/4}}=0$ by the growth rate of the logarithm, $\ln n\lt n^{1/4}$ for sufficiently large $n$, so $\dfrac{\ln n}{n^{3/2}}\lt\dfrac{n^{1/4}}{n^{3/2}}=\dfrac1{n^{5/4}}$. Since $\sum 1/n^{5/4}$ is a $p$-series with $p=5/4\gt1$, hence convergent, the <strong>Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\frac{\ln n}{n^{3/2}}$ converges.</p>
+        <p>(2) Since $0\leq\cos^2n\leq1$, we get $0\leq\dfrac{\cos^2n}{n^{3/2}}\leq\dfrac1{n^{3/2}}$, and $\sum 1/n^{3/2}$ is a convergent $p$-series ($p=3/2\gt1$), so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{\cos^2n}{n^{3/2}}$ converges.</p>
+        <p>(3) Since
+        $$\lim_{n\to\infty}\frac{\sqrt{(n+1)/(n^2+2)}}{1/\sqrt n} = \lim_{n\to\infty}\sqrt{\frac{n(n+1)}{n^2+2}} = 1,$$
+        the <strong>Limit Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\sqrt{\frac{n+1}{n^2+2}}$ diverges, just like $\sum 1/\sqrt n$ ($p=1/2\lt1$).</p>
+        <p>(4) For every $n\geq2$, $\ln n\lt n$, so $\dfrac1{\ln n}\gt\dfrac1n$, and since $\sum 1/n$ diverges, the <strong>Comparison Test</strong> shows $\displaystyle\sum_{n=2}^\infty\frac1{\ln n}$ also diverges.</p>
+        <p>(5) Since $\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{x}=1$,
+        $$\lim_{n\to\infty}\frac{\ln(1+1/n^2)}{1/n^2}=1,$$
+        and since $\sum 1/n^2$ converges, the <strong>Limit Comparison Test</strong> shows $\displaystyle\sum_{n=1}^\infty\ln\left(1+\frac1{n^2}\right)$ converges.</p>
+        <p>(6) For every $n$, $0\lt\tan^{-1}n\lt\pi/2$, so $0\lt\dfrac{\tan^{-1}n}{n^{1.1}}\lt\dfrac{\pi/2}{n^{1.1}}$, and $\sum(\pi/2)/n^{1.1}$ is a convergent $p$-series ($p=1.1\gt1$), so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{\tan^{-1}n}{n^{1.1}}$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">양항급수의 파생급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>양항급수 $\displaystyle\sum_{n=1}^{\infty} a_n$가 수렴하면 $\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{n}$이 수렴함을 보이시오.</li>
+          <li>양항급수 $\displaystyle\sum_{n=1}^{\infty} a_n$가 수렴하면 $\displaystyle\sum_{n=1}^{\infty} a_n^2$이 수렴함을 보이시오.</li>
+          <li>양항급수 $\displaystyle\sum_{n=1}^{\infty} a_n$가 수렴하면 $\displaystyle\sum_{n=1}^{\infty} \sin a_n$이 수렴함을 보이시오.</li>
+          <li>자연수 $n$에 대해 $a_n \gt 0$이고 $\displaystyle\lim_{n\to\infty} n^2 a_n = 0$이면 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴함을 보이시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 모든 $n\geq1$에 대해 $1/n\leq1$이므로 $0\lt\dfrac{a_n}{n}\leq a_n$이다. $\sum a_n$이 수렴하므로 비교판정법에 의해 $\displaystyle\sum_{n=1}^\infty\frac{a_n}{n}$도 수렴한다.</p>
+        <p>(2) $\sum a_n$이 수렴하므로 $a_n\to0$이고, 따라서 어떤 자연수 $N$이 있어 $n\geq N$이면 $0\lt a_n\lt1$이므로 $a_n^2\lt a_n$이다. $\sum_{n\geq N}a_n$이 수렴하므로 비교판정법에 의해 $\sum_{n\geq N}a_n^2$이 수렴하고, 유한개의 항을 더해도 수렴성은 바뀌지 않으므로 $\displaystyle\sum_{n=1}^\infty a_n^2$은 수렴한다.</p>
+        <p>(3) 모든 $x\geq0$에 대해 $\sin x\leq x$이다. $\sum a_n$이 수렴하므로 $a_n\to0$이고, 어떤 자연수 $N$이 있어 $n\geq N$이면 $0\lt a_n\lt\pi/2$이므로 $0\lt\sin a_n\leq a_n$이다. $\sum_{n\geq N}a_n$이 수렴하므로 비교판정법에 의해 $\sum_{n\geq N}\sin a_n$이 수렴하고, 따라서 $\displaystyle\sum_{n=1}^\infty\sin a_n$은 수렴한다.</p>
+        <p>(4) $\displaystyle\lim_{n\to\infty}n^2a_n=0$이므로 어떤 자연수 $N$이 있어 $n\geq N$이면 $n^2a_n\lt1$, 즉 $a_n\lt1/n^2$이다. $\sum 1/n^2$이 $p$-급수($p=2\gt1$)로 수렴하므로 비교판정법에 의해 $\sum_{n\geq N}a_n$이 수렴하고, 따라서 $\displaystyle\sum_{n=1}^\infty a_n$은 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that if the series of positive terms $\displaystyle\sum_{n=1}^{\infty} a_n$ converges, then $\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{n}$ converges.</li>
+          <li>Show that if the series of positive terms $\displaystyle\sum_{n=1}^{\infty} a_n$ converges, then $\displaystyle\sum_{n=1}^{\infty} a_n^2$ converges.</li>
+          <li>Show that if the series of positive terms $\displaystyle\sum_{n=1}^{\infty} a_n$ converges, then $\displaystyle\sum_{n=1}^{\infty} \sin a_n$ converges.</li>
+          <li>Show that if $a_n \gt 0$ for every natural number $n$ and $\displaystyle\lim_{n\to\infty} n^2 a_n = 0$, then $\displaystyle\sum_{n=1}^{\infty} a_n$ converges.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Since $1/n\leq1$ for all $n\geq1$, $0\lt\dfrac{a_n}{n}\leq a_n$. Since $\sum a_n$ converges, the Comparison Test shows $\displaystyle\sum_{n=1}^\infty\frac{a_n}{n}$ converges as well.</p>
+        <p>(2) Since $\sum a_n$ converges, $a_n\to0$, so there is a natural number $N$ such that $0\lt a_n\lt1$, hence $a_n^2\lt a_n$, for all $n\geq N$. Since $\sum_{n\geq N}a_n$ converges, the Comparison Test gives convergence of $\sum_{n\geq N}a_n^2$, and adding finitely many terms does not affect convergence, so $\displaystyle\sum_{n=1}^\infty a_n^2$ converges.</p>
+        <p>(3) For all $x\geq0$, $\sin x\leq x$. Since $\sum a_n$ converges, $a_n\to0$, so there is a natural number $N$ such that $0\lt a_n\lt\pi/2$, hence $0\lt\sin a_n\leq a_n$, for all $n\geq N$. Since $\sum_{n\geq N}a_n$ converges, the Comparison Test gives convergence of $\sum_{n\geq N}\sin a_n$, so $\displaystyle\sum_{n=1}^\infty\sin a_n$ converges.</p>
+        <p>(4) Since $\displaystyle\lim_{n\to\infty}n^2a_n=0$, there is a natural number $N$ such that $n^2a_n\lt1$, i.e., $a_n\lt1/n^2$, for all $n\geq N$. Since $\sum 1/n^2$ is a convergent $p$-series ($p=2\gt1$), the Comparison Test gives convergence of $\sum_{n\geq N}a_n$, so $\displaystyle\sum_{n=1}^\infty a_n$ converges.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-3 -->
+<div class="card ex-card" id="yu03-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-3</span>
+    <span class="ex-title">로그·거듭제곱 수렴 범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\displaystyle\sum_{n=2}^{\infty} \frac{(\ln n)^q}{n^p}$가 수렴하도록 하는 $p$와 $q$의 범위를 구하시오. (단, $p, q \gt 0$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $p\gt1$일 때: $\varepsilon=(p-1)/2\gt0$이라 하면, 로그의 증가율에 의해 $(\ln n)^q=o(n^\varepsilon)$이므로 충분히 큰 $n$에 대해 $(\ln n)^q\lt n^\varepsilon$이고, 따라서
+        $$\frac{(\ln n)^q}{n^p}\lt\frac{n^\varepsilon}{n^p}=\frac1{n^{p-\varepsilon}}, \qquad p-\varepsilon=\frac{p+1}{2}\gt1$$
+        이다. $\sum 1/n^{p-\varepsilon}$이 $p$-급수로 수렴하므로 <strong>비교판정법</strong>에 의해 원래 급수도 수렴한다.</p>
+        <p>$p=1$일 때: $q\gt0$이므로 충분히 큰 $n$에 대해 $\ln n\gt1$, 즉 $(\ln n)^q\gt1$이다. 따라서 $\dfrac{(\ln n)^q}{n}\gt\dfrac1n$이고, $\sum 1/n$이 발산하므로 <strong>비교판정법</strong>에 의해 발산한다.</p>
+        <p>$0\lt p\lt1$일 때: 마찬가지로 충분히 큰 $n$에 대해 $(\ln n)^q\gt1$이므로 $\dfrac{(\ln n)^q}{n^p}\gt\dfrac1{n^p}$이고, $\sum 1/n^p$이 $p$-급수($p\lt1$)로 발산하므로 <strong>비교판정법</strong>에 의해 발산한다.</p>
+        <p>따라서 $p,q\gt0$인 범위에서 급수가 수렴하는 것은 $p\gt1$일 때뿐이며 ($q$의 값과 무관), $p\leq1$이면 항상 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the range of $p$ and $q$ for which $\displaystyle\sum_{n=2}^{\infty} \frac{(\ln n)^q}{n^p}$ converges. (Here $p, q \gt 0$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Case $p\gt1$: let $\varepsilon=(p-1)/2\gt0$. By the growth rate of the logarithm, $(\ln n)^q=o(n^\varepsilon)$, so for sufficiently large $n$, $(\ln n)^q\lt n^\varepsilon$, and hence
+        $$\frac{(\ln n)^q}{n^p}\lt\frac{n^\varepsilon}{n^p}=\frac1{n^{p-\varepsilon}}, \qquad p-\varepsilon=\frac{p+1}{2}\gt1.$$
+        Since $\sum 1/n^{p-\varepsilon}$ is a convergent $p$-series, the <strong>Comparison Test</strong> shows the original series converges.</p>
+        <p>Case $p=1$: since $q\gt0$, for sufficiently large $n$, $\ln n\gt1$, i.e., $(\ln n)^q\gt1$. Hence $\dfrac{(\ln n)^q}{n}\gt\dfrac1n$, and since $\sum 1/n$ diverges, the <strong>Comparison Test</strong> shows this case diverges.</p>
+        <p>Case $0\lt p\lt1$: similarly $(\ln n)^q\gt1$ for sufficiently large $n$, so $\dfrac{(\ln n)^q}{n^p}\gt\dfrac1{n^p}$, and since $\sum 1/n^p$ is a divergent $p$-series ($p\lt1$), the <strong>Comparison Test</strong> shows this case diverges.</p>
+        <p>Therefore, among $p,q\gt0$, the series converges precisely when $p\gt1$ (regardless of $q$), and diverges whenever $p\leq1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-4 -->
+<div class="card ex-card" id="yu03-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-4</span>
+    <span class="ex-title">소수 전개 급수의 수렴</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>소수 $0.d_1 d_2 d_3 \cdots := \displaystyle\sum_{n=1}^{\infty} \frac{d_n}{10^n}$으로 정의된다. 이 급수가 항상 수렴함을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 각 $d_n$은 $0$부터 $9$까지의 숫자이므로 모든 $n$에 대해 $0\leq d_n\leq9$이고, 따라서
+        $$0\leq\frac{d_n}{10^n}\leq\frac{9}{10^n}$$
+        이다. $\displaystyle\sum_{n=1}^\infty\frac{9}{10^n}$은 공비 $1/10$인 등비급수로
+        $$\sum_{n=1}^\infty\frac{9}{10^n}=9\cdot\frac{1/10}{1-1/10}=1$$
+        로 수렴한다. 따라서 비교판정법에 의해 $\displaystyle\sum_{n=1}^\infty\frac{d_n}{10^n}$은 (음이 아닌 항으로 이루어져 있으므로 절대) 항상 수렴한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A decimal $0.d_1 d_2 d_3 \cdots$ is defined by $\displaystyle\sum_{n=1}^{\infty} \frac{d_n}{10^n}$. Show that this series always converges.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Each $d_n$ is a digit from $0$ to $9$, so $0\leq d_n\leq9$ for every $n$, and hence
+        $$0\leq\frac{d_n}{10^n}\leq\frac{9}{10^n}.$$
+        The series $\displaystyle\sum_{n=1}^\infty\frac{9}{10^n}$ is geometric with ratio $1/10$ and converges to
+        $$\sum_{n=1}^\infty\frac{9}{10^n}=9\cdot\frac{1/10}{1-1/10}=1.$$
+        Hence by the Comparison Test, $\displaystyle\sum_{n=1}^\infty\frac{d_n}{10^n}$ (with nonnegative terms, so absolutely) always converges.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">비판정·근판정 종합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\sin n}{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n n^2 e^{-n}$</li>
+          <li>$\displaystyle\sum_{n=0}^{\infty} \frac{2^n+5}{3^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(2n)!}{n!\,n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{4^n\,n!\,n!}{(2n)!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{n^2}{2^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2^n}{n^3}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{1+n}\right)^n$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\sum 1/n^2$이 수렴하므로 $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac1{n^2}$은 <strong>절대수렴</strong>하고, 따라서 수렴한다.</p>
+        <p>(2) $|\sin n|\leq1$이므로 $\left|\dfrac{\sin n}{n^2}\right|\leq\dfrac1{n^2}$이고, $\sum 1/n^2$이 수렴하므로 <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{\sin n}{n^2}$은 절대수렴한다.</p>
+        <p>(3) $|a_n|=n^2e^{-n}$이라 하면
+        $$\frac{|a_{n+1}|}{|a_n|}=\left(\frac{n+1}{n}\right)^2e^{-1}\to\frac1e\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^nn^2e^{-n}$은 절대수렴한다.</p>
+        <p>(4) $a_n=\dfrac{2^n+5}{3^n}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac13\cdot\frac{2^{n+1}+5}{2^n+5}\to\frac13\cdot2=\frac23\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=0}^\infty\frac{2^n+5}{3^n}$은 수렴한다.</p>
+        <p>(5) $a_n=\dfrac{(2n)!}{n!\,n!}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{(2n+2)(2n+1)}{(n+1)^2}\to4\gt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{(2n)!}{n!\,n!}$은 발산한다.</p>
+        <p>(6) $a_n=\dfrac{4^n\,n!\,n!}{(2n)!}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{4(n+1)^2}{(2n+2)(2n+1)}=\frac{2(n+1)}{2n+1}=1+\frac1{2n+1}\gt1$$
+        이 모든 $n\geq1$에서 성립하므로 $\{a_n\}$은 증가수열이고, $a_1=2$이므로 $a_n\geq2$이다. 따라서 $a_n\not\to0$이고, <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{4^n\,n!\,n!}{(2n)!}$은 발산한다.</p>
+        <p>(7) $a_n=n^2/2^n$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac12\left(\frac{n+1}n\right)^2\to\frac12\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{n^2}{2^n}$은 수렴한다.</p>
+        <p>(8) $a_n=2^n/n^3$이라 하면
+        $$\frac{a_{n+1}}{a_n}=2\left(\frac{n}{n+1}\right)^3\to2\gt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{2^n}{n^3}$은 발산한다.</p>
+        <p>(9) $\sqrt[n]{a_n}=\dfrac1{1+n}\to0\lt1$이므로 <strong>근판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\left(\frac1{1+n}\right)^n$은 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{\sin n}{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n n^2 e^{-n}$</li>
+          <li>$\displaystyle\sum_{n=0}^{\infty} \frac{2^n+5}{3^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(2n)!}{n!\,n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{4^n\,n!\,n!}{(2n)!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{n^2}{2^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2^n}{n^3}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{1+n}\right)^n$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\sum 1/n^2$ converges, $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac1{n^2}$ <strong>converges absolutely</strong>, hence converges.</p>
+        <p>(2) Since $|\sin n|\leq1$, $\left|\dfrac{\sin n}{n^2}\right|\leq\dfrac1{n^2}$, and $\sum 1/n^2$ converges, so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{\sin n}{n^2}$ converges absolutely.</p>
+        <p>(3) Let $|a_n|=n^2e^{-n}$; then
+        $$\frac{|a_{n+1}|}{|a_n|}=\left(\frac{n+1}{n}\right)^2e^{-1}\to\frac1e\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^nn^2e^{-n}$ converges absolutely.</p>
+        <p>(4) Let $a_n=\dfrac{2^n+5}{3^n}$; then
+        $$\frac{a_{n+1}}{a_n}=\frac13\cdot\frac{2^{n+1}+5}{2^n+5}\to\frac13\cdot2=\frac23\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=0}^\infty\frac{2^n+5}{3^n}$ converges.</p>
+        <p>(5) Let $a_n=\dfrac{(2n)!}{n!\,n!}$; then
+        $$\frac{a_{n+1}}{a_n}=\frac{(2n+2)(2n+1)}{(n+1)^2}\to4\gt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{(2n)!}{n!\,n!}$ diverges.</p>
+        <p>(6) Let $a_n=\dfrac{4^n\,n!\,n!}{(2n)!}$; then
+        $$\frac{a_{n+1}}{a_n}=\frac{4(n+1)^2}{(2n+2)(2n+1)}=\frac{2(n+1)}{2n+1}=1+\frac1{2n+1}\gt1$$
+        for every $n\geq1$, so $\{a_n\}$ is increasing, and since $a_1=2$, $a_n\geq2$ for all $n$. Hence $a_n\not\to0$, and by the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{4^n\,n!\,n!}{(2n)!}$ diverges.</p>
+        <p>(7) Let $a_n=n^2/2^n$; then
+        $$\frac{a_{n+1}}{a_n}=\frac12\left(\frac{n+1}n\right)^2\to\frac12\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{n^2}{2^n}$ converges.</p>
+        <p>(8) Let $a_n=2^n/n^3$; then
+        $$\frac{a_{n+1}}{a_n}=2\left(\frac{n}{n+1}\right)^3\to2\gt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{2^n}{n^3}$ diverges.</p>
+        <p>(9) Since $\sqrt[n]{a_n}=\dfrac1{1+n}\to0\lt1$, by the <strong>Root Test</strong>, $\displaystyle\sum_{n=1}^\infty\left(\frac1{1+n}\right)^n$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">조각정의 수열의 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래와 같이 정의된 수열 $\{a_n\}$에 대해 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴하는지 판정하시오.</p>
+        <p>$$a_n = \begin{cases} n/2^n & (n\text{은 홀수}) \\ 1/2^n & (n\text{은 짝수}) \end{cases}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 모든 $n\geq1$에 대해 $a_n\gt0$이고, $n$이 짝수이면 $a_n=1/2^n\leq n/2^n$이므로 항상
+        $$0\lt a_n\leq\frac{n}{2^n}$$
+        이 성립한다. $b_n=n/2^n$이라 하면
+        $$\frac{b_{n+1}}{b_n}=\frac12\cdot\frac{n+1}n\to\frac12\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\sum n/2^n$은 수렴한다. 따라서 <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty a_n$은 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether $\displaystyle\sum_{n=1}^{\infty} a_n$ converges for the sequence $\{a_n\}$ defined below.</p>
+        <p>$$a_n = \begin{cases} n/2^n & (n\text{ is odd}) \\ 1/2^n & (n\text{ is even}) \end{cases}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> For all $n\geq1$, $a_n\gt0$, and when $n$ is even, $a_n=1/2^n\leq n/2^n$, so
+        $$0\lt a_n\leq\frac{n}{2^n}$$
+        always holds. Let $b_n=n/2^n$; then
+        $$\frac{b_{n+1}}{b_n}=\frac12\cdot\frac{n+1}n\to\frac12\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\sum n/2^n$ converges. Hence by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty a_n$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">비판정·근판정 종합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(n-1)!}{(n+1)^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(-\ln\left(e^2+\frac{1}{n}\right)\right)^{n+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \left(1-\frac{1}{n}\right)^{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{e^n}{n^e}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{(n!)^n}{n^{n^2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(1-\frac{1}{3n}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2^{n^2}}{n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1\cdot 3\cdot \cdots \cdot (2n-1)}{[2\cdot 4\cdot \cdots \cdot (2n)](3^n+1)}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $a_n=\dfrac{(n-1)!}{(n+1)^2}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{n!/(n+2)^2}{(n-1)!/(n+1)^2}=n\left(\frac{n+1}{n+2}\right)^2\to\infty$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{(n-1)!}{(n+1)^2}$은 발산한다.</p>
+        <p>(2) $e^2+1/n\gt e^2$이므로 $\ln(e^2+1/n)\gt\ln(e^2)=2$이고, 따라서
+        $$\left|\left(-\ln\left(e^2+\frac1n\right)\right)^{n+1}\right|=\left(\ln\left(e^2+\frac1n\right)\right)^{n+1}\gt2^{n+1}\to\infty$$
+        이다. 일반항의 절댓값이 $0$으로 수렴하지 않으므로 <strong>일반항판정법</strong>에 의해 발산한다.</p>
+        <p>(3) $|a_n|=\left(1-\dfrac1n\right)^{n^2}$이라 하면
+        $$\sqrt[n]{|a_n|}=\left(1-\frac1n\right)^n\to e^{-1}\lt1$$
+        이므로 <strong>근판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^n\left(1-\frac1n\right)^{n^2}$은 절대수렴한다.</p>
+        <p>(4) $a_n=e^n/n^e$라 하면
+        $$\frac{a_{n+1}}{a_n}=e\left(\frac{n}{n+1}\right)^e\to e\gt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{e^n}{n^e}$은 발산한다.</p>
+        <p>(5) $|a_n|=\dfrac{(n!)^n}{n^{n^2}}=\left(\dfrac{n!}{n^n}\right)^n$이라 하면 $\dfrac{n!}{n^n}=\displaystyle\prod_{k=1}^n\frac kn\leq\frac1n\to0$이므로
+        $$\sqrt[n]{|a_n|}=\frac{n!}{n^n}\to0\lt1$$
+        이고, <strong>근판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{(n!)^n}{n^{n^2}}$은 절대수렴한다.</p>
+        <p>(6) $\left(1-\dfrac1{3n}\right)^n\to e^{-1/3}\neq0$이므로 일반항이 $0$으로 수렴하지 않고, <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\left(1-\frac1{3n}\right)^n$은 발산한다.</p>
+        <p>(7) $a_n=2^{n^2}/n!$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{2^{2n+1}}{n+1}\to\infty$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{2^{n^2}}{n!}$은 발산한다.</p>
+        <p>(8) $c_n=\dfrac{1\cdot3\cdots(2n-1)}{2\cdot4\cdots(2n)}$이라 하면 $\dfrac{c_{n+1}}{c_n}=\dfrac{2n+1}{2n+2}\to1$이고, $a_n=\dfrac{c_n}{3^n+1}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{c_{n+1}}{c_n}\cdot\frac{3^n+1}{3^{n+1}+1}\to1\cdot\frac13=\frac13\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1\cdot3\cdots(2n-1)}{[2\cdot4\cdots(2n)](3^n+1)}$은 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(n-1)!}{(n+1)^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(-\ln\left(e^2+\frac{1}{n}\right)\right)^{n+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \left(1-\frac{1}{n}\right)^{n^2}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{e^n}{n^e}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{(n!)^n}{n^{n^2}}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(1-\frac{1}{3n}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{2^{n^2}}{n!}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1\cdot 3\cdot \cdots \cdot (2n-1)}{[2\cdot 4\cdot \cdots \cdot (2n)](3^n+1)}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Let $a_n=\dfrac{(n-1)!}{(n+1)^2}$; then
+        $$\frac{a_{n+1}}{a_n}=\frac{n!/(n+2)^2}{(n-1)!/(n+1)^2}=n\left(\frac{n+1}{n+2}\right)^2\to\infty,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{(n-1)!}{(n+1)^2}$ diverges.</p>
+        <p>(2) Since $e^2+1/n\gt e^2$, $\ln(e^2+1/n)\gt\ln(e^2)=2$, so
+        $$\left|\left(-\ln\left(e^2+\frac1n\right)\right)^{n+1}\right|=\left(\ln\left(e^2+\frac1n\right)\right)^{n+1}\gt2^{n+1}\to\infty.$$
+        Since the magnitude of the general term does not converge to $0$, the <strong>Divergence Test</strong> shows the series diverges.</p>
+        <p>(3) Let $|a_n|=\left(1-\dfrac1n\right)^{n^2}$; then
+        $$\sqrt[n]{|a_n|}=\left(1-\frac1n\right)^n\to e^{-1}\lt1,$$
+        so by the <strong>Root Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^n\left(1-\frac1n\right)^{n^2}$ converges absolutely.</p>
+        <p>(4) Let $a_n=e^n/n^e$; then
+        $$\frac{a_{n+1}}{a_n}=e\left(\frac{n}{n+1}\right)^e\to e\gt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{e^n}{n^e}$ diverges.</p>
+        <p>(5) Let $|a_n|=\dfrac{(n!)^n}{n^{n^2}}=\left(\dfrac{n!}{n^n}\right)^n$. Since $\dfrac{n!}{n^n}=\displaystyle\prod_{k=1}^n\frac kn\leq\frac1n\to0$,
+        $$\sqrt[n]{|a_n|}=\frac{n!}{n^n}\to0\lt1,$$
+        so by the <strong>Root Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{(n!)^n}{n^{n^2}}$ converges absolutely.</p>
+        <p>(6) Since $\left(1-\dfrac1{3n}\right)^n\to e^{-1/3}\neq0$, the general term does not converge to $0$, so by the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty\left(1-\frac1{3n}\right)^n$ diverges.</p>
+        <p>(7) Let $a_n=2^{n^2}/n!$; then
+        $$\frac{a_{n+1}}{a_n}=\frac{2^{2n+1}}{n+1}\to\infty,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{2^{n^2}}{n!}$ diverges.</p>
+        <p>(8) Let $c_n=\dfrac{1\cdot3\cdots(2n-1)}{2\cdot4\cdots(2n)}$; then $\dfrac{c_{n+1}}{c_n}=\dfrac{2n+1}{2n+2}\to1$. Letting $a_n=\dfrac{c_n}{3^n+1}$,
+        $$\frac{a_{n+1}}{a_n}=\frac{c_{n+1}}{c_n}\cdot\frac{3^n+1}{3^{n+1}+1}\to1\cdot\frac13=\frac13\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{1\cdot3\cdots(2n-1)}{[2\cdot4\cdots(2n)](3^n+1)}$ converges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-3 -->
+<div class="card ex-card" id="yu04-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-3</span>
+    <span class="ex-title">점화식 수열의 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>수열 $\{a_n\}$에 대해 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴하는지 판정하시오.</p>
+        <ol>
+          <li>$a_{n+1} = \dfrac{1+\tan^{-1} n}{n}\, a_n$, $\ a_1 = 1$</li>
+          <li>$a_{n+1} = \sqrt[n]{a_n}$, $\ a_1 = \dfrac{1}{3}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 모든 항이 양수이고
+        $$\frac{a_{n+1}}{a_n}=\frac{1+\tan^{-1}n}{n}\to0\lt1$$
+        이다 ($\tan^{-1}n\to\pi/2$로 유계이고 분모가 $\infty$로 발산하므로). <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty a_n$은 수렴한다.</p>
+        <p>(2) $\ln a_{n+1}=\dfrac1n\ln a_n$이므로 반복 적용하면
+        $$\ln a_{n+1}=\frac1n\cdot\frac1{n-1}\cdots\frac11\ln a_1=\frac1{n!}\ln\frac13=\frac{-\ln3}{n!}$$
+        이다. $n\to\infty$이면 $\dfrac{-\ln3}{n!}\to0$이므로 $\ln a_{n+1}\to0$, 즉 $a_n\to e^0=1\neq0$이다. <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty a_n$은 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether $\displaystyle\sum_{n=1}^{\infty} a_n$ converges for the sequence $\{a_n\}$.</p>
+        <ol>
+          <li>$a_{n+1} = \dfrac{1+\tan^{-1} n}{n}\, a_n$, $\ a_1 = 1$</li>
+          <li>$a_{n+1} = \sqrt[n]{a_n}$, $\ a_1 = \dfrac{1}{3}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) All terms are positive, and
+        $$\frac{a_{n+1}}{a_n}=\frac{1+\tan^{-1}n}{n}\to0\lt1$$
+        (since $\tan^{-1}n\to\pi/2$ is bounded while the denominator diverges to $\infty$). By the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty a_n$ converges.</p>
+        <p>(2) Since $\ln a_{n+1}=\dfrac1n\ln a_n$, iterating gives
+        $$\ln a_{n+1}=\frac1n\cdot\frac1{n-1}\cdots\frac11\ln a_1=\frac1{n!}\ln\frac13=\frac{-\ln3}{n!}.$$
+        As $n\to\infty$, $\dfrac{-\ln3}{n!}\to0$, so $\ln a_{n+1}\to0$, i.e., $a_n\to e^0=1\neq0$. By the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty a_n$ diverges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-4 -->
+<div class="card ex-card" id="yu04-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-4</span>
+    <span class="ex-title">극한 4/5 수열의 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>각 항이 양수인 수열 $\{b_n\}$이 $\dfrac{4}{5}$로 수렴할 때 다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} b_n^{1/n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{5}{4}\right)^n b_n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1000^n}{n!+b_n}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $b_n\to4/5$이므로 $\ln b_n$은 $\ln(4/5)$로 수렴하여 유계이고, 따라서
+        $$b_n^{1/n}=e^{(\ln b_n)/n}\to e^0=1\neq0$$
+        이다. <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty b_n^{1/n}$은 발산한다.</p>
+        <p>(2)
+        $$\sqrt[n]{\left(\frac54\right)^nb_n}=\frac54\cdot b_n^{1/n}\to\frac54\cdot1=\frac54\gt1$$
+        이므로 <strong>근판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\left(\frac54\right)^nb_n$은 발산한다.</p>
+        <p>(3) $b_n\gt0$이므로 $n!+b_n\gt n!$이고, 따라서
+        $$0\lt\frac{1000^n}{n!+b_n}\lt\frac{1000^n}{n!}$$
+        이다. $a_n=1000^n/n!$이라 하면 $\dfrac{a_{n+1}}{a_n}=\dfrac{1000}{n+1}\to0\lt1$이므로 <strong>비판정법</strong>에 의해 $\sum 1000^n/n!$은 수렴하고, <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{1000^n}{n!+b_n}$도 수렴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the sequence $\{b_n\}$, all of whose terms are positive, converges to $\dfrac{4}{5}$. Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} b_n^{1/n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{5}{4}\right)^n b_n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{1000^n}{n!+b_n}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $b_n\to4/5$, $\ln b_n$ converges to $\ln(4/5)$, hence is bounded, so
+        $$b_n^{1/n}=e^{(\ln b_n)/n}\to e^0=1\neq0.$$
+        By the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty b_n^{1/n}$ diverges.</p>
+        <p>(2) Since
+        $$\sqrt[n]{\left(\frac54\right)^nb_n}=\frac54\cdot b_n^{1/n}\to\frac54\cdot1=\frac54\gt1,$$
+        by the <strong>Root Test</strong>, $\displaystyle\sum_{n=1}^\infty\left(\frac54\right)^nb_n$ diverges.</p>
+        <p>(3) Since $b_n\gt0$, $n!+b_n\gt n!$, so
+        $$0\lt\frac{1000^n}{n!+b_n}\lt\frac{1000^n}{n!}.$$
+        Let $a_n=1000^n/n!$; then $\dfrac{a_{n+1}}{a_n}=\dfrac{1000}{n+1}\to0\lt1$, so by the <strong>Ratio Test</strong>, $\sum 1000^n/n!$ converges, and by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{1000^n}{n!+b_n}$ converges as well.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-5 -->
+<div class="card ex-card" id="yu04-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-5</span>
+    <span class="ex-title">극한 1/3 수열의 급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>각 항이 양수인 수열 $\{b_n\}$이 $\dfrac{1}{3}$으로 수렴할 때 다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{b_{n+1} b_n}{n\,4^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{n^n}{n!\,b_1^2 b_2^2 \cdots b_n^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $b_n\to1/3$이므로 $\{b_n\}$은 수렴하는 수열이라 유계이고, 어떤 $M\gt0$이 있어 모든 $n$에 대해 $0\lt b_n\leq M$이다. 따라서
+        $$0\lt\frac{b_{n+1}b_n}{n\cdot4^n}\leq\frac{M^2}{n\cdot4^n}\leq\frac{M^2}{4^n}$$
+        이고, $\sum M^2/4^n$은 공비 $1/4$인 등비급수로 수렴하므로 <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{b_{n+1}b_n}{n\cdot4^n}$은 수렴한다.</p>
+        <p>(2) $a_n=\dfrac{n^n}{n!\,b_1^2b_2^2\cdots b_n^2}$이라 하면
+        $$\frac{a_{n+1}}{a_n}=\frac{(n+1)^{n+1}/[(n+1)!\prod_{k=1}^{n+1}b_k^2]}{n^n/[n!\prod_{k=1}^nb_k^2]}=\left(\frac{n+1}n\right)^n\cdot\frac1{b_{n+1}^2}=\left(1+\frac1n\right)^n\cdot\frac1{b_{n+1}^2}$$
+        이다. $n\to\infty$이면 $(1+1/n)^n\to e$이고 $b_{n+1}\to1/3$이므로 $1/b_{n+1}^2\to9$이다. 따라서
+        $$\frac{a_{n+1}}{a_n}\to9e\gt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{n^n}{n!\,b_1^2b_2^2\cdots b_n^2}$은 발산한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the sequence $\{b_n\}$, all of whose terms are positive, converges to $\dfrac{1}{3}$. Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{b_{n+1} b_n}{n\,4^n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{n^n}{n!\,b_1^2 b_2^2 \cdots b_n^2}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $b_n\to1/3$, the sequence $\{b_n\}$ is convergent, hence bounded: there is $M\gt0$ with $0\lt b_n\leq M$ for all $n$. Hence
+        $$0\lt\frac{b_{n+1}b_n}{n\cdot4^n}\leq\frac{M^2}{n\cdot4^n}\leq\frac{M^2}{4^n},$$
+        and $\sum M^2/4^n$ is a convergent geometric series with ratio $1/4$, so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{b_{n+1}b_n}{n\cdot4^n}$ converges.</p>
+        <p>(2) Let $a_n=\dfrac{n^n}{n!\,b_1^2b_2^2\cdots b_n^2}$; then
+        $$\frac{a_{n+1}}{a_n}=\frac{(n+1)^{n+1}/[(n+1)!\prod_{k=1}^{n+1}b_k^2]}{n^n/[n!\prod_{k=1}^nb_k^2]}=\left(\frac{n+1}n\right)^n\cdot\frac1{b_{n+1}^2}=\left(1+\frac1n\right)^n\cdot\frac1{b_{n+1}^2}.$$
+        As $n\to\infty$, $(1+1/n)^n\to e$ and $b_{n+1}\to1/3$, so $1/b_{n+1}^2\to9$. Hence
+        $$\frac{a_{n+1}}{a_n}\to9e\gt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{n^n}{n!\,b_1^2b_2^2\cdots b_n^2}$ diverges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">교대급수 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{10n}{n^2+16}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $c_n=1/n$이라 하면 $c_n\gt0$, $c_{n+1}\lt c_n$, $c_n\to0$이므로 <strong>교대급수판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac1n$은 수렴한다. 한편 $\sum 1/n$은 조화급수로 발산하므로 절대수렴하지 않고, 따라서 이 급수는 <strong>조건수렴</strong>한다.</p>
+        <p>(2) $c_n=\dfrac{10n}{n^2+16}$이라 하면 $c_n\gt0$이고 $c_n\to0$이다. $f(x)=\dfrac{10x}{x^2+16}$의 도함수는
+        $$f'(x)=\frac{10(16-x^2)}{(x^2+16)^2}$$
+        이므로 $x\gt4$에서 $f'(x)\lt0$, 즉 $c_n$은 $n\geq5$부터 단조감소한다. <strong>교대급수판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{10n}{n^2+16}$은 수렴한다. 한편
+        $$\lim_{n\to\infty}\frac{10n/(n^2+16)}{1/n}=\lim_{n\to\infty}\frac{10n^2}{n^2+16}=10$$
+        이므로 <strong>극한비교판정법</strong>에 의해 $\sum c_n$은 조화급수와 같이 발산하고, 이 급수는 절대수렴하지 않으므로 <strong>조건수렴</strong>한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{10n}{n^2+16}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Let $c_n=1/n$; then $c_n\gt0$, $c_{n+1}\lt c_n$, and $c_n\to0$, so by the <strong>Alternating Series Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac1n$ converges. Since $\sum 1/n$ is the divergent harmonic series, this is not absolutely convergent, so the series is <strong>conditionally convergent</strong>.</p>
+        <p>(2) Let $c_n=\dfrac{10n}{n^2+16}$; then $c_n\gt0$ and $c_n\to0$. Since $f(x)=\dfrac{10x}{x^2+16}$ has derivative
+        $$f'(x)=\frac{10(16-x^2)}{(x^2+16)^2},$$
+        $f'(x)\lt0$ for $x\gt4$, so $c_n$ is monotonically decreasing from $n=5$ onward. By the <strong>Alternating Series Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{10n}{n^2+16}$ converges. Meanwhile,
+        $$\lim_{n\to\infty}\frac{10n/(n^2+16)}{1/n}=\lim_{n\to\infty}\frac{10n^2}{n^2+16}=10,$$
+        so by the <strong>Limit Comparison Test</strong>, $\sum c_n$ diverges like the harmonic series, so this series is not absolutely convergent, and is therefore <strong>conditionally convergent</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">교대급수 수렴 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \left(\frac{n}{10}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} (-1)^{n+1} \frac{1}{\ln n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{3\sqrt{n}+1}{\sqrt{n}+1}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} (-1)^n \frac{\ln n}{n}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $n\to\infty$일 때 $(n/10)^n\to\infty$이므로 일반항이 $0$으로 수렴하지 않는다. <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\left(\frac{n}{10}\right)^n$은 발산한다.</p>
+        <p>(2) $c_n=1/\ln n$이라 하면 $n\geq2$에서 $c_n\gt0$이고, $\ln n$이 증가하므로 $c_n$은 감소하며 $c_n\to0$이다. <strong>교대급수판정법</strong>에 의해 $\displaystyle\sum_{n=2}^\infty(-1)^{n+1}\frac1{\ln n}$은 수렴한다. $\ln n\lt n$이므로 $1/\ln n\gt1/n$이고 $\sum1/n$이 발산하므로 비교판정법에 의해 절대수렴하지 않는다. 따라서 이 급수는 <strong>조건수렴</strong>한다.</p>
+        <p>(3) $n\to\infty$일 때
+        $$\left|(-1)^{n+1}\frac{3\sqrt n+1}{\sqrt n+1}\right|=\frac{3+1/\sqrt n}{1+1/\sqrt n}\to3\neq0$$
+        이므로 일반항이 $0$으로 수렴하지 않는다. <strong>일반항판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac{3\sqrt n+1}{\sqrt n+1}$은 발산한다.</p>
+        <p>(4) $c_n=\ln n/n$이라 하면 $f(x)=(\ln x)/x$의 도함수는 $f'(x)=\dfrac{1-\ln x}{x^2}$이므로 $x\gt e$에서 $f'(x)\lt0$이고, 따라서 $c_n$은 $n\geq3$부터 단조감소하며 $c_n\to0$이다. <strong>교대급수판정법</strong>에 의해 $\displaystyle\sum_{n=2}^\infty(-1)^n\frac{\ln n}{n}$은 수렴한다. $n\geq3$에서 $\ln n\gt1$이므로 $c_n\gt1/n$이고 $\sum1/n$이 발산하므로 비교판정법에 의해 절대수렴하지 않는다. 따라서 이 급수는 <strong>조건수렴</strong>한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \left(\frac{n}{10}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} (-1)^{n+1} \frac{1}{\ln n}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{3\sqrt{n}+1}{\sqrt{n}+1}$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} (-1)^n \frac{\ln n}{n}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) As $n\to\infty$, $(n/10)^n\to\infty$, so the general term does not converge to $0$. By the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\left(\frac{n}{10}\right)^n$ diverges.</p>
+        <p>(2) Let $c_n=1/\ln n$; then $c_n\gt0$ for $n\geq2$, and since $\ln n$ increases, $c_n$ decreases, with $c_n\to0$. By the <strong>Alternating Series Test</strong>, $\displaystyle\sum_{n=2}^\infty(-1)^{n+1}\frac1{\ln n}$ converges. Since $\ln n\lt n$, $1/\ln n\gt1/n$, and $\sum1/n$ diverges, so by the Comparison Test this series is not absolutely convergent. Hence it is <strong>conditionally convergent</strong>.</p>
+        <p>(3) As $n\to\infty$,
+        $$\left|(-1)^{n+1}\frac{3\sqrt n+1}{\sqrt n+1}\right|=\frac{3+1/\sqrt n}{1+1/\sqrt n}\to3\neq0,$$
+        so the general term does not converge to $0$. By the <strong>Divergence Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}\frac{3\sqrt n+1}{\sqrt n+1}$ diverges.</p>
+        <p>(4) Let $c_n=\ln n/n$. Since $f(x)=(\ln x)/x$ has derivative $f'(x)=\dfrac{1-\ln x}{x^2}$, $f'(x)\lt0$ for $x\gt e$, so $c_n$ is monotonically decreasing from $n=3$ onward, with $c_n\to0$. By the <strong>Alternating Series Test</strong>, $\displaystyle\sum_{n=2}^\infty(-1)^n\frac{\ln n}{n}$ converges. For $n\geq3$, $\ln n\gt1$, so $c_n\gt1/n$, and $\sum1/n$ diverges, so by the Comparison Test this series is not absolutely convergent. Hence it is <strong>conditionally convergent</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">절대·조건수렴 조사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 절대수렴 여부와 조건수렴 여부를 조사하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{\tan^{-1} n}{n^2+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(-100)^n}{n!}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $0\lt\tan^{-1}n\lt\pi/2$이므로
+        $$\left|(-1)^n\frac{\tan^{-1}n}{n^2+1}\right|\lt\frac{\pi/2}{n^2+1}\lt\frac{\pi/2}{n^2}$$
+        이고 $\sum(\pi/2)/n^2$이 수렴하므로 <strong>비교판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{\tan^{-1}n}{n^2+1}$은 <strong>절대수렴</strong>한다.</p>
+        <p>(2) $|a_n|=100^n/n!$이라 하면
+        $$\frac{|a_{n+1}|}{|a_n|}=\frac{100}{n+1}\to0\lt1$$
+        이므로 <strong>비판정법</strong>에 의해 $\displaystyle\sum_{n=1}^\infty\frac{(-100)^n}{n!}$은 <strong>절대수렴</strong>한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Investigate the absolute and conditional convergence of the following series.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{\tan^{-1} n}{n^2+1}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{(-100)^n}{n!}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $0\lt\tan^{-1}n\lt\pi/2$,
+        $$\left|(-1)^n\frac{\tan^{-1}n}{n^2+1}\right|\lt\frac{\pi/2}{n^2+1}\lt\frac{\pi/2}{n^2},$$
+        and $\sum(\pi/2)/n^2$ converges, so by the <strong>Comparison Test</strong>, $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{\tan^{-1}n}{n^2+1}$ <strong>converges absolutely</strong>.</p>
+        <p>(2) Let $|a_n|=100^n/n!$; then
+        $$\frac{|a_{n+1}|}{|a_n|}=\frac{100}{n+1}\to0\lt1,$$
+        so by the <strong>Ratio Test</strong>, $\displaystyle\sum_{n=1}^\infty\frac{(-100)^n}{n!}$ <strong>converges absolutely</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-3 -->
+<div class="card ex-card" id="yu05-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-3</span>
+    <span class="ex-title">교대 p-급수의 수렴성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^p}$의 절대수렴 여부와 조건수렴 여부를 조사하시오. (단, $p \gt 0$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\sum 1/n^p$는 $p$-급수로 $p\gt1$일 때 수렴하고 $0\lt p\leq1$일 때 발산한다.</p>
+        <p>$p\gt1$일 때: $\sum1/n^p$이 수렴하므로 $\displaystyle\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n^p}$은 <strong>절대수렴</strong>한다.</p>
+        <p>$0\lt p\leq1$일 때: $c_n=1/n^p$이라 하면 $c_n\gt0$이고, $p\gt0$이므로 $c_n$은 단조감소하며 $c_n\to0$이다. <strong>교대급수판정법</strong>에 의해 급수는 수렴한다. 그런데 $\sum1/n^p$은 $p\leq1$이므로 발산하여 절대수렴하지 않는다. 따라서 이 경우 급수는 <strong>조건수렴</strong>한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Investigate the absolute and conditional convergence of the series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^p}$. (Here $p \gt 0$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\sum 1/n^p$ is a $p$-series, convergent for $p\gt1$ and divergent for $0\lt p\leq1$.</p>
+        <p>For $p\gt1$: since $\sum1/n^p$ converges, $\displaystyle\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n^p}$ <strong>converges absolutely</strong>.</p>
+        <p>For $0\lt p\leq1$: let $c_n=1/n^p$; then $c_n\gt0$, and since $p\gt0$, $c_n$ is monotonically decreasing with $c_n\to0$. By the <strong>Alternating Series Test</strong>, the series converges. But $\sum1/n^p$ diverges since $p\leq1$, so it is not absolutely convergent. Hence in this case the series is <strong>conditionally convergent</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-4 -->
+<div class="card ex-card" id="yu05-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-4</span>
+    <span class="ex-title">절대수렴의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>급수 $\displaystyle\sum_{n=1}^{\infty} a_n$가 절대수렴하면 $\left| \displaystyle\sum_{n=1}^{\infty} a_n \right| \leq \displaystyle\sum_{n=1}^{\infty} |a_n|$임을 보이시오.</li>
+          <li>급수 $\displaystyle\sum_{n=1}^{\infty} a_n$, $\displaystyle\sum_{n=1}^{\infty} b_n$이 절대수렴하면 $\displaystyle\sum_{n=1}^{\infty} (a_n+b_n)$, $\displaystyle\sum_{n=1}^{\infty} (a_n-b_n)$, $\displaystyle\sum_{n=1}^{\infty} k a_n$도 절대수렴함을 보이시오. (단, $k$는 상수)</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} a_n$, $\displaystyle\sum_{n=1}^{\infty} b_n$이 수렴하지만 $\displaystyle\sum_{n=1}^{\infty} a_n b_n$은 발산하는 예시를 하나 찾으시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 각 부분합에 삼각부등식을 적용하면
+        $$\left|\sum_{n=1}^Na_n\right|\leq\sum_{n=1}^N|a_n|$$
+        이다. $\sum a_n$이 절대수렴하므로 좌변은 $N\to\infty$일 때 $\left|\sum_{n=1}^\infty a_n\right|$로, 우변은 $\sum_{n=1}^\infty|a_n|$로 수렴하고, 부등식은 극한에서도 유지되므로
+        $$\left|\sum_{n=1}^\infty a_n\right|\leq\sum_{n=1}^\infty|a_n|$$
+        이다.</p>
+        <p>(2) 삼각부등식에 의해 $|a_n+b_n|\leq|a_n|+|b_n|$이고 $|a_n-b_n|\leq|a_n|+|b_n|$이다. $\sum|a_n|$, $\sum|b_n|$이 수렴하므로 $\sum(|a_n|+|b_n|)$도 수렴하고, 비교판정법에 의해 $\sum|a_n+b_n|$, $\sum|a_n-b_n|$이 수렴한다. 즉 $\sum(a_n+b_n)$, $\sum(a_n-b_n)$은 절대수렴한다. 또한 $|ka_n|=|k||a_n|$이고 $\sum|k||a_n|=|k|\sum|a_n|$이 수렴하므로 $\sum ka_n$도 절대수렴한다.</p>
+        <p>(3) $a_n=b_n=\dfrac{(-1)^n}{\sqrt n}$이라 하자. $c_n=1/\sqrt n$은 양수, 단조감소, $c_n\to0$이므로 교대급수판정법에 의해 $\sum a_n$, $\sum b_n$은 모두 수렴한다. 그러나
+        $$a_nb_n=\frac{(-1)^n}{\sqrt n}\cdot\frac{(-1)^n}{\sqrt n}=\frac1n$$
+        이므로 $\sum a_nb_n=\sum1/n$은 조화급수로 발산한다. 따라서 이 $\{a_n\}$, $\{b_n\}$이 원하는 예시이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that if the series $\displaystyle\sum_{n=1}^{\infty} a_n$ converges absolutely, then $\left| \displaystyle\sum_{n=1}^{\infty} a_n \right| \leq \displaystyle\sum_{n=1}^{\infty} |a_n|$.</li>
+          <li>Show that if the series $\displaystyle\sum_{n=1}^{\infty} a_n$ and $\displaystyle\sum_{n=1}^{\infty} b_n$ converge absolutely, then $\displaystyle\sum_{n=1}^{\infty} (a_n+b_n)$, $\displaystyle\sum_{n=1}^{\infty} (a_n-b_n)$, and $\displaystyle\sum_{n=1}^{\infty} k a_n$ also converge absolutely. (Here $k$ is a constant.)</li>
+          <li>Find an example in which $\displaystyle\sum_{n=1}^{\infty} a_n$ and $\displaystyle\sum_{n=1}^{\infty} b_n$ converge but $\displaystyle\sum_{n=1}^{\infty} a_n b_n$ diverges.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Applying the triangle inequality to each partial sum,
+        $$\left|\sum_{n=1}^Na_n\right|\leq\sum_{n=1}^N|a_n|.$$
+        Since $\sum a_n$ converges absolutely, the left side converges to $\left|\sum_{n=1}^\infty a_n\right|$ and the right side to $\sum_{n=1}^\infty|a_n|$ as $N\to\infty$, and the inequality is preserved in the limit, giving
+        $$\left|\sum_{n=1}^\infty a_n\right|\leq\sum_{n=1}^\infty|a_n|.$$</p>
+        <p>(2) By the triangle inequality, $|a_n+b_n|\leq|a_n|+|b_n|$ and $|a_n-b_n|\leq|a_n|+|b_n|$. Since $\sum|a_n|$ and $\sum|b_n|$ converge, $\sum(|a_n|+|b_n|)$ converges as well, and by the Comparison Test $\sum|a_n+b_n|$ and $\sum|a_n-b_n|$ converge. That is, $\sum(a_n+b_n)$ and $\sum(a_n-b_n)$ converge absolutely. Also $|ka_n|=|k||a_n|$ and $\sum|k||a_n|=|k|\sum|a_n|$ converges, so $\sum ka_n$ converges absolutely too.</p>
+        <p>(3) Let $a_n=b_n=\dfrac{(-1)^n}{\sqrt n}$. Since $c_n=1/\sqrt n$ is positive, monotonically decreasing, and $c_n\to0$, the Alternating Series Test shows $\sum a_n$ and $\sum b_n$ both converge. However,
+        $$a_nb_n=\frac{(-1)^n}{\sqrt n}\cdot\frac{(-1)^n}{\sqrt n}=\frac1n,$$
+        so $\sum a_nb_n=\sum1/n$ is the divergent harmonic series. Hence this $\{a_n\}$, $\{b_n\}$ is the desired example.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-5 -->
+<div class="card ex-card" id="yu05-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-5</span>
+    <span class="ex-title">교대급수 오차의 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=0}^{\infty} (-1)^n \frac{1}{2^n}$를 $\displaystyle\sum_{n=0}^{8} (-1)^n \frac{1}{2^n}$으로 근사했을 때 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $c_n=1/2^n$은 양수, 단조감소, $c_n\to0$이므로 <strong>교대급수판정법</strong>의 오차 추정에 의해 부분합 $\displaystyle\sum_{n=0}^{8}(-1)^n\frac1{2^n}$의 오차는 생략된 첫 항의 크기를 넘지 않는다. 즉
+        $$\left|\sum_{n=0}^\infty(-1)^n\frac1{2^n} - \sum_{n=0}^8(-1)^n\frac1{2^n}\right|\leq\frac1{2^9}=\frac1{512}$$
+        이므로 오차의 한계는 $\dfrac1{512}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the error bound when the series $\displaystyle\sum_{n=0}^{\infty} (-1)^n \frac{1}{2^n}$ is approximated by $\displaystyle\sum_{n=0}^{8} (-1)^n \frac{1}{2^n}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $c_n=1/2^n$ is positive, monotonically decreasing, and $c_n\to0$, the error estimate for the <strong>Alternating Series Test</strong> shows that the error of the partial sum $\displaystyle\sum_{n=0}^{8}(-1)^n\frac1{2^n}$ does not exceed the magnitude of the first omitted term. That is,
+        $$\left|\sum_{n=0}^\infty(-1)^n\frac1{2^n} - \sum_{n=0}^8(-1)^n\frac1{2^n}\right|\leq\frac1{2^9}=\frac1{512},$$
+        so the error bound is $\dfrac1{512}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-6 -->
+<div class="card ex-card" id="yu05-6">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-6</span>
+    <span class="ex-title">오차 0.001 이내 항수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{1}{n^2+3}$를 부분합으로 0.001보다 작은 오차를 갖도록 근사할 때 몇 번째 항까지 계산해야 하는지 제시하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $c_n=\dfrac1{n^2+3}$은 양수, 단조감소, $c_n\to0$이므로 <strong>교대급수판정법</strong>의 오차 추정에 의해 $N$항까지의 부분합의 오차는 $c_{N+1}=\dfrac1{(N+1)^2+3}$을 넘지 않는다. 오차가 $0.001$보다 작으려면
+        $$\frac1{(N+1)^2+3}\lt0.001 \iff (N+1)^2\gt997 \iff N+1\gt\sqrt{997}\approx31.58$$
+        이어야 하므로 $N+1\geq32$, 즉 $N\geq31$이다. 실제로 $N=31$이면 $c_{32}=\dfrac1{32^2+3}=\dfrac1{1027}\lt0.001$로 조건을 만족하지만, $N=30$이면 $c_{31}=\dfrac1{31^2+3}=\dfrac1{964}\gt0.001$로 이 오차 한계로는 조건을 만족시키지 못한다. 따라서 <strong>제31항까지</strong> 계산해야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>State up to which term must be computed so that the partial sum of $\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{1}{n^2+3}$ approximates the series with an error less than 0.001.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $c_n=\dfrac1{n^2+3}$ is positive, monotonically decreasing, and $c_n\to0$, the error estimate for the <strong>Alternating Series Test</strong> shows that the error of the partial sum through the $N$th term does not exceed $c_{N+1}=\dfrac1{(N+1)^2+3}$. For the error to be less than $0.001$,
+        $$\frac1{(N+1)^2+3}\lt0.001 \iff (N+1)^2\gt997 \iff N+1\gt\sqrt{997}\approx31.58,$$
+        so $N+1\geq32$, i.e., $N\geq31$. Indeed, for $N=31$, $c_{32}=\dfrac1{32^2+3}=\dfrac1{1027}\lt0.001$, satisfying the condition, while for $N=30$, $c_{31}=\dfrac1{31^2+3}=\dfrac1{964}\gt0.001$, which fails to satisfy the condition via this error bound. Hence terms must be computed <strong>up to the 31st term</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 06 -->
+<div class="card ex-card" id="ex06">
+  <div class="card-head">
+    <span class="ex-num">예제 06</span>
+    <span class="ex-title">재배열로 같은 합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>수열 $a_n = \dfrac{(-1)^{n+1}}{n}$에 대해 $\displaystyle\sum_{n=1}^{\infty} a_n = L$이라 하자.</p>
+        <p>수열 $\{2a_n\}$의 적당한 재배열 $\{b_n\}$이 있어 $\displaystyle\sum_{n=1}^{\infty} b_n = L$임을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $a_n=(-1)^{n+1}/n$은 $n$이 홀수이면 $1/n\gt0$, 짝수이면 $-1/n\lt0$이다. $2a_n$의 양의 항들을 순서대로 $p_1,p_2,p_3,\ldots$ ($p_k=2/(2k-1)$), 음의 항들을 순서대로 $q_1,q_2,q_3,\ldots$ ($q_k=-2/(2k)=-1/k$)라 하자.</p>
+        <p>$\displaystyle\sum_{k=1}^\infty p_k=\sum_{k=1}^\infty\frac2{2k-1}$과 $\displaystyle\sum_{k=1}^\infty|q_k|=\sum_{k=1}^\infty\frac1k$은 각각 조화급수와 비교하여 발산하므로(극한비교판정법으로 확인 가능) 양의 항들의 합은 $+\infty$, 음의 항들의 합은 $-\infty$이다. 또한 $p_k\to0$, $q_k\to0$이다.</p>
+        <p>이제 재배열 $\{b_n\}$을 다음과 같이 구성한다. 부분합이 처음으로 $L$을 넘어설 때까지 $p_1,p_2,\ldots$를 순서대로 택하고, 그 다음 부분합이 처음으로 $L$ 아래로 내려갈 때까지 아직 쓰이지 않은 $q_1,q_2,\ldots$를 순서대로 택하며, 이를 번갈아 반복한다. $\sum p_k=\infty$, $\sum q_k=-\infty$이므로 이 과정은 각 단계에서 항상 계속될 수 있고, 모든 $p_k$, $q_k$가 결국 재배열에 포함된다.</p>
+        <p>이렇게 구성된 부분합은 각 전환 시점마다 그 직전 값과 마지막으로 추가한 항 $p_k$ 또는 $q_k$ 사이의 거리만큼만 $L$에서 벗어난다. $p_k\to0$, $q_k\to0$이므로, 임의의 $\varepsilon\gt0$에 대해 충분히 뒤의 전환부터는 그 오차가 $\varepsilon$보다 작아진다. 따라서 재배열 $\{b_n\}$의 부분합은 $L$로 수렴하며, $\{2a_n\}$의 모든 항이 정확히 한 번씩 나타나므로 $\{b_n\}$은 $\{2a_n\}$의 재배열이다. 즉 $\displaystyle\sum_{n=1}^\infty b_n=L$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a_n = \dfrac{(-1)^{n+1}}{n}$ and suppose $\displaystyle\sum_{n=1}^{\infty} a_n = L$.</p>
+        <p>Show that there is a rearrangement $\{b_n\}$ of $\{2a_n\}$ such that $\displaystyle\sum_{n=1}^{\infty} b_n = L$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> $a_n=(-1)^{n+1}/n$ is $1/n\gt0$ when $n$ is odd and $-1/n\lt0$ when $n$ is even. Let $p_1,p_2,p_3,\ldots$ ($p_k=2/(2k-1)$) denote the positive terms of $\{2a_n\}$ in order, and $q_1,q_2,q_3,\ldots$ ($q_k=-2/(2k)=-1/k$) the negative terms in order.</p>
+        <p>Both $\displaystyle\sum_{k=1}^\infty p_k=\sum_{k=1}^\infty\frac2{2k-1}$ and $\displaystyle\sum_{k=1}^\infty|q_k|=\sum_{k=1}^\infty\frac1k$ diverge by comparison with the harmonic series (verifiable by the Limit Comparison Test), so the sum of the positive terms is $+\infty$ and the sum of the negative terms is $-\infty$. Also $p_k\to0$ and $q_k\to0$.</p>
+        <p>Now construct a rearrangement $\{b_n\}$ as follows. Take $p_1,p_2,\ldots$ in order until the partial sum first exceeds $L$; then take unused terms $q_1,q_2,\ldots$ in order until the partial sum first falls below $L$; and repeat this alternation. Since $\sum p_k=\infty$ and $\sum q_k=-\infty$, this process can always continue at each stage, and every $p_k$ and $q_k$ is eventually included in the rearrangement.</p>
+        <p>At each switch, the partial sum deviates from $L$ by at most the size of the last term $p_k$ or $q_k$ added. Since $p_k\to0$ and $q_k\to0$, for any $\varepsilon\gt0$ this deviation is eventually less than $\varepsilon$ from some switch onward. Hence the partial sums of $\{b_n\}$ converge to $L$, and since every term of $\{2a_n\}$ appears exactly once, $\{b_n\}$ is a rearrangement of $\{2a_n\}$. That is, $\displaystyle\sum_{n=1}^\infty b_n=L$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06 -->
+<div class="card ex-card" id="yu06">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06</span>
+    <span class="ex-title">조각정의 교대급수의 합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래와 같이 정의된 수열 $\{a_n\}$에 대해 $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} a_n$의 값을 구하시오. (단, $k$는 자연수)</p>
+        <p>$$a_n = \begin{cases} \left(\dfrac{1}{3}\right)^k & (n = 2k-1) \\[6pt] \left(\dfrac{1}{2}\right)^k & (n = 2k) \end{cases}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\displaystyle\sum_{n=1}^\infty|a_n|=\sum_{k=1}^\infty\left(\frac13\right)^k+\sum_{k=1}^\infty\left(\frac12\right)^k=\frac12+1=\frac32\lt\infty$이므로 $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}a_n$은 절대수렴하고, 따라서 항의 순서를 재배열·재그룹화하여 계산해도 값이 변하지 않는다.</p>
+        <p>$n$이 홀수($n=2k-1$)이면 $(-1)^{n+1}=1$이고, $n$이 짝수($n=2k$)이면 $(-1)^{n+1}=-1$이므로
+        $$\sum_{n=1}^\infty(-1)^{n+1}a_n=\sum_{k=1}^\infty a_{2k-1}-\sum_{k=1}^\infty a_{2k}=\sum_{k=1}^\infty\left(\frac13\right)^k-\sum_{k=1}^\infty\left(\frac12\right)^k$$
+        이다. 두 급수는 각각 등비급수이므로
+        $$\sum_{k=1}^\infty\left(\frac13\right)^k=\frac{1/3}{1-1/3}=\frac12, \qquad \sum_{k=1}^\infty\left(\frac12\right)^k=\frac{1/2}{1-1/2}=1$$
+        이고, 따라서
+        $$\sum_{n=1}^\infty(-1)^{n+1}a_n=\frac12-1=-\frac12$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the value of $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} a_n$ for the sequence $\{a_n\}$ defined below. (Here $k$ is a natural number.)</p>
+        <p>$$a_n = \begin{cases} \left(\dfrac{1}{3}\right)^k & (n = 2k-1) \\[6pt] \left(\dfrac{1}{2}\right)^k & (n = 2k) \end{cases}$$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\displaystyle\sum_{n=1}^\infty|a_n|=\sum_{k=1}^\infty\left(\frac13\right)^k+\sum_{k=1}^\infty\left(\frac12\right)^k=\frac12+1=\frac32\lt\infty$, the series $\displaystyle\sum_{n=1}^\infty(-1)^{n+1}a_n$ converges absolutely, so its value is unchanged under rearrangement or regrouping of terms.</p>
+        <p>When $n$ is odd ($n=2k-1$), $(-1)^{n+1}=1$, and when $n$ is even ($n=2k$), $(-1)^{n+1}=-1$, so
+        $$\sum_{n=1}^\infty(-1)^{n+1}a_n=\sum_{k=1}^\infty a_{2k-1}-\sum_{k=1}^\infty a_{2k}=\sum_{k=1}^\infty\left(\frac13\right)^k-\sum_{k=1}^\infty\left(\frac12\right)^k.$$
+        Both are geometric series:
+        $$\sum_{k=1}^\infty\left(\frac13\right)^k=\frac{1/3}{1-1/3}=\frac12, \qquad \sum_{k=1}^\infty\left(\frac12\right)^k=\frac{1/2}{1-1/2}=1,$$
+        so
+        $$\sum_{n=1}^\infty(-1)^{n+1}a_n=\frac12-1=-\frac12.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">오일러 상수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$y = \dfrac{1}{x}$의 그래프를 이용하여 모든 자연수 $n$에 대해 다음 부등식이 성립함을 보이시오.
+            $$\ln(n+1) \leq 1 + \frac{1}{2} + \cdots + \frac{1}{n} \leq 1 + \ln n$$
+            <div class="formal-box">(Hint. 적분판정법의 증명과정을 참고할 것)</div>
+          </li>
+          <li>수열 $a_n = 1 + \dfrac{1}{2} + \cdots + \dfrac{1}{n} - \ln n$이 수렴함을 보이시오. 이때 극한값은 $\gamma = 0.5772\ldots$이고 <strong>오일러 상수(Euler's constant)</strong>라 한다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Using the graph of $y = \dfrac{1}{x}$, show that the following inequality holds for every natural number $n$.
+            $$\ln(n+1) \leq 1 + \frac{1}{2} + \cdots + \frac{1}{n} \leq 1 + \ln n$$
+            <div class="formal-box">(Hint. Refer to the proof of the Integral Test.)</div>
+          </li>
+          <li>Show that the sequence $a_n = 1 + \dfrac{1}{2} + \cdots + \dfrac{1}{n} - \ln n$ converges. The limit value is $\gamma = 0.5772\ldots$, called the <strong>Euler's constant</strong>.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">코시 응집 판정법</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>각 항이 양수인 수열 $\{a_n\}$이 단조감소한다고 하자. 이때 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴할 필요충분조건은 $\displaystyle\sum_{n=1}^{\infty} 2^n a_{2^n}$이 수렴하는 것임을 보이시오.</li>
+          <li>코시 응집 판정법을 이용해 $p$-급수 $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$의 수렴 여부를 판정하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $\{a_n\}$ be a monotonically decreasing sequence with positive terms. Show that $\displaystyle\sum_{n=1}^{\infty} a_n$ converges if and only if $\displaystyle\sum_{n=1}^{\infty} 2^n a_{2^n}$ converges.</li>
+          <li>Using the Cauchy condensation test, determine whether the $p$-series $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$ converges.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">라비 판정법</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>각 항이 양수인 수열 $\{a_n\}$에 대해 상수 $C$와 유계수열 $\{b_n\}$이 있어
+            $$\frac{a_n}{a_{n+1}} = 1 + \frac{C}{n} + \frac{b_n}{n^2}$$
+            가 성립한다고 하자. $C \gt 1$이면 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴하고 $C \leq 1$이면 $\displaystyle\sum_{n=1}^{\infty} a_n$이 발산함을 보이시오.
+            <div class="formal-box">(Hint. $C \gt 1$인 경우 적당한 $C' \gt 1$이 있어 충분히 큰 $n$에 대해 $\dfrac{a_n}{a_{n+1}} \geq 1 + \dfrac{C'}{n}$임을 보이시오. 이 부등식은 아래와 같이 정리됨을 이용해 급수 $\displaystyle\sum_{n=1}^{\infty} a_n$의 부분합이 수렴함을 보이시오.
+            $$na_n - (n+1)a_{n+1} \geq (C'-1)a_{n+1} \gt 0$$
+            $C \lt 1$인 경우도 비슷하게 증명하시오.)</div>
+          </li>
+          <li>각 항이 양수인 수열 $\{a_n\}$에 대해 $\displaystyle\lim_{n\to\infty} n\left(\frac{a_n}{a_{n+1}} - 1\right) = \rho$라 하자. $\rho \gt 1$이면 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴하고 $\rho \lt 1$이면 $\displaystyle\sum_{n=1}^{\infty} a_n$이 발산함을 보이시오.</li>
+          <li>라비 판정법을 이용하여 $u_{n+1} = \dfrac{(2n-1)^2}{(2n)(2n+1)}\, u_n$, $u_1 = 1$로 정의된 수열 $\{u_n\}$에 대해 $\displaystyle\sum_{n=1}^{\infty} u_n$이 수렴하는지 판정하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $\{a_n\}$ be a sequence with positive terms, and suppose there exist a constant $C$ and a bounded sequence $\{b_n\}$ such that
+            $$\frac{a_n}{a_{n+1}} = 1 + \frac{C}{n} + \frac{b_n}{n^2}$$
+            holds. Show that $\displaystyle\sum_{n=1}^{\infty} a_n$ converges if $C \gt 1$ and diverges if $C \leq 1$.
+            <div class="formal-box">(Hint. For the case $C \gt 1$, show that there exists a suitable $C' \gt 1$ such that $\dfrac{a_n}{a_{n+1}} \geq 1 + \dfrac{C'}{n}$ for sufficiently large $n$. Using the fact that this inequality rearranges as below, show that the partial sums of the series $\displaystyle\sum_{n=1}^{\infty} a_n$ converge.
+            $$na_n - (n+1)a_{n+1} \geq (C'-1)a_{n+1} \gt 0$$
+            Prove the case $C \lt 1$ similarly.)</div>
+          </li>
+          <li>Let $\{a_n\}$ be a sequence with positive terms, and suppose $\displaystyle\lim_{n\to\infty} n\left(\frac{a_n}{a_{n+1}} - 1\right) = \rho$. Show that $\displaystyle\sum_{n=1}^{\infty} a_n$ converges if $\rho \gt 1$ and diverges if $\rho \lt 1$.</li>
+          <li>Using Raabe's test, determine whether $\displaystyle\sum_{n=1}^{\infty} u_n$ converges for the sequence $\{u_n\}$ defined by $u_{n+1} = \dfrac{(2n-1)^2}{(2n)(2n+1)}\, u_n$, $u_1 = 1$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">급수 수렴 여부 종합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \tanh n$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{\log_n(n!)}{n^3}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} a_n$ (단, $a_{n+1} = \dfrac{1}{1+a_n}$, $a_1 = 1$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} (-1)^n \tanh n$</li>
+          <li>$\displaystyle\sum_{n=2}^{\infty} \frac{\log_n(n!)}{n^3}$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} a_n$ (Here $a_{n+1} = \dfrac{1}{1+a_n}$, $a_1 = 1$.)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">수렴급수의 파생급수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>급수 $\displaystyle\sum_{n=1}^{\infty} a_n$가 수렴할 때 다음 급수의 수렴 여부를 판정하시오.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{1+\sin a_n}{2}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{1-a_n}$ (단, 자연수 $n$에 대해 $a_n \gt 0$, $a_n \neq 1$)</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \ln(1-a_n)$ (단, 자연수 $n$에 대해 $0 \lt a_n \lt 1$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the series $\displaystyle\sum_{n=1}^{\infty} a_n$ converges. Determine whether the following series converge.</p>
+        <ol>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \left(\frac{1+\sin a_n}{2}\right)^n$</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{1-a_n}$ (Here $a_n \gt 0$, $a_n \neq 1$ for every natural number $n$.)</li>
+          <li>$\displaystyle\sum_{n=1}^{\infty} \ln(1-a_n)$ (Here $0 \lt a_n \lt 1$ for every natural number $n$.)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">응집급수와 발산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>각 항이 양수인 단조감소수열 $\{a_n\}$에 대해 급수 $\displaystyle\sum_{n=1}^{\infty} a_{2^n}$가 발산한다고 가정하자. 이때 급수 $\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{n}$가 발산함을 보이시오. 이를 이용하여 $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n\ln n}$이 발산함을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\{a_n\}$ be a monotonically decreasing sequence with positive terms, and suppose the series $\displaystyle\sum_{n=1}^{\infty} a_{2^n}$ diverges. Show that the series $\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{n}$ diverges. Using this, show that $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n\ln n}$ diverges.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">비판정법 적용 (임용05-12)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>무한급수 $\displaystyle\sum_{n=1}^{\infty} \frac{n!}{(n+1)^n}$의 수렴, 발산을 판정하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the infinite series $\displaystyle\sum_{n=1}^{\infty} \frac{n!}{(n+1)^n}$ converges or diverges.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">교대급수판정법 (임용07-8)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>교대급수판정법을 기술하고, 교대급수판정법을 이용하여 무한급수 $\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{(2n-1)!}{(2^n \cdot n!)^2}$가 수렴함을 보이시오. (단, $\dfrac{(2n-1)!}{(2^n \cdot n!)^2} = \dfrac{1}{2} \times \dfrac{3}{4} \times \cdots \times \dfrac{2n-1}{2n} \times \dfrac{1}{2n}$이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>State the Alternating Series Test, and use it to show that the infinite series $\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{(2n-1)!}{(2^n \cdot n!)^2}$ converges. (Here $\dfrac{(2n-1)!}{(2^n \cdot n!)^2} = \dfrac{1}{2} \times \dfrac{3}{4} \times \cdots \times \dfrac{2n-1}{2n} \times \dfrac{1}{2n}$.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">수렴급수 보기 판정 (임용13-21)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 항이 양수인 급수 $\displaystyle\sum_{n=1}^{\infty} a_n$이 수렴할 때, 수렴하는 급수만을 &lt;보기&gt;에서 있는 대로 고른 것은?</p>
+        <div class="formal-box">
+          <p>ㄱ. $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} a_n$</p>
+          <p>ㄴ. $\displaystyle\sum_{n=1}^{\infty} \sqrt{a_n^2+1}$</p>
+          <p>ㄷ. $\displaystyle\sum_{n=1}^{\infty} \left(e^{a_n}-1\right)$</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp; ② ㄷ &nbsp;&nbsp; ③ ㄱ, ㄴ &nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp; ⑤ ㄴ, ㄷ</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the series $\displaystyle\sum_{n=1}^{\infty} a_n$, all of whose terms are positive, converges. Which choice below lists exactly the series among &lt;List&gt; that converge?</p>
+        <div class="formal-box">
+          <p>ㄱ. $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} a_n$</p>
+          <p>ㄴ. $\displaystyle\sum_{n=1}^{\infty} \sqrt{a_n^2+1}$</p>
+          <p>ㄷ. $\displaystyle\sum_{n=1}^{\infty} \left(e^{a_n}-1\right)$</p>
+        </div>
+        <p>① ㄱ &nbsp;&nbsp; ② ㄷ &nbsp;&nbsp; ③ ㄱ, ㄴ &nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp; ⑤ ㄴ, ㄷ</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="card pr-card" id="pr10">
+  <div class="card-head">
+    <span class="pr-num">문제 10</span>
+    <span class="ex-title">적분수열의 급수 (2024(A)-10)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>수열 $\{a_n\}$이 $a_n = \displaystyle\int_0^1 (1-x^2)^n\,dx$일 때, $a_{n+1} = f(n) a_n$을 만족시키는 $f(n)$을 구하고, $\displaystyle\sum_{n=1}^{\infty} (a_n)^{\alpha}$이 수렴하는 실수 $\alpha$의 범위를 풀이 과정과 함께 쓰시오.</p>
+        <p>다음 식은 필요하다면 증명 없이 사용할 수 있다.</p>
+        <div class="formal-box">모든 자연수 $n$에 대하여 $n^{n+1/2} e^{-n} \leq n! \leq n^{n+1/2} e^{1-n}$이다.</div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the sequence $\{a_n\}$ defined by $a_n = \displaystyle\int_0^1 (1-x^2)^n\,dx$, find $f(n)$ satisfying $a_{n+1} = f(n) a_n$, and find the range of real numbers $\alpha$ for which $\displaystyle\sum_{n=1}^{\infty} (a_n)^{\alpha}$ converges, together with your solution process.</p>
+        <p>The following inequality may be used without proof if needed.</p>
+        <div class="formal-box">For every natural number $n$, $n^{n+1/2} e^{-n} \leq n! \leq n^{n+1/2} e^{1-n}$.</div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

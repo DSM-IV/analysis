@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02. 선형화와 미분 (Linearization and Differentials) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 02단원 선형화와 미분(Linearization and Differentials) 예제·유제·문제 모음. 선형근사, 미분 dy, 오차 추정, 이차 근사식, 라이프니츠 규칙을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 선형화, linearization, 선형근사, linear approximation, 미분, differential, 오차, error, 이차 근사식, quadratic approximation, 라이프니츠 규칙, Leibniz's rule, 미분가능, differentiable, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch02.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02. 선형화와 미분 (Linearization and Differentials) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="선형화와 미분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch02.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "02. 선형화와 미분 (Linearization and Differentials) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 선형화와 미분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch02.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch02.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html" class="active">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 02</p>
+  <h1>02. 선형화와 미분<span>Linearization and Differentials</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 제곱근함수의 선형화</a></li>
+    <li><a href="#yu01"><span class="toc-num">유제 01</span> 여러 함수의 선형화</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 미분 dy 계산</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 음함수·합성함수의 dy</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 원 넓이 변화량의 선형근사</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 원기둥 부피 변화량의 선형근사</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 혈중 농도 변화량의 선형근사</a></li>
+    <li><a href="#yu03-3"><span class="toc-num">유제 03-3</span> 상대론적 질량 증가량 근사</a></li>
+    <li><a href="#yu03-4"><span class="toc-num">유제 03-4</span> 선형근사로 값 계산</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 낙하 거리 오차 추정</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 구 부피 측정의 오차 허용범위</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 빌딩 높이 측정의 각도 오차</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 이차 근사식 구하기</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 선형근사식의 필요충분조건</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 대칭차분과 미분가능성</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 연속이지만 미분불가능한 함수</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 도함수의 연속 조건 (임용14A-기9)</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 진동함수의 미분가능성 (임용18A-11)</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 라이프니츠 규칙 증명 (라이프니츠 규칙)</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 라이프니츠 규칙과 고계도함수</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">제곱근함수의 선형화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \sqrt{1+x}$를 $x = 0$에서 선형화하여라.</li>
+          <li>$f(x) = \sqrt{1+x}$를 $x = 3$에서 선형화하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x)=\sqrt{1+x}$이므로 $f'(x) = \dfrac{1}{2\sqrt{1+x}}$이다.</p>
+        <p>(1) $x=0$에서 $f(0)=1$, $f'(0)=\dfrac{1}{2}$이므로 선형화는
+        $$L(x) = f(0) + f'(0)(x-0) = 1 + \frac{1}{2}x$$
+        이다.</p>
+        <p>(2) $x=3$에서 $f(3)=\sqrt{4}=2$, $f'(3)=\dfrac{1}{2\sqrt{4}}=\dfrac{1}{4}$이므로 선형화는
+        $$L(x) = f(3)+f'(3)(x-3) = 2+\frac{1}{4}(x-3)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Linearize $f(x) = \sqrt{1+x}$ at $x = 0$.</li>
+          <li>Linearize $f(x) = \sqrt{1+x}$ at $x = 3$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f(x)=\sqrt{1+x}$, we have $f'(x) = \dfrac{1}{2\sqrt{1+x}}$.</p>
+        <p>(1) At $x=0$, $f(0)=1$ and $f'(0)=\dfrac{1}{2}$, so the linearization is
+        $$L(x) = f(0)+f'(0)(x-0) = 1+\frac{1}{2}x.$$</p>
+        <p>(2) At $x=3$, $f(3)=\sqrt{4}=2$ and $f'(3)=\dfrac{1}{2\sqrt{4}}=\dfrac{1}{4}$, so the linearization is
+        $$L(x) = f(3)+f'(3)(x-3) = 2+\frac{1}{4}(x-3).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01 -->
+<div class="card ex-card" id="yu01">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01</span>
+    <span class="ex-title">여러 함수의 선형화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \cos x$를 $x = \pi/2$에서 선형화하여라.</li>
+          <li>$f(x) = (1+x)^k$를 $x = 0$에서 선형화하여라.</li>
+          <li>$f(x) = x + \dfrac{1}{x}$를 $x = 1$에서 선형화하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x)=\cos x$, $f'(x) = -\sin x$이다. $x=\pi/2$에서 $f(\pi/2)=0$, $f'(\pi/2)=-1$이므로
+        $$L(x) = 0 + (-1)\left(x-\frac{\pi}{2}\right) = \frac{\pi}{2} - x$$
+        이다.</p>
+        <p>(2) $f(x)=(1+x)^k$, $f'(x)=k(1+x)^{k-1}$이다. $x=0$에서 $f(0)=1$, $f'(0)=k$이므로
+        $$L(x) = 1+kx$$
+        이다.</p>
+        <p>(3) $f(x)=x+\dfrac1x$, $f'(x)=1-\dfrac{1}{x^2}$이다. $x=1$에서 $f(1)=2$, $f'(1)=0$이므로
+        $$L(x) = 2 + 0\cdot(x-1) = 2$$
+        이다. 즉 $f$는 $x=1$ 근방에서 상수함수 $2$로 선형근사된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Linearize $f(x) = \cos x$ at $x = \pi/2$.</li>
+          <li>Linearize $f(x) = (1+x)^k$ at $x = 0$.</li>
+          <li>Linearize $f(x) = x + \dfrac{1}{x}$ at $x = 1$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $f(x)=\cos x$, $f'(x) = -\sin x$. At $x=\pi/2$, $f(\pi/2)=0$ and $f'(\pi/2)=-1$, so
+        $$L(x) = 0 + (-1)\left(x-\frac{\pi}{2}\right) = \frac{\pi}{2} - x.$$</p>
+        <p>(2) Since $f(x)=(1+x)^k$, $f'(x)=k(1+x)^{k-1}$. At $x=0$, $f(0)=1$ and $f'(0)=k$, so
+        $$L(x) = 1+kx.$$</p>
+        <p>(3) Since $f(x)=x+\dfrac1x$, $f'(x)=1-\dfrac{1}{x^2}$. At $x=1$, $f(1)=2$ and $f'(1)=0$, so
+        $$L(x) = 2 + 0\cdot(x-1) = 2.$$
+        That is, near $x=1$, $f$ is linearly approximated by the constant function $2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">미분 dy 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$y = x^5 + 37x$라 할 때 $dy$를 구하여라. 이때, $x = 1$이고 $dx = 0.2$이면 $dy$는 얼마인가?</li>
+          <li>$d(\tan 2x)$, $d\left(\dfrac{x}{x+1}\right)$을 구하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $y=x^5+37x$이므로 $dy = (5x^4+37)\,dx$이다. $x=1$, $dx=0.2$일 때
+        $$dy = (5\cdot1^4+37)(0.2) = 42\times0.2 = 8.4$$
+        이다.</p>
+        <p>(2) $\tan 2x$의 미분은 $d(\tan2x) = \sec^2(2x)\cdot 2\,dx = 2\sec^2(2x)\,dx$이다. $\dfrac{x}{x+1}$의 미분은 몫의 법칙에 의해 $\left(\dfrac{x}{x+1}\right)' = \dfrac{(x+1)-x}{(x+1)^2} = \dfrac{1}{(x+1)^2}$이므로
+        $$d\left(\frac{x}{x+1}\right) = \frac{1}{(x+1)^2}\,dx$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $y = x^5 + 37x$. Find $dy$. What is the value of $dy$ when $x = 1$ and $dx = 0.2$?</li>
+          <li>Find $d(\tan 2x)$ and $d\left(\dfrac{x}{x+1}\right)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $y=x^5+37x$, $dy = (5x^4+37)\,dx$. At $x=1$, $dx=0.2$,
+        $$dy = (5\cdot1^4+37)(0.2) = 42\times0.2 = 8.4.$$</p>
+        <p>(2) For $\tan 2x$, $d(\tan2x) = \sec^2(2x)\cdot 2\,dx = 2\sec^2(2x)\,dx$. For $\dfrac{x}{x+1}$, the quotient rule gives $\left(\dfrac{x}{x+1}\right)' = \dfrac{(x+1)-x}{(x+1)^2} = \dfrac{1}{(x+1)^2}$, so
+        $$d\left(\frac{x}{x+1}\right) = \frac{1}{(x+1)^2}\,dx.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">음함수·합성함수의 dy</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 식에서 $dy$를 구하여라.</p>
+        <ol>
+          <li>$2y^{3/2} + xy - x = 0$</li>
+          <li>$y = 3\csc\left(1 - 2\sqrt{x}\right)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $2y^{3/2}+xy-x=0$의 양변을 미분하면
+        $$2\cdot\frac32 y^{1/2}\,dy + (x\,dy+y\,dx) - dx = 0$$
+        $$3\sqrt{y}\,dy + x\,dy + y\,dx - dx = 0$$
+        $$(3\sqrt{y}+x)\,dy = (1-y)\,dx$$
+        이므로
+        $$dy = \frac{1-y}{3\sqrt{y}+x}\,dx$$
+        이다.</p>
+        <p>(2) $y=3\csc(1-2\sqrt{x})$라 하자. $u=1-2\sqrt x$로 놓으면 $\dfrac{du}{dx} = -\dfrac{1}{\sqrt x}$이고, $(\csc u)' = -\csc u\cot u\cdot u'$이므로
+        $$\frac{dy}{dx} = 3\left(-\csc u\cot u\right)\left(-\frac{1}{\sqrt x}\right) = \frac{3\csc(1-2\sqrt x)\cot(1-2\sqrt x)}{\sqrt x}$$
+        이다. 따라서
+        $$dy = \frac{3\csc(1-2\sqrt x)\cot(1-2\sqrt x)}{\sqrt x}\,dx$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $dy$ for each equation.</p>
+        <ol>
+          <li>$2y^{3/2} + xy - x = 0$</li>
+          <li>$y = 3\csc\left(1 - 2\sqrt{x}\right)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Differentiating both sides of $2y^{3/2}+xy-x=0$,
+        $$2\cdot\frac32 y^{1/2}\,dy + (x\,dy+y\,dx) - dx = 0$$
+        $$3\sqrt{y}\,dy + x\,dy + y\,dx - dx = 0$$
+        $$(3\sqrt{y}+x)\,dy = (1-y)\,dx,$$
+        so
+        $$dy = \frac{1-y}{3\sqrt{y}+x}\,dx.$$</p>
+        <p>(2) Let $y=3\csc(1-2\sqrt{x})$. Set $u=1-2\sqrt x$, so $\dfrac{du}{dx} = -\dfrac{1}{\sqrt x}$, and $(\csc u)' = -\csc u\cot u\cdot u'$ gives
+        $$\frac{dy}{dx} = 3\left(-\csc u\cot u\right)\left(-\frac{1}{\sqrt x}\right) = \frac{3\csc(1-2\sqrt x)\cot(1-2\sqrt x)}{\sqrt x}.$$
+        Hence
+        $$dy = \frac{3\csc(1-2\sqrt x)\cot(1-2\sqrt x)}{\sqrt x}\,dx.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">원 넓이 변화량의 선형근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원의 반지름이 10m에서 10.1m로 변화할 때 넓이의 변화량을 선형근사하여 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 원의 넓이는 $A=\pi r^2$이므로 $dA = 2\pi r\,dr$이다.</p>
+        <p>$r=10$, $dr=10.1-10=0.1$이므로
+        $$dA = 2\pi(10)(0.1) = 2\pi \approx 6.28\ (\text{m}^2)$$
+        이다. 즉 반지름이 10m에서 10.1m로 변할 때 원의 넓이는 약 $2\pi\ \text{m}^2$(약 $6.28\ \text{m}^2$) 증가한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use a linear approximation to find the change in the area of a circle when its radius changes from 10 m to 10.1 m.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since the area of a circle is $A=\pi r^2$, $dA = 2\pi r\,dr$.</p>
+        <p>With $r=10$ and $dr=10.1-10=0.1$,
+        $$dA = 2\pi(10)(0.1) = 2\pi \approx 6.28\ (\text{m}^2).$$
+        That is, as the radius changes from 10 m to 10.1 m, the area increases by about $2\pi\ \text{m}^2$ (about $6.28\ \text{m}^2$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">원기둥 부피 변화량의 선형근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원기둥의 반지름이 $r_0$에서 $r_0 + dr$로 변화하고 높이는 $h_0$로 일정할 때 부피의 변화량을 선형근사하여 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 원기둥의 부피는 $V = \pi r^2 h_0$이고 $h_0$는 고정되어 있으므로
+        $$dV = 2\pi r_0 h_0\,dr$$
+        이다. 즉 반지름이 $r_0$에서 $r_0+dr$로 변할 때 부피의 변화량은 선형근사로 $2\pi r_0 h_0\,dr$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use a linear approximation to find the change in the volume of a cylinder when its radius changes from $r_0$ to $r_0 + dr$ while its height remains fixed at $h_0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The volume of the cylinder is $V = \pi r^2 h_0$ with $h_0$ fixed, so
+        $$dV = 2\pi r_0 h_0\,dr.$$
+        That is, as the radius changes from $r_0$ to $r_0+dr$, the change in volume is, by linear approximation, $2\pi r_0 h_0\,dr$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">혈중 농도 변화량의 선형근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사람의 혈액에서 약 A의 농도 $C$(mg/ml)는 A를 먹은지 $t$시간 후에 $C(t) = \dfrac{4t}{1+t^3} + 0.06t$로 변화한다고 하자. 이때 20분에서 30분 동안 변화한 농도를 선형근사하여 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C(t) = \dfrac{4t}{1+t^3}+0.06t$의 도함수는 몫의 법칙에 의해
+        $$C'(t) = \frac{4(1+t^3)-4t(3t^2)}{(1+t^3)^2}+0.06 = \frac{4-8t^3}{(1+t^3)^2}+0.06$$
+        이다.</p>
+        <p>20분은 $t=\dfrac{1}{3}$시간이고, 20분에서 30분까지의 변화는 $dt = \dfrac{1}{6}$시간이다. $t=\dfrac13$에서 $t^3=\dfrac{1}{27}$이므로
+        $$C'\left(\frac13\right) = \frac{4-\frac{8}{27}}{\left(\frac{28}{27}\right)^2}+0.06 = \frac{\frac{100}{27}}{\frac{784}{729}}+0.06 = \frac{675}{196}+0.06 \approx 3.444+0.06 = 3.504$$
+        이다.</p>
+        <p>따라서 선형근사에 의해
+        $$dC = C'\left(\frac13\right)dt \approx 3.504\times\frac16 \approx 0.584\ (\text{mg/ml})$$
+        이다. 즉 20분에서 30분 동안 혈중 농도는 약 $0.584\ \text{mg/ml}$ 증가한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the concentration $C$ (mg/ml) of drug A in a person's blood, $t$ hours after taking it, changes according to $C(t) = \dfrac{4t}{1+t^3} + 0.06t$. Use a linear approximation to find the change in concentration from 20 minutes to 30 minutes.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By the quotient rule, the derivative of $C(t) = \dfrac{4t}{1+t^3}+0.06t$ is
+        $$C'(t) = \frac{4(1+t^3)-4t(3t^2)}{(1+t^3)^2}+0.06 = \frac{4-8t^3}{(1+t^3)^2}+0.06.$$</p>
+        <p>20 minutes is $t=\dfrac{1}{3}$ hour, and the change from 20 to 30 minutes is $dt = \dfrac{1}{6}$ hour. At $t=\dfrac13$, $t^3=\dfrac{1}{27}$, so
+        $$C'\left(\frac13\right) = \frac{4-\frac{8}{27}}{\left(\frac{28}{27}\right)^2}+0.06 = \frac{\frac{100}{27}}{\frac{784}{729}}+0.06 = \frac{675}{196}+0.06 \approx 3.444+0.06 = 3.504.$$</p>
+        <p>Hence, by linear approximation,
+        $$dC = C'\left(\frac13\right)dt \approx 3.504\times\frac16 \approx 0.584\ (\text{mg/ml}).$$
+        That is, the blood concentration increases by about $0.584\ \text{mg/ml}$ from 20 to 30 minutes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-3 -->
+<div class="card ex-card" id="yu03-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-3</span>
+    <span class="ex-title">상대론적 질량 증가량 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아인슈타인의 상대성이론에 의하면 정지했을 때 질량이 $m_0$인 물체가 $v$의 속력으로 운동할 때의 질량은 $m = \dfrac{m_0}{\sqrt{1 - v^2/c^2}}$으로 근사된다고 한다. (단, $c$는 빛의 속력으로 약 30만km/s이다.)</p>
+        <p>이때 $\dfrac{1}{\sqrt{1-x^2}} \approx 1 + \dfrac{1}{2}x^2$이 성립함을 보이고 $\Delta m = m - m_0$를 근사하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f(u) = \dfrac{1}{\sqrt{1-u}} = (1-u)^{-1/2}$이라 하자. $f$는 $u=0$ 근방에서 미분가능하고
+        $$f(0)=1, \qquad f'(u) = \frac12(1-u)^{-3/2}, \qquad f'(0) = \frac12$$
+        이므로 $u=0$에서 $f$의 선형화는
+        $$L(u) = f(0)+f'(0)u = 1+\frac{u}{2}$$
+        이다. $u$가 $0$에 가까울 때 $f(u)\approx L(u)$, 즉
+        $$\frac{1}{\sqrt{1-u}} \approx 1+\frac u2$$
+        이다. 여기에 $u=x^2$을 대입하면 $x$가 $0$에 가까울 때
+        $$\frac{1}{\sqrt{1-x^2}} \approx 1+\frac12 x^2$$
+        이 성립한다.</p>
+        <p>이제 $x=v/c$로 놓으면 ($v$가 $c$에 비해 매우 작으므로 $x$는 $0$에 가깝다) 위 근사에 의해
+        $$m = \frac{m_0}{\sqrt{1-v^2/c^2}} = m_0\cdot\frac{1}{\sqrt{1-x^2}} \approx m_0\left(1+\frac12 x^2\right) = m_0+\frac{m_0 v^2}{2c^2}$$
+        이다. 따라서
+        $$\Delta m = m-m_0 \approx \frac{m_0 v^2}{2c^2}$$
+        이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>According to Einstein's theory of relativity, an object with rest mass $m_0$ moving at speed $v$ has mass approximated by $m = \dfrac{m_0}{\sqrt{1 - v^2/c^2}}$. (Here $c$ is the speed of light, about 300,000 km/s.)</p>
+        <p>Show that $\dfrac{1}{\sqrt{1-x^2}} \approx 1 + \dfrac{1}{2}x^2$, and use this to approximate $\Delta m = m - m_0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $f(u) = \dfrac{1}{\sqrt{1-u}} = (1-u)^{-1/2}$. Then $f$ is differentiable near $u=0$, with
+        $$f(0)=1, \qquad f'(u)=\frac12(1-u)^{-3/2}, \qquad f'(0)=\frac12,$$
+        so the linearization of $f$ at $u=0$ is
+        $$L(u) = f(0)+f'(0)u = 1+\frac u2.$$
+        For $u$ near $0$, $f(u)\approx L(u)$, that is,
+        $$\frac{1}{\sqrt{1-u}}\approx 1+\frac u2.$$
+        Substituting $u=x^2$ gives, for $x$ near $0$,
+        $$\frac{1}{\sqrt{1-x^2}}\approx 1+\frac12 x^2.$$</p>
+        <p>Now let $x=v/c$ (which is near $0$ since $v$ is much smaller than $c$). By the approximation above,
+        $$m = \frac{m_0}{\sqrt{1-v^2/c^2}} = m_0\cdot\frac{1}{\sqrt{1-x^2}} \approx m_0\left(1+\frac12 x^2\right) = m_0+\frac{m_0v^2}{2c^2}.$$
+        Hence
+        $$\Delta m = m-m_0 \approx \frac{m_0v^2}{2c^2}.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-4 -->
+<div class="card ex-card" id="yu03-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-4</span>
+    <span class="ex-title">선형근사로 값 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>선형근사를 이용해 다음 값을 대략 계산하시오.</p>
+        <ol>
+          <li>$7.97^{1/3}$</li>
+          <li>$\sin(\pi/6 + 0.01)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x)=x^{1/3}$, $f'(x)=\dfrac13x^{-2/3}$이라 하자. $8^{1/3}=2$이므로 $x=8$에서 선형화한다. $f(8)=2$, $f'(8)=\dfrac13\cdot 8^{-2/3} = \dfrac13\cdot\dfrac14=\dfrac1{12}$이고, $dx = 7.97-8=-0.03$이므로
+        $$7.97^{1/3} \approx f(8)+f'(8)\,dx = 2+\frac1{12}(-0.03) = 2-0.0025 = 1.9975$$
+        이다.</p>
+        <p>(2) $f(x)=\sin x$, $f'(x)=\cos x$라 하자. $x=\pi/6$에서 $f(\pi/6)=\dfrac12$, $f'(\pi/6)=\dfrac{\sqrt3}{2}$이고 $dx=0.01$이므로
+        $$\sin\left(\frac{\pi}{6}+0.01\right) \approx f\left(\frac\pi6\right)+f'\left(\frac\pi6\right)(0.01) = \frac12+\frac{\sqrt3}{2}(0.01) \approx 0.5+0.00866 = 0.50866$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use a linear approximation to estimate each of the following values.</p>
+        <ol>
+          <li>$7.97^{1/3}$</li>
+          <li>$\sin(\pi/6 + 0.01)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Let $f(x)=x^{1/3}$, so $f'(x)=\dfrac13x^{-2/3}$. Since $8^{1/3}=2$, we linearize at $x=8$. We have $f(8)=2$, $f'(8)=\dfrac13\cdot 8^{-2/3} = \dfrac13\cdot\dfrac14=\dfrac1{12}$, and $dx = 7.97-8=-0.03$, so
+        $$7.97^{1/3} \approx f(8)+f'(8)\,dx = 2+\frac1{12}(-0.03) = 2-0.0025 = 1.9975.$$</p>
+        <p>(2) Let $f(x)=\sin x$, so $f'(x)=\cos x$. At $x=\pi/6$, $f(\pi/6)=\dfrac12$, $f'(\pi/6)=\dfrac{\sqrt3}{2}$, and $dx=0.01$, so
+        $$\sin\left(\frac{\pi}{6}+0.01\right) \approx f\left(\frac\pi6\right)+f'\left(\frac\pi6\right)(0.01) = \frac12+\frac{\sqrt3}{2}(0.01) \approx 0.5+0.00866 = 0.50866.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">낙하 거리 오차 추정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>물체를 가만히 떨어뜨릴 때 떨어뜨린 거리를 $s$, 떨어진 시간을 $t$라 하면 $s = 4.9t^2$가 성립한다. 시간을 측정해 물체가 떨어진 거리를 계산한다고 가정하면 시간을 측정할 때 0.1초의 오차는 거리를 계산할 때 어느 정도의 오차를 만들어내는가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $s=4.9t^2$이므로 $ds = 9.8t\,dt$이다.</p>
+        <p>시간 측정 오차가 $dt=0.1$초일 때 거리의 오차는 선형근사에 의해
+        $$ds = 9.8t(0.1) = 0.98t\ (\text{m})$$
+        이다. 즉 낙하 시간이 $t$초일 때 시간 측정의 $0.1$초 오차는 거리 계산에서 약 $0.98t$ m의 오차를 만들어낸다 (오차의 크기는 낙하 시간 $t$에 비례하여 커진다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>When an object is dropped from rest, the distance fallen $s$ and the elapsed time $t$ satisfy $s = 4.9t^2$. Suppose the distance fallen is computed by measuring the time. If the time measurement has an error of 0.1 seconds, approximately how large an error does this produce in the computed distance?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $s=4.9t^2$, $ds = 9.8t\,dt$.</p>
+        <p>With a time-measurement error of $dt=0.1$ seconds, the error in the computed distance is, by linear approximation,
+        $$ds = 9.8t(0.1) = 0.98t\ (\text{m}).$$
+        That is, at fall time $t$ seconds, a $0.1$-second error in the time measurement produces an error of about $0.98t$ m in the computed distance (the size of the error grows in proportion to the fall time $t$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">구 부피 측정의 오차 허용범위</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구의 부피를 3% 이내의 오차로 측정하기 위해 지름은 어느 정도 이내의 오차로 측정되어야 하는가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 구의 지름을 $d$라 하면 부피는 $V = \dfrac43\pi r^3 = \dfrac43\pi\left(\dfrac d2\right)^3 = \dfrac{\pi}{6}d^3$이다.</p>
+        <p>$dV = \dfrac{\pi}{2}d^2\,dd$이므로
+        $$\frac{dV}{V} = \frac{\frac\pi2 d^2\,dd}{\frac\pi6 d^3} = 3\cdot\frac{dd}{d}$$
+        이다.</p>
+        <p>부피의 오차가 3% 이내이려면 $\left|\dfrac{dV}{V}\right| \leq 0.03$이어야 하므로
+        $$3\left|\frac{dd}{d}\right| \leq 0.03 \quad\Longrightarrow\quad \left|\frac{dd}{d}\right| \leq 0.01$$
+        이다. 즉 지름은 $1\%$ 이내의 오차로 측정되어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To measure the volume of a sphere with an error of at most 3%, within what error must the diameter be measured?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $d$ be the diameter of the sphere. Then the volume is $V = \dfrac43\pi r^3 = \dfrac43\pi\left(\dfrac d2\right)^3 = \dfrac{\pi}{6}d^3$.</p>
+        <p>Since $dV = \dfrac{\pi}{2}d^2\,dd$,
+        $$\frac{dV}{V} = \frac{\frac\pi2 d^2\,dd}{\frac\pi6 d^3} = 3\cdot\frac{dd}{d}.$$</p>
+        <p>For the volume error to be at most 3%, we need $\left|\dfrac{dV}{V}\right| \leq 0.03$, so
+        $$3\left|\frac{dd}{d}\right| \leq 0.03 \quad\Longrightarrow\quad \left|\frac{dd}{d}\right| \leq 0.01.$$
+        That is, the diameter must be measured with an error of at most $1\%$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">빌딩 높이 측정의 각도 오차</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>빌딩으로부터 9m 떨어진 거리에서 철수가 빌딩의 높이를 계산하려고 한다. 철수는 지면과 철수가 빌딩의 꼭대기를 바라봤을 때 이루는 각이 $75°$라고 측정하였다. 빌딩의 높이를 4% 이내의 오차를 갖도록 측정하려면 각도는 어느 정도의 오차만이 허용되는가? (단, 철수의 키는 무시한다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 빌딩의 높이를 $h$, 각도를 $\theta$라 하면 $h = 9\tan\theta$이다 (단, $\theta$는 라디안 기준이며 $75° = \dfrac{5\pi}{12}$ 라디안이다).</p>
+        <p>$dh = 9\sec^2\theta\,d\theta$이므로
+        $$\frac{dh}{h} = \frac{9\sec^2\theta\,d\theta}{9\tan\theta} = \frac{d\theta}{\sin\theta\cos\theta} = \frac{2\,d\theta}{\sin2\theta}$$
+        이다.</p>
+        <p>$\theta=75°$일 때 $2\theta = 150°$이고 $\sin150° = \dfrac12$이므로
+        $$\frac{dh}{h} = \frac{2\,d\theta}{1/2} = 4\,d\theta$$
+        이다.</p>
+        <p>높이의 오차가 4% 이내이려면 $\left|\dfrac{dh}{h}\right| \leq 0.04$이어야 하므로
+        $$4|d\theta| \leq 0.04 \quad\Longrightarrow\quad |d\theta| \leq 0.01\ (\text{라디안})$$
+        이다. 즉 각도는 라디안 기준으로 $0.01$ 라디안(약 $0.57°$) 이내의 오차로 측정되어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Cheolsu stands 9 m from a building and wants to compute its height. He measures the angle of elevation from the ground to the top of the building to be $75°$. If the computed height is to have an error of at most 4%, what is the maximum allowable error in the angle measurement? (Ignore Cheolsu's own height.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $h$ be the height of the building and $\theta$ the angle, so $h = 9\tan\theta$ (with $\theta$ in radians, where $75° = \dfrac{5\pi}{12}$ radians).</p>
+        <p>Since $dh = 9\sec^2\theta\,d\theta$,
+        $$\frac{dh}{h} = \frac{9\sec^2\theta\,d\theta}{9\tan\theta} = \frac{d\theta}{\sin\theta\cos\theta} = \frac{2\,d\theta}{\sin2\theta}.$$</p>
+        <p>At $\theta=75°$, $2\theta = 150°$ and $\sin150° = \dfrac12$, so
+        $$\frac{dh}{h} = \frac{2\,d\theta}{1/2} = 4\,d\theta.$$</p>
+        <p>For the height error to be at most 4%, we need $\left|\dfrac{dh}{h}\right| \leq 0.04$, so
+        $$4|d\theta| \leq 0.04 \quad\Longrightarrow\quad |d\theta| \leq 0.01\ (\text{radians}).$$
+        That is, the angle must be measured with an error of at most $0.01$ radian (about $0.57°$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">이차 근사식 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>(2번 미분가능한) 함수 $f(x)$를 $x = a$에서 이차식 $Q(x) = b_0 + b_1(x-a) + b_2(x-a)^2$으로 근사하고자 한다. 다음 세 조건 $Q(a) = f(a)$, $Q'(a) = f'(a)$, $Q''(a) = f''(a)$를 만족하도록 근사할 때, $b_0, b_1, b_2$의 값을 구하시오.</li>
+          <li>(1)에서 $f(x) = \dfrac{1}{1-x}$일 때 $x = 0$에서의 이차 근사식 $Q(x)$를 구하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>We wish to approximate a (twice differentiable) function $f(x)$ near $x = a$ by a quadratic $Q(x) = b_0 + b_1(x-a) + b_2(x-a)^2$. Find the values of $b_0, b_1, b_2$ so that the three conditions $Q(a) = f(a)$, $Q'(a) = f'(a)$, $Q''(a) = f''(a)$ hold.</li>
+          <li>Using part (1), find the quadratic approximation $Q(x)$ of $f(x) = \dfrac{1}{1-x}$ at $x = 0$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">선형근사식의 필요충분조건</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x)$는 $x = a$에서 미분가능한 함수이고 $L(x)$는 일차함수라고 하자.</p>
+        <p>$E(x) = f(x) - L(x)$라 할 때, $L(x)$가 $x = a$에서 $f(x)$의 선형근사식일 필요충분조건은 $E(a) = 0$이고 $\displaystyle\lim_{x \to a} \dfrac{E(x)}{x-a} = 0$인 것을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x)$ be differentiable at $x = a$, and let $L(x)$ be a linear function.</p>
+        <p>Let $E(x) = f(x) - L(x)$. Show that $L(x)$ is the linear approximation of $f(x)$ at $x = a$ if and only if $E(a) = 0$ and $\displaystyle\lim_{x \to a} \dfrac{E(x)}{x-a} = 0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">대칭차분과 미분가능성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실함수 $f(x)$에 대해 다음을 보이시오.</p>
+        <ol>
+          <li>$f$가 $x = a$에서 미분가능하면 $\displaystyle\lim_{h \to 0} \dfrac{f(a+h) - f(a-h)}{2h} = f'(a)$가 성립한다.</li>
+          <li>$\displaystyle\lim_{h \to 0} \dfrac{f(a+h) - f(a-h)}{2h}$가 수렴하지만 $f$가 $x = a$에서 미분가능하지 않은 하나의 예를 드시오. (Hint. $f(x) = |x|$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x)$ be a real-valued function. Show the following.</p>
+        <ol>
+          <li>If $f$ is differentiable at $x = a$, then $\displaystyle\lim_{h \to 0} \dfrac{f(a+h) - f(a-h)}{2h} = f'(a)$.</li>
+          <li>Give an example where $\displaystyle\lim_{h \to 0} \dfrac{f(a+h) - f(a-h)}{2h}$ converges but $f$ is not differentiable at $x = a$. (Hint. $f(x) = |x|$)</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">연속이지만 미분불가능한 함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \begin{cases} x\sin\dfrac{1}{x} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$는 $x = 0$에서 연속이지만 미분가능하지 않음을 보이시오.</li>
+          <li>$f(x) = \begin{cases} x^2\sin\dfrac{1}{x} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$는 모든 점에서 미분가능하지만 $f'(x)$는 $x = 0$에서 연속이 아님을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $f(x) = \begin{cases} x\sin\dfrac{1}{x} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$ is continuous at $x = 0$ but not differentiable there.</li>
+          <li>Show that $f(x) = \begin{cases} x^2\sin\dfrac{1}{x} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$ is differentiable everywhere, but $f'(x)$ is not continuous at $x = 0$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">도함수의 연속 조건 (임용14A-기9)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>양수 $r \gt 0$에 대하여 함수 $f : \mathbb{R} \to \mathbb{R}$를 다음과 같이 정의하자.</p>
+        <p>$$f(x) = \begin{cases} x^6\sin\dfrac{1}{x^r} + x^r\sin\dfrac{1}{x^2} & (x \gt 0) \\ 0 & (x \leq 0) \end{cases}$$</p>
+        <p>함수 $f$의 도함수 $f'$이 $x = 0$에서 연속이기 위한 필요충분조건을 $r$에 대한 부등식으로 나타내시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a positive number $r \gt 0$, define $f : \mathbb{R} \to \mathbb{R}$ by</p>
+        <p>$$f(x) = \begin{cases} x^6\sin\dfrac{1}{x^r} + x^r\sin\dfrac{1}{x^2} & (x \gt 0) \\ 0 & (x \leq 0) \end{cases}$$</p>
+        <p>Find the necessary and sufficient condition on $r$, expressed as an inequality, for the derivative $f'$ to be continuous at $x = 0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">진동함수의 미분가능성 (임용18A-11)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(0) = f'(0) = 0$인 함수 $f : \mathbb{R} \to \mathbb{R}$에 대하여 함수 $g$를</p>
+        <p>$$g(x) = \begin{cases} f(x)\cos\left(\dfrac{1}{x^2}\right) & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</p>
+        <p>이라 하자. 함수 $g$가 $x = 0$에서 미분가능함을 보이고 $g'(0)$의 값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : \mathbb{R} \to \mathbb{R}$ be a function with $f(0) = f'(0) = 0$, and define $g$ by</p>
+        <p>$$g(x) = \begin{cases} f(x)\cos\left(\dfrac{1}{x^2}\right) & (x \neq 0) \\ 0 & (x = 0) \end{cases}$$</p>
+        <p>Show that $g$ is differentiable at $x = 0$, and find the value of $g'(0)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">라이프니츠 규칙 증명 (라이프니츠 규칙)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$u(x), v(x)$ $n$번 미분가능한 함수이면 다음이 성립함을 보이시오.</p>
+        <p>$$\frac{d^n(uv)}{dx^n} = \sum_{k=0}^{n} \binom{n}{k} \frac{d^k u}{dx^k} \frac{d^{n-k}v}{dx^{n-k}} \quad \left(\text{단, } \binom{n}{k} = {}_n C_k\right)$$</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $u(x)$ and $v(x)$ are $n$ times differentiable functions. Show that</p>
+        <p>$$\frac{d^n(uv)}{dx^n} = \sum_{k=0}^{n} \binom{n}{k} \frac{d^k u}{dx^k} \frac{d^{n-k}v}{dx^{n-k}} \quad \left(\text{where } \binom{n}{k} = {}_n C_k\right)$$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">라이프니츠 규칙과 고계도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x) = \begin{cases} e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$이라 할 때 $f^{(n)}(0)$를 라이프니츠 규칙을 이용해 계산하시오.</li>
+          <li>$y = \sin x \left(-\dfrac{\pi}{2} \lt x \lt \dfrac{\pi}{2}\right)$의 역함수를 $f(x)$라 할 때 $f^{(n)}(0)$를 라이프니츠 규칙을 이용해 계산하시오.</li>
+        </ol>
+        <p>(단, 두 함수 모두 $n$번 미분가능하다고 가정하고 문제를 해결하자.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $f(x) = \begin{cases} e^{-1/x^2} & (x \neq 0) \\ 0 & (x = 0) \end{cases}$. Compute $f^{(n)}(0)$ using Leibniz's rule.</li>
+          <li>Let $f(x)$ be the inverse function of $y = \sin x \left(-\dfrac{\pi}{2} \lt x \lt \dfrac{\pi}{2}\right)$. Compute $f^{(n)}(0)$ using Leibniz's rule.</li>
+        </ol>
+        <p>(Assume both functions are $n$ times differentiable, and solve the problem under this assumption.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

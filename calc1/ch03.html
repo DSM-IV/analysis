@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03. 뉴턴의 방법 (Newton's Method) | 미적분학 1 학습 가이드</title>
+<meta name="description" content="미적분학 1 03단원 뉴턴의 방법(Newton's Method) 예제·유제·문제 모음. 근의 근사, 뉴턴 반복, 평균값 정리, 코시-슈바르츠 부등식, 고정점의 유일성을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 1, 뉴턴의 방법, Newton's method, 근 근사, root approximation, 근삿값, 평균값 정리, Mean Value Theorem, 코시-슈바르츠 부등식, Cauchy-Schwarz inequality, 고정점, fixed point, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc1/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03. 뉴턴의 방법 (Newton's Method) — 미적분학 1 한·영 대조">
+<meta property="og:description" content="뉴턴의 방법 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc1/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "03. 뉴턴의 방법 (Newton's Method) — 미적분학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 1 뉴턴의 방법 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc1/ch03.html",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-07-16",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc1/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="index.html">미적분학 1</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html" class="active">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+  <a href="ch15.html">15</a>
+  <a href="ch16.html">16</a>
+  <a href="ch17.html">17</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 1 — Unit 03</p>
+  <h1>03. 뉴턴의 방법<span>Newton's Method</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 근과 교점의 근사</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 두 근과 교점 근사</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> π의 근삿값 계산</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 분수함수의 근 근사</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 뉴턴의 방법이 실패하는 예</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 뉴턴 반복의 순환</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 평균값 정리와 최대 증가</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 제곱합이 상수함수</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 코시-슈바르츠 부등식</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 사인함수의 부등식 (임용06-8)</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 매개곡선과 평균값 정리 (임용15A-기3)</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 고정점의 유일성 (임용21B-7)</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 유계 도함수와 유일해 (임용16A-11)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">근과 교점의 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>뉴턴의 방법을 이용하여 $f(x) = x^2 - 2$의 양의 근을 근사하여라.</li>
+          <li>뉴턴의 방법을 이용하여 $y = x^3 - x$와 $y = 1$의 교점의 $x$좌표를 근사하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $f(x) = x^2 - 2$이면 $f'(x) = 2x$이고, 뉴턴의 방법의 반복식은
+        $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^2-2}{2x_n} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right)$$
+        이다. $x_0 = 1$에서 시작하여 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.500000</td><td>1.416667</td><td>1.414216</td><td>1.414214</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to \sqrt{2} \approx 1.414214$로 수렴하며, 이것이 $f(x)=x^2-2$의 양의 근의 근삿값이다.</p>
+        <p>(2) $y = x^3-x$와 $y=1$의 교점의 $x$좌표는 방정식 $x^3-x = 1$, 즉 $x^3-x-1=0$의 근이다. $f(x) = x^3-x-1$이면 $f'(x)=3x^2-1$이고, 반복식은
+        $$x_{n+1} = x_n - \frac{x_n^3-x_n-1}{3x_n^2-1}$$
+        이다. $x_0=1$에서 시작하여 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.500000</td><td>1.347826</td><td>1.325200</td><td>1.324718</td><td>1.324718</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to 1.324718$로 수렴하며, 이것이 교점의 $x$좌표의 근삿값이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Use Newton's method to approximate the positive root of $f(x) = x^2 - 2$.</li>
+          <li>Use Newton's method to approximate the $x$-coordinate of the intersection point of $y = x^3 - x$ and $y = 1$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) If $f(x) = x^2 - 2$, then $f'(x) = 2x$, and Newton's iteration is
+        $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^2-2}{2x_n} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).$$
+        Starting from $x_0 = 1$ and iterating gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.500000</td><td>1.416667</td><td>1.414216</td><td>1.414214</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to \sqrt{2} \approx 1.414214$, which is the approximate value of the positive root of $f(x)=x^2-2$.</p>
+        <p>(2) The $x$-coordinate of the intersection point of $y = x^3-x$ and $y=1$ is a root of $x^3-x = 1$, i.e., $x^3-x-1=0$. If $f(x) = x^3-x-1$, then $f'(x)=3x^2-1$, and the iteration is
+        $$x_{n+1} = x_n - \frac{x_n^3-x_n-1}{3x_n^2-1}.$$
+        Starting from $x_0=1$ and iterating gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.500000</td><td>1.347826</td><td>1.325200</td><td>1.324718</td><td>1.324718</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to 1.324718$, which is the approximate $x$-coordinate of the intersection point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">두 근과 교점 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>뉴턴의 방법을 이용하여 $f(x) = -x^2 + 2x + 1$의 두 근을 모두 근사하여라.
+            <div class="formal-box">(Hint. $x_0 = 0$와 $x_0 = 2$를 이용할 것)</div>
+          </li>
+          <li>뉴턴의 방법을 이용하여 $y = \tan x$와 $y = 2x$의 교점의 $x$좌표 중 $0$보다 크고 $\pi/2$보다 작은 것을 하나 근사하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $f(x) = -x^2+2x+1$이면 $f'(x) = -2x+2$이고, 뉴턴의 방법의 반복식은
+        $$x_{n+1} = x_n - \frac{-x_n^2+2x_n+1}{-2x_n+2}$$
+        이다.</p>
+        <p>$x_0=0$에서 시작하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.000000</td><td>-0.500000</td><td>-0.416667</td><td>-0.414216</td><td>-0.414214</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to 1-\sqrt{2} \approx -0.414214$로 수렴한다.</p>
+        <p>$x_0=2$에서 시작하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>2.000000</td><td>2.500000</td><td>2.416667</td><td>2.414216</td><td>2.414214</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to 1+\sqrt{2} \approx 2.414214$로 수렴한다. 실제로 $-x^2+2x+1=0$, 즉 $x^2-2x-1=0$의 두 근은 근의 공식에 의해 $x=1\pm\sqrt{2}$이므로, 위의 두 근삿값은 이 두 근에 정확히 대응한다.</p>
+        <p>(2) $y=\tan x$와 $y=2x$의 교점의 $x$좌표는 $f(x) = \tan x - 2x = 0$의 근이다. $f'(x) = \sec^2 x - 2$이고, 반복식은
+        $$x_{n+1} = x_n - \frac{\tan x_n - 2x_n}{\sec^2 x_n - 2}$$
+        이다. $x_0=1$ (이는 $0 \lt x_0 \lt \pi/2$를 만족한다)에서 시작하여 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.310478</td><td>1.223929</td><td>1.176051</td><td>1.165927</td><td>1.165562</td><td>1.165561</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to 1.165561$로 수렴하며, 이것이 $0$과 $\pi/2$ 사이에 있는 교점의 $x$좌표의 근삿값이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Use Newton's method to approximate both roots of $f(x) = -x^2 + 2x + 1$.
+            <div class="formal-box">(Hint. Use $x_0 = 0$ and $x_0 = 2$)</div>
+          </li>
+          <li>Use Newton's method to approximate one of the $x$-coordinates of the intersection points of $y = \tan x$ and $y = 2x$ that is greater than $0$ and less than $\pi/2$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) If $f(x) = -x^2+2x+1$, then $f'(x) = -2x+2$, and Newton's iteration is
+        $$x_{n+1} = x_n - \frac{-x_n^2+2x_n+1}{-2x_n+2}.$$</p>
+        <p>Starting from $x_0=0$ gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.000000</td><td>-0.500000</td><td>-0.416667</td><td>-0.414216</td><td>-0.414214</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to 1-\sqrt{2} \approx -0.414214$.</p>
+        <p>Starting from $x_0=2$ gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>2.000000</td><td>2.500000</td><td>2.416667</td><td>2.414216</td><td>2.414214</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to 1+\sqrt{2} \approx 2.414214$. Indeed, the two roots of $-x^2+2x+1=0$, i.e., $x^2-2x-1=0$, are $x = 1\pm\sqrt{2}$ by the quadratic formula, so the two approximations above correspond exactly to these roots.</p>
+        <p>(2) The $x$-coordinate of the intersection point of $y=\tan x$ and $y=2x$ is a root of $f(x) = \tan x - 2x = 0$. Since $f'(x) = \sec^2 x - 2$, the iteration is
+        $$x_{n+1} = x_n - \frac{\tan x_n - 2x_n}{\sec^2 x_n - 2}.$$
+        Starting from $x_0=1$ (which satisfies $0 \lt x_0 \lt \pi/2$) and iterating gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>1.000000</td><td>1.310478</td><td>1.223929</td><td>1.176051</td><td>1.165927</td><td>1.165562</td><td>1.165561</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to 1.165561$, which is the approximate $x$-coordinate of the intersection point lying between $0$ and $\pi/2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">π의 근삿값 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\tan x = 0$, $x_0 = 3$에 뉴턴의 방법을 적용하여 $\pi$의 근삿값을 계산하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x) = \tan x$라 하면 $f'(x) = \sec^2 x$이고, 뉴턴의 방법의 반복식은
+        $$x_{n+1} = x_n - \frac{\tan x_n}{\sec^2 x_n} = x_n - \sin x_n \cos x_n = x_n - \frac{1}{2}\sin(2x_n)$$
+        이다. $x_0 = 3$에서 시작하여 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>3.000000</td><td>3.139708</td><td>3.141593</td><td>3.141593</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to \pi \approx 3.141593$으로 수렴한다. $\tan x = 0$의 근은 $x = k\pi$ ($k$는 정수) 꼴이며, $x_0=3$이 그 중 $\pi \approx 3.14159$에 가장 가까우므로 이 근으로 수렴한 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Apply Newton's method to $\tan x = 0$ with $x_0 = 3$ to compute an approximate value of $\pi$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $f(x) = \tan x$, so $f'(x) = \sec^2 x$, and Newton's iteration is
+        $$x_{n+1} = x_n - \frac{\tan x_n}{\sec^2 x_n} = x_n - \sin x_n \cos x_n = x_n - \frac{1}{2}\sin(2x_n).$$
+        Starting from $x_0 = 3$ and iterating gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>3.000000</td><td>3.139708</td><td>3.141593</td><td>3.141593</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to \pi \approx 3.141593$. The roots of $\tan x = 0$ are of the form $x = k\pi$ for an integer $k$, and since $x_0=3$ is closest to $\pi \approx 3.14159$ among these, the iteration converges to that root.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">분수함수의 근 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>뉴턴의 방법을 이용하여 $f(x) = 1/x - 3$의 근을 근사하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x) = \dfrac{1}{x} - 3$이면 $f'(x) = -\dfrac{1}{x^2}$이고, 뉴턴의 방법의 반복식은
+        $$x_{n+1} = x_n - \frac{\frac1{x_n}-3}{-\frac1{x_n^2}} = x_n + x_n^2\left(\frac1{x_n}-3\right) = 2x_n - 3x_n^2 = x_n(2-3x_n)$$
+        이다. $f$의 정의역은 $x \neq 0$이므로, 근 $1/3$에 가까운 $x_0 = 0.5$에서 시작하여 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.500000</td><td>0.250000</td><td>0.312500</td><td>0.332031</td><td>0.333328</td><td>0.333333</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to \dfrac13 \approx 0.333333$으로 수렴하며, 이는 $f(x)=1/x-3=0$의 근과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use Newton's method to approximate the root of $f(x) = 1/x - 3$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> If $f(x) = \dfrac{1}{x} - 3$, then $f'(x) = -\dfrac{1}{x^2}$, and Newton's iteration is
+        $$x_{n+1} = x_n - \frac{\frac1{x_n}-3}{-\frac1{x_n^2}} = x_n + x_n^2\left(\frac1{x_n}-3\right) = 2x_n - 3x_n^2 = x_n(2-3x_n).$$
+        Since $f$ is defined only for $x \neq 0$, starting from $x_0 = 0.5$, which is close to the root $1/3$, and iterating gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.500000</td><td>0.250000</td><td>0.312500</td><td>0.332031</td><td>0.333328</td><td>0.333333</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to \dfrac13 \approx 0.333333$, which agrees with the root of $f(x)=1/x-3=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">뉴턴의 방법이 실패하는 예</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = x^{1/3}$, $x_0 = 1$이라 할 때 뉴턴의 방법이 적용되지 않음을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f(x) = x^{1/3}$이면 $x \neq 0$에서 $f'(x) = \dfrac13 x^{-2/3}$이다. $x_n \neq 0$일 때 뉴턴의 방법의 반복식은
+        $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^{1/3}}{\frac13 x_n^{-2/3}} = x_n - 3x_n^{1/3+2/3} = x_n - 3x_n = -2x_n$$
+        이다.</p>
+        <p>$x_0=1$에서 시작하면 $x_n = (-2)^n x_0 = (-2)^n$이 성립함을 귀납적으로 보일 수 있다: $x_0=1=(-2)^0$이고, $x_n=(-2)^n$이면 $x_{n+1}=-2x_n=-2\cdot(-2)^n=(-2)^{n+1}$이기 때문이다.</p>
+        <p>따라서 $|x_n| = 2^n \to \infty$이므로 수열 $\{x_n\}$은 발산하며, $f$의 근인 $x=0$으로 수렴하지 않는다. 이는 $f'(0)$이 존재하지 않아 $x=0$ 근처에서 그래프가 수직에 가까운 접선을 가지기 때문으로, 뉴턴의 방법이 매 단계마다 근을 향해 다가가는 대신 원점으로부터 두 배씩 멀어지도록 만든다. 그러므로 $x_0=1$일 때 뉴턴의 방법은 $f(x)=x^{1/3}$에 적용되지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x) = x^{1/3}$ and $x_0 = 1$. Show that Newton's method does not apply.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> If $f(x) = x^{1/3}$, then $f'(x) = \dfrac13 x^{-2/3}$ for $x \neq 0$. For $x_n \neq 0$, Newton's iteration is
+        $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^{1/3}}{\frac13 x_n^{-2/3}} = x_n - 3x_n^{1/3+2/3} = x_n - 3x_n = -2x_n.$$</p>
+        <p>Starting from $x_0=1$, one shows by induction that $x_n = (-2)^n x_0 = (-2)^n$: indeed $x_0 = 1 = (-2)^0$, and if $x_n=(-2)^n$ then $x_{n+1} = -2x_n = -2\cdot(-2)^n = (-2)^{n+1}$.</p>
+        <p>Hence $|x_n| = 2^n \to \infty$, so the sequence $\{x_n\}$ diverges and does not converge to the root $x=0$ of $f$. This happens because $f'(0)$ does not exist — the graph of $f$ has a nearly vertical tangent line near the root — so each Newton step moves the iterate to twice the distance from the origin instead of closer to it. Therefore Newton's method does not apply to $f(x)=x^{1/3}$ when $x_0=1$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">뉴턴 반복의 순환</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x) = 4x^4 - 4x^2$이라 하자.</p>
+        <ol>
+          <li>$x_0 = \sqrt{3/7}$일 때 뉴턴의 방법을 적용하시오.</li>
+          <li>$x_0 = \sqrt{13/28}$일 때 뉴턴의 방법을 적용하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f(x) = 4x^4-4x^2 = 4x^2(x^2-1)$이면 $f'(x) = 16x^3-8x = 8x(2x^2-1)$이다. $x_n \neq 0$이고 $x_n^2 \neq \frac12$일 때 뉴턴의 방법의 반복식을 정리하면
+        $$x_{n+1} = x_n - \frac{4x_n^2(x_n^2-1)}{8x_n(2x_n^2-1)} = x_n - \frac{x_n(x_n^2-1)}{2(2x_n^2-1)} = \frac{x_n\left[2(2x_n^2-1)-(x_n^2-1)\right]}{2(2x_n^2-1)} = \frac{x_n(3x_n^2-1)}{2(2x_n^2-1)}$$
+        이다.</p>
+        <p>(1) $x_0 = \sqrt{3/7}$이면 $x_0^2 = 3/7$이므로
+        $$3x_0^2-1 = \frac97-1=\frac27, \qquad 2x_0^2-1=\frac67-1=-\frac17$$
+        이고, 따라서
+        $$x_1 = \frac{x_0 \cdot \frac27}{2\cdot\left(-\frac17\right)} = \frac{x_0\cdot\frac27}{-\frac27} = -x_0$$
+        이다. 한편 $x_1^2 = x_0^2 = 3/7$이므로 위와 똑같은 계산을 $x_1$에 적용하면 $x_2 = -x_1 = x_0$을 얻는다. 즉 $x_n^2 = x_0^2 = 3/7$이 모든 $n$에 대해 성립하므로, 반복식의 계수 $\dfrac{3x_n^2-1}{2(2x_n^2-1)}=-1$이 항상 유지되어
+        $$x_{2k} = x_0, \qquad x_{2k+1} = -x_0 \qquad (k=0,1,2,\dots)$$
+        이다. 참고로 $f(x_0) = 4x_0^2(x_0^2-1) = 4\cdot\frac37\cdot\left(\frac37-1\right) = -\frac{48}{49} \neq 0$이므로 $x_0$은 $f$의 근이 아니다. 따라서 뉴턴의 방법의 반복열은 근에 수렴하지 않고 $x_0$과 $-x_0$ 사이를 영원히 진동한다.</p>
+        <p>(2) $x_0 = \sqrt{13/28} \approx 0.681385$이면 이번에는 위와 같은 깔끔한 상쇄가 일어나지 않는다. 반복식에 따라 직접 계산하면 다음과 같다.</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.681385</td><td>-1.873809</td><td>-1.483143</td><td>-1.221430</td><td>-1.070000</td><td>-1.009896</td><td>-1.000237</td><td>-1.000000</td></tr></tbody>
+        </table>
+        <p>따라서 $x_n \to -1$로 수렴하며, $x=-1$은 $f(x)=4x^2(x^2-1)$의 실제 근이다 ($f(-1)=4\cdot1\cdot0=0$). 이처럼 초깃값이 조금만 달라져도 — (1)의 $\sqrt{3/7}$에서 (2)의 $\sqrt{13/28}$로 — 뉴턴의 방법은 영원히 순환하는 경우와 실제 근으로 수렴하는 경우로 전혀 다르게 거동할 수 있다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x) = 4x^4 - 4x^2$.</p>
+        <ol>
+          <li>Apply Newton's method with $x_0 = \sqrt{3/7}$.</li>
+          <li>Apply Newton's method with $x_0 = \sqrt{13/28}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> If $f(x) = 4x^4-4x^2 = 4x^2(x^2-1)$, then $f'(x) = 16x^3-8x = 8x(2x^2-1)$. For $x_n \neq 0$ and $x_n^2 \neq \frac12$, Newton's iteration simplifies to
+        $$x_{n+1} = x_n - \frac{4x_n^2(x_n^2-1)}{8x_n(2x_n^2-1)} = x_n - \frac{x_n(x_n^2-1)}{2(2x_n^2-1)} = \frac{x_n\left[2(2x_n^2-1)-(x_n^2-1)\right]}{2(2x_n^2-1)} = \frac{x_n(3x_n^2-1)}{2(2x_n^2-1)}.$$</p>
+        <p>(1) If $x_0 = \sqrt{3/7}$, then $x_0^2 = 3/7$, so
+        $$3x_0^2-1 = \frac97-1=\frac27, \qquad 2x_0^2-1=\frac67-1=-\frac17,$$
+        and hence
+        $$x_1 = \frac{x_0 \cdot \frac27}{2\cdot\left(-\frac17\right)} = \frac{x_0\cdot\frac27}{-\frac27} = -x_0.$$
+        Since $x_1^2 = x_0^2 = 3/7$, applying the same computation to $x_1$ gives $x_2 = -x_1 = x_0$. That is, $x_n^2 = x_0^2 = 3/7$ holds for every $n$, so the coefficient $\dfrac{3x_n^2-1}{2(2x_n^2-1)}=-1$ persists throughout, giving
+        $$x_{2k} = x_0, \qquad x_{2k+1} = -x_0 \qquad (k=0,1,2,\dots).$$
+        Note that $f(x_0) = 4x_0^2(x_0^2-1) = 4\cdot\frac37\cdot\left(\frac37-1\right) = -\frac{48}{49} \neq 0$, so $x_0$ is not a root of $f$. Hence the Newton iterates never converge to a root — they oscillate forever between $x_0$ and $-x_0$.</p>
+        <p>(2) If $x_0 = \sqrt{13/28} \approx 0.681385$, this exact cancellation no longer occurs. Computing directly from the iteration formula gives</p>
+        <table class="formal-table">
+          <thead><tr><th>$n$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
+          <tbody><tr><th>$x_n$</th><td>0.681385</td><td>-1.873809</td><td>-1.483143</td><td>-1.221430</td><td>-1.070000</td><td>-1.009896</td><td>-1.000237</td><td>-1.000000</td></tr></tbody>
+        </table>
+        <p>Hence $x_n \to -1$, and $x=-1$ is indeed a root of $f(x)=4x^2(x^2-1)$ (since $f(-1)=4\cdot1\cdot0=0$). Thus a small change in the initial value — from $\sqrt{3/7}$ in part (1) to $\sqrt{13/28}$ in part (2) — can make Newton's method behave completely differently: perpetual oscillation versus convergence to an actual root.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">평균값 정리와 최대 증가</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$0 \leq x \leq 6$에서 정의된 연속함수 $f(x)$가 모든 $0 \lt x \lt 6$에 대해 $f'(x) \leq 2$가 성립한다고 하자. $f(6) - f(0)$의 값이 최대가 되도록 하는 $f(x)$는 $f(x) = 2x + c$ (단, $c$는 상수)뿐임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x)$ be a continuous function defined on $0 \leq x \leq 6$ such that $f'(x) \leq 2$ holds for all $0 \lt x \lt 6$. Show that the only $f(x)$ for which $f(6) - f(0)$ attains its maximum value is $f(x) = 2x + c$ (where $c$ is a constant).</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">제곱합이 상수함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x), g(x)$가 2번 연속미분가능한 함수라고 하자. (즉, 이계도함수가 존재하고 연속이다) 만약 $f'(x) = g(x)$이고 $f''(x) = -f(x)$라면 $h(x) = f(x)^2 + g(x)^2$이 상수함수임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x), g(x)$ be twice continuously differentiable functions. (That is, the second derivative exists and is continuous.) If $f'(x) = g(x)$ and $f''(x) = -f(x)$, show that $h(x) = f(x)^2 + g(x)^2$ is a constant function.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">코시-슈바르츠 부등식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x) = (a_1 x + b_1)^2 + (a_2 x + b_2)^2 + \cdots + (a_n x + b_n)^2$를 이용하여 <strong>코시-슈바르츠 부등식</strong></p>
+        <p>$$(a_1 b_1 + a_2 b_2 + \cdots + a_n b_n)^2 \leq (a_1^2 + a_2^2 + \cdots + a_n^2)(b_1^2 + b_2^2 + \cdots + b_n^2)$$</p>
+        <p>을 증명하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using the function $f(x) = (a_1 x + b_1)^2 + (a_2 x + b_2)^2 + \cdots + (a_n x + b_n)^2$, prove the <strong>Cauchy–Schwarz inequality</strong></p>
+        <p>$$(a_1 b_1 + a_2 b_2 + \cdots + a_n b_n)^2 \leq (a_1^2 + a_2^2 + \cdots + a_n^2)(b_1^2 + b_2^2 + \cdots + b_n^2)$$</p>
+        <p>stated above.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">사인함수의 부등식 (임용06-8)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평균값 정리를 이용하여 임의의 두 실수 $x, y$에 대하여 다음 식이 성립함을 보이시오.</p>
+        <p>$$|\sin x - \sin y| \leq |x - y|$$</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using the Mean Value Theorem, show that the following holds for any two real numbers $x, y$.</p>
+        <p>$$|\sin x - \sin y| \leq |x - y|$$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">매개곡선과 평균값 정리 (임용15A-기3)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>매개변수방정식 $x = 4t - t^2$, $y = t^2 + 1$ $(0 \leq t \leq 1)$로 주어진 곡선 $y = f(x)$가 있다. 이 곡선 위의 두 점 $(0, f(0))$, $(3, f(3))$을 연결하는 직선의 기울기와 곡선 위의 점 $(c, f(c))$에서의 접선의 기울기가 같게 되는 값 $c$를 구간 $(0, 3)$에서 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $y = f(x)$ be the curve given by the parametric equations $x = 4t - t^2$, $y = t^2 + 1$ $(0 \leq t \leq 1)$. Find the value $c$ in the interval $(0, 3)$ at which the slope of the tangent line to the curve at the point $(c, f(c))$ equals the slope of the line joining the two points $(0, f(0))$ and $(3, f(3))$ on the curve.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">고정점의 유일성 (임용21B-7)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연속함수 $f : [0, 1] \to [0, 1]$은 $(0, 1)$에서 미분가능하다. 모든 $x \in (0, 1)$에 대하여 $f'(x) \neq 1$일 때 $f(a) = a$ $(0 \leq a \leq 1)$을 만족하는 $a$가 유일하게 존재함을 증명하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : [0, 1] \to [0, 1]$ be a continuous function that is differentiable on $(0, 1)$. If $f'(x) \neq 1$ for all $x \in (0, 1)$, prove that there exists a unique $a$ $(0 \leq a \leq 1)$ satisfying $f(a) = a$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">유계 도함수와 유일해 (임용16A-11)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f : [0, \infty) \to \mathbb{R}$가 구간 $(0, \infty)$에서 미분가능하다. 모든 점 $x \in [0, \infty)$에 대하여 $|f'(x)| \leq M$이고 $f(0) \gt 0$일 때, $f(x) \leq f(0) + Mx$임을 보이시오. 또한 $0 \leq M \lt 1$이면 방정식 $f(x) = x$는 단 하나의 해를 가짐을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : [0, \infty) \to \mathbb{R}$ be differentiable on the interval $(0, \infty)$. Suppose $|f'(x)| \leq M$ for every point $x \in [0, \infty)$ and $f(0) \gt 0$. Show that $f(x) \leq f(0) + Mx$. Also, show that if $0 \leq M \lt 1$, the equation $f(x) = x$ has exactly one solution.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="index.html">미적분학 1 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="ch15.html">15</a>
+    <a href="ch16.html">16</a>
+    <a href="ch17.html">17</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
