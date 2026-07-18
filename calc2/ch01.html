@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01. 공간벡터와 그 연산 (Vectors in Space and Their Operations) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 01단원 공간벡터와 그 연산(Vectors in Space and Their Operations) 예제·유제·문제 모음. 벡터의 성분과 크기, 내적, 외적, 정사영, 스칼라 삼중적과 평행육면체의 부피, 방향코사인을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 공간벡터, vector in space, 내적, dot product, 외적, cross product, 정사영, projection, 스칼라 삼중적, scalar triple product, 평행육면체, parallelepiped, 방향코사인, direction cosine, 무게중심, centroid, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch01.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. 공간벡터와 그 연산 (Vectors in Space and Their Operations) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="공간벡터와 그 연산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch01.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "01. 공간벡터와 그 연산 (Vectors in Space and Their Operations) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 공간벡터와 그 연산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch01.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch01.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html" class="active">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 01</p>
+  <h1>01. 공간벡터와 그 연산<span>Vectors in Space and Their Operations</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 벡터의 성분과 크기</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 크기와 각으로 성분 표시</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 무게중심의 위치벡터</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 벡터의 기본 연산</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 벡터의 방향 구하기</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 속력과 방향 분해</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 힘을 크기와 방향으로</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 내적 계산</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 두 벡터의 사잇각</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 세 점이 이루는 각</a></li>
+    <li><a href="#yu03-3"><span class="toc-num">유제 03-3</span> 내적 명제의 참·거짓</a></li>
+    <li><a href="#yu03-4"><span class="toc-num">유제 03-4</span> 내적으로 크기 계산</a></li>
+    <li><a href="#yu03-5"><span class="toc-num">유제 03-5</span> 각의 이등분 증명</a></li>
+    <li><a href="#yu03-6"><span class="toc-num">유제 03-6</span> 힘이 한 일</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 정사영과 스칼라 성분</a></li>
+    <li><a href="#yu04"><span class="toc-num">유제 04</span> 정사영의 성질</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 외적 계산</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 법선벡터와 삼각형 넓이</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 평행사변형의 넓이</a></li>
+    <li><a href="#yu05-3"><span class="toc-num">유제 05-3</span> 외적 명제의 참·거짓</a></li>
+    <li><a href="#ex06"><span class="toc-num">예제 06</span> 평행육면체의 부피</a></li>
+    <li><a href="#yu06-1"><span class="toc-num">유제 06-1</span> 삼각뿔의 부피</a></li>
+    <li><a href="#yu06-2"><span class="toc-num">유제 06-2</span> 네 꼭짓점과 부피</a></li>
+    <li><a href="#yu06-3"><span class="toc-num">유제 06-3</span> 네 점의 공면 판정</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 벡터의 일차결합</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 매단 물체의 힘 분해</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 벡터 합의 성질</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 방향코사인</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 수직 조건과 반원의 각</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 정사면체의 사잇각</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 반사광 벡터 구하기</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 외적 항등식 증명</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">벡터의 성분과 크기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>시점이 $P(-3,4,1)$이고 종점이 $Q(-5,2,2)$인 벡터를 성분으로 나타내고 크기를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\overrightarrow{PQ} = Q-P = (-5-(-3),\, 2-4,\, 2-1) = (-2,-2,1)$이다.</p>
+        <p>따라서 $|\overrightarrow{PQ}| = \sqrt{(-2)^2+(-2)^2+1^2} = \sqrt{9} = 3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the component form of the vector with initial point $P(-3,4,1)$ and terminal point $Q(-5,2,2)$, and find its magnitude.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\overrightarrow{PQ} = Q-P = (-5-(-3),\, 2-4,\, 2-1) = (-2,-2,1)$.</p>
+        <p>Hence $|\overrightarrow{PQ}| = \sqrt{(-2)^2+(-2)^2+1^2} = \sqrt{9} = 3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">크기와 각으로 성분 표시</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면벡터 $\mathbf{F}$의 크기가 $20$이고 양의 $x$축과 이루는 각의 크기가 $45^\circ$일 때 벡터 $\mathbf{F}$를 성분으로 나타내시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{F}$의 크기가 $20$이고 양의 $x$축과 이루는 각이 $45^\circ$이므로 $\mathbf{F} = 20(\cos45^\circ, \sin45^\circ) = 20\left(\dfrac{\sqrt2}{2}, \dfrac{\sqrt2}{2}\right) = (10\sqrt2, 10\sqrt2)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the component form of the vector $\mathbf{F}$ in the plane, given that $\mathbf{F}$ has magnitude $20$ and makes an angle of $45^\circ$ with the positive $x$-axis.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{F}$ has magnitude $20$ and makes an angle of $45^\circ$ with the positive $x$-axis, $\mathbf{F} = 20(\cos45^\circ, \sin45^\circ) = 20\left(\dfrac{\sqrt2}{2}, \dfrac{\sqrt2}{2}\right) = (10\sqrt2, 10\sqrt2)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">무게중심의 위치벡터</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 점 $A(1,-1,2)$, $B(2,1,3)$, $C(-1,2,-1)$을 꼭짓점으로 하는 삼각형의 무게중심을 $P$라 하자. $\overrightarrow{OP}$를 성분으로 나타내시오. (단, $O$는 원점)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 삼각형의 무게중심은 세 꼭짓점의 위치벡터의 평균이므로</p>
+        <p>$$\overrightarrow{OP} = \frac{1}{3}\left(\overrightarrow{OA}+\overrightarrow{OB}+\overrightarrow{OC}\right) = \frac{1}{3}\big((1,-1,2)+(2,1,3)+(-1,2,-1)\big) = \frac{1}{3}(2,2,4) = \left(\frac{2}{3},\frac{2}{3},\frac{4}{3}\right)$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ be the centroid of the triangle with vertices $A(1,-1,2)$, $B(2,1,3)$, $C(-1,2,-1)$. Find the component form of $\overrightarrow{OP}$. (Here $O$ is the origin.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The centroid of a triangle is the average of the position vectors of its three vertices, so</p>
+        <p>$$\overrightarrow{OP} = \frac{1}{3}\left(\overrightarrow{OA}+\overrightarrow{OB}+\overrightarrow{OC}\right) = \frac{1}{3}\big((1,-1,2)+(2,1,3)+(-1,2,-1)\big) = \frac{1}{3}(2,2,4) = \left(\frac{2}{3},\frac{2}{3},\frac{4}{3}\right).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">벡터의 기본 연산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf{u}=(-1,3,1)$, $\mathbf{v}=(4,7,0)$일 때 다음을 구하시오.</p>
+        <ol>
+          <li>$2\mathbf{u}+3\mathbf{v}$</li>
+          <li>$\mathbf{u}-\mathbf{v}$</li>
+          <li>$\left|\dfrac{1}{2}\mathbf{u}\right|$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{u}=(-1,3,1)$, $\mathbf{v}=(4,7,0)$이다.</p>
+        <p>(1) $2\mathbf{u}+3\mathbf{v} = (-2,6,2)+(12,21,0) = (10,27,2)$이다.</p>
+        <p>(2) $\mathbf{u}-\mathbf{v} = (-1-4,\,3-7,\,1-0) = (-5,-4,1)$이다.</p>
+        <p>(3) $\dfrac{1}{2}\mathbf{u} = \left(-\dfrac12,\dfrac32,\dfrac12\right)$이므로 $\left|\dfrac12\mathbf{u}\right| = \dfrac12|\mathbf{u}| = \dfrac12\sqrt{(-1)^2+3^2+1^2} = \dfrac{\sqrt{11}}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $\mathbf{u}=(-1,3,1)$ and $\mathbf{v}=(4,7,0)$, find each of the following.</p>
+        <ol>
+          <li>$2\mathbf{u}+3\mathbf{v}$</li>
+          <li>$\mathbf{u}-\mathbf{v}$</li>
+          <li>$\left|\dfrac{1}{2}\mathbf{u}\right|$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\mathbf{u}=(-1,3,1)$ and $\mathbf{v}=(4,7,0)$.</p>
+        <p>(1) $2\mathbf{u}+3\mathbf{v} = (-2,6,2)+(12,21,0) = (10,27,2)$.</p>
+        <p>(2) $\mathbf{u}-\mathbf{v} = (-1-4,\,3-7,\,1-0) = (-5,-4,1)$.</p>
+        <p>(3) Since $\dfrac{1}{2}\mathbf{u} = \left(-\dfrac12,\dfrac32,\dfrac12\right)$, we have $\left|\dfrac12\mathbf{u}\right| = \dfrac12|\mathbf{u}| = \dfrac12\sqrt{(-1)^2+3^2+1^2} = \dfrac{\sqrt{11}}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">벡터의 방향 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P_1(1,0,1)$을 시점으로 하고 $P_2(3,2,0)$을 종점으로 하는 벡터의 방향을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\overrightarrow{P_1P_2} = P_2-P_1 = (3-1,\,2-0,\,0-1) = (2,2,-1)$이다.</p>
+        <p>$|\overrightarrow{P_1P_2}| = \sqrt{4+4+1} = 3$이므로 방향은 $\dfrac{\overrightarrow{P_1P_2}}{|\overrightarrow{P_1P_2}|} = \left(\dfrac23,\dfrac23,-\dfrac13\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the direction of the vector with initial point $P_1(1,0,1)$ and terminal point $P_2(3,2,0)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\overrightarrow{P_1P_2} = P_2-P_1 = (3-1,\,2-0,\,0-1) = (2,2,-1)$.</p>
+        <p>Since $|\overrightarrow{P_1P_2}| = \sqrt{4+4+1} = 3$, the direction is $\dfrac{\overrightarrow{P_1P_2}}{|\overrightarrow{P_1P_2}|} = \left(\dfrac23,\dfrac23,-\dfrac13\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">속력과 방향 분해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>속도벡터 $\mathbf{v}=3\mathbf{i}-4\mathbf{j}$에 대해 속력과 방향을 각각 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{v}=3\mathbf{i}-4\mathbf{j}=(3,-4)$이므로 속력은 $|\mathbf{v}| = \sqrt{3^2+(-4)^2} = \sqrt{25} = 5$이다.</p>
+        <p>방향은 $\dfrac{\mathbf{v}}{|\mathbf{v}|} = \left(\dfrac35,-\dfrac45\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the velocity vector $\mathbf{v}=3\mathbf{i}-4\mathbf{j}$, find the speed and the direction.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{v}=3\mathbf{i}-4\mathbf{j}=(3,-4)$, the speed is $|\mathbf{v}| = \sqrt{3^2+(-4)^2} = \sqrt{25} = 5$.</p>
+        <p>The direction is $\dfrac{\mathbf{v}}{|\mathbf{v}|} = \left(\dfrac35,-\dfrac45\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">힘을 크기와 방향으로</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf{v}=2\mathbf{i}+2\mathbf{j}-\mathbf{k}$와 같은 방향으로 6N의 힘 $\mathbf{F}$가 물체에 가해지고 있다. $\mathbf{F}$를 크기와 방향의 곱으로 나타내시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{v}=2\mathbf{i}+2\mathbf{j}-\mathbf{k}=(2,2,-1)$이고 $|\mathbf{v}| = \sqrt{4+4+1} = 3$이므로 $\mathbf{v}$의 방향은 $\dfrac{\mathbf{v}}{|\mathbf{v}|} = \left(\dfrac23,\dfrac23,-\dfrac13\right)$이다.</p>
+        <p>$\mathbf{F}$는 이 방향으로 크기 $6$을 가지므로</p>
+        <p>$$\mathbf{F} = 6\cdot\frac{\mathbf{v}}{|\mathbf{v}|} = 6\left(\frac23,\frac23,-\frac13\right) = (4,4,-2)$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A force $\mathbf{F}$ of magnitude 6N is applied to an object in the same direction as $\mathbf{v}=2\mathbf{i}+2\mathbf{j}-\mathbf{k}$. Express $\mathbf{F}$ as the product of its magnitude and direction.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{v}=2\mathbf{i}+2\mathbf{j}-\mathbf{k}=(2,2,-1)$ and $|\mathbf{v}| = \sqrt{4+4+1} = 3$, the direction of $\mathbf{v}$ is $\dfrac{\mathbf{v}}{|\mathbf{v}|} = \left(\dfrac23,\dfrac23,-\dfrac13\right)$.</p>
+        <p>Since $\mathbf{F}$ has magnitude $6$ in this direction,</p>
+        <p>$$\mathbf{F} = 6\cdot\frac{\mathbf{v}}{|\mathbf{v}|} = 6\left(\frac23,\frac23,-\frac13\right) = (4,4,-2).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">내적 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$(1,-2,-1)\cdot(-6,2,-3)$</li>
+          <li>$\left(\dfrac{1}{2}\mathbf{i}+3\mathbf{j}+\mathbf{k}\right)\cdot(4\mathbf{i}-\mathbf{j}+2\mathbf{k})$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $(1,-2,-1)\cdot(-6,2,-3) = 1\cdot(-6)+(-2)\cdot2+(-1)\cdot(-3) = -6-4+3 = -7$이다.</p>
+        <p>(2) $\left(\dfrac12\mathbf{i}+3\mathbf{j}+\mathbf{k}\right)\cdot(4\mathbf{i}-\mathbf{j}+2\mathbf{k}) = \dfrac12\cdot4 + 3\cdot(-1) + 1\cdot2 = 2-3+2 = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$(1,-2,-1)\cdot(-6,2,-3)$</li>
+          <li>$\left(\dfrac{1}{2}\mathbf{i}+3\mathbf{j}+\mathbf{k}\right)\cdot(4\mathbf{i}-\mathbf{j}+2\mathbf{k})$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) $(1,-2,-1)\cdot(-6,2,-3) = 1\cdot(-6)+(-2)\cdot2+(-1)\cdot(-3) = -6-4+3 = -7$.</p>
+        <p>(2) $\left(\dfrac12\mathbf{i}+3\mathbf{j}+\mathbf{k}\right)\cdot(4\mathbf{i}-\mathbf{j}+2\mathbf{k}) = \dfrac12\cdot4 + 3\cdot(-1) + 1\cdot2 = 2-3+2 = 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">두 벡터의 사잇각</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 두 벡터가 이루는 각의 크기를 구하시오.</p>
+        <ol>
+          <li>$\mathbf{u}=\mathbf{i}-2\mathbf{j}-2\mathbf{k}$, $\mathbf{v}=6\mathbf{i}+3\mathbf{j}+2\mathbf{k}$</li>
+          <li>$\mathbf{u}=3\mathbf{i}-2\mathbf{j}+\mathbf{k}$, $\mathbf{v}=2\mathbf{j}+4\mathbf{k}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 두 벡터 $\mathbf{u}$, $\mathbf{v}$가 이루는 각을 $\theta$라 하면 $\cos\theta = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{u}||\mathbf{v}|}$이다.</p>
+        <p>(1) $\mathbf{u}\cdot\mathbf{v} = 1\cdot6+(-2)\cdot3+(-2)\cdot2 = 6-6-4 = -4$이고 $|\mathbf{u}| = \sqrt{1+4+4}=3$, $|\mathbf{v}| = \sqrt{36+9+4}=7$이므로 $\cos\theta = -\dfrac{4}{21}$, 즉 $\theta = \cos^{-1}\left(-\dfrac{4}{21}\right)$이다.</p>
+        <p>(2) $\mathbf{u}\cdot\mathbf{v} = 3\cdot0+(-2)\cdot2+1\cdot4 = -4+4 = 0$이므로 $\cos\theta=0$, 즉 $\theta = \dfrac{\pi}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the angle between the given pair of vectors.</p>
+        <ol>
+          <li>$\mathbf{u}=\mathbf{i}-2\mathbf{j}-2\mathbf{k}$, $\mathbf{v}=6\mathbf{i}+3\mathbf{j}+2\mathbf{k}$</li>
+          <li>$\mathbf{u}=3\mathbf{i}-2\mathbf{j}+\mathbf{k}$, $\mathbf{v}=2\mathbf{j}+4\mathbf{k}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> If $\theta$ is the angle between $\mathbf{u}$ and $\mathbf{v}$, then $\cos\theta = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{u}||\mathbf{v}|}$.</p>
+        <p>(1) $\mathbf{u}\cdot\mathbf{v} = 1\cdot6+(-2)\cdot3+(-2)\cdot2 = 6-6-4 = -4$, and $|\mathbf{u}| = \sqrt{1+4+4}=3$, $|\mathbf{v}| = \sqrt{36+9+4}=7$, so $\cos\theta = -\dfrac{4}{21}$, i.e., $\theta = \cos^{-1}\left(-\dfrac{4}{21}\right)$.</p>
+        <p>(2) $\mathbf{u}\cdot\mathbf{v} = 3\cdot0+(-2)\cdot2+1\cdot4 = -4+4 = 0$, so $\cos\theta=0$, i.e., $\theta = \dfrac{\pi}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">세 점이 이루는 각</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 점 $A(1,0,0)$, $B(0,1,0)$, $C(0,0,1)$이 주어졌을 때, $\angle ABC$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\angle ABC$는 $\overrightarrow{BA}$와 $\overrightarrow{BC}$가 이루는 각이다.</p>
+        <p>$\overrightarrow{BA} = A-B = (1,-1,0)$, $\overrightarrow{BC} = C-B = (0,-1,1)$이고, $\overrightarrow{BA}\cdot\overrightarrow{BC} = 0+1+0=1$, $|\overrightarrow{BA}|=|\overrightarrow{BC}|=\sqrt2$이다.</p>
+        <p>따라서 $\cos(\angle ABC) = \dfrac{1}{\sqrt2\cdot\sqrt2} = \dfrac12$이므로 $\angle ABC = \dfrac{\pi}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given the three points $A(1,0,0)$, $B(0,1,0)$, $C(0,0,1)$, find $\angle ABC$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\angle ABC$ is the angle between $\overrightarrow{BA}$ and $\overrightarrow{BC}$.</p>
+        <p>$\overrightarrow{BA} = A-B = (1,-1,0)$, $\overrightarrow{BC} = C-B = (0,-1,1)$, and $\overrightarrow{BA}\cdot\overrightarrow{BC} = 0+1+0=1$, $|\overrightarrow{BA}|=|\overrightarrow{BC}|=\sqrt2$.</p>
+        <p>Hence $\cos(\angle ABC) = \dfrac{1}{\sqrt2\cdot\sqrt2} = \dfrac12$, so $\angle ABC = \dfrac{\pi}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-3 -->
+<div class="card ex-card" id="yu03-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-3</span>
+    <span class="ex-title">내적 명제의 참·거짓</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 명제의 참·거짓을 밝히시오.</p>
+        <ol>
+          <li>$\mathbf{u}\cdot\mathbf{u}=0$일 필요충분조건은 $\mathbf{u}=\mathbf{0}$이다.</li>
+          <li>$\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$이고 $\mathbf{u}\neq\mathbf{0}$이면 $\mathbf{v}_1=\mathbf{v}_2$이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 참이다. $\mathbf{u}\cdot\mathbf{u} = |\mathbf{u}|^2$이므로 $\mathbf{u}\cdot\mathbf{u}=0 \Leftrightarrow |\mathbf{u}|^2=0 \Leftrightarrow |\mathbf{u}|=0 \Leftrightarrow \mathbf{u}=\mathbf{0}$이다. 즉 $\mathbf{u}\cdot\mathbf{u}=0$은 $\mathbf{u}=\mathbf{0}$과 필요충분조건이다.</p>
+        <p>(2) 거짓이다. $\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$는 $\mathbf{u}\cdot(\mathbf{v}_1-\mathbf{v}_2)=0$, 즉 $\mathbf{v}_1-\mathbf{v}_2$가 $\mathbf{u}$와 수직임과 동치이므로, $\mathbf{v}_1\neq\mathbf{v}_2$이면서 등식이 성립하는 예를 만들 수 있다. 예를 들어 $\mathbf{u}=(1,0,0)$, $\mathbf{v}_1=(0,1,0)$, $\mathbf{v}_2=(0,1,1)$이라 하면 $\mathbf{u}\neq\mathbf{0}$이고 $\mathbf{u}\cdot\mathbf{v}_1 = 0 = \mathbf{u}\cdot\mathbf{v}_2$이지만 $\mathbf{v}_1\neq\mathbf{v}_2$이다. 따라서 주어진 명제는 거짓이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following are true or false.</p>
+        <ol>
+          <li>A necessary and sufficient condition for $\mathbf{u}\cdot\mathbf{u}=0$ is $\mathbf{u}=\mathbf{0}$.</li>
+          <li>If $\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$ and $\mathbf{u}\neq\mathbf{0}$, then $\mathbf{v}_1=\mathbf{v}_2$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) True. Since $\mathbf{u}\cdot\mathbf{u} = |\mathbf{u}|^2$, we have $\mathbf{u}\cdot\mathbf{u}=0 \Leftrightarrow |\mathbf{u}|^2=0 \Leftrightarrow |\mathbf{u}|=0 \Leftrightarrow \mathbf{u}=\mathbf{0}$. Hence $\mathbf{u}\cdot\mathbf{u}=0$ is a necessary and sufficient condition for $\mathbf{u}=\mathbf{0}$.</p>
+        <p>(2) False. The equality $\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$ is equivalent to $\mathbf{u}\cdot(\mathbf{v}_1-\mathbf{v}_2)=0$, i.e., $\mathbf{v}_1-\mathbf{v}_2$ is perpendicular to $\mathbf{u}$, so we can find $\mathbf{v}_1\neq\mathbf{v}_2$ for which the equality still holds. For instance, let $\mathbf{u}=(1,0,0)$, $\mathbf{v}_1=(0,1,0)$, $\mathbf{v}_2=(0,1,1)$. Then $\mathbf{u}\neq\mathbf{0}$ and $\mathbf{u}\cdot\mathbf{v}_1 = 0 = \mathbf{u}\cdot\mathbf{v}_2$, but $\mathbf{v}_1\neq\mathbf{v}_2$. Hence the statement is false.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-4 -->
+<div class="card ex-card" id="yu03-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-4</span>
+    <span class="ex-title">내적으로 크기 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$|\mathbf{v}|=2$, $|\mathbf{w}|=3$이고 $\mathbf{v}$와 $\mathbf{w}$가 이루는 각의 크기가 $\pi/3$일 때 $|\mathbf{v}-2\mathbf{w}|$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $|\mathbf{v}-2\mathbf{w}|^2 = |\mathbf{v}|^2 - 4\,\mathbf{v}\cdot\mathbf{w} + 4|\mathbf{w}|^2$이고, $\mathbf{v}\cdot\mathbf{w} = |\mathbf{v}||\mathbf{w}|\cos\dfrac{\pi}{3} = 2\cdot3\cdot\dfrac12 = 3$이다.</p>
+        <p>따라서 $|\mathbf{v}-2\mathbf{w}|^2 = 4 - 4\cdot3 + 4\cdot9 = 4-12+36 = 28$이므로 $|\mathbf{v}-2\mathbf{w}| = \sqrt{28} = 2\sqrt7$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $|\mathbf{v}|=2$, $|\mathbf{w}|=3$, and that the angle between $\mathbf{v}$ and $\mathbf{w}$ is $\pi/3$, find $|\mathbf{v}-2\mathbf{w}|$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $|\mathbf{v}-2\mathbf{w}|^2 = |\mathbf{v}|^2 - 4\,\mathbf{v}\cdot\mathbf{w} + 4|\mathbf{w}|^2$, and $\mathbf{v}\cdot\mathbf{w} = |\mathbf{v}||\mathbf{w}|\cos\dfrac{\pi}{3} = 2\cdot3\cdot\dfrac12 = 3$.</p>
+        <p>Hence $|\mathbf{v}-2\mathbf{w}|^2 = 4 - 4\cdot3 + 4\cdot9 = 4-12+36 = 28$, so $|\mathbf{v}-2\mathbf{w}| = \sqrt{28} = 2\sqrt7$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-5 -->
+<div class="card ex-card" id="yu03-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-5</span>
+    <span class="ex-title">각의 이등분 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf{w}=|\mathbf{v}|\mathbf{u}+|\mathbf{u}|\mathbf{v}$는 $\mathbf{u}$와 $\mathbf{v}$가 이루는 각을 이등분함을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf{u}\neq\mathbf{0}$, $\mathbf{v}\neq\mathbf{0}$이라 하고 $\mathbf{a}=|\mathbf{v}|\mathbf{u}$, $\mathbf{b}=|\mathbf{u}|\mathbf{v}$라 하자. 그러면 $\mathbf{w}=\mathbf{a}+\mathbf{b}$이고</p>
+        <p>$$|\mathbf{a}| = |\mathbf{v}||\mathbf{u}| = |\mathbf{u}||\mathbf{v}| = |\mathbf{b}|$$</p>
+        <p>이다. 즉 $\mathbf{a}$와 $\mathbf{b}$는 크기가 같다. $\mathbf{a}$는 $\mathbf{u}$의 양의 배수, $\mathbf{b}$는 $\mathbf{v}$의 양의 배수이므로 $\mathbf{a}$와 $\mathbf{b}$가 이루는 각은 $\mathbf{u}$와 $\mathbf{v}$가 이루는 각과 같다.</p>
+        <p>$\mathbf{w}=\mathbf{a}+\mathbf{b}$와 $\mathbf{a}$가 이루는 각을 $\theta_1$, $\mathbf{w}$와 $\mathbf{b}$가 이루는 각을 $\theta_2$라 하면, $k=|\mathbf{a}|=|\mathbf{b}|$라 둘 때</p>
+        <p>$$\cos\theta_1 = \frac{\mathbf{w}\cdot\mathbf{a}}{|\mathbf{w}||\mathbf{a}|} = \frac{(\mathbf{a}+\mathbf{b})\cdot\mathbf{a}}{|\mathbf{w}|k} = \frac{k^2+\mathbf{a}\cdot\mathbf{b}}{|\mathbf{w}|k}, \qquad \cos\theta_2 = \frac{\mathbf{w}\cdot\mathbf{b}}{|\mathbf{w}||\mathbf{b}|} = \frac{(\mathbf{a}+\mathbf{b})\cdot\mathbf{b}}{|\mathbf{w}|k} = \frac{\mathbf{a}\cdot\mathbf{b}+k^2}{|\mathbf{w}|k}$$</p>
+        <p>이므로 $\cos\theta_1=\cos\theta_2$이고, $\theta_1,\theta_2\in[0,\pi]$이므로 $\theta_1=\theta_2$이다.</p>
+        <p>즉 $\mathbf{w}$는 $\mathbf{a}$와 $\mathbf{b}$가 이루는 각을 이등분하고, 이는 곧 $\mathbf{u}$와 $\mathbf{v}$가 이루는 각을 이등분함을 뜻한다. (단, $\mathbf{w}\neq\mathbf{0}$인 경우, 즉 $\mathbf{u}$와 $\mathbf{v}$가 서로 반대 방향이 아닌 경우를 다룬다.)</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that $\mathbf{w}=|\mathbf{v}|\mathbf{u}+|\mathbf{u}|\mathbf{v}$ bisects the angle between $\mathbf{u}$ and $\mathbf{v}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Assume $\mathbf{u}\neq\mathbf{0}$, $\mathbf{v}\neq\mathbf{0}$, and let $\mathbf{a}=|\mathbf{v}|\mathbf{u}$, $\mathbf{b}=|\mathbf{u}|\mathbf{v}$. Then $\mathbf{w}=\mathbf{a}+\mathbf{b}$, and</p>
+        <p>$$|\mathbf{a}| = |\mathbf{v}||\mathbf{u}| = |\mathbf{u}||\mathbf{v}| = |\mathbf{b}|,$$</p>
+        <p>so $\mathbf{a}$ and $\mathbf{b}$ have equal magnitude. Since $\mathbf{a}$ is a positive multiple of $\mathbf{u}$ and $\mathbf{b}$ is a positive multiple of $\mathbf{v}$, the angle between $\mathbf{a}$ and $\mathbf{b}$ equals the angle between $\mathbf{u}$ and $\mathbf{v}$.</p>
+        <p>Let $\theta_1$ be the angle between $\mathbf{w}=\mathbf{a}+\mathbf{b}$ and $\mathbf{a}$, and $\theta_2$ the angle between $\mathbf{w}$ and $\mathbf{b}$. Writing $k=|\mathbf{a}|=|\mathbf{b}|$,</p>
+        <p>$$\cos\theta_1 = \frac{\mathbf{w}\cdot\mathbf{a}}{|\mathbf{w}||\mathbf{a}|} = \frac{(\mathbf{a}+\mathbf{b})\cdot\mathbf{a}}{|\mathbf{w}|k} = \frac{k^2+\mathbf{a}\cdot\mathbf{b}}{|\mathbf{w}|k}, \qquad \cos\theta_2 = \frac{\mathbf{w}\cdot\mathbf{b}}{|\mathbf{w}||\mathbf{b}|} = \frac{(\mathbf{a}+\mathbf{b})\cdot\mathbf{b}}{|\mathbf{w}|k} = \frac{\mathbf{a}\cdot\mathbf{b}+k^2}{|\mathbf{w}|k}.$$</p>
+        <p>Hence $\cos\theta_1=\cos\theta_2$, and since $\theta_1,\theta_2\in[0,\pi]$, we get $\theta_1=\theta_2$.</p>
+        <p>Thus $\mathbf{w}$ bisects the angle between $\mathbf{a}$ and $\mathbf{b}$, hence it bisects the angle between $\mathbf{u}$ and $\mathbf{v}$. (Here we treat the case $\mathbf{w}\neq\mathbf{0}$, i.e., $\mathbf{u}$ and $\mathbf{v}$ are not exactly opposite in direction.)</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-6 -->
+<div class="card ex-card" id="yu03-6">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-6</span>
+    <span class="ex-title">힘이 한 일</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>상자를 오른쪽 방향으로 이동시키기 위해 오른쪽 방향과 $60^\circ$의 각도를 이루는 방향으로 40N 크기의 힘을 가하고 있다. 물체가 오른쪽 방향으로 3m 이동했을 때 그 힘이 한 일을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 힘이 한 일은 $W = \mathbf{F}\cdot\mathbf{d} = |\mathbf{F}||\mathbf{d}|\cos\theta$이다.</p>
+        <p>$|\mathbf{F}|=40$, $|\mathbf{d}|=3$, $\theta=60^\circ$이므로</p>
+        <p>$$W = 40\cdot3\cdot\cos60^\circ = 120\cdot\frac12 = 60\ \text{J}$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To move a box to the right, a force of magnitude 40N is applied in a direction making a $60^\circ$ angle with the rightward direction. Find the work done by the force when the object moves 3m to the right.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The work done by the force is $W = \mathbf{F}\cdot\mathbf{d} = |\mathbf{F}||\mathbf{d}|\cos\theta$.</p>
+        <p>Since $|\mathbf{F}|=40$, $|\mathbf{d}|=3$, $\theta=60^\circ$,</p>
+        <p>$$W = 40\cdot3\cdot\cos60^\circ = 120\cdot\frac12 = 60\ \text{J}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">정사영과 스칼라 성분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\mathbf{F}=5\mathbf{i}+2\mathbf{j}$의 $\mathbf{v}=\mathbf{i}-3\mathbf{j}$ 위로의 정사영을 구하고 $\mathbf{F}$의 $\mathbf{v}$ 방향으로의 스칼라 성분을 구하시오.</li>
+          <li>$\mathbf{u}=6\mathbf{i}+3\mathbf{j}+2\mathbf{k}$의 $\mathbf{v}=\mathbf{i}-2\mathbf{j}-2\mathbf{k}$ 위로의 정사영을 구하고 $\mathbf{u}$의 $\mathbf{v}$ 방향으로의 스칼라 성분을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 정사영은 $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}\mathbf{v}$이고, $\mathbf{v}$ 방향으로의 스칼라 성분은 $\dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|}$이다.</p>
+        <p>(1) $\mathbf{F}=(5,2)$, $\mathbf{v}=(1,-3)$이다. $\mathbf{F}\cdot\mathbf{v} = 5-6=-1$, $|\mathbf{v}|^2=1+9=10$이므로</p>
+        <p>$$\operatorname{proj}_{\mathbf{v}}\mathbf{F} = \frac{-1}{10}(1,-3) = \left(-\frac1{10},\frac3{10}\right)$$</p>
+        <p>이고, 스칼라 성분은 $\dfrac{\mathbf{F}\cdot\mathbf{v}}{|\mathbf{v}|} = \dfrac{-1}{\sqrt{10}} = -\dfrac{\sqrt{10}}{10}$이다.</p>
+        <p>(2) $\mathbf{u}=(6,3,2)$, $\mathbf{v}=(1,-2,-2)$이다. $\mathbf{u}\cdot\mathbf{v} = 6-6-4=-4$, $|\mathbf{v}|^2=1+4+4=9$이므로</p>
+        <p>$$\operatorname{proj}_{\mathbf{v}}\mathbf{u} = \frac{-4}{9}(1,-2,-2) = \left(-\frac49,\frac89,\frac89\right)$$</p>
+        <p>이고, 스칼라 성분은 $\dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|} = \dfrac{-4}{3} = -\dfrac43$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the projection of $\mathbf{F}=5\mathbf{i}+2\mathbf{j}$ onto $\mathbf{v}=\mathbf{i}-3\mathbf{j}$, and find the scalar component of $\mathbf{F}$ in the direction of $\mathbf{v}$.</li>
+          <li>Find the projection of $\mathbf{u}=6\mathbf{i}+3\mathbf{j}+2\mathbf{k}$ onto $\mathbf{v}=\mathbf{i}-2\mathbf{j}-2\mathbf{k}$, and find the scalar component of $\mathbf{u}$ in the direction of $\mathbf{v}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The projection is $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}\mathbf{v}$, and the scalar component in the direction of $\mathbf{v}$ is $\dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|}$.</p>
+        <p>(1) $\mathbf{F}=(5,2)$, $\mathbf{v}=(1,-3)$. Since $\mathbf{F}\cdot\mathbf{v} = 5-6=-1$ and $|\mathbf{v}|^2=1+9=10$,</p>
+        <p>$$\operatorname{proj}_{\mathbf{v}}\mathbf{F} = \frac{-1}{10}(1,-3) = \left(-\frac1{10},\frac3{10}\right),$$</p>
+        <p>and the scalar component is $\dfrac{\mathbf{F}\cdot\mathbf{v}}{|\mathbf{v}|} = \dfrac{-1}{\sqrt{10}} = -\dfrac{\sqrt{10}}{10}$.</p>
+        <p>(2) $\mathbf{u}=(6,3,2)$, $\mathbf{v}=(1,-2,-2)$. Since $\mathbf{u}\cdot\mathbf{v} = 6-6-4=-4$ and $|\mathbf{v}|^2=1+4+4=9$,</p>
+        <p>$$\operatorname{proj}_{\mathbf{v}}\mathbf{u} = \frac{-4}{9}(1,-2,-2) = \left(-\frac49,\frac89,\frac89\right),$$</p>
+        <p>and the scalar component is $\dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|} = \dfrac{-4}{3} = -\dfrac43$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04 -->
+<div class="card ex-card" id="yu04">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04</span>
+    <span class="ex-title">정사영의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u}$는 $\operatorname{proj}_{\mathbf{v}}\mathbf{u}$와 수직임을 보이시오.</li>
+          <li>$\mathbf{u}$와 $\mathbf{v}$가 수직이면 $\operatorname{proj}_{\mathbf{v}}\mathbf{u}=\mathbf{0}$임을 보이시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}$라 하면 $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = c\mathbf{v}$이다.</p>
+        <p>(1) $(\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u})\cdot\operatorname{proj}_{\mathbf{v}}\mathbf{u} = (\mathbf{u}-c\mathbf{v})\cdot(c\mathbf{v}) = c(\mathbf{u}\cdot\mathbf{v}) - c^2|\mathbf{v}|^2$이다. $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}$을 대입하면</p>
+        <p>$$c(\mathbf{u}\cdot\mathbf{v}) - c^2|\mathbf{v}|^2 = \frac{(\mathbf{u}\cdot\mathbf{v})^2}{|\mathbf{v}|^2} - \frac{(\mathbf{u}\cdot\mathbf{v})^2}{|\mathbf{v}|^2} = 0$$</p>
+        <p>이므로 $\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u}$는 $\operatorname{proj}_{\mathbf{v}}\mathbf{u}$와 수직이다.</p>
+        <p>(2) $\mathbf{u}$와 $\mathbf{v}$가 수직이면 $\mathbf{u}\cdot\mathbf{v}=0$이므로 $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2} = 0$이다. 따라서 $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = c\mathbf{v} = \mathbf{0}$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that $\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u}$ is perpendicular to $\operatorname{proj}_{\mathbf{v}}\mathbf{u}$.</li>
+          <li>Show that if $\mathbf{u}$ and $\mathbf{v}$ are perpendicular, then $\operatorname{proj}_{\mathbf{v}}\mathbf{u}=\mathbf{0}$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}$, so that $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = c\mathbf{v}$.</p>
+        <p>(1) $(\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u})\cdot\operatorname{proj}_{\mathbf{v}}\mathbf{u} = (\mathbf{u}-c\mathbf{v})\cdot(c\mathbf{v}) = c(\mathbf{u}\cdot\mathbf{v}) - c^2|\mathbf{v}|^2$. Substituting $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2}$,</p>
+        <p>$$c(\mathbf{u}\cdot\mathbf{v}) - c^2|\mathbf{v}|^2 = \frac{(\mathbf{u}\cdot\mathbf{v})^2}{|\mathbf{v}|^2} - \frac{(\mathbf{u}\cdot\mathbf{v})^2}{|\mathbf{v}|^2} = 0,$$</p>
+        <p>so $\mathbf{u}-\operatorname{proj}_{\mathbf{v}}\mathbf{u}$ is perpendicular to $\operatorname{proj}_{\mathbf{v}}\mathbf{u}$.</p>
+        <p>(2) If $\mathbf{u}$ and $\mathbf{v}$ are perpendicular, then $\mathbf{u}\cdot\mathbf{v}=0$, so $c = \dfrac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{v}|^2} = 0$. Hence $\operatorname{proj}_{\mathbf{v}}\mathbf{u} = c\mathbf{v} = \mathbf{0}$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">외적 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 벡터 $\mathbf{u}=2\mathbf{i}+\mathbf{j}+\mathbf{k}$, $\mathbf{v}=-4\mathbf{i}+3\mathbf{j}+\mathbf{k}$에 대해 $\mathbf{u}\times\mathbf{v}$와 $\mathbf{v}\times\mathbf{u}$를 각각 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{u}=(2,1,1)$, $\mathbf{v}=(-4,3,1)$이다.</p>
+        <p>$$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&1&1\\-4&3&1\end{vmatrix} = (1\cdot1-1\cdot3)\mathbf{i} - (2\cdot1-1\cdot(-4))\mathbf{j} + (2\cdot3-1\cdot(-4))\mathbf{k} = -2\mathbf{i}-6\mathbf{j}+10\mathbf{k} = (-2,-6,10)$$</p>
+        <p>이다. 외적의 반교환법칙에 의해 $\mathbf{v}\times\mathbf{u} = -(\mathbf{u}\times\mathbf{v}) = (2,6,-10)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the two vectors $\mathbf{u}=2\mathbf{i}+\mathbf{j}+\mathbf{k}$ and $\mathbf{v}=-4\mathbf{i}+3\mathbf{j}+\mathbf{k}$, find $\mathbf{u}\times\mathbf{v}$ and $\mathbf{v}\times\mathbf{u}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\mathbf{u}=(2,1,1)$, $\mathbf{v}=(-4,3,1)$.</p>
+        <p>$$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&1&1\\-4&3&1\end{vmatrix} = (1\cdot1-1\cdot3)\mathbf{i} - (2\cdot1-1\cdot(-4))\mathbf{j} + (2\cdot3-1\cdot(-4))\mathbf{k} = -2\mathbf{i}-6\mathbf{j}+10\mathbf{k} = (-2,-6,10).$$</p>
+        <p>By anticommutativity of the cross product, $\mathbf{v}\times\mathbf{u} = -(\mathbf{u}\times\mathbf{v}) = (2,6,-10)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">법선벡터와 삼각형 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 점 $P(1,-1,0)$, $Q(2,1,-1)$, $R(-1,1,2)$가 주어져 있다.</p>
+        <ol>
+          <li>점 $P,Q,R$을 지나는 평면과 수직인 단위벡터를 하나 찾으시오.</li>
+          <li>삼각형 $PQR$의 넓이를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\overrightarrow{PQ} = Q-P = (1,2,-1)$, $\overrightarrow{PR} = R-P = (-2,2,2)$이다.</p>
+        <p>(1) $\overrightarrow{PQ}\times\overrightarrow{PR}$은 평면 $PQR$과 수직이다.</p>
+        <p>$$\overrightarrow{PQ}\times\overrightarrow{PR} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&-1\\-2&2&2\end{vmatrix} = (2\cdot2-(-1)\cdot2)\mathbf{i}-(1\cdot2-(-1)\cdot(-2))\mathbf{j}+(1\cdot2-2\cdot(-2))\mathbf{k} = (6,0,6)$$</p>
+        <p>이고 $|\overrightarrow{PQ}\times\overrightarrow{PR}| = \sqrt{36+0+36}=6\sqrt2$이므로, 구하는 단위벡터는</p>
+        <p>$$\frac{\overrightarrow{PQ}\times\overrightarrow{PR}}{|\overrightarrow{PQ}\times\overrightarrow{PR}|} = \frac{(6,0,6)}{6\sqrt2} = \left(\frac{\sqrt2}{2},0,\frac{\sqrt2}{2}\right)$$</p>
+        <p>이다.</p>
+        <p>(2) 삼각형 $PQR$의 넓이는 $\dfrac12|\overrightarrow{PQ}\times\overrightarrow{PR}| = \dfrac12\cdot6\sqrt2 = 3\sqrt2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The three points $P(1,-1,0)$, $Q(2,1,-1)$, $R(-1,1,2)$ are given.</p>
+        <ol>
+          <li>Find a unit vector perpendicular to the plane through the points $P,Q,R$.</li>
+          <li>Find the area of triangle $PQR$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $\overrightarrow{PQ} = Q-P = (1,2,-1)$, $\overrightarrow{PR} = R-P = (-2,2,2)$.</p>
+        <p>(1) The vector $\overrightarrow{PQ}\times\overrightarrow{PR}$ is perpendicular to the plane through $P,Q,R$.</p>
+        <p>$$\overrightarrow{PQ}\times\overrightarrow{PR} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&-1\\-2&2&2\end{vmatrix} = (2\cdot2-(-1)\cdot2)\mathbf{i}-(1\cdot2-(-1)\cdot(-2))\mathbf{j}+(1\cdot2-2\cdot(-2))\mathbf{k} = (6,0,6),$$</p>
+        <p>and $|\overrightarrow{PQ}\times\overrightarrow{PR}| = \sqrt{36+0+36}=6\sqrt2$, so the required unit vector is</p>
+        <p>$$\frac{\overrightarrow{PQ}\times\overrightarrow{PR}}{|\overrightarrow{PQ}\times\overrightarrow{PR}|} = \frac{(6,0,6)}{6\sqrt2} = \left(\frac{\sqrt2}{2},0,\frac{\sqrt2}{2}\right).$$</p>
+        <p>(2) The area of triangle $PQR$ is $\dfrac12|\overrightarrow{PQ}\times\overrightarrow{PR}| = \dfrac12\cdot6\sqrt2 = 3\sqrt2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">평행사변형의 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>네 점 $A(1,0,-1)$, $B(1,7,2)$, $C(2,4,-1)$, $D(0,3,2)$를 꼭짓점으로 갖는 평행사변형의 넓이를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 네 점이 이루는 평행사변형에서 대각선은 서로를 이등분하므로, $\overline{AB}$와 $\overline{CD}$의 중점을 비교한다.</p>
+        <p>$A,B$의 중점은 $\left(1,\dfrac72,\dfrac12\right)$이고 $C,D$의 중점도 $\left(1,\dfrac72,\dfrac12\right)$로 서로 같다. 따라서 $A,B$가 한 대각선을, $C,D$가 다른 대각선을 이루며, 평행사변형의 꼭짓점은 $A,C,B,D$ 순서로 배열된다.</p>
+        <p>즉 $A$에 인접한 두 변은 $\overrightarrow{AC}$, $\overrightarrow{AD}$이다. $\overrightarrow{AC} = (1,4,0)$, $\overrightarrow{AD} = (-1,3,3)$이고</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&4&0\\-1&3&3\end{vmatrix} = (4\cdot3-0\cdot3)\mathbf{i}-(1\cdot3-0\cdot(-1))\mathbf{j}+(1\cdot3-4\cdot(-1))\mathbf{k} = (12,-3,7)$$</p>
+        <p>이므로 평행사변형의 넓이는 $|\overrightarrow{AC}\times\overrightarrow{AD}| = \sqrt{144+9+49} = \sqrt{202}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the area of the parallelogram with vertices $A(1,0,-1)$, $B(1,7,2)$, $C(2,4,-1)$, $D(0,3,2)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In a parallelogram, the diagonals bisect each other, so we compare the midpoints of $\overline{AB}$ and $\overline{CD}$.</p>
+        <p>The midpoint of $A,B$ is $\left(1,\dfrac72,\dfrac12\right)$, and the midpoint of $C,D$ is also $\left(1,\dfrac72,\dfrac12\right)$, so they coincide. Hence $A,B$ form one diagonal and $C,D$ form the other, so the vertices of the parallelogram are arranged in the order $A,C,B,D$.</p>
+        <p>That is, the two sides adjacent to $A$ are $\overrightarrow{AC}$ and $\overrightarrow{AD}$. Since $\overrightarrow{AC} = (1,4,0)$ and $\overrightarrow{AD} = (-1,3,3)$,</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&4&0\\-1&3&3\end{vmatrix} = (4\cdot3-0\cdot3)\mathbf{i}-(1\cdot3-0\cdot(-1))\mathbf{j}+(1\cdot3-4\cdot(-1))\mathbf{k} = (12,-3,7),$$</p>
+        <p>so the area of the parallelogram is $|\overrightarrow{AC}\times\overrightarrow{AD}| = \sqrt{144+9+49} = \sqrt{202}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-3 -->
+<div class="card ex-card" id="yu05-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-3</span>
+    <span class="ex-title">외적 명제의 참·거짓</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 명제의 참·거짓을 밝히시오.</p>
+        <ol>
+          <li>$(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u}=\mathbf{v}\cdot(\mathbf{u}\times\mathbf{v})$</li>
+          <li>$\mathbf{u}\times\mathbf{v}_1=\mathbf{u}\times\mathbf{v}_2$이고 $\mathbf{u}\neq\mathbf{0}$이면 $\mathbf{v}_1=\mathbf{v}_2$이다.</li>
+          <li>$\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$, $\mathbf{u}\times\mathbf{v}_1=\mathbf{u}\times\mathbf{v}_2$, $\mathbf{u}\neq\mathbf{0}$이면 $\mathbf{v}_1=\mathbf{v}_2$이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 참이다. $\mathbf{u}\times\mathbf{v}$는 $\mathbf{u}$와 $\mathbf{v}$ 모두와 수직이므로 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u} = 0$이고 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{v}=0$이다. 내적은 교환법칙이 성립하므로 $\mathbf{v}\cdot(\mathbf{u}\times\mathbf{v}) = (\mathbf{u}\times\mathbf{v})\cdot\mathbf{v} = 0$이다. 따라서 양변이 모두 $0$이므로 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u} = \mathbf{v}\cdot(\mathbf{u}\times\mathbf{v})$이 성립한다.</p>
+        <p>(2) 거짓이다. $\mathbf{u}\times\mathbf{v}_1 = \mathbf{u}\times\mathbf{v}_2 \Leftrightarrow \mathbf{u}\times(\mathbf{v}_1-\mathbf{v}_2) = \mathbf{0}$이므로 $\mathbf{v}_1-\mathbf{v}_2$가 $\mathbf{u}$와 평행하기만 하면 등식이 성립한다. 예를 들어 $\mathbf{u}=(1,0,0)$, $\mathbf{v}_1=(0,1,0)$, $\mathbf{v}_2=\mathbf{v}_1+\mathbf{u}=(1,1,0)$이라 하면</p>
+        <p>$$\mathbf{u}\times\mathbf{v}_1 = (1,0,0)\times(0,1,0) = (0,0,1), \qquad \mathbf{u}\times\mathbf{v}_2 = (1,0,0)\times(1,1,0) = (0,0,1)$$</p>
+        <p>로 같지만, $\mathbf{u}\neq\mathbf{0}$이고 $\mathbf{v}_1=(0,1,0)\neq(1,1,0)=\mathbf{v}_2$이다. 따라서 명제는 거짓이다.</p>
+        <p>(3) 참이다. $\mathbf{d}=\mathbf{v}_1-\mathbf{v}_2$라 하면 가정에 의해 $\mathbf{u}\cdot\mathbf{d}=0$이고 $\mathbf{u}\times\mathbf{d}=\mathbf{0}$이다. $\mathbf{u}\times\mathbf{d}=\mathbf{0}$이므로 $\mathbf{d}=\mathbf{0}$이거나 $\mathbf{d}$가 $\mathbf{u}$와 평행하다. $\mathbf{d}$가 $\mathbf{u}$와 평행, 즉 $\mathbf{d}=\lambda\mathbf{u}$ ($\lambda\neq0$)라면 $\mathbf{u}\cdot\mathbf{d} = \lambda|\mathbf{u}|^2 = 0$이고 $\mathbf{u}\neq\mathbf{0}$이므로 $|\mathbf{u}|^2\neq0$, 따라서 $\lambda=0$이 되어 모순이다. 그러므로 $\mathbf{d}=\mathbf{0}$, 즉 $\mathbf{v}_1=\mathbf{v}_2$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether the following are true or false.</p>
+        <ol>
+          <li>$(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u}=\mathbf{v}\cdot(\mathbf{u}\times\mathbf{v})$</li>
+          <li>If $\mathbf{u}\times\mathbf{v}_1=\mathbf{u}\times\mathbf{v}_2$ and $\mathbf{u}\neq\mathbf{0}$, then $\mathbf{v}_1=\mathbf{v}_2$.</li>
+          <li>If $\mathbf{u}\cdot\mathbf{v}_1=\mathbf{u}\cdot\mathbf{v}_2$, $\mathbf{u}\times\mathbf{v}_1=\mathbf{u}\times\mathbf{v}_2$, and $\mathbf{u}\neq\mathbf{0}$, then $\mathbf{v}_1=\mathbf{v}_2$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) True. Since $\mathbf{u}\times\mathbf{v}$ is perpendicular to both $\mathbf{u}$ and $\mathbf{v}$, we have $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u} = 0$ and $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{v}=0$. By commutativity of the dot product, $\mathbf{v}\cdot(\mathbf{u}\times\mathbf{v}) = (\mathbf{u}\times\mathbf{v})\cdot\mathbf{v} = 0$. Since both sides equal $0$, $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{u} = \mathbf{v}\cdot(\mathbf{u}\times\mathbf{v})$ holds.</p>
+        <p>(2) False. Since $\mathbf{u}\times\mathbf{v}_1 = \mathbf{u}\times\mathbf{v}_2 \Leftrightarrow \mathbf{u}\times(\mathbf{v}_1-\mathbf{v}_2) = \mathbf{0}$, the equality holds whenever $\mathbf{v}_1-\mathbf{v}_2$ is parallel to $\mathbf{u}$. For instance, let $\mathbf{u}=(1,0,0)$, $\mathbf{v}_1=(0,1,0)$, $\mathbf{v}_2=\mathbf{v}_1+\mathbf{u}=(1,1,0)$. Then</p>
+        <p>$$\mathbf{u}\times\mathbf{v}_1 = (1,0,0)\times(0,1,0) = (0,0,1), \qquad \mathbf{u}\times\mathbf{v}_2 = (1,0,0)\times(1,1,0) = (0,0,1),$$</p>
+        <p>which are equal, but $\mathbf{u}\neq\mathbf{0}$ and $\mathbf{v}_1=(0,1,0)\neq(1,1,0)=\mathbf{v}_2$. Hence the statement is false.</p>
+        <p>(3) True. Let $\mathbf{d}=\mathbf{v}_1-\mathbf{v}_2$. By hypothesis $\mathbf{u}\cdot\mathbf{d}=0$ and $\mathbf{u}\times\mathbf{d}=\mathbf{0}$. Since $\mathbf{u}\times\mathbf{d}=\mathbf{0}$, either $\mathbf{d}=\mathbf{0}$ or $\mathbf{d}$ is parallel to $\mathbf{u}$. If $\mathbf{d}$ is parallel to $\mathbf{u}$, say $\mathbf{d}=\lambda\mathbf{u}$ with $\lambda\neq0$, then $\mathbf{u}\cdot\mathbf{d} = \lambda|\mathbf{u}|^2 = 0$; since $\mathbf{u}\neq\mathbf{0}$, $|\mathbf{u}|^2\neq0$, forcing $\lambda=0$, a contradiction. Hence $\mathbf{d}=\mathbf{0}$, i.e., $\mathbf{v}_1=\mathbf{v}_2$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 06 -->
+<div class="card ex-card" id="ex06">
+  <div class="card-head">
+    <span class="ex-num">예제 06</span>
+    <span class="ex-title">평행육면체의 부피</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 벡터 $\mathbf{u}=\mathbf{i}+2\mathbf{j}-\mathbf{k}$, $\mathbf{v}=-2\mathbf{i}+3\mathbf{k}$, $\mathbf{w}=7\mathbf{j}-4\mathbf{k}$로 결정되는 평행육면체의 부피를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평행육면체의 부피는 세 벡터의 스칼라 삼중적의 절댓값 $|\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})|$이다.</p>
+        <p>$$\mathbf{v}\times\mathbf{w} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-2&0&3\\0&7&-4\end{vmatrix} = (0\cdot(-4)-3\cdot7)\mathbf{i}-((-2)\cdot(-4)-3\cdot0)\mathbf{j}+((-2)\cdot7-0\cdot0)\mathbf{k} = (-21,-8,-14)$$</p>
+        <p>이므로</p>
+        <p>$$\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w}) = 1\cdot(-21)+2\cdot(-8)+(-1)\cdot(-14) = -21-16+14 = -23$$</p>
+        <p>이다. 따라서 부피는 $|-23|=23$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the volume of the parallelepiped determined by the three vectors $\mathbf{u}=\mathbf{i}+2\mathbf{j}-\mathbf{k}$, $\mathbf{v}=-2\mathbf{i}+3\mathbf{k}$, $\mathbf{w}=7\mathbf{j}-4\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The volume of the parallelepiped is the absolute value of the scalar triple product, $|\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})|$.</p>
+        <p>$$\mathbf{v}\times\mathbf{w} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-2&0&3\\0&7&-4\end{vmatrix} = (0\cdot(-4)-3\cdot7)\mathbf{i}-((-2)\cdot(-4)-3\cdot0)\mathbf{j}+((-2)\cdot7-0\cdot0)\mathbf{k} = (-21,-8,-14),$$</p>
+        <p>so</p>
+        <p>$$\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w}) = 1\cdot(-21)+2\cdot(-8)+(-1)\cdot(-14) = -21-16+14 = -23.$$</p>
+        <p>Hence the volume is $|-23|=23$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-1 -->
+<div class="card ex-card" id="yu06-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-1</span>
+    <span class="ex-title">삼각뿔의 부피</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A(-1,2,3)$, $B(2,0,1)$, $C(1,-3,2)$, $D(-2,1,-1)$을 꼭짓점으로 갖는 삼각뿔의 부피를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 삼각뿔의 부피는 한 꼭짓점에서 뻗어나온 세 모서리 벡터의 스칼라 삼중적의 절댓값의 $\dfrac16$이다.</p>
+        <p>$\overrightarrow{AB}=(3,-2,-2)$, $\overrightarrow{AC}=(2,-5,-1)$, $\overrightarrow{AD}=(-1,-1,-4)$이고</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&-5&-1\\-1&-1&-4\end{vmatrix} = ((-5)(-4)-(-1)(-1))\mathbf{i}-((2)(-4)-(-1)(-1))\mathbf{j}+((2)(-1)-(-5)(-1))\mathbf{k} = (19,9,-7)$$</p>
+        <p>이므로</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = 3\cdot19+(-2)\cdot9+(-2)\cdot(-7) = 57-18+14 = 53$$</p>
+        <p>이다. 따라서 삼각뿔의 부피는 $\dfrac{1}{6}|53| = \dfrac{53}{6}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the volume of the tetrahedron with vertices $A(-1,2,3)$, $B(2,0,1)$, $C(1,-3,2)$, $D(-2,1,-1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The volume of a tetrahedron is $\dfrac16$ of the absolute value of the scalar triple product of the three edge vectors from one vertex.</p>
+        <p>$\overrightarrow{AB}=(3,-2,-2)$, $\overrightarrow{AC}=(2,-5,-1)$, $\overrightarrow{AD}=(-1,-1,-4)$, and</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&-5&-1\\-1&-1&-4\end{vmatrix} = ((-5)(-4)-(-1)(-1))\mathbf{i}-((2)(-4)-(-1)(-1))\mathbf{j}+((2)(-1)-(-5)(-1))\mathbf{k} = (19,9,-7),$$</p>
+        <p>so</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = 3\cdot19+(-2)\cdot9+(-2)\cdot(-7) = 57-18+14 = 53.$$</p>
+        <p>Hence the volume of the tetrahedron is $\dfrac{1}{6}|53| = \dfrac{53}{6}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-2 -->
+<div class="card ex-card" id="yu06-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-2</span>
+    <span class="ex-title">네 꼭짓점과 부피</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>8개의 꼭짓점 중 네 꼭짓점이 $A(0,0,0)$, $B(1,2,0)$, $C(0,-3,2)$, $D(3,-4,5)$인 평행육면체의 부피를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 네 점 $A,B,C,D$가 평행육면체의 한 꼭짓점 $A$와 그에 인접한 세 꼭짓점 $B,C,D$라 하면, 부피는 $|\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD})|$이다.</p>
+        <p>$\overrightarrow{AB}=(1,2,0)$, $\overrightarrow{AC}=(0,-3,2)$, $\overrightarrow{AD}=(3,-4,5)$이고</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\0&-3&2\\3&-4&5\end{vmatrix} = ((-3)(5)-(2)(-4))\mathbf{i}-((0)(5)-(2)(3))\mathbf{j}+((0)(-4)-(-3)(3))\mathbf{k} = (-7,6,9)$$</p>
+        <p>이므로</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = 1\cdot(-7)+2\cdot6+0\cdot9 = -7+12 = 5$$</p>
+        <p>이다. 따라서 평행육면체의 부피는 $|5|=5$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the volume of the parallelepiped whose eight vertices include the four vertices $A(0,0,0)$, $B(1,2,0)$, $C(0,-3,2)$, $D(3,-4,5)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $A$ is a vertex of the parallelepiped and $B,C,D$ are the three vertices adjacent to it, the volume is $|\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD})|$.</p>
+        <p>$\overrightarrow{AB}=(1,2,0)$, $\overrightarrow{AC}=(0,-3,2)$, $\overrightarrow{AD}=(3,-4,5)$, and</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\0&-3&2\\3&-4&5\end{vmatrix} = ((-3)(5)-(2)(-4))\mathbf{i}-((0)(5)-(2)(3))\mathbf{j}+((0)(-4)-(-3)(3))\mathbf{k} = (-7,6,9),$$</p>
+        <p>so</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = 1\cdot(-7)+2\cdot6+0\cdot9 = -7+12 = 5.$$</p>
+        <p>Hence the volume of the parallelepiped is $|5|=5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-3 -->
+<div class="card ex-card" id="yu06-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-3</span>
+    <span class="ex-title">네 점의 공면 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>시점이 원점인 공간벡터 $\mathbf{u}$, $\mathbf{v}$, $\mathbf{w}$가 한 평면 위에 있을 필요충분조건은 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$임을 보이시오.</li>
+          <li>네 점 $A(1,1,1)$, $B(-1,0,4)$, $C(0,2,1)$, $D(2,-2,3)$이 한 평면 위에 있는지 판별하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 세 벡터 $\mathbf{u},\mathbf{v},\mathbf{w}$가 시점을 원점으로 할 때 한 평면 위에 있다는 것은 세 벡터가 일차종속임을, 즉 세 벡터로 만든 평행육면체의 부피가 $0$임을 뜻한다. 이 부피는 $|(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}|$이므로, 세 벡터가 한 평면 위에 있을 필요충분조건은 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$이다.</p>
+        <p>보다 구체적으로, $\mathbf{u}\times\mathbf{v}\neq\mathbf{0}$인 경우 $\mathbf{u}$, $\mathbf{v}$는 원점을 지나는 한 평면 $\Pi$(법선벡터 $\mathbf{n}=\mathbf{u}\times\mathbf{v}$)를 결정하고, $\mathbf{w}$가 $\mathbf{u},\mathbf{v}$와 같은 평면 위에 있는 것은 $\mathbf{w}$가 $\mathbf{u},\mathbf{v}$의 일차결합으로 표현됨을, 즉 $\mathbf{w}\perp\mathbf{n}$을, 즉 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$을 뜻한다. $\mathbf{u}\times\mathbf{v}=\mathbf{0}$인 경우는 $\mathbf{u}$와 $\mathbf{v}$가 평행하므로 $\mathbf{u},\mathbf{v},\mathbf{w}$는 (원점, $\mathbf{u}$(또는 $\mathbf{v}$)의 방향, $\mathbf{w}$의 방향이 만드는) 한 평면 위에 항상 놓이고, 이때도 $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=\mathbf{0}\cdot\mathbf{w}=0$이므로 등식이 성립한다. 따라서 어느 경우든 필요충분조건이 성립한다.</p>
+        <p>(2) $\overrightarrow{AB}=(-2,-1,3)$, $\overrightarrow{AC}=(-1,1,0)$, $\overrightarrow{AD}=(1,-3,2)$라 하면, 네 점이 한 평면 위에 있는지는 (1)에 의해 $(\overrightarrow{AC}\times\overrightarrow{AD})\cdot\overrightarrow{AB}=0$인지로 판별할 수 있다.</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-1&1&0\\1&-3&2\end{vmatrix} = (1\cdot2-0\cdot(-3))\mathbf{i}-((-1)\cdot2-0\cdot1)\mathbf{j}+((-1)(-3)-1\cdot1)\mathbf{k} = (2,2,2)$$</p>
+        <p>이므로</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = (-2)\cdot2+(-1)\cdot2+3\cdot2 = -4-2+6 = 0$$</p>
+        <p>이다. 스칼라 삼중적이 $0$이므로 네 점 $A,B,C,D$는 한 평면 위에 있다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that a necessary and sufficient condition for the vectors in space $\mathbf{u}$, $\mathbf{v}$, $\mathbf{w}$, each with initial point at the origin, to lie in a single plane is $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$.</li>
+          <li>Determine whether the four points $A(1,1,1)$, $B(-1,0,4)$, $C(0,2,1)$, $D(2,-2,3)$ lie in a single plane.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Three vectors $\mathbf{u},\mathbf{v},\mathbf{w}$ with initial point at the origin lie in a single plane exactly when they are linearly dependent, i.e., when the parallelepiped they determine has volume $0$. This volume equals $|(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}|$, so the vectors lie in a single plane if and only if $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$.</p>
+        <p>More precisely, if $\mathbf{u}\times\mathbf{v}\neq\mathbf{0}$, then $\mathbf{u}$ and $\mathbf{v}$ determine a plane $\Pi$ through the origin with normal vector $\mathbf{n}=\mathbf{u}\times\mathbf{v}$, and $\mathbf{w}$ lies in the same plane as $\mathbf{u},\mathbf{v}$ exactly when $\mathbf{w}$ is a linear combination of $\mathbf{u},\mathbf{v}$, i.e., when $\mathbf{w}\perp\mathbf{n}$, i.e., when $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=0$. If $\mathbf{u}\times\mathbf{v}=\mathbf{0}$, then $\mathbf{u}$ and $\mathbf{v}$ are parallel, so $\mathbf{u},\mathbf{v},\mathbf{w}$ always lie in the plane spanned by the origin, the common direction of $\mathbf{u}$ (or $\mathbf{v}$), and $\mathbf{w}$; in this case $(\mathbf{u}\times\mathbf{v})\cdot\mathbf{w}=\mathbf{0}\cdot\mathbf{w}=0$ as well, so the equality holds. Hence the necessary and sufficient condition holds in either case.</p>
+        <p>(2) Let $\overrightarrow{AB}=(-2,-1,3)$, $\overrightarrow{AC}=(-1,1,0)$, $\overrightarrow{AD}=(1,-3,2)$. By part (1), whether the four points lie in a single plane can be determined by checking whether $(\overrightarrow{AC}\times\overrightarrow{AD})\cdot\overrightarrow{AB}=0$.</p>
+        <p>$$\overrightarrow{AC}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-1&1&0\\1&-3&2\end{vmatrix} = (1\cdot2-0\cdot(-3))\mathbf{i}-((-1)\cdot2-0\cdot1)\mathbf{j}+((-1)(-3)-1\cdot1)\mathbf{k} = (2,2,2),$$</p>
+        <p>so</p>
+        <p>$$\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD}) = (-2)\cdot2+(-1)\cdot2+3\cdot2 = -4-2+6 = 0.$$</p>
+        <p>Since the scalar triple product is $0$, the four points $A,B,C,D$ lie in a single plane.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">벡터의 일차결합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf{u}=(1,2,1)$, $\mathbf{v}=(1,-1,-1)$, $\mathbf{w}=(1,1,-1)$, $\mathbf{z}=(2,-3,-4)$라 하자. $\mathbf{z}=a\mathbf{u}+b\mathbf{v}+c\mathbf{w}$를 만족시키는 실수 $a,b,c$를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf{u}=(1,2,1)$, $\mathbf{v}=(1,-1,-1)$, $\mathbf{w}=(1,1,-1)$, $\mathbf{z}=(2,-3,-4)$. Find the real numbers $a,b,c$ satisfying $\mathbf{z}=a\mathbf{u}+b\mathbf{v}+c\mathbf{w}$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">매단 물체의 힘 분해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>100N의 무게를 갖는 물체 A가 2개의 실에 의해 그림과 같이 천장에 매달려 있다. $\mathbf{F}_1$과 $\mathbf{F}_2$의 수평 방향으로의 성분과 수직 방향으로의 성분을 $\alpha,\beta$를 이용해 각각 나타내시오.</p>
+        <svg viewBox="0 0 300 150" width="300" height="150" role="img" aria-label="천장에 두 실로 매달린 100N 물체와 힘 F1, F2, 실이 천장과 이루는 각 알파와 베타" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <line x1="30" y1="28" x2="270" y2="28" stroke="#555" stroke-width="2"/>
+          <line x1="40" y1="28" x2="32" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="60" y1="28" x2="52" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="80" y1="28" x2="72" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="100" y1="28" x2="92" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="120" y1="28" x2="112" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="140" y1="28" x2="132" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="160" y1="28" x2="152" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="180" y1="28" x2="172" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="200" y1="28" x2="192" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="220" y1="28" x2="212" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="240" y1="28" x2="232" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="260" y1="28" x2="252" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="147" y1="106" x2="75" y2="28" stroke="#555" stroke-width="1"/>
+          <line x1="153" y1="106" x2="225" y2="28" stroke="#555" stroke-width="1"/>
+          <text x="88" y="43" font-size="14" font-style="italic" fill="#333">&#945;</text>
+          <text x="203" y="43" font-size="14" font-style="italic" fill="#333">&#946;</text>
+          <line x1="145" y1="104" x2="112" y2="66" stroke="#1a56b4" stroke-width="2.5"/>
+          <polygon points="112,66 123,69 117,77" fill="#1a56b4"/>
+          <line x1="155" y1="104" x2="188" y2="66" stroke="#1a56b4" stroke-width="2.5"/>
+          <polygon points="188,66 177,69 183,77" fill="#1a56b4"/>
+          <text x="116" y="98" font-size="13" font-style="italic" fill="#1a56b4">F&#8321;</text>
+          <text x="174" y="98" font-size="13" font-style="italic" fill="#1a56b4">F&#8322;</text>
+          <rect x="135" y="106" width="30" height="26" fill="#9db8e0" stroke="#33507a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>An object A weighing 100N is suspended from the ceiling by two strings, as shown in the figure. Express the horizontal and vertical components of $\mathbf{F}_1$ and $\mathbf{F}_2$ in terms of $\alpha$ and $\beta$.</p>
+        <svg viewBox="0 0 300 150" width="300" height="150" role="img" aria-label="A 100N body suspended from the ceiling by two strings, with forces F1, F2 and angles alpha and beta" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <line x1="30" y1="28" x2="270" y2="28" stroke="#555" stroke-width="2"/>
+          <line x1="40" y1="28" x2="32" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="60" y1="28" x2="52" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="80" y1="28" x2="72" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="100" y1="28" x2="92" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="120" y1="28" x2="112" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="140" y1="28" x2="132" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="160" y1="28" x2="152" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="180" y1="28" x2="172" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="200" y1="28" x2="192" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="220" y1="28" x2="212" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="240" y1="28" x2="232" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="260" y1="28" x2="252" y2="20" stroke="#999" stroke-width="1"/>
+          <line x1="147" y1="106" x2="75" y2="28" stroke="#555" stroke-width="1"/>
+          <line x1="153" y1="106" x2="225" y2="28" stroke="#555" stroke-width="1"/>
+          <text x="88" y="43" font-size="14" font-style="italic" fill="#333">&#945;</text>
+          <text x="203" y="43" font-size="14" font-style="italic" fill="#333">&#946;</text>
+          <line x1="145" y1="104" x2="112" y2="66" stroke="#1a56b4" stroke-width="2.5"/>
+          <polygon points="112,66 123,69 117,77" fill="#1a56b4"/>
+          <line x1="155" y1="104" x2="188" y2="66" stroke="#1a56b4" stroke-width="2.5"/>
+          <polygon points="188,66 177,69 183,77" fill="#1a56b4"/>
+          <text x="116" y="98" font-size="13" font-style="italic" fill="#1a56b4">F&#8321;</text>
+          <text x="174" y="98" font-size="13" font-style="italic" fill="#1a56b4">F&#8322;</text>
+          <rect x="135" y="106" width="30" height="26" fill="#9db8e0" stroke="#33507a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">벡터 합의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>공간 위의 $n$개의 점 $A_1,A_2,\cdots,A_n$에 대해 다음이 성립함을 보이시오.
+            $$\overrightarrow{A_1A_2}+\overrightarrow{A_2A_3}+\cdots+\overrightarrow{A_{n-1}A_n}+\overrightarrow{A_nA_1}=\mathbf{0}$$
+          </li>
+          <li>삼각형 $ABC$에 대해 꼭짓점 $A,B,C$가 마주보는 변의 중점을 각각 $A',B',C'$라 하자. 이때 다음이 성립함을 보이시오.
+            $$\overrightarrow{AA'}+\overrightarrow{BB'}+\overrightarrow{CC'}=\mathbf{0}$$
+          </li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that the following holds for $n$ points $A_1,A_2,\cdots,A_n$ in space.
+            $$\overrightarrow{A_1A_2}+\overrightarrow{A_2A_3}+\cdots+\overrightarrow{A_{n-1}A_n}+\overrightarrow{A_nA_1}=\mathbf{0}$$
+          </li>
+          <li>For triangle $ABC$, let $A',B',C'$ be the midpoints of the sides opposite vertices $A,B,C$, respectively. Show that the following holds.
+            $$\overrightarrow{AA'}+\overrightarrow{BB'}+\overrightarrow{CC'}=\mathbf{0}$$
+          </li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">방향코사인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공간벡터 $\mathbf{v}=a\mathbf{i}+b\mathbf{j}+c\mathbf{k}$에 대해 $\mathbf{v}$가 양의 $x$축과 이루는 각의 크기를 $\alpha$, 양의 $y$축과 이루는 각의 크기를 $\beta$, 양의 $z$축과 이루는 각의 크기를 $\gamma$라 하자. 이때 $(\cos\alpha,\cos\beta,\cos\gamma)$는 $\mathbf{v}$와 평행한 단위벡터임을 보이시오. 여기서 $\cos\alpha,\cos\beta,\cos\gamma$를 <strong>방향코사인(direction cosine)</strong>이라 한다.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the vector in space $\mathbf{v}=a\mathbf{i}+b\mathbf{j}+c\mathbf{k}$, let $\alpha$ be the angle it makes with the positive $x$-axis, $\beta$ the angle with the positive $y$-axis, and $\gamma$ the angle with the positive $z$-axis. Show that $(\cos\alpha,\cos\beta,\cos\gamma)$ is a unit vector parallel to $\mathbf{v}$. Here $\cos\alpha,\cos\beta,\cos\gamma$ are called the <strong>direction cosines</strong>.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">수직 조건과 반원의 각</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>두 벡터 $\mathbf{v}_1$, $\mathbf{v}_2$에 대해 $\mathbf{v}_1+\mathbf{v}_2$와 $\mathbf{v}_1-\mathbf{v}_2$가 수직일 필요충분조건을 제시하시오.</li>
+          <li>선분 $AB$를 지름으로 갖는 원 위의 한 점 $C$에 대해 $\overrightarrow{CA}$와 $\overrightarrow{CB}$는 수직임을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Give a necessary and sufficient condition for $\mathbf{v}_1+\mathbf{v}_2$ and $\mathbf{v}_1-\mathbf{v}_2$ to be perpendicular, for two vectors $\mathbf{v}_1$, $\mathbf{v}_2$.</li>
+          <li>Show that for a point $C$ on the circle with diameter $AB$, $\overrightarrow{CA}$ and $\overrightarrow{CB}$ are perpendicular.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">정사면체의 사잇각</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정사면체 $ABCD$에 대하여 선분 $BC$의 중점을 $P$라 하자. $\overrightarrow{AD}$와 $\overrightarrow{AP}$가 이루는 각의 크기를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a regular tetrahedron $ABCD$, let $P$ be the midpoint of segment $BC$. Find the angle between $\overrightarrow{AD}$ and $\overrightarrow{AP}$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">반사광 벡터 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공간 위에 벡터 $\mathbf{n}$과 수직인 평면 $\alpha$가 존재한다. 벡터 $\mathbf{v}$와 평행한 방향으로 진행하던 빛이 평면 $\alpha$에서 반사되었을 때 반사광과 평행한 벡터 $\mathbf{w}$를 구하시오 (단, $|\mathbf{v}|=|\mathbf{w}|$)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In space, there is a plane $\alpha$ perpendicular to the vector $\mathbf{n}$. A ray of light traveling in a direction parallel to the vector $\mathbf{v}$ is reflected off the plane $\alpha$. Find a vector $\mathbf{w}$ parallel to the reflected ray (where $|\mathbf{v}|=|\mathbf{w}|$).</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">외적 항등식 증명</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\mathbf{u}\times(\mathbf{v}\times\mathbf{w})+\mathbf{v}\times(\mathbf{w}\times\mathbf{u})+\mathbf{w}\times(\mathbf{u}\times\mathbf{v})=\mathbf{0}$</li>
+          <li>$\mathbf{u}\times\mathbf{v}=(\mathbf{u}\cdot\mathbf{v}\times\mathbf{i})\mathbf{i}+(\mathbf{u}\cdot\mathbf{v}\times\mathbf{j})\mathbf{j}+(\mathbf{u}\cdot\mathbf{v}\times\mathbf{k})\mathbf{k}$</li>
+          <li>$(\mathbf{u}\times\mathbf{v})\cdot(\mathbf{w}\times\mathbf{r})=(\mathbf{u}\cdot\mathbf{w})(\mathbf{v}\cdot\mathbf{r})-(\mathbf{v}\cdot\mathbf{w})(\mathbf{u}\cdot\mathbf{r})$</li>
+          <li>$\mathbf{u}\times(\mathbf{u}\times(\mathbf{u}\times\mathbf{v}))\cdot\mathbf{w}=-|\mathbf{u}|^2\mathbf{u}\cdot\mathbf{v}\times\mathbf{w}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the following hold.</p>
+        <ol>
+          <li>$\mathbf{u}\times(\mathbf{v}\times\mathbf{w})+\mathbf{v}\times(\mathbf{w}\times\mathbf{u})+\mathbf{w}\times(\mathbf{u}\times\mathbf{v})=\mathbf{0}$</li>
+          <li>$\mathbf{u}\times\mathbf{v}=(\mathbf{u}\cdot\mathbf{v}\times\mathbf{i})\mathbf{i}+(\mathbf{u}\cdot\mathbf{v}\times\mathbf{j})\mathbf{j}+(\mathbf{u}\cdot\mathbf{v}\times\mathbf{k})\mathbf{k}$</li>
+          <li>$(\mathbf{u}\times\mathbf{v})\cdot(\mathbf{w}\times\mathbf{r})=(\mathbf{u}\cdot\mathbf{w})(\mathbf{v}\cdot\mathbf{r})-(\mathbf{v}\cdot\mathbf{w})(\mathbf{u}\cdot\mathbf{r})$</li>
+          <li>$\mathbf{u}\times(\mathbf{u}\times(\mathbf{u}\times\mathbf{v}))\cdot\mathbf{w}=-|\mathbf{u}|^2\mathbf{u}\cdot\mathbf{v}\times\mathbf{w}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

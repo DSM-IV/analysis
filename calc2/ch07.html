@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07. 편도함수의 활용-변화율과 접평면 (Applications of Partial Derivatives: Rates of Change and Tangent Planes) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 07단원 편도함수의 활용-변화율과 접평면(Applications of Partial Derivatives: Rates of Change and Tangent Planes) 예제·유제·문제 모음. 기울기 벡터와 방향도함수, 등위선의 접선과 등위면의 접평면·법선, 선형화와 선형근사, 오차의 한계와 상대오차를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 편도함수의 활용, 기울기 벡터, gradient, 방향도함수, directional derivative, 접평면, tangent plane, 법선, normal line, 선형화, linearization, 선형근사, linear approximation, 오차의 한계, error bound, 상대오차, relative error, 체감온도, wind-chill, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch07.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="07. 편도함수의 활용-변화율과 접평면 (Applications of Partial Derivatives: Rates of Change and Tangent Planes) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="편도함수의 활용-변화율과 접평면 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch07.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "07. 편도함수의 활용-변화율과 접평면 (Applications of Partial Derivatives: Rates of Change and Tangent Planes) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 편도함수의 활용-변화율과 접평면 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch07.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch07.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html" class="active">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 07</p>
+  <h1>07. 편도함수의 활용-변화율과 접평면<span>Applications of Partial Derivatives: Rates of Change and Tangent Planes</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 기울기 벡터와 방향도함수</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 기울기 벡터 계산</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 방향도함수 계산</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 변화율이 1인 방향</a></li>
+    <li><a href="#yu01-4"><span class="toc-num">유제 01-4</span> 가장 빠른 증감 방향</a></li>
+    <li><a href="#yu01-5"><span class="toc-num">유제 01-5</span> 방향으로의 변화율</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 접선과 접평면</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 곡면의 접평면</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 교선의 접선</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 곡면의 법선</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 함수의 선형화</a></li>
+    <li><a href="#yu03"><span class="toc-num">유제 03</span> 체감온도의 선형화</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 선형근사의 오차 한계</a></li>
+    <li><a href="#yu04"><span class="toc-num">유제 04</span> 선형근사의 오차 한계</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 변화량의 근사</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 부피의 오차 근사</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 부피에 큰 영향 요소</a></li>
+    <li><a href="#yu05-3"><span class="toc-num">유제 05-3</span> 오차의 최댓값</a></li>
+    <li><a href="#yu05-4"><span class="toc-num">유제 05-4</span> 부피의 상대오차</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 접선 방향 변화율</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 방향변화율로 편도함수</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 최대 증가 방향 곡선</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 기울기와 위치벡터 평행</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 위치벡터와 기울기</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> xy평면과 평행한 접평면</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 곡선과 곡면의 접점</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 곡선과 곡면의 각</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 접하는 방향의 최대 변화율</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">기울기 벡터와 방향도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=x^2+xy$라 하자.</p>
+        <ol>
+          <li>$\nabla f(x,y)$를 계산하시오.</li>
+          <li>$f$의 $P_0(1,2)$에서의 $\mathbf{u}=\left(\dfrac{1}{\sqrt{2}},\dfrac{1}{\sqrt{2}}\right)$ 방향으로의 방향도함수를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $f_x=2x+y,\ f_y=x$이므로 $\nabla f(x,y)=(2x+y,\ x)$이다.</p>
+        <p>(2) $\nabla f(1,2)=(2\cdot1+2,\ 1)=(4,1)$이고, $\mathbf u=\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$이므로
+        $$D_{\mathbf u}f(1,2)=\nabla f(1,2)\cdot\mathbf u=(4,1)\cdot\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)=\dfrac{4+1}{\sqrt2}=\dfrac{5\sqrt2}{2}$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y)=x^2+xy$.</p>
+        <ol>
+          <li>Compute $\nabla f(x,y)$.</li>
+          <li>Find the directional derivative of $f$ at $P_0(1,2)$ in the direction $\mathbf{u}=\left(\dfrac{1}{\sqrt{2}},\dfrac{1}{\sqrt{2}}\right)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Since $f_x=2x+y$ and $f_y=x$, we have $\nabla f(x,y)=(2x+y,\ x)$.</p>
+        <p>(2) $\nabla f(1,2)=(2\cdot1+2,\ 1)=(4,1)$ and $\mathbf u=\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$, so
+        $$D_{\mathbf u}f(1,2)=\nabla f(1,2)\cdot\mathbf u=(4,1)\cdot\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)=\dfrac{4+1}{\sqrt2}=\dfrac{5\sqrt2}{2}$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">기울기 벡터 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y,z)=x^2+y^2-2z^2+z\ln x$라 할 때, $\nabla f(1,1,1)$을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=2x+\dfrac{z}{x},\ f_y=2y,\ f_z=-4z+\ln x$이므로
+        $$\nabla f(1,1,1)=\left(2\cdot1+\dfrac{1}{1},\ 2\cdot1,\ -4\cdot1+\ln1\right)=(3,\ 2,\ -4)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y,z)=x^2+y^2-2z^2+z\ln x$. Find $\nabla f(1,1,1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=2x+\dfrac{z}{x}$, $f_y=2y$, $f_z=-4z+\ln x$, we get
+        $$\nabla f(1,1,1)=\left(2\cdot1+\dfrac{1}{1},\ 2\cdot1,\ -4\cdot1+\ln1\right)=(3,\ 2,\ -4)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">방향도함수 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=xe^y+\cos(xy)$의 $(2,0)$에서 $(3,-4)$ 방향으로의 방향도함수를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=e^y-y\sin(xy),\ f_y=xe^y-x\sin(xy)$이므로 $\nabla f(2,0)=(e^0-0,\ 2e^0-0)=(1,2)$이다.</p>
+        <p>방향벡터 $(3,-4)$의 크기는 $5$이므로 단위벡터는 $\mathbf u=\left(\dfrac35,-\dfrac45\right)$이고,
+        $$D_{\mathbf u}f(2,0)=\nabla f(2,0)\cdot\mathbf u=(1,2)\cdot\left(\dfrac35,-\dfrac45\right)=\dfrac35-\dfrac85=-1$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the directional derivative of $f(x,y)=xe^y+\cos(xy)$ at $(2,0)$ in the direction $(3,-4)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=e^y-y\sin(xy)$ and $f_y=xe^y-x\sin(xy)$, we have $\nabla f(2,0)=(e^0-0,\ 2e^0-0)=(1,2)$.</p>
+        <p>The vector $(3,-4)$ has magnitude $5$, so the unit direction is $\mathbf u=\left(\dfrac35,-\dfrac45\right)$, and
+        $$D_{\mathbf u}f(2,0)=\nabla f(2,0)\cdot\mathbf u=(1,2)\cdot\left(\dfrac35,-\dfrac45\right)=\dfrac35-\dfrac85=-1$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">변화율이 1인 방향</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=\dfrac{x-y}{x+y}$라 할 때, $D_{\mathbf{u}}f\left(-\dfrac{1}{2},\dfrac{3}{2}\right)=1$을 만족시키는 방향 $\mathbf{u}$를 찾으시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=\dfrac{2y}{(x+y)^2},\ f_y=\dfrac{-2x}{(x+y)^2}$이고, $\left(-\dfrac12,\dfrac32\right)$에서 $x+y=1$이므로
+        $$\nabla f\left(-\dfrac12,\dfrac32\right)=(3,1)$$
+        이다.</p>
+        <p>$\mathbf u=(u_1,u_2)$가 단위벡터이고 $D_{\mathbf u}f=\nabla f\cdot\mathbf u=3u_1+u_2=1$을 만족한다고 하자. $u_2=1-3u_1$을 $u_1^2+u_2^2=1$에 대입하면
+        $$u_1^2+(1-3u_1)^2=1 \;\Leftrightarrow\; 10u_1^2-6u_1=0 \;\Leftrightarrow\; 2u_1(5u_1-3)=0$$
+        이므로 $u_1=0$ 또는 $u_1=\dfrac35$이다.</p>
+        <p>$u_1=0$이면 $u_2=1$이므로 $\mathbf u=(0,1)$이고, $u_1=\dfrac35$이면 $u_2=1-\dfrac95=-\dfrac45$이므로 $\mathbf u=\left(\dfrac35,-\dfrac45\right)$이다. 따라서 구하는 방향은 $\mathbf u=(0,1)$ 또는 $\mathbf u=\left(\dfrac35,-\dfrac45\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y)=\dfrac{x-y}{x+y}$. Find a direction $\mathbf{u}$ satisfying $D_{\mathbf{u}}f\left(-\dfrac{1}{2},\dfrac{3}{2}\right)=1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=\dfrac{2y}{(x+y)^2}$ and $f_y=\dfrac{-2x}{(x+y)^2}$, and $x+y=1$ at $\left(-\dfrac12,\dfrac32\right)$,
+        $$\nabla f\left(-\dfrac12,\dfrac32\right)=(3,1)$$</p>
+        <p>Let $\mathbf u=(u_1,u_2)$ be a unit vector with $D_{\mathbf u}f=\nabla f\cdot\mathbf u=3u_1+u_2=1$. Substituting $u_2=1-3u_1$ into $u_1^2+u_2^2=1$ gives
+        $$u_1^2+(1-3u_1)^2=1 \;\Leftrightarrow\; 10u_1^2-6u_1=0 \;\Leftrightarrow\; 2u_1(5u_1-3)=0$$
+        so $u_1=0$ or $u_1=\dfrac35$.</p>
+        <p>If $u_1=0$, then $u_2=1$, so $\mathbf u=(0,1)$; if $u_1=\dfrac35$, then $u_2=1-\dfrac95=-\dfrac45$, so $\mathbf u=\left(\dfrac35,-\dfrac45\right)$. Hence the desired direction is $\mathbf u=(0,1)$ or $\mathbf u=\left(\dfrac35,-\dfrac45\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-4 -->
+<div class="card ex-card" id="yu01-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-4</span>
+    <span class="ex-title">가장 빠른 증감 방향</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=\dfrac{x^2}{2}+\dfrac{y^2}{2}$에 대하여 다음을 구하시오.</p>
+        <ol>
+          <li>$(1,1)$에서 $f(x,y)$가 가장 빠르게 증가하는 방향</li>
+          <li>$(1,1)$에서 $f(x,y)$가 가장 빠르게 감소하는 방향</li>
+          <li>$(1,1)$에서 $f(x,y)$의 변화율이 $0$인 방향</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\nabla f(x,y)=(x,y)$이므로 $\nabla f(1,1)=(1,1)$이고 $|\nabla f(1,1)|=\sqrt2$이다.</p>
+        <p>(1) 가장 빠르게 증가하는 방향은 $\dfrac{\nabla f(1,1)}{|\nabla f(1,1)|}=\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$이다.</p>
+        <p>(2) 가장 빠르게 감소하는 방향은 $-\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$이다.</p>
+        <p>(3) 변화율이 $0$인 방향은 $\nabla f(1,1)$과 수직인 단위벡터이므로 $\pm\left(\dfrac{1}{\sqrt2},-\dfrac{1}{\sqrt2}\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y)=\dfrac{x^2}{2}+\dfrac{y^2}{2}$, find the following.</p>
+        <ol>
+          <li>The direction in which $f(x,y)$ increases fastest at $(1,1)$</li>
+          <li>The direction in which $f(x,y)$ decreases fastest at $(1,1)$</li>
+          <li>The direction in which the rate of change of $f(x,y)$ at $(1,1)$ is $0$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\nabla f(x,y)=(x,y)$, we have $\nabla f(1,1)=(1,1)$ and $|\nabla f(1,1)|=\sqrt2$.</p>
+        <p>(1) The direction of fastest increase is $\dfrac{\nabla f(1,1)}{|\nabla f(1,1)|}=\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$.</p>
+        <p>(2) The direction of fastest decrease is $-\left(\dfrac{1}{\sqrt2},\dfrac{1}{\sqrt2}\right)$.</p>
+        <p>(3) The direction with rate of change $0$ is a unit vector perpendicular to $\nabla f(1,1)$, namely $\pm\left(\dfrac{1}{\sqrt2},-\dfrac{1}{\sqrt2}\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-5 -->
+<div class="card ex-card" id="yu01-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-5</span>
+    <span class="ex-title">방향으로의 변화율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y,z)=x^3-xy^2-z$에 대하여 다음을 구하시오.</p>
+        <ol>
+          <li>$(1,1,0)$에서 $\mathbf{v}=(2,-3,6)$ 방향으로의 변화율</li>
+          <li>$(1,1,0)$에서 가장 빠르게 증가하는 방향으로의 변화율</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=3x^2-y^2,\ f_y=-2xy,\ f_z=-1$이므로 $\nabla f(1,1,0)=(2,-2,-1)$이다.</p>
+        <p>(1) $\mathbf v=(2,-3,6)$의 크기는 $|\mathbf v|=\sqrt{4+9+36}=7$이므로 단위벡터는 $\mathbf u=\dfrac{1}{7}(2,-3,6)$이고,
+        $$D_{\mathbf u}f(1,1,0)=\nabla f(1,1,0)\cdot\mathbf u=\dfrac{2\cdot2+(-2)(-3)+(-1)\cdot6}{7}=\dfrac{4+6-6}{7}=\dfrac47$$
+        이다.</p>
+        <p>(2) 가장 빠르게 증가하는 방향으로의 변화율은 $|\nabla f(1,1,0)|=\sqrt{4+4+1}=\sqrt9=3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y,z)=x^3-xy^2-z$, find the following.</p>
+        <ol>
+          <li>The rate of change at $(1,1,0)$ in the direction $\mathbf{v}=(2,-3,6)$</li>
+          <li>The rate of change at $(1,1,0)$ in the direction of fastest increase</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=3x^2-y^2$, $f_y=-2xy$, $f_z=-1$, we have $\nabla f(1,1,0)=(2,-2,-1)$.</p>
+        <p>(1) The vector $\mathbf v=(2,-3,6)$ has magnitude $|\mathbf v|=\sqrt{4+9+36}=7$, so the unit direction is $\mathbf u=\dfrac{1}{7}(2,-3,6)$, and
+        $$D_{\mathbf u}f(1,1,0)=\nabla f(1,1,0)\cdot\mathbf u=\dfrac{2\cdot2+(-2)(-3)+(-1)\cdot6}{7}=\dfrac{4+6-6}{7}=\dfrac47$$</p>
+        <p>(2) The rate of change in the direction of fastest increase is $|\nabla f(1,1,0)|=\sqrt{4+4+1}=\sqrt9=3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">접선과 접평면</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$(-2,1)$에서 등위선 $\dfrac{x^2}{4}+y^2=2$의 접선의 방정식을 구하시오.</li>
+          <li>$(1,2,4)$에서 등위면 $x^2+y^2+z-9=0$의 접평면의 방정식을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $F(x,y)=\dfrac{x^2}{4}+y^2-2$라 하면 $\nabla F(x,y)=\left(\dfrac{x}{2},\ 2y\right)$이고 $\nabla F(-2,1)=(-1,\ 2)$이다. 등위선의 접선은 $\nabla F(-2,1)$에 수직이므로
+        $$-1(x+2)+2(y-1)=0 \;\Leftrightarrow\; x-2y+4=0$$
+        이다.</p>
+        <p>(2) $F(x,y,z)=x^2+y^2+z-9$라 하면 $\nabla F(x,y,z)=(2x,\ 2y,\ 1)$이고 $\nabla F(1,2,4)=(2,\ 4,\ 1)$이다. 등위면의 접평면은
+        $$2(x-1)+4(y-2)+1(z-4)=0 \;\Leftrightarrow\; 2x+4y+z=14$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the equation of the tangent line to the level curve $\dfrac{x^2}{4}+y^2=2$ at $(-2,1)$.</li>
+          <li>Find the equation of the tangent plane to the level surface $x^2+y^2+z-9=0$ at $(1,2,4)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Let $F(x,y)=\dfrac{x^2}{4}+y^2-2$. Then $\nabla F(x,y)=\left(\dfrac{x}{2},\ 2y\right)$ and $\nabla F(-2,1)=(-1,\ 2)$. The tangent line to the level curve is perpendicular to $\nabla F(-2,1)$, so
+        $$-1(x+2)+2(y-1)=0 \;\Leftrightarrow\; x-2y+4=0$$</p>
+        <p>(2) Let $F(x,y,z)=x^2+y^2+z-9$. Then $\nabla F(x,y,z)=(2x,\ 2y,\ 1)$ and $\nabla F(1,2,4)=(2,\ 4,\ 1)$. The tangent plane to the level surface is
+        $$2(x-1)+4(y-2)+1(z-4)=0 \;\Leftrightarrow\; 2x+4y+z=14$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">곡면의 접평면</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원점에서의 곡면 $z=x\cos y-ye^x$의 접평면의 방정식을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F(x,y,z)=x\cos y-ye^x-z$라 하면
+        $$F_x=\cos y-ye^x,\quad F_y=-x\sin y-e^x,\quad F_z=-1$$
+        이고, $F(0,0,0)=(1\cdot1-0)-0=0$이므로 원점은 곡면 위의 점이다. $\nabla F(0,0,0)=(\cos0-0,\ -0-e^0,\ -1)=(1,-1,-1)$이므로 접평면의 방정식은
+        $$1(x-0)-1(y-0)-1(z-0)=0 \;\Leftrightarrow\; x-y-z=0$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the equation of the tangent plane to the surface $z=x\cos y-ye^x$ at the origin.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F(x,y,z)=x\cos y-ye^x-z$. Then
+        $$F_x=\cos y-ye^x,\quad F_y=-x\sin y-e^x,\quad F_z=-1$$
+        and $F(0,0,0)=0$, so the origin lies on the surface. Since $\nabla F(0,0,0)=(\cos0-0,\ -0-e^0,\ -1)=(1,-1,-1)$, the tangent plane is
+        $$1(x-0)-1(y-0)-1(z-0)=0 \;\Leftrightarrow\; x-y-z=0$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">교선의 접선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 곡면 $x^2+y^2-2=0$과 $x+z-4=0$의 교선을 $E$라 할 때, $E$ 위의 점 $(1,1,3)$에서의 $E$의 접선의 방정식을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F_1(x,y,z)=x^2+y^2-2,\ F_2(x,y,z)=x+z-4$라 하면 $\nabla F_1=(2x,2y,0),\ \nabla F_2=(1,0,1)$이고, $(1,1,3)$에서
+        $$\nabla F_1(1,1,3)=(2,2,0),\qquad \nabla F_2(1,1,3)=(1,0,1)$$
+        이다. 교선 $E$의 접선방향은 두 곡면의 법선 $\nabla F_1,\nabla F_2$에 모두 수직이므로
+        $$\nabla F_1(1,1,3)\times\nabla F_2(1,1,3)=(2,2,0)\times(1,0,1)=(2\cdot1-0\cdot0,\ 0\cdot1-2\cdot1,\ 2\cdot0-2\cdot1)=(2,-2,-2)$$
+        이며, 이는 $(1,-1,-1)$과 평행하다. 따라서 $(1,1,3)$에서의 접선의 매개변수방정식은
+        $$(x,y,z)=(1+t,\ 1-t,\ 3-t)\quad(t\in\mathbb R)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E$ be the curve of intersection of the two surfaces $x^2+y^2-2=0$ and $x+z-4=0$. Find the equation of the tangent line to $E$ at the point $(1,1,3)$ on $E$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F_1(x,y,z)=x^2+y^2-2$ and $F_2(x,y,z)=x+z-4$. Then $\nabla F_1=(2x,2y,0)$, $\nabla F_2=(1,0,1)$, and at $(1,1,3)$,
+        $$\nabla F_1(1,1,3)=(2,2,0),\qquad \nabla F_2(1,1,3)=(1,0,1)$$
+        The tangent direction of $E$ is perpendicular to both normals $\nabla F_1,\nabla F_2$, so
+        $$\nabla F_1(1,1,3)\times\nabla F_2(1,1,3)=(2,2,0)\times(1,0,1)=(2\cdot1-0\cdot0,\ 0\cdot1-2\cdot1,\ 2\cdot0-2\cdot1)=(2,-2,-2)$$
+        which is parallel to $(1,-1,-1)$. Hence the parametric equation of the tangent line at $(1,1,3)$ is
+        $$(x,y,z)=(1+t,\ 1-t,\ 3-t)\quad(t\in\mathbb R)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">곡면의 법선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$ye^x-ze^{y^2}=z$의 $P(0,0,1)$에서의 법선의 방정식을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F(x,y,z)=ye^x-ze^{y^2}-z$라 하면
+        $$F_x=ye^x,\quad F_y=e^x-2yze^{y^2},\quad F_z=-e^{y^2}-1$$
+        이고, $\nabla F(0,0,1)=(0\cdot1,\ 1-0,\ -1-1)=(0,1,-2)$이다. 법선은 $P(0,0,1)$을 지나고 $\nabla F(0,0,1)$을 방향벡터로 가지므로 매개변수방정식은
+        $$(x,y,z)=(0,\ t,\ 1-2t)\quad(t\in\mathbb R)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the equation of the normal line to $ye^x-ze^{y^2}=z$ at $P(0,0,1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F(x,y,z)=ye^x-ze^{y^2}-z$. Then
+        $$F_x=ye^x,\quad F_y=e^x-2yze^{y^2},\quad F_z=-e^{y^2}-1$$
+        so $\nabla F(0,0,1)=(0\cdot1,\ 1-0,\ -1-1)=(0,1,-2)$. The normal line passes through $P(0,0,1)$ with direction vector $\nabla F(0,0,1)$, so its parametric equation is
+        $$(x,y,z)=(0,\ t,\ 1-2t)\quad(t\in\mathbb R)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">함수의 선형화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=x^2-xy+\dfrac{1}{2}y^2+3$를 $(3,2)$에서 선형화하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(3,2)=9-6+2+3=8$이고, $f_x=2x-y,\ f_y=-x+y$이므로 $f_x(3,2)=4,\ f_y(3,2)=-1$이다. 선형화는
+        $$L(x,y)=f(3,2)+f_x(3,2)(x-3)+f_y(3,2)(y-2)=8+4(x-3)-(y-2)=4x-y-2$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Linearize $f(x,y)=x^2-xy+\dfrac{1}{2}y^2+3$ at $(3,2)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We have $f(3,2)=9-6+2+3=8$, and since $f_x=2x-y,\ f_y=-x+y$, we get $f_x(3,2)=4,\ f_y(3,2)=-1$. The linearization is
+        $$L(x,y)=f(3,2)+f_x(3,2)(x-3)+f_y(3,2)(y-2)=8+4(x-3)-(y-2)=4x-y-2$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03 -->
+<div class="card ex-card" id="yu03">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03</span>
+    <span class="ex-title">체감온도의 선형화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실제 온도가 $T$(℃), 풍속이 $v$(km/h)일 때 체감온도 $W$는 아래와 같이 주어진다.</p>
+        $$W=13.13+0.6215T-11.36v^{0.16}+0.396Tv^{0.16}$$
+        <p>$W(v,T)$를 $(40,-10)$에서 선형화하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong>
+        $$W_v=-11.36(0.16)v^{-0.84}+0.396T(0.16)v^{-0.84}=0.16v^{-0.84}(-11.36+0.396T),\qquad W_T=0.6215+0.396v^{0.16}$$
+        이다. $v=40$에서 $v^{0.16}\approx1.8044,\ v^{-0.84}\approx0.04511$이므로
+        $$W(40,-10)=13.13+0.6215(-10)-11.36(1.8044)+0.396(-10)(1.8044)\approx-20.7282$$
+        $$W_v(40,-10)=0.16(0.04511)\big(-11.36+0.396(-10)\big)=0.16(0.04511)(-15.32)\approx-0.1106$$
+        $$W_T(40,-10)=0.6215+0.396(1.8044)\approx1.3360$$
+        이다. 따라서 선형화는
+        $$L(v,T)\approx-20.7282-0.1106(v-40)+1.3360(T+10)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>When the actual temperature is $T$(℃) and the wind speed is $v$(km/h), the wind-chill temperature $W$ is given by</p>
+        $$W=13.13+0.6215T-11.36v^{0.16}+0.396Tv^{0.16}$$
+        <p>Linearize $W(v,T)$ at $(40,-10)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong>
+        $$W_v=-11.36(0.16)v^{-0.84}+0.396T(0.16)v^{-0.84}=0.16v^{-0.84}(-11.36+0.396T),\qquad W_T=0.6215+0.396v^{0.16}$$
+        At $v=40$, $v^{0.16}\approx1.8044$ and $v^{-0.84}\approx0.04511$, so
+        $$W(40,-10)=13.13+0.6215(-10)-11.36(1.8044)+0.396(-10)(1.8044)\approx-20.7282$$
+        $$W_v(40,-10)=0.16(0.04511)\big(-11.36+0.396(-10)\big)=0.16(0.04511)(-15.32)\approx-0.1106$$
+        $$W_T(40,-10)=0.6215+0.396(1.8044)\approx1.3360$$
+        Hence the linearization is
+        $$L(v,T)\approx-20.7282-0.1106(v-40)+1.3360(T+10)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">선형근사의 오차 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y,z)=x^2-xy+3\sin z$를 $(2,1,0)$에서 선형근사하려고 한다. 영역</p>
+        $$R:\ |x-2|\le 0.01,\quad |y-1|\le 0.02,\quad |z|\le 0.01$$
+        <p>에서 생기는 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=2x-y,\ f_y=-x,\ f_z=3\cos z$이므로
+        $$f_{xx}=2,\quad f_{xy}=-1,\quad f_{xz}=0,\quad f_{yy}=0,\quad f_{yz}=0,\quad f_{zz}=-3\sin z$$
+        이다. $R$ 위에서 $|f_{xx}|=2,\ |f_{xy}|=1,\ |f_{zz}|=3|\sin z|\le3$이고 나머지는 $0$이므로, 모든 이계 편도함수의 절댓값의 상한 $M$은
+        $$M=3$$
+        으로 잡을 수 있다. 선형근사의 오차 $E$에 대해 일반적으로
+        $$|E|\le\dfrac12M\left(|x-x_0|+|y-y_0|+|z-z_0|\right)^2$$
+        이 성립하므로, $R$ 위에서
+        $$|E|\le\dfrac12(3)(0.01+0.02+0.01)^2=\dfrac12(3)(0.04)^2=1.5(0.0016)=0.0024$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We wish to find the linear approximation of $f(x,y,z)=x^2-xy+3\sin z$ at $(2,1,0)$. On the region</p>
+        $$R:\ |x-2|\le 0.01,\quad |y-1|\le 0.02,\quad |z|\le 0.01$$
+        <p>find the resulting error bound.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=2x-y,\ f_y=-x,\ f_z=3\cos z$,
+        $$f_{xx}=2,\quad f_{xy}=-1,\quad f_{xz}=0,\quad f_{yy}=0,\quad f_{yz}=0,\quad f_{zz}=-3\sin z$$
+        On $R$, $|f_{xx}|=2$, $|f_{xy}|=1$, $|f_{zz}|=3|\sin z|\le3$, and the rest are $0$, so we may take the bound on all second partial derivatives to be
+        $$M=3$$
+        Since the error $E$ in the linear approximation satisfies, in general,
+        $$|E|\le\dfrac12M\left(|x-x_0|+|y-y_0|+|z-z_0|\right)^2$$
+        we get, on $R$,
+        $$|E|\le\dfrac12(3)(0.01+0.02+0.01)^2=\dfrac12(3)(0.04)^2=1.5(0.0016)=0.0024$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04 -->
+<div class="card ex-card" id="yu04">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04</span>
+    <span class="ex-title">선형근사의 오차 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=e^x\cos y$를 $(0,0)$에서 선형근사하려고 한다. 영역</p>
+        $$R:\ |x|\le 0.1,\quad |y|\le 0.1$$
+        <p>에서 생기는 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=e^x\cos y,\ f_y=-e^x\sin y$이므로
+        $$f_{xx}=e^x\cos y,\quad f_{xy}=-e^x\sin y,\quad f_{yy}=-e^x\cos y$$
+        이다. $R$ 위에서 $x\le0.1$이고 $|\cos y|\le1,\ |\sin y|\le1$이므로
+        $$|f_{xx}|,|f_{xy}|,|f_{yy}|\le e^x\le e^{0.1}$$
+        이고, 따라서 이계 편도함수의 상한으로
+        $$M=e^{0.1}\approx1.1052$$
+        를 잡을 수 있다. 오차의 한계는
+        $$|E|\le\dfrac12M\left(|x|+|y|\right)^2=\dfrac12e^{0.1}(0.1+0.1)^2=\dfrac{e^{0.1}}{50}\approx0.0221$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We wish to find the linear approximation of $f(x,y)=e^x\cos y$ at $(0,0)$. On the region</p>
+        $$R:\ |x|\le 0.1,\quad |y|\le 0.1$$
+        <p>find the resulting error bound.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=e^x\cos y,\ f_y=-e^x\sin y$,
+        $$f_{xx}=e^x\cos y,\quad f_{xy}=-e^x\sin y,\quad f_{yy}=-e^x\cos y$$
+        On $R$, $x\le0.1$ and $|\cos y|\le1,\ |\sin y|\le1$, so
+        $$|f_{xx}|,|f_{xy}|,|f_{yy}|\le e^x\le e^{0.1}$$
+        so we may take the bound on the second partial derivatives to be
+        $$M=e^{0.1}\approx1.1052$$
+        The error bound is
+        $$|E|\le\dfrac12M\left(|x|+|y|\right)^2=\dfrac12e^{0.1}(0.1+0.1)^2=\dfrac{e^{0.1}}{50}\approx0.0221$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">변화량의 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y,z)=y\sin x+2yz$에 대해 $P_0(0,1,0)$에서 $P_1(2,2,-2)$ 방향으로 $0.1$만큼 이동할 때 $f$의 변화량을 근사하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=y\cos x,\ f_y=\sin x+2z,\ f_z=2y$이므로 $\nabla f(0,1,0)=(1\cdot1,\ 0+0,\ 2\cdot1)=(1,0,2)$이다. $P_0$에서 $P_1$ 방향의 벡터는
+        $$P_1-P_0=(2,2,-2)-(0,1,0)=(2,1,-2),\qquad |P_1-P_0|=\sqrt{4+1+4}=3$$
+        이므로 단위벡터는 $\mathbf u=\dfrac13(2,1,-2)$이다. $0.1$만큼 이동할 때 $f$의 변화량은
+        $$\Delta f\approx\nabla f(0,1,0)\cdot\mathbf u\,(0.1)=(1,0,2)\cdot\dfrac13(2,1,-2)\,(0.1)=\dfrac{2+0-4}{3}(0.1)=-\dfrac{2}{30}=-\dfrac{1}{15}\approx-0.0667$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y,z)=y\sin x+2yz$, approximate the change in $f$ when moving a distance of $0.1$ from $P_0(0,1,0)$ in the direction of $P_1(2,2,-2)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=y\cos x,\ f_y=\sin x+2z,\ f_z=2y$, we have $\nabla f(0,1,0)=(1\cdot1,\ 0+0,\ 2\cdot1)=(1,0,2)$. The vector from $P_0$ to $P_1$ is
+        $$P_1-P_0=(2,2,-2)-(0,1,0)=(2,1,-2),\qquad |P_1-P_0|=\sqrt{4+1+4}=3$$
+        so the unit direction is $\mathbf u=\dfrac13(2,1,-2)$. Moving a distance $0.1$, the change in $f$ is approximately
+        $$\Delta f\approx\nabla f(0,1,0)\cdot\mathbf u\,(0.1)=(1,0,2)\cdot\dfrac13(2,1,-2)\,(0.1)=\dfrac{2+0-4}{3}(0.1)=-\dfrac{2}{30}=-\dfrac{1}{15}\approx-0.0667$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">부피의 오차 근사</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반지름의 길이가 1cm이고 높이가 5cm인 원기둥 모양의 캔을 만들려고 한다. 반지름이 0.3cm 더 크고 높이가 0.1cm 더 작은 캔을 만들었을 때 부피의 오차를 근사하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $V=\pi r^2h$이므로 $dV=2\pi rh\,dr+\pi r^2\,dh$이다. $r=1,\ h=5,\ dr=0.3,\ dh=-0.1$을 대입하면
+        $$dV=2\pi(1)(5)(0.3)+\pi(1)^2(-0.1)=3\pi-0.1\pi=2.9\pi\ (\approx9.11\text{cm}^3)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We want to make a cylindrical can with radius 1cm and height 5cm. If a can is made with radius 0.3cm larger and height 0.1cm smaller, approximate the error in the volume.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $V=\pi r^2h$, we have $dV=2\pi rh\,dr+\pi r^2\,dh$. Substituting $r=1,\ h=5,\ dr=0.3,\ dh=-0.1$,
+        $$dV=2\pi(1)(5)(0.3)+\pi(1)^2(-0.1)=3\pi-0.1\pi=2.9\pi\ (\approx9.11\text{cm}^3)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">부피에 큰 영향 요소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반지름이 0.5m이고 높이가 2.5m인 물탱크를 만드려고 한다. 높이와 반지름에 작은 오차가 생긴다면 높이와 반지름 중 부피에 더 큰 영향을 주는 요소는 무엇인가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $V=\pi r^2h$이므로 $\dfrac{\partial V}{\partial r}=2\pi rh,\ \dfrac{\partial V}{\partial h}=\pi r^2$이고, $r=0.5\text{m},\ h=2.5\text{m}$에서
+        $$\dfrac{\partial V}{\partial r}=2\pi(0.5)(2.5)=2.5\pi,\qquad \dfrac{\partial V}{\partial h}=\pi(0.5)^2=0.25\pi$$
+        이다. 따라서 부피의 변화량은
+        $$dV=2.5\pi\,dr+0.25\pi\,dh$$
+        이고, $dr$의 계수 $2.5\pi$가 $dh$의 계수 $0.25\pi$의 $10$배이다. 즉 반지름과 높이에 크기가 비슷한 오차가 생기더라도 반지름의 오차가 부피에 미치는 영향이 높이의 오차보다 약 $10$배 크므로, 부피에 더 큰 영향을 주는 요소는 <strong>반지름</strong>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We want to make a water tank with radius 0.5m and height 2.5m. If small errors occur in the height and the radius, which of the two—height or radius—has a greater effect on the volume?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $V=\pi r^2h$, we have $\dfrac{\partial V}{\partial r}=2\pi rh,\ \dfrac{\partial V}{\partial h}=\pi r^2$, and at $r=0.5\text{m},\ h=2.5\text{m}$,
+        $$\dfrac{\partial V}{\partial r}=2\pi(0.5)(2.5)=2.5\pi,\qquad \dfrac{\partial V}{\partial h}=\pi(0.5)^2=0.25\pi$$
+        so the change in volume is
+        $$dV=2.5\pi\,dr+0.25\pi\,dh$$
+        The coefficient of $dr$, $2.5\pi$, is $10$ times the coefficient of $dh$, $0.25\pi$. So for errors of comparable size in the radius and the height, the error in the radius affects the volume roughly $10$ times more than the error in the height, meaning the factor with the greater effect on the volume is the <strong>radius</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-3 -->
+<div class="card ex-card" id="yu05-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-3</span>
+    <span class="ex-title">오차의 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x,y$값이 각각 $2$와 $\ln 2$로 측정되었는데 그 오차는 각각 $0.1$과 $0.02$까지 생길 수 있다고 한다. $T=x(e^y+e^{-y})$ 값의 오차의 최댓값을 근사하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $T_x=e^y+e^{-y},\ T_y=x(e^y-e^{-y})$이고, $x=2,\ y=\ln2$에서 $e^{\ln2}=2,\ e^{-\ln2}=\dfrac12$이므로
+        $$T_x(2,\ln2)=2+\dfrac12=\dfrac52,\qquad T_y(2,\ln2)=2\left(2-\dfrac12\right)=3$$
+        이다. 오차의 최댓값은
+        $$|dT|\le|T_x||dx|+|T_y||dy|=\dfrac52(0.1)+3(0.02)=0.25+0.06=0.31$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The values of $x,y$ were measured as $2$ and $\ln 2$, respectively, and the errors may be as large as $0.1$ and $0.02$, respectively. Approximate the maximum error in the value of $T=x(e^y+e^{-y})$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We have $T_x=e^y+e^{-y}$ and $T_y=x(e^y-e^{-y})$, and at $x=2,\ y=\ln2$ where $e^{\ln2}=2,\ e^{-\ln2}=\dfrac12$,
+        $$T_x(2,\ln2)=2+\dfrac12=\dfrac52,\qquad T_y(2,\ln2)=2\left(2-\dfrac12\right)=3$$
+        The maximum error is
+        $$|dT|\le|T_x||dx|+|T_y||dy|=\dfrac52(0.1)+3(0.02)=0.25+0.06=0.31$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-4 -->
+<div class="card ex-card" id="yu05-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-4</span>
+    <span class="ex-title">부피의 상대오차</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>한 변의 길이가 $x$인 정사각형을 밑면으로 갖는 높이가 $y$인 직육면체가 있다. $x$와 $y$의 길이를 각각 오차 $0.5\%$, $0.75\%$ 이내로 측정할 수 있다고 할 때 직육면체 부피 $V$의 상대오차의 최댓값을 근사하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $V=x^2y$이므로 $\ln V=2\ln x+\ln y$이고, 양변을 미분하면
+        $$\dfrac{dV}{V}=2\dfrac{dx}{x}+\dfrac{dy}{y}$$
+        이다. $\left|\dfrac{dx}{x}\right|\le0.5\%,\ \left|\dfrac{dy}{y}\right|\le0.75\%$이므로 상대오차의 최댓값은
+        $$\left|\dfrac{dV}{V}\right|\le2\left|\dfrac{dx}{x}\right|+\left|\dfrac{dy}{y}\right|\le2(0.5\%)+0.75\%=1.75\%$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>There is a rectangular box of height $y$ whose base is a square with side length $x$. If the lengths $x$ and $y$ can be measured with errors within $0.5\%$ and $0.75\%$, respectively, approximate the maximum relative error in the volume $V$ of the box.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $V=x^2y$, we have $\ln V=2\ln x+\ln y$, and differentiating both sides gives
+        $$\dfrac{dV}{V}=2\dfrac{dx}{x}+\dfrac{dy}{y}$$
+        Since $\left|\dfrac{dx}{x}\right|\le0.5\%$ and $\left|\dfrac{dy}{y}\right|\le0.75\%$, the maximum relative error is
+        $$\left|\dfrac{dV}{V}\right|\le2\left|\dfrac{dx}{x}\right|+\left|\dfrac{dy}{y}\right|\le2(0.5\%)+0.75\%=1.75\%$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">접선 방향 변화율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면곡선 $\mathbf{r}(t)=(\cos t+t\sin t,\ \sin t-t\cos t)$ $(t>0)$를 생각하자. $\mathbf{r}(t)$에서 $\mathbf{r}(t)$의 단위접선벡터 방향으로의 $f(x,y)=x^2+y^2$의 변화율을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the plane curve $\mathbf{r}(t)=(\cos t+t\sin t,\ \sin t-t\cos t)$ $(t>0)$. Find the rate of change of $f(x,y)=x^2+y^2$ at $\mathbf{r}(t)$ in the direction of the unit tangent vector of $\mathbf{r}(t)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">방향변화율로 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $(1,2)$에서 $f(x,y)$는 점 $(2,2)$ 방향으로의 변화율이 $2$이고 점 $(1,0)$ 방향으로의 변화율이 $-2$이다. $f_x(1,2)$와 $f_y(1,2)$의 값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>At the point $(1,2)$, the rate of change of $f(x,y)$ in the direction of the point $(2,2)$ is $2$, and the rate of change in the direction of the point $(1,0)$ is $-2$. Find the values of $f_x(1,2)$ and $f_y(1,2)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">최대 증가 방향 곡선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면 위의 점 $(x,y)$에서의 온도가 $T(x,y)=e^{-2y}\cos x$로 주어져 있다. 점 $P$가 $(\pi/4,0)$에서 출발하여 곡선 $y=f(x)$를 따라 이동할 때 그 이동방향은 항상 $T$가 최대로 증가하는 방향이다. $f(x)$를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The temperature at a point $(x,y)$ in the coordinate plane is given by $T(x,y)=e^{-2y}\cos x$. A point $P$ starts at $(\pi/4,0)$ and moves along the curve $y=f(x)$, and its direction of motion is always the direction in which $T$ increases fastest. Find $f(x)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">기울기와 위치벡터 평행</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>기울기 벡터 $\nabla f(x,y,z)$가 위치벡터 $(x,y,z)$와 항상 평행하면 모든 실수 $a$에 대해 $f(0,0,a)=f(0,0,-a)$가 성립함을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that if the gradient vector $\nabla f(x,y,z)$ is always parallel to the position vector $(x,y,z)$, then $f(0,0,a)=f(0,0,-a)$ holds for every real number $a$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">위치벡터와 기울기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf{r}=(x,y,z)$이고 $r=|\mathbf{r}|$라고 하자.</p>
+        <ol>
+          <li>자연수 $n$에 대해 $\nabla(r^n)=nr^{n-2}\mathbf{r}$가 성립함을 보이시오.</li>
+          <li>$\nabla f=\mathbf{r}$를 만족하는 함수 $f$를 하나 찾으시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf{r}=(x,y,z)$ and $r=|\mathbf{r}|$.</p>
+        <ol>
+          <li>Show that $\nabla(r^n)=nr^{n-2}\mathbf{r}$ holds for a natural number $n$.</li>
+          <li>Find a function $f$ satisfying $\nabla f=\mathbf{r}$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">xy평면과 평행한 접평면</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $xy+yz+zx-x-z^2=0$ 위의 점 $P$에서의 접평면의 방정식이 $xy$평면과 평행하도록 하는 $P$를 모두 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all points $P$ on the surface $xy+yz+zx-x-z^2=0$ such that the tangent plane at $P$ is parallel to the $xy$-plane.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">곡선과 곡면의 접점</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡선 $\mathbf{r}(t)=(t^2,\ e^{t-1},\ 2t^2-3+2e^{t-1})$가 곡면 $x^2+y^2-z=1$의 교점을 찾으시오.</li>
+          <li>$\mathbf{r}(t)=(t^2,\ e^{t-1},\ 2t^2-3+2e^{t-1})$가 곡면 $x^2+y^2-z=1$과 접함을 보이시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the point of intersection of the curve $\mathbf{r}(t)=(t^2,\ e^{t-1},\ 2t^2-3+2e^{t-1})$ with the surface $x^2+y^2-z=1$.</li>
+          <li>Show that $\mathbf{r}(t)=(t^2,\ e^{t-1},\ 2t^2-3+2e^{t-1})$ is tangent to the surface $x^2+y^2-z=1$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">곡선과 곡면의 각</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=\left(\sqrt{t},\ \sqrt{t},\ -\dfrac{1}{4}(t+3)\right)$이 $t=1$에서 곡면 $x^2+y^2-z=3$과 이루는 각도를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the angle that the curve $\mathbf{r}(t)=\left(\sqrt{t},\ \sqrt{t},\ -\dfrac{1}{4}(t+3)\right)$ makes with the surface $x^2+y^2-z=3$ at $t=1$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">접하는 방향의 최대 변화율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=10-x^2-y^2$의 그래프를 $S$라 하자. 좌표공간 위의 점 $(x,y,z)$에서의 온도가 $T(x,y,z)=x^2y+y^2z+4x+14y+z$라 할 때, $(0,0,10)$에서 $S$에 접하는 방향 중 $T$의 변화율이 최대가 되도록 하는 방향을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the graph of the function $f(x,y)=10-x^2-y^2$. Given that the temperature at a point $(x,y,z)$ in coordinate space is $T(x,y,z)=x^2y+y^2z+4x+14y+z$, find, among the directions tangent to $S$ at $(0,0,10)$, the direction in which the rate of change of $T$ is maximal.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

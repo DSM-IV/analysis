@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14. 스토크스 정리와 발산 정리 (Stokes' Theorem and the Divergence Theorem) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 14단원 스토크스 정리와 발산 정리(Stokes' Theorem and the Divergence Theorem) 예제·유제·문제 모음. 벡터장의 회전과 발산, 스토크스 정리, 발산 정리, 조화함수, 그린 항등식, 패러데이 법칙을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 회전, curl, 발산, divergence, 스토크스 정리, Stokes' Theorem, 발산 정리, Divergence Theorem, 조화함수, harmonic function, 그린 항등식, Green's identities, 패러데이 법칙, Faraday's law, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch14.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14. 스토크스 정리와 발산 정리 (Stokes' Theorem and the Divergence Theorem) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="스토크스 정리와 발산 정리 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch14.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "14. 스토크스 정리와 발산 정리 (Stokes' Theorem and the Divergence Theorem) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 스토크스 정리와 발산 정리 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch14.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch14.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html" class="active">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 14</p>
+  <h1>14. 스토크스 정리와 발산 정리<span>Stokes' Theorem and the Divergence Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 벡터장의 회전</a></li>
+    <li><a href="#yu01"><span class="toc-num">유제 01</span> 회전이 0인 벡터장</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 스토크스 정리의 확인</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 스토크스 정리 확인</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 교선을 따른 순환</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 교선을 따른 순환</a></li>
+    <li><a href="#yu02-4"><span class="toc-num">유제 02-4</span> 평면 경계의 선적분</a></li>
+    <li><a href="#yu02-5"><span class="toc-num">유제 02-5</span> 회전의 유출</a></li>
+    <li><a href="#yu02-6"><span class="toc-num">유제 02-6</span> 반구면 위 회전의 면적분</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 벡터장의 발산</a></li>
+    <li><a href="#yu03"><span class="toc-num">유제 03</span> 발산·회전의 연산 법칙</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 발산 정리의 확인</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 발산 정리 확인</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 정육면체의 유출</a></li>
+    <li><a href="#yu04-3"><span class="toc-num">유제 04-3</span> 구껍질의 유출</a></li>
+    <li><a href="#yu04-4"><span class="toc-num">유제 04-4</span> 기울기의 면적분</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 회전으로 나타낼 수 없는 장</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 발산·회전이 0인 장</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 매개곡면 위 회전의 유출</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 선적분과 넓이</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 회전 0이나 순환은 0이 아님</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 수직 벡터장의 부재</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 발산 적분의 상계</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 유출의 최대화</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 조화함수의 성질</a></li>
+    <li><a href="#pr10"><span class="toc-num">문제 10</span> 벡터장의 유일성</a></li>
+    <li><a href="#pr11"><span class="toc-num">문제 11</span> 그린 항등식</a></li>
+    <li><a href="#pr12"><span class="toc-num">문제 12</span> 패러데이 법칙</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">벡터장의 회전</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf{F}=(x^2-z)\mathbf{i}+xe^z\mathbf{j}+xy\mathbf{k}$의 회전을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 회전의 정의는 다음과 같다.</p>
+        $$\nabla\times\mathbf F=\left(\frac{\partial F_3}{\partial y}-\frac{\partial F_2}{\partial z}\right)\mathbf i+\left(\frac{\partial F_1}{\partial z}-\frac{\partial F_3}{\partial x}\right)\mathbf j+\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)\mathbf k$$
+        <p>$F_1=x^2-z,\ F_2=xe^z,\ F_3=xy$이므로 각 성분을 계산하면</p>
+        $$\frac{\partial F_3}{\partial y}-\frac{\partial F_2}{\partial z}=x-xe^z=x(1-e^z),\qquad \frac{\partial F_1}{\partial z}-\frac{\partial F_3}{\partial x}=-1-y=-(1+y),\qquad \frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=e^z-0=e^z$$
+        <p>이다. 따라서 구하는 회전은</p>
+        $$\nabla\times\mathbf F=x(1-e^z)\mathbf i-(1+y)\mathbf j+e^z\mathbf k$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the curl of the vector field $\mathbf{F}=(x^2-z)\mathbf{i}+xe^z\mathbf{j}+xy\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The curl is defined by</p>
+        $$\nabla\times\mathbf F=\left(\frac{\partial F_3}{\partial y}-\frac{\partial F_2}{\partial z}\right)\mathbf i+\left(\frac{\partial F_1}{\partial z}-\frac{\partial F_3}{\partial x}\right)\mathbf j+\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)\mathbf k.$$
+        <p>Since $F_1=x^2-z,\ F_2=xe^z,\ F_3=xy$, computing each component gives</p>
+        $$\frac{\partial F_3}{\partial y}-\frac{\partial F_2}{\partial z}=x-xe^z=x(1-e^z),\qquad \frac{\partial F_1}{\partial z}-\frac{\partial F_3}{\partial x}=-1-y=-(1+y),\qquad \frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=e^z-0=e^z.$$
+        <p>Therefore</p>
+        $$\nabla\times\mathbf F=x(1-e^z)\mathbf i-(1+y)\mathbf j+e^z\mathbf k.$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01 -->
+<div class="card ex-card" id="yu01">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01</span>
+    <span class="ex-title">회전이 0인 벡터장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 벡터장의 회전이 0임을 보이시오.</p>
+        <ol>
+          <li>$\mathbf{F}=2x\mathbf{i}+2y\mathbf{j}+2z\mathbf{k}$</li>
+          <li>$\nabla(xy^2z^3)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 임의의 이급함수(class $C^2$) $f(x,y,z)$에 대해 $\nabla\times(\nabla f)=\mathbf 0$임을 먼저 보인다. $\nabla f=(f_x,f_y,f_z)$이므로</p>
+        $$\nabla\times(\nabla f)=(f_{zy}-f_{yz})\mathbf i+(f_{xz}-f_{zx})\mathbf j+(f_{yx}-f_{xy})\mathbf k$$
+        <p>인데 $f$가 이급이므로 클레로 정리(혼합 편도함수의 순서 무관성)에 의해 $f_{zy}=f_{yz},\ f_{xz}=f_{zx},\ f_{yx}=f_{xy}$이다. 따라서 $\nabla\times(\nabla f)=\mathbf 0$이다.</p>
+        <p>(1) $\mathbf F=2x\mathbf i+2y\mathbf j+2z\mathbf k=\nabla(x^2+y^2+z^2)$이고 $x^2+y^2+z^2$은 다항함수이므로 이급이다. 따라서 위 결과에 의해 $\nabla\times\mathbf F=\mathbf 0$이다.</p>
+        <p>(2) $\mathbf F=\nabla(xy^2z^3)$이고 $xy^2z^3$은 다항함수이므로 이급이다. 따라서 위 결과에 의해 $\nabla\times\mathbf F=\mathbf 0$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the curl of each given vector field is 0.</p>
+        <ol>
+          <li>$\mathbf{F}=2x\mathbf{i}+2y\mathbf{j}+2z\mathbf{k}$</li>
+          <li>$\nabla(xy^2z^3)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> We first show that for any function $f(x,y,z)$ of class $C^2$, $\nabla\times(\nabla f)=\mathbf 0$. Since $\nabla f=(f_x,f_y,f_z)$,</p>
+        $$\nabla\times(\nabla f)=(f_{zy}-f_{yz})\mathbf i+(f_{xz}-f_{zx})\mathbf j+(f_{yx}-f_{xy})\mathbf k.$$
+        <p>Since $f$ is of class $C^2$, Clairaut's theorem (equality of mixed partial derivatives) gives $f_{zy}=f_{yz},\ f_{xz}=f_{zx},\ f_{yx}=f_{xy}$. Hence $\nabla\times(\nabla f)=\mathbf 0$.</p>
+        <p>(1) $\mathbf F=2x\mathbf i+2y\mathbf j+2z\mathbf k=\nabla(x^2+y^2+z^2)$, and $x^2+y^2+z^2$ is a polynomial, hence of class $C^2$. So by the identity above, $\nabla\times\mathbf F=\mathbf 0$.</p>
+        <p>(2) $\mathbf F=\nabla(xy^2z^3)$, and $xy^2z^3$ is a polynomial, hence of class $C^2$. So by the identity above, $\nabla\times\mathbf F=\mathbf 0$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">스토크스 정리의 확인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡면 $S: x^2+y^2+z^2=9\ (z\geq 0)$와 그 경계 $C: x^2+y^2=9,\ z=0$이 있다. 벡터장 $\mathbf{F}=y\mathbf{i}-x\mathbf{j}$에 대하여 다음이 성립함을 보이시오.
+            $$\oint_C\mathbf{F}\cdot d\mathbf{r}=\iint_S(\nabla\times\mathbf{F})\cdot\mathbf{n}\,d\sigma$$
+          </li>
+          <li>$xy$평면 위에 반지름이 3이고 중심이 원점인 원판을 $S$라 하고 $\mathbf{F}=y\mathbf{i}-x\mathbf{j}$라 할 때 $\iint_S(\nabla\times\mathbf{F})\cdot\mathbf{n}\,d\sigma$의 값을 구하시오. 이를 (1)과 비교하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=y\mathbf i-x\mathbf j$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(0-0)\mathbf j+(-1-1)\mathbf k=-2\mathbf k$$
+        <p>이다.</p>
+        <p>(1) $S$의 향 $\mathbf n$을 원점에서 바깥쪽(위쪽 성분을 갖도록)으로 정하면, 오른손 법칙에 의해 경계 $C: x^2+y^2=9,\ z=0$는 위에서 바라볼 때 시계 반대 방향의 향이 유도된다.</p>
+        <p>먼저 우변을 계산한다. $\nabla\times\mathbf F$가 상수벡터이고 $S$와 같은 경계 $C$를 갖는 평면 원판 $S':x^2+y^2\leq 9,\ z=0$ (향 $\mathbf n=\mathbf k$)을 잡아도 스토크스 정리에 의해 곡면 위 회전의 면적분 값은 같으므로,</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_{S'}(\nabla\times\mathbf F)\cdot\mathbf k\,dA=\iint_{S'}(-2)\,dA=-2\cdot 9\pi=-18\pi$$
+        <p>이다.</p>
+        <p>다음으로 좌변을 계산한다. $C$를 $\mathbf r(t)=(3\cos t,3\sin t,0),\ 0\leq t\leq 2\pi$로 매개화하면 $d\mathbf r=(-3\sin t,3\cos t,0)\,dt$이고</p>
+        $$\mathbf F\cdot d\mathbf r=y\,dx-x\,dy=(3\sin t)(-3\sin t)\,dt-(3\cos t)(3\cos t)\,dt=-9\,dt$$
+        <p>이므로</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(-9)\,dt=-18\pi$$
+        <p>이다. 두 값이 $-18\pi$로 일치하므로 스토크스 정리가 성립함을 확인했다.</p>
+        <p>(2) $S$를 $xy$평면 위 반지름 3인 원판이라 하면 이는 (1)에서 잡은 $S'$과 같은 곡면이다. 따라서</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=-18\pi$$
+        <p>이고, 이는 (1)에서 구한 값과 정확히 일치한다. 즉 경계 $C$가 같으면 $S$를 반구면으로 잡든 평면 원판으로 잡든 회전의 면적분 값이 같음을 보여준다 — 이는 스토크스 정리가 곡면의 선택에 무관하게 경계에만 의존함을 보여주는 예이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $S: x^2+y^2+z^2=9\ (z\geq 0)$ be a surface with boundary $C: x^2+y^2=9,\ z=0$. For the vector field $\mathbf{F}=y\mathbf{i}-x\mathbf{j}$, show that the following holds.
+            $$\oint_C\mathbf{F}\cdot d\mathbf{r}=\iint_S(\nabla\times\mathbf{F})\cdot\mathbf{n}\,d\sigma$$
+          </li>
+          <li>Let $S$ be the disk of radius $3$ centered at the origin in the $xy$-plane, and let $\mathbf{F}=y\mathbf{i}-x\mathbf{j}$. Find the value of $\iint_S(\nabla\times\mathbf{F})\cdot\mathbf{n}\,d\sigma$, and compare it with (1).</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The curl of $\mathbf F=y\mathbf i-x\mathbf j$ is</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(0-0)\mathbf j+(-1-1)\mathbf k=-2\mathbf k.$$
+        <p>(1) Orient $S$ with $\mathbf n$ pointing outward from the origin (with a positive $\mathbf k$-component); by the right-hand rule, this induces a counterclockwise orientation on $C: x^2+y^2=9,\ z=0$ as viewed from above.</p>
+        <p>First compute the right side. Since $\nabla\times\mathbf F$ is a constant vector, replacing $S$ by the flat disk $S':x^2+y^2\leq 9,\ z=0$ (with orientation $\mathbf n=\mathbf k$), which has the same boundary $C$, gives the same value of the surface integral by Stokes' Theorem, so</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_{S'}(\nabla\times\mathbf F)\cdot\mathbf k\,dA=\iint_{S'}(-2)\,dA=-2\cdot 9\pi=-18\pi.$$
+        <p>Next compute the left side. Parametrizing $C$ by $\mathbf r(t)=(3\cos t,3\sin t,0),\ 0\leq t\leq 2\pi$, we get $d\mathbf r=(-3\sin t,3\cos t,0)\,dt$ and</p>
+        $$\mathbf F\cdot d\mathbf r=y\,dx-x\,dy=(3\sin t)(-3\sin t)\,dt-(3\cos t)(3\cos t)\,dt=-9\,dt,$$
+        <p>so</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(-9)\,dt=-18\pi.$$
+        <p>Both sides equal $-18\pi$, confirming that Stokes' Theorem holds.</p>
+        <p>(2) Let $S$ be the disk of radius $3$ in the $xy$-plane; this is the same surface as $S'$ in (1). Hence</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=-18\pi,$$
+        <p>which agrees exactly with the value found in (1). That is, whether $S$ is taken to be the hemisphere or the flat disk, the surface integral of the curl over $S$ is the same as long as the boundary $C$ is the same — this illustrates that Stokes' Theorem depends only on the boundary, not on the choice of surface.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">스토크스 정리 확인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z$축을 중심으로 하는 반지름의 길이가 1인 원기둥 내부에 있는 곡면 $z=y^2-x^2$의 부분을 $S$라 하자. 양의 $\mathbf{k}$성분을 갖도록 $S$의 향을 정할 때 $\mathbf{F}=y\mathbf{i}-x\mathbf{j}+x^2\mathbf{k}$에 대하여 스토크스 정리가 성립함을 확인하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=y\mathbf i-x\mathbf j+x^2\mathbf k$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(0-2x)\mathbf j+(-1-1)\mathbf k=-2x\mathbf j-2\mathbf k$$
+        <p>이다.</p>
+        <p><em>우변(면적분).</em> $S$를 $z=g(x,y)=y^2-x^2\ (x^2+y^2\leq 1)$로 매개화하고, $\mathbf k$성분이 양수가 되도록 향을 정하면</p>
+        $$\mathbf n\,d\sigma=(-g_x,-g_y,1)\,dA=(2x,-2y,1)\,dA$$
+        <p>이다. 따라서</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\big(0\cdot 2x+(-2x)(-2y)+(-2)\cdot 1\big)\,dA=(4xy-2)\,dA$$
+        <p>이고, $D:x^2+y^2\leq 1$ 위에서 $4xy$는 기함수이므로 대칭성에 의해 $\iint_D 4xy\,dA=0$이다. 따라서</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_D(4xy-2)\,dA=-2\cdot\pi(1)^2=-2\pi$$
+        <p>이다.</p>
+        <p><em>좌변(선적분).</em> 경계 $C$는 원기둥 $x^2+y^2=1$ 위에 있으며, $S$의 향에 대응하여 위에서 바라볼 때 시계 반대 방향으로 향한다. $\mathbf r(t)=(\cos t,\sin t,\sin^2t-\cos^2t)=(\cos t,\sin t,-\cos 2t),\ 0\leq t\leq 2\pi$로 매개화하면</p>
+        $$d\mathbf r=(-\sin t,\cos t,2\sin 2t)\,dt,\qquad \mathbf F=(\sin t,-\cos t,\cos^2t)$$
+        <p>이므로</p>
+        $$\mathbf F\cdot d\mathbf r=-\sin^2t-\cos^2t+2\cos^2t\sin 2t\,dt=(-1+2\cos^2t\sin 2t)\,dt$$
+        <p>이다. $2\cos^2t\sin 2t=4\sin t\cos^3t$의 부정적분은 $-\cos^4t$로 주기함수이므로 한 주기에 대한 정적분은 $0$이다. 따라서</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(-1)\,dt+0=-2\pi$$
+        <p>이다. 두 값이 $-2\pi$로 일치하므로 스토크스 정리가 성립함을 확인했다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the part of the surface $z=y^2-x^2$ lying inside the cylinder of radius $1$ centered on the $z$-axis. Orient $S$ so that it has a positive $\mathbf{k}$-component. Verify that Stokes' Theorem holds for $\mathbf{F}=y\mathbf{i}-x\mathbf{j}+x^2\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The curl of $\mathbf F=y\mathbf i-x\mathbf j+x^2\mathbf k$ is</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(0-2x)\mathbf j+(-1-1)\mathbf k=-2x\mathbf j-2\mathbf k.$$
+        <p><em>Right side (surface integral).</em> Parametrize $S$ by $z=g(x,y)=y^2-x^2\ (x^2+y^2\leq 1)$, oriented with a positive $\mathbf k$-component; then</p>
+        $$\mathbf n\,d\sigma=(-g_x,-g_y,1)\,dA=(2x,-2y,1)\,dA,$$
+        <p>so</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\big(0\cdot 2x+(-2x)(-2y)+(-2)\cdot 1\big)\,dA=(4xy-2)\,dA,$$
+        <p>and since $4xy$ is an odd function on $D:x^2+y^2\leq 1$, symmetry gives $\iint_D 4xy\,dA=0$. Hence</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_D(4xy-2)\,dA=-2\cdot\pi(1)^2=-2\pi.$$
+        <p><em>Left side (line integral).</em> The boundary $C$ lies on the cylinder $x^2+y^2=1$, oriented counterclockwise as viewed from above, corresponding to the orientation of $S$. Parametrizing by $\mathbf r(t)=(\cos t,\sin t,\sin^2t-\cos^2t)=(\cos t,\sin t,-\cos 2t),\ 0\leq t\leq 2\pi$,</p>
+        $$d\mathbf r=(-\sin t,\cos t,2\sin 2t)\,dt,\qquad \mathbf F=(\sin t,-\cos t,\cos^2t),$$
+        <p>so</p>
+        $$\mathbf F\cdot d\mathbf r=-\sin^2t-\cos^2t+2\cos^2t\sin 2t\,dt=(-1+2\cos^2t\sin 2t)\,dt.$$
+        <p>Since $2\cos^2t\sin 2t=4\sin t\cos^3t$ has antiderivative $-\cos^4t$, which is periodic, its definite integral over one full period is $0$. Therefore</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(-1)\,dt+0=-2\pi.$$
+        <p>Both sides equal $-2\pi$, confirming that Stokes' Theorem holds.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">교선을 따른 순환</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=2$와 $z=\sqrt{x^2+y^2}$의 교선 $C$에 위에서 바라봤을 때 시계 반대 방향으로 향을 주자. 이때 $C$를 따른 벡터장 $\mathbf{F}=(x^2-y)\mathbf{i}+4z\mathbf{j}+x^2\mathbf{k}$의 순환을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $z=2$와 $z=\sqrt{x^2+y^2}$의 교선은 $\sqrt{x^2+y^2}=2$, 즉 $x^2+y^2=4,\ z=2$인 원이다. 이 원을 경계로 갖는 평면 원판 $S:x^2+y^2\leq 4,\ z=2$를 향 $\mathbf n=\mathbf k$(위쪽)로 잡으면, $C$가 위에서 바라볼 때 시계 반대 방향으로 향한 것과 일치한다.</p>
+        <p>스토크스 정리에 의해</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S(\nabla\times\mathbf F)\cdot\mathbf k\,dA$$
+        <p>이다. $\mathbf F=(x^2-y,4z,x^2)$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(0-4)\mathbf i+(0-2x)\mathbf j+(0-(-1))\mathbf k=-4\mathbf i-2x\mathbf j+\mathbf k$$
+        <p>이므로 $(\nabla\times\mathbf F)\cdot\mathbf k=1$은 상수이다. 따라서</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S 1\,dA=\pi(2)^2=4\pi$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the curve of intersection of $z=2$ and $z=\sqrt{x^2+y^2}$, oriented counterclockwise as viewed from above. Find the circulation of the vector field $\mathbf{F}=(x^2-y)\mathbf{i}+4z\mathbf{j}+x^2\mathbf{k}$ along $C$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The curve of intersection of $z=2$ and $z=\sqrt{x^2+y^2}$ is the circle $\sqrt{x^2+y^2}=2$, i.e. $x^2+y^2=4,\ z=2$. Taking the flat disk $S:x^2+y^2\leq 4,\ z=2$ bounded by this circle, oriented with $\mathbf n=\mathbf k$ (upward), matches the counterclockwise orientation of $C$ as viewed from above.</p>
+        <p>By Stokes' Theorem,</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S(\nabla\times\mathbf F)\cdot\mathbf k\,dA.$$
+        <p>The curl of $\mathbf F=(x^2-y,4z,x^2)$ is</p>
+        $$\nabla\times\mathbf F=(0-4)\mathbf i+(0-2x)\mathbf j+(0-(-1))\mathbf k=-4\mathbf i-2x\mathbf j+\mathbf k,$$
+        <p>so $(\nabla\times\mathbf F)\cdot\mathbf k=1$ is constant. Therefore</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S 1\,dA=\pi(2)^2=4\pi.$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">교선을 따른 순환</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x^2+y^2+z^2=1$과 $z=\sqrt{x^2+y^2}$의 교선 $C$에 위에서 바라봤을 때 시계 반대 방향으로 향을 주자. 이때 $C$를 따른 벡터장 $\mathbf{F}=(x^2+z)\mathbf{i}+(y^2+2x)\mathbf{j}+(z^2-y)\mathbf{k}$의 순환을 구하시오</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x^2+y^2+z^2=1$과 $z=\sqrt{x^2+y^2}$의 교선을 구하기 위해 $x^2+y^2=z^2$을 구의 방정식에 대입하면 $z^2+z^2=1$, 즉 $z=\dfrac{1}{\sqrt2}$ (양의 근)이다. 이때 $x^2+y^2=z^2=\dfrac12$이므로 $C$는 높이 $z=\dfrac1{\sqrt2}$, 반지름 $\dfrac1{\sqrt2}$인 원이다. 이 원을 경계로 갖는 평면 원판 $S:x^2+y^2\leq \dfrac12,\ z=\dfrac1{\sqrt2}$를 향 $\mathbf n=\mathbf k$로 잡으면 $C$의 향과 일치한다.</p>
+        <p>$\mathbf F=(x^2+z,y^2+2x,z^2-y)$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(-1-0)\mathbf i+(1-0)\mathbf j+(2-0)\mathbf k=-\mathbf i+\mathbf j+2\mathbf k$$
+        <p>이므로 $(\nabla\times\mathbf F)\cdot\mathbf k=2$는 상수이다. 스토크스 정리에 의해</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S(\nabla\times\mathbf F)\cdot\mathbf k\,dA=2\cdot\pi\cdot\frac12=\pi$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the curve of intersection of $x^2+y^2+z^2=1$ and $z=\sqrt{x^2+y^2}$, oriented counterclockwise as viewed from above. Find the circulation of the vector field $\mathbf{F}=(x^2+z)\mathbf{i}+(y^2+2x)\mathbf{j}+(z^2-y)\mathbf{k}$ along $C$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> To find the curve of intersection of $x^2+y^2+z^2=1$ and $z=\sqrt{x^2+y^2}$, substitute $x^2+y^2=z^2$ into the sphere's equation: $z^2+z^2=1$, so $z=\dfrac{1}{\sqrt2}$ (taking the positive root). Then $x^2+y^2=z^2=\dfrac12$, so $C$ is a circle of radius $\dfrac1{\sqrt2}$ at height $z=\dfrac1{\sqrt2}$. Taking the flat disk $S:x^2+y^2\leq \dfrac12,\ z=\dfrac1{\sqrt2}$ bounded by this circle, oriented with $\mathbf n=\mathbf k$, matches the orientation of $C$.</p>
+        <p>The curl of $\mathbf F=(x^2+z,y^2+2x,z^2-y)$ is</p>
+        $$\nabla\times\mathbf F=(-1-0)\mathbf i+(1-0)\mathbf j+(2-0)\mathbf k=-\mathbf i+\mathbf j+2\mathbf k,$$
+        <p>so $(\nabla\times\mathbf F)\cdot\mathbf k=2$ is constant. By Stokes' Theorem,</p>
+        $$\oint_C\mathbf F\cdot d\mathbf r=\iint_S(\nabla\times\mathbf F)\cdot\mathbf k\,dA=2\cdot\pi\cdot\frac12=\pi.$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-4 -->
+<div class="card ex-card" id="yu02-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-4</span>
+    <span class="ex-title">평면 경계의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $2x+y+z=2,\ x,y,z\geq 0$의 경계 $C$에 위에서 바라봤을 때 시계 반대 방향으로 향을 주자. 이때 벡터장 $\mathbf{F}=xz\mathbf{i}+xy\mathbf{j}+3xz\mathbf{k}$에 대해 $\int_C\mathbf{F}\cdot d\mathbf{r}$의 값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C$는 닫힌곡선이므로 스토크스 정리를 적용할 수 있다. 평면 $2x+y+z=2\ (x,y,z\geq 0)$을 $z=g(x,y)=2-2x-y$로 매개화하면, 정의역은 $xy$평면의 삼각형 $D:x\geq0,\ y\geq0,\ 2x+y\leq2$이다. $C$가 위에서 바라볼 때 시계 반대 방향이므로 $S$의 향은 위쪽이고</p>
+        $$\mathbf n\,d\sigma=(-g_x,-g_y,1)\,dA=(2,1,1)\,dA$$
+        <p>이다. $\mathbf F=(xz,xy,3xz)$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(x-3z)\mathbf j+(y-0)\mathbf k=(x-3z)\mathbf j+y\mathbf k$$
+        <p>이므로</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\big(0\cdot 2+(x-3z)\cdot1+y\cdot1\big)\,dA=(x-3z+y)\,dA$$
+        <p>이다. $z=2-2x-y$를 대입하면 $x-3(2-2x-y)+y=7x+4y-6$이므로</p>
+        $$\int_C\mathbf F\cdot d\mathbf r=\iint_D(7x+4y-6)\,dA=\int_0^1\int_0^{2-2x}(7x+4y-6)\,dy\,dx$$
+        <p>이다. 안쪽 적분을 계산하면</p>
+        $$\int_0^{2-2x}(7x+4y-6)\,dy=\Big[7xy+2y^2-6y\Big]_0^{2-2x}=(2-2x)(3x-2)=-6x^2+10x-4$$
+        <p>이고, 바깥쪽 적분은</p>
+        $$\int_0^1(-6x^2+10x-4)\,dx=\Big[-2x^3+5x^2-4x\Big]_0^1=-2+5-4=-1$$
+        <p>이다. 따라서 $\displaystyle\int_C\mathbf F\cdot d\mathbf r=-1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the boundary of the surface $2x+y+z=2,\ x,y,z\geq 0$, oriented counterclockwise as viewed from above. For the vector field $\mathbf{F}=xz\mathbf{i}+xy\mathbf{j}+3xz\mathbf{k}$, find the value of $\int_C\mathbf{F}\cdot d\mathbf{r}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $C$ is a closed curve, Stokes' Theorem applies. Parametrize the plane $2x+y+z=2\ (x,y,z\geq 0)$ by $z=g(x,y)=2-2x-y$, with domain the triangle $D:x\geq0,\ y\geq0,\ 2x+y\leq2$ in the $xy$-plane. Since $C$ runs counterclockwise as viewed from above, $S$ is oriented upward, and</p>
+        $$\mathbf n\,d\sigma=(-g_x,-g_y,1)\,dA=(2,1,1)\,dA.$$
+        <p>The curl of $\mathbf F=(xz,xy,3xz)$ is</p>
+        $$\nabla\times\mathbf F=(0-0)\mathbf i+(x-3z)\mathbf j+(y-0)\mathbf k=(x-3z)\mathbf j+y\mathbf k,$$
+        <p>so</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\big(0\cdot 2+(x-3z)\cdot1+y\cdot1\big)\,dA=(x-3z+y)\,dA.$$
+        <p>Substituting $z=2-2x-y$ gives $x-3(2-2x-y)+y=7x+4y-6$, so</p>
+        $$\int_C\mathbf F\cdot d\mathbf r=\iint_D(7x+4y-6)\,dA=\int_0^1\int_0^{2-2x}(7x+4y-6)\,dy\,dx.$$
+        <p>Evaluating the inner integral,</p>
+        $$\int_0^{2-2x}(7x+4y-6)\,dy=\Big[7xy+2y^2-6y\Big]_0^{2-2x}=(2-2x)(3x-2)=-6x^2+10x-4,$$
+        <p>and then the outer integral,</p>
+        $$\int_0^1(-6x^2+10x-4)\,dx=\Big[-2x^3+5x^2-4x\Big]_0^1=-2+5-4=-1.$$
+        <p>Therefore $\displaystyle\int_C\mathbf F\cdot d\mathbf r=-1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-5 -->
+<div class="card ex-card" id="yu02-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-5</span>
+    <span class="ex-title">회전의 유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=1$ 아래에 있는 $z=x^2+4y^2$의 부분을 $S$라 하자. $\mathbf{k}$성분이 양수가 되도록 $S$의 향을 정할 때, 벡터장 $\mathbf{F}=y\mathbf{i}-xz\mathbf{j}+xz^2\mathbf{k}$에 대해 $S$를 가로지르는 $\nabla\times\mathbf{F}$의 유출을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S$의 경계 $C$는 평면 $z=1$ 위 타원 $x^2+4y^2=1$이며, $S$가 $\mathbf k$성분이 양수가 되도록 향해 있으므로 $C$는 위에서 바라볼 때 시계 반대 방향으로 향한다. $\mathbf F=(y,-xz,xz^2)$의 회전을 계산하면</p>
+        $$\nabla\times\mathbf F=(0-(-x))\mathbf i+(0-z^2)\mathbf j+(-z-1)\mathbf k=x\mathbf i-z^2\mathbf j-(z+1)\mathbf k$$
+        <p>이다. $\nabla\times\mathbf F$는 다항식으로 이루어져 있어 어디서나 매끄러우므로, 스토크스 정리에 의해 $S$ 대신 같은 경계 $C$를 갖는 평면 타원판 $S':x^2+4y^2\leq1,\ z=1$ (향 $\mathbf n=\mathbf k$)을 사용해도 유출 값이 같다. $S'$ 위에서는 $z=1$이므로</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf k=-(z+1)\Big|_{z=1}=-2$$
+        <p>는 상수이다. 타원 $x^2+4y^2\leq1$의 반축은 $1,\ \dfrac12$이므로 넓이는 $\pi\cdot1\cdot\dfrac12=\dfrac{\pi}2$이다. 따라서</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_{S'}(-2)\,dA=-2\cdot\frac{\pi}2=-\pi$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the part of $z=x^2+4y^2$ lying below $z=1$. Orient $S$ so that its $\mathbf{k}$-component is positive. For the vector field $\mathbf{F}=y\mathbf{i}-xz\mathbf{j}+xz^2\mathbf{k}$, find the flux of $\nabla\times\mathbf{F}$ across $S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The boundary $C$ of $S$ is the ellipse $x^2+4y^2=1$ on the plane $z=1$; since $S$ is oriented with a positive $\mathbf k$-component, $C$ runs counterclockwise as viewed from above. The curl of $\mathbf F=(y,-xz,xz^2)$ is</p>
+        $$\nabla\times\mathbf F=(0-(-x))\mathbf i+(0-z^2)\mathbf j+(-z-1)\mathbf k=x\mathbf i-z^2\mathbf j-(z+1)\mathbf k.$$
+        <p>Since $\nabla\times\mathbf F$ is polynomial and hence smooth everywhere, Stokes' Theorem lets us replace $S$ by the flat elliptical disk $S':x^2+4y^2\leq1,\ z=1$ (with orientation $\mathbf n=\mathbf k$), which has the same boundary $C$, without changing the value of the flux. On $S'$, $z=1$, so</p>
+        $$(\nabla\times\mathbf F)\cdot\mathbf k=-(z+1)\Big|_{z=1}=-2$$
+        <p>is constant. The ellipse $x^2+4y^2\leq1$ has semi-axes $1$ and $\dfrac12$, so its area is $\pi\cdot1\cdot\dfrac12=\dfrac{\pi}2$. Therefore</p>
+        $$\iint_S(\nabla\times\mathbf F)\cdot\mathbf n\,d\sigma=\iint_{S'}(-2)\,dA=-2\cdot\frac{\pi}2=-\pi.$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-6 -->
+<div class="card ex-card" id="yu02-6">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-6</span>
+    <span class="ex-title">반구면 위 회전의 면적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x^2+y^2+z^2=1,\ z\geq 0$으로 정의된 반구면 $S$에 대해 다음을 구하시오.</p>
+        $$\iint_S(\nabla\times(y\mathbf{i}))\cdot\mathbf{n}\,d\sigma$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 향 $\mathbf n$을 반구면 $S$의 바깥쪽(원점에서 멀어지는 방향)으로 잡는다. $\mathbf F=y\mathbf i$의 회전을 계산하면</p>
+        $$\nabla\times(y\mathbf i)=(0-0)\mathbf i+(0-0)\mathbf j+(0-1)\mathbf k=-\mathbf k$$
+        <p>이다. $S$의 경계는 $C:x^2+y^2=1,\ z=0$이며, 위쪽으로 향한 반구면의 바깥 향은 오른손 법칙에 의해 $C$를 위에서 바라볼 때 시계 반대 방향으로 유도한다. $\nabla\times(y\mathbf i)$가 상수벡터이므로, 스토크스 정리에 의해 $S$ 대신 같은 경계를 갖는 평면 원판 $S':x^2+y^2\leq1,\ z=0$ (향 $\mathbf n=\mathbf k$)을 사용해도 값이 같다. 따라서</p>
+        $$\iint_S(\nabla\times(y\mathbf i))\cdot\mathbf n\,d\sigma=\iint_{S'}(-1)\,dA=-\pi(1)^2=-\pi$$
+        <p>이다. (검산: $\mathbf F\cdot d\mathbf r=y\,dx$이므로 $\mathbf r(t)=(\cos t,\sin t,0)$에 대해 $\displaystyle\oint_C y\,dx=\int_0^{2\pi}\sin t\cdot(-\sin t)\,dt=-\pi$로 동일하다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the hemisphere $S$ defined by $x^2+y^2+z^2=1,\ z\geq 0$, find the following.</p>
+        $$\iint_S(\nabla\times(y\mathbf{i}))\cdot\mathbf{n}\,d\sigma$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Orient $S$ with $\mathbf n$ pointing outward from the origin. The curl of $\mathbf F=y\mathbf i$ is</p>
+        $$\nabla\times(y\mathbf i)=(0-0)\mathbf i+(0-0)\mathbf j+(0-1)\mathbf k=-\mathbf k.$$
+        <p>The boundary of $S$ is $C:x^2+y^2=1,\ z=0$, and by the right-hand rule the outward orientation of the upper hemisphere induces a counterclockwise orientation on $C$ as viewed from above. Since $\nabla\times(y\mathbf i)$ is a constant vector, Stokes' Theorem lets us replace $S$ by the flat disk $S':x^2+y^2\leq1,\ z=0$ (with orientation $\mathbf n=\mathbf k$), which has the same boundary, without changing the value. Hence</p>
+        $$\iint_S(\nabla\times(y\mathbf i))\cdot\mathbf n\,d\sigma=\iint_{S'}(-1)\,dA=-\pi(1)^2=-\pi.$$
+        <p>(Check: since $\mathbf F\cdot d\mathbf r=y\,dx$, parametrizing $\mathbf r(t)=(\cos t,\sin t,0)$ gives $\displaystyle\oint_C y\,dx=\int_0^{2\pi}\sin t\cdot(-\sin t)\,dt=-\pi$, in agreement.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">벡터장의 발산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 벡터장의 발산을 구하시오.</p>
+        <ol>
+          <li>$\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$</li>
+          <li>$\mathbf{F}=-x\mathbf{i}-y\mathbf{j}-z\mathbf{k}$</li>
+          <li>$\mathbf{F}=-y\mathbf{i}+x\mathbf{j}$</li>
+          <li>$\mathbf{F}=z\mathbf{j}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 발산의 정의 $\nabla\cdot\mathbf F=\dfrac{\partial F_1}{\partial x}+\dfrac{\partial F_2}{\partial y}+\dfrac{\partial F_3}{\partial z}$를 이용한다.</p>
+        <p>(1) $\mathbf F=x\mathbf i+y\mathbf j+z\mathbf k$: $\nabla\cdot\mathbf F=1+1+1=3$.</p>
+        <p>(2) $\mathbf F=-x\mathbf i-y\mathbf j-z\mathbf k$: $\nabla\cdot\mathbf F=-1-1-1=-3$.</p>
+        <p>(3) $\mathbf F=-y\mathbf i+x\mathbf j$: $\nabla\cdot\mathbf F=\dfrac{\partial(-y)}{\partial x}+\dfrac{\partial x}{\partial y}+0=0+0=0$.</p>
+        <p>(4) $\mathbf F=z\mathbf j$: $\nabla\cdot\mathbf F=0+\dfrac{\partial z}{\partial y}+0=0$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the divergence of each given vector field.</p>
+        <ol>
+          <li>$\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$</li>
+          <li>$\mathbf{F}=-x\mathbf{i}-y\mathbf{j}-z\mathbf{k}$</li>
+          <li>$\mathbf{F}=-y\mathbf{i}+x\mathbf{j}$</li>
+          <li>$\mathbf{F}=z\mathbf{j}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We use the definition $\nabla\cdot\mathbf F=\dfrac{\partial F_1}{\partial x}+\dfrac{\partial F_2}{\partial y}+\dfrac{\partial F_3}{\partial z}$.</p>
+        <p>(1) $\mathbf F=x\mathbf i+y\mathbf j+z\mathbf k$: $\nabla\cdot\mathbf F=1+1+1=3$.</p>
+        <p>(2) $\mathbf F=-x\mathbf i-y\mathbf j-z\mathbf k$: $\nabla\cdot\mathbf F=-1-1-1=-3$.</p>
+        <p>(3) $\mathbf F=-y\mathbf i+x\mathbf j$: $\nabla\cdot\mathbf F=\dfrac{\partial(-y)}{\partial x}+\dfrac{\partial x}{\partial y}+0=0+0=0$.</p>
+        <p>(4) $\mathbf F=z\mathbf j$: $\nabla\cdot\mathbf F=0+\dfrac{\partial z}{\partial y}+0=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03 -->
+<div class="card ex-card" id="yu03">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03</span>
+    <span class="ex-title">발산·회전의 연산 법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>미분가능한 함수 $g(x,y,z)$, 미분가능한 벡터장 $\mathbf{F},\mathbf{F}_1,\mathbf{F}_2$, 실수 $a,b$에 대해 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\nabla\cdot(g\mathbf{F})=g\nabla\cdot\mathbf{F}+\nabla g\cdot\mathbf{F}$, &nbsp; $\nabla\times(g\mathbf{F})=g\nabla\times\mathbf{F}+\nabla g\times\mathbf{F}$</li>
+          <li>$\nabla\cdot(a\mathbf{F}_1+b\mathbf{F}_2)=a\nabla\cdot\mathbf{F}_1+b\nabla\cdot\mathbf{F}_2$, &nbsp; $\nabla\times(a\mathbf{F}_1+b\mathbf{F}_2)=a\nabla\times\mathbf{F}_1+b\nabla\times\mathbf{F}_2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> (1) $\mathbf F=P\mathbf i+Q\mathbf j+R\mathbf k$라 하자. 발산의 곱셈법칙을 보이면, $g\mathbf F=(gP)\mathbf i+(gQ)\mathbf j+(gR)\mathbf k$이므로</p>
+        $$\nabla\cdot(g\mathbf F)=\frac{\partial(gP)}{\partial x}+\frac{\partial(gQ)}{\partial y}+\frac{\partial(gR)}{\partial z}$$
+        <p>인데, 각 항에 곱미분법칙을 적용하면</p>
+        $$=\left(g_xP+gP_x\right)+\left(g_yQ+gQ_y\right)+\left(g_zR+gR_z\right)=g\left(P_x+Q_y+R_z\right)+\left(g_xP+g_yQ+g_zR\right)=g\,\nabla\cdot\mathbf F+\nabla g\cdot\mathbf F$$
+        <p>이다.</p>
+        <p>회전의 곱셈법칙을 보이면, $(g\mathbf F)$의 $\mathbf i$성분은</p>
+        $$\big[\nabla\times(g\mathbf F)\big]_{\mathbf i}=\frac{\partial(gR)}{\partial y}-\frac{\partial(gQ)}{\partial z}=\left(g_yR+gR_y\right)-\left(g_zQ+gQ_z\right)=g\left(R_y-Q_z\right)+\left(g_yR-g_zQ\right)$$
+        <p>이고, 이는 $g(\nabla\times\mathbf F)_{\mathbf i}+(\nabla g\times\mathbf F)_{\mathbf i}$와 같다. $\mathbf j,\mathbf k$성분도 $(x,P)\to(y,Q)\to(z,R)\to(x,P)$의 순환치환으로 동일하게 성립하므로</p>
+        $$\nabla\times(g\mathbf F)=g\,\nabla\times\mathbf F+\nabla g\times\mathbf F$$
+        <p>이다.</p>
+        <p>(2) $\mathbf F_1=P_1\mathbf i+Q_1\mathbf j+R_1\mathbf k,\ \mathbf F_2=P_2\mathbf i+Q_2\mathbf j+R_2\mathbf k$라 하면 편미분의 선형성에 의해</p>
+        $$\nabla\cdot(a\mathbf F_1+b\mathbf F_2)=\frac{\partial(aP_1+bP_2)}{\partial x}+\frac{\partial(aQ_1+bQ_2)}{\partial y}+\frac{\partial(aR_1+bR_2)}{\partial z}=a\left(\frac{\partial P_1}{\partial x}+\frac{\partial Q_1}{\partial y}+\frac{\partial R_1}{\partial z}\right)+b\left(\frac{\partial P_2}{\partial x}+\frac{\partial Q_2}{\partial y}+\frac{\partial R_2}{\partial z}\right)=a\,\nabla\cdot\mathbf F_1+b\,\nabla\cdot\mathbf F_2$$
+        <p>이다. 회전의 각 성분도 마찬가지로 편미분의 선형성에 의해 동일하게 분배되므로</p>
+        $$\nabla\times(a\mathbf F_1+b\mathbf F_2)=a\,\nabla\times\mathbf F_1+b\,\nabla\times\mathbf F_2$$
+        <p>이 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a differentiable function $g(x,y,z)$, differentiable vector fields $\mathbf{F},\mathbf{F}_1,\mathbf{F}_2$, and real numbers $a,b$, show that the following hold.</p>
+        <ol>
+          <li>$\nabla\cdot(g\mathbf{F})=g\nabla\cdot\mathbf{F}+\nabla g\cdot\mathbf{F}$, &nbsp; $\nabla\times(g\mathbf{F})=g\nabla\times\mathbf{F}+\nabla g\times\mathbf{F}$</li>
+          <li>$\nabla\cdot(a\mathbf{F}_1+b\mathbf{F}_2)=a\nabla\cdot\mathbf{F}_1+b\nabla\cdot\mathbf{F}_2$, &nbsp; $\nabla\times(a\mathbf{F}_1+b\mathbf{F}_2)=a\nabla\times\mathbf{F}_1+b\nabla\times\mathbf{F}_2$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> (1) Let $\mathbf F=P\mathbf i+Q\mathbf j+R\mathbf k$. For the divergence product rule, since $g\mathbf F=(gP)\mathbf i+(gQ)\mathbf j+(gR)\mathbf k$,</p>
+        $$\nabla\cdot(g\mathbf F)=\frac{\partial(gP)}{\partial x}+\frac{\partial(gQ)}{\partial y}+\frac{\partial(gR)}{\partial z}$$
+        <p>and applying the product rule to each term,</p>
+        $$=\left(g_xP+gP_x\right)+\left(g_yQ+gQ_y\right)+\left(g_zR+gR_z\right)=g\left(P_x+Q_y+R_z\right)+\left(g_xP+g_yQ+g_zR\right)=g\,\nabla\cdot\mathbf F+\nabla g\cdot\mathbf F.$$
+        <p>For the curl product rule, the $\mathbf i$-component of $g\mathbf F$ is</p>
+        $$\big[\nabla\times(g\mathbf F)\big]_{\mathbf i}=\frac{\partial(gR)}{\partial y}-\frac{\partial(gQ)}{\partial z}=\left(g_yR+gR_y\right)-\left(g_zQ+gQ_z\right)=g\left(R_y-Q_z\right)+\left(g_yR-g_zQ\right),$$
+        <p>which equals $g(\nabla\times\mathbf F)_{\mathbf i}+(\nabla g\times\mathbf F)_{\mathbf i}$. The $\mathbf j$- and $\mathbf k$-components follow the same way under the cyclic substitution $(x,P)\to(y,Q)\to(z,R)\to(x,P)$, so</p>
+        $$\nabla\times(g\mathbf F)=g\,\nabla\times\mathbf F+\nabla g\times\mathbf F.$$
+        <p>(2) Let $\mathbf F_1=P_1\mathbf i+Q_1\mathbf j+R_1\mathbf k,\ \mathbf F_2=P_2\mathbf i+Q_2\mathbf j+R_2\mathbf k$. By linearity of partial differentiation,</p>
+        $$\nabla\cdot(a\mathbf F_1+b\mathbf F_2)=\frac{\partial(aP_1+bP_2)}{\partial x}+\frac{\partial(aQ_1+bQ_2)}{\partial y}+\frac{\partial(aR_1+bR_2)}{\partial z}=a\left(\frac{\partial P_1}{\partial x}+\frac{\partial Q_1}{\partial y}+\frac{\partial R_1}{\partial z}\right)+b\left(\frac{\partial P_2}{\partial x}+\frac{\partial Q_2}{\partial y}+\frac{\partial R_2}{\partial z}\right)=a\,\nabla\cdot\mathbf F_1+b\,\nabla\cdot\mathbf F_2.$$
+        <p>Each component of the curl distributes in the same way by linearity of partial differentiation, so</p>
+        $$\nabla\times(a\mathbf F_1+b\mathbf F_2)=a\,\nabla\times\mathbf F_1+b\,\nabla\times\mathbf F_2.$$
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">발산 정리의 확인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $S: x^2+y^2+z^2=a^2\ (a>0)$와 그 내부 $D$가 있다. 벡터장 $\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$에 대하여 다음이 성립함을 보이시오.</p>
+        $$\iint_S\mathbf{F}\cdot\mathbf{n}\,d\sigma=\iiint_D\nabla\cdot\mathbf{F}\,dV$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=x\mathbf i+y\mathbf j+z\mathbf k$의 발산은 $\nabla\cdot\mathbf F=1+1+1=3$이다.</p>
+        <p>먼저 우변을 계산한다. $D$는 반지름 $a$인 공이므로 부피는 $\dfrac43\pi a^3$이고,</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\iiint_D 3\,dV=3\cdot\frac43\pi a^3=4\pi a^3$$
+        <p>이다.</p>
+        <p>다음으로 좌변을 계산한다. 구 $S$ 위의 점 $(x,y,z)$에서 바깥쪽 향은 $\mathbf n=\dfrac{(x,y,z)}a$이므로</p>
+        $$\mathbf F\cdot\mathbf n=\frac{x^2+y^2+z^2}a=\frac{a^2}a=a$$
+        <p>는 $S$ 위에서 상수이다. $S$의 겉넓이는 $4\pi a^2$이므로</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=a\cdot 4\pi a^2=4\pi a^3$$
+        <p>이다. 두 값이 $4\pi a^3$으로 일치하므로 발산 정리가 성립함을 확인했다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S: x^2+y^2+z^2=a^2\ (a>0)$ be a surface with interior $D$. For the vector field $\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$, show that the following holds.</p>
+        $$\iint_S\mathbf{F}\cdot\mathbf{n}\,d\sigma=\iiint_D\nabla\cdot\mathbf{F}\,dV$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The divergence of $\mathbf F=x\mathbf i+y\mathbf j+z\mathbf k$ is $\nabla\cdot\mathbf F=1+1+1=3$.</p>
+        <p>First compute the right side. Since $D$ is a ball of radius $a$, its volume is $\dfrac43\pi a^3$, so</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\iiint_D 3\,dV=3\cdot\frac43\pi a^3=4\pi a^3.$$
+        <p>Next compute the left side. At a point $(x,y,z)$ on the sphere $S$, the outward orientation is $\mathbf n=\dfrac{(x,y,z)}a$, so</p>
+        $$\mathbf F\cdot\mathbf n=\frac{x^2+y^2+z^2}a=\frac{a^2}a=a$$
+        <p>is constant on $S$. Since the surface area of $S$ is $4\pi a^2$,</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=a\cdot 4\pi a^2=4\pi a^3.$$
+        <p>Both sides equal $4\pi a^3$, confirming that the Divergence Theorem holds.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">발산 정리 확인</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직육면체 $D: 0\leq x\leq 3,0\leq y\leq 2,0\leq z\leq 1$과 벡터장 $\mathbf{F}=x^2\mathbf{i}+4xyz\mathbf{j}+ze^x\mathbf{k}$에 대하여 발산 정리가 성립함을 확인하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=x^2\mathbf i+4xyz\mathbf j+ze^x\mathbf k$의 발산을 계산하면</p>
+        $$\nabla\cdot\mathbf F=2x+4xz+e^x$$
+        <p>이다.</p>
+        <p>먼저 우변을 계산한다.</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\int_0^1\int_0^2\int_0^3\big[2x+4xz+e^x\big]\,dx\,dy\,dz$$
+        <p>$x$에 대해 적분하면 $\displaystyle\int_0^3 2x\,dx=9,\ \int_0^3 4xz\,dx=18z,\ \int_0^3 e^x\,dx=e^3-1$이다. $y$에 대한 적분은 피적분함수가 $y$와 무관하므로 $2$를 곱하는 것과 같다. 즉</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\int_0^1\Big[2(9+18z)+2(e^3-1)\Big]\,dz=\int_0^1\Big[18+36z+2e^3-2\Big]\,dz$$
+        <p>이고, $\displaystyle\int_0^1 18\,dz=18,\ \int_0^1 36z\,dz=18,\ \int_0^1(2e^3-2)\,dz=2e^3-2$이므로</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=18+18+2e^3-2=34+2e^3$$
+        <p>이다.</p>
+        <p>다음으로 좌변을 여섯 면에 대한 유출의 합으로 계산한다. $x=0,\ y=0,\ z=0$ 면에서는 각각 $\mathbf F\cdot\mathbf n=-F_1=-x^2=0,\ -F_2=-4xyz=0,\ -F_3=-ze^x=0$이므로 기여가 없다. 나머지 세 면에서:</p>
+        <ul>
+        <li>$x=3$ ($\mathbf n=\mathbf i$): $\mathbf F\cdot\mathbf n=x^2=9$ (상수), 넓이 $2\times1=2$이므로 유출 $=9\cdot2=18$.</li>
+        <li>$y=2$ ($\mathbf n=\mathbf j$): $\mathbf F\cdot\mathbf n=4xyz=8xz$, 유출 $=\displaystyle\int_0^1\int_0^3 8xz\,dx\,dz=8\cdot\frac92\cdot\frac12=18$.</li>
+        <li>$z=1$ ($\mathbf n=\mathbf k$): $\mathbf F\cdot\mathbf n=ze^x\big|_{z=1}=e^x$, 유출 $=\displaystyle\int_0^2\int_0^3 e^x\,dx\,dy=2(e^3-1)=2e^3-2$.</li>
+        </ul>
+        <p>따라서</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=18+18+2e^3-2=34+2e^3$$
+        <p>이다. 두 값이 $34+2e^3$으로 일치하므로 발산 정리가 성립함을 확인했다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Verify that the Divergence Theorem holds for the rectangular box $D: 0\leq x\leq 3,0\leq y\leq 2,0\leq z\leq 1$ and the vector field $\mathbf{F}=x^2\mathbf{i}+4xyz\mathbf{j}+ze^x\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The divergence of $\mathbf F=x^2\mathbf i+4xyz\mathbf j+ze^x\mathbf k$ is</p>
+        $$\nabla\cdot\mathbf F=2x+4xz+e^x.$$
+        <p>First compute the right side.</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\int_0^1\int_0^2\int_0^3\big[2x+4xz+e^x\big]\,dx\,dy\,dz.$$
+        <p>Integrating over $x$ gives $\displaystyle\int_0^3 2x\,dx=9,\ \int_0^3 4xz\,dx=18z,\ \int_0^3 e^x\,dx=e^3-1$. Integrating over $y$ multiplies by $2$, since the integrand does not depend on $y$. Thus</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=\int_0^1\Big[2(9+18z)+2(e^3-1)\Big]\,dz=\int_0^1\Big[18+36z+2e^3-2\Big]\,dz,$$
+        <p>and since $\displaystyle\int_0^1 18\,dz=18,\ \int_0^1 36z\,dz=18,\ \int_0^1(2e^3-2)\,dz=2e^3-2$,</p>
+        $$\iiint_D\nabla\cdot\mathbf F\,dV=18+18+2e^3-2=34+2e^3.$$
+        <p>Next compute the left side as the sum of the outward flux through the six faces. On the faces $x=0,\ y=0,\ z=0$ we get $\mathbf F\cdot\mathbf n=-F_1=-x^2=0,\ -F_2=-4xyz=0,\ -F_3=-ze^x=0$, respectively, so these contribute nothing. On the remaining three faces:</p>
+        <ul>
+        <li>$x=3$ ($\mathbf n=\mathbf i$): $\mathbf F\cdot\mathbf n=x^2=9$ (constant), area $2\times1=2$, so the flux is $9\cdot2=18$.</li>
+        <li>$y=2$ ($\mathbf n=\mathbf j$): $\mathbf F\cdot\mathbf n=4xyz=8xz$, so the flux is $\displaystyle\int_0^1\int_0^3 8xz\,dx\,dz=8\cdot\frac92\cdot\frac12=18$.</li>
+        <li>$z=1$ ($\mathbf n=\mathbf k$): $\mathbf F\cdot\mathbf n=ze^x\big|_{z=1}=e^x$, so the flux is $\displaystyle\int_0^2\int_0^3 e^x\,dx\,dy=2(e^3-1)=2e^3-2$.</li>
+        </ul>
+        <p>Therefore</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=18+18+2e^3-2=34+2e^3.$$
+        <p>Both sides equal $34+2e^3$, confirming that the Divergence Theorem holds.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">정육면체의 유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x=1,\ y=1,\ z=1$과 좌표평면으로 둘러싸인 정육면체를 빠져나오는 벡터장 $\mathbf{F}=xy\mathbf{i}+yz\mathbf{j}+zx\mathbf{k}$의 유출을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf F=xy\mathbf i+yz\mathbf j+zx\mathbf k$의 발산은</p>
+        $$\nabla\cdot\mathbf F=y+z+x$$
+        <p>이다. 정육면체 $D=[0,1]^3$에 대해 발산 정리를 적용하면</p>
+        $$\iint_{\partial D}\mathbf F\cdot\mathbf n\,d\sigma=\iiint_D(x+y+z)\,dV$$
+        <p>이고, 대칭성에 의해 $\iiint_Dx\,dV=\iiint_Dy\,dV=\iiint_Dz\,dV$이므로</p>
+        $$\iiint_D(x+y+z)\,dV=3\iiint_Dx\,dV=3\left(\int_0^1x\,dx\right)\left(\int_0^1dy\right)\left(\int_0^1dz\right)=3\cdot\frac12\cdot1\cdot1=\frac32$$
+        <p>이다. 따라서 유출은 $\dfrac32$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the flux of the vector field $\mathbf{F}=xy\mathbf{i}+yz\mathbf{j}+zx\mathbf{k}$ outward through the cube bounded by $x=1,\ y=1,\ z=1$ and the coordinate planes.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The divergence of $\mathbf F=xy\mathbf i+yz\mathbf j+zx\mathbf k$ is</p>
+        $$\nabla\cdot\mathbf F=y+z+x.$$
+        <p>Applying the Divergence Theorem to the cube $D=[0,1]^3$,</p>
+        $$\iint_{\partial D}\mathbf F\cdot\mathbf n\,d\sigma=\iiint_D(x+y+z)\,dV,$$
+        <p>and by symmetry $\iiint_Dx\,dV=\iiint_Dy\,dV=\iiint_Dz\,dV$, so</p>
+        $$\iiint_D(x+y+z)\,dV=3\iiint_Dx\,dV=3\left(\int_0^1x\,dx\right)\left(\int_0^1dy\right)\left(\int_0^1dz\right)=3\cdot\frac12\cdot1\cdot1=\frac32.$$
+        <p>Therefore the flux is $\dfrac32$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-3 -->
+<div class="card ex-card" id="yu04-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-3</span>
+    <span class="ex-title">구껍질의 유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>영역 $D: b^2\leq x^2+y^2+z^2\leq a^2$가 있다. $(a>b>0)$ 이때 $D$를 빠져나오는 벡터장 $\mathbf{F}=(x\mathbf{i}+y\mathbf{j}+z\mathbf{k})/\rho^3,\ \rho=\sqrt{x^2+y^2+z^2}$의 유출을 구하시오.</li>
+          <li>구면 $S: x^2+y^2+z^2=a^2\ (a>0)$를 가로지르는 벡터장 $\mathbf{F}$의 유출을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $\rho=\sqrt{x^2+y^2+z^2}$라 하면 $\mathbf F=\dfrac{x\mathbf i+y\mathbf j+z\mathbf k}{\rho^3}$이다. $x$성분을 미분하면</p>
+        $$\frac{\partial}{\partial x}\left(\frac x{\rho^3}\right)=\frac1{\rho^3}+x\cdot(-3)\rho^{-4}\cdot\frac x\rho=\frac1{\rho^3}-\frac{3x^2}{\rho^5}$$
+        <p>이고 $y,z$성분도 같은 방식으로 계산되므로</p>
+        $$\nabla\cdot\mathbf F=\frac3{\rho^3}-\frac{3(x^2+y^2+z^2)}{\rho^5}=\frac3{\rho^3}-\frac{3\rho^2}{\rho^5}=\frac3{\rho^3}-\frac3{\rho^3}=0$$
+        <p>이다. $D$에서는 $\rho\geq b\gt0$이므로 $\mathbf F$는 $D$ 전체에서 매끄럽고, 발산 정리에 의해</p>
+        $$(D\text{를 빠져나오는 유출})=\iiint_D\nabla\cdot\mathbf F\,dV=\iiint_D0\,dV=0$$
+        <p>이다.</p>
+        <p>(2) 구 $S:\rho=a$만을 가로지르는 유출을 구한다. $S$의 내부(원점 포함)에서는 $\mathbf F$가 원점에서 정의되지 않으므로 발산 정리를 바로 적용할 수 없고, 직접 계산해야 한다. $S$ 위에서 바깥쪽 향은 $\mathbf n=\dfrac{(x,y,z)}a$이므로</p>
+        $$\mathbf F\cdot\mathbf n=\frac{x^2+y^2+z^2}{a^3\cdot a}=\frac{a^2}{a^4}=\frac1{a^2}$$
+        <p>은 $S$ 위에서 상수이다. $S$의 겉넓이는 $4\pi a^2$이므로</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=\frac1{a^2}\cdot4\pi a^2=4\pi$$
+        <p>이다. (참고: 이 값은 $a$에 무관하게 $4\pi$이므로, 반지름 $a,b$인 두 구의 바깥 유출은 각각 $4\pi$로 같고, $D$의 향(바깥 구는 바깥쪽, 안쪽 구는 원점 방향)에 대한 (1)의 결과 $4\pi-4\pi=0$과 정확히 일치한다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $D: b^2\leq x^2+y^2+z^2\leq a^2$ be a region. $(a>b>0)$ Find the flux of the vector field $\mathbf{F}=(x\mathbf{i}+y\mathbf{j}+z\mathbf{k})/\rho^3,\ \rho=\sqrt{x^2+y^2+z^2}$ outward through $D$.</li>
+          <li>Find the flux of the vector field $\mathbf{F}$ across the sphere $S: x^2+y^2+z^2=a^2\ (a>0)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Let $\rho=\sqrt{x^2+y^2+z^2}$, so $\mathbf F=\dfrac{x\mathbf i+y\mathbf j+z\mathbf k}{\rho^3}$. Differentiating the $x$-component,</p>
+        $$\frac{\partial}{\partial x}\left(\frac x{\rho^3}\right)=\frac1{\rho^3}+x\cdot(-3)\rho^{-4}\cdot\frac x\rho=\frac1{\rho^3}-\frac{3x^2}{\rho^5},$$
+        <p>and the $y$- and $z$-components are computed the same way, so</p>
+        $$\nabla\cdot\mathbf F=\frac3{\rho^3}-\frac{3(x^2+y^2+z^2)}{\rho^5}=\frac3{\rho^3}-\frac{3\rho^2}{\rho^5}=\frac3{\rho^3}-\frac3{\rho^3}=0.$$
+        <p>On $D$ we have $\rho\geq b\gt0$, so $\mathbf F$ is smooth throughout $D$, and by the Divergence Theorem,</p>
+        $$(\text{flux outward through }D)=\iiint_D\nabla\cdot\mathbf F\,dV=\iiint_D0\,dV=0.$$
+        <p>(2) Now find the flux across the sphere $S:\rho=a$ alone. Since the interior of $S$ contains the origin, where $\mathbf F$ is undefined, the Divergence Theorem cannot be applied directly, and the flux must be computed directly. On $S$, the outward orientation is $\mathbf n=\dfrac{(x,y,z)}a$, so</p>
+        $$\mathbf F\cdot\mathbf n=\frac{x^2+y^2+z^2}{a^3\cdot a}=\frac{a^2}{a^4}=\frac1{a^2}$$
+        <p>is constant on $S$. Since the surface area of $S$ is $4\pi a^2$,</p>
+        $$\iint_S\mathbf F\cdot\mathbf n\,d\sigma=\frac1{a^2}\cdot4\pi a^2=4\pi.$$
+        <p>(Remark: this value is $4\pi$ regardless of $a$, so the outward flux through the spheres of radii $a$ and $b$ are each $4\pi$; with the orientation induced by $D$ — outward on the outer sphere, toward the origin on the inner sphere — this is exactly consistent with the result $4\pi-4\pi=0$ from part (1).)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-4 -->
+<div class="card ex-card" id="yu04-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-4</span>
+    <span class="ex-title">기울기의 면적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$b^2\leq x^2+y^2+z^2\leq a^2,\ x,y,z\geq 0$로 정의된 영역 $D$의 경계 $S$와 함수 $f(x,y,z)=\ln(x^2+y^2+z^2)$에 대해 $\iint_S\nabla f\cdot\mathbf{n}\,d\sigma$를 구하시오. (단, $a>b>0$, $\mathbf{n}$은 $D$를 빠져나오는 방향)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\nabla f$는 $D$ 전체에서 매끄러우므로($\rho\geq b\gt0$) 발산 정리에 의해</p>
+        $$\iint_S\nabla f\cdot\mathbf n\,d\sigma=\iiint_D\nabla\cdot(\nabla f)\,dV=\iiint_D\nabla^2f\,dV$$
+        <p>이다. $f=\ln(x^2+y^2+z^2)$이므로 $\dfrac{\partial f}{\partial x}=\dfrac{2x}{\rho^2}$이고 (단, $\rho^2=x^2+y^2+z^2$),</p>
+        $$\frac{\partial^2f}{\partial x^2}=\frac2{\rho^2}-\frac{4x^2}{\rho^4}$$
+        <p>이며 $y,z$에 대해서도 같은 형태이므로</p>
+        $$\nabla^2f=\frac6{\rho^2}-\frac{4(x^2+y^2+z^2)}{\rho^4}=\frac6{\rho^2}-\frac{4\rho^2}{\rho^4}=\frac2{\rho^2}$$
+        <p>이다. 구면좌표 $(\rho,\phi,\theta)$로 바꾸면 $dV=\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$이므로 $\nabla^2f\,dV=2\sin\phi\,d\rho\,d\phi\,d\theta$이다. $D$는 $\rho:b\to a$, $z\geq0$이므로 $\phi:0\to\dfrac{\pi}2$, $x,y\geq0$(제1팔분공간)이므로 $\theta:0\to\dfrac{\pi}2$에 대응한다. 따라서</p>
+        $$\iiint_D\nabla^2f\,dV=2\int_b^ad\rho\int_0^{\pi/2}\sin\phi\,d\phi\int_0^{\pi/2}d\theta=2(a-b)\cdot1\cdot\frac{\pi}2=\pi(a-b)$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the boundary $S$ of the region $D$ defined by $b^2\leq x^2+y^2+z^2\leq a^2,\ x,y,z\geq 0$ and the function $f(x,y,z)=\ln(x^2+y^2+z^2)$, find $\iint_S\nabla f\cdot\mathbf{n}\,d\sigma$. (Here $a>b>0$, and $\mathbf{n}$ points outward from $D$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\nabla f$ is smooth throughout $D$ (as $\rho\geq b\gt0$), the Divergence Theorem gives</p>
+        $$\iint_S\nabla f\cdot\mathbf n\,d\sigma=\iiint_D\nabla\cdot(\nabla f)\,dV=\iiint_D\nabla^2f\,dV.$$
+        <p>Since $f=\ln(x^2+y^2+z^2)$, $\dfrac{\partial f}{\partial x}=\dfrac{2x}{\rho^2}$ (where $\rho^2=x^2+y^2+z^2$), so</p>
+        $$\frac{\partial^2f}{\partial x^2}=\frac2{\rho^2}-\frac{4x^2}{\rho^4},$$
+        <p>and the $y$- and $z$-terms have the same form, so</p>
+        $$\nabla^2f=\frac6{\rho^2}-\frac{4(x^2+y^2+z^2)}{\rho^4}=\frac6{\rho^2}-\frac{4\rho^2}{\rho^4}=\frac2{\rho^2}.$$
+        <p>In spherical coordinates $(\rho,\phi,\theta)$, $dV=\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$, so $\nabla^2f\,dV=2\sin\phi\,d\rho\,d\phi\,d\theta$. Since $D$ has $\rho:b\to a$, and $z\geq0$ corresponds to $\phi:0\to\dfrac{\pi}2$ while $x,y\geq0$ (the first octant) corresponds to $\theta:0\to\dfrac{\pi}2$,</p>
+        $$\iiint_D\nabla^2f\,dV=2\int_b^ad\rho\int_0^{\pi/2}\sin\phi\,d\phi\int_0^{\pi/2}d\theta=2(a-b)\cdot1\cdot\frac{\pi}2=\pi(a-b).$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">회전으로 나타낼 수 없는 장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\nabla\times\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$를 만족하는 2급 벡터장 $\mathbf{F}$는 존재하지 않음을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that there is no vector field $\mathbf{F}$ of class $C^2$ satisfying $\nabla\times\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">발산·회전이 0인 장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\nabla\cdot\mathbf{F}=0$이고 $\nabla\times\mathbf{F}=0$이지만 $\mathbf{F}\neq 0$인 예시를 하나 찾으시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find an example of a vector field $\mathbf{F}$ such that $\nabla\cdot\mathbf{F}=0$ and $\nabla\times\mathbf{F}=0$, but $\mathbf{F}\neq 0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">매개곡면 위 회전의 유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $S: \mathbf{r}(r,\theta)=(r\cos\theta)\mathbf{i}+(r\sin\theta)\mathbf{j}+(4-r^2)\mathbf{k}\ (0\leq r\leq 2,\ 0\leq\theta\leq 2\pi)$와 벡터장 $\mathbf{F}=2z\mathbf{i}+3x\mathbf{j}+5y\mathbf{k}$에 대해 $S$를 가로지르는 $\nabla\times\mathbf{F}$의 유출을 구하시오. (단, $S$의 향 $\mathbf{n}$은 $\mathbf{n}\cdot\mathbf{k}\geq 0$을 만족하도록 정한다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the surface $S: \mathbf{r}(r,\theta)=(r\cos\theta)\mathbf{i}+(r\sin\theta)\mathbf{j}+(4-r^2)\mathbf{k}\ (0\leq r\leq 2,\ 0\leq\theta\leq 2\pi)$ and the vector field $\mathbf{F}=2z\mathbf{i}+3x\mathbf{j}+5y\mathbf{k}$, find the flux of $\nabla\times\mathbf{F}$ across $S$. (Here the orientation $\mathbf{n}$ of $S$ is chosen so that $\mathbf{n}\cdot\mathbf{k}\geq 0$.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">선적분과 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $2x+2y+z=2$ 위에 있는 단순닫힌곡선 $C$에 대하여 $\oint_C 2y\,dx+3z\,dy-x\,dz$의 값은 $C$의 넓이에만 의존함을 보이시오. (단, $C$는 위에서 바라봤을 때 시계반대방향으로 회전하도록 향을 정한다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a simple closed curve $C$ lying on the plane $2x+2y+z=2$, show that the value of $\oint_C 2y\,dx+3z\,dy-x\,dz$ depends only on the area enclosed by $C$. (Here $C$ is oriented so that it runs counterclockwise as viewed from above.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">회전 0이나 순환은 0이 아님</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf{F}=\dfrac{-y}{x^2+y^2}\mathbf{i}+\dfrac{x}{x^2+y^2}\mathbf{j}+z\mathbf{k}$에 대해 다음을 보이시오.</p>
+        <ol>
+          <li>$\nabla\times\mathbf{F}=0$</li>
+          <li>원 $C: x^2+y^2=1$에 대해 $\oint_C\mathbf{F}\cdot d\mathbf{r}\neq 0$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the vector field $\mathbf{F}=\dfrac{-y}{x^2+y^2}\mathbf{i}+\dfrac{x}{x^2+y^2}\mathbf{j}+z\mathbf{k}$, show the following.</p>
+        <ol>
+          <li>$\nabla\times\mathbf{F}=0$</li>
+          <li>For the circle $C: x^2+y^2=1$, $\oint_C\mathbf{F}\cdot d\mathbf{r}\neq 0$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">수직 벡터장의 부재</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부드러운 닫힌 곡면 $S$의 향을 $\mathbf{n}$이라 하자. $\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$가 $\mathbf{n}$과 항상 수직이 되도록 하는 곡면 $S$는 존재하지 않음을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf{n}$ be the orientation of a smooth closed surface $S$. Show that there is no surface $S$ for which $\mathbf{F}=x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$ is always perpendicular to $\mathbf{n}$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">발산 적분의 상계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부드러운 닫힌 곡면 $S$를 경계로 하는 영역 $D$에서 정의된 일급벡터장 $\mathbf{F}$가 있다. $|\mathbf{F}|\leq 1$일 때 $\iiint_D\nabla\cdot\mathbf{F}\,dV$의 상계를 하나 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf{F}$ be a vector field of class $C^1$ defined on a region $D$ whose boundary is a smooth closed surface $S$. When $|\mathbf{F}|\leq 1$, find an upper bound for $\iiint_D\nabla\cdot\mathbf{F}\,dV$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">유출의 최대화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직육면체 $0\leq x\leq a,\ 0\leq y\leq b,\ 0\leq z\leq 1$을 빠져나오는 벡터장</p>
+        $$\mathbf{F}=(-x^2-4xy)\mathbf{i}-6yz\mathbf{j}+12z\mathbf{k}$$
+        <p>의 유출이 최대가 되도록 하는 $a,b$의 값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the values of $a,b$ for which the flux, outward through the rectangular box $0\leq x\leq a,\ 0\leq y\leq b,\ 0\leq z\leq 1$, of the vector field</p>
+        $$\mathbf{F}=(-x^2-4xy)\mathbf{i}-6yz\mathbf{j}+12z\mathbf{k}$$
+        <p>is maximized.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">조화함수의 성질</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>영역 $D$에서 정의된 함수 $f(x,y,z)$가 다음 조건을 만족시키면 $f$를 <strong>조화함수(harmonic function)</strong>라 한다.</p>
+        $$\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}=0$$
+        <p>$D$의 경계가 조각적으로 부드러운 곡면 $S$일 때 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\iint_S\nabla f\cdot\mathbf{n}\,d\sigma=0$</li>
+          <li>$\iint_S f\nabla f\cdot\mathbf{n}\,d\sigma=\iiint_D|\nabla f|^2\,dV$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If a function $f(x,y,z)$ defined on a region $D$ satisfies the following condition, $f$ is called a <strong>harmonic function</strong>.</p>
+        $$\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}=0$$
+        <p>When the boundary of $D$ is a piecewise smooth surface $S$, show that the following hold.</p>
+        <ol>
+          <li>$\iint_S\nabla f\cdot\mathbf{n}\,d\sigma=0$</li>
+          <li>$\iint_S f\nabla f\cdot\mathbf{n}\,d\sigma=\iiint_D|\nabla f|^2\,dV$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="card pr-card" id="pr10">
+  <div class="card-head">
+    <span class="pr-num">문제 10</span>
+    <span class="ex-title">벡터장의 유일성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단순닫힌곡면 $S$를 경계로 하는 단순연결영역 $D$가 있다. 일급벡터장 $\mathbf{F}_1,\mathbf{F}_2$에 대해 $D$에서 $\nabla\cdot\mathbf{F}_1=\nabla\cdot\mathbf{F}_2,\ \nabla\times\mathbf{F}_1=\nabla\times\mathbf{F}_2$가 성립하고 $S$의 향 $\mathbf{n}$에 대해 $S$에서 $\mathbf{F}_1\cdot\mathbf{n}=\mathbf{F}_2\cdot\mathbf{n}$이 성립할 때 $D$에서 $\mathbf{F}_1=\mathbf{F}_2$가 성립함을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $D$ be a simply connected region whose boundary is a simple closed surface $S$. For vector fields $\mathbf{F}_1,\mathbf{F}_2$ of class $C^1$, suppose $\nabla\cdot\mathbf{F}_1=\nabla\cdot\mathbf{F}_2,\ \nabla\times\mathbf{F}_1=\nabla\times\mathbf{F}_2$ hold on $D$ and $\mathbf{F}_1\cdot\mathbf{n}=\mathbf{F}_2\cdot\mathbf{n}$ holds on $S$ for the orientation $\mathbf{n}$ of $S$. Show that $\mathbf{F}_1=\mathbf{F}_2$ holds on $D$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 11 -->
+<div class="card pr-card" id="pr11">
+  <div class="card-head">
+    <span class="pr-num">문제 11</span>
+    <span class="ex-title">그린 항등식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>조각적으로 부드러운 곡면 $S$를 경계로 갖는 영역 $D$에서 정의된 이급함수 $f(x,y,z)$, $g(x,y,z)$가 있다. 다음이 성립함을 보이시오.</p>
+        <ol>
+          <li>$\iint_S f\nabla g\cdot\mathbf{n}\,d\sigma=\iiint_D(f\nabla^2 g+\nabla f\cdot\nabla g)\,dV$ &nbsp;<strong>(그린 제1정리)</strong></li>
+          <li>$\iint_S(f\nabla g-g\nabla f)\cdot\mathbf{n}\,d\sigma=\iiint_D(f\nabla^2 g-g\nabla^2 f)\,dV$ &nbsp;<strong>(그린 제2정리)</strong></li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y,z)$, $g(x,y,z)$ be functions of class $C^2$ defined on a region $D$ whose boundary is a piecewise smooth surface $S$. Show that the following hold.</p>
+        <ol>
+          <li>$\iint_S f\nabla g\cdot\mathbf{n}\,d\sigma=\iiint_D(f\nabla^2 g+\nabla f\cdot\nabla g)\,dV$ &nbsp;<strong>(Green's first identity)</strong></li>
+          <li>$\iint_S(f\nabla g-g\nabla f)\cdot\mathbf{n}\,d\sigma=\iiint_D(f\nabla^2 g-g\nabla^2 f)\,dV$ &nbsp;<strong>(Green's second identity)</strong></li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 12 -->
+<div class="card pr-card" id="pr12">
+  <div class="card-head">
+    <span class="pr-num">문제 12</span>
+    <span class="ex-title">패러데이 법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>시각 $t$에서 점 $(x,y,z)$에서의 전기장과 자기장을 각각 $\mathbf{E}(t,x,y,z)$, $\mathbf{B}(t,x,y,z)$라 하자. 이때 $\nabla\times\mathbf{E}=-\partial\mathbf{B}/\partial t$가 성립함이 알려져 있다. (단, $\nabla\times\mathbf{E}$를 계산할 때에는 $t$를 상수 취급하여 계산한다.) 이때 다음이 성립함을 보이시오.</p>
+        $$\oint_C\mathbf{E}\cdot d\mathbf{r}=-\frac{\partial}{\partial t}\iint_S\mathbf{B}\cdot\mathbf{n}\,d\sigma$$
+        <p><strong>(패러데이 법칙)</strong></p>
+        <p>(단, $S$는 조각적으로 부드러운 곡선 $C$를 경계로 갖는 조각적으로 부드러운 유향곡면)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf{E}(t,x,y,z)$ and $\mathbf{B}(t,x,y,z)$ denote the electric and magnetic fields, respectively, at the point $(x,y,z)$ at time $t$. It is known that $\nabla\times\mathbf{E}=-\partial\mathbf{B}/\partial t$ holds. (Here, when computing $\nabla\times\mathbf{E}$, $t$ is treated as a constant.) Show that the following holds.</p>
+        $$\oint_C\mathbf{E}\cdot d\mathbf{r}=-\frac{\partial}{\partial t}\iint_S\mathbf{B}\cdot\mathbf{n}\,d\sigma$$
+        <p><strong>(Faraday's law)</strong></p>
+        <p>(Here $S$ is a piecewise smooth oriented surface whose boundary is a piecewise smooth curve $C$)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

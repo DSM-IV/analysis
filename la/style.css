@@ -585,3 +585,19 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .scroll-top.visible { opacity: .85; visibility: visible; }
 .scroll-top:hover { opacity: 1; transform: translateY(-2px); }
+
+/* ── RESPONSIVE MATH OVERFLOW FIX (2026-07-19) ──
+   좀은 폭에서 긴 display 수식이 패널 경계를 뚫거나 잘리는 문제:
+   (1) display 수식은 가로 스크롤, (2) 900px 이하에서는 한·영 패널을 세로로 스택 */
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 3px 2px;
+  scrollbar-width: thin;
+}
+@media (max-width: 900px) {
+  .card-body { grid-template-columns: 1fr; }
+  .ko-panel { border-right: none; border-bottom: 1px solid var(--rule-light); }
+}

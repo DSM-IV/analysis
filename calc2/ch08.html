@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08. 편도함수의 활용-극값과 테일러급수 (Applications of Partial Derivatives: Extreme Values and Taylor Series) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 08단원 편도함수의 활용-극값과 테일러급수(Applications of Partial Derivatives: Extreme Values and Taylor Series) 예제·유제·문제 모음. 극값과 임계점, 안장점, 이계도함수 판정법, 라그랑주 승수법, 최댓값 최솟값, 이차근사식과 테일러급수를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 극값, extreme value, 임계점, critical point, 안장점, saddle point, 라그랑주 승수, Lagrange multiplier, 최댓값 최솟값, maximum minimum, 이차근사식, quadratic approximation, 테일러급수, Taylor series, 이계도함수 판정법, Second Derivative Test, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. 편도함수의 활용-극값과 테일러급수 (Applications of Partial Derivatives: Extreme Values and Taylor Series) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="편도함수의 활용-극값과 테일러급수 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "08. 편도함수의 활용-극값과 테일러급수 (Applications of Partial Derivatives: Extreme Values and Taylor Series) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 편도함수의 활용-극값과 테일러급수 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch08.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html" class="active">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 08</p>
+  <h1>08. 편도함수의 활용-극값과 테일러급수<span>Applications of Partial Derivatives: Extreme Values and Taylor Series</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 이변수함수의 극값</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 극값 구하기</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 임계점 판정</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 판별식이 0인 경우</a></li>
+    <li><a href="#yu01-4"><span class="toc-num">유제 01-4</span> 유계영역의 최대·최소</a></li>
+    <li><a href="#yu01-5"><span class="toc-num">유제 01-5</span> 상자 부피의 최댓값</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 라그랑주 승수법</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 조건부 최대·최소</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 내접 직사각형의 넓이</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 교선 위의 최대·최소</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 이차근사식과 오차</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 2차·3차근사식</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 근사식과 오차의 한계</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 최댓값 구하기</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 적분값이 최대인 구간</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 최단 거리의 점</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 내접 직육면체의 부피</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 추세선</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 혈액형과 최댓값</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 자기장이 최소인 점</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 제약 조건과 최댓값</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 영역에서의 최대·최소</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">이변수함수의 극값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x,y)=x^2+y^2-4y+9$의 극값을 모두 찾으시오.</li>
+          <li>$f(x,y)=y^2-x^2$의 극값을 모두 찾으시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 이계도함수 판정법을 사용한다. 임계점에서 $D=f_{xx}f_{yy}-f_{xy}^2$이라 하면, $D>0,\,f_{xx}>0$이면 극솟값, $D>0,\,f_{xx}<0$이면 극댓값, $D<0$이면 안장점(극값 아님)이다.</p>
+        <p>(1) $f_x=2x,\ f_y=2y-4$이므로 $f_x=f_y=0$을 만족시키는 임계점은 $(0,2)$뿐이다. $f_{xx}=2,\ f_{yy}=2,\ f_{xy}=0$이므로
+        $$D=2\cdot2-0^2=4\gt0,\quad f_{xx}=2\gt0$$
+        이다. 따라서 $f$는 $(0,2)$에서 극솟값 $f(0,2)=0+4-8+9=5$를 갖는다.</p>
+        <p>(2) $f_x=-2x,\ f_y=2y$이므로 임계점은 $(0,0)$뿐이다. $f_{xx}=-2,\ f_{yy}=2,\ f_{xy}=0$이므로
+        $$D=(-2)(2)-0^2=-4\lt0$$
+        이다. 따라서 $(0,0)$은 안장점이고 $f$는 극값을 갖지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find all local extreme values of $f(x,y)=x^2+y^2-4y+9$.</li>
+          <li>Find all local extreme values of $f(x,y)=y^2-x^2$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> We use the Second Derivative Test. At a critical point, let $D=f_{xx}f_{yy}-f_{xy}^2$. If $D\gt0$ and $f_{xx}\gt0$, there is a local minimum; if $D\gt0$ and $f_{xx}\lt0$, a local maximum; if $D\lt0$, a saddle point (no extreme value).</p>
+        <p>(1) Since $f_x=2x,\ f_y=2y-4$, the only critical point satisfying $f_x=f_y=0$ is $(0,2)$. Since $f_{xx}=2,\ f_{yy}=2,\ f_{xy}=0$,
+        $$D=2\cdot2-0^2=4\gt0,\quad f_{xx}=2\gt0$$
+        so $f$ has a local minimum $f(0,2)=0+4-8+9=5$ at $(0,2)$.</p>
+        <p>(2) Since $f_x=-2x,\ f_y=2y$, the only critical point is $(0,0)$. Since $f_{xx}=-2,\ f_{yy}=2,\ f_{xy}=0$,
+        $$D=(-2)(2)-0^2=-4\lt0$$
+        so $(0,0)$ is a saddle point and $f$ has no local extreme value.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">극값 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x,y)=xy-x^2-y^2-2x-2y+4$의 극값을 모두 찾으시오.</li>
+          <li>$f(x,y)=3y^2-2y^3-3x^2+6xy$의 극값을 모두 찾으시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f_x=y-2x-2,\ f_y=x-2y-2$이다. $f_x=0$에서 $y=2x+2$이고, 이를 $f_y=0$에 대입하면 $x-2(2x+2)-2=0\Leftrightarrow-3x-6=0\Leftrightarrow x=-2$, $y=-2$이다. 즉 임계점은 $(-2,-2)$뿐이다. $f_{xx}=-2,\ f_{yy}=-2,\ f_{xy}=1$이므로
+        $$D=(-2)(-2)-1^2=3\gt0,\quad f_{xx}=-2\lt0$$
+        이다. 따라서 $f$는 $(-2,-2)$에서 극댓값 $f(-2,-2)=4-4-4+4+4+4=8$을 갖는다.</p>
+        <p>(2) $f_x=6(y-x),\ f_y=6(x+y-y^2)$이다. $f_x=0$에서 $y=x$이고, 이를 $f_y=0$에 대입하면 $x+x-x^2=0\Leftrightarrow x(2-x)=0\Leftrightarrow x=0$ 또는 $x=2$이다. 즉 임계점은 $(0,0)$, $(2,2)$이다. $f_{xx}=-6,\ f_{yy}=6-12y,\ f_{xy}=6$이다.</p>
+        <p>$(0,0)$에서 $f_{yy}=6$이므로 $D=(-6)(6)-6^2=-72\lt0$이고, $(0,0)$은 안장점이다.</p>
+        <p>$(2,2)$에서 $f_{yy}=6-24=-18$이므로 $D=(-6)(-18)-6^2=108-36=72\gt0$, $f_{xx}=-6\lt0$이다. 따라서 $f$는 $(2,2)$에서 극댓값 $f(2,2)=12-16-12+24=8$을 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find all local extreme values of $f(x,y)=xy-x^2-y^2-2x-2y+4$.</li>
+          <li>Find all local extreme values of $f(x,y)=3y^2-2y^3-3x^2+6xy$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $f_x=y-2x-2,\ f_y=x-2y-2$. From $f_x=0$, $y=2x+2$; substituting into $f_y=0$ gives $x-2(2x+2)-2=0\Leftrightarrow-3x-6=0\Leftrightarrow x=-2$, $y=-2$. So the only critical point is $(-2,-2)$. Since $f_{xx}=-2,\ f_{yy}=-2,\ f_{xy}=1$,
+        $$D=(-2)(-2)-1^2=3\gt0,\quad f_{xx}=-2\lt0$$
+        so $f$ has a local maximum $f(-2,-2)=4-4-4+4+4+4=8$ at $(-2,-2)$.</p>
+        <p>(2) $f_x=6(y-x),\ f_y=6(x+y-y^2)$. From $f_x=0$, $y=x$; substituting into $f_y=0$ gives $x+x-x^2=0\Leftrightarrow x(2-x)=0\Leftrightarrow x=0$ or $x=2$. So the critical points are $(0,0)$ and $(2,2)$. We have $f_{xx}=-6,\ f_{yy}=6-12y,\ f_{xy}=6$.</p>
+        <p>At $(0,0)$, $f_{yy}=6$, so $D=(-6)(6)-6^2=-72\lt0$, and $(0,0)$ is a saddle point.</p>
+        <p>At $(2,2)$, $f_{yy}=6-24=-18$, so $D=(-6)(-18)-6^2=108-36=72\gt0$, $f_{xx}=-6\lt0$. Hence $f$ has a local maximum $f(2,2)=12-16-12+24=8$ at $(2,2)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">임계점 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=10xye^{-(x^2+y^2)}$의 임계점을 모두 찾고 각각이 안장점인지, 극솟점인지, 극댓점인지 판정하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=10xye^{-(x^2+y^2)}$라 하자.</p>
+        <p>$$f_x=10ye^{-(x^2+y^2)}(1-2x^2),\qquad f_y=10xe^{-(x^2+y^2)}(1-2y^2)$$</p>
+        <p>$f_x=0$이면 $y=0$ 또는 $x^2=1/2$이고, $f_y=0$이면 $x=0$ 또는 $y^2=1/2$이다. $y=0$이면 $f_y=10xe^{-x^2}\neq0$($x\neq0$)이므로 $f_y=0$을 만족시키려면 $x=0$이어야 하고, 마찬가지로 $x^2=1/2$이면 $y^2=1/2$이어야 한다. 따라서 임계점은 다음 $5$개이다.
+        $$(0,0),\quad \left(\pm\frac{\sqrt2}2,\pm\frac{\sqrt2}2\right)\ (\text{같은 부호}),\quad \left(\pm\frac{\sqrt2}2,\mp\frac{\sqrt2}2\right)\ (\text{다른 부호})$$</p>
+        <p>이계 편도함수는
+        $$f_{xx}=10ye^{-(x^2+y^2)}(4x^3-6x),\quad f_{yy}=10xe^{-(x^2+y^2)}(4y^3-6y),\quad f_{xy}=10e^{-(x^2+y^2)}(1-2x^2)(1-2y^2)$$
+        이다.</p>
+        <p>$(0,0)$에서는 $f_{xx}=f_{yy}=0,\ f_{xy}=10$이므로 $D=0-100=-100\lt0$이다. 따라서 $(0,0)$은 안장점이다.</p>
+        <p>$x^2=y^2=1/2$인 점에서는 $1-2x^2=1-2y^2=0$이므로 $f_{xy}=0$이다. 또한 $4x^3-6x=x(4x^2-6)=-4x$이므로 $f_{xx}=10y\cdot(-4x)e^{-1}=-40xye^{-1}$이고, 마찬가지로 $f_{yy}=-40xye^{-1}$이다.</p>
+        <p>$\left(\dfrac{\sqrt2}2,\dfrac{\sqrt2}2\right)$와 $\left(-\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2\right)$에서는 $xy=1/2\gt0$이므로 $f_{xx}=f_{yy}=-20/e\lt0$이고 $D=(-20/e)^2\gt0$이다. 따라서 이 두 점에서 극댓값
+        $$f=10\cdot\frac12\cdot e^{-1}=\frac5e$$
+        를 갖는다.</p>
+        <p>$\left(\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2\right)$와 $\left(-\dfrac{\sqrt2}2,\dfrac{\sqrt2}2\right)$에서는 $xy=-1/2\lt0$이므로 $f_{xx}=f_{yy}=20/e\gt0$이고 $D\gt0$이다. 따라서 이 두 점에서 극솟값
+        $$f=10\cdot\left(-\frac12\right)e^{-1}=-\frac5e$$
+        를 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all critical points of $f(x,y)=10xye^{-(x^2+y^2)}$, and determine whether each is a saddle point, a local minimum, or a local maximum.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $f(x,y)=10xye^{-(x^2+y^2)}$.</p>
+        <p>$$f_x=10ye^{-(x^2+y^2)}(1-2x^2),\qquad f_y=10xe^{-(x^2+y^2)}(1-2y^2)$$</p>
+        <p>$f_x=0$ gives $y=0$ or $x^2=1/2$, and $f_y=0$ gives $x=0$ or $y^2=1/2$. If $y=0$, then $f_y=10xe^{-x^2}\neq0$ for $x\neq0$, so we need $x=0$; similarly if $x^2=1/2$ we need $y^2=1/2$. Hence there are exactly $5$ critical points:
+        $$(0,0),\quad \left(\pm\frac{\sqrt2}2,\pm\frac{\sqrt2}2\right)\ (\text{same sign}),\quad \left(\pm\frac{\sqrt2}2,\mp\frac{\sqrt2}2\right)\ (\text{opposite signs})$$</p>
+        <p>The second partial derivatives are
+        $$f_{xx}=10ye^{-(x^2+y^2)}(4x^3-6x),\quad f_{yy}=10xe^{-(x^2+y^2)}(4y^3-6y),\quad f_{xy}=10e^{-(x^2+y^2)}(1-2x^2)(1-2y^2)$$</p>
+        <p>At $(0,0)$, $f_{xx}=f_{yy}=0,\ f_{xy}=10$, so $D=0-100=-100\lt0$; hence $(0,0)$ is a saddle point.</p>
+        <p>At any point with $x^2=y^2=1/2$ we have $1-2x^2=1-2y^2=0$, so $f_{xy}=0$. Also $4x^3-6x=x(4x^2-6)=-4x$, so $f_{xx}=10y\cdot(-4x)e^{-1}=-40xye^{-1}$, and likewise $f_{yy}=-40xye^{-1}$.</p>
+        <p>At $\left(\dfrac{\sqrt2}2,\dfrac{\sqrt2}2\right)$ and $\left(-\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2\right)$, $xy=1/2\gt0$, so $f_{xx}=f_{yy}=-20/e\lt0$ and $D=(-20/e)^2\gt0$. Hence $f$ has a local maximum
+        $$f=10\cdot\frac12\cdot e^{-1}=\frac5e$$
+        at these two points.</p>
+        <p>At $\left(\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2\right)$ and $\left(-\dfrac{\sqrt2}2,\dfrac{\sqrt2}2\right)$, $xy=-1/2\lt0$, so $f_{xx}=f_{yy}=20/e\gt0$ and $D\gt0$. Hence $f$ has a local minimum
+        $$f=10\cdot\left(-\frac12\right)e^{-1}=-\frac5e$$
+        at these two points.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">판별식이 0인 경우</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주어진 함수 $f(x,y)$에 대해 $(0,0)$에서 $f_{xx}f_{yy}-f_{xy}^2=0$임을 관찰하시오. 그리고 $f(x,y)$가 원점에서 극대인지 극소인지 판정하시오.</p>
+        <ol>
+          <li>$f(x,y)=x^2y^2$</li>
+          <li>$f(x,y)=xy^2$</li>
+          <li>$f(x,y)=x^3y^3$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 세 경우 모두 $(0,0)$에서 $f_x=f_y=0$이고 $f_{xx}=f_{yy}=f_{xy}=0$임을 계산으로 확인할 수 있으므로 $D=f_{xx}f_{yy}-f_{xy}^2=0$이다. $D=0$이면 이계도함수 판정법이 적용되지 않으므로, 원점 근방에서 $f$의 부호를 직접 조사한다.</p>
+        <p>(1) $f(x,y)=x^2y^2$이다. $f_x=2xy^2,\ f_y=2x^2y$이므로 $(0,0)$에서 $f_x=f_y=0$이고, $f_{xx}=2y^2,\ f_{yy}=2x^2,\ f_{xy}=4xy$이므로 $(0,0)$에서 모두 $0$이다. 그런데 모든 $(x,y)$에 대해 $f(x,y)=x^2y^2\geq0=f(0,0)$이므로, $f$는 원점에서 극솟값 $0$을 갖는다.</p>
+        <p>(2) $f(x,y)=xy^2$이다. $f_x=y^2,\ f_y=2xy$이므로 $(0,0)$에서 $f_x=f_y=0$이고, $f_{xx}=0,\ f_{yy}=2x,\ f_{xy}=2y$이므로 $(0,0)$에서 모두 $0$이다. 그런데 $x=t,\ y=t$ ($t\to0$)를 따라가면 $f(t,t)=t^3$이고, 이는 $t\gt0$일 때 양수, $t\lt0$일 때 음수이다. 즉 원점의 임의로 작은 근방에서 $f$는 양수와 음수 값을 모두 가지므로, $f$는 원점에서 극댓값도 극솟값도 갖지 않는다.</p>
+        <p>(3) $f(x,y)=x^3y^3$이다. $f_x=3x^2y^3,\ f_y=3x^3y^2$이므로 $(0,0)$에서 $f_x=f_y=0$이고, $f_{xx}=6xy^3,\ f_{yy}=6x^3y,\ f_{xy}=9x^2y^2$이므로 $(0,0)$에서 모두 $0$이다. $x=t,\ y=t$를 따라가면 $f(t,t)=t^6\gt0$($t\neq0$)이고, $x=t,\ y=-t$를 따라가면 $f(t,-t)=-t^6\lt0$($t\neq0$)이다. 즉 원점의 임의로 작은 근방에서 $f$는 양수와 음수 값을 모두 가지므로, $f$는 원점에서 극댓값도 극솟값도 갖지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each given function $f(x,y)$, observe that $f_{xx}f_{yy}-f_{xy}^2=0$ at $(0,0)$. Then determine whether $f(x,y)$ has a local maximum or a local minimum at the origin.</p>
+        <ol>
+          <li>$f(x,y)=x^2y^2$</li>
+          <li>$f(x,y)=xy^2$</li>
+          <li>$f(x,y)=x^3y^3$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In all three cases one can check that $f_x=f_y=0$ and $f_{xx}=f_{yy}=f_{xy}=0$ at $(0,0)$, so $D=f_{xx}f_{yy}-f_{xy}^2=0$. Since the Second Derivative Test does not apply when $D=0$, we examine the sign of $f$ directly near the origin.</p>
+        <p>(1) $f(x,y)=x^2y^2$. Since $f_x=2xy^2,\ f_y=2x^2y$, we have $f_x=f_y=0$ at $(0,0)$, and since $f_{xx}=2y^2,\ f_{yy}=2x^2,\ f_{xy}=4xy$, all are $0$ at $(0,0)$. However, $f(x,y)=x^2y^2\geq0=f(0,0)$ for every $(x,y)$, so $f$ has a local minimum value $0$ at the origin.</p>
+        <p>(2) $f(x,y)=xy^2$. Since $f_x=y^2,\ f_y=2xy$, we have $f_x=f_y=0$ at $(0,0)$, and since $f_{xx}=0,\ f_{yy}=2x,\ f_{xy}=2y$, all are $0$ at $(0,0)$. But along $x=t,\ y=t$ (as $t\to0$), $f(t,t)=t^3$, which is positive for $t\gt0$ and negative for $t\lt0$. Thus $f$ takes both positive and negative values in every neighborhood of the origin, so $f$ has neither a local maximum nor a local minimum at the origin.</p>
+        <p>(3) $f(x,y)=x^3y^3$. Since $f_x=3x^2y^3,\ f_y=3x^3y^2$, we have $f_x=f_y=0$ at $(0,0)$, and since $f_{xx}=6xy^3,\ f_{yy}=6x^3y,\ f_{xy}=9x^2y^2$, all are $0$ at $(0,0)$. Along $x=t,\ y=t$, $f(t,t)=t^6\gt0$ for $t\neq0$, while along $x=t,\ y=-t$, $f(t,-t)=-t^6\lt0$ for $t\neq0$. Thus $f$ takes both positive and negative values in every neighborhood of the origin, so $f$ has neither a local maximum nor a local minimum at the origin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-4 -->
+<div class="card ex-card" id="yu01-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-4</span>
+    <span class="ex-title">유계영역의 최대·최소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>세 직선 $x=0$, $y=0$, $y=9-x$으로 둘러싸인 영역 위에서 정의된 함수
+            $$f(x,y)=2+2x+4y-x^2-y^2$$
+            의 최댓값과 최솟값을 구하시오.</li>
+          <li>$1\le x\le 3$, $-\pi\le y\le \pi/4$에서 정의된 함수 $f(x,y)=(4x-x^2)\cos y$의 최댓값과 최솟값을 구하시오.</li>
+          <li>$x,y>0$에서 정의된 함수 $f(x,y)=xy+2x-\ln x^2y$의 최솟값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 영역 $R=\{(x,y): x\geq0,\ y\geq0,\ y\leq9-x\}$는 세 꼭짓점 $(0,0),(9,0),(0,9)$을 갖는 닫힌 삼각형이다. $f$는 $R$에서 연속이고 $R$은 유계 닫힌집합이므로 최댓값과 최솟값이 존재하며, 이들은 $R$의 내부의 임계점 또는 경계 위에서 나타난다.</p>
+        <p><em>내부.</em> $f_x=2-2x=0,\ f_y=4-2y=0$에서 $(x,y)=(1,2)$이고, 이는 $R$의 내부에 있다($1+2=3\lt9$). $f(1,2)=2+2+8-1-4=7$.</p>
+        <p><em>경계.</em> 세 변을 각각 조사한다.</p>
+        <p>· $x=0,\ 0\leq y\leq9$: $f(0,y)=2+4y-y^2$, $\dfrac{d}{dy}=4-2y=0$에서 $y=2$, $f(0,2)=6$. 양 끝점 $f(0,0)=2,\ f(0,9)=2+36-81=-43$.</p>
+        <p>· $y=0,\ 0\leq x\leq9$: $f(x,0)=2+2x-x^2$, $\dfrac{d}{dx}=2-2x=0$에서 $x=1$, $f(1,0)=3$. 양 끝점 $f(0,0)=2,\ f(9,0)=2+18-81=-61$.</p>
+        <p>· $y=9-x,\ 0\leq x\leq9$: $f(x,9-x)=2+2x+4(9-x)-x^2-(9-x)^2=-43+16x-2x^2$, $\dfrac{d}{dx}=16-4x=0$에서 $x=4$, $f=-43+64-32=-11$. 양 끝점은 위와 동일한 $(0,9),(9,0)$에서 $-43,-61$.</p>
+        <p>모든 후보값 $7,6,3,-11,2,-43,-61$ 중 최댓값은 $7$($(1,2)$), 최솟값은 $-61$($(9,0)$)이다.</p>
+        <p>(2) <em>역주.</em> 원문의 정의역은 $1\le x\le3,\ -\pi\le y\le\pi/4$로 비대칭인데, 아래에서 확인되듯 이는 $1\le x\le3,\ -\pi/4\le y\le\pi/4$의 오기로 보인다. 대칭 정의역 $R=\{1\le x\le3,\ -\pi/4\le y\le\pi/4\}$로 보정하여 풀이한다.</p>
+        <p>$f(x,y)=(4x-x^2)\cos y$이다. $f$는 유계 닫힌 직사각형 $R$ 위에서 연속이므로 최댓값과 최솟값이 존재한다.</p>
+        <p><em>내부.</em> $f_x=(4-2x)\cos y=0,\ f_y=-(4x-x^2)\sin y=0$이다. $R$의 내부($1\lt x\lt3,\ -\pi/4\lt y\lt\pi/4$)에서 $\cos y\neq0$이므로 $f_x=0$은 $x=2$를 뜻하고, 이때 $4x-x^2=4\neq0$이므로 $f_y=0$은 $\sin y=0$, 즉 $y=0$을 뜻한다. 임계점은 $(2,0)$이고 $f(2,0)=4$.</p>
+        <p><em>경계.</em></p>
+        <p>· $x=1$ 또는 $x=3$: 두 경우 모두 $4x-x^2=3$이므로 $f=3\cos y,\ -\pi/4\leq y\leq\pi/4$. $\cos y$는 $y=0$에서 최댓값 $1$($f=3$), $y=\pm\pi/4$에서 최솟값 $\sqrt2/2$($f=3\sqrt2/2$)를 갖는다.</p>
+        <p>· $y=\pm\pi/4$: $f=(4x-x^2)\dfrac{\sqrt2}2,\ 1\leq x\leq3$. $4x-x^2$은 $x=2$에서 최댓값 $4$($f=2\sqrt2$), 양 끝점 $x=1,3$에서 최솟값 $3$($f=3\sqrt2/2$)를 갖는다.</p>
+        <p>경계에서 나온 후보값 $3,\ 3\sqrt2/2,\ 2\sqrt2$ 중 가장 큰 값은 $3$이지만 내부의 $f(2,0)=4$가 이보다 크므로, 전체 최댓값은 $4$이다($(2,0)$). 가장 작은 값은 $3\sqrt2/2$이며, 이는 네 점 $(1,\pi/4),(1,-\pi/4),(3,\pi/4),(3,-\pi/4)$(경계의 네 모서리)에서 공통으로 나타나므로 전체 최솟값이다.</p>
+        <p>(3) $f(x,y)=xy+2x-\ln(x^2y),\ x,y\gt0$이다.</p>
+        <p>$$f_x=y+2-\frac2x,\qquad f_y=x-\frac1y$$
+        $f_x=0,\ f_y=0$에서 $y=\dfrac1x$이고 $\dfrac1x+2-\dfrac2x=0\Leftrightarrow2-\dfrac1x=0\Leftrightarrow x=\dfrac12$, $y=2$이다. 임계점은 $\left(\dfrac12,2\right)$뿐이다.</p>
+        <p>$$f_{xx}=\frac2{x^2},\qquad f_{yy}=\frac1{y^2},\qquad f_{xy}=1$$
+        $\left(\dfrac12,2\right)$에서 $f_{xx}=8,\ f_{yy}=1/4,\ f_{xy}=1$이므로 $D=8\cdot\dfrac14-1=1\gt0,\ f_{xx}=8\gt0$이다. 따라서 이 점에서 극솟값을 갖는다.</p>
+        <p>정의역 $x,y\gt0$의 경계($x\to0^+$ 또는 $y\to0^+$)에서는 $-\ln(x^2y)\to\infty$이므로 $f\to\infty$이고, $x\to\infty$ 또는 $y\to\infty$이면 $xy$항이 지배적이므로 역시 $f\to\infty$이다. 즉 정의역 전체에서 경계·무한대로 갈수록 $f$가 발산하고 임계점이 $\left(\dfrac12,2\right)$ 하나뿐이므로, 이 점에서 $f$는 최솟값을 갖는다.
+        $$f\left(\frac12,2\right)=1+1-\ln\frac12=2+\ln2$$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the maximum and minimum values of the function
+            $$f(x,y)=2+2x+4y-x^2-y^2$$
+            defined on the region bounded by the three lines $x=0$, $y=0$, $y=9-x$.</li>
+          <li>Find the maximum and minimum values of $f(x,y)=(4x-x^2)\cos y$ defined on $1\le x\le 3$, $-\pi\le y\le \pi/4$.</li>
+          <li>Find the minimum value of $f(x,y)=xy+2x-\ln x^2y$ defined on $x,y>0$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) The region $R=\{(x,y): x\geq0,\ y\geq0,\ y\leq9-x\}$ is a closed triangle with vertices $(0,0),(9,0),(0,9)$. Since $f$ is continuous on the bounded closed set $R$, it attains a maximum and minimum, occurring either at an interior critical point or on the boundary.</p>
+        <p><em>Interior.</em> Solving $f_x=2-2x=0,\ f_y=4-2y=0$ gives $(x,y)=(1,2)$, which lies in the interior of $R$ (since $1+2=3\lt9$). $f(1,2)=2+2+8-1-4=7$.</p>
+        <p><em>Boundary.</em> We examine each of the three sides.</p>
+        <p>· $x=0,\ 0\leq y\leq9$: $f(0,y)=2+4y-y^2$, with $\dfrac{d}{dy}=4-2y=0$ at $y=2$, giving $f(0,2)=6$. Endpoints: $f(0,0)=2,\ f(0,9)=2+36-81=-43$.</p>
+        <p>· $y=0,\ 0\leq x\leq9$: $f(x,0)=2+2x-x^2$, with $\dfrac{d}{dx}=2-2x=0$ at $x=1$, giving $f(1,0)=3$. Endpoints: $f(0,0)=2,\ f(9,0)=2+18-81=-61$.</p>
+        <p>· $y=9-x,\ 0\leq x\leq9$: $f(x,9-x)=2+2x+4(9-x)-x^2-(9-x)^2=-43+16x-2x^2$, with $\dfrac{d}{dx}=16-4x=0$ at $x=4$, giving $f=-43+64-32=-11$. Endpoints are the same $(0,9),(9,0)$ found above, giving $-43,-61$.</p>
+        <p>Among all candidate values $7,6,3,-11,2,-43,-61$, the maximum is $7$ (at $(1,2)$) and the minimum is $-61$ (at $(9,0)$).</p>
+        <p>(2) <em>Note.</em> The domain as transcribed, $1\le x\le3,\ -\pi\le y\le\pi/4$, is asymmetric; as confirmed below, this appears to be a typo for $1\le x\le3,\ -\pi/4\le y\le\pi/4$. We solve on the corrected symmetric domain $R=\{1\le x\le3,\ -\pi/4\le y\le\pi/4\}$.</p>
+        <p>$f(x,y)=(4x-x^2)\cos y$ is continuous on the bounded closed rectangle $R$, so it attains a maximum and minimum.</p>
+        <p><em>Interior.</em> $f_x=(4-2x)\cos y=0,\ f_y=-(4x-x^2)\sin y=0$. In the interior of $R$ ($1\lt x\lt3,\ -\pi/4\lt y\lt\pi/4$), $\cos y\neq0$, so $f_x=0$ means $x=2$; then $4x-x^2=4\neq0$, so $f_y=0$ means $\sin y=0$, i.e., $y=0$. The critical point is $(2,0)$ with $f(2,0)=4$.</p>
+        <p><em>Boundary.</em></p>
+        <p>· $x=1$ or $x=3$: in both cases $4x-x^2=3$, so $f=3\cos y,\ -\pi/4\leq y\leq\pi/4$. This has maximum $3$ at $y=0$ and minimum $3\sqrt2/2$ at $y=\pm\pi/4$.</p>
+        <p>· $y=\pm\pi/4$: $f=(4x-x^2)\dfrac{\sqrt2}2,\ 1\leq x\leq3$. This has maximum $4\cdot\dfrac{\sqrt2}2=2\sqrt2$ at $x=2$ and minimum $3\dfrac{\sqrt2}2$ at the endpoints $x=1,3$.</p>
+        <p>Among the boundary candidates $3,\ 3\sqrt2/2,\ 2\sqrt2$, the largest is $3$, but the interior value $f(2,0)=4$ exceeds it, so the overall maximum is $4$ (at $(2,0)$). The smallest value is $3\sqrt2/2$, occurring at the four corners $(1,\pi/4),(1,-\pi/4),(3,\pi/4),(3,-\pi/4)$, so this is the overall minimum.</p>
+        <p>(3) $f(x,y)=xy+2x-\ln(x^2y),\ x,y\gt0$.</p>
+        <p>$$f_x=y+2-\frac2x,\qquad f_y=x-\frac1y$$
+        Setting $f_x=0,\ f_y=0$ gives $y=\dfrac1x$, and $\dfrac1x+2-\dfrac2x=0\Leftrightarrow2-\dfrac1x=0\Leftrightarrow x=\dfrac12,\ y=2$. So the only critical point is $\left(\dfrac12,2\right)$.</p>
+        <p>$$f_{xx}=\frac2{x^2},\qquad f_{yy}=\frac1{y^2},\qquad f_{xy}=1$$
+        At $\left(\dfrac12,2\right)$, $f_{xx}=8,\ f_{yy}=1/4,\ f_{xy}=1$, so $D=8\cdot\dfrac14-1=1\gt0,\ f_{xx}=8\gt0$; hence $f$ has a local minimum there.</p>
+        <p>As we approach the boundary of the domain $x,y\gt0$ (i.e., $x\to0^+$ or $y\to0^+$), $-\ln(x^2y)\to\infty$, so $f\to\infty$; and as $x\to\infty$ or $y\to\infty$, the term $xy$ dominates, so again $f\to\infty$. Since $f$ diverges toward the boundary and infinity throughout the domain and has only this one critical point, $f$ attains its minimum value there:
+        $$f\left(\frac12,2\right)=1+1-\ln\frac12=2+\ln2$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-5 -->
+<div class="card ex-card" id="yu01-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-5</span>
+    <span class="ex-title">상자 부피의 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직육면체 모양의 상자의 밑면의 둘레의 길이와 높이의 합이 270cm이다. 가능한 상자의 부피의 최댓값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 밑면의 가로, 세로를 각각 $x,y>0$(cm), 높이를 $z>0$(cm)라 하면 밑면 둘레와 높이의 합 조건은
+        $$2(x+y)+z=270$$
+        이다. $z=270-2x-2y>0$이어야 하므로 $x+y<135$이다. 부피는
+        $$V(x,y)=xyz=xy(270-2x-2y)=270xy-2x^2y-2xy^2$$
+        이다.</p>
+        <p>$$V_x=270y-4xy-2y^2=y(270-4x-2y),\qquad V_y=270x-2x^2-4xy=x(270-2x-4y)$$
+        $x,y>0$이므로 $V_x=V_y=0$은
+        $$270-4x-2y=0,\qquad 270-2x-4y=0$$
+        을 뜻한다. 두 식을 빼면 $-2x+2y=0$, 즉 $x=y$이고, 이를 첫 식에 대입하면 $270-6x=0$에서 $x=45$이다. 따라서 임계점은 $(x,y)=(45,45)$이다.</p>
+        <p>$$V_{xx}=-4y,\qquad V_{yy}=-4x,\qquad V_{xy}=270-4x-4y$$
+        $(45,45)$에서 $V_{xx}=-180,\ V_{yy}=-180,\ V_{xy}=270-180-180=-90$이므로
+        $$D=(-180)(-180)-(-90)^2=32400-8100=24300\gt0,\qquad V_{xx}=-180\lt0$$
+        이다. 따라서 $(45,45)$에서 극댓값을 갖는다. 정의역의 경계($x\to0^+,\ y\to0^+,\ x+y\to135^-$)에서는 $V\to0$이고 내부에서는 $V>0$이며 임계점이 하나뿐이므로, 이 극댓값이 곧 최댓값이다.</p>
+        <p>이때 $z=270-2(45)-2(45)=90$이고, 부피의 최댓값은
+        $$V=45\cdot45\cdot90=182250\ \text{cm}^3$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A rectangular box has a base whose perimeter, added to the height of the box, equals 270cm. Find the maximum possible volume of the box.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let the base of the box have side lengths $x,y\gt0$ (cm) and let the height be $z\gt0$ (cm). The condition that the perimeter of the base plus the height equals $270$ cm is
+        $$2(x+y)+z=270$$
+        Since $z=270-2x-2y\gt0$, we need $x+y\lt135$. The volume is
+        $$V(x,y)=xyz=xy(270-2x-2y)=270xy-2x^2y-2xy^2$$</p>
+        <p>$$V_x=270y-4xy-2y^2=y(270-4x-2y),\qquad V_y=270x-2x^2-4xy=x(270-2x-4y)$$
+        Since $x,y\gt0$, setting $V_x=V_y=0$ means
+        $$270-4x-2y=0,\qquad 270-2x-4y=0$$
+        Subtracting gives $-2x+2y=0$, i.e., $x=y$; substituting into the first equation gives $270-6x=0$, so $x=45$. Hence the critical point is $(x,y)=(45,45)$.</p>
+        <p>$$V_{xx}=-4y,\qquad V_{yy}=-4x,\qquad V_{xy}=270-4x-4y$$
+        At $(45,45)$, $V_{xx}=-180,\ V_{yy}=-180,\ V_{xy}=270-180-180=-90$, so
+        $$D=(-180)(-180)-(-90)^2=32400-8100=24300\gt0,\qquad V_{xx}=-180\lt0$$
+        so $V$ has a local maximum at $(45,45)$. Since $V\to0$ as we approach the boundary of the domain ($x\to0^+,\ y\to0^+,\ x+y\to135^-$), $V\gt0$ in the interior, and there is only one critical point, this local maximum is the global maximum.</p>
+        <p>Here $z=270-2(45)-2(45)=90$, and the maximum possible volume is
+        $$V=45\cdot45\cdot90=182250\ \text{cm}^3$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">라그랑주 승수법</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>평면 $2x+y-z-5=0$ 상의 점 중에서 원점과 가장 가까운 점을 구하시오.</li>
+          <li>타원 $\dfrac{x^2}{8}+\dfrac{y^2}{2}=1$ 위에서 함수 $f(x,y)=xy$의 최댓값과 최솟값을 구하시오.</li>
+          <li>평면 $x+y+z=1$과 곡면 $x^2+y^2=1$의 교선을 $C$라 하자. $C$ 위의 점 $P$에 대해 원점에서부터 $P$까지의 거리가 최대가 되도록 하는 $P$와 최소가 되도록 하는 $P$를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 원점에서 평면 $2x+y-z-5=0$까지의 거리의 제곱 $g(x,y,z)=x^2+y^2+z^2$을 제약조건 $h(x,y,z)=2x+y-z-5=0$ 아래 최소화한다. 라그랑주 조건 $\nabla g=\lambda\nabla h$는
+        $$2x=2\lambda,\qquad 2y=\lambda,\qquad 2z=-\lambda$$
+        즉 $x=\lambda,\ y=\lambda/2,\ z=-\lambda/2$이다. 이를 제약조건에 대입하면
+        $$2\lambda+\frac\lambda2-\left(-\frac\lambda2\right)-5=0\ \Leftrightarrow\ 3\lambda=5\ \Leftrightarrow\ \lambda=\frac53$$
+        이므로 $(x,y,z)=\left(\dfrac53,\dfrac56,-\dfrac56\right)$이다. 평면은 유계가 아니고 거리는 이 한 임계점에서만 최소가 될 수 있으므로, 구하는 점은
+        $$\left(\frac53,\frac56,-\frac56\right),\qquad \text{거리}=\sqrt{\frac{25}9+\frac{25}{36}+\frac{25}{36}}=\sqrt{\frac{25}6}=\frac{5\sqrt6}6$$
+        이다.</p>
+        <p>(2) $f(x,y)=xy$를 제약조건 $h(x,y)=\dfrac{x^2}8+\dfrac{y^2}2-1=0$ 아래 최적화한다. $\nabla f=\lambda\nabla h$는
+        $$y=\lambda\frac{x}4,\qquad x=\lambda y$$
+        이다. 둘째 식에서 $\lambda=x/y$($y\neq0$)이고, 이를 첫째 식에 대입하면 $y=\dfrac{x}{y}\cdot\dfrac x4=\dfrac{x^2}{4y}$, 즉 $x^2=4y^2$, $x=\pm2y$이다.</p>
+        <p>$x=2y$이면 $\lambda=2$이고, 제약조건 $\dfrac{4y^2}8+\dfrac{y^2}2=1\Leftrightarrow y^2=1\Leftrightarrow y=\pm1$에서 $(x,y)=(2,1),(-2,-1)$이고 $f=xy=2$.</p>
+        <p>$x=-2y$이면 $\lambda=-2$이고, 같은 방식으로 $y=\pm1$에서 $(x,y)=(-2,1),(2,-1)$이고 $f=xy=-2$.</p>
+        <p>타원은 유계 닫힌곡선이므로 $f$는 이 곡선 위에서 최댓값과 최솟값을 가지며, 네 임계점의 함숫값 중 최댓값은 $2$(점 $(\pm2,\pm1)$, 동일부호), 최솟값은 $-2$(점 $(2,-1),(-2,1)$)이다.</p>
+        <p>(3) $C$ 위에서 $f(x,y,z)=x^2+y^2+z^2$(원점으로부터 거리의 제곱)을 제약조건 $g_1=x+y+z-1=0$, $g_2=x^2+y^2-1=0$ 아래 최적화한다. $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$는
+        $$2x=\lambda+2\mu x,\qquad 2y=\lambda+2\mu y,\qquad 2z=\lambda \tag{I,II,III}$$
+        이다. (I)$-$(II)에서 $2(x-y)=2\mu(x-y)$, 즉 $(x-y)(1-\mu)=0$이다.</p>
+        <p><em>경우 1: $x=y$.</em> $g_2$에서 $2x^2=1$, $x=y=\pm\dfrac{\sqrt2}2$이고, $g_1$에서 $z=1-2x$이다.</p>
+        <p>$x=y=\dfrac{\sqrt2}2$이면 $z=1-\sqrt2$이고 $f=\dfrac12+\dfrac12+(1-\sqrt2)^2=1+3-2\sqrt2=4-2\sqrt2$.</p>
+        <p>$x=y=-\dfrac{\sqrt2}2$이면 $z=1+\sqrt2$이고 $f=\dfrac12+\dfrac12+(1+\sqrt2)^2=1+3+2\sqrt2=4+2\sqrt2$.</p>
+        <p><em>경우 2: $\mu=1$.</em> (III)에서 $\lambda=2z$이고, 이를 (I)에 대입하면 $2x=2z+2x\Leftrightarrow z=0$이다. $g_1$에서 $x+y=1$, $g_2$에서 $x^2+y^2=1$이므로 $y=1-x$를 대입해 $x^2+(1-x)^2=1\Leftrightarrow 2x^2-2x=0\Leftrightarrow x=0$ 또는 $x=1$이다. 즉 $(x,y,z)=(0,1,0)$ 또는 $(1,0,0)$이고, 두 점 모두 $f=1$이다.</p>
+        <p>$C$는 평면과 원기둥의 교선으로 유계인 폐곡선(타원)이므로 $f$는 $C$ 위에서 최댓값과 최솟값을 갖는다. 네 임계값 $4-2\sqrt2\approx1.17,\ 4+2\sqrt2\approx6.83,\ 1,\ 1$ 중 최댓값은 $4+2\sqrt2$(점 $\left(-\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2,1+\sqrt2\right)$에서 원점까지 거리 최대), 최솟값은 $1$(점 $(1,0,0),(0,1,0)$에서 거리 최소, 즉 $\sqrt f=1$)이다. 따라서 원점으로부터 거리가 최대인 점은
+        $$P=\left(-\frac{\sqrt2}2,-\frac{\sqrt2}2,1+\sqrt2\right)$$
+        이고, 최소인 점은
+        $$P=(1,0,0)\ \text{또는}\ (0,1,0)$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the point on the plane $2x+y-z-5=0$ that is closest to the origin.</li>
+          <li>Find the maximum and minimum values of $f(x,y)=xy$ on the ellipse $\dfrac{x^2}{8}+\dfrac{y^2}{2}=1$.</li>
+          <li>Let $C$ be the curve of intersection of the plane $x+y+z=1$ and the surface $x^2+y^2=1$. For a point $P$ on $C$, find the point $P$ that maximizes the distance from the origin to $P$, and the point $P$ that minimizes it.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) We minimize the squared distance $g(x,y,z)=x^2+y^2+z^2$ from the origin subject to the constraint $h(x,y,z)=2x+y-z-5=0$. The Lagrange condition $\nabla g=\lambda\nabla h$ gives
+        $$2x=2\lambda,\qquad 2y=\lambda,\qquad 2z=-\lambda$$
+        i.e., $x=\lambda,\ y=\lambda/2,\ z=-\lambda/2$. Substituting into the constraint,
+        $$2\lambda+\frac\lambda2-\left(-\frac\lambda2\right)-5=0\ \Leftrightarrow\ 3\lambda=5\ \Leftrightarrow\ \lambda=\frac53$$
+        so $(x,y,z)=\left(\dfrac53,\dfrac56,-\dfrac56\right)$. The plane is unbounded and the distance can only be minimized at this single critical point, so the closest point is
+        $$\left(\frac53,\frac56,-\frac56\right),\qquad \text{distance}=\sqrt{\frac{25}9+\frac{25}{36}+\frac{25}{36}}=\sqrt{\frac{25}6}=\frac{5\sqrt6}6$$</p>
+        <p>(2) We optimize $f(x,y)=xy$ subject to the constraint $h(x,y)=\dfrac{x^2}8+\dfrac{y^2}2-1=0$. $\nabla f=\lambda\nabla h$ gives
+        $$y=\lambda\frac{x}4,\qquad x=\lambda y$$
+        From the second equation, $\lambda=x/y$ (for $y\neq0$); substituting into the first gives $y=\dfrac xy\cdot\dfrac x4=\dfrac{x^2}{4y}$, i.e., $x^2=4y^2$, so $x=\pm2y$.</p>
+        <p>If $x=2y$, then $\lambda=2$, and the constraint $\dfrac{4y^2}8+\dfrac{y^2}2=1\Leftrightarrow y^2=1\Leftrightarrow y=\pm1$ gives $(x,y)=(2,1),(-2,-1)$, with $f=xy=2$.</p>
+        <p>If $x=-2y$, then $\lambda=-2$, and similarly $y=\pm1$ gives $(x,y)=(-2,1),(2,-1)$, with $f=xy=-2$.</p>
+        <p>Since the ellipse is a bounded closed curve, $f$ attains a maximum and minimum on it; among the four critical values, the maximum is $2$ (at $(\pm2,\pm1)$, matching signs) and the minimum is $-2$ (at $(2,-1),(-2,1)$).</p>
+        <p>(3) On $C$ we optimize $f(x,y,z)=x^2+y^2+z^2$ (the squared distance from the origin) subject to $g_1=x+y+z-1=0$, $g_2=x^2+y^2-1=0$. $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$ gives
+        $$2x=\lambda+2\mu x,\qquad 2y=\lambda+2\mu y,\qquad 2z=\lambda \tag{I,II,III}$$
+        Subtracting (II) from (I) gives $2(x-y)=2\mu(x-y)$, i.e., $(x-y)(1-\mu)=0$.</p>
+        <p><em>Case 1: $x=y$.</em> From $g_2$, $2x^2=1$, so $x=y=\pm\dfrac{\sqrt2}2$, and from $g_1$, $z=1-2x$.</p>
+        <p>If $x=y=\dfrac{\sqrt2}2$, then $z=1-\sqrt2$ and $f=\dfrac12+\dfrac12+(1-\sqrt2)^2=1+3-2\sqrt2=4-2\sqrt2$.</p>
+        <p>If $x=y=-\dfrac{\sqrt2}2$, then $z=1+\sqrt2$ and $f=\dfrac12+\dfrac12+(1+\sqrt2)^2=1+3+2\sqrt2=4+2\sqrt2$.</p>
+        <p><em>Case 2: $\mu=1$.</em> From (III), $\lambda=2z$; substituting into (I) gives $2x=2z+2x\Leftrightarrow z=0$. From $g_1$, $x+y=1$, and from $g_2$, $x^2+y^2=1$; substituting $y=1-x$ gives $x^2+(1-x)^2=1\Leftrightarrow2x^2-2x=0\Leftrightarrow x=0$ or $x=1$. So $(x,y,z)=(0,1,0)$ or $(1,0,0)$, both giving $f=1$.</p>
+        <p>Since $C$, the intersection of a plane and a cylinder, is a bounded closed curve (an ellipse), $f$ attains a maximum and minimum on $C$. Among the four critical values $4-2\sqrt2\approx1.17,\ 4+2\sqrt2\approx6.83,\ 1,\ 1$, the maximum is $4+2\sqrt2$ (the point $\left(-\dfrac{\sqrt2}2,-\dfrac{\sqrt2}2,1+\sqrt2\right)$ is farthest from the origin) and the minimum is $1$ (the points $(1,0,0),(0,1,0)$ are closest, at distance $\sqrt f=1$). Thus the point maximizing the distance from the origin is
+        $$P=\left(-\frac{\sqrt2}2,-\frac{\sqrt2}2,1+\sqrt2\right)$$
+        and the point(s) minimizing it are
+        $$P=(1,0,0)\ \text{or}\ (0,1,0)$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">조건부 최대·최소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡면 $x^2-z^2=1$ 상의 점 중에서 원점과 가장 가까운 점을 구하시오.</li>
+          <li>원 $x^2+y^2=1$ 위에서 함수 $f(x,y)=3x+4y$의 최댓값과 최솟값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 원점에서 곡면 $x^2-z^2=1$ 위의 점까지의 거리의 제곱 $g(x,y,z)=x^2+y^2+z^2$을 제약조건 $h(x,y,z)=x^2-z^2-1=0$ 아래 최소화한다. 라그랑주 조건 $\nabla g=\lambda\nabla h$는
+        $$2x=2\lambda x,\qquad 2y=0,\qquad 2z=-2\lambda z$$
+        즉 $y=0$, $x(1-\lambda)=0$, $z(1+\lambda)=0$을 뜻한다.</p>
+        <p>$x=0$이면 제약조건에서 $-z^2=1$이 되어 실수해가 없으므로 $x\neq0$이어야 하고, 따라서 $\lambda=1$이다. 이때 $z(1+1)=0$에서 $z=0$이고, 제약조건에서 $x^2=1$, 즉 $x=\pm1$이다. 임계점은 $(\pm1,0,0)$뿐이다.</p>
+        <p>곡면 $x^2-z^2=1$은 유계가 아니며(예를 들어 $y\to\infty$이면 거리도 $\to\infty$), 임계점이 이 한 쌍뿐이므로 이 점들에서 거리가 최소가 된다. 따라서 원점과 가장 가까운 점은
+        $$(\pm1,0,0)$$
+        이고, 이때 거리는 $\sqrt g=1$이다.</p>
+        <p>(2) $f(x,y)=3x+4y$를 제약조건 $h(x,y)=x^2+y^2-1=0$ 아래 최적화한다. $\nabla f=\lambda\nabla h$는
+        $$3=2\lambda x,\qquad 4=2\lambda y$$
+        이다. $\lambda=0$이면 $3=4=0$이 되어 모순이므로 $\lambda\neq0$이고,
+        $$x=\frac3{2\lambda},\qquad y=\frac2\lambda$$
+        이다. 이를 제약조건에 대입하면
+        $$\frac9{4\lambda^2}+\frac4{\lambda^2}=1\ \Leftrightarrow\ \frac9{4\lambda^2}+\frac{16}{4\lambda^2}=1\ \Leftrightarrow\ \frac{25}{4\lambda^2}=1\ \Leftrightarrow\ \lambda=\pm\frac52$$
+        이다.</p>
+        <p>$\lambda=\dfrac52$이면 $(x,y)=\left(\dfrac35,\dfrac45\right)$이고 $f=3\cdot\dfrac35+4\cdot\dfrac45=5$이다. $\lambda=-\dfrac52$이면 $(x,y)=\left(-\dfrac35,-\dfrac45\right)$이고 $f=-5$이다.</p>
+        <p>원은 유계 닫힌곡선이므로 $f$는 이 곡선 위에서 최댓값과 최솟값을 가지며, 두 임계값 중 최댓값은 $5$(점 $(3/5,4/5)$에서), 최솟값은 $-5$(점 $(-3/5,-4/5)$에서)이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the point on the surface $x^2-z^2=1$ that is closest to the origin.</li>
+          <li>Find the maximum and minimum values of $f(x,y)=3x+4y$ on the circle $x^2+y^2=1$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) We minimize the squared distance $g(x,y,z)=x^2+y^2+z^2$ from the origin to a point on the surface $x^2-z^2=1$, subject to the constraint $h(x,y,z)=x^2-z^2-1=0$. The Lagrange condition $\nabla g=\lambda\nabla h$ gives
+        $$2x=2\lambda x,\qquad 2y=0,\qquad 2z=-2\lambda z$$
+        that is, $y=0$, $x(1-\lambda)=0$, $z(1+\lambda)=0$.</p>
+        <p>If $x=0$, the constraint becomes $-z^2=1$, which has no real solution, so $x\neq0$ and hence $\lambda=1$. Then $z(1+1)=0$ gives $z=0$, and the constraint gives $x^2=1$, i.e., $x=\pm1$. So the only critical points are $(\pm1,0,0)$.</p>
+        <p>The surface $x^2-z^2=1$ is unbounded (for instance, as $y\to\infty$ the distance also $\to\infty$), and since these are the only critical points, the distance is minimized there. Hence the point closest to the origin is
+        $$(\pm1,0,0)$$
+        at distance $\sqrt g=1$.</p>
+        <p>(2) We optimize $f(x,y)=3x+4y$ subject to the constraint $h(x,y)=x^2+y^2-1=0$. $\nabla f=\lambda\nabla h$ gives
+        $$3=2\lambda x,\qquad 4=2\lambda y$$
+        Since $\lambda=0$ would force $3=4=0$, a contradiction, $\lambda\neq0$ and
+        $$x=\frac3{2\lambda},\qquad y=\frac2\lambda$$
+        Substituting into the constraint,
+        $$\frac9{4\lambda^2}+\frac4{\lambda^2}=1\ \Leftrightarrow\ \frac9{4\lambda^2}+\frac{16}{4\lambda^2}=1\ \Leftrightarrow\ \frac{25}{4\lambda^2}=1\ \Leftrightarrow\ \lambda=\pm\frac52$$</p>
+        <p>If $\lambda=\dfrac52$, then $(x,y)=\left(\dfrac35,\dfrac45\right)$ and $f=3\cdot\dfrac35+4\cdot\dfrac45=5$. If $\lambda=-\dfrac52$, then $(x,y)=\left(-\dfrac35,-\dfrac45\right)$ and $f=-5$.</p>
+        <p>Since the circle is a bounded closed curve, $f$ attains a maximum and minimum on it; among the two critical values, the maximum is $5$ (at $(3/5,4/5)$) and the minimum is $-5$ (at $(-3/5,-4/5)$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">내접 직사각형의 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>타원 $\dfrac{x^2}{16}+\dfrac{y^2}{9}=1$에 내접하는 직사각형의 넓이의 최댓값을 구하시오. (단, 직사각형의 가로와 세로는 각각 $x$축, $y$축에 평행하다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 직사각형의 변이 좌표축에 평행하므로, 대칭성에 의해 네 꼭짓점은 $(\pm x,\pm y)$ 꼴이며 이 중 한 꼭짓점 $(x,y)$($x,y>0$)가 타원 위에 있으면 된다. 직사각형의 넓이는 $A=4xy$이다.</p>
+        <p>$A=4xy$를 제약조건 $h(x,y)=\dfrac{x^2}{16}+\dfrac{y^2}9-1=0$ ($x,y>0$) 아래 최대화한다. $\nabla A=\lambda\nabla h$는
+        $$4y=\lambda\frac{x}8,\qquad 4x=\lambda\frac{2y}9$$
+        이다. 첫 식에서 $\lambda=\dfrac{32y}x$, 둘째 식에서 $\lambda=\dfrac{18x}y$이므로
+        $$\frac{32y}x=\frac{18x}y\ \Leftrightarrow\ 32y^2=18x^2\ \Leftrightarrow\ x^2=\frac{16}9y^2\ \Leftrightarrow\ x=\frac43y$$
+        ($x,y>0$이므로 양의 근만 취한다).</p>
+        <p>이를 제약조건에 대입하면
+        $$\frac{(16/9)y^2}{16}+\frac{y^2}9=1\ \Leftrightarrow\ \frac{y^2}9+\frac{y^2}9=1\ \Leftrightarrow\ y^2=\frac92\ \Leftrightarrow\ y=\frac{3\sqrt2}2$$
+        이고, $x=\dfrac43y=2\sqrt2$이다.</p>
+        <p>타원의 제$1$사분면 부분을 $x=4\cos\theta,\ y=3\sin\theta$ ($0\lt\theta\lt\pi/2$)로 매개화하면 $A=4xy=48\sin\theta\cos\theta=24\sin2\theta$이고, $\theta\to0^+$ 또는 $\theta\to\pi/2^-$이면 $A\to0$이다. 즉 열린구간의 양 끝에서 $A\to0$이고 내부에서 $A>0$이며 임계점이 유일하므로, 이 임계점에서 $A$가 최댓값을 갖는다.</p>
+        <p>따라서 넓이의 최댓값은
+        $$A=4xy=4\cdot2\sqrt2\cdot\frac{3\sqrt2}2=24$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the maximum area of a rectangle inscribed in the ellipse $\dfrac{x^2}{16}+\dfrac{y^2}{9}=1$. (Here the sides of the rectangle are parallel to the $x$-axis and $y$-axis, respectively.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since the sides of the rectangle are parallel to the coordinate axes, by symmetry its four vertices have the form $(\pm x,\pm y)$, where one vertex $(x,y)$ ($x,y\gt0$) lies on the ellipse. The area of the rectangle is $A=4xy$.</p>
+        <p>We maximize $A=4xy$ subject to the constraint $h(x,y)=\dfrac{x^2}{16}+\dfrac{y^2}9-1=0$ ($x,y\gt0$). $\nabla A=\lambda\nabla h$ gives
+        $$4y=\lambda\frac{x}8,\qquad 4x=\lambda\frac{2y}9$$
+        From the first equation $\lambda=\dfrac{32y}x$, and from the second $\lambda=\dfrac{18x}y$, so
+        $$\frac{32y}x=\frac{18x}y\ \Leftrightarrow\ 32y^2=18x^2\ \Leftrightarrow\ x^2=\frac{16}9y^2\ \Leftrightarrow\ x=\frac43y$$
+        (taking the positive root since $x,y\gt0$).</p>
+        <p>Substituting into the constraint,
+        $$\frac{(16/9)y^2}{16}+\frac{y^2}9=1\ \Leftrightarrow\ \frac{y^2}9+\frac{y^2}9=1\ \Leftrightarrow\ y^2=\frac92\ \Leftrightarrow\ y=\frac{3\sqrt2}2$$
+        and $x=\dfrac43y=2\sqrt2$.</p>
+        <p>Parametrizing the first-quadrant arc of the ellipse by $x=4\cos\theta,\ y=3\sin\theta$ ($0\lt\theta\lt\pi/2$), we get $A=4xy=48\sin\theta\cos\theta=24\sin2\theta$, and $A\to0$ as $\theta\to0^+$ or $\theta\to\pi/2^-$. Since $A\to0$ at both ends of the open interval, $A\gt0$ in the interior, and the critical point is unique, $A$ attains its maximum there.</p>
+        <p>Hence the maximum area is
+        $$A=4xy=4\cdot2\sqrt2\cdot\frac{3\sqrt2}2=24$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">교선 위의 최대·최소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $y-x=0$과 구면 $x^2+y^2+z^2=4$의 교선을 $C$라 하자. $C$ 위에서 $f(x,y,z)=xy+z^2$의 최댓값과 최솟값을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C$ 위에서 $f(x,y,z)=xy+z^2$을 제약조건 $g_1(x,y,z)=y-x=0$, $g_2(x,y,z)=x^2+y^2+z^2-4=0$ 아래 최적화한다. 라그랑주 조건 $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$는
+        $$y=-\lambda+2\mu x,\qquad x=\lambda+2\mu y,\qquad 2z=2\mu z\tag{I,II,III}$$
+        이다.</p>
+        <p>(III)에서 $z=0$ 또는 $\mu=1$이다. (I)+(II)에서 $x+y=2\mu(x+y)$, 즉 $(x+y)(1-2\mu)=0$이므로 $x+y=0$ 또는 $\mu=\dfrac12$이다.</p>
+        <p><em>경우 1: $\mu=\dfrac12$.</em> $\mu\neq1$이므로 (III)에서 $z=0$이어야 한다. $C$의 정의에서 $y=x$이므로 $g_2$는 $2x^2=4$, 즉 $x=y=\pm\sqrt2$가 된다. 이때
+        $$f=xy+z^2=x^2=2$$
+        이다.</p>
+        <p><em>경우 2: $\mu=1$.</em> $\mu\neq\dfrac12$이므로 $x+y=0$이어야 한다. $y=x$와 $x+y=0$을 함께 풀면 $x=y=0$이고, $g_2$에서 $z^2=4$, 즉 $z=\pm2$이다. 이때
+        $$f=xy+z^2=0+4=4$$
+        이다.</p>
+        <p>$C$는 원점을 지나는 평면 $y=x$와 구면의 교선이므로 구의 대원(큰 원)이며, 유계 닫힌곡선이다. 따라서 $f$는 $C$ 위에서 최댓값과 최솟값을 가지며, 두 임계값 $2,4$ 중 최댓값은 $4$(점 $(0,0,\pm2)$에서), 최솟값은 $2$(점 $(\pm\sqrt2,\pm\sqrt2,0)$, 동일부호에서)이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the curve of intersection of the plane $y-x=0$ and the sphere $x^2+y^2+z^2=4$. Find the maximum and minimum values of $f(x,y,z)=xy+z^2$ on $C$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> On $C$ we optimize $f(x,y,z)=xy+z^2$ subject to the constraints $g_1(x,y,z)=y-x=0$, $g_2(x,y,z)=x^2+y^2+z^2-4=0$. The Lagrange condition $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$ gives
+        $$y=-\lambda+2\mu x,\qquad x=\lambda+2\mu y,\qquad 2z=2\mu z\tag{I,II,III}$$</p>
+        <p>From (III), $z=0$ or $\mu=1$. Adding (I) and (II) gives $x+y=2\mu(x+y)$, i.e., $(x+y)(1-2\mu)=0$, so $x+y=0$ or $\mu=\dfrac12$.</p>
+        <p><em>Case 1: $\mu=\dfrac12$.</em> Since $\mu\neq1$, (III) forces $z=0$. Since $y=x$ by the definition of $C$, $g_2$ becomes $2x^2=4$, i.e., $x=y=\pm\sqrt2$. Then
+        $$f=xy+z^2=x^2=2$$</p>
+        <p><em>Case 2: $\mu=1$.</em> Since $\mu\neq\dfrac12$, we need $x+y=0$. Solving $y=x$ and $x+y=0$ together gives $x=y=0$, and $g_2$ gives $z^2=4$, i.e., $z=\pm2$. Then
+        $$f=xy+z^2=0+4=4$$</p>
+        <p>Since $C$ is the intersection of the sphere with the plane $y=x$, which passes through the center of the sphere, $C$ is a great circle — a bounded closed curve. Hence $f$ attains a maximum and minimum on $C$; among the two critical values $2,4$, the maximum is $4$ (at $(0,0,\pm2)$) and the minimum is $2$ (at $(\pm\sqrt2,\pm\sqrt2,0)$, matching signs).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">이차근사식과 오차</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$f(x,y)=\sin x\sin y$의 원점에서의 이차근사식을 구하시오.</li>
+          <li>$|x|\le 0.1$, $|y|\le 0.1$일 때 이차근사식의 오차의 한계를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f$가 $(0,0)$ 근방에서 $3$계까지 연속인 편도함수를 가지면, $f$의 원점에서의 이차근사식(2차 테일러다항식)은
+        $$Q(x,y)=f(0,0)+f_x(0,0)x+f_y(0,0)y+\frac12\Big(f_{xx}(0,0)x^2+2f_{xy}(0,0)xy+f_{yy}(0,0)y^2\Big)$$
+        이다.</p>
+        <p>(1) $f(x,y)=\sin x\sin y$라 하자. $f(0,0)=0$이고,
+        $$f_x=\cos x\sin y,\quad f_y=\sin x\cos y,\quad f_{xx}=-\sin x\sin y,\quad f_{yy}=-\sin x\sin y,\quad f_{xy}=\cos x\cos y$$
+        이므로 $(0,0)$에서 $f_x=f_y=0$, $f_{xx}=f_{yy}=0$, $f_{xy}=1$이다. 따라서
+        $$Q(x,y)=0+0+0+\frac12\big(0+2\cdot1\cdot xy+0\big)=xy$$
+        이다.</p>
+        <p>(2) $E(x,y)=f(x,y)-Q(x,y)$라 하면, $Q$가 $2$차 테일러다항식이므로 $|f_{xxx}|,|f_{xxy}|,|f_{xyy}|,|f_{yyy}|\leq M$을 만족시키는 상수 $M$에 대해
+        $$|E(x,y)|\leq\frac16M\big(|x|+|y|\big)^3$$
+        이 성립한다.</p>
+        <p>$f=\sin x\sin y$의 $3$계 편도함수는
+        $$f_{xxx}=-\cos x\sin y,\quad f_{xxy}=-\sin x\cos y,\quad f_{xyy}=-\cos x\sin y,\quad f_{yyy}=-\sin x\cos y$$
+        이고, 각각 $\cos,\sin$의 곱이므로 모든 $(x,y)$에서 절댓값이 $1$ 이하이다. 따라서 $M=1$을 취할 수 있다.</p>
+        <p>$|x|\leq0.1,\ |y|\leq0.1$이면 $|x|+|y|\leq0.2$이므로
+        $$|E(x,y)|\leq\frac16\cdot1\cdot(0.2)^3=\frac{0.008}6=\frac1{750}\approx0.00133$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the quadratic approximation of $f(x,y)=\sin x\sin y$ at the origin.</li>
+          <li>Find the error bound of the quadratic approximation when $|x|\le 0.1$, $|y|\le 0.1$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> If $f$ has continuous partial derivatives up to third order near $(0,0)$, the quadratic approximation (second-degree Taylor polynomial) of $f$ at the origin is
+        $$Q(x,y)=f(0,0)+f_x(0,0)x+f_y(0,0)y+\frac12\Big(f_{xx}(0,0)x^2+2f_{xy}(0,0)xy+f_{yy}(0,0)y^2\Big)$$</p>
+        <p>(1) Let $f(x,y)=\sin x\sin y$. Then $f(0,0)=0$, and
+        $$f_x=\cos x\sin y,\quad f_y=\sin x\cos y,\quad f_{xx}=-\sin x\sin y,\quad f_{yy}=-\sin x\sin y,\quad f_{xy}=\cos x\cos y$$
+        so at $(0,0)$, $f_x=f_y=0$, $f_{xx}=f_{yy}=0$, $f_{xy}=1$. Hence
+        $$Q(x,y)=0+0+0+\frac12\big(0+2\cdot1\cdot xy+0\big)=xy$$</p>
+        <p>(2) Let $E(x,y)=f(x,y)-Q(x,y)$. Since $Q$ is the second-degree Taylor polynomial, for any constant $M$ with $|f_{xxx}|,|f_{xxy}|,|f_{xyy}|,|f_{yyy}|\leq M$,
+        $$|E(x,y)|\leq\frac16M\big(|x|+|y|\big)^3$$</p>
+        <p>The third-order partial derivatives of $f=\sin x\sin y$ are
+        $$f_{xxx}=-\cos x\sin y,\quad f_{xxy}=-\sin x\cos y,\quad f_{xyy}=-\cos x\sin y,\quad f_{yyy}=-\sin x\cos y$$
+        each a product of a sine and cosine, hence bounded in absolute value by $1$ for all $(x,y)$. So we may take $M=1$.</p>
+        <p>For $|x|\leq0.1,\ |y|\leq0.1$ we have $|x|+|y|\leq0.2$, so
+        $$|E(x,y)|\leq\frac16\cdot1\cdot(0.2)^3=\frac{0.008}6=\frac1{750}\approx0.00133$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">2차·3차근사식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 주어진 함수의 원점에서의 2차근사식과 3차근사식을 구하시오.</p>
+        <ol>
+          <li>$f(x,y)=xe^y$</li>
+          <li>$\sin(x^2+y^2)$</li>
+          <li>$f(x,y)=\dfrac{1}{1-x-y+xy}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 03의 이차근사식 $Q_2(x,y)$에 이어, $3$차근사식(3차 테일러다항식)은
+        $$Q_3(x,y)=Q_2(x,y)+\frac16\Big(f_{xxx}(0,0)x^3+3f_{xxy}(0,0)x^2y+3f_{xyy}(0,0)xy^2+f_{yyy}(0,0)y^3\Big)$$
+        이다. 매클로린급수의 계수는 유일하므로, 이미 알려진 한 변수 함수의 매클로린급수를 대입·전개하여 필요한 차수까지 모은 다항식도 같은 $Q_2,Q_3$을 준다. 아래에서는 이 방법을 사용한다.</p>
+        <p>(1) $f(x,y)=xe^y$이다. $e^y=1+y+\dfrac{y^2}2+\dfrac{y^3}6+\cdots$이므로
+        $$xe^y=x+xy+\frac{xy^2}2+\frac{xy^3}6+\cdots$$
+        이다. 차수가 $2$ 이하인 항을 모으면 $2$차근사식
+        $$Q_2=x+xy$$
+        를 얻고, 차수가 $3$ 이하인 항까지 모으면 $3$차근사식
+        $$Q_3=x+xy+\frac{xy^2}2$$
+        을 얻는다.</p>
+        <p>(2) $f(x,y)=\sin(x^2+y^2)$이다. $u=x^2+y^2$라 하면 $u$는 이미 $2$차 동차식이고, $\sin u=u-\dfrac{u^3}6+\cdots$에서 둘째항 $u^3=(x^2+y^2)^3$은 모든 항의 차수가 $6$ 이상이다. 즉 전개식
+        $$\sin(x^2+y^2)=(x^2+y^2)-\frac{(x^2+y^2)^3}6+\cdots$$
+        에는 $3$차 항이 전혀 나타나지 않는다(차수는 $2,6,10,\ldots$뿐). 따라서 $2$차근사식과 $3$차근사식은 같고
+        $$Q_2=Q_3=x^2+y^2$$
+        이다.</p>
+        <p>(3) $f(x,y)=\dfrac1{1-x-y+xy}$이다. $1-x-y+xy=(1-x)(1-y)$이므로
+        $$f(x,y)=\frac1{1-x}\cdot\frac1{1-y}=(1+x+x^2+x^3+\cdots)(1+y+y^2+y^3+\cdots)$$
+        이다. 두 급수를 곱해 차수별로 모으면, $0$차항 $1$, $1$차항 $x+y$, $2$차항 $x^2+xy+y^2$, $3$차항 $x^3+x^2y+xy^2+y^3$을 얻는다. 따라서
+        $$Q_2=1+x+y+x^2+xy+y^2,\qquad Q_3=Q_2+x^3+x^2y+xy^2+y^3$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the quadratic and cubic approximations at the origin of each function given below.</p>
+        <ol>
+          <li>$f(x,y)=xe^y$</li>
+          <li>$\sin(x^2+y^2)$</li>
+          <li>$f(x,y)=\dfrac{1}{1-x-y+xy}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Continuing from the quadratic approximation $Q_2(x,y)$ of 예제 03, the cubic approximation (third-degree Taylor polynomial) is
+        $$Q_3(x,y)=Q_2(x,y)+\frac16\Big(f_{xxx}(0,0)x^3+3f_{xxy}(0,0)x^2y+3f_{xyy}(0,0)xy^2+f_{yyy}(0,0)y^3\Big)$$
+        Since the coefficients of a Maclaurin series are unique, substituting and expanding the known Maclaurin series of the relevant single-variable functions and collecting terms up to the required degree gives the same $Q_2,Q_3$. We use this method below.</p>
+        <p>(1) Let $f(x,y)=xe^y$. Since $e^y=1+y+\dfrac{y^2}2+\dfrac{y^3}6+\cdots$,
+        $$xe^y=x+xy+\frac{xy^2}2+\frac{xy^3}6+\cdots$$
+        Collecting terms of degree $\leq2$ gives the quadratic approximation
+        $$Q_2=x+xy$$
+        and collecting terms of degree $\leq3$ gives the cubic approximation
+        $$Q_3=x+xy+\frac{xy^2}2$$</p>
+        <p>(2) Let $f(x,y)=\sin(x^2+y^2)$. Setting $u=x^2+y^2$, which is already a homogeneous quadratic, in $\sin u=u-\dfrac{u^3}6+\cdots$ the next term $u^3=(x^2+y^2)^3$ has every term of degree at least $6$. That is, in the expansion
+        $$\sin(x^2+y^2)=(x^2+y^2)-\frac{(x^2+y^2)^3}6+\cdots$$
+        no degree-$3$ term appears at all (the degrees present are $2,6,10,\ldots$). Hence the quadratic and cubic approximations coincide:
+        $$Q_2=Q_3=x^2+y^2$$</p>
+        <p>(3) Let $f(x,y)=\dfrac1{1-x-y+xy}$. Since $1-x-y+xy=(1-x)(1-y)$,
+        $$f(x,y)=\frac1{1-x}\cdot\frac1{1-y}=(1+x+x^2+x^3+\cdots)(1+y+y^2+y^3+\cdots)$$
+        Multiplying the two series and collecting by degree gives the degree-$0$ term $1$, degree-$1$ terms $x+y$, degree-$2$ terms $x^2+xy+y^2$, and degree-$3$ terms $x^3+x^2y+xy^2+y^3$. Hence
+        $$Q_2=1+x+y+x^2+xy+y^2,\qquad Q_3=Q_2+x^3+x^2y+xy^2+y^3$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">근사식과 오차의 한계</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=e^x\sin y$의 원점에서의 2차근사식을 구하고 $|x|\le 0.1$, $|y|\le 0.1$일 때 이차근사식의 오차의 한계를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=e^x\sin y$라 하자. $f(0,0)=0$이고,
+        $$f_x=e^x\sin y,\quad f_y=e^x\cos y,\quad f_{xx}=e^x\sin y,\quad f_{yy}=-e^x\sin y,\quad f_{xy}=e^x\cos y$$
+        이므로 $(0,0)$에서 $f_x=0,\ f_y=1,\ f_{xx}=f_{yy}=0,\ f_{xy}=1$이다. 예제 03에서와 같은 이차근사식 공식에 대입하면
+        $$Q(x,y)=0+0\cdot x+1\cdot y+\frac12\big(0+2\cdot1\cdot xy+0\big)=y+xy$$
+        이다.</p>
+        <p>오차의 한계를 구하기 위해 $3$계 편도함수를 계산하면
+        $$f_{xxx}=e^x\sin y,\quad f_{xxy}=e^x\cos y,\quad f_{xyy}=-e^x\sin y,\quad f_{yyy}=-e^x\cos y$$
+        이다. 영역 $R:\ |x|\leq0.1,\ |y|\leq0.1$ 위에서 $e^x\leq e^{0.1}$이고 $|\sin y|\leq1,\ |\cos y|\leq1$이므로
+        $$|f_{xxx}|,|f_{xxy}|,|f_{xyy}|,|f_{yyy}|\leq e^{0.1}$$
+        이고, $M=e^{0.1}\approx1.1052$를 취할 수 있다.</p>
+        <p>따라서 오차의 한계는
+        $$|E(x,y)|\leq\frac16M\big(|x|+|y|\big)^3=\frac16e^{0.1}(0.2)^3=\frac{e^{0.1}}{750}\approx0.00147$$
+        이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the quadratic approximation of $f(x,y)=e^x\sin y$ at the origin, and find the error bound of the quadratic approximation when $|x|\le 0.1$, $|y|\le 0.1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $f(x,y)=e^x\sin y$. Then $f(0,0)=0$, and
+        $$f_x=e^x\sin y,\quad f_y=e^x\cos y,\quad f_{xx}=e^x\sin y,\quad f_{yy}=-e^x\sin y,\quad f_{xy}=e^x\cos y$$
+        so at $(0,0)$, $f_x=0,\ f_y=1,\ f_{xx}=f_{yy}=0,\ f_{xy}=1$. Substituting into the quadratic approximation formula from 예제 03,
+        $$Q(x,y)=0+0\cdot x+1\cdot y+\frac12\big(0+2\cdot1\cdot xy+0\big)=y+xy$$</p>
+        <p>To find the error bound, we compute the third-order partial derivatives:
+        $$f_{xxx}=e^x\sin y,\quad f_{xxy}=e^x\cos y,\quad f_{xyy}=-e^x\sin y,\quad f_{yyy}=-e^x\cos y$$
+        On the region $R:\ |x|\leq0.1,\ |y|\leq0.1$, we have $e^x\leq e^{0.1}$ and $|\sin y|\leq1,\ |\cos y|\leq1$, so
+        $$|f_{xxx}|,|f_{xxy}|,|f_{xyy}|,|f_{yyy}|\leq e^{0.1}$$
+        and we may take $M=e^{0.1}\approx1.1052$.</p>
+        <p>Hence the error bound is
+        $$|E(x,y)|\leq\frac16M\big(|x|+|y|\big)^3=\frac16e^{0.1}(0.2)^3=\frac{e^{0.1}}{750}\approx0.00147$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">최댓값 구하기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x,y\ge 0$에서 정의된 함수 $f(x,y)=6xye^{-(2x+3y)}$의 최댓값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the maximum value of $f(x,y)=6xye^{-(2x+3y)}$ defined on $x,y\ge 0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">적분값이 최대인 구간</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a\le b$일 때 $\displaystyle\int_a^b (24-2x-x^2)^{1/3}dx$가 최대가 되도록 하는 $a,b$를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $a,b$ with $a\le b$ that maximize $\displaystyle\int_a^b (24-2x-x^2)^{1/3}dx$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">최단 거리의 점</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡면 $z=x^2+y^2+10$ 상의 점 중에서 평면 $x+2y-z=0$과 가장 가까운 점을 구하시오.</li>
+          <li>곡면 $y^2-xz^2=4$의 점 중 가장 원점과 가까운 점을 구하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the point on the surface $z=x^2+y^2+10$ that is closest to the plane $x+2y-z=0$.</li>
+          <li>Find the point on the surface $y^2-xz^2=4$ that is closest to the origin.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">내접 직육면체의 부피</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구면 $x^2+y^2+z^2=4$에 내접하는 직육면체 중 가장 부피가 큰 직육면체의 각 변의 길이를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Among the rectangular boxes inscribed in the sphere $x^2+y^2+z^2=4$, find the edge lengths of the one with the greatest volume.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">추세선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면 위에 $n$개의 점 $(x_1,y_1),\cdots,(x_n,y_n)$이 있다. <strong>추세선(trend line)</strong> $y=mx+b$는 다음 값이 최소가 되는 $m,b$에 의해 정해진다.
+        $$w=(mx_1+b-y_1)^2+\cdots+(mx_n+b-y_n)^2$$
+        $$m=\frac{\left(\sum x_k\right)\left(\sum y_k\right)-n\sum x_ky_k}{\left(\sum x_k\right)^2-n\sum x_k^2}, \quad b=\frac{1}{n}\left(\sum y_k-m\sum x_k\right)$$
+        임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>There are $n$ points $(x_1,y_1),\cdots,(x_n,y_n)$ in the coordinate plane. The <strong>trend line</strong> $y=mx+b$ is determined by the $m,b$ that minimize the following value.
+        $$w=(mx_1+b-y_1)^2+\cdots+(mx_n+b-y_n)^2$$
+        Show that
+        $$m=\frac{\left(\sum x_k\right)\left(\sum y_k\right)-n\sum x_ky_k}{\left(\sum x_k\right)^2-n\sum x_k^2}, \quad b=\frac{1}{n}\left(\sum y_k-m\sum x_k\right)$$</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">혈액형과 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사람의 혈액형은 A, B, O 세 가지 유전자에 의해 결정된다. AA, BB, OO의 혈액형은 동형이라 하고, AB, AO, BO의 혈액형은 이형이라 한다. 한 집단에서 전체 유전자 중 A, B, O 유전자의 비율을 각각 $p,q,r$이라 하면 그 집단에서 이형인 혈액형을 가진 사람의 비율은 다음과 같이 주어진다.
+        $$Q(p,q,r)=2(pq+pr+qr)$$
+        $Q$의 최댓값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A person's blood type is determined by three genes: A, B, and O. The blood types AA, BB, and OO are called homozygous, and the blood types AB, AO, and BO are called heterozygous. If the proportions of the A, B, and O genes among all genes in a population are $p,q,r$, respectively, then the proportion of people in that population with a heterozygous blood type is given by
+        $$Q(p,q,r)=2(pq+pr+qr)$$
+        Find the maximum value of $Q$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">자기장이 최소인 점</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반지름의 길이가 6인 구 모양의 행성에서 자기장이 가장 작은 지점에 망원경을 설치하려고 한다. 행성의 중심을 원점으로 하는 직교좌표계에서 자기장이 아래와 같이 주어진다.
+        $$M(x,y,z)=6x-y^2+xz+60$$
+        망원경을 설치해야 하는 위치를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A telescope is to be installed at the point where the magnetic field is smallest on a spherical planet of radius 6. In the rectangular coordinate system with the center of the planet as the origin, the magnetic field is given by
+        $$M(x,y,z)=6x-y^2+xz+60$$
+        Find the location where the telescope should be installed.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">제약 조건과 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$개의 양의 실수 $a_1,\cdots,a_n$가 있다. $\displaystyle\sum_{i=1}^n x_i^2=1$이 성립할 때 $\displaystyle\sum_{i=1}^n a_ix_i$의 최댓값을 $a_1,\cdots,a_n$을 이용해 나타내시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a_1,\cdots,a_n$ be $n$ positive real numbers. Express, in terms of $a_1,\cdots,a_n$, the maximum value of $\displaystyle\sum_{i=1}^n a_ix_i$ subject to $\displaystyle\sum_{i=1}^n x_i^2=1$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09 (임용17A-5)</span>
+    <span class="ex-title">영역에서의 최대·최소</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면의 영역 $D=\{(x,y)\in\mathbb{R}^2\mid 0\le x\le 4,\ 0\le y\le 4,\ x+y\le 4\}$에서 함수 $f(x,y)=4x-2xy+y^2$의 최댓값과 최솟값의 합을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the sum of the maximum and minimum values of $f(x,y)=4x-2xy+y^2$ on the region $D=\{(x,y)\in\mathbb{R}^2\mid 0\le x\le 4,\ 0\le y\le 4,\ x+y\le 4\}$ of the coordinate plane.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

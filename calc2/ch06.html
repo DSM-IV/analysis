@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06. 편도함수와 그 계산 (Partial Derivatives and Their Computation) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 06단원 편도함수와 그 계산(Partial Derivatives and Their Computation) 예제·유제·문제 모음. 편도함수, 이계·혼합 편도함수, 연쇄법칙(chain rule), 음함수 미분법, 동차함수, 라이프니츠 정리를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 편도함수, partial derivative, 이계 편도함수, second-order partial derivative, 혼합 편도함수, mixed partial derivative, 연쇄법칙, chain rule, 음함수, implicit function, 동차함수, homogeneous function, 라이프니츠 정리, Leibniz rule, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06. 편도함수와 그 계산 (Partial Derivatives and Their Computation) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="편도함수와 그 계산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch06.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "06. 편도함수와 그 계산 (Partial Derivatives and Their Computation) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 편도함수와 그 계산 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch06.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch06.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html" class="active">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 06</p>
+  <h1>06. 편도함수와 그 계산<span>Partial Derivatives and Their Computation</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 편도함수의 값</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 여러 함수의 편도함수</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 음함수의 편도함수</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 교선 위의 순간변화율</a></li>
+    <li><a href="#yu01-4"><span class="toc-num">유제 01-4</span> 합성저항의 편미분</a></li>
+    <li><a href="#yu01-5"><span class="toc-num">유제 01-5</span> 연속성과 편도함수 존재</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 이계 편도함수</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 혼합 편도함수</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 고계 편도함수</a></li>
+    <li><a href="#yu02-3"><span class="toc-num">유제 02-3</span> 원점에서의 혼합 편도함수</a></li>
+    <li><a href="#yu02-4"><span class="toc-num">유제 02-4</span> 이계 편도함수의 합</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 연쇄법칙</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 연쇄법칙의 적용</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 합성함수와 연쇄법칙</a></li>
+    <li><a href="#yu03-3"><span class="toc-num">유제 03-3</span> 연쇄법칙으로 도함수 값</a></li>
+    <li><a href="#yu03-4"><span class="toc-num">유제 03-4</span> 전류의 변화율</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 음함수 미분법</a></li>
+    <li><a href="#yu04"><span class="toc-num">유제 04</span> 음함수의 편도함수</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 독립변수 선택과 편미분</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 제약조건 아래 편미분</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 변수를 고정한 편미분</a></li>
+    <li><a href="#yu05-3"><span class="toc-num">유제 05-3</span> 이상기체의 내부에너지</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 편도함수의 존재 판정</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 편도함수로 함수 찾기</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 삼각형의 각과 편미분</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 음함수 관계식의 편미분</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 편도함수 조건과 함수 결정</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 유계 편도함수와 연속성</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 극좌표계의 편도함수</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 원 위 온도의 최댓값</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> n차 동차함수</a></li>
+    <li><a href="#pr10"><span class="toc-num">문제 10</span> 구면대칭 라플라스 방정식</a></li>
+    <li><a href="#pr11"><span class="toc-num">문제 11</span> 라이프니츠 정리의 적용</a></li>
+    <li><a href="#pr12"><span class="toc-num">문제 12</span> 세 편도함수의 곱</a></li>
+    <li><a href="#pr13"><span class="toc-num">문제 13</span> 연립 관계식의 편미분</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">편도함수의 값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=x^2+3xy+y-1$에 대하여 $(4,-5)$에서의 $\partial f/\partial x$와 $\partial f/\partial y$의 값을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x=\dfrac{\partial f}{\partial x}=2x+3y$이므로 $f_x(4,-5)=2(4)+3(-5)=8-15=-7$이다.</p>
+        <p>$f_y=\dfrac{\partial f}{\partial y}=3x+1$이므로 $f_y(4,-5)=3(4)+1=13$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y)=x^2+3xy+y-1$, find the values of $\partial f/\partial x$ and $\partial f/\partial y$ at $(4,-5)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x=\dfrac{\partial f}{\partial x}=2x+3y$, we have $f_x(4,-5)=2(4)+3(-5)=8-15=-7$.</p>
+        <p>Since $f_y=\dfrac{\partial f}{\partial y}=3x+1$, we have $f_y(4,-5)=3(4)+1=13$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">여러 함수의 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>함수 $f(x,y)=y\sin xy$에 대하여 $\partial f/\partial y$를 구하여라.</li>
+          <li>함수 $f(x,y)=\dfrac{2y}{y+\cos x}$에 대하여 $f_x$와 $f_y$를 구하여라.</li>
+          <li>함수 $f(x,y,z)=x\sin(y+3z)$에 대하여 $\partial f/\partial z$를 구하여라.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $f(x,y)=y\sin xy$이므로 곱미분법에 의해</p>
+        $$\frac{\partial f}{\partial y}=\sin xy+y\cdot\cos(xy)\cdot x=\sin xy+xy\cos xy$$
+        <p>이다.</p>
+        <p>(2) $f(x,y)=\dfrac{2y}{y+\cos x}$이다. $x$에 대해 미분하면 (몫미분법, 분자는 $x$를 포함하지 않으므로 미분값 $0$)</p>
+        $$f_x=\frac{0\cdot(y+\cos x)-2y\cdot(-\sin x)}{(y+\cos x)^2}=\frac{2y\sin x}{(y+\cos x)^2}$$
+        <p>이고, $y$에 대해 미분하면</p>
+        $$f_y=\frac{2\cdot(y+\cos x)-2y\cdot1}{(y+\cos x)^2}=\frac{2\cos x}{(y+\cos x)^2}$$
+        <p>이다.</p>
+        <p>(3) $f(x,y,z)=x\sin(y+3z)$이므로</p>
+        $$\frac{\partial f}{\partial z}=x\cos(y+3z)\cdot3=3x\cos(y+3z)$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>For the function $f(x,y)=y\sin xy$, find $\partial f/\partial y$.</li>
+          <li>For the function $f(x,y)=\dfrac{2y}{y+\cos x}$, find $f_x$ and $f_y$.</li>
+          <li>For the function $f(x,y,z)=x\sin(y+3z)$, find $\partial f/\partial z$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $f(x,y)=y\sin xy$, the product rule gives</p>
+        $$\frac{\partial f}{\partial y}=\sin xy+y\cdot\cos(xy)\cdot x=\sin xy+xy\cos xy$$
+        <p>(2) We have $f(x,y)=\dfrac{2y}{y+\cos x}$. Differentiating with respect to $x$ (quotient rule; the numerator does not contain $x$, so its derivative is $0$),</p>
+        $$f_x=\frac{0\cdot(y+\cos x)-2y\cdot(-\sin x)}{(y+\cos x)^2}=\frac{2y\sin x}{(y+\cos x)^2}$$
+        <p>and differentiating with respect to $y$,</p>
+        $$f_y=\frac{2\cdot(y+\cos x)-2y\cdot1}{(y+\cos x)^2}=\frac{2\cos x}{(y+\cos x)^2}$$
+        <p>(3) Since $f(x,y,z)=x\sin(y+3z)$,</p>
+        $$\frac{\partial f}{\partial z}=x\cos(y+3z)\cdot3=3x\cos(y+3z)$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">음함수의 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>방정식 $yz-\ln z=x+y$으로 주어진 $x,y$에 대한 함수 $z$에 대하여 $\partial z/\partial x$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 방정식 $yz-\ln z=x+y$의 양변을 $x$에 대해 편미분하면 ($y$는 상수로 취급, $z=z(x,y)$)</p>
+        $$y\frac{\partial z}{\partial x}-\frac{1}{z}\frac{\partial z}{\partial x}=1$$
+        <p>이다. 좌변을 정리하면</p>
+        $$\frac{\partial z}{\partial x}\left(y-\frac{1}{z}\right)=1 \quad\Leftrightarrow\quad \frac{\partial z}{\partial x}\cdot\frac{yz-1}{z}=1$$
+        <p>이므로</p>
+        $$\frac{\partial z}{\partial x}=\frac{z}{yz-1}$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $z$ of $x,y$ given by the equation $yz-\ln z=x+y$, find $\partial z/\partial x$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Differentiating both sides of $yz-\ln z=x+y$ with respect to $x$ (treating $y$ as constant, $z=z(x,y)$),</p>
+        $$y\frac{\partial z}{\partial x}-\frac{1}{z}\frac{\partial z}{\partial x}=1$$
+        <p>Rearranging the left side,</p>
+        $$\frac{\partial z}{\partial x}\left(y-\frac{1}{z}\right)=1 \quad\Leftrightarrow\quad \frac{\partial z}{\partial x}\cdot\frac{yz-1}{z}=1$$
+        <p>so</p>
+        $$\frac{\partial z}{\partial x}=\frac{z}{yz-1}$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">교선 위의 순간변화율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>포물면 $z=x^2+y^2$과 $x=1$의 교선 위의 점 $(1,2,5)$에서 $y$에 대한 $z$의 순간변화율을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 교선 위에서는 $x=1$이 고정되므로 $z=1+y^2$이다. 따라서 이 교선을 따라 $y$에 대한 $z$의 순간변화율은</p>
+        $$\frac{dz}{dy}=2y$$
+        <p>이고, $x$가 상수 $1$로 고정된 단면을 따르는 것이므로 이는 $\partial z/\partial y$와 같다. 점 $(1,2,5)$에서 $y=2$이므로 구하는 순간변화율은</p>
+        $$\left.\frac{\partial z}{\partial y}\right|_{(1,2)}=2(2)=4$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the instantaneous rate of change of $z$ with respect to $y$ at the point $(1,2,5)$ on the curve of intersection of the paraboloid $z=x^2+y^2$ and $x=1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Along the curve of intersection, $x=1$ is fixed, so $z=1+y^2$. Hence the instantaneous rate of change of $z$ with respect to $y$ along this curve is</p>
+        $$\frac{dz}{dy}=2y$$
+        <p>and since this is the cross-section with $x$ held at the constant $1$, it agrees with $\partial z/\partial y$. At the point $(1,2,5)$ we have $y=2$, so the rate of change is</p>
+        $$\left.\frac{\partial z}{\partial y}\right|_{(1,2)}=2(2)=4$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-4 -->
+<div class="card ex-card" id="yu01-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-4</span>
+    <span class="ex-title">합성저항의 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>저항값이 $R_1,R_2,R_3$인 세 저항이 병렬 연결된 회로의 합성저항의 저항값 $R$은 다음과 같이 주어진다.</p>
+        $$\frac{1}{R}=\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}$$
+        <p>$R_1=30$, $R_2=45$, $R_3=90$일 때 $\partial R/\partial R_2$를 구하시오. (단, 단위는 $\Omega$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $R_1=30,R_2=45,R_3=90$일 때 $R$의 값을 먼저 구하면</p>
+        $$\frac{1}{R}=\frac{1}{30}+\frac{1}{45}+\frac{1}{90}=\frac{3}{90}+\frac{2}{90}+\frac{1}{90}=\frac{6}{90}=\frac{1}{15}$$
+        <p>이므로 $R=15\,\Omega$이다.</p>
+        <p>$\dfrac{1}{R}=\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}$의 양변을 $R_2$에 대해 편미분하면 ($R_1,R_3$는 상수, $R=R(R_1,R_2,R_3)$)</p>
+        $$-\frac{1}{R^2}\frac{\partial R}{\partial R_2}=-\frac{1}{R_2^2}$$
+        <p>이므로</p>
+        $$\frac{\partial R}{\partial R_2}=\left(\frac{R}{R_2}\right)^2=\left(\frac{15}{45}\right)^2=\left(\frac{1}{3}\right)^2=\frac{1}{9}\ (\Omega)$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The resistance $R$ of the combined (equivalent) resistance of a circuit in which three resistors with resistances $R_1,R_2,R_3$ are connected in parallel is given as follows.</p>
+        $$\frac{1}{R}=\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}$$
+        <p>When $R_1=30$, $R_2=45$, $R_3=90$, find $\partial R/\partial R_2$. (Here the unit is $\Omega$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $R_1=30,R_2=45,R_3=90$, we first find the value of $R$:</p>
+        $$\frac{1}{R}=\frac{1}{30}+\frac{1}{45}+\frac{1}{90}=\frac{3}{90}+\frac{2}{90}+\frac{1}{90}=\frac{6}{90}=\frac{1}{15}$$
+        <p>so $R=15\,\Omega$.</p>
+        <p>Differentiating both sides of $\dfrac{1}{R}=\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}$ with respect to $R_2$ ($R_1,R_3$ constant, $R=R(R_1,R_2,R_3)$),</p>
+        $$-\frac{1}{R^2}\frac{\partial R}{\partial R_2}=-\frac{1}{R_2^2}$$
+        <p>so</p>
+        $$\frac{\partial R}{\partial R_2}=\left(\frac{R}{R_2}\right)^2=\left(\frac{15}{45}\right)^2=\left(\frac{1}{3}\right)^2=\frac{1}{9}\ (\Omega)$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-5 -->
+<div class="card ex-card" id="yu01-5">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-5</span>
+    <span class="ex-title">연속성과 편도함수 존재</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=\begin{cases}0 & (xy\neq 0)\\ 1 & (xy=0)\end{cases}$에 대해 다음 물음에 답하시오.</p>
+        <ol>
+          <li>$f$는 $(0,0)$에서 연속인가?</li>
+          <li>$\partial f/\partial x$와 $\partial f/\partial y$는 원점에서 존재하는가?</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong></p>
+        <p>(1) 원점 근방에서 $x$축 위의 점 $(x,0)$ $(x\neq0)$을 생각하면 $xy=0$이므로 $f(x,0)=1$이 모든 $x$에 대해 성립한다. 따라서 점열 $(x_n,0)\to(0,0)$ $(x_n\neq0)$을 따라가면 $f(x_n,0)=1\to1$이다.</p>
+        <p>반면 직선 $y=x$ 위의 점 $(x,x)$ $(x\neq0)$을 생각하면 $xy=x^2\neq0$이므로 $f(x,x)=0$이다. 따라서 점열 $(x_n,x_n)\to(0,0)$ $(x_n\neq0)$을 따라가면 $f(x_n,x_n)=0\to0$이다.</p>
+        <p>두 경로에서 얻은 극한값이 각각 $1$과 $0$으로 서로 다르므로 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$는 존재하지 않는다. 그러므로 $f$는 $(0,0)$에서 연속이 아니다.</p>
+        <p>(2) 편도함수는 정의를 이용해 직접 계산한다. $y=0$을 고정하면 $xy=0$이므로 임의의 $h\neq0$에 대해 $f(h,0)=1$이고, $f(0,0)=1$이다. 따라서</p>
+        $$\frac{\partial f}{\partial x}(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\frac{1-1}{h}=\lim_{h\to0}0=0$$
+        <p>이 존재하고 값은 $0$이다. 마찬가지로 $x=0$을 고정하면 임의의 $h\neq0$에 대해 $f(0,h)=1$이고 $f(0,0)=1$이므로</p>
+        $$\frac{\partial f}{\partial y}(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\frac{1-1}{h}=0$$
+        <p>이 존재하고 값은 $0$이다. 즉 $\partial f/\partial x(0,0)=\partial f/\partial y(0,0)=0$으로, 두 편도함수 모두 원점에서 존재한다. (편도함수의 존재가 연속성을 함의하지 않음을 보여주는 예이다.)</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y)=\begin{cases}0 & (xy\neq 0)\\ 1 & (xy=0)\end{cases}$, answer the following questions.</p>
+        <ol>
+          <li>Is $f$ continuous at $(0,0)$?</li>
+          <li>Do $\partial f/\partial x$ and $\partial f/\partial y$ exist at the origin?</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong></p>
+        <p>(1) Consider points $(x,0)$ on the $x$-axis near the origin, $x\neq0$. Since $xy=0$ there, $f(x,0)=1$ for all $x$. Hence along any sequence $(x_n,0)\to(0,0)$ with $x_n\neq0$, $f(x_n,0)=1\to1$.</p>
+        <p>On the other hand, consider points $(x,x)$ on the line $y=x$ with $x\neq0$. Then $xy=x^2\neq0$, so $f(x,x)=0$. Hence along any sequence $(x_n,x_n)\to(0,0)$ with $x_n\neq0$, $f(x_n,x_n)=0\to0$.</p>
+        <p>Since the limits along these two paths are $1$ and $0$, respectively, and they differ, $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ does not exist. Therefore $f$ is not continuous at $(0,0)$.</p>
+        <p>(2) We compute the partial derivatives directly from the definition. Fixing $y=0$, we have $xy=0$, so $f(h,0)=1$ for every $h\neq0$, and $f(0,0)=1$. Hence</p>
+        $$\frac{\partial f}{\partial x}(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\frac{1-1}{h}=\lim_{h\to0}0=0$$
+        <p>exists and equals $0$. Similarly, fixing $x=0$, we have $f(0,h)=1$ for every $h\neq0$ and $f(0,0)=1$, so</p>
+        $$\frac{\partial f}{\partial y}(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\frac{1-1}{h}=0$$
+        <p>exists and equals $0$. That is, $\partial f/\partial x(0,0)=\partial f/\partial y(0,0)=0$, so both partial derivatives exist at the origin. (This shows that existence of the partial derivatives does not imply continuity.)</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">이계 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=x\cos y+ye^x$이라 할 때 다음을 구하시오.</p>
+        <ol>
+          <li>$\dfrac{\partial^2 f}{\partial x^2}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial y\,\partial x}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial y^2}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial x\,\partial y}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 일계 편도함수를 구하면</p>
+        $$f_x=\cos y+ye^x, \qquad f_y=-x\sin y+e^x$$
+        <p>이다.</p>
+        <p>(1) $\dfrac{\partial^2 f}{\partial x^2}=\dfrac{\partial}{\partial x}(f_x)=ye^x$이다.</p>
+        <p>(2) $\dfrac{\partial^2 f}{\partial y\,\partial x}=\dfrac{\partial}{\partial y}(f_x)=-\sin y+e^x$이다.</p>
+        <p>(3) $\dfrac{\partial^2 f}{\partial y^2}=\dfrac{\partial}{\partial y}(f_y)=-x\cos y$이다.</p>
+        <p>(4) $\dfrac{\partial^2 f}{\partial x\,\partial y}=\dfrac{\partial}{\partial x}(f_y)=-\sin y+e^x$이다. (혼합 편도함수가 모두 연속이므로 (2)와 (4)의 값이 일치한다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y)=x\cos y+ye^x$. Find the following.</p>
+        <ol>
+          <li>$\dfrac{\partial^2 f}{\partial x^2}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial y\,\partial x}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial y^2}$</li>
+          <li>$\dfrac{\partial^2 f}{\partial x\,\partial y}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First we find the first-order partial derivatives:</p>
+        $$f_x=\cos y+ye^x, \qquad f_y=-x\sin y+e^x$$
+        <p>(1) $\dfrac{\partial^2 f}{\partial x^2}=\dfrac{\partial}{\partial x}(f_x)=ye^x$.</p>
+        <p>(2) $\dfrac{\partial^2 f}{\partial y\,\partial x}=\dfrac{\partial}{\partial y}(f_x)=-\sin y+e^x$.</p>
+        <p>(3) $\dfrac{\partial^2 f}{\partial y^2}=\dfrac{\partial}{\partial y}(f_y)=-x\cos y$.</p>
+        <p>(4) $\dfrac{\partial^2 f}{\partial x\,\partial y}=\dfrac{\partial}{\partial x}(f_y)=-\sin y+e^x$. (Since the mixed partials are continuous, the values in (2) and (4) agree.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">혼합 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $w=xy+\dfrac{e^y}{y^2+1}$에 대해 $\dfrac{\partial^2 w}{\partial x\,\partial y}$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 $x$에 대해 편미분하면 ($e^y/(y^2+1)$ 항은 $x$를 포함하지 않으므로 소거된다)</p>
+        $$\frac{\partial w}{\partial x}=y$$
+        <p>이다. 이를 다시 $y$에 대해 편미분하면</p>
+        $$\frac{\partial^2 w}{\partial x\,\partial y}=\frac{\partial}{\partial y}(y)=1$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $w=xy+\dfrac{e^y}{y^2+1}$, find $\dfrac{\partial^2 w}{\partial x\,\partial y}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Differentiating with respect to $x$ first (the term $e^y/(y^2+1)$ contains no $x$, so it drops out),</p>
+        $$\frac{\partial w}{\partial x}=y$$
+        <p>Differentiating this again with respect to $y$,</p>
+        $$\frac{\partial^2 w}{\partial x\,\partial y}=\frac{\partial}{\partial y}(y)=1$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">고계 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y,z)=1-2xy^2z+x^2y$에 대해 $f_{yxyz}$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_{yxyz}$는 아래첨자 순서대로, 즉 $y\to x\to y\to z$ 순으로 차례로 편미분함을 뜻한다.</p>
+        <p>먼저 $y$에 대해 미분하면</p>
+        $$f_y=-4xyz+x^2$$
+        <p>이다. 이어서 $x$에 대해 미분하면</p>
+        $$f_{yx}=-4yz+2x$$
+        <p>이다. 다시 $y$에 대해 미분하면</p>
+        $$f_{yxy}=-4z$$
+        <p>이다. 마지막으로 $z$에 대해 미분하면</p>
+        $$f_{yxyz}=-4$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y,z)=1-2xy^2z+x^2y$, find $f_{yxyz}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $f_{yxyz}$ means differentiating in the order given by the subscripts, i.e. $y\to x\to y\to z$.</p>
+        <p>Differentiating with respect to $y$ first,</p>
+        $$f_y=-4xyz+x^2$$
+        <p>then with respect to $x$,</p>
+        $$f_{yx}=-4yz+2x$$
+        <p>then again with respect to $y$,</p>
+        $$f_{yxy}=-4z$$
+        <p>and finally with respect to $z$,</p>
+        $$f_{yxyz}=-4$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-3 -->
+<div class="card ex-card" id="yu02-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-3</span>
+    <span class="ex-title">원점에서의 혼합 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 함수에 대해 $\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)$와 $\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$를 각각 계산하시오.</p>
+        $$f(x,y)=\begin{cases}xy\dfrac{x^2-y^2}{x^2+y^2} & (x,y)\neq(0,0)\\[4pt] 0 & (x,y)=(0,0)\end{cases}$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $(x,y)\neq(0,0)$일 때 몫미분법으로 일계 편도함수를 구하면</p>
+        $$f_x(x,y)=\frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}, \qquad f_y(x,y)=\frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}$$
+        <p>이다. 원점에서는 이 식이 $0/0$ 꼴이 되므로 정의를 이용해 직접 계산해야 한다. $y=0$이면 분자 $xy(x^2-y^2)=0$이므로 ($x\neq0$이면 분모 $x^2\neq0$) $f(x,0)=0$이 모든 $x$에 대해 성립하고, 마찬가지로 $f(0,y)=0$이 모든 $y$에 대해 성립한다. 따라서</p>
+        $$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\frac{0-0}{h}=0, \qquad f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=0$$
+        <p>이다.</p>
+        <p><u>$\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)$의 계산.</u> 이는 $\dfrac{\partial}{\partial x}(f_y)$를 원점에서 계산하는 것이다. $y=0$을 대입하면 $x\neq0$일 때 $f_y(x,0)=\dfrac{x^5}{x^4}=x$이고, $f_y(0,0)=0$이므로 $f_y(x,0)=x$가 모든 $x$에 대해 성립한다. 따라서</p>
+        $$\frac{\partial^2 f}{\partial x\,\partial y}(0,0)=\lim_{h\to0}\frac{f_y(h,0)-f_y(0,0)}{h}=\lim_{h\to0}\frac{h-0}{h}=1$$
+        <p>이다.</p>
+        <p><u>$\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$의 계산.</u> 이는 $\dfrac{\partial}{\partial y}(f_x)$를 원점에서 계산하는 것이다. $x=0$을 대입하면 $y\neq0$일 때 $f_x(0,y)=\dfrac{-y^5}{y^4}=-y$이고, $f_x(0,0)=0$이므로 $f_x(0,y)=-y$가 모든 $y$에 대해 성립한다. 따라서</p>
+        $$\frac{\partial^2 f}{\partial y\,\partial x}(0,0)=\lim_{h\to0}\frac{f_x(0,h)-f_x(0,0)}{h}=\lim_{h\to0}\frac{-h-0}{h}=-1$$
+        <p>이다.</p>
+        <p>즉 $\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)=1\neq-1=\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$로, 두 혼합 편도함수의 값이 원점에서 서로 다르다. (혼합 편도함수가 원점에서 연속이 아니기 때문에 Clairaut 정리의 결론이 성립하지 않는 표준적인 예이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function below, compute $\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)$ and $\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$, respectively.</p>
+        $$f(x,y)=\begin{cases}xy\dfrac{x^2-y^2}{x^2+y^2} & (x,y)\neq(0,0)\\[4pt] 0 & (x,y)=(0,0)\end{cases}$$
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> For $(x,y)\neq(0,0)$, the quotient rule gives</p>
+        $$f_x(x,y)=\frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}, \qquad f_y(x,y)=\frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}$$
+        <p>At the origin these formulas are of the form $0/0$, so the values must be found from the definition. When $y=0$, the numerator $xy(x^2-y^2)=0$ (and the denominator $x^2\neq0$ for $x\neq0$), so $f(x,0)=0$ for all $x$; likewise $f(0,y)=0$ for all $y$. Hence</p>
+        $$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=0, \qquad f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=0$$
+        <p><u>Computing $\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)$.</u> This is $\dfrac{\partial}{\partial x}(f_y)$ evaluated at the origin. Setting $y=0$, for $x\neq0$ we get $f_y(x,0)=\dfrac{x^5}{x^4}=x$, and $f_y(0,0)=0$, so $f_y(x,0)=x$ for all $x$. Hence</p>
+        $$\frac{\partial^2 f}{\partial x\,\partial y}(0,0)=\lim_{h\to0}\frac{f_y(h,0)-f_y(0,0)}{h}=\lim_{h\to0}\frac{h-0}{h}=1$$
+        <p><u>Computing $\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$.</u> This is $\dfrac{\partial}{\partial y}(f_x)$ evaluated at the origin. Setting $x=0$, for $y\neq0$ we get $f_x(0,y)=\dfrac{-y^5}{y^4}=-y$, and $f_x(0,0)=0$, so $f_x(0,y)=-y$ for all $y$. Hence</p>
+        $$\frac{\partial^2 f}{\partial y\,\partial x}(0,0)=\lim_{h\to0}\frac{f_x(0,h)-f_x(0,0)}{h}=\lim_{h\to0}\frac{-h-0}{h}=-1$$
+        <p>Thus $\dfrac{\partial^2 f}{\partial x\,\partial y}(0,0)=1\neq-1=\dfrac{\partial^2 f}{\partial y\,\partial x}(0,0)$: the two mixed partial derivatives disagree at the origin. (This is the standard example showing that when the mixed partials are not continuous at a point, the conclusion of Clairaut's theorem can fail.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-4 -->
+<div class="card ex-card" id="yu02-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-4</span>
+    <span class="ex-title">이계 편도함수의 합</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y,z)=\left(x^2+y^2+z^2\right)^{-1/2}$에 대해 $f_{xx}+f_{yy}+f_{zz}$의 값을 계산하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $r=\sqrt{x^2+y^2+z^2}$라 하면 $f=r^{-1}$이다. $\dfrac{\partial r}{\partial x}=\dfrac{x}{r}$이므로 연쇄법칙에 의해</p>
+        $$f_x=-r^{-2}\cdot\frac{x}{r}=-xr^{-3}$$
+        <p>이다. 이를 다시 $x$에 대해 미분하면</p>
+        $$f_{xx}=-r^{-3}-x\cdot(-3r^{-4})\cdot\frac{x}{r}=-r^{-3}+3x^2r^{-5}$$
+        <p>이다. $y,z$에 대해서도 $r$에 대한 대칭성에 의해 동일한 방법으로</p>
+        $$f_{yy}=-r^{-3}+3y^2r^{-5}, \qquad f_{zz}=-r^{-3}+3z^2r^{-5}$$
+        <p>를 얻는다. 세 식을 더하면</p>
+        $$f_{xx}+f_{yy}+f_{zz}=-3r^{-3}+3(x^2+y^2+z^2)r^{-5}=-3r^{-3}+3r^2\cdot r^{-5}=-3r^{-3}+3r^{-3}=0$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the function $f(x,y,z)=\left(x^2+y^2+z^2\right)^{-1/2}$, compute the value of $f_{xx}+f_{yy}+f_{zz}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $r=\sqrt{x^2+y^2+z^2}$, so $f=r^{-1}$. Since $\dfrac{\partial r}{\partial x}=\dfrac{x}{r}$, the chain rule gives</p>
+        $$f_x=-r^{-2}\cdot\frac{x}{r}=-xr^{-3}$$
+        <p>Differentiating again with respect to $x$,</p>
+        $$f_{xx}=-r^{-3}-x\cdot(-3r^{-4})\cdot\frac{x}{r}=-r^{-3}+3x^2r^{-5}$$
+        <p>By symmetry in $r$, the same computation for $y$ and $z$ gives</p>
+        $$f_{yy}=-r^{-3}+3y^2r^{-5}, \qquad f_{zz}=-r^{-3}+3z^2r^{-5}$$
+        <p>Adding the three expressions,</p>
+        $$f_{xx}+f_{yy}+f_{zz}=-3r^{-3}+3(x^2+y^2+z^2)r^{-5}=-3r^{-3}+3r^2\cdot r^{-5}=-3r^{-3}+3r^{-3}=0$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">연쇄법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$x=\cos t$, $y=\sin t$이고 $w=xy$일 때, $t=\pi/2$에서의 $dw/dt$의 값을 구하시오.</li>
+          <li>$w=x+2y+z^2$, $x=r/s$, $y=r^2+\ln s$, $z=2r$일 때, $\partial w/\partial r$과 $\partial w/\partial s$를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 연쇄법칙에 의해</p>
+        $$\frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}=y\cdot(-\sin t)+x\cdot\cos t=-\sin^2t+\cos^2t=\cos2t$$
+        <p>이다. $t=\pi/2$에서 $\cos2t=\cos\pi=-1$이므로 $\left.\dfrac{dw}{dt}\right|_{t=\pi/2}=-1$이다.</p>
+        <p>(2) 연쇄법칙에 의해</p>
+        $$\frac{\partial w}{\partial r}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial r}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial r}=1\cdot\frac{1}{s}+2\cdot2r+2z\cdot2$$
+        <p>이다. $z=2r$을 대입하면</p>
+        $$\frac{\partial w}{\partial r}=\frac{1}{s}+4r+4(2r)=\frac{1}{s}+4r+8r=12r+\frac{1}{s}$$
+        <p>이다. 또한</p>
+        $$\frac{\partial w}{\partial s}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial s}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial s}=1\cdot\left(-\frac{r}{s^2}\right)+2\cdot\frac{1}{s}+2z\cdot0=-\frac{r}{s^2}+\frac{2}{s}=\frac{2s-r}{s^2}$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Given $x=\cos t$, $y=\sin t$, and $w=xy$, find the value of $dw/dt$ at $t=\pi/2$.</li>
+          <li>Given $w=x+2y+z^2$, $x=r/s$, $y=r^2+\ln s$, $z=2r$, find $\partial w/\partial r$ and $\partial w/\partial s$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) By the Chain Rule,</p>
+        $$\frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}=y\cdot(-\sin t)+x\cdot\cos t=-\sin^2t+\cos^2t=\cos2t$$
+        <p>At $t=\pi/2$, $\cos2t=\cos\pi=-1$, so $\left.\dfrac{dw}{dt}\right|_{t=\pi/2}=-1$.</p>
+        <p>(2) By the Chain Rule,</p>
+        $$\frac{\partial w}{\partial r}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial r}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial r}=1\cdot\frac{1}{s}+2\cdot2r+2z\cdot2$$
+        <p>Substituting $z=2r$,</p>
+        $$\frac{\partial w}{\partial r}=\frac{1}{s}+4r+4(2r)=\frac{1}{s}+4r+8r=12r+\frac{1}{s}$$
+        <p>Also</p>
+        $$\frac{\partial w}{\partial s}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial s}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial s}=1\cdot\left(-\frac{r}{s^2}\right)+2\cdot\frac{1}{s}+2z\cdot0=-\frac{r}{s^2}+\frac{2}{s}=\frac{2s-r}{s^2}$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">연쇄법칙의 적용</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$x=\cos t$, $y=\sin t$, $z=t$, $w=xy+z$일 때, $dw/dt$를 구하시오.</li>
+          <li>$w=x^2+y^2$, $x=r-s$, $y=r+s$일 때, $\partial w/\partial r$과 $\partial w/\partial s$를 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 연쇄법칙에 의해</p>
+        $$\frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}+\frac{\partial w}{\partial z}\frac{dz}{dt}=y(-\sin t)+x\cos t+1=-\sin^2t+\cos^2t+1=\cos2t+1$$
+        <p>이다. ($=2\cos^2t$로도 쓸 수 있다.)</p>
+        <p>(2) 연쇄법칙에 의해</p>
+        $$\frac{\partial w}{\partial r}=2x\cdot1+2y\cdot1=2x+2y=2(r-s)+2(r+s)=4r$$
+        $$\frac{\partial w}{\partial s}=2x\cdot(-1)+2y\cdot1=-2x+2y=-2(r-s)+2(r+s)=4s$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Given $x=\cos t$, $y=\sin t$, $z=t$, $w=xy+z$, find $dw/dt$.</li>
+          <li>Given $w=x^2+y^2$, $x=r-s$, $y=r+s$, find $\partial w/\partial r$ and $\partial w/\partial s$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) By the Chain Rule,</p>
+        $$\frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}+\frac{\partial w}{\partial z}\frac{dz}{dt}=y(-\sin t)+x\cos t+1=-\sin^2t+\cos^2t+1=\cos2t+1$$
+        <p>(equivalently $=2\cos^2t$).</p>
+        <p>(2) By the Chain Rule,</p>
+        $$\frac{\partial w}{\partial r}=2x\cdot1+2y\cdot1=2x+2y=2(r-s)+2(r+s)=4r$$
+        $$\frac{\partial w}{\partial s}=2x\cdot(-1)+2y\cdot1=-2x+2y=-2(r-s)+2(r+s)=4s$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">합성함수와 연쇄법칙</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$w=f(s^3+t^2)$이고 $f'(x)=e^x$일 때, $\partial w/\partial t$와 $\partial w/\partial s$를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $u=s^3+t^2$라 하면 $w=f(u)$이고 $f'(u)=e^u$이다. 연쇄법칙에 의해</p>
+        $$\frac{\partial w}{\partial t}=f'(u)\cdot\frac{\partial u}{\partial t}=e^u\cdot2t=2te^{s^3+t^2}$$
+        $$\frac{\partial w}{\partial s}=f'(u)\cdot\frac{\partial u}{\partial s}=e^u\cdot3s^2=3s^2e^{s^3+t^2}$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $w=f(s^3+t^2)$ and $f'(x)=e^x$, find $\partial w/\partial t$ and $\partial w/\partial s$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $u=s^3+t^2$, so $w=f(u)$ and $f'(u)=e^u$. By the Chain Rule,</p>
+        $$\frac{\partial w}{\partial t}=f'(u)\cdot\frac{\partial u}{\partial t}=e^u\cdot2t=2te^{s^3+t^2}$$
+        $$\frac{\partial w}{\partial s}=f'(u)\cdot\frac{\partial u}{\partial s}=e^u\cdot3s^2=3s^2e^{s^3+t^2}$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-3 -->
+<div class="card ex-card" id="yu03-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-3</span>
+    <span class="ex-title">연쇄법칙으로 도함수 값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=f(x,y)^2$, $x=g(t)$, $y=h(t)$, $f(2,-1)=-1$, $f_x(2,-1)=3$, $f_y(2,-1)=-2$, $g(0)=2$, $h(0)=-1$, $g'(0)=5$, $h'(0)=-4$일 때, $\left.\dfrac{dz}{dt}\right|_{t=0}$을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $z=f(x,y)^2$이고 $x=g(t)$, $y=h(t)$이므로 연쇄법칙에 의해</p>
+        $$\frac{dz}{dt}=2f(x,y)\left(f_x\frac{dx}{dt}+f_y\frac{dy}{dt}\right)=2f(x,y)\big(f_x\,g'(t)+f_y\,h'(t)\big)$$
+        <p>이다. $t=0$에서 $x=g(0)=2$, $y=h(0)=-1$이므로 주어진 값들을 대입하면</p>
+        $$\left.\frac{dz}{dt}\right|_{t=0}=2f(2,-1)\big(f_x(2,-1)g'(0)+f_y(2,-1)h'(0)\big)=2(-1)\big(3\cdot5+(-2)(-4)\big)$$
+        $$=-2(15+8)=-2\cdot23=-46$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $z=f(x,y)^2$, $x=g(t)$, $y=h(t)$, $f(2,-1)=-1$, $f_x(2,-1)=3$, $f_y(2,-1)=-2$, $g(0)=2$, $h(0)=-1$, $g'(0)=5$, $h'(0)=-4$, find $\left.\dfrac{dz}{dt}\right|_{t=0}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $z=f(x,y)^2$ with $x=g(t)$, $y=h(t)$, the Chain Rule gives</p>
+        $$\frac{dz}{dt}=2f(x,y)\left(f_x\frac{dx}{dt}+f_y\frac{dy}{dt}\right)=2f(x,y)\big(f_x\,g'(t)+f_y\,h'(t)\big)$$
+        <p>At $t=0$ we have $x=g(0)=2$, $y=h(0)=-1$. Substituting the given values,</p>
+        $$\left.\frac{dz}{dt}\right|_{t=0}=2f(2,-1)\big(f_x(2,-1)g'(0)+f_y(2,-1)h'(0)\big)=2(-1)\big(3\cdot5+(-2)(-4)\big)$$
+        $$=-2(15+8)=-2\cdot23=-46$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-4 -->
+<div class="card ex-card" id="yu03-4">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-4</span>
+    <span class="ex-title">전류의 변화율</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>회로의 전압을 $V(\text{V})$, 흐르는 전류를 $I(\text{A})$, 저항을 $R(\Omega)$이라 할 때, 다음 관계식이 성립한다.</p>
+        $$V=IR$$
+        <p>시각 $t$에서 $R=600\,\Omega$, $I=0.04\,\text{A}$, $dR/dt=0.5\,\Omega/\text{s}$, $dV/dt=-0.01\,\text{V/s}$일 때, $dI/dt$를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $V=IR$의 양변을 $t$에 대해 미분하면 (곱미분법)</p>
+        $$\frac{dV}{dt}=\frac{dI}{dt}R+I\frac{dR}{dt}$$
+        <p>이다. 주어진 값 $R=600\,\Omega$, $I=0.04\,\text{A}$, $dR/dt=0.5\,\Omega/\text{s}$, $dV/dt=-0.01\,\text{V/s}$를 대입하면</p>
+        $$-0.01=\frac{dI}{dt}(600)+(0.04)(0.5)=600\frac{dI}{dt}+0.02$$
+        <p>이므로</p>
+        $$600\frac{dI}{dt}=-0.01-0.02=-0.03 \quad\Rightarrow\quad \frac{dI}{dt}=-\frac{0.03}{600}=-\frac{1}{20000}=-0.00005\,\text{A/s}$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let the voltage of a circuit be $V(\text{V})$, the current flowing through it be $I(\text{A})$, and the resistance be $R(\Omega)$. Then the following relation holds.</p>
+        $$V=IR$$
+        <p>At time $t$, given $R=600\,\Omega$, $I=0.04\,\text{A}$, $dR/dt=0.5\,\Omega/\text{s}$, $dV/dt=-0.01\,\text{V/s}$, find $dI/dt$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Differentiating both sides of $V=IR$ with respect to $t$ (product rule),</p>
+        $$\frac{dV}{dt}=\frac{dI}{dt}R+I\frac{dR}{dt}$$
+        <p>Substituting $R=600\,\Omega$, $I=0.04\,\text{A}$, $dR/dt=0.5\,\Omega/\text{s}$, $dV/dt=-0.01\,\text{V/s}$,</p>
+        $$-0.01=\frac{dI}{dt}(600)+(0.04)(0.5)=600\frac{dI}{dt}+0.02$$
+        <p>so</p>
+        $$600\frac{dI}{dt}=-0.01-0.02=-0.03 \quad\Rightarrow\quad \frac{dI}{dt}=-\frac{0.03}{600}=-\frac{1}{20000}=-0.00005\,\text{A/s}$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">음함수 미분법</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$y^2-x^2-\sin xy=0$일 때, $dy/dx$를 구하시오.</li>
+          <li>$x^3+z^2+ye^{xz}+z\cos y=0$일 때, 원점에서의 $\partial z/\partial x$와 $\partial z/\partial y$의 값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $F(x,y)=y^2-x^2-\sin xy$라 하면 $F(x,y)=0$은 $y$를 $x$의 음함수로 정의한다. $F_x,F_y$를 구하면</p>
+        $$F_x=-2x-y\cos xy, \qquad F_y=2y-x\cos xy$$
+        <p>이므로 음함수 미분법에 의해</p>
+        $$\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{-2x-y\cos xy}{2y-x\cos xy}=\frac{2x+y\cos xy}{2y-x\cos xy}$$
+        <p>이다.</p>
+        <p>(2) $F(x,y,z)=x^3+z^2+ye^{xz}+z\cos y$라 하면</p>
+        $$F_x=3x^2+yze^{xz}, \qquad F_y=e^{xz}-z\sin y, \qquad F_z=2z+xye^{xz}+\cos y$$
+        <p>이다. 원점 $(0,0,0)$에서 $F(0,0,0)=0+0+0+0=0$이므로 이 점은 곡면 위에 있고, 이 점에서</p>
+        $$F_x(0,0,0)=0, \qquad F_y(0,0,0)=e^0-0=1, \qquad F_z(0,0,0)=0+0+\cos0=1$$
+        <p>이다. 따라서</p>
+        $$\frac{\partial z}{\partial x}\bigg|_{(0,0,0)}=-\frac{F_x}{F_z}=-\frac{0}{1}=0, \qquad \frac{\partial z}{\partial y}\bigg|_{(0,0,0)}=-\frac{F_y}{F_z}=-\frac{1}{1}=-1$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Given $y^2-x^2-\sin xy=0$, find $dy/dx$.</li>
+          <li>Given $x^3+z^2+ye^{xz}+z\cos y=0$, find the values of $\partial z/\partial x$ and $\partial z/\partial y$ at the origin.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Let $F(x,y)=y^2-x^2-\sin xy$, so $F(x,y)=0$ defines $y$ implicitly as a function of $x$. Computing $F_x,F_y$,</p>
+        $$F_x=-2x-y\cos xy, \qquad F_y=2y-x\cos xy$$
+        <p>so by implicit differentiation,</p>
+        $$\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{-2x-y\cos xy}{2y-x\cos xy}=\frac{2x+y\cos xy}{2y-x\cos xy}$$
+        <p>(2) Let $F(x,y,z)=x^3+z^2+ye^{xz}+z\cos y$. Then</p>
+        $$F_x=3x^2+yze^{xz}, \qquad F_y=e^{xz}-z\sin y, \qquad F_z=2z+xye^{xz}+\cos y$$
+        <p>At the origin $(0,0,0)$, $F(0,0,0)=0+0+0+0=0$, so the origin lies on the surface, and there</p>
+        $$F_x(0,0,0)=0, \qquad F_y(0,0,0)=e^0-0=1, \qquad F_z(0,0,0)=0+0+\cos0=1$$
+        <p>Hence</p>
+        $$\frac{\partial z}{\partial x}\bigg|_{(0,0,0)}=-\frac{F_x}{F_z}=-\frac{0}{1}=0, \qquad \frac{\partial z}{\partial y}\bigg|_{(0,0,0)}=-\frac{F_y}{F_z}=-\frac{1}{1}=-1$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04 -->
+<div class="card ex-card" id="yu04">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04</span>
+    <span class="ex-title">음함수의 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\sin(x+y)+\sin(y+z)+\sin(z+x)=0$ 위의 점 $(\pi,\pi,\pi)$에서의 $\partial z/\partial x$와 $\partial z/\partial y$의 값을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F(x,y,z)=\sin(x+y)+\sin(y+z)+\sin(z+x)$라 하면</p>
+        $$F_x=\cos(x+y)+\cos(z+x), \qquad F_y=\cos(x+y)+\cos(y+z), \qquad F_z=\cos(y+z)+\cos(z+x)$$
+        <p>이다. 점 $(\pi,\pi,\pi)$이 곡면 위에 있는지 확인하면 $\sin2\pi+\sin2\pi+\sin2\pi=0$이므로 성립한다. 이 점에서 $x+y=y+z=z+x=2\pi$이므로 $\cos(x+y)=\cos(y+z)=\cos(z+x)=1$이고,</p>
+        $$F_x(\pi,\pi,\pi)=1+1=2, \qquad F_y(\pi,\pi,\pi)=1+1=2, \qquad F_z(\pi,\pi,\pi)=1+1=2$$
+        <p>이다. 따라서</p>
+        $$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac{2}{2}=-1, \qquad \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac{2}{2}=-1$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the values of $\partial z/\partial x$ and $\partial z/\partial y$ at the point $(\pi,\pi,\pi)$ on $\sin(x+y)+\sin(y+z)+\sin(z+x)=0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F(x,y,z)=\sin(x+y)+\sin(y+z)+\sin(z+x)$. Then</p>
+        $$F_x=\cos(x+y)+\cos(z+x), \qquad F_y=\cos(x+y)+\cos(y+z), \qquad F_z=\cos(y+z)+\cos(z+x)$$
+        <p>Checking that $(\pi,\pi,\pi)$ lies on the surface: $\sin2\pi+\sin2\pi+\sin2\pi=0$, so it does. At this point $x+y=y+z=z+x=2\pi$, so $\cos(x+y)=\cos(y+z)=\cos(z+x)=1$, and</p>
+        $$F_x(\pi,\pi,\pi)=1+1=2, \qquad F_y(\pi,\pi,\pi)=1+1=2, \qquad F_z(\pi,\pi,\pi)=1+1=2$$
+        <p>Hence</p>
+        $$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac{2}{2}=-1, \qquad \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac{2}{2}=-1$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">독립변수 선택과 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$w=x^2+y^2+z^2$, $z=x^2+y^2$일 때 각 경우에 대해 $\partial w/\partial x$를 구하여라.</p>
+        <ol>
+          <li>$x,y$가 독립변수인 경우</li>
+          <li>$x,z$가 독립변수인 경우</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x,y$가 독립변수이면 $z=z(x,y)=x^2+y^2$이므로 연쇄법칙에 의해</p>
+        $$\frac{\partial w}{\partial x}=2x+2z\frac{\partial z}{\partial x}=2x+2z(2x)=2x+4xz$$
+        <p>이다. $z=x^2+y^2$을 대입하면</p>
+        $$\frac{\partial w}{\partial x}=2x+4x(x^2+y^2)=4x^3+4xy^2+2x$$
+        <p>이다.</p>
+        <p>(2) $x,z$가 독립변수이면 $z=x^2+y^2$으로부터 $y^2=z-x^2$이다. 이를 $w=x^2+y^2+z^2$에 대입하면</p>
+        $$w=x^2+(z-x^2)+z^2=z+z^2$$
+        <p>이 되어 $w$는 $x$를 전혀 포함하지 않고 $z$만의 함수가 된다. 따라서 $x,z$를 독립변수로 볼 때</p>
+        $$\frac{\partial w}{\partial x}=0$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $w=x^2+y^2+z^2$ and $z=x^2+y^2$, find $\partial w/\partial x$ for each of the following cases.</p>
+        <ol>
+          <li>The case where $x,y$ are independent variables</li>
+          <li>The case where $x,z$ are independent variables</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) If $x,y$ are independent variables, then $z=z(x,y)=x^2+y^2$, so by the Chain Rule,</p>
+        $$\frac{\partial w}{\partial x}=2x+2z\frac{\partial z}{\partial x}=2x+2z(2x)=2x+4xz$$
+        <p>Substituting $z=x^2+y^2$,</p>
+        $$\frac{\partial w}{\partial x}=2x+4x(x^2+y^2)=4x^3+4xy^2+2x$$
+        <p>(2) If $x,z$ are independent variables, then from $z=x^2+y^2$ we get $y^2=z-x^2$. Substituting into $w=x^2+y^2+z^2$,</p>
+        $$w=x^2+(z-x^2)+z^2=z+z^2$$
+        <p>so $w$ contains no $x$ at all and is a function of $z$ alone. Hence, regarding $x,z$ as independent,</p>
+        $$\frac{\partial w}{\partial x}=0$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">제약조건 아래 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$w=x^2+y^2+z^2$, $z^3-xy+yz+y^3=1$에서 $x,y$가 독립변수일 때, $(x,y,z)=(2,-1,1)$에서 $\partial w/\partial x$의 값을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $G(x,y,z)=z^3-xy+yz+y^3-1=0$이고 $x,y$가 독립변수이므로 $z=z(x,y)$이다. $G=0$의 양변을 $x$에 대해 편미분하면 ($y$ 고정)</p>
+        $$3z^2\frac{\partial z}{\partial x}-y+y\frac{\partial z}{\partial x}=0 \quad\Leftrightarrow\quad \frac{\partial z}{\partial x}(3z^2+y)=y$$
+        <p>이므로</p>
+        $$\frac{\partial z}{\partial x}=\frac{y}{3z^2+y}$$
+        <p>이다. 점 $(x,y,z)=(2,-1,1)$에서</p>
+        $$\frac{\partial z}{\partial x}=\frac{-1}{3(1)^2+(-1)}=\frac{-1}{2}$$
+        <p>이다. 한편 $w=x^2+y^2+z^2$이고 $x,y$가 독립변수이므로</p>
+        $$\frac{\partial w}{\partial x}=2x+2z\frac{\partial z}{\partial x}$$
+        <p>이고, $(x,y,z)=(2,-1,1)$과 $\partial z/\partial x=-1/2$를 대입하면</p>
+        $$\frac{\partial w}{\partial x}=2(2)+2(1)\left(-\frac{1}{2}\right)=4-1=3$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $w=x^2+y^2+z^2$ and $z^3-xy+yz+y^3=1$, where $x,y$ are independent variables, find the value of $\partial w/\partial x$ at $(x,y,z)=(2,-1,1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $G(x,y,z)=z^3-xy+yz+y^3-1=0$; since $x,y$ are independent variables, $z=z(x,y)$. Differentiating $G=0$ with respect to $x$ ($y$ fixed),</p>
+        $$3z^2\frac{\partial z}{\partial x}-y+y\frac{\partial z}{\partial x}=0 \quad\Leftrightarrow\quad \frac{\partial z}{\partial x}(3z^2+y)=y$$
+        <p>so</p>
+        $$\frac{\partial z}{\partial x}=\frac{y}{3z^2+y}$$
+        <p>At $(x,y,z)=(2,-1,1)$,</p>
+        $$\frac{\partial z}{\partial x}=\frac{-1}{3(1)^2+(-1)}=\frac{-1}{2}$$
+        <p>Since $w=x^2+y^2+z^2$ with $x,y$ independent,</p>
+        $$\frac{\partial w}{\partial x}=2x+2z\frac{\partial z}{\partial x}$$
+        <p>Substituting $(x,y,z)=(2,-1,1)$ and $\partial z/\partial x=-1/2$,</p>
+        $$\frac{\partial w}{\partial x}=2(2)+2(1)\left(-\frac{1}{2}\right)=4-1=3$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">변수를 고정한 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$w=x^2+y-z+\sin t$, $x+y=t$일 때, $\left(\dfrac{\partial w}{\partial x}\right)_{y,z}$를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x,y,z$를 독립변수로 두고 $t=x+y$로 결정된다고 하자. $w=x^2+y-z+\sin t$에서 $y,z$를 고정하고 $x$에 대해 편미분하면 ($t$가 $x$에 의존하므로 연쇄법칙을 적용)</p>
+        $$\left(\frac{\partial w}{\partial x}\right)_{y,z}=2x+0-0+\cos t\cdot\left(\frac{\partial t}{\partial x}\right)_y$$
+        <p>이다. $t=x+y$에서 $y$를 고정하면 $\left(\partial t/\partial x\right)_y=1$이므로</p>
+        $$\left(\frac{\partial w}{\partial x}\right)_{y,z}=2x+\cos t=2x+\cos(x+y)$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given $w=x^2+y-z+\sin t$ and $x+y=t$, find $\left(\dfrac{\partial w}{\partial x}\right)_{y,z}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Take $x,y,z$ as independent variables with $t=x+y$. Differentiating $w=x^2+y-z+\sin t$ with respect to $x$, holding $y,z$ fixed (applying the Chain Rule since $t$ depends on $x$),</p>
+        $$\left(\frac{\partial w}{\partial x}\right)_{y,z}=2x+0-0+\cos t\cdot\left(\frac{\partial t}{\partial x}\right)_y$$
+        <p>Since $t=x+y$ with $y$ fixed gives $\left(\partial t/\partial x\right)_y=1$,</p>
+        $$\left(\frac{\partial w}{\partial x}\right)_{y,z}=2x+\cos t=2x+\cos(x+y)$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-3 -->
+<div class="card ex-card" id="yu05-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-3</span>
+    <span class="ex-title">이상기체의 내부에너지</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이상기체의 압력을 $P$, 부피를 $V$, 온도를 $T$라 할 때 관계식 $PV=nRT$이 성립한다. (단, $n,R$은 상수) 이상기체의 내부에너지가 $U=f(P,V,T)$로 주어질 때 $\left(\dfrac{\partial U}{\partial P}\right)_V$, $\left(\dfrac{\partial U}{\partial T}\right)_V$를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 관계식 $PV=nRT$에 의해 $P,V,T$ 중 둘을 독립변수로 잡으면 나머지 하나는 그 두 변수에 종속된다. $U=f(P,V,T)$는 세 변수 모두에 대해 정의된 함수이지만, 어떤 두 변수를 독립변수로 택하느냐에 따라 편미분의 의미가 달라진다.</p>
+        <p><u>$(\partial U/\partial P)_V$의 계산.</u> $V$를 고정하고 $P$를 독립변수로 잡으면, 관계식으로부터 $T=\dfrac{PV}{nR}$이므로 $T$는 $P$ (와 고정된 $V$)에 종속된다. $U=f(P,V,T(P,V))$에 연쇄법칙을 적용하면</p>
+        $$\left(\frac{\partial U}{\partial P}\right)_V=\frac{\partial f}{\partial P}+\frac{\partial f}{\partial T}\left(\frac{\partial T}{\partial P}\right)_V$$
+        <p>이다. $T=PV/(nR)$에서 $V$를 고정하고 $P$로 미분하면 $\left(\partial T/\partial P\right)_V=V/(nR)$이므로</p>
+        $$\left(\frac{\partial U}{\partial P}\right)_V=\frac{\partial f}{\partial P}+\frac{\partial f}{\partial T}\cdot\frac{V}{nR}$$
+        <p>이다.</p>
+        <p><u>$(\partial U/\partial T)_V$의 계산.</u> 이번에는 $V$를 고정하고 $T$를 독립변수로 잡으므로, 관계식으로부터 $P=\dfrac{nRT}{V}$이고 $P$는 $T$ (와 고정된 $V$)에 종속된다. 같은 방식으로 연쇄법칙을 적용하면</p>
+        $$\left(\frac{\partial U}{\partial T}\right)_V=\frac{\partial f}{\partial T}+\frac{\partial f}{\partial P}\left(\frac{\partial P}{\partial T}\right)_V$$
+        <p>이다. $P=nRT/V$에서 $V$를 고정하고 $T$로 미분하면 $\left(\partial P/\partial T\right)_V=nR/V$이므로</p>
+        $$\left(\frac{\partial U}{\partial T}\right)_V=\frac{\partial f}{\partial T}+\frac{\partial f}{\partial P}\cdot\frac{nR}{V}$$
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let the pressure, volume, and temperature of an ideal gas be $P$, $V$, and $T$, respectively; then the relation $PV=nRT$ holds. (Here $n,R$ are constants.) Given that the internal energy of the ideal gas is $U=f(P,V,T)$, find $\left(\dfrac{\partial U}{\partial P}\right)_V$ and $\left(\dfrac{\partial U}{\partial T}\right)_V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The relation $PV=nRT$ means that once two of $P,V,T$ are taken as independent variables, the remaining one is determined by them. Although $U=f(P,V,T)$ is defined as a function of all three variables, the meaning of a partial derivative depends on which two variables are chosen as independent.</p>
+        <p><u>Computing $(\partial U/\partial P)_V$.</u> Holding $V$ fixed and taking $P$ as the independent variable, the relation gives $T=\dfrac{PV}{nR}$, so $T$ depends on $P$ (with $V$ fixed). Applying the Chain Rule to $U=f(P,V,T(P,V))$,</p>
+        $$\left(\frac{\partial U}{\partial P}\right)_V=\frac{\partial f}{\partial P}+\frac{\partial f}{\partial T}\left(\frac{\partial T}{\partial P}\right)_V$$
+        <p>Since $T=PV/(nR)$ with $V$ fixed gives $\left(\partial T/\partial P\right)_V=V/(nR)$,</p>
+        $$\left(\frac{\partial U}{\partial P}\right)_V=\frac{\partial f}{\partial P}+\frac{\partial f}{\partial T}\cdot\frac{V}{nR}$$
+        <p><u>Computing $(\partial U/\partial T)_V$.</u> Now holding $V$ fixed and taking $T$ as the independent variable, the relation gives $P=\dfrac{nRT}{V}$, so $P$ depends on $T$ (with $V$ fixed). Applying the Chain Rule in the same way,</p>
+        $$\left(\frac{\partial U}{\partial T}\right)_V=\frac{\partial f}{\partial T}+\frac{\partial f}{\partial P}\left(\frac{\partial P}{\partial T}\right)_V$$
+        <p>Since $P=nRT/V$ with $V$ fixed gives $\left(\partial P/\partial T\right)_V=nR/V$,</p>
+        $$\left(\frac{\partial U}{\partial T}\right)_V=\frac{\partial f}{\partial T}+\frac{\partial f}{\partial P}\cdot\frac{nR}{V}$$
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">편도함수의 존재 판정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 함수에 대해 $\dfrac{\partial f}{\partial x}(0,0)$과 $\dfrac{\partial f}{\partial y}(0,0)$이 존재하는지 판정하고 존재한다면 그 값을 구하시오.</p>
+        $$f(x,y)=\begin{cases}\dfrac{\sin(x^3+y^4)}{x^2+y^2} & (x,y)\neq(0,0)\\[4pt] 0 & (x,y)=(0,0)\end{cases}$$
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether $\dfrac{\partial f}{\partial x}(0,0)$ and $\dfrac{\partial f}{\partial y}(0,0)$ exist for the function below, and if they exist, find their values.</p>
+        $$f(x,y)=\begin{cases}\dfrac{\sin(x^3+y^4)}{x^2+y^2} & (x,y)\neq(0,0)\\[4pt] 0 & (x,y)=(0,0)\end{cases}$$
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">편도함수로 함수 찾기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 만족하는 함수 $f(x,y)$가 존재하는지 판정하고 존재한다면 이를 만족하는 $f(x,y)$를 하나 구하시오.</p>
+        <ol>
+          <li>$\dfrac{\partial f}{\partial x}=3x^2y^2-2x$, $\dfrac{\partial f}{\partial y}=2x^3y+6y$</li>
+          <li>$\dfrac{\partial f}{\partial x}=\dfrac{2y}{(x+y)^2}$, $\dfrac{\partial f}{\partial y}=\dfrac{2x}{(x+y)^2}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine whether a function $f(x,y)$ satisfying the following exists, and if it exists, find one such $f(x,y)$.</p>
+        <ol>
+          <li>$\dfrac{\partial f}{\partial x}=3x^2y^2-2x$, $\dfrac{\partial f}{\partial y}=2x^3y+6y$</li>
+          <li>$\dfrac{\partial f}{\partial x}=\dfrac{2y}{(x+y)^2}$, $\dfrac{\partial f}{\partial y}=\dfrac{2x}{(x+y)^2}$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">삼각형의 각과 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼각형 $ABC$에 대해 각 $A,B,C$의 대변의 길이를 $a,b,c$라 할 때, $\partial A/\partial a$와 $\partial A/\partial b$를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For triangle $ABC$, let $a,b,c$ be the lengths of the sides opposite angles $A,B,C$, respectively. Find $\partial A/\partial a$ and $\partial A/\partial b$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">음함수 관계식의 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>독립변수 $x,y$에 대한 함수 $u,v$가 다음 관계식을 만족한다.</p>
+        $$x=v\ln u, \quad y=u\ln v$$
+        <p>이때, $v_x$를 계산하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Functions $u,v$ of the independent variables $x,y$ satisfy the following relations.</p>
+        $$x=v\ln u, \quad y=u\ln v$$
+        <p>Compute $v_x$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">편도함수 조건과 함수 결정</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x,y$에 대한 함수 $f,g$가 다음을 만족시킨다.</p>
+        $$\frac{\partial f}{\partial y}=\frac{\partial g}{\partial x}, \quad \frac{\partial f}{\partial x}=\frac{\partial g}{\partial y}=0, \quad f(1,2)=g(1,2)=5, \quad f(0,0)=4$$
+        <p>$f(x,y)$와 $g(x,y)$를 구하여라.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Functions $f,g$ of $x,y$ satisfy the following.</p>
+        $$\frac{\partial f}{\partial y}=\frac{\partial g}{\partial x}, \quad \frac{\partial f}{\partial x}=\frac{\partial g}{\partial y}=0, \quad f(1,2)=g(1,2)=5, \quad f(0,0)=4$$
+        <p>Find $f(x,y)$ and $g(x,y)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">유계 편도함수와 연속성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면 위의 열린집합 $R$에서 정의된 $f(x,y)$에 대해 $f_x, f_y$가 $R$에서 유계이면 $f$는 $R$에서 연속임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that if $f_x, f_y$ are bounded on $R$ for $f(x,y)$ defined on an open set $R$ of the coordinate plane, then $f$ is continuous on $R$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">극좌표계의 편도함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직교좌표계에서 표현된 미분가능한 함수 $w=f(x,y)$를 극좌표계로 표현할 때 다음 관계식이 성립함을 보이시오.</p>
+        $$(f_x)^2+(f_y)^2=\left(\frac{\partial w}{\partial r}\right)^2+\frac{1}{r^2}\left(\frac{\partial w}{\partial \theta}\right)^2$$
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that when a differentiable function $w=f(x,y)$ expressed in rectangular coordinates is expressed in polar coordinates, the following relation holds.</p>
+        $$(f_x)^2+(f_y)^2=\left(\frac{\partial w}{\partial r}\right)^2+\frac{1}{r^2}\left(\frac{\partial w}{\partial \theta}\right)^2$$
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">원 위 온도의 최댓값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면 위의 점 $(x,y)$에서의 온도 $T(x,y)$는 다음을 만족시킨다.</p>
+        $$\frac{\partial T}{\partial x}=8x-4y, \quad \frac{\partial T}{\partial y}=8y-4x$$
+        <p>점 $P$가 원 $x^2+y^2=1$을 따라 움직일 때, 온도가 최대가 되는 점 $P$를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The temperature $T(x,y)$ at the point $(x,y)$ on the coordinate plane satisfies the following.</p>
+        $$\frac{\partial T}{\partial x}=8x-4y, \quad \frac{\partial T}{\partial y}=8y-4x$$
+        <p>As the point $P$ moves along the circle $x^2+y^2=1$, find the point $P$ at which the temperature is maximum.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">n차 동차함수</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이급함수 $f(x,y)$가 <strong>$n$차 동차함수(homogeneous function of degree $n$)</strong>라는 것은 임의의 실수 $t,x,y$에 대해 다음이 성립하는 것이다.</p>
+        $$f(tx,ty)=t^n f(x,y)$$
+        <p>다음을 보이시오.</p>
+        <ol>
+          <li>$x\dfrac{\partial f}{\partial x}+y\dfrac{\partial f}{\partial y}=nf(x,y)$</li>
+          <li>$x^2\dfrac{\partial^2 f}{\partial x^2}+2xy\left(\dfrac{\partial^2 f}{\partial x\,\partial y}\right)+y^2\dfrac{\partial^2 f}{\partial y^2}=n(n-1)f(x,y)$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>That a function of class $C^2$, $f(x,y)$, is a <strong>homogeneous function of degree $n$</strong> means that the following holds for arbitrary real numbers $t,x,y$.</p>
+        $$f(tx,ty)=t^n f(x,y)$$
+        <p>Show the following.</p>
+        <ol>
+          <li>$x\dfrac{\partial f}{\partial x}+y\dfrac{\partial f}{\partial y}=nf(x,y)$</li>
+          <li>$x^2\dfrac{\partial^2 f}{\partial x^2}+2xy\left(\dfrac{\partial^2 f}{\partial x\,\partial y}\right)+y^2\dfrac{\partial^2 f}{\partial y^2}=n(n-1)f(x,y)$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="card pr-card" id="pr10">
+  <div class="card-head">
+    <span class="pr-num">문제 10</span>
+    <span class="ex-title">구면대칭 라플라스 방정식</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 번 미분가능한 함수 $f(r)$이 $r=\sqrt{x^2+y^2+z^2}$일 때 다음을 만족시킨다.</p>
+        $$f_{xx}+f_{yy}+f_{zz}=0$$
+        <p>이때 적당한 상수 $a,b$가 있어 $f(r)=a/r+b$임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A twice-differentiable function $f(r)$, where $r=\sqrt{x^2+y^2+z^2}$, satisfies the following.</p>
+        $$f_{xx}+f_{yy}+f_{zz}=0$$
+        <p>Show that there exist suitable constants $a,b$ such that $f(r)=a/r+b$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 11 -->
+<div class="card pr-card" id="pr11">
+  <div class="card-head">
+    <span class="pr-num">문제 11</span>
+    <span class="ex-title">라이프니츠 정리의 적용</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 <strong>라이프니츠 정리(Leibniz rule)</strong>을 이용하여 주어진 함수의 도함수를 구하시오.</p>
+        <div class="formal-box">
+          <p>연속함수 $f(x,y)$의 편도함수 $\partial f/\partial x$가 존재하고 연속이라고 하자. 이때</p>
+          $$\frac{d}{dx}\int_c^d f(x,y)\,dy=\int_c^d \frac{\partial f}{\partial x}(x,y)\,dy$$
+          <p>가 성립한다.</p>
+        </div>
+        <ol>
+          <li>$F(x)=\displaystyle\int_0^{x^2}\sqrt{t^4+x^2+1}\,dt$</li>
+          <li>$F(x)=\displaystyle\int_{x^3-1}^{x^2+1}\sin(t^2+x^3)\,dt$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using <strong>Leibniz's rule</strong> below, find the derivative of the given function.</p>
+        <div class="formal-box">
+          $$\frac{d}{dx}\int_c^d f(x,y)\,dy=\int_c^d \frac{\partial f}{\partial x}(x,y)\,dy$$
+        </div>
+        <ol>
+          <li>$F(x)=\displaystyle\int_0^{x^2}\sqrt{t^4+x^2+1}\,dt$</li>
+          <li>$F(x)=\displaystyle\int_{x^3-1}^{x^2+1}\sin(t^2+x^3)\,dt$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 12 -->
+<div class="card pr-card" id="pr12">
+  <div class="card-head">
+    <span class="pr-num">문제 12</span>
+    <span class="ex-title">세 편도함수의 곱</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x,y,z$에 대한 관계식 $f(x,y,z)=0$이 성립할 때 다음이 성립함을 보이시오.</p>
+        $$\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x\left(\frac{\partial z}{\partial x}\right)_y=-1$$
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given that the relation $f(x,y,z)=0$ holds for $x,y,z$, show that the following holds.</p>
+        $$\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x\left(\frac{\partial z}{\partial x}\right)_y=-1$$
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 13 -->
+<div class="card pr-card" id="pr13">
+  <div class="card-head">
+    <span class="pr-num">문제 13</span>
+    <span class="ex-title">연립 관계식의 편미분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>관계식 $f(x,y,z,w)=0$과 $g(x,y,z,w)=0$에 의해 $z,w$가 $x,y$에 대한 미분가능한 함수로 표현가능하다고 하자. $\dfrac{\partial f}{\partial z}\dfrac{\partial g}{\partial w}-\dfrac{\partial f}{\partial w}\dfrac{\partial g}{\partial z}\neq 0$일 때, 다음을 계산하시오.</p>
+        <ol>
+          <li>$\left(\dfrac{\partial z}{\partial x}\right)_y$</li>
+          <li>$\left(\dfrac{\partial w}{\partial y}\right)_x$</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose that the relations $f(x,y,z,w)=0$ and $g(x,y,z,w)=0$ allow $z,w$ to be expressed as differentiable functions of $x,y$. When $\dfrac{\partial f}{\partial z}\dfrac{\partial g}{\partial w}-\dfrac{\partial f}{\partial w}\dfrac{\partial g}{\partial z}\neq 0$, compute the following.</p>
+        <ol>
+          <li>$\left(\dfrac{\partial z}{\partial x}\right)_y$</li>
+          <li>$\left(\dfrac{\partial w}{\partial y}\right)_x$</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

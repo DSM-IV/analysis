@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11. 벡터장과 선적분 (Vector Fields and Line Integrals) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 11단원 벡터장과 선적분(Vector Fields and Line Integrals) 예제·유제·문제 모음. 스칼라장의 선적분, 벡터장과 기울기 벡터장, 벡터장의 선적분과 일·유동·순환·유출을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 벡터장, vector field, 선적분, line integral, 일, work, 유동, flow, 순환, circulation, 유출, flux, 기울기 벡터장, gradient field, 밀도, density, 질량중심, center of mass, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch11.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11. 벡터장과 선적분 (Vector Fields and Line Integrals) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="벡터장과 선적분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch11.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "11. 벡터장과 선적분 (Vector Fields and Line Integrals) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 벡터장과 선적분 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch11.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch11.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html" class="active">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 11</p>
+  <h1>11. 벡터장과 선적분<span>Vector Fields and Line Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 선분 위의 선적분</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 꺾은선 경로의 선적분</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 나선 위의 선적분</a></li>
+    <li><a href="#yu01-3"><span class="toc-num">유제 01-3</span> 호의 길이 선적분</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 온도의 기울기 벡터장</a></li>
+    <li><a href="#yu02-1"><span class="toc-num">유제 02-1</span> 원점을 향하는 벡터장</a></li>
+    <li><a href="#yu02-2"><span class="toc-num">유제 02-2</span> 평면 벡터장 그리기</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 벡터장의 선적분</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 두 경로의 선적분</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 성분별 선적분 계산</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> 일·유동·유출</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 일·순환·유출</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 중심력이 한 일</a></li>
+    <li><a href="#yu04-3"><span class="toc-num">유제 04-3</span> 교선을 따른 유동</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 곡면의 넓이</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 구면과 수직인 벡터장</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 중력이 줄에 한 일</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 비꼬임과 선적분 (임용02-12)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">선분 위의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y,z)=x-3y^2+z$를 원점에서 출발하여 $(1,1,1)$까지 이동하는 선분 $C$를 따라 선적분하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 선분 $C$를 $\mathbf{r}(t)=t\,\mathbf{i}+t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$로 매개화하면 $\mathbf{r}'(t)=(1,1,1)$이므로 $|\mathbf{r}'(t)|=\sqrt{3}$이다.</p>
+        <p>$f(\mathbf{r}(t))=t-3t^2+t=2t-3t^2$이므로</p>
+        <p>$$\int_C f\,ds=\int_0^1 (2t-3t^2)\sqrt{3}\,dt=\sqrt{3}\left[t^2-t^3\right]_0^1=\sqrt{3}(1-1)=0$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the line integral of $f(x,y,z)=x-3y^2+z$ along the line segment $C$ from the origin to $(1,1,1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize the segment $C$ as $\mathbf{r}(t)=t\,\mathbf{i}+t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$; then $\mathbf{r}'(t)=(1,1,1)$, so $|\mathbf{r}'(t)|=\sqrt{3}$.</p>
+        <p>Since $f(\mathbf{r}(t))=t-3t^2+t=2t-3t^2$,</p>
+        <p>$$\int_C f\,ds=\int_0^1 (2t-3t^2)\sqrt{3}\,dt=\sqrt{3}\left[t^2-t^3\right]_0^1=\sqrt{3}(1-1)=0.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">꺾은선 경로의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(0,0,0)$에서 $(1,1,0)$까지 이동하는 선분을 $C_1$, $(1,1,0)$에서 $(1,1,1)$까지 이동하는 선분을 $C_2$라 하자. 함수 $f(x,y,z)=x-3y^2+z$를 $C_1\cup C_2$를 따라 선적분하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C_1$을 $\mathbf{r}_1(t)=t\,\mathbf{i}+t\,\mathbf{j}$ $(0\le t\le 1)$로 매개화하면 $\mathbf{r}_1'(t)=(1,1,0)$, $|\mathbf{r}_1'(t)|=\sqrt2$이고 $f(\mathbf{r}_1(t))=t-3t^2$이므로</p>
+        <p>$$\int_{C_1} f\,ds=\int_0^1 (t-3t^2)\sqrt2\,dt=\sqrt2\left[\frac{t^2}{2}-t^3\right]_0^1=\sqrt2\left(\frac12-1\right)=-\frac{\sqrt2}{2}$$</p>
+        <p>이다. $C_2$를 $\mathbf{r}_2(t)=\mathbf{i}+\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$로 매개화하면 $\mathbf{r}_2'(t)=(0,0,1)$, $|\mathbf{r}_2'(t)|=1$이고 $f(\mathbf{r}_2(t))=1-3+t=t-2$이므로</p>
+        <p>$$\int_{C_2} f\,ds=\int_0^1(t-2)\,dt=\left[\frac{t^2}{2}-2t\right]_0^1=\frac12-2=-\frac32$$</p>
+        <p>이다. 따라서</p>
+        <p>$$\int_{C_1\cup C_2} f\,ds=\int_{C_1}f\,ds+\int_{C_2}f\,ds=-\frac{\sqrt2}{2}-\frac32$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C_1$ be the line segment from $(0,0,0)$ to $(1,1,0)$, and let $C_2$ be the line segment from $(1,1,0)$ to $(1,1,1)$. Evaluate the line integral of $f(x,y,z)=x-3y^2+z$ along $C_1\cup C_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize $C_1$ as $\mathbf{r}_1(t)=t\,\mathbf{i}+t\,\mathbf{j}$ $(0\le t\le 1)$; then $\mathbf{r}_1'(t)=(1,1,0)$, $|\mathbf{r}_1'(t)|=\sqrt2$, and $f(\mathbf{r}_1(t))=t-3t^2$, so</p>
+        <p>$$\int_{C_1} f\,ds=\int_0^1 (t-3t^2)\sqrt2\,dt=\sqrt2\left[\frac{t^2}{2}-t^3\right]_0^1=\sqrt2\left(\frac12-1\right)=-\frac{\sqrt2}{2}.$$</p>
+        <p>Parametrize $C_2$ as $\mathbf{r}_2(t)=\mathbf{i}+\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$; then $\mathbf{r}_2'(t)=(0,0,1)$, $|\mathbf{r}_2'(t)|=1$, and $f(\mathbf{r}_2(t))=1-3+t=t-2$, so</p>
+        <p>$$\int_{C_2} f\,ds=\int_0^1(t-2)\,dt=\left[\frac{t^2}{2}-2t\right]_0^1=\frac12-2=-\frac32.$$</p>
+        <p>Hence</p>
+        <p>$$\int_{C_1\cup C_2} f\,ds=\int_{C_1}f\,ds+\int_{C_2}f\,ds=-\frac{\sqrt2}{2}-\frac32.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">나선 위의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le \pi)$를 따라 함수 $f(x,y,z)=2xy+\sqrt{z}$를 선적분하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}'(t)=(-\sin t,\cos t,1)$이므로 $|\mathbf{r}'(t)|=\sqrt{\sin^2t+\cos^2t+1}=\sqrt2$이다. $f(\mathbf{r}(t))=2\cos t\sin t+\sqrt t=\sin 2t+\sqrt t$이므로</p>
+        <p>$$\int_C f\,ds=\sqrt2\int_0^\pi(\sin 2t+\sqrt t)\,dt=\sqrt2\left(\left[-\frac{\cos 2t}{2}\right]_0^\pi+\left[\frac23 t^{3/2}\right]_0^\pi\right)$$</p>
+        <p>이다. $\left[-\dfrac{\cos 2t}{2}\right]_0^\pi=-\dfrac{\cos2\pi}{2}+\dfrac{\cos0}{2}=0$이고 $\left[\dfrac23t^{3/2}\right]_0^\pi=\dfrac23\pi^{3/2}$이므로</p>
+        <p>$$\int_C f\,ds=\sqrt2\cdot\frac23\pi^{3/2}=\frac{2\sqrt2}{3}\pi^{3/2}$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the line integral of $f(x,y,z)=2xy+\sqrt{z}$ along the curve $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le \pi)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}'(t)=(-\sin t,\cos t,1)$, we get $|\mathbf{r}'(t)|=\sqrt{\sin^2t+\cos^2t+1}=\sqrt2$. Since $f(\mathbf{r}(t))=2\cos t\sin t+\sqrt t=\sin 2t+\sqrt t$,</p>
+        <p>$$\int_C f\,ds=\sqrt2\int_0^\pi(\sin 2t+\sqrt t)\,dt=\sqrt2\left(\left[-\frac{\cos 2t}{2}\right]_0^\pi+\left[\frac23 t^{3/2}\right]_0^\pi\right).$$</p>
+        <p>Here $\left[-\dfrac{\cos 2t}{2}\right]_0^\pi=-\dfrac{\cos2\pi}{2}+\dfrac{\cos0}{2}=0$ and $\left[\dfrac23t^{3/2}\right]_0^\pi=\dfrac23\pi^{3/2}$, so</p>
+        <p>$$\int_C f\,ds=\sqrt2\cdot\frac23\pi^{3/2}=\frac{2\sqrt2}{3}\pi^{3/2}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-3 -->
+<div class="card ex-card" id="yu01-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-3</span>
+    <span class="ex-title">호의 길이 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 계산하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_C \frac{x^2}{y^{4/3}}\,ds$, &nbsp; $C: x=t^2,\ y=t^3$ $(1\le t\le 2)$</li>
+          <li>$\displaystyle\int_C (xy+y+z)\,ds$, &nbsp; $C: x=0,\ y=t,\ z=2-2t$ $(0\le t\le 1)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $x=t^2,\ y=t^3$이므로 $dx/dt=2t$, $dy/dt=3t^2$이고 $ds=\sqrt{(2t)^2+(3t^2)^2}\,dt=\sqrt{4t^2+9t^4}\,dt=t\sqrt{4+9t^2}\,dt$ ($1\le t\le 2$에서 $t\gt0$). 한편 $\dfrac{x^2}{y^{4/3}}=\dfrac{t^4}{(t^3)^{4/3}}=\dfrac{t^4}{t^4}=1$이므로</p>
+        <p>$$\int_C \frac{x^2}{y^{4/3}}\,ds=\int_1^2 t\sqrt{4+9t^2}\,dt$$</p>
+        <p>이다. $u=4+9t^2$로 치환하면 $du=18t\,dt$이고, $t=1$일 때 $u=13$, $t=2$일 때 $u=40$이므로</p>
+        <p>$$\int_1^2 t\sqrt{4+9t^2}\,dt=\frac{1}{18}\int_{13}^{40}\sqrt u\,du=\frac{1}{18}\cdot\frac23\left[u^{3/2}\right]_{13}^{40}=\frac{1}{27}\left(40^{3/2}-13^{3/2}\right)=\frac{80\sqrt{10}-13\sqrt{13}}{27}$$</p>
+        <p>이다 (단, $40^{3/2}=40\sqrt{40}=80\sqrt{10}$).</p>
+        <p>(2) $x=0,\ y=t,\ z=2-2t$이므로 $dx/dt=0$, $dy/dt=1$, $dz/dt=-2$이고 $ds=\sqrt{0+1+4}\,dt=\sqrt5\,dt$이다. $xy+y+z=0+t+(2-2t)=2-t$이므로</p>
+        <p>$$\int_C(xy+y+z)\,ds=\sqrt5\int_0^1(2-t)\,dt=\sqrt5\left[2t-\frac{t^2}{2}\right]_0^1=\sqrt5\left(2-\frac12\right)=\frac{3\sqrt5}{2}$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the following.</p>
+        <ol>
+          <li>$\displaystyle\int_C \frac{x^2}{y^{4/3}}\,ds$, &nbsp; $C: x=t^2,\ y=t^3$ $(1\le t\le 2)$</li>
+          <li>$\displaystyle\int_C (xy+y+z)\,ds$, &nbsp; $C: x=0,\ y=t,\ z=2-2t$ $(0\le t\le 1)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $x=t^2,\ y=t^3$, we have $dx/dt=2t$, $dy/dt=3t^2$, and $ds=\sqrt{(2t)^2+(3t^2)^2}\,dt=\sqrt{4t^2+9t^4}\,dt=t\sqrt{4+9t^2}\,dt$ (as $t\gt0$ on $[1,2]$). Also $\dfrac{x^2}{y^{4/3}}=\dfrac{t^4}{(t^3)^{4/3}}=\dfrac{t^4}{t^4}=1$, so</p>
+        <p>$$\int_C \frac{x^2}{y^{4/3}}\,ds=\int_1^2 t\sqrt{4+9t^2}\,dt.$$</p>
+        <p>Substituting $u=4+9t^2$, $du=18t\,dt$, and noting $u=13$ at $t=1$, $u=40$ at $t=2$,</p>
+        <p>$$\int_1^2 t\sqrt{4+9t^2}\,dt=\frac{1}{18}\int_{13}^{40}\sqrt u\,du=\frac{1}{18}\cdot\frac23\left[u^{3/2}\right]_{13}^{40}=\frac{1}{27}\left(40^{3/2}-13^{3/2}\right)=\frac{80\sqrt{10}-13\sqrt{13}}{27}$$</p>
+        <p>(using $40^{3/2}=40\sqrt{40}=80\sqrt{10}$).</p>
+        <p>(2) Since $x=0,\ y=t,\ z=2-2t$, we have $dx/dt=0$, $dy/dt=1$, $dz/dt=-2$, so $ds=\sqrt{0+1+4}\,dt=\sqrt5\,dt$. Also $xy+y+z=0+t+(2-2t)=2-t$, so</p>
+        <p>$$\int_C(xy+y+z)\,ds=\sqrt5\int_0^1(2-t)\,dt=\sqrt5\left[2t-\frac{t^2}{2}\right]_0^1=\sqrt5\left(2-\frac12\right)=\frac{3\sqrt5}{2}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">온도의 기울기 벡터장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공간 위의 점 $(x,y,z)$에서의 온도가 $T=100-x^2-y^2-z^2$으로 주어진다. $T$의 기울기 벡터장을 그림으로 나타내시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $T=100-x^2-y^2-z^2$의 기울기 벡터장은</p>
+        <p>$$\nabla T=(-2x,-2y,-2z)=-2(x,y,z)$$</p>
+        <p>이다. 점 $(x,y,z)$에서 $\nabla T$는 위치벡터 $(x,y,z)$와 방향이 반대이므로 항상 원점을 향하고, 크기는 $|\nabla T|=2\sqrt{x^2+y^2+z^2}$로 원점으로부터의 거리에 비례하여 커진다. $T$의 등위면은 원점을 중심으로 하는 구면 $x^2+y^2+z^2=100-T$이므로, $\nabla T$는 이 구면들에 수직이며 $T$가 커지는 방향, 즉 구의 중심(원점) 쪽을 가리킨다. 아래 그림은 $z=0$ 평면 위에서 이 벡터장을 나타낸 것으로, 원점에서 먼 점일수록 화살표가 길다.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="원점을 향하는 벡터장: 원점에서 멀수록 화살표가 길다" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-ex02-ko" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="10" y1="100" x2="190" y2="100" stroke="#c2c9d6" stroke-width="1"/>
+          <line x1="100" y1="10" x2="100" y2="190" stroke="#c2c9d6" stroke-width="1"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-ex02-ko)">
+            <line x1="135" y1="100" x2="121" y2="100"/>
+            <line x1="65" y1="100" x2="79" y2="100"/>
+            <line x1="100" y1="135" x2="100" y2="121"/>
+            <line x1="100" y1="65" x2="100" y2="79"/>
+            <line x1="150" y1="150" x2="130" y2="130"/>
+            <line x1="50" y1="150" x2="70" y2="130"/>
+            <line x1="150" y1="50" x2="130" y2="70"/>
+            <line x1="50" y1="50" x2="70" y2="70"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The temperature at the point $(x,y,z)$ in space is given by $T=100-x^2-y^2-z^2$. Sketch the gradient field of $T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The gradient field of $T=100-x^2-y^2-z^2$ is</p>
+        <p>$$\nabla T=(-2x,-2y,-2z)=-2(x,y,z).$$</p>
+        <p>At the point $(x,y,z)$, $\nabla T$ is opposite in direction to the position vector $(x,y,z)$, so it always points toward the origin, and its magnitude $|\nabla T|=2\sqrt{x^2+y^2+z^2}$ grows in proportion to the distance from the origin. The level surfaces of $T$ are spheres $x^2+y^2+z^2=100-T$ centered at the origin, so $\nabla T$ is perpendicular to these spheres and points in the direction in which $T$ increases, i.e., toward the center (the origin). The figure below depicts this vector field restricted to the plane $z=0$: the farther a point is from the origin, the longer its arrow.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Vector field pointing toward the origin: arrows grow longer farther from the origin" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-ex02-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="10" y1="100" x2="190" y2="100" stroke="#c2c9d6" stroke-width="1"/>
+          <line x1="100" y1="10" x2="100" y2="190" stroke="#c2c9d6" stroke-width="1"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-ex02-en)">
+            <line x1="135" y1="100" x2="121" y2="100"/>
+            <line x1="65" y1="100" x2="79" y2="100"/>
+            <line x1="100" y1="135" x2="100" y2="121"/>
+            <line x1="100" y1="65" x2="100" y2="79"/>
+            <line x1="150" y1="150" x2="130" y2="130"/>
+            <line x1="50" y1="150" x2="70" y2="130"/>
+            <line x1="150" y1="50" x2="130" y2="70"/>
+            <line x1="50" y1="50" x2="70" y2="70"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-1 -->
+<div class="card ex-card" id="yu02-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-1</span>
+    <span class="ex-title">원점을 향하는 벡터장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 성질을 만족시키는 평면 위의 벡터장 $\mathbf{F}$를 모두 구하시오.</p>
+        <p style="text-align:center;">$\mathbf{F}$는 원점을 향하고 크기는 원점으로부터의 거리의 제곱과 반비례한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평면 위의 점 $(x,y)\ (\neq(0,0))$에서의 원점까지의 거리를 $r=\sqrt{x^2+y^2}$라 하자. 원점을 향하는 단위벡터는 $-\dfrac{(x,y)}{r}$이고, $\mathbf F$의 크기는 $r^2$에 반비례하므로 어떤 양수 $c\gt0$에 대해 $|\mathbf F|=\dfrac{c}{r^2}$이다. 따라서</p>
+        <p>$$\mathbf F=|\mathbf F|\cdot\left(-\frac{(x,y)}{r}\right)=-\frac{c}{r^2}\cdot\frac{(x,y)}{r}=-\frac{c\,(x,y)}{r^3}$$</p>
+        <p>즉</p>
+        <p>$$\mathbf F=-\frac{c\,x}{(x^2+y^2)^{3/2}}\,\mathbf i-\frac{c\,y}{(x^2+y^2)^{3/2}}\,\mathbf j\qquad(c\gt0\text{는 임의의 상수})$$</p>
+        <p>가 조건을 만족시키는 벡터장 전체이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all vector fields $\mathbf{F}$ in the plane satisfying the following property.</p>
+        <p style="text-align:center;">$\mathbf{F}$ points toward the origin, and its magnitude is inversely proportional to the square of the distance from the origin.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> For a point $(x,y)\neq(0,0)$ in the plane, let $r=\sqrt{x^2+y^2}$ be its distance from the origin. The unit vector pointing toward the origin is $-\dfrac{(x,y)}{r}$, and since the magnitude of $\mathbf F$ is inversely proportional to $r^2$, we have $|\mathbf F|=\dfrac{c}{r^2}$ for some constant $c\gt0$. Hence</p>
+        <p>$$\mathbf F=|\mathbf F|\cdot\left(-\frac{(x,y)}{r}\right)=-\frac{c}{r^2}\cdot\frac{(x,y)}{r}=-\frac{c\,(x,y)}{r^3},$$</p>
+        <p>that is,</p>
+        <p>$$\mathbf F=-\frac{c\,x}{(x^2+y^2)^{3/2}}\,\mathbf i-\frac{c\,y}{(x^2+y^2)^{3/2}}\,\mathbf j\qquad(c\gt0\text{ an arbitrary constant})$$</p>
+        <p>is the complete family of vector fields satisfying the condition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02-2 -->
+<div class="card ex-card" id="yu02-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02-2</span>
+    <span class="ex-title">평면 벡터장 그리기</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 평면 벡터장을 그림으로 나타내시오.</p>
+        <ol>
+          <li>$\mathbf{F}=-\dfrac{y}{\sqrt{x^2+y^2}}\,\mathbf{i}+\dfrac{x}{\sqrt{x^2+y^2}}\,\mathbf{j}$</li>
+          <li>$\mathbf{F}=x\,\mathbf{i}+y\,\mathbf{j}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\mathbf F=-\dfrac{y}{\sqrt{x^2+y^2}}\mathbf i+\dfrac{x}{\sqrt{x^2+y^2}}\mathbf j=\dfrac{1}{r}(-y,x)$ (단, $r=\sqrt{x^2+y^2}$)는 모든 점에서 크기가 $|\mathbf F|=\dfrac{\sqrt{y^2+x^2}}{r}=1$로 일정하고, 위치벡터 $(x,y)$를 반시계 방향으로 $90^\circ$ 회전시킨 방향(원점을 중심으로 하는 원에 대한 접선 방향)을 향한다. 즉 원점 둘레를 반시계 방향으로 회전하는, 크기가 항상 $1$인 벡터장이다.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="반시계 방향으로 회전하는 크기 1인 접선 벡터장" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-yu022a-ko" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="65" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-yu022a-ko)">
+            <line x1="165" y1="100" x2="165" y2="78"/>
+            <line x1="146" y1="54" x2="130" y2="38"/>
+            <line x1="100" y1="35" x2="78" y2="35"/>
+            <line x1="54" y1="54" x2="38" y2="70"/>
+            <line x1="35" y1="100" x2="35" y2="122"/>
+            <line x1="54" y1="146" x2="70" y2="162"/>
+            <line x1="100" y1="165" x2="122" y2="165"/>
+            <line x1="146" y1="146" x2="162" y2="130"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+        <p>(2) $\mathbf F=x\,\mathbf i+y\,\mathbf j$는 위치벡터 그 자체이므로 모든 점에서 원점으로부터 바깥쪽(원점의 반대 방향)을 향하고, 크기는 $|\mathbf F|=\sqrt{x^2+y^2}=r$로 원점으로부터의 거리와 같다. 즉 원점에서 방사형으로 뻗어나가며 멀어질수록 화살표가 길어지는 벡터장이다.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="원점에서 바깥으로 뻗어나가며 거리에 비례해 커지는 벡터장" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-yu022b-ko" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="100" cy="100" r="65" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-yu022b-ko)">
+            <line x1="130" y1="100" x2="142" y2="100"/>
+            <line x1="100" y1="70" x2="100" y2="58"/>
+            <line x1="70" y1="100" x2="58" y2="100"/>
+            <line x1="100" y1="130" x2="100" y2="142"/>
+            <line x1="146" y1="54" x2="164" y2="36"/>
+            <line x1="54" y1="54" x2="36" y2="36"/>
+            <line x1="54" y1="146" x2="36" y2="164"/>
+            <line x1="146" y1="146" x2="164" y2="164"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Sketch the following plane vector fields.</p>
+        <ol>
+          <li>$\mathbf{F}=-\dfrac{y}{\sqrt{x^2+y^2}}\,\mathbf{i}+\dfrac{x}{\sqrt{x^2+y^2}}\,\mathbf{j}$</li>
+          <li>$\mathbf{F}=x\,\mathbf{i}+y\,\mathbf{j}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) $\mathbf F=-\dfrac{y}{\sqrt{x^2+y^2}}\mathbf i+\dfrac{x}{\sqrt{x^2+y^2}}\mathbf j=\dfrac1r(-y,x)$ (where $r=\sqrt{x^2+y^2}$) has constant magnitude $|\mathbf F|=\dfrac{\sqrt{y^2+x^2}}{r}=1$ at every point, and points in the direction obtained by rotating the position vector $(x,y)$ by $90^\circ$ counterclockwise — the tangent direction to the circle centered at the origin through that point. That is, $\mathbf F$ is a vector field of constant magnitude $1$ that circulates counterclockwise about the origin.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Tangential vector field of constant magnitude 1 circulating counterclockwise" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-yu022a-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="65" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-yu022a-en)">
+            <line x1="165" y1="100" x2="165" y2="78"/>
+            <line x1="146" y1="54" x2="130" y2="38"/>
+            <line x1="100" y1="35" x2="78" y2="35"/>
+            <line x1="54" y1="54" x2="38" y2="70"/>
+            <line x1="35" y1="100" x2="35" y2="122"/>
+            <line x1="54" y1="146" x2="70" y2="162"/>
+            <line x1="100" y1="165" x2="122" y2="165"/>
+            <line x1="146" y1="146" x2="162" y2="130"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+        <p>(2) $\mathbf F=x\,\mathbf i+y\,\mathbf j$ is simply the position vector, so at every point it points outward, away from the origin, with magnitude $|\mathbf F|=\sqrt{x^2+y^2}=r$ equal to the distance from the origin. That is, $\mathbf F$ radiates outward from the origin, and its arrows grow longer with distance.</p>
+        <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Vector field radiating outward from the origin, growing in proportion to distance" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:.6rem auto;">
+          <defs>
+            <marker id="arrow-yu022b-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f4f8f"/>
+            </marker>
+          </defs>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="100" cy="100" r="65" fill="none" stroke="#c2c9d6" stroke-width="1" stroke-dasharray="3,3"/>
+          <g stroke="#2f4f8f" stroke-width="2" fill="none" marker-end="url(#arrow-yu022b-en)">
+            <line x1="130" y1="100" x2="142" y2="100"/>
+            <line x1="100" y1="70" x2="100" y2="58"/>
+            <line x1="70" y1="100" x2="58" y2="100"/>
+            <line x1="100" y1="130" x2="100" y2="142"/>
+            <line x1="146" y1="54" x2="164" y2="36"/>
+            <line x1="54" y1="54" x2="36" y2="36"/>
+            <line x1="54" y1="146" x2="36" y2="164"/>
+            <line x1="146" y1="146" x2="164" y2="164"/>
+          </g>
+          <circle cx="100" cy="100" r="3" fill="#2f4f8f"/>
+          <text x="106" y="96" font-size="12" fill="#333">O</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">벡터장의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$\mathbf{F}(x,y,z)=z\,\mathbf{i}+xy\,\mathbf{j}-y^2\,\mathbf{k}$이고 곡선 $C$가 $\mathbf{r}(t)=t^2\,\mathbf{i}+t\,\mathbf{j}+\sqrt{t}\,\mathbf{k}$ $(0\le t\le 1)$로 매개화될 때, $\displaystyle\int_C \mathbf{F}\cdot d\mathbf{r}$의 값을 구하시오.</li>
+          <li>곡선 $C$가 $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 2\pi)$로 매개화될 때, $\displaystyle\int_C -y\,dx+z\,dy+2x\,dz$의 값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $\mathbf r(t)=t^2\,\mathbf i+t\,\mathbf j+\sqrt t\,\mathbf k$ $(0\le t\le1)$이므로 $\mathbf r'(t)=\left(2t,\,1,\,\dfrac{1}{2\sqrt t}\right)$이다. $x=t^2,\ y=t,\ z=\sqrt t$이므로</p>
+        <p>$$\mathbf F(\mathbf r(t))=z\,\mathbf i+xy\,\mathbf j-y^2\,\mathbf k=\sqrt t\,\mathbf i+t^3\,\mathbf j-t^2\,\mathbf k$$</p>
+        <p>이고</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=\sqrt t\cdot 2t+t^3\cdot1+(-t^2)\cdot\frac{1}{2\sqrt t}=2t^{3/2}+t^3-\frac12t^{3/2}=\frac32t^{3/2}+t^3$$</p>
+        <p>이다. 따라서</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^1\left(\frac32t^{3/2}+t^3\right)dt=\left[\frac32\cdot\frac25t^{5/2}+\frac{t^4}{4}\right]_0^1=\frac35+\frac14=\frac{17}{20}$$</p>
+        <p>이다.</p>
+        <p>(2) $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ $(0\le t\le2\pi)$이므로 $x=\cos t,\ y=\sin t,\ z=t$이고 $dx=-\sin t\,dt,\ dy=\cos t\,dt,\ dz=dt$이다. 따라서</p>
+        <p>$$-y\,dx+z\,dy+2x\,dz=\sin^2t\,dt+t\cos t\,dt+2\cos t\,dt$$</p>
+        <p>이고</p>
+        <p>$$\int_C-y\,dx+z\,dy+2x\,dz=\int_0^{2\pi}\sin^2t\,dt+\int_0^{2\pi}t\cos t\,dt+\int_0^{2\pi}2\cos t\,dt$$</p>
+        <p>이다. $\displaystyle\int_0^{2\pi}\sin^2t\,dt=\pi$이고, $\displaystyle\int_0^{2\pi}t\cos t\,dt=\big[t\sin t+\cos t\big]_0^{2\pi}=(0+1)-(0+1)=0$이며, $\displaystyle\int_0^{2\pi}2\cos t\,dt=\big[2\sin t\big]_0^{2\pi}=0$이므로</p>
+        <p>$$\int_C-y\,dx+z\,dy+2x\,dz=\pi+0+0=\pi$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Let $\mathbf{F}(x,y,z)=z\,\mathbf{i}+xy\,\mathbf{j}-y^2\,\mathbf{k}$, and suppose the curve $C$ is parametrized by $\mathbf{r}(t)=t^2\,\mathbf{i}+t\,\mathbf{j}+\sqrt{t}\,\mathbf{k}$ $(0\le t\le 1)$. Find the value of $\displaystyle\int_C \mathbf{F}\cdot d\mathbf{r}$.</li>
+          <li>Suppose the curve $C$ is parametrized by $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 2\pi)$. Find the value of $\displaystyle\int_C -y\,dx+z\,dy+2x\,dz$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Since $\mathbf r(t)=t^2\,\mathbf i+t\,\mathbf j+\sqrt t\,\mathbf k$ $(0\le t\le1)$, we have $\mathbf r'(t)=\left(2t,\,1,\,\dfrac{1}{2\sqrt t}\right)$. Since $x=t^2,\ y=t,\ z=\sqrt t$,</p>
+        <p>$$\mathbf F(\mathbf r(t))=z\,\mathbf i+xy\,\mathbf j-y^2\,\mathbf k=\sqrt t\,\mathbf i+t^3\,\mathbf j-t^2\,\mathbf k,$$</p>
+        <p>and</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=\sqrt t\cdot 2t+t^3\cdot1+(-t^2)\cdot\frac{1}{2\sqrt t}=2t^{3/2}+t^3-\frac12t^{3/2}=\frac32t^{3/2}+t^3.$$</p>
+        <p>Hence</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^1\left(\frac32t^{3/2}+t^3\right)dt=\left[\frac32\cdot\frac25t^{5/2}+\frac{t^4}{4}\right]_0^1=\frac35+\frac14=\frac{17}{20}.$$</p>
+        <p>(2) Since $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ $(0\le t\le2\pi)$, we have $x=\cos t,\ y=\sin t,\ z=t$, and $dx=-\sin t\,dt,\ dy=\cos t\,dt,\ dz=dt$. Hence</p>
+        <p>$$-y\,dx+z\,dy+2x\,dz=\sin^2t\,dt+t\cos t\,dt+2\cos t\,dt,$$</p>
+        <p>so</p>
+        <p>$$\int_C-y\,dx+z\,dy+2x\,dz=\int_0^{2\pi}\sin^2t\,dt+\int_0^{2\pi}t\cos t\,dt+\int_0^{2\pi}2\cos t\,dt.$$</p>
+        <p>Now $\displaystyle\int_0^{2\pi}\sin^2t\,dt=\pi$, $\displaystyle\int_0^{2\pi}t\cos t\,dt=\big[t\sin t+\cos t\big]_0^{2\pi}=(0+1)-(0+1)=0$, and $\displaystyle\int_0^{2\pi}2\cos t\,dt=\big[2\sin t\big]_0^{2\pi}=0$, so</p>
+        <p>$$\int_C-y\,dx+z\,dy+2x\,dz=\pi+0+0=\pi.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">두 경로의 선적분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf{F}(x,y,z)=3y\,\mathbf{i}+2x\,\mathbf{j}+4z\,\mathbf{k}$에 대하여 다음을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_{C_1}\mathbf{F}\cdot d\mathbf{r}$, &nbsp; $C_1: \mathbf{r}(t)=t\,\mathbf{i}+t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$</li>
+          <li>$\displaystyle\int_{C_2}\mathbf{F}\cdot d\mathbf{r}$, &nbsp; $C_2: \mathbf{r}(t)=t\,\mathbf{i}+t^2\,\mathbf{j}+t^4\,\mathbf{k}$ $(0\le t\le 1)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) $C_1:\mathbf r(t)=t\,\mathbf i+t\,\mathbf j+t\,\mathbf k$ $(0\le t\le1)$이므로 $\mathbf r'(t)=(1,1,1)$이고 $\mathbf F(\mathbf r(t))=3t\,\mathbf i+2t\,\mathbf j+4t\,\mathbf k$이다. 따라서 $\mathbf F\cdot\mathbf r'(t)=3t+2t+4t=9t$이고</p>
+        <p>$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_0^1 9t\,dt=\frac92$$</p>
+        <p>이다.</p>
+        <p>(2) $C_2:\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^4\,\mathbf k$ $(0\le t\le1)$이므로 $\mathbf r'(t)=(1,2t,4t^3)$이고 $\mathbf F(\mathbf r(t))=3t^2\,\mathbf i+2t\,\mathbf j+4t^4\,\mathbf k$이다. 따라서</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=3t^2\cdot1+2t\cdot2t+4t^4\cdot4t^3=3t^2+4t^2+16t^7=7t^2+16t^7$$</p>
+        <p>이고</p>
+        <p>$$\int_{C_2}\mathbf F\cdot d\mathbf r=\int_0^1\left(7t^2+16t^7\right)dt=\left[\frac{7}{3}t^3+2t^8\right]_0^1=\frac73+2=\frac{13}{3}$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the vector field $\mathbf{F}(x,y,z)=3y\,\mathbf{i}+2x\,\mathbf{j}+4z\,\mathbf{k}$, find the following.</p>
+        <ol>
+          <li>$\displaystyle\int_{C_1}\mathbf{F}\cdot d\mathbf{r}$, &nbsp; $C_1: \mathbf{r}(t)=t\,\mathbf{i}+t\,\mathbf{j}+t\,\mathbf{k}$ $(0\le t\le 1)$</li>
+          <li>$\displaystyle\int_{C_2}\mathbf{F}\cdot d\mathbf{r}$, &nbsp; $C_2: \mathbf{r}(t)=t\,\mathbf{i}+t^2\,\mathbf{j}+t^4\,\mathbf{k}$ $(0\le t\le 1)$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Parametrize $C_1$ as $\mathbf r(t)=t\,\mathbf i+t\,\mathbf j+t\,\mathbf k$ $(0\le t\le1)$; then $\mathbf r'(t)=(1,1,1)$ and $\mathbf F(\mathbf r(t))=3t\,\mathbf i+2t\,\mathbf j+4t\,\mathbf k$. Hence $\mathbf F\cdot\mathbf r'(t)=3t+2t+4t=9t$, so</p>
+        <p>$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_0^1 9t\,dt=\frac92.$$</p>
+        <p>(2) Parametrize $C_2$ as $\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^4\,\mathbf k$ $(0\le t\le1)$; then $\mathbf r'(t)=(1,2t,4t^3)$ and $\mathbf F(\mathbf r(t))=3t^2\,\mathbf i+2t\,\mathbf j+4t^4\,\mathbf k$. Hence</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=3t^2\cdot1+2t\cdot2t+4t^4\cdot4t^3=3t^2+4t^2+16t^7=7t^2+16t^7,$$</p>
+        <p>so</p>
+        <p>$$\int_{C_2}\mathbf F\cdot d\mathbf r=\int_0^1\left(7t^2+16t^7\right)dt=\left[\frac{7}{3}t^3+2t^8\right]_0^1=\frac73+2=\frac{13}{3}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">성분별 선적분 계산</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $C$가 $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}-\cos t\,\mathbf{k}$ $(0\le t\le 2\pi)$로 매개화될 때 다음을 구하시오.</p>
+        <ol>
+          <li>$\displaystyle\int_C xz\,dx$</li>
+          <li>$\displaystyle\int_C xz\,dy$</li>
+          <li>$\displaystyle\int_C xyz\,dz$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x=\cos t,\ y=\sin t,\ z=-\cos t$ $(0\le t\le2\pi)$이므로 $dx=-\sin t\,dt$, $dy=\cos t\,dt$, $dz=\sin t\,dt$이다.</p>
+        <p>(1) $xz\,dx=\cos t\cdot(-\cos t)\cdot(-\sin t)\,dt=\cos^2t\sin t\,dt$이므로</p>
+        <p>$$\int_C xz\,dx=\int_0^{2\pi}\cos^2t\sin t\,dt=\left[-\frac{\cos^3t}{3}\right]_0^{2\pi}=-\frac13+\frac13=0$$</p>
+        <p>이다.</p>
+        <p>(2) $xz\,dy=\cos t\cdot(-\cos t)\cdot\cos t\,dt=-\cos^3t\,dt$이므로</p>
+        <p>$$\int_C xz\,dy=-\int_0^{2\pi}\cos^3t\,dt=0$$</p>
+        <p>이다 ($\cos^3t$는 한 주기에 대한 적분값이 $0$).</p>
+        <p>(3) $xyz\,dz=\cos t\cdot\sin t\cdot(-\cos t)\cdot\sin t\,dt=-\cos^2t\sin^2t\,dt=-\dfrac14\sin^2(2t)\,dt$이므로</p>
+        <p>$$\int_C xyz\,dz=-\frac14\int_0^{2\pi}\sin^2(2t)\,dt=-\frac14\cdot\pi=-\frac{\pi}{4}$$</p>
+        <p>이다 ($\sin^2(2t)$의 한 주기 적분값은 $\pi$).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the curve $C$ is parametrized by $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}-\cos t\,\mathbf{k}$ $(0\le t\le 2\pi)$. Find the following.</p>
+        <ol>
+          <li>$\displaystyle\int_C xz\,dx$</li>
+          <li>$\displaystyle\int_C xz\,dy$</li>
+          <li>$\displaystyle\int_C xyz\,dz$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $x=\cos t,\ y=\sin t,\ z=-\cos t$ $(0\le t\le2\pi)$, we have $dx=-\sin t\,dt$, $dy=\cos t\,dt$, $dz=\sin t\,dt$.</p>
+        <p>(1) $xz\,dx=\cos t\cdot(-\cos t)\cdot(-\sin t)\,dt=\cos^2t\sin t\,dt$, so</p>
+        <p>$$\int_C xz\,dx=\int_0^{2\pi}\cos^2t\sin t\,dt=\left[-\frac{\cos^3t}{3}\right]_0^{2\pi}=-\frac13+\frac13=0.$$</p>
+        <p>(2) $xz\,dy=\cos t\cdot(-\cos t)\cdot\cos t\,dt=-\cos^3t\,dt$, so</p>
+        <p>$$\int_C xz\,dy=-\int_0^{2\pi}\cos^3t\,dt=0$$</p>
+        <p>($\cos^3t$ integrates to $0$ over a full period).</p>
+        <p>(3) $xyz\,dz=\cos t\cdot\sin t\cdot(-\cos t)\cdot\sin t\,dt=-\cos^2t\sin^2t\,dt=-\dfrac14\sin^2(2t)\,dt$, so</p>
+        <p>$$\int_C xyz\,dz=-\frac14\int_0^{2\pi}\sin^2(2t)\,dt=-\frac14\cdot\pi=-\frac{\pi}{4}$$</p>
+        <p>(the integral of $\sin^2(2t)$ over one period equals $\pi$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">일·유동·유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>물체에 힘 $\mathbf{F}=(y-x^2)\,\mathbf{i}+(z-y^2)\,\mathbf{j}+(x-z^2)\,\mathbf{k}$를 가하여 곡선 $\mathbf{r}(t)=t\,\mathbf{i}+t^2\,\mathbf{j}+t^3\,\mathbf{k}$ $(0\le t\le 1)$을 따라 $\mathbf{r}(0)$에서 $\mathbf{r}(1)$까지 이동시킬 때 한 일을 구하시오.</li>
+          <li>유체의 속도장이 $\mathbf{F}=x\,\mathbf{i}+z\,\mathbf{j}+y\,\mathbf{k}$로 주어져 있다. 곡선 $$\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}\quad(0\le t\le \pi/2)$$ 를 따른 유동을 구하시오.</li>
+          <li>평면 위의 원 $x^2+y^2=1$을 가로지르는 벡터장 $\mathbf{F}=(x-y)\,\mathbf{i}+x\,\mathbf{j}$의 유출을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 곡선을 $\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$ $(0\le t\le1)$로 매개화하면 $\mathbf r'(t)=(1,2t,3t^2)$이다. $x=t,\ y=t^2,\ z=t^3$이므로</p>
+        <p>$$\mathbf F(\mathbf r(t))=(y-x^2)\,\mathbf i+(z-y^2)\,\mathbf j+(x-z^2)\,\mathbf k=(t^2-t^2)\,\mathbf i+(t^3-t^4)\,\mathbf j+(t-t^6)\,\mathbf k=(t^3-t^4)\,\mathbf j+(t-t^6)\,\mathbf k$$</p>
+        <p>이고</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=0\cdot1+(t^3-t^4)\cdot2t+(t-t^6)\cdot3t^2=2t^4-2t^5+3t^3-3t^8$$</p>
+        <p>이다. 따라서 한 일은</p>
+        <p>$$W=\int_0^1\left(3t^3+2t^4-2t^5-3t^8\right)dt=\left[\frac34t^4+\frac25t^5-\frac13t^6-\frac13t^9\right]_0^1=\frac34+\frac25-\frac13-\frac13$$</p>
+        <p>이다. 통분(분모 $60$)하면 $\dfrac34=\dfrac{45}{60}$, $\dfrac25=\dfrac{24}{60}$, $\dfrac13=\dfrac{20}{60}$이므로</p>
+        <p>$$W=\frac{45+24-20-20}{60}=\frac{29}{60}$$</p>
+        <p>이다.</p>
+        <p>(2) 곡선을 $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ $\left(0\le t\le\dfrac\pi2\right)$로 매개화하면 $\mathbf r'(t)=(-\sin t,\cos t,1)$이다. $x=\cos t,\ z=t,\ y=\sin t$이므로 $\mathbf F(\mathbf r(t))=x\,\mathbf i+z\,\mathbf j+y\,\mathbf k=\cos t\,\mathbf i+t\,\mathbf j+\sin t\,\mathbf k$이고</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=\cos t\cdot(-\sin t)+t\cos t+\sin t\cdot1=-\sin t\cos t+t\cos t+\sin t$$</p>
+        <p>이다. 유동은</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^{\pi/2}(-\sin t\cos t+t\cos t+\sin t)\,dt$$</p>
+        <p>이고, $\displaystyle\int_0^{\pi/2}-\sin t\cos t\,dt=\left[-\frac{\sin^2t}{2}\right]_0^{\pi/2}=-\frac12$, $\displaystyle\int_0^{\pi/2}t\cos t\,dt=\big[t\sin t+\cos t\big]_0^{\pi/2}=\frac\pi2-1$, $\displaystyle\int_0^{\pi/2}\sin t\,dt=\big[-\cos t\big]_0^{\pi/2}=1$이므로</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=-\frac12+\left(\frac\pi2-1\right)+1=\frac\pi2-\frac12$$</p>
+        <p>이다.</p>
+        <p>(3) 원 $C:x^2+y^2=1$을 $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ $(0\le t\le2\pi)$로 반시계 방향으로 매개화하자. 접선 방향을 시계 방향으로 $90^\circ$ 회전시키면 바깥쪽 법선 방향이 되므로 $\mathbf n\,ds=(dy,-dx)$이고, $\mathbf F=M\,\mathbf i+N\,\mathbf j$에 대하여 유출은 $\displaystyle\oint_C\mathbf F\cdot\mathbf n\,ds=\oint_C M\,dy-N\,dx$이다. 여기서 $M=x-y,\ N=x$이고 $dx=-\sin t\,dt,\ dy=\cos t\,dt$이므로</p>
+        <p>$$M\,dy-N\,dx=(\cos t-\sin t)\cos t\,dt-\cos t\cdot(-\sin t)\,dt=(\cos^2t-\sin t\cos t+\sin t\cos t)\,dt=\cos^2t\,dt$$</p>
+        <p>이다. 따라서 유출은</p>
+        <p>$$\oint_C M\,dy-N\,dx=\int_0^{2\pi}\cos^2t\,dt=\pi$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the work done in moving an object along the curve $\mathbf{r}(t)=t\,\mathbf{i}+t^2\,\mathbf{j}+t^3\,\mathbf{k}$ $(0\le t\le 1)$ from $\mathbf{r}(0)$ to $\mathbf{r}(1)$ by applying the force $\mathbf{F}=(y-x^2)\,\mathbf{i}+(z-y^2)\,\mathbf{j}+(x-z^2)\,\mathbf{k}$.</li>
+          <li>The velocity field of a fluid is given by $\mathbf{F}=x\,\mathbf{i}+z\,\mathbf{j}+y\,\mathbf{k}$. Find the flow along the curve $$\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}+t\,\mathbf{k}\quad(0\le t\le \pi/2)$$</li>
+          <li>Find the flux of the vector field $\mathbf{F}=(x-y)\,\mathbf{i}+x\,\mathbf{j}$ across the circle $x^2+y^2=1$ in the plane.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Parametrize the curve as $\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$ $(0\le t\le1)$; then $\mathbf r'(t)=(1,2t,3t^2)$. Since $x=t,\ y=t^2,\ z=t^3$,</p>
+        <p>$$\mathbf F(\mathbf r(t))=(y-x^2)\,\mathbf i+(z-y^2)\,\mathbf j+(x-z^2)\,\mathbf k=(t^2-t^2)\,\mathbf i+(t^3-t^4)\,\mathbf j+(t-t^6)\,\mathbf k=(t^3-t^4)\,\mathbf j+(t-t^6)\,\mathbf k,$$</p>
+        <p>and</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=0\cdot1+(t^3-t^4)\cdot2t+(t-t^6)\cdot3t^2=2t^4-2t^5+3t^3-3t^8.$$</p>
+        <p>Hence the work is</p>
+        <p>$$W=\int_0^1\left(3t^3+2t^4-2t^5-3t^8\right)dt=\left[\frac34t^4+\frac25t^5-\frac13t^6-\frac13t^9\right]_0^1=\frac34+\frac25-\frac13-\frac13.$$</p>
+        <p>With common denominator $60$: $\dfrac34=\dfrac{45}{60}$, $\dfrac25=\dfrac{24}{60}$, $\dfrac13=\dfrac{20}{60}$, so</p>
+        <p>$$W=\frac{45+24-20-20}{60}=\frac{29}{60}.$$</p>
+        <p>(2) Parametrize the curve as $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ $\left(0\le t\le\dfrac\pi2\right)$; then $\mathbf r'(t)=(-\sin t,\cos t,1)$. Since $x=\cos t,\ z=t,\ y=\sin t$, $\mathbf F(\mathbf r(t))=x\,\mathbf i+z\,\mathbf j+y\,\mathbf k=\cos t\,\mathbf i+t\,\mathbf j+\sin t\,\mathbf k$, so</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=\cos t\cdot(-\sin t)+t\cos t+\sin t\cdot1=-\sin t\cos t+t\cos t+\sin t.$$</p>
+        <p>The flow is</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^{\pi/2}(-\sin t\cos t+t\cos t+\sin t)\,dt,$$</p>
+        <p>and $\displaystyle\int_0^{\pi/2}-\sin t\cos t\,dt=\left[-\frac{\sin^2t}{2}\right]_0^{\pi/2}=-\frac12$, $\displaystyle\int_0^{\pi/2}t\cos t\,dt=\big[t\sin t+\cos t\big]_0^{\pi/2}=\frac\pi2-1$, $\displaystyle\int_0^{\pi/2}\sin t\,dt=\big[-\cos t\big]_0^{\pi/2}=1$, so</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=-\frac12+\left(\frac\pi2-1\right)+1=\frac\pi2-\frac12.$$</p>
+        <p>(3) Parametrize the circle $C:x^2+y^2=1$ counterclockwise as $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ $(0\le t\le2\pi)$. Rotating the tangent direction $90^\circ$ clockwise gives the outward unit normal, so $\mathbf n\,ds=(dy,-dx)$, and for $\mathbf F=M\,\mathbf i+N\,\mathbf j$ the flux is $\displaystyle\oint_C \mathbf F\cdot\mathbf n\,ds=\oint_C M\,dy-N\,dx$. Here $M=x-y,\ N=x$, and $dx=-\sin t\,dt,\ dy=\cos t\,dt$, so</p>
+        <p>$$M\,dy-N\,dx=(\cos t-\sin t)\cos t\,dt-\cos t\cdot(-\sin t)\,dt=(\cos^2t-\sin t\cos t+\sin t\cos t)\,dt=\cos^2t\,dt.$$</p>
+        <p>Hence the flux is</p>
+        <p>$$\oint_C M\,dy-N\,dx=\int_0^{2\pi}\cos^2t\,dt=\pi.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">일·순환·유출</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>물체에 힘 $\mathbf{F}=x\,\mathbf{i}+y\,\mathbf{j}+z\,\mathbf{k}$를 가하여 곡선 $\mathbf{r}(t)=\cos(\pi t)\,\mathbf{i}+t^2\,\mathbf{j}+\sin(\pi t)\,\mathbf{k}$ $(0\le t\le 1)$을 따라 $\mathbf{r}(0)$에서 $\mathbf{r}(1)$까지 이동시킬 때 한 일을 구하시오.</li>
+          <li>유체의 속도장이 $\mathbf{F}=(x-y)\,\mathbf{i}+x\,\mathbf{j}$로 주어져 있다. 곡선 $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}$ $(0\le t\le 2\pi)$를 따른 순환을 구하시오.</li>
+          <li>$(1,0)$, $(0,1)$, $(-1,0)$을 꼭짓점으로 하는 삼각형을 가로지르는 벡터장 $$\mathbf{F}=(x+y)\,\mathbf{i}-(x^2+y^2)\,\mathbf{j}$$ 의 유출을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong></p>
+        <p>(1) 곡선을 $\mathbf r(t)=\cos(\pi t)\,\mathbf i+t^2\,\mathbf j+\sin(\pi t)\,\mathbf k$ $(0\le t\le1)$로 매개화하면 $\mathbf r'(t)=(-\pi\sin(\pi t),\,2t,\,\pi\cos(\pi t))$이다. $\mathbf F=x\,\mathbf i+y\,\mathbf j+z\,\mathbf k$이므로 $\mathbf F(\mathbf r(t))=\cos(\pi t)\,\mathbf i+t^2\,\mathbf j+\sin(\pi t)\,\mathbf k$이고</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=-\pi\sin(\pi t)\cos(\pi t)+2t^3+\pi\sin(\pi t)\cos(\pi t)=2t^3$$</p>
+        <p>이다 (처음과 마지막 항이 상쇄됨). 따라서</p>
+        <p>$$W=\int_0^1 2t^3\,dt=\left[\frac{t^4}{2}\right]_0^1=\frac12$$</p>
+        <p>이다.</p>
+        <p>(2) 곡선을 $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ $(0\le t\le2\pi)$로 매개화하면 $\mathbf r'(t)=(-\sin t,\cos t)$이다. $\mathbf F=(x-y)\,\mathbf i+x\,\mathbf j$이므로 $\mathbf F(\mathbf r(t))=(\cos t-\sin t)\,\mathbf i+\cos t\,\mathbf j$이고</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=(\cos t-\sin t)(-\sin t)+\cos t\cdot\cos t=-\sin t\cos t+\sin^2t+\cos^2t=1-\sin t\cos t$$</p>
+        <p>이다. 따라서 순환은</p>
+        <p>$$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(1-\sin t\cos t)\,dt=2\pi-0=2\pi$$</p>
+        <p>이다 ($\sin t\cos t$의 한 주기 적분값은 $0$).</p>
+        <p>(3) 삼각형의 세 꼭짓점을 $A=(1,0),\ B=(0,1),\ C_0=(-1,0)$이라 하면 $A\to B\to C_0\to A$의 순서가 반시계 방향이다 (신발끈 공식으로 넓이 $=1\gt0$ 확인). 예제 04(3)과 같은 방법으로, $\mathbf F=M\,\mathbf i+N\,\mathbf j$ ($M=x+y,\ N=-(x^2+y^2)$)에 대해 유출은</p>
+        <p>$$\oint_{\partial} M\,dy-N\,dx=\oint_\partial (x+y)\,dy+(x^2+y^2)\,dx$$</p>
+        <p>이다. 세 변을 각각 매개화한다.</p>
+        <p>$\overline{AB}$: $x=1-t,\ y=t$ $(0\le t\le1)$, $dx=-dt,\ dy=dt$. $(x+y)dy+(x^2+y^2)dx=dt-[(1-t)^2+t^2]\,dt=(2t-2t^2)\,dt$이므로 $\displaystyle\int_{\overline{AB}}=\int_0^1(2t-2t^2)\,dt=1-\frac23=\frac13$이다.</p>
+        <p>$\overline{BC_0}$: $x=-t,\ y=1-t$ $(0\le t\le1)$, $dx=-dt,\ dy=-dt$. $(x+y)dy=(1-2t)(-dt)$, $(x^2+y^2)dx=-[t^2+(1-t)^2]\,dt=-(1-2t+2t^2)\,dt$이므로 합은 $[-(1-2t)-(1-2t+2t^2)]\,dt=(-2+4t-2t^2)\,dt$이고 $\displaystyle\int_{\overline{BC_0}}=\int_0^1(-2+4t-2t^2)\,dt=-2+2-\frac23=-\frac23$이다.</p>
+        <p>$\overline{C_0A}$: $x=-1+2t,\ y=0$ $(0\le t\le1)$, $dx=2dt,\ dy=0$. $(x^2+y^2)dx=2(-1+2t)^2\,dt$이므로 $u=-1+2t$로 치환하면 $\displaystyle\int_{\overline{C_0A}}=\int_0^1 2(-1+2t)^2\,dt=\int_{-1}^1u^2\,du=\frac23$이다.</p>
+        <p>따라서 유출은 $\dfrac13-\dfrac23+\dfrac23=\dfrac13$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the work done in moving an object along the curve $\mathbf{r}(t)=\cos(\pi t)\,\mathbf{i}+t^2\,\mathbf{j}+\sin(\pi t)\,\mathbf{k}$ $(0\le t\le 1)$ from $\mathbf{r}(0)$ to $\mathbf{r}(1)$ by applying the force $\mathbf{F}=x\,\mathbf{i}+y\,\mathbf{j}+z\,\mathbf{k}$.</li>
+          <li>The velocity field of a fluid is given by $\mathbf{F}=(x-y)\,\mathbf{i}+x\,\mathbf{j}$. Find the circulation along the curve $\mathbf{r}(t)=\cos t\,\mathbf{i}+\sin t\,\mathbf{j}$ $(0\le t\le 2\pi)$.</li>
+          <li>Find the flux of the vector field $$\mathbf{F}=(x+y)\,\mathbf{i}-(x^2+y^2)\,\mathbf{j}$$ across the triangle with vertices $(1,0)$, $(0,1)$, $(-1,0)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong></p>
+        <p>(1) Parametrize the curve as $\mathbf r(t)=\cos(\pi t)\,\mathbf i+t^2\,\mathbf j+\sin(\pi t)\,\mathbf k$ $(0\le t\le1)$; then $\mathbf r'(t)=(-\pi\sin(\pi t),\,2t,\,\pi\cos(\pi t))$. Since $\mathbf F=x\,\mathbf i+y\,\mathbf j+z\,\mathbf k$, $\mathbf F(\mathbf r(t))=\cos(\pi t)\,\mathbf i+t^2\,\mathbf j+\sin(\pi t)\,\mathbf k$, so</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=-\pi\sin(\pi t)\cos(\pi t)+2t^3+\pi\sin(\pi t)\cos(\pi t)=2t^3$$</p>
+        <p>(the first and last terms cancel). Hence</p>
+        <p>$$W=\int_0^1 2t^3\,dt=\left[\frac{t^4}{2}\right]_0^1=\frac12.$$</p>
+        <p>(2) Parametrize the curve as $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ $(0\le t\le2\pi)$; then $\mathbf r'(t)=(-\sin t,\cos t)$. Since $\mathbf F=(x-y)\,\mathbf i+x\,\mathbf j$, $\mathbf F(\mathbf r(t))=(\cos t-\sin t)\,\mathbf i+\cos t\,\mathbf j$, so</p>
+        <p>$$\mathbf F\cdot\mathbf r'(t)=(\cos t-\sin t)(-\sin t)+\cos t\cdot\cos t=-\sin t\cos t+\sin^2t+\cos^2t=1-\sin t\cos t.$$</p>
+        <p>Hence the circulation is</p>
+        <p>$$\oint_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}(1-\sin t\cos t)\,dt=2\pi-0=2\pi$$</p>
+        <p>(the integral of $\sin t\cos t$ over one period is $0$).</p>
+        <p>(3) Let the vertices of the triangle be $A=(1,0),\ B=(0,1),\ C_0=(-1,0)$; then $A\to B\to C_0\to A$ is counterclockwise (the shoelace formula gives area $=1\gt0$). By 예제 04(3), for $\mathbf F=M\,\mathbf i+N\,\mathbf j$ ($M=x+y,\ N=-(x^2+y^2)$) the flux is</p>
+        <p>$$\oint_{\partial} M\,dy-N\,dx=\oint_\partial (x+y)\,dy+(x^2+y^2)\,dx.$$</p>
+        <p>We parametrize each side.</p>
+        <p>$\overline{AB}$: $x=1-t,\ y=t$ $(0\le t\le1)$, $dx=-dt,\ dy=dt$. Then $(x+y)dy+(x^2+y^2)dx=dt-[(1-t)^2+t^2]\,dt=(2t-2t^2)\,dt$, so $\displaystyle\int_{\overline{AB}}=\int_0^1(2t-2t^2)\,dt=1-\frac23=\frac13$.</p>
+        <p>$\overline{BC_0}$: $x=-t,\ y=1-t$ $(0\le t\le1)$, $dx=-dt,\ dy=-dt$. Then $(x+y)dy=(1-2t)(-dt)$ and $(x^2+y^2)dx=-[t^2+(1-t)^2]\,dt=-(1-2t+2t^2)\,dt$, so the sum is $[-(1-2t)-(1-2t+2t^2)]\,dt=(-2+4t-2t^2)\,dt$, giving $\displaystyle\int_{\overline{BC_0}}=\int_0^1(-2+4t-2t^2)\,dt=-2+2-\frac23=-\frac23$.</p>
+        <p>$\overline{C_0A}$: $x=-1+2t,\ y=0$ $(0\le t\le1)$, $dx=2dt,\ dy=0$. Then $(x^2+y^2)dx=2(-1+2t)^2\,dt$, so substituting $u=-1+2t$, $\displaystyle\int_{\overline{C_0A}}=\int_0^1 2(-1+2t)^2\,dt=\int_{-1}^1u^2\,du=\frac23$.</p>
+        <p>Hence the flux is $\dfrac13-\dfrac23+\dfrac23=\dfrac13$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">중심력이 한 일</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $y=f(x)$를 따라 $(a,f(a))$에서 $(b,f(b))$까지 물체를 이동시키려 한다. 물체에 있을 때 가하는 힘은 크기가 $k$로 일정하고 항상 원점을 향하고 있다고 할 때 힘이 물체에 가한 일을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 물체가 위치 $(x,y)$에 있을 때 원점을 향하는 단위벡터는 $-\dfrac{(x,y)}{\sqrt{x^2+y^2}}$이므로, 크기 $k$로 항상 원점을 향하는 힘은</p>
+        <p>$$\mathbf F(x,y)=-\frac{k}{\sqrt{x^2+y^2}}(x,y)$$</p>
+        <p>이다. 곡선 $y=f(x)$를 $\mathbf r(t)=t\,\mathbf i+f(t)\,\mathbf j$ $(a\le t\le b)$로 매개화하면 $\mathbf r'(t)=(1,f'(t))$이고</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-\frac{k\big(t+f(t)f'(t)\big)}{\sqrt{t^2+f(t)^2}}$$</p>
+        <p>이다. 그런데 $\dfrac{d}{dt}\sqrt{t^2+f(t)^2}=\dfrac{2t+2f(t)f'(t)}{2\sqrt{t^2+f(t)^2}}=\dfrac{t+f(t)f'(t)}{\sqrt{t^2+f(t)^2}}$이므로</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-k\cdot\frac{d}{dt}\sqrt{t^2+f(t)^2}$$</p>
+        <p>이다. 따라서 힘이 한 일은</p>
+        <p>$$W=\int_a^b\mathbf F\cdot d\mathbf r=-k\int_a^b\frac{d}{dt}\sqrt{t^2+f(t)^2}\,dt=-k\Big[\sqrt{t^2+f(t)^2}\Big]_a^b=k\left(\sqrt{a^2+f(a)^2}-\sqrt{b^2+f(b)^2}\right)$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>An object is to be moved along the curve $y=f(x)$ from $(a,f(a))$ to $(b,f(b))$. Suppose the force applied to the object has constant magnitude $k$ and always points toward the origin. Find the work done on the object by the force.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> When the object is at $(x,y)$, the unit vector pointing toward the origin is $-\dfrac{(x,y)}{\sqrt{x^2+y^2}}$, so the force of constant magnitude $k$ always directed toward the origin is</p>
+        <p>$$\mathbf F(x,y)=-\frac{k}{\sqrt{x^2+y^2}}(x,y).$$</p>
+        <p>Parametrize the curve $y=f(x)$ as $\mathbf r(t)=t\,\mathbf i+f(t)\,\mathbf j$ $(a\le t\le b)$; then $\mathbf r'(t)=(1,f'(t))$ and</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-\frac{k\big(t+f(t)f'(t)\big)}{\sqrt{t^2+f(t)^2}}.$$</p>
+        <p>Since $\dfrac{d}{dt}\sqrt{t^2+f(t)^2}=\dfrac{2t+2f(t)f'(t)}{2\sqrt{t^2+f(t)^2}}=\dfrac{t+f(t)f'(t)}{\sqrt{t^2+f(t)^2}}$,</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-k\cdot\frac{d}{dt}\sqrt{t^2+f(t)^2}.$$</p>
+        <p>Hence the work done by the force is</p>
+        <p>$$W=\int_a^b\mathbf F\cdot d\mathbf r=-k\int_a^b\frac{d}{dt}\sqrt{t^2+f(t)^2}\,dt=-k\Big[\sqrt{t^2+f(t)^2}\Big]_a^b=k\left(\sqrt{a^2+f(a)^2}-\sqrt{b^2+f(b)^2}\right).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-3 -->
+<div class="card ex-card" id="yu04-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-3</span>
+    <span class="ex-title">교선을 따른 유동</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유체의 속도장이 $\mathbf{F}=xy\,\mathbf{i}+y\,\mathbf{j}-yz\,\mathbf{k}$로 주어져 있다. 곡면 $y=x^2$과 $z=x$의 교선을 따라 $(0,0,0)$에서 $(1,1,1)$까지 이동할 때 유동을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 곡면 $y=x^2$과 $z=x$의 교선을 $x=t$로 매개화하면 $y=t^2,\ z=t$이고, $(0,0,0)$에서 $(1,1,1)$까지는 $t:0\to1$에 대응한다. $\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t\,\mathbf k$이므로 $\mathbf r'(t)=(1,2t,1)$이다. $\mathbf F=xy\,\mathbf i+y\,\mathbf j-yz\,\mathbf k$이므로</p>
+        <p>$$\mathbf F(\mathbf r(t))=t\cdot t^2\,\mathbf i+t^2\,\mathbf j-t^2\cdot t\,\mathbf k=t^3\,\mathbf i+t^2\,\mathbf j-t^3\,\mathbf k$$</p>
+        <p>이고</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=t^3\cdot1+t^2\cdot2t+(-t^3)\cdot1=t^3+2t^3-t^3=2t^3$$</p>
+        <p>이다. 따라서 유동은</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^1 2t^3\,dt=\left[\frac{t^4}{2}\right]_0^1=\frac12$$</p>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The velocity field of a fluid is given by $\mathbf{F}=xy\,\mathbf{i}+y\,\mathbf{j}-yz\,\mathbf{k}$. Find the flow from $(0,0,0)$ to $(1,1,1)$ along the curve of intersection of the surfaces $y=x^2$ and $z=x$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize the curve of intersection of $y=x^2$ and $z=x$ by $x=t$, so $y=t^2,\ z=t$; the interval from $(0,0,0)$ to $(1,1,1)$ corresponds to $t:0\to1$. With $\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t\,\mathbf k$, $\mathbf r'(t)=(1,2t,1)$. Since $\mathbf F=xy\,\mathbf i+y\,\mathbf j-yz\,\mathbf k$,</p>
+        <p>$$\mathbf F(\mathbf r(t))=t\cdot t^2\,\mathbf i+t^2\,\mathbf j-t^2\cdot t\,\mathbf k=t^3\,\mathbf i+t^2\,\mathbf j-t^3\,\mathbf k,$$</p>
+        <p>and</p>
+        <p>$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=t^3\cdot1+t^2\cdot2t+(-t^3)\cdot1=t^3+2t^3-t^3=2t^3.$$</p>
+        <p>Hence the flow is</p>
+        <p>$$\int_C\mathbf F\cdot d\mathbf r=\int_0^1 2t^3\,dt=\left[\frac{t^4}{2}\right]_0^1=\frac12.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">곡면의 넓이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 곡면의 넓이를 구하시오.</p>
+        $$S=\{(x,y,z)\in\mathbb{R}^3 : 2x+3y=6,\ 0\le x\le 6,\ 0\le z\le 4+3x+2y\}$$
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the surface area of the following surface.</p>
+        $$S=\{(x,y,z)\in\mathbb{R}^3 : 2x+3y=6,\ 0\le x\le 6,\ 0\le z\le 4+3x+2y\}$$
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">구면과 수직인 벡터장</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 만족하는 구면 $x^2+y^2+z^2=R^2$ 위의 점 $P$를 모두 찾으시오.</p>
+        <div class="formal-box">
+          <p>(1) 벡터장 $\mathbf{F}=yz^2\,\mathbf{i}+xz^2\,\mathbf{j}+2xyz\,\mathbf{k}$에 대하여 $\mathbf{F}(P)$는 구면과 수직이다.</p>
+          <p>(2) $\mathbf{F}(P)\neq\mathbf{0}$</p>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all points $P$ on the sphere $x^2+y^2+z^2=R^2$ satisfying the following.</p>
+        <div class="formal-box">
+          <p>(1) For the vector field $\mathbf{F}=yz^2\,\mathbf{i}+xz^2\,\mathbf{j}+2xyz\,\mathbf{k}$, the vector $\mathbf{F}(P)$ is perpendicular to the sphere.</p>
+          <p>(2) $\mathbf{F}(P)\neq\mathbf{0}$</p>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">중력이 줄에 한 일</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1사분면 위에 있는 원 $x^2+y^2=4$의 일부에 줄 $C$가 놓여 있다. $(x,y)$에서의 줄의 밀도는 $\rho(x,y)=xy$로 주어져 있다. 줄이 완전히 $x$축으로 떨어질 때까지 중력이 한 일은 $\displaystyle\int_C gy\rho\,ds$로 주어짐을 안다. (단, $g$는 중력가속도)</p>
+        <ol>
+          <li>줄이 완전히 떨어질 때까지 중력이 줄에 가한 일을 구하시오.</li>
+          <li>줄의 질량은 $\displaystyle\int_C \rho\,ds$이고 질량중심은 $(\bar{x},\bar{y})=\left(\displaystyle\int_C x\rho\,ds,\ \displaystyle\int_C y\rho\,ds\right)\Big/\displaystyle\int_C \rho\,ds$로 주어진다. 줄과 같은 질량을 갖는 질량중심에 위치한 물체가 $x$축으로 떨어질 때까지 중력이 가하는 일을 구하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A rope $C$ lies along part of the circle $x^2+y^2=4$ in the first quadrant. The density of the rope at $(x,y)$ is given by $\rho(x,y)=xy$. It is known that the work done by gravity as the rope falls completely to the $x$-axis is given by $\displaystyle\int_C gy\rho\,ds$. (Here $g$ is the gravitational acceleration.)</p>
+        <ol>
+          <li>Find the work done by gravity on the rope as it falls completely to the $x$-axis.</li>
+          <li>The mass of the rope is $\displaystyle\int_C \rho\,ds$, and its center of mass is given by $(\bar{x},\bar{y})=\left(\displaystyle\int_C x\rho\,ds,\ \displaystyle\int_C y\rho\,ds\right)\Big/\displaystyle\int_C \rho\,ds$. Find the work done by gravity as an object with the same mass as the rope, located at the center of mass, falls to the $x$-axis.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">비꼬임과 선적분 (임용02-12)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\alpha:[-1,1]\to\mathbb{R}^3$을 $\alpha(t)=(2t,t^2,t^3/3)$으로 정의할 때, 다음 물음에 답하시오.</p>
+        <ol>
+          <li>$t=0$에서 곡선 $\alpha$의 비꼬임(torsion)을 구하시오.</li>
+          <li>$\phi=y\,dx+z\,dy+xy\,dz$일 때, $\displaystyle\int_\alpha \phi$를 계산하시오.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let the curve $\alpha:[-1,1]\to\mathbb{R}^3$ be defined by $\alpha(t)=(2t,t^2,t^3/3)$. Answer the following questions.</p>
+        <ol>
+          <li>Find the torsion of the curve $\alpha$ at $t=0$.</li>
+          <li>Let $\phi=y\,dx+z\,dy+xy\,dz$. Compute $\displaystyle\int_\alpha \phi$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04. 공간 운동 (Motion in Space) | 미적분학 2 학습 가이드</title>
+<meta name="description" content="미적분학 2 04단원 공간 운동(Motion in Space) 예제·유제·문제 모음. 호의 길이와 재매개화, 곡률(curvature), 열률(torsion), 단위접선·주법선·종법선벡터(TNB frame), 접촉원(osculating circle), 극좌표 속도와 가속도, 임용 기출을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="미적분학, Calculus 2, 공간 운동, motion in space, 호의 길이, arc length, 곡률, curvature, 열률, torsion, 단위접선벡터, unit tangent vector, 주단위법선벡터, principal normal vector, 단위종법선벡터, binormal vector, TNB frame, 접촉원, osculating circle, 재매개화, 극좌표, polar coordinates, 임용기출, 예제, 유제, 문제">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/calc2/ch04.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04. 공간 운동 (Motion in Space) — 미적분학 2 한·영 대조">
+<meta property="og:description" content="공간 운동 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/calc2/ch04.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="미적분학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "04. 공간 운동 (Motion in Space) — 미적분학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "미적분학 2 공간 운동 예제·유제·문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/calc2/ch04.html",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/calc2/ch04.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">해석학</a>
+  <a href="../la/index.html">선형대수학</a>
+  <a href="../calc1/index.html">미적분학 1</a>
+  <a href="index.html">미적분학 2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html" class="active">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+  <a href="ch09.html">09</a>
+  <a href="ch10.html">10</a>
+  <a href="ch11.html">11</a>
+  <a href="ch12.html">12</a>
+  <a href="ch13.html">13</a>
+  <a href="ch14.html">14</a>
+</nav>
+
+<header>
+  <p class="subtitle">Calculus 2 — Unit 04</p>
+  <h1>04. 공간 운동<span>Motion in Space</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>문항 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#ex01"><span class="toc-num">예제 01</span> 호의 길이와 재매개화</a></li>
+    <li><a href="#yu01-1"><span class="toc-num">유제 01-1</span> 두 점 사이 곡선의 길이</a></li>
+    <li><a href="#yu01-2"><span class="toc-num">유제 01-2</span> 호의 길이 재매개화</a></li>
+    <li><a href="#ex02"><span class="toc-num">예제 02</span> 단위접선벡터</a></li>
+    <li><a href="#yu02"><span class="toc-num">유제 02</span> 길이 조건과 단위접선벡터</a></li>
+    <li><a href="#ex03"><span class="toc-num">예제 03</span> 직선과 원의 곡률</a></li>
+    <li><a href="#yu03-1"><span class="toc-num">유제 03-1</span> 나선과 곡선의 곡률</a></li>
+    <li><a href="#yu03-2"><span class="toc-num">유제 03-2</span> 평면곡선의 곡률</a></li>
+    <li><a href="#yu03-3"><span class="toc-num">유제 03-3</span> 곡률의 최댓값·최솟값</a></li>
+    <li><a href="#ex04"><span class="toc-num">예제 04</span> TNB 틀과 접촉원</a></li>
+    <li><a href="#yu04-1"><span class="toc-num">유제 04-1</span> 단위접선·주법선벡터</a></li>
+    <li><a href="#yu04-2"><span class="toc-num">유제 04-2</span> 접촉·법·교정평면</a></li>
+    <li><a href="#ex05"><span class="toc-num">예제 05</span> 가속도의 접선·법선 성분</a></li>
+    <li><a href="#yu05-1"><span class="toc-num">유제 05-1</span> 가속도 성분 분해</a></li>
+    <li><a href="#yu05-2"><span class="toc-num">유제 05-2</span> 법선 성분이 0인 곡선</a></li>
+    <li><a href="#ex06"><span class="toc-num">예제 06</span> 나선의 열률</a></li>
+    <li><a href="#yu06-1"><span class="toc-num">유제 06-1</span> 종법선벡터와 열률</a></li>
+    <li><a href="#yu06-2"><span class="toc-num">유제 06-2</span> 열률 0과 평면성</a></li>
+    <li><a href="#ex07"><span class="toc-num">예제 07</span> 극좌표 속도와 가속도</a></li>
+    <li><a href="#yu07"><span class="toc-num">유제 07</span> 나선의 극좌표 속도·가속도</a></li>
+    <li><a href="#pr01"><span class="toc-num">문제 01</span> 원의 신개선</a></li>
+    <li><a href="#pr02"><span class="toc-num">문제 02</span> 나선의 전곡률</a></li>
+    <li><a href="#pr03"><span class="toc-num">문제 03</span> 곡률의 각 표현</a></li>
+    <li><a href="#pr04"><span class="toc-num">문제 04</span> 나선의 길이와 계수 (임용11-35)</a></li>
+    <li><a href="#pr05"><span class="toc-num">문제 05</span> 접선벡터와 평면의 각 (임용04-11)</a></li>
+    <li><a href="#pr06"><span class="toc-num">문제 06</span> 교선의 접선과 법평면 (임용10-19)</a></li>
+    <li><a href="#pr07"><span class="toc-num">문제 07</span> 접촉평면과 xy평면의 각 (임용07-9)</a></li>
+    <li><a href="#pr08"><span class="toc-num">문제 08</span> 교점의 접선과 곡률 (임용24A-4)</a></li>
+    <li><a href="#pr09"><span class="toc-num">문제 09</span> 곡선의 열률과 곡률 (임용19A-6)</a></li>
+    <li><a href="#pr10"><span class="toc-num">문제 10</span> 접벡터 평행과 열률 (임용20A-3)</a></li>
+    <li><a href="#pr11"><span class="toc-num">문제 11</span> 접촉원의 중심과 반지름 (임용23A-3)</a></li>
+    <li><a href="#pr12"><span class="toc-num">문제 12</span> 곡률로 곡선의 길이 (임용16A-6)</a></li>
+    <li><a href="#pr13"><span class="toc-num">문제 13</span> 재매개화와 열률 (임용09-35)</a></li>
+    <li><a href="#pr14"><span class="toc-num">문제 14</span> 평면곡선의 곡률 결정 (임용17A-8)</a></li>
+    <li><a href="#pr15"><span class="toc-num">문제 15</span> 주법벡터장과 곡률·열률 (임용14A-기11)</a></li>
+    <li><a href="#pr16"><span class="toc-num">문제 16</span> 정칙성과 곡률·열률 (임용22A-9)</a></li>
+    <li><a href="#pr17"><span class="toc-num">문제 17</span> 곡률·열률과 곡선의 종류 (임용12-34)</a></li>
+    <li><a href="#pr18"><span class="toc-num">문제 18</span> 곡률·열률로 곡선 판별 (임용03-13)</a></li>
+    <li><a href="#pr19"><span class="toc-num">문제 19</span> 곡률중심 고정과 원 (임용05-17)</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div class="section-title"><h2>예제·유제 · Examples &amp; Exercises</h2></div>
+
+<!-- 예제 01 -->
+<div class="card ex-card" id="ex01">
+  <div class="card-head">
+    <span class="ex-num">예제 01</span>
+    <span class="ex-title">호의 길이와 재매개화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>나선 $\mathbf{r}(t)=(\cos t)\mathbf{i}+(\sin t)\mathbf{j}+t\mathbf{k}$에 대해 다음 물음에 답하시오.</p>
+        <ol>
+          <li>$\mathbf{r}(t)$ $(0\le t\le 2\pi)$의 길이를 구하시오.</li>
+          <li>$\mathbf{r}(0)$을 시점으로 하는 $\mathbf{r}(t)$의 호의 길이 함수를 구하시오.</li>
+          <li>$\mathbf{r}(t)$을 호의 길이로 재매개화하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\cos t)\mathbf{i}+(\sin t)\mathbf{j}+t\mathbf{k}$이므로 $\mathbf{r}'(t)=(-\sin t)\mathbf{i}+(\cos t)\mathbf{j}+\mathbf{k}$이고, $|\mathbf{r}'(t)|=\sqrt{\sin^2t+\cos^2t+1}=\sqrt2$이다.</p>
+        <p>(1) $\displaystyle L=\int_0^{2\pi}|\mathbf{r}'(t)|\,dt=\int_0^{2\pi}\sqrt2\,dt=2\sqrt2\,\pi$이다.</p>
+        <p>(2) $\mathbf{r}(0)$을 시점으로 하는 호의 길이 함수는 $\displaystyle s(t)=\int_0^t|\mathbf{r}'(u)|\,du=\int_0^t\sqrt2\,du=\sqrt2\,t$이다.</p>
+        <p>(3) $s=\sqrt2\,t$에서 $t=s/\sqrt2$이므로, 호의 길이로 재매개화하면 $$\mathbf{r}(s)=\Bigl(\cos\dfrac{s}{\sqrt2}\Bigr)\mathbf{i}+\Bigl(\sin\dfrac{s}{\sqrt2}\Bigr)\mathbf{j}+\dfrac{s}{\sqrt2}\mathbf{k}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the helix $\mathbf{r}(t)=(\cos t)\mathbf{i}+(\sin t)\mathbf{j}+t\mathbf{k}$, answer the following.</p>
+        <ol>
+          <li>Find the length of $\mathbf{r}(t)$ $(0\le t\le 2\pi)$.</li>
+          <li>Find the arc length function of $\mathbf{r}(t)$ with initial point $\mathbf{r}(0)$.</li>
+          <li>Reparametrize $\mathbf{r}(t)$ by arc length.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(\cos t)\mathbf{i}+(\sin t)\mathbf{j}+t\mathbf{k}$, we have $\mathbf{r}'(t)=(-\sin t)\mathbf{i}+(\cos t)\mathbf{j}+\mathbf{k}$ and $|\mathbf{r}'(t)|=\sqrt{\sin^2t+\cos^2t+1}=\sqrt2$.</p>
+        <p>(1) $\displaystyle L=\int_0^{2\pi}|\mathbf{r}'(t)|\,dt=\int_0^{2\pi}\sqrt2\,dt=2\sqrt2\,\pi$.</p>
+        <p>(2) The arc length function with initial point $\mathbf{r}(0)$ is $\displaystyle s(t)=\int_0^t|\mathbf{r}'(u)|\,du=\int_0^t\sqrt2\,du=\sqrt2\,t$.</p>
+        <p>(3) From $s=\sqrt2\,t$ we get $t=s/\sqrt2$, so the arc length reparametrization is $$\mathbf{r}(s)=\Bigl(\cos\dfrac{s}{\sqrt2}\Bigr)\mathbf{i}+\Bigl(\sin\dfrac{s}{\sqrt2}\Bigr)\mathbf{j}+\dfrac{s}{\sqrt2}\mathbf{k}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-1 -->
+<div class="card ex-card" id="yu01-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-1</span>
+    <span class="ex-title">두 점 사이 곡선의 길이</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(0,0,1)$에서 $(\sqrt{2},\sqrt{2},0)$까지 곡선 $\mathbf{r}(t)=(\sqrt{2}\,t)\mathbf{i}+(\sqrt{2}\,t)\mathbf{j}+(1-t^2)\mathbf{k}$의 길이를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\sqrt2\,t)\mathbf{i}+(\sqrt2\,t)\mathbf{j}+(1-t^2)\mathbf{k}$라 하면 $\mathbf{r}(0)=(0,0,1)$, $\mathbf{r}(1)=(\sqrt2,\sqrt2,0)$이므로 $t$는 $0$에서 $1$까지 움직인다.</p>
+        <p>$\mathbf{r}'(t)=\sqrt2\,\mathbf{i}+\sqrt2\,\mathbf{j}-2t\mathbf{k}$이므로 $$|\mathbf{r}'(t)|=\sqrt{2+2+4t^2}=2\sqrt{1+t^2}$$ 이다. 따라서 곡선의 길이는 $$L=\int_0^1 2\sqrt{1+t^2}\,dt=\Bigl[t\sqrt{1+t^2}+\ln\bigl(t+\sqrt{1+t^2}\bigr)\Bigr]_0^1=\sqrt2+\ln(1+\sqrt2)$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the length of the curve $\mathbf{r}(t)=(\sqrt{2}\,t)\mathbf{i}+(\sqrt{2}\,t)\mathbf{j}+(1-t^2)\mathbf{k}$ from $(0,0,1)$ to $(\sqrt{2},\sqrt{2},0)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $\mathbf{r}(t)=(\sqrt2\,t)\mathbf{i}+(\sqrt2\,t)\mathbf{j}+(1-t^2)\mathbf{k}$, we have $\mathbf{r}(0)=(0,0,1)$ and $\mathbf{r}(1)=(\sqrt2,\sqrt2,0)$, so $t$ ranges from $0$ to $1$.</p>
+        <p>Since $\mathbf{r}'(t)=\sqrt2\,\mathbf{i}+\sqrt2\,\mathbf{j}-2t\mathbf{k}$, $$|\mathbf{r}'(t)|=\sqrt{2+2+4t^2}=2\sqrt{1+t^2}.$$ Hence the length of the curve is $$L=\int_0^1 2\sqrt{1+t^2}\,dt=\Bigl[t\sqrt{1+t^2}+\ln\bigl(t+\sqrt{1+t^2}\bigr)\Bigr]_0^1=\sqrt2+\ln(1+\sqrt2).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 01-2 -->
+<div class="card ex-card" id="yu01-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 01-2</span>
+    <span class="ex-title">호의 길이 재매개화</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(1+2t)\mathbf{i}+(1+3t)\mathbf{j}+(6-6t)\mathbf{k}$를 호의 길이로 재매개화하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(1+2t)\mathbf{i}+(1+3t)\mathbf{j}+(6-6t)\mathbf{k}$이므로 $\mathbf{r}'(t)=2\mathbf{i}+3\mathbf{j}-6\mathbf{k}$이고 $$|\mathbf{r}'(t)|=\sqrt{4+9+36}=\sqrt{49}=7$$ 이다 (일정한 속력). 호의 길이는 $$s=\int_0^t|\mathbf{r}'(u)|\,du=7t$$ 이므로 $t=s/7$이다. 따라서 호의 길이로 재매개화하면 $$\mathbf{r}(s)=\Bigl(1+\dfrac{2s}{7}\Bigr)\mathbf{i}+\Bigl(1+\dfrac{3s}{7}\Bigr)\mathbf{j}+\Bigl(6-\dfrac{6s}{7}\Bigr)\mathbf{k}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Reparametrize the curve $\mathbf{r}(t)=(1+2t)\mathbf{i}+(1+3t)\mathbf{j}+(6-6t)\mathbf{k}$ by arc length.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(1+2t)\mathbf{i}+(1+3t)\mathbf{j}+(6-6t)\mathbf{k}$, we have $\mathbf{r}'(t)=2\mathbf{i}+3\mathbf{j}-6\mathbf{k}$ and $$|\mathbf{r}'(t)|=\sqrt{4+9+36}=\sqrt{49}=7$$ (constant speed). The arc length is $$s=\int_0^t|\mathbf{r}'(u)|\,du=7t,$$ so $t=s/7$. Hence the arc length reparametrization is $$\mathbf{r}(s)=\Bigl(1+\dfrac{2s}{7}\Bigr)\mathbf{i}+\Bigl(1+\dfrac{3s}{7}\Bigr)\mathbf{j}+\Bigl(6-\dfrac{6s}{7}\Bigr)\mathbf{k}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 02 -->
+<div class="card ex-card" id="ex02">
+  <div class="card-head">
+    <span class="ex-num">예제 02</span>
+    <span class="ex-title">단위접선벡터</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(1+3\cos t)\mathbf{i}+(3\sin t)\mathbf{j}+t^2\mathbf{k}$의 단위접선벡터를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(1+3\cos t)\mathbf{i}+(3\sin t)\mathbf{j}+t^2\mathbf{k}$이므로 $$\mathbf{r}'(t)=(-3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+2t\mathbf{k}$$ 이고 $$|\mathbf{r}'(t)|=\sqrt{9\sin^2t+9\cos^2t+4t^2}=\sqrt{9+4t^2}$$ 이다. 따라서 단위접선벡터는 $$\mathbf{T}(t)=\dfrac{\mathbf{r}'(t)}{|\mathbf{r}'(t)|}=\dfrac{-3\sin t\,\mathbf{i}+3\cos t\,\mathbf{j}+2t\,\mathbf{k}}{\sqrt{9+4t^2}}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the unit tangent vector of the curve $\mathbf{r}(t)=(1+3\cos t)\mathbf{i}+(3\sin t)\mathbf{j}+t^2\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(1+3\cos t)\mathbf{i}+(3\sin t)\mathbf{j}+t^2\mathbf{k}$, $$\mathbf{r}'(t)=(-3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+2t\mathbf{k}$$ and $$|\mathbf{r}'(t)|=\sqrt{9\sin^2t+9\cos^2t+4t^2}=\sqrt{9+4t^2}.$$ Hence the unit tangent vector is $$\mathbf{T}(t)=\dfrac{\mathbf{r}'(t)}{|\mathbf{r}'(t)|}=\dfrac{-3\sin t\,\mathbf{i}+3\cos t\,\mathbf{j}+2t\,\mathbf{k}}{\sqrt{9+4t^2}}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 02 -->
+<div class="card ex-card" id="yu02">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 02</span>
+    <span class="ex-title">길이 조건과 단위접선벡터</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(5\sin t)\mathbf{i}+(5\cos t)\mathbf{j}+12t\mathbf{k}$ $(0\le t\le a)$의 길이는 $26\pi$이다. $\mathbf{r}(a/2)$에서의 단위접선벡터를 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(5\sin t)\mathbf{i}+(5\cos t)\mathbf{j}+12t\mathbf{k}$이므로 $$\mathbf{r}'(t)=(5\cos t)\mathbf{i}-(5\sin t)\mathbf{j}+12\mathbf{k},\qquad |\mathbf{r}'(t)|=\sqrt{25+144}=13$$ 이다 (일정한 속력). $0\le t\le a$에서 길이는 $13a$이고, 이것이 $26\pi$와 같으므로 $a=2\pi$이다.</p>
+        <p>따라서 $a/2=\pi$이고, $$\mathbf{r}'(\pi)=(5\cos\pi)\mathbf{i}-(5\sin\pi)\mathbf{j}+12\mathbf{k}=-5\mathbf{i}+12\mathbf{k}$$ 이므로 $\mathbf{r}(a/2)$에서의 단위접선벡터는 $$\mathbf{T}(\pi)=\dfrac{\mathbf{r}'(\pi)}{|\mathbf{r}'(\pi)|}=\dfrac{-5\mathbf{i}+12\mathbf{k}}{13}=-\dfrac{5}{13}\mathbf{i}+\dfrac{12}{13}\mathbf{k}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The length of the curve $\mathbf{r}(t)=(5\sin t)\mathbf{i}+(5\cos t)\mathbf{j}+12t\mathbf{k}$ $(0\le t\le a)$ is $26\pi$. Find the unit tangent vector at $\mathbf{r}(a/2)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(5\sin t)\mathbf{i}+(5\cos t)\mathbf{j}+12t\mathbf{k}$, $$\mathbf{r}'(t)=(5\cos t)\mathbf{i}-(5\sin t)\mathbf{j}+12\mathbf{k},\qquad |\mathbf{r}'(t)|=\sqrt{25+144}=13$$ (constant speed). On $0\le t\le a$ the length is $13a$, and setting this equal to $26\pi$ gives $a=2\pi$.</p>
+        <p>Hence $a/2=\pi$, and $$\mathbf{r}'(\pi)=(5\cos\pi)\mathbf{i}-(5\sin\pi)\mathbf{j}+12\mathbf{k}=-5\mathbf{i}+12\mathbf{k},$$ so the unit tangent vector at $\mathbf{r}(a/2)$ is $$\mathbf{T}(\pi)=\dfrac{\mathbf{r}'(\pi)}{|\mathbf{r}'(\pi)|}=\dfrac{-5\mathbf{i}+12\mathbf{k}}{13}=-\dfrac{5}{13}\mathbf{i}+\dfrac{12}{13}\mathbf{k}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 03 -->
+<div class="card ex-card" id="ex03">
+  <div class="card-head">
+    <span class="ex-num">예제 03</span>
+    <span class="ex-title">직선과 원의 곡률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>직선 $\mathbf{r}(t)=\mathbf{C}+t\mathbf{v}$ ($\mathbf{C}$, $\mathbf{v}$는 상수벡터)의 곡률이 $0$임을 보이시오.</li>
+          <li>원 $\mathbf{r}(t)=(a\cos t,a\sin t)$ $(a>0)$의 곡률은 $1/a$임을 보이시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> (1) $\mathbf{r}(t)=\mathbf{C}+t\mathbf{v}$이므로 $\mathbf{r}'(t)=\mathbf{v}$, $\mathbf{r}''(t)=\mathbf{0}$이다. 곡률의 정의 $\kappa=\dfrac{|\mathbf{r}'\times\mathbf{r}''|}{|\mathbf{r}'|^3}$에서 $\mathbf{r}'\times\mathbf{r}''=\mathbf{v}\times\mathbf{0}=\mathbf{0}$이므로 $\kappa=0$이다.</p>
+        <p>(2) $\mathbf{r}(t)=(a\cos t,a\sin t,0)$이라 하면 $$\mathbf{r}'(t)=(-a\sin t,a\cos t,0),\qquad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0)$$ 이다. 외적을 계산하면 $$\mathbf{r}'\times\mathbf{r}''=(0,0,a^2\sin^2t+a^2\cos^2t)=(0,0,a^2)$$ 이므로 $|\mathbf{r}'\times\mathbf{r}''|=a^2$이다. 또한 $|\mathbf{r}'(t)|=a$이므로 $|\mathbf{r}'|^3=a^3$이다. 따라서 $$\kappa=\dfrac{a^2}{a^3}=\dfrac1a$$ 이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Show that the curvature of the line $\mathbf{r}(t)=\mathbf{C}+t\mathbf{v}$ ($\mathbf{C}$, $\mathbf{v}$ are constant vectors) is $0$.</li>
+          <li>Show that the curvature of the circle $\mathbf{r}(t)=(a\cos t,a\sin t)$ $(a>0)$ is $1/a$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> (1) Since $\mathbf{r}(t)=\mathbf{C}+t\mathbf{v}$, we have $\mathbf{r}'(t)=\mathbf{v}$ and $\mathbf{r}''(t)=\mathbf{0}$. By the definition $\kappa=\dfrac{|\mathbf{r}'\times\mathbf{r}''|}{|\mathbf{r}'|^3}$, since $\mathbf{r}'\times\mathbf{r}''=\mathbf{v}\times\mathbf{0}=\mathbf{0}$, we get $\kappa=0$.</p>
+        <p>(2) Let $\mathbf{r}(t)=(a\cos t,a\sin t,0)$. Then $$\mathbf{r}'(t)=(-a\sin t,a\cos t,0),\qquad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0).$$ Computing the cross product, $$\mathbf{r}'\times\mathbf{r}''=(0,0,a^2\sin^2t+a^2\cos^2t)=(0,0,a^2),$$ so $|\mathbf{r}'\times\mathbf{r}''|=a^2$. Also $|\mathbf{r}'(t)|=a$, so $|\mathbf{r}'|^3=a^3$. Therefore $$\kappa=\dfrac{a^2}{a^3}=\dfrac1a.$$</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-1 -->
+<div class="card ex-card" id="yu03-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-1</span>
+    <span class="ex-title">나선과 곡선의 곡률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>나선 $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$의 곡률을 구하시오.</li>
+          <li>곡선 $\mathbf{r}(t)=(\cosh t,-\sinh t,t)$의 곡률을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$이므로 $$\mathbf{r}'(t)=(-a\sin t,a\cos t,b),\qquad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0)$$ 이다. 외적을 계산하면 $$\mathbf{r}'\times\mathbf{r}''=(ab\sin t,\,-ab\cos t,\,a^2)$$ 이므로 $$|\mathbf{r}'\times\mathbf{r}''|=\sqrt{a^2b^2+a^4}=a\sqrt{a^2+b^2}$$ 이다. 또 $|\mathbf{r}'(t)|=\sqrt{a^2+b^2}$이므로 $$\kappa=\dfrac{a\sqrt{a^2+b^2}}{(a^2+b^2)^{3/2}}=\dfrac{a}{a^2+b^2}$$ 이다.</p>
+        <p>(2) $\mathbf{r}(t)=(\cosh t,-\sinh t,t)$이므로 $$\mathbf{r}'(t)=(\sinh t,-\cosh t,1),\qquad \mathbf{r}''(t)=(\cosh t,-\sinh t,0)$$ 이다. 외적을 계산하면 $$\mathbf{r}'\times\mathbf{r}''=(\sinh t,\cosh t,-\sinh^2t+\cosh^2t)=(\sinh t,\cosh t,1)$$ 이므로 $$|\mathbf{r}'\times\mathbf{r}''|=\sqrt{\sinh^2t+\cosh^2t+1}=\sqrt{2\cosh^2t}=\sqrt2\cosh t$$ 이다 (단, $\cosh^2t-\sinh^2t=1$을 이용). 같은 방식으로 $|\mathbf{r}'(t)|^2=\sinh^2t+\cosh^2t+1=2\cosh^2t$이므로 $|\mathbf{r}'(t)|=\sqrt2\cosh t$이다. 따라서 $$\kappa=\dfrac{\sqrt2\cosh t}{(\sqrt2\cosh t)^3}=\dfrac{1}{2\cosh^2t}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the curvature of the helix $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$.</li>
+          <li>Find the curvature of the curve $\mathbf{r}(t)=(\cosh t,-\sinh t,t)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Since $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$, $$\mathbf{r}'(t)=(-a\sin t,a\cos t,b),\qquad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0).$$ Computing the cross product, $$\mathbf{r}'\times\mathbf{r}''=(ab\sin t,\,-ab\cos t,\,a^2),$$ so $$|\mathbf{r}'\times\mathbf{r}''|=\sqrt{a^2b^2+a^4}=a\sqrt{a^2+b^2}.$$ Since $|\mathbf{r}'(t)|=\sqrt{a^2+b^2}$, $$\kappa=\dfrac{a\sqrt{a^2+b^2}}{(a^2+b^2)^{3/2}}=\dfrac{a}{a^2+b^2}.$$</p>
+        <p>(2) Since $\mathbf{r}(t)=(\cosh t,-\sinh t,t)$, $$\mathbf{r}'(t)=(\sinh t,-\cosh t,1),\qquad \mathbf{r}''(t)=(\cosh t,-\sinh t,0).$$ Computing the cross product, $$\mathbf{r}'\times\mathbf{r}''=(\sinh t,\cosh t,-\sinh^2t+\cosh^2t)=(\sinh t,\cosh t,1),$$ so, using $\cosh^2t-\sinh^2t=1$, $$|\mathbf{r}'\times\mathbf{r}''|=\sqrt{\sinh^2t+\cosh^2t+1}=\sqrt{2\cosh^2t}=\sqrt2\cosh t.$$ Similarly $|\mathbf{r}'(t)|^2=\sinh^2t+\cosh^2t+1=2\cosh^2t$, so $|\mathbf{r}'(t)|=\sqrt2\cosh t$. Therefore $$\kappa=\dfrac{\sqrt2\cosh t}{(\sqrt2\cosh t)^3}=\dfrac{1}{2\cosh^2t}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-2 -->
+<div class="card ex-card" id="yu03-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-2</span>
+    <span class="ex-title">평면곡선의 곡률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 평면곡선의 곡률을 계산하시오.</p>
+        <ol>
+          <li>$y=\ln(\cos x)$ $(-\pi/2 \lt x \lt \pi/2)$</li>
+          <li>$\mathbf{r}(t)=(\tan^{-1}(\sinh t),\ln(\cosh t))$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $y=\ln(\cos x)$ $(-\pi/2 \lt x \lt \pi/2)$에서 $$y'=-\tan x,\qquad y''=-\sec^2x$$ 이다. 평면곡선 $y=f(x)$의 곡률 공식 $\kappa=\dfrac{|f''|}{(1+f'^2)^{3/2}}$에 대입하면, $1+y'^2=1+\tan^2x=\sec^2x$이므로 $$\kappa=\dfrac{\sec^2x}{(\sec^2x)^{3/2}}=\dfrac{\sec^2x}{\sec^3x}=\dfrac{1}{\sec x}=\cos x$$ 이다 (단, $-\pi/2 \lt x \lt \pi/2$에서 $\cos x \gt 0$이므로 $\sec^3x=|\sec x|^3$의 부호 문제가 없다).</p>
+        <p>(2) $\mathbf{r}(t)=(\tan^{-1}(\sinh t),\ln(\cosh t))$이라 하면 $$x'(t)=\dfrac{\cosh t}{1+\sinh^2t}=\dfrac{\cosh t}{\cosh^2t}=\operatorname{sech}t,\qquad y'(t)=\dfrac{\sinh t}{\cosh t}=\tanh t$$ 이고, $$x''(t)=-\operatorname{sech}t\tanh t,\qquad y''(t)=\operatorname{sech}^2t$$ 이다. 평면곡선 $\mathbf{r}(t)=(x(t),y(t))$의 곡률 공식 $\kappa=\dfrac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}$에서, $$x'y''-y'x''=\operatorname{sech}t\cdot\operatorname{sech}^2t+\tanh t\cdot\operatorname{sech}t\tanh t=\operatorname{sech}t(\operatorname{sech}^2t+\tanh^2t)=\operatorname{sech}t$$ 이고 ($\operatorname{sech}^2t+\tanh^2t=1$이므로), $$x'^2+y'^2=\operatorname{sech}^2t+\tanh^2t=1$$ 이다. 따라서 $$\kappa=\dfrac{\operatorname{sech}t}{1^{3/2}}=\operatorname{sech}t=\dfrac{1}{\cosh t}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the curvature of each of the following plane curves.</p>
+        <ol>
+          <li>$y=\ln(\cos x)$ $(-\pi/2 \lt x \lt \pi/2)$</li>
+          <li>$\mathbf{r}(t)=(\tan^{-1}(\sinh t),\ln(\cosh t))$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) For $y=\ln(\cos x)$ $(-\pi/2 \lt x \lt \pi/2)$, $$y'=-\tan x,\qquad y''=-\sec^2x.$$ Substituting into the curvature formula for a plane curve $y=f(x)$, $\kappa=\dfrac{|f''|}{(1+f'^2)^{3/2}}$, and using $1+y'^2=1+\tan^2x=\sec^2x$, $$\kappa=\dfrac{\sec^2x}{(\sec^2x)^{3/2}}=\dfrac{\sec^2x}{\sec^3x}=\dfrac{1}{\sec x}=\cos x$$ (since $\cos x \gt 0$ on $-\pi/2 \lt x \lt \pi/2$, there is no sign ambiguity in $\sec^3x=|\sec x|^3$).</p>
+        <p>(2) Let $\mathbf{r}(t)=(\tan^{-1}(\sinh t),\ln(\cosh t))$. Then $$x'(t)=\dfrac{\cosh t}{1+\sinh^2t}=\dfrac{\cosh t}{\cosh^2t}=\operatorname{sech}t,\qquad y'(t)=\dfrac{\sinh t}{\cosh t}=\tanh t,$$ and $$x''(t)=-\operatorname{sech}t\tanh t,\qquad y''(t)=\operatorname{sech}^2t.$$ Using the plane-curve curvature formula $\kappa=\dfrac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}$, we get $$x'y''-y'x''=\operatorname{sech}t\cdot\operatorname{sech}^2t+\tanh t\cdot\operatorname{sech}t\tanh t=\operatorname{sech}t(\operatorname{sech}^2t+\tanh^2t)=\operatorname{sech}t$$ (since $\operatorname{sech}^2t+\tanh^2t=1$), and $$x'^2+y'^2=\operatorname{sech}^2t+\tanh^2t=1.$$ Hence $$\kappa=\dfrac{\operatorname{sech}t}{1^{3/2}}=\operatorname{sech}t=\dfrac{1}{\cosh t}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 03-3 -->
+<div class="card ex-card" id="yu03-3">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 03-3</span>
+    <span class="ex-title">곡률의 최댓값·최솟값</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>$y=ax^2$ $(a\neq 0)$의 곡률의 최댓값을 구하시오.</li>
+          <li>타원 $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ $(a>b>0)$의 곡률의 최댓값과 최솟값을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $y=ax^2$ $(a\neq0)$에서 $y'=2ax$, $y''=2a$이므로 $$\kappa(x)=\dfrac{|2a|}{(1+4a^2x^2)^{3/2}}$$ 이다. 분모 $(1+4a^2x^2)^{3/2}$는 $x=0$에서 최솟값 $1$을 가지므로 $\kappa(x)$는 $x=0$에서 최댓값 $$\kappa(0)=2|a|$$ 를 갖는다.</p>
+        <p>(2) 타원을 $x=a\cos t,\ y=b\sin t$로 매개화하면 $$x'=-a\sin t,\ y'=b\cos t,\qquad x''=-a\cos t,\ y''=-b\sin t$$ 이고, $$x'y''-y'x''=ab\sin^2t+ab\cos^2t=ab$$ 이므로 $$\kappa(t)=\dfrac{ab}{(a^2\sin^2t+b^2\cos^2t)^{3/2}}$$ 이다. $a \gt b \gt 0$이므로 $$a^2\sin^2t+b^2\cos^2t=b^2+(a^2-b^2)\sin^2t$$ 는 $\sin t=0$(즉 $t=0,\pi$, 점 $(\pm a,0)$)일 때 최솟값 $b^2$, $\sin^2t=1$(즉 $t=\pi/2,3\pi/2$, 점 $(0,\pm b)$)일 때 최댓값 $a^2$을 갖는다. 분모가 최소일 때 $\kappa$는 최대이므로, $$\kappa_{\max}=\dfrac{ab}{b^3}=\dfrac{a}{b^2}\ \ (\text{점 }(\pm a,0)),\qquad \kappa_{\min}=\dfrac{ab}{a^3}=\dfrac{b}{a^2}\ \ (\text{점 }(0,\pm b))$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>Find the maximum curvature of $y=ax^2$ $(a\neq 0)$.</li>
+          <li>Find the maximum and minimum curvature of the ellipse $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ $(a>b>0)$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) For $y=ax^2$ $(a\neq0)$, $y'=2ax$ and $y''=2a$, so $$\kappa(x)=\dfrac{|2a|}{(1+4a^2x^2)^{3/2}}.$$ The denominator $(1+4a^2x^2)^{3/2}$ attains its minimum value $1$ at $x=0$, so $\kappa(x)$ attains its maximum $$\kappa(0)=2|a|$$ at $x=0$.</p>
+        <p>(2) Parametrize the ellipse as $x=a\cos t,\ y=b\sin t$. Then $$x'=-a\sin t,\ y'=b\cos t,\qquad x''=-a\cos t,\ y''=-b\sin t,$$ and $$x'y''-y'x''=ab\sin^2t+ab\cos^2t=ab,$$ so $$\kappa(t)=\dfrac{ab}{(a^2\sin^2t+b^2\cos^2t)^{3/2}}.$$ Since $a \gt b \gt 0$, $$a^2\sin^2t+b^2\cos^2t=b^2+(a^2-b^2)\sin^2t$$ attains its minimum $b^2$ when $\sin t=0$ (i.e. $t=0,\pi$, the points $(\pm a,0)$), and its maximum $a^2$ when $\sin^2t=1$ (i.e. $t=\pi/2,3\pi/2$, the points $(0,\pm b)$). Since $\kappa$ is largest where the denominator is smallest, $$\kappa_{\max}=\dfrac{ab}{b^3}=\dfrac{a}{b^2}\ \ (\text{at }(\pm a,0)),\qquad \kappa_{\min}=\dfrac{ab}{a^3}=\dfrac{b}{a^2}\ \ (\text{at }(0,\pm b)).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 04 -->
+<div class="card ex-card" id="ex04">
+  <div class="card-head">
+    <span class="ex-num">예제 04</span>
+    <span class="ex-title">TNB 틀과 접촉원</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol>
+          <li>곡선 $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$에 대해 단위접선벡터 $\mathbf{T}$, 주단위법선벡터 $\mathbf{N}$, 단위종법선벡터 $\mathbf{B}$를 구하시오.</li>
+          <li>곡선 $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$의 $t=0$에서의 접촉원을 구하시오.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> (1) $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$이므로 $$\mathbf{r}'(t)=(3\cos t)\mathbf{i}-(3\sin t)\mathbf{j}+4\mathbf{k},\qquad |\mathbf{r}'(t)|=\sqrt{9+16}=5$$ 이다 (일정한 속력). 따라서 $$\mathbf{T}(t)=\dfrac{3\cos t}{5}\mathbf{i}-\dfrac{3\sin t}{5}\mathbf{j}+\dfrac{4}{5}\mathbf{k}$$ 이다. $\mathbf{T}$를 미분하면 $$\mathbf{T}'(t)=-\dfrac{3\sin t}{5}\mathbf{i}-\dfrac{3\cos t}{5}\mathbf{j},\qquad |\mathbf{T}'(t)|=\dfrac35$$ 이므로 $$\mathbf{N}(t)=\dfrac{\mathbf{T}'(t)}{|\mathbf{T}'(t)|}=(-\sin t)\mathbf{i}-(\cos t)\mathbf{j}$$ 이다. 단위종법선벡터는 $\mathbf{B}=\mathbf{T}\times\mathbf{N}$이므로 $$\mathbf{B}(t)=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ 3\cos t/5 & -3\sin t/5 & 4/5\\ -\sin t & -\cos t & 0\end{vmatrix}=\dfrac{4\cos t}{5}\mathbf{i}-\dfrac{4\sin t}{5}\mathbf{j}-\dfrac35\mathbf{k}$$ 이다.</p>
+        <p>(2) $\mathbf{T}'(t)$로부터 $$\kappa=\dfrac{|\mathbf{T}'(t)|}{|\mathbf{r}'(t)|}=\dfrac{3/5}{5}=\dfrac{3}{25}$$ 이고, 곡률반경은 $\rho=1/\kappa=25/3$이다. $t=0$에서 $\mathbf{r}(0)=(0,3,0)$, $\mathbf{N}(0)=(0,-1,0)$이므로, 접촉원의 중심(곡률중심)은 $$\mathbf{r}(0)+\rho\,\mathbf{N}(0)=(0,3,0)+\dfrac{25}{3}(0,-1,0)=\Bigl(0,-\dfrac{16}{3},0\Bigr)$$ 이다. 접촉원은 점 $\bigl(0,-\dfrac{16}{3},0\bigr)$을 중심으로 하고 반지름이 $25/3$이며, $\mathbf{T}(0),\mathbf{N}(0)$이 이루는 평면(법선 $\mathbf{B}(0)=(4/5,0,-3/5)$인 평면, 즉 $4x-3z=0$) 위에 있는 원이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol>
+          <li>For the curve $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$, find the unit tangent vector $\mathbf{T}$, the principal unit normal vector $\mathbf{N}$, and the unit binormal vector $\mathbf{B}$.</li>
+          <li>Find the osculating circle of the curve $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$ at $t=0$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> (1) Since $\mathbf{r}(t)=(3\sin t)\mathbf{i}+(3\cos t)\mathbf{j}+4t\mathbf{k}$, $$\mathbf{r}'(t)=(3\cos t)\mathbf{i}-(3\sin t)\mathbf{j}+4\mathbf{k},\qquad |\mathbf{r}'(t)|=\sqrt{9+16}=5$$ (constant speed). Hence $$\mathbf{T}(t)=\dfrac{3\cos t}{5}\mathbf{i}-\dfrac{3\sin t}{5}\mathbf{j}+\dfrac{4}{5}\mathbf{k}.$$ Differentiating $\mathbf{T}$, $$\mathbf{T}'(t)=-\dfrac{3\sin t}{5}\mathbf{i}-\dfrac{3\cos t}{5}\mathbf{j},\qquad |\mathbf{T}'(t)|=\dfrac35,$$ so $$\mathbf{N}(t)=\dfrac{\mathbf{T}'(t)}{|\mathbf{T}'(t)|}=(-\sin t)\mathbf{i}-(\cos t)\mathbf{j}.$$ The unit binormal vector is $\mathbf{B}=\mathbf{T}\times\mathbf{N}$, so $$\mathbf{B}(t)=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ 3\cos t/5 & -3\sin t/5 & 4/5\\ -\sin t & -\cos t & 0\end{vmatrix}=\dfrac{4\cos t}{5}\mathbf{i}-\dfrac{4\sin t}{5}\mathbf{j}-\dfrac35\mathbf{k}.$$</p>
+        <p>(2) From $\mathbf{T}'(t)$ above, $$\kappa=\dfrac{|\mathbf{T}'(t)|}{|\mathbf{r}'(t)|}=\dfrac{3/5}{5}=\dfrac{3}{25},$$ so the radius of curvature is $\rho=1/\kappa=25/3$. At $t=0$, $\mathbf{r}(0)=(0,3,0)$ and $\mathbf{N}(0)=(0,-1,0)$, so the center of the osculating circle (center of curvature) is $$\mathbf{r}(0)+\rho\,\mathbf{N}(0)=(0,3,0)+\dfrac{25}{3}(0,-1,0)=\Bigl(0,-\dfrac{16}{3},0\Bigr).$$ The osculating circle is centered at $\bigl(0,-\dfrac{16}{3},0\bigr)$ with radius $25/3$, lying in the plane spanned by $\mathbf{T}(0)$ and $\mathbf{N}(0)$ (the plane with normal $\mathbf{B}(0)=(4/5,0,-3/5)$, i.e. $4x-3z=0$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-1 -->
+<div class="card ex-card" id="yu04-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-1</span>
+    <span class="ex-title">단위접선·주법선벡터</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(\cos 2t)\mathbf{i}+(\sin 2t)\mathbf{j}$에 대해 $\mathbf{T}$와 $\mathbf{N}$을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\cos 2t)\mathbf{i}+(\sin 2t)\mathbf{j}$이므로 $$\mathbf{r}'(t)=(-2\sin 2t)\mathbf{i}+(2\cos 2t)\mathbf{j},\qquad |\mathbf{r}'(t)|=2$$ 이다 (일정한 속력). 따라서 $$\mathbf{T}(t)=(-\sin 2t)\mathbf{i}+(\cos 2t)\mathbf{j}$$ 이다. $\mathbf{T}$를 미분하면 $$\mathbf{T}'(t)=(-2\cos 2t)\mathbf{i}-(2\sin 2t)\mathbf{j},\qquad |\mathbf{T}'(t)|=2$$ 이므로 $$\mathbf{N}(t)=\dfrac{\mathbf{T}'(t)}{|\mathbf{T}'(t)|}=(-\cos 2t)\mathbf{i}-(\sin 2t)\mathbf{j}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the curve $\mathbf{r}(t)=(\cos 2t)\mathbf{i}+(\sin 2t)\mathbf{j}$, find $\mathbf{T}$ and $\mathbf{N}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(\cos 2t)\mathbf{i}+(\sin 2t)\mathbf{j}$, $$\mathbf{r}'(t)=(-2\sin 2t)\mathbf{i}+(2\cos 2t)\mathbf{j},\qquad |\mathbf{r}'(t)|=2$$ (constant speed). Hence $$\mathbf{T}(t)=(-\sin 2t)\mathbf{i}+(\cos 2t)\mathbf{j}.$$ Differentiating $\mathbf{T}$, $$\mathbf{T}'(t)=(-2\cos 2t)\mathbf{i}-(2\sin 2t)\mathbf{j},\qquad |\mathbf{T}'(t)|=2,$$ so $$\mathbf{N}(t)=\dfrac{\mathbf{T}'(t)}{|\mathbf{T}'(t)|}=(-\cos 2t)\mathbf{i}-(\sin 2t)\mathbf{j}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 04-2 -->
+<div class="card ex-card" id="yu04-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 04-2</span>
+    <span class="ex-title">접촉·법·교정평면</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>나선 $\mathbf{r}(t)=(\cos t,\sin t,-t)$에 대해 $t=\pi/4$에서의 접촉평면, 법평면, 교정면을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\cos t,\sin t,-t)$이므로 $$\mathbf{r}'(t)=(-\sin t,\cos t,-1),\qquad |\mathbf{r}'(t)|=\sqrt2$$ 이다 (일정한 속력). $t=\pi/4$에서 $$\mathbf{r}(\pi/4)=\Bigl(\dfrac{\sqrt2}{2},\dfrac{\sqrt2}{2},-\dfrac{\pi}{4}\Bigr)=P,\qquad \mathbf{T}(\pi/4)=\dfrac{\mathbf{r}'(\pi/4)}{\sqrt2}=\Bigl(-\dfrac12,\dfrac12,-\dfrac{\sqrt2}{2}\Bigr)$$ 이다.</p>
+        <p>속력이 일정하므로 $\mathbf{T}'(t)=\mathbf{r}''(t)/\sqrt2$이고, $\mathbf{r}''(t)=(-\cos t,-\sin t,0)$이므로 $\mathbf{r}''(\pi/4)=\bigl(-\sqrt2/2,-\sqrt2/2,0\bigr)$, 즉 $$\mathbf{T}'(\pi/4)=\Bigl(-\dfrac12,-\dfrac12,0\Bigr),\qquad |\mathbf{T}'(\pi/4)|=\dfrac{1}{\sqrt2}$$ 이다. 따라서 $$\mathbf{N}(\pi/4)=\dfrac{\mathbf{T}'(\pi/4)}{|\mathbf{T}'(\pi/4)|}=\Bigl(-\dfrac{\sqrt2}{2},-\dfrac{\sqrt2}{2},0\Bigr)$$ 이고, $$\mathbf{B}(\pi/4)=\mathbf{T}(\pi/4)\times\mathbf{N}(\pi/4)=\Bigl(-\dfrac12,\dfrac12,\dfrac{\sqrt2}{2}\Bigr)$$ 이다.</p>
+        <p>접촉평면(법선 $\mathbf{B}$), 법평면(법선 $\mathbf{T}$), 교정면(법선 $\mathbf{N}$)은 각각 $\mathbf{B}\cdot(X-P)=0$, $\mathbf{T}\cdot(X-P)=0$, $\mathbf{N}\cdot(X-P)=0$을 만족하는 평면이므로, 계산하면 다음과 같다.</p>
+        <ul>
+          <li>접촉평면: $-\dfrac12\bigl(x-\dfrac{\sqrt2}{2}\bigr)+\dfrac12\bigl(y-\dfrac{\sqrt2}{2}\bigr)+\dfrac{\sqrt2}{2}\bigl(z+\dfrac{\pi}{4}\bigr)=0$, 즉 $$x-y-\sqrt2\,z=\dfrac{\sqrt2\,\pi}{4}$$</li>
+          <li>법평면: $-\dfrac12\bigl(x-\dfrac{\sqrt2}{2}\bigr)+\dfrac12\bigl(y-\dfrac{\sqrt2}{2}\bigr)-\dfrac{\sqrt2}{2}\bigl(z+\dfrac{\pi}{4}\bigr)=0$, 즉 $$x-y+\sqrt2\,z=-\dfrac{\sqrt2\,\pi}{4}$$</li>
+          <li>교정면: $-\dfrac{\sqrt2}{2}\bigl(x-\dfrac{\sqrt2}{2}\bigr)-\dfrac{\sqrt2}{2}\bigl(y-\dfrac{\sqrt2}{2}\bigr)=0$, 즉 $$x+y=\sqrt2$$</li>
+        </ul>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the helix $\mathbf{r}(t)=(\cos t,\sin t,-t)$, find the osculating plane, normal plane, and rectifying plane at $t=\pi/4$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(\cos t,\sin t,-t)$, $$\mathbf{r}'(t)=(-\sin t,\cos t,-1),\qquad |\mathbf{r}'(t)|=\sqrt2$$ (constant speed). At $t=\pi/4$, $$\mathbf{r}(\pi/4)=\Bigl(\dfrac{\sqrt2}{2},\dfrac{\sqrt2}{2},-\dfrac{\pi}{4}\Bigr)=P,\qquad \mathbf{T}(\pi/4)=\dfrac{\mathbf{r}'(\pi/4)}{\sqrt2}=\Bigl(-\dfrac12,\dfrac12,-\dfrac{\sqrt2}{2}\Bigr).$$</p>
+        <p>Since the speed is constant, $\mathbf{T}'(t)=\mathbf{r}''(t)/\sqrt2$; from $\mathbf{r}''(t)=(-\cos t,-\sin t,0)$ we get $\mathbf{r}''(\pi/4)=\bigl(-\sqrt2/2,-\sqrt2/2,0\bigr)$, so $$\mathbf{T}'(\pi/4)=\Bigl(-\dfrac12,-\dfrac12,0\Bigr),\qquad |\mathbf{T}'(\pi/4)|=\dfrac{1}{\sqrt2}.$$ Hence $$\mathbf{N}(\pi/4)=\dfrac{\mathbf{T}'(\pi/4)}{|\mathbf{T}'(\pi/4)|}=\Bigl(-\dfrac{\sqrt2}{2},-\dfrac{\sqrt2}{2},0\Bigr),$$ and $$\mathbf{B}(\pi/4)=\mathbf{T}(\pi/4)\times\mathbf{N}(\pi/4)=\Bigl(-\dfrac12,\dfrac12,\dfrac{\sqrt2}{2}\Bigr).$$</p>
+        <p>The osculating plane (normal $\mathbf{B}$), normal plane (normal $\mathbf{T}$), and rectifying plane (normal $\mathbf{N}$) are the planes satisfying $\mathbf{B}\cdot(X-P)=0$, $\mathbf{T}\cdot(X-P)=0$, $\mathbf{N}\cdot(X-P)=0$ respectively, which simplify to:</p>
+        <ul>
+          <li>Osculating plane: $-\dfrac12\bigl(x-\dfrac{\sqrt2}{2}\bigr)+\dfrac12\bigl(y-\dfrac{\sqrt2}{2}\bigr)+\dfrac{\sqrt2}{2}\bigl(z+\dfrac{\pi}{4}\bigr)=0$, i.e. $$x-y-\sqrt2\,z=\dfrac{\sqrt2\,\pi}{4}$$</li>
+          <li>Normal plane: $-\dfrac12\bigl(x-\dfrac{\sqrt2}{2}\bigr)+\dfrac12\bigl(y-\dfrac{\sqrt2}{2}\bigr)-\dfrac{\sqrt2}{2}\bigl(z+\dfrac{\pi}{4}\bigr)=0$, i.e. $$x-y+\sqrt2\,z=-\dfrac{\sqrt2\,\pi}{4}$$</li>
+          <li>Rectifying plane: $-\dfrac{\sqrt2}{2}\bigl(x-\dfrac{\sqrt2}{2}\bigr)-\dfrac{\sqrt2}{2}\bigl(y-\dfrac{\sqrt2}{2}\bigr)=0$, i.e. $$x+y=\sqrt2$$</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 05 -->
+<div class="card ex-card" id="ex05">
+  <div class="card-head">
+    <span class="ex-num">예제 05</span>
+    <span class="ex-title">가속도의 접선·법선 성분</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(\cos t+t\sin t)\mathbf{i}+(\sin t-t\cos t)\mathbf{j}$ $(t>0)$의 가속도의 $\mathbf{T}$방향 성분과 $\mathbf{N}$방향 성분을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\cos t+t\sin t)\mathbf{i}+(\sin t-t\cos t)\mathbf{j}$ $(t \gt 0)$이므로 $$\mathbf{r}'(t)=(t\cos t)\mathbf{i}+(t\sin t)\mathbf{j}$$ 이고 (곱미분에서 $-\sin t+\sin t+t\cos t=t\cos t$, $\cos t-\cos t+t\sin t=t\sin t$), $$|\mathbf{r}'(t)|=t\sqrt{\cos^2t+\sin^2t}=t\quad(t \gt 0)$$ 이다.</p>
+        <p>가속도의 $\mathbf{T}$방향 성분은 $$a_T=\dfrac{d}{dt}|\mathbf{r}'(t)|=\dfrac{d}{dt}(t)=1$$ 이다. 한편 $$\mathbf{r}''(t)=(\cos t-t\sin t)\mathbf{i}+(\sin t+t\cos t)\mathbf{j}$$ 이므로 $$|\mathbf{r}''(t)|^2=(\cos t-t\sin t)^2+(\sin t+t\cos t)^2=\cos^2t+\sin^2t+t^2(\sin^2t+\cos^2t)=1+t^2$$ 이다. 따라서 $$a_N=\sqrt{|\mathbf{r}''(t)|^2-a_T^2}=\sqrt{(1+t^2)-1}=\sqrt{t^2}=t\quad(t \gt 0)$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the tangential ($\mathbf{T}$-direction) and normal ($\mathbf{N}$-direction) components of the acceleration of the curve $\mathbf{r}(t)=(\cos t+t\sin t)\mathbf{i}+(\sin t-t\cos t)\mathbf{j}$ $(t>0)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(\cos t+t\sin t)\mathbf{i}+(\sin t-t\cos t)\mathbf{j}$ $(t \gt 0)$, the product rule gives $-\sin t+\sin t+t\cos t=t\cos t$ and $\cos t-\cos t+t\sin t=t\sin t$, so $$\mathbf{r}'(t)=(t\cos t)\mathbf{i}+(t\sin t)\mathbf{j},$$ and $$|\mathbf{r}'(t)|=t\sqrt{\cos^2t+\sin^2t}=t\quad(t \gt 0).$$</p>
+        <p>The tangential component of acceleration is $$a_T=\dfrac{d}{dt}|\mathbf{r}'(t)|=\dfrac{d}{dt}(t)=1.$$ On the other hand, $$\mathbf{r}''(t)=(\cos t-t\sin t)\mathbf{i}+(\sin t+t\cos t)\mathbf{j},$$ so $$|\mathbf{r}''(t)|^2=(\cos t-t\sin t)^2+(\sin t+t\cos t)^2=\cos^2t+\sin^2t+t^2(\sin^2t+\cos^2t)=1+t^2.$$ Hence $$a_N=\sqrt{|\mathbf{r}''(t)|^2-a_T^2}=\sqrt{(1+t^2)-1}=\sqrt{t^2}=t\quad(t \gt 0).$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-1 -->
+<div class="card ex-card" id="yu05-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-1</span>
+    <span class="ex-title">가속도 성분 분해</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(e^t\cos t)\mathbf{i}+(e^t\sin t)\mathbf{j}+\sqrt{2}\,e^t\mathbf{k}$의 가속도의 $\mathbf{T}$방향 성분과 $\mathbf{N}$방향 성분을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(e^t\cos t)\mathbf{i}+(e^t\sin t)\mathbf{j}+\sqrt2\,e^t\mathbf{k}$이므로 $$\mathbf{r}'(t)=e^t(\cos t-\sin t)\mathbf{i}+e^t(\sin t+\cos t)\mathbf{j}+\sqrt2\,e^t\mathbf{k}$$ 이고, $$(\cos t-\sin t)^2+(\sin t+\cos t)^2+2=(1-\sin 2t)+(1+\sin 2t)+2=4$$ 이므로 $$|\mathbf{r}'(t)|=e^t\sqrt4=2e^t$$ 이다. 따라서 $$a_T=\dfrac{d}{dt}(2e^t)=2e^t$$ 이다.</p>
+        <p>또한 $\mathbf{r}'(t)$를 다시 미분하면 $$\mathbf{r}''(t)=e^t(-2\sin t)\mathbf{i}+e^t(2\cos t)\mathbf{j}+\sqrt2\,e^t\mathbf{k}$$ 이고, $$|\mathbf{r}''(t)|^2=e^{2t}(4\sin^2t+4\cos^2t+2)=6e^{2t}$$ 이다. 따라서 $$a_N=\sqrt{|\mathbf{r}''(t)|^2-a_T^2}=\sqrt{6e^{2t}-4e^{2t}}=\sqrt{2e^{2t}}=\sqrt2\,e^t$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the tangential ($\mathbf{T}$-direction) and normal ($\mathbf{N}$-direction) components of the acceleration of the curve $\mathbf{r}(t)=(e^t\cos t)\mathbf{i}+(e^t\sin t)\mathbf{j}+\sqrt{2}\,e^t\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(e^t\cos t)\mathbf{i}+(e^t\sin t)\mathbf{j}+\sqrt2\,e^t\mathbf{k}$, $$\mathbf{r}'(t)=e^t(\cos t-\sin t)\mathbf{i}+e^t(\sin t+\cos t)\mathbf{j}+\sqrt2\,e^t\mathbf{k},$$ and since $$(\cos t-\sin t)^2+(\sin t+\cos t)^2+2=(1-\sin 2t)+(1+\sin 2t)+2=4,$$ we get $$|\mathbf{r}'(t)|=e^t\sqrt4=2e^t.$$ Hence $$a_T=\dfrac{d}{dt}(2e^t)=2e^t.$$</p>
+        <p>Differentiating $\mathbf{r}'(t)$ again, $$\mathbf{r}''(t)=e^t(-2\sin t)\mathbf{i}+e^t(2\cos t)\mathbf{j}+\sqrt2\,e^t\mathbf{k},$$ so $$|\mathbf{r}''(t)|^2=e^{2t}(4\sin^2t+4\cos^2t+2)=6e^{2t}.$$ Hence $$a_N=\sqrt{|\mathbf{r}''(t)|^2-a_T^2}=\sqrt{6e^{2t}-4e^{2t}}=\sqrt{2e^{2t}}=\sqrt2\,e^t.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 05-2 -->
+<div class="card ex-card" id="yu05-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 05-2</span>
+    <span class="ex-title">법선 성분이 0인 곡선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부드러운 곡선 $\mathbf{r}(t)$의 가속도의 $\mathbf{N}$방향 성분이 $0$이면 $\mathbf{r}(t)$는 직선의 일부임을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 곡선이 부드럽다는 것은 $\mathbf{r}'(t)\neq\mathbf{0}$가 성립함을 뜻하므로, $\mathbf{v}(t)=\mathbf{r}'(t)$에 대해 $|\mathbf{v}(t)|\neq0$이다. 가속도는 $$\mathbf{a}(t)=a_T\mathbf{T}(t)+a_N\mathbf{N}(t),\qquad a_N=|\mathbf{v}(t)|\,|\mathbf{T}'(t)|$$ 로 분해된다. 가정에 의해 $a_N=0$이고 $|\mathbf{v}(t)|\neq0$이므로 $|\mathbf{T}'(t)|=0$, 즉 $\mathbf{T}'(t)=\mathbf{0}$이다. 따라서 $\mathbf{T}(t)\equiv\mathbf{T}_0$ (상수벡터)이다.</p>
+        <p>이제 $\mathbf{v}(t)=|\mathbf{v}(t)|\mathbf{T}(t)=|\mathbf{v}(t)|\mathbf{T}_0$이므로, 임의의 $t_0$에 대해 $$\mathbf{r}(t)=\mathbf{r}(t_0)+\int_{t_0}^t\mathbf{v}(u)\,du=\mathbf{r}(t_0)+\Bigl(\int_{t_0}^t|\mathbf{v}(u)|\,du\Bigr)\mathbf{T}_0=\mathbf{r}(t_0)+s(t)\,\mathbf{T}_0$$ 이다. 여기서 $s(t)=\int_{t_0}^t|\mathbf{v}(u)|\,du$는 스칼라 함수이다. 따라서 곡선 위의 모든 점은 $\mathbf{r}(t_0)$을 지나고 방향이 $\mathbf{T}_0$인 직선 위에 있으므로, $\mathbf{r}(t)$는 직선의 일부이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that if the normal ($\mathbf{N}$-direction) component of the acceleration of a smooth curve $\mathbf{r}(t)$ is $0$, then $\mathbf{r}(t)$ is part of a line.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Smoothness of the curve means $\mathbf{r}'(t)\neq\mathbf{0}$, so for $\mathbf{v}(t)=\mathbf{r}'(t)$ we have $|\mathbf{v}(t)|\neq0$. The acceleration decomposes as $$\mathbf{a}(t)=a_T\mathbf{T}(t)+a_N\mathbf{N}(t),\qquad a_N=|\mathbf{v}(t)|\,|\mathbf{T}'(t)|.$$ By assumption $a_N=0$ and $|\mathbf{v}(t)|\neq0$, so $|\mathbf{T}'(t)|=0$, i.e. $\mathbf{T}'(t)=\mathbf{0}$. Hence $\mathbf{T}(t)\equiv\mathbf{T}_0$ is a constant vector.</p>
+        <p>Since $\mathbf{v}(t)=|\mathbf{v}(t)|\mathbf{T}(t)=|\mathbf{v}(t)|\mathbf{T}_0$, for any $t_0$ we have $$\mathbf{r}(t)=\mathbf{r}(t_0)+\int_{t_0}^t\mathbf{v}(u)\,du=\mathbf{r}(t_0)+\Bigl(\int_{t_0}^t|\mathbf{v}(u)|\,du\Bigr)\mathbf{T}_0=\mathbf{r}(t_0)+s(t)\,\mathbf{T}_0,$$ where $s(t)=\int_{t_0}^t|\mathbf{v}(u)|\,du$ is a scalar function. Thus every point of the curve lies on the line through $\mathbf{r}(t_0)$ with direction $\mathbf{T}_0$, so $\mathbf{r}(t)$ is part of a line.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 06 -->
+<div class="card ex-card" id="ex06">
+  <div class="card-head">
+    <span class="ex-num">예제 06</span>
+    <span class="ex-title">나선의 열률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>나선 $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$의 열률을 구하시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$이므로 $$\mathbf{r}'(t)=(-a\sin t,a\cos t,b),\quad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0),\quad \mathbf{r}'''(t)=(a\sin t,-a\cos t,0)$$ 이다. 유제 03-1(1)에서 $$\mathbf{r}'\times\mathbf{r}''=(ab\sin t,\,-ab\cos t,\,a^2),\qquad |\mathbf{r}'\times\mathbf{r}''|^2=a^2(a^2+b^2)$$ 임을 얻었다. 이제 $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=ab\sin t\cdot a\sin t+(-ab\cos t)(-a\cos t)+a^2\cdot0=a^2b\sin^2t+a^2b\cos^2t=a^2b$$ 이므로, 열률의 정의 $\tau=\dfrac{(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''}{|\mathbf{r}'\times\mathbf{r}''|^2}$에 대입하면 $$\tau=\dfrac{a^2b}{a^2(a^2+b^2)}=\dfrac{b}{a^2+b^2}$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the torsion of the helix $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$, $$\mathbf{r}'(t)=(-a\sin t,a\cos t,b),\quad \mathbf{r}''(t)=(-a\cos t,-a\sin t,0),\quad \mathbf{r}'''(t)=(a\sin t,-a\cos t,0).$$ From Exercise 03-1(1), $$\mathbf{r}'\times\mathbf{r}''=(ab\sin t,\,-ab\cos t,\,a^2),\qquad |\mathbf{r}'\times\mathbf{r}''|^2=a^2(a^2+b^2).$$ Now $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=ab\sin t\cdot a\sin t+(-ab\cos t)(-a\cos t)+a^2\cdot0=a^2b\sin^2t+a^2b\cos^2t=a^2b,$$ so, substituting into the torsion formula $\tau=\dfrac{(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''}{|\mathbf{r}'\times\mathbf{r}''|^2}$, $$\tau=\dfrac{a^2b}{a^2(a^2+b^2)}=\dfrac{b}{a^2+b^2}.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-1 -->
+<div class="card ex-card" id="yu06-1">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-1</span>
+    <span class="ex-title">종법선벡터와 열률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\mathbf{r}(t)=(\cosh t)\mathbf{i}-(\sinh t)\mathbf{j}+t\mathbf{k}$에 대해 $\mathbf{B}$와 $\tau$를 구하시오. (Hint. 유제03-1(2))</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf{r}(t)=(\cosh t)\mathbf{i}-(\sinh t)\mathbf{j}+t\mathbf{k}$는 유제 03-1(2)의 곡선과 같으므로, 그 결과를 재사용한다. $$\mathbf{r}'(t)=(\sinh t,-\cosh t,1),\quad \mathbf{r}''(t)=(\cosh t,-\sinh t,0),\quad \mathbf{r}'''(t)=(\sinh t,-\cosh t,0)$$ 이고, 유제 03-1(2)에서 $$\mathbf{r}'\times\mathbf{r}''=(\sinh t,\cosh t,1),\qquad |\mathbf{r}'\times\mathbf{r}''|=\sqrt2\cosh t$$ 를 얻었다. 따라서 단위종법선벡터는 $$\mathbf{B}(t)=\dfrac{\mathbf{r}'\times\mathbf{r}''}{|\mathbf{r}'\times\mathbf{r}''|}=\dfrac{(\sinh t,\cosh t,1)}{\sqrt2\cosh t}$$ 이다.</p>
+        <p>열률을 구하기 위해 $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=\sinh t\cdot\sinh t+\cosh t\cdot(-\cosh t)+1\cdot0=\sinh^2t-\cosh^2t=-1$$ 을 계산하고, $|\mathbf{r}'\times\mathbf{r}''|^2=2\cosh^2t$이므로 $$\tau=\dfrac{-1}{2\cosh^2t}$$ 이다. (참고로 $\kappa=|\mathbf{r}'\times\mathbf{r}''|/|\mathbf{r}'|^3=1/(2\cosh^2t)$로 유제03-1(2)의 값과 같고, $|\tau|=\kappa$이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For the curve $\mathbf{r}(t)=(\cosh t)\mathbf{i}-(\sinh t)\mathbf{j}+t\mathbf{k}$, find $\mathbf{B}$ and $\tau$. (Hint. Exercise 03-1(2))</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The curve $\mathbf{r}(t)=(\cosh t)\mathbf{i}-(\sinh t)\mathbf{j}+t\mathbf{k}$ is the same as in Exercise 03-1(2), so we reuse that computation. $$\mathbf{r}'(t)=(\sinh t,-\cosh t,1),\quad \mathbf{r}''(t)=(\cosh t,-\sinh t,0),\quad \mathbf{r}'''(t)=(\sinh t,-\cosh t,0),$$ and from Exercise 03-1(2), $$\mathbf{r}'\times\mathbf{r}''=(\sinh t,\cosh t,1),\qquad |\mathbf{r}'\times\mathbf{r}''|=\sqrt2\cosh t.$$ Hence the unit binormal vector is $$\mathbf{B}(t)=\dfrac{\mathbf{r}'\times\mathbf{r}''}{|\mathbf{r}'\times\mathbf{r}''|}=\dfrac{(\sinh t,\cosh t,1)}{\sqrt2\cosh t}.$$</p>
+        <p>To find the torsion, compute $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=\sinh t\cdot\sinh t+\cosh t\cdot(-\cosh t)+1\cdot0=\sinh^2t-\cosh^2t=-1,$$ and since $|\mathbf{r}'\times\mathbf{r}''|^2=2\cosh^2t$, $$\tau=\dfrac{-1}{2\cosh^2t}.$$ (Note that $\kappa=|\mathbf{r}'\times\mathbf{r}''|/|\mathbf{r}'|^3=1/(2\cosh^2t)$, the same as in Exercise 03-1(2), and $|\tau|=\kappa$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 06-2 -->
+<div class="card ex-card" id="yu06-2">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 06-2</span>
+    <span class="ex-title">열률 0과 평면성</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>부드러운 곡선 $\mathbf{r}(t)$의 열률이 $0$일 필요충분조건은 $\mathbf{r}(t)$가 한 평면 위에 있는 것임을 보이시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> ($\Rightarrow$) $\mathbf{r}(t)$가 평면 위에 있다고 하자. 즉 어떤 고정된 단위법선벡터 $\mathbf{n}$과 점 $\mathbf{r}(t_0)$에 대해 $(\mathbf{r}(t)-\mathbf{r}(t_0))\cdot\mathbf{n}=0$이 모든 $t$에서 성립한다. 이를 차례로 미분하면 $$\mathbf{r}'(t)\cdot\mathbf{n}=0,\quad \mathbf{r}''(t)\cdot\mathbf{n}=0,\quad \mathbf{r}'''(t)\cdot\mathbf{n}=0$$ 이므로 $\mathbf{r}'(t),\mathbf{r}''(t),\mathbf{r}'''(t)$는 모두 $\mathbf{n}$에 수직인 (2차원) 평면에 놓인다. 2차원 공간의 세 벡터는 항상 일차종속이므로 스칼라 삼중적은 $0$이다: $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=0.$$ $\kappa \gt 0$이면 $|\mathbf{r}'\times\mathbf{r}''|\neq0$이므로 $$\tau=\dfrac{(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''}{|\mathbf{r}'\times\mathbf{r}''|^2}=0$$ 이다.</p>
+        <p>($\Leftarrow$) 역으로 $\tau=0$이라 하자. 프레네-세레 공식 $\mathbf{B}'(s)=-\tau(s)\mathbf{N}(s)$ (호의 길이 매개변수 기준)에서 $\tau\equiv0$이므로 $\mathbf{B}'(s)=\mathbf{0}$, 즉 $\mathbf{B}(s)\equiv\mathbf{B}_0$은 상수벡터이다. 임의의 $s_0$에 대해 함수 $$f(s)=(\mathbf{r}(s)-\mathbf{r}(s_0))\cdot\mathbf{B}_0$$ 를 정의하면 $$f'(s)=\mathbf{r}'(s)\cdot\mathbf{B}_0=\mathbf{T}(s)\cdot\mathbf{B}_0=0$$ 이다 ($\mathbf{T}\perp\mathbf{B}$이므로). 따라서 $f(s)$는 상수이고 $f(s_0)=0$이므로 $f(s)\equiv0$, 즉 $$(\mathbf{r}(s)-\mathbf{r}(s_0))\cdot\mathbf{B}_0=0$$ 이 모든 $s$에서 성립한다. 이는 $\mathbf{r}(s)$가 점 $\mathbf{r}(s_0)$을 지나고 법선이 $\mathbf{B}_0$인 평면 위에 있음을 뜻한다.</p>
+        <p>이상에서 $\mathbf{r}(t)$의 열률이 $0$일 필요충분조건은 $\mathbf{r}(t)$가 한 평면 위에 있는 것이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that the torsion of a smooth curve $\mathbf{r}(t)$ is $0$ if and only if $\mathbf{r}(t)$ lies in a single plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> ($\Rightarrow$) Suppose $\mathbf{r}(t)$ lies in a plane, i.e. there is a fixed unit normal $\mathbf{n}$ and a point $\mathbf{r}(t_0)$ with $(\mathbf{r}(t)-\mathbf{r}(t_0))\cdot\mathbf{n}=0$ for all $t$. Differentiating successively, $$\mathbf{r}'(t)\cdot\mathbf{n}=0,\quad \mathbf{r}''(t)\cdot\mathbf{n}=0,\quad \mathbf{r}'''(t)\cdot\mathbf{n}=0,$$ so $\mathbf{r}'(t),\mathbf{r}''(t),\mathbf{r}'''(t)$ all lie in the (two-dimensional) plane orthogonal to $\mathbf{n}$. Three vectors in a two-dimensional space are always linearly dependent, so the scalar triple product vanishes: $$(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=0.$$ Since $\kappa \gt 0$ gives $|\mathbf{r}'\times\mathbf{r}''|\neq0$, $$\tau=\dfrac{(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''}{|\mathbf{r}'\times\mathbf{r}''|^2}=0.$$</p>
+        <p>($\Leftarrow$) Conversely, suppose $\tau=0$. By the Frenet–Serret formula $\mathbf{B}'(s)=-\tau(s)\mathbf{N}(s)$ (with $s$ the arc length parameter), $\tau\equiv0$ gives $\mathbf{B}'(s)=\mathbf{0}$, so $\mathbf{B}(s)\equiv\mathbf{B}_0$ is a constant vector. For any $s_0$, define $$f(s)=(\mathbf{r}(s)-\mathbf{r}(s_0))\cdot\mathbf{B}_0.$$ Then $$f'(s)=\mathbf{r}'(s)\cdot\mathbf{B}_0=\mathbf{T}(s)\cdot\mathbf{B}_0=0$$ since $\mathbf{T}\perp\mathbf{B}$. Hence $f(s)$ is constant, and since $f(s_0)=0$ we get $f(s)\equiv0$, i.e. $$(\mathbf{r}(s)-\mathbf{r}(s_0))\cdot\mathbf{B}_0=0$$ for all $s$. This means $\mathbf{r}(s)$ lies in the plane through $\mathbf{r}(s_0)$ with normal $\mathbf{B}_0$.</p>
+        <p>Therefore the torsion of $\mathbf{r}(t)$ is $0$ if and only if $\mathbf{r}(t)$ lies in a single plane.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 예제 07 -->
+<div class="card ex-card" id="ex07">
+  <div class="card-head">
+    <span class="ex-num">예제 07</span>
+    <span class="ex-title">극좌표 속도와 가속도</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 극좌표로 주어진 곡선에 대해 속도와 가속도를 $\mathbf{u}_r$, $\mathbf{u}_\theta$를 이용하여 나타내시오.</p>
+        <ol>
+          <li>$r=\theta$, $\dfrac{d\theta}{dt}=2$</li>
+          <li>$r=a(1+\sin t)$, $\theta=1-e^{-t}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 극좌표에서 속도와 가속도는 $$\mathbf{v}=\dot r\,\mathbf{u}_r+r\dot\theta\,\mathbf{u}_\theta,\qquad \mathbf{a}=(\ddot r-r\dot\theta^2)\mathbf{u}_r+(r\ddot\theta+2\dot r\dot\theta)\mathbf{u}_\theta$$ 로 주어진다.</p>
+        <p>(1) $r=\theta$, $\dot\theta=2$ (상수)이므로 $\dot r=\dot\theta=2$, $\ddot r=\ddot\theta=0$이다. 따라서 $$\mathbf{v}=2\,\mathbf{u}_r+r\cdot2\,\mathbf{u}_\theta=2\,\mathbf{u}_r+2\theta\,\mathbf{u}_\theta$$ 이고, $$\mathbf{a}=(0-r\cdot4)\mathbf{u}_r+(0+2\cdot2\cdot2)\mathbf{u}_\theta=-4\theta\,\mathbf{u}_r+8\,\mathbf{u}_\theta$$ 이다.</p>
+        <p>(2) $r=a(1+\sin t)$, $\theta=1-e^{-t}$이므로 $$\dot r=a\cos t,\quad \ddot r=-a\sin t,\qquad \dot\theta=e^{-t},\quad \ddot\theta=-e^{-t}$$ 이다. 따라서 $$\mathbf{v}=a\cos t\,\mathbf{u}_r+a(1+\sin t)e^{-t}\,\mathbf{u}_\theta$$ 이고, $$a_r=\ddot r-r\dot\theta^2=-a\sin t-a(1+\sin t)e^{-2t}=-a\bigl[\sin t+(1+\sin t)e^{-2t}\bigr]$$ $$a_\theta=r\ddot\theta+2\dot r\dot\theta=-a(1+\sin t)e^{-t}+2a\cos t\,e^{-t}=a(2\cos t-\sin t-1)e^{-t}$$ 이므로 $$\mathbf{a}=-a\bigl[\sin t+(1+\sin t)e^{-2t}\bigr]\mathbf{u}_r+a(2\cos t-\sin t-1)e^{-t}\,\mathbf{u}_\theta$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each curve given in polar coordinates below, express the velocity and acceleration in terms of $\mathbf{u}_r$ and $\mathbf{u}_\theta$.</p>
+        <ol>
+          <li>$r=\theta$, $\dfrac{d\theta}{dt}=2$</li>
+          <li>$r=a(1+\sin t)$, $\theta=1-e^{-t}$</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In polar coordinates, the velocity and acceleration are given by $$\mathbf{v}=\dot r\,\mathbf{u}_r+r\dot\theta\,\mathbf{u}_\theta,\qquad \mathbf{a}=(\ddot r-r\dot\theta^2)\mathbf{u}_r+(r\ddot\theta+2\dot r\dot\theta)\mathbf{u}_\theta.$$</p>
+        <p>(1) Since $r=\theta$ and $\dot\theta=2$ (constant), $\dot r=\dot\theta=2$ and $\ddot r=\ddot\theta=0$. Hence $$\mathbf{v}=2\,\mathbf{u}_r+r\cdot2\,\mathbf{u}_\theta=2\,\mathbf{u}_r+2\theta\,\mathbf{u}_\theta,$$ and $$\mathbf{a}=(0-r\cdot4)\mathbf{u}_r+(0+2\cdot2\cdot2)\mathbf{u}_\theta=-4\theta\,\mathbf{u}_r+8\,\mathbf{u}_\theta.$$</p>
+        <p>(2) Since $r=a(1+\sin t)$ and $\theta=1-e^{-t}$, $$\dot r=a\cos t,\quad \ddot r=-a\sin t,\qquad \dot\theta=e^{-t},\quad \ddot\theta=-e^{-t}.$$ Hence $$\mathbf{v}=a\cos t\,\mathbf{u}_r+a(1+\sin t)e^{-t}\,\mathbf{u}_\theta,$$ and $$a_r=\ddot r-r\dot\theta^2=-a\sin t-a(1+\sin t)e^{-2t}=-a\bigl[\sin t+(1+\sin t)e^{-2t}\bigr],$$ $$a_\theta=r\ddot\theta+2\dot r\dot\theta=-a(1+\sin t)e^{-t}+2a\cos t\,e^{-t}=a(2\cos t-\sin t-1)e^{-t},$$ so $$\mathbf{a}=-a\bigl[\sin t+(1+\sin t)e^{-2t}\bigr]\mathbf{u}_r+a(2\cos t-\sin t-1)e^{-t}\,\mathbf{u}_\theta.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유제 07 -->
+<div class="card ex-card" id="yu07">
+  <div class="card-head">
+    <span class="ex-num yu-num">유제 07</span>
+    <span class="ex-title">나선의 극좌표 속도·가속도</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>나선 $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$의 속도와 가속도를 $\mathbf{u}_r$, $\mathbf{u}_\theta$, $\mathbf{k}$를 이용하여 나타내시오.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 나선 $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$는 원통좌표로 나타내면 원통 반지름이 $\rho=a$ (일정), $\theta=t$, $z=bt$인 곡선이다. 따라서 $$\dot\rho=0,\ \ddot\rho=0,\qquad \dot\theta=1,\ \ddot\theta=0,\qquad \dot z=b,\ \ddot z=0$$ 이다.</p>
+        <p>속도는 $$\mathbf{v}=\dot\rho\,\mathbf{u}_r+\rho\dot\theta\,\mathbf{u}_\theta+\dot z\,\mathbf{k}=0\cdot\mathbf{u}_r+a\cdot1\cdot\mathbf{u}_\theta+b\,\mathbf{k}=a\,\mathbf{u}_\theta+b\,\mathbf{k}$$ 이고, 가속도는 $$\mathbf{a}=(\ddot\rho-\rho\dot\theta^2)\mathbf{u}_r+(\rho\ddot\theta+2\dot\rho\dot\theta)\mathbf{u}_\theta+\ddot z\,\mathbf{k}=(0-a\cdot1)\mathbf{u}_r+0\cdot\mathbf{u}_\theta+0\cdot\mathbf{k}=-a\,\mathbf{u}_r$$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Express the velocity and acceleration of the helix $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ $(a,b>0)$ in terms of $\mathbf{u}_r$, $\mathbf{u}_\theta$, and $\mathbf{k}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In cylindrical coordinates, the helix $\mathbf{r}(t)=(a\cos t,a\sin t,bt)$ has constant cylindrical radius $\rho=a$, with $\theta=t$ and $z=bt$. Hence $$\dot\rho=0,\ \ddot\rho=0,\qquad \dot\theta=1,\ \ddot\theta=0,\qquad \dot z=b,\ \ddot z=0.$$</p>
+        <p>The velocity is $$\mathbf{v}=\dot\rho\,\mathbf{u}_r+\rho\dot\theta\,\mathbf{u}_\theta+\dot z\,\mathbf{k}=0\cdot\mathbf{u}_r+a\cdot1\cdot\mathbf{u}_\theta+b\,\mathbf{k}=a\,\mathbf{u}_\theta+b\,\mathbf{k},$$ and the acceleration is $$\mathbf{a}=(\ddot\rho-\rho\dot\theta^2)\mathbf{u}_r+(\rho\ddot\theta+2\dot\rho\dot\theta)\mathbf{u}_\theta+\ddot z\,\mathbf{k}=(0-a\cdot1)\mathbf{u}_r+0\cdot\mathbf{u}_\theta+0\cdot\mathbf{k}=-a\,\mathbf{u}_r.$$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div class="section-title"><h2>문제 · Problems</h2></div>
+
+<!-- 문제 01 -->
+<div class="card pr-card" id="pr01">
+  <div class="card-head">
+    <span class="pr-num">문제 01</span>
+    <span class="ex-title">원의 신개선</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $(1,0)$에서 출발하여 원 $x^2+y^2=1$을 따라 점 $Q$가 시계 반대방향으로 초속 $1$의 속력으로 이동하고 있다. 이때 다음 성질을 만족하도록 점 $P$를 정하자. (단, $O$는 원점)</p>
+        <div class="formal-box">
+          <p>(가) $\overrightarrow{QP}$의 방향은 $\overrightarrow{QO}$를 $Q$를 중심으로 하여 시계 반대방향으로 $90^\circ$ 회전시킨 것과 같다.</p>
+          <p>(나) $|\overrightarrow{QP}|$는 $Q$가 이동한 거리와 같다.</p>
+        </div>
+        <ol>
+          <li>$t$초 후 점 $P$의 위치를 구하시오.</li>
+          <li>점 $P$의 자취를 곡선 $C$라 하자. $t$초 후 $P$에서 $C$의 단위접선벡터를 구하시오. 여기서 $C$는 원 $x^2+y^2=1$의 <strong>신개선(involute)</strong>이다.</li>
+        </ol>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Starting from the point $(1,0)$, a point $Q$ moves counterclockwise along the circle $x^2+y^2=1$ with speed $1$. Let the point $P$ be determined so that it satisfies the following properties. (Here $O$ is the origin.)</p>
+        <div class="formal-box">
+          <p>(a) The direction of $\overrightarrow{QP}$ is the same as $\overrightarrow{QO}$ rotated $90^\circ$ counterclockwise about $Q$.</p>
+          <p>(b) $|\overrightarrow{QP}|$ equals the distance traveled by $Q$.</p>
+        </div>
+        <ol>
+          <li>Find the position of the point $P$ after $t$ seconds.</li>
+          <li>Let the trace of the point $P$ be the curve $C$. Find the unit tangent vector of $C$ at $P$ after $t$ seconds. Here $C$ is the <strong>involute</strong> of the circle $x^2+y^2=1$.</li>
+        </ol>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 02 -->
+<div class="card pr-card" id="pr02">
+  <div class="card-head">
+    <span class="pr-num">문제 02</span>
+    <span class="ex-title">나선의 전곡률</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>호의 길이로 매개화된 곡선 $\mathbf{r}(s)$ $(s_0\le s\le s_1)$에 대해 $K=\displaystyle\int_{s_0}^{s_1}\kappa\,ds$를 $\mathbf{r}(s)$의 <strong>전곡률(total curvature)</strong>이라 한다. 나선 $\mathbf{r}(t)=(3\cos t,3\sin t,t)$ $(0\le t\le 4\pi)$의 전곡률을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a curve $\mathbf{r}(s)$ $(s_0\le s\le s_1)$ parametrized by arc length, $K=\displaystyle\int_{s_0}^{s_1}\kappa\,ds$ is called the <strong>total curvature</strong> of $\mathbf{r}(s)$. Find the total curvature of the helix $\mathbf{r}(t)=(3\cos t,3\sin t,t)$ $(0\le t\le 4\pi)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 03 -->
+<div class="card pr-card" id="pr03">
+  <div class="card-head">
+    <span class="pr-num">문제 03</span>
+    <span class="ex-title">곡률의 각 표현</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면곡선 $\mathbf{r}(t)$에 대해 단위접선벡터 $\mathbf{T}$와 $x$축이 이루는 각의 크기를 $\phi$라 하자. $|d\phi/ds|$가 $\mathbf{r}(t)$의 곡률임을 보이시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a plane curve $\mathbf{r}(t)$, let $\phi$ be the angle between the unit tangent vector $\mathbf{T}$ and the $x$-axis. Show that $|d\phi/ds|$ is the curvature of $\mathbf{r}(t)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 04 -->
+<div class="card pr-card" id="pr04">
+  <div class="card-head">
+    <span class="pr-num">문제 04</span>
+    <span class="ex-title">나선의 길이와 계수 (임용11-35)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표공간에서 곡선 $\gamma(t)=(a\cos t,a\sin t,bt)$는 두 점 $P(2,0,4\pi)$, $Q(2,0,8\pi)$를 지난다. 점 $P$에서 점 $Q$까지 곡선 $\gamma(t)$의 길이가 $4\sqrt{10}\,\pi$일 때, $a+b$의 값은? (단, $a>0$이고 $b>0$이다.)</p>
+        <div class="formal-box">
+          <p>① $\dfrac{8}{3}$ &nbsp;&nbsp;&nbsp; ② $3$ &nbsp;&nbsp;&nbsp; ③ $\dfrac{10}{3}$ &nbsp;&nbsp;&nbsp; ④ $\dfrac{11}{3}$ &nbsp;&nbsp;&nbsp; ⑤ $4$</p>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In coordinate space, the curve $\gamma(t)=(a\cos t,a\sin t,bt)$ passes through the two points $P(2,0,4\pi)$ and $Q(2,0,8\pi)$. If the length of $\gamma(t)$ from $P$ to $Q$ is $4\sqrt{10}\,\pi$, what is the value of $a+b$? (Here $a>0$ and $b>0$.)</p>
+        <div class="formal-box">
+          <p>① $\dfrac{8}{3}$ &nbsp;&nbsp;&nbsp; ② $3$ &nbsp;&nbsp;&nbsp; ③ $\dfrac{10}{3}$ &nbsp;&nbsp;&nbsp; ④ $\dfrac{11}{3}$ &nbsp;&nbsp;&nbsp; ⑤ $4$</p>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 05 -->
+<div class="card pr-card" id="pr05">
+  <div class="card-head">
+    <span class="pr-num">문제 05</span>
+    <span class="ex-title">접선벡터와 평면의 각 (임용04-11)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $x(t)=(3t,3t^2,2t^3)$ 위의 모든 점에서 단위접선벡터(unit tangent vector)와 평면 $x+z=0$이 이루는 각을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the angle between the unit tangent vector and the plane $x+z=0$ at every point on the curve $x(t)=(3t,3t^2,2t^3)$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 06 -->
+<div class="card pr-card" id="pr06">
+  <div class="card-head">
+    <span class="pr-num">문제 06</span>
+    <span class="ex-title">교선의 접선과 법평면 (임용10-19)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 곡선 $\gamma$를 두 곡면</p>
+        $$S_1=\{(x,y,z)\in\mathbb{R}^3\mid x^2-y^2=1,\ x>0\},\ S_2=\{(x,y,z)\in\mathbb{R}^3\mid z=xy\}$$
+        <p>의 교선이라 하자. 이때 $\gamma$ 위의 점 $q=(1,0,0)$에서의 $\gamma$의 접선벡터와 수직이고 점 $q$를 포함하는 평면에 속하는 점은?</p>
+        <div class="formal-box">
+          <p>① $(0,1,1)$ &nbsp;&nbsp;&nbsp; ② $(1,0,1)$ &nbsp;&nbsp;&nbsp; ③ $(1,1,1)$ &nbsp;&nbsp;&nbsp; ④ $(1,-1,-1)$ &nbsp;&nbsp;&nbsp; ⑤ $(-1,1,-1)$</p>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, let the curve $\gamma$ be the intersection of the two surfaces</p>
+        $$S_1=\{(x,y,z)\in\mathbb{R}^3\mid x^2-y^2=1,\ x>0\},\ S_2=\{(x,y,z)\in\mathbb{R}^3\mid z=xy\}$$
+        <p>Which of the following points lies in the plane that is perpendicular to the tangent vector of $\gamma$ at the point $q=(1,0,0)$ on $\gamma$ and contains the point $q$?</p>
+        <div class="formal-box">
+          <p>① $(0,1,1)$ &nbsp;&nbsp;&nbsp; ② $(1,0,1)$ &nbsp;&nbsp;&nbsp; ③ $(1,1,1)$ &nbsp;&nbsp;&nbsp; ④ $(1,-1,-1)$ &nbsp;&nbsp;&nbsp; ⑤ $(-1,1,-1)$</p>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 07 -->
+<div class="card pr-card" id="pr07">
+  <div class="card-head">
+    <span class="pr-num">문제 07</span>
+    <span class="ex-title">접촉평면과 xy평면의 각 (임용07-9)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $\alpha:(0,\infty)\to\mathbb{R}^3$, $\alpha(t)=(t^3+t,t^2+1,t)$가 있다. 이 곡선의 접촉평면($\alpha'(t)$와 $\alpha''(t)$를 포함하는 평면)과 $xy$-평면이 이루는 각이 $45^\circ$가 되는 $t$의 값을 구하시오. (단, $\mathbb{R}^3$은 3차원 유클리드 공간이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the curve $\alpha:(0,\infty)\to\mathbb{R}^3$, $\alpha(t)=(t^3+t,t^2+1,t)$. Find the value of $t$ for which the angle between the osculating plane of this curve (the plane containing $\alpha'(t)$ and $\alpha''(t)$) and the $xy$-plane is $45^\circ$. (Here $\mathbb{R}^3$ is three-dimensional Euclidean space.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 08 -->
+<div class="card pr-card" id="pr08">
+  <div class="card-head">
+    <span class="pr-num">문제 08</span>
+    <span class="ex-title">교점의 접선과 곡률 (임용24A-4)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 곡선 $C$를</p>
+        $$C=\{(x,y,z)\in\mathbb{R}^3\mid y=e^{ax},\ yz=b\}$$
+        <p>(단, $a,b$는 상수)라 하자. 곡선 $C$와 $yz$-평면의 교점 $P$에서 곡선 $C$의 접선(tangent line)이 점 $(2\sqrt{2},3,-1)$을 지날 때, $a^2+b^2$의 값과 점 $P$에서의 곡률(curvature)을 순서대로 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, let the curve $C$ be</p>
+        $$C=\{(x,y,z)\in\mathbb{R}^3\mid y=e^{ax},\ yz=b\}$$
+        <p>(where $a,b$ are constants). Let $P$ be the intersection point of the curve $C$ and the $yz$-plane. If the tangent line of $C$ at $P$ passes through the point $(2\sqrt{2},3,-1)$, find, in order, the value of $a^2+b^2$ and the curvature at the point $P$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 09 -->
+<div class="card pr-card" id="pr09">
+  <div class="card-head">
+    <span class="pr-num">문제 09</span>
+    <span class="ex-title">곡선의 열률과 곡률 (임용19A-6)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 곡선 $C$가 $C=\{(x,y,z)\in\mathbb{R}^3\mid y=x^3-ax+a,\ z=x-1\}$일 때, 이 곡선의 비틀림률(열률, 꼬임률, torsion) $\tau$를 구하시오. 또한 점 $(1,1,0)$에서 곡선 $C$의 곡률(curvature)이 $3$이 되도록 하는 $a$의 값을 구하시오. (단, $a$는 상수이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, let the curve $C$ be $C=\{(x,y,z)\in\mathbb{R}^3\mid y=x^3-ax+a,\ z=x-1\}$. Find the torsion $\tau$ of this curve. Also, find the value of $a$ for which the curvature of the curve $C$ at the point $(1,1,0)$ is $3$. (Here $a$ is a constant.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="card pr-card" id="pr10">
+  <div class="card-head">
+    <span class="pr-num">문제 10</span>
+    <span class="ex-title">접벡터 평행과 열률 (임용20A-3)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 곡선 $\gamma(t)=(2t-\cos t,t+\sin t,2t+1)$ $(0 \lt t \lt 2\pi)$ 위의 점 $\gamma(t_0)$에서의 접벡터(tangent vector)가 벡터 $(6,2,4)$와 평행하다. $t_0$의 값과 $t=t_0$일 때 곡선 $\gamma$의 비틀림률(열률, 꼬임률, torsion)을 각각 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, the tangent vector of the curve $\gamma(t)=(2t-\cos t,t+\sin t,2t+1)$ $(0 \lt t \lt 2\pi)$ at the point $\gamma(t_0)$ is parallel to the vector $(6,2,4)$. Find, respectively, the value of $t_0$ and the torsion of the curve $\gamma$ at $t=t_0$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 11 -->
+<div class="card pr-card" id="pr11">
+  <div class="card-head">
+    <span class="pr-num">문제 11</span>
+    <span class="ex-title">접촉원의 중심과 반지름 (임용23A-3)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>2차원 유클리드 평면에 곡선 $\alpha(t)=(2\sin t-\sin 2t,2\cos t-\cos 2t)$ $(0 \lt t \lt \pi)$가 있다. 곡선 $\alpha$의 $t=\dfrac{\pi}{2}$에서의 접촉원(osculating circle)의 중심(곡률중심, center of curvature)과 반지름(곡률반경, radius of curvature)을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the curve $\alpha(t)=(2\sin t-\sin 2t,2\cos t-\cos 2t)$ $(0 \lt t \lt \pi)$ in the two-dimensional Euclidean plane. Find the center (center of curvature) and radius (radius of curvature) of the osculating circle of the curve $\alpha$ at $t=\dfrac{\pi}{2}$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 12 -->
+<div class="card pr-card" id="pr12">
+  <div class="card-head">
+    <span class="pr-num">문제 12</span>
+    <span class="ex-title">곡률로 곡선의 길이 (임용16A-6)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 단위속력곡선(unit speed curve) $\gamma:\mathbb{R}\to\mathbb{R}^3$의 점 $\gamma(s)$에서의 곡률(curvature) $\kappa(s)$는 $\kappa(s)=\sqrt{s^4+4s^2+3}$이다. 곡선 $\alpha:\mathbb{R}\to\mathbb{R}^3$을 $\alpha(t)=\gamma(t)+\gamma'(t)$로 정의할 때, $t=0$에서 $t=1$까지 곡선 $\alpha$의 길이를 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, the curvature $\kappa(s)$ of a unit speed curve $\gamma:\mathbb{R}\to\mathbb{R}^3$ at the point $\gamma(s)$ is $\kappa(s)=\sqrt{s^4+4s^2+3}$. Define the curve $\alpha:\mathbb{R}\to\mathbb{R}^3$ by $\alpha(t)=\gamma(t)+\gamma'(t)$. Find the length of the curve $\alpha$ from $t=0$ to $t=1$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 13 -->
+<div class="card pr-card" id="pr13">
+  <div class="card-head">
+    <span class="pr-num">문제 13</span>
+    <span class="ex-title">재매개화와 열률 (임용09-35)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실수 전체의 집합을 $\mathbb{R}$이라 하자. 3차원 유클리드 공간에 놓인 정칙곡선 $\alpha:\mathbb{R}\to\mathbb{R}^3$에 대하여 곡선 $\beta:\mathbb{R}\to\mathbb{R}^3$을 $\beta(t)=2\alpha(-2t)$로 정의하자. $t=0$일 때 $\alpha$의 비틀림(열률, torsion)을 $\tau(0)$이라 하면 $t=0$일 때 $\beta$의 비틀림은?</p>
+        <div class="formal-box">
+          <p>① $\dfrac{1}{2}\tau(0)$ &nbsp;&nbsp;&nbsp; ② $-\dfrac{1}{2}\tau(0)$ &nbsp;&nbsp;&nbsp; ③ $-2\tau(0)$ &nbsp;&nbsp;&nbsp; ④ $\tau(0)$ &nbsp;&nbsp;&nbsp; ⑤ $-\tau(0)$</p>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbb{R}$ be the set of all real numbers. For a regular curve $\alpha:\mathbb{R}\to\mathbb{R}^3$ lying in three-dimensional Euclidean space, define the curve $\beta:\mathbb{R}\to\mathbb{R}^3$ by $\beta(t)=2\alpha(-2t)$. If the torsion of $\alpha$ at $t=0$ is $\tau(0)$, what is the torsion of $\beta$ at $t=0$?</p>
+        <div class="formal-box">
+          <p>① $\dfrac{1}{2}\tau(0)$ &nbsp;&nbsp;&nbsp; ② $-\dfrac{1}{2}\tau(0)$ &nbsp;&nbsp;&nbsp; ③ $-2\tau(0)$ &nbsp;&nbsp;&nbsp; ④ $\tau(0)$ &nbsp;&nbsp;&nbsp; ⑤ $-\tau(0)$</p>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 14 -->
+<div class="card pr-card" id="pr14">
+  <div class="card-head">
+    <span class="pr-num">문제 14</span>
+    <span class="ex-title">평면곡선의 곡률 결정 (임용17A-8)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$의 한 평면에 있고 곡률(curvature)이 양인 단위속력곡선(unit speed curve) $\gamma:\mathbb{R}\to\mathbb{R}^3$에 대하여 점 $\gamma(s)$에서의 접선벡터(tangent vector)를 $T(s)$, 주법선벡터(principal normal vector)를 $N(s)$라 하자. 곡선 $\beta:\mathbb{R}\to\mathbb{R}^3$을 $\beta(s)=\dfrac{1}{2}T(s)+N(s)$로 정의할 때, 모든 양수 $t$에 대하여 $s=0$에서 $s=t$까지 곡선 $\beta$의 길이는 $3t$이다. $s=1$일 때, 곡선 $\gamma$의 곡률을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\gamma:\mathbb{R}\to\mathbb{R}^3$ be a unit speed curve with positive curvature lying in a plane of the three-dimensional Euclidean space $\mathbb{R}^3$, and let $T(s)$ be the tangent vector and $N(s)$ the principal normal vector at the point $\gamma(s)$. Define the curve $\beta:\mathbb{R}\to\mathbb{R}^3$ by $\beta(s)=\dfrac{1}{2}T(s)+N(s)$. Suppose that for every positive $t$, the length of the curve $\beta$ from $s=0$ to $s=t$ is $3t$. Find the curvature of the curve $\gamma$ at $s=1$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 15 -->
+<div class="card pr-card" id="pr15">
+  <div class="card-head">
+    <span class="pr-num">문제 15</span>
+    <span class="ex-title">주법벡터장과 곡률·열률 (임용14A-기11)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 유클리드 공간 $\mathbb{R}^3$에서 비틀림률(열률, 꼬임률, torsion)과 곡률(curvature)이 각각 상수 $\tau$, $1$인 단위속력곡선 $\alpha$에 대하여 곡선 $\beta$를 다음과 같이 정의하자.</p>
+        $$\beta(s)=\int_0^s N(t)\,dt$$
+        <p>여기서 $N(t)$는 곡선 $\alpha$의 주법벡터장(단위주법벡터장, principal normal vector field, unit principal normal vector field)이다. 곡선 $\beta$의 곡률과 비틀림률을 각각 $\kappa_\beta(>0)$, $\tau_\beta$라 할 때, $\kappa_\beta+\tau_\beta$의 값을 구하시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the three-dimensional Euclidean space $\mathbb{R}^3$, let $\alpha$ be a unit speed curve whose torsion and curvature are the constants $\tau$ and $1$, respectively, and define the curve $\beta$ as follows.</p>
+        $$\beta(s)=\int_0^s N(t)\,dt$$
+        <p>Here $N(t)$ is the principal normal vector field of the curve $\alpha$. Letting $\kappa_\beta(>0)$ and $\tau_\beta$ be the curvature and torsion of the curve $\beta$, respectively, find the value of $\kappa_\beta+\tau_\beta$.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 16 -->
+<div class="card pr-card" id="pr16">
+  <div class="card-head">
+    <span class="pr-num">문제 16</span>
+    <span class="ex-title">정칙성과 곡률·열률 (임용22A-9)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단위속력곡선(unit speed curve) $\alpha:\mathbb{R}\to\mathbb{R}^3$에 대하여 점 $\alpha(t)$에서의 곡률(curvature)과 비틀림률(열률, 꼬임률, torsion)을 각각 $\varkappa_\alpha(t)$, $\tau_\alpha(t)$라 할 때, $\varkappa_\alpha(t)\neq 0$ $(t\in\mathbb{R})$이고 함수 $f:\mathbb{R}\to\mathbb{R}$는 $\tau_\alpha(t)=f(t)\varkappa_\alpha(t)$, $f(1)=\sqrt{3}$, $f'(1)=-2$를 만족한다. 점 $\alpha(t)$에서 곡선 $\alpha$의 단위접벡터장(unit tangent vector field) $T(t)$와 단위종법벡터장(unit binormal vector field) $B(t)$에 대하여 곡선 $\beta:\mathbb{R}\to\mathbb{R}^3$을</p>
+        $$\beta(t)=\int_0^t\{\tau_\alpha(s)T(s)+\varkappa_\alpha(s)B(s)\}\,ds$$
+        <p>로 정의하고 이 곡선 위의 점 $\beta(t)$에서의 곡률을 $\varkappa_\beta(t)$라 하자. 이때, 곡선 $\beta$가 정칙곡선(정규곡선, regular curve)임을 보이고, $\tau_\alpha(1)\varkappa_\beta(1)$의 값을 풀이 과정과 함께 쓰시오.</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\alpha:\mathbb{R}\to\mathbb{R}^3$ be a unit speed curve, and let $\varkappa_\alpha(t)$ and $\tau_\alpha(t)$ denote, respectively, the curvature and torsion at the point $\alpha(t)$, where $\varkappa_\alpha(t)\neq 0$ $(t\in\mathbb{R})$. Suppose the function $f:\mathbb{R}\to\mathbb{R}$ satisfies $\tau_\alpha(t)=f(t)\varkappa_\alpha(t)$, $f(1)=\sqrt{3}$, $f'(1)=-2$. Let $T(t)$ be the unit tangent vector field and $B(t)$ the unit binormal vector field of the curve $\alpha$ at the point $\alpha(t)$, and define the curve $\beta:\mathbb{R}\to\mathbb{R}^3$ by</p>
+        $$\beta(t)=\int_0^t\{\tau_\alpha(s)T(s)+\varkappa_\alpha(s)B(s)\}\,ds$$
+        <p>Let $\varkappa_\beta(t)$ denote the curvature at the point $\beta(t)$ on this curve. Show that the curve $\beta$ is a regular curve, and write the value of $\tau_\alpha(1)\varkappa_\beta(1)$ along with your solution process.</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 17 -->
+<div class="card pr-card" id="pr17">
+  <div class="card-head">
+    <span class="pr-num">문제 17</span>
+    <span class="ex-title">곡률·열률과 곡선의 종류 (임용12-34)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3차원 공간 $\mathbb{R}^3$에 놓여 있는 정규곡선(정칙곡선, regular curve) $C$에 대하여 옳은 것만을 〈보기〉에서 있는 대로 고른 것은?</p>
+        <div class="formal-box">
+          <p>&#12296;보기&#12297;</p>
+          <p>ㄱ. $C$ 위의 모든 점에서 곡률(curvature)이 $0$이면 $C$는 직선이거나 직선의 일부이다.</p>
+          <p>ㄴ. $C$ 위의 모든 점에서 열률(비틀림률, 꼬임률, torsion)이 정의되고 그 값이 $0$이면 $C$는 적당한 평면에 놓여 있다.</p>
+          <p>ㄷ. $C$ 위의 모든 점에서 곡률이 양의 상수로 일정하면 $C$는 원이거나 원의 일부이다.</p>
+        </div>
+        <div class="formal-box">
+          <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄷ &nbsp;&nbsp;&nbsp; ③ ㄱ, ㄴ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄴ, ㄷ</p>
+        </div>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Which of the following selects all and only the true statements in &lt;List&gt; about a regular curve $C$ lying in three-dimensional space $\mathbb{R}^3$?</p>
+        <div class="formal-box">
+          <p>&lt;List&gt;</p>
+          <p>ㄱ. If the curvature of $C$ is $0$ at every point, then $C$ is a line or part of a line.</p>
+          <p>ㄴ. If the torsion of $C$ is defined and equal to $0$ at every point, then $C$ lies in some plane.</p>
+          <p>ㄷ. If the curvature of $C$ is a positive constant at every point, then $C$ is a circle or part of a circle.</p>
+        </div>
+        <div class="formal-box">
+          <p>① ㄱ &nbsp;&nbsp;&nbsp; ② ㄷ &nbsp;&nbsp;&nbsp; ③ ㄱ, ㄴ &nbsp;&nbsp;&nbsp; ④ ㄱ, ㄷ &nbsp;&nbsp;&nbsp; ⑤ ㄱ, ㄴ, ㄷ</p>
+        </div>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 18 -->
+<div class="card pr-card" id="pr18">
+  <div class="card-head">
+    <span class="pr-num">문제 18</span>
+    <span class="ex-title">곡률·열률로 곡선 판별 (임용03-13)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 곡선의 곡률(curvature)과 열률(torsion, 비꼬임률)을 구하고, 두 값을 모두 이용하여 곡선의 종류가 무엇인지 쓰시오.</p>
+        $$x(\theta)=(\cos\theta-2,\cos\theta+2,\sqrt{2}\sin\theta)$$
+        <p>(단, $0\le\theta \lt 2\pi$)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the curvature and torsion of the following curve, and using both values, state what type of curve it is.</p>
+        $$x(\theta)=(\cos\theta-2,\cos\theta+2,\sqrt{2}\sin\theta)$$
+        <p>(Here $0\le\theta \lt 2\pi$.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- 문제 19 -->
+<div class="card pr-card" id="pr19">
+  <div class="card-head">
+    <span class="pr-num">문제 19</span>
+    <span class="ex-title">곡률중심 고정과 원 (임용05-17)</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>호의 길이 $s$로 나타낸 매개변수 곡선 $\alpha:[a,b]\to\mathbb{R}^3$가 $\alpha''(s)\neq 0$이고 $\alpha(s)+\dfrac{1}{k(s)}N(s)$가 고정된 점이면 $\alpha$는 원의 일부임을 보이시오.</p>
+        <p>(단, $k(s)$는 $\alpha(s)$의 곡률(curvature)이고, $N(s)$는 주법선벡터(principal normal vector)이다.)</p>
+      </div>
+      <!-- PROOF-KO -->
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the parametrized curve $\alpha:[a,b]\to\mathbb{R}^3$, given in terms of arc length $s$, satisfies $\alpha''(s)\neq 0$, and that $\alpha(s)+\dfrac{1}{k(s)}N(s)$ is a fixed point. Show that $\alpha$ is part of a circle.</p>
+        <p>(Here $k(s)$ is the curvature of $\alpha(s)$, and $N(s)$ is the principal normal vector.)</p>
+      </div>
+      <!-- PROOF-EN -->
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">해석학 홈</a>
+    <a href="../la/index.html">선형대수학 홈</a>
+    <a href="../calc1/index.html">미적분학 1 홈</a>
+    <a href="index.html">미적분학 2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="ch10.html">10</a>
+    <a href="ch11.html">11</a>
+    <a href="ch12.html">12</a>
+    <a href="ch13.html">13</a>
+    <a href="ch14.html">14</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
