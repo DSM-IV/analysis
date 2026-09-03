@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4. 함수 (ii): 합성과 역함수 (Functions (ii): Composition and Inverses) | 집합론 학습 가이드</title>
+<meta name="description" content="집합론 4단원 함수 (ii) 합성과 역함수(Functions (ii): Composition and Inverses). 서로소 정의역 위의 두 함수 붙이기, 합성함수가 함수임, 가역함수와 역함수, 가역과 전단사의 동치, 항등함수 $I_A$·$I_B$, 왼쪽 역함수와 오른쪽 역함수, 합성의 단사성·전사성 보존을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="집합론, Set Theory, 함수, function, 합성함수, composition, 역함수, inverse function, 가역, invertible, 왼쪽 역함수, left inverse, 오른쪽 역함수, right inverse, 전단사, bijective, 단사, injective, 전사, surjective, 항등함수, identity function, 제한, restriction, 확장, extension, 그래프의 역, inverse of a graph, 그래프의 합성, composition of graphs, 정의역, domain, 치역, range, 상수함수, constant function">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/settheory/ch07.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. 함수 (ii): 합성과 역함수 (Functions (ii): Composition and Inverses) — 집합론 한·영 대조">
+<meta property="og:description" content="두 함수의 붙이기와 확장, 합성함수가 함수임, 가역함수와 역함수, 가역·전단사의 동치, 왼쪽·오른쪽 역함수, 합성의 단사성·전사성 보존을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/settheory/ch07.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="집합론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "4. 함수 (ii): 합성과 역함수 (Functions (ii): Composition and Inverses) — 집합론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "집합론 함수 (ii) — 두 함수의 붙이기, 합성함수, 가역함수와 역함수, 가역과 전단사의 동치, 왼쪽·오른쪽 역함수, 합성의 단사성·전사성 보존을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/settheory/ch07.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/settheory/ch07.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="index.html">집합론</a>
+  <a href="../analysis2/index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html" class="active">07</a>
+  <a href="ch08.html">08</a>
+</nav>
+
+<header>
+  <p class="subtitle">Set Theory — Unit 07</p>
+  <h1>4. 함수 (ii): 합성과 역함수<span>Functions (ii): Composition and Inverses</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c4-24"><span class="toc-num">LEM 4.24</span> 서로소 정의역 위의 두 함수 붙이기</a></li>
+    <li><a href="#c4-25"><span class="toc-num">EX 4.25</span> 보조정리 4.24(5) 없이 (F2’) 확인하기</a></li>
+    <li><a href="#c4-26"><span class="toc-num">THM 4.26</span> 붙인 함수는 공통 확장</a></li>
+    <li><a href="#c4-27"><span class="toc-num">THM 4.27</span> 합성함수가 함수임</a></li>
+    <li><a href="#c4-28"><span class="toc-num">EX 4.28</span> 합성에 대한 화살표 표기</a></li>
+    <li><a href="#c4-29"><span class="toc-num">EX 4.29</span> 합성의 점별 공식</a></li>
+    <li><a href="#c4-30"><span class="toc-num">DEF 4.30</span> 가역함수</a></li>
+    <li><a href="#c4-31"><span class="toc-num">LEM 4.31</span> 역함수의 값 읽어내기</a></li>
+    <li><a href="#c4-32"><span class="toc-num">EX 4.32</span> 가역성 없이 증명 또는 반증하기</a></li>
+    <li><a href="#c4-33"><span class="toc-num">LEM 4.33</span> 전단사함수의 역은 함수이다</a></li>
+    <li><a href="#c4-34"><span class="toc-num">THM 4.34</span> 전단사함수의 역은 전단사이다</a></li>
+    <li><a href="#c4-35"><span class="toc-num">THM 4.35</span> 가역이면 전단사이다</a></li>
+    <li><a href="#c4-36"><span class="toc-num">COR 4.36</span> 가역과 전단사의 동치</a></li>
+    <li><a href="#c4-37"><span class="toc-num">THM 4.37</span> 역함수와의 합성은 항등함수</a></li>
+    <li><a href="#c4-38"><span class="toc-num">EX 4.38</span> 정리 4.13을 이용한 정리 4.37</a></li>
+    <li><a href="#c4-39"><span class="toc-num">THM 4.39</span> 양쪽 역이 있으면 전단사이다</a></li>
+    <li><a href="#c4-40"><span class="toc-num">EX 4.40</span> 왼쪽 역이 있으면 단사이다</a></li>
+    <li><a href="#c4-41"><span class="toc-num">EX 4.41</span> 오른쪽 역이 있으면 전사이다</a></li>
+    <li><a href="#c4-42"><span class="toc-num">COR 4.42</span> 양쪽 역은 역함수이다</a></li>
+    <li><a href="#c4-43"><span class="toc-num">COR 4.43</span> 가역성의 특징화</a></li>
+    <li><a href="#c4-44"><span class="toc-num">EX 4.44</span> 따름정리 4.43 증명하기</a></li>
+    <li><a href="#c4-45"><span class="toc-num">EX 4.45</span> 역함수 자체도 가역이다</a></li>
+    <li><a href="#c4-46"><span class="toc-num">DEF 4.46</span> 왼쪽 역함수와 오른쪽 역함수</a></li>
+    <li><a href="#c4-47"><span class="toc-num">THM 4.47</span> 단사성과 왼쪽 역함수</a></li>
+    <li><a href="#c4-48"><span class="toc-num">REM 4.48</span> 전사성과 오른쪽 역함수</a></li>
+    <li><a href="#c4-49"><span class="toc-num">THM 4.49</span> 합성의 단사성·전사성 보존</a></li>
+    <li><a href="#c4-50"><span class="toc-num">COR 4.50</span> 가역함수의 합성</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  집합론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id="c{섹션}-{번호}" (예: id="c4-37"),
+     소스 등장 순서 그대로 배치한다. ch07은 §4의 4.24–4.50 구간을 담는다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation / Axiom / Undefined notion
+                                  → card def-card  · DEF n / NOTATION n / AXIOM n / UNDEF n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Idea / Question / Paradox
+                                  → card rem-card  · REM n / IDEA n / Q n / PARADOX n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름을 쓰고, 없으면 간결한 편집 제목을 새로 붙인다.
+     §4의 4.24–4.50에는 괄호 이름이 없으므로 모두 편집 제목이다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·따옴표·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경(4.24, 4.26, 4.27, 4.31, 4.33, 4.34, 4.35, 4.37,
+     4.39, 4.42, 4.47, 4.49 — 모두 12개)은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       "We skip the detail." / "The proof of (2) is analogous to that of (1)." 류
+       문장도 증명 안에 verbatim 유지한다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+       Corollary 4.36, 4.43, 4.50은 원문에 증명이 인쇄되어 있지 않으므로 토글 없음.
+  6) Exercise 카드는 소스에 풀이가 없다(4.25, 4.28, 4.29, 4.32, 4.38, 4.40, 4.41,
+     4.44, 4.45 — 모두 9개). 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+       ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로.
+       (실제 형태는 ch01의 EX 1.2 / EX 1.5 카드를 그대로 복사할 것.)
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note07-{순번} (예: note07-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+     4.24–4.50 구간은 환경과 증명만으로 채워져 있어 note 카드가 없다.
+  8) 수식은 $...$ / $$...$$. 여러 줄 display는 div.math-display 로 감싼다.
+     번호 붙은 display 수식은 \tag{4.7}(정리 4.26 증명), \tag{4.8}(정리 4.47 증명)
+     두 개뿐이며 번호를 그대로 유지한다.
+     dom·ran 은 원문대로 이탤릭 수식($dom\ f$, $ran\ f$)으로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+  9) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§4 Functions (ii): Composition and Inverses · 함수 (ii): 합성과 역함수</h2></div>
+
+<!-- ═══════════ PDF p.38 ═══════════ -->
+
+<!-- Lemma 4.24 -->
+<div class="card thm-card" id="c4-24">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.24</span>
+    <span class="thm-title">서로소 정의역 위의 두 함수 붙이기 <em>Gluing Two Functions on Disjoint Domains</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f_1 : B \to A$와 $f_2 : C \to A$가 함수이고 $B \cap C = \emptyset$이라 하자. $f = f_1 \cup f_2$라 정의하자. 그러면 다음이 성립한다.</p>
+        <ol class="paren">
+          <li>$(x,y) \in f$이고 $x \in B$인 것은 $(x,y) \in f_1$인 것과 동치이다</li>
+          <li>$(x,y) \in f$이고 $x \in C$인 것은 $(x,y) \in f_2$인 것과 동치이다</li>
+          <li>$dom\ f = B \cup C$이고 $ran\ f = (ran\ f_1) \cup (ran\ f_2) \subset A$이다</li>
+          <li>$x \in B$이면 $f(x) = f_1(x)$이고, $x \in C$이면 $f(x) = f_2(x)$이다</li>
+          <li>$f$는 (F2)를 만족한다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>먼저 (⇐)를 증명한다. $(x,y) \in f_1$이라 하자. 그러면 $f_1 \subset f$이므로 당연히 $(x,y) \in f$이다. 정의역의 정의에 의해 $x \in dom\ f_1$이다. 또한 $f_1 : B \to A$가 함수이므로 (정리 4.8 참조) $dom\ f_1 = B$이다. 따라서 $x \in B$이다. 역으로 $(x,y) \in f$이고 $x \in B$라고 가정하자. $(x,y) \in f$이고 $f = f_1 \cup f_2$이므로 $(x,y) \in f_1$이거나 $(x,y) \in f_2$이다. $(x,y) \in f_2$가 불가능함을 보이는 것으로 충분하다. $(x,y) \in f_2$라고 가정하자. 그러면 $x \in dom\ f_2 = C$이다. $C \cap B = \emptyset$이므로 $x \notin B$이다. 그러나 이는 $x \in B$라는 가정에 모순이다. 따라서 $(x,y) \notin f_2$이다.</li>
+          <li>(2)의 증명은 (1)과 유사하므로 자세한 내용은 생략한다.</li>
+          <li>정리 3.77과 정리 4.8에 의해,
+            <div class="math-display">$$dom\ f = dom\ (f_1 \cup f_2) = (dom\ f_1) \cup (dom\ f_2) = B \cup C.$$</div>
+            <p>마찬가지로,</p>
+            <div class="math-display">$$ran\ f = ran\ (f_1 \cup f_2) = (ran\ f_1) \cup (ran\ f_2) \subset A \cup A = A.$$</div>
+          </li>
+          <li>$x \in B$라 하자. 그러면 $f_1 : B \to A$가 함수이므로 $(x, f_1(x)) \in f_1$이다. 또한 $f_1 \subset f$이므로 $(x, f_1(x)) \in f$이다. 따라서 (4.3)을 상기하면 $f(x) = f_1(x)$이다. 마찬가지로 $x \in C$이면 $f(x) = f_2(x)$이다.</li>
+          <li>$(x,y_1) \in f$이고 $(x,y_2) \in f$라 하자. 그러면 $f = f_1 \cup f_2$이므로 다음 네 가지 경우가 있다: (경우 1) $(x,y_1) \in f_1$이고 $(x,y_2) \in f_2$인 경우, (경우 2) $(x,y_1) \in f_2$이고 $(x,y_2) \in f_1$인 경우, (경우 3) $(x,y_1) \in f_1$이고 $(x,y_2) \in f_1$인 경우, (경우 4) $(x,y_1) \in f_2$이고 $(x,y_2) \in f_2$인 경우. 먼저 (경우 1)과 (경우 2)는 일어날 수 없음을 보인다. $f_1$이 $B$에서 $A$로 가는 함수이므로 $dom\ f_1 = B$이다. 마찬가지로 $dom\ f_2 = C$이다. 또한 $B \cap C = \emptyset$이라는 가정에 의해 $x \in B$이면서 동시에 $x \in C$인 것은 불가능하다. 따라서 (경우 1)과 (경우 2)는 불가능하다. 이제 (경우 3)과 (경우 4)만 남는다. (경우 3) $(x,y_1) \in f_1$이고 $(x,y_2) \in f_1$이라 하자. $f_1 : B \to A$가 함수이므로 $y_1 = y_2$이다. 마찬가지로 (경우 4) $(x,y_1) \in f_2$이고 $(x,y_2) \in f_2$인 경우도 $f_2 : C \to A$가 함수이므로 $y_1 = y_2$이다.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f_1 : B \to A$ and $f_2 : C \to A$ be functions, where $B \cap C = \emptyset$. Define $f = f_1 \cup f_2$. Then</p>
+        <ol class="paren">
+          <li>$(x,y) \in f$ and $x \in B$ iff $(x,y) \in f_1$</li>
+          <li>$(x,y) \in f$ and $x \in C$ iff $(x,y) \in f_2$</li>
+          <li>$dom\ f = B \cup C$ and $ran\ f = (ran\ f_1) \cup (ran\ f_2) \subset A$</li>
+          <li>If $x \in B$ then $f(x) = f_1(x)$ and if $x \in C$ then $f(x) = f_2(x)$</li>
+          <li>$f$ satisfies (F2).</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>First we prove the if part. Let $(x,y) \in f_1$. Then obviously $(x,y) \in f$ since $f_1 \subset f$. By the definition of the domain, $x \in dom\ f_1$ . Moreover, $dom\ f_1 = B$ since $f_1 : B \to A$ is a function (cf. Theorem 4.8). Therefore, $x \in B$. Conversely, we assume $(x,y) \in f$ and $x \in B$. Since $(x,y) \in f$ and $f = f_1 \cup f_2$, $(x,y) \in f_1$ or $(x,y) \in f_2$. It is sufficient to show that $(x,y) \in f_2$ is impossible. Suppose $(x,y) \in f_2$. Then $x \in dom\ f_2 = C$. Since $C \cap B = \emptyset$, $x \notin B$. But it is contradiction to the assumption that $x \in B$. Thus $(x,y) \notin f_2$.</li>
+          <li>The proof of (2) is analogous to that of (1). We skip the detail.</li>
+          <li>By Theorem 3.77 and Theorem 4.8,
+            <div class="math-display">$$dom\ f = dom\ (f_1 \cup f_2) = (dom\ f_1) \cup (dom\ f_2) = B \cup C.$$</div>
+            <p>Similarly,</p>
+            <div class="math-display">$$ran\ f = ran\ (f_1 \cup f_2) = (ran\ f_1) \cup (ran\ f_2) \subset A \cup A = A.$$</div>
+          </li>
+          <li>Let $x \in B$. Then since $f_1 : B \to A$ is a function, $(x, f_1(x)) \in f_1$. Moreover, since $f_1 \subset f$, $(x, f_1(x)) \in f$. Therefore, recalling (4.3), we have $f(x) = f_1(x)$. Similarly, if $x \in C$, then $f(x) = f_2(x)$.</li>
+          <li>Let $(x,y_1) \in f$ and $(x,y_2) \in f$. Then since $f = f_1 \cup f_2$, there exist four cases : (Case 1) $(x,y_1) \in f_1$ and $(x,y_2) \in f_2$, (Case 2) $(x,y_1) \in f_2$ and $(x,y_2) \in f_1$, (Case 3) $(x,y_1) \in f_1$ and $(x,y_2) \in f_1$, (Case 4) $(x,y_1) \in f_2$ and $(x,y_2) \in f_2$. First we prove that (Case 1) and (Case 2) cannot happen. Since $f_1$ is a function from $B$ to $A$, $dom\ f_1 = B$. Similarly, $dom\ f_2 = C$. Moreover, the assumption $B \cap C = \emptyset$ implies that $x \in B$ and $x \in C$ are impossible. Therefore, (Case 1) and (Case 2) are impossible. It only remains to consider (Case 3) and (Case 4). Recall that (Case 3: $(x,y_1) \in f_1$ and $(x,y_2) \in f_1$. Since $f_1 : B \to A$ is a function, $y_1 = y_2$. Similarly, for (Case 4) $(x,y_1) \in f_2$ and $(x,y_2) \in f_2$, we have $y_1 = y_2$ since $f_2 : C \to A$ is a function.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.25 -->
+<div class="card ex-card" id="c4-25">
+  <div class="card-head">
+    <span class="ex-num">EX 4.25</span>
+    <span class="ex-title">보조정리 4.24(5) 없이 (F2’) 확인하기 <em>Verifying (F2’) Without Lemma 4.24(5)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>보조정리 4.24의 상황에서, 보조정리 4.24(5)를 사용하지 않고 $f$에 대해 (F2’)이 성립함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$x_1, x_2 \in dom\ f$이고 $x_1 = x_2$라 하자. $x := x_1 = x_2$라 쓰자. 보조정리 4.24(3)에 의해 $dom\ f = B \cup C$이므로 $x \in B \cup C$이다. 따라서 $x \in B$이거나 $x \in C$이다.</p>
+        <p>$x \in B$인 경우를 생각하자. 보조정리 4.24(4)에 의해 $f(x_1) = f(x) = f_1(x)$이고, 마찬가지로 $f(x_2) = f(x) = f_1(x)$이다. $f_1 : B \to A$가 함수이므로 (F1)에 의해 $x$의 상 $f_1(x)$가 존재하고 (F2)에 의해 유일하다. 즉 $f_1(x)$는 하나의 값으로 정해진다. 따라서</p>
+        <div class="math-display">$$f(x_1) = f_1(x) = f(x_2).$$</div>
+        <p>$x \in C$인 경우도 마찬가지이다. 보조정리 4.24(4)에 의해</p>
+        <div class="math-display">$$f(x_1) = f_2(x) = f(x_2).$$</div>
+        <p>$B \cap C = \emptyset$이므로 $x \in B$와 $x \in C$가 동시에 성립할 수는 없다. 따라서 두 경우 중 정확히 하나만 일어나며, 어느 경우이든 $f(x_1) = f(x_2)$를 얻는다. 그러므로 $f$는 (F2’)을 만족한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Under the setting Lemma 4.24, prove that (F2’) holds for $f$ without using Lemma 4.24(5).</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Let $x_1, x_2 \in dom\ f$ with $x_1 = x_2$. Write $x := x_1 = x_2$. By Lemma 4.24(3), $dom\ f = B \cup C$, so $x \in B \cup C$. Thus $x \in B$ or $x \in C$.</p>
+        <p>Suppose $x \in B$. By Lemma 4.24(4), $f(x_1) = f(x) = f_1(x)$, and likewise $f(x_2) = f(x) = f_1(x)$. Since $f_1 : B \to A$ is a function, by (F1) the image $f_1(x)$ exists, and by (F2) it is unique. That is, $f_1(x)$ is a single well-defined value. Hence</p>
+        <div class="math-display">$$f(x_1) = f_1(x) = f(x_2).$$</div>
+        <p>The case $x \in C$ is analogous. By Lemma 4.24(4),</p>
+        <div class="math-display">$$f(x_1) = f_2(x) = f(x_2).$$</div>
+        <p>Since $B \cap C = \emptyset$, $x \in B$ and $x \in C$ cannot hold simultaneously. Thus exactly one of the two cases applies, and in either case we obtain $f(x_1) = f(x_2)$. Therefore $f$ satisfies (F2’).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.26 -->
+<div class="card thm-card" id="c4-26">
+  <div class="card-head">
+    <span class="thm-num">THM 4.26</span>
+    <span class="thm-title">붙인 함수는 공통 확장 <em>The Glued Map as a Common Extension</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f_1 : B \to A$와 $f_2 : C \to A$가 함수이고 $B \cap C = \emptyset$이라 하자. $f = f_1 \cup f_2$라 정의하자. 그러면 다음이 성립한다.</p>
+        <ol class="paren">
+          <li>$f : B \cup C \to A$는 함수이다</li>
+          <li>$f_1 = f_{[B]}$이고 $f_2 = f_{[C]}$이다</li>
+          <li>$f : B \cup C \to A$는 $f_1$을 $B \cup C$로 확장한 것이다</li>
+          <li>$f : B \cup C \to A$는 $f_2$를 $B \cup C$로 확장한 것이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>보조정리 4.24(3), (5)와 정리 4.8에 의해, $f : B \cup C \to A$는 함수이다.</li>
+          <li>(1)에 의해 $f : B \cup C \to A$는 함수이다. 따라서 보조정리 4.24(4)에 의해,
+            <div class="math-display">$$f_1(x) = f(x) \qquad \forall x \in B \tag{4.7}$$</div>
+            <p>이고</p>
+            <div class="math-display">$$f_2(x) = f(x) \qquad \forall x \in C.$$</div>
+            <p>따라서 (4.5)에 의해 $f_1 = f_{[B]}$이고 $f_2 = f_{[C]}$임을 얻는다.</p>
+          </li>
+          <li>(4.7)과 (4.6)에 의해, $f : B \cup C \to A$는 $f_1$을 $B \cup C$로 확장한 것이다.</li>
+          <li>(4)의 증명은 (3)과 매우 유사하므로 자세한 내용은 생략한다.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f_1 : B \to A$ and $f_2 : C \to A$ be functions, where $B \cap C = \emptyset$. Define $f = f_1 \cup f_2$. Then</p>
+        <ol class="paren">
+          <li>$f : B \cup C \to A$ is a function</li>
+          <li>$f_1 = f_{[B]}$ and $f_2 = f_{[C]}$</li>
+          <li>$f : B \cup C \to A$ is an extension of $f_1$ to $B \cup C$</li>
+          <li>$f : B \cup C \to A$ is an extension of $f_2$ to $B \cup C$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>Due to Lemma 4.24(3), (5), and Theorem 4.8, $f : B \cup C \to A$ is a function.</li>
+          <li>By (1), $f : B \cup C \to A$ is a function. Thus due to Lemma 4.24(4),
+            <div class="math-display">$$f_1(x) = f(x) \qquad \forall x \in B \tag{4.7}$$</div>
+            <p>and</p>
+            <div class="math-display">$$f_2(x) = f(x) \qquad \forall x \in C.$$</div>
+            <p>Therefore, by (4.5), we have $f_1 = f_{[B]}$ and $f_2 = f_{[C]}$.</p>
+          </li>
+          <li>By (4.7) and (4.6), $f : B \cup C \to A$ is an extension of $f_1$ to $B \cup C$.</li>
+          <li>The proof of (4) is very analogous to that of (3). We skip the detail.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.39 ═══════════ -->
+
+<!-- Theorem 4.27 -->
+<div class="card thm-card" id="c4-27">
+  <div class="card-head">
+    <span class="thm-num">THM 4.27</span>
+    <span class="thm-title">합성함수가 함수임 <em>Composition of Functions is a Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to C$가 함수라 하자. 그러면 $g \circ f : A \to C$는 함수이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>정리 4.8에 의해, $g \circ f$가 (F2)를 만족하고 $dom\ g \circ f = A$이며 $ran\ g \circ f \subset C$임을 보이는 것으로 충분하다. 먼저 $ran\ g \circ f \subset C$임을 증명한다. 정리 3.64(4)와 정리 4.8에 의해,</p>
+        <div class="math-display">$$ran\ g \circ f \subset ran\ g \subset C.$$</div>
+        <p>다음으로 $dom\ g \circ f = A$임을 보인다. 정리 4.8에 의해 $ran\ f \subset B = dom\ g$이다. 따라서 따름정리 3.65와 정리 4.8에 의해,</p>
+        <div class="math-display">$$dom\ g \circ f = dom\ f = A.$$</div>
+        <p>이제 $g \circ f$가 (F2)를 만족함을 보이는 것만 남았다. $(x,y_1) \in g \circ f$이고 $(x,y_2) \in g \circ f$라 하자. 그러면 합성의 정의에 의해 다음을 만족하는 $z_1$과 $z_2$가 존재한다.</p>
+        <div class="math-display">$$(x,z_1) \in f \quad \wedge \quad (z_1,y_1) \in g$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$(x,z_2) \in f \quad \wedge \quad (z_2,y_2) \in g.$$</div>
+        <p>$f : A \to B$가 함수이므로 $(x,z_1) \in f$이고 $(x,z_2) \in f$이면 $z_1 = z_2$이다. 따라서 $g : B \to C$가 함수이므로 $(z_1,y_1) \in g$이고 $(z_2,y_2) = (z_1,y_2) \in g$이면 $y_1 = y_2$이다. 그러므로 $g \circ f$는 (F2)를 만족한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to C$ be functions. Then $g \circ f : A \to C$ is a function.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Due to Theorem 4.8, it is sufficient to show that $g \circ f$ satisfies (F2), $dom\ g \circ f = A$, and $ran\ g \circ f \subset C$. First we prove $ran\ g \circ f \subset C$. By Theorem 3.64(4) and Theorem 4.8,</p>
+        <div class="math-display">$$ran\ g \circ f \subset ran\ g \subset C.$$</div>
+        <p>Next we show $dom\ g \circ f = A$. By Theorem 4.8, $ran\ f \subset B = dom\ g$. Thus by Corollary 3.65 and Theorem 4.8,</p>
+        <div class="math-display">$$dom\ g \circ f = dom\ f = A.$$</div>
+        <p>It only remains to show that $g \circ f$ satisfies (F2). Let $(x,y_1) \in g \circ f$ and $(x,y_2) \in g \circ f$. Then by the definition of the composition, there exist $z_1$ and $z_2$ such that</p>
+        <div class="math-display">$$(x,z_1) \in f \quad \wedge \quad (z_1,y_1) \in g$$</div>
+        <p>and</p>
+        <div class="math-display">$$(x,z_2) \in f \quad \wedge \quad (z_2,y_2) \in g.$$</div>
+        <p>Since $f : A \to B$ is a function, $(x,z_1) \in f$ and $(x,z_2) \in f$ implies $z_1 = z_2$. Thus since $g : B \to C$ is a function, $(z_1,y_1) \in g$ and $(z_2,y_2) = (z_1,y_2) \in g$ implies $y_1 = y_2$. Therefore $g \circ f$ satisfies (F2).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.28 -->
+<div class="card ex-card" id="c4-28">
+  <div class="card-head">
+    <span class="ex-num">EX 4.28</span>
+    <span class="ex-title">합성에 대한 화살표 표기 <em>Arrow Notation for the Composition</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to C$가 함수라 하자. 다음을 증명하라.</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff \exists z \ni x \overset{f}{\mapsto} z \text{ and } z \overset{g}{\mapsto} y.$$</div>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>정의 4.7(3)에 의해, 함수 $h$와 원소 $x, y$에 대하여 $x \overset{h}{\mapsto} y$인 것은 $(x,y) \in h$인 것과 동치이다. 이를 $h = g \circ f$에 적용하면,</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff (x,y) \in g \circ f.$$</div>
+        <p>또한 정의 3.61(그래프의 합성)에 의해,</p>
+        <div class="math-display">$$(x,y) \in g \circ f \iff \exists z \ni (x,z) \in f \text{ and } (z,y) \in g.$$</div>
+        <p>다시 정의 4.7(3)에 의해, $(x,z) \in f$인 것은 $x \overset{f}{\mapsto} z$인 것과 동치이고, $(z,y) \in g$인 것은 $z \overset{g}{\mapsto} y$인 것과 동치이다. 따라서</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff \exists z \ni x \overset{f}{\mapsto} z \text{ and } z \overset{g}{\mapsto} y.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to C$ be functions. Prove that</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff \exists z \ni x \overset{f}{\mapsto} z \text{ and } z \overset{g}{\mapsto} y.$$</div>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>By Definition 4.7(3), for a function $h$ and elements $x, y$, $x \overset{h}{\mapsto} y$ iff $(x,y) \in h$. Applying this with $h = g \circ f$,</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff (x,y) \in g \circ f.$$</div>
+        <p>Moreover, by Definition 3.61 (the composition of graphs),</p>
+        <div class="math-display">$$(x,y) \in g \circ f \iff \exists z \ni (x,z) \in f \text{ and } (z,y) \in g.$$</div>
+        <p>Again by Definition 4.7(3), $(x,z) \in f$ iff $x \overset{f}{\mapsto} z$, and $(z,y) \in g$ iff $z \overset{g}{\mapsto} y$. Therefore</p>
+        <div class="math-display">$$x \overset{g \circ f}{\longmapsto} y \iff \exists z \ni x \overset{f}{\mapsto} z \text{ and } z \overset{g}{\mapsto} y.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.29 -->
+<div class="card ex-card" id="c4-29">
+  <div class="card-head">
+    <span class="ex-num">EX 4.29</span>
+    <span class="ex-title">합성의 점별 공식 <em>Pointwise Formula for the Composition</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to C$가 함수라 하자. 다음을 증명하라.</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)) \qquad \forall x \in A.$$</div>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$x \in A$라 하자. 정리 4.27에 의해 $g \circ f : A \to C$는 함수이고, 정리 4.27의 증명에서 보인 대로 $dom\ g \circ f = A$이다. 따라서 $x \in dom\ g \circ f$이다.</p>
+        <p>$f : A \to B$가 함수이므로, (4.2)에 의해 $(x, f(x)) \in f$이다. 또한 $f(x) \in B = dom\ g$이고 $g : B \to C$가 함수이므로, 다시 (4.2)에 의해 $(f(x), g(f(x))) \in g$이다.</p>
+        <p>따라서 정의 3.61(그래프의 합성)에 의해, $z = f(x)$를 취하면</p>
+        <div class="math-display">$$(x, g(f(x))) \in g \circ f.$$</div>
+        <p>$g \circ f$는 함수이므로, (4.2)에 의해</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to C$ be functions. Prove that</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)) \qquad \forall x \in A.$$</div>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Let $x \in A$. By Theorem 4.27, $g \circ f : A \to C$ is a function, and as shown in the proof of Theorem 4.27, $dom\ g \circ f = A$. Hence $x \in dom\ g \circ f$.</p>
+        <p>Since $f : A \to B$ is a function, by (4.2), $(x, f(x)) \in f$. Moreover $f(x) \in B = dom\ g$, and since $g : B \to C$ is a function, again by (4.2), $(f(x), g(f(x))) \in g$.</p>
+        <p>Thus by Definition 3.61 (the composition of graphs), taking $z = f(x)$,</p>
+        <div class="math-display">$$(x, g(f(x))) \in g \circ f.$$</div>
+        <p>Since $g \circ f$ is a function, by (4.2),</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 4.30 -->
+<div class="card def-card" id="c4-30">
+  <div class="card-head">
+    <span class="def-num">DEF 4.30</span>
+    <span class="def-title">가역함수 <em>Invertible function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f : A \to B$는 $f^{-1} : B \to A$가 함수일 때 “가역(invertible)”이라고 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A function $f : A \to B$ is said to be “invertible” if $f^{-1} : B \to A$ is a function.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lemma 4.31 -->
+<div class="card thm-card" id="c4-31">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.31</span>
+    <span class="thm-title">역함수의 값 읽어내기 <em>Reading Off the Value of the Inverse</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 가역함수라 하자. 그러면</p>
+        <div class="math-display">$$y = f(x) \iff x = f^{-1}(y).$$</div>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>(4.2)와 그래프 $f$의 역의 정의에 의해,</p>
+        <div class="math-display">$$y = f(x) \iff (x,y) \in f \iff (y,x) \in f^{-1} \iff x = f^{-1}(y).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a invertible function. Then</p>
+        <div class="math-display">$$y = f(x) \iff x = f^{-1}(y).$$</div>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>By (4.2) and the definition of the inverse of the graph $f$,</p>
+        <div class="math-display">$$y = f(x) \iff (x,y) \in f \iff (y,x) \in f^{-1} \iff x = f^{-1}(y).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.40 ═══════════ -->
+
+<!-- Exercise 4.32 -->
+<div class="card ex-card" id="c4-32">
+  <div class="card-head">
+    <span class="ex-num">EX 4.32</span>
+    <span class="ex-title">가역성 없이 증명 또는 반증하기 <em>Prove or Disprove Without Invertibility</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 함수라 하자. 다음을 증명하거나 반증하라.</p>
+        <div class="math-display">$$y = f(x) \iff x = f^{-1}(y).$$</div>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>이 명제는 일반적인 함수 $f$에 대해서는 성립하지 않는다. $A = \{a_1, a_2\}$ ($a_1 \neq a_2$)이고 $B = \{b\}$라 하고, $f = \{(a_1,b),(a_2,b)\} : A \to B$ (즉 상수함수 $K_b$)라 하자. 그래프의 역의 정의에 의해 $f^{-1} = \{(b,a_1),(b,a_2)\}$이다. $a_1 \neq a_2$이면서 $(b,a_1) \in f^{-1}$이고 $(b,a_2) \in f^{-1}$이므로, $f^{-1}$은 (F2)를 만족하지 않아 함수가 아니다 (따라서 정의 4.30에 의해 $f$는 가역이 아니다). 표기 (4.3)의 의미에서는, $(b,a_1) \in f^{-1}$이므로 “$f^{-1}(b) = a_1$”이 성립하고, $(b,a_2) \in f^{-1}$이므로 “$f^{-1}(b) = a_2$”도 동시에 성립한다.</p>
+        <p>이제 이 $f$에 대해 위 동치가 성립한다고 가정해 보자. 단, 보조정리 4.31에서처럼 $f^{-1}(y)$는 $A$의 원소 하나를 가리키는 것으로 읽는다. $b = f(a_1)$이고 $b = f(a_2)$이므로, 순방향($\implies$)을 두 번 적용하면</p>
+        <div class="math-display">$$a_1 = f^{-1}(b) \quad \text{and} \quad a_2 = f^{-1}(b)$$</div>
+        <p>를 얻고, 따라서 $a_1 = a_2$가 되어 $a_1 \neq a_2$에 모순이다. 모호한 표현 $f^{-1}(b)$의 두 가지 읽기를 하나씩 따져 보아도 같은 실패가 드러난다. $f^{-1}(b) = a_1$로 읽으면 $x = a_2$, $y = b$인 경우에 “$y = f(x)$”는 참이지만 “$x = f^{-1}(y)$”는 거짓이고, $f^{-1}(b) = a_2$로 읽으면 $x = a_1$, $y = b$인 경우에 그러하다. 따라서 $f^{-1}(b)$에 어떤 값을 지정하더라도 모든 $x$와 $y$에 대해 이 동치를 성립시킬 수는 없으며, “$y = f(x) \iff x = f^{-1}(y)$”는 일반적인 함수 $f$에 대해 성립하지 않는다.</p>
+        <p>다만 $f$가 가역인 경우, 즉 $f^{-1}$이 함수인 경우에는 이 동치관계가 실제로 성립한다 (보조정리 4.31).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a function. Prove or disprove that</p>
+        <div class="math-display">$$y = f(x) \iff x = f^{-1}(y).$$</div>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>This statement does not hold for a general function $f$. Let $A = \{a_1, a_2\}$ with $a_1 \neq a_2$, let $B = \{b\}$, and let $f = \{(a_1,b),(a_2,b)\} : A \to B$ (i.e. the constant function $K_b$). By the definition of the inverse of a graph, $f^{-1} = \{(b,a_1),(b,a_2)\}$. Since $a_1 \neq a_2$ while $(b,a_1) \in f^{-1}$ and $(b,a_2) \in f^{-1}$, $f^{-1}$ fails to satisfy (F2) and hence is not a function (so by Definition 4.30, $f$ is not invertible). In the sense of Notation (4.3), since $(b,a_1) \in f^{-1}$, “$f^{-1}(b) = a_1$” holds, and since $(b,a_2) \in f^{-1}$, “$f^{-1}(b) = a_2$” also holds simultaneously.</p>
+        <p>Now suppose the stated equivalence held for this $f$, with $f^{-1}(y)$ read — as in Lemma 4.31 — as a single element of $A$. Since $b = f(a_1)$ and $b = f(a_2)$, applying the forward direction ($\implies$) twice would give</p>
+        <div class="math-display">$$a_1 = f^{-1}(b) \quad \text{and} \quad a_2 = f^{-1}(b),$$</div>
+        <p>hence $a_1 = a_2$, contradicting $a_1 \neq a_2$. Examining the two readings of the ambiguous expression $f^{-1}(b)$ one at a time exhibits the same failure: under the reading $f^{-1}(b) = a_1$, the instance $x = a_2$, $y = b$ makes “$y = f(x)$” true and “$x = f^{-1}(y)$” false; under the reading $f^{-1}(b) = a_2$, the instance $x = a_1$, $y = b$ does. Thus no assignment of a value to $f^{-1}(b)$ makes the equivalence hold for all $x$ and $y$, and “$y = f(x) \iff x = f^{-1}(y)$” fails to hold for a general function $f$.</p>
+        <p>This equivalence does hold, however, when $f$ is invertible, i.e. when $f^{-1}$ is a function (Lemma 4.31).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lemma 4.33 -->
+<div class="card thm-card" id="c4-33">
+  <div class="card-head">
+    <span class="thm-num">LEM 4.33</span>
+    <span class="thm-title">전단사함수의 역은 함수이다 <em>The Inverse of a Bijection is a Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 전단사함수라 하자. 그러면 $f^{-1} : B \to A$는 함수이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>정리 4.8에 의해, (1) $dom\ f^{-1} = B$, (2) $ran\ f^{-1} \subset A$, (3) $f^{-1}$이 (F2)를 만족함을 보이는 것으로 충분하다.</p>
+        <ol class="paren">
+          <li>$y \in dom\ f^{-1}$이라 하자. 그러면 정의역의 정의에 의해 $(y,x) \in f^{-1}$을 만족하는 $x$가 존재한다. 또한 그래프의 역의 정의에 의해 $(x,y) \in f$이다. $f : A \to B$가 함수이므로, 치역의 정의와 정리 4.8에 의해 $y \in ran\ f \subset B$이다. 역으로 $y \in B$라 하자. 그러면 $f : A \to B$가 전사이므로 $(x,y) \in f$를 만족하는 $x \in A$가 존재한다. 또한 그래프의 역의 정의에 의해 $(y,x) \in f^{-1}$이다. 따라서 정의역의 정의에 의해 $y \in dom\ f^{-1}$이다.</li>
+          <li>$x \in ran\ f^{-1}$이라 하자. 그러면 치역의 정의에 의해 $(y,x) \in f^{-1}$을 만족하는 $y$가 존재한다. 역의 정의에 의해 $(x,y) \in f$이다. 따라서 정의역의 정의에 의해 $x \in dom\ f$이다. 또한 $f : A \to B$가 함수이므로, 정리 4.8에 의해 $x \in dom\ f = A$이다.</li>
+          <li>$(x,y_1) \in f^{-1}$이고 $(x,y_2) \in f^{-1}$이라 가정하자. 그러면 $(y_1,x) \in f$이고 $(y_2,x) \in f$이다. $f : A \to B$가 단사이므로 $y_1 = y_2$이다. 따라서 $f^{-1}$에 대해 (F2)가 성립한다.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a bijective function. Then $f^{-1} : B \to A$ is a function.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Due to Theorem 4.8, it is sufficient to show that (1) $dom\ f^{-1} = B$, (2) $ran\ f^{-1} \subset A$, and (3) $f^{-1}$ satisfies (F2).</p>
+        <ol class="paren">
+          <li>Let $y \in dom\ f^{-1}$. Then by the definition of the domain, there exists a $x$ such that $(y,x) \in f^{-1}$. Moreover, by the definition of the inverse of graph, $(x,y) \in f$. Since $f : A \to B$ is a function, $y \in ran\ f \subset B$ by the definition of the range and Theorem 4.8. Conversely, let $y \in B$. Then since $f : A \to B$ is surjective, there exists a $x \in A$ such that $(x,y) \in f$. Moreover, by the definition of the inverse of graph, $(y,x) \in f^{-1}$. Therefore, by the definition of the domain, $y \in dom\ f^{-1}$.</li>
+          <li>Let $x \in ran\ f^{-1}$. Then by the definition of the range, there exists a $y$ such that $(y,x) \in f^{-1}$. By the definition of the inverse, $(x,y) \in f$. Thus $x \in dom\ f$ by the definition of the domain. Moreover, since $f : A \to B$ is a function, $x \in dom\ f = A$ by Theorem 4.8.</li>
+          <li>Assume that $(x,y_1) \in f^{-1}$ and $(x,y_2) \in f^{-1}$. Then $(y_1,x) \in f$ and $(y_2,x) \in f$. Since $f : A \to B$ is injective, $y_1 = y_2$. Therefore (F2) holds for $f^{-1}$.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.34 -->
+<div class="card thm-card" id="c4-34">
+  <div class="card-head">
+    <span class="thm-num">THM 4.34</span>
+    <span class="thm-title">전단사함수의 역은 전단사이다 <em>The Inverse of a Bijection is Bijective</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 전단사함수라 하자. 그러면 $f^{-1} : B \to A$는 전단사함수이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>보조정리 4.33에 의해 $f^{-1} : B \to A$는 함수이다. 따라서 함수 $f^{-1} : B \to A$가 전단사임을 보이는 것으로 충분하다. $x \in A$라 하자. 그러면 $f : A \to B$가 함수이므로 $(x,y) \in f$를 만족하는 $y \in B$가 존재한다. 따라서 $(y,x) \in f^{-1}$이고, 이는 $f^{-1}(y) = x$임을 뜻한다. 그러므로 함수 $f^{-1} : B \to A$는 전사이다. 함수 $f^{-1} : B \to A$가 단사임을 증명하기 위해, $(x_1,y) \in f^{-1}$이고 $(x_2,y) \in f^{-1}$이라 하자. 그러면 역의 정의에 의해 $(y,x_1) \in f$이고 $(y,x_2) \in f$이다. $f : A \to B$가 함수이므로 (F2)에 의해 $x_1 = x_2$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a bijective function. Then $f^{-1} : B \to A$ is a bijective function.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Due to Lemma 4.33, $f^{-1} : B \to A$ is a function. Thus it is sufficient to show that the function $f^{-1} : B \to A$ is bijective. Let $x \in A$. Then since $f : A \to B$ is a function, there exists a $y \in B$ such that $(x,y) \in f$. Thus $(y,x) \in f^{-1}$ and it implies that $f^{-1}(y) = x$. Therefore, the function $f^{-1} : B \to A$ is surjective. To prove that the function $f^{-1} : B \to A$ is injective, let $(x_1,y) \in f^{-1}$ and $(x_2,y) \in f^{-1}$. Then $(y,x_1) \in f$ and $(y,x_2) \in f$ by the definition of the inverse. Since $f : A \to B$ is a function, $x_1 = x_2$ by (F2).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.35 -->
+<div class="card thm-card" id="c4-35">
+  <div class="card-head">
+    <span class="thm-num">THM 4.35</span>
+    <span class="thm-title">가역이면 전단사이다 <em>Invertible Implies Bijective</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 가역함수라 하자. 그러면 $f : A \to B$는 전단사이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$f : A \to B$가 가역이므로 $f^{-1} : B \to A$는 함수이다. 따라서 정리 4.8에 의해 $dom\ f^{-1} = B$이다. 정리 3.64(2)에 의해 $dom\ f^{-1} = B$이면 $ran\ f = dom\ f^{-1} = B$이다. 따라서 $f : A \to B$는 전사이다. $f : A \to B$가 단사임을 증명하기 위해, $(x_1,y) \in f$이고 $(x_2,y) \in f$라 가정하자. 그러면 $(y,x_1) \in f^{-1}$이고 $(y,x_2) \in f^{-1}$이다. $f^{-1} : B \to A$가 함수이므로 (F2)에 의해 $x_1 = x_2$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ is a invertible function. Then $f : A \to B$ is bijective.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Since $f : A \to B$ is invertible, $f^{-1} : B \to A$ is a function. Thus by Theorem 4.8, $dom\ f^{-1} = B$. By Theorem 3.64(2), $dom\ f^{-1} = B$ implies $ran\ f = dom\ f^{-1} = B$. Thus $f : A \to B$ is surjective. To prove that $f : A \to B$ is injective, assume that $(x_1,y) \in f$ and $(x_2,y) \in f$. Then $(y,x_1) \in f^{-1}$ and $(y,x_2) \in f^{-1}$. Since $f^{-1} : B \to A$ is a function, we have $x_1 = x_2$ by (F2).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.41 ═══════════ -->
+
+<!-- Corollary 4.36 -->
+<div class="card thm-card" id="c4-36">
+  <div class="card-head">
+    <span class="thm-num">COR 4.36</span>
+    <span class="thm-title">가역과 전단사의 동치 <em>Invertible if and only if Bijective</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 함수라 하자. 그러면 $f : A \to B$가 가역인 것과 $f$가 전단사인 것은 동치이다. 또한 $f : A \to B$가 가역이면 $f^{-1} : B \to A$는 전단사함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a function. Then $f : A \to B$ is invertible if and only if $f$ is bijective. Moreover, if $f : A \to B$ is invertible, then $f^{-1} : B \to A$ is a bijective function.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.37 -->
+<div class="card thm-card" id="c4-37">
+  <div class="card-head">
+    <span class="thm-num">THM 4.37</span>
+    <span class="thm-title">역함수와의 합성은 항등함수 <em>Inverse Compositions are Identities</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 가역함수라 하자. 그러면</p>
+        <ol class="paren">
+          <li>$f^{-1} \circ f = I_A$이다</li>
+          <li>$f \circ f^{-1} = I_B$이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>$(x,y) \in f^{-1} \circ f$라 하자. 그러면 $(x,z) \in f$이고 $(z,y) \in f^{-1}$을 만족하는 $z$가 존재한다. 또한 그래프의 역의 정의에 의해 $(y,z) \in f$이다. 따라서 $(x,z) \in f$이고 $(y,z) \in f$이다. 따름정리 4.36에 의해 $f$가 단사이므로,
+            <div class="math-display">$$x = y.$$</div>
+            <p>임을 얻는다. $f : A \to B$가 함수이므로 $x \in dom\ f = A$이다. 따라서 $I_A$의 정의에 의해 $(x,y) = (x,x) \in I_A$이다. 역으로 $(x,y) \in I_A$라 하자. 그러면 $I_A$의 정의에 의해 $x = y$이고 $x \in A$이다. $(x,x) \in f^{-1} \circ f$임을 보이는 것으로 충분하다. $f : A \to B$가 함수이므로 $f(x) = z$, 즉 $(x,z) \in f$를 만족하는 $z$가 존재한다. 보조정리 4.31에 의해 $x = f^{-1}(z)$이다. 따라서 $(z,x) \in f^{-1}$이다. 그러므로 그래프의 합성의 정의에 의해 $(x,x) \in f^{-1} \circ f$이다.</p>
+          </li>
+          <li>(2)의 증명은 (1)과 매우 유사하므로 자세한 내용은 생략한다.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be an invertible function. Then</p>
+        <ol class="paren">
+          <li>$f^{-1} \circ f = I_A$</li>
+          <li>$f \circ f^{-1} = I_B$.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>Let $(x,y) \in f^{-1} \circ f$. Then there exists a $z$ such that $(x,z) \in f$ and $(z,y) \in f^{-1}$. Moreover, by the definition of the inverse of graph, $(y,z) \in f$. Thus we have $(x,z) \in f$ and $(y,z) \in f$. Since $f$ is injective due to Corollary 4.36, we obtain
+            <div class="math-display">$$x = y.$$</div>
+            <p>Since $f : A \to B$ is a function, $x \in dom\ f = A$. Therefore, by the definition of $I_A$, $(x,y) = (x,x) \in I_A$. Conversely, let $(x,y) \in I_A$. Then by the definition of $I_A$, $x = y$ and $x \in A$. It is sufficient to show that $(x,x) \in f^{-1} \circ f$. Since $f : A \to B$ is a function, there exists a $z$ such that $f(x) = z$, i.e. $(x,z) \in f$. By Lemma 4.31, $x = f^{-1}(z)$. Thus $(z,x) \in f^{-1}$. Therefore, by the definition of the composition of graphs, $(x,x) \in f^{-1} \circ f$.</p>
+          </li>
+          <li>Since the proof of (2) is very similar to (1), we skip the detail.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.38 -->
+<div class="card ex-card" id="c4-38">
+  <div class="card-head">
+    <span class="ex-num">EX 4.38</span>
+    <span class="ex-title">정리 4.13을 이용한 정리 4.37 <em>Theorem 4.37 via Theorem 4.13</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 4.13을 이용하여 정리 4.37을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$f : A \to B$가 가역함수라 하므로, 정의 4.30에 의해 $f^{-1} : B \to A$는 함수이다.</p>
+        <ol class="paren">
+          <li>$f^{-1} \circ f = I_A$임을 보인다. $f : A \to B$와 $f^{-1} : B \to A$가 모두 함수이므로, 정리 4.27에 의해 $f^{-1} \circ f : A \to A$는 함수이다. 또한 $I_A : A \to A$도 함수이다. 따라서 정리 4.13에 의해, 다음을 보이는 것으로 충분하다.
+            <div class="math-display">$$f^{-1} \circ f(x) = I_A(x) \qquad \forall x \in A.$$</div>
+            <p>$x \in A$라 하자. 연습문제 4.29에 의해</p>
+            <div class="math-display">$$f^{-1} \circ f(x) = f^{-1}(f(x)).$$</div>
+            <p>또한 보조정리 4.31에 의해 $y = f(x)$이면 $x = f^{-1}(y)$이므로, $y = f(x)$를 대입하면</p>
+            <div class="math-display">$$f^{-1}(f(x)) = x.$$</div>
+            <p>한편 예제 4.17에 의해 $I_A(x) = x$이다. 따라서</p>
+            <div class="math-display">$$f^{-1} \circ f(x) = x = I_A(x) \qquad \forall x \in A$$</div>
+            <p>를 얻고, 정리 4.13에 의해 $f^{-1} \circ f = I_A$이다.</p>
+          </li>
+          <li>$f \circ f^{-1} = I_B$임의 증명은 (1)과 매우 유사하다. $f^{-1} : B \to A$와 $f : A \to B$가 모두 함수이므로, 정리 4.27에 의해 $f \circ f^{-1} : B \to B$는 함수이고, $I_B : B \to B$도 함수이다. 정리 4.13에 의해
+            <div class="math-display">$$f \circ f^{-1}(y) = I_B(y) \qquad \forall y \in B$$</div>
+            <p>를 보이는 것으로 충분하다. $y \in B$라 하자. $f^{-1} : B \to A$가 함수이므로 $x := f^{-1}(y) \in A$가 존재한다. 연습문제 4.29에 의해</p>
+            <div class="math-display">$$f \circ f^{-1}(y) = f(f^{-1}(y)) = f(x).$$</div>
+            <p>또한 보조정리 4.31에 의해 $x = f^{-1}(y)$이면 $y = f(x)$이므로, $f(x) = y$이다. 예제 4.17에 의해 $I_B(y) = y$이므로,</p>
+            <div class="math-display">$$f \circ f^{-1}(y) = f(x) = y = I_B(y) \qquad \forall y \in B$$</div>
+            <p>를 얻고, 정리 4.13에 의해 $f \circ f^{-1} = I_B$이다.</p>
+          </li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove Theorem 4.37 by using Theorem 4.13.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Since $f : A \to B$ is an invertible function, by Definition 4.30, $f^{-1} : B \to A$ is a function.</p>
+        <ol class="paren">
+          <li>We show $f^{-1} \circ f = I_A$. Since $f : A \to B$ and $f^{-1} : B \to A$ are both functions, by Theorem 4.27, $f^{-1} \circ f : A \to A$ is a function. Moreover $I_A : A \to A$ is also a function. Thus by Theorem 4.13, it is sufficient to show that
+            <div class="math-display">$$f^{-1} \circ f(x) = I_A(x) \qquad \forall x \in A.$$</div>
+            <p>Let $x \in A$. By Exercise 4.29,</p>
+            <div class="math-display">$$f^{-1} \circ f(x) = f^{-1}(f(x)).$$</div>
+            <p>Moreover, by Lemma 4.31, $y = f(x)$ implies $x = f^{-1}(y)$, so substituting $y = f(x)$,</p>
+            <div class="math-display">$$f^{-1}(f(x)) = x.$$</div>
+            <p>On the other hand, by Example 4.17, $I_A(x) = x$. Hence</p>
+            <div class="math-display">$$f^{-1} \circ f(x) = x = I_A(x) \qquad \forall x \in A,$$</div>
+            <p>and by Theorem 4.13, $f^{-1} \circ f = I_A$.</p>
+          </li>
+          <li>The proof of $f \circ f^{-1} = I_B$ is very similar to (1). Since $f^{-1} : B \to A$ and $f : A \to B$ are both functions, by Theorem 4.27, $f \circ f^{-1} : B \to B$ is a function, and $I_B : B \to B$ is also a function. By Theorem 4.13, it is sufficient to show that
+            <div class="math-display">$$f \circ f^{-1}(y) = I_B(y) \qquad \forall y \in B.$$</div>
+            <p>Let $y \in B$. Since $f^{-1} : B \to A$ is a function, there exists $x := f^{-1}(y) \in A$. By Exercise 4.29,</p>
+            <div class="math-display">$$f \circ f^{-1}(y) = f(f^{-1}(y)) = f(x).$$</div>
+            <p>Moreover, by Lemma 4.31, $x = f^{-1}(y)$ implies $y = f(x)$, so $f(x) = y$. Since $I_B(y) = y$ by Example 4.17,</p>
+            <div class="math-display">$$f \circ f^{-1}(y) = f(x) = y = I_B(y) \qquad \forall y \in B,$$</div>
+            <p>and by Theorem 4.13, $f \circ f^{-1} = I_B$.</p>
+          </li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.39 -->
+<div class="card thm-card" id="c4-39">
+  <div class="card-head">
+    <span class="thm-num">THM 4.39</span>
+    <span class="thm-title">양쪽 역이 있으면 전단사이다 <em>Two-Sided Inverses Force Bijectivity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to A$가 함수라 하자. $g \circ f = I_A$이고 $f \circ g = I_B$라 가정하자. 그러면 $f : A \to B$는 전단사이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>먼저 $f$가 단사임을 증명한다. $(x_1,y) \in f$이고 $(x_2,y) \in f$라 하자. 그러면 $y \in ran\ f \subset B$이다. $g : B \to A$가 함수이므로, 다음을 만족하는 $g(y) \in A$가 존재한다.</p>
+        <div class="math-display">$$(y,g(y)) \in g.$$</div>
+        <p>합성 $g \circ f$의 정의에 의해,</p>
+        <div class="math-display">$$(x_1,g(y)) \in g \circ f \quad \text{and} \quad (x_2,g(y)) \in g \circ f.$$</div>
+        <p>따라서 $g \circ f = I_A$라는 가정에 의해 다음을 얻는다.</p>
+        <div class="math-display">$$(x_1,g(y)) \in I_A \quad \text{and} \quad (x_2,g(y)) \in I_A.$$</div>
+        <p>또한 $I_A$의 정의에 의해,</p>
+        <div class="math-display">$$(x_1,g(y)) = (x_3,x_3) \quad \text{and} \quad (x_2,g(y)) = (x_4,x_4)$$</div>
+        <p>를 만족하는 $x_3, x_4 \in A$가 존재한다. 따라서 정리 3.54를 적용하면 다음을 얻는다.</p>
+        <div class="math-display">$$x_1 = x_3 = g(y) = x_4 = x_2.$$</div>
+        <p>다음으로 $f : A \to B$가 전사임을 증명한다. $y \in B$라 하자. 그러면 $I_B$의 정의에 의해 $(y,y) \in I_B$이다. 또한 $f \circ g = I_B$라는 가정에 의해 $(y,y) \in f \circ g$이다. 따라서 그래프의 합성의 정의에 의해 $(y,z) \in g$이고 $(z,y) \in f$를 만족하는 $z$가 존재한다. 그러므로 $y = f(z)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to A$ be functions. Assume that $g \circ f = I_A$ and $f \circ g = I_B$. Then $f : A \to B$ is bijective.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>First we prove that $f$ is injective. Let $(x_1,y) \in f$ and $(x_2,y) \in f$. Then $y \in ran\ f \subset B$. Since $g : B \to A$ is a function, there exists $g(y) \in A$ such that</p>
+        <div class="math-display">$$(y,g(y)) \in g.$$</div>
+        <p>By the definition of the composition $g \circ f$,</p>
+        <div class="math-display">$$(x_1,g(y)) \in g \circ f \quad \text{and} \quad (x_2,g(y)) \in g \circ f.$$</div>
+        <p>Thus by the assumption that $g \circ f = I_A$, we have</p>
+        <div class="math-display">$$(x_1,g(y)) \in I_A \quad \text{and} \quad (x_2,g(y)) \in I_A.$$</div>
+        <p>Moreover, by the definition of $I_A$,</p>
+        <div class="math-display">$$(x_1,g(y)) = (x_3,x_3) \quad \text{and} \quad (x_2,g(y)) = (x_4,x_4)$$</div>
+        <p>for some $x_3, x_4 \in A$. Thus applying Theorem 3.54, we obtain</p>
+        <div class="math-display">$$x_1 = x_3 = g(y) = x_4 = x_2.$$</div>
+        <p>Next we prove that $f : A \to B$ is surjective. Let $y \in B$. Then by the definition of $I_B$, $(y,y) \in I_B$. Moreover by the assumption that $f \circ g = I_B$, we have $(y,y) \in f \circ g$. Thus by the definition of the composition of graphs, there exists a $z$ such that $(y,z) \in g$ and $(z,y) \in f$. Therefore, $y = f(z)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.40 -->
+<div class="card ex-card" id="c4-40">
+  <div class="card-head">
+    <span class="ex-num">EX 4.40</span>
+    <span class="ex-title">왼쪽 역이 있으면 단사이다 <em>A Left Inverse Forces Injectivity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to A$가 함수라 하자. $g \circ f = I_A$라 가정하자. 그러면 $f$는 단사이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$x_1, x_2 \in A$이고 $f(x_1) = f(x_2)$라 가정하자. $g : B \to A$가 함수이므로, 양변에 $g$를 적용하면</p>
+        <div class="math-display">$$g(f(x_1)) = g(f(x_2)).$$</div>
+        <p>연습문제 4.29에 의해 $g(f(x_1)) = g \circ f(x_1)$이고 $g(f(x_2)) = g \circ f(x_2)$이다. 따라서</p>
+        <div class="math-display">$$g \circ f(x_1) = g \circ f(x_2).$$</div>
+        <p>가정 $g \circ f = I_A$에 의해</p>
+        <div class="math-display">$$I_A(x_1) = I_A(x_2).$$</div>
+        <p>예제 4.17에 의해 $I_A(x_1) = x_1$이고 $I_A(x_2) = x_2$이므로,</p>
+        <div class="math-display">$$x_1 = x_2.$$</div>
+        <p>그러므로 주의 4.15(2)의 (INJ) 기준, 즉 $f(x_1) = f(x_2)$이면 $x_1 = x_2$라는 것에 의해 $f$는 단사이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to A$ be functions. Assume that $g \circ f = I_A$. Then $f$ is injective.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Let $x_1, x_2 \in A$ and assume that $f(x_1) = f(x_2)$. Since $g : B \to A$ is a function, applying $g$ to both sides gives</p>
+        <div class="math-display">$$g(f(x_1)) = g(f(x_2)).$$</div>
+        <p>By Exercise 4.29, $g(f(x_1)) = g \circ f(x_1)$ and $g(f(x_2)) = g \circ f(x_2)$. Hence</p>
+        <div class="math-display">$$g \circ f(x_1) = g \circ f(x_2).$$</div>
+        <p>By the assumption $g \circ f = I_A$,</p>
+        <div class="math-display">$$I_A(x_1) = I_A(x_2).$$</div>
+        <p>By Example 4.17, $I_A(x_1) = x_1$ and $I_A(x_2) = x_2$, so</p>
+        <div class="math-display">$$x_1 = x_2.$$</div>
+        <p>Therefore, by the (INJ) criterion of Remark 4.15(2), namely that $f(x_1) = f(x_2)$ implies $x_1 = x_2$, $f$ is injective.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.42 ═══════════ -->
+
+<!-- Exercise 4.41 -->
+<div class="card ex-card" id="c4-41">
+  <div class="card-head">
+    <span class="ex-num">EX 4.41</span>
+    <span class="ex-title">오른쪽 역이 있으면 전사이다 <em>A Right Inverse Forces Surjectivity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to A$가 함수라 하자. $f \circ g = I_B$라 가정하자. 그러면 $f$는 전사이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$y \in B$라 하자. 예제 4.17에 의해 $I_B(y) = y$이고, 가정 $f \circ g = I_B$에 의해</p>
+        <div class="math-display">$$y = I_B(y) = f \circ g(y).$$</div>
+        <p>또한 연습문제 4.29에 의해</p>
+        <div class="math-display">$$f \circ g(y) = f(g(y)).$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$y = f(g(y)).$$</div>
+        <p>$g : B \to A$가 함수이므로 $g(y) \in A$이다. 그러므로 $y \in B$는 $A$의 원소 $g(y)$의 상이다. $y \in B$가 임의였으므로, (SURJ)가 성립한다. 즉 $f$는 전사이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to A$ be functions. Assume that $f \circ g = I_B$. Then $f$ is surjective.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Let $y \in B$. By Example 4.17, $I_B(y) = y$, and by the assumption $f \circ g = I_B$,</p>
+        <div class="math-display">$$y = I_B(y) = f \circ g(y).$$</div>
+        <p>Moreover, by Exercise 4.29,</p>
+        <div class="math-display">$$f \circ g(y) = f(g(y)).$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$y = f(g(y)).$$</div>
+        <p>Since $g : B \to A$ is a function, $g(y) \in A$. Therefore $y \in B$ is the image of the element $g(y) \in A$. Since $y \in B$ was arbitrary, (SURJ) holds, i.e. $f$ is surjective.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 4.42 -->
+<div class="card thm-card" id="c4-42">
+  <div class="card-head">
+    <span class="thm-num">COR 4.42</span>
+    <span class="thm-title">양쪽 역은 역함수이다 <em>A Two-Sided Inverse is the Inverse Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to A$가 함수라 하자. $g \circ f = I_A$이고 $f \circ g = I_B$이면, $f$는 가역이고 $f^{-1} = g$이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>정리 4.39와 따름정리 4.36에 의해, $f^{-1} = g$임을 보이는 것만 남았다. 또한 정리 4.13에 의해 다음을 보이는 것으로 충분하다.</p>
+        <div class="math-display">$$f^{-1}(y) = g(y) \qquad \forall y \in B.$$</div>
+        <p>$y \in B$라 하고, 따름정리 4.36에 의해 $f^{-1} : B \to A$가 (전단사) 함수임을 상기하자. 그러면 $f^{-1} : B \to A$와 $g : B \to A$가 모두 함수이므로, $x_1 = f^{-1}(y)$이고 $x_2 = g(y)$를 만족하는 $x_1 \in A$와 $x_2 \in A$가 존재한다. 보조정리 4.31에 의해 $y = f(x_1)$이다. 연습문제 4.29와, 정리 4.13을 함께 사용한 $g \circ f = I_A$라는 가정, 그리고 $A$ 위의 항등함수의 정의에 의해,</p>
+        <div class="math-display">$$g(y) = g \circ f(x_1) = I_A(x_1) = x_1.$$</div>
+        <p>따라서 $x_2 = g(y)$이고 $g : B \to A$가 함수이므로 $x_1 = x_2$이고, 즉 $f^{-1}(y) = g(y)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to A$ be functions. If $g \circ f = I_A$ and $f \circ g = I_B$, then $f$ is invertible and $f^{-1} = g$.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Due to Theorem 4.39 and Corollary 4.36, it only remains to show that $f^{-1} = g$. Moreover, by Theorem 4.13, it is sufficient to show that</p>
+        <div class="math-display">$$f^{-1}(y) = g(y) \qquad \forall y \in B.$$</div>
+        <p>Let $y \in B$ and recall that $f^{-1} : B \to A$ is a (bijective) function by Corollary 4.36. Then since both $f^{-1} : B \to A$ and $g : B \to A$ are functions, there exists $x_1 \in A$ and $x_2 \in A$ such that $x_1 = f^{-1}(y)$ and $x_2 = g(y)$. Due to Lemma 4.31, $y = f(x_1)$. By Exercise 4.29, the assumption that $g \circ f = I_A$ with Theorem 4.13, and the definition of the identity function on $A$,</p>
+        <div class="math-display">$$g(y) = g \circ f(x_1) = I_A(x_1) = x_1.$$</div>
+        <p>Therefore, since $x_2 = g(y)$ and $g : B \to A$ is a function. $x_1 = x_2$, i.e. $f^{-1}(y) = g(y)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 4.43 -->
+<div class="card thm-card" id="c4-43">
+  <div class="card-head">
+    <span class="thm-num">COR 4.43</span>
+    <span class="thm-title">가역성의 특징화 <em>Characterization of Invertibility</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 함수라 하자. 그러면 $f : A \to B$가 가역인 것은, $g \circ f = I_A$이고 $f \circ g = I_B$를 만족하는 함수 $g : B \to A$가 존재하는 것과 동치이다. 또한 이때 $g = f^{-1}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a function. Then $f : A \to B$ is invertible if and only if there exists a function $g : B \to A$ such that $g \circ f = I_A$ and $f \circ g = I_B$. Moreover, $g = f^{-1}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.44 -->
+<div class="card ex-card" id="c4-44">
+  <div class="card-head">
+    <span class="ex-num">EX 4.44</span>
+    <span class="ex-title">따름정리 4.43 증명하기 <em>Prove Corollary 4.43</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>따름정리 4.43을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>(⟹) $f : A \to B$가 가역이라 하자. $g = f^{-1}$이라 하면, 정의 4.30에 의해 $f^{-1} : B \to A$는 함수이므로 $g : B \to A$는 함수이다. 또한 정리 4.37에 의해</p>
+        <div class="math-display">$$g \circ f = f^{-1} \circ f = I_A \quad \text{and} \quad f \circ g = f \circ f^{-1} = I_B$$</div>
+        <p>이다. 따라서 이러한 함수 $g : B \to A$가 존재하며, 이때 $g = f^{-1}$이다.</p>
+        <p>(⟸) $g \circ f = I_A$이고 $f \circ g = I_B$를 만족하는 함수 $g : B \to A$가 존재한다고 하자. 그러면 따름정리 4.42에 의해 $f$는 가역이고 $f^{-1} = g$이다.</p>
+        <p>이상으로 $f : A \to B$가 가역인 것과 그러한 $g$가 존재하는 것이 동치임을 보였고, 두 경우 모두 $g = f^{-1}$임을 확인했다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove Corollary 4.43.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>(⟹) Suppose $f : A \to B$ is invertible. Let $g = f^{-1}$. By Definition 4.30, $f^{-1} : B \to A$ is a function, so $g : B \to A$ is a function. By Theorem 4.37,</p>
+        <div class="math-display">$$g \circ f = f^{-1} \circ f = I_A \quad \text{and} \quad f \circ g = f \circ f^{-1} = I_B.$$</div>
+        <p>Hence such a function $g : B \to A$ exists, and $g = f^{-1}$.</p>
+        <p>(⟸) Suppose there exists a function $g : B \to A$ such that $g \circ f = I_A$ and $f \circ g = I_B$. Then by Corollary 4.42, $f$ is invertible and $f^{-1} = g$.</p>
+        <p>This shows that $f : A \to B$ is invertible if and only if such a $g$ exists, and in either case $g = f^{-1}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.45 -->
+<div class="card ex-card" id="c4-45">
+  <div class="card-head">
+    <span class="ex-num">EX 4.45</span>
+    <span class="ex-title">역함수 자체도 가역이다 <em>The Inverse Function is Itself Invertible</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 가역함수라 하자. 그러면 $f^{-1} : B \to A$는 함수이다. $f^{-1} : B \to A$가 가역임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>$f : A \to B$가 가역이므로, 정의 4.30에 의해 $f^{-1} : B \to A$는 함수이다. $f^{-1} : B \to A$가 가역임을 보이려면, 정의 4.30을 $f^{-1}$에 적용하여 $(f^{-1})^{-1} : A \to B$가 함수임을 보이는 것으로 충분하다.</p>
+        <p>정리 3.62(2)에 의해, 임의의 그래프 $G$에 대하여 $(G^{-1})^{-1} = G$이다. $G = f$를 대입하면</p>
+        <div class="math-display">$$(f^{-1})^{-1} = f.$$</div>
+        <p>$f : A \to B$는 (가역이므로 특히) 함수이다. 따라서 $(f^{-1})^{-1} = f : A \to B$는 함수이다.</p>
+        <p>그러므로 정의 4.30을 $f^{-1} : B \to A$에 적용하면, $f^{-1} : B \to A$는 가역이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be an invertible function. Then $f^{-1} : B \to A$ is a function. Prove that $f^{-1} : B \to A$ is invertible.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Since $f : A \to B$ is invertible, by Definition 4.30, $f^{-1} : B \to A$ is a function. To show that $f^{-1} : B \to A$ is invertible, it is sufficient, applying Definition 4.30 to $f^{-1}$, to show that $(f^{-1})^{-1} : A \to B$ is a function.</p>
+        <p>By Theorem 3.62(2), $(G^{-1})^{-1} = G$ for any graph $G$. Taking $G = f$,</p>
+        <div class="math-display">$$(f^{-1})^{-1} = f.$$</div>
+        <p>Since $f : A \to B$ is (in particular, being invertible) a function, $(f^{-1})^{-1} = f : A \to B$ is a function.</p>
+        <p>Therefore, applying Definition 4.30 to $f^{-1} : B \to A$, $f^{-1} : B \to A$ is invertible.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 4.46 -->
+<div class="card def-card" id="c4-46">
+  <div class="card-head">
+    <span class="def-num">DEF 4.46</span>
+    <span class="def-title">왼쪽 역함수와 오른쪽 역함수 <em>Left inverse and right inverse</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 함수라 하자.</p>
+        <ol class="paren">
+          <li>$g \circ f = I_A$이면, 함수 $g : B \to A$를 $f : A \to B$의 왼쪽 역함수라고 한다.</li>
+          <li>$f \circ g = I_B$이면, 함수 $g : B \to A$를 $f : A \to B$의 오른쪽 역함수라고 한다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a function.</p>
+        <ol class="paren">
+          <li>We call a function $g : B \to A$ a left inverse of $f : A \to B$ if $g \circ f = I_A$.</li>
+          <li>We call a function $g : B \to A$ a right inverse of $f : A \to B$ if $f \circ g = I_B$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.47 -->
+<div class="card thm-card" id="c4-47">
+  <div class="card-head">
+    <span class="thm-num">THM 4.47</span>
+    <span class="thm-title">단사성과 왼쪽 역함수 <em>Injectivity and Left Inverses</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$가 함수이고 $A \neq \emptyset$이라 가정하자. 그러면 $f : A \to B$가 단사인 것은 $f : A \to B$의 왼쪽 역함수가 존재하는 것, 즉 $g \circ f = I_A$를 만족하는 함수 $g : B \to A$가 존재하는 것과 동치이다.</p>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>(⇐)는 연습문제 4.40에서 나오므로, (⇒)만 증명한다. $f : A \to B$가 단사라고 가정하고 $C = ran\ f$라 하자. 그러면 따름정리 4.9에 의해 $f : A \to C$는 함수이다. 가정에 의해 이는 단사이고, 또한 $C = ran\ f$이므로 전사이기도 하다. 따라서 $f : A \to C$는 전단사이고, 따름정리 4.36에 의해 $f^{-1} : C \to A$는 전단사함수이다. 또한 따름정리 4.43과 연습문제 4.29에 의해,</p>
+        <div class="math-display">$$f^{-1}(f(x)) = I_A(x) \qquad \forall x \in A. \tag{4.8}$$</div>
+        <p>$A$가 공집합이 아닌 모임이므로 $a \in A$가 존재한다. 상수함수 $K_a : B - C \to A$를 생각하자 (예제 4.18 참조). 특히 $K_a$는 $K_a = \{(x,a) : x \in B - C\}$로 주어지는 그래프임을 상기하자. 그래프 $g = f^{-1} \cup K_a$라 정의하자. 그러면 정리 4.26(1)에 의해 $g : B \to A$는 함수이다. $g$가 $f : A \to B$의 왼쪽 역함수임을 주장한다. 이를 증명하려면, 정리 4.13에 의해</p>
+        <div class="math-display">$$g \circ f(x) = I_A(x) \qquad \forall x \in A$$</div>
+        <p>임을 보이는 것으로 충분하다. $x \in A$라 하자. 그러면 $f(x) \in ran\ f$이므로, 연습문제 4.29와 보조정리 4.24(4)를 함께 사용한 $g : B \to A$의 정의, 그리고 (4.8)에 의해,</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)) = f^{-1}(f(x)) = I_A(x).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ be a function and assume that $A \neq \emptyset$. Then $f : A \to B$ is injective if and only if there exists a left inverse of $f : A \to B$, i.e. there exists a function $g : B \to A$ such that $g \circ f = I_A$.</p>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>Since the if part comes from Exercise 4.40, we only prove the only if part. Assume that $f : A \to B$ is injective and let $C = ran\ f$. Then by Corollary 4.9, $f : A \to C$ is a function. It is injective by the assumption and moreover it is surjective since $C = ran\ f$. Thus $f : A \to C$ is bijective and $f^{-1} : C \to A$ is a bijective function by Corollary 4.36. Moreover, by Corollary 4.43 and Exercise 4.29,</p>
+        <div class="math-display">$$f^{-1}(f(x)) = I_A(x) \qquad \forall x \in A. \tag{4.8}$$</div>
+        <p>Since $A$ is a nonempty class, there exists a $a \in A$. Consider the constant function $K_a : B - C \to A$ (cf. Example 4.18). In particular, recall that $K_a$ is the graph given by $K_a = \{(x,a) : x \in B - C\}$. Define the graph $g = f^{-1} \cup K_a$. Then by Theorem 4.26(1), $g : B \to A$ is a function. We claim that $g$ is a left inverse of $f : A \to B$. To prove this, it is sufficient to show that</p>
+        <div class="math-display">$$g \circ f(x) = I_A(x) \qquad \forall x \in A$$</div>
+        <p>due to Theorem 4.13. Let $x \in A$. Then $f(x) \in ran\ f$ and therefore by Exercise 4.29, the definition of $g : B \to A$ with Lemma 4.24(4), and (4.8),</p>
+        <div class="math-display">$$g \circ f(x) = g(f(x)) = f^{-1}(f(x)) = I_A(x).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.43 ═══════════ -->
+
+<!-- Remark 4.48 -->
+<div class="card rem-card" id="c4-48">
+  <div class="card-head">
+    <span class="rem-num">REM 4.48</span>
+    <span class="rem-title">전사성과 오른쪽 역함수 <em>Surjectivity and Right Inverses</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연습문제 4.41에 의해, $f : A \to B$의 오른쪽 역함수가 존재하면 $f : A \to B$는 전사이다. 그 역, 즉 $f : A \to B$가 전사이면 $f : A \to B$의 오른쪽 역함수가 존재한다는 것 또한 참이다. 그러나 이 역을 증명하려면 추가적인 공리가 필요하다. 따라서 이는 나중에 증명하기로 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Due to Exercise 4.41, $f : A \to B$ is surjective if there exists a right inverse of $f : A \to B$. The converse that there exists a right inverse of $f : A \to B$ if $f : A \to B$ is surjective is true as well. However, to prove this converse, we need an extra axiom. Therefore we will prove it later.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 4.49 -->
+<div class="card thm-card" id="c4-49">
+  <div class="card-head">
+    <span class="thm-num">THM 4.49</span>
+    <span class="thm-title">합성의 단사성·전사성 보존 <em>Composition Preserves Injectivity and Surjectivity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to C$가 함수라 하자. 그러면</p>
+        <ol class="paren">
+          <li>$f$와 $g$가 단사이면 $g \circ f$는 단사이다</li>
+          <li>$f$와 $g$가 전사이면 $g \circ f$는 전사이다</li>
+          <li>$f$와 $g$가 전단사이면 $g \circ f$는 전단사이다.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="증명 보기" data-hide="증명 접기" onclick="toggleProof(this)"><span class="arrow">▸</span> 증명 보기</button>
+      <div class="proof-content">
+        <p>먼저 정리 4.27에 의해 $g \circ f : A \to C$가 함수임을 상기하자.</p>
+        <ol class="paren">
+          <li>$(x_1,y) \in g \circ f$이고 $(x_2,y) \in g \circ f$라 하자. 그러면 그래프의 합성의 정의에 의해 다음을 만족하는 $z_1$과 $z_2$가 존재한다.
+            <div class="math-display">$$(x_1,z_1) \in f \quad \wedge \quad (z_1,y) \in g$$</div>
+            <p>그리고</p>
+            <div class="math-display">$$(x_2,z_2) \in f \quad \wedge \quad (z_2,y) \in g$$</div>
+            <p>$g$가 단사이므로 $z_1 = z_2$를 얻는다. 따라서 $(x_1,z_1) \in f$이고 $(x_2,z_2) = (x_2,z_1) \in f$이다. 마지막으로 $f$가 단사이므로 $x_1 = x_2$를 얻는다.</p>
+          </li>
+          <li>$z \in C$라 하자. 그러면 $g$가 전사이므로 $(y,z) \in g$를 만족하는 $y \in B$가 존재한다. 또한 $f$가 전사이므로 $(x,y) \in f$를 만족하는 $x \in A$가 존재한다. 마지막으로 그래프의 합성의 정의에 의해,
+            <div class="math-display">$$(x,z) \in g \circ f.$$</div>
+            <p>그러므로 $g \circ f$는 ($C$로의) 전사이다.</p>
+          </li>
+          <li>이는 (1)과 (2)로부터 바로 따라온다.</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to C$ be functions. Then</p>
+        <ol class="paren">
+          <li>If $f$ and $g$ are injective, then $g \circ f$ is injective</li>
+          <li>If $f$ and $g$ are surjective, then $g \circ f$ is surjective</li>
+          <li>If $f$ and $g$ are bijective, then $g \circ f$ is bijective.</li>
+        </ol>
+      </div>
+      <button class="proof-toggle" data-show="Proof" data-hide="Hide Proof" onclick="toggleProof(this)"><span class="arrow">▸</span> Proof</button>
+      <div class="en-proof-content">
+        <p>First recall that $g \circ f : A \to C$ is a function due to Theorem 4.27.</p>
+        <ol class="paren">
+          <li>Let $(x_1,y) \in g \circ f$ and $(x_2,y) \in g \circ f$. Then by the definition of the composition of graphs, there exist $z_1$ and $z_2$ such that
+            <div class="math-display">$$(x_1,z_1) \in f \quad \wedge \quad (z_1,y) \in g$$</div>
+            <p>and</p>
+            <div class="math-display">$$(x_2,z_2) \in f \quad \wedge \quad (z_2,y) \in g$$</div>
+            <p>Since $g$ is injective, we obtain $z_1 = z_2$. Thus we have $(x_1,z_1) \in f$ and $(x_2,z_2) = (x_2,z_1) \in f$. Finally, since $f$ is injective, we have $x_1 = x_2$.</p>
+          </li>
+          <li>Let $z \in C$. Then since $g$ is surjective, there exists a $y \in B$ such that $(y,z) \in g$. Moreover, since $f$ is surjective, there exists a $x \in A$ such that $(x,y) \in f$. Finally, by the definition of the composition of graphs,
+            <div class="math-display">$$(x,z) \in g \circ f.$$</div>
+            <p>Therefore, $g \circ f$ is surjective (to $C$).</p>
+          </li>
+          <li>This follows immediately from (1) and (2).</li>
+        </ol>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 4.50 -->
+<div class="card thm-card" id="c4-50">
+  <div class="card-head">
+    <span class="thm-num">COR 4.50</span>
+    <span class="thm-title">가역함수의 합성 <em>Composition of Invertible Functions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f : A \to B$와 $g : B \to C$가 가역함수라 하자. 그러면 $g \circ f : A \to C$는 가역함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f : A \to B$ and $g : B \to C$ be invertible functions. Then $g \circ f : A \to C$ is a invertible function.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">집합론 홈</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2. 명제와 논리 (Sentence and Logic) | 집합론 학습 가이드</title>
+<meta name="description" content="집합론 2단원 명제와 논리(Sentence and Logic). 명제의 정의, 부정·논리곱·논리합·함의의 진리표, 역·이·대우, 추이법칙, 멱등·교환·결합·분배법칙, 드모르간 법칙과 논리 기호를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="집합론, Set Theory, 명제와 논리, Sentence and Logic, 명제, sentence, 진리표, truth table, 부정, negation, 논리곱, conjunction, 논리합, disjunction, 함의, implication, 전제, premise, 역, converse, 이, inverse, 대우, contrapositive, 필요충분조건, if and only if, 동치, equivalent, 충분조건, sufficient condition, 필요조건, necessary condition, 추이법칙, transitive law, 멱등법칙, idempotent law, 교환법칙, commutative law, 결합법칙, associative law, 분배법칙, distributive law, 드모르간 법칙, De Morgan's laws, 이중부정, double negation, 논리 기호, logical symbols">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/settheory/ch02.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. 명제와 논리 (Sentence and Logic) — 집합론 한·영 대조">
+<meta property="og:description" content="명제의 정의와 부정·논리곱·논리합·함의의 진리표부터 역·이·대우, 추이법칙, 드모르간 법칙까지 집합론의 논리 기초를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/settheory/ch02.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="집합론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2. 명제와 논리 (Sentence and Logic) — 집합론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "집합론 명제와 논리 — 명제의 정의, 부정·논리곱·논리합·함의의 진리표, 역·이·대우, 추이법칙, 멱등·교환·결합·분배법칙, 드모르간 법칙을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/settheory/ch02.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/settheory/ch02.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="index.html">집합론</a>
+  <a href="../analysis2/index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html" class="active">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+  <a href="ch08.html">08</a>
+</nav>
+
+<header>
+  <p class="subtitle">Set Theory — Unit 02</p>
+  <h1>2. 명제와 논리<span>Sentence and Logic</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c2-1"><span class="toc-num">DEF 2.1</span> 명제</a></li>
+    <li><a href="#c2-2"><span class="toc-num">EX 2.2</span> 명제 여부 판정</a></li>
+    <li><a href="#c2-3"><span class="toc-num">DEF 2.3</span> 부정</a></li>
+    <li><a href="#c2-4"><span class="toc-num">DEF 2.4</span> 논리곱</a></li>
+    <li><a href="#c2-5"><span class="toc-num">DEF 2.5</span> 논리합</a></li>
+    <li><a href="#c2-6"><span class="toc-num">DEF 2.6</span> 함의</a></li>
+    <li><a href="#c2-7"><span class="toc-num">NOTATION 2.7</span> 함의 읽는 법</a></li>
+    <li><a href="#c2-8"><span class="toc-num">EXAM 2.8</span> 함의 진리표의 작동 방식</a></li>
+    <li><a href="#c2-9"><span class="toc-num">EX 2.9</span> $\mathbb{N}$ 위 두 함의의 진리값</a></li>
+    <li><a href="#c2-10"><span class="toc-num">DEF 2.10</span> 역, 이, 대우</a></li>
+    <li><a href="#c2-11"><span class="toc-num">REM 2.11</span> 역·이·대우의 진리표</a></li>
+    <li><a href="#c2-12"><span class="toc-num">NOTATION 2.12</span> 충분조건과 필요조건</a></li>
+    <li><a href="#c2-13"><span class="toc-num">THM 2.13</span> 논리합·논리곱에 대한 기본 함의</a></li>
+    <li><a href="#c2-14"><span class="toc-num">THM 2.14</span> 논리합·논리곱으로 보존되는 함의</a></li>
+    <li><a href="#c2-15"><span class="toc-num">REM 2.15</span> "참이다" 생략 관행</a></li>
+    <li><a href="#c2-16"><span class="toc-num">EX 2.16</span> 정리 2.14의 (2) 증명</a></li>
+    <li><a href="#c2-17"><span class="toc-num">THM 2.17</span> 추이법칙</a></li>
+    <li><a href="#c2-18"><span class="toc-num">NOTATION 2.18</span> 동치의 약어</a></li>
+    <li><a href="#c2-19"><span class="toc-num">THM 2.19</span> 멱등·교환·결합·분배법칙</a></li>
+    <li><a href="#c2-20"><span class="toc-num">EX 2.20</span> 이중부정</a></li>
+    <li><a href="#c2-21"><span class="toc-num">EX 2.21</span> 명제에 대한 드모르간 법칙</a></li>
+    <li><a href="#c2-22"><span class="toc-num">NOTATION 2.22</span> 수학 기호</a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  집합론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id="c{섹션}-{번호}" (예: id="c2-13"),
+     소스 등장 순서 그대로 배치한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation / Axiom / Undefined notion
+                                  → card def-card  · DEF n / NOTATION n / AXIOM n / UNDEF n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Idea / Question / Paradox
+                                  → card rem-card  · REM n / IDEA n / Q n / PARADOX n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름(예: Definition 2.10 (The converse, inverse,
+     contrapositive))을 쓰고, 없으면 간결한 편집 제목을 새로 붙인다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·따옴표·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경(2.13, 2.14, 2.17, 2.19)은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       "We leave the proof as an exercise" 류 문장도 증명 안에 verbatim 유지한다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  6) Exercise 카드는 소스에 풀이가 없다. 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+       ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로.
+       (실제 형태는 ch01의 EX 1.2 / EX 1.5 카드를 그대로 복사할 것.)
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note02-{순번} (예: note02-3),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  8) 진리표는 div.table-wrap 안의 table.truth-table 로 전사한다.
+     caption 은 원문 표 제목(이탤릭) verbatim, 수식 부분은 $..$.
+     헤더는 th, 본문 칸의 참·거짓은 em 태그로 감싼 t / f.
+     진리표는 en 쪽(en-formal 또는 en-proof-content)에만 둔다.
+  9) 수식은 $...$ / $$...$$. 여러 줄 사슬은 div.math-display 안의
+     $$\begin{aligned}...\end{aligned}$$ 로 둔다. §2에는 번호 붙은 수식이 없다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§2 Sentence and Logic · 명제와 논리</h2></div>
+
+<!-- ═══════════ PDF p.5 ═══════════ -->
+
+<!-- Definition 2.1 -->
+<div class="card def-card" id="c2-1">
+  <div class="card-head">
+    <span class="def-num">DEF 2.1</span>
+    <span class="def-title">명제 <em>Sentence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>"명제"란 (주어진 문맥에서) 참인지 거짓인지가 명확하게 하나로 정해지는 서술을 말한다. 예를 들어,</p>
+        <div class="math-display">$$\text{Seoul is the capital of Korea,}$$</div>
+        <div class="math-display">$$\text{Money grows on trees,}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$\text{Snow is black}$$</div>
+        <p>는 모두 명제이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>“Sentence” is a statement which is unambiguously either true or false (in a given context). For example,</p>
+        <div class="math-display">$$\text{Seoul is the capital of Korea,}$$</div>
+        <div class="math-display">$$\text{Money grows on trees,}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\text{Snow is black}$$</div>
+        <p>are all sentences.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.2 -->
+<div class="card ex-card" id="c2-2">
+  <div class="card-head">
+    <span class="ex-num">EX 2.2</span>
+    <span class="ex-title">명제 여부 판정 <em>Deciding whether a statement is a sentence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>"고려대학교는 한국에서 최고의 대학교이다"가 명제인지 판정하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>"고려대학교는 한국에서 최고의 대학교이다"는 명제가 아니다. 정의 2.1에 의하면 명제는 참인지 거짓인지가 명확하게 하나로 정해지는 서술이어야 한다. 그러나 "최고"라는 표현에는 모호하지 않은 단일한 판정 기준이 없다 — 예를 들어 연구 실적, 입학 경쟁률, 졸업생의 사회적 성취, 또는 대학 순위 평가기관마다 다른 산정 방식 중 어떤 기준을 적용하느냐에 따라 참·거짓이 달라질 수 있다. 따라서 이 서술은 참·거짓이 명확하게 하나로 정해지지 않으므로 명제가 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Is “Korea university is the top university in Korea” a sentence?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>"Korea university is the top university in Korea" is not a sentence. By Definition 2.1, a sentence must be a statement that is unambiguously either true or false. However, the word "top" has no single unambiguous criterion; its truth value can differ depending on which criterion is applied, for example research output, admission competitiveness, graduates' achievements, or the differing methodologies used by various university ranking agencies. Hence this statement does not have a single, unambiguously determined truth value, so it is not a sentence.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.5) -->
+<div class="card note-card" id="note02-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>명제를 나타내기 위해 $P$, $Q$, $R$, $S$ 등의 문자를 사용할 것이다.</p>
+        <p>주어진 명제를 이용하여 새로운 명제를 만들어낼 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We will use letters $P$, $Q$, $R$, $S$ to denote sentences.</p>
+        <p>By using a given sentence, we can produce a new sentence.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 2.3 -->
+<div class="card def-card" id="c2-3">
+  <div class="card-head">
+    <span class="def-num">DEF 2.3</span>
+    <span class="def-title">부정 <em>Negation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$를 명제라 하자. 그러면 $P$의 부정은 "$P$는 거짓이다"라고 주장하는 것으로 이해한다. 다시 말해 $P$가 참이면 $P$의 부정은 거짓이다. $P$의 부정은 $\neg P$로 표기하고 "$P$가 아니다"로 읽는다. 아래 표에서는 "참"과 "거짓"을 각각 나타내기 위해 "t"와 "f"를 사용한다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>부정의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$\neg P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ be a sentence. Then the negation of $P$ is understood to assert that “$P$ is false”. In other words, if $P$ is true, then the negation of $P$ is false. The negation of $P$ is denoted by $\neg P$ and it is read as “not $P$”. We use “t” and “f” to denote “true” and “false”, respectively in the following table.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the negation</caption>
+            <thead>
+              <tr><th>$P$</th><th>$\neg P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.5) -->
+<div class="card note-card" id="note02-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>명제들을 결합하여 새로운 명제를 만들 수 있다. 다음은 명제의 결합 목록이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By combining sentences, we can make a new sentence. Here is a list of combinations of sentences.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 2.4 -->
+<div class="card def-card" id="c2-4">
+  <div class="card-head">
+    <span class="def-num">DEF 2.4</span>
+    <span class="def-title">논리곱 <em>Conjunction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하자. 그러면 $P$와 $Q$의 논리곱은 "$P$가 참이고 $Q$가 참이면 $P$와 $Q$의 논리곱은 참이다"라고 주장하는 것으로 이해한다. 다시 말해 $P$와 $Q$가 모두 참이면 $P$와 $Q$의 논리곱은 참이고, 그렇지 않으면 거짓이다. $P$와 $Q$의 논리곱은 $P \wedge Q$로 표기하고 "$P$ 그리고 $Q$"로 읽는다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>논리곱의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \wedge Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences. Then the conjunction of $P$ and $Q$ is understood to assert that “the conjunction of $P$ and $Q$ is true if $P$ is true and $Q$ is true”. In other words, if both $P$ and $Q$ are true, then the conjunction of $P$ and $Q$ is true and otherwise it is false. The conjunction of $P$ and $Q$ is denoted by $P \wedge Q$ and it is read as “$P$ and $Q$”.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the conjunction</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \wedge Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 2.5 -->
+<div class="card def-card" id="c2-5">
+  <div class="card-head">
+    <span class="def-num">DEF 2.5</span>
+    <span class="def-title">논리합 <em>Disjunction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하자. 그러면 $P$와 $Q$의 논리합은 "$P$ 또는 $Q$, 혹은 $P$와 $Q$가 모두 참이면 $P$와 $Q$의 논리합은 참이다"라고 주장하는 것으로 이해한다. 다시 말해 $P$와 $Q$가 모두 거짓일 때만 $P$와 $Q$의 논리합은 거짓이다. $P$와 $Q$의 논리합은 $P \vee Q$로 표기하고 "$P$ 또는 $Q$"로 읽는다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>논리합의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \vee Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences. Then the disjunction of $P$ and $Q$ is understood to assert that “the disjunction of $P$ and $Q$ is true if $P$, or $Q$, or both $P$ and $Q$ are true”. In other words, the disjunction of $P$ and $Q$ is false only if both $P$ and $Q$ are false. The disjunction of $P$ and $Q$ is denoted by $P \vee Q$ and it is read as “$P$ or $Q$”.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the disjunction</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \vee Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.6 ═══════════ -->
+
+<!-- Definition 2.6 -->
+<div class="card def-card" id="c2-6">
+  <div class="card-head">
+    <span class="def-num">DEF 2.6</span>
+    <span class="def-title">함의 <em>Implication</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하자. 그러면 "$P$는 $Q$를 함의한다"는 "$P$가 참이면 $Q$도 참이다"라고 주장하는 것으로 이해한다. 수학에서 더 구체적으로 말하면, 이 함의는 $P$가 참이고 $Q$가 거짓인 경우를 제외하고는 항상 참이다. $P$가 $Q$를 함의한다는 것을 나타내기 위해 $P \implies Q$라는 표기를 사용한다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>함의의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \implies Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences. Then that $P$ implies $Q$ is understood to assert that “if $P$ is true, then $Q$ is true”. More specifically in mathematics, the implication is true except if $P$ is true and $Q$ is false. We use the notation $P \implies Q$ to denote that $P$ implies $Q$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the implication</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \implies Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notation 2.7 -->
+<div class="card def-card" id="c2-7">
+  <div class="card-head">
+    <span class="def-num">NOTATION 2.7</span>
+    <span class="def-title">함의 읽는 법 <em>Reading the implication</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ul>
+          <li>정의에 의해 $P \implies Q$는 "$P$는 $Q$를 함의한다"로 읽는다.</li>
+          <li>$P \implies Q$는 "$P$이면 $Q$이다" 또는 "$P$일 때 $Q$이다"로도 읽는다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ul>
+          <li>By the definition, $P \implies Q$ is read as “$P$ implies $Q$”.</li>
+          <li>$P \implies Q$ is also read as “if $P$, then $Q$” or “$Q$ if $P$”.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2.8 -->
+<div class="card exam-card" id="c2-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.8</span>
+    <span class="exam-title">함의 진리표의 작동 방식 <em>How the truth table for the implication works</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ol class="paren">
+          <li>함의의 진리표는 두 명제 사이에 아무 관계가 없어도 작동한다. 예를 들어 명제
+            <div class="math-display">$$1+1=2 \quad \implies \quad \pi \text{ is an irrational number}$$</div>
+            는 "$1 + 1 = 2$"와 "$\pi$는 무리수이다" 두 명제가 모두 참이므로 참이다.</li>
+          <li>전제 $P$가 참이면 함의 $P \implies Q$의 참·거짓은 $Q$의 참·거짓에 의해 결정되며, 이는 우리의 상식에 매우 자연스러워 보인다. 그러나 전제 $P$가 거짓인 경우에는 함의를 이해하기가 어렵다. 우리의 진리표에 따르면 전제 $P$가 거짓이면 함의 $P \implies Q$는 항상 참임에 유의하라. 다음 예를 생각해보자:
+            <div class="math-display">$$1+1=3 \quad \implies \quad 3 \text{ is an even number.}$$</div>
+            위의 두 명제는 모두 거짓이지만, 우리의 진리 규칙에 의해 함의는 참이다.</li>
+          <li>$A$를 공집합이라 하자. 즉 $A$는 원소를 갖지 않는다. 명제
+            <div class="math-display">$$\text{for all } x \in A, \; x \text{ can have any property.}$$</div>
+            를 생각하자. 위 명제는 함의 표기를 이용하여 다음과 같이 해석할 수 있다:
+            <div class="math-display">$$x \in A \implies x \text{ can have any property.}$$</div>
+            따라서 이 명제는 참이다. 다시 말해, 주어진 집합 $A$가 공집합이면 $A$의 모든 원소가 우리가 원하는 어떤 성질이든 가진다고 말할 수 있다. 이러한 상황은 주어진 집합이 공집합인 극단적인 경우를 고려할 때 수학에서 자주 나타난다.</li>
+          <li>$P$를 명제라 하자. 그러면 $P \implies P$는 항상 참이다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ol class="paren">
+          <li>The truth table for the implication is working even though there is no relation between two sentences. For instance, the sentence
+            <div class="math-display">$$1+1=2 \quad \implies \quad \pi \text{ is an irrational number}$$</div>
+            is true since both sentences “$1 + 1 = 2$” and “$\pi$ is an irrational number” are true.</li>
+          <li>If the premise $P$ is true, then the truth of the implication $P \implies Q$ is determined by truth of $Q$ and it seems very natural to our common sense. However, it is difficult to understand the implication if the premise $P$ is false. Note that if the premise $P$ is false, then the implication $P \implies Q$ is always true due to our truth table. Consider the following example:
+            <div class="math-display">$$1+1=3 \quad \implies \quad 3 \text{ is an even number.}$$</div>
+            Both sentences above are false but the implication is true by our truth rule.</li>
+          <li>Let $A$ be the empty set, i.e. $A$ has no elements. Consider the sentence
+            <div class="math-display">$$\text{for all } x \in A, \; x \text{ can have any property.}$$</div>
+            We could interpret the above sentence by using the implication notation as follows:
+            <div class="math-display">$$x \in A \implies x \text{ can have any property.}$$</div>
+            Therefore, this sentence is true. In other words, if the given set $A$ is empty, then we may say that all elements of $A$ have any property which we want to give. This kind of situation appears frequently in mathematics when we consider the extreme case that the given set is empty.</li>
+          <li>Let $P$ be a sentence. Then $P \implies P$ is always true.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.9 -->
+<div class="card ex-card" id="c2-9">
+  <div class="card-head">
+    <span class="ex-num">EX 2.9</span>
+    <span class="ex-title">$\mathbb{N}$ 위 두 함의의 진리값 <em>Truth values of two implications over $\mathbb{N}$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{N}$을 자연수 체계라 하자. 다음 두 명제가 참인지 거짓인지 판정하라:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$A \subset \mathbb{N} \implies \text{all elements of } A \text{ are integers}$$</div></li>
+          <li><div class="math-display">$$A \subset \mathbb{N} \implies \text{all elements of } A \text{ are even numbers.}$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>이 명제는 참이다. 실제로 $A \subset \mathbb{N}$이라고 가정하고 $x \in A$인 임의의 $x$를 취하자. $A \subset \mathbb{N}$이므로 $x \in \mathbb{N}$이고, 모든 자연수는 정수이므로 $x$는 정수이다. $x \in A$는 임의로 취하였으므로 $A$의 모든 원소는 정수이다. 따라서 함의 "$A \subset \mathbb{N} \implies$ $A$의 모든 원소는 정수이다"는 참이다. 이 논증은 임의의 $A \subset \mathbb{N}$에 대해 성립하며, 특히 $A = \emptyset$인 경우에도 전제와 결론이 모두 공허하게 참이 되어 함의는 여전히 성립한다 (예 2.8(3) 참고).</li>
+          <li>이 명제는 거짓이다. 반례를 들어 보이자. $A = \{1\}$이라 하자. $1 \in \mathbb{N}$이므로 $A \subset \mathbb{N}$이고, 따라서 전제 "$A \subset \mathbb{N}$"은 참이다. 그러나 $1$은 짝수가 아니므로 $A$의 모든 원소가 짝수라는 결론은 거짓이다. 따라서 이 $A$에 대해 전제는 참이고 결론은 거짓이므로, 함의 "$A \subset \mathbb{N} \implies$ $A$의 모든 원소는 짝수이다"는 거짓이다. (몇몇 특정한 $A$, 예를 들어 $A = \emptyset$이나 $A = \{2\}$에 대해서는 이 함의가 참이 될 수 있음에 유의하라. 그러나 문제는 모든 $A \subset \mathbb{N}$에 대해 이 명제가 참인지를 묻고 있으므로, $A = \{1\}$이라는 하나의 반례만으로도 명제 전체가 거짓임을 보이기에 충분하다.)</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbb{N}$ be the natural number system. Determine if the following two sentence are true or false:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$A \subset \mathbb{N} \implies \text{all elements of } A \text{ are integers}$$</div></li>
+          <li><div class="math-display">$$A \subset \mathbb{N} \implies \text{all elements of } A \text{ are even numbers.}$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>This statement is true. Indeed, assume $A \subset \mathbb{N}$ and let $x \in A$ be arbitrary. Since $A \subset \mathbb{N}$, we have $x \in \mathbb{N}$, and since every natural number is an integer, $x$ is an integer. As $x \in A$ was arbitrary, every element of $A$ is an integer. Hence the implication "$A \subset \mathbb{N} \implies$ all elements of $A$ are integers" is true. This argument holds for every $A \subset \mathbb{N}$, and in particular for $A = \emptyset$ the premise and the conclusion are both vacuously true, so the implication still holds (cf. Example 2.8(3)).</li>
+          <li>This statement is false. We exhibit a counterexample. Let $A = \{1\}$. Since $1 \in \mathbb{N}$, we have $A \subset \mathbb{N}$, so the premise "$A \subset \mathbb{N}$" is true. However, $1$ is not an even number, so the conclusion that all elements of $A$ are even numbers is false. Thus for this $A$ the premise is true and the conclusion is false, so the implication "$A \subset \mathbb{N} \implies$ all elements of $A$ are even numbers" is false. (Note that for some particular $A$, e.g. $A = \emptyset$ or $A = \{2\}$, this implication can hold. However, since the question asks whether the statement holds for all $A \subset \mathbb{N}$, the single counterexample $A = \{1\}$ suffices to show that the statement is false in general.)</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 2.10 -->
+<div class="card def-card" id="c2-10">
+  <div class="card-head">
+    <span class="def-num">DEF 2.10</span>
+    <span class="def-title">역, 이, 대우 <em>The converse, inverse, contrapositive</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하고 $P$가 $Q$를 함의한다는 함의, 즉 $P \implies Q$를 생각하자.</p>
+        <ol class="paren">
+          <li>이 함의의 <strong>역</strong>은 $Q$가 $P$를 함의한다는 것, 즉
+            <div class="math-display">$$Q \implies P.$$</div></li>
+          <li>이 함의의 <strong>이</strong>는 $\neg P$가 $\neg Q$를 함의한다는 것, 즉
+            <div class="math-display">$$\neg P \implies \neg Q.$$</div></li>
+          <li>이 함의의 <strong>대우</strong>는 $\neg Q$가 $\neg P$를 함의한다는 것, 즉
+            <div class="math-display">$$\neg Q \implies \neg P.$$</div></li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences and consider the implication that $P$ implies $Q$, i.e. $P \implies Q$.</p>
+        <ol class="paren">
+          <li>The <strong>converse</strong> of the implication is that $Q$ implies $P$, i.e.
+            <div class="math-display">$$Q \implies P.$$</div></li>
+          <li>The <strong>inverse</strong> of the implication is that $\neg P$ implies $\neg Q$, i.e.
+            <div class="math-display">$$\neg P \implies \neg Q.$$</div></li>
+          <li>The <strong>contrapositive</strong> of the implication is that $\neg Q$ implies $\neg P$, i.e.
+            <div class="math-display">$$\neg Q \implies \neg P.$$</div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.7 ═══════════ -->
+
+<!-- Remark 2.11 -->
+<div class="card rem-card" id="c2-11">
+  <div class="card-head">
+    <span class="rem-num">REM 2.11</span>
+    <span class="rem-title">역·이·대우의 진리표 <em>Truth tables for the converse, inverse, and contrapositive</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하고 $P$가 $Q$를 함의한다는 함의를 생각하자. 역, 이, 대우의 진리표는 부정과 함의의 진리값으로부터 쉽게 얻을 수 있다. 실제로,</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>함의의 역의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$Q \implies P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>함의의 이의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$\neg P \implies \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>함의의 대우의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$\neg Q \implies \neg P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>$P \implies Q$와 그 대우의 진리값이 같다는 점을 강조한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences and consider the implication that $P$ implies $Q$. The truth tables for the converse, inverse, and contrapositive are easily obtained from truth values from the negation and implication. Indeed,</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the converse of the implication</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$Q \implies P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the inverse of the implication</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$\neg P \implies \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for the contrapositive of the implication</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$\neg Q \implies \neg P$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We emphasize that the truth values for $P \implies Q$ and its contrapositive are same.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notation 2.12 -->
+<div class="card def-card" id="c2-12">
+  <div class="card-head">
+    <span class="def-num">NOTATION 2.12</span>
+    <span class="def-title">충분조건과 필요조건 <em>Sufficient and necessary conditions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P \implies Q$는 "$Q$일 때만 $P$이다", "$P$는 $Q$의 충분조건이다", "$Q$는 $P$의 필요조건이다"로도 읽는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$P \implies Q$ is also read as “$P$ only if $Q$”, “$P$ is a sufficient condition of $Q$”, and “$Q$ is a necessary condition of $P$”.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.13 -->
+<div class="card thm-card" id="c2-13">
+  <div class="card-head">
+    <span class="thm-num">THM 2.13</span>
+    <span class="thm-title">논리합·논리곱에 대한 기본 함의 <em>Basic implications for disjunction and conjunction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하자. 그러면 다음 명제들은 (항상) 참이다:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$P \implies P \vee Q$$</div></li>
+          <li><div class="math-display">$$Q \implies P \vee Q$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies P$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies Q$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>논리곱과 함의의 진리표를 떠올려보자. 증명을 네 가지 경우로 나눈다.
+            <ul>
+              <li>(경우 1: $P$가 참이고 $Q$가 참인 경우). $P$가 참이고 $Q$가 참이면 $P \vee Q$는 참이다. 따라서 $P \implies P \vee Q$는 참이다.</li>
+              <li>(경우 2: $P$가 참이고 $Q$가 거짓인 경우). $P$가 참이고 $Q$가 거짓이면 $P \vee Q$는 참이다. 따라서 $P \implies P \vee Q$는 참이다.</li>
+              <li>(경우 3: $P$가 거짓이고 $Q$가 참인 경우). $P$가 거짓이면 $P \implies P \vee Q$는 참이다.</li>
+              <li>(경우 4: $P$가 거짓이고 $Q$가 거짓인 경우). $P$가 거짓이면 $P \implies P \vee Q$는 참이다.</li>
+            </ul>
+            <p>따라서</p>
+            <div class="math-display">$$P \implies P \vee Q$$</div>
+            <p>다음 진리표를 통해서도 결론을 이끌어낼 수 있다:</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>$P \implies P \vee Q$의 진리표</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$P \vee Q$</th><th>$P \implies P \vee Q$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+          <li>$Q \implies P \vee Q$에 대한 진리표는 $P \implies P \vee Q$에 대한 것과 유사하다. 세부 사항은 생략한다.</li>
+          <li>$P \wedge Q \implies P$에 대한 진리표를 유도한다.
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>$P \wedge Q \implies P$의 진리표</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$P \wedge Q$</th><th>$P \wedge Q \implies P$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+          <li>$P \wedge Q \implies Q$에 대한 진리표는 $P \wedge Q \implies P$에 대한 것과 매우 유사하므로 세부 사항은 생략한다.</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences. Then the following statements are (always) true:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$P \implies P \vee Q$$</div></li>
+          <li><div class="math-display">$$Q \implies P \vee Q$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies P$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies Q$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>Recall the truth table for the conjunction and implication. We divide the proof into four cases.
+            <ul>
+              <li>(Case 1: $P$ is true and $Q$ is true). If $P$ is true and $Q$ is true, then $P \vee Q$ is true. Thus $P \implies P \vee Q$ is true.</li>
+              <li>(Case 2: $P$ is true and $Q$ is false). If $P$ is true and $Q$ is false, then $P \vee Q$ is true. Thus $P \implies P \vee Q$ is true.</li>
+              <li>(Case 3: $P$ is false and $Q$ is true). If $P$ is false, then $P \implies P \vee Q$ is true.</li>
+              <li>(Case 4: $P$ is false and $Q$ is false). If $P$ is false, then $P \implies P \vee Q$ is true.</li>
+            </ul>
+            <p>Therefore</p>
+            <div class="math-display">$$P \implies P \vee Q$$</div>
+            <p>We can also deduce the conclusion through the following truth table:</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>Truth table for $P \implies P \vee Q$</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$P \vee Q$</th><th>$P \implies P \vee Q$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+          <li>The truth table for $Q \implies P \vee Q$ is analogous to the one for $P \implies P \vee Q$. We skip the detail.</li>
+          <li>We derive a truth table for $P \wedge Q \implies P$.
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>Truth table for $P \wedge Q \implies P$</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$P \wedge Q$</th><th>$P \wedge Q \implies P$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+          <li>Since the truth table for $P \wedge Q \implies Q$ is very similar to the one for $P \wedge Q \implies P$, we skip the detail.</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.8 ═══════════ -->
+
+<!-- Theorem 2.14 -->
+<div class="card thm-card" id="c2-14">
+  <div class="card-head">
+    <span class="thm-num">THM 2.14</span>
+    <span class="thm-title">논리합·논리곱으로 보존되는 함의 <em>Implications preserved by disjunction and conjunction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$, $Q$, $R$을 명제라 하자. $Q \implies R$이 참이라고 가정하자. 그러면 다음 명제들은 참이다:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$P \vee Q \implies P \vee R$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies P \wedge R.$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>먼저 $P \vee Q \implies P \vee R$에 대한 진리표를 살펴보자.
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>$P \vee Q \implies P \vee R$의 진리표</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \vee Q$</th><th>$P \vee R$</th><th>$P \vee Q \implies P \vee R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>$Q \implies R$이 참이라는 가정을 상기하며 $Q \implies R$에 대한 진리표를 살펴보자.</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>$Q \implies R$의 진리표</caption>
+                <thead>
+                  <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>가정에 의해 $Q$가 참이고 $R$이 거짓인 경우는 불가능하다. $P \vee Q \implies P \vee R$의 진리표에서 이 경우를 제거하면 다음을 얻는다:</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>$Q \implies R$라는 가정 아래</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \vee Q$</th><th>$P \vee R$</th><th>$P \vee Q \implies P \vee R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>따라서 $Q \implies R$이라는 가정 아래 $P \vee Q \implies P \vee R$는 항상 참임을 결론지을 수 있다.</p>
+          </li>
+          <li>(2)의 증명은 (1)의 증명과 유사하다. 이 증명은 연습문제로 남긴다.</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$, $Q$, and $R$ be sentences. Assume that $Q \implies R$ is true. Then the following statements are true:</p>
+        <ol class="paren">
+          <li><div class="math-display">$$P \vee Q \implies P \vee R$$</div></li>
+          <li><div class="math-display">$$P \wedge Q \implies P \wedge R.$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>We consider the truth table for $P \vee Q \implies P \vee R$ first.
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>Truth table for $P \vee Q \implies P \vee R$</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \vee Q$</th><th>$P \vee R$</th><th>$P \vee Q \implies P \vee R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Recalling the assumption that $Q \implies R$ is true, we consider the truth table for $Q \implies R$.</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>Truth table for $Q \implies R$</caption>
+                <thead>
+                  <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Due to the assumption, the case that $Q$ is true and $R$ is false is impossible. Remove this case from the truth table for $P \vee Q \implies P \vee R$. Then we have</p>
+            <div class="table-wrap">
+              <table class="truth-table">
+                <caption>Under the assumption that $Q \implies R$</caption>
+                <thead>
+                  <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \vee Q$</th><th>$P \vee R$</th><th>$P \vee Q \implies P \vee R$</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+                  <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Therefore, we conclude that $P \vee Q \implies P \vee R$ is always true under the assumption that $Q \implies R$.</p>
+          </li>
+          <li>The proof of (2) is analogous to (1). We leave the proof as an exercise.</li>
+        </ol>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.9 ═══════════ -->
+
+<!-- Remark 2.15 -->
+<div class="card rem-card" id="c2-15">
+  <div class="card-head">
+    <span class="rem-num">REM 2.15</span>
+    <span class="rem-title">"참이다" 생략 관행 <em>The convention of omitting “is true”</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 2.14에서 우리는 $Q \implies R$이 참이라고 가정하였다. 그러나 관례적으로 "참이다"는 보통 생략한다. 다시 말해 단순히 $Q \implies R$이라고 말하면, 이는 명제 $Q \implies R$이 참이라는 것을 의미한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Theorem 2.14, we assumed that $Q \implies R$ is true. However, conventionally, we usually skip “is true”. In other words, if we simply say that $Q \implies R$, then it means that the sentence $Q \implies R$ is true.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.16 -->
+<div class="card ex-card" id="c2-16">
+  <div class="card-head">
+    <span class="ex-num">EX 2.16</span>
+    <span class="ex-title">정리 2.14의 (2) 증명 <em>Proving part (2) of Theorem 2.14</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 2.14의 (2)를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 2.14(1)의 증명과 같은 방식으로 진행한다. $P$, $Q$, $R$을 명제라 하고 $Q \implies R$이 참이라고 가정하자. 먼저 $P \wedge Q \implies P \wedge R$에 대한 진리표를 살펴보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$P \wedge Q \implies P \wedge R$의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \wedge Q$</th><th>$P \wedge R$</th><th>$P \wedge Q \implies P \wedge R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>$Q \implies R$이 참이라는 가정을 상기하며 $Q \implies R$에 대한 진리표를 살펴보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$Q \implies R$의 진리표</caption>
+            <thead>
+              <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>가정에 의해 $Q$가 참이고 $R$이 거짓인 경우는 불가능하다. $P \wedge Q \implies P \wedge R$의 진리표에서 이 경우를 제거하면 다음을 얻는다:</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$Q \implies R$라는 가정 아래</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \wedge Q$</th><th>$P \wedge R$</th><th>$P \wedge Q \implies P \wedge R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>남은 모든 경우에서 $P \wedge Q \implies P \wedge R$의 값이 참임을 확인할 수 있다. 따라서 $Q \implies R$이라는 가정 아래 $P \wedge Q \implies P \wedge R$는 항상 참임을 결론지을 수 있다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove (2) in Theorem 2.14.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We proceed in the same way as the proof of Theorem 2.14(1). Let $P$, $Q$, $R$ be sentences and assume that $Q \implies R$ is true. We consider the truth table for $P \wedge Q \implies P \wedge R$ first.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $P \wedge Q \implies P \wedge R$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \wedge Q$</th><th>$P \wedge R$</th><th>$P \wedge Q \implies P \wedge R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Recalling the assumption that $Q \implies R$ is true, we consider the truth table for $Q \implies R$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $Q \implies R$</caption>
+            <thead>
+              <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Due to the assumption, the case that $Q$ is true and $R$ is false is impossible. Remove this case from the truth table for $P \wedge Q \implies P \wedge R$. Then we have</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Under the assumption that $Q \implies R$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th><th>$P \wedge Q$</th><th>$P \wedge R$</th><th>$P \wedge Q \implies P \wedge R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We see that $P \wedge Q \implies P \wedge R$ is true in every remaining case. Therefore, we conclude that $P \wedge Q \implies P \wedge R$ is always true under the assumption that $Q \implies R$.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.17 -->
+<div class="card thm-card" id="c2-17">
+  <div class="card-head">
+    <span class="thm-num">THM 2.17</span>
+    <span class="thm-title">추이법칙 <em>Transitive law</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$, $Q$, $R$을 명제라 하자. 그러면</p>
+        <div class="math-display">$$[(P \implies Q) \wedge (Q \implies R)] \implies (P \implies R).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(P \implies Q) \wedge (Q \implies R)$가 거짓이면 이 함의는 참이다. 따라서 $(P \implies Q) \wedge (Q \implies R)$가 참인 경우만 고려하면 되고, 논리곱의 진리표에 의해 $P \implies Q$와 $Q \implies R$가 모두 참이라고 가정할 수 있다. $P \implies Q$와 $Q \implies R$가 모두 참인 모든 경우를 분류해보자. $P \implies Q$와 $Q \implies R$에 대한 진리표를 생각하자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$P \implies Q$의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \implies Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>그리고</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$Q \implies R$의 진리표</caption>
+            <thead>
+              <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>그러면 가능한 모든 경우는 다음과 같다:</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$P \implies Q$와 $Q \implies R$가 모두 참이라는 가정 아래</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>그리고 우리는 다음을 얻는다:</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$P \implies Q$와 $Q \implies R$가 모두 참이라는 가정 아래</caption>
+            <thead>
+              <tr><th>$P$</th><th>$R$</th><th>$P \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>정리가 증명되었다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$, $Q$, and $R$ be sentences. Then</p>
+        <div class="math-display">$$[(P \implies Q) \wedge (Q \implies R)] \implies (P \implies R).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>If $(P \implies Q) \wedge (Q \implies R)$ is false, then the implication is true. Thus we only need to consider the case $(P \implies Q) \wedge (Q \implies R)$ is true and by the truth table for the conjunction, we may assume that both $P \implies Q$ and $Q \implies R$ are true. Let’s classify all cases that both $P \implies Q$ and $Q \implies R$ are true. Consider the truth table for $P \implies Q$ and $Q \implies R$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $P \implies Q$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$P \implies Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>and</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $Q \implies R$</caption>
+            <thead>
+              <tr><th>$Q$</th><th>$R$</th><th>$Q \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Then all possible cases are</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Under the assumption that both $P \implies Q$ and $Q \implies R$ are true</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>and we have</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Under the assumption that both $P \implies Q$ and $Q \implies R$ are true</caption>
+            <thead>
+              <tr><th>$P$</th><th>$R$</th><th>$P \implies R$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The theorem is proved.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.10 ═══════════ -->
+
+<!-- Notation 2.18 -->
+<div class="card def-card" id="c2-18">
+  <div class="card-head">
+    <span class="def-num">NOTATION 2.18</span>
+    <span class="def-title">동치의 약어 <em>The abbreviation for equivalence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(P \implies Q) \wedge (Q \implies P)$에 대한 약어로 $P \iff Q$를 사용한다. $P \iff Q$는 "$Q$일 때 그리고 그럴 때만 $P$이다"로 읽는다. 또한 두 명제 $P$와 $Q$가 "동치"라고 말한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We use the abbreviation $P \iff Q$ for $(P \implies Q) \wedge (Q \implies P)$. $P \iff Q$ is read as “$P$ if and only if $Q$”. We also say that two sentences $P$ and $Q$ are “equivalent”.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.19 -->
+<div class="card thm-card" id="c2-19">
+  <div class="card-head">
+    <span class="thm-num">THM 2.19</span>
+    <span class="thm-title">멱등·교환·결합·분배법칙 <em>Idempotent, commutative, associative, and distributive laws</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$, $Q$, $R$을 명제라 하자. 그러면</p>
+        <ol class="paren">
+          <li>(멱등법칙)
+            <div class="math-display">$$P \vee P \iff P$$</div></li>
+          <li>(멱등법칙)
+            <div class="math-display">$$P \wedge P \iff P$$</div></li>
+          <li>(교환법칙)
+            <div class="math-display">$$P \vee Q \iff Q \vee P$$</div></li>
+          <li>(교환법칙)
+            <div class="math-display">$$P \wedge Q \iff Q \wedge P$$</div></li>
+          <li>(결합법칙)
+            <div class="math-display">$$P \vee (Q \vee R) \iff (P \vee Q) \vee R$$</div></li>
+          <li>(결합법칙)
+            <div class="math-display">$$P \wedge (Q \wedge R) \iff (P \wedge Q) \wedge R$$</div></li>
+          <li>(분배법칙)
+            <div class="math-display">$$P \wedge (Q \vee R) \iff (P \wedge Q) \vee (P \wedge R)$$</div></li>
+          <li>(분배법칙)
+            <div class="math-display">$$P \vee (Q \wedge R) \iff (P \vee Q) \wedge (P \vee R).$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ol class="paren">
+          <li>"만약(if) 부분"은 자명하다. 실제로 $P$가 참이면 $P$는 참이거나 $P$는 참이다. 따라서 $P \vee P$는 참이다. 다음으로 "오직 ~인 경우에만(only if) 부분"을 증명한다. $P \vee P$가 거짓이면 증명할 것이 없다. 따라서 $P \vee P$가 참이면 $P$가 참임을 보이면 충분하다. $P \vee P$가 참이라고 가정하자. 그러면 논리합의 진리표에 의해 $P$는 참이거나 $P$는 참이다. 따라서 $P$는 참이다.</li>
+        </ol>
+        <p>나머지 명제의 증명은 연습문제로 남긴다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$, $Q$, and $R$ be sentences. Then</p>
+        <ol class="paren">
+          <li>(Idempotent law)
+            <div class="math-display">$$P \vee P \iff P$$</div></li>
+          <li>(Idempotent law)
+            <div class="math-display">$$P \wedge P \iff P$$</div></li>
+          <li>(Commutative law)
+            <div class="math-display">$$P \vee Q \iff Q \vee P$$</div></li>
+          <li>(Commutative law)
+            <div class="math-display">$$P \wedge Q \iff Q \wedge P$$</div></li>
+          <li>(Associative law)
+            <div class="math-display">$$P \vee (Q \vee R) \iff (P \vee Q) \vee R$$</div></li>
+          <li>(Associative law)
+            <div class="math-display">$$P \wedge (Q \wedge R) \iff (P \wedge Q) \wedge R$$</div></li>
+          <li>(Distributive law)
+            <div class="math-display">$$P \wedge (Q \vee R) \iff (P \wedge Q) \vee (P \wedge R)$$</div></li>
+          <li>(Distributive law)
+            <div class="math-display">$$P \vee (Q \wedge R) \iff (P \vee Q) \wedge (P \vee R).$$</div></li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ol class="paren">
+          <li>The “if part” is obvious. Indeed, if $P$ is true, then $P$ is true or $P$ is true. Therefore $P \vee P$ is true. Next we prove the “only if part”. If $P \vee P$ is false, then there is nothing to prove. Thus it is sufficient to show that if $P \vee P$ is true, then $P$ is true. Assume that $P \vee P$ is true. Then by the truth table for the disjunction, $P$ is true or $P$ is true. Therefore $P$ is true.</li>
+        </ol>
+        <p>We leave the proof of the other statements as exercises.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.11 ═══════════ -->
+
+<!-- Exercise 2.20 -->
+<div class="card ex-card" id="c2-20">
+  <div class="card-head">
+    <span class="ex-num">EX 2.20</span>
+    <span class="ex-title">이중부정 <em>Double negation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 명제 $P$에 대하여 다음이 성립함을 증명하라.</p>
+        <div class="math-display">$$P \iff \neg(\neg P).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>진리표를 이용하여 두 명제 $P$와 $\neg(\neg P)$의 진리값이 항상 일치함을 보인다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$P$와 $\neg(\neg P)$의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$\neg P$</th><th>$\neg(\neg P)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>표에서 보듯이 $P$와 $\neg(\neg P)$는 모든 경우에 같은 진리값을 갖는다. 즉 $P$가 참이면 $\neg(\neg P)$도 참이고, $P$가 거짓이면 $\neg(\neg P)$도 거짓이다. 따라서 함의의 진리표에 의해 $P \implies \neg(\neg P)$와 $\neg(\neg P) \implies P$가 모두 참이다. 표기 2.18에 의해 이는 곧</p>
+        <div class="math-display">$$P \iff \neg(\neg P)$$</div>
+        <p>가 성립함을 의미한다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that for every sentence $P$,</p>
+        <div class="math-display">$$P \iff \neg(\neg P).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We use a truth table to show that the sentences $P$ and $\neg(\neg P)$ always have the same truth value.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $P$ and $\neg(\neg P)$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$\neg P$</th><th>$\neg(\neg P)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>As the table shows, $P$ and $\neg(\neg P)$ have the same truth value in every case. That is, if $P$ is true, then $\neg(\neg P)$ is true, and if $P$ is false, then $\neg(\neg P)$ is false. Therefore, by the truth table for the implication, both $P \implies \neg(\neg P)$ and $\neg(\neg P) \implies P$ are true. By Notation 2.18, this means that</p>
+        <div class="math-display">$$P \iff \neg(\neg P)$$</div>
+        <p>holds.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.21 -->
+<div class="card ex-card" id="c2-21">
+  <div class="card-head">
+    <span class="ex-num">EX 2.21</span>
+    <span class="ex-title">명제에 대한 드모르간 법칙 <em>De Morgan’s laws for sentences</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$P$와 $Q$를 명제라 하자. 다음이 성립함을 증명하라.</p>
+        <div class="math-display">$$\neg(P \vee Q) \iff \neg P \wedge \neg Q$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$\neg(P \wedge Q) \iff \neg P \vee \neg Q.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>첫 번째 드모르간 법칙 $\neg(P \vee Q) \iff \neg P \wedge \neg Q$의 진리표를 살펴보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$\neg(P \vee Q)$와 $\neg P \wedge \neg Q$의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$P \vee Q$</th><th>$\neg(P \vee Q)$</th><th>$\neg P \wedge \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>표의 각 행에서 $\neg(P \vee Q)$와 $\neg P \wedge \neg Q$의 값이 일치함을 확인할 수 있다. 따라서 함의의 진리표에 의해 $\neg(P \vee Q) \implies \neg P \wedge \neg Q$와 $\neg P \wedge \neg Q \implies \neg(P \vee Q)$가 모두 참이며, 표기 2.18에 의해</p>
+        <div class="math-display">$$\neg(P \vee Q) \iff \neg P \wedge \neg Q$$</div>
+        <p>가 성립한다.</p>
+        <p>다음으로 두 번째 드모르간 법칙 $\neg(P \wedge Q) \iff \neg P \vee \neg Q$의 진리표를 살펴보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>$\neg(P \wedge Q)$와 $\neg P \vee \neg Q$의 진리표</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$P \wedge Q$</th><th>$\neg(P \wedge Q)$</th><th>$\neg P \vee \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>표의 각 행에서 $\neg(P \wedge Q)$와 $\neg P \vee \neg Q$의 값이 일치함을 확인할 수 있다. 따라서 마찬가지로 함의의 진리표와 표기 2.18에 의해</p>
+        <div class="math-display">$$\neg(P \wedge Q) \iff \neg P \vee \neg Q$$</div>
+        <p>가 성립한다.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P$ and $Q$ be sentences. Show that</p>
+        <div class="math-display">$$\neg(P \vee Q) \iff \neg P \wedge \neg Q$$</div>
+        <p>and</p>
+        <div class="math-display">$$\neg(P \wedge Q) \iff \neg P \vee \neg Q.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We consider the truth table for the first De Morgan's law $\neg(P \vee Q) \iff \neg P \wedge \neg Q$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $\neg(P \vee Q)$ and $\neg P \wedge \neg Q$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$P \vee Q$</th><th>$\neg(P \vee Q)$</th><th>$\neg P \wedge \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We see that $\neg(P \vee Q)$ and $\neg P \wedge \neg Q$ agree in every row. Therefore, by the truth table for the implication, both $\neg(P \vee Q) \implies \neg P \wedge \neg Q$ and $\neg P \wedge \neg Q \implies \neg(P \vee Q)$ are true, and by Notation 2.18,</p>
+        <div class="math-display">$$\neg(P \vee Q) \iff \neg P \wedge \neg Q$$</div>
+        <p>holds.</p>
+        <p>Next, we consider the truth table for the second De Morgan's law $\neg(P \wedge Q) \iff \neg P \vee \neg Q$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <caption>Truth table for $\neg(P \wedge Q)$ and $\neg P \vee \neg Q$</caption>
+            <thead>
+              <tr><th>$P$</th><th>$Q$</th><th>$\neg P$</th><th>$\neg Q$</th><th>$P \wedge Q$</th><th>$\neg(P \wedge Q)$</th><th>$\neg P \vee \neg Q$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td></tr>
+              <tr><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+              <tr><td><em>f</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td><td><em>f</em></td><td><em>t</em></td><td><em>t</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We see that $\neg(P \wedge Q)$ and $\neg P \vee \neg Q$ agree in every row. Therefore, similarly, by the truth table for the implication and Notation 2.18,</p>
+        <div class="math-display">$$\neg(P \wedge Q) \iff \neg P \vee \neg Q$$</div>
+        <p>holds.</p>
+        <div class="qed">&#9633;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.11) -->
+<div class="card note-card" id="note02-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>마지막으로 이 강의노트와 수학 전반에서 사용될 수학 기호들을 소개하며 이 절을 마친다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Finally we close this section by introducing math symbols which will be used in this lecture note and overall mathematics.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notation 2.22 -->
+<div class="card def-card" id="c2-22">
+  <div class="card-head">
+    <span class="def-num">NOTATION 2.22</span>
+    <span class="def-title">수학 기호 <em>Math symbols</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <ul>
+          <li>"iff"라는 약어를 "필요충분조건(if and only if)"을 나타내기 위해 사용한다. 즉 iff는 $\iff$를 의미한다.</li>
+          <li>$\wedge$는 "그리고(and)"를 나타내기 위해 사용한다.</li>
+          <li>$\vee$는 "또는(or)"을 나타내기 위해 사용한다.</li>
+          <li>모든 명제 $P$, $Q$, $R$, $\ldots$에 대해,
+            <div class="math-display">$$P \implies Q \implies R \implies \cdots$$</div>
+            는 $P \implies Q$, $Q \implies R$, 등등을 의미하는 것으로 이해해야 한다.</li>
+          <li>$\exists$는 "존재한다(there exists)"를 나타내기 위해 사용한다</li>
+          <li>$\forall$은 "모든 ~에 대해(for all)"를 의미한다.</li>
+          <li>$\ni$는 "~를 만족하는"으로 읽으며 성질을 서술하는 데 사용한다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <ul>
+          <li>We use the abbreviation “iff” to denote “if and only if”, i.e. iff means $\iff$ .</li>
+          <li>$\wedge$ is used for “and”.</li>
+          <li>$\vee$ is used for “or”.</li>
+          <li>For all sentences, $P$, $Q$, $R$, $\ldots$,
+            <div class="math-display">$$P \implies Q \implies R \implies \cdots$$</div>
+            should be understood to mean that $P \implies Q$, $Q \implies R$, and so on.</li>
+          <li>$\exists$ is used to denote “there exists”</li>
+          <li>$\forall$ means “for all”.</li>
+          <li>$\ni$ is read as “such that” and it is used to describe properties.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">집합론 홈</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
