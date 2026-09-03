@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1. 미분 (iii): 로피탈 법칙과 테일러 정리 (Differentiation (iii): L’Hospital’s Rule and Taylor’s Theorem) | 해석학2 학습 가이드</title>
+<meta name="description" content="해석학2 3단원 미분 (iii): 로피탈 법칙과 테일러 정리. 무한대 극한의 정의, 극한의 부등식 판정 보조정리, 로피탈 법칙과 그 증명, 고계 도함수, 평균값 정리의 일반화, 테일러 정리를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="해석학2, Analysis II, 미분, differentiation, 무한대 극한, infinite limit, 로피탈 법칙, L'Hospital's rule, 고계 도함수, higher-order derivative, n계 도함수, n-th derivative, 테일러 정리, Taylor's theorem, 평균값 정리의 일반화, generalization of the mean-value theorem, 코시 평균값 정리, Cauchy's mean-value theorem, 롤의 정리, Rolle's theorem, 다항식 근사, polynomial approximation, 우극한, right limit, 좌극한, left limit, 루딘, Rudin">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/analysis2/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. 미분 (iii): 로피탈 법칙과 테일러 정리 (Differentiation (iii): L’Hospital’s Rule and Taylor’s Theorem) — 해석학2 한·영 대조">
+<meta property="og:description" content="무한대 극한의 정의에서 로피탈 법칙, 고계 도함수, 평균값 정리의 일반화와 테일러 정리까지, 해석학2 미분 단원의 마지막 부분을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/analysis2/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1. 미분 (iii): 로피탈 법칙과 테일러 정리 (Differentiation (iii): L’Hospital’s Rule and Taylor’s Theorem) — 해석학2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "해석학2 미분 (iii) — 무한대 극한의 정의, 극한의 부등식 판정 보조정리, 로피탈 법칙, 고계 도함수, 평균값 정리의 일반화, 테일러 정리를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/analysis2/ch03.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/analysis2/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="../settheory/index.html">집합론</a>
+  <a href="index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html" class="active">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+</nav>
+
+<header>
+  <p class="subtitle">Analysis II — Unit 03</p>
+  <h1>1. 미분 (iii): 로피탈 법칙과 테일러 정리<span>Differentiation (iii): L’Hospital’s Rule and Taylor’s Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-61"><span class="toc-num">DEF 1.61</span> 무한대 극한 <em>Infinite limits</em></a></li>
+    <li><a href="#c1-62"><span class="toc-num">EX 1.62</span> 나머지 무한대 극한의 정의 <em>Defining the remaining infinite limits</em></a></li>
+    <li><a href="#c1-63"><span class="toc-num">EX 1.63</span> 무한 우극한의 동치 표현 <em>Equivalent formulations of an infinite right limit</em></a></li>
+    <li><a href="#c1-64"><span class="toc-num">REM 1.64</span> 비유계 구간에서의 무한대 극한 <em>Infinite limits on unbounded intervals</em></a></li>
+    <li><a href="#c1-65"><span class="toc-num">LEM 1.65</span> 한쪽 극한에 대한 부등식 판정법 <em>An inequality criterion for a one-sided limit</em></a></li>
+    <li><a href="#c1-66"><span class="toc-num">EX 1.66</span> 무한대 극한을 갖는 끝점 근방에서의 비교 <em>Comparison near an endpoint with an infinite limit</em></a></li>
+    <li><a href="#c1-67"><span class="toc-num">EX 1.67</span> 비유계 끝점에 대한 보조정리 1.65 <em>Lemma 1.65 for an unbounded endpoint</em></a></li>
+    <li><a href="#c1-68"><span class="toc-num">THM 1.68</span> 로피탈 법칙 <em>L’Hospital’s rule</em></a></li>
+    <li><a href="#c1-69"><span class="toc-num">EX 1.69</span> 정리 1.68 증명의 (ii)단계 완성 <em>Completing step (ii) in the proof of Theorem 1.68</em></a></li>
+    <li><a href="#c1-70"><span class="toc-num">DEF 1.70</span> 고계 도함수 <em>Higher-order derivatives</em></a></li>
+    <li><a href="#c1-71"><span class="toc-num">THM 1.71</span> 평균값 정리의 일반화 <em>A generalization of the mean-value theorem</em></a></li>
+    <li><a href="#c1-72"><span class="toc-num">COR 1.72</span> 1차 근사의 오차 한계 <em>An error bound for the first-order approximation</em></a></li>
+    <li><a href="#c1-73"><span class="toc-num">THM 1.73</span> 테일러 정리 <em>Taylor’s theorem</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  해석학2 카드 작성 규약 (ch01–ch07 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 c{섹션}-{번호} (예: c1-68),
+     소스 등장 순서 그대로 배치한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark                     → card rem-card  · REM n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름(예: L’Hospital’s rule)을 쓰고,
+     없으면 간결한 편집 제목을 새로 붙인다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  6) Exercise 카드는 소스에 풀이가 없다. 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+       ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원}-{순번} (예: note03-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 번호 붙은 display 수식은 \tag{섹션.번호} 형태로 번호를 유지한다.
+     수식 안의 여는 부등호는 항상 \lt 로 쓴다(HTML 파싱 위험 차단).
+     정렬 수식의 앰퍼샌드 뒤에는 반드시 공백을 둔다.
+  9) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것.
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§1 Differentiation (iii): L’Hospital’s Rule and Taylor’s Theorem · 미분 (iii): 로피탈 법칙과 테일러 정리</h2></div>
+
+<!-- ═══════════ PDF p.18 ═══════════ -->
+
+<!-- Definition 1.61 -->
+<div class="card def-card" id="c1-61">
+  <div class="card-head">
+    <span class="def-num">DEF 1.61</span>
+    <span class="def-title">무한대 극한 <em>Infinite limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $a \lt b$인 열린 구간 $(a, b)$에서 정의된 실숫값 함수라 하자. $c \in (a, b)$에 대하여, 다음과 같이 쓴다</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = \infty$$</div>
+        <p>또는 $x \to c$일 때 $f(x) \to \infty$라고 쓰는 것은, 임의의 $M > 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>$(c - \delta, c) \cup (c, c + \delta)$의 모든 $y$에 대하여. 한편, 다음과 같이 쓴다</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = -\infty$$</div>
+        <p>또는 $x \to c$일 때 $f(x) \to -\infty$라고 쓰는 것은, 임의의 $M \lt 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>$(c - \delta, c) \cup (c, c + \delta)$의 모든 $y$에 대하여. 마찬가지로, $c \in [a, b)$에 대하여</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+        <p>또는 $x \downarrow c$일 때 $f(x) \to \infty$라고 쓰는 것은, 임의의 $M > 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>$(c, c + \delta)$의 모든 $y$에 대하여.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on an open interval $(a, b)$ with $a \lt b$. For $c \in (a, b)$, we write</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = \infty$$</div>
+        <p>or $f(x) \to \infty$ as $x \to c$ iff for any $M > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>for all $y \in (c - \delta, c) \cup (c, c + \delta)$. On the other hand, we write</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = -\infty$$</div>
+        <p>or $f(x) \to -\infty$ as $x \to c$ iff for any $M \lt 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>for all $y \in (c - \delta, c) \cup (c, c + \delta)$. Similarly, for $c \in [a, b)$</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+        <p>or $f(x) \to \infty$ as $x \downarrow c$ iff for any $M > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>for all $y \in (c, c + \delta)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.62 -->
+<div class="card ex-card" id="c1-62">
+  <div class="card-head">
+    <span class="ex-num">EX 1.62</span>
+    <span class="ex-title">나머지 무한대 극한의 정의 <em>Defining the remaining infinite limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 정의하라.</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = -\infty, \quad \lim_{x \to c^-} f(x) = \infty,$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = -\infty.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$c \in [a, b)$에 대하여, 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = -\infty$$</div>
+        <p>또는 $x \downarrow c$일 때 $f(x) \to -\infty$라고 쓰는 것은, 임의의 $M \lt 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>$(c, c + \delta)$의 모든 $y$에 대하여.</p>
+        <p>마찬가지로, $c \in (a, b]$에 대하여, 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = \infty$$</div>
+        <p>또는 $x \uparrow c$일 때 $f(x) \to \infty$라고 쓰는 것은, 임의의 $M > 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>$(c - \delta, c)$의 모든 $y$에 대하여.</p>
+        <p>끝으로, $c \in (a, b]$에 대하여, 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = -\infty$$</div>
+        <p>또는 $x \uparrow c$일 때 $f(x) \to -\infty$라고 쓰는 것은, 임의의 $M \lt 0$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>$(c - \delta, c)$의 모든 $y$에 대하여.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Define</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = -\infty, \quad \lim_{x \to c^-} f(x) = \infty,$$</div>
+        <p>and</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = -\infty.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>For $c \in [a, b)$, we define</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = -\infty$$</div>
+        <p>or $f(x) \to -\infty$ as $x \downarrow c$ iff for any $M \lt 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>for all $y \in (c, c + \delta)$.</p>
+        <p>Similarly, for $c \in (a, b]$, we define</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = \infty$$</div>
+        <p>or $f(x) \to \infty$ as $x \uparrow c$ iff for any $M > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) > M$$</div>
+        <p>for all $y \in (c - \delta, c)$.</p>
+        <p>Finally, for $c \in (a, b]$, we define</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = -\infty$$</div>
+        <p>or $f(x) \to -\infty$ as $x \uparrow c$ iff for any $M \lt 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) \lt M$$</div>
+        <p>for all $y \in (c - \delta, c)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.63 -->
+<div class="card ex-card" id="c1-63">
+  <div class="card-head">
+    <span class="ex-num">EX 1.63</span>
+    <span class="ex-title">무한 우극한의 동치 표현 <em>Equivalent formulations of an infinite right limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $a \lt b$인 열린 구간 $(a, b)$에서 정의된 실숫값 함수라 하고 $c \in (a, b)$라 하자. 다음을 증명하라.</p>
+        <ul style="list-style:none;">
+          <li>(i)
+            <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+            <p>인 것은, 모든 $M \in \mathbb{R}$에 대하여 다음을 만족하는 $\delta > 0$이 존재하는 것과 동치이다</p>
+            <div class="math-display">$$f(y) > M$$</div>
+            <p>$(c, c + \delta)$의 모든 $y$에 대하여.</p>
+          </li>
+          <li>(ii)
+            <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+            <p>인 것은, 어떤 $M_0 \in \mathbb{R}$이 존재하여 모든 $M > M_0$에 대해 다음을 만족하는 $\delta > 0$을 찾을 수 있는 것과 동치이다</p>
+            <div class="math-display">$$f(y) > M$$</div>
+            <p>$(c, c + \delta)$의 모든 $y$에 대하여.</p>
+          </li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ul style="list-style:none;">
+          <li>(i) (⟸) 임의의 $M \in \mathbb{R}$에 대하여 조건이 성립한다고 가정하면, 특히 임의의 $M > 0$에 대해서도 성립하므로, 이는 정의 1.61의 우극한 조건과 정확히 일치한다. 따라서 $\lim_{x \to c^+} f(x) = \infty$이다.
+            <p>(⟹) $\lim_{x \to c^+} f(x) = \infty$라 가정하자. 정의 1.61을 $M' = 1 > 0$에 적용하면, 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+            <div class="math-display">$$f(y) > 1 \qquad \forall y \in (c, c + \delta).$$</div>
+            <p>이제 임의의 $M \in \mathbb{R}$을 택하자. $M \leq 0$이면 $M \leq 0 \lt 1$이므로 $f(y) > 1 > M$이 $(c, c+\delta)$의 모든 $y$에 대하여 성립하며, 즉 위의 $\delta$가 이 $M$에 대해서도 그대로 작동한다. $M > 0$이면, $\lim_{x \to c^+} f(x) = \infty$라는 가정을 정의 1.61에서 이 $M$에 직접 적용하여 $f(y) > M$을 만족하는 $\delta > 0$을 얻는다. 두 경우 모두 원하는 $\delta$가 존재하므로, 모든 $M \in \mathbb{R}$에 대하여 $f(y) > M$을 만족하는 $\delta > 0$이 존재한다. 이로써 (i)이 증명되었다.</p>
+          </li>
+          <li>(ii) (⟹) $\lim_{x \to c^+} f(x) = \infty$라 가정하고 $M_0 := 0$이라 하자. 그러면 임의의 $M > M_0 = 0$에 대하여, 정의 1.61에 의해 $f(y) > M$을 만족하는 $\delta > 0$이 존재한다.
+            <p>(⟸) 어떤 $M_0 \in \mathbb{R}$이 존재하여, 모든 $M > M_0$에 대해 $f(y) > M$을 만족하는 $\delta > 0$을 찾을 수 있다고 가정하자. 임의의 $M' > 0$이 주어졌다고 하자. $M := \max\{M', M_0 + 1\}$이라 하면 $M \geq M_0 + 1 > M_0$이므로, 가정에 의해 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+            <div class="math-display">$$f(y) > M \qquad \forall y \in (c, c+\delta).$$</div>
+            <p>$M \geq M'$이므로 $f(y) > M \geq M'$, 즉 $f(y) > M'$이 $(c, c+\delta)$의 모든 $y$에 대하여 성립한다. 따라서 이 $\delta$는 $M'$에 대한 정의 1.61의 조건을 만족시키므로 $\lim_{x \to c^+} f(x) = \infty$이다. 이로써 (ii)도 증명되었다.</p>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on an open interval $(a, b)$ with $a \lt b$ and $c \in (a, b)$. Prove</p>
+        <ul style="list-style:none;">
+          <li>(i)
+            <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+            <p>iff for all $M \in \mathbb{R}$, there exists a $\delta > 0$ such that</p>
+            <div class="math-display">$$f(y) > M$$</div>
+            <p>for all $y \in (c, c + \delta)$.</p>
+          </li>
+          <li>(ii)
+            <div class="math-display">$$\lim_{x \to c^+} f(x) = \infty$$</div>
+            <p>iff there exists $M_0 \in \mathbb{R}$ such that for all $M > M_0$, one can find a $\delta > 0$ such that</p>
+            <div class="math-display">$$f(y) > M$$</div>
+            <p>for all $y \in (c, c + \delta)$.</p>
+          </li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ul style="list-style:none;">
+          <li>(i) ($\Leftarrow$) Suppose the condition holds for all $M \in \mathbb{R}$; in particular it holds for all $M > 0$, which is exactly the condition for the right limit in Definition 1.61. Hence $\lim_{x \to c^+} f(x) = \infty$.
+            <p>($\Rightarrow$) Suppose $\lim_{x \to c^+} f(x) = \infty$. Applying Definition 1.61 with $M' = 1 > 0$, there exists a $\delta > 0$ such that</p>
+            <div class="math-display">$$f(y) > 1 \qquad \forall y \in (c, c + \delta).$$</div>
+            <p>Now let $M \in \mathbb{R}$ be arbitrary. If $M \leq 0$, then since $M \leq 0 \lt 1$, we have $f(y) > 1 > M$ for all $y \in (c, c+\delta)$, that is, the $\delta$ above works for this $M$ as well. If $M > 0$, then applying the assumption $\lim_{x \to c^+} f(x) = \infty$ directly to this $M$ in Definition 1.61, we obtain a $\delta > 0$ such that $f(y) > M$. In either case, the desired $\delta$ exists, so for all $M \in \mathbb{R}$, there exists a $\delta > 0$ such that $f(y) > M$. This proves (i).</p>
+          </li>
+          <li>(ii) ($\Rightarrow$) Suppose $\lim_{x \to c^+} f(x) = \infty$ and let $M_0 := 0$. Then for any $M > M_0 = 0$, by Definition 1.61 there exists a $\delta > 0$ such that $f(y) > M$.
+            <p>($\Leftarrow$) Suppose there exists $M_0 \in \mathbb{R}$ such that for all $M > M_0$, one can find a $\delta > 0$ such that $f(y) > M$. Let $M' > 0$ be given. Let $M := \max\{M', M_0 + 1\}$. Then $M \geq M_0 + 1 > M_0$, so by the assumption there exists a $\delta > 0$ such that</p>
+            <div class="math-display">$$f(y) > M \qquad \forall y \in (c, c+\delta).$$</div>
+            <p>Since $M \geq M'$, we have $f(y) > M \geq M'$, that is, $f(y) > M'$ for all $y \in (c, c+\delta)$. Hence this $\delta$ satisfies the condition of Definition 1.61 for $M'$, so $\lim_{x \to c^+} f(x) = \infty$. This proves (ii).</p>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 1.64 -->
+<div class="card rem-card" id="c1-64">
+  <div class="card-head">
+    <span class="rem-num">REM 1.64</span>
+    <span class="rem-title">비유계 구간에서의 무한대 극한 <em>Infinite limits on unbounded intervals</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $-\infty \leq a \lt b \leq \infty$인 열린 구간 $(a, b)$ 위의 실숫값 함수라 하자. $a = -\infty$이거나 $b = \infty$인 경우에도 모든 극한을 같은 방식으로 정의할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on an open interval $(a, b)$, where $-\infty \leq a \lt b \leq \infty$. We can define all limits in a similar way even though $a = -\infty$ or $b = \infty$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.19 ═══════════ -->
+
+<!-- Lemma 1.65 -->
+<div class="card thm-card" id="c1-65">
+  <div class="card-head">
+    <span class="thm-num">LEM 1.65</span>
+    <span class="thm-title">한쪽 극한에 대한 부등식 판정법 <em>An inequality criterion for a one-sided limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $-\infty \leq a \lt b \leq \infty$인 열린 구간 $(a, b)$에서 정의된 실숫값 함수라 하고 $A \in \mathbb{R}$라 하자. 그러면</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = A$$</div>
+        <p>인 것은, $q_1 \lt A \lt q_2$를 만족하는 모든 실수 $q_1$, $q_2$에 대하여 다음을 만족하는 $c \in (a, b)$가 존재하는 것과 동치이다</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2.$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$-\infty \lt a$인 경우만 다루고 $a = -\infty$인 경우는 연습문제로 남겨둔다. 먼저 "$\Leftarrow$ 방향"을 증명한다. $\varepsilon > 0$이 주어졌다고 하자. 다음을 만족하도록 $q_1$과 $q_2$를 택한다.</p>
+        <div class="math-display">$$q_1 \in (A - \varepsilon, A) \tag{1.16}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$q_2 \in (A, A + \varepsilon). \tag{1.17}$$</div>
+        <p>그러면 가정에 의해 다음을 만족하는 $c \in (a, b)$가 존재한다.</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여. 따라서</p>
+        <div class="math-display">$$f(y) - A \lt q_2 - A \tag{1.18}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$A - f(y) \lt A - q_1 \tag{1.19}$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여. (1.18), (1.19), (1.16), (1.17)을 적용하면</p>
+        <div class="math-display">$$|f(y) - A| \lt \max\{q_2 - A, A - q_1\} \lt \varepsilon$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여. 마지막으로 $\delta = c - a$로 두면</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>$(a, a + \delta)$의 모든 $y$에 대하여. 다음으로 "$\Rightarrow$ 방향"을 증명한다. $q_1 \lt A \lt q_2$라 하자. 다음을 정의한다.</p>
+        <div class="math-display">$$\varepsilon = \min\{A - q_1, q_2 - A\}.$$</div>
+        <p>그러면 자명하게 $\varepsilon > 0$이고, 이 $\varepsilon$에 대하여 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>$(a, a + \delta)$의 모든 $y$에 대하여. $c \in (a, a + \delta) \cap (a, b)$를 택하자. 그러면</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여. 이 부등식으로부터</p>
+        <div class="math-display">$$f(y) = f(y) - A + A \leq |f(y) - A| + A \lt \varepsilon + A \leq q_2 - A + A = q_2$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$f(y) = f(y) - A + A > -\varepsilon + A \geq -(A - q_1) + A = q_1$$</div>
+        <p>$(a, c)$의 모든 $y$에 대하여. 이로써 보조정리가 증명되었다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on an open interval $(a, b)$ with $-\infty \leq a \lt b \leq \infty$ and $A \in \mathbb{R}$. Then</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = A$$</div>
+        <p>iff for all real numbers $q_1$ and $q_2$ such that $q_1 \lt A \lt q_2$, there exist exists a $c \in (a, b)$ such that</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2.$$</div>
+        <p>for all $y \in (a, c)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We only consider the case $-\infty \lt a$ and leave the case $a = -\infty$ as an exercise. First we prove “the if part ($\Leftarrow$)”. Let $\varepsilon > 0$ be given. Choose $q_1$ and $q_2$ so that</p>
+        <div class="math-display">$$q_1 \in (A - \varepsilon, A) \tag{1.16}$$</div>
+        <p>and</p>
+        <div class="math-display">$$q_2 \in (A, A + \varepsilon). \tag{1.17}$$</div>
+        <p>Then by the assumption, there exists a $c \in (a, b)$ such that</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2$$</div>
+        <p>for all $y \in (a, c)$. Thus</p>
+        <div class="math-display">$$f(y) - A \lt q_2 - A \tag{1.18}$$</div>
+        <p>and</p>
+        <div class="math-display">$$A - f(y) \lt A - q_1 \tag{1.19}$$</div>
+        <p>for all $y \in (a, c)$. Applying (1.18), (1.19), (1.16), and (1.17), we have</p>
+        <div class="math-display">$$|f(y) - A| \lt \max\{q_2 - A, A - q_1\} \lt \varepsilon$$</div>
+        <p>for all $y \in (a, c)$. Finally taking $\delta = c - a$, we have</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>for all $y \in (a, a + \delta)$. Next we prove “the only if part ($\Rightarrow$)”. Let $q_1 \lt A \lt q_2$. Define</p>
+        <div class="math-display">$$\varepsilon = \min\{A - q_1, q_2 - A\}.$$</div>
+        <p>Then obviously $\varepsilon > 0$ and for this $\varepsilon$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>for all $y \in (a, a + \delta)$. Choose a $c \in (a, a + \delta) \cap (a, b)$. Then</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon$$</div>
+        <p>for all $y \in (a, c)$. This inequality implies</p>
+        <div class="math-display">$$f(y) = f(y) - A + A \leq |f(y) - A| + A \lt \varepsilon + A \leq q_2 - A + A = q_2$$</div>
+        <p>and</p>
+        <div class="math-display">$$f(y) = f(y) - A + A > -\varepsilon + A \geq -(A - q_1) + A = q_1$$</div>
+        <p>for all $y \in (a, c)$. The lemma is proved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.20 ═══════════ -->
+
+<!-- Exercise 1.66 -->
+<div class="card ex-card" id="c1-66">
+  <div class="card-head">
+    <span class="ex-num">EX 1.66</span>
+    <span class="ex-title">무한대 극한을 갖는 끝점 근방에서의 비교 <em>Comparison near an endpoint with an infinite limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 열린 구간 $(a, b)$ 위의 실숫값 함수라 하자. 다음을 가정하자.</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = \infty.$$</div>
+        <p>임의의 $x \in (a, b)$에 대하여 다음을 만족하는 $c \in (a, b)$가 존재함을 보여라.</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, c).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$x \in (a, b)$를 임의로 택하자. $\lim_{t \to a^+} f(t) = \infty$이므로, 연습문제 1.63(i)를 왼쪽 끝점 $a$에 적용하면, 임의의 $M \in \mathbb{R}$에 대하여 다음을 만족하는 $\delta > 0$이 존재한다 (연습문제 1.63은 그 점이 $(a,b)$에 있는 경우로 서술되었으나, 그 증명은 정의 1.61의 우극한 조건만을 사용하며 정의 1.61 자체가 $c \in [a,b)$, 즉 끝점 $a$까지 포함하므로 (i)의 동치관계는 끝점 $a$에서도 그대로 성립한다).</p>
+        <div class="math-display">$$f(y) > M \qquad \forall y \in (a, a + \delta).$$</div>
+        <p>$M := f(x)$로 두면, 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, a + \delta).$$</div>
+        <p>필요하면 $\delta$를 더 작게 잡아 $a + \delta \lt b$가 되도록 할 수 있다 (이렇게 $\delta$를 줄여도 $(a, a+\delta)$가 더 작은 구간으로 바뀔 뿐이므로 위 부등식은 그대로 성립한다). $c := a + \delta$라 하면 $c \in (a, b)$이고</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, c)$$</div>
+        <p>가 성립한다. $x \in (a,b)$가 임의였으므로 증명이 완성되었다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function on an open interval $(a, b)$. Suppose that</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = \infty.$$</div>
+        <p>Show that for any $x \in (a, b)$, there exists $c \in (a, b)$ such that</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, c).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $x \in (a, b)$ be arbitrary. Since $\lim_{t \to a^+} f(t) = \infty$, applying Exercise 1.63(i) at the left endpoint $a$, for any $M \in \mathbb{R}$ there exists a $\delta > 0$ such that (Exercise 1.63 is stated for a point of $(a,b)$, but its proof uses only the right-limit condition of Definition 1.61, and Definition 1.61 itself covers $c \in [a,b)$, i.e. includes the endpoint $a$, so the equivalence in (i) holds equally well at the endpoint $a$).</p>
+        <div class="math-display">$$f(y) > M \qquad \forall y \in (a, a + \delta).$$</div>
+        <p>Take $M := f(x)$. Then there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, a + \delta).$$</div>
+        <p>If necessary, we may shrink $\delta$ so that $a + \delta \lt b$ (shrinking $\delta$ only makes $(a, a+\delta)$ a smaller interval, so the above inequality still holds). Let $c := a + \delta$. Then $c \in (a, b)$ and</p>
+        <div class="math-display">$$f(y) > f(x) \qquad \forall y \in (a, c)$$</div>
+        <p>holds. Since $x \in (a,b)$ was arbitrary, the proof is complete.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.67 -->
+<div class="card ex-card" id="c1-67">
+  <div class="card-head">
+    <span class="ex-num">EX 1.67</span>
+    <span class="ex-title">비유계 끝점에 대한 보조정리 1.65 <em>Lemma 1.65 for an unbounded endpoint</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a = -\infty$일 때 보조정리 1.65를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$a = -\infty$인 경우를 다룬다. 주의 1.64에 의해 $-\infty$의 근방은 $(-\infty, c)$ ($c \in \mathbb{R}$) 꼴로 주어지므로, 정의 1.6(ii)의 패턴을 그대로 따라 $A \in \mathbb{R}$에 대하여</p>
+        <div class="math-display">$$\lim_{t \to -\infty} f(t) = A$$</div>
+        <p>라는 것은, 임의의 $\varepsilon > 0$에 대하여 다음을 만족하는 $c \in \mathbb{R}$이 존재하는 것과 동치로 정의된다.</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (-\infty, c).$$</div>
+        <p>이 정의 아래, 보조정리 1.65의 증명을 $(a, a + \delta)$를 $(-\infty, c)$로 바꾸고 "$\delta = c - a$로 둔다"는 과정을 생략한 채 그대로 따라간다.</p>
+        <p>먼저 "$\Leftarrow$ 방향"을 증명한다. $\varepsilon > 0$이 주어졌다고 하자. 다음을 만족하도록 $q_1$과 $q_2$를 택한다.</p>
+        <div class="math-display">$$q_1 \in (A - \varepsilon, A) \quad \text{그리고} \quad q_2 \in (A, A + \varepsilon).$$</div>
+        <p>그러면 가정에 의해 다음을 만족하는 $c \in (a, b) = (-\infty, b)$가 존재한다.</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2 \qquad \forall y \in (a, c) = (-\infty, c).$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f(y) - A \lt q_2 - A \quad \text{그리고} \quad A - f(y) \lt A - q_1 \qquad \forall y \in (-\infty, c).$$</div>
+        <p>이를 종합하면</p>
+        <div class="math-display">$$|f(y) - A| \lt \max\{q_2 - A, A - q_1\} \lt \varepsilon \qquad \forall y \in (-\infty, c).$$</div>
+        <p>$(-\infty, c)$ 위에서 이미 원하는 형태를 얻었으므로 ($a$가 유한한 경우처럼 $\delta = c - a$로 바꾸는 과정이 필요 없다), $|f(y) - A| \lt \varepsilon$이 $(-\infty, c)$의 모든 $y$에 대하여 성립한다.</p>
+        <p>다음으로 "$\Rightarrow$ 방향"을 증명한다. $q_1 \lt A \lt q_2$라 하자. 다음을 정의한다.</p>
+        <div class="math-display">$$\varepsilon = \min\{A - q_1, q_2 - A\}.$$</div>
+        <p>그러면 자명하게 $\varepsilon > 0$이고, 이 $\varepsilon$에 대하여 다음을 만족하는 $c_0 \in \mathbb{R}$이 존재한다.</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (-\infty, c_0).$$</div>
+        <p>$c \in (-\infty, c_0) \cap (a, b)$를 택하자 (이는 $(-\infty, c_0)$와 $(a, b) = (-\infty, b)$가 모두 $-\infty$ 방향으로 뻗은 열린 구간이므로 공집합이 아니다). 그러면</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (a, c) = (-\infty, c).$$</div>
+        <p>이 부등식으로부터</p>
+        <div class="math-display">$$f(y) = f(y) - A + A \leq |f(y) - A| + A \lt \varepsilon + A \leq q_2 - A + A = q_2$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$f(y) = f(y) - A + A > -\varepsilon + A \geq -(A - q_1) + A = q_1$$</div>
+        <p>이 $(-\infty, c)$의 모든 $y$에 대하여 성립한다. 이로써 $a = -\infty$인 경우의 보조정리가 증명되었다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove lemma 1.65 when $a = -\infty$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We consider the case $a = -\infty$. By Remark 1.64, a neighborhood of $-\infty$ has the form $(-\infty, c)$ for $c \in \mathbb{R}$, so, following the pattern of Definition 1.6(ii), for $A \in \mathbb{R}$ we define</p>
+        <div class="math-display">$$\lim_{t \to -\infty} f(t) = A$$</div>
+        <p>to mean that for any $\varepsilon > 0$, there exists $c \in \mathbb{R}$ such that</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (-\infty, c).$$</div>
+        <p>Under this definition, we follow the proof of Lemma 1.65 verbatim, replacing $(a, a+\delta)$ by $(-\infty, c)$ and omitting the step of "taking $\delta = c - a$".</p>
+        <p>First we prove "the if part ($\Leftarrow$)". Let $\varepsilon > 0$ be given. Choose $q_1$ and $q_2$ so that</p>
+        <div class="math-display">$$q_1 \in (A - \varepsilon, A) \quad \text{and} \quad q_2 \in (A, A + \varepsilon).$$</div>
+        <p>Then by the assumption, there exists a $c \in (a, b) = (-\infty, b)$ such that</p>
+        <div class="math-display">$$q_1 \lt f(y) \lt q_2 \qquad \forall y \in (a, c) = (-\infty, c).$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$f(y) - A \lt q_2 - A \quad \text{and} \quad A - f(y) \lt A - q_1 \qquad \forall y \in (-\infty, c).$$</div>
+        <p>Combining these, we have</p>
+        <div class="math-display">$$|f(y) - A| \lt \max\{q_2 - A, A - q_1\} \lt \varepsilon \qquad \forall y \in (-\infty, c).$$</div>
+        <p>Since we already obtained the desired form on $(-\infty, c)$ (there is no need for the step of converting to $\delta = c - a$ as in the finite-$a$ case), $|f(y) - A| \lt \varepsilon$ holds for all $y \in (-\infty, c)$.</p>
+        <p>Next we prove "the only if part ($\Rightarrow$)". Let $q_1 \lt A \lt q_2$. Define</p>
+        <div class="math-display">$$\varepsilon = \min\{A - q_1, q_2 - A\}.$$</div>
+        <p>Then obviously $\varepsilon > 0$ and for this $\varepsilon$, there exists $c_0 \in \mathbb{R}$ such that</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (-\infty, c_0).$$</div>
+        <p>Choose $c \in (-\infty, c_0) \cap (a, b)$ (this is nonempty since both $(-\infty, c_0)$ and $(a, b) = (-\infty, b)$ are open intervals extending toward $-\infty$). Then</p>
+        <div class="math-display">$$|f(y) - A| \lt \varepsilon \qquad \forall y \in (a, c) = (-\infty, c).$$</div>
+        <p>This inequality implies</p>
+        <div class="math-display">$$f(y) = f(y) - A + A \leq |f(y) - A| + A \lt \varepsilon + A \leq q_2 - A + A = q_2$$</div>
+        <p>and</p>
+        <div class="math-display">$$f(y) = f(y) - A + A > -\varepsilon + A \geq -(A - q_1) + A = q_1$$</div>
+        <p>for all $y \in (-\infty, c)$. This proves the lemma for the case $a = -\infty$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.68 -->
+<div class="card thm-card" id="c1-68">
+  <div class="card-head">
+    <span class="thm-num">THM 1.68</span>
+    <span class="thm-title">로피탈 법칙 <em>L’Hospital’s rule</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$와 $g$를 다음을 만족하는 $(a, b)$ 위에서 미분가능한 실숫값 함수라 하자.</p>
+        <div class="math-display">$$-\infty \leq a \lt b \leq \infty.$$</div>
+        <p>모든 $x \in (a, b)$에 대하여 $g'(x) \neq 0$이고, 어떤 $A \in [-\infty, \infty] := \mathbb{R} \cup \{-\infty, \infty\}$에 대하여</p>
+        <div class="math-display">$$\lim_{t \to a^+} \frac{f'(t)}{g'(t)} = A, \tag{1.20}$$</div>
+        <p>가 성립한다고 가정하자. 추가로 다음을 가정하자.</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = \lim_{t \to a^+} g(t) = 0 \tag{1.21}$$</div>
+        <p>또는</p>
+        <div class="math-display">$$\lim_{t \to a^+} g(t) = \infty. \tag{1.22}$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = A.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>증명을 여러 단계로 나눈다.</p>
+        <ul style="list-style:none;">
+          <li>(i) $-\infty \leq A \lt \infty$라 하자. 이 단계에서는 $A \lt q_2$인 임의의 실수 $q_2$에 대하여 다음을 만족하는 $c \in (a, b)$가 존재함을 증명한다.
+            <div class="math-display">$$\frac{f(y)}{g(y)} \lt q_2 \qquad \forall y \in (a, c).$$</div>
+            <p>$A \lt q_2$라 하고 $r \in (A, q_2)$를 택하자. (1.20)에 의해 다음을 만족하는 $c_0 \in (a, b)$가 존재한다.</p>
+            <div class="math-display">$$\frac{f'(t)}{g'(t)} \lt r \qquad \forall t \in (a, c_0).$$</div>
+            <p>$a \lt x \lt y \lt c_0$라 하자. 그러면 코시 평균값 정리에 의해 다음을 만족하는 $t_0 \in (a, c_0)$가 존재한다.</p>
+            <div class="math-display">$$\frac{f(x) - f(y)}{g(x) - g(y)} = \frac{f'(t_0)}{g'(t_0)} \lt r. \tag{1.23}$$</div>
+            <p>(1.21)이 성립한다고 하자. 그러면 (1.23)에서 $x \downarrow a$로 두면</p>
+            <div class="math-display">$$\frac{f(y)}{g(y)} \leq r \lt q_2 \qquad \forall y \in (a, c_0).$$</div>
+            <p>다음으로 (1.22)가 성립한다고 하자. (1.23)에서 $y$를 고정하고 $x$를 $a$에 충분히 가깝게 잡아</p>
+            <div class="math-display">$$g(x) > 0 \quad \text{and} \quad g(x) > g(y), \tag{1.24}$$</div>
+            <p>즉, (1.24)가 모든 $x \in (a, c_1)$에 대해 성립하도록 하는 $c_1 \in (a, y)$가 존재한다. 이러한 $x$에 대하여 (1.23)의 양변에 $\frac{g(x) - g(y)}{g(x)}$를 곱하면</p>
+            <div class="math-display">$$\frac{f(x) - f(y)}{g(x)} \lt r \frac{g(x) - g(y)}{g(x)}.$$</div>
+            <p>이고, 따라서</p>
+            <div class="math-display">$$\frac{f(x)}{g(x)} \lt r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)}.$$</div>
+            <p>(1.22)가 성립하므로, $x$가 $a$에 충분히 가까우면</p>
+            <div class="math-display">$$-r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} \lt q_2 - r,$$</div>
+            <p>즉, 다음이 모든 $x \in (a, c_2)$에 대해 성립하도록 하는</p>
+            <div class="math-display">$$\frac{f(x)}{g(x)} \lt r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} \lt q_2 \tag{1.25}$$</div>
+            <p>$c_2 \in (a, c_1) \subset (a, b)$가 존재한다.</p>
+          </li>
+          <li>(ii) $-\infty \lt A \leq \infty$라 하자. 이 단계에서는 $q_1 \lt A$인 임의의 실수 $q_1$에 대하여 다음을 만족하는 $c \in (a, b)$가 존재함을 증명한다.
+            <div class="math-display">$$q_1 \lt \frac{f(y)}{g(y)} \qquad \forall y \in (a, c).$$</div>
+            <p>이 단계는 (i)의 증명을 따라 쉽게 증명할 수 있으므로 자세한 내용은 생략한다.</p>
+          </li>
+          <li>(iii) 이 단계에서 증명을 완성한다. $A = -\infty$이면 (i)에 의해
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = -\infty = A.$$</div>
+            <p>$A = \infty$이면 (ii)에 의해</p>
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = \infty = A.$$</div>
+            <p>$A \in \mathbb{R}$이면 (i), (ii), 그리고 보조정리 1.65에 의해</p>
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = A.$$</div>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ and $g$ be real-valued differentiable functions on $(a, b)$, where</p>
+        <div class="math-display">$$-\infty \leq a \lt b \leq \infty.$$</div>
+        <p>Assume that $g'(x) \neq 0$ for all $x \in (a, b)$ and</p>
+        <div class="math-display">$$\lim_{t \to a^+} \frac{f'(t)}{g'(t)} = A, \tag{1.20}$$</div>
+        <p>for some $A \in [-\infty, \infty] := \mathbb{R} \cup \{-\infty, \infty\}$. Additionally, suppose that</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = \lim_{t \to a^+} g(t) = 0 \tag{1.21}$$</div>
+        <p>or</p>
+        <div class="math-display">$$\lim_{t \to a^+} g(t) = \infty. \tag{1.22}$$</div>
+        <p>Then</p>
+        <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = A.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We divide the proof into several steps.</p>
+        <ul style="list-style:none;">
+          <li>(i) Assume $-\infty \leq A \lt \infty$. In this step, we prove for any real number $q_2$ such that $A \lt q_2$, there exists a $c \in (a, b)$ such that
+            <div class="math-display">$$\frac{f(y)}{g(y)} \lt q_2 \qquad \forall y \in (a, c).$$</div>
+            <p>Let $A \lt q_2$ and choose $r \in (A, q_2)$. By (1.20), there exists a $c_0 \in (a, b)$ such that</p>
+            <div class="math-display">$$\frac{f'(t)}{g'(t)} \lt r \qquad \forall t \in (a, c_0).$$</div>
+            <p>Let $a \lt x \lt y \lt c_0$. Then by Cauchy’s mean-value theorem, there exists a $t_0 \in (a, c_0)$ such that</p>
+            <div class="math-display">$$\frac{f(x) - f(y)}{g(x) - g(y)} = \frac{f'(t_0)}{g'(t_0)} \lt r. \tag{1.23}$$</div>
+            <p>Suppose (1.21) holds. Then taking $x \downarrow a$ in (1.23), we have</p>
+            <div class="math-display">$$\frac{f(y)}{g(y)} \leq r \lt q_2 \qquad \forall y \in (a, c_0).$$</div>
+            <p>Next suppose (1.22) holds. Fix $y$ in (1.23) and take $x$ close enough to $a$ so that</p>
+            <div class="math-display">$$g(x) > 0 \quad \text{and} \quad g(x) > g(y), \tag{1.24}$$</div>
+            <p>that is, there exists $c_1 \in (a, y)$ such that (1.24) holds for all $x \in (a, c_1)$. For these $x$, multiplying (1.23) by $\frac{g(x) - g(y)}{g(x)}$, we have</p>
+            <div class="math-display">$$\frac{f(x) - f(y)}{g(x)} \lt r \frac{g(x) - g(y)}{g(x)}.$$</div>
+            <p>and thus</p>
+            <div class="math-display">$$\frac{f(x)}{g(x)} \lt r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)}.$$</div>
+            <p>Since (1.22) holds, if $x$ is close enough to $a$, then</p>
+            <div class="math-display">$$-r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} \lt q_2 - r,$$</div>
+            <p>that is, there exist $c_2 \in (a, c_1) \subset (a, b)$ such that</p>
+            <div class="math-display">$$\frac{f(x)}{g(x)} \lt r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} \lt q_2 \tag{1.25}$$</div>
+            <p>for all $x \in (a, c_2)$.</p>
+          </li>
+          <li>(ii) Assume $-\infty \lt A \leq \infty$. In this step, we prove for any real number $q_1$ such that $q_1 \lt A$, there exists a $c \in (a, b)$ such that
+            <div class="math-display">$$q_1 \lt \frac{f(y)}{g(y)} \qquad \forall y \in (a, c).$$</div>
+            <p>One can easily prove this step following the proof of (i) and thus we skip the details.</p>
+          </li>
+          <li>(iii) We complete the proof in this step. If $A = -\infty$, then by (i)
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = -\infty = A.$$</div>
+            <p>If $A = \infty$, then by (ii)</p>
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = \infty = A.$$</div>
+            <p>If $A \in \mathbb{R}$, then by (i), (ii), and Lemma 1.65,</p>
+            <div class="math-display">$$\lim_{t \to a^+} \frac{f(t)}{g(t)} = A.$$</div>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.21 ═══════════ -->
+
+<!-- Exercise 1.69 -->
+<div class="card ex-card" id="c1-69">
+  <div class="card-head">
+    <span class="ex-num">EX 1.69</span>
+    <span class="ex-title">정리 1.68 증명의 (ii)단계 완성 <em>Completing step (ii) in the proof of Theorem 1.68</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.68의 증명에서 (ii)를 완전히 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$-\infty \lt A \leq \infty$라 하자. $q_1 \lt A$인 임의의 실수 $q_1$에 대하여, 다음을 만족하는 $c \in (a, b)$가 존재함을 보인다.</p>
+        <div class="math-display">$$q_1 \lt \frac{f(y)}{g(y)} \qquad \forall y \in (a, c).$$</div>
+        <p>$q_1 \lt A$라 하고 $r \in (q_1, A)$를 택하자. (1.20)에 의해 다음을 만족하는 $c_0 \in (a, b)$가 존재한다.</p>
+        <div class="math-display">$$\frac{f'(t)}{g'(t)} > r \qquad \forall t \in (a, c_0).$$</div>
+        <p>$a \lt x \lt y \lt c_0$라 하자. 그러면 코시 평균값 정리에 의해 다음을 만족하는 $t_0 \in (a, c_0)$가 존재한다.</p>
+        <div class="math-display">$$\frac{f(x) - f(y)}{g(x) - g(y)} = \frac{f'(t_0)}{g'(t_0)} > r.$$</div>
+        <p>(1.21)이 성립한다고 하자. 그러면 위 부등식에서 $x \downarrow a$로 두면</p>
+        <div class="math-display">$$\frac{f(y)}{g(y)} \geq r > q_1 \qquad \forall y \in (a, c_0).$$</div>
+        <p>다음으로 (1.22)가 성립한다고 하자. $y$를 고정하고 $x$를 $a$에 충분히 가깝게 잡아</p>
+        <div class="math-display">$$g(x) > 0 \quad \text{and} \quad g(x) > g(y),$$</div>
+        <p>즉, 위 조건이 모든 $x \in (a, c_1)$에 대해 성립하도록 하는 $c_1 \in (a, y)$가 존재한다. 이러한 $x$에 대하여, $\frac{g(x) - g(y)}{g(x)} > 0$이므로 위 부등식의 양변에 $\frac{g(x) - g(y)}{g(x)}$를 곱하면 (부등호 방향이 유지되어)</p>
+        <div class="math-display">$$\frac{f(x) - f(y)}{g(x)} > r \frac{g(x) - g(y)}{g(x)}.$$</div>
+        <p>이고, 따라서</p>
+        <div class="math-display">$$\frac{f(x)}{g(x)} > r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)}.$$</div>
+        <p>(1.22)가 성립하므로, $x$가 $a$에 충분히 가까우면</p>
+        <div class="math-display">$$-r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} > q_1 - r,$$</div>
+        <p>즉, 다음이 모든 $x \in (a, c_2)$에 대해 성립하도록 하는</p>
+        <div class="math-display">$$\frac{f(x)}{g(x)} > r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} > q_1$$</div>
+        <p>$c_2 \in (a, c_1) \subset (a, b)$가 존재한다.</p>
+        <p>두 경우 모두에서 원하는 $c$ ((1.21)의 경우 $c = c_0$, (1.22)의 경우 $c = c_2$)가 존재하므로, (ii)단계의 증명이 완성된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Completely prove (ii) in the proof of Theorem 1.68.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Assume $-\infty \lt A \leq \infty$. For any real number $q_1$ such that $q_1 \lt A$, we show that there exists a $c \in (a, b)$ such that</p>
+        <div class="math-display">$$q_1 \lt \frac{f(y)}{g(y)} \qquad \forall y \in (a, c).$$</div>
+        <p>Let $q_1 \lt A$ and choose $r \in (q_1, A)$. By (1.20), there exists a $c_0 \in (a, b)$ such that</p>
+        <div class="math-display">$$\frac{f'(t)}{g'(t)} > r \qquad \forall t \in (a, c_0).$$</div>
+        <p>Let $a \lt x \lt y \lt c_0$. Then by Cauchy's mean-value theorem, there exists a $t_0 \in (a, c_0)$ such that</p>
+        <div class="math-display">$$\frac{f(x) - f(y)}{g(x) - g(y)} = \frac{f'(t_0)}{g'(t_0)} > r.$$</div>
+        <p>Suppose (1.21) holds. Then taking $x \downarrow a$ in the above inequality, we have</p>
+        <div class="math-display">$$\frac{f(y)}{g(y)} \geq r > q_1 \qquad \forall y \in (a, c_0).$$</div>
+        <p>Next suppose (1.22) holds. Fix $y$ and take $x$ close enough to $a$ so that</p>
+        <div class="math-display">$$g(x) > 0 \quad \text{and} \quad g(x) > g(y),$$</div>
+        <p>that is, there exists $c_1 \in (a, y)$ such that this holds for all $x \in (a, c_1)$. For these $x$, since $\frac{g(x) - g(y)}{g(x)} > 0$, multiplying the above inequality by $\frac{g(x) - g(y)}{g(x)}$ (which preserves the direction of the inequality), we have</p>
+        <div class="math-display">$$\frac{f(x) - f(y)}{g(x)} > r \frac{g(x) - g(y)}{g(x)}.$$</div>
+        <p>and thus</p>
+        <div class="math-display">$$\frac{f(x)}{g(x)} > r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)}.$$</div>
+        <p>Since (1.22) holds, if $x$ is close enough to $a$, then</p>
+        <div class="math-display">$$-r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} > q_1 - r,$$</div>
+        <p>that is, there exists $c_2 \in (a, c_1) \subset (a, b)$ such that</p>
+        <div class="math-display">$$\frac{f(x)}{g(x)} > r - r \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)} > q_1$$</div>
+        <p>for all $x \in (a, c_2)$.</p>
+        <p>In either case, the desired $c$ exists ($c = c_0$ in the case of (1.21), $c = c_2$ in the case of (1.22)), which completes the proof of step (ii).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.70 -->
+<div class="card def-card" id="c1-70">
+  <div class="card-head">
+    <span class="def-num">DEF 1.70</span>
+    <span class="def-title">고계 도함수 <em>Higher-order derivatives</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위에서 미분가능한 실숫값 함수이고 그 도함수 $f'$ 또한 $[a, b]$ 위에서 미분가능하다고 하자. 그러면 $f'$의 도함수를 $f''$ 또는 $f^{(2)}$로 표기한다. $f''$이 다시 미분가능하면, $f^{(2)}$의 도함수를 $f^{(3)}$으로 표기한다. 귀납적으로, 모든 $n \geq 3$에 대하여 $f^{(n-1)}$이 미분가능하면 $f^{(n)}$은 $f^{(n-1)}$의 도함수를 나타낸다. $f^{(n)}$을 $f$의 $n$계 도함수라 하고, $f^{(n)}(t)$가 존재하면 $f$가 $t$에서 $n$번 미분가능하다고 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Assume that $f$ is a real-valued differentiable function on $[a, b]$ and its derivative $f'$ is also differentiable on $[a, b]$. Then we denote the derivative of $f'$ by $f''$ or $f^{(2)}$. If $f''$ is differentiable again, then the derivative of $f^{(2)}$ is denoted by $f^{(3)}$. Inductively, for all $n \geq 3$, $f^{(n)}$ denotes the derivative of $f^{(n-1)}$ if $f^{(n-1)}$ is differentiable. $f^{(n)}$ is called $n$-th derivative of $f$ and we say that $f$ is $n$-times differentiable at $t$ if $f^{(n)}(t)$ exists at $t$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.22 ═══════════ -->
+
+<!-- Theorem 1.71 -->
+<div class="card thm-card" id="c1-71">
+  <div class="card-head">
+    <span class="thm-num">THM 1.71</span>
+    <span class="thm-title">평균값 정리의 일반화 <em>A generalization of the mean-value theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $[a, b]$ 위의 실숫값 함수라 하자. 어떤 $n \in \mathbb{N}$에 대하여 $f^{(n-1)}$이 $[a, b]$ 위에서 연속이고 모든 $t \in (a, b)$에서 $f^{(n)}(t)$가 존재한다고 가정하자. 여기서 $f^{(0)} := f$, $f^{(1)} := f'$이다. 그러면 서로 다른 모든 $\alpha, \beta \in [a, b]$에 대하여 $\alpha$와 $\beta$ 사이의 점 $x_1$, $x_2$, $\cdots$, $x_n$이 존재하여 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(\alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + \cdots + f^{(n-1)}(\alpha)(x_{(n-2)} - \alpha) \cdots (x_3 - \alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + f^{(n)}(x_n)(x_{(n-1)} - \alpha) \cdots (x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>특히 $n = 1$이면 $\alpha$와 $\beta$ 사이의 $x$가 존재하여 다음이 성립한다.</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x)(\beta - \alpha).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>먼저 $n = 1$일 때 정리가 성립함을 보인다. $\alpha, \beta \in [a, b]$이고 $\alpha \neq \beta$라 하자. $n = 1$이고 $\alpha \lt \beta$이면, 평균값 정리에 의해 다음을 만족하는 $x_1 \in (\alpha, \beta)$가 존재한다.</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha).$$</div>
+        <p>$n = 1$이고 $\beta \lt \alpha$이면, 다시 평균값 정리에 의해 다음을 만족하는 $x_1 \in (\beta, \alpha)$가 존재한다.</p>
+        <div class="math-display">$$f(\alpha) - f(\beta) = f'(x_1)(\alpha - \beta).$$</div>
+        <p>또한, 다음이 성립하므로</p>
+        <div class="math-display">$$\begin{aligned}
+        f(\beta) - f(\alpha) & = -(f(\alpha) - f(\beta)) \\
+        & = -f'(x_1)(\alpha - \beta) = f'(x_1)(\beta - \alpha),
+        \end{aligned}$$</div>
+        <p>평균값 정리에 의해 $\alpha$와 $\beta$ 사이의 $x_1$이 존재하여</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha) \tag{1.26}$$</div>
+        <p>가 $\alpha \lt \beta$이든 $\alpha > \beta$이든 관계없이 성립함을 쉽게 확인할 수 있다. 다음으로 $n = 2$이면 평균값 정리를 두 번 적용한다. 평균값 정리에 의해 $\alpha$와 $x_1$ 사이의 $x_2$가 존재하여</p>
+        <div class="math-display">$$f'(x_1) = f'(x_1) - f'(\alpha) + f'(\alpha) = f''(x_2)(x_1 - \alpha) + f'(\alpha). \tag{1.27}$$</div>
+        <p>(1.27)을 (1.26)에 대입하면</p>
+        <div class="math-display">$$\begin{aligned}
+        f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha) & = \left( f''(x_2)(x_1 - \alpha) + f'(\alpha) \right)(\beta - \alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(x_2)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned} \tag{1.28}$$</div>
+        <p>$n = 3$이면 평균값 정리를 3번 적용한다. 평균값 정리에 의해 $\alpha$와 $x_2$ 사이의 $x_3$가 존재하여</p>
+        <div class="math-display">$$f''(x_2) = f''(x_2) - f''(\alpha) + f''(\alpha) = f^{(3)}(x_3)(x_2 - \alpha) + f''(\alpha). \tag{1.29}$$</div>
+        <p>(1.29)를 (1.28)에 대입하면</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(x_3)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>일반적으로, 임의의 $n \in \mathbb{N}$에 대하여 평균값 정리를 $n$번 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(\alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + \cdots f^{(n-1)}(\alpha)(x_{(n-1)} - \alpha) \cdots (x_3 - \alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + f^{(n)}(x_n)(x_{(n-1)} - \alpha) \cdots (x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>정리가 증명되었다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function on $[a, b]$. Assume that for some $n \in \mathbb{N}$, $f^{(n-1)}$ is continuous on $[a, b]$ and $f^{(n)}(t)$ exists for every $t \in (a, b)$, where $f^{(0)} := f$ and $f^{(1)} := f'$. Then for all distinct $\alpha, \beta \in [a, b]$, there exist points $x_1$, $x_2$, $\cdots$, $x_n$ between $\alpha$ and $\beta$ such that</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(\alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + \cdots + f^{(n-1)}(\alpha)(x_{(n-2)} - \alpha) \cdots (x_3 - \alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + f^{(n)}(x_n)(x_{(n-1)} - \alpha) \cdots (x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>In particular, if $n = 1$, then there exists a $x$ between $\alpha$ and $\beta$ such that</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x)(\beta - \alpha).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>First we show that the theorem holds for $n = 1$. Let $\alpha, \beta \in [a, b]$ such that $\alpha \neq \beta$. If $n = 1$ and $\alpha \lt \beta$, then by the mean-value theorem, there exists a $x_1 \in (\alpha, \beta)$ such that</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha).$$</div>
+        <p>If $n = 1$ and $\beta \lt \alpha$, then by the mean-value theorem again, there exists a $x_1 \in (\beta, \alpha)$ such that</p>
+        <div class="math-display">$$f(\alpha) - f(\beta) = f'(x_1)(\alpha - \beta).$$</div>
+        <p>Moreover, since</p>
+        <div class="math-display">$$\begin{aligned}
+        f(\beta) - f(\alpha) & = -(f(\alpha) - f(\beta)) \\
+        & = -f'(x_1)(\alpha - \beta) = f'(x_1)(\beta - \alpha),
+        \end{aligned}$$</div>
+        <p>we can easily check that the mean-value theorem implies that there exists a $x_1$ between $\alpha$ and $\beta$ such that</p>
+        <div class="math-display">$$f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha) \tag{1.26}$$</div>
+        <p>is true whether $\alpha \lt \beta$ or $\alpha > \beta$. Next if $n = 2$, we apply the mean-value theorem twice. By the mean-value theorem, there exists $x_2$ between $\alpha$ and $x_1$ such that</p>
+        <div class="math-display">$$f'(x_1) = f'(x_1) - f'(\alpha) + f'(\alpha) = f''(x_2)(x_1 - \alpha) + f'(\alpha). \tag{1.27}$$</div>
+        <p>Plugging (1.27) in (1.26), we have</p>
+        <div class="math-display">$$\begin{aligned}
+        f(\beta) - f(\alpha) = f'(x_1)(\beta - \alpha) & = \left( f''(x_2)(x_1 - \alpha) + f'(\alpha) \right)(\beta - \alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(x_2)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned} \tag{1.28}$$</div>
+        <p>If $n = 3$, then we apply the mean-value theorem 3-times. By the mean-value theorem, there exists a $x_3$ between $\alpha$ and $x_2$ such that</p>
+        <div class="math-display">$$f''(x_2) = f''(x_2) - f''(\alpha) + f''(\alpha) = f^{(3)}(x_3)(x_2 - \alpha) + f''(\alpha). \tag{1.29}$$</div>
+        <p>Plugging (1.29) in (1.28), we obtain</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(x_3)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>In general, for any $n \in \mathbb{N}$, applying the mean-value theorem $n$-times, we have</p>
+        <div class="math-display">$$\begin{aligned}
+        & f(\beta) - f(\alpha) \\
+        & = f'(\alpha)(\beta - \alpha) + f''(\alpha)(x_1 - \alpha)(\beta - \alpha) + f^{(3)}(\alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + \cdots f^{(n-1)}(\alpha)(x_{(n-1)} - \alpha) \cdots (x_3 - \alpha)(x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha) \\
+        & \quad + f^{(n)}(x_n)(x_{(n-1)} - \alpha) \cdots (x_2 - \alpha)(x_1 - \alpha)(\beta - \alpha).
+        \end{aligned}$$</div>
+        <p>The theorem is proved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.23 ═══════════ -->
+
+<!-- Corollary 1.72 -->
+<div class="card thm-card" id="c1-72">
+  <div class="card-head">
+    <span class="thm-num">COR 1.72</span>
+    <span class="thm-title">1차 근사의 오차 한계 <em>An error bound for the first-order approximation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $[a, b]$ 위에서 미분가능한 실숫값 함수라 하자. $f'$이 $[a, b]$ 위에서 연속이고 모든 $t \in (a, b)$에서 $f''(t)$가 존재한다고 가정하자. 그러면 모든 $t \in (a, b]$에 대하여 다음을 만족하는 $x_t \in (a, t)$가 존재한다.</p>
+        <div class="math-display">$$|f(t) - f(a) - f'(a)(t - a)| \leq |f''(x_t)| \, (t - a)^2.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 1.71에 의해 다음을 만족하는 $x_1, x_2 \in (a, t)$가 존재한다.</p>
+        <div class="math-display">$$f(t) - f(a) = f'(a)(t - a) + f''(x_2)(x_1 - a)(t - a).$$</div>
+        <p>$|x_1 - a| \lt |t - a|$이므로</p>
+        <div class="math-display">$$|f(t) - f(a) - f'(a)(t - a)| = |f''(x_2)(x_1 - a)(t - a)| \leq |f''(x_2)||t - a|^2$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued differentiable function on $[a, b]$. Assume that $f'$ is continuous on $[a, b]$ and $f''(t)$ exists for every $t \in (a, b)$. Then for all $t \in (a, b]$, there exists a $x_t \in (a, t)$ such that</p>
+        <div class="math-display">$$|f(t) - f(a) - f'(a)(t - a)| \leq |f''(x_t)| \, (t - a)^2.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By Theorem 1.71, there exist $x_1, x_2 \in (a, t)$ such that</p>
+        <div class="math-display">$$f(t) - f(a) = f'(a)(t - a) + f''(x_2)(x_1 - a)(t - a).$$</div>
+        <p>Since $|x_1 - a| \lt |t - a|$, we have</p>
+        <div class="math-display">$$|f(t) - f(a) - f'(a)(t - a)| = |f''(x_2)(x_1 - a)(t - a)| \leq |f''(x_2)||t - a|^2$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.23) -->
+<div class="card note-card" id="note03-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>따름정리 1.72에 의해, 1차 다항식</p>
+        <div class="math-display">$$f(a) + f'(a)(t - a)$$</div>
+        <p>은 $f''(x)$가 유계이고 $t$가 $a$ 근방에 있을 때, 즉 $\sup_{x \in (a,t)} |f''(x)| \lt \infty$일 때 $f$의 좋은 근사가 된다. 더 일반적으로, $f$가 $n$번 미분가능할 때 다항식</p>
+        <div class="math-display">$$p(t) := \sum_{k=0}^{n-1} f^{(k)}(a)(t - a)^k$$</div>
+        <p>이 $t = a$ 근방에서 $f(t)$의 최선의 다항식 근사인지 묻는 것은 자연스럽다. 여기서 "최선의 근사"란 무엇을 의미하는가? $f(a) = p(a)$임을 관찰하자. 그러나 모든 $j \in \{1, 2, \ldots, n-1\}$에 대하여</p>
+        <div class="math-display">$$p^{(j)}(a) = j! f^{(j)}(a).$$</div>
+        <p>따라서 $f^{(j)}(a) \neq 0$이고 $j \neq 1$이면 $p^{(j)}(a) \neq f^{(j)}(a)$이다. 이제 다음 다항식을 생각해보자.</p>
+        <div class="math-display">$$\tilde{p}(t) = \sum_{k=0}^{n-1} \frac{f^{(k)}(a)}{k!} (t - a)^k.$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\tilde{p}^{(j)}(a) = f^{(j)}(a) \qquad \forall j \in \{0, 1, 2, \ldots, n-1\}.$$</div>
+        <p>이러한 의미에서, $\tilde{p}(t)$가 $t = a$ 근방에서 $p(t)$보다 더 나은 다항식 근사라고 말한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Due to Corollary 1.72, the first-order polynomial</p>
+        <div class="math-display">$$f(a) + f'(a)(t - a)$$</div>
+        <p>is a good approximation of $f$ if $f''(x)$ is bounded and $t$ is near $a$, i.e. $\sup_{x \in (a,t)} |f''(x)| \lt \infty$. More generally, it is natural to ask if the polynomial</p>
+        <div class="math-display">$$p(t) := \sum_{k=0}^{n-1} f^{(k)}(a)(t - a)^k$$</div>
+        <p>is the best polynomial approximation of $f(t)$ near $t = a$ if $f$ is $n$-times differentiable? Here what does the “best approximation” mean? Observe that $f(a) = p(a)$. However for all $j \in \{1, 2, \ldots, n-1\}$</p>
+        <div class="math-display">$$p^{(j)}(a) = j! f^{(j)}(a).$$</div>
+        <p>Thus $p^{(j)}(a) \neq f^{(j)}(a)$ if $f^{(j)}(a) \neq 0$ nor $j = 1$. Next let’s consider the polynomial</p>
+        <div class="math-display">$$\tilde{p}(t) = \sum_{k=0}^{n-1} \frac{f^{(k)}(a)}{k!} (t - a)^k.$$</div>
+        <p>Then</p>
+        <div class="math-display">$$\tilde{p}^{(j)}(a) = f^{(j)}(a) \qquad \forall j \in \{0, 1, 2, \ldots, n-1\}.$$</div>
+        <p>In this sense, we say that $\tilde{p}(t)$ is a better polynomial approximation than $p(t)$ near $t = a$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.24 ═══════════ -->
+
+<!-- Theorem 1.73 -->
+<div class="card thm-card" id="c1-73">
+  <div class="card-head">
+    <span class="thm-num">THM 1.73</span>
+    <span class="thm-title">테일러 정리 <em>Taylor’s theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$를 $[a, b]$ 위에서 미분가능한 실숫값 함수라 하자. 어떤 $n \in \mathbb{N}$에 대하여 $f^{n-1}$이 $[a, b]$ 위에서 연속이고 모든 $t \in (a, b)$에서 $f^{(n)}(t)$가 존재한다고 가정하자. 여기서 $f^{(0)} := f$, $f^{(1)} := f'$이다. 그러면 서로 다른 모든 $\alpha, \beta \in [a, b]$에 대하여 $\alpha$와 $\beta$ 사이의 점 $x$가 존재하여 다음이 성립한다.</p>
+        <div class="math-display">$$f(\beta) = \sum_{k=0}^{n-1} \frac{f^{(k)}(\alpha)}{k!} (\beta - \alpha)^k + \frac{f^{(n)}(x)}{n!} (\beta - \alpha)^n. \tag{1.30}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\alpha, \beta \in [a, b]$이고 $\alpha \neq \beta$라 하자. 다음을 정의한다.</p>
+        <div class="math-display">$$p(t) := \sum_{k=0}^{n-1} \frac{f^{(k)}(\alpha)}{k!} (t - \alpha)^k \qquad (t \in [a, b])$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$M := \frac{f(\beta) - p(\beta)}{(\beta - \alpha)^n}. \tag{1.31}$$</div>
+        <p>다음을 정의한다.</p>
+        <div class="math-display">$$g(t) := f(t) - p(t) - M(t - \alpha)^n \qquad (a \leq t \leq b).$$</div>
+        <p>그러면 자명하게</p>
+        <div class="math-display">$$g(\beta) = f(\beta) - p(\beta) - M(\beta - \alpha)^n = 0.$$</div>
+        <p>또한 $k = 0, 1, \ldots, n-1$에 대하여</p>
+        <div class="math-display">$$f^{(k)}(\alpha) = p^{(k)}(\alpha)$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$g^{(k)}(\alpha) = f^{(k)}(\alpha) - p^{(k)}(\alpha) - Mn(n-1) \cdots (n-k+1)(\alpha - \alpha)^{n-k} = 0.$$</div>
+        <p>따라서 롤의 정리에 의해 $\alpha$와 $\beta$ 사이의 $x_1$이 존재하여</p>
+        <div class="math-display">$$g'(x_1) = 0.$$</div>
+        <p>롤의 정리를 다시 적용하면 $\alpha$와 $x_1$ 사이의 $x_2$를 찾을 수 있어</p>
+        <div class="math-display">$$g^{(2)}(x_2) = 0.$$</div>
+        <p>이 과정을 계속하면 $\alpha$와 $x_{n-1}$ 사이의 $x_n$이 존재하여</p>
+        <div class="math-display">$$g^{(n)}(x_n) = 0. \tag{1.32}$$</div>
+        <p>다음이 성립하므로</p>
+        <div class="math-display">$$g^{(n)}(t) = f^{(n)}(t) - p^{(n)}(t) - Mn(n-1) \cdots 2 \cdot 1 = f^{(n)}(t) - Mn! \quad \forall t \in (a, b),$$</div>
+        <p>다음을 얻는다.</p>
+        <div class="math-display">$$M = \frac{f^{(n)}(x_n)}{n!} \tag{1.33}$$</div>
+        <p>(1.33)을 (1.31)에 대입하면 $x = x_n$일 때 마침내 (1.30)을 얻는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued differentiable function on $[a, b]$. Assume that for some $n \in \mathbb{N}$, $f^{n-1}$ is continuous on $[a, b]$ and $f^{(n)}(t)$ exists for every $t \in (a, b)$, where $f^{(0)} := f$ and $f^{(1)} := f'$. Then for all distinct $\alpha, \beta \in [a, b]$, there exists a point $x$ between $\alpha$ and $\beta$ such that</p>
+        <div class="math-display">$$f(\beta) = \sum_{k=0}^{n-1} \frac{f^{(k)}(\alpha)}{k!} (\beta - \alpha)^k + \frac{f^{(n)}(x)}{n!} (\beta - \alpha)^n. \tag{1.30}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\alpha, \beta \in [a, b]$ such that $\alpha \neq \beta$. Define</p>
+        <div class="math-display">$$p(t) := \sum_{k=0}^{n-1} \frac{f^{(k)}(\alpha)}{k!} (t - \alpha)^k \qquad (t \in [a, b])$$</div>
+        <p>and</p>
+        <div class="math-display">$$M := \frac{f(\beta) - p(\beta)}{(\beta - \alpha)^n}. \tag{1.31}$$</div>
+        <p>Define</p>
+        <div class="math-display">$$g(t) := f(t) - p(t) - M(t - \alpha)^n \qquad (a \leq t \leq b).$$</div>
+        <p>Then obviously,</p>
+        <div class="math-display">$$g(\beta) = f(\beta) - p(\beta) - M(\beta - \alpha)^n = 0.$$</div>
+        <p>Moreover, observe that for $k = 0, 1, \ldots, n-1$,</p>
+        <div class="math-display">$$f^{(k)}(\alpha) = p^{(k)}(\alpha)$$</div>
+        <p>and thus</p>
+        <div class="math-display">$$g^{(k)}(\alpha) = f^{(k)}(\alpha) - p^{(k)}(\alpha) - Mn(n-1) \cdots (n-k+1)(\alpha - \alpha)^{n-k} = 0.$$</div>
+        <p>Therefore, by Rolle’s theorem, there exists a $x_1$ between $\alpha$ and $\beta$ such that</p>
+        <div class="math-display">$$g'(x_1) = 0.$$</div>
+        <p>Applying Rolle’s theorem again, we can find a $x_2$ between $\alpha$ and $x_1$ such that</p>
+        <div class="math-display">$$g^{(2)}(x_2) = 0.$$</div>
+        <p>Continuing in this way, we conclude that there exists a $x_n$ between $\alpha$ and $x_{n-1}$ such that</p>
+        <div class="math-display">$$g^{(n)}(x_n) = 0. \tag{1.32}$$</div>
+        <p>Since</p>
+        <div class="math-display">$$g^{(n)}(t) = f^{(n)}(t) - p^{(n)}(t) - Mn(n-1) \cdots 2 \cdot 1 = f^{(n)}(t) - Mn! \quad \forall t \in (a, b),$$</div>
+        <p>we have</p>
+        <div class="math-display">$$M = \frac{f^{(n)}(x_n)}{n!} \tag{1.33}$$</div>
+        <p>Putting (1.33) in (1.31), we finally obtain (1.30) with $x = x_n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="index.html">해석학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

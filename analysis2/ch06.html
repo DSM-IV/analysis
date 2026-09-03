@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2. 리만-스틸체스 적분 (iii): 계단함수·변수변환·미적분학의 기본정리 (The Riemann-Stieltjes Integral (iii): Step Functions, Change of Variable, and the FTC) | 해석학2 학습 가이드</title>
+<meta name="description" content="해석학2 6단원 리만-스틸체스 적분 (iii). 단위계단함수와 지시함수, 계단함수 급수에 대한 적분, 미분가능한 적분자와 상·하적분, 변수변환, 미적분학의 기본정리와 부분적분을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="해석학2, Analysis II, 리만-스틸체스 적분, Riemann-Stieltjes integral, 단위계단함수, unit step function, 지시함수, indicator function, 변수변환, change of variable, 부분적분, integration by parts, 미적분학의 기본정리, fundamental theorem of calculus, 절대수렴, absolute convergence, 세분, refinement, 상적분, 하적분, upper integral, lower integral, 적분자, integrator, 순증가함수, strictly increasing function, 부정적분, indefinite integral, 균등연속, uniformly continuous, 평균값 정리, mean-value theorem, 곱의 미분법, product rule of differentiation">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/analysis2/ch06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. 리만-스틸체스 적분 (iii): 계단함수·변수변환·미적분학의 기본정리 (The Riemann-Stieltjes Integral (iii): Step Functions, Change of Variable, and the FTC) — 해석학2 한·영 대조">
+<meta property="og:description" content="단위계단함수와 지시함수에서 계단함수 급수에 대한 적분, 미분가능한 적분자, 변수변환, 미적분학의 기본정리와 부분적분까지, 리만-스틸체스 적분의 마지막 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/analysis2/ch06.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2. 리만-스틸체스 적분 (iii): 계단함수·변수변환·미적분학의 기본정리 (The Riemann-Stieltjes Integral (iii): Step Functions, Change of Variable, and the FTC) — 해석학2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "리만-스틸체스 적분의 계단함수·변수변환·미적분학의 기본정리 — 단위계단함수와 지시함수, 계단함수 급수에 대한 적분, 미분가능한 적분자와 상·하적분, 변수변환, 미적분학의 기본정리와 부분적분을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/analysis2/ch06.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/analysis2/ch06.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* 로마자 항목 라벨 (i), (ii), ... — 원문 항목 번호 재현 (ol.paren의 로마자 판) */
+.formal ol.roman, .en-formal ol.roman,
+.proof-content ol.roman, .en-proof-content ol.roman {
+  list-style: none;
+  counter-reset: romanitem;
+  padding-left: 2.4rem;
+}
+.formal ol.roman > li, .en-formal ol.roman > li,
+.proof-content ol.roman > li, .en-proof-content ol.roman > li {
+  counter-increment: romanitem;
+  position: relative;
+}
+.formal ol.roman > li::before, .en-formal ol.roman > li::before,
+.proof-content ol.roman > li::before, .en-proof-content ol.roman > li::before {
+  content: "(" counter(romanitem, lower-roman) ")";
+  position: absolute;
+  left: -2.4rem;
+  color: var(--ink-faint);
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="../settheory/index.html">집합론</a>
+  <a href="index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html" class="active">06</a>
+  <a href="ch07.html">07</a>
+</nav>
+
+<header>
+  <p class="subtitle">Analysis II — Unit 06</p>
+  <h1>2. 리만-스틸체스 적분 (iii): 계단함수·변수변환·미적분학의 기본정리<span>The Riemann-Stieltjes Integral (iii): Step Functions, Change of Variable, and the FTC</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c2-44"><span class="toc-num">DEF 2.44</span> 단위계단함수와 지시함수 <em>The Unit Step Function and the Indicator Function</em></a></li>
+    <li><a href="#c2-45"><span class="toc-num">THM 2.45</span> 단일 단위계단에 대한 적분 <em>The Integral against a Single Unit Step</em></a></li>
+    <li><a href="#c2-46"><span class="toc-num">EX 2.46</span> 비교판정법에 의한 절대수렴 <em>Absolute Convergence by Comparison</em></a></li>
+    <li><a href="#c2-47"><span class="toc-num">THM 2.47</span> 단위계단들의 급수에 대한 적분 <em>Integration against a Series of Unit Steps</em></a></li>
+    <li><a href="#c2-48"><span class="toc-num">LEM 2.48</span> 세분에 대한 하한으로서의 상적분 <em>The Upper Integral as an Infimum over Refinements</em></a></li>
+    <li><a href="#c2-49"><span class="toc-num">LEM 2.49</span> 미분가능한 적분자에 대한 상·하적분 <em>Upper and Lower Integrals with a Differentiable Integrator</em></a></li>
+    <li><a href="#c2-50"><span class="toc-num">EX 2.50</span> 보조정리 2.49 (ii)의 증명 <em>Proof of Lemma 2.49 (ii)</em></a></li>
+    <li><a href="#c2-51"><span class="toc-num">EX 2.51</span> (2.53)에서 (2.54)로 <em>From (2.53) to (2.54)</em></a></li>
+    <li><a href="#c2-52"><span class="toc-num">EX 2.52</span> (2.52)를 이용한 (2.55)의 증명 <em>Proof of (2.55) Using (2.52)</em></a></li>
+    <li><a href="#c2-53"><span class="toc-num">THM 2.53</span> 미분가능한 적분자에 대한 리만-스틸체스 적분가능성 판정 <em>Riemann-Stieltjes Integrability Criterion for a Differentiable Integrator</em></a></li>
+    <li><a href="#c2-54"><span class="toc-num">COR 2.54</span> 적분자의 도함수를 통한 계산 <em>Evaluation through the Derivative of the Integrator</em></a></li>
+    <li><a href="#c2-55"><span class="toc-num">EX 2.55</span> 정리 2.53의 증명 <em>Proof of Theorem 2.53</em></a></li>
+    <li><a href="#c2-56"><span class="toc-num">EX 2.56</span> 따름정리 2.54의 증명 <em>Proof of Corollary 2.54</em></a></li>
+    <li><a href="#c2-57"><span class="toc-num">THM 2.57</span> 순증가 연속 치환에 대한 불변성 <em>Invariance under a Strictly Increasing Continuous Substitution</em></a></li>
+    <li><a href="#c2-58"><span class="toc-num">COR 2.58</span> 변수변환 <em>Change of variable</em></a></li>
+    <li><a href="#c2-59"><span class="toc-num">THM 2.59</span> 부정적분의 연속성 <em>Continuity of the Indefinite Integral</em></a></li>
+    <li><a href="#c2-60"><span class="toc-num">EX 2.60</span> 리만-스틸체스 적분가능 함수의 유계성 <em>Boundedness of Riemann-Stieltjes Integrable Functions</em></a></li>
+    <li><a href="#c2-61"><span class="toc-num">THM 2.61</span> 연속점에서의 부정적분의 미분가능성 <em>Differentiability of the Indefinite Integral at a Point of Continuity</em></a></li>
+    <li><a href="#c2-62"><span class="toc-num">EX 2.62</span> (2.58)의 증명 <em>Proof of (2.58)</em></a></li>
+    <li><a href="#c2-63"><span class="toc-num">EX 2.63</span> 연속함수의 원시함수의 존재성 <em>Existence of an Antiderivative of a Continuous Function</em></a></li>
+    <li><a href="#c2-64"><span class="toc-num">THM 2.64</span> 미적분학의 기본정리 <em>The fundamental theorem of calculus</em></a></li>
+    <li><a href="#c2-65"><span class="toc-num">THM 2.65</span> 부분적분 <em>Integration by parts</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  해석학2 카드 작성 규약 (ch01–ch07 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id="c{섹션}-{번호}" (예: id="c2-44"),
+     소스 등장 순서 그대로 배치한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark                     → card rem-card  · REM n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름(예: Change of variable, Integration by parts)을
+     쓰고, 없으면 간결한 편집 제목을 새로 붙인다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+     원문이 증명을 Exercise로 미룬 환경(Theorem 2.53, Corollary 2.54)은 진술만 둔다.
+  6) Exercise 카드는 소스에 풀이가 없다. 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+     ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로 둔다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원}-{순번} (예: note06-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+     이 단원(2.44-2.65)은 환경이 연달아 이어지므로 독립 서술 단락이 없다.
+     Definition 2.44의 "Obviously, for any s in R", "and for all a <= b",
+     "More generally, ...", "In particular, ..." 는 모두 원문에서 이탤릭(정의 환경의
+     연속)이므로 note 카드로 떼지 않고 DEF 2.44 카드 안에 그대로 전사한다.
+  8) 수식은 $...$ / $$...$$. 번호 붙은 display 수식은 \tag{2.43} 형태로 번호를 유지한다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — 이 단원은 작다 기호를 모두 \lt 로 쓴다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+  9) 상·하 적분은 원문 표기대로 \overline{\int_a^b} / \underline{\int_a^b} 로 쓴다.
+     M_i^f, m_i^f, M_i^{\alpha'} 등의 위첨자 표기도 원문 그대로 유지한다.
+     조각정의 함수는 \begin{cases} ... \end{cases} 로 쓴다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§2 The Riemann-Stieltjes Integral (iii) · 리만-스틸체스 적분 (iii)</h2></div>
+
+<!-- ═══════════ PDF p.46 ═══════════ -->
+
+<!-- Definition 2.44 -->
+<div class="card def-card" id="c2-44">
+  <div class="card-head">
+    <span class="def-num">DEF 2.44</span>
+    <span class="def-title">단위계단함수와 지시함수 <em>The Unit Step Function and the Indicator Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>단위계단함수</strong> $I$는 다음과 같이 정의된다.</p>
+        <div class="math-display">$$I(x) = \begin{cases} 0 & (x \le 0) \\ 1 & (x > 0). \end{cases}$$</div>
+        <p>임의의 $s \in \mathbb{R}$에 대해 자명하게</p>
+        <div class="math-display">$$I(x - s) = \begin{cases} 0 & (x \le s) \\ 1 & (x > s). \end{cases}$$</div>
+        <p>이고, 모든 $a \le b$에 대해</p>
+        <div class="math-display">$$I(b - x) - I(a - x) = \begin{cases} 0 & (b \le x) \\ 1 & (b > x) \end{cases} - \begin{cases} 0 & (a \le x) \\ 1 & (a > x) \end{cases} = \begin{cases} 1 & (x \in [a, b)) \\ 0 & (x \notin [a, b)). \end{cases}$$</div>
+        <p>이다. 더 일반적으로, 임의의 집합 $A$에 대해 <strong>지시함수</strong> $I_A(x)$를 다음과 같이 정의한다.</p>
+        <div class="math-display">$$I_A(x) = \begin{cases} 1 & (x \in A) \\ 0 & (x \in A^c). \end{cases}$$</div>
+        <p>특히</p>
+        <div class="math-display">$$I(b - x) - I(a - x) = I_{[a,b)}(x).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The <strong>unit step function</strong> $I$ is defined by</p>
+        <div class="math-display">$$I(x) = \begin{cases} 0 & (x \le 0) \\ 1 & (x > 0). \end{cases}$$</div>
+        <p>Obviously, for any $s \in \mathbb{R}$,</p>
+        <div class="math-display">$$I(x - s) = \begin{cases} 0 & (x \le s) \\ 1 & (x > s). \end{cases}$$</div>
+        <p>and for all $a \le b$,</p>
+        <div class="math-display">$$I(b - x) - I(a - x) = \begin{cases} 0 & (b \le x) \\ 1 & (b > x) \end{cases} - \begin{cases} 0 & (a \le x) \\ 1 & (a > x) \end{cases} = \begin{cases} 1 & (x \in [a, b)) \\ 0 & (x \notin [a, b)). \end{cases}$$</div>
+        <p>More generally, for any set $A$, we define the <strong>indicator function</strong> $I_A(x)$ as</p>
+        <div class="math-display">$$I_A(x) = \begin{cases} 1 & (x \in A) \\ 0 & (x \in A^c). \end{cases}$$</div>
+        <p>In particular,</p>
+        <div class="math-display">$$I(b - x) - I(a - x) = I_{[a,b)}(x).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.47 ═══════════ -->
+
+<!-- Theorem 2.45 -->
+<div class="card thm-card" id="c2-45">
+  <div class="card-head">
+    <span class="thm-num">THM 2.45</span>
+    <span class="thm-title">단일 단위계단에 대한 적분 <em>The Integral against a Single Unit Step</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a \lt s \lt b$이고 $f$가 $[a, b]$ 위의 유계함수이며 $\alpha(x) = I(x - s)$라 하자. $f$가 $s$에서 연속이라 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b f d\alpha = f(s).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>모든 $n \in \mathbb{N}$에 대해</p>
+        <div class="math-display">$$x_i^n = a + i\frac{b - a}{n} \qquad (i = 0, \ldots, n)$$</div>
+        <p>이라 두고</p>
+        <div class="math-display">$$P_n = \{x_0^n, x_1^n, \ldots, x_n^n\}.$$</div>
+        <p>이라 하자. 그러면 $P_n$은 $[a, b]$의 분할이다. $s \in (a, b)$이므로, 각 $n \in \mathbb{N}$에 대해</p>
+        <div class="math-display">$$s \in [x_{k-1}^n, x_k^n).$$</div>
+        <p>을 만족하는 $k \in \{1, \ldots, n\}$이 존재한다. 따라서 각 $n$에 대해</p>
+        <div class="math-display">$$\Delta\alpha_k = \alpha(x_k^n) - \alpha(x_{k-1}^n) = I(x_k^n - s) - I(x_{k-1}^n - s) = I_{[x_{k-1}^n, x_k^n)}(s) = 1.$$</div>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i^n) - \alpha(x_{i-1}^n) = I(x_i^n - s) - I(x_{i-1}^n - s) = 0$$</div>
+        <p>이 모든 $i \in \{1, \ldots, n\} \setminus \{k\}$에 대해 성립하고,</p>
+        <div class="math-display">$$\begin{aligned} U(P_n, f, \alpha) &= \sum_{i=1}^{n} M_i \Delta\alpha_i \\ &= M_k = \sup_{x \in [x_{k-1}^n, x_k^n]} f(x), \end{aligned} \tag{2.43}$$</div>
+        <div class="math-display">$$\begin{aligned} L(P_n, f, \alpha) &= \sum_{i=1}^{n} m_i \Delta\alpha_i \\ &= m_k = \inf_{x \in [x_{k-1}^n, x_k^n]} f(x), \end{aligned} \tag{2.44}$$</div>
+        <p>이며</p>
+        <div class="math-display">$$\begin{aligned} U(P_n, f, \alpha) - L(P_n, f, \alpha) &= \sum_{i=1}^{n} (M_i - m_i)\Delta\alpha_i \\ &= M_k - m_k = \sup_{x \in [x_{k-1}^n, x_k^n]} f(x) - \inf_{x \in [x_{k-1}^n, x_k^n]} f(x). \end{aligned} \tag{2.45}$$</div>
+        <p>이다. $\varepsilon > 0$이 주어졌다고 하자. 그러면 $f$가 $s$에서 연속이므로,</p>
+        <div class="math-display">$$|f(x) - f(s)| \lt \frac{\varepsilon}{3} \tag{2.46}$$</div>
+        <p>이 모든 $x \in (s - \delta, s + \delta)$에 대해 성립하도록 하는 $\delta > 0$이 존재한다. 다음을 만족하도록 충분히 큰 $n_0 \in \mathbb{N}$을 택하자.</p>
+        <div class="math-display">$$\frac{b - a}{n_0} \lt \delta.$$</div>
+        <p>이 $n_0$에 대해</p>
+        <div class="math-display">$$s \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0})$$</div>
+        <p>를 만족하는 $k_0 \in \{1, \ldots, n_0\}$이 존재함을 상기하자. $x_{k_0}^{n_0} - x_{k_0-1}^{n_0} = \frac{b-a}{n_0} \lt \delta$이므로,</p>
+        <div class="math-display">$$[x_{k_0-1}^{n_0}, x_{k_0}^{n_0}] \subset (s - \delta, s + \delta).$$</div>
+        <p>이다. 따라서 모든 $x, y \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]$에 대해 (2.46)과 삼각부등식을 적용하면,</p>
+        <div class="math-display">$$f(x) - f(y) \le |f(x) - f(y)| \le |f(x) - f(s)| + |f(y) - f(s)| \lt \frac{2\varepsilon}{3}.$$</div>
+        <p>특히</p>
+        <div class="math-display">$$\sup_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) - f(s) \le \frac{2\varepsilon}{3} \lt \varepsilon, \tag{2.47}$$</div>
+        <div class="math-display">$$f(s) \le \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) + \frac{2\varepsilon}{3} \lt \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) + \varepsilon, \tag{2.48}$$</div>
+        <p>이며</p>
+        <div class="math-display">$$\sup_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) - \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) \le \frac{2\varepsilon}{3} \lt \varepsilon.$$</div>
+        <p>이다. 그러므로 (2.45)에 의해</p>
+        <div class="math-display">$$U(P_{n_0}, f, \alpha) - L(P_{n_0}, f, \alpha) \lt \varepsilon,$$</div>
+        <p>이며, 이는 $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능함을 뜻한다. (2.43), (2.44), (2.47), (2.48)을 적용하면,</p>
+        <div class="math-display">$$f(s) - \varepsilon \lt m_{k_0}^{n_0} = L(P_{n_0}, f, \alpha) \le \underline{\int_a^b} f d\alpha = \int_a^b f d\alpha$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \overline{\int_a^b} f d\alpha \le U(P_{n_0}, f, \alpha) = M_{k_0}^{n_0} \lt f(s) + \varepsilon.$$</div>
+        <p>이다. $\varepsilon > 0$이 임의의 양의 상수이므로,</p>
+        <div class="math-display">$$\int_a^b f d\alpha = f(s).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a \lt s \lt b$, $f$ be a bounded function on $[a, b]$, and $\alpha(x) = I(x - s)$. Assume that $f$ is continuous at $s$. Then</p>
+        <div class="math-display">$$\int_a^b f d\alpha = f(s).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>For all $n \in \mathbb{N}$, set</p>
+        <div class="math-display">$$x_i^n = a + i\frac{b - a}{n} \qquad (i = 0, \ldots, n)$$</div>
+        <p>and</p>
+        <div class="math-display">$$P_n = \{x_0^n, x_1^n, \ldots, x_n^n\}.$$</div>
+        <p>Then $P_n$ is a partition of $[a, b]$. Since $s \in (a, b)$, for each $n \in \mathbb{N}$, there exists a $k \in \{1, \ldots, n\}$ such that</p>
+        <div class="math-display">$$s \in [x_{k-1}^n, x_k^n).$$</div>
+        <p>Thus for each $n$, we have</p>
+        <div class="math-display">$$\Delta\alpha_k = \alpha(x_k^n) - \alpha(x_{k-1}^n) = I(x_k^n - s) - I(x_{k-1}^n - s) = I_{[x_{k-1}^n, x_k^n)}(s) = 1.$$</div>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i^n) - \alpha(x_{i-1}^n) = I(x_i^n - s) - I(x_{i-1}^n - s) = 0$$</div>
+        <p>for all $i \in \{1, \ldots, n\} \setminus \{k\}$, and</p>
+        <div class="math-display">$$\begin{aligned} U(P_n, f, \alpha) &= \sum_{i=1}^{n} M_i \Delta\alpha_i \\ &= M_k = \sup_{x \in [x_{k-1}^n, x_k^n]} f(x), \end{aligned} \tag{2.43}$$</div>
+        <div class="math-display">$$\begin{aligned} L(P_n, f, \alpha) &= \sum_{i=1}^{n} m_i \Delta\alpha_i \\ &= m_k = \inf_{x \in [x_{k-1}^n, x_k^n]} f(x), \end{aligned} \tag{2.44}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\begin{aligned} U(P_n, f, \alpha) - L(P_n, f, \alpha) &= \sum_{i=1}^{n} (M_i - m_i)\Delta\alpha_i \\ &= M_k - m_k = \sup_{x \in [x_{k-1}^n, x_k^n]} f(x) - \inf_{x \in [x_{k-1}^n, x_k^n]} f(x). \end{aligned} \tag{2.45}$$</div>
+        <p>Let $\varepsilon > 0$ be given. Then since $f$ is continuous at $s$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - f(s)| \lt \frac{\varepsilon}{3} \tag{2.46}$$</div>
+        <p>for all $x \in (s - \delta, s + \delta)$. Take $n_0 \in \mathbb{N}$ large enough so that</p>
+        <div class="math-display">$$\frac{b - a}{n_0} \lt \delta.$$</div>
+        <p>Recall that for this $n_0$, there exists a $k_0 \in \{1, \ldots, n_0\}$ such that</p>
+        <div class="math-display">$$s \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0})$$</div>
+        <p>Since $x_{k_0}^{n_0} - x_{k_0-1}^{n_0} = \frac{b-a}{n_0} \lt \delta$, we have</p>
+        <div class="math-display">$$[x_{k_0-1}^{n_0}, x_{k_0}^{n_0}] \subset (s - \delta, s + \delta).$$</div>
+        <p>Thus applying (2.46) and the triangle inequality for all $x, y \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]$,</p>
+        <div class="math-display">$$f(x) - f(y) \le |f(x) - f(y)| \le |f(x) - f(s)| + |f(y) - f(s)| \lt \frac{2\varepsilon}{3}.$$</div>
+        <p>In particular,</p>
+        <div class="math-display">$$\sup_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) - f(s) \le \frac{2\varepsilon}{3} \lt \varepsilon, \tag{2.47}$$</div>
+        <div class="math-display">$$f(s) \le \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) + \frac{2\varepsilon}{3} \lt \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) + \varepsilon, \tag{2.48}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\sup_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) - \inf_{x \in [x_{k_0-1}^{n_0}, x_{k_0}^{n_0}]} f(x) \le \frac{2\varepsilon}{3} \lt \varepsilon.$$</div>
+        <p>Therefore by (2.45),</p>
+        <div class="math-display">$$U(P_{n_0}, f, \alpha) - L(P_{n_0}, f, \alpha) \lt \varepsilon,$$</div>
+        <p>which implies that $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a, b]$. Applying (2.43), (2.44), (2.47), and (2.48), we have</p>
+        <div class="math-display">$$f(s) - \varepsilon \lt m_{k_0}^{n_0} = L(P_{n_0}, f, \alpha) \le \underline{\int_a^b} f d\alpha = \int_a^b f d\alpha$$</div>
+        <p>and</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \overline{\int_a^b} f d\alpha \le U(P_{n_0}, f, \alpha) = M_{k_0}^{n_0} \lt f(s) + \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant, we have</p>
+        <div class="math-display">$$\int_a^b f d\alpha = f(s).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.48 ═══════════ -->
+
+<!-- Exercise 2.46 -->
+<div class="card ex-card" id="c2-46">
+  <div class="card-head">
+    <span class="ex-num">EX 2.46</span>
+    <span class="ex-title">비교판정법에 의한 절대수렴 <em>Absolute Convergence by Comparison</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a_n$과 $b_n$을 $\mathbb{R}$의 수열이라 하자.</p>
+        <div class="math-display">$$a_n \ge 0, \quad |b_n| \le a_n \qquad \forall n \in \mathbb{N},$$</div>
+        <p>이고 $\sum_{n=1}^{\infty} a_n$이 수렴한다고 가정하자. 급수 $\sum_{n=1}^{\infty} b_n$이 절대수렴함을, 즉 수열 $\sum_{n=1}^{k} |b_n|$이 $k \to \infty$일 때 실수로 수렴함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A := \sum_{n=1}^{\infty} a_n \in \mathbb{R}$이라 하자. 각 $k \in \mathbb{N}$에 대해</p>
+        <div class="math-display">$$S_k := \sum_{n=1}^{k} |b_n|, \qquad T_k := \sum_{n=1}^{k} a_n$$</div>
+        <p>이라 두자. 모든 $n \in \mathbb{N}$에 대해 $|b_n| \ge 0$이므로,</p>
+        <div class="math-display">$$S_{k+1} - S_k = |b_{k+1}| \ge 0 \qquad \forall k \in \mathbb{N},$$</div>
+        <p>즉 수열 $\{S_k\}$는 단조증가한다. 더욱이 $|b_n| \le a_n$이고 $a_n \ge 0$이므로, $T_k$ 역시 단조증가하며 $\sum_{n=1}^{\infty} a_n$이 수렴하여 $T_k \le A$이다. 따라서 각 $k \in \mathbb{N}$에 대해</p>
+        <div class="math-display">$$S_k = \sum_{n=1}^{k} |b_n| \le \sum_{n=1}^{k} a_n = T_k \le A,$$</div>
+        <p>이다. 즉 $\{S_k\}$는 위로 유계이고, 집합 $\{S_k : k \in \mathbb{N}\}$은 공집합이 아니며 $A$를 상계로 가진다. 따라서 주의 1.49에 의해</p>
+        <div class="math-display">$$S := \sup_{k \in \mathbb{N}} S_k$$</div>
+        <p>가 $\mathbb{R}$에서 존재하고, 임의의 $\varepsilon > 0$에 대해</p>
+        <div class="math-display">$$S - \varepsilon \lt S_K$$</div>
+        <p>를 만족하는 $K \in \mathbb{N}$이 존재한다.</p>
+        <p>$\varepsilon > 0$이 주어졌다고 하자. 위와 같이 $K \in \mathbb{N}$을 택하자. $\{S_k\}$가 단조증가하므로, 모든 $k \ge K$에 대해</p>
+        <div class="math-display">$$S - \varepsilon \lt S_K \le S_k.$$</div>
+        <p>이다. 또한 $S$가 $\{S_k : k \in \mathbb{N}\}$의 상계이므로 $S_k \le S \lt S + \varepsilon$이다. 따라서 모든 $k \ge K$에 대해</p>
+        <div class="math-display">$$|S_k - S| \lt \varepsilon.$$</div>
+        <p>이다. $\varepsilon > 0$이 임의의 양의 상수이므로, $k \to \infty$일 때 $S_k \to S$, 즉 수열 $\sum_{n=1}^{k} |b_n|$은 실수 $S$로 수렴한다. 그러므로 급수 $\sum_{n=1}^{\infty} b_n$은 절대수렴한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a_n$ and $b_n$ be sequences in $\mathbb{R}$. Assume that</p>
+        <div class="math-display">$$a_n \ge 0, \quad |b_n| \le a_n \qquad \forall n \in \mathbb{N},$$</div>
+        <p>and $\sum_{n=1}^{\infty} a_n$ converges. Show that the series $\sum_{n=1}^{\infty} b_n$ absolutely converges, i.e. the sequence $\sum_{n=1}^{k} |b_n|$ converges to a real number as $k \to \infty$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $A := \sum_{n=1}^{\infty} a_n \in \mathbb{R}$. For each $k \in \mathbb{N}$, put</p>
+        <div class="math-display">$$S_k := \sum_{n=1}^{k} |b_n|, \qquad T_k := \sum_{n=1}^{k} a_n$$</div>
+        <p>Since $|b_n| \ge 0$ for all $n \in \mathbb{N}$,</p>
+        <div class="math-display">$$S_{k+1} - S_k = |b_{k+1}| \ge 0 \qquad \forall k \in \mathbb{N},$$</div>
+        <p>i.e. the sequence $\{S_k\}$ is monotonically increasing. Moreover, since $|b_n| \le a_n$ and $a_n \ge 0$, $T_k$ is also monotonically increasing and, since $\sum_{n=1}^{\infty} a_n$ converges, $T_k \le A$. Thus for each $k \in \mathbb{N}$,</p>
+        <div class="math-display">$$S_k = \sum_{n=1}^{k} |b_n| \le \sum_{n=1}^{k} a_n = T_k \le A,$$</div>
+        <p>i.e. $\{S_k\}$ is bounded above, and the set $\{S_k : k \in \mathbb{N}\}$ is nonempty and has $A$ as an upper bound. Thus by Remark 1.49,</p>
+        <div class="math-display">$$S := \sup_{k \in \mathbb{N}} S_k$$</div>
+        <p>exists in $\mathbb{R}$, and for any $\varepsilon > 0$, there exists a $K \in \mathbb{N}$ such that</p>
+        <div class="math-display">$$S - \varepsilon \lt S_K.$$</div>
+        <p>Let $\varepsilon > 0$ be given. Take $K \in \mathbb{N}$ as above. Since $\{S_k\}$ is monotonically increasing, for all $k \ge K$,</p>
+        <div class="math-display">$$S - \varepsilon \lt S_K \le S_k.$$</div>
+        <p>Also since $S$ is an upper bound of $\{S_k : k \in \mathbb{N}\}$, $S_k \le S \lt S + \varepsilon$. Thus for all $k \ge K$,</p>
+        <div class="math-display">$$|S_k - S| \lt \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant, $S_k \to S$ as $k \to \infty$, i.e. the sequence $\sum_{n=1}^{k} |b_n|$ converges to the real number $S$. Therefore the series $\sum_{n=1}^{\infty} b_n$ absolutely converges.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.49 ═══════════ -->
+
+<!-- Theorem 2.47 -->
+<div class="card thm-card" id="c2-47">
+  <div class="card-head">
+    <span class="thm-num">THM 2.47</span>
+    <span class="thm-title">단위계단들의 급수에 대한 적분 <em>Integration against a Series of Unit Steps</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$c_n$을 음이 아닌 수열, $s_n$을 $(a, b)$ 안의 서로 다른 점들로 이루어진 수열이라 하고,</p>
+        <div class="math-display">$$\alpha(x) = \sum_{n=1}^{\infty} c_n I(x - s_n),$$</div>
+        <p>즉 모든 $n \in \mathbb{N}$에 대해 $c_n \ge 0$, $s_n \in (a, b)$이고 모든 $j \ne k$에 대해 $s_j \ne s_k$라 하자. $f$가 $[a, b]$ 위에서 연속이고 $\sum_{n=1}^{\infty} c_n$이 수렴한다고 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \sum_{n=1}^{\infty} c_n f(s_n).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>각 $x \in [a, b]$에 대해 모든 $n \in \mathbb{N}$에서 $c_n I(x - s_n) \le c_n$이므로 $\alpha(x) = \sum_{n=1}^{\infty} c_n I(x - s_n)$은 잘 정의된다. 마찬가지로,</p>
+        <div class="math-display">$$|c_n f(s_n)| \le M c_n,$$</div>
+        <p>이고, 여기서</p>
+        <div class="math-display">$$M := \sup_{x \in [a,b]} |f(x)| \lt \infty$$</div>
+        <p>인데 이는 $f$가 $[a, b]$ 위에서 연속이고 $[a, b]$가 콤팩트 집합이기 때문이므로, $\sum_{n=1}^{\infty} c_n f(s_n)$ 역시 잘 정의된다. 더욱이 각 $c_n I(x - s_n)$이 단조증가이므로 $\alpha$ 또한 단조증가이다. 따라서 $f$가 $[a, b]$ 위에서 연속이므로, $f$는 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능하다. $\varepsilon > 0$이 주어졌다고 하자.</p>
+        <div class="math-display">$$\sum_{n=N+1}^{\infty} c_n := \sum_{n=1}^{\infty} c_n - \sum_{n=1}^{N} c_n \lt \varepsilon. \tag{2.49}$$</div>
+        <p>을 만족하도록 $N \in \mathbb{N}$을 택하자.</p>
+        <div class="math-display">$$\alpha_1(x) := \sum_{n=1}^{N} c_n I(x - s_n), \quad \text{and} \quad \alpha_2(x) := \alpha(x) - \alpha_1(x) = \sum_{n=N+1}^{\infty} c_n I(x - s_n).$$</div>
+        <p>이라 두자. 자명하게 $\alpha_1$과 $\alpha_2$ 모두 $[a, b]$ 위에서 단조증가이다. 따라서 $f$가 $[a, b]$ 위에서 연속이므로, $f$는 $[a, b]$ 위에서 각각 $\alpha_1$과 $\alpha_2$에 관하여 리만-스틸체스 적분가능하다. 다음을 관찰하자.</p>
+        <div class="math-display">$$\alpha(b) = \sum_{n=1}^{\infty} c_n I(b - s_n) = \sum_{n=1}^{\infty} c_n,$$</div>
+        <div class="math-display">$$\alpha_1(b) = \sum_{n=1}^{N} c_n I(b - s_n) = \sum_{n=1}^{N} c_n$$</div>
+        <div class="math-display">$$\alpha(a) = \sum_{n=1}^{\infty} c_n I(a - s_n) = 0, \quad \alpha_1(a) = 0,$$</div>
+        <p>이고 (2.49)에 의해</p>
+        <div class="math-display">$$\alpha_2(b) - \alpha_2(a) = \alpha(b) - \alpha_1(b) - \alpha(a) + \alpha_1(a) = \sum_{n=N+1}^{\infty} c_n \lt \varepsilon.$$</div>
+        <p>이다. 따라서 정리 2.37(iv)를 적용하면,</p>
+        <div class="math-display">$$\left|\int_a^b f d\alpha_2\right| \le M(\alpha_2(b) - \alpha_2(a)) \lt M\varepsilon. \tag{2.50}$$</div>
+        <p>한편 정리 2.40과 정리 2.45에 의해,</p>
+        <div class="math-display">$$\begin{aligned} \int_a^b f d\alpha_1 &= \int_a^b f d\left(\sum_{n=1}^{N} c_n I(x - s_n)\right) \\ &= \sum_{n=1}^{N} c_n \int_a^b f d\left(I(x - s_n)\right) \\ &= \sum_{n=1}^{N} c_n f(s_n). \end{aligned}$$</div>
+        <p>따라서 (2.50)을 상기하고 정리 2.40과 정리 2.45를 다시 적용하면,</p>
+        <div class="math-display">$$\begin{aligned} \left|\int_a^b f d\alpha - \sum_{n=1}^{\infty} c_n f(s_n)\right| &= \left|\int_a^b f d\alpha_1 + \int_a^b f d\alpha_2 - \sum_{n=1}^{N} c_n f(s_n) - \sum_{n=N+1}^{\infty} c_n f(s_n)\right| \\ &= \left|\int_a^b f d\alpha_2 - \sum_{n=N+1}^{\infty} c_n f(s_n)\right| \le 2M\varepsilon. \end{aligned}$$</div>
+        <p>이다. $\varepsilon > 0$이 임의의 양의 상수이므로,</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \sum_{n=1}^{\infty} c_n f(s_n).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $c_n$ be a nonnegative sequence, $s_n$ be a sequence of distinct points in $(a, b)$, and</p>
+        <div class="math-display">$$\alpha(x) = \sum_{n=1}^{\infty} c_n I(x - s_n),$$</div>
+        <p>i.e. $c_n \ge 0$, $s_n \in (a, b)$ for all $n \in \mathbb{N}$ and $s_j \ne s_k$ for all $j \ne k$. Assume that $f$ is continuous on $[a, b]$ and $\sum_{n=1}^{\infty} c_n$ converges. Then</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \sum_{n=1}^{\infty} c_n f(s_n).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>For each $x \in [a, b]$, $c_n I(x - s_n) \le c_n$ for all $n \in \mathbb{N}$ and thus $\alpha(x) = \sum_{n=1}^{\infty} c_n I(x - s_n)$ is well-defined. Similarly, $\sum_{n=1}^{\infty} c_n f(s_n)$ is well-defined since</p>
+        <div class="math-display">$$|c_n f(s_n)| \le M c_n,$$</div>
+        <p>where</p>
+        <div class="math-display">$$M := \sup_{x \in [a,b]} |f(x)| \lt \infty$$</div>
+        <p>since $f$ is continuous on $[a, b]$ and $[a, b]$ is a compact set. Moreover, since each $c_n I(x - s_n)$ is monotonically increasing, $\alpha$ is also monotonically increasing. Thus since $f$ is continuous on $[a, b]$, $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a, b]$. Let $\varepsilon > 0$ be given. Choose a $N \in \mathbb{N}$ so that</p>
+        <div class="math-display">$$\sum_{n=N+1}^{\infty} c_n := \sum_{n=1}^{\infty} c_n - \sum_{n=1}^{N} c_n \lt \varepsilon. \tag{2.49}$$</div>
+        <p>Put</p>
+        <div class="math-display">$$\alpha_1(x) := \sum_{n=1}^{N} c_n I(x - s_n), \quad \text{and} \quad \alpha_2(x) := \alpha(x) - \alpha_1(x) = \sum_{n=N+1}^{\infty} c_n I(x - s_n).$$</div>
+        <p>Obviously both $\alpha_1$ and $\alpha_2$ are monotonically increasing on $[a, b]$. Thus $f$ is Riemann-Stieltjes integrable with respect to $\alpha_1$ and $\alpha_2$ on $[a, b]$, respectively since $f$ is continuous on $[a, b]$. Observe that</p>
+        <div class="math-display">$$\alpha(b) = \sum_{n=1}^{\infty} c_n I(b - s_n) = \sum_{n=1}^{\infty} c_n,$$</div>
+        <div class="math-display">$$\alpha_1(b) = \sum_{n=1}^{N} c_n I(b - s_n) = \sum_{n=1}^{N} c_n$$</div>
+        <div class="math-display">$$\alpha(a) = \sum_{n=1}^{\infty} c_n I(a - s_n) = 0, \quad \alpha_1(a) = 0,$$</div>
+        <p>and by (2.49)</p>
+        <div class="math-display">$$\alpha_2(b) - \alpha_2(a) = \alpha(b) - \alpha_1(b) - \alpha(a) + \alpha_1(a) = \sum_{n=N+1}^{\infty} c_n \lt \varepsilon.$$</div>
+        <p>Thus applying Theorem 2.37(iv), we have</p>
+        <div class="math-display">$$\left|\int_a^b f d\alpha_2\right| \le M(\alpha_2(b) - \alpha_2(a)) \lt M\varepsilon. \tag{2.50}$$</div>
+        <p>On the other hand, by Theorem 2.40 and Theorem 2.45,</p>
+        <div class="math-display">$$\begin{aligned} \int_a^b f d\alpha_1 &= \int_a^b f d\left(\sum_{n=1}^{N} c_n I(x - s_n)\right) \\ &= \sum_{n=1}^{N} c_n \int_a^b f d\left(I(x - s_n)\right) \\ &= \sum_{n=1}^{N} c_n f(s_n). \end{aligned}$$</div>
+        <p>Therefore recalling (2.50) and applying Theorem 2.40 and Theorem 2.45 again, we have</p>
+        <div class="math-display">$$\begin{aligned} \left|\int_a^b f d\alpha - \sum_{n=1}^{\infty} c_n f(s_n)\right| &= \left|\int_a^b f d\alpha_1 + \int_a^b f d\alpha_2 - \sum_{n=1}^{N} c_n f(s_n) - \sum_{n=N+1}^{\infty} c_n f(s_n)\right| \\ &= \left|\int_a^b f d\alpha_2 - \sum_{n=N+1}^{\infty} c_n f(s_n)\right| \le 2M\varepsilon. \end{aligned}$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant,</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \sum_{n=1}^{\infty} c_n f(s_n).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.50 ═══════════ -->
+
+<!-- Lemma 2.48 -->
+<div class="card thm-card" id="c2-48">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.48</span>
+    <span class="thm-title">세분에 대한 하한으로서의 상적분 <em>The Upper Integral as an Infimum over Refinements</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 유계함수, $\alpha$가 단조증가함수, $P$가 $[a, b]$의 분할이라 하자. 그러면</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \inf_{P^* \supset P} U(P^*, f, \alpha) := \inf\{U(P^*, f, \alpha) : P^* \text{ is a refinement of } P\}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>자명하게</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le \inf_{P^* \supset P} U(P^*, f, \alpha).$$</div>
+        <p>이다. 한편 $P_1$을 $[a, b]$의 분할이라 하자. 그러면 $P_1 \cup P$는 $P$의 세분이 되고</p>
+        <div class="math-display">$$\inf_{P^* \supset P} U(P^*, f, \alpha) \le U(P_1 \cup P, f, \alpha) \le U(P_1, f, \alpha).$$</div>
+        <p>이다. $P_1$이 $[a, b]$의 임의의 분할이므로,</p>
+        <div class="math-display">$$\inf_{P^* \supset P} U(P^*, f, \alpha) \le \overline{\int_a^b} f d\alpha.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a bounded function on $[a, b]$, $\alpha$ be a monotonically increasing function, and $P$ be a partition of $[a, b]$. Then</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \inf_{P^* \supset P} U(P^*, f, \alpha) := \inf\{U(P^*, f, \alpha) : P^* \text{ is a refinement of } P\}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Obviously,</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le \inf_{P^* \supset P} U(P^*, f, \alpha).$$</div>
+        <p>On the other hand, let $P_1$ be a partition of $[a, b]$. Then $P_1 \cup P$ becomes a refinement of $P$ and</p>
+        <div class="math-display">$$\inf_{P^* \supset P} U(P^*, f, \alpha) \le U(P_1 \cup P, f, \alpha) \le U(P_1, f, \alpha).$$</div>
+        <p>Since $P_1$ is an arbitrary partition of $[a, b]$, we have</p>
+        <div class="math-display">$$\inf_{P^* \supset P} U(P^*, f, \alpha) \le \overline{\int_a^b} f d\alpha.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lemma 2.49 -->
+<div class="card thm-card" id="c2-49">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.49</span>
+    <span class="thm-title">미분가능한 적분자에 대한 상·하적분 <em>Upper and Lower Integrals with a Differentiable Integrator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 유계함수이고 $\alpha$가 단조증가함수라 하자. $\alpha$가 $[a, b]$ 위에서 미분가능하고 그 도함수 $\alpha'$이 $[a, b]$ 위에서 리만 적분가능하다고 가정하자. 그러면</p>
+        <ol class="roman">
+          <li>
+            <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx$$</div>
+          </li>
+          <li>
+            <div class="math-display">$$\underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx.$$</div>
+          </li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>증명이 유사하므로 (i)만 증명한다. $\varepsilon > 0$이 주어졌다고 하자. $\alpha'$이 $[a, b]$ 위에서 리만 적분가능하므로,</p>
+        <div class="math-display">$$U(P, \alpha') - L(P, \alpha') \lt \varepsilon \tag{2.51}$$</div>
+        <p>을 만족하는 $[a, b]$의 분할 $P = \{x_0, \ldots, x_n\}$이 존재한다. 평균값 정리에 의해, 각 $i \in \{1, \ldots, n\}$에 대해</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha'(t_i)\Delta x_i.$$</div>
+        <p>를 만족하는 $t_i \in [x_{i-1}, x_i]$가 존재한다. 더욱이</p>
+        <div class="math-display">$$M_i^{\alpha'} = \sup_{x \in [x_{i-1}, x_i]} \alpha'(x) \quad \text{and} \quad m_i^{\alpha'} = \inf_{x \in [x_{i-1}, x_i]} \alpha'(x)$$</div>
+        <p>라 두자. 그러면 (2.51)에 의해, 모든 $i$와 $s_i \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\sum_{i=1}^{n} |\alpha'(s_i) - \alpha'(t_i)|\Delta x_i \le \sum_{i=1}^{n} \left(M_i^{\alpha'} - m_i^{\alpha'}\right) \Delta x_i = U(P, \alpha') - L(P, \alpha') \lt \varepsilon.$$</div>
+        <p>이다. 따라서</p>
+        <div class="math-display">$$M := \sup_{x \in [a, b]} |f(x)|,$$</div>
+        <p>라 두면, 모든 $s_i \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| &= \left|\sum_{i=1}^{n} f(s_i)\alpha'(t_i)\Delta x_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \\ &\le \sum_{i=1}^{n} |f(s_i)||\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \\ &\le M \sum_{i=1}^{n} |\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \lt M\varepsilon. \end{aligned} \tag{2.52}$$</div>
+        <p>이다. 특히 모든 $s_i \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \sum_{i=1}^{n} f(s_i)\Delta\alpha_i &\le \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i + M\varepsilon \\ &\le U(P, f\alpha') + M\varepsilon. \end{aligned} \tag{2.53}$$</div>
+        <p>이다. 따라서</p>
+        <div class="math-display">$$U(P, f, \alpha) \le U(P, f\alpha') + M\varepsilon \tag{2.54}$$</div>
+        <p>이다. 마찬가지로,</p>
+        <div class="math-display">$$U(P, f\alpha') \le U(P, f, \alpha) + M\varepsilon. \tag{2.55}$$</div>
+        <p>$P$의 임의의 세분 $P^*$에 대해서도 (2.54)와 (2.55)가 성립함을 유의하자. 왜냐하면</p>
+        <div class="math-display">$$U(P^*, \alpha') - L(P^*, \alpha') \le U(P, \alpha') - L(P, \alpha') \lt \varepsilon.$$</div>
+        <p>이기 때문이다. 다시 말해</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le U(P^*, f, \alpha) \le U(P^*, f\alpha') + M\varepsilon$$</div>
+        <p>이다. 마찬가지로,</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx \le U(P^*, f\alpha') \le U(P^*, f, \alpha) + M\varepsilon.$$</div>
+        <p>이 $P$의 임의의 세분 $P^*$에 대해 성립한다. 마지막으로 보조정리 2.48에 의해,</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le \overline{\int_a^b} f\alpha' dx + M\varepsilon$$</div>
+        <p>이다. 마찬가지로,</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx \le \overline{\int_a^b} f d\alpha + M\varepsilon.$$</div>
+        <p>이다. $\varepsilon > 0$이 임의의 양의 상수이므로, 다음을 얻는다.</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \overline{\int_a^b} f d\alpha.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a bounded function on $[a, b]$ and $\alpha$ be a monotonically increasing function. Assume that $\alpha$ is differentiable on $[a, b]$ and its derivative $\alpha'$ is Riemann integrable on $[a, b]$. Then</p>
+        <ol class="roman">
+          <li>
+            <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx$$</div>
+          </li>
+          <li>
+            <div class="math-display">$$\underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx.$$</div>
+          </li>
+        </ol>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Because of similarity of the proof, we only prove (i). Let $\varepsilon > 0$ be given. Since $\alpha'$ is Riemann integrable on $[a, b]$, there exists a partition $P = \{x_0, \ldots, x_n\}$ of $[a, b]$ such that</p>
+        <div class="math-display">$$U(P, \alpha') - L(P, \alpha') \lt \varepsilon \tag{2.51}$$</div>
+        <p>By the mean-value theorem, for each $i \in \{1, \ldots, n\}$, there exists $t_i \in [x_{i-1}, x_i]$ such that</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha'(t_i)\Delta x_i.$$</div>
+        <p>Moreover, set</p>
+        <div class="math-display">$$M_i^{\alpha'} = \sup_{x \in [x_{i-1}, x_i]} \alpha'(x) \quad \text{and} \quad m_i^{\alpha'} = \inf_{x \in [x_{i-1}, x_i]} \alpha'(x)$$</div>
+        <p>Then due to (2.51), for all $i$ and $s_i \in [x_{i-1}, x_i]$,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} |\alpha'(s_i) - \alpha'(t_i)|\Delta x_i \le \sum_{i=1}^{n} \left(M_i^{\alpha'} - m_i^{\alpha'}\right) \Delta x_i = U(P, \alpha') - L(P, \alpha') \lt \varepsilon.$$</div>
+        <p>Thus putting</p>
+        <div class="math-display">$$M := \sup_{x \in [a,,b]} |f(x)|,$$</div>
+        <p>for all $s_i \in [x_{i-1}, x_i]$ we have</p>
+        <div class="math-display">$$\begin{aligned} \left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| &= \left|\sum_{i=1}^{n} f(s_i)\alpha'(t_i)\Delta x_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \\ &\le \sum_{i=1}^{n} |f(s_i)||\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \\ &\le M \sum_{i=1}^{n} |\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \lt M\varepsilon. \end{aligned} \tag{2.52}$$</div>
+        <p>In particular, for all $s_i \in [x_{i-1}, x_i]$,</p>
+        <div class="math-display">$$\begin{aligned} \sum_{i=1}^{n} f(s_i)\Delta\alpha_i &\le \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i + M\varepsilon \\ &\le U(P, f\alpha') + M\varepsilon. \end{aligned} \tag{2.53}$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$U(P, f, \alpha) \le U(P, f\alpha') + M\varepsilon \tag{2.54}$$</div>
+        <p>Similarly,</p>
+        <div class="math-display">$$U(P, f\alpha') \le U(P, f, \alpha) + M\varepsilon. \tag{2.55}$$</div>
+        <p>Note that for any refinement $P^*$ of $P$, (2.54) and (2.55) hold since</p>
+        <div class="math-display">$$U(P^*, \alpha') - L(P^*, \alpha') \le U(P, \alpha') - L(P, \alpha') \lt \varepsilon.$$</div>
+        <p>In other words, we have</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le U(P^*, f, \alpha) \le U(P^*, f\alpha') + M\varepsilon$$</div>
+        <p>Similarly,</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx \le U(P^*, f\alpha') \le U(P^*, f, \alpha) + M\varepsilon.$$</div>
+        <p>for all refinement $P^*$ of $P$. Finally by Lemma 2.48, we have</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha \le \overline{\int_a^b} f\alpha' dx + M\varepsilon$$</div>
+        <p>Similarly,</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx \le \overline{\int_a^b} f d\alpha + M\varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant, we conclude</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \overline{\int_a^b} f d\alpha.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.52 ═══════════ -->
+
+<!-- Exercise 2.50 -->
+<div class="card ex-card" id="c2-50">
+  <div class="card-head">
+    <span class="ex-num">EX 2.50</span>
+    <span class="ex-title">보조정리 2.49 (ii)의 증명 <em>Proof of Lemma 2.49 (ii)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>보조정리 2.49의 (ii)를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>보조정리 2.48은 상적분에 대한 세분 하한 특성만을 다루므로, 먼저 하적분에 대한 대응 결과를 보인다. $P$를 $[a,b]$의 분할이라 하면,</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>임을 보이자(보조정리 2.48의 증명을 그대로 본뜬다). 명백히</p>
+        <div class="math-display">$$\sup_{P^* \supset P} L(P^*, f, \alpha) \le \underline{\int_a^b} f d\alpha$$</div>
+        <p>이다($P$의 세분 $P^*$ 역시 $[a,b]$의 분할이므로, $L(P^*,f,\alpha)$는 하적분을 정의하는 상한에 참여하는 값이다). 한편 $P_1$을 $[a,b]$의 임의의 분할이라 하자. $P_1 \cup P$는 $P$의 세분이면서 동시에 $P_1$의 세분이므로, 정리 2.15에 의해</p>
+        <div class="math-display">$$L(P_1, f, \alpha) \le L(P_1 \cup P, f, \alpha) \le \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>이다. $P_1$이 $[a,b]$의 임의의 분할이므로,</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \sup_{P_1} L(P_1, f, \alpha) \le \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>이다. 두 부등식을 합치면 원하는 등식을 얻는다.</p>
+        <p>이제 (ii)를 증명한다. $\varepsilon > 0$이 주어졌다고 하자. $\alpha'$이 $[a,b]$ 위에서 리만 적분가능하므로,</p>
+        <div class="math-display">$$U(P, \alpha') - L(P, \alpha') \lt \varepsilon$$</div>
+        <p>을 만족하는 $[a,b]$의 분할 $P = \{x_0, \ldots, x_n\}$이 존재한다. 평균값 정리에 의해, 각 $i \in \{1, \ldots, n\}$에 대해</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha'(t_i)\Delta x_i$$</div>
+        <p>를 만족하는 $t_i \in [x_{i-1}, x_i]$가 존재한다. (i)의 증명과 마찬가지로</p>
+        <div class="math-display">$$M := \sup_{x \in [a,b]} |f(x)|$$</div>
+        <p>라 두면, 모든 $s_i \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \le M\sum_{i=1}^{n} |\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \lt M\varepsilon$$</div>
+        <p>이다(이는 (2.52)와 동일한 부등식이다). 특히 모든 $s_i \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \ge \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i - M\varepsilon \ge L(P, f\alpha') - M\varepsilon,$$</div>
+        <p>이다. 좌변에서 각 $s_i \in [x_{i-1}, x_i]$에 대해 하한을 취하면,</p>
+        <div class="math-display">$$\inf_{s_i} \sum_{i=1}^{n} f(s_i)\Delta\alpha_i = \sum_{i=1}^{n} \left(\inf_{s_i} f(s_i)\right) \Delta\alpha_i = \sum_{i=1}^{n} m_i \Delta\alpha_i = L(P, f, \alpha)$$</div>
+        <p>이다(각 $\Delta\alpha_i \ge 0$이고 $s_i$들이 서로 독립적으로 움직이므로, 하한이 각 항에 분배된다). 이 값은 우변의 상수 $L(P,f\alpha') - M\varepsilon$ 이상이므로,</p>
+        <div class="math-display">$$L(P, f, \alpha) \ge L(P, f\alpha') - M\varepsilon.$$</div>
+        <p>이다. 같은 방법으로,</p>
+        <div class="math-display">$$L(P, f\alpha') \ge L(P, f, \alpha) - M\varepsilon.$$</div>
+        <p>이다. $P$의 임의의 세분 $P^*$에 대해서도 위 두 부등식이 성립함을 유의하자. 왜냐하면</p>
+        <div class="math-display">$$U(P^*, \alpha') - L(P^*, \alpha') \le U(P, \alpha') - L(P, \alpha') \lt \varepsilon$$</div>
+        <p>이기 때문이다(정리 2.15와 따름정리 2.16에 의해 세분은 하합을 늘리고 상합을 줄이므로, 그 차는 세분에 대해 감소한다). 즉 $P$의 임의의 세분 $P^*$에 대해</p>
+        <div class="math-display">$$L(P^*, f, \alpha) \ge L(P^*, f\alpha') - M\varepsilon, \qquad L(P^*, f\alpha') \ge L(P^*, f, \alpha) - M\varepsilon$$</div>
+        <p>이 성립한다. 이 부등식들에서 $P^*$에 대해 $P$의 세분 전체에 대한 상한을 취하고 위에서 보인 하적분의 세분 특성화를 적용하면,</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha \ge \underline{\int_a^b} f\alpha' dx - M\varepsilon, \qquad \underline{\int_a^b} f\alpha' dx \ge \underline{\int_a^b} f d\alpha - M\varepsilon$$</div>
+        <p>을 얻는다. $\varepsilon > 0$이 임의의 양의 상수이므로,</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove (ii) in Lemma 2.49.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since Lemma 2.48 only gives the infimum-over-refinements characterization for the upper integral, we first establish the corresponding fact for the lower integral. Let $P$ be a partition of $[a,b]$. We claim</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>(this mirrors the proof of Lemma 2.48). Obviously</p>
+        <div class="math-display">$$\sup_{P^* \supset P} L(P^*, f, \alpha) \le \underline{\int_a^b} f d\alpha$$</div>
+        <p>since every refinement $P^*$ of $P$ is itself a partition of $[a,b]$, and $L(P^*,f,\alpha)$ is one of the values whose supremum defines the lower integral. On the other hand, let $P_1$ be an arbitrary partition of $[a,b]$. Then $P_1 \cup P$ is a refinement of $P$ and also a refinement of $P_1$, so by Theorem 2.15,</p>
+        <div class="math-display">$$L(P_1, f, \alpha) \le L(P_1 \cup P, f, \alpha) \le \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>Since $P_1$ is an arbitrary partition of $[a,b]$,</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \sup_{P_1} L(P_1, f, \alpha) \le \sup_{P^* \supset P} L(P^*, f, \alpha)$$</div>
+        <p>Combining the two inequalities gives the claimed equality.</p>
+        <p>Now we prove (ii). Let $\varepsilon > 0$ be given. Since $\alpha'$ is Riemann integrable on $[a,b]$, there exists a partition $P = \{x_0, \ldots, x_n\}$ of $[a,b]$ such that</p>
+        <div class="math-display">$$U(P, \alpha') - L(P, \alpha') \lt \varepsilon$$</div>
+        <p>By the mean-value theorem, for each $i \in \{1, \ldots, n\}$, there exists $t_i \in [x_{i-1}, x_i]$ such that</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha'(t_i)\Delta x_i$$</div>
+        <p>As in the proof of (i), setting</p>
+        <div class="math-display">$$M := \sup_{x \in [a,b]} |f(x)|,$$</div>
+        <p>we have, for all $s_i \in [x_{i-1}, x_i]$,</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \le M\sum_{i=1}^{n} |\alpha'(t_i) - \alpha'(s_i)|\Delta x_i \lt M\varepsilon$$</div>
+        <p>(this is exactly (2.52)). In particular, for all $s_i \in [x_{i-1}, x_i]$,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \ge \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i - M\varepsilon \ge L(P, f\alpha') - M\varepsilon.$$</div>
+        <p>Taking the infimum over each $s_i \in [x_{i-1}, x_i]$ on the left,</p>
+        <div class="math-display">$$\inf_{s_i} \sum_{i=1}^{n} f(s_i)\Delta\alpha_i = \sum_{i=1}^{n} \left(\inf_{s_i} f(s_i)\right) \Delta\alpha_i = \sum_{i=1}^{n} m_i \Delta\alpha_i = L(P, f, \alpha)$$</div>
+        <p>(since $\Delta\alpha_i \ge 0$ and the $s_i$ vary independently, the infimum distributes across the terms). This value is at least the constant $L(P,f\alpha') - M\varepsilon$ on the right, so</p>
+        <div class="math-display">$$L(P, f, \alpha) \ge L(P, f\alpha') - M\varepsilon.$$</div>
+        <p>Similarly,</p>
+        <div class="math-display">$$L(P, f\alpha') \ge L(P, f, \alpha) - M\varepsilon.$$</div>
+        <p>Note that both inequalities also hold for any refinement $P^*$ of $P$, since</p>
+        <div class="math-display">$$U(P^*, \alpha') - L(P^*, \alpha') \le U(P, \alpha') - L(P, \alpha') \lt \varepsilon$$</div>
+        <p>(by Theorem 2.15 and Corollary 2.16, refinement increases the lower sum and decreases the upper sum, so their difference only shrinks under refinement). That is, for any refinement $P^*$ of $P$,</p>
+        <div class="math-display">$$L(P^*, f, \alpha) \ge L(P^*, f\alpha') - M\varepsilon, \qquad L(P^*, f\alpha') \ge L(P^*, f, \alpha) - M\varepsilon$$</div>
+        <p>Taking the supremum over refinements $P^*$ of $P$ and applying the lower-integral characterization shown above, we obtain</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha \ge \underline{\int_a^b} f\alpha' dx - M\varepsilon, \qquad \underline{\int_a^b} f\alpha' dx \ge \underline{\int_a^b} f d\alpha - M\varepsilon$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant, we conclude</p>
+        <div class="math-display">$$\underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.51 -->
+<div class="card ex-card" id="c2-51">
+  <div class="card-head">
+    <span class="ex-num">EX 2.51</span>
+    <span class="ex-title">(2.53)에서 (2.54)로 <em>From (2.53) to (2.54)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(2.53)이 (2.54)를 함의함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(2.53)에 의해, $[a,b]$의 분할 $P = \{x_0,\ldots,x_n\}$에 대해 임의의 선택 $s_1 \in [x_0,x_1], \ldots, s_n \in [x_{n-1},x_n]$마다</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \le U(P, f\alpha') + M\varepsilon$$</div>
+        <p>이 성립한다. 여기서 우변은 $s_1,\ldots,s_n$의 선택과 무관한 상수이고, 각 구간 $[x_{i-1},x_i]$에서의 선택 $s_i$는 서로 독립적이다. 이를 이용하여 좌변의 상한이 각 항별로 분배됨을 보인다.</p>
+        <p>$\varepsilon' > 0$이 주어졌다고 하자. 각 $i = 1,\ldots,n$에 대해 $M_i := \sup_{x \in [x_{i-1},x_i]} f(x)$라 두자. $\Delta\alpha_i > 0$이면, 주의 1.49의 $\varepsilon$-특성화에 의해</p>
+        <div class="math-display">$$f(s_i^*) \gt M_i - \frac{\varepsilon'}{n\Delta\alpha_i}$$</div>
+        <p>를 만족하는 $s_i^* \in [x_{i-1},x_i]$가 존재하고, 이때</p>
+        <div class="math-display">$$f(s_i^*)\Delta\alpha_i \gt M_i\Delta\alpha_i - \frac{\varepsilon'}{n}$$</div>
+        <p>이다. $\Delta\alpha_i = 0$이면 $s_i^* \in [x_{i-1},x_i]$를 임의로 택하더라도</p>
+        <div class="math-display">$$f(s_i^*)\Delta\alpha_i = 0 = M_i\Delta\alpha_i \gt M_i\Delta\alpha_i - \frac{\varepsilon'}{n}$$</div>
+        <p>이 자명하게 성립한다. 두 경우 모두 $f(s_i^*)\Delta\alpha_i \gt M_i\Delta\alpha_i - \varepsilon'/n$이므로, $i = 1,\ldots,n$에 대해 더하면</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i^*)\Delta\alpha_i \gt \sum_{i=1}^{n} M_i\Delta\alpha_i - \varepsilon' = U(P,f,\alpha) - \varepsilon'.$$</div>
+        <p>한편 $s_1^*,\ldots,s_n^*$은 각 구간에서의 선택이므로 (2.53)에 의해</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i^*)\Delta\alpha_i \le U(P, f\alpha') + M\varepsilon$$</div>
+        <p>이다. 두 부등식을 결합하면</p>
+        <div class="math-display">$$U(P,f,\alpha) - \varepsilon' \lt U(P, f\alpha') + M\varepsilon$$</div>
+        <p>즉</p>
+        <div class="math-display">$$U(P,f,\alpha) \lt U(P, f\alpha') + M\varepsilon + \varepsilon'$$</div>
+        <p>이 임의의 $\varepsilon' > 0$에 대해 성립한다. $\varepsilon' > 0$이 임의적이므로,</p>
+        <div class="math-display">$$U(P,f,\alpha) \le U(P, f\alpha') + M\varepsilon,$$</div>
+        <p>즉 (2.54)가 성립한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that (2.53) implies (2.54).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By (2.53), for the partition $P = \{x_0,\ldots,x_n\}$ of $[a,b]$, for every choice $s_1 \in [x_0,x_1], \ldots, s_n \in [x_{n-1},x_n]$,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \le U(P, f\alpha') + M\varepsilon$$</div>
+        <p>holds. Here the right side is a constant independent of the choice of $s_1,\ldots,s_n$, and the choice $s_i$ on each interval $[x_{i-1},x_i]$ is independent of the others. We use this to show that the supremum on the left distributes term by term.</p>
+        <p>Let $\varepsilon' > 0$ be given. For each $i = 1,\ldots,n$, put $M_i := \sup_{x \in [x_{i-1},x_i]} f(x)$. If $\Delta\alpha_i > 0$, then by the $\varepsilon$-characterization of Remark 1.49, there exists $s_i^* \in [x_{i-1},x_i]$ such that</p>
+        <div class="math-display">$$f(s_i^*) \gt M_i - \frac{\varepsilon'}{n\Delta\alpha_i},$$</div>
+        <p>and hence</p>
+        <div class="math-display">$$f(s_i^*)\Delta\alpha_i \gt M_i\Delta\alpha_i - \frac{\varepsilon'}{n}.$$</div>
+        <p>If $\Delta\alpha_i = 0$, then for any choice of $s_i^* \in [x_{i-1},x_i]$,</p>
+        <div class="math-display">$$f(s_i^*)\Delta\alpha_i = 0 = M_i\Delta\alpha_i \gt M_i\Delta\alpha_i - \frac{\varepsilon'}{n}$$</div>
+        <p>trivially holds. In either case $f(s_i^*)\Delta\alpha_i \gt M_i\Delta\alpha_i - \varepsilon'/n$, so summing over $i = 1,\ldots,n$,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i^*)\Delta\alpha_i \gt \sum_{i=1}^{n} M_i\Delta\alpha_i - \varepsilon' = U(P,f,\alpha) - \varepsilon'.$$</div>
+        <p>On the other hand, since $s_1^*,\ldots,s_n^*$ is a choice on each interval, (2.53) gives</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i^*)\Delta\alpha_i \le U(P, f\alpha') + M\varepsilon.$$</div>
+        <p>Combining the two inequalities,</p>
+        <div class="math-display">$$U(P,f,\alpha) - \varepsilon' \lt U(P, f\alpha') + M\varepsilon,$$</div>
+        <p>that is,</p>
+        <div class="math-display">$$U(P,f,\alpha) \lt U(P, f\alpha') + M\varepsilon + \varepsilon'$$</div>
+        <p>for every $\varepsilon' > 0$. Since $\varepsilon' > 0$ is arbitrary,</p>
+        <div class="math-display">$$U(P,f,\alpha) \le U(P, f\alpha') + M\varepsilon,$$</div>
+        <p>which is (2.54).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.52 -->
+<div class="card ex-card" id="c2-52">
+  <div class="card-head">
+    <span class="ex-num">EX 2.52</span>
+    <span class="ex-title">(2.52)를 이용한 (2.55)의 증명 <em>Proof of (2.55) Using (2.52)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(2.52)를 이용하여 (2.55)를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(2.52)에 의해, $[a,b]$의 분할 $P = \{x_0,\ldots,x_n\}$과 임의의 선택 $s_1 \in [x_0,x_1],\ldots,s_n \in [x_{n-1},x_n]$에 대해</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \lt M\varepsilon$$</div>
+        <p>이 성립한다. 특히</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i \le \sum_{i=1}^{n} f(s_i)\Delta\alpha_i + M\varepsilon$$</div>
+        <p>이다. 또한 정의에 의해 각 $i$에 대해 $f(s_i) \le M_i = \sup_{x\in[x_{i-1},x_i]} f(x)$이고 $\Delta\alpha_i \ge 0$이므로,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \le \sum_{i=1}^{n} M_i\Delta\alpha_i = U(P,f,\alpha)$$</div>
+        <p>이다. 따라서 모든 $s_1,\ldots,s_n$에 대해</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i \le U(P,f,\alpha) + M\varepsilon$$</div>
+        <p>이 성립한다. 우변은 $s_1,\ldots,s_n$의 선택과 무관한 상수이고, 연습문제 2.51에서와 마찬가지로 각 $s_i$는 서로 독립적으로 자신의 구간에서 움직일 수 있다. 각 $i = 1,\ldots,n$에 대해</p>
+        <div class="math-display">$$M_i^{f\alpha'} := \sup_{x \in [x_{i-1},x_i]} f(x)\alpha'(x)$$</div>
+        <p>라 두자. 연습문제 2.51의 논법을 그대로 적용하면($\varepsilon' > 0$을 고정하고, 각 $i$에 대해 $\Delta x_i > 0$이면 주의 1.49의 $\varepsilon$-특성화로 $f(s_i^*)\alpha'(s_i^*)\Delta x_i > M_i^{f\alpha'}\Delta x_i - \varepsilon'/n$을 만족하는 $s_i^*$를 택하고, $\Delta x_i = 0$이면 아무 $s_i^*$나 택하여 $i=1,\ldots,n$에 대해 더한 뒤 $\varepsilon' \to 0$으로 보내면),</p>
+        <div class="math-display">$$U(P,f\alpha') = \sum_{i=1}^{n} M_i^{f\alpha'}\Delta x_i \le U(P,f,\alpha) + M\varepsilon$$</div>
+        <p>즉 (2.55)를 얻는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove (2.55) by using (2.52).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By (2.52), for the partition $P = \{x_0,\ldots,x_n\}$ of $[a,b]$ and every choice $s_1 \in [x_0,x_1],\ldots,s_n \in [x_{n-1},x_n]$,</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(s_i)\Delta\alpha_i - \sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i\right| \lt M\varepsilon$$</div>
+        <p>holds. In particular,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i \le \sum_{i=1}^{n} f(s_i)\Delta\alpha_i + M\varepsilon.$$</div>
+        <p>Also, by definition $f(s_i) \le M_i = \sup_{x\in[x_{i-1},x_i]} f(x)$ for each $i$, and $\Delta\alpha_i \ge 0$, so</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\Delta\alpha_i \le \sum_{i=1}^{n} M_i\Delta\alpha_i = U(P,f,\alpha).$$</div>
+        <p>Thus for all $s_1,\ldots,s_n$,</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(s_i)\alpha'(s_i)\Delta x_i \le U(P,f,\alpha) + M\varepsilon$$</div>
+        <p>holds. The right side is a constant independent of the choice of $s_1,\ldots,s_n$, and as in Exercise 2.51, each $s_i$ can be chosen independently on its own interval. For each $i = 1,\ldots,n$, put</p>
+        <div class="math-display">$$M_i^{f\alpha'} := \sup_{x \in [x_{i-1},x_i]} f(x)\alpha'(x).$$</div>
+        <p>Applying the same argument as in Exercise 2.51 (fix $\varepsilon' > 0$; for each $i$ with $\Delta x_i > 0$, use the $\varepsilon$-characterization of Remark 1.49 to choose $s_i^*$ with $f(s_i^*)\alpha'(s_i^*)\Delta x_i > M_i^{f\alpha'}\Delta x_i - \varepsilon'/n$, and any $s_i^*$ when $\Delta x_i = 0$; sum over $i = 1,\ldots,n$ and let $\varepsilon' \to 0$), we obtain</p>
+        <div class="math-display">$$U(P,f\alpha') = \sum_{i=1}^{n} M_i^{f\alpha'}\Delta x_i \le U(P,f,\alpha) + M\varepsilon,$$</div>
+        <p>which is (2.55).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.53 -->
+<div class="card thm-card" id="c2-53">
+  <div class="card-head">
+    <span class="thm-num">THM 2.53</span>
+    <span class="thm-title">미분가능한 적분자에 대한 리만-스틸체스 적분가능성 판정 <em>Riemann-Stieltjes Integrability Criterion for a Differentiable Integrator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 유계함수이고 $\alpha$가 단조증가함수라 하자. $\alpha$가 $[a, b]$ 위에서 미분가능하고 그 도함수 $\alpha'$이 $[a, b]$ 위에서 리만 적분가능하다고 가정하자. 그러면 $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능한 것과 $f\alpha'$이 $[a, b]$ 위에서 리만 적분가능한 것은 동치이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a bounded function on $[a, b]$ and $\alpha$ be a monotonically increasing function. Assume that $\alpha$ is differentiable on $[a, b]$ and its derivative $\alpha'$ is Riemann integrable on $[a, b]$. Then $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a, b]$ if and only if $f\alpha'$ is Riemann integrable on $[a, b]$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 2.54 -->
+<div class="card thm-card" id="c2-54">
+  <div class="card-head">
+    <span class="thm-num">COR 2.54</span>
+    <span class="thm-title">적분자의 도함수를 통한 계산 <em>Evaluation through the Derivative of the Integrator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 유계함수이고 $\alpha$가 $[a, b]$ 위에서 단조증가하며 미분가능한 함수로서 그 도함수 $\alpha'$이 $[a, b]$ 위에서 리만 적분가능하다고 하자. $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능하거나 $f\alpha'$이 $[a, b]$ 위에서 리만 적분가능하다고 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \int_a^b f\alpha' dx =: \int_a^b f(x)\alpha'(x)dx.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a bounded function on $[a, b]$ and $\alpha$ be a monotonically increasing differentiable function on $[a, b]$ whose derivative $\alpha'$ is Riemann integrable on $[a, b]$. Assume that $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a, b]$ or $f\alpha'$ is Riemann integrable on $[a, b]$. Then</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \int_a^b f\alpha' dx =: \int_a^b f(x)\alpha'(x)dx.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.55 -->
+<div class="card ex-card" id="c2-55">
+  <div class="card-head">
+    <span class="ex-num">EX 2.55</span>
+    <span class="ex-title">정리 2.53의 증명 <em>Proof of Theorem 2.53</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 2.53을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 2.53의 가정은 보조정리 2.49의 가정과 동일하다: $f$는 $[a,b]$ 위의 유계함수이고, $\alpha$는 $[a,b]$ 위에서 단조증가하며 미분가능한 함수로서 그 도함수 $\alpha'$이 $[a,b]$ 위에서 리만 적분가능하다. 따라서 보조정리 2.49의 (i)와 (ii)에 의해</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx, \qquad \underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx$$</div>
+        <p>이다. 또한 $f$는 $[a,b]$ 위의 유계함수이고, $\alpha'$이 $[a,b]$ 위에서 리만 적분가능하므로 연습문제 2.10에 의해 $\alpha'$ 역시 $[a,b]$ 위에서 유계이어서 $f\alpha'$도 $[a,b]$ 위의 유계함수이다. 적분자 $\alpha$는 단조증가함수이고 항등함수 $x \mapsto x$ 또한 단조증가함수이므로, 따름정리 2.18에 의해 위 네 값은 모두 $\mathbb{R}$에서 존재한다. 따라서 정의 2.12에 의해, $f$가 $[a,b]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능한 것과</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \underline{\int_a^b} f d\alpha$$</div>
+        <p>인 것은 동치이다. 위에서 보인 등식에 의해 이는 다시</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \underline{\int_a^b} f\alpha' dx$$</div>
+        <p>인 것과 동치이고, 정의 2.6에 의해 이는 $f\alpha'$이 $[a,b]$에서 리만 적분가능한 것과 동치이다. 그러므로 $f$가 $[a,b]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능한 것과 $f\alpha'$이 $[a,b]$에서 리만 적분가능한 것은 동치이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove Theorem 2.53.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>The hypotheses of Theorem 2.53 coincide with those of Lemma 2.49: $f$ is a bounded function on $[a,b]$, and $\alpha$ is a monotonically increasing differentiable function on $[a,b]$ whose derivative $\alpha'$ is Riemann integrable on $[a,b]$. Thus by Lemma 2.49 (i) and (ii),</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx, \qquad \underline{\int_a^b} f d\alpha = \underline{\int_a^b} f\alpha' dx$$</div>
+        <p>Also, $f$ is a bounded function on $[a,b]$, and since $\alpha'$ is Riemann integrable on $[a,b]$, Exercise 2.10 makes $\alpha'$ bounded on $[a,b]$, so $f\alpha'$ is a bounded function on $[a,b]$ as well. Since the integrator $\alpha$ is monotonically increasing and so is the identity $x \mapsto x$, by Corollary 2.18 all four of the above values exist in $\mathbb{R}$. Thus by Definition 2.12, $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,b]$ if and only if</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \underline{\int_a^b} f d\alpha.$$</div>
+        <p>By the equalities shown above, this is equivalent to</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \underline{\int_a^b} f\alpha' dx,$$</div>
+        <p>which by Definition 2.6 is equivalent to $f\alpha'$ being Riemann integrable on $[a,b]$. Therefore $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,b]$ if and only if $f\alpha'$ is Riemann integrable on $[a,b]$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.56 -->
+<div class="card ex-card" id="c2-56">
+  <div class="card-head">
+    <span class="ex-num">EX 2.56</span>
+    <span class="ex-title">따름정리 2.54의 증명 <em>Proof of Corollary 2.54</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>따름정리 2.54를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>가정에 의해 $f$는 $[a,b]$ 위의 유계함수이고 $\alpha$는 $[a,b]$ 위에서 단조증가하며 미분가능한 함수로서 그 도함수 $\alpha'$이 $[a,b]$ 위에서 리만 적분가능하다. 즉 정리 2.53의 가정이 성립한다. $f$가 $[a,b]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능하거나 $f\alpha'$이 $[a,b]$에서 리만 적분가능하다고 가정하였으므로, 정리 2.53에 의해 두 성질이 모두 성립한다. 즉 $f$는 $[a,b]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능하고 $f\alpha'$은 $[a,b]$에서 리만 적분가능하다.</p>
+        <p>정의 2.12에 의해</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \overline{\int_a^b} f d\alpha$$</div>
+        <p>이고, 보조정리 2.49(i)에 의해</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx$$</div>
+        <p>이며, $f\alpha'$이 $[a,b]$에서 리만 적분가능하므로 정의 2.6에 의해</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \int_a^b f\alpha' dx$$</div>
+        <p>이다. 세 등식을 결합하면</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \int_a^b f\alpha' dx =: \int_a^b f(x)\alpha'(x)dx.$$</div>
+        <p>를 얻는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove Corollary 2.54.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By hypothesis, $f$ is a bounded function on $[a,b]$ and $\alpha$ is a monotonically increasing differentiable function on $[a,b]$ whose derivative $\alpha'$ is Riemann integrable on $[a,b]$, i.e. the hypotheses of Theorem 2.53 hold. Since we assumed that $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,b]$ or $f\alpha'$ is Riemann integrable on $[a,b]$, by Theorem 2.53 both properties hold: $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,b]$ and $f\alpha'$ is Riemann integrable on $[a,b]$.</p>
+        <p>By Definition 2.12,</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \overline{\int_a^b} f d\alpha,$$</div>
+        <p>by Lemma 2.49(i),</p>
+        <div class="math-display">$$\overline{\int_a^b} f d\alpha = \overline{\int_a^b} f\alpha' dx,$$</div>
+        <p>and since $f\alpha'$ is Riemann integrable on $[a,b]$, by Definition 2.6,</p>
+        <div class="math-display">$$\overline{\int_a^b} f\alpha' dx = \int_a^b f\alpha' dx.$$</div>
+        <p>Combining the three equalities, we obtain</p>
+        <div class="math-display">$$\int_a^b f d\alpha = \int_a^b f\alpha' dx =: \int_a^b f(x)\alpha'(x)dx.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.57 -->
+<div class="card thm-card" id="c2-57">
+  <div class="card-head">
+    <span class="thm-num">THM 2.57</span>
+    <span class="thm-title">순증가 연속 치환에 대한 불변성 <em>Invariance under a Strictly Increasing Continuous Substitution</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\varphi$가 구간 $[A, B]$를 $[a, b]$ 위로 대응시키는 순증가 연속함수이고, $\alpha$가 $[a, b]$ 위의 단조증가함수이며, $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능한 함수라 하자.</p>
+        <div class="math-display">$$\beta(y) = \alpha(\varphi(y)) \quad \text{and} \quad g(y) = f(\varphi(y)) \qquad (y \in [A, B]).$$</div>
+        <p>라 정의하자. 그러면 $g$는 $[A, B]$ 위에서 $\beta$에 관하여 리만-스틸체스 적분가능하고</p>
+        <div class="math-display">$$\int_A^B g d\beta = \int_a^b f d\alpha.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varphi$가 순증가이므로 $\varphi$는 $[A, B]$에서 $[a, b]$ 위로의 일대일대응임을 유의하자. 따라서 $[a, b]$에서 $[A, B]$ 위로의 역함수 $\varphi^{-1}$이 존재한다. $[a, b]$의 임의의 분할 $P = \{x_0, \ldots, x_n\}$에 대해, 다음을 만족하는 $[A, B]$의 대응하는 분할 $Q = \{y_0, \ldots, y_n\}$이 존재한다.</p>
+        <div class="math-display">$$y_i = \varphi^{-1}(x_i) \quad \text{and} \quad x_i = \varphi(y_i) \qquad \forall i \in \{0, 1, \ldots, n\}.$$</div>
+        <p>마찬가지로, $[A, B]$의 임의의 분할 $Q = \{y_0, \ldots, y_n\}$에 대해, 다음을 만족하는 $[a, b]$의 대응하는 분할 $P = \{x_0, \ldots, x_n\}$이 존재한다.</p>
+        <div class="math-display">$$y_i = \varphi^{-1}(x_i) \quad \text{and} \quad x_i = \varphi(y_i) \qquad \forall i \in \{0, 1, \ldots, n\}.$$</div>
+        <p>$P = \{x_0, \ldots, x_n\}$을 $[a, b]$의 분할, $Q = \{y_0, \ldots, y_n\}$을 대응하는 $[A, B]$의 분할이라 하자. $i = 1, \ldots, n$에 대해</p>
+        <div class="math-display">$$M_i^f := \sup_{x \in [x_{i-1}, x_i]} f(x), \quad M_i^g := \sup_{y \in [y_{i-1}, y_i]} g(y),$$</div>
+        <div class="math-display">$$m_i^f := \inf_{x \in [x_{i-1}, x_i]} f(x), \quad m_i^g := \inf_{y \in [y_{i-1}, y_i]} g(y).$$</div>
+        <p>라 두자. 각 $i$에 대해</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha(\varphi(y_i)) - \alpha(\varphi(y_{i-1})) = \beta(y_i) - \beta(y_{i-1}) = \Delta\beta_i.$$</div>
+        <p>임을 관찰하자. 더욱이 모든 $i = 1, \ldots, n$과 $x \in [x_{i-1}, x_i]$에 대해</p>
+        <div class="math-display">$$\varphi^{-1}(x) \in [y_{i-1}, y_i]$$</div>
+        <p>이고</p>
+        <div class="math-display">$$f(x) = f(\varphi(\varphi^{-1}(x))) = g(\varphi^{-1}(x)),$$</div>
+        <p>이므로,</p>
+        <div class="math-display">$$M_i^f = M_i^g, \quad \text{and} \quad m_i^f = m_i^g.$$</div>
+        <p>를 얻는다. 따라서</p>
+        <div class="math-display">$$U(P, f, \alpha) = \sum_{i=1}^{n} M_i^f \Delta\alpha_i = \sum_{i=1}^{n} M_i^g \Delta\beta_i = U(Q, g, \beta)$$</div>
+        <p>이고</p>
+        <div class="math-display">$$L(P, f, \alpha) = \sum_{i=1}^{n} m_i^f \Delta\alpha_i = \sum_{i=1}^{n} m_i^g \Delta\beta_i = L(Q, g, \beta).$$</div>
+        <p>이다. $\varepsilon > 0$이 주어졌다고 하자. $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만 적분가능하므로,</p>
+        <div class="math-display">$$U(P_0, f, \alpha) - L(P_0, f, \alpha) \lt \varepsilon.$$</div>
+        <p>을 만족하는 분할 $P_0$가 존재한다. $[A, B]$의 대응하는 분할 $Q_0$를 생각하면,</p>
+        <div class="math-display">$$U(Q_0, g, \beta) - L(Q_0, g, \beta) = U(P_0, f, \alpha) - L(P_0, f, \alpha) \lt \varepsilon.$$</div>
+        <p>이다. 따라서 $g$는 $[A, B]$ 위에서 $\beta$에 관하여 리만-스틸체스 적분가능하다. 더욱이,</p>
+        <div class="math-display">$$\begin{aligned} \int_a^b f d\alpha = \overline{\int_a^b} f d\alpha &:= \inf\{U(P, f, \alpha) : P \text{ is a partition of } [a,b]\} \\ &= \inf\{U(Q, g, \beta) : P \text{ is a partition of } [a,b]\} \\ &= \inf\{U(Q, g, \beta) : Q \text{ is a partition of } [A,B]\} \\ &= \overline{\int_A^B} g d\beta = \int_A^B g d\beta. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\varphi$ be a strictly increasing continuous function that maps an interval $[A, B]$ onto $[a, b]$, $\alpha$ be a monotonically increasing function on $[a, b]$, and $f$ be a Riemann-Stieltjes integrable function with respect to $\alpha$ on $[a, b]$. Define</p>
+        <div class="math-display">$$\beta(y) = \alpha(\varphi(y)) \quad \text{and} \quad g(y) = f(\varphi(y)) \qquad (y \in [A, B]).$$</div>
+        <p>Then $g$ is Riemann-Stieltjes integrable with respect to $\beta$ on $[A, B]$ and</p>
+        <div class="math-display">$$\int_A^B g d\beta = \int_a^b f d\alpha.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Note that $\varphi$ is 1-1 function from $[A, B]$ onto $[a, b]$ since $\varphi$ is strictly increasing. Thus there exists the inverse function $\varphi^{-1}$ from $[a, b]$ onto $[A, B]$. For any partition $P = \{x_0, \ldots, x_n\}$ of $[a, b]$, there exists a corresponding partition $Q = \{y_0, \ldots, y_n\}$ of $[A, B]$ such that</p>
+        <div class="math-display">$$y_i = \varphi^{-1}(x_i) \quad \text{and} \quad x_i = \varphi(y_i) \qquad \forall i \in \{0, 1, \ldots, n\}.$$</div>
+        <p>Similarly, for any partition $Q = \{y_0, \ldots, y_n\}$ of $[A, B]$, there exists a corresponding partition $P = \{x_0, \ldots, x_n\}$ of $[a, b]$ such that</p>
+        <div class="math-display">$$y_i = \varphi^{-1}(x_i) \quad \text{and} \quad x_i = \varphi(y_i) \qquad \forall i \in \{0, 1, \ldots, n\}.$$</div>
+        <p>Let $P = \{x_0, \ldots, x_n\}$ be a partition of $[a, b]$ and $Q = \{y_0, \ldots, y_n\}$ be the corresponding partition of $[A, B]$. For $i = 1, \ldots, n$, set</p>
+        <div class="math-display">$$M_i^f := \sup_{x \in [x_{i-1}, x_i]} f(x), \quad M_i^g := \sup_{y \in [y_{i-1}, y_i]} g(y),$$</div>
+        <div class="math-display">$$m_i^f := \inf_{x \in [x_{i-1}, x_i]} f(x), \quad m_i^g := \inf_{y \in [y_{i-1}, y_i]} g(y).$$</div>
+        <p>Observe that for each $i$,</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = \alpha(\varphi(y_i)) - \alpha(\varphi(y_{i-1})) = \beta(y_i) - \beta(y_{i-1}) = \Delta\beta_i.$$</div>
+        <p>Moreover for all $i = 1, \ldots, n$ and $x \in [x_{i-1}, x_i]$,</p>
+        <div class="math-display">$$\varphi^{-1}(x) \in [y_{i-1}, y_i]$$</div>
+        <p>and</p>
+        <div class="math-display">$$f(x) = f(\varphi(\varphi^{-1}(x))) = g(\varphi^{-1}(x)),$$</div>
+        <p>which lead to</p>
+        <div class="math-display">$$M_i^f = M_i^g, \quad \text{and} \quad m_i^f = m_i^g.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$U(P, f, \alpha) = \sum_{i=1}^{n} M_i^f \Delta\alpha_i = \sum_{i=1}^{n} M_i^g \Delta\beta_i = U(Q, g, \beta)$$</div>
+        <p>and</p>
+        <div class="math-display">$$L(P, f, \alpha) = \sum_{i=1}^{n} m_i^f \Delta\alpha_i = \sum_{i=1}^{n} m_i^g \Delta\beta_i = L(Q, g, \beta).$$</div>
+        <p>Let $\varepsilon > 0$ be given. Since $f$ is Riemann-integrable with respect to $\alpha$ on $[a, b]$, there exists a partition $P_0$ such that</p>
+        <div class="math-display">$$U(P_0, f, \alpha) - L(P_0, f, \alpha) \lt \varepsilon.$$</div>
+        <p>Considering the corresponding partition $Q_0$ of $[A, B]$, we have</p>
+        <div class="math-display">$$U(Q_0, g, \beta) - L(Q_0, g, \beta) = U(P_0, f, \alpha) - L(P_0, f, \alpha) \lt \varepsilon.$$</div>
+        <p>Thus $g$ is Riemann-Stieltjes integrable with respect to $\beta$ on $[A, B]$. Moreover,</p>
+        <div class="math-display">$$\begin{aligned} \int_a^b f d\alpha = \overline{\int_a^b} f d\alpha &:= \inf\{U(P, f, \alpha) : P \text{ is a partition of } [a,b]\} \\ &= \inf\{U(Q, g, \beta) : P \text{ is a partition of } [a,b]\} \\ &= \inf\{U(Q, g, \beta) : Q \text{ is a partition of } [A,B]\} \\ &= \overline{\int_A^B} g d\beta = \int_A^B g d\beta. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.54 ═══════════ -->
+
+<!-- Corollary 2.58 -->
+<div class="card thm-card" id="c2-58">
+  <div class="card-head">
+    <span class="thm-num">COR 2.58</span>
+    <span class="thm-title">변수변환 <em>Change of variable</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\varphi$가 구간 $[A, B]$를 $[a, b]$ 위로 대응시키는 순증가 미분가능함수이고, $f$가 $[a, b]$ 위의 리만 적분가능함수라 하자. $\varphi'$이 $[A, B]$ 위에서 리만 적분가능하다고 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b f(x)dx = \int_A^B f(\varphi(y))\varphi'(y)dy.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\alpha(x) = x$라 두고</p>
+        <div class="math-display">$$\beta(y) = \alpha(\varphi(y)) \quad \text{and} \quad g(y) = f(\varphi(y)) \qquad (y \in [a, b]).$$</div>
+        <p>를 상기하자. 그러면 $\beta(y) = \varphi(y)$이고, 정리 2.57에 의해,</p>
+        <div class="math-display">$$\int_A^B f(\varphi(y))d\varphi(y) = \int_A^B g d\beta = \int_a^b f d\alpha = \int_a^b f dx.$$</div>
+        <p>이다. 마지막으로 따름정리 2.54를 적용하면,</p>
+        <div class="math-display">$$\int_A^B f(\varphi(y))\varphi'(y)dy = \int_a^b f dx.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\varphi$ be a strictly increasing differentiable function that maps an interval $[A, B]$ onto $[a, b]$, and $f$ be a Riemann integrable function on $[a, b]$. Assume that $\varphi'$ is Riemann integrable on $[A, B]$. Then</p>
+        <div class="math-display">$$\int_a^b f(x)dx = \int_A^B f(\varphi(y))\varphi'(y)dy.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Set $\alpha(x) = x$ and recall</p>
+        <div class="math-display">$$\beta(y) = \alpha(\varphi(y)) \quad \text{and} \quad g(y) = f(\varphi(y)) \qquad (y \in [a, b]).$$</div>
+        <p>Then $\beta(y) = \varphi(y)$ and by Theorem 2.57,</p>
+        <div class="math-display">$$\int_A^B f(\varphi(y))d\varphi(y) = \int_A^B g d\beta = \int_a^b f d\alpha = \int_a^b f dx.$$</div>
+        <p>Finally applying Corollary 2.54, we have</p>
+        <div class="math-display">$$\int_A^B f(\varphi(y))\varphi'(y)dy = \int_a^b f dx.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.59 -->
+<div class="card thm-card" id="c2-59">
+  <div class="card-head">
+    <span class="thm-num">THM 2.59</span>
+    <span class="thm-title">부정적분의 연속성 <em>Continuity of the Indefinite Integral</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 리만 적분가능함수라 하자.</p>
+        <div class="math-display">$$F(x) = \int_a^x f(t)dt \qquad (a \le x \le b).$$</div>
+        <p>라 정의하자. 그러면 $F$는 $[a, b]$ 위에서 연속이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$f$가 $[a, b]$ 위에서 리만 적분가능하므로, $f$는 $[a, b]$ 위에서 유계이다. 따라서</p>
+        <div class="math-display">$$|f(t)| \le M \qquad \forall t \in [a, b].$$</div>
+        <p>을 만족하는 양의 상수 $M$이 존재한다. $a \le x \le y \le b$라 하자. 그러면 정리 2.37에 의해,</p>
+        <div class="math-display">$$|F(y) - F(x)| = \left|\int_a^y f(t)dt - \int_a^x f(t)dt\right| = \left|\int_x^y f(t)dt\right| \le M(y - x). \tag{2.56}$$</div>
+        <p>이다. $\varepsilon > 0$이 주어졌다고 하자. $\delta = \frac{\varepsilon}{M}$이라 두자. $|x - y| \lt \delta$이면, (2.56)에 의해</p>
+        <div class="math-display">$$|F(x) - F(y)| \le M|x - y| \lt M\delta = \varepsilon.$$</div>
+        <p>이다. 그러므로 $F$는 $[a, b]$ 위에서 균등연속이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a Riemann integrable function on $[a, b]$. Define</p>
+        <div class="math-display">$$F(x) = \int_a^x f(t)dt \qquad (a \le x \le b).$$</div>
+        <p>Then $F$ is continuous on $[a, b]$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $f$ is Riemann integrable on $[a, b]$, $f$ is bounded on $[a, b]$. Thus there exists a positive constant $M$ such that</p>
+        <div class="math-display">$$|f(t)| \le M \qquad \forall t \in [a, b].$$</div>
+        <p>Let $a \le x \le y \le b$. Then by Theorem 2.37,</p>
+        <div class="math-display">$$|F(y) - F(x)| = \left|\int_a^y f(t)dt - \int_a^x f(t)dt\right| = \left|\int_x^y f(t)dt\right| \le M(y - x). \tag{2.56}$$</div>
+        <p>Let $\varepsilon > 0$ be given. Take $\delta = \frac{\varepsilon}{M}$. If $|x - y| \lt \delta$, then by (2.56)</p>
+        <div class="math-display">$$|F(x) - F(y)| \le M|x - y| \lt M\delta = \varepsilon.$$</div>
+        <p>Therefore $F$ is uniformly continuous on $[a, b]$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.60 -->
+<div class="card ex-card" id="c2-60">
+  <div class="card-head">
+    <span class="ex-num">EX 2.60</span>
+    <span class="ex-title">리만-스틸체스 적분가능 함수의 유계성 <em>Boundedness of Riemann-Stieltjes Integrable Functions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연습문제 2.10에 의해, $f$가 $[a, b]$ 위에서 리만 적분가능하면 $f$는 유계이다. $f$가 $[a, b]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능하면 $f$가 유계임을 증명하거나 반증하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 정의 2.11은 명시적으로 "$f$가 $[a,b]$ 위의 유계함수"라는 가정 아래 $U(P,f,\alpha)$, $L(P,f,\alpha)$를 정의한다. 아래 반례에서는 $f$가 유계가 아니므로, $M_i = \sup_{x\in[x_{i-1},x_i]} f(x)$가 $+\infty$일 수 있는 구간이 생기고, 그 구간에서 $\Delta\alpha_i = 0$이면 곱 $M_i\Delta\alpha_i$는 액면 그대로는 "$\infty \times 0$" 꼴로 정의되지 않는다. 이하에서는 $\Delta\alpha_i = 0$인 구간에서는 $M_i$가 유한이든 $+\infty$이든, 또 $m_i$가 유한이든 $-\infty$이든 관계없이 $M_i\Delta\alpha_i := 0$(마찬가지로 $m_i\Delta\alpha_i := 0$)으로 읽는 자연스러운 관례를 채택하여 $U(P,f,\alpha)$, $L(P,f,\alpha)$를 계산한다. 정의 2.12 자체는 유계성을 따로 요구하지 않고 "$[a,b]$ 위의 함수 $f$"에 대해 적분가능성을 규정하므로, 이 관례 아래에서 정의 2.12의 적분가능성(상·하적분이 $\mathbb{R}$에 존재하고 서로 같음)을 직접 확인할 수 있다. 이는 연습문제 2.10의 논증—$\alpha(x)=x$처럼 $\alpha$가 순증가하여 모든 $\Delta\alpha_i > 0$인 경우, $f$가 유계가 아니면 어떤 구간에서 $M_i\Delta\alpha_i$가 임의로 커져 상합이 발산한다는 논증—이 $\alpha$가 (일부 구간에서) 상수여서 $\Delta\alpha_i = 0$이 되는 경우에는 더 이상 적용되지 않음을 정확히 겨냥한 것이다. (만약 정의 2.11의 유계 가정을 문항 전체에 대한 전제로 엄격하게 읽는다면, "리만-스틸체스 적분가능한 $f$"라는 말 자체가 이미 유계인 $f$만을 가리키므로 주장은 자명하게 참이 된다. 아래 논증은 정의 2.11의 상·하합 공식을 유계가 아닌 $f$에도 위와 같이 자연스럽게 확장하여 읽는 방식을 따른다.)</p>
+        <p>주장은 반증된다. $[a,b] = [0,1]$이라 하고,</p>
+        <div class="math-display">$$\alpha(x) := 0 \qquad (x \in [0,1])$$</div>
+        <p>라 하자. 모든 $x, y \in [0,1]$에 대해 $x \lt y$이면 $\alpha(x) = 0 \le 0 = \alpha(y)$이므로, 정의 1.43(i)에 의해 $\alpha$는 $[0,1]$ 위에서 단조증가한다.</p>
+        <div class="math-display">$$f(x) := \begin{cases} \dfrac{1}{x} & (x \in (0,1]) \\ 0 & (x = 0) \end{cases}$$</div>
+        <p>이라 하자. $x_k := 1/k \to 0^+$ ($k \to \infty$)일 때 $f(x_k) = k \to \infty$이므로, $f$는 $[0,1]$ 위에서 유계가 아니다.</p>
+        <p>$P = \{x_0, x_1, \ldots, x_n\}$을 $[0,1]$의 임의의 분할이라 하자. $\alpha$가 상수함수이므로, 모든 $i \in \{1,\ldots,n\}$에 대해</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = 0 - 0 = 0$$</div>
+        <p>이다. 위 역주의 관례에 의해, $M_i\Delta\alpha_i = 0$이고 $m_i\Delta\alpha_i = 0$이 모든 $i$에 대해 성립하므로(예컨대 $x_1 > 0$인 분할에서 첫째 구간 $[x_0,x_1] = [0,x_1]$을 보면 $M_1 = \sup_{x\in[0,x_1]} f(x) = +\infty$이지만, 이 역시 $\Delta\alpha_1 = 0$과 곱해져 $0$으로 읽는다),</p>
+        <div class="math-display">$$U(P,f,\alpha) = \sum_{i=1}^{n} M_i\Delta\alpha_i = 0, \qquad L(P,f,\alpha) = \sum_{i=1}^{n} m_i\Delta\alpha_i = 0$$</div>
+        <p>이다. $P$가 $[0,1]$의 임의의 분할이었으므로,</p>
+        <div class="math-display">$$\overline{\int_0^1} f d\alpha = \inf_{P} U(P,f,\alpha) = 0, \qquad \underline{\int_0^1} f d\alpha = \sup_{P} L(P,f,\alpha) = 0$$</div>
+        <p>이며, 두 값 모두 $\mathbb{R}$에 존재하고 서로 같다. 따라서 정의 2.12에 의해 $f$는 $[0,1]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능하고</p>
+        <div class="math-display">$$\int_0^1 f d\alpha = 0$$</div>
+        <p>이다. 그러나 $f$는 $[0,1]$ 위에서 유계가 아니다. 그러므로 "$f$가 $[a,b]$에서 $\alpha$에 관하여 리만-스틸체스 적분가능하면 $f$는 유계이다"라는 주장은 (위 역주의 관례 아래) 거짓이며, 반증되었다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Due to Exercise 2.10, if $f$ is Riemann integrable on $[a, b]$, then $f$ is bounded. Prove or disprove that if $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a, b]$, then $f$ is bounded.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> Definition 2.11 explicitly sets up $U(P,f,\alpha)$ and $L(P,f,\alpha)$ under the hypothesis that $f$ is a bounded function on $[a,b]$. In the counterexample below, $f$ is unbounded, so there can be an interval on which $M_i = \sup_{x\in[x_{i-1},x_i]} f(x)$ equals $+\infty$; on such an interval, if $\Delta\alpha_i = 0$, the product $M_i\Delta\alpha_i$ is, on its face, of the undefined form "$\infty \times 0$". Below we adopt the natural convention that, on any interval with $\Delta\alpha_i = 0$, we read $M_i\Delta\alpha_i := 0$ (likewise $m_i\Delta\alpha_i := 0$), regardless of whether $M_i$ is finite or $+\infty$ and whether $m_i$ is finite or $-\infty$, and compute $U(P,f,\alpha)$, $L(P,f,\alpha)$ accordingly. Definition 2.12 imposes no boundedness of its own and states integrability for "a function $f$ on $[a,b]$", so under this convention we can directly check the integrability condition of Definition 2.12 (the upper and lower integrals exist in $\mathbb{R}$ and are equal). This precisely targets the point at which the argument of Exercise 2.10 — that if $\alpha$ is strictly increasing, e.g. $\alpha(x) = x$, so that every $\Delta\alpha_i > 0$, then an unbounded $f$ forces $M_i\Delta\alpha_i$ to grow arbitrarily large on some interval, so the upper sum diverges — no longer applies once $\alpha$ is (locally) constant, so $\Delta\alpha_i = 0$. (If instead one reads the boundedness hypothesis of Definition 2.11 as a blanket precondition for the entire problem, then the phrase "Riemann-Stieltjes integrable $f$" already refers only to bounded $f$, and the claim is trivially true. The argument below instead follows the reading that extends the upper/lower sum formulas of Definition 2.11 to unbounded $f$ in the natural way described above.)</p>
+        <p>The claim is disproved. Let $[a,b] = [0,1]$ and</p>
+        <div class="math-display">$$\alpha(x) := 0 \qquad (x \in [0,1]).$$</div>
+        <p>For all $x, y \in [0,1]$ with $x \lt y$, $\alpha(x) = 0 \le 0 = \alpha(y)$, so by Definition 1.43(i), $\alpha$ is monotonically increasing on $[0,1]$.</p>
+        <div class="math-display">$$f(x) := \begin{cases} \dfrac{1}{x} & (x \in (0,1]) \\ 0 & (x = 0) \end{cases}$$</div>
+        <p>Since $f(x_k) = k \to \infty$ for $x_k := 1/k \to 0^+$ as $k \to \infty$, $f$ is unbounded on $[0,1]$.</p>
+        <p>Let $P = \{x_0, x_1, \ldots, x_n\}$ be an arbitrary partition of $[0,1]$. Since $\alpha$ is a constant function, for all $i \in \{1,\ldots,n\}$,</p>
+        <div class="math-display">$$\Delta\alpha_i = \alpha(x_i) - \alpha(x_{i-1}) = 0 - 0 = 0.$$</div>
+        <p>By the convention in the note above, $M_i\Delta\alpha_i = 0$ and $m_i\Delta\alpha_i = 0$ for all $i$ (for instance, in a partition with $x_1 > 0$ the first interval $[x_0,x_1] = [0,x_1]$ has $M_1 = \sup_{x\in[0,x_1]} f(x) = +\infty$, but this too is read as $0$ once multiplied by $\Delta\alpha_1 = 0$), so</p>
+        <div class="math-display">$$U(P,f,\alpha) = \sum_{i=1}^{n} M_i\Delta\alpha_i = 0, \qquad L(P,f,\alpha) = \sum_{i=1}^{n} m_i\Delta\alpha_i = 0.$$</div>
+        <p>Since $P$ was an arbitrary partition of $[0,1]$,</p>
+        <div class="math-display">$$\overline{\int_0^1} f d\alpha = \inf_{P} U(P,f,\alpha) = 0, \qquad \underline{\int_0^1} f d\alpha = \sup_{P} L(P,f,\alpha) = 0,$$</div>
+        <p>and both values exist in $\mathbb{R}$ and are equal. Thus by Definition 2.12, $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[0,1]$ and</p>
+        <div class="math-display">$$\int_0^1 f d\alpha = 0.$$</div>
+        <p>But $f$ is unbounded on $[0,1]$. Therefore the claim "if $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,b]$, then $f$ is bounded" is false (under the convention in the note above), and it is disproved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.61 -->
+<div class="card thm-card" id="c2-61">
+  <div class="card-head">
+    <span class="thm-num">THM 2.61</span>
+    <span class="thm-title">연속점에서의 부정적분의 미분가능성 <em>Differentiability of the Indefinite Integral at a Point of Continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 리만 적분가능함수라 하자.</p>
+        <div class="math-display">$$F(x) = \int_a^x f(t)dt \qquad (a \le x \le b).$$</div>
+        <p>라 정의하자. $f$가 $x_0 \in [a, b]$에서 연속이라 가정하자. 그러면 $F$는 $x_0$에서 미분가능하고</p>
+        <div class="math-display">$$F'(x_0) = f(x_0).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon > 0$이 주어졌다고 하자. $f$가 $x_0$에서 연속이므로,</p>
+        <div class="math-display">$$|f(x) - f(x_0)| \lt \frac{\varepsilon}{2} \tag{2.57}$$</div>
+        <p>이 모든 $x \in (x_0 - \delta, x_0 + \delta) \cap [a, b]$에 대해 성립하도록 하는 $\delta > 0$이 존재한다. 리만-스틸체스 적분의 선형성에 의해, 모든 $a \le x \lt x_0 \lt y \le b$에 대해</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{y - x_0}{y - x_0} = f(x_0)\frac{\int_{x_0}^{y} 1dt}{y - x_0} = \frac{1}{y - x_0}\int_{x_0}^{y} f(x_0)dt$$</div>
+        <p>이고</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{x_0 - x}{x_0 - x} = f(x_0)\frac{\int_{x}^{x_0} 1dt}{x_0 - x} = \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt$$</div>
+        <p>임을 유의하자. 따라서 선형성을 다시 적용하면, $y \in (x_0, x_0 + \delta) \cap [a, b]$일 때</p>
+        <div class="math-display">$$\begin{aligned} \left|\frac{F(y) - F(x_0)}{y - x_0} - f(x_0)\right| &= \left|\frac{\int_{x_0}^{y} f(t)dt}{y - x_0} - \frac{1}{y - x_0}\int_{x_0}^{y} f(x_0)dt\right| \\ &= \left|\frac{1}{y - x_0}\int_{x_0}^{y} (f(t) - f(x_0))dt\right|. \end{aligned}$$</div>
+        <p>이다. 따라서 (2.57)과 정리 2.37(iv)에 의해,</p>
+        <div class="math-display">$$\left|\frac{F(y) - F(x_0)}{y - x_0} - f(x_0)\right| \le \frac{1}{y - x_0}\frac{\varepsilon}{2}(y - x_0) = \frac{\varepsilon}{2} \lt \varepsilon.$$</div>
+        <p>이다. 마찬가지로, 모든 $x \in (x_0 - \delta, x_0) \cap [a, b]$에 대해</p>
+        <div class="math-display">$$\left|\frac{F(x) - F(x_0)}{x - x_0} - f(x_0)\right| \lt \varepsilon. \tag{2.58}$$</div>
+        <p>이다. 따라서 $F$는 $x_0$에서 미분가능하고</p>
+        <div class="math-display">$$F'(x_0) = f(x_0).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a Riemann integrable function on $[a, b]$. Define</p>
+        <div class="math-display">$$F(x) = \int_a^x f(t)dt \qquad (a \le x \le b).$$</div>
+        <p>Assume that $f$ is continuous at $x_0 \in [a, b]$. Then $F$ is differentiable at $x_0$ and</p>
+        <div class="math-display">$$F'(x_0) = f(x_0).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\varepsilon > 0$ be given. Since $f$ is continuous at $x_0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - f(x_0)| \lt \frac{\varepsilon}{2} \tag{2.57}$$</div>
+        <p>for all $x \in (x_0 - \delta, x_0 + \delta) \cap [a, b]$. Note that by the linear property of the Riemann-Stieltjes integral, for all $a \le x \lt x_0 \lt y \le b$</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{y - x_0}{y - x_0} = f(x_0)\frac{\int_{x_0}^{y} 1dt}{y - x_0} = \frac{1}{y - x_0}\int_{x_0}^{y} f(x_0)dt$$</div>
+        <p>and</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{x_0 - x}{x_0 - x} = f(x_0)\frac{\int_{x}^{x_0} 1dt}{x_0 - x} = \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt$$</div>
+        <p>Thus by the linear property again, if $y \in (x_0, x_0 + \delta) \cap [a, b]$, then</p>
+        <div class="math-display">$$\begin{aligned} \left|\frac{F(y) - F(x_0)}{y - x_0} - f(x_0)\right| &= \left|\frac{\int_{x_0}^{y} f(t)dt}{y - x_0} - \frac{1}{y - x_0}\int_{x_0}^{y} f(x_0)dt\right| \\ &= \left|\frac{1}{y - x_0}\int_{x_0}^{y} (f(t) - f(x_0))dt\right|. \end{aligned}$$</div>
+        <p>Therefore by (2.57) and Theorem 2.37(iv), we have</p>
+        <div class="math-display">$$\left|\frac{F(y) - F(x_0)}{y - x_0} - f(x_0)\right| \le \frac{1}{y - x_0}\frac{\varepsilon}{2}(y - x_0) = \frac{\varepsilon}{2} \lt \varepsilon.$$</div>
+        <p>Similarly, for all $x \in (x_0 - \delta, x_0) \cap [a, b]$, we have</p>
+        <div class="math-display">$$\left|\frac{F(x) - F(x_0)}{x - x_0} - f(x_0)\right| \lt \varepsilon. \tag{2.58}$$</div>
+        <p>Thus $F$ is differentiable at $x_0$ and</p>
+        <div class="math-display">$$F'(x_0) = f(x_0).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.55 ═══════════ -->
+
+<!-- Exercise 2.62 -->
+<div class="card ex-card" id="c2-62">
+  <div class="card-head">
+    <span class="ex-num">EX 2.62</span>
+    <span class="ex-title">(2.58)의 증명 <em>Proof of (2.58)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(2.58)을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$x \in (x_0 - \delta, x_0) \cap [a,b]$라 하자. 정리 2.37(iii)에 의해</p>
+        <div class="math-display">$$F(x_0) - F(x) = \int_a^{x_0} f(t)dt - \int_a^{x} f(t)dt = \int_x^{x_0} f(t)dt$$</div>
+        <p>이다. 정리 2.61의 증명에서 이미 관찰한 바와 같이,</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{x_0 - x}{x_0 - x} = f(x_0)\frac{\int_{x}^{x_0} 1dt}{x_0 - x} = \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt$$</div>
+        <p>이다. 따라서 리만 적분의 선형성(정리 2.37(i), (ii))을 다시 적용하면,</p>
+        <div class="math-display">$$\begin{aligned} \frac{F(x) - F(x_0)}{x - x_0} - f(x_0) &= \frac{F(x_0) - F(x)}{x_0 - x} - f(x_0) \\ &= \frac{\int_x^{x_0} f(t)dt}{x_0 - x} - \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt \\ &= \frac{1}{x_0 - x}\int_{x}^{x_0} (f(t) - f(x_0))dt. \end{aligned}$$</div>
+        <p>이다. $x \in (x_0 - \delta, x_0) \cap [a,b]$이고 $t \in [x, x_0]$이면 $t \in (x_0 - \delta, x_0 + \delta) \cap [a,b]$이므로, (2.57)에 의해</p>
+        <div class="math-display">$$|f(t) - f(x_0)| \lt \frac{\varepsilon}{2} \qquad \forall t \in [x, x_0]$$</div>
+        <p>이다. 따라서 정리 2.37(iv)에 의해(적분 구간을 $[x,x_0]$로, 적분자를 $\alpha(t) = t$로, $M = \varepsilon/2$로 두면),</p>
+        <div class="math-display">$$\left|\int_{x}^{x_0} (f(t) - f(x_0))dt\right| \le \frac{\varepsilon}{2}(x_0 - x)$$</div>
+        <p>이다. 그러므로</p>
+        <div class="math-display">$$\left|\frac{F(x) - F(x_0)}{x - x_0} - f(x_0)\right| = \frac{1}{x_0 - x}\left|\int_{x}^{x_0} (f(t) - f(x_0))dt\right| \le \frac{1}{x_0 - x}\cdot\frac{\varepsilon}{2}(x_0 - x) = \frac{\varepsilon}{2} \lt \varepsilon$$</div>
+        <p>이다. 이는 모든 $x \in (x_0 - \delta, x_0) \cap [a,b]$에 대해 성립하므로, (2.58)이 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove (2.58).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $x \in (x_0 - \delta, x_0) \cap [a,b]$. By Theorem 2.37(iii),</p>
+        <div class="math-display">$$F(x_0) - F(x) = \int_a^{x_0} f(t)dt - \int_a^{x} f(t)dt = \int_x^{x_0} f(t)dt.$$</div>
+        <p>As already observed in the proof of Theorem 2.61,</p>
+        <div class="math-display">$$f(x_0) = f(x_0)\frac{x_0 - x}{x_0 - x} = f(x_0)\frac{\int_{x}^{x_0} 1dt}{x_0 - x} = \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt.$$</div>
+        <p>Thus applying the linear property of the Riemann integral (Theorem 2.37(i), (ii)) again,</p>
+        <div class="math-display">$$\begin{aligned} \frac{F(x) - F(x_0)}{x - x_0} - f(x_0) &= \frac{F(x_0) - F(x)}{x_0 - x} - f(x_0) \\ &= \frac{\int_x^{x_0} f(t)dt}{x_0 - x} - \frac{1}{x_0 - x}\int_{x}^{x_0} f(x_0)dt \\ &= \frac{1}{x_0 - x}\int_{x}^{x_0} (f(t) - f(x_0))dt. \end{aligned}$$</div>
+        <p>If $x \in (x_0 - \delta, x_0) \cap [a,b]$ and $t \in [x, x_0]$, then $t \in (x_0 - \delta, x_0 + \delta) \cap [a,b]$, so by (2.57),</p>
+        <div class="math-display">$$|f(t) - f(x_0)| \lt \frac{\varepsilon}{2} \qquad \forall t \in [x, x_0].$$</div>
+        <p>Thus by Theorem 2.37(iv) (taking the interval of integration to be $[x,x_0]$, the integrator $\alpha(t) = t$, and $M = \varepsilon/2$),</p>
+        <div class="math-display">$$\left|\int_{x}^{x_0} (f(t) - f(x_0))dt\right| \le \frac{\varepsilon}{2}(x_0 - x).$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\left|\frac{F(x) - F(x_0)}{x - x_0} - f(x_0)\right| = \frac{1}{x_0 - x}\left|\int_{x}^{x_0} (f(t) - f(x_0))dt\right| \le \frac{1}{x_0 - x}\cdot\frac{\varepsilon}{2}(x_0 - x) = \frac{\varepsilon}{2} \lt \varepsilon.$$</div>
+        <p>Since this holds for all $x \in (x_0 - \delta, x_0) \cap [a,b]$, (2.58) is proved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2.63 -->
+<div class="card ex-card" id="c2-63">
+  <div class="card-head">
+    <span class="ex-num">EX 2.63</span>
+    <span class="ex-title">연속함수의 원시함수의 존재성 <em>Existence of an Antiderivative of a Continuous Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 연속함수라 하자. 다음을 만족하는 $[a, b]$ 위의 미분가능함수 $F$가 존재함을 증명하거나 반증하라.</p>
+        <div class="math-display">$$F'(x) = f(x) \qquad \forall x \in [a, b].$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>주장은 참이다. $f$가 $[a,b]$ 위에서 연속이라 하자.</p>
+        <div class="math-display">$$F(x) := \int_a^x f(t)dt \qquad (a \le x \le b)$$</div>
+        <p>라 정의하자(단 $F(a) = 0$). 임의의 $x \in [a,b]$에 대해 $f$는 $[a,x]$ 위에서도 연속이고 항등함수 $\alpha(t) = t$는 $[a,x]$ 위에서 단조증가하므로, 정리 2.26에 의해 $f$는 $[a,x]$ 위에서 $\alpha$에 관하여 리만-스틸체스 적분가능하다. 주의 2.13에 의해 이는 $f$가 $[a,x]$ 위에서 리만 적분가능함과 동치이므로, $F(x)$는 모든 $x \in [a,b]$에 대해 잘 정의된다.</p>
+        <p>$f$는 $[a,b]$ 위에서 연속이므로, 특히 모든 $x_0 \in [a,b]$에서 연속이다. $f$가 $[a,b]$ 위의 리만 적분가능함수이므로(위에서 $x = b$인 경우로 확인하였다), 정리 2.61의 가정이 모든 $x_0 \in [a,b]$에서 성립한다. 따라서 정리 2.61에 의해, 모든 $x_0 \in [a,b]$에 대해 $F$는 $x_0$에서 미분가능하고</p>
+        <div class="math-display">$$F'(x_0) = f(x_0)$$</div>
+        <p>이다. (정의 1.17에 의해, $x_0 = a$ 또는 $x_0 = b$일 때 $F'(x_0)$은 각각 우미분계수·좌미분계수를 뜻하는데, 정리 2.61의 증명은 애초에 $(x_0 - \delta, x_0 + \delta) \cap [a,b]$, $(x_0, x_0+\delta) \cap [a,b]$, $(x_0-\delta, x_0) \cap [a,b]$ 형태의 구간에서 논증을 진행하므로, $x_0$이 끝점일 때도 그대로 적용되어 해당 한쪽 미분계수를 준다.) 그러므로 $F$는 $[a,b]$ 위에서 미분가능하고 모든 $x \in [a,b]$에 대해 $F'(x) = f(x)$를 만족하며, 이러한 $F$가 존재함이 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a continuous function on $[a, b]$. Prove or disprove that there exists a differentiable function $F$ on $[a, b]$ such that</p>
+        <div class="math-display">$$F'(x) = f(x) \qquad \forall x \in [a, b].$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>The claim is true. Let $f$ be continuous on $[a,b]$. Define</p>
+        <div class="math-display">$$F(x) := \int_a^x f(t)dt \qquad (a \le x \le b)$$</div>
+        <p>(with $F(a) = 0$). For any $x \in [a,b]$, $f$ is also continuous on $[a,x]$, and the identity function $\alpha(t) = t$ is monotonically increasing on $[a,x]$, so by Theorem 2.26, $f$ is Riemann-Stieltjes integrable with respect to $\alpha$ on $[a,x]$. By Remark 2.13, this is equivalent to $f$ being Riemann integrable on $[a,x]$, so $F(x)$ is well-defined for every $x \in [a,b]$.</p>
+        <p>Since $f$ is continuous on $[a,b]$, it is in particular continuous at every $x_0 \in [a,b]$. Since $f$ is a Riemann integrable function on $[a,b]$ (as verified above with $x = b$), the hypotheses of Theorem 2.61 hold at every $x_0 \in [a,b]$. Thus by Theorem 2.61, for every $x_0 \in [a,b]$, $F$ is differentiable at $x_0$ and</p>
+        <div class="math-display">$$F'(x_0) = f(x_0).$$</div>
+        <p>(By Definition 1.17, when $x_0 = a$ or $x_0 = b$, $F'(x_0)$ means the right- or left-hand derivative, respectively; but the proof of Theorem 2.61 works throughout with intervals of the form $(x_0 - \delta, x_0 + \delta) \cap [a,b]$, $(x_0, x_0+\delta) \cap [a,b]$, and $(x_0-\delta, x_0) \cap [a,b]$, so it applies unchanged when $x_0$ is an endpoint and yields exactly the corresponding one-sided derivative.) Therefore $F$ is differentiable on $[a,b]$ and satisfies $F'(x) = f(x)$ for all $x \in [a,b]$, so such an $F$ exists, as claimed.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 2.64 -->
+<div class="card thm-card" id="c2-64">
+  <div class="card-head">
+    <span class="thm-num">THM 2.64</span>
+    <span class="thm-title">미적분학의 기본정리 <em>The fundamental theorem of calculus</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 리만 적분가능함수라 하자. 모든 $x \in [a, b]$에 대해 $F'(x) = f(x)$를 만족하는 $[a, b]$ 위의 미분가능함수 $F$가 존재한다고 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b f(x)dx = F(b) - F(a).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\varepsilon > 0$이 주어졌다고 하자. 그러면</p>
+        <div class="math-display">$$U(P, f) - L(P, f) \lt \varepsilon.$$</div>
+        <p>을 만족하는 $[a, b]$의 분할 $P = \{x_0, \ldots, x_n\}$이 존재한다. 평균값 정리에 의해,</p>
+        <div class="math-display">$$F(x_i) - F(x_{i-1}) = f(\tilde{t}_i)\Delta x_i \qquad (i = 1, \ldots, n).$$</div>
+        <p>를 만족하는 $\tilde{t}_i \in [x_{i-1}, x_i]$가 존재한다. 따라서</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(\tilde{t}_i)\Delta x_i = F(x_n) - F(x_0) = F(b) - F(a).$$</div>
+        <p>이다. 정리 2.20(iii)에 의해, 모든 $t_i \in [x_{i-1}, x_i]$ $(i = 1, \ldots, n)$에 대해</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(t_i)\Delta x_i - \int_a^b f dx\right| \lt \varepsilon.$$</div>
+        <p>이다. 특히</p>
+        <div class="math-display">$$\left|F(b) - F(a) - \int_a^b f dx\right| = \left|\sum_{i=1}^{n} f(\tilde{t}_i)\Delta x_i - \int_a^b f dx\right| \lt \varepsilon.$$</div>
+        <p>이다. $\varepsilon > 0$이 임의의 양의 상수이므로, 정리가 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a Riemann integrable function on $[a, b]$. Assume that there exists a differentiable function $F$ on $[a, b]$ such that $F'(x) = f(x)$ for all $x \in [a, b]$. Then</p>
+        <div class="math-display">$$\int_a^b f(x)dx = F(b) - F(a).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\varepsilon > 0$ be given. Then there exists a partition $P = \{x_0, \ldots, x_n\}$ of $[a, b]$ such that</p>
+        <div class="math-display">$$U(P, f) - L(P, f) \lt \varepsilon.$$</div>
+        <p>By the mean-value theorem, there exist $\tilde{t}_i \in [x_{i-1}, x_i]$ such that</p>
+        <div class="math-display">$$F(x_i) - F(x_{i-1}) = f(\tilde{t}_i)\Delta x_i \qquad (i = 1, \ldots, n).$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$\sum_{i=1}^{n} f(\tilde{t}_i)\Delta x_i = F(x_n) - F(x_0) = F(b) - F(a).$$</div>
+        <p>Due to Theorem 2.20(iii), for all $t_i \in [x_{i-1}, x_i]$ $(i = 1, \ldots, n)$,</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n} f(t_i)\Delta x_i - \int_a^b f dx\right| \lt \varepsilon.$$</div>
+        <p>In particular, we have</p>
+        <div class="math-display">$$\left|F(b) - F(a) - \int_a^b f dx\right| = \left|\sum_{i=1}^{n} f(\tilde{t}_i)\Delta x_i - \int_a^b f dx\right| \lt \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ is an arbitrary positive constant, the theorem is proved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.56 ═══════════ -->
+
+<!-- Theorem 2.65 -->
+<div class="card thm-card" id="c2-65">
+  <div class="card-head">
+    <span class="thm-num">THM 2.65</span>
+    <span class="thm-title">부분적분 <em>Integration by parts</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$F$와 $G$가 $[a, b]$ 위의 미분가능함수라 하자. $F'$과 $G'$이 $[a, b]$ 위에서 리만 적분가능하다고 가정하자. 그러면</p>
+        <div class="math-display">$$\int_a^b F(x)G'(x)dx = F(b)G(b) - F(a)G(a) - \int_a^b F'(x)G(x)dx.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>다음과 같이 두자.</p>
+        <div class="math-display">$$H(x) = F(x)G(x).$$</div>
+        <p>그러면 곱의 미분법에 의해,</p>
+        <div class="math-display">$$H'(x) = F'(x)G(x) + F(x)G'(x).$$</div>
+        <p>$G$와 $F$가 $[a, b]$ 위에서 미분가능하므로, 이들은 $[a, b]$ 위에서 연속이기도 하다. 따라서 정리 2.26에 의해 $G$와 $F$는 $[a, b]$ 위에서 리만 적분가능하다. $F'(x)$와 $G'(x)$가 $[a, b]$ 위에서 리만 적분가능하다고 가정하였으므로, 정리 2.42와 선형성에 의해 $F'(x)G(x)$, $F(x)G'(x)$, $H'(x)$는 리만 적분가능하다. 따라서 미적분학의 기본정리를 적용하면,</p>
+        <div class="math-display">$$\int_a^b H'(x)dx = H(b) - H(a),$$</div>
+        <p>이고, 이는 다음과 동치이다.</p>
+        <div class="math-display">$$\int_a^b (F'(x)G(x) + F(x)G'(x))dx = F(b)G(b) - F(a)G(a).$$</div>
+        <p>마지막으로 리만 적분의 선형성을 적용하면, 정리가 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $F$ and $G$ be differentiable function on $[a, b]$. Assume that $F'$ and $G'$ are Riemann integrable on $[a, b]$. Then</p>
+        <div class="math-display">$$\int_a^b F(x)G'(x)dx = F(b)G(b) - F(a)G(a) - \int_a^b F'(x)G(x)dx.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Set</p>
+        <div class="math-display">$$H(x) = F(x)G(x).$$</div>
+        <p>Then by the product rule of differentiation,</p>
+        <div class="math-display">$$H'(x) = F'(x)G(x) + F(x)G'(x).$$</div>
+        <p>Since $G$ and $F$ are differentiable on $[a, b]$, they are also continuous on $[a, b]$. Thus by Theorem 2.26, $G$ and $F$ are Riemann integrable on $[a, b]$. Since we assumed that $F'(x)$ and $G'(x)$ are Riemann integrable on $[a, b]$, $F'(x)G(x)$, $F(x)G'(x)$, $H'(x)$ are Riemann integrable by Theorem 2.42 and the linearity. Therefore applying the fundamental theorem of calculus,</p>
+        <div class="math-display">$$\int_a^b H'(x)dx = H(b) - H(a),$$</div>
+        <p>which is equivalent to</p>
+        <div class="math-display">$$\int_a^b (F'(x)G(x) + F(x)G'(x))dx = F(b)G(b) - F(a)G(a).$$</div>
+        <p>Finally applying the linear property of the Riemann integral, the theorem is proved.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="index.html">해석학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3. 함수열과 함수급수 (Sequence and Series of Functions) | 해석학2 학습 가이드</title>
+<meta name="description" content="해석학2 7단원 함수열과 함수급수. 점별수렴의 정의와 극한함수, 연속성·미분가능성·리만 적분이 점별극한에서 보존되지 않음을 보이는 반례들, 균등수렴의 정의와 상한(sup) 판정법을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="해석학2, Analysis II, 함수열, sequence of functions, 함수급수, series of functions, 점별수렴, pointwise convergence, 극한함수, limit function, 점별극한, pointwise limit, 균등수렴, uniform convergence, 반례, counter example, 극한의 교환, interchange of limits, 로피탈 법칙, L'Hospital's rule, 리만 적분, Riemann integral, 상한 판정법, sup criterion, 루딘, Rudin">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/analysis2/ch07.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3. 함수열과 함수급수 (Sequence and Series of Functions) — 해석학2 한·영 대조">
+<meta property="og:description" content="점별수렴과 극한함수의 정의에서 출발해 연속성·미분·적분이 점별극한에서 깨지는 반례를 살펴보고, 균등수렴의 정의와 상한 판정 정리까지 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/analysis2/ch07.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "3. 함수열과 함수급수 (Sequence and Series of Functions) — 해석학2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "해석학2 함수열과 함수급수 — 점별수렴과 극한함수의 정의, 연속성·미분·적분이 점별극한에서 보존되지 않는 반례, 균등수렴의 정의와 상한 판정 정리를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/analysis2/ch07.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/analysis2/ch07.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="../settheory/index.html">집합론</a>
+  <a href="index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html" class="active">07</a>
+</nav>
+
+<header>
+  <p class="subtitle">Analysis II — Unit 07</p>
+  <h1>3. 함수열과 함수급수<span>Sequence and Series of Functions</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c3-1"><span class="toc-num">DEF 3.1</span> 점별수렴과 극한함수 <em>Pointwise convergence and the limit function</em></a></li>
+    <li><a href="#c3-2"><span class="toc-num">EXAM 3.2</span> 연속성을 잃는 점별극한 <em>A pointwise limit that loses continuity</em></a></li>
+    <li><a href="#c3-3"><span class="toc-num">EXAM 3.3</span> 극한의 도함수로 수렴하지 않는 도함수열 <em>Derivatives that do not converge to the derivative of the limit</em></a></li>
+    <li><a href="#c3-4"><span class="toc-num">EX 3.4</span> 도함수와 극한의 교환에 대한 증명 또는 반증 <em>Prove or disprove the interchange of derivative and limit</em></a></li>
+    <li><a href="#c3-5"><span class="toc-num">EXAM 3.5</span> 극한의 적분에서 벗어나 발산하는 적분열 <em>Integrals that diverge away from the integral of the limit</em></a></li>
+    <li><a href="#c3-6"><span class="toc-num">EXAM 3.6</span> 극한이 유한해도 극한의 적분과 다른 적분열 <em>A finite limit of integrals that still differs from the integral of the limit</em></a></li>
+    <li><a href="#c3-7"><span class="toc-num">DEF 3.7</span> 균등수렴 <em>Uniform convergence</em></a></li>
+    <li><a href="#c3-8"><span class="toc-num">EX 3.8</span> 균등수렴과 점별수렴의 비교 <em>Uniform convergence versus pointwise convergence</em></a></li>
+    <li><a href="#c3-9"><span class="toc-num">THM 3.9</span> 균등수렴에 대한 점별 판정법 <em>A pointwise criterion for uniform convergence</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  해석학2 카드 작성 규약 (ch01–ch07 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 c{섹션}-{번호} (예: c3-9),
+     소스 등장 순서 그대로 배치한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark                     → card rem-card  · REM n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름을 쓰고, 없으면 간결한 편집 제목을 새로 붙인다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+     Example은 원문에서 계산이 진술 안에 그대로 이어지므로 토글 없이 진술에 포함한다.
+  6) Exercise 카드는 소스에 풀이가 없다. 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+       ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원}-{순번} (예: note07-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 번호 붙은 display 수식은 \tag{섹션.번호} 형태로 번호를 유지한다.
+     수식 안의 여는 부등호는 항상 \lt 로 쓴다(HTML 파싱 위험 차단).
+     정렬 수식의 앰퍼샌드 뒤에는 반드시 공백을 둔다.
+  9) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것.
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§3 Sequence and series of functions · 함수열과 함수급수</h2></div>
+
+<!-- ═══════════ PDF p.56 ═══════════ -->
+
+<!-- Definition 3.1 -->
+<div class="card def-card" id="c3-1">
+  <div class="card-head">
+    <span class="def-num">DEF 3.1</span>
+    <span class="def-title">점별수렴과 극한함수 <em>Pointwise convergence and the limit function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이고 $\{f_n : n \in \mathbb{N}\}$을 $E$ 위의 실숫값 함수열이라 하자. 즉, 각 $n \in \mathbb{N}$에 대하여 $f_n$은 $E$에서 $\mathbb{R}$로 가는 함수이다. 각 $x \in E$에 대하여 수열 $\{f_n(x)\}$가 수렴한다고 가정하고 다음을 정의하자.</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x).$$</div>
+        <p>그러면 $f_n$이 $E$ 위에서 $f$로 점별수렴한다고 한다. 또한 $f$를 $f_n$의 <strong>극한</strong>, $f_n$의 <strong>극한함수</strong>, 또는 $f_n$의 <strong>점별극한</strong>이라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E \subset \mathbb{R}$ and $\{f_n : n \in \mathbb{N}\}$ be a sequence of real-valued functions on $E$, i.e. for each $n \in \mathbb{N}$, $f_n$ is a function from $E$ to $\mathbb{R}$. Assume that for each $x \in E$, the sequence $\{f_n(x)\}$ converges and define</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x).$$</div>
+        <p>Then we say that $f_n$ converges to $f$ pointwise on $E$. Moreover, $f$ is called <strong>the limit</strong> of $f_n$, <strong>the limit function</strong> of $f_n$,or <strong>the pointwise limit</strong> of $f_n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.57 ═══════════ -->
+
+<!-- 서술 단락 (p.57): 점별극한이 성질을 보존하는가 -->
+<div class="card note-card" id="note07-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 함수열의 점별극한이 함수의 성질을 보존할 수 있는지 묻는 것은 매우 자연스럽다. 다음은 그러한 질문들의 목록이다.</p>
+        <ul>
+          <li>
+            <p>$f_n$이 $[a, b]$ 위에서 $f$로 점별수렴하고 모든 $n$에 대해 $f_n$이 $[a, b]$ 위에서 연속이라고 가정하자. 그러면 $f(x)$가 $[a, b]$ 위에서 연속인가? 다시 말해, 임의의 $c \in E$에 대하여</p>
+            <div class="math-display">$$\lim_{x \to c} \lim_{n \to \infty} f_n(x) = \lim_{x \to c} f(x) = f(c) = \lim_{n \to \infty} f_n(c) = \lim_{n \to \infty} \lim_{x \to c} f_n(x)?$$</div>
+            <p>($[a, b]$의 끝점에서는 극한을 좌극한 또는 우극한으로 간주한다).</p>
+          </li>
+          <li>
+            <p>$f_n$이 $[a, b]$ 위에서 $f$로 점별수렴하고 모든 $n$에 대해 $f_n$이 $[a, b]$ 위에서 미분가능하다고 가정하자. 그러면 $f(x)$가 $[a, b]$ 위에서 미분가능하고</p>
+            <div class="math-display">$$\begin{aligned}
+            f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} & = \lim_{x \to c} \lim_{n \to \infty} \frac{f_n(x) - f_n(c)}{x - c} = \lim_{n \to \infty} \lim_{x \to c} \frac{f_n(x) - f_n(c)}{x - c} \\
+            & = \lim_{n \to \infty} f'_n(c)?
+            \end{aligned}$$</div>
+          </li>
+          <li>
+            <p>$f_n$이 $[a, b]$ 위에서 $f$로 점별수렴하고 모든 $n$에 대해 $f_n$이 $[a, b]$ 위에서 리만 적분가능하다고 가정하자. 그러면 $f(x)$가 $[a, b]$ 위에서 리만 적분가능하고</p>
+            <div class="math-display">$$\int_a^b f(x)dx = \int_a^b \lim_{n \to \infty} f_n(x)dx = \lim_{n \to \infty} \int_a^b f_n(x)dx?$$</div>
+          </li>
+        </ul>
+        <p>위 질문들에 대한 답은 모두 "아니오"이다. 다음과 같이 반례를 쉽게 찾을 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>It is very natural to ask if this pointwise limit of functions can preserve the properties of functions. Here is a list of questions.</p>
+        <ul>
+          <li>
+            <p>Assume that $f_n$ converges to $f$ pointwise on $[a, b]$ and $f_n$ is continuous on $[a, b]$ for all $n$. Then is $f(x)$ continuous on $[a, b]$? In other words, for any $c \in E$,</p>
+            <div class="math-display">$$\lim_{x \to c} \lim_{n \to \infty} f_n(x) = \lim_{x \to c} f(x) = f(c) = \lim_{n \to \infty} f_n(c) = \lim_{n \to \infty} \lim_{x \to c} f_n(x)?$$</div>
+            <p>(the limit is considered as the left limit or right limit at the end points of $[a, b]$).</p>
+          </li>
+          <li>
+            <p>Assume that $f_n$ converges to $f$ pointwise on $[a, b]$ and $f_n$ is differentiable on $[a, b]$ for all $n$. Then is $f(x)$ differentiable on $[a, b]$ and</p>
+            <div class="math-display">$$\begin{aligned}
+            f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} & = \lim_{x \to c} \lim_{n \to \infty} \frac{f_n(x) - f_n(c)}{x - c} = \lim_{n \to \infty} \lim_{x \to c} \frac{f_n(x) - f_n(c)}{x - c} \\
+            & = \lim_{n \to \infty} f'_n(c)?
+            \end{aligned}$$</div>
+          </li>
+          <li>
+            <p>Assume that $f_n$ converges to $f$ pointwise on $[a, b]$ and $f_n$ is Riemann integrable on $[a, b]$ for all $n$. Then is $f(x)$ Riemann integrable on $[a, b]$ and</p>
+            <div class="math-display">$$\int_a^b f(x)dx = \int_a^b \lim_{n \to \infty} f_n(x)dx = \lim_{n \to \infty} \int_a^b f_n(x)dx?$$</div>
+          </li>
+        </ul>
+        <p>All answers to above questions are “No”. We can easily find counter examples as follows.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3.2 -->
+<div class="card exam-card" id="c3-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.2</span>
+    <span class="exam-title">연속성을 잃는 점별극한 <em>A pointwise limit that loses continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $n \in \mathbb{N}$에 대하여 다음을 정의하자.</p>
+        <div class="math-display">$$f_n(x) = \begin{cases} \frac{1}{1+nx} & \left(x \neq -\frac{1}{n}\right) \\ 0 & \left(x = -\frac{1}{n}\right). \end{cases}$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = \begin{cases} 0 & (x \neq 0) \\ 1 & (x = 0). \end{cases}$$</div>
+        <p>특히,</p>
+        <div class="math-display">$$\lim_{x \to 0} \lim_{n \to \infty} f_n(x) = 0.$$</div>
+        <p>한편, 각 $n$에 대하여 $f_n$이 $0$에서 연속이므로</p>
+        <div class="math-display">$$1 = \lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} \lim_{x \to 0} f_n(x).$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\lim_{x \to 0} \lim_{n \to \infty} f_n(x) \neq \lim_{n \to \infty} \lim_{x \to 0} f_n(x).$$</div>
+        <p>또한,</p>
+        <div class="math-display">$$f(x) = \lim_{n \to \infty} f_n(x)$$</div>
+        <p>는 모든 $n$에 대해 $f_n$이 $0$에서 미분가능함에도 불구하고 $0$에서 미분가능하지 않다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For all $n \in \mathbb{N}$, define</p>
+        <div class="math-display">$$f_n(x) = \begin{cases} \frac{1}{1+nx} & \left(x \neq -\frac{1}{n}\right) \\ 0 & \left(x = -\frac{1}{n}\right). \end{cases}$$</div>
+        <p>Then</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = \begin{cases} 0 & (x \neq 0) \\ 1 & (x = 0). \end{cases}$$</div>
+        <p>In particular,</p>
+        <div class="math-display">$$\lim_{x \to 0} \lim_{n \to \infty} f_n(x) = 0.$$</div>
+        <p>On the other hand, since for each $n$, $f_n$ is continuous at $0$,</p>
+        <div class="math-display">$$1 = \lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} \lim_{x \to 0} f_n(x).$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\lim_{x \to 0} \lim_{n \to \infty} f_n(x) \neq \lim_{n \to \infty} \lim_{x \to 0} f_n(x).$$</div>
+        <p>Moreover,</p>
+        <div class="math-display">$$f(x) = \lim_{n \to \infty} f_n(x)$$</div>
+        <p>is not differentiable at $0$ even though $f_n$ is differentiable at $0$ for all $n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.57 하단): 다음 예제 예고 -->
+<div class="card note-card" id="note07-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 예제는 $f(x) = \lim_{n \to \infty} f_n(x)$가 $\mathbb{R}$ 위에서 미분가능함에도 불구하고</p>
+        <div class="math-display">$$f'(x) \neq \lim_{n \to \infty} f'_n(x)$$</div>
+        <p>임을 보여준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Next example shows that</p>
+        <div class="math-display">$$f'(x) \neq \lim_{n \to \infty} f'_n(x)$$</div>
+        <p>even though $f(x) = \lim_{n \to \infty} f_n(x)$ is differentiable on $\mathbb{R}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.58 ═══════════ -->
+
+<!-- Example 3.3 -->
+<div class="card exam-card" id="c3-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.3</span>
+    <span class="exam-title">극한의 도함수로 수렴하지 않는 도함수열 <em>Derivatives that do not converge to the derivative of the limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $n \in \mathbb{N}$에 대하여 다음을 정의하자.</p>
+        <div class="math-display">$$f_n(x) = \frac{\sin(nx)}{\sqrt{n}} \qquad (x \in \mathbb{R}).$$</div>
+        <p>그러면 모든 $x \in \mathbb{R}$에 대하여</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0.$$</div>
+        <p>따라서 $f$는 $\mathbb{R}$ 위에서 미분가능하고 모든 $x \in \mathbb{R}$에 대해 $f'(x) = 0$이다. 한편,</p>
+        <div class="math-display">$$f'_n(x) = n\frac{\cos(nx)}{\sqrt{n}} = \sqrt{n}\cos(nx)$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$\lim_{n \to \infty} f'_n(0) = \lim_{n \to \infty} \sqrt{n} = \infty.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f'(0) \neq \lim_{n \to \infty} f'_n(0).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For all $n \in \mathbb{N}$, define</p>
+        <div class="math-display">$$f_n(x) = \frac{\sin(nx)}{\sqrt{n}} \qquad (x \in \mathbb{R}).$$</div>
+        <p>Then for all $x \in \mathbb{R}$,</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0.$$</div>
+        <p>Thus $f$ is differentiable on $\mathbb{R}$ and $f'(x) = 0$ for all $x \in \mathbb{R}$. On the other hand,</p>
+        <div class="math-display">$$f'_n(x) = n\frac{\cos(nx)}{\sqrt{n}} = \sqrt{n}\cos(nx)$$</div>
+        <p>and thus</p>
+        <div class="math-display">$$\lim_{n \to \infty} f'_n(0) = \lim_{n \to \infty} \sqrt{n} = \infty.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$f'(0) \neq \lim_{n \to \infty} f'_n(0).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.4 -->
+<div class="card ex-card" id="c3-4">
+  <div class="card-head">
+    <span class="ex-num">EX 3.4</span>
+    <span class="ex-title">도함수와 극한의 교환에 대한 증명 또는 반증 <em>Prove or disprove the interchange of derivative and limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a \lt b$이고 $f_n$을 $(a, b)$ 위에서 미분가능한 실숫값 함수열이라 하자. 다음이</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) \quad \text{and} \quad \lim_{n \to \infty} f'_n(x)$$</div>
+        <p>모든 $x \in (a, b)$에 대하여 존재하고, 함수 $f(x) := \lim_{n \to \infty} f_n(x)$가 $(a, b)$ 위에서 미분가능하다고 가정하자. 다음을 증명하거나 반증하라.</p>
+        <div class="math-display">$$f'(x) = \lim_{n \to \infty} f'_n(x) \qquad \forall x \in (a, b).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>이 주장은 거짓이다. 반례를 제시한다. $(a, b) := (-1, 1)$이라 하고, 모든 $n \in \mathbb{N}$에 대하여 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f_n(x) = \frac{x}{1 + nx^2} \qquad (x \in (-1, 1)).$$</div>
+        <p>$1 + nx^2 \geq 1 > 0$이므로 $f_n$은 $(-1, 1)$ 위에서 (실제로는 $\mathbb{R}$ 전체에서) 미분가능하다.</p>
+        <p>먼저 점별극한을 구한다. $x = 0$이면 $f_n(0) = 0 \to 0$이다. $x \neq 0$이면 $n \to \infty$일 때 $1 + nx^2 \to \infty$이므로</p>
+        <div class="math-display">$$f_n(x) = \frac{x}{1 + nx^2} \to 0.$$</div>
+        <p>따라서 모든 $x \in (-1, 1)$에 대하여 $\lim_{n \to \infty} f_n(x) = 0$이 존재하고,</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in (-1, 1))$$</div>
+        <p>이다. $f \equiv 0$은 $(-1, 1)$ 위에서 미분가능하고 $f'(x) = 0$이며, 특히 $f'(0) = 0$이다.</p>
+        <p>다음으로 $f_n'$을 계산한다.</p>
+        <div class="math-display">$$f_n'(x) = \frac{(1 + nx^2) - x \cdot 2nx}{(1 + nx^2)^2} = \frac{1 - nx^2}{(1 + nx^2)^2}.$$</div>
+        <p>$x = 0$이면 $f_n'(0) = \dfrac{1 - 0}{(1+0)^2} = 1$이 모든 $n$에 대해 성립하므로</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n'(0) = 1.$$</div>
+        <p>$x \neq 0$이면 $n \to \infty$일 때 $nx^2 \to \infty$이므로 $m := nx^2$라 두면</p>
+        <div class="math-display">$$f_n'(x) = \frac{1 - m}{(1 + m)^2} \to 0 \qquad (m \to \infty),$$</div>
+        <p>즉 $\lim_{n \to \infty} f_n'(x) = 0$이다. 따라서 모든 $x \in (-1, 1)$에 대하여 $\lim_{n \to \infty} f_n'(x)$가 존재한다.</p>
+        <p>이로써 $f_n$은 이 연습문제의 모든 가정을 만족한다. 즉 모든 $x \in (-1,1)$에서 $\lim_{n\to\infty} f_n(x)$와 $\lim_{n\to\infty} f_n'(x)$가 존재하고, $f = \lim_{n\to\infty} f_n$이 $(-1,1)$ 위에서 미분가능하다. 그러나</p>
+        <div class="math-display">$$f'(0) = 0 \neq 1 = \lim_{n \to \infty} f_n'(0)$$</div>
+        <p>이므로, 주어진 등식은 성립하지 않는다. 이는 주장을 반증한다.</p>
+        <p>(예제 3.3의 $f_n(x) = \sin(nx)/\sqrt{n}$은 이 반례로 쓸 수 없음에 유의하자. $\lim_{n \to \infty} f_n'(0) = \lim_{n \to \infty} \sqrt{n} = \infty$이므로 실수로서의 극한이 존재하지 않아, "모든 $x$에서 $\lim_{n\to\infty} f_n'(x)$가 존재한다"는 이 연습문제의 가정 자체를 만족시키지 못한다. 이 때문에 위와 같이 $\lim_{n\to\infty} f_n'$이 모든 점에서 존재하면서도 $f' \neq \lim_{n\to\infty} f_n'$인 새로운 반례가 필요하다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a \lt b$ and $f_n$ be a sequence of real-valued differentiable functions on $(a, b)$. Assume that</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) \quad \text{and} \quad \lim_{n \to \infty} f'_n(x)$$</div>
+        <p>exist for all $x \in (a, b)$, and the function $f(x) := \lim_{n \to \infty} f_n(x)$ is differentiable on $(a, b)$. Prove or disprove that</p>
+        <div class="math-display">$$f'(x) = \lim_{n \to \infty} f'_n(x) \qquad \forall x \in (a, b).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>The claim is false. We give a counterexample. Let $(a, b) := (-1, 1)$ and for all $n \in \mathbb{N}$, define</p>
+        <div class="math-display">$$f_n(x) = \frac{x}{1 + nx^2} \qquad (x \in (-1, 1)).$$</div>
+        <p>Since $1 + nx^2 \geq 1 > 0$, $f_n$ is differentiable on $(-1, 1)$ (indeed on all of $\mathbb{R}$).</p>
+        <p>First we find the pointwise limit. If $x = 0$, then $f_n(0) = 0 \to 0$. If $x \neq 0$, then as $n \to \infty$, $1 + nx^2 \to \infty$, so</p>
+        <div class="math-display">$$f_n(x) = \frac{x}{1 + nx^2} \to 0.$$</div>
+        <p>Thus $\lim_{n \to \infty} f_n(x) = 0$ exists for all $x \in (-1, 1)$, and</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in (-1, 1)).$$</div>
+        <p>The function $f \equiv 0$ is differentiable on $(-1, 1)$ with $f'(x) = 0$, in particular $f'(0) = 0$.</p>
+        <p>Next we compute $f_n'$.</p>
+        <div class="math-display">$$f_n'(x) = \frac{(1 + nx^2) - x \cdot 2nx}{(1 + nx^2)^2} = \frac{1 - nx^2}{(1 + nx^2)^2}.$$</div>
+        <p>If $x = 0$, then $f_n'(0) = \dfrac{1 - 0}{(1+0)^2} = 1$ for all $n$, so</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n'(0) = 1.$$</div>
+        <p>If $x \neq 0$, then as $n \to \infty$, $nx^2 \to \infty$; letting $m := nx^2$,</p>
+        <div class="math-display">$$f_n'(x) = \frac{1 - m}{(1 + m)^2} \to 0 \qquad (m \to \infty),$$</div>
+        <p>that is, $\lim_{n \to \infty} f_n'(x) = 0$. Hence $\lim_{n \to \infty} f_n'(x)$ exists for all $x \in (-1, 1)$.</p>
+        <p>Thus $f_n$ satisfies all the hypotheses of this exercise: $\lim_{n\to\infty} f_n(x)$ and $\lim_{n\to\infty} f_n'(x)$ exist for all $x \in (-1,1)$, and $f = \lim_{n\to\infty} f_n$ is differentiable on $(-1,1)$. However,</p>
+        <div class="math-display">$$f'(0) = 0 \neq 1 = \lim_{n \to \infty} f_n'(0),$$</div>
+        <p>so the claimed equality fails. This disproves the claim.</p>
+        <p>(Note that $f_n(x) = \sin(nx)/\sqrt{n}$ from Example 3.3 cannot serve as this counterexample. Since $\lim_{n \to \infty} f_n'(0) = \lim_{n \to \infty} \sqrt{n} = \infty$ does not exist as a real number, Example 3.3 fails to satisfy the very hypothesis of this exercise that $\lim_{n\to\infty} f_n'(x)$ exist for all $x$. This is exactly why a new counterexample, in which $\lim_{n\to\infty} f_n'$ exists everywhere yet still $f' \neq \lim_{n\to\infty} f_n'$, is needed above.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3.5 -->
+<div class="card exam-card" id="c3-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.5</span>
+    <span class="exam-title">극한의 적분에서 벗어나 발산하는 적분열 <em>Integrals that diverge away from the integral of the limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $n \in \mathbb{N}$에 대하여 다음을 정의하자.</p>
+        <div class="math-display">$$f_n(x) = n^2x(1 - x^2)^n \qquad (x \in \mathbb{R}).$$</div>
+        <p>각 $n$에 대하여 $f$가 $[0, 1]$ 위에서 연속이므로 $f_n$은 $[0, 1]$ 위에서 리만 적분가능하다. $a \in (0, 1)$에 대하여, 로피탈 법칙에 의해</p>
+        <div class="math-display">$$\lim_{x \to \infty} x^2a^x = \lim_{x \to \infty} \frac{x^2}{a^{-x}} = \lim_{x \to \infty} \frac{2x}{-a^{-x}\ln a} = \lim_{x \to \infty} \frac{2}{a^{-x}(\ln a)^2} = \lim_{x \to \infty} a^x \frac{2}{(\ln a)^2} = 0$$</div>
+        <p>이고 자명하게</p>
+        <div class="math-display">$$\lim_{x \to \infty} x^2 \cdot 0^x = 0.$$</div>
+        <p>특히, 모든 $a \in [0, 1)$에 대하여</p>
+        <div class="math-display">$$\lim_{n \to \infty} n^2a^n = 0.$$</div>
+        <p>따라서 모든 $x \in (0, 1]$에 대하여</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = x \lim_{n \to \infty} n^2(1 - x^2)^n = 0$$</div>
+        <p>이고 자명하게</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} 0 = 0.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in [0, 1])$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\int_0^1 f(x)dx = \int_0^1 0dx = 0.$$</div>
+        <p>한편, 각 $n$에 대하여 변수변환 $1 - x^2 \to x$에 의해</p>
+        <div class="math-display">$$\int_0^1 f_n(x)dx = n^2\int_0^1 x(1 - x^2)^ndx = n^2\int_0^1 x^n\frac{1}{2}dx = n^2\frac{1}{2}\frac{1}{n+1} = \frac{n^2}{2n+2}.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx = \infty \neq 0 = \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For all $n \in \mathbb{N}$, define</p>
+        <div class="math-display">$$f_n(x) = n^2x(1 - x^2)^n \qquad (x \in \mathbb{R}).$$</div>
+        <p>Then for each $n$, $f_n$ is Riemann integrable on $[0, 1]$ since $f$ is continuous on $[0, 1]$. Observe that for $a \in (0, 1)$, by L’Hôpital’s rule,</p>
+        <div class="math-display">$$\lim_{x \to \infty} x^2a^x = \lim_{x \to \infty} \frac{x^2}{a^{-x}} = \lim_{x \to \infty} \frac{2x}{-a^{-x}\ln a} = \lim_{x \to \infty} \frac{2}{a^{-x}(\ln a)^2} = \lim_{x \to \infty} a^x \frac{2}{(\ln a)^2} = 0$$</div>
+        <p>and obviously</p>
+        <div class="math-display">$$\lim_{x \to \infty} x^2 \cdot 0^x = 0.$$</div>
+        <p>In particular, for all $a \in [0, 1)$</p>
+        <div class="math-display">$$\lim_{n \to \infty} n^2a^n = 0.$$</div>
+        <p>Thus for all $x \in (0, 1]$,</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = x \lim_{n \to \infty} n^2(1 - x^2)^n = 0$$</div>
+        <p>and obviously</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} 0 = 0.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in [0, 1])$$</div>
+        <p>and</p>
+        <div class="math-display">$$\int_0^1 f(x)dx = \int_0^1 0dx = 0.$$</div>
+        <p>On the other hand, for each $n$, by the change of variable $1 - x^2 \to x$,</p>
+        <div class="math-display">$$\int_0^1 f_n(x)dx = n^2\int_0^1 x(1 - x^2)^ndx = n^2\int_0^1 x^n\frac{1}{2}dx = n^2\frac{1}{2}\frac{1}{n+1} = \frac{n^2}{2n+2}.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx = \infty \neq 0 = \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.59 ═══════════ -->
+
+<!-- 서술 단락 (p.59): 다음 예제 예고 -->
+<div class="card note-card" id="note07-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 예제에 의해,</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx \neq \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+        <p>이지만</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx \lt \infty.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Due to the next example,</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx \neq \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+        <p>even though</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx \lt \infty.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3.6 -->
+<div class="card exam-card" id="c3-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.6</span>
+    <span class="exam-title">극한이 유한해도 극한의 적분과 다른 적분열 <em>A finite limit of integrals that still differs from the integral of the limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $n \in \mathbb{N}$에 대하여 다음을 정의하자.</p>
+        <div class="math-display">$$f_n(x) = nx(1 - x^2)^n. \qquad (x \in \mathbb{R})$$</div>
+        <p>각 $n$에 대하여 $f$가 $[a, b]$ 위에서 연속이므로 $f_n$은 $[0, 1]$ 위에서 리만 적분가능하다. $a \in [0, 1)$에 대하여, 로피탈 법칙에 의해</p>
+        <div class="math-display">$$\lim_{x \to \infty} xa^x = \lim_{x \to \infty} \frac{x}{a^{-x}} = \lim_{x \to \infty} \frac{2}{-a^{-x}\ln a} = -\lim_{x \to \infty} a^x \frac{2}{\ln a} = 0.$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\lim_{x \to \infty} x \cdot 0^x = 0.$$</div>
+        <p>특히, 모든 $a \in [0, 1)$에 대하여</p>
+        <div class="math-display">$$\lim_{n \to \infty} na^n = 0.$$</div>
+        <p>따라서 모든 $x \in (0, 1]$에 대하여</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = x \lim_{n \to \infty} n(1 - x^2)^n = 0$$</div>
+        <p>이고 자명하게</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} 0 = 0.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in [0, 1])$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\int_0^1 f(x)dx = \int_0^1 0dx = 0.$$</div>
+        <p>한편, 각 $n$에 대하여</p>
+        <div class="math-display">$$\int_0^1 f_n(x)dx = n\int_0^1 x(1 - x^2)^ndx = n\int_0^1 x^n\frac{1}{2}dx = n\frac{1}{2}\frac{1}{n+1} = \frac{n}{2n+2}.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx = \frac{1}{2} \neq 0 = \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For all $n \in \mathbb{N}$, define</p>
+        <div class="math-display">$$f_n(x) = nx(1 - x^2)^n. \qquad (x \in \mathbb{R})$$</div>
+        <p>Then for each $n$, $f_n$ is Riemann integrable on $[0, 1]$ since $f$ is continuous on $[a, b]$. Observe that for $a \in [0, 1)$, by L’Hôpital’s rule,</p>
+        <div class="math-display">$$\lim_{x \to \infty} xa^x = \lim_{x \to \infty} \frac{x}{a^{-x}} = \lim_{x \to \infty} \frac{2}{-a^{-x}\ln a} = -\lim_{x \to \infty} a^x \frac{2}{\ln a} = 0.$$</div>
+        <p>and</p>
+        <div class="math-display">$$\lim_{x \to \infty} x \cdot 0^x = 0.$$</div>
+        <p>In particular, for all $a \in [0, 1)$</p>
+        <div class="math-display">$$\lim_{n \to \infty} na^n = 0.$$</div>
+        <p>Thus for all $x \in (0, 1]$,</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(x) = x \lim_{n \to \infty} n(1 - x^2)^n = 0$$</div>
+        <p>and obviously</p>
+        <div class="math-display">$$\lim_{n \to \infty} f_n(0) = \lim_{n \to \infty} 0 = 0.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = 0 \qquad (x \in [0, 1])$$</div>
+        <p>and</p>
+        <div class="math-display">$$\int_0^1 f(x)dx = \int_0^1 0dx = 0.$$</div>
+        <p>On the other hand, for each $n$</p>
+        <div class="math-display">$$\int_0^1 f_n(x)dx = n\int_0^1 x(1 - x^2)^ndx = n\int_0^1 x^n\frac{1}{2}dx = n\frac{1}{2}\frac{1}{n+1} = \frac{n}{2n+2}.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\lim_{n \to \infty} \int_0^1 f_n(x)dx = \frac{1}{2} \neq 0 = \int_0^1 \lim_{n \to \infty} f_n(x)dx.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.59 하단): 더 강한 수렴의 필요 -->
+<div class="card note-card" id="note07-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 예제들은 우리로 하여금 점별수렴보다 강한 수렴을 찾도록 이끈다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>These examples lead us to find stronger convergence than pointwise convergence.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.60 ═══════════ -->
+
+<!-- Definition 3.7 -->
+<div class="card def-card" id="c3-7">
+  <div class="card-head">
+    <span class="def-num">DEF 3.7</span>
+    <span class="def-title">균등수렴 <em>Uniform convergence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이고 $\{f_n : n \in \mathbb{N}\}$을 $E$ 위의 실숫값 함수열이라 하자. 즉, 각 $n \in \mathbb{N}$에 대하여 $f_n$은 $E$에서 $\mathbb{R}$로 가는 함수이다. $f_n$이 $E$ 위에서 $f$로 균등수렴한다는 것은, 임의의 $\varepsilon > 0$에 대하여 모든 $n \geq N$에서 다음을 만족하는 양의 정수 $N$이 존재함을 의미한다.</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \lt \varepsilon.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E \subset \mathbb{R}$ and $\{f_n : n \in \mathbb{N}\}$ be a sequence of real-valued functions on $E$, i.e. for each $n \in \mathbb{N}$, $f_n$ is a function from $E$ to $\mathbb{R}$. We say that $f_n$ converges to $f$ uniformly on $E$ if for any $\varepsilon > 0$, there exists a positive integer $N$ such that for all $n \geq N$</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \lt \varepsilon.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.8 -->
+<div class="card ex-card" id="c3-8">
+  <div class="card-head">
+    <span class="ex-num">EX 3.8</span>
+    <span class="ex-title">균등수렴과 점별수렴의 비교 <em>Uniform convergence versus pointwise convergence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이고 $\{f_n : n \in \mathbb{N}\}$을 $E$ 위의 실숫값 함수열이라 하자.</p>
+        <ul style="list-style:none;">
+          <li>(i) $f_n$이 $E$ 위에서 $f$로 균등수렴하면 $f_n$이 $E$ 위에서 $f$로 점별수렴함을 보여라.</li>
+          <li>(ii) $f_n$이 $E$ 위에서 $f$로 점별수렴하면 $f_n$이 $E$ 위에서 $f$로 균등수렴한다는 것을 반증하라.</li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <ul style="list-style:none;">
+          <li>(i) $f_n$이 $E$ 위에서 $f$로 균등수렴한다고 가정하자. $x \in E$를 고정하자. $\varepsilon > 0$이라 하자. 균등수렴의 정의(정의 3.7)에 의해, 모든 $n \geq N$에 대하여
+            <div class="math-display">$$\sup_{y \in E} |f_n(y) - f(y)| \lt \varepsilon$$</div>
+            <p>을 만족하는 $N \in \mathbb{N}$이 존재한다. $x \in E$이므로 모든 $n \geq N$에 대하여</p>
+            <div class="math-display">$$|f_n(x) - f(x)| \leq \sup_{y \in E} |f_n(y) - f(y)| \lt \varepsilon$$</div>
+            <p>이다. 즉 $f_n(x) \to f(x)$이다. $x \in E$가 임의였으므로 $f_n$은 $E$ 위에서 $f$로 점별수렴한다.</p>
+          </li>
+          <li>(ii) 역은 성립하지 않음을 반례로 보인다. $E := [0, 1]$이라 하고 모든 $n \in \mathbb{N}$에 대하여 $f_n(x) := x^n$이라 하자.
+            <p>점별극한을 구한다. $x \in [0, 1)$이면 $0 \leq x \lt 1$이므로 $x^n \to 0$이다. $x = 1$이면 $x^n = 1 \to 1$이다. 따라서</p>
+            <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = \begin{cases} 0 & (0 \leq x \lt 1) \\ 1 & (x = 1) \end{cases}$$</div>
+            <p>이고, $f_n$은 $[0, 1]$ 위에서 $f$로 점별수렴한다.</p>
+            <p>이제 이 수렴이 균등수렴이 아님을 정리 3.9의 판정법을 이용해 보인다. $\varepsilon := 1/2$라 하자. 임의의 $N \in \mathbb{N}$에 대하여</p>
+            <div class="math-display">$$x_N := \left(\frac{1}{2}\right)^{1/N} \in (0, 1)$$</div>
+            <p>이라 두면 $x_N \in [0, 1)$이므로 $f(x_N) = 0$이고,</p>
+            <div class="math-display">$$|f_N(x_N) - f(x_N)| = |x_N^N - 0| = \left(\left(\frac{1}{2}\right)^{1/N}\right)^N = \frac{1}{2}$$</div>
+            <p>이다. 즉 $|f_N(x_N) - f(x_N)| = 1/2$이고, 이는 $\varepsilon = 1/2$보다 작지 않다. 따라서 어떤 $N$을 택하더라도, 모든 $n \geq N$과 $x \in [0,1]$에 대해 $|f_n(x) - f(x)| \lt \varepsilon$이 성립하도록 만들 수 없다 ($n = N$, $x = x_N$이 반례가 된다). 정리 3.9에 의해, $f_n$은 $[0,1]$ 위에서 $f$로 균등수렴하지 않는다. 이로써 역이 반증되었다.</p>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E \subset \mathbb{R}$ and $\{f_n : n \in \mathbb{N}\}$ be a sequence of real-valued functions on $E$.</p>
+        <ul style="list-style:none;">
+          <li>(i) Show that if $f_n$ converges to $f$ uniformly on $E$, then $f_n$ converges to $f$ pointwise on $E$.</li>
+          <li>(ii) Disprove that if $f_n$ converges to $f$ pointwise on $E$, then $f_n$ converges to $f$ uniformly on $E$.</li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <ul style="list-style:none;">
+          <li>(i) Suppose $f_n$ converges to $f$ uniformly on $E$. Fix $x \in E$. Let $\varepsilon > 0$. By the definition of uniform convergence (Definition 3.7), there exists $N \in \mathbb{N}$ such that for all $n \geq N$,
+            <div class="math-display">$$\sup_{y \in E} |f_n(y) - f(y)| \lt \varepsilon.$$</div>
+            <p>Since $x \in E$, for all $n \geq N$,</p>
+            <div class="math-display">$$|f_n(x) - f(x)| \leq \sup_{y \in E} |f_n(y) - f(y)| \lt \varepsilon.$$</div>
+            <p>That is, $f_n(x) \to f(x)$. Since $x \in E$ was arbitrary, $f_n$ converges to $f$ pointwise on $E$.</p>
+          </li>
+          <li>(ii) We show the converse fails, by a counterexample. Let $E := [0, 1]$ and for all $n \in \mathbb{N}$, let $f_n(x) := x^n$.
+            <p>We find the pointwise limit. If $x \in [0, 1)$, then $0 \leq x \lt 1$, so $x^n \to 0$. If $x = 1$, then $x^n = 1 \to 1$. Thus</p>
+            <div class="math-display">$$f(x) := \lim_{n \to \infty} f_n(x) = \begin{cases} 0 & (0 \leq x \lt 1) \\ 1 & (x = 1) \end{cases}$$</div>
+            <p>and $f_n$ converges to $f$ pointwise on $[0, 1]$.</p>
+            <p>We now show that this convergence is not uniform, using the criterion of Theorem 3.9. Let $\varepsilon := 1/2$. For any $N \in \mathbb{N}$, let</p>
+            <div class="math-display">$$x_N := \left(\frac{1}{2}\right)^{1/N} \in (0, 1).$$</div>
+            <p>Then $x_N \in [0, 1)$, so $f(x_N) = 0$, and</p>
+            <div class="math-display">$$|f_N(x_N) - f(x_N)| = |x_N^N - 0| = \left(\left(\frac{1}{2}\right)^{1/N}\right)^N = \frac{1}{2}.$$</div>
+            <p>That is, $|f_N(x_N) - f(x_N)| = 1/2$, which is not less than $\varepsilon = 1/2$. Hence no matter which $N$ we choose, it is impossible that $|f_n(x) - f(x)| \lt \varepsilon$ for all $n \geq N$ and $x \in [0,1]$ (taking $n = N$ and $x = x_N$ gives a counterexample). By Theorem 3.9, $f_n$ does not converge to $f$ uniformly on $[0,1]$. This disproves the converse.</p>
+          </li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 3.9 -->
+<div class="card thm-card" id="c3-9">
+  <div class="card-head">
+    <span class="thm-num">THM 3.9</span>
+    <span class="thm-title">균등수렴에 대한 점별 판정법 <em>A pointwise criterion for uniform convergence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$E \subset \mathbb{R}$이고 $f_n$을 $E$ 위의 실숫값 함수열이라 하자. 그러면 $f_n$이 $E$ 위에서 $f$로 균등수렴하는 것은, 임의의 $\varepsilon > 0$에 대하여 모든 $n \geq N$과 $x \in E$에서 다음을 만족하는 양의 정수 $N$이 존재하는 것과 동치이다.</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>먼저 "$\Rightarrow$ 방향"을 증명한다. $\varepsilon > 0$이라 하자. $f_n$이 $E$ 위에서 $f$로 균등수렴하므로, 모든 $n \geq N$에 대하여 다음을 만족하는 $N \in \mathbb{N}$이 존재한다.</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \lt \varepsilon.$$</div>
+        <p>모든 $n \geq N$과 $x \in E$에 대하여</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \leq \sup_{y \in E} |f_n(y) - f(y)|,$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon.$$</div>
+        <p>다음으로 "$\Leftarrow$ 방향"을 증명한다. $\varepsilon > 0$이라 하자. 그러면 모든 $n \geq N$과 $x \in E$에서 다음을 만족하는 양의 정수 $N$이 존재한다.</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon/2.$$</div>
+        <p>따라서 모든 $n \geq N$에 대하여</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \leq \varepsilon/2 \lt \varepsilon.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E \subset \mathbb{R}$ and $f_n$ be a sequence of real-valued functions on $E$. Then $f_n \to f$ converges to $f$ uniformly on $E$ if and only if for any $\varepsilon > 0$, there exists a positive integer $N$ such that for all $n \geq N$ and $x \in E$,</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We first prove the only if part ($\Rightarrow$). Let $\varepsilon > 0$. Then since $f_n \to f$ uniformly on $E$, there exists a $N \in \mathbb{N}$ such that for all $n \geq N$ such that</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \lt \varepsilon.$$</div>
+        <p>Since for all $n \geq N$ and $x \in E$,</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \leq \sup_{y \in E} |f_n(y) - f(y)|,$$</div>
+        <p>we have</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon.$$</div>
+        <p>Next we prove the if part ($\Leftarrow$). Let $\varepsilon > 0$. Then there exists a positive integer $N$ such that for all $n \geq N$ and $x \in E$,</p>
+        <div class="math-display">$$|f_n(x) - f(x)| \lt \varepsilon/2.$$</div>
+        <p>Thus for all $n \geq N$ we have</p>
+        <div class="math-display">$$\sup_{x \in E} |f_n(x) - f(x)| \leq \varepsilon/2 \lt \varepsilon.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 참고문헌 (p.60) -->
+<div class="card note-card" id="note07-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>참고문헌</strong></p>
+        <p>[1] W. Rudin. <em>Principles of Mathematical Analysis</em>. McGRAW-HILL.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>References</strong></p>
+        <p>[1] W. Rudin. <em>Principles of Mathematical Analysis</em>. McGRAW-HILL.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="index.html">해석학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

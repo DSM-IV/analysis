@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1. 미분 (i): 극한·연속·도함수 (Differentiation (i): Limits, Continuity, and the Derivative) | 해석학2 학습 가이드</title>
+<meta name="description" content="해석학2 1단원 미분 (i) — 거리공간과 거리함수, 사상의 극한과 연속, 좌극한·우극한, 극한의 사칙연산, 닫힌구간 위의 연속성, 도함수의 정의와 미분가능성, 곱·몫의 미분법, 다항식과 각·코사인·사인, 연쇄법칙(Chain Rule)을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="해석학2, Analysis II, 미분, differentiation, 거리공간, metric space, 거리함수, distance function, 극한, limit, 극한점, limit point, 우극한, right limit, 좌극한, left limit, 연속, continuous, 닫힌구간, closed interval, 열린구간, open interval, 미분가능, differentiable, 도함수, derivative, 미분계수, 극한의 사칙연산, 다항식, polynomial, 각, angle, 코사인, cosine, 사인, sine, 연쇄법칙, chain rule, 루딘, Rudin">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://analysisonline.pages.dev/analysis2/ch01.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. 미분 (i): 극한·연속·도함수 (Differentiation (i): Limits, Continuity, and the Derivative) — 해석학2 한·영 대조">
+<meta property="og:description" content="거리공간의 극한과 연속에서 도함수의 정의, 곱·몫의 미분법과 연쇄법칙까지, 해석학2 미분 단원의 첫 부분을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://analysisonline.pages.dev/analysis2/ch01.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해석학2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1. 미분 (i): 극한·연속·도함수 (Differentiation (i): Limits, Continuity, and the Derivative) — 해석학2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "해석학2 미분 (i) — 거리공간, 극한과 연속, 좌·우극한, 극한의 사칙연산, 도함수의 정의, 곱·몫의 미분법, 다항식, 각·코사인·사인, 연쇄법칙을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://analysisonline.pages.dev/analysis2/ch01.html",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://analysisonline.pages.dev/analysis2/ch01.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <a href="../index.html">홈</a>
+  <a href="../settheory/index.html">집합론</a>
+  <a href="index.html">해석학2</a>
+  <span class="nav-sep">·</span>
+  <a href="ch01.html" class="active">01</a>
+  <a href="ch02.html">02</a>
+  <a href="ch03.html">03</a>
+  <a href="ch04.html">04</a>
+  <a href="ch05.html">05</a>
+  <a href="ch06.html">06</a>
+  <a href="ch07.html">07</a>
+</nav>
+
+<header>
+  <p class="subtitle">Analysis II — Unit 01</p>
+  <h1>1. 미분 (i): 극한·연속·도함수<span>Differentiation (i): Limits, Continuity, and the Derivative</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-1"><span class="toc-num">DEF 1.1</span> 거리공간 <em>Metric Space</em></a></li>
+    <li><a href="#c1-2"><span class="toc-num">REM 1.2</span> 거리공간의 부분집합 <em>Subsets of a Metric Space</em></a></li>
+    <li><a href="#c1-3"><span class="toc-num">DEF 1.3</span> 사상의 극한 <em>The Limit of a Mapping</em></a></li>
+    <li><a href="#c1-4"><span class="toc-num">DEF 1.4</span> 사상의 연속성 <em>Continuity of a Mapping</em></a></li>
+    <li><a href="#c1-5"><span class="toc-num">EXAM 1.5</span> 유클리드 공간 <em>The Euclidean Spaces</em></a></li>
+    <li><a href="#c1-6"><span class="toc-num">DEF 1.6</span> 구간 위에서의 극한과 우극한 <em>Limits and Right Limits on an Interval</em></a></li>
+    <li><a href="#c1-7"><span class="toc-num">REM 1.7</span> 끝점에서의 극한 <em>The Limit at an Endpoint</em></a></li>
+    <li><a href="#c1-8"><span class="toc-num">EX 1.8</span> 좌극한의 정의 <em>Defining the Left Limit</em></a></li>
+    <li><a href="#c1-9"><span class="toc-num">EX 1.9</span> 상수함수의 극한 <em>The Limit of a Constant Function</em></a></li>
+    <li><a href="#c1-10"><span class="toc-num">EX 1.10</span> 좌우극한을 통한 극한의 존재성 <em>Existence of a Limit via One-Sided Limits</em></a></li>
+    <li><a href="#c1-11"><span class="toc-num">EX 1.11</span> 극한의 두 정의 비교 <em>Comparing the Two Definitions of a Limit</em></a></li>
+    <li><a href="#c1-12"><span class="toc-num">THM 1.12</span> 극한의 사칙연산 <em>The Algebra of Limits</em></a></li>
+    <li><a href="#c1-13"><span class="toc-num">EX 1.13</span> 정리 1.12의 증명 <em>Proving Theorem 1.12</em></a></li>
+    <li><a href="#c1-14"><span class="toc-num">EX 1.14</span> 좌우극한의 사칙연산 <em>The Algebra of One-Sided Limits</em></a></li>
+    <li><a href="#c1-15"><span class="toc-num">DEF 1.15</span> 닫힌구간 위에서의 연속성 <em>Continuity on a Closed Interval</em></a></li>
+    <li><a href="#c1-16"><span class="toc-num">EX 1.16</span> 좌우연속 <em>One-Sided Continuity</em></a></li>
+    <li><a href="#c1-17"><span class="toc-num">DEF 1.17</span> 도함수 <em>The Derivative</em></a></li>
+    <li><a href="#c1-18"><span class="toc-num">REM 1.18</span> 더 간단한 도함수의 정의 <em>A Simpler Definition of the Derivative</em></a></li>
+    <li><a href="#c1-19"><span class="toc-num">EX 1.19</span> 좌우도함수 <em>One-Sided Derivatives</em></a></li>
+    <li><a href="#c1-20"><span class="toc-num">EXAM 1.20</span> 상수함수와 항등함수의 도함수 <em>Derivatives of Constant and Identity Functions</em></a></li>
+    <li><a href="#c1-21"><span class="toc-num">THM 1.21</span> 미분가능성은 연속성을 함의한다 <em>Differentiability Implies Continuity</em></a></li>
+    <li><a href="#c1-22"><span class="toc-num">EX 1.22</span> 정리 1.21 증명의 완성 <em>Completing the Proof of Theorem 1.21</em></a></li>
+    <li><a href="#c1-23"><span class="toc-num">EX 1.23</span> 닫힌구간에서의 연속성 정의가 나쁜 이유 (어려움!) <em>Why Closed-Interval Continuity Is Bad (Difficult!)</em></a></li>
+    <li><a href="#c1-24"><span class="toc-num">REM 1.24</span> 콤팩트 집합 위에서의 최댓값과 최솟값 <em>Maximum and Minimum on a Compact Set</em></a></li>
+    <li><a href="#c1-25"><span class="toc-num">THM 1.25</span> 도함수의 사칙연산 <em>The Algebra of Derivatives</em></a></li>
+    <li><a href="#c1-26"><span class="toc-num">DEF 1.26</span> 다항식 <em>Polynomials</em></a></li>
+    <li><a href="#c1-27"><span class="toc-num">COR 1.27</span> 모든 다항식은 미분가능하다 <em>All Polynomials Are Differentiable</em></a></li>
+    <li><a href="#c1-28"><span class="toc-num">DEF 1.28</span> 각, 코사인, 사인 <em>Angle, Cosine and Sine</em></a></li>
+    <li><a href="#c1-29"><span class="toc-num">EX 1.29</span> 코사인과 사인의 도함수 (어려움(?)) <em>Derivatives of Cosine and Sine (Difficult(?))</em></a></li>
+    <li><a href="#c1-30"><span class="toc-num">THM 1.30</span> 연쇄법칙 <em>Chain Rule</em></a></li>
+    <li><a href="#c1-31"><span class="toc-num">EX 1.31</span> (1.5) 증명 <em>Proving (1.5)</em></a></li>
+    <li><a href="#c1-32"><span class="toc-num">EX 1.32</span> 직관적 증명이 엄밀하지 않은 이유 <em>Why the Intuitive Proof Is Not Rigorous</em></a></li>
+    <li><a href="#c1-33"><span class="toc-num">EX 1.33</span> 유리수 거듭제곱의 도함수 (어려움(?)) <em>The Derivative of a Rational Power (Difficult(?))</em></a></li>
+    <li><a href="#c1-34"><span class="toc-num">EXAM 1.34</span> 미분가능성과 그 실패 <em>Differentiability and Its Failure</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  해석학2 카드 작성 규약 (ch01–ch07 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 번호가 붙은 환경 하나 = 카드 하나. id="c{섹션}-{번호}" (예: id="c1-10"),
+     소스 등장 순서 그대로 배치한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation / Axiom / Undefined notion
+                                  → card def-card  · DEF n / NOTATION n / AXIOM n / UNDEF n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Idea / Question / Paradox
+                                  → card rem-card  · REM n / IDEA n / Q n / PARADOX n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 소스의 괄호 이름(예: Russell’s paradox (a logical paradox))을 쓰고,
+     없으면 간결한 편집 제목을 새로 붙인다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사 (어구·수식·항목번호·"(?)"·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+  5) 원문에 Proof가 있는 환경은 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+       원문이 "(Intuitive proof)"/"(Rigorous proof)"처럼 증명을 나누어 인쇄한 경우
+       라벨을 그대로 두고 한 토글 안에 순서대로 담는다.
+  6) Exercise 카드는 소스에 풀이가 없다. 진술만 두고 풀이 자리에 숨은 마커만 남긴다.
+       ko-panel 안에 PROOF-KO 마커, en-panel 안에 PROOF-EN 마커를 각각 HTML 주석으로.
+       (실제 형태는 아래 EX 1.8 / EX 1.9 카드를 그대로 복사할 것.)
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  7) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{페이지}-{순번} (예: note02-3),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+     이탤릭으로 인쇄된 단락은 서술이 아니라 바로 앞 환경의 일부이므로 그 카드에 붙인다.
+  8) 수식은 $...$ / $$...$$. 번호 붙은 display 수식은 \tag{1.1} 형태로 번호를 유지한다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     소스의 항목 라벨이 (i)/(ii) 또는 (a)/(b)처럼 로마자·알파벳이면 ol.paren 대신
+     p 태그 앞에 strong 으로 라벨을 그대로 적어 원문 표기를 보존한다.
+  9) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§1 Differentiation · 미분</h2></div>
+
+<!-- ═══════════ PDF p.1 ═══════════ -->
+
+<!-- 서술 단락 (p.1) -->
+<div class="card note-card" id="note01-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>먼저 거리공간의 정의를 복습한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>First, review the definition of a metric space.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.1 -->
+<div class="card def-card" id="c1-1">
+  <div class="card-head">
+    <span class="def-num">DEF 1.1</span>
+    <span class="def-title">거리공간 <em>Metric Space</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>집합 $X$가 <strong>거리공간</strong>일 필요충분조건은 다음을 만족하는 함수 $d : X \times X \to \mathbb{R}$이 존재하는 것이다.</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$d(p, p) = 0 \qquad \forall p \in X$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$d(p, q) > 0 \quad \textit{if} \quad p \neq q$$</div>
+        <p><strong>(c)</strong></p>
+        <div class="math-display">$$d(p, q) = d(q, p) \qquad \forall p, q \in X$$</div>
+        <p><strong>(d)</strong> (삼각부등식)</p>
+        <div class="math-display">$$d(p, q) \le d(p, r) + d(r, q) \qquad \forall p, q, r, \in X.$$</div>
+        <p>위 네 성질을 만족하는 함수를 <strong>거리</strong> 또는 <strong>거리함수</strong>라 한다. 거리공간 $X$의 원소를 <strong>점</strong>이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A set $X$ is said to be a <strong>metric space</strong> if and only if there exists a function $d : X \times X \to \mathbb{R}$ such that</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$d(p, p) = 0 \qquad \forall p \in X$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$d(p, q) > 0 \quad \textit{if} \quad p \neq q$$</div>
+        <p><strong>(c)</strong></p>
+        <div class="math-display">$$d(p, q) = d(q, p) \qquad \forall p, q \in X$$</div>
+        <p><strong>(d)</strong> (triangle inequality)</p>
+        <div class="math-display">$$d(p, q) \le d(p, r) + d(r, q) \qquad \forall p, q, r, \in X.$$</div>
+        <p>Any function satisfying above four properties is called a <strong>metric</strong> or <strong>distance function</strong>. An element of a metric space $X$ is called a <strong>point</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.1) -->
+<div class="card note-card" id="note01-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>종종 $X$가 거리함수 $d$를 갖는 거리공간이면 $(X, d)$가 거리공간이라고 말하기도 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Sometime we say that $(X, d)$ is a metric space if $X$ is a metric space with the metric $d$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 1.2 -->
+<div class="card rem-card" id="c1-2">
+  <div class="card-head">
+    <span class="rem-num">REM 1.2</span>
+    <span class="rem-title">거리공간의 부분집합 <em>Subsets of a Metric Space</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d)$가 거리공간이라 하자. 그러면 $X$의 임의의 부분집합도 거리함수 $d$를 갖는 거리공간이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $(X, d)$ be an metric space. Then any subset of $X$ is also an metric space with the metric $d$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.3 -->
+<div class="card def-card" id="c1-3">
+  <div class="card-head">
+    <span class="def-num">DEF 1.3</span>
+    <span class="def-title">사상의 극한 <em>The Limit of a Mapping</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X)$와 $(Y, d_Y)$가 거리공간이라 하자. $E \subset X$이고 $f$는 $E$에서 $Y$로 가는 사상이며 $p$는 $E$의 극한점이라 하자. $f$가 $p$에서 극한 $q$를 가진다고 하며, $x \to p$일 때 $f(x) \to q$라고 쓰거나 다음과 같이 쓰는 것은,</p>
+        <div class="math-display">$$\lim_{x \to p} f(x) = q$$</div>
+        <p>$q \in Y$이고 임의의 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다:</p>
+        <div class="math-display">$$d_Y(f(x), q) \lt \varepsilon$$</div>
+        <p>여기서 $x$는 다음을 만족하는 $E$의 모든 원소이다.</p>
+        <div class="math-display">$$0 \lt d_X(x, p) \lt \delta.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces. Assume that $E \subset X$, $f$ is a mapping from $E$ to $Y$, and $p$ is a limit point of $E$. We say that $f$ has a limit $q$ at $p$ and write $f(x) \to q$ as $x \to p$ or</p>
+        <div class="math-display">$$\lim_{x \to p} f(x) = q$$</div>
+        <p>if and only if $q \in Y$ and for any $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$d_Y(f(x), q) \lt \varepsilon$$</div>
+        <p>for all $x \in E$ satisfying</p>
+        <div class="math-display">$$0 \lt d_X(x, p) \lt \delta.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.2 ═══════════ -->
+
+<!-- Definition 1.4 -->
+<div class="card def-card" id="c1-4">
+  <div class="card-head">
+    <span class="def-num">DEF 1.4</span>
+    <span class="def-title">사상의 연속성 <em>Continuity of a Mapping</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(X, d_X)$와 $(Y, d_Y)$가 거리공간, $E \subset X$, $f$는 $E$에서 $Y$로 가는 사상, $p \in E$라 하자. 그러면 $f$가 $p$에서 연속일 필요충분조건은 임의의 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재하는 것이다.</p>
+        <div class="math-display">$$d_Y(f(x), f(p)) \lt \varepsilon$$</div>
+        <p>여기서 $x$는 다음을 만족하는 $E$의 모든 원소이다.</p>
+        <div class="math-display">$$d_X(x, p) \lt \delta.$$</div>
+        <p>또한 $f$가 $E$에서 연속일 필요충분조건은 모든 $p \in E$에 대해 $f$가 $p$에서 연속인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, $E \subset X$, $f$ is a mapping from $E$ to $Y$, and $p \in E$. Then we say that $f$ is continuous at $p$ if and only if for any $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$d_Y(f(x), f(p)) \lt \varepsilon$$</div>
+        <p>for all $x \in E$ satisfying</p>
+        <div class="math-display">$$d_X(x, p) \lt \delta.$$</div>
+        <p>Additionally, we say that $f$ is continuous on $E$ if and only if $f$ is continuous at $p$ for all $p \in E$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.5 -->
+<div class="card exam-card" id="c1-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.5</span>
+    <span class="exam-title">유클리드 공간 <em>The Euclidean Spaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>거리공간의 가장 중요한 예 중 하나는 유클리드 공간 $\mathbb{R}^k$이다. $\mathbb{R}^k$에서의 거리는 다음과 같이 정의된다.</p>
+        <div class="math-display">$$d(x, y) = |x - y| \qquad \forall x, y \in \mathbb{R}^k. \tag{1.1}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>One of the most important examples of a metric space are the Euclidean spaces $\mathbb{R}^k$. The metric in $\mathbb{R}^k$ is defined by</p>
+        <div class="math-display">$$d(x, y) = |x - y| \qquad \forall x, y \in \mathbb{R}^k. \tag{1.1}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.2) -->
+<div class="card note-card" id="note01-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}$에서 열린구간과 닫힌구간의 정의를 복습하자. 다음과 같이 정의한다.</p>
+        <div class="math-display">$$(a, b) := \{x \in \mathbb{R} : a \lt x \lt b\}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$[a, b] := \{x \in \mathbb{R} : a \le x \le b\}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Recall the definition of an open interval and a closed interval in $\mathbb{R}$. We define</p>
+        <div class="math-display">$$(a, b) := \{x \in \mathbb{R} : a \lt x \lt b\}$$</div>
+        <p>and</p>
+        <div class="math-display">$$[a, b] := \{x \in \mathbb{R} : a \le x \le b\}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.6 -->
+<div class="card def-card" id="c1-6">
+  <div class="card-head">
+    <span class="def-num">DEF 1.6</span>
+    <span class="def-title">구간 위에서의 극한과 우극한 <em>Limits and Right Limits on an Interval</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, b$가 $a \lt b$인 실수이고 $f$는 열린구간 $(a, b)$ 위에서 정의된 실숫값 함수라 하자.</p>
+        <p><strong>(i)</strong> $d \in \mathbb{R}$이고 $c \in (a, b)$일 때, $f$가 $c$에서 <strong>극한</strong> $d$를 가진다는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>여기서 $x$는 $(c - \delta, c) \cup (c, c + \delta)$의 모든 원소이다. 이때 다음과 같은 표기를 쓴다.</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d$$</div>
+        <p>또는 $x \to c$일 때 $f(x) \to d$라고 말하는 것은 $f$가 $c$에서 <strong>극한</strong> $d$를 가진다는 것과 동치이다.</p>
+        <p><strong>(ii)</strong> 마찬가지로, $d \in \mathbb{R}$이고 $c \in [a, b)$일 때, $f$가 $c$에서 <strong>우극한</strong> $d$를 가진다는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>여기서 $x$는 $(c, c + \delta)$의 모든 원소이다. 우극한에 대해서는 다음과 같은 표기를 쓴다.</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = d$$</div>
+        <p>또는</p>
+        <div class="math-display">$$\lim_{x \downarrow c} f(x) = d.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a, b$ be real numbers such that $a \lt b$ and $f$ be a real-valued function defined on the open interval $(a, b)$.</p>
+        <p><strong>(i)</strong> For $d \in \mathbb{R}$ and $c \in (a, b)$, we say that $f$ has a <strong>limit</strong> $d$ at $c$ iff (if and only if) for all $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>for all $x \in (c - \delta, c) \cup (c, c + \delta)$. We use the notation</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d$$</div>
+        <p>or we say that $f(x) \to d$ as $x \to c$ iff $f$ has a <strong>limit</strong> $d$ at $c$.</p>
+        <p><strong>(ii)</strong> Similarly, for $d \in \mathbb{R}$ and $c \in [a, b)$, we say that $f$ has a <strong>right limit</strong> $d$ at $c$ iff for all $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>for all $x \in (c, c + \delta)$. For the right limit, we use the notation We use the notation</p>
+        <div class="math-display">$$\lim_{x \to c^+} f(x) = d$$</div>
+        <p>or</p>
+        <div class="math-display">$$\lim_{x \downarrow c} f(x) = d.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 1.7 -->
+<div class="card rem-card" id="c1-7">
+  <div class="card-head">
+    <span class="rem-num">REM 1.7</span>
+    <span class="rem-title">끝점에서의 극한 <em>The Limit at an Endpoint</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[a, b)$는 거리공간이므로, $a$에서의 $f$의 극한은 정의 1.3에서 정의된다. 더욱이 다음이 성립함을 쉽게 확인할 수 있다.</p>
+        <div class="math-display">$$\lim_{x \to a} f(x) = \lim_{x \to a^+} f(x).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Since $[a, b)$ is a metric space, the limit of $f$ at $a$ is defined in Definition 1.3. Moreover, it is easily checkable that</p>
+        <div class="math-display">$$\lim_{x \to a} f(x) = \lim_{x \to a^+} f(x).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.8 -->
+<div class="card ex-card" id="c1-8">
+  <div class="card-head">
+    <span class="ex-num">EX 1.8</span>
+    <span class="ex-title">좌극한의 정의 <em>Defining the Left Limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수의 <strong>좌극한</strong>을 정의하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정의 1.6(ii)의 우극한 정의를 왼쪽으로 그대로 옮기면 된다. $a, b$가 $a \lt b$인 실수이고 $f$가 열린구간 $(a, b)$ 위에서 정의된 실숫값 함수라 하자.</p>
+        <p>$d \in \mathbb{R}$이고 $c \in (a, b]$일 때, $f$가 $c$에서 <strong>좌극한</strong> $d$를 가진다는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>여기서 $x$는 $(c - \delta, c)$의 모든 원소이다. 좌극한에 대해서는 다음과 같은 표기를 쓴다.</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = d$$</div>
+        <p>또는</p>
+        <div class="math-display">$$\lim_{x \uparrow c} f(x) = d.$$</div>
+        <p>정의 1.6(ii)가 우극한을 $c \in [a, b)$에 대해 정의한 것과 대칭적으로, 좌극한은 $c \in (a, b]$에 대해 정의된다. 실제로 $c \in (a, b]$이면 $\delta \le c - a$인 $\delta > 0$에 대해 $(c - \delta, c) \subset (a, b)$이므로 위 조건은 뜻을 가지며, 정의 1.6(ii)에서와 마찬가지로 $\delta$를 그렇게 작게 잡아도 일반성을 잃지 않는다.</p>
+        <p>$f$의 정의역 $(a, b)$는 $\mathbb{R}$의 부분거리공간이고(주의 1.2) $c \in (a, b]$는 $(a, b)$의 극한점이므로 $c$에서의 $f$의 극한은 정의 1.3으로도 정의된다. 이때 $\delta \le c - a$이면</p>
+        <div class="math-display">$$\{x \in (a, b) : 0 \lt |x - c| \lt \delta\} = (c - \delta, c) \cup \big( (c, c + \delta) \cap (a, b) \big)$$</div>
+        <p>이고, 특히 $c = b$이면 오른쪽 두 번째 집합이 공집합이므로 위 집합은 $(b - \delta, b)$와 같다. 따라서 주의 1.7과 대칭적으로 다음이 성립한다.</p>
+        <div class="math-display">$$\lim_{x \to b} f(x) = \lim_{x \to b^-} f(x).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Define a <strong>left limit</strong> of a function.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>We simply transfer the definition of the right limit in Definition 1.6(ii) to the left side. Let $a, b$ be real numbers such that $a \lt b$ and $f$ be a real-valued function defined on the open interval $(a, b)$.</p>
+        <p>For $d \in \mathbb{R}$ and $c \in (a, b]$, we say that $f$ has a <strong>left limit</strong> $d$ at $c$ iff for all $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon$$</div>
+        <p>for all $x \in (c - \delta, c)$. For the left limit, we use the notation</p>
+        <div class="math-display">$$\lim_{x \to c^-} f(x) = d$$</div>
+        <p>or</p>
+        <div class="math-display">$$\lim_{x \uparrow c} f(x) = d.$$</div>
+        <p>Symmetrically to Definition 1.6(ii), which defines the right limit for $c \in [a, b)$, the left limit is defined for $c \in (a, b]$. Indeed, if $c \in (a, b]$ and $\delta \le c - a$, then $(c - \delta, c) \subset (a, b)$, so the condition above is meaningful; as in Definition 1.6(ii), there is no loss of generality in taking $\delta$ that small.</p>
+        <p>The domain $(a, b)$ of $f$ is a metric subspace of $\mathbb{R}$ (Remark 1.2) and $c \in (a, b]$ is a limit point of $(a, b)$, so the limit of $f$ at $c$ is also defined by Definition 1.3. If $\delta \le c - a$, then</p>
+        <div class="math-display">$$\{x \in (a, b) : 0 \lt |x - c| \lt \delta\} = (c - \delta, c) \cup \big( (c, c + \delta) \cap (a, b) \big)$$</div>
+        <p>and in particular, when $c = b$ the second set on the right is empty, so the set above equals $(b - \delta, b)$. Hence, symmetrically to Remark 1.7,</p>
+        <div class="math-display">$$\lim_{x \to b} f(x) = \lim_{x \to b^-} f(x).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.9 -->
+<div class="card ex-card" id="c1-9">
+  <div class="card-head">
+    <span class="ex-num">EX 1.9</span>
+    <span class="ex-title">상수함수의 극한 <em>The Limit of a Constant Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $(a, b)$ 위의 상수함수, 즉 다음을 만족하는 실수 $d$가 존재한다고 하자.</p>
+        <div class="math-display">$$f(x) = d \qquad \forall x \in (a, b).$$</div>
+        <p>모든 $c \in (a, b)$에 대해 다음이 성립함을 보여라.</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$c \in (a, b)$라 하고 $\varepsilon > 0$이 주어졌다고 하자. $\delta > 0$을 아무렇게나 잡아도 되지만, 정의 1.6(i)의 조건이 $f$의 정의역 안에서 뜻을 가지도록</p>
+        <div class="math-display">$$\delta := \min \{ c - a, \ b - c \} > 0$$</div>
+        <p>으로 두자. 그러면 $(c - \delta, c) \cup (c, c + \delta) \subset (a, b)$이므로, 이 집합의 임의의 원소 $x$에 대해 $f(x) = d$이고 따라서</p>
+        <div class="math-display">$$|f(x) - d| = |d - d| = 0 \lt \varepsilon.$$</div>
+        <p>$\varepsilon > 0$이 임의였으므로 정의 1.6(i)에 의해</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d.$$</div>
+        <p>여기서 $\delta$가 $\varepsilon$에 전혀 의존하지 않는다는 점에 주목하자. 같은 계산으로 한쪽 극한도 얻는데, 이때 $\delta$는 한쪽 폭만 잡아야 한다. 실제로 $c \in [a, b)$에 대해 $\delta := b - c > 0$으로 두면 $(c, c + \delta) \subset (a, b)$이므로 그 위의 모든 $x$에서 $|f(x) - d| = 0 \lt \varepsilon$이고, 정의 1.6(ii)에 의해 $\lim_{x \to c^+} f(x) = d$이다. 마찬가지로 $c \in (a, b]$에 대해 $\delta := c - a > 0$으로 두면 $(c - \delta, c) \subset (a, b)$이므로 연습문제 1.8의 정의에 의해 $\lim_{x \to c^-} f(x) = d$이다. (끝점 $c = a$ 또는 $c = b$에서는 $\min\{c - a, \ b - c\} = 0$이므로 위에서 쓴 $\delta$를 그대로 쓸 수 없고, 이렇게 필요한 쪽의 폭만 잡아야 한다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a constant function on $(a, b)$, i.e. there exists a real number $d$ such that</p>
+        <div class="math-display">$$f(x) = d \qquad \forall x \in (a, b).$$</div>
+        <p>Show that for all $c \in (a, b)$,</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $c \in (a, b)$ and let $\varepsilon > 0$ be given. Any $\delta > 0$ will do, but so that the condition in Definition 1.6(i) is meaningful inside the domain of $f$, put</p>
+        <div class="math-display">$$\delta := \min \{ c - a, \ b - c \} > 0$$</div>
+        <p>Then $(c - \delta, c) \cup (c, c + \delta) \subset (a, b)$, so for any element $x$ of this set we have $f(x) = d$ and hence</p>
+        <div class="math-display">$$|f(x) - d| = |d - d| = 0 \lt \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ was arbitrary, Definition 1.6(i) gives</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d.$$</div>
+        <p>Note that $\delta$ does not depend on $\varepsilon$ at all. The same computation gives the one-sided limits as well, provided $\delta$ is taken one-sided. Indeed, for $c \in [a, b)$ put $\delta := b - c > 0$; then $(c, c + \delta) \subset (a, b)$, so $|f(x) - d| = 0 \lt \varepsilon$ at every $x$ of that set and Definition 1.6(ii) gives $\lim_{x \to c^+} f(x) = d$. Likewise, for $c \in (a, b]$ put $\delta := c - a > 0$; then $(c - \delta, c) \subset (a, b)$ and the definition of Exercise 1.8 gives $\lim_{x \to c^-} f(x) = d$. (At an endpoint $c = a$ or $c = b$ one has $\min\{c - a, \ b - c\} = 0$, so the $\delta$ used above is unavailable and only the relevant one-sided width may be taken.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.3 ═══════════ -->
+
+<!-- Exercise 1.10 -->
+<div class="card ex-card" id="c1-10">
+  <div class="card-head">
+    <span class="ex-num">EX 1.10</span>
+    <span class="ex-title">좌우극한을 통한 극한의 존재성 <em>Existence of a Limit via One-Sided Limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $(a, b)$ 위의 함수이고 $c \in (a, b)$라 하자. $\lim_{x \to c} f(x)$가 존재할 필요충분조건은 $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x)$인 것임을 보여라. 여기서 $\lim_{x \to c^-} f(x)$는 $c$에서의 $f$의 좌극한을, $\lim_{x \to c^+} f(x)$는 $c$에서의 $f$의 우극한을 나타낸다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>문제의 진술에서 등식 $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x)$는 <em>두 한쪽 극한이 모두 존재하고 그 값이 같다</em>는 뜻으로 읽는다. 이 표현이 뜻을 가지려면 극한값이 유일해야 하는데, 이는 다음과 같이 확인된다. $d_1 \neq d_2$가 모두 $c$에서의 $f$의 극한(또는 모두 우극한, 또는 모두 좌극한)이라 하면, $\varepsilon := |d_1 - d_2| / 2 > 0$에 대해 $\delta_1, \delta_2 > 0$을 얻고, 해당하는 (한쪽) 근방을 $\delta := \min\{\delta_1, \delta_2\}$로 잡으면 그 근방은 공집합이 아니므로 그 안의 점 $x$에 대해</p>
+        <div class="math-display">$$|d_1 - d_2| \le |d_1 - f(x)| + |f(x) - d_2| \lt \varepsilon + \varepsilon = |d_1 - d_2|$$</div>
+        <p>이 되어 모순이다. 따라서 극한값은 유일하다.</p>
+        <p><strong>($\Longrightarrow$)</strong> $\lim_{x \to c} f(x) = d$가 존재한다고 하자. $\varepsilon > 0$이 주어졌다고 하면, 정의 1.6(i)에 의해 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c - \delta, c) \cup (c, c + \delta).$$</div>
+        <p>특히 모든 $x \in (c, c + \delta)$에 대해 $|f(x) - d| \lt \varepsilon$이므로 정의 1.6(ii)에 의해 $\lim_{x \to c^+} f(x) = d$이고, 또 특히 모든 $x \in (c - \delta, c)$에 대해 $|f(x) - d| \lt \varepsilon$이므로 연습문제 1.8의 정의에 의해 $\lim_{x \to c^-} f(x) = d$이다. 따라서 두 한쪽 극한이 모두 존재하고 그 값은 모두 $d$이다.</p>
+        <p><strong>($\Longleftarrow$)</strong> 두 한쪽 극한이 존재하고 그 공통값을 $d$라 하자. $\varepsilon > 0$이 주어졌다고 하자. 연습문제 1.8의 정의에 의해</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c - \delta_1, c)$$</div>
+        <p>인 $\delta_1 > 0$이 존재하고, 정의 1.6(ii)에 의해</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c, c + \delta_2)$$</div>
+        <p>인 $\delta_2 > 0$이 존재한다. 이제</p>
+        <div class="math-display">$$\delta := \min \{ \delta_1, \delta_2 \} > 0$$</div>
+        <p>으로 두자. $x \in (c - \delta, c) \cup (c, c + \delta)$라 하면 두 경우가 있다. $x \in (c - \delta, c)$이면 $(c - \delta, c) \subset (c - \delta_1, c)$이므로 $|f(x) - d| \lt \varepsilon$이고, $x \in (c, c + \delta)$이면 $(c, c + \delta) \subset (c, c + \delta_2)$이므로 역시 $|f(x) - d| \lt \varepsilon$이다. 어느 경우든 $|f(x) - d| \lt \varepsilon$이므로, $\varepsilon > 0$이 임의였음과 정의 1.6(i)에 의해</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d$$</div>
+        <p>이고, 특히 $c$에서의 $f$의 극한이 존재한다.</p>
+        <p>두 방향을 합하면, $\lim_{x \to c} f(x)$가 존재할 필요충분조건은 $\lim_{x \to c^-} f(x)$와 $\lim_{x \to c^+} f(x)$가 모두 존재하고 서로 같은 것이며, 이때 세 값은 모두 일치한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a function on $(a, b)$ and $c \in (a, b)$. Show that $\lim_{x \to c} f(x)$ exists if and only if $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x)$, where $\lim_{x \to c^-} f(x)$ denotes the left limit of $f$ at $c$ and $\lim_{x \to c^+} f(x)$ is the right limit of $f$ at $c$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>In the statement, the equality $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x)$ is read as: <em>both one-sided limits exist and their values agree</em>. For this to be meaningful the value of a limit must be unique, which is checked as follows. If $d_1 \neq d_2$ were both limits of $f$ at $c$ (or both right limits, or both left limits), then for $\varepsilon := |d_1 - d_2| / 2 > 0$ we obtain $\delta_1, \delta_2 > 0$, and taking the corresponding (one-sided) neighbourhood with $\delta := \min\{\delta_1, \delta_2\}$, which is nonempty, any point $x$ in it satisfies</p>
+        <div class="math-display">$$|d_1 - d_2| \le |d_1 - f(x)| + |f(x) - d_2| \lt \varepsilon + \varepsilon = |d_1 - d_2|$$</div>
+        <p>a contradiction. Hence the value of a limit is unique.</p>
+        <p><strong>($\Longrightarrow$)</strong> Assume $\lim_{x \to c} f(x) = d$ exists. Let $\varepsilon > 0$ be given. By Definition 1.6(i) there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c - \delta, c) \cup (c, c + \delta).$$</div>
+        <p>In particular $|f(x) - d| \lt \varepsilon$ for all $x \in (c, c + \delta)$, so $\lim_{x \to c^+} f(x) = d$ by Definition 1.6(ii); and in particular $|f(x) - d| \lt \varepsilon$ for all $x \in (c - \delta, c)$, so $\lim_{x \to c^-} f(x) = d$ by the definition in Exercise 1.8. Thus both one-sided limits exist and both equal $d$.</p>
+        <p><strong>($\Longleftarrow$)</strong> Assume both one-sided limits exist and let $d$ be their common value. Let $\varepsilon > 0$ be given. By the definition in Exercise 1.8 there exists a $\delta_1 > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c - \delta_1, c)$$</div>
+        <p>and by Definition 1.6(ii) there exists a $\delta_2 > 0$ such that</p>
+        <div class="math-display">$$|f(x) - d| \lt \varepsilon \qquad \forall x \in (c, c + \delta_2)$$</div>
+        <p>Now put</p>
+        <div class="math-display">$$\delta := \min \{ \delta_1, \delta_2 \} > 0$$</div>
+        <p>Let $x \in (c - \delta, c) \cup (c, c + \delta)$. There are two cases. If $x \in (c - \delta, c)$, then $(c - \delta, c) \subset (c - \delta_1, c)$ and hence $|f(x) - d| \lt \varepsilon$; if $x \in (c, c + \delta)$, then $(c, c + \delta) \subset (c, c + \delta_2)$ and again $|f(x) - d| \lt \varepsilon$. In either case $|f(x) - d| \lt \varepsilon$, so since $\varepsilon > 0$ was arbitrary, Definition 1.6(i) gives</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = d$$</div>
+        <p>in particular the limit of $f$ at $c$ exists.</p>
+        <p>Combining the two directions, $\lim_{x \to c} f(x)$ exists if and only if $\lim_{x \to c^-} f(x)$ and $\lim_{x \to c^+} f(x)$ both exist and are equal, and in that case all three values coincide.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.11 -->
+<div class="card ex-card" id="c1-11">
+  <div class="card-head">
+    <span class="ex-num">EX 1.11</span>
+    <span class="ex-title">극한의 두 정의 비교 <em>Comparing the Two Definitions of a Limit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의 1.3과 정의 1.6(i)를 비교하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정의 1.6(i)은 정의 1.3에서 $X = Y = \mathbb{R}$, $E = (a, b)$, $p = c$, $q = d$로 두고 거리를 예제 1.5의 $k = 1$인 경우, 즉 (1.1)의 $d(x, y) = |x - y|$로 택한 특수한 경우이다. 실제로 두 조건은 다음과 같이 일치한다.</p>
+        <p><strong>(결론 부분)</strong> 정의 1.3의 결론은 $d_Y(f(x), q) \lt \varepsilon$인데, $Y = \mathbb{R}$이고 $d_Y(u, v) = |u - v|$이므로 이는 $|f(x) - d| \lt \varepsilon$, 즉 정의 1.6(i)의 결론과 같은 부등식이다.</p>
+        <p><strong>($x$의 범위)</strong> 정의 1.3에서 $x$는 $0 \lt d_X(x, p) \lt \delta$를 만족하는 $E$의 원소 전체를 훑는다. $d_X(x, c) = |x - c|$이므로</p>
+        <div class="math-display">$$\{ x \in (a, b) : 0 \lt |x - c| \lt \delta \} = \big( (c - \delta, c) \cup (c, c + \delta) \big) \cap (a, b)$$</div>
+        <p>이다. $c \in (a, b)$이므로 $\delta \le \min\{c - a, \ b - c\}$로 잡으면 오른쪽은 정확히 $(c - \delta, c) \cup (c, c + \delta)$, 즉 정의 1.6(i)에서 $x$가 훑는 집합이 된다. 그리고 $\delta$를 더 작게 잡아도 조건은 약해지지 않으므로(작은 $\delta$에 대한 조건은 큰 $\delta$에 대한 조건의 따름이다), 어느 쪽 정의를 쓰든 성립하는 극한의 집합은 같다.</p>
+        <p>특히 두 정의 모두 점 $c$ 자체를 제외한다. 정의 1.3에서는 왼쪽 부등식 $0 \lt d_X(x, p)$가, 즉 $x \neq c$가 이를 담당하고, 정의 1.6(i)에서는 근방을 $(c - \delta, c + \delta)$가 아니라 $(c - \delta, c) \cup (c, c + \delta)$로 쓴 것이 이를 담당한다. 그러므로 $f(c)$의 값(정의되어 있는지조차)은 극한과 아무 상관이 없다.</p>
+        <p><strong>차이점</strong>은 형식과 일반성에 있다.</p>
+        <p><strong>(a)</strong> 정의 1.3은 $q \in Y$일 것을 명시적으로 요구한다. 정의 1.6(i)에서는 애초에 $d \in \mathbb{R} = Y$로 두었으므로 이 요구가 자동으로 충족된다.</p>
+        <p><strong>(b)</strong> 정의 1.3은 $p$가 $E$의 극한점일 것을 요구한다. 정의 1.6(i)에서는 $E = (a, b)$가 열린구간이고 $c \in (a, b)$이므로 $c$는 항상 $E$의 극한점이며, 이 요구도 자동으로 충족된다. (이 조건이 없으면 고립점에서는 임의의 $q$가 극한이 되어 극한의 유일성이 깨진다.)</p>
+        <p><strong>(c)</strong> 정의 1.3은 임의의 거리공간 $X, Y$와 임의의 부분집합 $E \subset X$에 대해 작동한다. 예컨대 $Y = \mathbb{R}^k$인 벡터값 함수, 또는 $E = [a, b)$처럼 끝점을 포함하는 정의역(주의 1.2, 주의 1.7)에도 그대로 적용된다. 반면 정의 1.6(i)은 $\mathbb{R}$의 열린구간 위의 실숫값 함수라는 한 가지 상황만을 다룬다.</p>
+        <p><strong>(d)</strong> 그럼에도 정의 1.6이 따로 필요한 이유는 (ii)의 우극한 때문이다. $x$의 범위를 $(c, c + \delta)$로 제한하는 한쪽 극한은 정의 1.3의 형태로는 $(a, b)$ 위에서 곧바로 표현되지 않는다. 그것을 정의 1.3으로 말하려면 $f$를 $(c, b)$로 제한한 뒤 $c$에서의 극한을 취해야 하며, 주의 1.7은 바로 그 사실의 한 사례이다.</p>
+        <p>요약하면, $(a, b)$ 위에서 유클리드 거리를 줄 때 정의 1.6(i)은 정의 1.3의 축어적인 번역이며, 두 정의가 정하는 $\lim_{x \to c} f(x)$는 같다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compare Definition 1.3 and 1.6(i).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Definition 1.6(i) is the special case of Definition 1.3 obtained by taking $X = Y = \mathbb{R}$, $E = (a, b)$, $p = c$, $q = d$, and the metric of Example 1.5 with $k = 1$, that is, $d(x, y) = |x - y|$ from (1.1). Indeed the two conditions match as follows.</p>
+        <p><strong>(The conclusion.)</strong> The conclusion in Definition 1.3 is $d_Y(f(x), q) \lt \varepsilon$; since $Y = \mathbb{R}$ and $d_Y(u, v) = |u - v|$, this is $|f(x) - d| \lt \varepsilon$, the same inequality as the conclusion of Definition 1.6(i).</p>
+        <p><strong>(The range of $x$.)</strong> In Definition 1.3, $x$ ranges over all elements of $E$ satisfying $0 \lt d_X(x, p) \lt \delta$. Since $d_X(x, c) = |x - c|$,</p>
+        <div class="math-display">$$\{ x \in (a, b) : 0 \lt |x - c| \lt \delta \} = \big( (c - \delta, c) \cup (c, c + \delta) \big) \cap (a, b)$$</div>
+        <p>As $c \in (a, b)$, choosing $\delta \le \min\{c - a, \ b - c\}$ makes the right-hand side exactly $(c - \delta, c) \cup (c, c + \delta)$, the set over which $x$ ranges in Definition 1.6(i). Shrinking $\delta$ never weakens the condition (the condition for a smaller $\delta$ follows from the one for a larger $\delta$), so whichever definition is used, the set of admissible limits is the same.</p>
+        <p>In particular both definitions exclude the point $c$ itself: in Definition 1.3 this is done by the left inequality $0 \lt d_X(x, p)$, i.e. $x \neq c$, and in Definition 1.6(i) by writing the neighbourhood as $(c - \delta, c) \cup (c, c + \delta)$ rather than $(c - \delta, c + \delta)$. Hence the value $f(c)$ (indeed, whether it is defined at all) is irrelevant to the limit.</p>
+        <p>The <strong>differences</strong> lie in form and in generality.</p>
+        <p><strong>(a)</strong> Definition 1.3 explicitly demands $q \in Y$. In Definition 1.6(i) one starts with $d \in \mathbb{R} = Y$, so this demand is automatically met.</p>
+        <p><strong>(b)</strong> Definition 1.3 requires $p$ to be a limit point of $E$. In Definition 1.6(i) the set $E = (a, b)$ is an open interval and $c \in (a, b)$, so $c$ is always a limit point of $E$ and this requirement is automatic as well. (Without it, at an isolated point every $q$ would be a limit and uniqueness of the limit would fail.)</p>
+        <p><strong>(c)</strong> Definition 1.3 works for arbitrary metric spaces $X, Y$ and an arbitrary subset $E \subset X$. For instance it applies verbatim to vector-valued functions with $Y = \mathbb{R}^k$, or to a domain containing an endpoint such as $E = [a, b)$ (Remark 1.2, Remark 1.7). Definition 1.6(i), by contrast, covers only one situation: a real-valued function on an open interval of $\mathbb{R}$.</p>
+        <p><strong>(d)</strong> The reason Definition 1.6 is nevertheless needed is part (ii), the right limit. A one-sided limit, in which $x$ is restricted to $(c, c + \delta)$, is not directly expressible on $(a, b)$ in the form of Definition 1.3; to phrase it through Definition 1.3 one must first restrict $f$ to $(c, b)$ and then take the limit at $c$, and Remark 1.7 is exactly an instance of that fact.</p>
+        <p>In summary, on $(a, b)$ with the Euclidean metric, Definition 1.6(i) is a verbatim translation of Definition 1.3, and the two definitions determine the same $\lim_{x \to c} f(x)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.12 -->
+<div class="card thm-card" id="c1-12">
+  <div class="card-head">
+    <span class="thm-num">THM 1.12</span>
+    <span class="thm-title">극한의 사칙연산 <em>The Algebra of Limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f, g$가 열린구간 $(a, b)$ 위에서 정의된 실숫값 함수라 하자. $(a, b)$ 위에서 함수 $f + g$와 $fg$를 다음과 같이 정의한다: 모든 $x \in (a, b)$에 대해,</p>
+        <div class="math-display">$$(f + g)(x) = f(x) + g(x)$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$fg(x) = f(x)g(x).$$</div>
+        <p>또한 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\frac{f}{g}(x) = \frac{f(x)}{g(x)}$$</div>
+        <p>단, $g(x) \neq 0$이다. $f$가 $c$에서 극한을 가지고 $g$도 $c$에서 극한을 가진다고 하자. 그러면</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} (f + g)\,(x) = \lim_{x \to c} f(x) + \lim_{x \to c} g(x)$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} (fg)\,(x) = \lim_{x \to c} f(x) \lim_{x \to c} g(x)$$</div>
+        <p><strong>(iii)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} \left( \frac{f}{g} \right)(x) = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}$$</div>
+        <p>단, $\lim_{x \to c} g(x) \neq 0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f, g$ be real-valued functions defined on an open interval $(a, b)$. We define functions $f + g$ and $fg$ on $(a, b)$ as follows: for all $x \in (a, b)$,</p>
+        <div class="math-display">$$(f + g)(x) = f(x) + g(x)$$</div>
+        <p>and</p>
+        <div class="math-display">$$fg(x) = f(x)g(x).$$</div>
+        <p>Additionally, we define</p>
+        <div class="math-display">$$\frac{f}{g}(x) = \frac{f(x)}{g(x)}$$</div>
+        <p>if $g(x) \neq 0$. Assume that $f$ has a limit at $c$ and $g$ has a limit at $c$. Then</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} (f + g)\,(x) = \lim_{x \to c} f(x) + \lim_{x \to c} g(x)$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} (fg)\,(x) = \lim_{x \to c} f(x) \lim_{x \to c} g(x)$$</div>
+        <p><strong>(iii)</strong></p>
+        <div class="math-display">$$\lim_{x \to c} \left( \frac{f}{g} \right)(x) = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}$$</div>
+        <p>if $\lim_{x \to c} g(x) \neq 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.13 -->
+<div class="card ex-card" id="c1-13">
+  <div class="card-head">
+    <span class="ex-num">EX 1.13</span>
+    <span class="ex-title">정리 1.12의 증명 <em>Proving Theorem 1.12</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.12를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$c \in (a, b)$이고</p>
+        <div class="math-display">$$L := \lim_{x \to c} f(x), \qquad M := \lim_{x \to c} g(x)$$</div>
+        <p>가 존재한다고 하자. 표기를 줄이기 위해 $0 \lt \delta \le \min\{c - a, \ b - c\}$인 $\delta$에 대해</p>
+        <div class="math-display">$$N_\delta := (c - \delta, c) \cup (c, c + \delta) \subset (a, b)$$</div>
+        <p>라 쓴다. 정의 1.6(i)은 "모든 $\varepsilon > 0$에 대해 어떤 $\delta > 0$이 존재하여 $N_\delta$ 위에서 $|f(x) - L| \lt \varepsilon$"이라는 형태이며, $\delta_1, \delta_2$에 대해 $N_{\delta_1} \cap N_{\delta_2} = N_{\min\{\delta_1, \delta_2\}}$임을 되풀이해 사용한다.</p>
+        <p><strong>(보조사실: 국소 유계성)</strong> $\lim_{x \to c} f(x) = L$이면 어떤 $\delta_0 > 0$이 존재하여</p>
+        <div class="math-display">$$|f(x)| \lt |L| + 1 \qquad \forall x \in N_{\delta_0}.$$</div>
+        <p>실제로 정의 1.6(i)에서 $\varepsilon = 1$로 두면 $N_{\delta_0}$ 위에서 $|f(x) - L| \lt 1$인 $\delta_0 > 0$을 얻고, 삼각부등식에 의해 $|f(x)| \le |f(x) - L| + |L| \lt |L| + 1$이다.</p>
+        <p><strong>(i)</strong> $\varepsilon > 0$이 주어졌다고 하자. $\varepsilon / 2 > 0$에 대해 정의 1.6(i)을 $f$와 $g$에 각각 적용하면 다음을 만족하는 $\delta_1, \delta_2 > 0$을 얻는다.</p>
+        <div class="math-display">$$|f(x) - L| \lt \frac{\varepsilon}{2} \quad (x \in N_{\delta_1}), \qquad |g(x) - M| \lt \frac{\varepsilon}{2} \quad (x \in N_{\delta_2}).$$</div>
+        <p>$\delta := \min\{\delta_1, \delta_2\}$로 두면 모든 $x \in N_\delta$에 대해 삼각부등식에 의해</p>
+        <div class="math-display">$$|(f + g)(x) - (L + M)| \le |f(x) - L| + |g(x) - M| \lt \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <p>$\varepsilon > 0$이 임의였으므로 $\lim_{x \to c} (f + g)(x) = L + M$이다.</p>
+        <p><strong>(ii)</strong> 모든 $x \in (a, b)$에 대해 항을 더하고 빼면</p>
+        <div class="math-display">$$|f(x)g(x) - LM| = |f(x)(g(x) - M) + (f(x) - L)M| \le |f(x)| \, |g(x) - M| + |M| \, |f(x) - L|.$$</div>
+        <p>$\varepsilon > 0$이 주어졌다고 하자. 보조사실에서 $\delta_0 > 0$을 얻어 $N_{\delta_0}$ 위에서 $|f(x)| \lt |L| + 1$이라 하고, 정의 1.6(i)을 써서</p>
+        <div class="math-display">$$|g(x) - M| \lt \frac{\varepsilon}{2(|L| + 1)} \quad (x \in N_{\delta_1}), \qquad |f(x) - L| \lt \frac{\varepsilon}{2(|M| + 1)} \quad (x \in N_{\delta_2})$$</div>
+        <p>인 $\delta_1, \delta_2 > 0$을 잡는다(분모는 모두 양수이다). $\delta := \min\{\delta_0, \delta_1, \delta_2\}$로 두면 모든 $x \in N_\delta$에 대해</p>
+        <div class="math-display">$$|f(x)g(x) - LM| \lt (|L| + 1) \cdot \frac{\varepsilon}{2(|L| + 1)} + |M| \cdot \frac{\varepsilon}{2(|M| + 1)} \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <p>따라서 $\lim_{x \to c} (fg)(x) = LM$이다.</p>
+        <p><strong>(iii)</strong> $M \neq 0$이라 하자. 먼저</p>
+        <div class="math-display">$$\lim_{x \to c} \frac{1}{g(x)} = \frac{1}{M}$$</div>
+        <p>임을 보인다. 정의 1.6(i)에서 $\varepsilon = |M| / 2 > 0$으로 두면 다음을 만족하는 $\delta_3 > 0$을 얻는다.</p>
+        <div class="math-display">$$|g(x) - M| \lt \frac{|M|}{2} \qquad \forall x \in N_{\delta_3}.$$</div>
+        <p>그러면 모든 $x \in N_{\delta_3}$에 대해 삼각부등식에 의해</p>
+        <div class="math-display">$$|g(x)| \ge |M| - |M - g(x)| > |M| - \frac{|M|}{2} = \frac{|M|}{2} > 0$$</div>
+        <p>이므로, 특히 $N_{\delta_3}$ 위에서 $g(x) \neq 0$이고 $1/g$와 $f/g$가 정의된다. 또한 이 범위에서</p>
+        <div class="math-display">$$\left| \frac{1}{g(x)} - \frac{1}{M} \right| = \frac{|M - g(x)|}{|g(x)| \, |M|} \le \frac{2}{|M|^2} \, |g(x) - M|.$$</div>
+        <p>이제 $\varepsilon > 0$이 주어지면, 정의 1.6(i)에 의해 $N_{\delta_4}$ 위에서 $|g(x) - M| \lt \dfrac{|M|^2}{2}\varepsilon$인 $\delta_4 > 0$이 존재한다. $\delta := \min\{\delta_3, \delta_4\}$로 두면 모든 $x \in N_\delta$에 대해</p>
+        <div class="math-display">$$\left| \frac{1}{g(x)} - \frac{1}{M} \right| \lt \frac{2}{|M|^2} \cdot \frac{|M|^2}{2}\varepsilon = \varepsilon$$</div>
+        <p>을 얻는다(마지막에 쓴 부등식이 강한 부등식이므로 결과도 강한 부등식이다). 따라서 $\lim_{x \to c} 1/g(x) = 1/M$이다. 끝으로 $N_{\delta_3}$ 위에서 $\dfrac{f}{g}(x) = f(x) \cdot \dfrac{1}{g(x)}$이므로, 이미 증명한 (ii)에 의해</p>
+        <div class="math-display">$$\lim_{x \to c} \left( \frac{f}{g} \right)(x) = L \cdot \frac{1}{M} = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove Theorem 1.12.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $c \in (a, b)$ and assume that</p>
+        <div class="math-display">$$L := \lim_{x \to c} f(x), \qquad M := \lim_{x \to c} g(x)$$</div>
+        <p>exist. To shorten the notation, for $0 \lt \delta \le \min\{c - a, \ b - c\}$ write</p>
+        <div class="math-display">$$N_\delta := (c - \delta, c) \cup (c, c + \delta) \subset (a, b)$$</div>
+        <p>Definition 1.6(i) has the form "for all $\varepsilon > 0$ there exists a $\delta > 0$ such that $|f(x) - L| \lt \varepsilon$ on $N_\delta$", and we repeatedly use that $N_{\delta_1} \cap N_{\delta_2} = N_{\min\{\delta_1, \delta_2\}}$.</p>
+        <p><strong>(A lemma: local boundedness.)</strong> If $\lim_{x \to c} f(x) = L$, then there exists a $\delta_0 > 0$ such that</p>
+        <div class="math-display">$$|f(x)| \lt |L| + 1 \qquad \forall x \in N_{\delta_0}.$$</div>
+        <p>Indeed, taking $\varepsilon = 1$ in Definition 1.6(i) gives a $\delta_0 > 0$ with $|f(x) - L| \lt 1$ on $N_{\delta_0}$, and by the triangle inequality $|f(x)| \le |f(x) - L| + |L| \lt |L| + 1$.</p>
+        <p><strong>(i)</strong> Let $\varepsilon > 0$ be given. Applying Definition 1.6(i) to $f$ and to $g$ with $\varepsilon / 2 > 0$ gives $\delta_1, \delta_2 > 0$ such that</p>
+        <div class="math-display">$$|f(x) - L| \lt \frac{\varepsilon}{2} \quad (x \in N_{\delta_1}), \qquad |g(x) - M| \lt \frac{\varepsilon}{2} \quad (x \in N_{\delta_2}).$$</div>
+        <p>Put $\delta := \min\{\delta_1, \delta_2\}$. Then for all $x \in N_\delta$, by the triangle inequality,</p>
+        <div class="math-display">$$|(f + g)(x) - (L + M)| \le |f(x) - L| + |g(x) - M| \lt \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ was arbitrary, $\lim_{x \to c} (f + g)(x) = L + M$.</p>
+        <p><strong>(ii)</strong> Adding and subtracting a term, for all $x \in (a, b)$,</p>
+        <div class="math-display">$$|f(x)g(x) - LM| = |f(x)(g(x) - M) + (f(x) - L)M| \le |f(x)| \, |g(x) - M| + |M| \, |f(x) - L|.$$</div>
+        <p>Let $\varepsilon > 0$ be given. Take $\delta_0 > 0$ from the lemma, so that $|f(x)| \lt |L| + 1$ on $N_{\delta_0}$, and use Definition 1.6(i) to choose $\delta_1, \delta_2 > 0$ with</p>
+        <div class="math-display">$$|g(x) - M| \lt \frac{\varepsilon}{2(|L| + 1)} \quad (x \in N_{\delta_1}), \qquad |f(x) - L| \lt \frac{\varepsilon}{2(|M| + 1)} \quad (x \in N_{\delta_2})$$</div>
+        <p>(both denominators are positive). Put $\delta := \min\{\delta_0, \delta_1, \delta_2\}$. Then for all $x \in N_\delta$,</p>
+        <div class="math-display">$$|f(x)g(x) - LM| \lt (|L| + 1) \cdot \frac{\varepsilon}{2(|L| + 1)} + |M| \cdot \frac{\varepsilon}{2(|M| + 1)} \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$</div>
+        <p>Hence $\lim_{x \to c} (fg)(x) = LM$.</p>
+        <p><strong>(iii)</strong> Assume $M \neq 0$. We first show that</p>
+        <div class="math-display">$$\lim_{x \to c} \frac{1}{g(x)} = \frac{1}{M}$$</div>
+        <p>Taking $\varepsilon = |M| / 2 > 0$ in Definition 1.6(i) gives a $\delta_3 > 0$ such that</p>
+        <div class="math-display">$$|g(x) - M| \lt \frac{|M|}{2} \qquad \forall x \in N_{\delta_3}.$$</div>
+        <p>Then for all $x \in N_{\delta_3}$, by the triangle inequality,</p>
+        <div class="math-display">$$|g(x)| \ge |M| - |M - g(x)| > |M| - \frac{|M|}{2} = \frac{|M|}{2} > 0$$</div>
+        <p>so in particular $g(x) \neq 0$ on $N_{\delta_3}$ and both $1/g$ and $f/g$ are defined there. Moreover, on that range,</p>
+        <div class="math-display">$$\left| \frac{1}{g(x)} - \frac{1}{M} \right| = \frac{|M - g(x)|}{|g(x)| \, |M|} \le \frac{2}{|M|^2} \, |g(x) - M|.$$</div>
+        <p>Now let $\varepsilon > 0$ be given. By Definition 1.6(i) there is a $\delta_4 > 0$ with $|g(x) - M| \lt \dfrac{|M|^2}{2}\varepsilon$ on $N_{\delta_4}$. Putting $\delta := \min\{\delta_3, \delta_4\}$, for all $x \in N_\delta$ we get</p>
+        <div class="math-display">$$\left| \frac{1}{g(x)} - \frac{1}{M} \right| \lt \frac{2}{|M|^2} \cdot \frac{|M|^2}{2}\varepsilon = \varepsilon$$</div>
+        <p>(the inequality is strict because the last one used is strict). Hence $\lim_{x \to c} 1/g(x) = 1/M$. Finally, on $N_{\delta_3}$ we have $\dfrac{f}{g}(x) = f(x) \cdot \dfrac{1}{g(x)}$, so part (ii), already proved, gives</p>
+        <div class="math-display">$$\lim_{x \to c} \left( \frac{f}{g} \right)(x) = L \cdot \frac{1}{M} = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.14 -->
+<div class="card ex-card" id="c1-14">
+  <div class="card-head">
+    <span class="ex-num">EX 1.14</span>
+    <span class="ex-title">좌우극한의 사칙연산 <em>The Algebra of One-Sided Limits</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.12의 (i), (ii), (iii)이 좌극한과 우극한에 대해서도 성립함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>연습문제 1.13의 증명은 극한을 규정하는 집합 $N_\delta = (c - \delta, c) \cup (c, c + \delta)$에 대해 다음 두 가지 성질만 사용한다.</p>
+        <p><strong>(P1)</strong> 정의가 "모든 $\varepsilon > 0$에 대해 어떤 $\delta > 0$이 존재하여 해당 집합의 모든 점에서 $|f(x) - L| \lt \varepsilon$"이라는 형태이다.</p>
+        <p><strong>(P2)</strong> 두 집합의 교집합이 다시 같은 꼴의 집합이다. 즉 $\delta := \min\{\delta_1, \delta_2\}$로 두면 $N_{\delta_1} \cap N_{\delta_2} = N_\delta$이다.</p>
+        <p>우극한이 규정하는 집합 $R_\delta := (c, c + \delta)$와 좌극한이 규정하는 집합 $L_\delta := (c - \delta, c)$도 (P1), (P2)를 그대로 만족한다. 실제로</p>
+        <div class="math-display">$$R_{\delta_1} \cap R_{\delta_2} = R_{\min\{\delta_1, \delta_2\}}, \qquad L_{\delta_1} \cap L_{\delta_2} = L_{\min\{\delta_1, \delta_2\}}$$</div>
+        <p>이다. 그러므로 연습문제 1.13의 논증은 $N_\delta$를 $R_\delta$ 또는 $L_\delta$로 바꾸고 $\lim_{x \to c}$를 $\lim_{x \to c^+}$ 또는 $\lim_{x \to c^-}$로 바꾸기만 하면 한 글자도 고치지 않고 그대로 통한다. 아래에서 우극한의 경우를 온전히 적고, 좌극한의 경우가 대칭임을 밝힌다.</p>
+        <p><strong>(우극한)</strong> $c \in [a, b)$이고</p>
+        <div class="math-display">$$L := \lim_{x \to c^+} f(x), \qquad M := \lim_{x \to c^+} g(x)$$</div>
+        <p>가 존재한다고 하자. $0 \lt \delta \le b - c$인 $\delta$에 대해 $R_\delta = (c, c + \delta) \subset (a, b)$이다.</p>
+        <p><em>(국소 유계성)</em> 정의 1.6(ii)에서 $\varepsilon = 1$로 두면 $R_{\delta_0}$ 위에서 $|f(x) - L| \lt 1$인 $\delta_0 > 0$을 얻고, 따라서</p>
+        <div class="math-display">$$|f(x)| \le |f(x) - L| + |L| \lt |L| + 1 \qquad \forall x \in R_{\delta_0}.$$</div>
+        <p><em>(i)</em> $\varepsilon > 0$이 주어졌다고 하자. 정의 1.6(ii)에 의해 $R_{\delta_1}$ 위에서 $|f(x) - L| \lt \varepsilon / 2$, $R_{\delta_2}$ 위에서 $|g(x) - M| \lt \varepsilon / 2$인 $\delta_1, \delta_2 > 0$을 얻는다. $\delta := \min\{\delta_1, \delta_2\}$로 두면 모든 $x \in R_\delta$에 대해</p>
+        <div class="math-display">$$|(f + g)(x) - (L + M)| \le |f(x) - L| + |g(x) - M| \lt \varepsilon,$$</div>
+        <p>즉 $\lim_{x \to c^+} (f + g)(x) = L + M$이다.</p>
+        <p><em>(ii)</em> $\varepsilon > 0$이 주어졌다고 하자. 위의 $\delta_0$와 함께, $R_{\delta_1}$ 위에서 $|g(x) - M| \lt \dfrac{\varepsilon}{2(|L| + 1)}$이고 $R_{\delta_2}$ 위에서 $|f(x) - L| \lt \dfrac{\varepsilon}{2(|M| + 1)}$인 $\delta_1, \delta_2 > 0$을 잡고 $\delta := \min\{\delta_0, \delta_1, \delta_2\}$로 둔다. 그러면 모든 $x \in R_\delta$에 대해</p>
+        <div class="math-display">$$|f(x)g(x) - LM| \le |f(x)| \, |g(x) - M| + |M| \, |f(x) - L| \lt \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon,$$</div>
+        <p>즉 $\lim_{x \to c^+} (fg)(x) = LM$이다.</p>
+        <p><em>(iii)</em> $M \neq 0$이라 하자. 정의 1.6(ii)에서 $\varepsilon = |M| / 2$로 두면 $R_{\delta_3}$ 위에서 $|g(x) - M| \lt |M| / 2$인 $\delta_3 > 0$을 얻고, 따라서 그 위에서</p>
+        <div class="math-display">$$|g(x)| \ge |M| - |M - g(x)| > \frac{|M|}{2} > 0, \qquad \left| \frac{1}{g(x)} - \frac{1}{M} \right| = \frac{|M - g(x)|}{|g(x)| \, |M|} \le \frac{2}{|M|^2} |g(x) - M|.$$</div>
+        <p>$\varepsilon > 0$이 주어지면 $R_{\delta_4}$ 위에서 $|g(x) - M| \lt \dfrac{|M|^2}{2}\varepsilon$인 $\delta_4 > 0$을 잡고 $\delta := \min\{\delta_3, \delta_4\}$로 두면 $R_\delta$ 위에서 $\left| 1/g(x) - 1/M \right| \lt \varepsilon$이다. 즉 $\lim_{x \to c^+} 1/g(x) = 1/M$이고, 이미 증명한 (ii)를 $f$와 $1/g$에 적용하면</p>
+        <div class="math-display">$$\lim_{x \to c^+} \left( \frac{f}{g} \right)(x) = \frac{L}{M} = \frac{\lim_{x \to c^+} f(x)}{\lim_{x \to c^+} g(x)}.$$</div>
+        <p><strong>(좌극한)</strong> 위 논증에서 $R_\delta = (c, c + \delta)$를 $L_\delta = (c - \delta, c)$로, $c \in [a, b)$를 $c \in (a, b]$로, $\delta \le b - c$를 $\delta \le c - a$로, 그리고 $\lim_{x \to c^+}$를 $\lim_{x \to c^-}$로 바꾸면 된다(정의는 연습문제 1.8). 등장하는 부등식과 $\delta$의 선택은 하나도 달라지지 않는데, 이는 논증이 오직 (P1)과 (P2)에만 의존하기 때문이다. 따라서 정리 1.12의 (i), (ii), (iii)은 좌극한과 우극한에 대해서도 성립한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that formula (i), (ii), and (iii) in Theorem 1.12 hold for left limits and right limits.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>The proof in Exercise 1.13 uses only the following two properties of the set $N_\delta = (c - \delta, c) \cup (c, c + \delta)$ that governs the limit.</p>
+        <p><strong>(P1)</strong> The definition has the form "for all $\varepsilon > 0$ there exists a $\delta > 0$ such that $|f(x) - L| \lt \varepsilon$ at every point of that set".</p>
+        <p><strong>(P2)</strong> The intersection of two such sets is again a set of the same shape: with $\delta := \min\{\delta_1, \delta_2\}$ we have $N_{\delta_1} \cap N_{\delta_2} = N_\delta$.</p>
+        <p>The set $R_\delta := (c, c + \delta)$ governing the right limit and the set $L_\delta := (c - \delta, c)$ governing the left limit satisfy (P1) and (P2) as well; indeed</p>
+        <div class="math-display">$$R_{\delta_1} \cap R_{\delta_2} = R_{\min\{\delta_1, \delta_2\}}, \qquad L_{\delta_1} \cap L_{\delta_2} = L_{\min\{\delta_1, \delta_2\}}$$</div>
+        <p>Therefore the argument of Exercise 1.13 goes through word for word once $N_\delta$ is replaced by $R_\delta$ or $L_\delta$ and $\lim_{x \to c}$ by $\lim_{x \to c^+}$ or $\lim_{x \to c^-}$. Below we write the right-limit case out in full and note that the left-limit case is symmetric.</p>
+        <p><strong>(Right limits.)</strong> Let $c \in [a, b)$ and assume that</p>
+        <div class="math-display">$$L := \lim_{x \to c^+} f(x), \qquad M := \lim_{x \to c^+} g(x)$$</div>
+        <p>exist. For $0 \lt \delta \le b - c$ we have $R_\delta = (c, c + \delta) \subset (a, b)$.</p>
+        <p><em>(Local boundedness.)</em> Taking $\varepsilon = 1$ in Definition 1.6(ii) gives a $\delta_0 > 0$ with $|f(x) - L| \lt 1$ on $R_{\delta_0}$, hence</p>
+        <div class="math-display">$$|f(x)| \le |f(x) - L| + |L| \lt |L| + 1 \qquad \forall x \in R_{\delta_0}.$$</div>
+        <p><em>(i)</em> Let $\varepsilon > 0$ be given. Definition 1.6(ii) gives $\delta_1, \delta_2 > 0$ with $|f(x) - L| \lt \varepsilon / 2$ on $R_{\delta_1}$ and $|g(x) - M| \lt \varepsilon / 2$ on $R_{\delta_2}$. Putting $\delta := \min\{\delta_1, \delta_2\}$, for all $x \in R_\delta$,</p>
+        <div class="math-display">$$|(f + g)(x) - (L + M)| \le |f(x) - L| + |g(x) - M| \lt \varepsilon,$$</div>
+        <p>that is, $\lim_{x \to c^+} (f + g)(x) = L + M$.</p>
+        <p><em>(ii)</em> Let $\varepsilon > 0$ be given. Together with $\delta_0$ above, choose $\delta_1, \delta_2 > 0$ with $|g(x) - M| \lt \dfrac{\varepsilon}{2(|L| + 1)}$ on $R_{\delta_1}$ and $|f(x) - L| \lt \dfrac{\varepsilon}{2(|M| + 1)}$ on $R_{\delta_2}$, and put $\delta := \min\{\delta_0, \delta_1, \delta_2\}$. Then for all $x \in R_\delta$,</p>
+        <div class="math-display">$$|f(x)g(x) - LM| \le |f(x)| \, |g(x) - M| + |M| \, |f(x) - L| \lt \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon,$$</div>
+        <p>that is, $\lim_{x \to c^+} (fg)(x) = LM$.</p>
+        <p><em>(iii)</em> Assume $M \neq 0$. Taking $\varepsilon = |M| / 2$ in Definition 1.6(ii) gives a $\delta_3 > 0$ with $|g(x) - M| \lt |M| / 2$ on $R_{\delta_3}$, so that there</p>
+        <div class="math-display">$$|g(x)| \ge |M| - |M - g(x)| > \frac{|M|}{2} > 0, \qquad \left| \frac{1}{g(x)} - \frac{1}{M} \right| = \frac{|M - g(x)|}{|g(x)| \, |M|} \le \frac{2}{|M|^2} |g(x) - M|.$$</div>
+        <p>Given $\varepsilon > 0$, choose $\delta_4 > 0$ with $|g(x) - M| \lt \dfrac{|M|^2}{2}\varepsilon$ on $R_{\delta_4}$ and put $\delta := \min\{\delta_3, \delta_4\}$; then $\left| 1/g(x) - 1/M \right| \lt \varepsilon$ on $R_\delta$. Thus $\lim_{x \to c^+} 1/g(x) = 1/M$, and applying part (ii), already proved, to $f$ and $1/g$,</p>
+        <div class="math-display">$$\lim_{x \to c^+} \left( \frac{f}{g} \right)(x) = \frac{L}{M} = \frac{\lim_{x \to c^+} f(x)}{\lim_{x \to c^+} g(x)}.$$</div>
+        <p><strong>(Left limits.)</strong> In the argument above replace $R_\delta = (c, c + \delta)$ by $L_\delta = (c - \delta, c)$, the condition $c \in [a, b)$ by $c \in (a, b]$, the restriction $\delta \le b - c$ by $\delta \le c - a$, and $\lim_{x \to c^+}$ by $\lim_{x \to c^-}$ (whose definition is that of Exercise 1.8). Not a single inequality or choice of $\delta$ changes, precisely because the argument depends only on (P1) and (P2). Hence formulas (i), (ii), and (iii) of Theorem 1.12 hold for left limits and right limits.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.15 -->
+<div class="card def-card" id="c1-15">
+  <div class="card-head">
+    <span class="def-num">DEF 1.15</span>
+    <span class="def-title">닫힌구간 위에서의 연속성 <em>Continuity on a Closed Interval</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 닫힌구간 $[a, b]$ 위에서 정의된 실숫값 함수라 하자. $c \in [a, b]$에 대해, $f$가 $c$에서 연속이라는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon$$</div>
+        <p>여기서 $x$는 $(c - \delta, c + \delta) \cap [a, b]$의 모든 원소이다. 특히 $c \in (a, b)$일 때, $f$가 $c$에서 연속인 것과 다음은 동치이다.</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = f(c).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on the closed interval $[a, b]$. For $c \in [a, b]$, we say that $f$ is continuous at $c$ iff for all $\varepsilon > 0$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon$$</div>
+        <p>for all $x \in (c - \delta, c + \delta) \cap [a, b]$. In particular, for $c \in (a, b)$, $f$ is continuous at $c$ iff</p>
+        <div class="math-display">$$\lim_{x \to c} f(x) = f(c).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.16 -->
+<div class="card ex-card" id="c1-16">
+  <div class="card-head">
+    <span class="ex-num">EX 1.16</span>
+    <span class="ex-title">좌우연속 <em>One-Sided Continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(i)</strong> $f$가 $c$에서 <strong>좌연속</strong>이라는 것과 $f$가 $c$에서 <strong>우연속</strong>이라는 것을 정의하라.</p>
+        <p><strong>(ii)</strong> $f$가 $a$에서 우연속인 것과 $f$가 $a$에서 연속인 것을 비교하라.</p>
+        <p><strong>(iii)</strong> 정의 1.4와 정의 1.15가 일치함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$f$가 닫힌구간 $[a, b]$ 위에서 정의된 실숫값 함수라 하자.</p>
+        <p><strong>(i)</strong> 정의 1.15의 근방 $(c - \delta, c + \delta) \cap [a, b]$를 한쪽으로 자르면 다음 정의를 얻는다.</p>
+        <p>$c \in [a, b)$일 때, $f$가 $c$에서 <strong>우연속</strong>이라는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon \qquad \forall x \in [c, c + \delta) \cap [a, b].$$</div>
+        <p>$c \in (a, b]$일 때, $f$가 $c$에서 <strong>좌연속</strong>이라는 것은 모든 $\varepsilon > 0$에 대해 다음을 만족하는 $\delta > 0$이 존재한다는 것과 동치이다.</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon \qquad \forall x \in (c - \delta, c] \cap [a, b].$$</div>
+        <p>$x = c$에서는 $|f(c) - f(c)| = 0 \lt \varepsilon$이 늘 성립하므로 위 두 조건에서 점 $c$를 빼도 조건은 달라지지 않는다. 따라서 $c \in [a, b)$에 대해 $f$가 $c$에서 우연속일 필요충분조건은 $\lim_{x \to c^+} f(x) = f(c)$인 것이고, $c \in (a, b]$에 대해 $f$가 $c$에서 좌연속일 필요충분조건은 $\lim_{x \to c^-} f(x) = f(c)$인 것이다(정의 1.6(ii)와 연습문제 1.8). 특히 $c \in (a, b)$이면 연습문제 1.10에 의해, $f$가 $c$에서 연속일 필요충분조건은 $f$가 $c$에서 좌연속이면서 우연속인 것이다.</p>
+        <p><strong>(ii)</strong> $c = a$에서 정의 1.15가 요구하는 $x$의 범위는</p>
+        <div class="math-display">$$(a - \delta, a + \delta) \cap [a, b] = [a, a + \delta) \cap [a, b]$$</div>
+        <p>이다($x \ge a$이므로 $x > a - \delta$는 자동이다). 그런데 이는 (i)에서 $c = a$일 때 우연속이 요구하는 $x$의 범위와 <em>글자 그대로 같은 집합</em>이다. 두 조건의 결론($|f(x) - f(a)| \lt \varepsilon$)과 한정기호의 순서도 같으므로, $f$가 $a$에서 연속인 것과 $f$가 $a$에서 우연속인 것은 동치이다. 대칭적으로 $c = b$에서는</p>
+        <div class="math-display">$$(b - \delta, b + \delta) \cap [a, b] = (b - \delta, b] \cap [a, b]$$</div>
+        <p>이므로 $f$가 $b$에서 연속인 것과 $b$에서 좌연속인 것이 동치이다. 다시 말해 정의 1.15의 "연속"은 끝점에서는 소리 없이 한쪽 연속으로 약화된다. 이것이 연습문제 1.23에서 다룰 문제점의 출발점이다.</p>
+        <p><strong>(iii)</strong> 정의 1.4를 다음 자료에 적용한다: $X = [a, b]$, $Y = \mathbb{R}$, $E = [a, b]$, $p = c$, 그리고 거리는 (1.1)의 $d(u, v) = |u - v|$. 주의 1.2에 의해 $[a, b] \subset \mathbb{R}$은 이 거리로 거리공간이 되므로 이는 적법한 적용이다. 그러면 정의 1.4는 다음을 말한다.</p>
+        <div class="math-display">$$\forall \varepsilon > 0 \ \exists \delta > 0 : \quad |f(x) - f(c)| \lt \varepsilon \quad \text{for all } x \in [a, b] \text{ with } |x - c| \lt \delta.$$</div>
+        <p>한편 정의 1.15는 다음을 말한다.</p>
+        <div class="math-display">$$\forall \varepsilon > 0 \ \exists \delta > 0 : \quad |f(x) - f(c)| \lt \varepsilon \quad \text{for all } x \in (c - \delta, c + \delta) \cap [a, b].$$</div>
+        <p>그런데 임의의 $\delta > 0$에 대해</p>
+        <div class="math-display">$$\{ x \in [a, b] : |x - c| \lt \delta \} = (c - \delta, c + \delta) \cap [a, b]$$</div>
+        <p>이다. 실제로 $x \in [a, b]$에 대해 $|x - c| \lt \delta$인 것은 $c - \delta \lt x \lt c + \delta$인 것과 동치이므로 두 집합은 같은 원소를 가진다. 따라서 두 정의는 같은 $\varepsilon$, 같은 $\delta$, 같은 결론, 같은 $x$의 범위를 가진 <em>동일한 명제</em>이다. 그러므로 $c$가 내부점이든 끝점이든 상관없이, $f$가 정의 1.4의 뜻으로 $c$에서 연속인 것과 정의 1.15의 뜻으로 $c$에서 연속인 것은 동치이다. 즉 정의 1.15는 정의 1.4를 $X = E = [a, b]$, $Y = \mathbb{R}$인 경우에 풀어 쓴 것에 지나지 않는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(i)</strong> Define that $f$ is <strong>left continuous</strong> at $c$ and $f$ is <strong>right continuous</strong> at $c$.</p>
+        <p><strong>(ii)</strong> Compare that $f$ is right continuous at $a$ and that $f$ is continuous at $a$.</p>
+        <p><strong>(iii)</strong> Prove the two definitions 1.4 and 1.15 coincide.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $f$ be a real-valued function defined on the closed interval $[a, b]$.</p>
+        <p><strong>(i)</strong> Cutting the neighbourhood $(c - \delta, c + \delta) \cap [a, b]$ of Definition 1.15 to one side gives the following definitions.</p>
+        <p>For $c \in [a, b)$, we say that $f$ is <strong>right continuous</strong> at $c$ iff for all $\varepsilon > 0$ there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon \qquad \forall x \in [c, c + \delta) \cap [a, b].$$</div>
+        <p>For $c \in (a, b]$, we say that $f$ is <strong>left continuous</strong> at $c$ iff for all $\varepsilon > 0$ there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(x) - f(c)| \lt \varepsilon \qquad \forall x \in (c - \delta, c] \cap [a, b].$$</div>
+        <p>At $x = c$ the inequality $|f(c) - f(c)| = 0 \lt \varepsilon$ always holds, so deleting the point $c$ from the two conditions changes nothing. Hence, for $c \in [a, b)$, $f$ is right continuous at $c$ if and only if $\lim_{x \to c^+} f(x) = f(c)$, and for $c \in (a, b]$, $f$ is left continuous at $c$ if and only if $\lim_{x \to c^-} f(x) = f(c)$ (Definition 1.6(ii) and Exercise 1.8). In particular, for $c \in (a, b)$, Exercise 1.10 shows that $f$ is continuous at $c$ if and only if $f$ is both left and right continuous at $c$.</p>
+        <p><strong>(ii)</strong> At $c = a$ the range of $x$ required by Definition 1.15 is</p>
+        <div class="math-display">$$(a - \delta, a + \delta) \cap [a, b] = [a, a + \delta) \cap [a, b]$$</div>
+        <p>(the inequality $x > a - \delta$ is automatic because $x \ge a$). But this is <em>literally the same set</em> as the range of $x$ required by right continuity in (i) with $c = a$. The conclusions ($|f(x) - f(a)| \lt \varepsilon$) and the order of the quantifiers agree as well, so $f$ is continuous at $a$ if and only if $f$ is right continuous at $a$. Symmetrically, at $c = b$,</p>
+        <div class="math-display">$$(b - \delta, b + \delta) \cap [a, b] = (b - \delta, b] \cap [a, b]$$</div>
+        <p>so $f$ is continuous at $b$ if and only if $f$ is left continuous at $b$. In other words, at an endpoint the notion of "continuity" in Definition 1.15 silently weakens to one-sided continuity. This is the starting point of the trouble discussed in Exercise 1.23.</p>
+        <p><strong>(iii)</strong> Apply Definition 1.4 to the following data: $X = [a, b]$, $Y = \mathbb{R}$, $E = [a, b]$, $p = c$, and the metric $d(u, v) = |u - v|$ of (1.1). By Remark 1.2 the set $[a, b] \subset \mathbb{R}$ is a metric space with this metric, so the application is legitimate. Definition 1.4 then says</p>
+        <div class="math-display">$$\forall \varepsilon > 0 \ \exists \delta > 0 : \quad |f(x) - f(c)| \lt \varepsilon \quad \text{for all } x \in [a, b] \text{ with } |x - c| \lt \delta.$$</div>
+        <p>Definition 1.15, on the other hand, says</p>
+        <div class="math-display">$$\forall \varepsilon > 0 \ \exists \delta > 0 : \quad |f(x) - f(c)| \lt \varepsilon \quad \text{for all } x \in (c - \delta, c + \delta) \cap [a, b].$$</div>
+        <p>But for every $\delta > 0$,</p>
+        <div class="math-display">$$\{ x \in [a, b] : |x - c| \lt \delta \} = (c - \delta, c + \delta) \cap [a, b]$$</div>
+        <p>Indeed, for $x \in [a, b]$ the inequality $|x - c| \lt \delta$ is equivalent to $c - \delta \lt x \lt c + \delta$, so the two sets have the same elements. The two definitions are therefore the <em>same statement</em>: same $\varepsilon$, same $\delta$, same conclusion, same range of $x$. Hence, whether $c$ is an interior point or an endpoint, $f$ is continuous at $c$ in the sense of Definition 1.4 if and only if it is continuous at $c$ in the sense of Definition 1.15. That is, Definition 1.15 is nothing but Definition 1.4 written out in the case $X = E = [a, b]$, $Y = \mathbb{R}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.17 -->
+<div class="card def-card" id="c1-17">
+  <div class="card-head">
+    <span class="def-num">DEF 1.17</span>
+    <span class="def-title">도함수 <em>The Derivative</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 닫힌구간 $[a, b]$ 위에서 정의된 실숫값 함수라 하자. 모든 $x \in [a, b]$에 대해 다음 사상을 생각하자.</p>
+        <div class="math-display">$$\phi(t) := \frac{f(t) - f(x)}{t - x} \qquad (a \lt t \lt b, \quad t \neq x).$$</div>
+        <p>다음과 같이 정의한다.</p>
+        <div class="math-display">$$\begin{aligned} f'(x) &amp;= \lim_{t \to x} \phi(t) \quad &amp;&amp;\textit{if} \ x \in (a, b), \\ f'(x) &amp;= \lim_{t \to x^+} \phi(t) \quad &amp;&amp;\textit{if} \ x = a, \end{aligned}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$f'(x) = \lim_{t \to x^-} \phi(t) \quad \textit{if} \ x = b$$</div>
+        <p>단, 이 극한들이 존재해야 한다. 여기서 $\lim_{t \to x^-}$는 좌극한을, $\lim_{t \to x^+}$는 우극한을 나타낸다.</p>
+        <p>$f'$은 다음 네 집합 중 하나를 정의역으로 하는 실숫값 함수로 볼 수 있다.</p>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\}$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{a\},$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{b\},$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{a, b\}.$$</div>
+        <p>$f'$이 $x$에서 정의되면 $f$가 $x$에서 <strong>미분가능</strong>하다고 하고, $f'(x)$를 $x$에서의 $f$의 <strong>도함수</strong>라 한다. 또한 $f$가 모든 $x \in E$에서 미분가능하면 $f$가 $E$에서 미분가능하다고 한다. 또한 다음과 같은 표기도 쓰는데,</p>
+        <div class="math-display">$$\frac{df}{dx}(x) := f'(x)$$</div>
+        <p>또는</p>
+        <div class="math-display">$$\frac{d}{dx}(f)(x) := f'(x)$$</div>
+        <p>변수를 강조하기 위함이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function defined on a closed interval $[a, b]$. For all $x \in [a, b]$, consider the mapping</p>
+        <div class="math-display">$$\phi(t) := \frac{f(t) - f(x)}{t - x} \qquad (a \lt t \lt b, \quad t \neq x).$$</div>
+        <p>Define</p>
+        <div class="math-display">$$\begin{aligned} f'(x) &amp;= \lim_{t \to x} \phi(t) \quad &amp;&amp;\textit{if} \ x \in (a, b), \\ f'(x) &amp;= \lim_{t \to x^+} \phi(t) \quad &amp;&amp;\textit{if} \ x = a, \end{aligned}$$</div>
+        <p>and</p>
+        <div class="math-display">$$f'(x) = \lim_{t \to x^-} \phi(t) \quad \textit{if} \ x = b$$</div>
+        <p>provided that the limits exist, where $\lim_{t \to x^-}$ denotes the left limit and $\lim_{t \to x^+}$ is the right limit.</p>
+        <p>We can consider $f'$ as a real-valued function whose domain is a one of the following four sets:</p>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\}$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{a\},$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{b\},$$</div>
+        <div class="math-display">$$\left\{ x \in (a, b) : \lim_{t \to x} \phi(t) \ \textit{exists} \right\} \cup \{a, b\}.$$</div>
+        <p>If $f'$ is defined at $x$, then we say that $f$ is <strong>differentiable</strong> at $x$ and $f'(x)$ is called a <strong>derivative</strong> of $f$ at $x$. Additionally, if $f$ is differentiable for all $x \in E$, then we say that $f$ is differentiable on $E$. We also use the notation</p>
+        <div class="math-display">$$\frac{df}{dx}(x) := f'(x)$$</div>
+        <p>or</p>
+        <div class="math-display">$$\frac{d}{dx}(f)(x) := f'(x)$$</div>
+        <p>to emphasize the variable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.4 ═══════════ -->
+
+<!-- Remark 1.18 -->
+<div class="card rem-card" id="c1-18">
+  <div class="card-head">
+    <span class="rem-num">REM 1.18</span>
+    <span class="rem-title">더 간단한 도함수의 정의 <em>A Simpler Definition of the Derivative</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의 1.3을 이용하면 다음과 같이 간단히 정의할 수 있다.</p>
+        <div class="math-display">$$f'(x) = \lim_{t \to x} \phi(t) \qquad \forall x \in [a, b]$$</div>
+        <p>단, 극한이 존재해야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By using Definition 1.3, we can simply define</p>
+        <div class="math-display">$$f'(x) = \lim_{t \to x} \phi(t) \qquad \forall x \in [a, b]$$</div>
+        <p>if the limit exists.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.19 -->
+<div class="card ex-card" id="c1-19">
+  <div class="card-head">
+    <span class="ex-num">EX 1.19</span>
+    <span class="ex-title">좌우도함수 <em>One-Sided Derivatives</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(i)</strong> $[a, b]$ 위의 함수 $f$의 <strong>좌도함수</strong>와 <strong>우도함수</strong>를 정의하라.</p>
+        <p><strong>(ii)</strong> $a$에서의 $f$의 우도함수와 $a$에서의 $f$의 도함수를 비교하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(i)</strong> $f$가 닫힌구간 $[a, b]$ 위에서 정의된 실숫값 함수라 하자. 정의 1.17에서와 같이 $x \in [a, b]$를 고정하고</p>
+        <div class="math-display">$$\phi(t) := \frac{f(t) - f(x)}{t - x} \qquad (a \lt t \lt b, \quad t \neq x)$$</div>
+        <p>라 두자. 정의 1.17이 극한 $\lim_{t \to x} \phi(t)$를 쓰는 자리에 한쪽 극한을 넣으면 다음 정의를 얻는다.</p>
+        <p>$x \in [a, b)$일 때, 극한</p>
+        <div class="math-display">$$f'_+(x) := \lim_{t \to x^+} \phi(t) = \lim_{t \to x^+} \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>이 존재하면 이 값을 $x$에서의 $f$의 <strong>우도함수</strong>라 하고, 이때 $f$가 $x$에서 <strong>우미분가능</strong>하다고 한다.</p>
+        <p>$x \in (a, b]$일 때, 극한</p>
+        <div class="math-display">$$f'_-(x) := \lim_{t \to x^-} \phi(t) = \lim_{t \to x^-} \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>이 존재하면 이 값을 $x$에서의 $f$의 <strong>좌도함수</strong>라 하고, 이때 $f$가 $x$에서 <strong>좌미분가능</strong>하다고 한다.</p>
+        <p>여기서 우극한은 정의 1.6(ii), 좌극한은 연습문제 1.8의 뜻이다. $\phi$의 정의역이 $\{t \in (a, b) : t \neq x\}$이므로 $x = b$에서는 우극한을, $x = a$에서는 좌극한을 말할 수 없고, 그래서 각각 $x \in [a, b)$와 $x \in (a, b]$로 제한한 것이다.</p>
+        <p><strong>(ii)</strong> 정의 1.17은 $x = a$에서의 도함수를 애초에</p>
+        <div class="math-display">$$f'(a) = \lim_{t \to a^+} \phi(t)$$</div>
+        <p>로 정의한다. 이는 (i)에서 정의한 $f'_+(a)$의 식과 글자 그대로 같다. 따라서 $a$에서의 우도함수와 $a$에서의 도함수는 값이 우연히 같은 두 대상이 아니라 <em>정의상 같은 대상</em>이다.</p>
+        <div class="math-display">$$f'_+(a) = f'(a).$$</div>
+        <p>한쪽이 존재할 필요충분조건은 다른 쪽이 존재하는 것이며, 존재하면 값도 같다. 대칭적으로 $x = b$에서는 $f'_-(b) = f'(b)$이다.</p>
+        <p>반면 내부점 $x \in (a, b)$에서는 정의 1.17이 양쪽 극한 $\lim_{t \to x} \phi(t)$를 요구하므로 사정이 다르다. 연습문제 1.10을 $\phi$에 적용하면, $f'(x)$가 존재할 필요충분조건은 $f'_-(x)$와 $f'_+(x)$가 모두 존재하고 서로 같은 것이며, 이때 세 값이 모두 일치한다. 예컨대 예제 1.34(i)의 $f(x) = |x|$는 $x = 0$에서 $f'_+(0) = 1$, $f'_-(0) = -1$로 두 한쪽 도함수가 모두 존재하지만 서로 다르므로 $f'(0)$은 존재하지 않는다.</p>
+        <p>요약하면, 끝점에서는 정의 1.17의 "도함수"가 곧 한쪽 도함수이고(그래서 주의 1.18처럼 정의 1.3을 쓰면 네 경우를 하나의 식 $f'(x) = \lim_{t \to x} \phi(t)$로 통합할 수 있다), 내부점에서만 도함수가 두 한쪽 도함수의 일치를 요구하는 진짜로 더 강한 조건이 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(i)</strong> Define a <strong>left derivative</strong> and a <strong>right derivative</strong> of a function $f$ on $[a, b]$.</p>
+        <p><strong>(ii)</strong> Compare the right derivative of $f$ at $a$ and the derivative of $f$ at $a$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(i)</strong> Let $f$ be a real-valued function defined on the closed interval $[a, b]$. As in Definition 1.17, fix $x \in [a, b]$ and put</p>
+        <div class="math-display">$$\phi(t) := \frac{f(t) - f(x)}{t - x} \qquad (a \lt t \lt b, \quad t \neq x)$$</div>
+        <p>Replacing the limit $\lim_{t \to x} \phi(t)$ of Definition 1.17 by a one-sided limit gives the following definitions.</p>
+        <p>For $x \in [a, b)$, if the limit</p>
+        <div class="math-display">$$f'_+(x) := \lim_{t \to x^+} \phi(t) = \lim_{t \to x^+} \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>exists, its value is called the <strong>right derivative</strong> of $f$ at $x$, and we say that $f$ is <strong>right differentiable</strong> at $x$.</p>
+        <p>For $x \in (a, b]$, if the limit</p>
+        <div class="math-display">$$f'_-(x) := \lim_{t \to x^-} \phi(t) = \lim_{t \to x^-} \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>exists, its value is called the <strong>left derivative</strong> of $f$ at $x$, and we say that $f$ is <strong>left differentiable</strong> at $x$.</p>
+        <p>Here the right limit is in the sense of Definition 1.6(ii) and the left limit in the sense of Exercise 1.8. Since the domain of $\phi$ is $\{t \in (a, b) : t \neq x\}$, one cannot speak of a right limit at $x = b$ nor of a left limit at $x = a$; this is why the definitions are restricted to $x \in [a, b)$ and $x \in (a, b]$ respectively.</p>
+        <p><strong>(ii)</strong> Definition 1.17 defines the derivative at $x = a$ in the first place by</p>
+        <div class="math-display">$$f'(a) = \lim_{t \to a^+} \phi(t)$$</div>
+        <p>which is literally the same expression as the $f'_+(a)$ defined in (i). Hence the right derivative at $a$ and the derivative at $a$ are not two objects that happen to have the same value; they are <em>the same object by definition</em>:</p>
+        <div class="math-display">$$f'_+(a) = f'(a).$$</div>
+        <p>One exists if and only if the other does, and then the values agree. Symmetrically, $f'_-(b) = f'(b)$ at $x = b$.</p>
+        <p>At an interior point $x \in (a, b)$ the situation is different, because there Definition 1.17 requires the two-sided limit $\lim_{t \to x} \phi(t)$. Applying Exercise 1.10 to $\phi$, the derivative $f'(x)$ exists if and only if $f'_-(x)$ and $f'_+(x)$ both exist and are equal, and then all three values coincide. For instance $f(x) = |x|$ of Example 1.34(i) has $f'_+(0) = 1$ and $f'_-(0) = -1$ at $x = 0$, so both one-sided derivatives exist but differ, and $f'(0)$ does not exist.</p>
+        <p>In summary, at an endpoint the "derivative" of Definition 1.17 is exactly a one-sided derivative (which is why, as in Remark 1.18, using Definition 1.3 collapses the four cases into the single formula $f'(x) = \lim_{t \to x} \phi(t)$), and only at interior points is the derivative a genuinely stronger condition requiring the two one-sided derivatives to agree.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.20 -->
+<div class="card exam-card" id="c1-20">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.20</span>
+    <span class="exam-title">상수함수와 항등함수의 도함수 <em>Derivatives of Constant and Identity Functions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>상수 $c \in \mathbb{R}$에 대해 $f(x) = c$라 정의하자. 그러면 $f$는 $\mathbb{R}$에서 미분가능하고 모든 $x \in \mathbb{R}$에 대해 $f'(x) = 0$이다. 항등함수 $g(x) = x$를 생각하자. 그러면 $g$는 $\mathbb{R}$에서 미분가능하고 모든 $x \in \mathbb{R}$에 대해 $g'(x) = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a constant $c \in \mathbb{R}$, define $f(x) = c$. Then $f$ is differentiable on $x$ and $f'(x) = 0$ for all $x \in \mathbb{R}$. Consider the identity function $g(x) = x$. Then $g$ is differentiable on $\mathbb{R}$ and $g'(x) = 1$ for all $x \in \mathbb{R}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.21 -->
+<div class="card thm-card" id="c1-21">
+  <div class="card-head">
+    <span class="thm-num">THM 1.21</span>
+    <span class="thm-title">미분가능성은 연속성을 함의한다 <em>Differentiability Implies Continuity</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 실숫값 함수라 하자. $f$가 $x \in [a, b]$에서 미분가능하다고 가정하자. 그러면 $f$는 $x$에서 연속이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$t, x \in [a, b]$이고 $t \neq x$인 모든 경우에 대해 다음이 성립함을 관찰하자.</p>
+        <div class="math-display">$$f(t) - f(x) = \frac{f(t) - f(x)}{t - x} \cdot (t - x). \tag{1.2}$$</div>
+        <ul>
+          <li>(경우 1 : $x \in (a, b)$). (1.2)의 양변에 $\lim_{t \to x}$를 취하자. 그러면 정리 1.12에 의해 다음을 얻는다.
+            <div class="math-display">$$\lim_{t \to x} (f(t) - f(x)) = \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \cdot \lim_{t \to x} (t - x) = f'(x) \cdot 0 = 0.$$</div>
+          </li>
+          <li>(경우 2 : $x = a$). 우극한을 사용한다.</li>
+          <li>(경우 3 : $x = b$). 좌극한을 사용한다.</li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function on $[a, b]$. Assume that $f$ is differentiable at $x \in [a, b]$. Then $f$ is continuous at $x$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Observe that for all $t, x \in [a, b]$ such that $t \neq x$,</p>
+        <div class="math-display">$$f(t) - f(x) = \frac{f(t) - f(x)}{t - x} \cdot (t - x). \tag{1.2}$$</div>
+        <ul>
+          <li>(Case 1 : $x \in (a, b)$). Take $\lim_{t \to x}$ to both sides of (1.2). Then by Theorem 1.12, we have
+            <div class="math-display">$$\lim_{t \to x} (f(t) - f(x)) = \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \cdot \lim_{t \to x} (t - x) = f'(x) \cdot 0 = 0.$$</div>
+          </li>
+          <li>(Case 2 : $x = a$). Use the right limit.</li>
+          <li>(Case 3 : $x = b$). Use the left limit.</li>
+        </ul>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.5 ═══════════ -->
+
+<!-- Exercise 1.22 -->
+<div class="card ex-card" id="c1-22">
+  <div class="card-head">
+    <span class="ex-num">EX 1.22</span>
+    <span class="ex-title">정리 1.21 증명의 완성 <em>Completing the Proof of Theorem 1.21</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.21의 증명을 경우 2와 경우 3에 대해 완성하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$f$가 $[a, b]$ 위의 실숫값 함수라 하자.</p>
+        <p><strong>(경우 2 : $x = a$)</strong> $f$가 $a$에서 미분가능하다고 하자. 정의 1.17에 의해 이는</p>
+        <div class="math-display">$$f'(a) = \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a}$$</div>
+        <p>가 존재한다는 뜻이다. (1.2)를 $x = a$에 대해 쓰면, $t \in (a, b)$인 모든 $t$에 대해 $t \neq a$이므로</p>
+        <div class="math-display">$$f(t) - f(a) = \frac{f(t) - f(a)}{t - a} \cdot (t - a)$$</div>
+        <p>이다. 이제 양변에 $\lim_{t \to a^+}$을 취한다. 오른쪽의 두 인자는 각각 우극한을 가지는데, 첫 인자의 우극한은 $f'(a)$이고, 둘째 인자에 대해서는 임의의 $\varepsilon > 0$에 대해 $\delta := \varepsilon$으로 두면 모든 $t \in (a, a + \delta)$에서</p>
+        <div class="math-display">$$|(t - a) - 0| = t - a \lt \delta = \varepsilon$$</div>
+        <p>이므로 $\lim_{t \to a^+} (t - a) = 0$이다. 따라서 연습문제 1.14의 (ii)(우극한에 대한 곱의 법칙)에 의해</p>
+        <div class="math-display">$$\lim_{t \to a^+} (f(t) - f(a)) = \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a} \cdot \lim_{t \to a^+} (t - a) = f'(a) \cdot 0 = 0.$$</div>
+        <p>상수함수 $t \mapsto f(a)$는 연습문제 1.9에 의해 $a$에서 우극한 $f(a)$를 가지므로, $f(t) = (f(t) - f(a)) + f(a)$와 연습문제 1.14의 (i)(우극한에 대한 합의 법칙)에 의해</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = 0 + f(a) = f(a).$$</div>
+        <p>즉 $f$는 $a$에서 우연속이고, 연습문제 1.16(ii)에 의해 이것은 정의 1.15의 뜻으로 $f$가 $a$에서 연속인 것과 같다.</p>
+        <p><strong>(경우 3 : $x = b$)</strong> 대칭이다. $f$가 $b$에서 미분가능하다고 하면 정의 1.17에 의해</p>
+        <div class="math-display">$$f'(b) = \lim_{t \to b^-} \frac{f(t) - f(b)}{t - b}$$</div>
+        <p>가 존재한다. (1.2)를 $x = b$에 대해 쓰고 양변에 $\lim_{t \to b^-}$을 취한다. 임의의 $\varepsilon > 0$에 대해 $\delta := \varepsilon$으로 두면 모든 $t \in (b - \delta, b)$에서 $|(t - b) - 0| = b - t \lt \varepsilon$이므로 $\lim_{t \to b^-} (t - b) = 0$이고, 따라서 연습문제 1.14의 (ii)(좌극한에 대한 곱의 법칙)에 의해</p>
+        <div class="math-display">$$\lim_{t \to b^-} (f(t) - f(b)) = f'(b) \cdot 0 = 0.$$</div>
+        <p>연습문제 1.9와 연습문제 1.14의 (i)에 의해 $\lim_{t \to b^-} f(t) = f(b)$, 즉 $f$는 $b$에서 좌연속이며, 연습문제 1.16(ii)에 의해 이것은 정의 1.15의 뜻으로 $f$가 $b$에서 연속인 것과 같다.</p>
+        <p>경우 1과 함께 이로써 모든 $x \in [a, b]$에 대해 정리 1.21이 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Complete the proof of Theorem 1.21 for Case 2 and Case 3.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $f$ be a real-valued function on $[a, b]$.</p>
+        <p><strong>(Case 2 : $x = a$.)</strong> Assume $f$ is differentiable at $a$. By Definition 1.17 this means that</p>
+        <div class="math-display">$$f'(a) = \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a}$$</div>
+        <p>exists. Writing (1.2) with $x = a$, we have $t \neq a$ for every $t \in (a, b)$, so</p>
+        <div class="math-display">$$f(t) - f(a) = \frac{f(t) - f(a)}{t - a} \cdot (t - a)$$</div>
+        <p>Now take $\lim_{t \to a^+}$ of both sides. Each of the two factors on the right has a right limit: the first has right limit $f'(a)$, and for the second, given any $\varepsilon > 0$, putting $\delta := \varepsilon$ gives, for all $t \in (a, a + \delta)$,</p>
+        <div class="math-display">$$|(t - a) - 0| = t - a \lt \delta = \varepsilon$$</div>
+        <p>so $\lim_{t \to a^+} (t - a) = 0$. Hence by Exercise 1.14(ii) (the product rule for right limits),</p>
+        <div class="math-display">$$\lim_{t \to a^+} (f(t) - f(a)) = \lim_{t \to a^+} \frac{f(t) - f(a)}{t - a} \cdot \lim_{t \to a^+} (t - a) = f'(a) \cdot 0 = 0.$$</div>
+        <p>The constant function $t \mapsto f(a)$ has right limit $f(a)$ at $a$ by Exercise 1.9, so from $f(t) = (f(t) - f(a)) + f(a)$ and Exercise 1.14(i) (the sum rule for right limits),</p>
+        <div class="math-display">$$\lim_{t \to a^+} f(t) = 0 + f(a) = f(a).$$</div>
+        <p>Thus $f$ is right continuous at $a$, and by Exercise 1.16(ii) this is the same as $f$ being continuous at $a$ in the sense of Definition 1.15.</p>
+        <p><strong>(Case 3 : $x = b$.)</strong> This is symmetric. If $f$ is differentiable at $b$, then by Definition 1.17</p>
+        <div class="math-display">$$f'(b) = \lim_{t \to b^-} \frac{f(t) - f(b)}{t - b}$$</div>
+        <p>exists. Write (1.2) with $x = b$ and take $\lim_{t \to b^-}$ of both sides. Given any $\varepsilon > 0$, putting $\delta := \varepsilon$ gives $|(t - b) - 0| = b - t \lt \varepsilon$ for all $t \in (b - \delta, b)$, so $\lim_{t \to b^-} (t - b) = 0$, and hence by Exercise 1.14(ii) (the product rule for left limits),</p>
+        <div class="math-display">$$\lim_{t \to b^-} (f(t) - f(b)) = f'(b) \cdot 0 = 0.$$</div>
+        <p>By Exercise 1.9 and Exercise 1.14(i), $\lim_{t \to b^-} f(t) = f(b)$, that is, $f$ is left continuous at $b$, which by Exercise 1.16(ii) is the same as $f$ being continuous at $b$ in the sense of Definition 1.15.</p>
+        <p>Together with Case 1 this proves Theorem 1.21 for every $x \in [a, b]$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.23 -->
+<div class="card ex-card" id="c1-23">
+  <div class="card-head">
+    <span class="ex-num">EX 1.23</span>
+    <span class="ex-title">닫힌구간에서의 연속성 정의가 나쁜 이유 (어려움!) <em>Why Closed-Interval Continuity Is Bad (Difficult!)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.21을 타당하게 만들기 위해, 정의 1.15에서 닫힌구간 위에서 정의된 함수에 대한 "연속"을 정의했다. 그러나 열린구간 위에서 정의된 함수에 대해 "연속"을 정의하는 것이 더 바람직하다. 닫힌구간 위에서 정의된 함수에 대한 "연속" 정의가 왜 나쁜지 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1. "점에서 연속"이 점 근방의 $f$만으로 결정되지 않는다.</strong> 정의 1.15는 "$c$에서 연속"이라는 국소적인 말을 쓰지만, 그 뜻은 $c$ 근방에서의 $f$의 모습만으로 정해지지 않고 <em>$f$를 어느 구간 위의 함수로 보고 있는가</em>에 함께 의존한다. 연습문제 1.16(ii)에서 보았듯이 끝점에서는 조건이 소리 없이 한쪽 연속으로 약화되기 때문이다. 구체적으로</p>
+        <div class="math-display">$$H(x) = \left\{ \begin{array}{cl} 0 &amp; \qquad (x \lt 0) \\ 1 &amp; \qquad (x \ge 0) \end{array} \right.$$</div>
+        <p>를 생각하자. $H$를 $[-1, 1]$ 위의 함수로 보면 $H$는 $0$에서 연속이 아니다($\varepsilon = 1/2$을 잡으면 임의의 $\delta > 0$에 대해 $x \in (-\delta, 0)$에서 $|H(x) - H(0)| = 1$이다). 그런데 똑같은 $H$를 $[0, 1]$ 위의 함수로 보면, 정의 1.15가 요구하는 $x$의 범위는 $(-\delta, \delta) \cap [0, 1] = [0, \delta) \cap [0, 1]$이고 이 위에서 $H \equiv 1$이므로 $H$는 $0$에서 연속이다. 즉 함수의 식도 점도 그대로인데 정의역을 바꾸었다는 이유만으로 "$0$에서 연속"의 참·거짓이 뒤집힌다. 이것은 "연속"이라는 낱말이 주는 국소적 인상과 어긋난다.</p>
+        <p><strong>2. 이미 있는 정의(정의 1.4)를 특수한 모양의 정의역에 대해 다시 쓴 것에 지나지 않는다.</strong> 주의 1.2에 의해 $[a, b]$는 $\mathbb{R}$의 거리를 물려받은 거리공간이고, 연습문제 1.16(iii)에서 보았듯이 정의 1.4를 $X = E = [a, b]$, $Y = \mathbb{R}$에 적용하면 정의 1.15와 <em>글자 그대로 같은 명제</em>가 나온다. 그러므로 정의 1.15는 새로운 개념이 아니라 정의 1.4의 한 사례를 손으로 풀어 쓴 것이며, 마땅히 정의가 아니라 정리(또는 관찰)여야 한다. 정의로 세우는 순간, 정의역의 모양이 바뀔 때마다 정의를 새로 써야 하는 부담이 생긴다. 반열린구간 $[a, b)$는? 구간들의 합집합은? $\mathbb{R}^k$의 영역이나 $\mathbb{Q}$ 같은 집합은? 정의 1.4는 이 모두를 한 번에 처리하지만, 정의 1.15 식의 접근은 정의역의 모양마다 "$(c - \delta, c + \delta)$와의 교집합"을 어떻게 잘라야 하는지 매번 새로 정해야 한다. 게다가 그 교집합을 취하는 조작 자체는 정의 1.4가 이미 $x \in E$라는 한 마디로 해내고 있다.</p>
+        <p><strong>3. 정리와 증명이 경우 나누기로 오염된다.</strong> 끝점을 특별 취급하는 대가는 곧바로 정리 쪽에 나타난다. 정리 1.21의 증명은 경우 1, 2, 3으로 갈라지고 그중 둘은 연습문제 1.22로 미루어졌다. 정리 1.25와 정리 1.30의 증명은 "증명의 유사성으로 인해 $x \in (a, b)$인 경우만 다룬다"는 말로 끝점을 아예 생략한다. 그 생략을 메우려면 극한의 사칙연산도 양쪽 판, 즉 정리 1.12와 연습문제 1.14를 모두 갖추어야 하고, 도함수 쪽에서도 연습문제 1.19의 좌·우도함수를 따로 마련해야 한다. 반면 열린구간 위에서라면 모든 점이 내부점이므로 $\lim_{x \to c} f(x) = f(c)$라는 단 하나의 조건과 단 하나의 논증으로 끝난다. 경우 나누기는 논증을 길게 만들 뿐 아니라, 생략된 경우에 오류가 숨을 자리를 만든다.</p>
+        <p><strong>4. 그렇다면 어떻게 하는 것이 옳은가.</strong> 닫힌구간 자체를 버릴 수는 없다. 주의 1.24처럼 최댓값·최솟값의 존재는 정의역이 콤팩트할 것을 요구하고, 이후의 롤의 정리와 평균값 정리도 마찬가지이기 때문이다. 문제는 닫힌구간을 쓰는 것이 아니라 <em>닫힌구간을 위해 "연속"을 새로 정의하는 것</em>이다. 바람직한 정리는 이렇다. 연속성은 정의 1.4로 (거리공간과 유도거리에 대해) 단 한 번만 정의하고, 정의 1.15는 그 특수한 경우를 계산해 낸 정리로 강등한다. 그러면 "연속"이라는 낱말은 늘 같은 뜻을 가지되, 그것이 함수 $f$ 하나가 아니라 정의역까지 포함한 자료 $f : E \to Y$의 성질임이 정의 자체에 드러난다. 끝점에서 조건이 한쪽으로 약해지는 것도 숨은 예외가 아니라 $E$와의 교집합이라는 한 가지 규칙의 결과로 설명된다. 그리고 미분처럼 진짜로 내부점을 필요로 하는 개념은, 정의역의 내부 $(a, b)$에서 논의한 뒤 끝점은 한쪽 도함수(연습문제 1.19)라는 이름으로 따로 부르면 된다. 강의노트가 정의 1.15를 둔 이유는 정리 1.21을 $[a, b]$ 위에서 진술하기 위해서인데, 그 목적은 위의 방식으로도 똑같이 달성되면서 위의 세 가지 대가를 치르지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To make Theorem 1.21 reasonable, we defined “continuity” for a function defined on a closed interval in Definition 1.15. However, it is more desirable to define “continuity” for a function defined on an open interval. Explain why the definition of “continuity” for a function defined on a closed interval is bad.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1. "Continuity at a point" is not determined by $f$ near that point.</strong> Definition 1.15 uses the local-sounding phrase "continuous at $c$", but its meaning is not determined by the behaviour of $f$ near $c$ alone: it also depends on <em>which interval we regard $f$ as a function on</em>. As we saw in Exercise 1.16(ii), at an endpoint the condition silently weakens to one-sided continuity. Concretely, consider</p>
+        <div class="math-display">$$H(x) = \left\{ \begin{array}{cl} 0 &amp; \qquad (x \lt 0) \\ 1 &amp; \qquad (x \ge 0) \end{array} \right.$$</div>
+        <p>Regarded as a function on $[-1, 1]$, $H$ is not continuous at $0$ (take $\varepsilon = 1/2$; for any $\delta > 0$ and any $x \in (-\delta, 0)$ we have $|H(x) - H(0)| = 1$). But regarded as a function on $[0, 1]$, the range of $x$ demanded by Definition 1.15 is $(-\delta, \delta) \cap [0, 1] = [0, \delta) \cap [0, 1]$, on which $H \equiv 1$, so $H$ <em>is</em> continuous at $0$. The formula and the point are unchanged, yet merely changing the domain flips the truth value of "continuous at $0$". This is at odds with the local flavour the word "continuous" suggests.</p>
+        <p><strong>2. It merely restates an existing definition (Definition 1.4) for one particular shape of domain.</strong> By Remark 1.2 the set $[a, b]$ is a metric space with the metric inherited from $\mathbb{R}$, and as shown in Exercise 1.16(iii), applying Definition 1.4 with $X = E = [a, b]$, $Y = \mathbb{R}$ produces <em>literally the same statement</em> as Definition 1.15. So Definition 1.15 is not a new notion but one instance of Definition 1.4 written out by hand, and it ought to be a theorem (or an observation) rather than a definition. The moment it is made a definition, one is committed to rewriting the definition for every new shape of domain. What about a half-open interval $[a, b)$? A union of intervals? A region in $\mathbb{R}^k$, or a set such as $\mathbb{Q}$? Definition 1.4 handles them all at once, whereas the style of Definition 1.15 requires deciding afresh, for each shape of domain, how the intersection with $(c - \delta, c + \delta)$ should be cut. And that intersection is precisely what Definition 1.4 already accomplishes with the single clause $x \in E$.</p>
+        <p><strong>3. Theorems and proofs become case-ridden.</strong> The price of treating endpoints specially shows up immediately in the theorems. The proof of Theorem 1.21 splits into Cases 1, 2, 3, two of which are deferred to Exercise 1.22. The proofs of Theorem 1.25 and Theorem 1.30 skip the endpoints altogether with the phrase "due to the similarity of the proof, we only consider the case $x \in (a, b)$". Filling those gaps requires both versions of the algebra of limits, Theorem 1.12 <em>and</em> Exercise 1.14, and, on the derivative side, the one-sided derivatives of Exercise 1.19 as well. On an open interval, by contrast, every point is interior, so the single condition $\lim_{x \to c} f(x) = f(c)$ and a single argument suffice. Case splitting not only lengthens arguments; it creates places where errors can hide inside the cases that were omitted.</p>
+        <p><strong>4. What should be done instead.</strong> Closed intervals cannot simply be abandoned: as in Remark 1.24, the existence of a maximum and a minimum requires the domain to be compact, and the same is true of Rolle's theorem and the mean-value theorem later on. The trouble is not the use of closed intervals but <em>defining "continuity" anew for them</em>. The desirable arrangement is this: define continuity once and for all by Definition 1.4 (for metric spaces with the induced metric), and demote Definition 1.15 to a theorem that computes that special case. Then the word "continuous" always means the same thing, while the definition itself makes visible that it is a property not of a bare function $f$ but of the data $f : E \to Y$, domain included. The weakening of the condition at an endpoint is then not a hidden exception but a consequence of the single rule "intersect with $E$". And notions that genuinely need interior points, such as the derivative, can be discussed on the interior $(a, b)$, with the endpoints handled separately under the name of one-sided derivatives (Exercise 1.19). The lecture note introduced Definition 1.15 in order to state Theorem 1.21 on $[a, b]$; that goal is met equally well in the way just described, without paying the three prices above.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 1.24 -->
+<div class="card rem-card" id="c1-24">
+  <div class="card-head">
+    <span class="rem-num">REM 1.24</span>
+    <span class="rem-title">콤팩트 집합 위에서의 최댓값과 최솟값 <em>Maximum and Minimum on a Compact Set</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>콤팩트 집합 $X$ 위의 실숫값 연속함수 $f$는 최댓값과 최솟값을 가진다는 것이 잘 알려져 있다. 즉 다음을 만족하는 $x, y \in X$가 존재한다.</p>
+        <div class="math-display">$$f(x) \ge f(z) \qquad \forall z \in X$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$f(y) \le f(z) \qquad \forall z \in X.$$</div>
+        <p>따라서 정리 1.21에 의해, $[a, b]$ 위의 임의의 실숫값 미분가능함수 $f$는 최댓값과 최솟값을 가진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>It is well-known that a real-valued continuous function $f$ on a compact set $X$ has a maximum and minimum, i.e. there exist $x, y \in X$ such that</p>
+        <div class="math-display">$$f(x) \ge f(z) \qquad \forall z \in X$$</div>
+        <p>and</p>
+        <div class="math-display">$$f(y) \le f(z) \qquad \forall z \in X.$$</div>
+        <p>Thus by Theorem 1.21, any real-valued differentiable function $f$ on $[a, b]$ has a maximum and minimum.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.25 -->
+<div class="card thm-card" id="c1-25">
+  <div class="card-head">
+    <span class="thm-num">THM 1.25</span>
+    <span class="thm-title">도함수의 사칙연산 <em>The Algebra of Derivatives</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$와 $g$가 $[a, b]$ 위의 함수라 하자. $f$와 $g$가 모두 $x \in [a, b]$에서 미분가능하다고 가정하자. 그러면 $f + g$와 $fg$는 $x$에서 미분가능하다. $g(x) \neq 0$이면 $f/g$도 $x$에서 미분가능하다. 더욱이,</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$(f + g)'(x) = f'(x) + g'(x)$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$(fg)'(x) = f'(x)g(x) + f(x)g'(x)$$</div>
+        <p><strong>(iii)</strong></p>
+        <div class="math-display">$$\left( \frac{f}{g} \right)'(x) = \frac{g(x)f'(x) - g'(x)f(x)}{g^2(x)} \quad \textit{if} \quad g(x) \neq 0,$$</div>
+        <p>여기서 $g^2(x) = gg(x) := g(x)g(x)$이다. 특히,</p>
+        <div class="math-display">$$\left( \frac{1}{g} \right)'(x) = -\frac{g'(x)}{g^2(x)} \quad \textit{if} \quad g(x) \neq 0. \tag{1.3}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>증명의 유사성으로 인해 $x \in (a, b)$인 경우만 다룬다. 먼저 (i)을 증명한다. $f$와 $g$가 모두 $x$에서 미분가능하므로,</p>
+        <div class="math-display">$$\lim_{t \to x} \frac{f(t) - f(x)}{t - x} \quad \text{and} \quad \lim_{t \to x} \frac{g(t) - g(x)}{t - x}$$</div>
+        <p>가 존재한다. 따라서 정리 1.12에 의해,</p>
+        <div class="math-display">$$\lim_{t \to x} \left( \frac{f(t) - f(x)}{t - x} + \frac{g(t) - g(x)}{t - x} \right) = \lim_{t \to x} \frac{f(t) - f(x)}{t - x} + \lim_{t \to x} \frac{g(t) - g(x)}{t - x}.$$</div>
+        <p>다음으로 (ii)를 증명한다. $t \in (a, b)$이고 $t \neq x$인 모든 경우에 대해 다음이 성립함을 관찰하자.</p>
+        <div class="math-display">$$\begin{aligned} \frac{f(t)g(t) - f(x)g(x)}{t - x} &amp;= \frac{f(t)g(t) - f(t)g(x) + f(t)g(x) - f(x)g(x)}{t - x} \\ &amp;= \frac{f(t)(g(t) - g(x)) + (f(t) - f(x))g(x)}{t - x} \end{aligned} \tag{1.4}$$</div>
+        <p>정리 1.21에 의해 $f$와 $g$는 $x$에서 연속이므로,</p>
+        <div class="math-display">$$\lim_{t \to x} f(t) = f(x) \quad \text{and} \quad \lim_{t \to x} g(t) = g(x).$$</div>
+        <p>따라서 정리 1.12와 (1.4)에 의해,</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{f(t)g(t) - f(x)g(x)}{t - x} &amp;= \lim_{t \to x} f(t) \lim_{t \to x} \frac{g(t) - g(x)}{t - x} + g(x) \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \\ &amp;= f(x)g'(x) + g(x)f'(x). \end{aligned}$$</div>
+        <p>마지막으로 (iii)을 증명한다. (1.3)을 증명하면 (ii)에 의해 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} \left( \frac{f}{g} \right)'(x) = \left( f\frac{1}{g} \right)'(x) &amp;= f'(x)\frac{1}{g(x)} - f(x)\frac{g'(x)}{g^2(x)} \\ &amp;= \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}. \end{aligned}$$</div>
+        <p>따라서 (1.3)을 보이면 충분하다. 다음을 관찰하자.</p>
+        <div class="math-display">$$\frac{\frac{1}{g(t)} - \frac{1}{g(x)}}{t - x} = \frac{g(x) - g(t)}{g(t)g(x)(t - x)}.$$</div>
+        <p>따라서 다시 정리 1.12와 정리 1.21에 의해 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{\frac{1}{g(t)} - \frac{1}{g(x)}}{t - x} &amp;= \lim_{t \to x} \frac{g(x) - g(t)}{g(t)g(x)(t - x)}, \\ &amp;= \frac{1}{g(x)} \lim_{t \to x} \frac{1}{g(t)} \lim_{t \to x} \frac{g(x) - g(t)}{(t - x)} \\ &amp;= -\frac{g'(x)}{g^2(x)}. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ and $g$ be functions on $[a, b]$. Assume that both $f$ and $g$ are differentiable at $x \in [a, b]$. Then $f + g$ and $fg$ are differentiable at $x$. If $g(x) \neq 0$, $f/g$ is also differentiable at $x$. Moreover,</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$(f + g)'(x) = f'(x) + g'(x)$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$(fg)'(x) = f'(x)g(x) + f(x)g'(x)$$</div>
+        <p><strong>(iii)</strong></p>
+        <div class="math-display">$$\left( \frac{f}{g} \right)'(x) = \frac{g(x)f'(x) - g'(x)f(x)}{g^2(x)} \quad \textit{if} \quad g(x) \neq 0,$$</div>
+        <p>where $g^2(x) = gg(x) := g(x)g(x)$. In particular,</p>
+        <div class="math-display">$$\left( \frac{1}{g} \right)'(x) = -\frac{g'(x)}{g^2(x)} \quad \textit{if} \quad g(x) \neq 0. \tag{1.3}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Due the similarity of the proof, we only consider the case $x \in (a, b)$. First we prove (i). Since both $f$ and $g$ are differentiable at $x$,</p>
+        <div class="math-display">$$\lim_{t \to x} \frac{f(t) - f(x)}{t - x} \quad \text{and} \quad \lim_{t \to x} \frac{g(t) - g(x)}{t - x}$$</div>
+        <p>exist. Thus by Theorem 1.12,</p>
+        <div class="math-display">$$\lim_{t \to x} \left( \frac{f(t) - f(x)}{t - x} + \frac{g(t) - g(x)}{t - x} \right) = \lim_{t \to x} \frac{f(t) - f(x)}{t - x} + \lim_{t \to x} \frac{g(t) - g(x)}{t - x}.$$</div>
+        <p>Next we prove (ii). Observe that for all $t \in (a, b)$ such that $t \neq x$,</p>
+        <div class="math-display">$$\begin{aligned} \frac{f(t)g(t) - f(x)g(x)}{t - x} &amp;= \frac{f(t)g(t) - f(t)g(x) + f(t)g(x) - f(x)g(x)}{t - x} \\ &amp;= \frac{f(t)(g(t) - g(x)) + (f(t) - f(x))g(x)}{t - x} \end{aligned} \tag{1.4}$$</div>
+        <p>Due to Theorem 1.21, $f$ and $g$ are continuous at $x$ and thus</p>
+        <div class="math-display">$$\lim_{t \to x} f(t) = f(x) \quad \text{and} \quad \lim_{t \to x} g(t) = g(x).$$</div>
+        <p>Therefore by Theorem 1.12 and (1.4),</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{f(t)g(t) - f(x)g(x)}{t - x} &amp;= \lim_{t \to x} f(t) \lim_{t \to x} \frac{g(t) - g(x)}{t - x} + g(x) \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \\ &amp;= f(x)g'(x) + g(x)f'(x). \end{aligned}$$</div>
+        <p>Finally we prove (iii). If we prove (1.3), then by (ii), we have</p>
+        <div class="math-display">$$\begin{aligned} \left( \frac{f}{g} \right)'(x) = \left( f\frac{1}{g} \right)'(x) &amp;= f'(x)\frac{1}{g(x)} - f(x)\frac{g'(x)}{g^2(x)} \\ &amp;= \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}. \end{aligned}$$</div>
+        <p>Thus it suffices to show (1.3). Observe that</p>
+        <div class="math-display">$$\frac{\frac{1}{g(t)} - \frac{1}{g(x)}}{t - x} = \frac{g(x) - g(t)}{g(t)g(x)(t - x)}.$$</div>
+        <p>Thus by Theorem 1.12 and Theorem 1.21 again, we have</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{\frac{1}{g(t)} - \frac{1}{g(x)}}{t - x} &amp;= \lim_{t \to x} \frac{g(x) - g(t)}{g(t)g(x)(t - x)}, \\ &amp;= \frac{1}{g(x)} \lim_{t \to x} \frac{1}{g(t)} \lim_{t \to x} \frac{g(x) - g(t)}{(t - x)} \\ &amp;= -\frac{g'(x)}{g^2(x)}. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.6 ═══════════ -->
+
+<!-- Definition 1.26 -->
+<div class="card def-card" id="c1-26">
+  <div class="card-head">
+    <span class="def-num">DEF 1.26</span>
+    <span class="def-title">다항식 <em>Polynomials</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \in \mathbb{N}$, $a_0, a_1, \ldots, a_n \in \mathbb{R}$에 대해 다음과 같이 정의한다.</p>
+        <div class="math-display">$$p(x) = a_0 + a_1 x + \cdots + a_n x^n \qquad (x \in \mathbb{R}),$$</div>
+        <p>여기서 $\mathbb{N}$은 자연수 체계를 나타낸다. 그러면 $p(x)$는 $\mathbb{R}$ 위의 실숫값 함수가 된다. $p(x)$를 <strong>다항식</strong>이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $n \in \mathbb{N}$, $a_0, a_1, \ldots, a_n \in \mathbb{R}$, define</p>
+        <div class="math-display">$$p(x) = a_0 + a_1 x + \cdots + a_n x^n \qquad (x \in \mathbb{R}),$$</div>
+        <p>where $\mathbb{N}$ denotes the natural number system. Then $p(x)$ becomes a real-valued function on $\mathbb{R}$. $p(x)$ is called <strong>a polynomial</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 1.27 -->
+<div class="card thm-card" id="c1-27">
+  <div class="card-head">
+    <span class="thm-num">COR 1.27</span>
+    <span class="thm-title">모든 다항식은 미분가능하다 <em>All Polynomials Are Differentiable</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 다항식은 $\mathbb{R}$에서 미분가능하다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>명백히, 모든 상수함수와 항등함수 $x$는 $\mathbb{R}$에서 미분가능하다. 따라서 이 따름정리는 정리 1.25의 쉬운 결과이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>All polynomials are differentiable on $\mathbb{R}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Obviously, all constant functions and the identity function $x$ are differentiable on $\mathbb{R}$. Therefore this corollary is an easy consequence of Theorem 1.25.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.28 -->
+<div class="card def-card" id="c1-28">
+  <div class="card-head">
+    <span class="def-num">DEF 1.28</span>
+    <span class="def-title">각, 코사인, 사인 <em>Angle, Cosine and Sine</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(각)</strong> 길이가 1인 두 선분에 대해, 대응하는 호의 길이를 <strong>각</strong>이라 정의한다 (아래 그림 참고).</p>
+        <figure class="fig">
+          <svg viewBox="0 0 300 250" width="300" height="250" role="img" aria-label="원의 중심에서 나온 길이 1인 두 선분과 그 사이의 호 ℓ, 그리고 각 θ">
+            <circle cx="130" cy="130" r="85" fill="none" stroke="#111" stroke-width="1.6"></circle>
+            <path d="M 214 118 A 85 85 0 0 0 182 63" fill="none" stroke="#111" stroke-width="2.8"></path>
+            <line x1="130" y1="130" x2="214" y2="118" stroke="#111" stroke-width="1.2"></line>
+            <line x1="130" y1="130" x2="182" y2="63" stroke="#111" stroke-width="1.2"></line>
+            <path d="M 155.7 126.4 A 26 26 0 0 0 146 109.5" fill="none" stroke="#111" stroke-width="1.1"></path>
+            <circle cx="130" cy="130" r="2" fill="#111"></circle>
+            <text x="162" y="117" font-family="Georgia, serif" font-style="italic" font-size="14" fill="#111">θ</text>
+            <text x="228" y="86" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">ℓ</text>
+          </svg>
+        </figure>
+        <p>다시 말해, 각 $\theta$를 $\ell$의 길이로 정의한다.</p>
+        <p><strong>(코사인과 사인)</strong> 단위원 위의 점 $P$와, 원점에서 점 $P$까지의 선분 $\overline{OP}$를 생각하자. $\theta$를 $x$축과 선분 $\overline{OP}$ 사이의 각이라 하자. $\cos \theta$와 $\sin \theta$를 각각 점 $P$의 $x$좌표와 $y$좌표로 정의한다 (아래 그림 참고).</p>
+        <figure class="fig">
+          <svg viewBox="0 0 360 300" width="360" height="300" role="img" aria-label="단위원 위의 점 P(cos θ, sin θ)와 x축·선분 OP 사이의 각 θ">
+            <defs>
+              <marker id="a2-f28b-ko-arw-blk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#111"></path>
+              </marker>
+              <marker id="a2-f28b-ko-arw-blu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2196c4"></path>
+              </marker>
+              <marker id="a2-f28b-ko-arw-pnk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e0559c"></path>
+              </marker>
+            </defs>
+            <line x1="170" y1="290" x2="170" y2="34" stroke="#111" stroke-width="1.4" marker-end="url(#a2-f28b-ko-arw-blk)"></line>
+            <line x1="48" y1="178" x2="170" y2="178" stroke="#111" stroke-width="1.4"></line>
+            <circle cx="170" cy="178" r="75" fill="none" stroke="#111" stroke-width="1.6"></circle>
+            <line x1="170" y1="178" x2="292" y2="178" stroke="#2196c4" stroke-width="2" marker-end="url(#a2-f28b-ko-arw-blu)"></line>
+            <line x1="170" y1="178" x2="110" y2="133" stroke="#2196c4" stroke-width="2"></line>
+            <circle cx="110" cy="133" r="4" fill="#2196c4"></circle>
+            <path d="M 210 178 A 40 40 0 0 0 138 154" fill="none" stroke="#e0559c" stroke-width="1.6" marker-end="url(#a2-f28b-ko-arw-pnk)"></path>
+            <text x="6" y="115" font-family="Georgia, serif" font-size="16" fill="#111">P(cos θ, sin θ)</text>
+            <text x="151" y="44" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">y</text>
+            <text x="300" y="194" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">x</text>
+            <text x="158" y="198" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">O</text>
+            <text x="118" y="166" font-family="Georgia, serif" font-size="15" fill="#111">1</text>
+            <text x="249" y="198" font-family="Georgia, serif" font-size="15" fill="#111">1</text>
+            <text x="199" y="150" font-family="Georgia, serif" font-style="italic" font-size="17" fill="#111">θ</text>
+          </svg>
+        </figure>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(Angle)</strong> For two segments whose length is 1, we define an <strong>angle</strong> as the length of corresponding arc (see the figure below).</p>
+        <figure class="fig">
+          <svg viewBox="0 0 300 250" width="300" height="250" role="img" aria-label="A circle with two unit segments from the centre and the arc ℓ between them, subtending the angle θ">
+            <circle cx="130" cy="130" r="85" fill="none" stroke="#111" stroke-width="1.6"></circle>
+            <path d="M 214 118 A 85 85 0 0 0 182 63" fill="none" stroke="#111" stroke-width="2.8"></path>
+            <line x1="130" y1="130" x2="214" y2="118" stroke="#111" stroke-width="1.2"></line>
+            <line x1="130" y1="130" x2="182" y2="63" stroke="#111" stroke-width="1.2"></line>
+            <path d="M 155.7 126.4 A 26 26 0 0 0 146 109.5" fill="none" stroke="#111" stroke-width="1.1"></path>
+            <circle cx="130" cy="130" r="2" fill="#111"></circle>
+            <text x="162" y="117" font-family="Georgia, serif" font-style="italic" font-size="14" fill="#111">θ</text>
+            <text x="228" y="86" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">ℓ</text>
+          </svg>
+        </figure>
+        <p>In other words, we define the angle $\theta$ as the length of $\ell$.</p>
+        <p><strong>(Cosine and Sine)</strong> Consider a point $P$ at the unit circle and the line segment $\overline{OP}$ from the origin to the point $P$. Let $\theta$ be the angle between $x$-axis and the line segment $\overline{OP}$. We define $\cos \theta$ and $\sin \theta$ as the $x$-coordinate and $y$-coordinate of the point $P$, respectively (see the following figure).</p>
+        <figure class="fig">
+          <svg viewBox="0 0 360 300" width="360" height="300" role="img" aria-label="The unit circle with the point P(cos θ, sin θ) and the angle θ between the x-axis and the segment OP">
+            <defs>
+              <marker id="a2-f28b-en-arw-blk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#111"></path>
+              </marker>
+              <marker id="a2-f28b-en-arw-blu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2196c4"></path>
+              </marker>
+              <marker id="a2-f28b-en-arw-pnk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e0559c"></path>
+              </marker>
+            </defs>
+            <line x1="170" y1="290" x2="170" y2="34" stroke="#111" stroke-width="1.4" marker-end="url(#a2-f28b-en-arw-blk)"></line>
+            <line x1="48" y1="178" x2="170" y2="178" stroke="#111" stroke-width="1.4"></line>
+            <circle cx="170" cy="178" r="75" fill="none" stroke="#111" stroke-width="1.6"></circle>
+            <line x1="170" y1="178" x2="292" y2="178" stroke="#2196c4" stroke-width="2" marker-end="url(#a2-f28b-en-arw-blu)"></line>
+            <line x1="170" y1="178" x2="110" y2="133" stroke="#2196c4" stroke-width="2"></line>
+            <circle cx="110" cy="133" r="4" fill="#2196c4"></circle>
+            <path d="M 210 178 A 40 40 0 0 0 138 154" fill="none" stroke="#e0559c" stroke-width="1.6" marker-end="url(#a2-f28b-en-arw-pnk)"></path>
+            <text x="6" y="115" font-family="Georgia, serif" font-size="16" fill="#111">P(cos θ, sin θ)</text>
+            <text x="151" y="44" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">y</text>
+            <text x="300" y="194" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">x</text>
+            <text x="158" y="198" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#111">O</text>
+            <text x="118" y="166" font-family="Georgia, serif" font-size="15" fill="#111">1</text>
+            <text x="249" y="198" font-family="Georgia, serif" font-size="15" fill="#111">1</text>
+            <text x="199" y="150" font-family="Georgia, serif" font-style="italic" font-size="17" fill="#111">θ</text>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.7 ═══════════ -->
+
+<!-- Exercise 1.29 -->
+<div class="card ex-card" id="c1-29">
+  <div class="card-head">
+    <span class="ex-num">EX 1.29</span>
+    <span class="ex-title">코사인과 사인의 도함수 (어려움(?)) <em>Derivatives of Cosine and Sine (Difficult(?))</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음을 증명하라.</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$\frac{d}{dx}(\cos x) = -\sin x$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$\frac{d}{dx}(\sin x) = \cos x.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>정의 1.28은 각을 <em>대응하는 호의 길이</em>로, $\cos \theta$와 $\sin \theta$를 그 각에 대응하는 단위원 위의 점 $P$의 좌표로 정의한다. 아래에서는 그 그림에서 읽어내는 기하적 사실을 먼저 분명히 밝히고, 그 뒤로는 오직 정의 1.6, 정리 1.12, 정의 1.17만 사용한다.</p>
+        <p><strong>(사용하는 기하적 사실)</strong> $A := (1, 0)$이라 하고, $0 \lt \theta \lt \pi/2$에 대해 $P = P(\theta) := (\cos\theta, \sin\theta)$를 각 $\theta$에 대응하는 단위원 위의 점이라 하자.</p>
+        <p><strong>(G1)</strong> 호 $\overset{\frown}{AP}$의 길이가 $\theta$이다(정의 1.28의 각의 정의 그 자체).</p>
+        <p><strong>(G2)</strong> $P$는 단위원 위의 점이므로 $|OP| = 1$, 즉</p>
+        <div class="math-display">$$\cos^2\theta + \sin^2\theta = 1.$$</div>
+        <p><strong>(G3)</strong> 두 점을 잇는 곡선 중 가장 짧은 것은 선분이다. 특히 현의 길이는 호의 길이 이하이다.</p>
+        <p><strong>(G4)</strong> 볼록영역 $K_1 \subset K_2$이면 $K_1$의 둘레는 $K_2$의 둘레 이하이다(아르키메데스의 볼록성 원리).</p>
+        <p><strong>(G5)</strong> $x$축에 대한 반사는 길이를 보존하고 각 $\theta$의 호를 각 $-\theta$의 호로 옮기므로 $\cos(-\theta) = \cos\theta$, $\sin(-\theta) = -\sin\theta$이다. 또한 원점 둘레의 회전은 길이를 보존하므로 각 $h$의 점을 각 $x + h$의 점으로 옮기며, 좌표로는 회전이</p>
+        <div class="math-display">$$(u, v) \longmapsto (u\cos x - v\sin x, \ u\sin x + v\cos x)$$</div>
+        <p>이므로 이를 $(u, v) = (\cos h, \sin h)$에 적용하면 덧셈정리</p>
+        <div class="math-display">$$\cos(x + h) = \cos x \cos h - \sin x \sin h, \qquad \sin(x + h) = \sin x \cos h + \cos x \sin h$$</div>
+        <p>를 얻는다. (강의노트는 삼각함수의 항등식을 알려진 것으로 쓰고 있으며, 여기서도 이들을 정의 1.28의 기하로부터 오는 기지의 사실로 사용한다.)</p>
+        <p><strong>1단계: $\sin\theta \le \theta$ ($0 \lt \theta \lt \pi/2$).</strong> $Q := (\cos\theta, 0)$이라 하면 삼각형 $APQ$는 $Q$에서 직각이고 $|PQ| = \sin\theta$, 빗변은 $|PA|$이다. 직각삼각형에서 변은 빗변 이하이므로 $\sin\theta = |PQ| \le |PA|$이고, (G3)과 (G1)에 의해 $|PA| \le \theta$이다. 따라서</p>
+        <div class="math-display">$$\sin\theta \le \theta \qquad (0 \lt \theta \lt \pi/2).$$</div>
+        <p><strong>2단계: $1 - \cos\theta \le \theta^2 / 2$ ($0 \lt \theta \lt \pi/2$).</strong> (G2)에 의해</p>
+        <div class="math-display">$$|PA|^2 = (\cos\theta - 1)^2 + \sin^2\theta = \cos^2\theta - 2\cos\theta + 1 + \sin^2\theta = 2 - 2\cos\theta$$</div>
+        <p>이고, 1단계에서 본 $|PA| \le \theta$와 합하면 $2 - 2\cos\theta \le \theta^2$, 즉</p>
+        <div class="math-display">$$0 \le 1 - \cos\theta \le \frac{\theta^2}{2}.$$</div>
+        <p><strong>3단계: $\theta \le 2\tan(\theta/2)$, 따라서 $u \le \tan u$ ($0 \lt u \lt \pi/4$).</strong> $0 \lt \theta \lt \pi/2$라 하고, 단위원의 $A$에서의 접선과 $P$에서의 접선이 만나는 점을 $T$라 하자(두 접선은 평행하지 않으므로 만난다). 접선은 접점에서 반지름과 수직이므로 삼각형 $OAT$는 $A$에서 직각이고, 대칭에 의해 $T$는 각 $AOP$의 이등분선 위에 있어 $\angle AOT = \theta/2$이다. $|OA| = 1$이므로</p>
+        <div class="math-display">$$|AT| = |TP| = \tan\frac{\theta}{2}.$$</div>
+        <p>이제 $K_1$을 부채꼴 $OAP$(선분 $OA$, 호 $\overset{\frown}{AP}$, 선분 $PO$로 둘러싸인 영역), $K_2$를 사각형 $OATP$라 하자. 둘 다 볼록이고, 단위원판이 두 접선이 정하는 반평면에 들어 있으므로 $K_1 \subset K_2$이다. (G4)와 (G1)에 의해 둘레를 비교하면</p>
+        <div class="math-display">$$1 + \theta + 1 \le 1 + \tan\frac{\theta}{2} + \tan\frac{\theta}{2} + 1,$$</div>
+        <p>즉 $\theta \le 2\tan(\theta/2)$이다. $u := \theta/2$로 두면 $0 \lt u \lt \pi/4$에 대해</p>
+        <div class="math-display">$$u \le \tan u = \frac{\sin u}{\cos u}, \qquad \text{i.e.} \qquad \cos u \le \frac{\sin u}{u}.$$</div>
+        <p>(마지막 변형에서 $0 \lt u \lt \pi/4$이면 $\cos u > 0$임을 썼다. 실제로 2단계에서 $1 - \cos u \le u^2/2 \lt \pi^2/32 \lt 1$이다.)</p>
+        <p><strong>4단계: $\displaystyle \lim_{\theta \to 0} \frac{\sin\theta}{\theta} = 1$.</strong> $q(\theta) := \dfrac{\sin\theta}{\theta}$ ($0 \lt |\theta| \lt \pi/4$)라 두자. (G5)에 의해 $\sin$은 홀함수이므로 $q$는 짝함수, 즉 $q(-\theta) = q(\theta)$이다. $0 \lt \theta \lt \pi/4$에 대해 1단계와 3단계를 합하면</p>
+        <div class="math-display">$$\cos\theta \le q(\theta) \le 1$$</div>
+        <p>이고, 따라서 2단계에 의해</p>
+        <div class="math-display">$$|q(\theta) - 1| = 1 - q(\theta) \le 1 - \cos\theta \le \frac{\theta^2}{2}.$$</div>
+        <p>$q$가 짝함수이고 $\theta^2$도 짝함수이므로 이 부등식은 $0 \lt |\theta| \lt \pi/4$인 모든 $\theta$에 대해 성립한다. 이제 $\varepsilon > 0$이 주어졌다고 하고</p>
+        <div class="math-display">$$\delta := \min \left\{ \frac{\pi}{4}, \ \sqrt{2\varepsilon} \right\} > 0$$</div>
+        <p>으로 두자. 그러면 모든 $\theta \in (-\delta, 0) \cup (0, \delta)$에 대해</p>
+        <div class="math-display">$$\left| \frac{\sin\theta}{\theta} - 1 \right| \le \frac{\theta^2}{2} \lt \frac{\delta^2}{2} \le \varepsilon$$</div>
+        <p>이므로 정의 1.6(i)에 의해 $\lim_{\theta \to 0} \dfrac{\sin\theta}{\theta} = 1$이다. 같은 방식으로 2단계의 부등식과 (G5)로부터</p>
+        <div class="math-display">$$\lim_{\theta \to 0} \cos\theta = 1, \qquad \lim_{\theta \to 0} \sin\theta = 0$$</div>
+        <p>도 얻는다(각각 $|\cos\theta - 1| \le \theta^2/2$와 $|\sin\theta| \le |\theta|$를 쓰고 $\delta := \min\{\pi/4, \sqrt{2\varepsilon}\}$, $\delta := \min\{\pi/4, \varepsilon\}$으로 두면 된다).</p>
+        <p><strong>5단계: $\displaystyle \lim_{\theta \to 0} \frac{\cos\theta - 1}{\theta} = 0$.</strong> 켤레를 곱하고 (G2)를 쓰면 $0 \lt |\theta| \lt \pi/4$에 대해</p>
+        <div class="math-display">$$\frac{\cos\theta - 1}{\theta} = \frac{(\cos\theta - 1)(\cos\theta + 1)}{\theta(\cos\theta + 1)} = \frac{\cos^2\theta - 1}{\theta(1 + \cos\theta)} = -\frac{\sin\theta}{\theta} \cdot \frac{\sin\theta}{1 + \cos\theta}$$</div>
+        <p>이다($1 + \cos\theta \ge 1 > 0$이므로 분모는 $0$이 아니다). 4단계와 정리 1.12에 의해 오른쪽 각 인자의 극한이 존재하므로</p>
+        <div class="math-display">$$\lim_{\theta \to 0} \frac{\cos\theta - 1}{\theta} = -1 \cdot \frac{0}{1 + 1} = 0.$$</div>
+        <p><strong>6단계: 차분몫의 조립.</strong> $x \in \mathbb{R}$를 고정하자. $\cos$과 $\sin$은 $\mathbb{R}$ 위에서 정의되어 있으므로 임의의 열린구간을 잡아 $x$를 내부점으로 볼 수 있고, 따라서 정의 1.17(과 주의 1.18)에 의해 도함수는 $\lim_{t \to x}$로 주어진다. $t \neq x$에 대해 $h := t - x$로 두면 (G5)의 덧셈정리에 의해</p>
+        <div class="math-display">$$\frac{\sin t - \sin x}{t - x} = \frac{\sin(x + h) - \sin x}{h} = \sin x \cdot \frac{\cos h - 1}{h} + \cos x \cdot \frac{\sin h}{h}$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\frac{\cos t - \cos x}{t - x} = \frac{\cos(x + h) - \cos x}{h} = \cos x \cdot \frac{\cos h - 1}{h} - \sin x \cdot \frac{\sin h}{h}$$</div>
+        <p>이다. 여기서 $0 \lt |t - x| \lt \delta$인 것과 $0 \lt |h| \lt \delta$인 것은 같은 조건이므로, 4단계와 5단계의 극한은 $h$ 대신 $t \to x$의 극한으로 그대로 읽을 수 있다. 즉</p>
+        <div class="math-display">$$\lim_{t \to x} \frac{\sin(t - x)}{t - x} = 1, \qquad \lim_{t \to x} \frac{\cos(t - x) - 1}{t - x} = 0.$$</div>
+        <p>상수함수의 극한(연습문제 1.9)과 정리 1.12의 (i), (ii)를 위 두 식에 적용하면</p>
+        <div class="math-display">$$\frac{d}{dx}(\sin x) = \lim_{t \to x} \frac{\sin t - \sin x}{t - x} = \sin x \cdot 0 + \cos x \cdot 1 = \cos x$$</div>
+        <p>이고</p>
+        <div class="math-display">$$\frac{d}{dx}(\cos x) = \lim_{t \to x} \frac{\cos t - \cos x}{t - x} = \cos x \cdot 0 - \sin x \cdot 1 = -\sin x$$</div>
+        <p>이다. 두 극한이 존재하므로 $\cos$과 $\sin$은 $\mathbb{R}$의 모든 점에서 미분가능하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that</p>
+        <p><strong>(i)</strong></p>
+        <div class="math-display">$$\frac{d}{dx}(\cos x) = -\sin x$$</div>
+        <p><strong>(ii)</strong></p>
+        <div class="math-display">$$\frac{d}{dx}(\sin x) = \cos x.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Definition 1.28 defines an angle as <em>the length of the corresponding arc</em>, and $\cos \theta$, $\sin \theta$ as the coordinates of the point $P$ on the unit circle corresponding to that angle. Below we first state explicitly the geometric facts read off from that figure; after that only Definition 1.6, Theorem 1.12 and Definition 1.17 are used.</p>
+        <p><strong>(The geometric facts used.)</strong> Put $A := (1, 0)$ and, for $0 \lt \theta \lt \pi/2$, let $P = P(\theta) := (\cos\theta, \sin\theta)$ be the point of the unit circle corresponding to the angle $\theta$.</p>
+        <p><strong>(G1)</strong> The arc $\overset{\frown}{AP}$ has length $\theta$ (this is the definition of the angle in Definition 1.28 itself).</p>
+        <p><strong>(G2)</strong> $P$ lies on the unit circle, so $|OP| = 1$, that is,</p>
+        <div class="math-display">$$\cos^2\theta + \sin^2\theta = 1.$$</div>
+        <p><strong>(G3)</strong> The shortest curve joining two points is the segment; in particular the length of a chord is at most the length of the arc.</p>
+        <p><strong>(G4)</strong> If convex regions satisfy $K_1 \subset K_2$, then the perimeter of $K_1$ is at most the perimeter of $K_2$ (Archimedes' convexity principle).</p>
+        <p><strong>(G5)</strong> Reflection in the $x$-axis preserves lengths and carries the arc of angle $\theta$ to the arc of angle $-\theta$, so $\cos(-\theta) = \cos\theta$ and $\sin(-\theta) = -\sin\theta$. Likewise a rotation about the origin preserves lengths and carries the point of angle $h$ to the point of angle $x + h$; in coordinates a rotation is</p>
+        <div class="math-display">$$(u, v) \longmapsto (u\cos x - v\sin x, \ u\sin x + v\cos x)$$</div>
+        <p>so applying it to $(u, v) = (\cos h, \sin h)$ gives the addition formulas</p>
+        <div class="math-display">$$\cos(x + h) = \cos x \cos h - \sin x \sin h, \qquad \sin(x + h) = \sin x \cos h + \cos x \sin h$$</div>
+        <p>(The lecture note treats trigonometric identities as known, and we likewise use these as known facts coming from the geometry of Definition 1.28.)</p>
+        <p><strong>Step 1: $\sin\theta \le \theta$ for $0 \lt \theta \lt \pi/2$.</strong> Put $Q := (\cos\theta, 0)$. The triangle $APQ$ has a right angle at $Q$, with $|PQ| = \sin\theta$ and hypotenuse $|PA|$. In a right triangle a leg is at most the hypotenuse, so $\sin\theta = |PQ| \le |PA|$, and $|PA| \le \theta$ by (G3) and (G1). Hence</p>
+        <div class="math-display">$$\sin\theta \le \theta \qquad (0 \lt \theta \lt \pi/2).$$</div>
+        <p><strong>Step 2: $1 - \cos\theta \le \theta^2 / 2$ for $0 \lt \theta \lt \pi/2$.</strong> By (G2),</p>
+        <div class="math-display">$$|PA|^2 = (\cos\theta - 1)^2 + \sin^2\theta = \cos^2\theta - 2\cos\theta + 1 + \sin^2\theta = 2 - 2\cos\theta$$</div>
+        <p>and combining this with $|PA| \le \theta$ from Step 1 gives $2 - 2\cos\theta \le \theta^2$, that is,</p>
+        <div class="math-display">$$0 \le 1 - \cos\theta \le \frac{\theta^2}{2}.$$</div>
+        <p><strong>Step 3: $\theta \le 2\tan(\theta/2)$, hence $u \le \tan u$ for $0 \lt u \lt \pi/4$.</strong> Let $0 \lt \theta \lt \pi/2$ and let $T$ be the intersection of the tangent line to the unit circle at $A$ with the tangent line at $P$ (they are not parallel, so they meet). A tangent is perpendicular to the radius at the point of tangency, so the triangle $OAT$ has a right angle at $A$; by symmetry $T$ lies on the bisector of the angle $AOP$, so $\angle AOT = \theta/2$. Since $|OA| = 1$,</p>
+        <div class="math-display">$$|AT| = |TP| = \tan\frac{\theta}{2}.$$</div>
+        <p>Now let $K_1$ be the sector $OAP$ (the region bounded by the segment $OA$, the arc $\overset{\frown}{AP}$ and the segment $PO$) and $K_2$ the quadrilateral $OATP$. Both are convex, and $K_1 \subset K_2$ because the unit disc lies in the half-planes determined by the two tangent lines. Comparing perimeters by (G4) and (G1),</p>
+        <div class="math-display">$$1 + \theta + 1 \le 1 + \tan\frac{\theta}{2} + \tan\frac{\theta}{2} + 1,$$</div>
+        <p>that is, $\theta \le 2\tan(\theta/2)$. Putting $u := \theta/2$, for $0 \lt u \lt \pi/4$,</p>
+        <div class="math-display">$$u \le \tan u = \frac{\sin u}{\cos u}, \qquad \text{i.e.} \qquad \cos u \le \frac{\sin u}{u}.$$</div>
+        <p>(The last rearrangement used $\cos u > 0$ for $0 \lt u \lt \pi/4$; indeed Step 2 gives $1 - \cos u \le u^2/2 \lt \pi^2/32 \lt 1$.)</p>
+        <p><strong>Step 4: $\displaystyle \lim_{\theta \to 0} \frac{\sin\theta}{\theta} = 1$.</strong> Put $q(\theta) := \dfrac{\sin\theta}{\theta}$ for $0 \lt |\theta| \lt \pi/4$. By (G5) the function $\sin$ is odd, so $q$ is even, i.e. $q(-\theta) = q(\theta)$. For $0 \lt \theta \lt \pi/4$, Steps 1 and 3 together give</p>
+        <div class="math-display">$$\cos\theta \le q(\theta) \le 1$$</div>
+        <p>and hence, by Step 2,</p>
+        <div class="math-display">$$|q(\theta) - 1| = 1 - q(\theta) \le 1 - \cos\theta \le \frac{\theta^2}{2}.$$</div>
+        <p>Since $q$ and $\theta^2$ are both even, this inequality holds for every $\theta$ with $0 \lt |\theta| \lt \pi/4$. Now let $\varepsilon > 0$ be given and put</p>
+        <div class="math-display">$$\delta := \min \left\{ \frac{\pi}{4}, \ \sqrt{2\varepsilon} \right\} > 0$$</div>
+        <p>Then for all $\theta \in (-\delta, 0) \cup (0, \delta)$,</p>
+        <div class="math-display">$$\left| \frac{\sin\theta}{\theta} - 1 \right| \le \frac{\theta^2}{2} \lt \frac{\delta^2}{2} \le \varepsilon$$</div>
+        <p>so $\lim_{\theta \to 0} \dfrac{\sin\theta}{\theta} = 1$ by Definition 1.6(i). In the same way, the inequalities of Step 2 and (G5) give</p>
+        <div class="math-display">$$\lim_{\theta \to 0} \cos\theta = 1, \qquad \lim_{\theta \to 0} \sin\theta = 0$$</div>
+        <p>(use $|\cos\theta - 1| \le \theta^2/2$ with $\delta := \min\{\pi/4, \sqrt{2\varepsilon}\}$, and $|\sin\theta| \le |\theta|$ with $\delta := \min\{\pi/4, \varepsilon\}$, respectively).</p>
+        <p><strong>Step 5: $\displaystyle \lim_{\theta \to 0} \frac{\cos\theta - 1}{\theta} = 0$.</strong> Multiplying by the conjugate and using (G2), for $0 \lt |\theta| \lt \pi/4$,</p>
+        <div class="math-display">$$\frac{\cos\theta - 1}{\theta} = \frac{(\cos\theta - 1)(\cos\theta + 1)}{\theta(\cos\theta + 1)} = \frac{\cos^2\theta - 1}{\theta(1 + \cos\theta)} = -\frac{\sin\theta}{\theta} \cdot \frac{\sin\theta}{1 + \cos\theta}$$</div>
+        <p>(the denominator is nonzero because $1 + \cos\theta \ge 1 > 0$). By Step 4 and Theorem 1.12 the limit of each factor on the right exists, so</p>
+        <div class="math-display">$$\lim_{\theta \to 0} \frac{\cos\theta - 1}{\theta} = -1 \cdot \frac{0}{1 + 1} = 0.$$</div>
+        <p><strong>Step 6: assembling the difference quotients.</strong> Fix $x \in \mathbb{R}$. Since $\cos$ and $\sin$ are defined on all of $\mathbb{R}$, we may take any open interval and regard $x$ as an interior point, so by Definition 1.17 (and Remark 1.18) the derivative is given by $\lim_{t \to x}$. For $t \neq x$ put $h := t - x$; the addition formulas of (G5) give</p>
+        <div class="math-display">$$\frac{\sin t - \sin x}{t - x} = \frac{\sin(x + h) - \sin x}{h} = \sin x \cdot \frac{\cos h - 1}{h} + \cos x \cdot \frac{\sin h}{h}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\frac{\cos t - \cos x}{t - x} = \frac{\cos(x + h) - \cos x}{h} = \cos x \cdot \frac{\cos h - 1}{h} - \sin x \cdot \frac{\sin h}{h}$$</div>
+        <p>Here the condition $0 \lt |t - x| \lt \delta$ is the same as $0 \lt |h| \lt \delta$, so the limits of Steps 4 and 5 may be read directly as limits as $t \to x$, namely</p>
+        <div class="math-display">$$\lim_{t \to x} \frac{\sin(t - x)}{t - x} = 1, \qquad \lim_{t \to x} \frac{\cos(t - x) - 1}{t - x} = 0.$$</div>
+        <p>Applying the limit of a constant function (Exercise 1.9) and Theorem 1.12(i), (ii) to the two identities above,</p>
+        <div class="math-display">$$\frac{d}{dx}(\sin x) = \lim_{t \to x} \frac{\sin t - \sin x}{t - x} = \sin x \cdot 0 + \cos x \cdot 1 = \cos x$$</div>
+        <p>and</p>
+        <div class="math-display">$$\frac{d}{dx}(\cos x) = \lim_{t \to x} \frac{\cos t - \cos x}{t - x} = \cos x \cdot 0 - \sin x \cdot 1 = -\sin x$$</div>
+        <p>Since both limits exist, $\cos$ and $\sin$ are differentiable at every point of $\mathbb{R}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.30 -->
+<div class="card thm-card" id="c1-30">
+  <div class="card-head">
+    <span class="thm-num">THM 1.30</span>
+    <span class="thm-title">연쇄법칙 <em>Chain Rule</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 $[a, b]$ 위의 실숫값 함수이고 $g$는 $f$의 치역을 포함하는 집합 $I$ 위에서 정의된 실숫값 함수라 하자. $f$가 $x \in [a, b]$에서 미분가능하고 $g$가 $f(x)$에서 미분가능하다고 가정하자. 다음과 같이 정의한다.</p>
+        <div class="math-display">$$h(t) := g \circ f(t) := g(f(t)) \qquad (a \le t \le b).$$</div>
+        <p>그러면 $h$는 $x$에서 미분가능하고</p>
+        <div class="math-display">$$h'(x) = g'(f(x))f'(x),$$</div>
+        <p>즉</p>
+        <div class="math-display">$$\frac{dh}{dt}(x) = \frac{d \left( g \circ f \right)}{dt}(x) = \frac{dg}{dt}(f(x)) \cdot \frac{df}{dt}(x).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>(직관적 증명)</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{h(t) - h(x)}{t - x} &amp;= \lim_{t \to x} \frac{g(f(t)) - g(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= \lim_{t \to x} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \right) \left( \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= \lim_{f(t) \to f(x)} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \right) \left( \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= g'(f(x))f'(x). \end{aligned}$$</div>
+        <p>(엄밀한 증명). 증명의 유사성으로 인해 $x \in (a, b)$인 경우만 다룬다. $I$가 함수 $g$의 정의역임을 상기하며, $s \in I$이고 $s \neq f(x)$인 경우에 대해 다음과 같이 정의한다.</p>
+        <div class="math-display">$$E_{g'}(s) := \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x))$$</div>
+        <p>그리고 $s = f(x)$인 경우에는</p>
+        <div class="math-display">$$E_{g'}(s) := 0.$$</div>
+        <p>증명의 유사성으로 인해 어떤 $c \lt d$에 대해 $f(x) \in (c, d) \subset I$인 경우만 다룬다. 그러면</p>
+        <div class="math-display">$$g(s) - g(f(x)) = (s - f(x))E_{g'}(s) + (s - f(x))g'(f(x)) \qquad \forall s \in I$$</div>
+        <p>이고 $s \to f(x)$일 때 $E_{g'}(s) \to 0$이다. 더욱이, 정리 1.21에 의해 $f$는 $x$에서 연속이므로,</p>
+        <div class="math-display">$$\lim_{t \to x} E_{g'}(f(t)) = \lim_{s \to f(x)} E_{g'}(s) = 0. \tag{1.5}$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{h(t) - h(x)}{t - x} &amp;= \lim_{t \to x} \frac{g(f(t)) - g(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \frac{(f(t) - f(x))\, E_{g'}(f(t)) + (f(t) - f(x))g'(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \frac{(f(t) - f(x))}{t - x} \lim_{t \to x} E_{g'}(f(t)) + \lim_{t \to x} \frac{(f(t) - f(x))}{t - x} \lim_{t \to x} g'(f(x)) \\ &amp;= f'(x) \cdot 0 + f'(x)g'(f(x)) = f'(x)g'(f(x)). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be a real-valued function on $[a, b]$ and $g$ be a real-valued function defined on a set $I$ containing the range of $f$. Assume that $f$ is differentiable at $x \in [a, b]$ and $g$ is differentiable at $f(x)$. Define</p>
+        <div class="math-display">$$h(t) := g \circ f(t) := g(f(t)) \qquad (a \le t \le b).$$</div>
+        <p>Then $h$ is differentiable at $x$ and</p>
+        <div class="math-display">$$h'(x) = g'(f(x))f'(x),$$</div>
+        <p>i.e.</p>
+        <div class="math-display">$$\frac{dh}{dt}(x) = \frac{d \left( g \circ f \right)}{dt}(x) = \frac{dg}{dt}(f(x)) \cdot \frac{df}{dt}(x).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>(Intuitive proof)</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{h(t) - h(x)}{t - x} &amp;= \lim_{t \to x} \frac{g(f(t)) - g(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= \lim_{t \to x} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \right) \left( \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= \lim_{f(t) \to f(x)} \left( \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \right) \left( \lim_{t \to x} \frac{f(t) - f(x)}{t - x} \right) \\ &amp;= g'(f(x))f'(x). \end{aligned}$$</div>
+        <p>(Rigorous proof). Due to the similarity, we only consider the case $x \in (a, b)$. Recalling $I$ is the domain of the function $g$, for $s \in I$ such that $s \neq f(x)$, we define</p>
+        <div class="math-display">$$E_{g'}(s) := \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x))$$</div>
+        <p>and for $s = f(x)$</p>
+        <div class="math-display">$$E_{g'}(s) := 0.$$</div>
+        <p>Due to the similarity, we only consider the case $f(x) \in (c, d) \subset I$ for some $c \lt d$. Then</p>
+        <div class="math-display">$$g(s) - g(f(x)) = (s - f(x))E_{g'}(s) + (s - f(x))g'(f(x)) \qquad \forall s \in I$$</div>
+        <p>and $E_{g'}(s) \to 0$ as $s \to f(x)$. Moreover, $f$ is continuous at $x$ by Theorem 1.21 , we have</p>
+        <div class="math-display">$$\lim_{t \to x} E_{g'}(f(t)) = \lim_{s \to f(x)} E_{g'}(s) = 0. \tag{1.5}$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\begin{aligned} \lim_{t \to x} \frac{h(t) - h(x)}{t - x} &amp;= \lim_{t \to x} \frac{g(f(t)) - g(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \frac{(f(t) - f(x))\, E_{g'}(f(t)) + (f(t) - f(x))g'(f(x))}{t - x} \\ &amp;= \lim_{t \to x} \frac{(f(t) - f(x))}{t - x} \lim_{t \to x} E_{g'}(f(t)) + \lim_{t \to x} \frac{(f(t) - f(x))}{t - x} \lim_{t \to x} g'(f(x)) \\ &amp;= f'(x) \cdot 0 + f'(x)g'(f(x)) = f'(x)g'(f(x)). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.8 ═══════════ -->
+
+<!-- Exercise 1.31 -->
+<div class="card ex-card" id="c1-31">
+  <div class="card-head">
+    <span class="ex-num">EX 1.31</span>
+    <span class="ex-title">(1.5) 증명 <em>Proving (1.5)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(1.5)를 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 1.30의 엄밀한 증명의 상황을 그대로 쓴다. $f$는 $[a, b]$ 위의 실숫값 함수, $g$는 $f$의 치역을 포함하는 집합 $I$ 위의 실숫값 함수, $x \in (a, b)$에서 $f$가 미분가능하고 $f(x)$에서 $g$가 미분가능하며, 어떤 $c \lt d$에 대해 $f(x) \in (c, d) \subset I$이다. 또한</p>
+        <div class="math-display">$$E_{g'}(s) := \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x)) \quad (s \in I, \ s \neq f(x)), \qquad E_{g'}(f(x)) := 0$$</div>
+        <p>이다. 보여야 할 것은</p>
+        <div class="math-display">$$\lim_{t \to x} E_{g'}(f(t)) = 0$$</div>
+        <p>이다. 증명의 핵심은 $E_{g'}$이 $s = f(x)$에서도 값을 가지며 그 값이 $0$이라는 점, 즉 $E_{g'}$이 $f(x)$에서 <em>연속</em>이라는 점이다. 이 덕분에 $f(t) = f(x)$가 되는 $t$가 있어도 아무 문제가 생기지 않는다.</p>
+        <p>$\varepsilon > 0$이 주어졌다고 하자.</p>
+        <p><strong>1단계 ($E_{g'}$ 쪽의 $\delta_1$).</strong> $g$가 $f(x)$에서 미분가능하므로 정의 1.17에 의해</p>
+        <div class="math-display">$$\lim_{s \to f(x)} \frac{g(s) - g(f(x))}{s - f(x)} = g'(f(x))$$</div>
+        <p>이다. 따라서 정의 1.6(i)에 의해 다음을 만족하는 $\delta_1 > 0$이 존재한다: $(f(x) - \delta_1, f(x) + \delta_1) \subset (c, d)$이고</p>
+        <div class="math-display">$$|E_{g'}(s)| = \left| \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x)) \right| \lt \varepsilon \qquad \forall s \in (f(x) - \delta_1, f(x)) \cup (f(x), f(x) + \delta_1).$$</div>
+        <p>한편 $s = f(x)$에서는 정의에 의해 $|E_{g'}(f(x))| = 0 \lt \varepsilon$이다. 이 둘을 합하면 뚫린 근방이 아니라 근방 <em>전체</em>에서</p>
+        <div class="math-display">$$|E_{g'}(s)| \lt \varepsilon \qquad \forall s \in I \ \text{with} \ |s - f(x)| \lt \delta_1 \tag{*}$$</div>
+        <p>가 성립한다.</p>
+        <p><strong>2단계 ($f$ 쪽의 $\delta$).</strong> $f$가 $x$에서 미분가능하므로 정리 1.21에 의해 $f$는 $x$에서 연속이고, $x \in (a, b)$이므로 정의 1.15에 의해 $\lim_{t \to x} f(t) = f(x)$이다. 1단계에서 얻은 $\delta_1 > 0$을 정의 1.6(i)의 $\varepsilon$ 자리에 넣으면 다음을 만족하는 $\delta > 0$이 존재한다.</p>
+        <div class="math-display">$$|f(t) - f(x)| \lt \delta_1 \qquad \forall t \in (x - \delta, x) \cup (x, x + \delta).$$</div>
+        <p>필요하면 $\delta$를 줄여 $(x - \delta, x) \cup (x, x + \delta) \subset (a, b)$가 되도록 한다.</p>
+        <p><strong>3단계 (합성).</strong> $t \in (x - \delta, x) \cup (x, x + \delta)$라 하자. 그러면 $s := f(t)$는 $g$의 정의역 $I$의 원소이고 2단계에 의해 $|s - f(x)| \lt \delta_1$이므로, $(*)$에 의해</p>
+        <div class="math-display">$$|E_{g'}(f(t)) - 0| = |E_{g'}(s)| \lt \varepsilon.$$</div>
+        <p>$\varepsilon > 0$이 임의였으므로 정의 1.6(i)에 의해 $\lim_{t \to x} E_{g'}(f(t)) = 0$이고, 이것이 (1.5)이다.</p>
+        <p>2단계에서 $|f(t) - f(x)| \lt \delta_1$만 얻었을 뿐 $f(t) \neq f(x)$는 얻지 못했다는 점에 주의하자. 실제로 $f(t) = f(x)$인 $t$가 $x$에 얼마든지 가까이 있을 수 있다. 만약 $(*)$가 뚫린 근방 $0 \lt |s - f(x)| \lt \delta_1$에서만 성립했다면 그런 $t$에서 3단계가 무너졌을 것이다. $E_{g'}(f(x)) := 0$이라는 정의가 바로 그 구멍을 메운다. 이것이 연습문제 1.32에서 지적할 직관적 증명의 결함을 엄밀한 증명이 피해 가는 방식이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove (1.5).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We keep the setting of the rigorous proof of Theorem 1.30: $f$ is a real-valued function on $[a, b]$, $g$ is a real-valued function on a set $I$ containing the range of $f$, $f$ is differentiable at $x \in (a, b)$, $g$ is differentiable at $f(x)$, and $f(x) \in (c, d) \subset I$ for some $c \lt d$. Moreover</p>
+        <div class="math-display">$$E_{g'}(s) := \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x)) \quad (s \in I, \ s \neq f(x)), \qquad E_{g'}(f(x)) := 0$$</div>
+        <p>What has to be shown is</p>
+        <div class="math-display">$$\lim_{t \to x} E_{g'}(f(t)) = 0$$</div>
+        <p>The heart of the proof is that $E_{g'}$ also has a value at $s = f(x)$ and that this value is $0$; that is, $E_{g'}$ is <em>continuous</em> at $f(x)$. Thanks to this, nothing goes wrong even if there are $t$ with $f(t) = f(x)$.</p>
+        <p>Let $\varepsilon > 0$ be given.</p>
+        <p><strong>Step 1 (the $\delta_1$ on the $E_{g'}$ side).</strong> Since $g$ is differentiable at $f(x)$, Definition 1.17 gives</p>
+        <div class="math-display">$$\lim_{s \to f(x)} \frac{g(s) - g(f(x))}{s - f(x)} = g'(f(x))$$</div>
+        <p>Hence by Definition 1.6(i) there exists a $\delta_1 > 0$ such that $(f(x) - \delta_1, f(x) + \delta_1) \subset (c, d)$ and</p>
+        <div class="math-display">$$|E_{g'}(s)| = \left| \frac{g(s) - g(f(x))}{s - f(x)} - g'(f(x)) \right| \lt \varepsilon \qquad \forall s \in (f(x) - \delta_1, f(x)) \cup (f(x), f(x) + \delta_1).$$</div>
+        <p>On the other hand, at $s = f(x)$ we have $|E_{g'}(f(x))| = 0 \lt \varepsilon$ by definition. Combining the two, the estimate holds on the <em>whole</em> neighbourhood, not merely the punctured one:</p>
+        <div class="math-display">$$|E_{g'}(s)| \lt \varepsilon \qquad \forall s \in I \ \text{with} \ |s - f(x)| \lt \delta_1 \tag{*}$$</div>
+        <p><strong>Step 2 (the $\delta$ on the $f$ side).</strong> Since $f$ is differentiable at $x$, Theorem 1.21 shows that $f$ is continuous at $x$, and as $x \in (a, b)$, Definition 1.15 gives $\lim_{t \to x} f(t) = f(x)$. Feeding the $\delta_1 > 0$ of Step 1 into Definition 1.6(i) in place of $\varepsilon$, there exists a $\delta > 0$ such that</p>
+        <div class="math-display">$$|f(t) - f(x)| \lt \delta_1 \qquad \forall t \in (x - \delta, x) \cup (x, x + \delta).$$</div>
+        <p>Shrinking $\delta$ if necessary, we may also assume $(x - \delta, x) \cup (x, x + \delta) \subset (a, b)$.</p>
+        <p><strong>Step 3 (composition).</strong> Let $t \in (x - \delta, x) \cup (x, x + \delta)$. Then $s := f(t)$ is an element of the domain $I$ of $g$ and $|s - f(x)| \lt \delta_1$ by Step 2, so $(*)$ gives</p>
+        <div class="math-display">$$|E_{g'}(f(t)) - 0| = |E_{g'}(s)| \lt \varepsilon.$$</div>
+        <p>Since $\varepsilon > 0$ was arbitrary, Definition 1.6(i) yields $\lim_{t \to x} E_{g'}(f(t)) = 0$, which is (1.5).</p>
+        <p>Note that Step 2 provided only $|f(t) - f(x)| \lt \delta_1$, not $f(t) \neq f(x)$. Indeed there may be $t$ arbitrarily close to $x$ with $f(t) = f(x)$. Had $(*)$ held only on the punctured neighbourhood $0 \lt |s - f(x)| \lt \delta_1$, Step 3 would have broken down at such $t$. The definition $E_{g'}(f(x)) := 0$ is exactly what fills that gap. This is how the rigorous proof avoids the flaw of the intuitive proof pointed out in Exercise 1.32.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.32 -->
+<div class="card ex-card" id="c1-32">
+  <div class="card-head">
+    <span class="ex-num">EX 1.32</span>
+    <span class="ex-title">직관적 증명이 엄밀하지 않은 이유 <em>Why the Intuitive Proof Is Not Rigorous</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 1.30의 직관적 증명이 왜 엄밀하지 않은지 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>직관적 증명에는 서로 다른 세 곳에 결함이 있다.</p>
+        <p><strong>(a) $f(t) - f(x)$로 나눌 수 없다.</strong> 둘째 줄에서 분자·분모에 $f(t) - f(x)$를 곱하여</p>
+        <div class="math-display">$$\frac{g(f(t)) - g(f(x))}{t - x} = \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \cdot \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>로 쓴다. 그런데 $f(t) = f(x)$이면 오른쪽 첫 인자는 $0/0$이 되어 아무 뜻이 없다. 그리고 이는 예외적인 상황이 아니다. 예컨대 $f$가 상수함수이면 모든 $t$에 대해 $f(t) - f(x) = 0$이므로 오른쪽 식은 어디에서도 정의되지 않는다. 더 심각한 예로 예제 1.34(iv)의</p>
+        <div class="math-display">$$f(t) = \left\{ \begin{array}{cl} t^2 \sin \frac{1}{t} &amp; \qquad (t \neq 0) \\ 0 &amp; \qquad (t = 0) \end{array} \right.$$</div>
+        <p>를 $x = 0$에서 생각하자. 이 $f$는 $0$에서 미분가능하고 $f'(0) = 0$이지만, $n \in \mathbb{N}$에 대해 $t_n := \dfrac{1}{n\pi}$로 두면 $\sin(1/t_n) = \sin(n\pi) = 0$이므로 $f(t_n) = 0 = f(0)$이다. 그런데 $t_n \to 0$이므로, $0$의 어떤 뚫린 근방을 잡아도 그 안에 $f(t) = f(0)$인 점이 들어 있다. 정의 1.6(i)의 극한은 뚫린 근방의 <em>모든</em> 점에서 성립해야 하는 조건인데, 위 등식의 오른쪽 변은 그런 근방 어디에서도 전부 정의되지 않는다. 따라서 문제의 극한은 값을 계산하기 이전에 <em>식으로 쓸 수조차 없다</em>.</p>
+        <p><strong>(b) 극한의 곱셈 분리가 정당화되지 않는다.</strong> 셋째 줄에서 곱의 극한을 두 극한의 곱으로 나눈다. 정리 1.12(ii)는 두 인자의 극한이 <em>각각 존재할 때</em>에만 그것을 허락하는데, 첫 인자의 극한이 존재한다는 것은 아직 아무 데서도 보이지 않았다. (a)에서 보았듯이 그 인자는 정의조차 되지 않을 수 있으므로, 이 단계는 증명하려는 것을 사실상 가정하고 있는 셈이다.</p>
+        <p><strong>(c) $\lim_{t \to x}$를 $\lim_{f(t) \to f(x)}$로 바꿀 수 없다.</strong> 넷째 줄의 기호 $\lim_{f(t) \to f(x)}$는 정의 1.3에도 정의 1.6에도 정의된 바 없다. 뜻을 좋게 새겨 이것이</p>
+        <div class="math-display">$$\lim_{s \to f(x)} \frac{g(s) - g(f(x))}{s - f(x)} = g'(f(x))$$</div>
+        <p>를 뜻한다고 하자. 그러면 $s = f(t)$라는 치환으로 $t \to x$의 극한을 $s \to f(x)$의 극한으로 바꾸는 셈인데, 이런 치환(합성함수의 극한)이 정당하려면 두 가지가 필요하다. 하나는 $t \to x$일 때 $f(t) \to f(x)$인 것으로, 이는 정리 1.21에 의해 참이다. 다른 하나는 $x$ 근방의 $t \neq x$에 대해 $f(t) \neq f(x)$인 것인데, 이것이 바로 (a)에서 성립하지 않을 수 있음을 본 조건이다. 뚫린 극한은 $s = f(x)$에서의 값에 대해 아무것도 말해 주지 않으므로, $f(t) = f(x)$가 되는 $t$가 $x$에 얼마든지 가까이 있으면 치환은 근거를 잃는다.</p>
+        <p><strong>엄밀한 증명은 이 세 결함을 모두 피한다.</strong> 거기서는 $f(t) - f(x)$로 나누는 일이 아예 없다. 항등식</p>
+        <div class="math-display">$$g(s) - g(f(x)) = (s - f(x))E_{g'}(s) + (s - f(x))g'(f(x))$$</div>
+        <p>은 $s = f(x)$를 포함한 <em>모든</em> $s \in I$에 대해 성립하며($s = f(x)$이면 양변이 모두 $0$이다), 치환의 문제는 $E_{g'}(f(x)) := 0$이라는 정의가 $E_{g'}$을 $f(x)$에서 연속으로 만들어 줌으로써 해결된다. 그 결과가 (1.5)이고, 그 증명이 연습문제 1.31이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Explain why the intuitive proof in Theorem 1.30 is not rigorous.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The intuitive proof has flaws in three different places.</p>
+        <p><strong>(a) One cannot divide by $f(t) - f(x)$.</strong> On the second line, numerator and denominator are multiplied by $f(t) - f(x)$ to write</p>
+        <div class="math-display">$$\frac{g(f(t)) - g(f(x))}{t - x} = \frac{g(f(t)) - g(f(x))}{f(t) - f(x)} \cdot \frac{f(t) - f(x)}{t - x}$$</div>
+        <p>But if $f(t) = f(x)$, the first factor on the right is $0/0$ and means nothing. And this is no exceptional situation. If $f$ is a constant function, for example, then $f(t) - f(x) = 0$ for every $t$ and the right-hand side is defined nowhere. For a more serious example, consider $f$ of Example 1.34(iv),</p>
+        <div class="math-display">$$f(t) = \left\{ \begin{array}{cl} t^2 \sin \frac{1}{t} &amp; \qquad (t \neq 0) \\ 0 &amp; \qquad (t = 0) \end{array} \right.$$</div>
+        <p>at $x = 0$. This $f$ is differentiable at $0$ with $f'(0) = 0$, yet putting $t_n := \dfrac{1}{n\pi}$ for $n \in \mathbb{N}$ gives $\sin(1/t_n) = \sin(n\pi) = 0$, hence $f(t_n) = 0 = f(0)$. Since $t_n \to 0$, every punctured neighbourhood of $0$ contains points with $f(t) = f(0)$. The limit in Definition 1.6(i) is a condition required at <em>every</em> point of a punctured neighbourhood, and the right-hand side above fails to be defined throughout any such neighbourhood. So the limit in question <em>cannot even be written down</em>, let alone evaluated.</p>
+        <p><strong>(b) Splitting the limit of a product is not justified.</strong> On the third line, the limit of a product is split into the product of two limits. Theorem 1.12(ii) permits this only when the limit of each factor <em>exists</em>, and nothing so far has shown that the limit of the first factor exists. As (a) shows, that factor may not even be defined, so this step effectively assumes what is to be proved.</p>
+        <p><strong>(c) One cannot replace $\lim_{t \to x}$ by $\lim_{f(t) \to f(x)}$.</strong> The symbol $\lim_{f(t) \to f(x)}$ on the fourth line is defined neither in Definition 1.3 nor in Definition 1.6. Read charitably, it is meant to be</p>
+        <div class="math-display">$$\lim_{s \to f(x)} \frac{g(s) - g(f(x))}{s - f(x)} = g'(f(x))$$</div>
+        <p>The step then amounts to the substitution $s = f(t)$, turning a limit as $t \to x$ into a limit as $s \to f(x)$. For such a substitution (a limit of a composition) to be legitimate, two things are needed. One is that $f(t) \to f(x)$ as $t \to x$, which is true by Theorem 1.21. The other is that $f(t) \neq f(x)$ for $t \neq x$ near $x$ — precisely the condition that (a) shows may fail. A punctured limit says nothing about the value at $s = f(x)$, so if there are $t$ arbitrarily close to $x$ with $f(t) = f(x)$, the substitution has no ground to stand on.</p>
+        <p><strong>The rigorous proof avoids all three flaws.</strong> There, nothing is ever divided by $f(t) - f(x)$. The identity</p>
+        <div class="math-display">$$g(s) - g(f(x)) = (s - f(x))E_{g'}(s) + (s - f(x))g'(f(x))$$</div>
+        <p>holds for <em>all</em> $s \in I$, including $s = f(x)$ (where both sides are $0$), and the difficulty with the substitution is resolved by the definition $E_{g'}(f(x)) := 0$, which makes $E_{g'}$ continuous at $f(x)$. The outcome is (1.5), proved in Exercise 1.31.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.33 -->
+<div class="card ex-card" id="c1-33">
+  <div class="card-head">
+    <span class="ex-num">EX 1.33</span>
+    <span class="ex-title">유리수 거듭제곱의 도함수 (어려움(?)) <em>The Derivative of a Rational Power (Difficult(?))</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$p \in \mathbb{Q}$라 하고 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f(x) = x^p,$$</div>
+        <p>여기서 $\mathbb{Q}$는 유리수 체계를 나타낸다. 그러면 모든 $x > 0$에 대해 $f$는 $x$에서 미분가능하고</p>
+        <div class="math-display">$$f'(x) = px^{p-1}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$p \in \mathbb{Q}$이므로 $m \in \mathbb{Z}$, $n \in \mathbb{N}$에 대해 $p = m/n$으로 쓸 수 있다. $x > 0$에 대해 $x^{1/n}$은 $y^n = x$인 유일한 양수 $y$를 뜻하며(그 존재와 유일성은 $\mathbb{R}$의 완비성에서 오는 기지의 사실로 쓴다. 유일성은 $t \mapsto t^n$이 $(0, \infty)$에서 순증가함에서 나온다), $x^{m/n} := \left( x^{1/n} \right)^m$이다. 또한 $(0, \infty)$ 위에서 유리수 지수에 대한 지수법칙 $x^r x^s = x^{r+s}$와 $\left( x^{1/n} \right)^k = x^{k/n}$은 대수적 사실로 쓰며, $p$의 표시 방법에 무관하게 $x^p$가 정해지는 것도 마찬가지이다.</p>
+        <p>아래에서 $x > 0$은 고정된 점이고, 이 점은 예컨대 $[x/2, 2x]$의 내부점이므로 정의 1.17(과 주의 1.18)에 의해 도함수는 양쪽 극한 $\lim_{t \to x}$로 주어진다. 로그와 지수함수는 아직 도입되지 않았으므로 사용하지 않는다.</p>
+        <p><strong>1단계: 자연수 지수.</strong> $k \in \mathbb{N}$에 대해 $u_k(x) := x^k$라 하면 $u_k$는 $\mathbb{R}$에서 미분가능하고 $u_k'(x) = kx^{k-1}$이다. $k$에 대한 귀납법으로 보인다. $k = 1$이면 예제 1.20에 의해 $u_1'(x) = 1 = 1 \cdot x^0$이다. $k$에 대해 성립한다고 하면 $u_{k+1} = u_k u_1$이므로 정리 1.25(ii)에 의해</p>
+        <div class="math-display">$$u_{k+1}'(x) = u_k'(x)u_1(x) + u_k(x)u_1'(x) = kx^{k-1} \cdot x + x^k \cdot 1 = (k+1)x^k.$$</div>
+        <p>또한 $u_0 \equiv 1$은 상수함수이므로 예제 1.20에 의해 $x \neq 0$에서 $u_0'(x) = 0 = 0 \cdot x^{-1}$이다.</p>
+        <p><strong>2단계: 음의 정수 지수.</strong> $k \in \mathbb{N}$이고 $x > 0$이라 하자. $x^k \neq 0$이므로 정리 1.25의 (1.3)과 1단계에 의해</p>
+        <div class="math-display">$$\left( x^{-k} \right)' = \left( \frac{1}{x^k} \right)' = -\frac{\left( x^k \right)'}{\left( x^k \right)^2} = -\frac{kx^{k-1}}{x^{2k}} = -kx^{-k-1}.$$</div>
+        <p>1단계와 합하면 모든 $m \in \mathbb{Z}$와 $x > 0$에 대해</p>
+        <div class="math-display">$$\left( x^m \right)' = mx^{m-1}. \tag{A}$$</div>
+        <p><strong>3단계: $n$제곱근의 미분.</strong> $n \in \mathbb{N}$을 고정하고 $g(x) := x^{1/n}$ ($x > 0$)이라 하자. 다음 대수적 항등식을 쓴다: 모든 $y, y_0$에 대해</p>
+        <div class="math-display">$$y^n - y_0^n = (y - y_0) \sum_{k=0}^{n-1} y^k y_0^{n-1-k}. \tag{B}$$</div>
+        <p>(오른쪽을 전개하면 이웃한 항들이 소거되어 왼쪽이 된다.)</p>
+        <p><em>(3a) $g$의 연속성.</em> $x_0 > 0$을 고정하고 $x > 0$에 대해 $y := g(x)$, $y_0 := g(x_0)$이라 하자. 그러면 $y, y_0 > 0$이고 $y^n = x$, $y_0^n = x_0$이므로 (B)에 의해</p>
+        <div class="math-display">$$|x - x_0| = |y - y_0| \sum_{k=0}^{n-1} y^k y_0^{n-1-k} \ge |y - y_0| \, y_0^{n-1}$$</div>
+        <p>이다(합의 각 항이 양수이고 $k = 0$인 항이 $y_0^{n-1}$이다). 따라서</p>
+        <div class="math-display">$$|g(x) - g(x_0)| = |y - y_0| \le \frac{|x - x_0|}{y_0^{n-1}}.$$</div>
+        <p>$\varepsilon > 0$이 주어지면 $\delta := \min \left\{ \dfrac{x_0}{2}, \ \varepsilon \, y_0^{n-1} \right\} > 0$으로 두자. $|x - x_0| \lt \delta$이면 $x > x_0 / 2 > 0$이므로 $g(x)$가 정의되고 $|g(x) - g(x_0)| \lt \varepsilon$이다. 즉 $g$는 $x_0$에서 연속이고, 특히</p>
+        <div class="math-display">$$\lim_{x \to x_0} g(x) = g(x_0) = y_0.$$</div>
+        <p><em>(3b) $g$의 미분가능성.</em> $x > 0$이고 $x \neq x_0$이라 하자. $t \mapsto t^n$이 $(0, \infty)$에서 단사이므로 $y \neq y_0$이고, (B)에 의해</p>
+        <div class="math-display">$$\frac{g(x) - g(x_0)}{x - x_0} = \frac{y - y_0}{y^n - y_0^n} = \frac{1}{\sum_{k=0}^{n-1} y^k y_0^{n-1-k}}$$</div>
+        <p>이다(분모의 각 항이 양수이므로 분모는 $0$이 아니다). $x \to x_0$일 때 (3a)에 의해 $y = g(x) \to y_0$이므로, 상수함수의 극한(연습문제 1.9)과 정리 1.12(ii)를 되풀이 적용하면 각 $k$에 대해</p>
+        <div class="math-display">$$\lim_{x \to x_0} y^k y_0^{n-1-k} = y_0^k \, y_0^{n-1-k} = y_0^{n-1}$$</div>
+        <p>이고, 정리 1.12(i)를 되풀이 적용하면</p>
+        <div class="math-display">$$\lim_{x \to x_0} \sum_{k=0}^{n-1} y^k y_0^{n-1-k} = n y_0^{n-1} \neq 0.$$</div>
+        <p>따라서 정리 1.12(iii)에 의해</p>
+        <div class="math-display">$$g'(x_0) = \lim_{x \to x_0} \frac{g(x) - g(x_0)}{x - x_0} = \frac{1}{n y_0^{n-1}} = \frac{1}{n \left( x_0^{1/n} \right)^{n-1}} = \frac{1}{n} x_0^{\frac{1}{n} - 1}.$$</div>
+        <p>$x_0 > 0$이 임의였으므로 모든 $x > 0$에 대해</p>
+        <div class="math-display">$$\left( x^{1/n} \right)' = \frac{1}{n} x^{\frac{1}{n} - 1}, \tag{C}$$</div>
+        <p>즉 $p = 1/n$인 경우에 주어진 공식이 성립한다.</p>
+        <p><strong>4단계: 일반의 $p = m/n$.</strong> $x > 0$이라 하자. $g(x) = x^{1/n} > 0$이고, 2단계에 의해 $u_m(s) = s^m$은 $(0, \infty)$에서 미분가능하며, 3단계에 의해 $g$는 $x$에서 미분가능하다. $f(x) = x^{m/n} = \left( x^{1/n} \right)^m = u_m(g(x))$이므로 정리 1.30(연쇄법칙)과 (A), (C)에 의해</p>
+        <div class="math-display">$$f'(x) = u_m'(g(x)) \, g'(x) = m \left( x^{1/n} \right)^{m-1} \cdot \frac{1}{n} x^{\frac{1}{n} - 1} = \frac{m}{n} \, x^{\frac{m-1}{n}} \, x^{\frac{1-n}{n}} = \frac{m}{n} \, x^{\frac{m-n}{n}}.$$</div>
+        <p>끝으로 $\dfrac{m-n}{n} = \dfrac{m}{n} - 1 = p - 1$이므로</p>
+        <div class="math-display">$$f'(x) = p \, x^{p-1} \qquad \forall x > 0.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $p \in \mathbb{Q}$ and define</p>
+        <div class="math-display">$$f(x) = x^p,$$</div>
+        <p>where $\mathbb{Q}$ denotes the rational number system. Then for all $x > 0$, $f$ is differentiable at $x$ and</p>
+        <div class="math-display">$$f'(x) = px^{p-1}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $p \in \mathbb{Q}$, we may write $p = m/n$ with $m \in \mathbb{Z}$ and $n \in \mathbb{N}$. For $x > 0$, $x^{1/n}$ denotes the unique positive $y$ with $y^n = x$ (we use its existence and uniqueness as known facts coming from the completeness of $\mathbb{R}$; uniqueness follows since $t \mapsto t^n$ is strictly increasing on $(0, \infty)$), and $x^{m/n} := \left( x^{1/n} \right)^m$. We also use, as algebraic facts on $(0, \infty)$, the laws of rational exponents $x^r x^s = x^{r+s}$ and $\left( x^{1/n} \right)^k = x^{k/n}$, and likewise that $x^p$ does not depend on the chosen representation of $p$.</p>
+        <p>Below $x > 0$ is a fixed point; it is an interior point of, say, $[x/2, 2x]$, so by Definition 1.17 (and Remark 1.18) the derivative is given by the two-sided limit $\lim_{t \to x}$. Logarithms and exponential functions have not been introduced yet and are not used.</p>
+        <p><strong>Step 1: natural exponents.</strong> For $k \in \mathbb{N}$ put $u_k(x) := x^k$. Then $u_k$ is differentiable on $\mathbb{R}$ and $u_k'(x) = kx^{k-1}$. We argue by induction on $k$. For $k = 1$, Example 1.20 gives $u_1'(x) = 1 = 1 \cdot x^0$. Assuming the claim for $k$, we have $u_{k+1} = u_k u_1$, so Theorem 1.25(ii) gives</p>
+        <div class="math-display">$$u_{k+1}'(x) = u_k'(x)u_1(x) + u_k(x)u_1'(x) = kx^{k-1} \cdot x + x^k \cdot 1 = (k+1)x^k.$$</div>
+        <p>Moreover $u_0 \equiv 1$ is a constant function, so Example 1.20 gives $u_0'(x) = 0 = 0 \cdot x^{-1}$ for $x \neq 0$.</p>
+        <p><strong>Step 2: negative integer exponents.</strong> Let $k \in \mathbb{N}$ and $x > 0$. Since $x^k \neq 0$, formula (1.3) of Theorem 1.25 together with Step 1 gives</p>
+        <div class="math-display">$$\left( x^{-k} \right)' = \left( \frac{1}{x^k} \right)' = -\frac{\left( x^k \right)'}{\left( x^k \right)^2} = -\frac{kx^{k-1}}{x^{2k}} = -kx^{-k-1}.$$</div>
+        <p>Combined with Step 1, for every $m \in \mathbb{Z}$ and every $x > 0$,</p>
+        <div class="math-display">$$\left( x^m \right)' = mx^{m-1}. \tag{A}$$</div>
+        <p><strong>Step 3: differentiating the $n$-th root.</strong> Fix $n \in \mathbb{N}$ and put $g(x) := x^{1/n}$ for $x > 0$. We use the algebraic identity: for all $y, y_0$,</p>
+        <div class="math-display">$$y^n - y_0^n = (y - y_0) \sum_{k=0}^{n-1} y^k y_0^{n-1-k}. \tag{B}$$</div>
+        <p>(Expanding the right-hand side, neighbouring terms cancel and the left-hand side remains.)</p>
+        <p><em>(3a) Continuity of $g$.</em> Fix $x_0 > 0$ and, for $x > 0$, put $y := g(x)$ and $y_0 := g(x_0)$. Then $y, y_0 > 0$ with $y^n = x$ and $y_0^n = x_0$, so (B) gives</p>
+        <div class="math-display">$$|x - x_0| = |y - y_0| \sum_{k=0}^{n-1} y^k y_0^{n-1-k} \ge |y - y_0| \, y_0^{n-1}$$</div>
+        <p>(every term of the sum is positive and the $k = 0$ term is $y_0^{n-1}$). Hence</p>
+        <div class="math-display">$$|g(x) - g(x_0)| = |y - y_0| \le \frac{|x - x_0|}{y_0^{n-1}}.$$</div>
+        <p>Given $\varepsilon > 0$, put $\delta := \min \left\{ \dfrac{x_0}{2}, \ \varepsilon \, y_0^{n-1} \right\} > 0$. If $|x - x_0| \lt \delta$, then $x > x_0 / 2 > 0$, so $g(x)$ is defined and $|g(x) - g(x_0)| \lt \varepsilon$. Thus $g$ is continuous at $x_0$, and in particular</p>
+        <div class="math-display">$$\lim_{x \to x_0} g(x) = g(x_0) = y_0.$$</div>
+        <p><em>(3b) Differentiability of $g$.</em> Let $x > 0$ with $x \neq x_0$. Since $t \mapsto t^n$ is one-to-one on $(0, \infty)$, we have $y \neq y_0$, and (B) gives</p>
+        <div class="math-display">$$\frac{g(x) - g(x_0)}{x - x_0} = \frac{y - y_0}{y^n - y_0^n} = \frac{1}{\sum_{k=0}^{n-1} y^k y_0^{n-1-k}}$$</div>
+        <p>(the denominator is nonzero because each of its terms is positive). As $x \to x_0$ we have $y = g(x) \to y_0$ by (3a), so repeated use of the limit of a constant function (Exercise 1.9) and of Theorem 1.12(ii) gives, for each $k$,</p>
+        <div class="math-display">$$\lim_{x \to x_0} y^k y_0^{n-1-k} = y_0^k \, y_0^{n-1-k} = y_0^{n-1}$$</div>
+        <p>and repeated use of Theorem 1.12(i) gives</p>
+        <div class="math-display">$$\lim_{x \to x_0} \sum_{k=0}^{n-1} y^k y_0^{n-1-k} = n y_0^{n-1} \neq 0.$$</div>
+        <p>Hence Theorem 1.12(iii) yields</p>
+        <div class="math-display">$$g'(x_0) = \lim_{x \to x_0} \frac{g(x) - g(x_0)}{x - x_0} = \frac{1}{n y_0^{n-1}} = \frac{1}{n \left( x_0^{1/n} \right)^{n-1}} = \frac{1}{n} x_0^{\frac{1}{n} - 1}.$$</div>
+        <p>Since $x_0 > 0$ was arbitrary, for all $x > 0$,</p>
+        <div class="math-display">$$\left( x^{1/n} \right)' = \frac{1}{n} x^{\frac{1}{n} - 1}, \tag{C}$$</div>
+        <p>that is, the stated formula holds in the case $p = 1/n$.</p>
+        <p><strong>Step 4: general $p = m/n$.</strong> Let $x > 0$. We have $g(x) = x^{1/n} > 0$, the function $u_m(s) = s^m$ is differentiable on $(0, \infty)$ by Step 2, and $g$ is differentiable at $x$ by Step 3. Since $f(x) = x^{m/n} = \left( x^{1/n} \right)^m = u_m(g(x))$, Theorem 1.30 (the chain rule) together with (A) and (C) gives</p>
+        <div class="math-display">$$f'(x) = u_m'(g(x)) \, g'(x) = m \left( x^{1/n} \right)^{m-1} \cdot \frac{1}{n} x^{\frac{1}{n} - 1} = \frac{m}{n} \, x^{\frac{m-1}{n}} \, x^{\frac{1-n}{n}} = \frac{m}{n} \, x^{\frac{m-n}{n}}.$$</div>
+        <p>Finally $\dfrac{m-n}{n} = \dfrac{m}{n} - 1 = p - 1$, so</p>
+        <div class="math-display">$$f'(x) = p \, x^{p-1} \qquad \forall x > 0.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.9–10 ═══════════ -->
+
+<!-- Example 1.34 -->
+<div class="card exam-card" id="c1-34">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.34</span>
+    <span class="exam-title">미분가능성과 그 실패 <em>Differentiability and Its Failure</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(i)</strong> 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f(x) = |x|.$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} 1 &amp; \qquad (x > 0) \\ -1 &amp; \qquad (x \lt 0). \end{array} \right.$$</div>
+        <p>이고 $f$는 $x = 0$에서 미분가능하지 않다.</p>
+        <p><strong>(ii)</strong> $p \in (1, \infty)$라 하고 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f(x) = |x|^p.$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} px^{p-1} &amp; \qquad (x > 0) \\ -px^{p-1} &amp; \qquad (x \lt 0). \end{array} \right.$$</div>
+        <p>더욱이, $f$는 $x = 0$에서 미분가능하고 $f'(x) = 0$이다. 실제로,</p>
+        <div class="math-display">$$\lim_{t \to 0} \frac{f(t) - f(0)}{t - 0} = \lim_{t \to 0} |t|^{p-1} = 0.$$</div>
+        <p><strong>(iii)</strong> 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f(x) = \left\{ \begin{array}{cl} x \sin \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>$x \neq 0$일 때, 정리 1.25와 정리 1.30에 의해,</p>
+        <div class="math-display">$$f'(x) = \sin \frac{1}{x} + x \cos \frac{1}{x} \left( -\frac{1}{x^2} \right) = \sin \frac{1}{x} - \frac{1}{x} \cos \frac{1}{x}.$$</div>
+        <p>$t \neq 0$일 때, 다음을 관찰하자.</p>
+        <div class="math-display">$$\frac{f(t) - f(0)}{t - 0} = \frac{t \sin \frac{1}{t}}{t} = \sin \frac{1}{t}.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\lim_{t \to 0} \frac{f(t) - f(0)}{t - 0}$$</div>
+        <p>이 존재하지 않으므로 $f$는 $x = 0$에서 미분가능하지 않다.</p>
+        <p><strong>(iv)</strong> 다음과 같이 정의하자.</p>
+        <div class="math-display">$$f(x) = \left\{ \begin{array}{cl} x^2 \sin \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>$x \neq 0$일 때, 정리 1.25와 정리 1.30에 의해,</p>
+        <div class="math-display">$$f'(x) = 2x \sin \frac{1}{x} + x^2 \cos \frac{1}{x} \left( -\frac{1}{x^2} \right) = 2x \sin \frac{1}{x} - \cos \frac{1}{x}.$$</div>
+        <p>$t \neq 0$일 때, 다음을 관찰하자.</p>
+        <div class="math-display">$$\frac{f(t) - f(0)}{t - 0} = \frac{t^2 \sin \frac{1}{t}}{t} = t \sin \frac{1}{t}.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f'(0) = \lim_{t \to 0} \frac{f(t) - f(0)}{t - 0} = 0.$$</div>
+        <p>따라서 다음을 얻는다.</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} 2x \sin \frac{1}{x} - \cos \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>그러나 $\lim_{x \to 0} f'(x)$가 존재하지 않으므로 $f'$은 $0$에서 연속이 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(i)</strong> Define</p>
+        <div class="math-display">$$f(x) = |x|.$$</div>
+        <p>Then</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} 1 &amp; \qquad (x > 0) \\ -1 &amp; \qquad (x \lt 0). \end{array} \right.$$</div>
+        <p>and $f$ is not differentiable at $x = 0$.</p>
+        <p><strong>(ii)</strong> Let $p \in (1, \infty)$ and define</p>
+        <div class="math-display">$$f(x) = |x|^p.$$</div>
+        <p>Then</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} px^{p-1} &amp; \qquad (x > 0) \\ -px^{p-1} &amp; \qquad (x \lt 0). \end{array} \right.$$</div>
+        <p>Moreover, $f$ is differentiable $x = 0$ and $f'(x) = 0$. Indeed,</p>
+        <div class="math-display">$$\lim_{t \to 0} \frac{f(t) - f(0)}{t - 0} = \lim_{t \to 0} |t|^{p-1} = 0.$$</div>
+        <p><strong>(iii)</strong> Define</p>
+        <div class="math-display">$$f(x) = \left\{ \begin{array}{cl} x \sin \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>For $x \neq 0$, by Theorem 1.25 and Theorem 1.30,</p>
+        <div class="math-display">$$f'(x) = \sin \frac{1}{x} + x \cos \frac{1}{x} \left( -\frac{1}{x^2} \right) = \sin \frac{1}{x} - \frac{1}{x} \cos \frac{1}{x}.$$</div>
+        <p>For $t \neq 0$, observe that</p>
+        <div class="math-display">$$\frac{f(t) - f(0)}{t - 0} = \frac{t \sin \frac{1}{t}}{t} = \sin \frac{1}{t}.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\lim_{t \to 0} \frac{f(t) - f(0)}{t - 0}$$</div>
+        <p>does not exist and thus $f$ is not differentiable at $x = 0$.</p>
+        <p><strong>(iv)</strong> Define</p>
+        <div class="math-display">$$f(x) = \left\{ \begin{array}{cl} x^2 \sin \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>For $x \neq 0$, by Theorem 1.25 and Theorem 1.30,</p>
+        <div class="math-display">$$f'(x) = 2x \sin \frac{1}{x} + x^2 \cos \frac{1}{x} \left( -\frac{1}{x^2} \right) = 2x \sin \frac{1}{x} - \cos \frac{1}{x}.$$</div>
+        <p>For $t \neq 0$, observe that</p>
+        <div class="math-display">$$\frac{f(t) - f(0)}{t - 0} = \frac{t^2 \sin \frac{1}{t}}{t} = t \sin \frac{1}{t}.$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$f'(0) = \lim_{t \to 0} \frac{f(t) - f(0)}{t - 0} = 0.$$</div>
+        <p>Therefore, we have</p>
+        <div class="math-display">$$f'(x) = \left\{ \begin{array}{cl} 2x \sin \frac{1}{x} - \cos \frac{1}{x} &amp; \qquad (x \neq 0) \\ 0 &amp; \qquad (x = 0). \end{array} \right.$$</div>
+        <p>However, $\lim_{x \to 0} f'(x)$ does not exist and thus $f'$ is not continuous at $0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="index.html">해석학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
