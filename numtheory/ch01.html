@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유클리드 호제법과 디오판토스 방정식 (§1.1–1.3 The Euclidean Algorithm and ax + by = c) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 1단원 — 최대공약수(gcd)의 정의, 나눗셈 알고리즘(division algorithm)과 유클리드 호제법(Euclidean algorithm), 확장 유클리드 호제법, 디오판토스 방정식 ax + by = c가 정수해(integral solution)를 가질 조건, 특수해(particular solution)와 동차방정식(homogeneous equation) ax + by = 0의 해로 표현되는 일반해(general solution)를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 정수론, number theory, 최대공약수, greatest common divisor, gcd, 나눗셈 알고리즘, division algorithm, 유클리드 호제법, Euclidean algorithm, 확장 유클리드, extended Euclidean algorithm, 소인수분해, prime factorization, 디오판토스 방정식, Diophantine equation, 정수해, integral solution, 특수해, particular solution, 일반해, general solution, 동차방정식, homogeneous equation, 배수, multiple, 약수, divisor, 몫, quotient, 나머지, remainder, 버튼, Burton">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch01.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="유클리드 호제법과 디오판토스 방정식 (§1.1–1.3 The Euclidean Algorithm and ax + by = c) — 응용정수론 한·영 대조">
+<meta property="og:description" content="최대공약수의 정의에서 나눗셈 알고리즘과 유클리드 호제법, 그리고 디오판토스 방정식 ax + by = c의 정수해와 모든 해를 구하는 절차까지 — 응용정수론 첫 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch01.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "유클리드 호제법과 디오판토스 방정식 (§1.1–1.3 The Euclidean Algorithm and ax + by = c) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §1.1–1.3 — 최대공약수, 나눗셈 알고리즘과 유클리드 호제법, 확장 유클리드 호제법, 디오판토스 방정식 ax + by = c의 정수해 존재 조건, 특수해와 동차방정식의 해로 표현되는 일반해를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch01.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch01.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html" class="active">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 01 · §1.1–1.3</p>
+  <h1>유클리드 호제법과 디오판토스 방정식<span>The Euclidean Algorithm and the Diophantine Equation ax + by = c</span></h1>
+  <p class="header-desc">최대공약수의 정의에서 출발해, 소인수분해 없이 최대공약수를 구하는 나눗셈 알고리즘과 유클리드 호제법, 그리고 그것을 확장해 정수해를 직접 만들어 내는 알고리즘까지 따라갑니다. 이어서 디오판토스 방정식 ax + by = c가 정수해를 가질 조건을 보고, 특수해 하나와 동차방정식 ax + by = 0의 해 전체로부터 모든 정수해를 얻는 절차를 정리합니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-1"><span class="toc-num">DEF 1.1</span> 최대공약수 <em>The Greatest Common Divisor</em></a></li>
+    <li><a href="#c1-2"><span class="toc-num">EXAM 1.2</span> 소인수분해로 읽는 최대공약수 <em>A Greatest Common Divisor by Prime Factorization</em></a></li>
+    <li><a href="#algo01-1"><span class="toc-num">ALGO</span> 나눗셈 알고리즘 <em>The Division Algorithm</em></a></li>
+    <li><a href="#algo01-2"><span class="toc-num">ALGO</span> 유클리드 호제법 <em>The Euclidean Algorithm</em></a></li>
+    <li><a href="#c1-3"><span class="toc-num">EXAM 1.3</span> 유클리드 호제법의 계산 예 <em>Computing gcd(15, 3) and gcd(15, 6)</em></a></li>
+    <li><a href="#c1-4"><span class="toc-num">THM 1.4</span> ax + by 값 전체의 집합 <em>T Is the Set of All Multiples of gcd(a, b)</em></a></li>
+    <li><a href="#algo01-3"><span class="toc-num">ALGO</span> ax + by = gcd(a, b)의 정수해 알고리즘 <em>An Integral Solution of ax + by = gcd(a, b)</em></a></li>
+    <li><a href="#c1-5"><span class="toc-num">EX 1.5</span> 소인수분해로 gcd(65, 105) 구하기 <em>gcd(65, 105) by Prime Factorization</em></a></li>
+    <li><a href="#c1-6"><span class="toc-num">EX 1.6</span> 유클리드 호제법으로 최대공약수 구하기 <em>Finding gcd(a, b) by the Euclidean Algorithm</em></a></li>
+    <li><a href="#c1-7"><span class="toc-num">EX 1.7</span> 정수해 존재 조건 빈칸 채우기 <em>Completing the Criterion for an Integral Solution</em></a></li>
+    <li><a href="#c1-8"><span class="toc-num">EX 1.8</span> 56x + 72y = 8의 정수해 <em>An Integral Solution of 56x + 72y = 8</em></a></li>
+    <li><a href="#c1-9"><span class="toc-num">THM 1.9</span> 특수해와 동차해로 표현되는 해 <em>A Particular Solution Plus a Homogeneous Solution</em></a></li>
+    <li><a href="#c1-10"><span class="toc-num">THM 1.10</span> 동차방정식 ax + by = 0의 모든 해 <em>Every Solution of ax + by = 0</em></a></li>
+    <li><a href="#c1-11"><span class="toc-num">EX 1.11</span> 동차방정식의 모든 정수해 <em>All Integral Solutions of ax + by = 0</em></a></li>
+    <li><a href="#c1-12"><span class="toc-num">EX 1.12</span> 특수해 구하기 <em>Finding a Particular Solution</em></a></li>
+    <li><a href="#c1-13"><span class="toc-num">EX 1.13</span> 모든 정수해 구하기 <em>Finding All Integral Solutions</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>1.1 The Euclidean Algorithm · 유클리드 호제법</h2></div>
+
+<!-- ═══════════ PDF p.2 ═══════════ -->
+
+<!-- Notation (p.2) -->
+<div class="card note-card" id="note01-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>표기.</strong> $\mathbb{Z}$(각각 $\mathbb{Q}, \mathbb{R}, \mathbb{C}$)는 정수(각각 유리수, 실수, 복소수) 전체의 집합을 나타낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Notation.</strong> $\mathbb{Z}$(resp. $\mathbb{Q}, \mathbb{R}, \mathbb{C}$) denotes the set of integers (resp. rational numbers, real numbers, complex numbers).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.1 -->
+<div class="card def-card" id="c1-1">
+  <div class="card-head">
+    <span class="def-num">DEF 1.1</span>
+    <span class="def-title">최대공약수 <em>The Greatest Common Divisor</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$와 $b$를 주어진 정수라 하고, 이 중 적어도 하나는 0이 아니라고 하자. $a$와 $b$의 최대공약수는 $\gcd(a, b)$로 나타낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a$ and $b$ be given integers, with at least one of them different form zero. The greatest common divisor of $a$ and $b$ is denoted by $\gcd(a, b)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.2 -->
+<div class="card exam-card" id="c1-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.2</span>
+    <span class="exam-title">소인수분해로 읽는 최대공약수 <em>A Greatest Common Divisor by Prime Factorization</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a = 3\cdot5^2\cdot7$, $b = 2\cdot5^2\cdot7\cdot11$이면 $\gcd(a, b) = 5^2\cdot7$임을 안다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $a = 3\cdot5^2\cdot7$ and $b = 2\cdot5^2\cdot7\cdot11$, we know that $\gcd(a, b) = 5^2\cdot7$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.2) -->
+<div class="card note-card" id="note01-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\gcd(a, b)$는 어떻게 구할까? 소인수분해는 어렵다는 점에 주의하자. 따라서 소인수분해 없이 $\gcd(a, b)$를 구하기 위해 유클리드 호제법을 사용할 것이다. 나눗셈 알고리즘과 유클리드 호제법을 소개하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>How to find $\gcd(a, b)$? Note that prime factorization is hard. Therefore we will use the Euclidean algorithm to find $\gcd(a, b)$ without prime factorization. Let introduce the division algorithm and the Euclidean algorithm.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (p.2) : The Division Algorithm -->
+<div class="card algo-card" id="algo01-1">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">나눗셈 알고리즘 <em>The Division Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> $a, b \in \mathbb{Z}$이고 $b \neq 0$.</p>
+        <p><strong>출력 :</strong> $a = qb + r$이고 $0 \le r \lt |b|$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> $a, b \in \mathbb{Z}$ and $b \neq 0$.</p>
+        <p><strong>Output :</strong> $a = qb + r$ and $0 \le r \lt |b|$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (p.2) : The Euclidean Algorithm -->
+<div class="card algo-card" id="algo01-2">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">유클리드 호제법 <em>The Euclidean Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> 0이 아닌 정수 $a, b(|a| \ge |b|)$.</p>
+        <p><strong>출력 :</strong> 입력 정수 $a$와 $b$의 $\gcd(a, b)$.</p>
+        <ol>
+          <li>$r_0 = b$라 하자.</li>
+          <li>나눗셈 알고리즘에 의해 $a = q_1 b + r_1$이고 $0 \le r_1 \lt |b|$인 $r_1, q_1$이 존재한다.</li>
+          <li>$r_i \neq 0$이면, $r_{i-1} = q_{i+1} r_i + r_{i+1}$이고 $0 \le r_{i+1} \lt r_i$인 $q_{i+1}, r_{i+1}$이 존재한다. (나눗셈 알고리즘을 이용)</li>
+          <li>$r_i = 0$이면, $\gcd(a, b) = r_{i-1}$이다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> nonzero integers $a, b(|a| \ge |b|)$.</p>
+        <p><strong>Output :</strong> $\gcd(a, b)$ of the input integers $a$ and $b$.</p>
+        <ol>
+          <li>Let $r_0 = b$.</li>
+          <li>By the division algorithm, there exists $r_1, q_1$ such that $a = q_1 b + r_1$ and $0 \le r_1 \lt |b|$.</li>
+          <li>If $r_i \neq 0$, then there exists $q_{i+1}, r_{i+1}$ such that $r_{i-1} = q_{i+1} r_i + r_{i+1}$ and $0 \le r_{i+1} \lt r_i$. (Using the division algorithm)</li>
+          <li>If $r_i = 0$, then $\gcd(a, b) = r_{i-1}$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.3 -->
+<div class="card exam-card" id="c1-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.3</span>
+    <span class="exam-title">유클리드 호제법의 계산 예 <em>Computing gcd(15, 3) and gcd(15, 6)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 15와 3의 최대공약수를 구하자.</p>
+        <div class="math-display">$$15 = 3 \times 5 + 0$$</div>
+        <p>따라서 $\gcd(15, 3) = r_0 = 3$이다.</p>
+        <p><strong>2.</strong> 15와 6의 최대공약수를 구하자.</p>
+        <div class="math-display">$$15 = 6 \times 2 + 3$$</div>
+        <div class="math-display">$$6 = 3 \times 2 + 0$$</div>
+        <p>따라서 $\gcd(15, 6) = r_1 = 3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Find the greatest common divisor of 15 and 3.</p>
+        <div class="math-display">$$15 = 3 \times 5 + 0$$</div>
+        <p>Therefore $\gcd(15, 3) = r_0 = 3$.</p>
+        <p><strong>2.</strong> Find the greatest common divisor of 15 and 6.</p>
+        <div class="math-display">$$15 = 6 \times 2 + 3$$</div>
+        <div class="math-display">$$6 = 3 \times 2 + 0$$</div>
+        <p>Therefore $\gcd(15, 6) = r_1 = 3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.3 ═══════════ -->
+
+<!-- 서술 단락 (p.3) -->
+<div class="card note-card" id="note01-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>0이 아닌 어떤 정수 $a, b(|a| \ge |b|)$에 대하여 유클리드 호제법을 정수 $a, b$에 적용하자. $r_3 = 0$이라 하자. 즉,</p>
+        <div class="math-display">$$a = bq_1 + r_1, b = r_1 q_2 + r_2, r_1 = r_2 q_3 + 0.$$</div>
+        <p>$r_1 = a - bq_1$이고 $a, b$는 $\gcd(a, b)$의 배수임을 안다. 그러므로 $r_1$은 $\gcd(a, b)$의 배수이다. 마찬가지로 $r_2 = b - r_1 q_2$이고 $b, r_1$은 $\gcd(a, b)$의 배수임을 안다. 그러므로 $r_2$는 $\gcd(a, b)$의 배수이다. $r_2 = \gcd(a, b)$의 나머지 증명은 생략한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For some nonzero integers $a, b(|a| \ge |b|)$, apply the Euclidean algorithm to integers $a, b$. Assume that $r_3 = 0$. In other words,</p>
+        <div class="math-display">$$a = bq_1 + r_1, b = r_1 q_2 + r_2, r_1 = r_2 q_3 + 0.$$</div>
+        <p>We know that $r_1 = a - bq_1$ and $a, b$ are multiple of $\gcd(a, b)$. So $r_1$ is multiple of $\gcd(a, b)$. Similarly, we know that $r_2 = b - r_1 q_2$ and $b, r_1$ are multiple of $\gcd(a, b)$. So $r_2$ is multiple of $\gcd(a, b)$. The remaining proof of $r_2 = \gcd(a, b)$ is omitted.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.2 Solving the Diophantine Equation ax + by = c · 디오판토스 방정식 ax + by = c의 풀이</h2></div>
+
+<!-- 서술 단락 (p.3) -->
+<div class="card note-card" id="note01-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, b, c \in \mathbb{Z}$라 하자. $ax + by = c$는 어떻게 풀까? 더 구체적으로는 &lsquo;$ax + by = c$가 해를 가지는가?&rsquo;와 &lsquo;$ax + by = c$의 모든 해를 구하라&rsquo;가 궁금하다. 먼저 &lsquo;$ax + by = c$가 해를 가지는가?&rsquo;에 대해 이야기하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a, b, c \in \mathbb{Z}$. How to solve $ax + by = c$? More specifically, we are curious about &lsquo;$ax + by = c$ has a solution?&rsquo; and &lsquo;Find the all solutions of $ax + by = c$&rsquo;. At first, let&rsquo;s talk about &lsquo;$ax + by = c$ has a solution?&rsquo;.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.4 -->
+<div class="card thm-card" id="c1-4">
+  <div class="card-head">
+    <span class="thm-num">THM 1.4</span>
+    <span class="thm-title">ax + by 값 전체의 집합 <em>T Is the Set of All Multiples of gcd(a, b)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>0이 아닌 정수 $a$와 $b$에 대하여 $T = \{ax + by|x, y \in \mathbb{Z}\}$라 하자. 그러면 $T$는 $\gcd(a, b)$의 배수 전체의 집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For nonzero integers $a$ and $b$, let $T = \{ax + by|x, y \in \mathbb{Z}\}$. Then $T$ is the set of all multiple of $\gcd(a, b)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.3) -->
+<div class="card note-card" id="note01-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예를 들어 $\{6x + 9y\} = \{3n|n \in \mathbb{Z}\}$이다. $ax + by = c$가 정수해를 가질 필요충분조건은 $\gcd(a, b) \mid c$임에 주목하자. 그러므로 $ax_0 + by_0 = \gcd(a, b)$인 $x_0, y_0 \in \mathbb{Z}$가 존재한다. $c = \gcd(a, b)m$이면 $a(mx_0) + b(my_0) = c$이다. $\gcd(a, b) \nmid c$이면 $ax + by = c$는 정수해를 갖지 않는다. $c$가 $\gcd(a, b)$일 때 $ax + by = c$의 해를 구할 수 있다면, $c$가 $\gcd(a, b)$의 배수일 때도 해를 구할 수 있다. $c = \gcd(a, b)$인 $ax + by = c$의 정수해를 구하는 알고리즘을 소개하자.</p>
+        <p><em>역주.</em> 원문은 &ldquo;$c|(a, b)$&rdquo;로 인쇄되어 있으나 이는 표기 오류이며, 뜻은 $\gcd(a, b) \mid c$이다(§1.3에는 $\gcd(a, b)|c$로 바르게 인쇄되어 있다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For example, $\{6x + 9y\} = \{3n|n \in \mathbb{Z}\}$. Remark $ax + by = c$ has an integral solution if and only if $c|(a, b)$. Therefore there exists $x_0, y_0 \in \mathbb{Z}$ such that $ax_0 + by_0 = \gcd(a, b)$. If $c = \gcd(a, b)m$, then $a(mx_0) + b(my_0) = c$. If $\gcd(a, b) \nmid c$, then $ax + by = c$ has no integral solution. If we can find the root of $ax + by = c$ when $c$ is $\gcd(a, b)$, we can also find the root when $c$ is a multiple of $\gcd(a, b)$. Let introduce an algorithm to find an integral solution of $ax + by = c$ such that $c = \gcd(a, b)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (pp.3–4) : 표제 없음 → 편집 제목 -->
+<div class="card algo-card" id="algo01-3">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">ax + by = gcd(a, b)의 정수해 알고리즘 <em>An Integral Solution of ax + by = gcd(a, b)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> $c = \gcd(a, b)$이고 $|a| \ge |b|$인 $ax + by = c$.</p>
+        <p><strong>출력 :</strong> $ax_0 + by_0 = c$인 정수해 $x_0, y_0$.</p>
+        <ol>
+          <li>$r_0 = b$, $m_1 = 1$이라 하자.</li>
+          <li>나눗셈 알고리즘에 의해 $r_1 = a - q_1 b$이고 $0 \le r_1 \lt |b|$인 $r_1, q_1$이 존재한다. $n_1 = -q_1$이라 하자. 그러면 $r_1 = m_1 a + n_1 b$이다.</li>
+          <li>나눗셈 알고리즘에 의해 $r_0 = q_2 r_1 + r_2$이고 $0 \le r_2 \lt r_1$인 $r_2, q_2$가 존재한다. $m_2 = -q_2$, $n_2 = 1 + q_1 q_2$라 하자. 그러면 $r_2 = m_2 a + n_2 b$이다.</li>
+          <li>$r_i \neq \gcd(a, b)$이면, $r_{i-1} = q_{i+1} r_i + r_{i+1}$이고 $0 \le r_{i+1} \lt r_i$인 $r_{i+1}, q_{i+1}$이 존재한다. $m_{i+1} = m_{i-1} - q_{i+1} m_i$, $n_{i+1} = n_{i-1} - q_{i+1} n_i$라 하자. 그러면 $r_{i+1} = m_{i+1} a + n_{i+1} b$이다.</li>
+          <li>$r_i = \gcd(a, b)$이면, $x_0 = m_i$, $y_0 = n_i$이다.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> $ax + by = c$ such that $c = \gcd(a, b)$ and $|a| \ge |b|$.</p>
+        <p><strong>Output :</strong> an integral solution $x_0, y_0$ such that $ax_0 + by_0 = c$.</p>
+        <ol>
+          <li>Let $r_0 = b$ and $m_1 = 1$.</li>
+          <li>By the division algorithm, there exists $r_1, q_1$ such that $r_1 = a - q_1 b$ and $0 \le r_1 \lt |b|$. Let $n_1 = -q_1$. Then $r_1 = m_1 a + n_1 b$.</li>
+          <li>By the division algorithm, there exists $r_2, q_2$ such that $r_0 = q_2 r_1 + r_2$ and $0 \le r_2 \lt r_1$. Let $m_2 = -q_2$ and $n_2 = 1 + q_1 q_2$. Then $r_2 = m_2 a + n_2 b$.</li>
+          <li>If $r_i \neq \gcd(a, b)$, then there exists $r_{i+1}, q_{i+1}$ such that $r_{i-1} = q_{i+1} r_i + r_{i+1}$ and $0 \le r_{i+1} \lt r_i$. Let $m_{i+1} = m_{i-1} - q_{i+1} m_i$ and $n_{i+1} = n_{i-1} - q_{i+1} n_i$. Then $r_{i+1} = m_{i+1} a + n_{i+1} b$.</li>
+          <li>If $r_i = \gcd(a, b)$, then $x_0 = m_i$ and $y_0 = n_i$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.4 ═══════════ -->
+
+<!-- Exercise 1.5 -->
+<div class="card ex-card" id="c1-5">
+  <div class="card-head">
+    <span class="ex-num">EX 1.5</span>
+    <span class="ex-title">소인수분해로 gcd(65, 105) 구하기 <em>gcd(65, 105) by Prime Factorization</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>소인수분해를 이용하여 $\gcd(65, 105)$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$65 = 5 \times 13$이고 $105 = 3 \times 5 \times 7$이므로, 두 소인수분해에 공통으로 나타나는 소인수는 $5$뿐이다. 따라서 $\gcd(65, 105) = 5$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $\gcd(65, 105)$ by using prime factorization.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $65 = 5 \times 13$ and $105 = 3 \times 5 \times 7$, the only prime factor common to both factorizations is $5$. Therefore $\gcd(65, 105) = 5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.6 -->
+<div class="card ex-card" id="c1-6">
+  <div class="card-head">
+    <span class="ex-num">EX 1.6</span>
+    <span class="ex-title">유클리드 호제법으로 최대공약수 구하기 <em>Finding gcd(a, b) by the Euclidean Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유클리드 호제법으로 $\gcd(a, b)$를 구하라.</p>
+        <p><strong>1.</strong> $\gcd(65, 105)$</p>
+        <p><strong>2.</strong> $\gcd(202, 98)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> 유클리드 호제법(algo01-2)을 $a = 105$, $b = 65$에 적용하면 $r_0 = 65$이고</p>
+        <div class="math-display">$$105 = 65 \times 1 + 40, \quad 65 = 40 \times 1 + 25, \quad 40 = 25 \times 1 + 15,$$</div>
+        <div class="math-display">$$25 = 15 \times 1 + 10, \quad 15 = 10 \times 1 + 5, \quad 10 = 5 \times 2 + 0$$</div>
+        <p>이다. 즉 $r_1 = 40, r_2 = 25, r_3 = 15, r_4 = 10, r_5 = 5, r_6 = 0$이므로, $\gcd(65, 105) = r_5 = 5$이다.</p>
+        <p><strong>2.</strong> 같은 알고리즘을 $a = 202$, $b = 98$에 적용하면 $r_0 = 98$이고</p>
+        <div class="math-display">$$202 = 98 \times 2 + 6, \quad 98 = 6 \times 16 + 2, \quad 6 = 2 \times 3 + 0$$</div>
+        <p>이다. 즉 $r_1 = 6, r_2 = 2, r_3 = 0$이므로, $\gcd(202, 98) = r_2 = 2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $\gcd(a, b)$ by Euclidean algorithm.</p>
+        <p><strong>1.</strong> $\gcd(65, 105)$</p>
+        <p><strong>2.</strong> $\gcd(202, 98)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> Applying the Euclidean algorithm (algo01-2) with $a = 105$, $b = 65$ gives $r_0 = 65$ and</p>
+        <div class="math-display">$$105 = 65 \times 1 + 40, \quad 65 = 40 \times 1 + 25, \quad 40 = 25 \times 1 + 15,$$</div>
+        <div class="math-display">$$25 = 15 \times 1 + 10, \quad 15 = 10 \times 1 + 5, \quad 10 = 5 \times 2 + 0$$</div>
+        <p>that is, $r_1 = 40, r_2 = 25, r_3 = 15, r_4 = 10, r_5 = 5, r_6 = 0$, so $\gcd(65, 105) = r_5 = 5$.</p>
+        <p><strong>2.</strong> Applying the same algorithm with $a = 202$, $b = 98$ gives $r_0 = 98$ and</p>
+        <div class="math-display">$$202 = 98 \times 2 + 6, \quad 98 = 6 \times 16 + 2, \quad 6 = 2 \times 3 + 0$$</div>
+        <p>that is, $r_1 = 6, r_2 = 2, r_3 = 0$, so $\gcd(202, 98) = r_2 = 2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.7 -->
+<div class="card ex-card" id="c1-7">
+  <div class="card-head">
+    <span class="ex-num">EX 1.7</span>
+    <span class="ex-title">정수해 존재 조건 빈칸 채우기 <em>Completing the Criterion for an Integral Solution</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 명제를 완성하라.</p>
+        <p>&ldquo;$ax+by=c\ (a,b,c\in\mathbb{Z})$는 정수해를 가진다 $\iff$ $\boxed{\qquad\qquad}$&rdquo;</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>빈칸에 들어갈 조건은 $\gcd(a, b) \mid c$이다. 즉 완성된 명제는 다음과 같다.</p>
+        <p>&ldquo;$ax + by = c\ (a, b, c \in \mathbb{Z})$는 정수해를 가진다 $\iff$ $\gcd(a, b) \mid c$&rdquo;</p>
+        <p>정리 1.4에 의해 $T = \{ax + by \mid x, y \in \mathbb{Z}\}$는 $\gcd(a, b)$의 배수 전체의 집합이므로, $c \in T$인 것, 즉 $ax + by = c$가 정수해를 가지는 것의 필요충분조건은 $c$가 $\gcd(a, b)$의 배수인 것, 다시 말해 $\gcd(a, b) \mid c$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Complete the following statement.</p>
+        <p>&ldquo;$ax + by = c(a, b, c \in \mathbb{Z})$has an integral solution if and only if $\boxed{\qquad\qquad}$&rdquo;</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The condition that fills the blank is $\gcd(a, b) \mid c$. That is, the completed statement reads</p>
+        <p>&ldquo;$ax + by = c\ (a, b, c \in \mathbb{Z})$ has an integral solution $\iff$ $\gcd(a, b) \mid c$&rdquo;</p>
+        <p>By Theorem 1.4, $T = \{ax + by \mid x, y \in \mathbb{Z}\}$ is the set of all multiples of $\gcd(a, b)$, so $c \in T$ &mdash; that is, $ax + by = c$ has an integral solution &mdash; if and only if $c$ is a multiple of $\gcd(a, b)$, i.e. $\gcd(a, b) \mid c$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.8 (원문 풀이 인쇄됨) -->
+<div class="card ex-card" id="c1-8">
+  <div class="card-head">
+    <span class="ex-num">EX 1.8</span>
+    <span class="ex-title">56x + 72y = 8의 정수해 <em>An Integral Solution of 56x + 72y = 8</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$56x + 72y = 8$인 정수해를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$x$와 $y$를 바꾸자. $72x + 56y = 8$인 정수해를 구하자.</p>
+        <ol>
+          <li>$r_0 = 56$, $m_1 = 1$.</li>
+          <li>$r_1 = 16 = 72 - 1 \times 56$, $q_1 = 1$.</li>
+          <li>$r_2 = 8 = 56 - 3 \times 16$, $q_2 = 3, m_2 = -3, n_2 = 4$. 그러면 $r_2 = -3 \times 72 + 4 \times 56$이다.</li>
+          <li>$0 = r_3 = 16 - 2 \times 8$.</li>
+        </ol>
+        <p>그러므로 $8 = -3 \times 72 + 4 \times 56$이다.</p>
+        <p>다시 $x$와 $y$를 바꾸면 $(x, y) = (4, -3)$은 정수해이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find an integral solution such that $56x + 72y = 8$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Replace $x$ and $y$. Find an integral solution such that $72x + 56y = 8$.</p>
+        <ol>
+          <li>$r_0 = 56$, $m_1 = 1$.</li>
+          <li>$r_1 = 16 = 72 - 1 \times 56$, $q_1 = 1$.</li>
+          <li>$r_2 = 8 = 56 - 3 \times 16$, $q_2 = 3, m_2 = -3, n_2 = 4$. Then $r_2 = -3 \times 72 + 4 \times 56$.</li>
+          <li>$0 = r_3 = 16 - 2 \times 8$.</li>
+        </ol>
+        <p>Therefore we have $8 = -3 \times 72 + 4 \times 56$.</p>
+        <p>Replace $x$ and $y$ again, then $(x, y) = (4, -3)$ is an integral solution.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.3 Find all of integral solutions of ax + by = c (a, b, c ∈ ℤ) · ax + by = c의 모든 정수해</h2></div>
+
+<!-- Notation + 서술 단락 (pp.4–5) -->
+<div class="card note-card" id="note01-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>표기.</strong> 이 절에서 해라고 쓰면 정수해를 뜻한다.</p>
+        <p>$ax + by = c$가 해를 가질 필요충분조건은 $\gcd(a, b)|c$임에 주의하라.</p>
+        <p>다음 공식을 관찰하자. $ax_0 + by_0 = c$이고 $ax_n + by_n = 0$이면, $a(x_0 + x_n) + b(y_0 + y_n) = c$이다. 그러므로 $(x, y) = (x_0 + x_n, y_0 + y_n)$은 $ax + by = c$의 또 다른 해이다. $ax_0 + by_0 = c$이고 $ax'_0 + by'_0 = c$이면, $a(x_0 - x'_0) + b(y_0 - y'_0) = 0$이다. 그러므로 $(x, y) = (x_0 - x'_0, y_0 - y'_0)$는 $ax + by = 0$의 해이다. 동차방정식 $ax+by=0$의 해를 구하는 일이 $ax+by=c$의 해를 구하는 데 중요함에 주의하라.</p>
+        <p><em>역주.</em> 원문은 둘째 가정을 &ldquo;$ax'_n + by'_n = 0$&rdquo;으로 인쇄했으나 이는 오타이다. 이어지는 결론 $a(x_0 - x'_0) + b(y_0 - y'_0) = 0$은 $(x'_0, y'_0)$ 역시 $ax + by = c$의 해일 때, 즉 $ax'_0 + by'_0 = c$일 때 성립한다(두 해의 차가 동차방정식의 해가 된다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Notation.</strong> When we write solution, it means integer solution.</p>
+        <p>Note that $ax + by = c$ has a solution if and only if $\gcd(a, b)|c$.</p>
+        <p>Observe the following formula. If $ax_0 + by_0 = c$ and $ax_n + by_n = 0$, then $a(x_0 + x_n) + b(y_0 + y_n) = c$. Therefore $(x, y) = (x_0 + x_n, y_0 + y_n)$ is another solution of $ax + by = c$. If $ax_0 + by_0 = c$ and $ax'_n + by'_n = 0$, then $a(x_0 - x'_0) + b(y_0 - y'_0) = 0$. Therefore $(x, y) = (x_0 - x'_0, y_0 - y'_0)$ is solution of $ax + by = 0$. Note that find a solution of homogeneous equation ($ax + by = 0$) is important for finding solution of $ax + by = c$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.5 ═══════════ -->
+
+<!-- Theorem 1.9 -->
+<div class="card thm-card" id="c1-9">
+  <div class="card-head">
+    <span class="thm-num">THM 1.9</span>
+    <span class="thm-title">특수해와 동차해로 표현되는 해 <em>A Particular Solution Plus a Homogeneous Solution</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, b, c \in \mathbb{Z}$라 하자. $(x, y) = (x_0, y_0)$가 $ax + by = c$의 정수해라 하자. 그러면 $(x', y')$가 $ax + by = c$의 해일 필요충분조건은 다음과 같다.</p>
+        <div class="math-display">$$x' = x_0 + x_n, y' = y_0 + y_n$$</div>
+        <p>단, $ax_n + by_n = 0$인 어떤 $(x_n, y_n) \in \mathbb{Z} \times \mathbb{Z}$에 대해서이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a, b, c \in \mathbb{Z}$. Assume that $(x, y) = (x_0, y_0)$ is an integral solution of $ax + by = c$. Then $(x', y')$ is a solution of $ax + by = c$ if and only if</p>
+        <div class="math-display">$$x' = x_0 + x_n, y' = y_0 + y_n$$</div>
+        <p>for some $(x_n, y_n) \in \mathbb{Z} \times \mathbb{Z}$ such that $ax_n + by_n = 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.5) -->
+<div class="card note-card" id="note01-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$ax + by = c$의 모든 해를 구하려면 $ax + by = 0$의 모든 해를 구해야 한다. $ax + by = 0$의 모든 정수해를 구하자. $a = a'\gcd(a, b)$, $b = b'\gcd(a, b)$라 하자. 그러면 $(a', b') = 1$이다.</p>
+        <div class="math-display">$$\begin{aligned}
+& ax + by = 0 \\
+\Rightarrow & ax = -by \\
+\Rightarrow & \gcd(a, b)a'x = -\gcd(a, b)b'y \\
+\Rightarrow & a'x = -b'y \\
+\Rightarrow & x = b'n, y = -a'n\ (\text{어떤 } n \in \mathbb{Z}\text{에 대하여}, \because (a', b') = 1)
+\end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To find all solutions of $ax + by = c$, we need to find all solutions of $ax + by = 0$. Let&rsquo;s find all integral solutions of $ax + by = 0$. Let $a = a'\gcd(a, b)$ and $b = b'\gcd(a, b)$. Then $(a', b') = 1$.</p>
+        <div class="math-display">$$\begin{aligned}
+& ax + by = 0 \\
+\Rightarrow & ax = -by \\
+\Rightarrow & \gcd(a, b)a'x = -\gcd(a, b)b'y \\
+\Rightarrow & a'x = -b'y \\
+\Rightarrow & x = b'n, y = -a'n \text{ for some } n \in \mathbb{Z}(\because (a', b') = 1)
+\end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.10 -->
+<div class="card thm-card" id="c1-10">
+  <div class="card-head">
+    <span class="thm-num">THM 1.10</span>
+    <span class="thm-title">동차방정식 ax + by = 0의 모든 해 <em>Every Solution of ax + by = 0</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>방정식 $ax + by = 0$의 모든 해는 다음과 같이 주어진다.</p>
+        <div class="math-display">$$x = \frac{b}{\gcd(a, b)}n, y = -\frac{a}{\gcd(a, b)}n$$</div>
+        <p>여기서 $n$은 임의의 정수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Every solution of equation $ax + by = 0$ is given by</p>
+        <div class="math-display">$$x = \frac{b}{\gcd(a, b)}n, y = -\frac{a}{\gcd(a, b)}n$$</div>
+        <p>where $n$ is an arbitrary integer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.5) -->
+<div class="card note-card" id="note01-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$ax + by = c$의 모든 해를 구하는 방법을 정리하면 다음과 같다.</p>
+        <p><strong>1.</strong> $ax_0 + by_0 = c$인 특수해 $(x_0, y_0)$를 구한다.</p>
+        <p><strong>2.</strong> $ax + by = c$의 일반해는 어떤 $n \in \mathbb{Z}$에 대하여 $x = x_0 + \dfrac{b}{\gcd(a, b)}n, y = y_0 - \dfrac{a}{\gcd(a, b)}n$로 나타난다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To summarize how to find all solutions of $ax + by = c$.</p>
+        <p><strong>1.</strong> Find a particular solution $(x_0, y_0)$ such that $ax_0 + by_0 = c$.</p>
+        <p><strong>2.</strong> General solution of $ax + by = c$ is represented by $x = x_0 + \dfrac{b}{\gcd(a, b)}n, y = y_0 - \dfrac{a}{\gcd(a, b)}n$ for some $n \in \mathbb{Z}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.11 -->
+<div class="card ex-card" id="c1-11">
+  <div class="card-head">
+    <span class="ex-num">EX 1.11</span>
+    <span class="ex-title">동차방정식의 모든 정수해 <em>All Integral Solutions of ax + by = 0</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$ax + by = 0$의 모든 정수해를 구하라.</p>
+        <p><strong>1.</strong> $120x + 24y = 0$.</p>
+        <p><strong>2.</strong> $256x + 30y = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> $120 = 5 \times 24$이므로 $\gcd(120, 24) = 24$이다. 정리 1.10에 의해 $120x + 24y = 0$의 모든 정수해는</p>
+        <div class="math-display">$$x = \frac{24}{24}n = n, \quad y = -\frac{120}{24}n = -5n \qquad (n \in \mathbb{Z})$$</div>
+        <p>로 주어진다.</p>
+        <p><strong>2.</strong> 유클리드 호제법으로 $\gcd(256, 30)$을 구하면</p>
+        <div class="math-display">$$256 = 30 \times 8 + 16, \quad 30 = 16 \times 1 + 14, \quad 16 = 14 \times 1 + 2, \quad 14 = 2 \times 7 + 0$$</div>
+        <p>이므로 $\gcd(256, 30) = 2$이다. 정리 1.10에 의해 $256x + 30y = 0$의 모든 정수해는</p>
+        <div class="math-display">$$x = \frac{30}{2}n = 15n, \quad y = -\frac{256}{2}n = -128n \qquad (n \in \mathbb{Z})$$</div>
+        <p>로 주어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all integral solutions of $ax + by = 0$.</p>
+        <p><strong>1.</strong> $120x + 24y = 0$.</p>
+        <p><strong>2.</strong> $256x + 30y = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> Since $120 = 5 \times 24$, $\gcd(120, 24) = 24$. By Theorem 1.10, every integral solution of $120x + 24y = 0$ is given by</p>
+        <div class="math-display">$$x = \frac{24}{24}n = n, \quad y = -\frac{120}{24}n = -5n \qquad (n \in \mathbb{Z})$$</div>
+        <p><strong>2.</strong> Computing $\gcd(256, 30)$ by the Euclidean algorithm,</p>
+        <div class="math-display">$$256 = 30 \times 8 + 16, \quad 30 = 16 \times 1 + 14, \quad 16 = 14 \times 1 + 2, \quad 14 = 2 \times 7 + 0$$</div>
+        <p>so $\gcd(256, 30) = 2$. By Theorem 1.10, every integral solution of $256x + 30y = 0$ is given by</p>
+        <div class="math-display">$$x = \frac{30}{2}n = 15n, \quad y = -\frac{256}{2}n = -128n \qquad (n \in \mathbb{Z})$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF pp.5–6 ═══════════ -->
+
+<!-- Exercise 1.12 -->
+<div class="card ex-card" id="c1-12">
+  <div class="card-head">
+    <span class="ex-num">EX 1.12</span>
+    <span class="ex-title">특수해 구하기 <em>Finding a Particular Solution</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$ax + by = c$의 특수해를 구하라.</p>
+        <ul>
+          <li>$172x + 20y = 1000$.</li>
+          <li>$278x + 102y = 2$.</li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>$172x + 20y = 1000$.</strong> 먼저 알고리즘(algo01-3)으로 $172x + 20y = \gcd(172, 20)$의 정수해를 구한다.</p>
+        <ol>
+          <li>$r_0 = 20$, $m_1 = 1$.</li>
+          <li>$r_1 = 12 = 172 - 8 \times 20$, $q_1 = 8$.</li>
+          <li>$r_2 = 8 = 20 - 1 \times 12$, $q_2 = 1, m_2 = -1, n_2 = 9$. 그러면 $r_2 = -172 + 9 \times 20$이다.</li>
+          <li>$r_3 = 4 = 12 - 1 \times 8$, $q_3 = 1, m_3 = 2, n_3 = -17$. 그러면 $r_3 = 2 \times 172 - 17 \times 20 = 4 = \gcd(172, 20)$이다.</li>
+        </ol>
+        <p>그러므로 $2 \times 172 - 17 \times 20 = 4$이다. $1000 = 4 \times 250$이므로 양변에 $250$을 곱하면 $172 \times 500 - 20 \times 4250 = 1000$을 얻는다. 따라서 $(x_0, y_0) = (500, -4250)$은 정수해이다. (검산: $172 \times 500 - 20 \times 4250 = 86000 - 85000 = 1000$.)</p>
+        <p><strong>$278x + 102y = 2$.</strong> 같은 알고리즘을 $a = 278$, $b = 102$에 적용한다.</p>
+        <ol>
+          <li>$r_0 = 102$, $m_1 = 1$.</li>
+          <li>$r_1 = 74 = 278 - 2 \times 102$, $q_1 = 2$.</li>
+          <li>$r_2 = 28 = 102 - 1 \times 74$, $q_2 = 1, m_2 = -1, n_2 = 3$. 그러면 $r_2 = -278 + 3 \times 102$이다.</li>
+          <li>$r_3 = 18 = 74 - 2 \times 28$, $q_3 = 2, m_3 = 3, n_3 = -8$. 그러면 $r_3 = 3 \times 278 - 8 \times 102$이다.</li>
+          <li>$r_4 = 10 = 28 - 1 \times 18$, $q_4 = 1, m_4 = -4, n_4 = 11$. 그러면 $r_4 = -4 \times 278 + 11 \times 102$이다.</li>
+          <li>$r_5 = 8 = 18 - 1 \times 10$, $q_5 = 1, m_5 = 7, n_5 = -19$. 그러면 $r_5 = 7 \times 278 - 19 \times 102$이다.</li>
+          <li>$r_6 = 2 = 10 - 1 \times 8$, $q_6 = 1, m_6 = -11, n_6 = 30$. 그러면 $r_6 = -11 \times 278 + 30 \times 102 = 2 = \gcd(278, 102)$이다.</li>
+        </ol>
+        <p>따라서 $(x_0, y_0) = (-11, 30)$은 정수해이다. (검산: $278 \times (-11) + 102 \times 30 = -3058 + 3060 = 2$.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find a particular solution of $ax + by = c$.</p>
+        <ul>
+          <li>$172x + 20y = 1000$.</li>
+          <li>$278x + 102y = 2$.</li>
+        </ul>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>$172x + 20y = 1000$.</strong> First find an integral solution of $172x + 20y = \gcd(172, 20)$ by the algorithm (algo01-3).</p>
+        <ol>
+          <li>$r_0 = 20$, $m_1 = 1$.</li>
+          <li>$r_1 = 12 = 172 - 8 \times 20$, $q_1 = 8$.</li>
+          <li>$r_2 = 8 = 20 - 1 \times 12$, $q_2 = 1, m_2 = -1, n_2 = 9$. Then $r_2 = -172 + 9 \times 20$.</li>
+          <li>$r_3 = 4 = 12 - 1 \times 8$, $q_3 = 1, m_3 = 2, n_3 = -17$. Then $r_3 = 2 \times 172 - 17 \times 20 = 4 = \gcd(172, 20)$.</li>
+        </ol>
+        <p>Therefore $2 \times 172 - 17 \times 20 = 4$. Since $1000 = 4 \times 250$, multiplying both sides by $250$ gives $172 \times 500 - 20 \times 4250 = 1000$. Hence $(x_0, y_0) = (500, -4250)$ is an integral solution. (Check: $172 \times 500 - 20 \times 4250 = 86000 - 85000 = 1000$.)</p>
+        <p><strong>$278x + 102y = 2$.</strong> Apply the same algorithm with $a = 278$, $b = 102$.</p>
+        <ol>
+          <li>$r_0 = 102$, $m_1 = 1$.</li>
+          <li>$r_1 = 74 = 278 - 2 \times 102$, $q_1 = 2$.</li>
+          <li>$r_2 = 28 = 102 - 1 \times 74$, $q_2 = 1, m_2 = -1, n_2 = 3$. Then $r_2 = -278 + 3 \times 102$.</li>
+          <li>$r_3 = 18 = 74 - 2 \times 28$, $q_3 = 2, m_3 = 3, n_3 = -8$. Then $r_3 = 3 \times 278 - 8 \times 102$.</li>
+          <li>$r_4 = 10 = 28 - 1 \times 18$, $q_4 = 1, m_4 = -4, n_4 = 11$. Then $r_4 = -4 \times 278 + 11 \times 102$.</li>
+          <li>$r_5 = 8 = 18 - 1 \times 10$, $q_5 = 1, m_5 = 7, n_5 = -19$. Then $r_5 = 7 \times 278 - 19 \times 102$.</li>
+          <li>$r_6 = 2 = 10 - 1 \times 8$, $q_6 = 1, m_6 = -11, n_6 = 30$. Then $r_6 = -11 \times 278 + 30 \times 102 = 2 = \gcd(278, 102)$.</li>
+        </ol>
+        <p>Hence $(x_0, y_0) = (-11, 30)$ is an integral solution. (Check: $278 \times (-11) + 102 \times 30 = -3058 + 3060 = 2$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.6 ═══════════ -->
+
+<!-- Exercise 1.13 (원문 풀이 1)만 인쇄됨) -->
+<div class="card ex-card" id="c1-13">
+  <div class="card-head">
+    <span class="ex-num">EX 1.13</span>
+    <span class="ex-title">모든 정수해 구하기 <em>Finding All Integral Solutions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 정수해를 구하라.</p>
+        <p><strong>1.</strong> $172x + 20y = 1000$.</p>
+        <p><strong>2.</strong> $278x + 102y = 2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1)</strong> 연습문제 1.12에 의해, $1000 = 172 \times 500 - 20 \times 4250$이고 $\gcd(172, 20) = 4$임을 안다. 그러므로 $172x + 20y = 1000$의 모든 정수해는 어떤 $n \in \mathbb{Z}$에 대하여 $(x, y) = (500 + 5n, -4250 - 43n)$로 나타난다.</p>
+        <p><em>역주.</em> 원문은 &ldquo;$4 = 172 \times 500 - 20 \times 4250$&rdquo;으로 인쇄되어 있으나 이는 오타이며, $\gcd(172, 20) = 4$이고 $172\cdot500 - 20\cdot4250 = 1000$이다.</p>
+        <p><strong>2)</strong> 연습문제 1.12에 의해, $2 = 278 \times (-11) + 102 \times 30$이고 $\gcd(278, 102) = 2$임을 안다. 정리 1.9와 정리 1.10에 의해, $278x + 102y = 2$의 모든 정수해는 어떤 $n \in \mathbb{Z}$에 대하여</p>
+        <div class="math-display">$$(x, y) = \left(-11 + \frac{102}{2}n, \ 30 - \frac{278}{2}n\right) = (-11 + 51n, \ 30 - 139n)$$</div>
+        <p>로 나타난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all integral solutions.</p>
+        <p><strong>1.</strong> $172x + 20y = 1000$.</p>
+        <p><strong>2.</strong> $278x + 102y = 2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1)</strong> By Exercise 1.12., we know that $4 = 172 \times 500 - 20 \times 4250$ and $\gcd(172, 20) = 4$. So every integral solution of $172x + 20y = 1000$ is represented by $(x, y) = (500 + 5n, -4250 - 43n)$ for some $n \in \mathbb{Z}$.</p>
+        <p><strong>2)</strong> By Exercise 1.12., we know that $2 = 278 \times (-11) + 102 \times 30$ and $\gcd(278, 102) = 2$. By Theorem 1.9 and Theorem 1.10, every integral solution of $278x + 102y = 2$ is represented by</p>
+        <div class="math-display">$$(x, y) = \left(-11 + \frac{102}{2}n, \ 30 - \frac{278}{2}n\right) = (-11 + 51n, \ 30 - 139n)$$</div>
+        <p>for some $n \in \mathbb{Z}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

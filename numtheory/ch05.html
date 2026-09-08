@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유한 연분수 (§3.1 Finite Continued Fractions) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 5단원 — 유한 연분수(finite continued fraction)와 단순연분수(simple continued fraction)의 정의, 유클리드 호제법으로 모든 유리수를 유한 단순연분수로 나타내는 방법, 기호 [a0; a1, ⋯, an]과 k번째 근사분수(convergent) Ck, 점화식 pk = ak·pk−1 + pk−2, qk = ak·qk−1 + qk−2로 계산하는 Ck = pk/qk, gcd(pk, qk) = 1, 피보나치 수와의 관계, 연분수로 푸는 일차 디오판토스 방정식을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 정수론, number theory, 연분수, continued fraction, 유한 연분수, finite continued fraction, 단순연분수, simple continued fraction, 근사분수, convergent, 유클리드 호제법, Euclidean algorithm, 분자, numerator, 분모, denominator, 서로소, relatively prime, 피보나치 수, Fibonacci number, 디오판토스 방정식, Diophantine equation, 일반해, general solution, 최대공약수, gcd, 버튼, Burton">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch05.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="유한 연분수 (§3.1 Finite Continued Fractions) — 응용정수론 한·영 대조">
+<meta property="og:description" content="유한 연분수와 단순연분수의 정의에서 출발해, 유클리드 호제법으로 유리수를 연분수로 펼치고, k번째 근사분수 Ck = pk/qk와 그 점화식·서로소 성질·대소 관계까지 — 응용정수론 §3.1을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch05.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "유한 연분수 (§3.1 Finite Continued Fractions) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §3.1 — 유한 연분수와 단순연분수의 정의, 유리수의 유한 단순연분수 표현, 기호 [a0; a1, ⋯, an], k번째 근사분수 Ck = pk/qk와 점화식, gcd(pk, qk) = 1, 근사분수의 대소 관계와 연분수를 이용한 디오판토스 방정식 풀이를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch05.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch05.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html" class="active">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 05 · §3.1</p>
+  <h1>유한 연분수<span>Finite Continued Fractions</span></h1>
+  <p class="header-desc">유리수를 나눗셈의 몫으로 층층이 쌓아 올린 분수, 곧 유한 연분수의 정의에서 출발합니다. 유클리드 호제법이 그대로 연분수 전개가 된다는 사실에서 모든 유리수가 유한 단순연분수로 표현됨을 보고, 기호 [a0; a1, ⋯, an]과 k번째 근사분수 Ck를 정의합니다. 이어서 점화식으로 정의한 분자·분모 pk, qk가 Ck = pk/qk를 준다는 정리, 두 값이 서로소라는 따름정리, 분모 수열의 단조성과 근사분수의 대소 관계, 그리고 연분수로 일차 디오판토스 방정식을 푸는 방법까지 정리합니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c3-1d"><span class="toc-num">DEF 3.1</span> 유한 연분수와 단순연분수 <em>Finite and Simple Continued Fractions</em></a></li>
+    <li><a href="#c3-1t"><span class="toc-num">THM 3.1</span> 유리수의 유한 단순연분수 표현 <em>Any Rational Number as a Finite Simple Continued Fraction</em></a></li>
+    <li><a href="#c3-2"><span class="toc-num">EXAM 3.2</span> 19/51의 단순연분수 전개 <em>Expressing 19/51 as a Simple Continued Fraction</em></a></li>
+    <li><a href="#c3-3"><span class="toc-num">DEF 3.3</span> 연분수 기호 <em>The Symbol [a0; a1, ⋯, an]</em></a></li>
+    <li><a href="#algo05-1"><span class="toc-num">ALGO</span> 단순연분수 알고리즘 <em>Simple Continued Fraction Algorithm</em></a></li>
+    <li><a href="#c3-4"><span class="toc-num">EX 3.4</span> 172/51과 71/55의 단순연분수 <em>Simple Continued Fractions of 172/51 and 71/55</em></a></li>
+    <li><a href="#c3-5"><span class="toc-num">EX 3.5</span> 118/303의 연분수 전개 <em>The Continued Fraction of 118/303</em></a></li>
+    <li><a href="#c3-6"><span class="toc-num">EX 3.6</span> 연분수가 나타내는 유리수 <em>Rational Numbers Represented by Continued Fractions</em></a></li>
+    <li><a href="#c3-7"><span class="toc-num">DEF 3.7</span> k번째 근사분수 <em>The kth Convergent</em></a></li>
+    <li><a href="#c3-8"><span class="toc-num">THM 3.8</span> 근사분수의 값 Ck = pk/qk <em>The Value of the kth Convergent</em></a></li>
+    <li><a href="#c3-9"><span class="toc-num">THM 3.9</span> 이웃한 근사분수의 관계식 <em>The Relation Between Consecutive Convergents</em></a></li>
+    <li><a href="#c3-10"><span class="toc-num">COR 3.10</span> 근사분수의 분자와 분모는 서로소 <em>pk and qk Are Relatively Prime</em></a></li>
+    <li><a href="#c3-11"><span class="toc-num">LEM 3.11</span> 분모 수열의 단조성 <em>The Denominators Are Nondecreasing</em></a></li>
+    <li><a href="#c3-12"><span class="toc-num">THM 3.12</span> 짝수 번째와 홀수 번째 근사분수의 대소 <em>Convergents with Even and Odd Scripts</em></a></li>
+    <li><a href="#c3-13"><span class="toc-num">EX 3.13</span> [1; 2, 3, ⋯, n, n+1]의 분자 pn <em>The Numerator pn of [1; 2, 3, ⋯, n, n+1]</em></a></li>
+    <li><a href="#c3-14"><span class="toc-num">EX 3.14</span> 분모 qk의 아래끝 <em>A Lower Bound for qk</em></a></li>
+    <li><a href="#c3-15"><span class="toc-num">EX 3.15</span> 근사분수 계산 <em>Computing Convergents</em></a></li>
+    <li><a href="#c3-16"><span class="toc-num">EX 3.16</span> 3.1416과 3.14159의 단순연분수 <em>Simple Continued Fractions of 3.1416 and 3.14159</em></a></li>
+    <li><a href="#c3-17"><span class="toc-num">EX 3.17</span> 뒤집은 연분수 <em>Reversing a Continued Fraction</em></a></li>
+    <li><a href="#c3-18"><span class="toc-num">EX 3.18</span> 연분수로 푸는 디오판토스 방정식 <em>Diophantine Equations by Continued Fractions</em></a></li>
+    <li><a href="#c3-19"><span class="toc-num">EX 3.19</span> 정리 3.12의 확인 <em>Verifying Theorem 3.12</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>3 Continued Fractions · 제3장 연분수</h2></div>
+
+<div class="section-title"><h2>3.1 Finite continued fractions · 유한 연분수</h2></div>
+
+<!-- ═══════════ PDF p.20 ═══════════ -->
+
+<!-- 서술 단락 (p.20) -->
+<div class="card note-card" id="note05-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 책의 제15장에서 전개할 내용은 [1, Chapter 15]를 바탕으로 한다.</p>
+        <p>예를 들어 $\frac{61}{14}$는 $4 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{4}}}$로 나타낼 수 있다.</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{61}{14} &= 4 + \frac{5}{14} \\
+&= 4 + \cfrac{1}{\cfrac{14}{5}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{4}{5}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{1}{\cfrac{5}{4}}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{4}}}
+\end{aligned}$$</div>
+        <p><em>역주.</em> 원문은 $\frac{61}{41} = 4 + \frac{5}{14}$로 적었으나 $61/41$은 오타이며, 옳은 좌변은 $\frac{61}{14}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We&rsquo;ll be using [1, Chapter 15] as a base to build on in Chapter 15 of this book.</p>
+        <p>For example, $\frac{61}{14}$ can be expressed as $4 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{4}}}$.</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{61}{41} &= 4 + \frac{5}{14} \\
+&= 4 + \cfrac{1}{\cfrac{14}{5}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{4}{5}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{1}{\cfrac{5}{4}}} \\
+&= 4 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{4}}}
+\end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 3.1 (pp.20–21) -->
+<div class="card def-card" id="c3-1d">
+  <div class="card-head">
+    <span class="def-num">DEF 3.1</span>
+    <span class="def-title">유한 연분수와 단순연분수 <em>Finite and Simple Continued Fractions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> <strong>유한 연분수</strong>란 다음과 같은 형태의 분수를 말한다.</p>
+        <div class="math-display">$$a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}$$</div>
+        <p>여기서 $a_0 \in \mathbb{R}$이고, $1 \le i \le n$인 모든 $i$에 대하여 $a_i \in \mathbb{R}_{\gt 0}$이다.</p>
+        <p><strong>2.</strong> 모든 $a_i$가 정수이면 이 분수를 <strong>단순연분수</strong>라고 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> By a <strong>finite continued fraction</strong> is meant a fraction of the form</p>
+        <div class="math-display">$$a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}$$</div>
+        <p>where $a_0 \in \mathbb{R}$ and $a_i \in \mathbb{R}_{\gt 0}$ for all $1 \le i \le n$.</p>
+        <p><strong>2.</strong> Such a fraction is called simple if all of $a_i$ are integers.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.21 ═══════════ -->
+
+<!-- Theorem 3.1 -->
+<div class="card thm-card" id="c3-1t">
+  <div class="card-head">
+    <span class="thm-num">THM 3.1</span>
+    <span class="thm-title">유리수의 유한 단순연분수 표현 <em>Any Rational Number as a Finite Simple Continued Fraction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>임의의 유리수는 유한 단순연분수로 나타낼 수 있다.</p>
+        <p>위 정리 증명의 핵심은 유클리드 호제법이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$r$을 임의의 유리수 $\frac{a}{b}$ ($b \gt 0$)라 하자. 유클리드 호제법에 의하여 다음 식을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned}
+a &= ba_0 + r_1, 0 \lt r_1 \lt b \\
+b &= r_1a_1 + r_2, 0 \lt r_2 \lt r_1 \\
+r_1 &= r_2a_2 + r_3, 0 \lt r_3 \lt r_2 \\
+&\cdots \\
+r_{n-2} &= r_{n-1}a_{n-1} + r_n, 0 \lt r_n \lt r_{n-1} \\
+r_{n-1} &= r_na_n + 0.
+\end{aligned}$$</div>
+        <p>그러면 다음이 성립함을 안다.</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{a}{b} &= a_0 + \frac{r_1}{b} = a_0 + \cfrac{1}{\cfrac{b}{r_1}} \\
+\frac{b}{r_1} &= a_1 + \frac{r_2}{r_1} = a_1 + \cfrac{1}{\cfrac{r_2}{r_1}} \\
+&\cdots \\
+\frac{r_{n-1}}{r_n} &= a_n.
+\end{aligned}$$</div>
+        <p>위 결과로부터 다음 공식을 얻는다.</p>
+        <div class="math-display">$$\frac{a}{b} = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}.$$</div>
+        <p>이로써 증명이 끝난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Any rational number can be written as a finite simple continued fraction.</p>
+        <p>The key point of proof of above theorem is the Euclid&rsquo;s algorithm.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $r$ be an arbitrary rational number $\frac{a}{b}$ ($b \gt 0$). By Euclid&rsquo;s algorithm, we have the equations</p>
+        <div class="math-display">$$\begin{aligned}
+a &= ba_0 + r_1, 0 \lt r_1 \lt b \\
+b &= r_1a_1 + r_2, 0 \lt r_2 \lt r_1 \\
+r_1 &= r_2a_2 + r_3, 0 \lt r_3 \lt r_2 \\
+&\cdots \\
+r_{n-2} &= r_{n-1}a_{n-1} + r_n, 0 \lt r_n \lt r_{n-1} \\
+r_{n-1} &= r_na_n + 0.
+\end{aligned}$$</div>
+        <p>Then we know that</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{a}{b} &= a_0 + \frac{r_1}{b} = a_0 + \cfrac{1}{\cfrac{b}{r_1}} \\
+\frac{b}{r_1} &= a_1 + \frac{r_2}{r_1} = a_1 + \cfrac{1}{\cfrac{r_2}{r_1}} \\
+&\cdots \\
+\frac{r_{n-1}}{r_n} &= a_n.
+\end{aligned}$$</div>
+        <p>In above result, we can get the formula</p>
+        <div class="math-display">$$\frac{a}{b} = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}.$$</div>
+        <p>Now we are done.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.22 ═══════════ -->
+
+<!-- Example 3.2 -->
+<div class="card exam-card" id="c3-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3.2</span>
+    <span class="exam-title">19/51의 단순연분수 전개 <em>Expressing 19/51 as a Simple Continued Fraction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\frac{19}{51}$을 단순연분수로 나타내 보자. 유클리드 호제법에 의하여 다음 식을 얻는다.</p>
+        <div class="math-display">$$51 = 2 \cdot 19 + 13, 19 = 1 \cdot 13 + 6, 13 = 2 \cdot 6 + 1, 6 = 6 \cdot 1 + 0.$$</div>
+        <p>위 식을 이용하여 단순연분수를 만들면 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{19}{51} &= \cfrac{1}{\cfrac{51}{19}} \\
+&= \cfrac{1}{2 + \cfrac{13}{19}} \\
+&= \cfrac{1}{2 + \cfrac{1}{\cfrac{19}{13}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{6}{13}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{\cfrac{13}{6}}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2 + \cfrac{1}{6}}}}
+\end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let us represent $\frac{19}{51}$ as a simple continued fraction. By Euclid&rsquo;s algorithm, we have the equations</p>
+        <div class="math-display">$$51 = 2 \cdot 19 + 13, 19 = 1 \cdot 13 + 6, 13 = 2 \cdot 6 + 1, 6 = 6 \cdot 1 + 0.$$</div>
+        <p>Making the simple continued fraction using above formula, it is seen that</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{19}{51} &= \cfrac{1}{\cfrac{51}{19}} \\
+&= \cfrac{1}{2 + \cfrac{13}{19}} \\
+&= \cfrac{1}{2 + \cfrac{1}{\cfrac{19}{13}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{6}{13}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{\cfrac{13}{6}}}} \\
+&= \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2 + \cfrac{1}{6}}}}
+\end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.23 ═══════════ -->
+
+<!-- Definition 3.3 -->
+<div class="card def-card" id="c3-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3.3</span>
+    <span class="def-title">연분수 기호 <em>The Symbol [a0; a1, ⋯, an]</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>기호 $\left[a_0; a_1, \cdots, a_n\right]$은 다음 유한 연분수를 나타낸다.</p>
+        <div class="math-display">$$a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The symbol $\left[a_0; a_1, \cdots, a_n\right]$ denotes a finite continued fraction</p>
+        <div class="math-display">$$a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots \cfrac{1}{a_{n-1} + \cfrac{1}{a_n}}}}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.23) -->
+<div class="card note-card" id="note05-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예를 들어 $\frac{19}{51}$의 경우,</p>
+        <div class="math-display">$$\frac{19}{51} = \left[0; 2, 1, 2, 6\right] = \left[0; 2, 1, 2, 5, 1\right].$$</div>
+        <p>단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$은 $\left[a_0; a_1, \cdots, a_n - 1, 1\right]$과 같음에 유의하라.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For example, in the case of $\frac{19}{51}$,</p>
+        <div class="math-display">$$\frac{19}{51} = \left[0; 2, 1, 2, 6\right] = \left[0; 2, 1, 2, 5, 1\right].$$</div>
+        <p>Remark that a simple continued fraction $\left[a_0; a_1, \cdots, a_n\right]$ is same as $\left[a_0; a_1, \cdots, a_n - 1, 1\right]$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (p.23) : [Simple continued fraction algorithm] -->
+<div class="card algo-card" id="algo05-1">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">단순연분수 알고리즘 <em>Simple Continued Fraction Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> 유리수 $\frac{a}{b}$ ($b \gt 0$)</p>
+        <p><strong>출력 :</strong> $\frac{a}{b}$와 같은 단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$</p>
+        <p><strong>(a)</strong> $a = a_0 b + r_1$, $b = a_1 r_1 + r_2$라 하자.</p>
+        <p><strong>(b)</strong> $r_i \neq 0$이면 $r_{i-1} = a_i r_i + r_{i+1}$이다.</p>
+        <p><strong>(c)</strong> $r_{i-1} = 0$이면 이 알고리즘을 종료한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> $\frac{a}{b}$ a rational number ($b \gt 0$)</p>
+        <p><strong>Output :</strong> $\left[a_0; a_1, \cdots, a_n\right]$ a simple continued fraction equal to $\frac{a}{b}$</p>
+        <p><strong>(a)</strong> Let $a = a_0 b + r_1$, $b = a_1 r_1 + r_2$.</p>
+        <p><strong>(b)</strong> If $r_i \neq 0$, then $r_{i-1} = a_i r_i + r_{i+1}$.</p>
+        <p><strong>(c)</strong> If $r_{i-1} = 0$, then terminate this algorithm.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.4 -->
+<div class="card ex-card" id="c3-4">
+  <div class="card-head">
+    <span class="ex-num">EX 3.4</span>
+    <span class="ex-title">172/51과 71/55의 단순연분수 <em>Simple Continued Fractions of 172/51 and 71/55</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\frac{172}{51}$, $\frac{71}{55}$ 각각을 단순연분수로 나타내라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>유클리드 호제법에 의하여 $\frac{172}{51}$에 대해 다음 식을 얻는다.</p>
+        <div class="math-display">$$172 = 3 \cdot 51 + 19, \ 51 = 2 \cdot 19 + 13, \ 19 = 1 \cdot 13 + 6, \ 13 = 2 \cdot 6 + 1, \ 6 = 6 \cdot 1 + 0.$$</div>
+        <p>따라서 몫을 차례로 읽으면</p>
+        <div class="math-display">$$\frac{172}{51} = \left[3; 2, 1, 2, 6\right] = 3 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2 + \cfrac{1}{6}}}}$$</div>
+        <p>이다. 같은 방법으로 $\frac{71}{55}$에 대하여는</p>
+        <div class="math-display">$$71 = 1 \cdot 55 + 16, \ 55 = 3 \cdot 16 + 7, \ 16 = 2 \cdot 7 + 2, \ 7 = 3 \cdot 2 + 1, \ 2 = 2 \cdot 1 + 0$$</div>
+        <p>을 얻으므로</p>
+        <div class="math-display">$$\frac{71}{55} = \left[1; 3, 2, 3, 2\right] = 1 + \cfrac{1}{3 + \cfrac{1}{2 + \cfrac{1}{3 + \cfrac{1}{2}}}}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Express each number as a simple continued fraction $\frac{172}{51}$, $\frac{71}{55}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By Euclid&rsquo;s algorithm, for $\frac{172}{51}$ we get</p>
+        <div class="math-display">$$172 = 3 \cdot 51 + 19, \ 51 = 2 \cdot 19 + 13, \ 19 = 1 \cdot 13 + 6, \ 13 = 2 \cdot 6 + 1, \ 6 = 6 \cdot 1 + 0.$$</div>
+        <p>Reading off the quotients,</p>
+        <div class="math-display">$$\frac{172}{51} = \left[3; 2, 1, 2, 6\right] = 3 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2 + \cfrac{1}{6}}}}.$$</div>
+        <p>In the same way, for $\frac{71}{55}$ we get</p>
+        <div class="math-display">$$71 = 1 \cdot 55 + 16, \ 55 = 3 \cdot 16 + 7, \ 16 = 2 \cdot 7 + 2, \ 7 = 3 \cdot 2 + 1, \ 2 = 2 \cdot 1 + 0,$$</div>
+        <p>so</p>
+        <div class="math-display">$$\frac{71}{55} = \left[1; 3, 2, 3, 2\right] = 1 + \cfrac{1}{3 + \cfrac{1}{2 + \cfrac{1}{3 + \cfrac{1}{2}}}}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.5 -->
+<div class="card ex-card" id="c3-5">
+  <div class="card-head">
+    <span class="ex-num">EX 3.5</span>
+    <span class="ex-title">118/303의 연분수 전개 <em>The Continued Fraction of 118/303</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유클리드 호제법을 이용하여 $\left[a_0; a_1, \cdots, a_n\right] = \frac{118}{303}$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>유클리드 호제법에 의하여 다음 식을 얻는다.</p>
+        <div class="math-display">$$303 = 2 \cdot 118 + 67, \ 118 = 1 \cdot 67 + 51, \ 67 = 1 \cdot 51 + 16, \ 51 = 3 \cdot 16 + 3, \ 16 = 5 \cdot 3 + 1, \ 3 = 3 \cdot 1 + 0.$$</div>
+        <p>$\frac{118}{303} \lt 1$이므로 $a_0 = 0$이고, 나머지 몫을 차례로 읽으면</p>
+        <div class="math-display">$$\frac{118}{303} = \left[0; 2, 1, 1, 3, 5, 3\right]$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By Euclid&rsquo;s algorithm, find $\left[a_0; a_1, \cdots, a_n\right] = \frac{118}{303}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By Euclid&rsquo;s algorithm, we get</p>
+        <div class="math-display">$$303 = 2 \cdot 118 + 67, \ 118 = 1 \cdot 67 + 51, \ 67 = 1 \cdot 51 + 16, \ 51 = 3 \cdot 16 + 3, \ 16 = 5 \cdot 3 + 1, \ 3 = 3 \cdot 1 + 0.$$</div>
+        <p>Since $\frac{118}{303} \lt 1$, $a_0 = 0$, and reading off the remaining quotients,</p>
+        <div class="math-display">$$\frac{118}{303} = \left[0; 2, 1, 1, 3, 5, 3\right].$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.6 -->
+<div class="card ex-card" id="c3-6">
+  <div class="card-head">
+    <span class="ex-num">EX 3.6</span>
+    <span class="ex-title">연분수가 나타내는 유리수 <em>Rational Numbers Represented by Continued Fractions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 단순연분수가 나타내는 유리수를 구하라.</p>
+        <div class="math-display">$$\left[-2; 2, 4, 6, 8\right], \left[0; 1, 2, 3, 4, 3, 2, 1\right]$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\left[-2; 2, 4, 6, 8\right]$에서 $a_0=-2, a_1=2, a_2=4, a_3=6, a_4=8$이다. 정리 3.8의 점화식 $p_k = a_kp_{k-1}+p_{k-2}$, $q_k = a_kq_{k-1}+q_{k-2}$ (단 $p_{-2}=0, q_{-2}=1, p_{-1}=1, q_{-1}=0$)를 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= -2, q_0 = 1 \\
+p_1 &= 2 \cdot(-2) + 1 = -3, q_1 = 2 \cdot 1 + 0 = 2 \\
+p_2 &= 4 \cdot(-3) + (-2) = -14, q_2 = 4 \cdot 2 + 1 = 9 \\
+p_3 &= 6 \cdot(-14) + (-3) = -87, q_3 = 6 \cdot 9 + 2 = 56 \\
+p_4 &= 8 \cdot(-87) + (-14) = -710, q_4 = 8 \cdot 56 + 9 = 457
+\end{aligned}$$</div>
+        <p>를 얻는다. 정리 3.8에 의해 $\left[-2; 2, 4, 6, 8\right] = C_4 = \frac{p_4}{q_4} = -\frac{710}{457}$이고, 따름정리 3.10에 의해 이는 이미 기약분수이다.</p>
+        <p>같은 방법으로 $\left[0; 1, 2, 3, 4, 3, 2, 1\right]$에서는 $a_0=0, a_1=1, a_2=2, a_3=3, a_4=4, a_5=3, a_6=2, a_7=1$이므로</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 1 \cdot 0 + 1 = 1, q_1 = 1 \cdot 1 + 0 = 1 \\
+p_2 &= 2 \cdot 1 + 0 = 2, q_2 = 2 \cdot 1 + 1 = 3 \\
+p_3 &= 3 \cdot 2 + 1 = 7, q_3 = 3 \cdot 3 + 1 = 10 \\
+p_4 &= 4 \cdot 7 + 2 = 30, q_4 = 4 \cdot 10 + 3 = 43 \\
+p_5 &= 3 \cdot 30 + 7 = 97, q_5 = 3 \cdot 43 + 10 = 139 \\
+p_6 &= 2 \cdot 97 + 30 = 224, q_6 = 2 \cdot 139 + 43 = 321 \\
+p_7 &= 1 \cdot 224 + 97 = 321, q_7 = 1 \cdot 321 + 139 = 460
+\end{aligned}$$</div>
+        <p>를 얻고, 따라서 $\left[0; 1, 2, 3, 4, 3, 2, 1\right] = C_7 = \frac{p_7}{q_7} = \frac{321}{460}$이며, 이 역시 따름정리 3.10에 의해 기약분수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the rational numbers represented by the following simple continued fractions,</p>
+        <div class="math-display">$$\left[-2; 2, 4, 6, 8\right], \left[0; 1, 2, 3, 4, 3, 2, 1\right]$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>For $\left[-2; 2, 4, 6, 8\right]$, $a_0=-2, a_1=2, a_2=4, a_3=6, a_4=8$. Applying the recursion $p_k = a_kp_{k-1}+p_{k-2}$, $q_k = a_kq_{k-1}+q_{k-2}$ of Theorem 3.8 (with $p_{-2}=0, q_{-2}=1, p_{-1}=1, q_{-1}=0$),</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= -2, q_0 = 1 \\
+p_1 &= 2 \cdot(-2) + 1 = -3, q_1 = 2 \cdot 1 + 0 = 2 \\
+p_2 &= 4 \cdot(-3) + (-2) = -14, q_2 = 4 \cdot 2 + 1 = 9 \\
+p_3 &= 6 \cdot(-14) + (-3) = -87, q_3 = 6 \cdot 9 + 2 = 56 \\
+p_4 &= 8 \cdot(-87) + (-14) = -710, q_4 = 8 \cdot 56 + 9 = 457
+\end{aligned}$$</div>
+        <p>By Theorem 3.8, $\left[-2; 2, 4, 6, 8\right] = C_4 = \frac{p_4}{q_4} = -\frac{710}{457}$, and by Corollary 3.10 this is already in lowest terms.</p>
+        <p>In the same way, for $\left[0; 1, 2, 3, 4, 3, 2, 1\right]$ we have $a_0=0, a_1=1, a_2=2, a_3=3, a_4=4, a_5=3, a_6=2, a_7=1$, so</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 1 \cdot 0 + 1 = 1, q_1 = 1 \cdot 1 + 0 = 1 \\
+p_2 &= 2 \cdot 1 + 0 = 2, q_2 = 2 \cdot 1 + 1 = 3 \\
+p_3 &= 3 \cdot 2 + 1 = 7, q_3 = 3 \cdot 3 + 1 = 10 \\
+p_4 &= 4 \cdot 7 + 2 = 30, q_4 = 4 \cdot 10 + 3 = 43 \\
+p_5 &= 3 \cdot 30 + 7 = 97, q_5 = 3 \cdot 43 + 10 = 139 \\
+p_6 &= 2 \cdot 97 + 30 = 224, q_6 = 2 \cdot 139 + 43 = 321 \\
+p_7 &= 1 \cdot 224 + 97 = 321, q_7 = 1 \cdot 321 + 139 = 460
+\end{aligned}$$</div>
+        <p>so $\left[0; 1, 2, 3, 4, 3, 2, 1\right] = C_7 = \frac{p_7}{q_7} = \frac{321}{460}$, again in lowest terms by Corollary 3.10.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 3.7 -->
+<div class="card def-card" id="c3-7">
+  <div class="card-head">
+    <span class="def-num">DEF 3.7</span>
+    <span class="def-title">k번째 근사분수 <em>The kth Convergent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$1 \le k \le n$에 대하여, $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수는 $\left[a_0; a_1, \cdots, a_k\right]$이며, 이를 $C_k$로 나타낸다. 편의상 $C_0 = a_0$으로 둔다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $1 \le k \le n$, the $k$th convergent of $\left[a_0; a_1, \cdots, a_n\right]$ is $\left[a_0; a_1, \cdots, a_k\right]$, denoted by $C_k$. For convenience, $C_0 = a_0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.24 ═══════════ -->
+
+<!-- 서술 단락 (p.24) -->
+<div class="card note-card" id="note05-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예를 들어 $\frac{19}{51} = \left[0; 2, 1, 2, 6\right]$일 때, 차례로 근사분수를 구하면 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= 0 \\
+C_1 &= [0; 2] = 0 + \frac{1}{2} = \frac{1}{2} \\
+C_2 &= [0; 2, 1] = 0 + \cfrac{1}{2 + \cfrac{1}{1}} = \frac{1}{3} \\
+C_3 &= [0; 2, 1, 2] = 0 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2}}} = \frac{3}{8} \\
+C_4 &= \left[0; 2, 1, 2, 6\right] = \frac{19}{51}.
+\end{aligned}$$</div>
+        <p>$C_k = \left[a_0; a_1, \cdots, a_k\right]$이고 $C_{k+1} = \left[a_0; a_1, \cdots, a_k + \frac{1}{a_{k+1}}\right] = \left[a_0; a_1, \cdots, a_{k+1}\right]$임에 유의하라.</p>
+        <p>$C_k$의 값은 어떻게 계산할까? $\left[a_0; a_1, \cdots, a_n\right]$ ($0 \le k \lt n$)에 대하여 수 $p_k, q_k$를 다음과 같이 정의하자.</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= a_0, q_0 = 1 \\
+p_1 &= a_1a_0 + 1, q_1 = a_1 \\
+&\cdots \\
+p_k &= a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}.
+\end{aligned}$$</div>
+        <p>직접 계산해 보면 $\left[a_0; a_1, \cdots, a_n\right]$의 처음 몇 근사분수는 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= a_0 = \frac{a_0}{1} = \frac{p_0}{q_0} \\
+C_1 &= a_0 + \frac{1}{a_1} = \frac{a_1a_0 + 1}{a_1} = \frac{p_1}{q_1} \\
+C_2 &= a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2}} = \frac{a_2(a_1a_0 + 1) + a_0}{a_2a_1 + 1} = \frac{p_2}{q_2}.
+\end{aligned}$$</div>
+        <p>편의상 $p_{-2} = 0, q_{-2} = 1, p_{-1} = 1, q_{-1} = 0$으로 정의하자. 그러면 모든 $k \ge 0$에 대하여 $p_k = a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For example, $\frac{19}{51} = \left[0; 2, 1, 2, 6\right]$, the successive convergents are</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= 0 \\
+C_1 &= [0; 2] = 0 + \frac{1}{2} = \frac{1}{2} \\
+C_2 &= [0; 2, 1] = 0 + \cfrac{1}{2 + \cfrac{1}{1}} = \frac{1}{3} \\
+C_3 &= [0; 2, 1, 2] = 0 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{2}}} = \frac{3}{8} \\
+C_4 &= \left[0; 2, 1, 2, 6\right] = \frac{19}{51}.
+\end{aligned}$$</div>
+        <p>Remark that $C_k = \left[a_0; a_1, \cdots, a_k\right]$ and $C_{k+1} = \left[a_0; a_1, \cdots, a_k + \frac{1}{a_{k+1}}\right] = \left[a_0; a_1, \cdots, a_{k+1}\right]$.</p>
+        <p>How to compute the value of $C_k$? Define the number $p_k, q_k$ for $\left[a_0; a_1, \cdots, a_n\right]$ ($0 \le k \lt n$),</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= a_0, q_0 = 1 \\
+p_1 &= a_1a_0 + 1, q_1 = a_1 \\
+&\cdots \\
+p_k &= a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}.
+\end{aligned}$$</div>
+        <p>A direct computation shows that the first few convergents of $\left[a_0; a_1, \cdots, a_n\right]$ are</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= a_0 = \frac{a_0}{1} = \frac{p_0}{q_0} \\
+C_1 &= a_0 + \frac{1}{a_1} = \frac{a_1a_0 + 1}{a_1} = \frac{p_1}{q_1} \\
+C_2 &= a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2}} = \frac{a_2(a_1a_0 + 1) + a_0}{a_2a_1 + 1} = \frac{p_2}{q_2}.
+\end{aligned}$$</div>
+        <p>For convenience, define $p_{-2} = 0, q_{-2} = 1, p_{-1} = 1, q_{-1} = 0$. Then $p_k = a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}$ for all $k \ge 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.25 ═══════════ -->
+
+<!-- Theorem 3.8 -->
+<div class="card thm-card" id="c3-8">
+  <div class="card-head">
+    <span class="thm-num">THM 3.8</span>
+    <span class="thm-title">근사분수의 값 Ck = pk/qk <em>The Value of the kth Convergent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수는 다음 값을 갖는다.</p>
+        <div class="math-display">$$C_k = \frac{p_k}{q_k}, \ 0 \le k \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$k = 0, 1, 2$일 때는 성립한다. $2 \le m \lt n$인 $m$에 대하여 $k = m$일 때 정리가 성립한다고 가정하자. 그러면 $C_m = \frac{p_m}{q_m} = \frac{a_mp_{m-1} + p_{m-2}}{a_mq_{m-1} + q_{m-2}}$이다. 그러면</p>
+        <div class="math-display">$$\begin{aligned}
+C_{m+1} &= \left[a_0; a_1, \cdots, a_{m+1}\right] \\
+&= \left[a_0; a_1, \cdots, a_m + \frac{1}{a_{m+1}}\right] \\
+&= \frac{\left(a_m + \frac{1}{a_{m+1}}\right)p_{m-1} + p_{m-2}}{\left(a_m + \frac{1}{a_{m+1}}\right)q_{m-1} + q_{m-2}} \\
+&= \frac{a_{m+1}(a_mp_{m-1} + p_{m-2}) + p_{m-1}}{a_{m+1}(a_mq_{m-1} + q_{m-2}) + q_{m-1}} \\
+&= \frac{a_{m+1}p_m + p_{m-1}}{a_{m+1}q_m + q_{m-1}} \\
+&= \frac{p_{m+1}}{q_{m+1}}.
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The $k$th convergent of the simple continued fraction $\left[a_0; a_1, \cdots, a_n\right]$ has the value</p>
+        <div class="math-display">$$C_k = \frac{p_k}{q_k}, \ 0 \le k \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>It is true for $k = 0, 1, 2$. Assume that $k = m$ for $2 \le m \lt n$ theorem is true for $k = m$. Then $C_m = \frac{p_m}{q_m} = \frac{a_mp_{m-1} + p_{m-2}}{a_mq_{m-1} + q_{m-2}}$. Then</p>
+        <div class="math-display">$$\begin{aligned}
+C_{m+1} &= \left[a_0; a_1, \cdots, a_{m+1}\right] \\
+&= \left[a_0; a_1, \cdots, a_m + \frac{1}{a_{m+1}}\right] \\
+&= \frac{\left(a_m + \frac{1}{a_{m+1}}\right)p_{m-1} + p_{m-2}}{\left(a_m + \frac{1}{a_{m+1}}\right)q_{m-1} + q_{m-2}} \\
+&= \frac{a_{m+1}(a_mp_{m-1} + p_{m-2}) + p_{m-1}}{a_{m+1}(a_mq_{m-1} + q_{m-2}) + q_{m-1}} \\
+&= \frac{a_{m+1}p_m + p_{m-1}}{a_{m+1}q_m + q_{m-1}} \\
+&= \frac{p_{m+1}}{q_{m+1}}.
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.25) -->
+<div class="card note-card" id="note05-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구체적인 예 $\frac{19}{51} = \left[0; 2, 1, 2, 6\right]$에서 이 방법이 어떻게 작동하는지 살펴보자.</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 0 \cdot 2 + 1 = 1, q_1 = 2 \\
+p_2 &= 1 \cdot 1 + 0 = 1, q_2 = 1 \cdot 2 + 1 = 3 \\
+p_3 &= 2 \cdot 1 + 1 = 3, q_3 = 2 \cdot 3 + 2 = 8 \\
+p_4 &= 6 \cdot 3 + 1 = 19, q_4 = 6 \cdot 8 + 3 = 51
+\end{aligned}$$</div>
+        <p>이로부터 $[0; 2, 1, 2, 6]$의 근사분수는 다음과 같음을 알 수 있다.</p>
+        <div class="math-display">$$C_0 = \frac{p_0}{q_0} = 0, C_1 = \frac{p_1}{q_1} = \frac{1}{2}, C_2 = \frac{p_2}{q_2} = \frac{1}{3}, C_3 = \frac{p_3}{q_3} = \frac{3}{8}, C_4 = \frac{p_4}{q_4} = \frac{19}{51}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let us see how this works in a specific example, $\frac{19}{51} = \left[0; 2, 1, 2, 6\right]$</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 0 \cdot 2 + 1 = 1, q_1 = 2 \\
+p_2 &= 1 \cdot 1 + 0 = 1, q_2 = 1 \cdot 2 + 1 = 3 \\
+p_3 &= 2 \cdot 1 + 1 = 3, q_3 = 2 \cdot 3 + 2 = 8 \\
+p_4 &= 6 \cdot 3 + 1 = 19, q_4 = 6 \cdot 8 + 3 = 51
+\end{aligned}$$</div>
+        <p>It says that the convergents of $[0; 2, 1, 2, 6]$ are</p>
+        <div class="math-display">$$C_0 = \frac{p_0}{q_0} = 0, C_1 = \frac{p_1}{q_1} = \frac{1}{2}, C_2 = \frac{p_2}{q_2} = \frac{1}{3}, C_3 = \frac{p_3}{q_3} = \frac{3}{8}, C_4 = \frac{p_4}{q_4} = \frac{19}{51}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.26 ═══════════ -->
+
+<!-- Theorem 3.9 (원문 증명 빈칸) -->
+<div class="card thm-card" id="c3-9">
+  <div class="card-head">
+    <span class="thm-num">THM 3.9</span>
+    <span class="thm-title">이웃한 근사분수의 관계식 <em>The Relation Between Consecutive Convergents</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C_k = \frac{p_k}{q_k}$가 유한 단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수이면, 다음이 성립한다.</p>
+        <div class="math-display">$$p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}, 1 \le k \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 원문에는 증명이 비어 있어 아래 증명은 직접 작성한 것이다.</p>
+        <p>$k$에 대한 수학적 귀납법으로 증명한다.</p>
+        <p><strong>기초 단계.</strong> $k=1$일 때, $p_1 = a_1a_0+1, q_1=a_1, p_0=a_0, q_0=1$이므로</p>
+        <div class="math-display">$$p_1q_0 - q_1p_0 = (a_1a_0+1)\cdot1 - a_1\cdot a_0 = 1 = (-1)^0.$$</div>
+        <p>따라서 $k=1$일 때 성립한다.</p>
+        <p><strong>귀납 단계.</strong> $1 \le k \lt n$인 $k$에 대하여 $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$이 성립한다고 가정하자. 점화식 $p_{k+1}=a_{k+1}p_k+p_{k-1}$, $q_{k+1}=a_{k+1}q_k+q_{k-1}$을 이용하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_{k+1}q_k - q_{k+1}p_k &= (a_{k+1}p_k+p_{k-1})q_k - (a_{k+1}q_k+q_{k-1})p_k \\
+&= a_{k+1}p_kq_k + p_{k-1}q_k - a_{k+1}q_kp_k - q_{k-1}p_k \\
+&= p_{k-1}q_k - q_{k-1}p_k \\
+&= -(p_kq_{k-1} - q_kp_{k-1}) \\
+&= -(-1)^{k-1} = (-1)^k
+\end{aligned}$$</div>
+        <p>이다. 따라서 $k+1$일 때도 성립한다. 수학적 귀납법에 의하여 $1 \le k \le n$인 모든 $k$에 대하여 $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $C_k = \frac{p_k}{q_k}$ is the $k$th convergent of the finite simple continued fraction $\left[a_0; a_1, \cdots, a_n\right]$, then</p>
+        <div class="math-display">$$p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}, 1 \le k \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The notes leave this proof blank; the proof below is ours.</p>
+        <p>We prove this by induction on $k$.</p>
+        <p><strong>Base case.</strong> For $k=1$, since $p_1 = a_1a_0+1, q_1=a_1, p_0=a_0, q_0=1$,</p>
+        <div class="math-display">$$p_1q_0 - q_1p_0 = (a_1a_0+1)\cdot1 - a_1\cdot a_0 = 1 = (-1)^0.$$</div>
+        <p>So the statement holds for $k=1$.</p>
+        <p><strong>Inductive step.</strong> Suppose $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$ holds for some $k$ with $1 \le k \lt n$. Using the recursion $p_{k+1}=a_{k+1}p_k+p_{k-1}$, $q_{k+1}=a_{k+1}q_k+q_{k-1}$,</p>
+        <div class="math-display">$$\begin{aligned}
+p_{k+1}q_k - q_{k+1}p_k &= (a_{k+1}p_k+p_{k-1})q_k - (a_{k+1}q_k+q_{k-1})p_k \\
+&= a_{k+1}p_kq_k + p_{k-1}q_k - a_{k+1}q_kp_k - q_{k-1}p_k \\
+&= p_{k-1}q_k - q_{k-1}p_k \\
+&= -(p_kq_{k-1} - q_kp_{k-1}) \\
+&= -(-1)^{k-1} = (-1)^k.
+\end{aligned}$$</div>
+        <p>So the statement also holds for $k+1$. By induction, $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$ for all $1 \le k \le n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 3.10 -->
+<div class="card thm-card" id="c3-10">
+  <div class="card-head">
+    <span class="thm-num">COR 3.10</span>
+    <span class="thm-title">근사분수의 분자와 분모는 서로소 <em>pk and qk Are Relatively Prime</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$1 \le k \le n$에 대하여 $p_k$와 $q_k$는 서로소이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$d \mid q_k$, $d \mid p_k$라 하자. $p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}$임을 안다. 그러면 $d$가 좌변을 나눈다. 따라서 $d \mid (-1)^{k-1}$이다. 그러므로 $d = 1$이다. 이로써 증명이 끝난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $1 \le k \le n$, $p_k$ and $q_k$ are relatively prime.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Assume that $d|q_k$, $d|p_k$. We know that $p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}$. Then $d|L.H.S.$ So $d|(-1)^{k-1}$. Therefore $d = 1$. Now we are done.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.26) -->
+<div class="card note-card" id="note05-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리하면, $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수는 $\left[a_0; a_1, \cdots, a_k\right] = \frac{p_k}{q_k}$이다. 그리고 $\gcd(p_k, q_k) = 1$이다.</p>
+        <p>예를 들어 연분수 $[0; 1, 1, \cdots, 1]$을 생각하자. $p_{-2} = 0, q_{-2} = 1, p_{-1} = 1, q_{-1} = 0$임에 유의하라. 그러면 모든 $k$에 대하여 $p_k = a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}$이다. 그러면 $C_0 = \frac{0}{1}, C_1 = \frac{1}{1}, C_2 = \frac{1}{2}, C_3 = \frac{2}{3}, \cdots$이다. $k$번째 근사분수 $C_k$의 분자는 $p_k = 1 \cdot p_{k-1} + p_{k-2} = p_{k-1} + p_{k-2}$이고 분모는 $q_k = 1 \cdot q_{k-1} + q_{k-2} = q_{k-1} + q_{k-2}$이다. $u_k$를 $k$번째 피보나치 수라 하자. 그러면 $C_k = \frac{u_k}{u_{k+1}}$이다. 정리 3.9에 의하여 정수 $k$에 대하여 $u_{k+1}u_{k-1} - u_k^2 = (-1)^k$임을 안다.</p>
+        <p><em>역주.</em> 원문은 $C_k = \frac{u_k}{u_{k-1}}$로 적었으나 분자와 분모가 뒤바뀐 식이다. $[0; 1, 1, \cdots, 1]$에서는 $p_k = u_k$, $q_k = u_{k+1}$ ($u_0 = 0, u_1 = u_2 = 1$)이므로 $C_k = \frac{u_k}{u_{k+1}}$이며, 이는 바로 위에 적은 $C_0 = \frac{0}{1}, C_1 = \frac{1}{1}, C_2 = \frac{1}{2}, C_3 = \frac{2}{3}$과 맞는다. 이 번호 매김에서 정리 3.9는 카시니 항등식 $u_{k+1}u_{k-1} - u_k^2 = (-1)^k$를 준다(원문의 $(-1)^{k-1}$은 $u_k$를 $(k+1)$번째 피보나치 수로 보는 다른 번호 매김에 해당한다). 또 이 항등식은 따름정리 3.10이 아니라 정리 3.9에서 따라 나온다.</p>
+        <p>(Burton) 정리 15.8의 예로, 일차 디오판토스 방정식 $172x + 20y = 1000$을 풀어 보자. $43x + 5y = 250$을 풀면 된다 ($\because \gcd(43, 5) = 1$). 유클리드 호제법에 의하여 다음 식을 얻는다.</p>
+        <div class="math-display">$$43 = 8 \cdot 5 + 3, 5 = 1 \cdot 3 + 2, 3 = 1 \cdot 2 + 1, 2 = 2 \cdot 1.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{43}{5} &= [8; 1, 1, 2] \\
+&= 8 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{2}}}.
+\end{aligned}$$</div>
+        <p>$q_2 = 2$이고 $p_2 = 17$이며 $p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}$임을 안다. 따라서 $43 \cdot 2 - 5 \cdot 17 = (-1)^2 = 1$이다. 그러므로 $172x + 20y = 1000$의 정수해로 $(x, y) = (2\cdot250, -17\cdot250) = (500, -4250)$을 얻는다.</p>
+        <p><em>역주.</em> 원문은 $(x, y) = (2\cdot250, 17\cdot250) = (500, 4250)$으로 적었으나 부호 오류이다. $43 \cdot 2 - 5 \cdot 17 = 1$이므로 $y_0 = -17\cdot250$이 되어야 하고, 옳은 해는 $(500, -4250)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Summary, $k$th convergent of $\left[a_0; a_1, \cdots, a_n\right]$ is $\left[a_0; a_1, \cdots, a_k\right] = \frac{p_k}{q_k}$. And $\gcd(p_k, q_k) = 1$.</p>
+        <p>For example, consider the continued fraction $[0; 1, 1, \cdots, 1]$. Note that $p_{-2} = 0, q_{-2} = 1, p_{-1} = 1, q_{-1} = 0$. Then $p_k = a_kp_{k-1} + p_{k-2}, q_k = a_kq_{k-1} + q_{k-2}$ for all $k$. Then $C_0 = \frac{0}{1}, C_1 = \frac{1}{1}, C_2 = \frac{1}{2}, C_3 = \frac{2}{3}, \cdots$. The numerator of the $k$th convergent $C_k$ is $p_k = 1 \cdot p_{k-1} + p_{k-2} = p_{k-1} + p_{k-2}$ and the denominator is $q_k = 1 \cdot q_{k-1} + q_{k-2} = q_{k-1} + q_{k-2}$. Define $u_k$ be the $k$th Fibonacci number. Then $C_k = \frac{u_k}{u_{k-1}}$. By corollary 3.10, we know that $u_{k+1}u_{k-1} - u_k^2 = (-1)^{k-1}$ for integer $k$.</p>
+        <p>For example of theorem 15. 8, let us solve the linear Diophantine equation $172x + 20y = 1000$. We need to solve the $43x + 5y = 250$ ($\because \gcd(43, 5) = 1$). By Euclid&rsquo;s algorithm, we have the formula</p>
+        <div class="math-display">$$43 = 8 \cdot 5 + 3, 5 = 1 \cdot 3 + 2, 3 = 1 \cdot 2 + 1, 2 = 2 \cdot 1.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\begin{aligned}
+\frac{43}{5} &= [8; 1, 1, 2] \\
+&= 8 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{2}}}.
+\end{aligned}$$</div>
+        <p>We know that $q_2 = 2$ and $p_2 = 17$ and $p_kq_{k-1} - q_kp_{k-1} = (-1)^{k-1}$. Therefore $43 \cdot 2 - 5 \cdot 17 = (-1)^2 = 1$. So we have an integral solution $(x, y) = (2 \cdot 250, 17 \cdot 250) = (500, 4250)$ of $172x + 20y = 1000$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lemma 3.11 (진술 p.26 · 증명 p.27) -->
+<div class="card thm-card" id="c3-11">
+  <div class="card-head">
+    <span class="thm-num">LEM 3.11</span>
+    <span class="thm-title">분모 수열의 단조성 <em>The Denominators Are Nondecreasing</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수 $C_k$의 분모를 $q_k$라 하면, $k \gt 1$일 때 $1 \le k \le n$에 대하여 $q_{k-1} \le q_k$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$k = 1$이라 하자. 그러면 $q_0 = 1$, $q_1 = a_1 \ge 1$이다. 따라서 $q_0 \le q_1$이다. $k = m$ ($1 \le m \lt n$)일 때 성립한다고 가정하자. 그러면</p>
+        <div class="math-display">$$q_{m+1} = a_{m+1}q_m + q_{m-1} \ge a_{m+1}q_m \ge 1 \cdot q_m = q_m.$$</div>
+        <p><em>역주.</em> 원문은 $q_{m+1} = a_mq_m + a_{m-1} \gt a_{m+1}q_m \ge 1 \cdot q_m = q_m$으로 적었으나 첨자가 잘못되었다. 옳은 식은 $q_{m+1} = a_{m+1}q_m + q_{m-1} \ge a_{m+1}q_m \ge 1 \cdot q_m = q_m$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $q_k$ is the denominator of the $k$th convergent $C_k$ of the simple continued fraction $\left[a_0; a_1, \cdots, a_n\right]$, then $q_{k-1} \le q_k$ for $1 \le k \le n$, when $k \gt 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Assume that $k = 1$. Then $q_0 = 1$, $q_1 = a_1 \ge 1$. Therefore $q_0 \le q_1$. Assume that it is true for $k = m$ ($1 \le m \lt n$). Then</p>
+        <div class="math-display">$$q_{m+1} = a_mq_m + a_{m-1} \gt a_{m+1}q_m \ge 1 \cdot q_m = q_m.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.27 ═══════════ -->
+
+<!-- Theorem 3.12 (원문 증명 빈칸) -->
+<div class="card thm-card" id="c3-12">
+  <div class="card-head">
+    <span class="thm-num">THM 3.12</span>
+    <span class="thm-title">짝수 번째와 홀수 번째 근사분수의 대소 <em>Convergents with Even and Odd Scripts</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $C_0 \lt C_2 \lt C_4 \lt \cdots$</p>
+        <p><strong>2.</strong> $C_1 \gt C_3 \gt C_5 \gt \cdots$</p>
+        <p><strong>3.</strong> 홀수 번째 근사분수는 모두 짝수 번째 근사분수보다 크다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 원문에는 증명이 비어 있어 아래 증명은 직접 작성한 것이다.</p>
+        <p>정리 3.9에 의해 $1 \le k \le n$에서 $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$이므로</p>
+        <div class="math-display">$$C_k - C_{k-1} = \frac{p_k}{q_k} - \frac{p_{k-1}}{q_{k-1}} = \frac{p_kq_{k-1}-q_kp_{k-1}}{q_kq_{k-1}} = \frac{(-1)^{k-1}}{q_kq_{k-1}}. \qquad (\text{i})$$</div>
+        <p>이제 $2 \le k \le n$에서 $C_k-C_{k-2}$를 계산하자. 점화식 $p_k=a_kp_{k-1}+p_{k-2}$, $q_k=a_kq_{k-1}+q_{k-2}$를 대입하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_kq_{k-2} - q_kp_{k-2} &= (a_kp_{k-1}+p_{k-2})q_{k-2} - (a_kq_{k-1}+q_{k-2})p_{k-2} \\
+&= a_k(p_{k-1}q_{k-2} - q_{k-1}p_{k-2}) \\
+&= a_k(-1)^{(k-1)-1} = a_k(-1)^{k-2} = a_k(-1)^k
+\end{aligned}$$</div>
+        <p>이고 (마지막 줄에서 정리 3.9를 $k-1$번째 관계식에 적용했다), 따라서</p>
+        <div class="math-display">$$C_k - C_{k-2} = \frac{p_kq_{k-2}-q_kp_{k-2}}{q_kq_{k-2}} = \frac{a_k(-1)^k}{q_kq_{k-2}}. \qquad (\text{ii})$$</div>
+        <p>$a_k$와 $q_k$는 모두 양수이므로 (ii)의 부호는 $(-1)^k$의 부호와 같다.</p>
+        <p><strong>1.</strong> $k$가 짝수이면 (ii)에서 $C_k - C_{k-2} \gt 0$, 즉 $C_k \gt C_{k-2}$이다. $k=2,4,6,\cdots$에 차례로 적용하면 $C_0 \lt C_2 \lt C_4 \lt \cdots$를 얻는다.</p>
+        <p><strong>2.</strong> $k$가 홀수이면 (ii)에서 $C_k - C_{k-2} \lt 0$, 즉 $C_k \lt C_{k-2}$이다. $k=3,5,7,\cdots$에 차례로 적용하면 $C_1 \gt C_3 \gt C_5 \gt \cdots$를 얻는다.</p>
+        <p><strong>3.</strong> 먼저 (i)에서 이웃한 두 근사분수의 대소를 읽자. $2j+1 \le n$일 때 $k=2j+1$로 두면 $C_{2j+1} - C_{2j} = \frac{(-1)^{2j}}{q_{2j+1}q_{2j}} = \frac{1}{q_{2j+1}q_{2j}} \gt 0$이고, $1 \le 2i \le n$일 때 $k=2i$로 두면 $C_{2i} - C_{2i-1} = \frac{(-1)^{2i-1}}{q_{2i}q_{2i-1}} = -\frac{1}{q_{2i}q_{2i-1}} \lt 0$이다. 즉</p>
+        <div class="math-display">$$C_{2j} \lt C_{2j+1} \ \ (2j+1 \le n), \qquad C_{2i} \lt C_{2i-1} \ \ (1 \le 2i \le n).$$</div>
+        <p>이제 $2i \le n$이고 $2j+1 \le n$인 임의의 $i, j \ge 0$을 잡아 $C_{2i} \lt C_{2j+1}$임을 보이자. $2i \lt 2j+1$이면 $2i \le 2j$이므로 1에 의해 $C_{2i} \le C_{2j}$이고, $2i \gt 2j+1$이면 $2i-1 \ge 2j+1$이므로 2에 의해 $C_{2i-1} \le C_{2j+1}$이다. 따라서</p>
+        <div class="math-display">$$C_{2i} \le C_{2j} \lt C_{2j+1} \qquad \text{또는} \qquad C_{2i} \lt C_{2i-1} \le C_{2j+1}$$</div>
+        <p>이므로 어느 경우에나 $C_{2i} \lt C_{2j+1}$이다. 두 경우 모두 쓰인 첨자가 $n$ 이하이므로 등장하는 근사분수는 모두 존재한다. 즉 홀수 번째 근사분수는 모두 짝수 번째 근사분수보다 크다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> $C_0 \lt C_2 \lt C_4 \lt \cdots$</p>
+        <p><strong>2.</strong> $C_1 \gt C_3 \gt C_5 \gt \cdots$</p>
+        <p><strong>3.</strong> Every convergent with an odd script is greater than every convergent with an even script.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The notes leave this proof blank; the proof below is ours.</p>
+        <p>By Theorem 3.9, $p_kq_{k-1}-q_kp_{k-1}=(-1)^{k-1}$ for $1 \le k \le n$, so</p>
+        <div class="math-display">$$C_k - C_{k-1} = \frac{p_k}{q_k} - \frac{p_{k-1}}{q_{k-1}} = \frac{p_kq_{k-1}-q_kp_{k-1}}{q_kq_{k-1}} = \frac{(-1)^{k-1}}{q_kq_{k-1}}. \qquad (\text{i})$$</div>
+        <p>Now compute $C_k-C_{k-2}$ for $2 \le k \le n$. Substituting the recursion $p_k=a_kp_{k-1}+p_{k-2}$, $q_k=a_kq_{k-1}+q_{k-2}$,</p>
+        <div class="math-display">$$\begin{aligned}
+p_kq_{k-2} - q_kp_{k-2} &= (a_kp_{k-1}+p_{k-2})q_{k-2} - (a_kq_{k-1}+q_{k-2})p_{k-2} \\
+&= a_k(p_{k-1}q_{k-2} - q_{k-1}p_{k-2}) \\
+&= a_k(-1)^{(k-1)-1} = a_k(-1)^{k-2} = a_k(-1)^k,
+\end{aligned}$$</div>
+        <p>where the last line applies Theorem 3.9 to the pair $(k-1, k-2)$. Hence</p>
+        <div class="math-display">$$C_k - C_{k-2} = \frac{p_kq_{k-2}-q_kp_{k-2}}{q_kq_{k-2}} = \frac{a_k(-1)^k}{q_kq_{k-2}}. \qquad (\text{ii})$$</div>
+        <p>Since $a_k$ and $q_k$ are positive, the sign of (ii) agrees with the sign of $(-1)^k$.</p>
+        <p><strong>1.</strong> If $k$ is even, (ii) gives $C_k - C_{k-2} \gt 0$, i.e. $C_k \gt C_{k-2}$. Applying this for $k=2,4,6,\cdots$ gives $C_0 \lt C_2 \lt C_4 \lt \cdots$.</p>
+        <p><strong>2.</strong> If $k$ is odd, (ii) gives $C_k - C_{k-2} \lt 0$, i.e. $C_k \lt C_{k-2}$. Applying this for $k=3,5,7,\cdots$ gives $C_1 \gt C_3 \gt C_5 \gt \cdots$.</p>
+        <p><strong>3.</strong> First read off from (i) how two adjacent convergents compare. For $2j+1 \le n$, taking $k=2j+1$ gives $C_{2j+1} - C_{2j} = \frac{(-1)^{2j}}{q_{2j+1}q_{2j}} = \frac{1}{q_{2j+1}q_{2j}} \gt 0$, and for $1 \le 2i \le n$, taking $k=2i$ gives $C_{2i} - C_{2i-1} = \frac{(-1)^{2i-1}}{q_{2i}q_{2i-1}} = -\frac{1}{q_{2i}q_{2i-1}} \lt 0$. That is,</p>
+        <div class="math-display">$$C_{2j} \lt C_{2j+1} \ \ (2j+1 \le n), \qquad C_{2i} \lt C_{2i-1} \ \ (1 \le 2i \le n).$$</div>
+        <p>Now take any $i, j \ge 0$ with $2i \le n$ and $2j+1 \le n$, and show $C_{2i} \lt C_{2j+1}$. If $2i \lt 2j+1$, then $2i \le 2j$, so part 1 gives $C_{2i} \le C_{2j}$; if $2i \gt 2j+1$, then $2i-1 \ge 2j+1$, so part 2 gives $C_{2i-1} \le C_{2j+1}$. Hence</p>
+        <div class="math-display">$$C_{2i} \le C_{2j} \lt C_{2j+1} \qquad \text{or} \qquad C_{2i} \lt C_{2i-1} \le C_{2j+1},$$</div>
+        <p>so in either case $C_{2i} \lt C_{2j+1}$. In both cases every index used is at most $n$, so all the convergents appearing exist. That is, every convergent with an odd script is greater than every convergent with an even script.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.13 -->
+<div class="card ex-card" id="c3-13">
+  <div class="card-head">
+    <span class="ex-num">EX 3.13</span>
+    <span class="ex-title">[1; 2, 3, ⋯, n, n+1]의 분자 pn <em>The Numerator pn of [1; 2, 3, ⋯, n, n+1]</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(*) $C_k = \frac{p_k}{q_k}$를 $[1; 2, 3, \cdots, n, n+1]$의 $k$번째 근사분수라 하자. $p_n = np_{n-1} + np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + p_0 + 1$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\left[1;2,3,\cdots,n,n+1\right]$에서는 $a_k = k+1$ ($0 \le k \le n$)이므로, 정리 3.8의 점화식은 모든 $k \ge 0$에 대하여 $p_k = (k+1)p_{k-1}+p_{k-2}$의 꼴이다 (단 $p_{-2}=0, p_{-1}=1$인 앞선 약속을 쓴다).</p>
+        <p><strong>1단계.</strong> $k=n$을 대입하면 $a_n=n+1$이므로</p>
+        <div class="math-display">$$p_n = (n+1)p_{n-1} + p_{n-2} = np_{n-1} + (p_{n-1}+p_{n-2}).$$</div>
+        <p><strong>2단계.</strong> $1 \le k \le n-1$인 각 $k$에 대해 $p_k=(k+1)p_{k-1}+p_{k-2}$의 양변에 $p_{k-1}$을 더하면</p>
+        <div class="math-display">$$p_k + p_{k-1} = (k+1)p_{k-1} + (p_{k-1}+p_{k-2}).$$</div>
+        <p><strong>3단계 (전개).</strong> 2단계의 식을 $k=n-1,n-2,\cdots,1$에 차례로 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_{n-1}+p_{n-2} &= np_{n-2} + (p_{n-2}+p_{n-3}) \\
+p_{n-2}+p_{n-3} &= (n-1)p_{n-3} + (p_{n-3}+p_{n-4}) \\
+&\ \ \vdots \\
+p_2+p_1 &= 3p_1 + (p_1+p_0) \\
+p_1+p_0 &= 2p_0 + (p_0+p_{-1})
+\end{aligned}$$</div>
+        <p>이고, 이 식들을 위에서부터 차례로 대입해 나가면 (즉 $k=n-1$부터 $k=1$까지 내려가는 귀납법)</p>
+        <div class="math-display">$$p_{n-1}+p_{n-2} = np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + (p_0+p_{-1})$$</div>
+        <p>을 얻는다. $p_{-1}=1$이므로 마지막 항은 $p_0+1$이다. 이를 1단계의 식에 대입하면</p>
+        <div class="math-display">$$p_n = np_{n-1} + np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + p_0 + 1$$</div>
+        <p>을 얻는다. 실제로 $n=3$일 때 $p_0=1, p_1=3, p_2=10, p_3=43$이고,</p>
+        <div class="math-display">$$3\cdot10 + 3\cdot3 + 2\cdot1 + 1 + 1 = 30+9+2+1+1 = 43 = p_3$$</div>
+        <p>이므로 공식이 확인된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>(*) Let $C_k = \frac{p_k}{q_k}$ be the $k$th convergent of $[1; 2, 3, \cdots, n, n+1]$. Prove that $p_n = np_{n-1} + np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + p_0 + 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>For $\left[1;2,3,\cdots,n,n+1\right]$ we have $a_k = k+1$ ($0 \le k \le n$), so the recursion of Theorem 3.8 reads $p_k = (k+1)p_{k-1}+p_{k-2}$ for all $k \ge 0$ (using the earlier convention $p_{-2}=0, p_{-1}=1$).</p>
+        <p><strong>Step 1.</strong> Taking $k=n$, since $a_n=n+1$,</p>
+        <div class="math-display">$$p_n = (n+1)p_{n-1} + p_{n-2} = np_{n-1} + (p_{n-1}+p_{n-2}).$$</div>
+        <p><strong>Step 2.</strong> For each $k$ with $1 \le k \le n-1$, adding $p_{k-1}$ to both sides of $p_k=(k+1)p_{k-1}+p_{k-2}$ gives</p>
+        <div class="math-display">$$p_k + p_{k-1} = (k+1)p_{k-1} + (p_{k-1}+p_{k-2}).$$</div>
+        <p><strong>Step 3 (unrolling).</strong> Applying Step 2 successively for $k=n-1,n-2,\cdots,1$,</p>
+        <div class="math-display">$$\begin{aligned}
+p_{n-1}+p_{n-2} &= np_{n-2} + (p_{n-2}+p_{n-3}) \\
+p_{n-2}+p_{n-3} &= (n-1)p_{n-3} + (p_{n-3}+p_{n-4}) \\
+&\ \ \vdots \\
+p_2+p_1 &= 3p_1 + (p_1+p_0) \\
+p_1+p_0 &= 2p_0 + (p_0+p_{-1})
+\end{aligned}$$</div>
+        <p>and substituting these in turn (i.e. induction descending from $k=n-1$ to $k=1$) yields</p>
+        <div class="math-display">$$p_{n-1}+p_{n-2} = np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + (p_0+p_{-1}).$$</div>
+        <p>Since $p_{-1}=1$, the last term is $p_0+1$. Substituting into Step 1,</p>
+        <div class="math-display">$$p_n = np_{n-1} + np_{n-2} + (n-1)p_{n-3} + \cdots + 3p_1 + 2p_0 + p_0 + 1,$$</div>
+        <p>as claimed. Indeed, for $n=3$, $p_0=1, p_1=3, p_2=10, p_3=43$, and</p>
+        <div class="math-display">$$3\cdot10 + 3\cdot3 + 2\cdot1 + 1 + 1 = 30+9+2+1+1 = 43 = p_3,$$</div>
+        <p>confirming the formula.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.14 -->
+<div class="card ex-card" id="c3-14">
+  <div class="card-head">
+    <span class="ex-num">EX 3.14</span>
+    <span class="ex-title">분모 qk의 아래끝 <em>A Lower Bound for qk</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C_k = \frac{p_k}{q_k}$를 단순연분수 $\left[a_0; a_1, \cdots, a_n\right]$의 $k$번째 근사분수라 하자. $2 \le k \le n$에 대하여 $q_k \ge 2^{\frac{k-1}{2}}$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>단순연분수의 정의(정의 3.1, 3.3)에 의해 $a_1, \cdots, a_n$은 모두 양의 정수이므로 $a_k \ge 1$ ($1 \le k \le n$)이다. 또 $q_{-1}=0, q_0=1, q_1=a_1 \ge 1$이다. 정리 3.8의 점화식 $q_k = a_kq_{k-1}+q_{k-2}$에 $a_k \ge 1$을 적용하면 $2 \le k \le n$에서</p>
+        <div class="math-display">$$q_k \ge q_{k-1}+q_{k-2}.$$</div>
+        <p>보조정리 3.11에 의해 $q_{k-2} \le q_{k-1}$이므로 $q_{k-1}+q_{k-2} \ge 2q_{k-2}$이고, 따라서</p>
+        <div class="math-display">$$q_k \ge 2q_{k-2}, \qquad 2 \le k \le n. \qquad (\ast)$$</div>
+        <p>$(\ast)$는 $q_k$를 두 단계 앞선 $q_{k-2}$로 묶으므로, $k$가 짝수인 경우와 홀수인 경우를 각각 $k=2$, $k=3$을 기초로 하는 귀납법으로 다룬다.</p>
+        <p><strong>기초 단계 ($k=2$).</strong> $q_2 = a_2q_1+q_0 \ge 1\cdot1+1 = 2 \ge \sqrt{2} = 2^{\frac{1}{2}}$이므로 $k=2$일 때 성립한다.</p>
+        <p><strong>기초 단계 ($k=3$).</strong> $q_3 = a_3q_2+q_1 \ge q_2+q_1 \ge 2+1 = 3 \ge 2 = 2^1$이므로 $k=3$일 때 성립한다.</p>
+        <p><strong>귀납 단계.</strong> $4 \le k \le n$이고 $q_{k-2} \ge 2^{\frac{(k-2)-1}{2}} = 2^{\frac{k-3}{2}}$이 이미 성립한다고 가정하자 (기초 단계에 의해 $k-2=2,3$일 때 성립하며, 이 단계를 거쳐 모든 $k-2$에 대해 귀납적으로 성립한다). 그러면 $(\ast)$에 의해</p>
+        <div class="math-display">$$q_k \ge 2q_{k-2} \ge 2\cdot2^{\frac{k-3}{2}} = 2^{\frac{k-3}{2}+1} = 2^{\frac{k-1}{2}}$$</div>
+        <p>이므로 $k$일 때도 성립한다. 수학적 귀납법(두 단계씩 진행하는 강한 귀납법)에 의하여 $2 \le k \le n$인 모든 $k$에 대하여 $q_k \ge 2^{\frac{k-1}{2}}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C_k = \frac{p_k}{q_k}$ be the $k$th convergent of the simple continued fraction $\left[a_0; a_1, \cdots, a_n\right]$. Prove that $q_k \ge 2^{\frac{k-1}{2}}$, $2 \le k \le n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By the definition of a simple continued fraction (Definitions 3.1, 3.3), $a_1, \cdots, a_n$ are all positive integers, so $a_k \ge 1$ for $1 \le k \le n$. Also $q_{-1}=0, q_0=1, q_1=a_1 \ge 1$. Applying $a_k \ge 1$ to the recursion $q_k = a_kq_{k-1}+q_{k-2}$ of Theorem 3.8, for $2 \le k \le n$,</p>
+        <div class="math-display">$$q_k \ge q_{k-1}+q_{k-2}.$$</div>
+        <p>By Lemma 3.11, $q_{k-2} \le q_{k-1}$, so $q_{k-1}+q_{k-2} \ge 2q_{k-2}$, and hence</p>
+        <div class="math-display">$$q_k \ge 2q_{k-2}, \qquad 2 \le k \le n. \qquad (\ast)$$</div>
+        <p>Since $(\ast)$ links $q_k$ to $q_{k-2}$ two steps earlier, we handle even and odd $k$ by induction based on $k=2$ and $k=3$ respectively.</p>
+        <p><strong>Base case ($k=2$).</strong> $q_2 = a_2q_1+q_0 \ge 1\cdot1+1 = 2 \ge \sqrt{2} = 2^{\frac{1}{2}}$, so the claim holds for $k=2$.</p>
+        <p><strong>Base case ($k=3$).</strong> $q_3 = a_3q_2+q_1 \ge q_2+q_1 \ge 2+1 = 3 \ge 2 = 2^1$, so the claim holds for $k=3$.</p>
+        <p><strong>Inductive step.</strong> Let $4 \le k \le n$ and suppose $q_{k-2} \ge 2^{\frac{(k-2)-1}{2}} = 2^{\frac{k-3}{2}}$ already holds (true for $k-2=2,3$ by the base cases, and inductively for every $k-2$ through this same step). Then by $(\ast)$,</p>
+        <div class="math-display">$$q_k \ge 2q_{k-2} \ge 2\cdot2^{\frac{k-3}{2}} = 2^{\frac{k-3}{2}+1} = 2^{\frac{k-1}{2}},$$</div>
+        <p>so the claim holds for $k$ as well. By mathematical induction (a strong induction proceeding two steps at a time), $q_k \ge 2^{\frac{k-1}{2}}$ for all $2 \le k \le n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.15 -->
+<div class="card ex-card" id="c3-15">
+  <div class="card-head">
+    <span class="ex-num">EX 3.15</span>
+    <span class="ex-title">근사분수 계산 <em>Computing Convergents</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[1; 2, 3, 3, 2, 1]$과 $[-3; 1, 1]$의 근사분수를 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$[1; 2, 3, 3, 2, 1]$에서는 $a_0=1, a_1=2, a_2=3, a_3=3, a_4=2, a_5=1$이다. 정리 3.8의 점화식 $p_k=a_kp_{k-1}+p_{k-2}$, $q_k=a_kq_{k-1}+q_{k-2}$ (단 $p_{-2}=0, q_{-2}=1, p_{-1}=1, q_{-1}=0$)를 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 1, q_0 = 1 \\
+p_1 &= 2\cdot1+1 = 3, q_1 = 2\cdot1+0 = 2 \\
+p_2 &= 3\cdot3+1 = 10, q_2 = 3\cdot2+1 = 7 \\
+p_3 &= 3\cdot10+3 = 33, q_3 = 3\cdot7+2 = 23 \\
+p_4 &= 2\cdot33+10 = 76, q_4 = 2\cdot23+7 = 53 \\
+p_5 &= 1\cdot76+33 = 109, q_5 = 1\cdot53+23 = 76
+\end{aligned}$$</div>
+        <p>를 얻으므로 $[1; 2, 3, 3, 2, 1]$의 근사분수는 차례로</p>
+        <div class="math-display">$$C_0=\frac{1}{1}, \ C_1=\frac{3}{2}, \ C_2=\frac{10}{7}, \ C_3=\frac{33}{23}, \ C_4=\frac{76}{53}, \ C_5=\frac{109}{76}$$</div>
+        <p>이다.</p>
+        <p>$[-3; 1, 1]$에서는 $a_0=-3, a_1=1, a_2=1$이므로 같은 점화식을 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= -3, q_0 = 1 \\
+p_1 &= 1\cdot(-3)+1 = -2, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot(-2)+(-3) = -5, q_2 = 1\cdot1+1 = 2
+\end{aligned}$$</div>
+        <p>를 얻으므로 $[-3; 1, 1]$의 근사분수는 차례로</p>
+        <div class="math-display">$$C_0=\frac{-3}{1}, \ C_1=\frac{-2}{1}, \ C_2=\frac{-5}{2}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the convergents of the $[1; 2, 3, 3, 2, 1]$ and $[-3; 1, 1]$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>For $[1; 2, 3, 3, 2, 1]$, $a_0=1, a_1=2, a_2=3, a_3=3, a_4=2, a_5=1$. Applying the recursion $p_k=a_kp_{k-1}+p_{k-2}$, $q_k=a_kq_{k-1}+q_{k-2}$ of Theorem 3.8 (with $p_{-2}=0, q_{-2}=1, p_{-1}=1, q_{-1}=0$),</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 1, q_0 = 1 \\
+p_1 &= 2\cdot1+1 = 3, q_1 = 2\cdot1+0 = 2 \\
+p_2 &= 3\cdot3+1 = 10, q_2 = 3\cdot2+1 = 7 \\
+p_3 &= 3\cdot10+3 = 33, q_3 = 3\cdot7+2 = 23 \\
+p_4 &= 2\cdot33+10 = 76, q_4 = 2\cdot23+7 = 53 \\
+p_5 &= 1\cdot76+33 = 109, q_5 = 1\cdot53+23 = 76
+\end{aligned}$$</div>
+        <p>so the convergents of $[1; 2, 3, 3, 2, 1]$ are, in order,</p>
+        <div class="math-display">$$C_0=\frac{1}{1}, \ C_1=\frac{3}{2}, \ C_2=\frac{10}{7}, \ C_3=\frac{33}{23}, \ C_4=\frac{76}{53}, \ C_5=\frac{109}{76}.$$</div>
+        <p>For $[-3; 1, 1]$, $a_0=-3, a_1=1, a_2=1$, and the same recursion gives</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= -3, q_0 = 1 \\
+p_1 &= 1\cdot(-3)+1 = -2, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot(-2)+(-3) = -5, q_2 = 1\cdot1+1 = 2
+\end{aligned}$$</div>
+        <p>so the convergents of $[-3; 1, 1]$ are, in order,</p>
+        <div class="math-display">$$C_0=\frac{-3}{1}, \ C_1=\frac{-2}{1}, \ C_2=\frac{-5}{2}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.16 -->
+<div class="card ex-card" id="c3-16">
+  <div class="card-head">
+    <span class="ex-num">EX 3.16</span>
+    <span class="ex-title">3.1416과 3.14159의 단순연분수 <em>Simple Continued Fractions of 3.1416 and 3.14159</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>3.1416의 단순연분수 표현과 3.14159의 단순연분수 표현을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$3.1416 = \frac{31416}{10000} = \frac{3927}{1250}$이다. 알고리즘(단순연분수 알고리즘)에 따라 $\frac{3927}{1250}$에 유클리드 호제법을 적용하면</p>
+        <div class="math-display">$$3927 = 3\cdot1250 + 177, \ 1250 = 7\cdot177 + 11, \ 177 = 16\cdot11 + 1, \ 11 = 11\cdot1 + 0$$</div>
+        <p>을 얻는다. 몫을 차례로 읽으면</p>
+        <div class="math-display">$$3.1416 = \frac{3927}{1250} = \left[3; 7, 16, 11\right]$$</div>
+        <p>이다.</p>
+        <p>같은 방법으로 $3.14159 = \frac{314159}{100000}$에 유클리드 호제법을 적용하면</p>
+        <div class="math-display">$$\begin{aligned}
+314159 &= 3\cdot100000 + 14159 \\
+100000 &= 7\cdot14159 + 887 \\
+14159 &= 15\cdot887 + 854 \\
+887 &= 1\cdot854 + 33 \\
+854 &= 25\cdot33 + 29 \\
+33 &= 1\cdot29 + 4 \\
+29 &= 7\cdot4 + 1 \\
+4 &= 4\cdot1 + 0
+\end{aligned}$$</div>
+        <p>을 얻는다. 몫을 차례로 읽으면</p>
+        <div class="math-display">$$3.14159 = \frac{314159}{100000} = \left[3; 7, 15, 1, 25, 1, 7, 4\right]$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the simple continued fraction representation of 3.1416, and that of 3.14159.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$3.1416 = \frac{31416}{10000} = \frac{3927}{1250}$. By the (simple continued fraction) algorithm, applying Euclid&rsquo;s algorithm to $\frac{3927}{1250}$,</p>
+        <div class="math-display">$$3927 = 3\cdot1250 + 177, \ 1250 = 7\cdot177 + 11, \ 177 = 16\cdot11 + 1, \ 11 = 11\cdot1 + 0.$$</div>
+        <p>Reading off the quotients,</p>
+        <div class="math-display">$$3.1416 = \frac{3927}{1250} = \left[3; 7, 16, 11\right].$$</div>
+        <p>In the same way, applying Euclid&rsquo;s algorithm to $3.14159 = \frac{314159}{100000}$,</p>
+        <div class="math-display">$$\begin{aligned}
+314159 &= 3\cdot100000 + 14159 \\
+100000 &= 7\cdot14159 + 887 \\
+14159 &= 15\cdot887 + 854 \\
+887 &= 1\cdot854 + 33 \\
+854 &= 25\cdot33 + 29 \\
+33 &= 1\cdot29 + 4 \\
+29 &= 7\cdot4 + 1 \\
+4 &= 4\cdot1 + 0.
+\end{aligned}$$</div>
+        <p>Reading off the quotients,</p>
+        <div class="math-display">$$3.14159 = \frac{314159}{100000} = \left[3; 7, 15, 1, 25, 1, 7, 4\right].$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.17 -->
+<div class="card ex-card" id="c3-17">
+  <div class="card-head">
+    <span class="ex-num">EX 3.17</span>
+    <span class="ex-title">뒤집은 연분수 <em>Reversing a Continued Fraction</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C_k = \frac{p_k}{q_k}$가 단순연분수 $[a_0; a_1, \cdots, a_n]$의 $k$번째 근사분수이고 $a_0 \gt 0$이면, 다음을 보여라.</p>
+        <div class="math-display">$$\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0], \quad \frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>먼저 모든 분모가 $0$이 아님을 확인하자. $a_0 \gt 0$이고 $a_1, \cdots, a_n$은 모두 양의 정수이므로, $p_{-1}=1$, $p_0=a_0 \ge 1$에서 시작하여 정리 3.8의 점화식 $p_j=a_jp_{j-1}+p_{j-2}$ ($p_{-2}=0$)를 적용하면 귀납적으로 $p_j \ge 1 \gt 0$이 모든 $j \ge -1$에 대하여 성립한다. 마찬가지로 $q_{-1}=0, q_0=1, q_1=a_1\ge1$에서 시작하여 보조정리 3.11에 의해 $q_j$는 단조증가하므로 $q_j \ge 1 \gt 0$이 모든 $j \ge 0$에 대하여 성립한다. 따라서 $p_{k-1}, q_{k-1}$은 각각 $k \ge 0$, $k \ge 1$에서 $0$이 아니다.</p>
+        <p><strong>1. $\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0]$의 증명.</strong> $k$에 대한 수학적 귀납법으로 보인다.</p>
+        <p><strong>기초 단계 ($k=1$).</strong> $p_1 = a_1a_0+1$, $p_0=a_0$이므로</p>
+        <div class="math-display">$$\frac{p_1}{p_0} = \frac{a_1a_0+1}{a_0} = a_1 + \frac{1}{a_0} = [a_1; a_0]$$</div>
+        <p>이며 (여기서 $a_0 \gt 0$이 정수이므로 $[a_1;a_0]$은 정당한 연분수 기호이다), 이는 $k=1$일 때 구하는 등식이다.</p>
+        <p><strong>귀납 단계.</strong> $1 \le m \lt n$인 $m$에 대하여 $\frac{p_m}{p_{m-1}} = [a_m; a_{m-1}, \cdots, a_1, a_0]$이 성립한다고 가정하자. 정의 3.3에 의해</p>
+        <div class="math-display">$$[a_{m+1}; a_m, \cdots, a_1, a_0] = a_{m+1} + \cfrac{1}{[a_m; a_{m-1}, \cdots, a_1, a_0]} = a_{m+1} + \frac{1}{\frac{p_m}{p_{m-1}}} = a_{m+1} + \frac{p_{m-1}}{p_m}$$</div>
+        <p>이고, 이는 다시</p>
+        <div class="math-display">$$= \frac{a_{m+1}p_m+p_{m-1}}{p_m} = \frac{p_{m+1}}{p_m}$$</div>
+        <p>이다 (마지막 등호는 정리 3.8의 점화식 $p_{m+1}=a_{m+1}p_m+p_{m-1}$에 의한다). 따라서 $k=m+1$일 때도 성립한다. 수학적 귀납법에 의하여 $1 \le k \le n$인 모든 $k$에 대하여 $\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0]$이다.</p>
+        <p><strong>2. $\frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$의 증명.</strong> $k=1$일 때는 $q_1=a_1$, $q_0=1$이므로</p>
+        <div class="math-display">$$\frac{q_1}{q_0} = \frac{a_1}{1} = a_1 = [a_1]$$</div>
+        <p>이며, 이는 (한 항으로만 이루어진 연분수 $[a_1]=a_1$이라는 약속에 의해) $k=1$일 때 구하는 등식이다. $2 \le k \le n$일 때는 1과 똑같은 귀납법을 쓰되 기초 단계를 $k=1$의 위 식으로 삼는다. $1 \le m \lt n$에서 $\frac{q_m}{q_{m-1}} = [a_m; a_{m-1}, \cdots, a_1]$이 성립한다고 가정하면, 정의 3.3에 의해</p>
+        <div class="math-display">$$[a_{m+1}; a_m, \cdots, a_1] = a_{m+1} + \cfrac{1}{[a_m; a_{m-1}, \cdots, a_1]} = a_{m+1} + \frac{q_{m-1}}{q_m} = \frac{a_{m+1}q_m+q_{m-1}}{q_m} = \frac{q_{m+1}}{q_m}$$</div>
+        <p>이다 (마지막 등호는 정리 3.8의 점화식 $q_{m+1}=a_{m+1}q_m+q_{m-1}$에 의한다). 따라서 $k=m+1$일 때도 성립하며, 수학적 귀납법에 의하여 $1 \le k \le n$인 모든 $k$에 대하여 $\frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $C_k = \frac{p_k}{q_k}$ is the $k$th convergent of the simple continued fraction $[a_0; a_1, \cdots, a_n]$ and $a_0 \gt 0$, show that</p>
+        <div class="math-display">$$\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0], \quad \frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>First we check that no denominator is $0$. Since $a_0 \gt 0$ and $a_1, \cdots, a_n$ are all positive integers, starting from $p_{-1}=1$, $p_0=a_0 \ge 1$ and applying the recursion $p_j=a_jp_{j-1}+p_{j-2}$ of Theorem 3.8 ($p_{-2}=0$), induction gives $p_j \ge 1 \gt 0$ for all $j \ge -1$. Likewise, starting from $q_{-1}=0, q_0=1, q_1=a_1\ge1$, Lemma 3.11 shows $q_j$ is nondecreasing, so $q_j \ge 1 \gt 0$ for all $j \ge 0$. Hence $p_{k-1}$ and $q_{k-1}$ are nonzero for $k \ge 0$ and $k \ge 1$, respectively.</p>
+        <p><strong>1. Proof of $\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0]$.</strong> We use induction on $k$.</p>
+        <p><strong>Base case ($k=1$).</strong> Since $p_1 = a_1a_0+1$, $p_0=a_0$,</p>
+        <div class="math-display">$$\frac{p_1}{p_0} = \frac{a_1a_0+1}{a_0} = a_1 + \frac{1}{a_0} = [a_1; a_0],$$</div>
+        <p>(here $[a_1;a_0]$ is a legitimate continued-fraction symbol since $a_0 \gt 0$ is an integer), which is the desired identity for $k=1$.</p>
+        <p><strong>Inductive step.</strong> Suppose $\frac{p_m}{p_{m-1}} = [a_m; a_{m-1}, \cdots, a_1, a_0]$ holds for some $m$ with $1 \le m \lt n$. By Definition 3.3,</p>
+        <div class="math-display">$$[a_{m+1}; a_m, \cdots, a_1, a_0] = a_{m+1} + \cfrac{1}{[a_m; a_{m-1}, \cdots, a_1, a_0]} = a_{m+1} + \frac{1}{\frac{p_m}{p_{m-1}}} = a_{m+1} + \frac{p_{m-1}}{p_m},$$</div>
+        <p>and this equals</p>
+        <div class="math-display">$$= \frac{a_{m+1}p_m+p_{m-1}}{p_m} = \frac{p_{m+1}}{p_m}$$</div>
+        <p>(the last equality by the recursion $p_{m+1}=a_{m+1}p_m+p_{m-1}$ of Theorem 3.8). So the identity also holds for $k=m+1$. By induction, $\frac{p_k}{p_{k-1}} = [a_k; a_{k-1}, \cdots, a_1, a_0]$ for all $1 \le k \le n$.</p>
+        <p><strong>2. Proof of $\frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$.</strong> For $k=1$, since $q_1=a_1$, $q_0=1$,</p>
+        <div class="math-display">$$\frac{q_1}{q_0} = \frac{a_1}{1} = a_1 = [a_1],$$</div>
+        <p>which is the desired identity for $k=1$ (by the convention that the one-term continued fraction $[a_1]=a_1$). For $2 \le k \le n$ we use the same induction as in 1, taking the identity above at $k=1$ as base case. Suppose $\frac{q_m}{q_{m-1}} = [a_m; a_{m-1}, \cdots, a_1]$ for some $1 \le m \lt n$; by Definition 3.3,</p>
+        <div class="math-display">$$[a_{m+1}; a_m, \cdots, a_1] = a_{m+1} + \cfrac{1}{[a_m; a_{m-1}, \cdots, a_1]} = a_{m+1} + \frac{q_{m-1}}{q_m} = \frac{a_{m+1}q_m+q_{m-1}}{q_m} = \frac{q_{m+1}}{q_m}$$</div>
+        <p>(the last equality by the recursion $q_{m+1}=a_{m+1}q_m+q_{m-1}$ of Theorem 3.8). So the identity also holds for $k=m+1$, and by induction $\frac{q_k}{q_{k-1}} = [a_k; a_{k-1}, \cdots, a_1]$ for all $1 \le k \le n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.18 -->
+<div class="card ex-card" id="c3-18">
+  <div class="card-head">
+    <span class="ex-num">EX 3.18</span>
+    <span class="ex-title">연분수로 푸는 디오판토스 방정식 <em>Diophantine Equations by Continued Fractions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연분수를 이용하여 다음 각 디오판토스 방정식의 일반해를 구하라.</p>
+        <p><strong>1.</strong> $19x + 51y = 1$.</p>
+        <p><strong>2.</strong> $18x + 5y = 24$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> $\gcd(19,51)=1$이므로 $19x+51y=1$은 정수해를 갖는다. $\frac{19}{51}=[0;2,1,2,6]$이므로 $a_0=0,a_1=2,a_2=1,a_3=2,a_4=6$이고, 정리 3.8의 점화식으로</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 2\cdot0+1 = 1, q_1 = 2\cdot1+0 = 2 \\
+p_2 &= 1\cdot1+0 = 1, q_2 = 1\cdot2+1 = 3 \\
+p_3 &= 2\cdot1+1 = 3, q_3 = 2\cdot3+2 = 8 \\
+p_4 &= 6\cdot3+1 = 19, q_4 = 6\cdot8+3 = 51
+\end{aligned}$$</div>
+        <p>를 얻는다. 즉 근사분수는 $\frac{0}{1},\frac{1}{2},\frac{1}{3},\frac{3}{8},\frac{19}{51}$이며 $n=4$이다. 정리 3.9에 의해 $p_nq_{n-1}-q_np_{n-1}=(-1)^{n-1}$이므로</p>
+        <div class="math-display">$$19\cdot8 - 51\cdot3 = 152-153 = -1 = (-1)^{4-1}.$$</div>
+        <p>양변에 $-1$을 곱하면 $19\cdot(-8)+51\cdot3=1$을 얻으므로 $(x_0,y_0)=(-8,3)$은 $19x+51y=1$의 특수해이다 (확인: $19\cdot(-8)+51\cdot3=-152+153=1$). $\gcd(19,51)=1$이므로 정리 1.9, 1.10에 의해 일반해는</p>
+        <div class="math-display">$$x = -8+51n, \quad y = 3-19n \qquad (n \in \mathbb{Z})$$</div>
+        <p>로 주어진다.</p>
+        <p><strong>2.</strong> $\gcd(18,5)=1$이다. $\frac{18}{5}=[3;1,1,2]$이므로 $a_0=3,a_1=1,a_2=1,a_3=2$이고,</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 3, q_0 = 1 \\
+p_1 &= 1\cdot3+1 = 4, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot4+3 = 7, q_2 = 1\cdot1+1 = 2 \\
+p_3 &= 2\cdot7+4 = 18, q_3 = 2\cdot2+1 = 5
+\end{aligned}$$</div>
+        <p>를 얻는다. 근사분수는 $\frac{3}{1},\frac{4}{1},\frac{7}{2},\frac{18}{5}$이며 $n=3$이다. 정리 3.9에 의해</p>
+        <div class="math-display">$$18\cdot2 - 5\cdot7 = 36-35 = 1 = (-1)^{3-1}.$$</div>
+        <p>이 식은 이미 $18x+5y=1$의 특수해 $(x,y)=(2,-7)$을 준다 (확인: $18\cdot2+5\cdot(-7)=36-35=1$). $18x+5y=24$를 얻으려면 양변에 $24$를 곱하면 되므로 $(x_0,y_0)=(48,-168)$은 $18x+5y=24$의 특수해이다 (확인: $18\cdot48+5\cdot(-168)=864-840=24$). $\gcd(18,5)=1$이므로 정리 1.9, 1.10에 의해 일반해는</p>
+        <div class="math-display">$$x = 48+5n, \quad y = -168-18n \qquad (n \in \mathbb{Z})$$</div>
+        <p>로 주어진다. 매개변수를 $n = n'-9$로 바꾸면 $x=48+5(n'-9)=3+5n'$, $y=-168-18(n'-9)=-6-18n'$이 되므로, 이는 더 간단한 특수해 $(x_0,y_0)=(3,-6)$에서 출발한 같은 해족을 $x=3+5n, y=-6-18n$ ($n \in \mathbb{Z}$)으로 나타낸 것과 같다 (확인: $18\cdot3+5\cdot(-6)=54-30=24$).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By means of continued fractions determine the general solutions of each of the following Diophantine equations:</p>
+        <p><strong>1.</strong> $19x + 51y = 1$.</p>
+        <p><strong>2.</strong> $18x + 5y = 24$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> Since $\gcd(19,51)=1$, $19x+51y=1$ has integral solutions. Since $\frac{19}{51}=[0;2,1,2,6]$, $a_0=0,a_1=2,a_2=1,a_3=2,a_4=6$, and the recursion of Theorem 3.8 gives</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 0, q_0 = 1 \\
+p_1 &= 2\cdot0+1 = 1, q_1 = 2\cdot1+0 = 2 \\
+p_2 &= 1\cdot1+0 = 1, q_2 = 1\cdot2+1 = 3 \\
+p_3 &= 2\cdot1+1 = 3, q_3 = 2\cdot3+2 = 8 \\
+p_4 &= 6\cdot3+1 = 19, q_4 = 6\cdot8+3 = 51.
+\end{aligned}$$</div>
+        <p>So the convergents are $\frac{0}{1},\frac{1}{2},\frac{1}{3},\frac{3}{8},\frac{19}{51}$, and $n=4$. By Theorem 3.9, $p_nq_{n-1}-q_np_{n-1}=(-1)^{n-1}$, so</p>
+        <div class="math-display">$$19\cdot8 - 51\cdot3 = 152-153 = -1 = (-1)^{4-1}.$$</div>
+        <p>Multiplying both sides by $-1$ gives $19\cdot(-8)+51\cdot3=1$, so $(x_0,y_0)=(-8,3)$ is a particular solution of $19x+51y=1$ (check: $19\cdot(-8)+51\cdot3=-152+153=1$). Since $\gcd(19,51)=1$, by Theorems 1.9 and 1.10 the general solution is</p>
+        <div class="math-display">$$x = -8+51n, \quad y = 3-19n \qquad (n \in \mathbb{Z}).$$</div>
+        <p><strong>2.</strong> $\gcd(18,5)=1$. Since $\frac{18}{5}=[3;1,1,2]$, $a_0=3,a_1=1,a_2=1,a_3=2$, and</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 3, q_0 = 1 \\
+p_1 &= 1\cdot3+1 = 4, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot4+3 = 7, q_2 = 1\cdot1+1 = 2 \\
+p_3 &= 2\cdot7+4 = 18, q_3 = 2\cdot2+1 = 5.
+\end{aligned}$$</div>
+        <p>So the convergents are $\frac{3}{1},\frac{4}{1},\frac{7}{2},\frac{18}{5}$, and $n=3$. By Theorem 3.9,</p>
+        <div class="math-display">$$18\cdot2 - 5\cdot7 = 36-35 = 1 = (-1)^{3-1}.$$</div>
+        <p>This already gives a particular solution $(x,y)=(2,-7)$ of $18x+5y=1$ (check: $18\cdot2+5\cdot(-7)=36-35=1$). To reach $18x+5y=24$ we multiply both sides by $24$, so $(x_0,y_0)=(48,-168)$ is a particular solution of $18x+5y=24$ (check: $18\cdot48+5\cdot(-168)=864-840=24$). Since $\gcd(18,5)=1$, by Theorems 1.9 and 1.10 the general solution is</p>
+        <div class="math-display">$$x = 48+5n, \quad y = -168-18n \qquad (n \in \mathbb{Z}).$$</div>
+        <p>Reparametrizing with $n=n'-9$ gives $x=48+5(n'-9)=3+5n'$, $y=-168-18(n'-9)=-6-18n'$, so this is the same family of solutions written from the simpler particular solution $(x_0,y_0)=(3,-6)$ as $x=3+5n, y=-6-18n$ ($n \in \mathbb{Z}$) (check: $18\cdot3+5\cdot(-6)=54-30=24$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3.19 -->
+<div class="card ex-card" id="c3-19">
+  <div class="card-head">
+    <span class="ex-num">EX 3.19</span>
+    <span class="ex-title">정리 3.12의 확인 <em>Verifying Theorem 3.12</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단순연분수 $[1; 1, 1, 1, 1, 1, 1, 1]$에 대하여 정리 3.12를 확인하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 3.12는 세 가지를 주장한다. (1) $C_0 \lt C_2 \lt C_4 \lt \cdots$, (2) $C_1 \gt C_3 \gt C_5 \gt \cdots$, (3) 홀수 번째 근사분수는 모두 짝수 번째 근사분수보다 크다. $[1;1,1,1,1,1,1,1]$에서는 $a_0=a_1=\cdots=a_7=1$이므로 정리 3.8의 점화식으로</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 1, q_0 = 1 \\
+p_1 &= 1\cdot1+1 = 2, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot2+1 = 3, q_2 = 1\cdot1+1 = 2 \\
+p_3 &= 1\cdot3+2 = 5, q_3 = 1\cdot2+1 = 3 \\
+p_4 &= 1\cdot5+3 = 8, q_4 = 1\cdot3+2 = 5 \\
+p_5 &= 1\cdot8+5 = 13, q_5 = 1\cdot5+3 = 8 \\
+p_6 &= 1\cdot13+8 = 21, q_6 = 1\cdot8+5 = 13 \\
+p_7 &= 1\cdot21+13 = 34, q_7 = 1\cdot13+8 = 21
+\end{aligned}$$</div>
+        <p>를 얻는다 (피보나치 수열이 그대로 나타난다). 근사분수와 그 값은</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= \frac{1}{1} = 1, & C_1 &= \frac{2}{1} = 2, & C_2 &= \frac{3}{2} = 1.5, & C_3 &= \frac{5}{3} \approx 1.6667, \\
+C_4 &= \frac{8}{5} = 1.6, & C_5 &= \frac{13}{8} = 1.625, & C_6 &= \frac{21}{13} \approx 1.6154, & C_7 &= \frac{34}{21} \approx 1.6190
+\end{aligned}$$</div>
+        <p>이다. 이제 정리 3.12의 세 항목을 각각 확인하자.</p>
+        <p><strong>(1)</strong> $C_0=1 \lt C_2=1.5 \lt C_4=1.6 \lt C_6\approx1.6154$이므로 $C_0 \lt C_2 \lt C_4 \lt C_6$이 성립한다.</p>
+        <p><strong>(2)</strong> $C_1=2 \gt C_3\approx1.6667 \gt C_5=1.625 \gt C_7\approx1.6190$이므로 $C_1 \gt C_3 \gt C_5 \gt C_7$이 성립한다.</p>
+        <p><strong>(3)</strong> 짝수 번째 근사분수 $\{C_0,C_2,C_4,C_6\}$ 중 최댓값은 $C_6\approx1.6154$이고, 홀수 번째 근사분수 $\{C_1,C_3,C_5,C_7\}$ 중 최솟값은 $C_7\approx1.6190$이다. $C_6 \lt C_7$이므로 짝수 번째 근사분수의 최댓값이 홀수 번째 근사분수의 최솟값보다 작고, 따라서 모든 짝수 번째 근사분수는 모든 홀수 번째 근사분수보다 작다. 즉 홀수 번째 근사분수는 모두 짝수 번째 근사분수보다 크다.</p>
+        <p>세 항목이 모두 확인되었으므로 정리 3.12가 이 연분수에 대하여 성립함이 검증되었다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Verify Theorem 3.12 for the simple continued fraction $[1; 1, 1, 1, 1, 1, 1, 1]$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Theorem 3.12 asserts three things: (1) $C_0 \lt C_2 \lt C_4 \lt \cdots$, (2) $C_1 \gt C_3 \gt C_5 \gt \cdots$, (3) every convergent with an odd script is greater than every convergent with an even script. For $[1;1,1,1,1,1,1,1]$, $a_0=a_1=\cdots=a_7=1$, so the recursion of Theorem 3.8 gives</p>
+        <div class="math-display">$$\begin{aligned}
+p_0 &= 1, q_0 = 1 \\
+p_1 &= 1\cdot1+1 = 2, q_1 = 1\cdot1+0 = 1 \\
+p_2 &= 1\cdot2+1 = 3, q_2 = 1\cdot1+1 = 2 \\
+p_3 &= 1\cdot3+2 = 5, q_3 = 1\cdot2+1 = 3 \\
+p_4 &= 1\cdot5+3 = 8, q_4 = 1\cdot3+2 = 5 \\
+p_5 &= 1\cdot8+5 = 13, q_5 = 1\cdot5+3 = 8 \\
+p_6 &= 1\cdot13+8 = 21, q_6 = 1\cdot8+5 = 13 \\
+p_7 &= 1\cdot21+13 = 34, q_7 = 1\cdot13+8 = 21
+\end{aligned}$$</div>
+        <p>(the Fibonacci sequence appears exactly). The convergents and their values are</p>
+        <div class="math-display">$$\begin{aligned}
+C_0 &= \frac{1}{1} = 1, & C_1 &= \frac{2}{1} = 2, & C_2 &= \frac{3}{2} = 1.5, & C_3 &= \frac{5}{3} \approx 1.6667, \\
+C_4 &= \frac{8}{5} = 1.6, & C_5 &= \frac{13}{8} = 1.625, & C_6 &= \frac{21}{13} \approx 1.6154, & C_7 &= \frac{34}{21} \approx 1.6190.
+\end{aligned}$$</div>
+        <p>Now we check each item of Theorem 3.12.</p>
+        <p><strong>(1)</strong> Since $C_0=1 \lt C_2=1.5 \lt C_4=1.6 \lt C_6\approx1.6154$, we have $C_0 \lt C_2 \lt C_4 \lt C_6$.</p>
+        <p><strong>(2)</strong> Since $C_1=2 \gt C_3\approx1.6667 \gt C_5=1.625 \gt C_7\approx1.6190$, we have $C_1 \gt C_3 \gt C_5 \gt C_7$.</p>
+        <p><strong>(3)</strong> The maximum of the even-indexed convergents $\{C_0,C_2,C_4,C_6\}$ is $C_6\approx1.6154$, and the minimum of the odd-indexed convergents $\{C_1,C_3,C_5,C_7\}$ is $C_7\approx1.6190$. Since $C_6 \lt C_7$, the maximum even-indexed convergent is less than the minimum odd-indexed convergent, so every even-indexed convergent is less than every odd-indexed convergent. That is, every convergent with an odd script is greater than every convergent with an even script.</p>
+        <p>All three items are confirmed, so Theorem 3.12 is verified for this continued fraction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

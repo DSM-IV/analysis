@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>큐비트와 게이트 (§4.1–4.4 Qubits and Gates) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 7단원 — 아날로그·디지털 컴퓨터의 장단점에서 출발해 큐비트(qubit)를 ℂ²의 단위벡터로 정의하고, 중첩과 붕괴·측정 확률, 텐서곱으로 만드는 2-큐비트와 n-큐비트, AND·OR·NOT 고전 게이트의 진리표와 범용 게이트 정리, 유니터리 행렬로 정의되는 양자 게이트와 CNOT·X·Z 게이트를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 양자컴퓨터, quantum computer, 큐비트, qubit, 비트, bit, 중첩, superposition, 붕괴, collapse, 측정, measurement, 단위벡터, unit vector, 텐서곱, tensor product, n-큐비트, n-qubit, 고전 게이트, classical gate, AND 게이트, And gate, OR 게이트, Or gate, NOT 게이트, Not gate, 진리표, truth table, 범용 게이트 정리, universal gate theorem, 유니터리 행렬, unitary matrix, 양자 게이트, quantum gate, CNOT 게이트, controlled not gate, X 게이트, Z 게이트">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch07.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="큐비트와 게이트 (§4.1–4.4 Qubits and Gates) — 응용정수론 한·영 대조">
+<meta property="og:description" content="큐비트를 ℂ²의 단위벡터로 정의하는 자리에서 시작해, 텐서곱으로 쌓는 n-큐비트, AND·OR·NOT 고전 게이트의 진리표, 그리고 유니터리 행렬로 주어지는 양자 게이트와 CNOT·X·Z 게이트까지 — 응용정수론 일곱째 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch07.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "큐비트와 게이트 (§4.1–4.4 Qubits and Gates) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §4.1–4.4 — 큐비트의 정의와 측정 확률, 텐서곱으로 정의되는 2-큐비트와 n-큐비트, AND·OR·NOT 고전 게이트의 진리표와 범용 게이트 정리, 유니터리 행렬로 정의되는 양자 게이트와 CNOT·X·Z 게이트를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch07.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch07.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html" class="active">07</a>
+      <a href="ch08.html">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 07 · §4.1–4.4</p>
+  <h1>큐비트와 게이트<span>Qubits and Gates</span></h1>
+  <p class="header-desc">아날로그 컴퓨터의 연산 효율과 디지털 컴퓨터의 입출력 편의를 함께 취하려는 동기에서 출발해, 정보의 단위인 큐비트를 ℂ²의 단위벡터로 정의하고 측정 확률과 중첩·붕괴를 읽습니다. 이어서 텐서곱으로 2-큐비트와 n-큐비트를 쌓고, AND·OR·NOT 고전 게이트의 진리표와 범용 게이트 정리를 본 뒤, 유니터리 행렬로 정의되는 양자 게이트와 CNOT·X·Z 게이트의 행렬 표현까지 정리합니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c4-1"><span class="toc-num">DEF 4.1</span> 큐비트 <em>A Qubit</em></a></li>
+    <li><a href="#c4-2"><span class="toc-num">EX 4.2</span> 양자컴퓨팅의 기본 아이디어 빈칸 채우기 <em>Completing the Basic Idea of Quantum Computing</em></a></li>
+    <li><a href="#c4-3"><span class="toc-num">EX 4.3</span> 아날로그·디지털 컴퓨터의 장단점 <em>Advantages of Analog and Digital Computers</em></a></li>
+    <li><a href="#c4-4"><span class="toc-num">EX 4.4</span> 큐비트란 무엇인가 <em>What Is a Qubit?</em></a></li>
+    <li><a href="#c4-5"><span class="toc-num">EX 4.5</span> |0⟩과 |1⟩의 일차결합으로 나타내기 <em>Expressing Vectors as a Linear Combination of |0⟩ and |1⟩</em></a></li>
+    <li><a href="#c4-6"><span class="toc-num">DEF 4.6</span> 2-큐비트와 n-큐비트 <em>Two-Qubit and n-Qubit</em></a></li>
+    <li><a href="#c4-7"><span class="toc-num">DEF 4.7</span> AND·OR·NOT 게이트 <em>The And, Or and Not Gates</em></a></li>
+    <li><a href="#c4-8"><span class="toc-num">DEF 4.8</span> 유니터리 행렬과 양자 게이트 <em>Unitary Matrices and Quantum Gates</em></a></li>
+    <li><a href="#c4-9"><span class="toc-num">EXAM 4.9</span> 양자 &ldquo;not&rdquo; 게이트 <em>The Quantum &ldquo;not&rdquo; Gate</em></a></li>
+    <li><a href="#c4-10"><span class="toc-num">EXAM 4.10</span> CNOT 게이트와 X·Z 게이트 <em>The CNOT Gate and the X, Z Gates</em></a></li>
+    <li><a href="#c4-11"><span class="toc-num">EX 4.11</span> 유니터리 행렬의 정의 <em>The Definition of a Unitary Matrix</em></a></li>
+    <li><a href="#c4-12"><span class="toc-num">EX 4.12</span> 양자 게이트 빈칸 채우기 <em>Completing the Description of a Quantum Gate</em></a></li>
+    <li><a href="#c4-13"><span class="toc-num">EX 4.13</span> 2-큐비트에 작용하는 CNOT 게이트 <em>The CNOT Gate on a Two-Qubit</em></a></li>
+    <li><a href="#c4-14"><span class="toc-num">EX 4.14</span> 1-큐비트 게이트의 행렬 <em>The Matrix Corresponding to a 1-Qubit Gate</em></a></li>
+    <li><a href="#c4-15"><span class="toc-num">EX 4.15</span> 2-큐비트 게이트의 행렬 <em>The Matrix Corresponding to a 2-Qubit Gate</em></a></li>
+    <li><a href="#c4-16"><span class="toc-num">EX 4.16</span> X 게이트와 Z 게이트의 행렬 <em>Matrices Corresponding to the X Gate and the Z Gate</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>4 Basic of Quantum computer · 제4장 양자컴퓨터 기초</h2></div>
+
+<!-- ═══════════ PDF pp.31–32 ═══════════ -->
+
+<!-- §4 도입 서술 (pp.31–32) -->
+<div class="card note-card" id="note07-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>양자컴퓨터는 아날로그 컴퓨터의 장점과 디지털 컴퓨터의 장점을 모두 갖는다. 디지털 컴퓨터의 장점은 0과 1로 이루어진 디지털 데이터를 사용한다는 것이며, 이는 데이터의 입력과 출력을 편리하게 한다. 아날로그 컴퓨터는 아날로그 데이터를 사용하며, 연산의 효율이 높다는 장점을 갖는다.</p>
+        <p>예를 들어 $1.21212137+0.12121211$을 생각하자. $A$를 $1.21212137$, $B$를 $0.12121211$이라 하자. 먼저 아날로그 컴퓨터에서의 연산을 서술한다. 키르히호프 전류 법칙에 따르면 한 마디로 흘러 들어가는 전류는 흘러 나가는 전류와 같아야 한다. 그러므로 전류 $A$가 흐르는 도선 두 개와 전류 $B$가 흐르는 도선 하나가 한 점에서 만나 하나의 도선이 되면, 만난 뒤의 전류는 $A + B$이다. 다음으로 디지털 컴퓨터에서의 연산을 서술한다. 9자리 수를 비트로 나타내면 30자리가 된다. 비트의 덧셈 연산 하나하나에도 비용이 든다. 이 경우 아날로그 컴퓨터가 디지털 컴퓨터보다 효율적이다. 그러나 아날로그 컴퓨터의 단점은 데이터의 입력과 출력이 어렵고 연산에 이상적인 환경이 필요하다는 것이다.</p>
+        <p>디지털 컴퓨터의 장점은 입자와 같다는 것이고, 아날로그 컴퓨터의 장점은 파동과 같다는 것이다. 양자컴퓨터는 파동과 입자 양쪽의 장점을 모두 활용하기 위해 중첩과 붕괴를 이용한다. 더 구체적으로 말하면, 중첩 상태는 측정이라는 과정을 통해 붕괴한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Quantum computers have the advantages of analog computers and the advantages of digital computers. The advantage of digital computers is that they use digital data, which consists of 0 and 1. It makes it convenient to input and output data. The analog computers use analog data. It has the advantage of being efficiency of operations.</p>
+        <p>For example, consider 1.21212137+0.12121211. Let $A$ be the 1.21212137 and $B$ be the 0.12121211. First, describe an operation on an analog computer. Note that Kirchhoff&rsquo;s current law states that the current flowing into a node must be equal to the current flowing out of it. So If two wires with current $A$ and one with current $B$ meet at a point as a single wire, then the current after they meet at the point is $A + B$. Second, describe an operation on an digital computer. A 9-digit number expressed in bits is 30 digits. Even bit additive operations require a cost. In this case, an analog computer is more efficient than a digital computer. However, the downside of analog computers is that data is difficult to input and output, and computation requires an ideal environment.</p>
+        <p>The advantage of digital computers is that they are like particles, and the advantage of analog computers is that they are like waves. Quantum computers use superposition and collapse to exploit the advantages of waves and particles. More explicitly, a superposition state is collapsed through a process called measurement.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>4.1 one-qubit · 1-큐비트</h2></div>
+
+<!-- 서술 단락 (p.32) -->
+<div class="card note-card" id="note07-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>비트는 0과 1로 이루어진, 고전컴퓨터에서 정보의 단위이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A bit is the unit information in classical computer consisting of 0 and 1.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 4.1 -->
+<div class="card def-card" id="c4-1">
+  <div class="card-head">
+    <span class="def-num">DEF 4.1</span>
+    <span class="def-title">큐비트 <em>A Qubit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>큐비트는 다음의 단위벡터로 이루어진, 양자컴퓨터에서 정보의 단위이다.</p>
+        <div class="math-display">$$\mathbb{C}^2 = \mathbb{C} \times \mathbb{C} = \{(x, y)|x, y \in \mathbb{C}\}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A qubit is the unit information in quantum computer consisting of unit vector of</p>
+        <div class="math-display">$$\mathbb{C}^2 = \mathbb{C} \times \mathbb{C} = \{(x, y)|x, y \in \mathbb{C}\}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 + 비교표 (p.32) -->
+<div class="card note-card" id="note07-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(1, 0), (0, 1)$을 각각 $e_1, e_2$라 쓰자. 이는 $(x, y) = xe_1 + ye_2$임을 뜻한다.</p>
+        <p>큐비트 $(x, y)$를 측정하면 확률 $|x|^2$로 0을, 확률 $|y|^2$로 1을 측정한다. 즉 이는 고전컴퓨터에서 0과 1의 중첩을 의미한다.</p>
+        <p><em>역주.</em> 원문은 &ldquo;확률 $|x|^2$로 1을, 확률 $|y|^2$로 0을 측정한다&rdquo;로 인쇄되어 있으나 0과 1이 서로 바뀐 것이다. 바로 아래에서 $(1, 0) = |0\rangle$, $(0, 1) = |1\rangle$로 두므로 $(x, y) = x|0\rangle + y|1\rangle$의 첫 좌표 $x$는 $|0\rangle$의 계수이고, 따라서 확률 $|x|^2$로 측정되는 값은 0이다. 원문 §4.5의 측정 규칙(고유벡터 $v_i$의 계수 $a_i$에 대하여 고유값 $\lambda_i$가 확률 $|a_i|^2$로 측정된다)과 연습문제 4.23($v = \frac{1}{\sqrt5}|0\rangle + \frac{2}{\sqrt5}|1\rangle$에서 $|0\rangle$의 고유값이 확률 $\frac15$로 측정된다)도 이 바른 순서를 따른다.</p>
+        <p>또한 $(1, 0), (0, 1)$을 각각 $|0\rangle, |1\rangle$이라 쓰자. 예를 들어 $(2, 3) = 2|0\rangle + 3|1\rangle$이다. 모든 1-큐비트는 다음을 만족하는 $a|0\rangle + b|1\rangle$의 꼴로 나타낼 수 있다.</p>
+        <div class="math-display">$$|a|^2 + |b|^2 = 1, (a, b \in \mathbb{C}).$$</div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th></th><th>고전컴퓨터</th><th>양자컴퓨터</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>정보의 단위</td><td>비트 $0, 1$</td><td>큐비트, $\mathbb{C}^2$의 단위벡터 ($ae_1 + be_2, |a|^2 + |b|^2 = 1$)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let&rsquo;s denote $(1, 0), (0, 1)$ by $e_1, e_2$, respectively. It means that $(x, y) = xe_1 + ye_2$.</p>
+        <p>If we measure a qubit $(x, y)$, then we measure 1 with probability $|x|^2$ and 0 with probability $|y|^2$, i.e., this means the superposition of 0 and 1 in classical computer.</p>
+        <p>Moreover, denote $(1, 0), (0, 1)$ by $|0\rangle, |1\rangle$, respectively. For example, $(2, 3) = 2|0\rangle + 3|1\rangle$. Every one qubit can be expressed as the following form $a|0\rangle + b|1\rangle$ such that</p>
+        <div class="math-display">$$|a|^2 + |b|^2 = 1, (a, b \in \mathbb{C}).$$</div>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th></th><th>classical computer</th><th>quantum computer</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>unit information</td><td>a bit $0, 1$</td><td>a qubit, a unit vector in $\mathbb{C}^2$ ($ae_1 + be_2, |a|^2 + |b|^2 = 1$)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.2 -->
+<div class="card ex-card" id="c4-2">
+  <div class="card-head">
+    <span class="ex-num">EX 4.2</span>
+    <span class="ex-title">양자컴퓨팅의 기본 아이디어 빈칸 채우기 <em>Completing the Basic Idea of Quantum Computing</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>빈칸을 채워라.</p>
+        <p>&ldquo;양자컴퓨팅의 기본 아이디어는 $\boxed{\ (a)\ }$와 $\boxed{\ (b)\ }$의 장점을 결합하는 데 기초한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>단원 도입부에서 보았듯이, 양자컴퓨터는 파동의 장점(아날로그 컴퓨터)과 입자의 장점(디지털 컴퓨터)을 모두 활용하기 위해 중첩과 붕괴를 이용한다. 따라서</p>
+        <p>$\boxed{\ (a)\ }$ = 아날로그 컴퓨터, $\boxed{\ (b)\ }$ = 디지털 컴퓨터.</p>
+        <p>완성된 문장: &ldquo;양자컴퓨팅의 기본 아이디어는 아날로그 컴퓨터의 장점(파동)과 디지털 컴퓨터의 장점(입자)을 결합하는 데 기초한다.&rdquo;</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Fill the blanks</p>
+        <p>&ldquo;the basis idea of quantum computing is based on combining advantage of $\boxed{\ (a)\ }$ and $\boxed{\ (b)\ }$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>As stated in the introduction to this unit, quantum computers use superposition and collapse to exploit both the advantage of waves (the analog computer) and the advantage of particles (the digital computer). Hence</p>
+        <p>$\boxed{\ (a)\ }$ = the analog computer, $\boxed{\ (b)\ }$ = the digital computer.</p>
+        <p>Completed sentence: &ldquo;the basic idea of quantum computing is based on combining advantage of the analog computer (waves) and the digital computer (particles).&rdquo;</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.3 -->
+<div class="card ex-card" id="c4-3">
+  <div class="card-head">
+    <span class="ex-num">EX 4.3</span>
+    <span class="ex-title">아날로그·디지털 컴퓨터의 장단점 <em>Advantages of Analog and Digital Computers</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>설명하라.</p>
+        <p><strong>1.</strong> 아날로그 컴퓨터의 장점</p>
+        <p><strong>2.</strong> 디지털 컴퓨터의 장점</p>
+        <p><strong>3.</strong> 아날로그 컴퓨터의 단점</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> 아날로그 컴퓨터의 장점은 연산이 효율적이라는 것이다. 예를 들어 전류 $A$가 흐르는 도선 두 개와 전류 $B$가 흐르는 도선 하나가 한 점에서 만나면, 키르히호프 전류 법칙에 의해 만난 뒤의 전류는 즉시 물리적으로 $A+B$가 된다. 반면 디지털 컴퓨터에서 같은 덧셈을 하려면 각 수를 비트로 나타내고(예를 들어 9자리 수는 30자리 비트가 된다) 비트별 덧셈 연산 하나하나에 비용을 치러야 하므로, 이 경우 아날로그 컴퓨터가 더 효율적이다.</p>
+        <p><strong>2.</strong> 디지털 컴퓨터의 장점은 데이터가 0과 1로 이루어진 디지털 데이터라는 것이다. 이는 데이터의 입력과 출력을 편리하게 한다.</p>
+        <p><strong>3.</strong> 아날로그 컴퓨터의 단점은 데이터의 입력과 출력이 어렵고, 연산에 이상적인 환경이 필요하다는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Explain</p>
+        <p><strong>1.</strong> advantages of analog computer</p>
+        <p><strong>2.</strong> advantages of digital computer</p>
+        <p><strong>3.</strong> disadvantage of analog computer</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> The advantage of analog computers is that operations are efficient. For example, if two wires carrying current $A$ and one wire carrying current $B$ meet at a point, Kirchhoff&rsquo;s current law makes the current after the meeting point equal to $A+B$ instantly and physically. By contrast, performing the same addition on a digital computer requires expressing each number in bits (a 9-digit number becomes 30 bits, for instance) and paying a cost for every single bit-addition, so in this case the analog computer is more efficient.</p>
+        <p><strong>2.</strong> The advantage of digital computers is that their data are digital, consisting of 0 and 1. This makes it convenient to input and output data.</p>
+        <p><strong>3.</strong> The disadvantage of analog computers is that data are difficult to input and output, and computation requires an ideal environment.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.4 -->
+<div class="card ex-card" id="c4-4">
+  <div class="card-head">
+    <span class="ex-num">EX 4.4</span>
+    <span class="ex-title">큐비트란 무엇인가 <em>What Is a Qubit?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>큐비트란 무엇인가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>큐비트는 $\mathbb{C}^2$의 단위벡터 $(x,y)$, 즉 $a|0\rangle+b|1\rangle$ ($|a|^2+|b|^2=1$) 꼴의 벡터로 이루어진, 양자컴퓨터에서 정보의 단위이다(정의 4.1). 고전적인 비트 0과 1의 중첩으로 볼 수 있으며, 큐비트 $(x,y) = x|0\rangle+y|1\rangle$을 측정하면 확률 $|x|^2$로 0을, 확률 $|y|^2$로 1을 측정한다(측정 후 상태는 그 결과로 붕괴한다). 원문 §4.1은 0과 1을 서로 바꾸어 인쇄했다(§4.1 NOTE의 역주 참고).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>What is a qubit?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>A qubit is the unit of information in a quantum computer, given by a unit vector $(x,y) \in \mathbb{C}^2$, i.e. a vector of the form $a|0\rangle + b|1\rangle$ with $|a|^2+|b|^2=1$ (Definition 4.1). It can be viewed as a superposition of the classical bits 0 and 1: if we measure a qubit $(x,y) = x|0\rangle + y|1\rangle$, we measure 0 with probability $|x|^2$ and 1 with probability $|y|^2$ (the state then collapses to that outcome). The notes print 0 and 1 the other way round in &sect;4.1; see the translator&rsquo;s note there.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.5 -->
+<div class="card ex-card" id="c4-5">
+  <div class="card-head">
+    <span class="ex-num">EX 4.5</span>
+    <span class="ex-title">|0⟩과 |1⟩의 일차결합으로 나타내기 <em>Expressing Vectors as a Linear Combination of |0⟩ and |1⟩</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 벡터들을 $|0\rangle$과 $|1\rangle$의 일차결합으로 나타내라.</p>
+        <p><strong>1.</strong> $(2, 4)$</p>
+        <p><strong>2.</strong> $(7, 2)$</p>
+        <p><strong>3.</strong> $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> $(2, 4) = 2e_1+4e_2 = 2|0\rangle+4|1\rangle$.</p>
+        <p><strong>2.</strong> $(7, 2) = 7|0\rangle+2|1\rangle$.</p>
+        <p><strong>3.</strong> $\left(\frac{1}{\sqrt2},-\frac{1}{\sqrt2}\right) = \frac{1}{\sqrt2}|0\rangle-\frac{1}{\sqrt2}|1\rangle$.</p>
+        <p><em>참고.</em> 정의 4.1에 의해 큐비트는 $\mathbb{C}^2$의 단위벡터여야 한다. $\left|\frac{1}{\sqrt2}\right|^2+\left|-\frac{1}{\sqrt2}\right|^2 = \frac12+\frac12=1$이므로 셋 중 (3)만 단위벡터, 즉 실제 큐비트이다. (1)의 노름은 $\sqrt{2^2+4^2}=\sqrt{20}$이고 (2)의 노름은 $\sqrt{7^2+2^2}=\sqrt{53}$이므로, 이들을 큐비트로 만들려면 각각 $\sqrt{20}$, $\sqrt{53}$으로 나누어 $\frac{1}{\sqrt{20}}(2,4) = \frac{2}{\sqrt{20}}|0\rangle+\frac{4}{\sqrt{20}}|1\rangle$, $\frac{1}{\sqrt{53}}(7,2)=\frac{7}{\sqrt{53}}|0\rangle+\frac{2}{\sqrt{53}}|1\rangle$로 정규화해야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Express the following vectors as a linear combination of $|0\rangle$ and $|1\rangle$,</p>
+        <p><strong>1.</strong> $(2, 4)$</p>
+        <p><strong>2.</strong> $(7, 2)$</p>
+        <p><strong>3.</strong> $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> $(2, 4) = 2e_1+4e_2 = 2|0\rangle+4|1\rangle$.</p>
+        <p><strong>2.</strong> $(7, 2) = 7|0\rangle+2|1\rangle$.</p>
+        <p><strong>3.</strong> $\left(\frac{1}{\sqrt2},-\frac{1}{\sqrt2}\right) = \frac{1}{\sqrt2}|0\rangle-\frac{1}{\sqrt2}|1\rangle$.</p>
+        <p><em>Remark.</em> By Definition 4.1 a qubit must be a unit vector in $\mathbb{C}^2$. Since $\left|\frac{1}{\sqrt2}\right|^2+\left|-\frac{1}{\sqrt2}\right|^2=\frac12+\frac12=1$, only (3) is a unit vector, i.e. an actual qubit. The norm of (1) is $\sqrt{2^2+4^2}=\sqrt{20}$ and of (2) is $\sqrt{7^2+2^2}=\sqrt{53}$, so to turn them into qubits they would need to be normalized as $\frac{1}{\sqrt{20}}(2,4) = \frac{2}{\sqrt{20}}|0\rangle+\frac{4}{\sqrt{20}}|1\rangle$ and $\frac{1}{\sqrt{53}}(7,2)=\frac{7}{\sqrt{53}}|0\rangle+\frac{2}{\sqrt{53}}|1\rangle$, respectively.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>4.2 n-qubit · n-큐비트</h2></div>
+
+<!-- ═══════════ PDF p.33 ═══════════ -->
+
+<!-- Definition 4.6 -->
+<div class="card def-card" id="c4-6">
+  <div class="card-head">
+    <span class="def-num">DEF 4.6</span>
+    <span class="def-title">2-큐비트와 n-큐비트 <em>Two-Qubit and n-Qubit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 2-큐비트는 하나의 큐비트 $\otimes$ 하나의 큐비트로 정의된다. 즉 2-큐비트는 다음과 같은 꼴이다.</p>
+        <div class="math-display">$$(a|0\rangle + b|1\rangle) \otimes (c|0\rangle + d|1\rangle)$$</div>
+        <p>여기서 $a, b, c, d \in \mathbb{C}$, $|a|^2 + |b|^2 = 1$, $|c|^2 + |d|^2 = 1$이다. 다항식의 전개와 마찬가지로 위 텐서곱은 다음과 같이 계산할 수도 있다.</p>
+        <div class="math-display">$$(a|0\rangle + b|1\rangle) \otimes (c|0\rangle + d|1\rangle) = ac|0\rangle \otimes |0\rangle + ad|0\rangle \otimes |1\rangle + bc|1\rangle \otimes |0\rangle + bd|1\rangle \otimes |1\rangle.$$</div>
+        <p>간단히 말해,</p>
+        <p><strong>2.</strong> $n$-큐비트는 다음과 같은 꼴이다.</p>
+        <div class="math-display">$$(a_1|0\rangle + b_1|1\rangle) \otimes \cdots \otimes (a_n|0\rangle + b_n|1\rangle)$$</div>
+        <p>여기서 $a_i, b_i \in \mathbb{C}$이고 모든 $i \le n$에 대하여 $|a_i|^2 + |b_i|^2 = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Two-qubit is defined by one qubit $\otimes$ one qubit. It means that two-qubit is the form of</p>
+        <div class="math-display">$$(a|0\rangle + b|1\rangle) \otimes (c|0\rangle + d|1\rangle)$$</div>
+        <p>where $a, b, c, d \in \mathbb{C}$, $|a|^2 + |b|^2 = 1$ and $|c|^2 + |d|^2 = 1$. Like polynomial expansion, the above tensor can also be computed as follows:</p>
+        <div class="math-display">$$(a|0\rangle + b|1\rangle) \otimes c|0\rangle + d|1\rangle) = ac|0\rangle \otimes |0\rangle + ad|0\rangle \otimes |1\rangle + bc|1\rangle \otimes |0\rangle + bd|1\rangle \otimes |1\rangle.$$</div>
+        <p>Simply,</p>
+        <p><strong>2.</strong> $n$-qubit is the form of</p>
+        <div class="math-display">$$(a_1|0\rangle + b_1|1\rangle) \otimes \cdots \otimes (a_n|0\rangle + b_n|1\rangle)$$</div>
+        <p>where $a_i, b_i \in \mathbb{C}$, $|a_i|^2 + |b_i|^2 = 1$ for all $i \le n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.33) -->
+<div class="card note-card" id="note07-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$|ac|^2 + |ad|^2 + |bc|^2 + |bd|^2 = (|a|^2 + |b|^2)(|c|^2 + |d|^2) = 1$임에 주의하라. $|ab\rangle := |a\rangle \otimes |b\rangle$로 간단히 표기한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Note that $|ac|^2 + |ad|^2 + |bc|^2 + |bd|^2 = (|a|^2 + |b|^2)(|c|^2 + |d|^2) = 1$. We simply denote $|ab\rangle := |a\rangle \otimes |b\rangle$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>4.3 Classical gate · 고전 게이트</h2></div>
+
+<!-- §4.3 도입 서술 (p.33) -->
+<div class="card note-card" id="note07-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>고전 게이트는 이진 데이터에 대한 기본적인 논리 연산을 수행하는 데 쓰이는, 디지털 논리 회로의 기본 구성 요소이다. $T$(참)는 1에, $F$(거짓)는 0에 대응한다고 하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A classical gate is a fundamental building block in digital logic circuits used to perform basic logical operations on binary data. Assumte that $T : true$ corresponds 1 and $F : False$ corresponds 0.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF pp.33–34 ═══════════ -->
+
+<!-- Definition 4.7 -->
+<div class="card def-card" id="c4-7">
+  <div class="card-head">
+    <span class="def-num">DEF 4.7</span>
+    <span class="def-title">AND·OR·NOT 게이트 <em>The And, Or and Not Gates</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>&ldquo;AND 게이트&rdquo;와 &ldquo;OR 게이트&rdquo;에서 입력 데이터의 개수는 2개이며, 이를 $A$, $B$로 표기한다. 그리고 출력 데이터의 개수는 1개이며, 이를 $C$로 표기한다. 아래 그림과 같다.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 300 130" width="300" height="130" role="img" aria-label="AND 게이트 기호: A와 B로 표시된 두 입력선이 D자 모양 게이트의 평평한 왼쪽 변으로 들어가고, C로 표시된 출력선 하나가 둥근 오른쪽에서 나온다." font-family="inherit" font-size="14">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="100" y1="45" x2="150" y2="45"></line>
+              <line x1="100" y1="90" x2="150" y2="90"></line>
+              <path d="M 150 30 L 180 30 A 35 35 0 0 1 180 100 L 150 100 Z"></path>
+              <line x1="215" y1="65" x2="265" y2="65"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="92" y="50" text-anchor="end">A</text>
+              <text x="92" y="95" text-anchor="end">B</text>
+              <text x="272" y="70" text-anchor="start">C</text>
+            </g>
+          </svg>
+          <figcaption>AND 게이트 기호</figcaption>
+        </figure>
+        <p><strong>1.</strong> <strong>AND 게이트</strong>는 다음 진리표에 따라 동작하는 기본적인 디지털 논리 게이트이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$C(A \wedge B)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td></tr>
+              <tr><td>T</td><td>F</td><td>F</td></tr>
+              <tr><td>F</td><td>T</td><td>F</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>AND 게이트는 법 2에 대한 곱셈으로 볼 수 있다. 즉 $AB \equiv C \ (\bmod\ 2)$이다.</p>
+        <p><strong>2.</strong> <strong>OR 게이트</strong>는 다음 진리표에 따라 동작하는 기본적인 디지털 논리 게이트이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$C(A \vee B)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td></tr>
+              <tr><td>T</td><td>F</td><td>T</td></tr>
+              <tr><td>F</td><td>T</td><td>T</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><em>역주.</em> 원문 표 머리의 $A \wedge B$는 $A \vee B$의 오타이다.</p>
+        <p>OR 게이트는 $(A+1)(B+1)+1 \equiv C \ (\bmod\ 2)$로 볼 수 있다.</p>
+        <p><strong>3.</strong> &ldquo;NOT 게이트&rdquo;에서 입력 데이터의 개수는 1개이며, 이를 $A$로 표기한다. 그리고 출력 데이터의 개수는 1개이며, 이를 $C$로 표기한다. 아래 그림과 같다.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 280 100" width="280" height="100" role="img" aria-label="NOT 게이트 기호: A로 표시된 입력선 하나가 AND와 같은 D자 모양 게이트로 들어가고, C로 표시된 출력선 하나가 나온다." font-family="inherit" font-size="14">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="90" y1="50" x2="135" y2="50"></line>
+              <path d="M 135 20 L 160 20 A 30 30 0 0 1 160 80 L 135 80 Z"></path>
+              <line x1="190" y1="50" x2="235" y2="50"></line>
+            </g>
+            <g fill="currentColor" stroke="none" font-style="italic">
+              <text x="82" y="55" text-anchor="end">A</text>
+              <text x="243" y="55" text-anchor="start">C</text>
+            </g>
+          </svg>
+          <figcaption>NOT 게이트 기호(원문대로)</figcaption>
+        </figure>
+        <p><em>역주.</em> 원문 그림은 AND 게이트와 같은 기호로 그려져 있다(표준 NOT 기호는 삼각형과 작은 원).</p>
+        <p><strong>NOT 게이트</strong>는 다음 진리표에 따라 동작하는 기본적인 디지털 논리 게이트이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$C$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>F</td></tr>
+              <tr><td>F</td><td>T</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>At the &rdquo;And gate&rdquo; and &rdquo;Or gate&rdquo;, the number of input data is 2, which we will denote as $A$ and $B$. And the number of output data is 1, which we will denote as $C$. It looks like the figure below.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 300 130" width="300" height="130" role="img" aria-label="An AND gate symbol: two input wires labelled A and B enter the flat left side of a D-shaped gate body, and a single output wire labelled C leaves its rounded right side." font-family="inherit" font-size="14">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="100" y1="45" x2="150" y2="45"></line>
+              <line x1="100" y1="90" x2="150" y2="90"></line>
+              <path d="M 150 30 L 180 30 A 35 35 0 0 1 180 100 L 150 100 Z"></path>
+              <line x1="215" y1="65" x2="265" y2="65"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="92" y="50" text-anchor="end">A</text>
+              <text x="92" y="95" text-anchor="end">B</text>
+              <text x="272" y="70" text-anchor="start">C</text>
+            </g>
+          </svg>
+          <figcaption>AND gate symbol</figcaption>
+        </figure>
+        <p><strong>1.</strong> The <strong>And gate</strong> is a basic digital logical gate behaves according to the truth table.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$C(A \wedge B)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td></tr>
+              <tr><td>T</td><td>F</td><td>F</td></tr>
+              <tr><td>F</td><td>T</td><td>F</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>And gate can be viewed as multiplication modulo 2, it means that $AB \equiv C \ (\bmod\ 2)$.</p>
+        <p><strong>2.</strong> The <strong>Or gate</strong> is a basic digital logical gate behaves according to the truth table.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$C(A \wedge B)$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td></tr>
+              <tr><td>T</td><td>F</td><td>T</td></tr>
+              <tr><td>F</td><td>T</td><td>T</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Or gate can be viewed as $(A+1)(B+1)+1 \equiv C \ (\bmod\ 2)$.</p>
+        <p><strong>3.</strong> At the &rdquo;Not gate&rdquo;, the number of input data is 1, which we will denote as $A$. And the number of output data is 1, which we will denote as $C$. It looks like the figure below.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 280 100" width="280" height="100" role="img" aria-label="A NOT gate drawn with the same D-shaped body as the AND gate: a single input wire labelled A enters its flat left side and one output wire labelled C leaves its rounded right side." font-family="inherit" font-size="14">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="90" y1="50" x2="135" y2="50"></line>
+              <path d="M 135 20 L 160 20 A 30 30 0 0 1 160 80 L 135 80 Z"></path>
+              <line x1="190" y1="50" x2="235" y2="50"></line>
+            </g>
+            <g fill="currentColor" stroke="none" font-style="italic">
+              <text x="82" y="55" text-anchor="end">A</text>
+              <text x="243" y="55" text-anchor="start">C</text>
+            </g>
+          </svg>
+          <figcaption>NOT gate symbol (as printed)</figcaption>
+        </figure>
+        <p>The <strong>Not gate</strong> is a basic digital logical gate behaves according to the truth table.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$C$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>F</td></tr>
+              <tr><td>F</td><td>T</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.34) -->
+<div class="card note-card" id="note07-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사실 모든 게이트는 &ldquo;and&rdquo;, &ldquo;or&rdquo;, &ldquo;not&rdquo; 게이트를 사용하여 구현할 수 있다. 이것이 범용 게이트 정리이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In fact, any gates can be implemented by using &ldquo;and&rdquo;, &ldquo;or&rdquo; and &ldquo;not&rdquo; gate. It is universal gate theorem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>4.4 Quantum gate · 양자 게이트</h2></div>
+
+<!-- ═══════════ PDF pp.34–35 ═══════════ -->
+
+<!-- Definition 4.8 -->
+<div class="card def-card" id="c4-8">
+  <div class="card-head">
+    <span class="def-num">DEF 4.8</span>
+    <span class="def-title">유니터리 행렬과 양자 게이트 <em>Unitary Matrices and Quantum Gates</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $A \in M_{n \times n}(\mathbb{C})$가 $A\overline{A}^{T} = I_n$을 만족하면, 즉 $A^{-1} = \overline{A}^{T}$이면 $A$는 유니터리라고 한다.</p>
+        <p><strong>2.</strong> 1-큐비트에 대한 양자 게이트는 유니터리 $2 \times 2$ 행렬이다.</p>
+        <p>예를 들어,</p>
+        <div class="math-display">$$U(x_1|0\rangle + x_2|1\rangle) = U\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} x'_1 \\ x'_2 \end{pmatrix} = x'_1|0\rangle + x'_2|1\rangle$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> $A \in M_{n \times n}(\mathbb{C})$ is unitary if $A\overline{A}^{T} = I_n$, i.e., $A^{-1} = \overline{A}^{T}$</p>
+        <p><strong>2.</strong> A quantum gate for 1-qubit is a unitary $2 \times 2$ matrix.</p>
+        <p>For example,</p>
+        <div class="math-display">$$U(x_1|0\rangle + x_2|1\rangle) = U\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} x'_1 \\ x'_2 \end{pmatrix} = x'_1|0\rangle + x'_2|1\rangle$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4.9 -->
+<div class="card exam-card" id="c4-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.9</span>
+    <span class="exam-title">양자 &ldquo;not&rdquo; 게이트 <em>The Quantum &ldquo;not&rdquo; Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$|0\rangle = (1, 0)$, $|1\rangle = (0, 1)$이라 하자. 그러면 $U := \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$는 양자 &ldquo;not&rdquo; 게이트이다.</p>
+        <div class="math-display">$$U|0\rangle = U\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} = |1\rangle$$</div>
+        <div class="math-display">$$U|1\rangle = U\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} = |0\rangle$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $|0\rangle = (1, 0)$ and $|1\rangle = (0, 1)$. Then $U := \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$ is quantum &ldquo;not&rdquo; gate.</p>
+        <div class="math-display">$$U|0\rangle = U\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} = |1\rangle$$</div>
+        <div class="math-display">$$U|1\rangle = U\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} = |0\rangle$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.35) -->
+<div class="card note-card" id="note07-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$-큐비트는 $(a_1|0\rangle + b_1|1\rangle) \otimes \cdots \otimes (a_n|0\rangle + b_n|1\rangle) \in \mathbb{C}^{2^n}$의 꼴임에 주의하라. 양자 게이트는 유니터리 행렬이므로, 양자 게이트는 $n$-큐비트를 $n$-큐비트로 보낸다는(차원이 같다는) 것을 알 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Note that $n$-qubit is the form of $(a_1|0\rangle + b_1|1\rangle) \otimes \cdots \otimes (a_n|0\rangle + b_n|1\rangle) \in \mathbb{C}^{2^n}$. Since quantum gates are unitary matrix, we know that quantum gates send $n$-qubit to $n$-qubit (same dimension).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4.10 -->
+<div class="card exam-card" id="c4-10">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.10</span>
+    <span class="exam-title">CNOT 게이트와 X·Z 게이트 <em>The CNOT Gate and the X, Z Gates</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 제어 NOT 게이트는 다음 진리표에 따라 동작하는 양자 논리 게이트이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$A'$</th><th>$B'$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|0\rangle$</td><td>$|0\rangle$</td><td>$|0\rangle$</td><td>$|0\rangle$</td></tr>
+              <tr><td>$|0\rangle$</td><td>$|1\rangle$</td><td>$|0\rangle$</td><td>$|1\rangle$</td></tr>
+              <tr><td>$|1\rangle$</td><td>$|0\rangle$</td><td>$|1\rangle$</td><td>$|1\rangle$</td></tr>
+              <tr><td>$|1\rangle$</td><td>$|1\rangle$</td><td>$|1\rangle$</td><td>$|0\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>$|0\rangle|0\rangle = (1, 0, 0, 0)$, $|0\rangle|1\rangle = (0, 1, 0, 0)$, $|1\rangle|0\rangle = (0, 0, 1, 0)$, $|1\rangle|1\rangle = (0, 0, 0, 1)$이라 하자. 그러면 CNOT 게이트에 대응하는 행렬은 다음과 같다.</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix}$$</div>
+        <p><strong>2.</strong> $X$ 게이트와 $Z$ 게이트는 다음을 만족하는 단일 게이트의 예이다.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 430 70" width="430" height="70" role="img" aria-label="X 게이트 회로: 상태 α|0⟩ + β|1⟩가 선 하나를 따라 X라고 적힌 상자를 지나 β|0⟩ + α|1⟩로 나온다." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">X</text>
+              <text x="322" y="40">β|0⟩ + α|1⟩</text>
+            </g>
+          </svg>
+          <figcaption>X 게이트 회로</figcaption>
+        </figure>
+        <figure class="fig">
+          <svg viewBox="0 0 430 70" width="430" height="70" role="img" aria-label="Z 게이트 회로: 상태 α|0⟩ + β|1⟩가 선 하나를 따라 Z라고 적힌 상자를 지나 α|0⟩ − β|1⟩로 나온다." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">Z</text>
+              <text x="322" y="40">α|0⟩ − β|1⟩</text>
+            </g>
+          </svg>
+          <figcaption>Z 게이트 회로</figcaption>
+        </figure>
+        <p>계산하여 $X$ 게이트와 $Z$ 게이트에 대응하는 행렬을 구하라.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Controlled not gate is a quantum logical gate behaves according to the truth table.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$A$</th><th>$B$</th><th>$A'$</th><th>$B'$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|0\rangle$</td><td>$|0\rangle$</td><td>$|0\rangle$</td><td>$|0\rangle$</td></tr>
+              <tr><td>$|0\rangle$</td><td>$|1\rangle$</td><td>$|0\rangle$</td><td>$|1\rangle$</td></tr>
+              <tr><td>$|1\rangle$</td><td>$|0\rangle$</td><td>$|1\rangle$</td><td>$|1\rangle$</td></tr>
+              <tr><td>$|1\rangle$</td><td>$|1\rangle$</td><td>$|1\rangle$</td><td>$|0\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let $|0\rangle|0\rangle = (1, 0, 0, 0)$, $|0\rangle|1\rangle = (0, 1, 0, 0)$, $|1\rangle|0\rangle = (0, 0, 1, 0)$ and $|1\rangle|1\rangle = (0, 0, 0, 1)$. Then the matrix corresponding to the CNOT gate is as follows:</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix}$$</div>
+        <p><strong>2.</strong> $X$-gate and $Z$-gate are example of single gate such that</p>
+        <figure class="fig">
+          <svg viewBox="0 0 430 70" width="430" height="70" role="img" aria-label="A one-qubit circuit: the state alpha ket 0 plus beta ket 1 travels along a single wire through a box labelled X and leaves as beta ket 0 plus alpha ket 1." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">X</text>
+              <text x="322" y="40">β|0⟩ + α|1⟩</text>
+            </g>
+          </svg>
+          <figcaption>X gate circuit</figcaption>
+        </figure>
+        <figure class="fig">
+          <svg viewBox="0 0 430 70" width="430" height="70" role="img" aria-label="A one-qubit circuit: the state alpha ket 0 plus beta ket 1 travels along a single wire through a box labelled Z and leaves as alpha ket 0 minus beta ket 1." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">Z</text>
+              <text x="322" y="40">α|0⟩ − β|1⟩</text>
+            </g>
+          </svg>
+          <figcaption>Z gate circuit</figcaption>
+        </figure>
+        <p>Compute to find the matrix corresponding to the $X$ gate and $Z$ gate.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.36 ═══════════ -->
+
+<!-- 서술 단락 (p.36) -->
+<div class="card note-card" id="note07-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사실 모든 양자 게이트는 1-큐비트 게이트와 CNOT 게이트를 사용하여 구현된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In fact, every quantum gate is implemented by using 1-qubit gates and CNOT gate.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.11 -->
+<div class="card ex-card" id="c4-11">
+  <div class="card-head">
+    <span class="ex-num">EX 4.11</span>
+    <span class="ex-title">유니터리 행렬의 정의 <em>The Definition of a Unitary Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유니터리 행렬의 정의를 말하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$A \in M_{n\times n}(\mathbb{C})$가 $A\overline{A}^{T} = I_n$을 만족하면, 즉 $A^{-1} = \overline{A}^{T}$이면 $A$를 유니터리라고 한다(정의 4.8 (1)).</p>
+        <p>유니터리 행렬은 벡터의 노름을 보존한다: 임의의 $v \in \mathbb{C}^n$에 대하여 $\|Av\|^2 = (\overline{Av})^{T}(Av) = \overline{v}^{T}\overline{A}^{T}Av$인데, $A$가 유니터리이면 $\overline{A}^{T}A = A^{-1}A = I_n$이므로 $\|Av\|^2 = \overline{v}^Tv = \|v\|^2$이다. 따라서 유니터리 행렬은 단위벡터를 단위벡터로, 즉 큐비트를 큐비트로 보낸다 — 이것이 양자 게이트를 유니터리 행렬로 정의하는 이유이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Give the definition of a unitary matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$A \in M_{n\times n}(\mathbb{C})$ is unitary if $A\overline{A}^{T} = I_n$, i.e. $A^{-1} = \overline{A}^{T}$ (Definition 4.8 (1)).</p>
+        <p>Unitary matrices preserve the norm of a vector: for any $v \in \mathbb{C}^n$, $\|Av\|^2 = (\overline{Av})^{T}(Av) = \overline{v}^{T}\overline{A}^{T}Av$, and if $A$ is unitary then $\overline{A}^{T}A = A^{-1}A = I_n$, so $\|Av\|^2 = \overline{v}^Tv = \|v\|^2$. Hence a unitary matrix sends a unit vector to a unit vector, i.e. it sends a qubit to a qubit &mdash; this is why quantum gates are defined to be unitary matrices.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.12 -->
+<div class="card ex-card" id="c4-12">
+  <div class="card-head">
+    <span class="ex-num">EX 4.12</span>
+    <span class="ex-title">양자 게이트 빈칸 채우기 <em>Completing the Description of a Quantum Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>빈칸을 채워라.</p>
+        <p><strong>1.</strong> 양자 게이트는 $\boxed{\ (a)\ }$ 행렬로 나타낼 수 있다.</p>
+        <p><strong>2.</strong> 모든 양자 게이트는 $\boxed{\ (b)\ }$와 $\boxed{\ (c)\ }$로 구현할 수 있다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> $\boxed{\ (a)\ }$ = 유니터리(unitary).</p>
+        <p><strong>2.</strong> $\boxed{\ (b)\ }$ = 1-큐비트 게이트, $\boxed{\ (c)\ }$ = CNOT 게이트.</p>
+        <p>정의 4.8에 의해 1-큐비트에 대한 양자 게이트는 유니터리 $2\times2$ 행렬이고, 이어지는 서술(§4.4 말미)에서 보았듯이 모든 양자 게이트는 1-큐비트 게이트와 CNOT 게이트를 사용하여 구현된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Fill the blank</p>
+        <p><strong>1.</strong> A quantum gate can be express as a $\boxed{\ (a)\ }$ matrix.</p>
+        <p><strong>2.</strong> Every quantum gate can be implemented by $\boxed{\ (b)\ }$ and $\boxed{\ (c)\ }$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> $\boxed{\ (a)\ }$ = a unitary matrix.</p>
+        <p><strong>2.</strong> $\boxed{\ (b)\ }$ = 1-qubit gates, $\boxed{\ (c)\ }$ = the CNOT gate.</p>
+        <p>By Definition 4.8, a quantum gate for 1-qubit is a unitary $2\times2$ matrix, and as noted at the end of &sect;4.4, every quantum gate is implemented by using 1-qubit gates and the CNOT gate.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.13 -->
+<div class="card ex-card" id="c4-13">
+  <div class="card-head">
+    <span class="ex-num">EX 4.13</span>
+    <span class="ex-title">2-큐비트에 작용하는 CNOT 게이트 <em>The CNOT Gate on a Two-Qubit</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(|x|^2+|y|^2 = 1)$인 2-큐비트 $(x|0\rangle + y|1\rangle)\left(\frac{|0\rangle+|1\rangle}{\sqrt{2}}\right)$와 CNOT 게이트 $U$에 대하여 $U(x|0\rangle+y|1\rangle)\left(\frac{|0\rangle+|1\rangle}{\sqrt{2}}\right)$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>텐서곱을 전개하면(정의 4.6 (1))</p>
+        <div class="math-display">$$(x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2} = \frac{1}{\sqrt2}\big(x|00\rangle+x|01\rangle+y|10\rangle+y|11\rangle\big).$$</div>
+        <p>$|00\rangle=e_1,|01\rangle=e_2,|10\rangle=e_3,|11\rangle=e_4$(예제 4.10)로 나타내면 위 상태의 좌표벡터는 $\frac{1}{\sqrt2}(x,x,y,y)^T$이다. 예제 4.10에서 구한 CNOT 게이트의 행렬을 적용하면</p>
+        <div class="math-display">$$U\cdot\frac{1}{\sqrt2}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} 1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;0&amp;1\\ 0&amp;0&amp;1&amp;0\end{pmatrix}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix}.$$</div>
+        <p>즉 CNOT 게이트는 $|10\rangle$의 계수와 $|11\rangle$의 계수를 서로 바꾸지만, 두 계수가 모두 $y$로 같으므로 결과 벡터는 바뀌지 않는다. 따라서</p>
+        <div class="math-display">$$U(x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2} = \frac{1}{\sqrt2}\big(x|00\rangle+x|01\rangle+y|10\rangle+y|11\rangle\big) = (x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2},$$</div>
+        <p>즉 이 2-큐비트는 CNOT 게이트에 의해 변하지 않는다(상태가 그대로 보존된다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $(x|0\rangle + y|1\rangle)\left(\frac{|0\rangle+|1\rangle}{\sqrt{2}}\right)$ be a 2-qubit where $(|x|^2+|y|^2 = 1)$ and $U$ be CNOT gate. Find $U(x|0\rangle+y|1\rangle)\left(\frac{|0\rangle+|1\rangle}{\sqrt{2}}\right)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Expanding the tensor product (Definition 4.6 (1)),</p>
+        <div class="math-display">$$(x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2} = \frac{1}{\sqrt2}\big(x|00\rangle+x|01\rangle+y|10\rangle+y|11\rangle\big).$$</div>
+        <p>Writing $|00\rangle=e_1,|01\rangle=e_2,|10\rangle=e_3,|11\rangle=e_4$ (Example 4.10), the coordinate vector of this state is $\frac{1}{\sqrt2}(x,x,y,y)^T$. Applying the matrix of the CNOT gate found in Example 4.10,</p>
+        <div class="math-display">$$U\cdot\frac{1}{\sqrt2}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} 1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;0&amp;1\\ 0&amp;0&amp;1&amp;0\end{pmatrix}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} x\\ x\\ y\\ y\end{pmatrix}.$$</div>
+        <p>That is, the CNOT gate swaps the coefficients of $|10\rangle$ and $|11\rangle$, but since both coefficients equal $y$, the resulting vector is unchanged. Hence</p>
+        <div class="math-display">$$U(x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2} = \frac{1}{\sqrt2}\big(x|00\rangle+x|01\rangle+y|10\rangle+y|11\rangle\big) = (x|0\rangle+y|1\rangle)\otimes\frac{|0\rangle+|1\rangle}{\sqrt2},$$</div>
+        <p>i.e. this 2-qubit is left unchanged by the CNOT gate (the state is preserved).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.14 -->
+<div class="card ex-card" id="c4-14">
+  <div class="card-head">
+    <span class="ex-num">EX 4.14</span>
+    <span class="ex-title">1-큐비트 게이트의 행렬 <em>The Matrix Corresponding to a 1-Qubit Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$U$가 다음을 만족하는 1-큐비트에 대한 양자 게이트라 하자.</p>
+        <div class="math-display">$$|0\rangle \xrightarrow{U} \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle,$$</div>
+        <div class="math-display">$$|1\rangle \xrightarrow{U} \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle.$$</div>
+        <p>$U$에 대응하는 행렬을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>양자 게이트 $U$에 대응하는 $2\times2$ 행렬의 열은 $U|0\rangle$과 $U|1\rangle$의 좌표이다(정의 4.8 (2), 예제 4.9). $|0\rangle=(1,0)$, $|1\rangle=(0,1)$이므로</p>
+        <div class="math-display">$$U = \begin{pmatrix} \frac{1}{\sqrt2} &amp; \frac{1}{\sqrt2}\\ \frac{1}{\sqrt2} &amp; -\frac{1}{\sqrt2}\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} 1&amp;1\\ 1&amp;-1\end{pmatrix}.$$</div>
+        <p>실제로 $U\overline{U}^T = \frac12\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix} = \frac12\begin{pmatrix}2&amp;0\\0&amp;2\end{pmatrix}=I_2$이므로 $U$는 유니터리이고, 이는 $U$가 정당한 양자 게이트임을 확인해 준다(이 행렬이 바로 §4.6의 아다마르 게이트이다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $U$ be a quantum gate for 1-qubit such that</p>
+        <div class="math-display">$$|0\rangle \xrightarrow{U} \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle,$$</div>
+        <div class="math-display">$$|1\rangle \xrightarrow{U} \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle.$$</div>
+        <p>Find the matrix corresponding to $U$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The columns of the $2\times2$ matrix corresponding to a quantum gate $U$ are the coordinates of $U|0\rangle$ and $U|1\rangle$ (Definition 4.8 (2), Example 4.9). Since $|0\rangle=(1,0)$ and $|1\rangle=(0,1)$,</p>
+        <div class="math-display">$$U = \begin{pmatrix} \frac{1}{\sqrt2} &amp; \frac{1}{\sqrt2}\\ \frac{1}{\sqrt2} &amp; -\frac{1}{\sqrt2}\end{pmatrix} = \frac{1}{\sqrt2}\begin{pmatrix} 1&amp;1\\ 1&amp;-1\end{pmatrix}.$$</div>
+        <p>Indeed $U\overline{U}^T = \frac12\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix} = \frac12\begin{pmatrix}2&amp;0\\0&amp;2\end{pmatrix}=I_2$, so $U$ is unitary, confirming that $U$ is a legitimate quantum gate (this matrix is exactly the Hadamard gate of &sect;4.6).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.15 -->
+<div class="card ex-card" id="c4-15">
+  <div class="card-head">
+    <span class="ex-num">EX 4.15</span>
+    <span class="ex-title">2-큐비트 게이트의 행렬 <em>The Matrix Corresponding to a 2-Qubit Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$U$가 다음을 만족하는 2-큐비트에 대한 양자 게이트라 하자.</p>
+        <div class="math-display">$$\begin{array}{ccc} (0, 0) &amp; &amp; (0, 1) \\ (0, 1) &amp; \xrightarrow{U} &amp; (1, 0) \\ (1, 0) &amp; &amp; (1, 1) \\ (1, 1) &amp; &amp; (0, 0) \end{array}.$$</div>
+        <p>$|0\rangle|0\rangle := (1, 0, 0, 0), |0\rangle|1\rangle := (0, 1, 0, 0), |1\rangle|0\rangle := (0, 0, 1, 0)$, $|1\rangle|1\rangle := (0, 0, 0, 1)$이라 하자. $U$에 대응하는 행렬을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$|0\rangle|0\rangle=e_1,|0\rangle|1\rangle=e_2,|1\rangle|0\rangle=e_3,|1\rangle|1\rangle=e_4$라 하자. 주어진 대응 $(0,0)\mapsto(0,1)$, $(0,1)\mapsto(1,0)$, $(1,0)\mapsto(1,1)$, $(1,1)\mapsto(0,0)$은</p>
+        <div class="math-display">$$Ue_1=e_2,\quad Ue_2=e_3,\quad Ue_3=e_4,\quad Ue_4=e_1$$</div>
+        <p>을 뜻한다. $U$에 대응하는 행렬의 $i$번째 열은 $Ue_i$의 좌표이므로(정의 4.8 (2))</p>
+        <div class="math-display">$$U = \begin{pmatrix} 0&amp;0&amp;0&amp;1\\ 1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;1&amp;0\end{pmatrix}.$$</div>
+        <p>이 행렬은 표준기저벡터들을 순환시키는 치환행렬이므로 각 행과 열에 $1$이 정확히 하나씩 있고, 따라서 $U\overline{U}^T=I_4$, 즉 $U$는 유니터리이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $U$ be the quantum gate for 2-qubit such that</p>
+        <div class="math-display">$$\begin{array}{ccc} (0, 0) &amp; &amp; (0, 1) \\ (0, 1) &amp; \xrightarrow{U} &amp; (1, 0) \\ (1, 0) &amp; &amp; (1, 1) \\ (1, 1) &amp; &amp; (0, 0) \end{array}.$$</div>
+        <p>Let $|0\rangle|0\rangle := (1, 0, 0, 0), |0\rangle|1\rangle := (0, 1, 0, 0), |1\rangle|0\rangle := (0, 0, 1, 0)$ and $|1\rangle|1\rangle := (0, 0, 0, 1)$. Find a matrix corresponding to $U$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Let $|0\rangle|0\rangle=e_1,|0\rangle|1\rangle=e_2,|1\rangle|0\rangle=e_3,|1\rangle|1\rangle=e_4$. The given correspondence $(0,0)\mapsto(0,1)$, $(0,1)\mapsto(1,0)$, $(1,0)\mapsto(1,1)$, $(1,1)\mapsto(0,0)$ means that</p>
+        <div class="math-display">$$Ue_1=e_2,\quad Ue_2=e_3,\quad Ue_3=e_4,\quad Ue_4=e_1.$$</div>
+        <p>The $i$-th column of the matrix corresponding to $U$ is the coordinate vector of $Ue_i$ (Definition 4.8 (2)), so</p>
+        <div class="math-display">$$U = \begin{pmatrix} 0&amp;0&amp;0&amp;1\\ 1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;1&amp;0\end{pmatrix}.$$</div>
+        <p>This matrix is a permutation matrix cycling the standard basis vectors, so each row and column contains exactly one $1$, and hence $U\overline{U}^T=I_4$, i.e. $U$ is unitary.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.16 -->
+<div class="card ex-card" id="c4-16">
+  <div class="card-head">
+    <span class="ex-num">EX 4.16</span>
+    <span class="ex-title">X 게이트와 Z 게이트의 행렬 <em>Matrices Corresponding to the X Gate and the Z Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$X$ 게이트와 $Z$ 게이트에 대응하는 행렬을 구하고 그것이 옳음을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 원문 문장이 미완이어서(&ldquo;Prove that matrices corresponding the $X$ gate and $Z$ gate&rdquo;), 두 게이트에 대응하는 행렬을 구하고 그것이 각 게이트를 나타냄을 증명한다.</p>
+        <p>예제 4.10 (2)의 회로도에 따르면 $X$ 게이트는 $\alpha|0\rangle+\beta|1\rangle$을 $\beta|0\rangle+\alpha|1\rangle$로, $Z$ 게이트는 $\alpha|0\rangle+\beta|1\rangle$을 $\alpha|0\rangle-\beta|1\rangle$로 보내는 1-큐비트 게이트이다.</p>
+        <p><strong>$X$ 게이트.</strong> $X := \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}$라 하면</p>
+        <div class="math-display">$$X\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix}\beta\\\alpha\end{pmatrix},$$</div>
+        <p>즉 $X(\alpha|0\rangle+\beta|1\rangle) = \beta|0\rangle+\alpha|1\rangle$이므로 $X$는 $X$ 게이트가 요구하는 대응을 그대로 준다.</p>
+        <p><strong>$Z$ 게이트.</strong> $Z := \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}$라 하면</p>
+        <div class="math-display">$$Z\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix}\alpha\\-\beta\end{pmatrix},$$</div>
+        <p>즉 $Z(\alpha|0\rangle+\beta|1\rangle) = \alpha|0\rangle-\beta|1\rangle$이므로 $Z$는 $Z$ 게이트가 요구하는 대응을 그대로 준다.</p>
+        <p>이 행렬들이 유일함을 보이자. 정의 4.8에 의해 게이트는 선형사상(유니터리 행렬)이므로, 기저 $|0\rangle,|1\rangle$에서의 값 $U|0\rangle,U|1\rangle$이 정해지면 $U$ 전체가 결정되고, $U$에 대응하는 행렬의 열은 각각 $U|0\rangle, U|1\rangle$의 좌표이다(예제 4.9, 4.10과 같은 방식). $X$ 게이트는 $|0\rangle\mapsto|1\rangle$, $|1\rangle\mapsto|0\rangle$을 만족해야 하므로 대응 행렬의 열은 $(0,1)^T,(1,0)^T$뿐이고, 즉 대응 행렬은 $X$뿐이다. 마찬가지로 $Z$ 게이트는 $|0\rangle\mapsto|0\rangle$, $|1\rangle\mapsto-|1\rangle$을 만족해야 하므로 대응 행렬은 $Z$뿐이다.</p>
+        <p>마지막으로 $X, Z$가 유니터리임을 확인하면(정의 4.8 (1))</p>
+        <div class="math-display">$$X\overline{X}^T = \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}\begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;1\end{pmatrix}=I_2, \qquad Z\overline{Z}^T = \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}\begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;1\end{pmatrix}=I_2$$</div>
+        <p>이므로 $X$와 $Z$는 유니터리 행렬이고, 따라서 각각 정당한 양자 게이트이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that matrices corresponding the $X$gate and $Z$gate.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The statement is printed incompletely (&ldquo;Prove that matrices corresponding the $X$ gate and $Z$ gate&rdquo;); we find the matrices and prove they represent the gates.</p>
+        <p>By the circuit diagrams in Example 4.10 (2), the $X$ gate is a 1-qubit gate sending $\alpha|0\rangle+\beta|1\rangle$ to $\beta|0\rangle+\alpha|1\rangle$, and the $Z$ gate sends $\alpha|0\rangle+\beta|1\rangle$ to $\alpha|0\rangle-\beta|1\rangle$.</p>
+        <p><strong>The $X$ gate.</strong> Let $X := \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}$. Then</p>
+        <div class="math-display">$$X\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix}\beta\\\alpha\end{pmatrix},$$</div>
+        <p>i.e. $X(\alpha|0\rangle+\beta|1\rangle) = \beta|0\rangle+\alpha|1\rangle$, so $X$ realizes exactly the correspondence required of the $X$ gate.</p>
+        <p><strong>The $Z$ gate.</strong> Let $Z := \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}$. Then</p>
+        <div class="math-display">$$Z\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix}\alpha\\-\beta\end{pmatrix},$$</div>
+        <p>i.e. $Z(\alpha|0\rangle+\beta|1\rangle) = \alpha|0\rangle-\beta|1\rangle$, so $Z$ realizes exactly the correspondence required of the $Z$ gate.</p>
+        <p>We show these matrices are unique. By Definition 4.8, a gate is a linear map (a unitary matrix), so it is determined once its values $U|0\rangle, U|1\rangle$ on the basis $|0\rangle, |1\rangle$ are fixed, and the columns of the matrix corresponding to $U$ are the coordinates of $U|0\rangle$ and $U|1\rangle$ (as in Examples 4.9 and 4.10). The $X$ gate must satisfy $|0\rangle\mapsto|1\rangle$ and $|1\rangle\mapsto|0\rangle$, so the columns of its matrix are $(0,1)^T,(1,0)^T$ and nothing else, i.e. the matrix is $X$. Likewise the $Z$ gate must satisfy $|0\rangle\mapsto|0\rangle$ and $|1\rangle\mapsto-|1\rangle$, so its matrix is $Z$ and nothing else.</p>
+        <p>Finally, we check that $X, Z$ are unitary (Definition 4.8 (1)):</p>
+        <div class="math-display">$$X\overline{X}^T = \begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}\begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;1\end{pmatrix}=I_2, \qquad Z\overline{Z}^T = \begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix}\begin{pmatrix} 1&amp;0\\0&amp;-1\end{pmatrix} = \begin{pmatrix} 1&amp;0\\0&amp;1\end{pmatrix}=I_2,$$</div>
+        <p>so $X$ and $Z$ are unitary matrices, and hence each is a legitimate quantum gate.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

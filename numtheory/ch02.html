@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>합동 산술과 법 n의 역원 (§1.4–1.5 Modulo Arithmetic and Inverses Modulo n) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 2단원 — 법 n에 대한 합동(congruent modulo n)의 정의와 기본 성질, 합동식의 소거 법칙, 2진 표현(2-digit expression)을 이용한 거듭제곱의 빠른 계산과 재귀적 power(x, N) 알고리즘, 그리고 법 n에 대한 역원(inverse modulo n)의 정의·존재 조건(gcd(n, a) = 1)·유일성과 유클리드 호제법으로 역원을 구하는 알고리즘을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 정수론, number theory, 합동, congruence, 법 n에 대하여 합동, congruent modulo n, 합동 산술, modulo arithmetic, 합동식, 소거법칙, cancellation, 거듭제곱, power, 반복제곱, repeated squaring, 2진 표현, 2-digit expression, binary expression, 재귀 알고리즘, recursive algorithm, 곱셈 횟수, 법 n에 대한 역원, inverse modulo n, 가역, invertible, 최대공약수, gcd, 유클리드 호제법, Euclidean algorithm, 역원의 유일성, RSA, 버튼, Burton">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch02.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="합동 산술과 법 n의 역원 (§1.4–1.5 Modulo Arithmetic and Inverses Modulo n) — 응용정수론 한·영 대조">
+<meta property="og:description" content="법 n에 대한 합동의 정의와 기본 성질에서 출발해, 2진 표현으로 거듭제곱을 빠르게 계산하는 재귀 알고리즘, 그리고 법 n에 대한 역원의 존재 조건과 유일성, 유클리드 호제법으로 역원을 구하는 절차까지 — 응용정수론 둘째 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch02.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "합동 산술과 법 n의 역원 (§1.4–1.5 Modulo Arithmetic and Inverses Modulo n) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §1.4–1.5 — 법 n에 대한 합동의 정의와 기본 성질, 2진 표현을 이용한 거듭제곱의 빠른 계산과 재귀 알고리즘, 법 n에 대한 역원의 정의와 존재 조건 gcd(n, a) = 1, 역원의 유일성, 유클리드 호제법을 이용한 역원 계산을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch02.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch02.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html" class="active">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 02 · §1.4–1.5</p>
+  <h1>합동 산술과 법 n의 역원<span>Modulo Arithmetic and Inverses Modulo n</span></h1>
+  <p class="header-desc">법 n에 대한 합동의 정의에서 출발해, 덧셈·곱셈과 소거가 합동에서 어떻게 작동하는지 확인합니다. 이어서 2진 표현을 이용해 거듭제곱을 곱셈 몇 번만으로 계산하는 방법과 그것을 그대로 옮긴 재귀 알고리즘을 보고, 마지막으로 법 n에 대한 역원이 언제 존재하는지(gcd(n, a) = 1), 왜 유일한지, 그리고 유클리드 호제법으로 어떻게 구하는지를 정리합니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-14"><span class="toc-num">DEF 1.14</span> 법 n에 대한 합동 <em>Congruence Modulo n</em></a></li>
+    <li><a href="#rem1"><span class="toc-num">REM 1</span> 나머지로 읽는 합동 <em>Congruence in Terms of Remainders</em></a></li>
+    <li><a href="#c1-15"><span class="toc-num">EXAM 1.15</span> 합동식의 예 <em>Examples of Congruences</em></a></li>
+    <li><a href="#c1-16"><span class="toc-num">THM 1.16</span> 합동의 기본 성질 <em>Basic Properties of Congruences</em></a></li>
+    <li><a href="#c1-17"><span class="toc-num">EXAM 1.17</span> 소거가 되는 경우와 안 되는 경우 <em>When Cancellation Works and When It Fails</em></a></li>
+    <li><a href="#c1-18"><span class="toc-num">EXAM 1.18</span> 곱의 합동 계산 <em>Computing Products Modulo n</em></a></li>
+    <li><a href="#c1-19"><span class="toc-num">EXAM 1.19</span> 거듭제곱의 빠른 계산 <em>Fast Computation of Powers Modulo 11</em></a></li>
+    <li><a href="#c1-20"><span class="toc-num">THM 1.20</span> 거듭제곱 계산의 곱셈 횟수 <em>The Number of Multiplications for a Power</em></a></li>
+    <li><a href="#algo02-1"><span class="toc-num">ALGO</span> 법 n 거듭제곱 알고리즘 <em>Algorithm for Powers mod n</em></a></li>
+    <li><a href="#c1-21"><span class="toc-num">EX 1.21</span> 24x + 9y = 3의 정수해 <em>An Integral Solution of 24x + 9y = 3</em></a></li>
+    <li><a href="#c1-22"><span class="toc-num">EX 1.22</span> 1001 · 409의 법 9 나머지 <em>Computing 1001 · 409 mod 9</em></a></li>
+    <li><a href="#c1-23"><span class="toc-num">EX 1.23</span> 곱셈 횟수 빈칸 채우기 <em>Completing the Bound on the Number of Multiplications</em></a></li>
+    <li><a href="#c1-24"><span class="toc-num">EX 1.24</span> 2진 표현을 이용한 거듭제곱 계산 <em>Computing 2³⁴¹ mod 340 by the 2-digit Expression</em></a></li>
+    <li><a href="#c1-25"><span class="toc-num">EX 1.25</span> 알고리즘을 단계별로 적용하기 <em>Computing 2³⁴¹ mod 340 by the Algorithm Step by Step</em></a></li>
+    <li><a href="#c1-26"><span class="toc-num">DEF 1.26</span> 법 n에 대한 역원 <em>The Inverse of an Integer Modulo n</em></a></li>
+    <li><a href="#c1-27"><span class="toc-num">EXAM 1.27</span> 역원이 있는 경우와 없는 경우 <em>Integers With and Without an Inverse</em></a></li>
+    <li><a href="#c1-28"><span class="toc-num">THM 1.28</span> 합동인 두 정수의 최대공약수 <em>Congruent Integers Have the Same gcd with n</em></a></li>
+    <li><a href="#c1-29"><span class="toc-num">THM 1.29</span> 가역일 필요충분조건 <em>Invertibility Modulo n and gcd(n, a) = 1</em></a></li>
+    <li><a href="#c1-30"><span class="toc-num">THM 1.30</span> 합동인 정수의 가역성 <em>Congruent Integers Are Invertible Together</em></a></li>
+    <li><a href="#c1-31"><span class="toc-num">EXAM 1.31</span> 법 12에 대하여 가역인 정수 <em>Integers Invertible Modulo 12</em></a></li>
+    <li><a href="#c1-32"><span class="toc-num">THM 1.32</span> 역원의 유일성과 이중 역원 <em>Uniqueness of the Inverse and (a⁻¹)⁻¹ = a</em></a></li>
+    <li><a href="#algo02-2"><span class="toc-num">ALGO</span> 법 n 역원 알고리즘 <em>Inverse mod n Algorithm</em></a></li>
+    <li><a href="#c1-33"><span class="toc-num">EX 1.33</span> 법 20에 대하여 가역인 수 <em>Which Numbers Are Invertible Modulo 20</em></a></li>
+    <li><a href="#c1-34"><span class="toc-num">EX 1.34</span> 역원의 유일성 증명 <em>Proving the Inverse Is Unique</em></a></li>
+    <li><a href="#c1-35"><span class="toc-num">EX 1.35</span> 가역 판정 조건 빈칸 채우기 <em>Completing the Criterion for Invertibility</em></a></li>
+    <li><a href="#c1-36"><span class="toc-num">EX 1.36</span> 유클리드 호제법으로 구하는 역원 <em>Finding 14⁻¹ mod 23 by the Euclidean Algorithm</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>1.4 Modulo arithmetic · 합동 산술</h2></div>
+
+<!-- ═══════════ PDF p.6 ═══════════ -->
+
+<!-- Definition 1.14 -->
+<div class="card def-card" id="c1-14">
+  <div class="card-head">
+    <span class="def-num">DEF 1.14</span>
+    <span class="def-title">법 n에 대한 합동 <em>Congruence Modulo n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$을 고정된 양의 정수라 하자. 두 정수 $a$와 $b$가 법 $n$에 대하여 합동이라는 것은,</p>
+        <div class="math-display">$$a \equiv b \ (\bmod\ n)$$</div>
+        <p>$n|a - b$라는 뜻이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n$ be a fixed positive integer. Two integers $a$ and $b$ are said to be congruent modulo n,</p>
+        <div class="math-display">$$a \equiv b \ (\bmod\ n)$$</div>
+        <p>if $n|a - b$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 1 -->
+<div class="card rem-card" id="rem1">
+  <div class="card-head">
+    <span class="rem-num">REM 1</span>
+    <span class="rem-title">나머지로 읽는 합동 <em>Congruence in Terms of Remainders</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a = q_1 n + r_1$ $(0 \le r_1 \lt |n|)$이고 $b = q_2 n + r_2$ $(0 \le r_2 \lt |n|)$라 하자. 그러면</p>
+        <div class="math-display">$$a \equiv b \ (\bmod\ n) \Leftrightarrow r_1 = r_2.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose that $a = q_1 n + r_1$ $(0 \le r_1 \lt |n|)$ and $b = q_2 n + r_2$ $(0 \le r_2 \lt |n|)$. Then</p>
+        <div class="math-display">$$a \equiv b \ (\bmod\ n) \Leftrightarrow r_1 = r_2.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.15 -->
+<div class="card exam-card" id="c1-15">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.15</span>
+    <span class="exam-title">합동식의 예 <em>Examples of Congruences</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $12 \equiv 7 \ (\bmod\ 5)$</p>
+        <p><strong>2.</strong> $23 \equiv 7 \ (\bmod\ 8)$</p>
+        <p><strong>3.</strong> $1000 \equiv 6 \ (\bmod\ 7)$</p>
+        <p><em>역주.</em> 원문 (3)은 "$1000 \equiv 4 \ (\bmod\ 7)$"으로 인쇄되어 있으나 $1000 - 4 = 996$은 7의 배수가 아니므로 성립하지 않는다. $1000 = 7 \cdot 142 + 6$이므로 $1000 \equiv 6 \ (\bmod\ 7)$이다. 위에서 바로잡아 옮겼다. (아래 예제 1.18 (1)의 $10000 \equiv 4 \ (\bmod\ 7)$은 옳다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> $12 \equiv 7 \ (\bmod\ 5)$</p>
+        <p><strong>2.</strong> $23 \equiv 7 \ (\bmod\ 8)$</p>
+        <p><strong>3.</strong> $1000 \equiv 4 \ (\bmod\ 7)$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.16 (증명은 p.7 "Theorem 1.16 2).") -->
+<div class="card thm-card" id="c1-16">
+  <div class="card-head">
+    <span class="thm-num">THM 1.16</span>
+    <span class="thm-title">합동의 기본 성질 <em>Basic Properties of Congruences</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \gt 1$을 고정하고 $a$, $b$, $c$, $d \in \mathbb{Z}$라 하자. 그러면 다음 성질이 성립한다:</p>
+        <p><strong>1.</strong> $a \equiv b \ (\bmod\ n)$이고 $c \equiv d \ (\bmod\ n)$이면, $a + c \equiv b + d \ (\bmod\ n)$이고 $ac \equiv bd \ (\bmod\ n)$이다.</p>
+        <p><strong>2.</strong> $\gcd(t, n) = 1$이라 하자. $ta \equiv tb \ (\bmod\ n)$이면 $a \equiv b \ (\bmod\ n)$이다.</p>
+        <p><em>역주.</em> 원문 (1)의 둘째 결론은 "$ac \equiv bc \ (\bmod\ n)$"으로 인쇄되어 있다. 이는 $a \equiv b$만으로도 얻어지는 약한 주장이고, 가정 $c \equiv d$까지 쓰는 본래의 성질은 $ac \equiv bd \ (\bmod\ n)$이다. 위에서 바로잡아 옮겼다(아래 연습문제 1.22의 풀이도 이 형태를 쓴다).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>정리 1.16 (2).</strong></p>
+        <div class="math-display">$$ta \equiv tb \ (\bmod\ n) \Leftrightarrow n|(ta - tb) = t(a - b) \Leftrightarrow n|(a - b)(\because (n, t) = 1)$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n \gt 1$ be fixed and $a$, $b$, $c$, $d \in \mathbb{Z}$. Then the following porperties hold:</p>
+        <p><strong>1.</strong> If $a \equiv b \ (\bmod\ n)$ and $c \equiv d \ (\bmod\ n)$, then $a + c \equiv b + d \ (\bmod\ n)$ and $ac \equiv bc \ (\bmod\ n)$.</p>
+        <p><strong>2.</strong> Suppose that $\gcd(t, n) = 1$. If $ta \equiv tb \ (\bmod\ n)$, then $a \equiv b \ (\bmod\ n)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Theorem 1.16 2).</strong></p>
+        <div class="math-display">$$ta \equiv tb \ (\bmod\ n) \Leftrightarrow n|(ta - tb) = t(a - b) \Leftrightarrow n|(a - b)(\because (n, t) = 1)$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.17 -->
+<div class="card exam-card" id="c1-17">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.17</span>
+    <span class="exam-title">소거가 되는 경우와 안 되는 경우 <em>When Cancellation Works and When It Fails</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $3 \cdot 6 \equiv 3 \cdot x \ (\bmod\ 35)$라 하자. 그러면 $\gcd(3, 35) = 1$이므로 $x \equiv 6 \ (\bmod\ 35)$이다.</p>
+        <p><strong>2.</strong> $3 \cdot 4 \equiv 3 \cdot 8 \ (\bmod\ 6)$이지만 $4 \not\equiv 8 \ (\bmod\ 6)$이다 $(\because (3, 6) \neq 1)$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Suppose that $3 \cdot 6 \equiv 3 \cdot x \ (\bmod\ 35)$. Then $\gcd(3, 35) = 1$. So $x \equiv 6 \ (\bmod\ 35)$.</p>
+        <p><strong>2.</strong> $3 \cdot 4 \equiv 3 \cdot 8 \ (\bmod\ 6)$. But $4 \not\equiv 8 \ (\bmod\ 6)$ $(\because (3, 6) \neq 1)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.7 ═══════════ -->
+
+<!-- Example 1.18 -->
+<div class="card exam-card" id="c1-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.18</span>
+    <span class="exam-title">곱의 합동 계산 <em>Computing Products Modulo n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong></p>
+        <div class="math-display">$$\begin{aligned}
+10000 \cdot 73 &amp;\equiv 4 \cdot 3 \ (\bmod\ 7) \\
+&amp;\equiv 12 \ (\bmod\ 7) \\
+&amp;\equiv 5 \ (\bmod\ 7)
+\end{aligned}$$</div>
+        <p><strong>2.</strong> $273 \cdot 107 \equiv 3 \cdot 2 \equiv 1 \ (\bmod\ 5)$</p>
+        <p><strong>3.</strong> $5^3 \equiv 25 \cdot 5 \equiv 1 \cdot 5 \equiv 5 \ (\bmod\ 12)$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong></p>
+        <div class="math-display">$$\begin{aligned}
+10000 \cdot 73 &amp;\equiv 4 \cdot 3 \ (\bmod\ 7) \\
+&amp;\equiv 12 \ (\bmod\ 7) \\
+&amp;\equiv 5 \ (\bmod\ 7)
+\end{aligned}$$</div>
+        <p><strong>2.</strong> $273 \cdot 107 \equiv 3 \cdot 2 \equiv 1 \ (\bmod\ 5)$</p>
+        <p><strong>3.</strong> $5^3 \equiv 25 \cdot 5 \equiv 1 \cdot 5 \equiv 5 \ (\bmod\ 12)$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.7) -->
+<div class="card note-card" id="note02-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공식 $a^x \equiv y \ (\bmod\ n)$을 생각하자. $a, x$를 알고 $y$를 구하는 것은 비교적 쉬운 문제이다. 하지만 $a, y$를 알고 $x$를 구하는 것은 어려운 문제이다. 이 문제가 어렵다는 사실 때문에 RSA 암호를 푸는 것이 어려워진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the formula $a^x \equiv y \ (\bmod\ n)$. Suppose that we know that $a, x$ and find $y$. It&rsquo;s a relatively easy problem. But suppose that we know that $a, y$ and find $x$. It&rsquo;s a hard problem. The fact that this problem is hard makes it difficult to solve the RSA password.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.19 -->
+<div class="card exam-card" id="c1-19">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.19</span>
+    <span class="exam-title">거듭제곱의 빠른 계산 <em>Fast Computation of Powers Modulo 11</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $3^4 \equiv (3^2)^2 \equiv 9^2 \equiv 81 \equiv 4 \ (\bmod\ 11)$</p>
+        <p><strong>2.</strong> $3^8 \equiv (3^4)^2 \equiv 4^2 \equiv 5 \ (\bmod\ 11)$</p>
+        <p><strong>3.</strong> $3^{16} \equiv (3^8)^2 \equiv 5^2 \equiv 3 \ (\bmod\ 11)$</p>
+        <p><strong>4.</strong> $3^{32} \equiv (3^{16})^2 \equiv 3^2 \equiv 9 \ (\bmod\ 11)$</p>
+        <p><strong>5.</strong> $3^{40} \ (\bmod\ 11)$을 계산하자. $40 = 2^5 + 2^3$임에 유의하라.</p>
+        <div class="math-display">$$\begin{aligned}
+3^{40} &amp;\equiv 3^{32}3^8 \ (\bmod\ 11) \\
+&amp;\equiv 9 \times 5 \ (\bmod\ 11) \\
+&amp;\equiv 1 \ (\bmod\ 11)
+\end{aligned}$$</div>
+        <p>곱셈을 6번만 사용했음에 유의하라.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> $3^4 \equiv (3^2)^2 \equiv 9^2 \equiv 81 \equiv 4 \ (\bmod\ 11)$</p>
+        <p><strong>2.</strong> $3^8 \equiv (3^4)^2 \equiv 4^2 \equiv 5 \ (\bmod\ 11)$</p>
+        <p><strong>3.</strong> $3^{16} \equiv (3^8)^2 \equiv 5^2 \equiv 3 \ (\bmod\ 11)$</p>
+        <p><strong>4.</strong> $3^{32} \equiv (3^{16})^2 \equiv 3^2 \equiv 9 \ (\bmod\ 11)$</p>
+        <p><strong>5.</strong> Calculate $3^{40} \ (\bmod\ 11)$. Note that $40 = 2^5 + 2^3$.</p>
+        <div class="math-display">$$\begin{aligned}
+3^{40} &amp;\equiv 3^{32}3^8 \ (\bmod\ 11) \\
+&amp;\equiv 9 \times 5 \ (\bmod\ 11) \\
+&amp;\equiv 1 \ (\bmod\ 11)
+\end{aligned}$$</div>
+        <p>Notice that we only did 6 multiplications.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (pp.7–8) -->
+<div class="card note-card" id="note02-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$r \in \mathbb{Z}_{>0}$이고 $r = b_n 2^n + \cdots + b_1 2 + b_0$ ($b_i \in \{0, 1\}$)라 하자. 2진 표현(2-digit expression)을 이용하여 $a^r \ (\bmod\ m)$을 계산하자.</p>
+        <div class="math-display">$$\begin{aligned}
+a^r &amp;\equiv a^{b_n 2^n + \cdots + b_1 2 + b_0} \ (\bmod\ m) \\
+&amp;\equiv a^{b_n 2^n} \cdots a^{b_1 2}a^{b_0} \ (\bmod\ m)
+\end{aligned}$$</div>
+        <p>위 식을 계산하는 데 필요한 곱셈의 횟수를 세어 보자.</p>
+        <p><strong>1.</strong> $a^{2^n}, \cdots, a^2$을 계산한다. $n$번의 곱셈이 필요하다.</p>
+        <p><strong>2.</strong> $a^{b_n 2^n} \times \cdots a^{b_0}$을 계산한다. $n$번 이하의 곱셈이 필요하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $r \in \mathbb{Z}_{>0}$ and $r = b_n 2^n + \cdots + b_1 2 + b_0(b_i \in \{0, 1\})$. Calculate $a^r \ (\bmod\ m)$ using 2-digit expression.</p>
+        <div class="math-display">$$\begin{aligned}
+a^r &amp;\equiv a^{b_n 2^n + \cdots + b_1 2 + b_0} \ (\bmod\ m) \\
+&amp;\equiv a^{b_n 2^n} \cdots a^{b_1 2}a^{b_0} \ (\bmod\ m)
+\end{aligned}$$</div>
+        <p>Let&rsquo;s count the number of multiplication of calculate above formula.</p>
+        <p><strong>1.</strong> Calculate $a^{2^n}, \cdots, a^2$. It requires $n$ times multiplication.</p>
+        <p><strong>2.</strong> Calculate $a^{b_n 2^n} \times \cdots a^{b_0}$. It requires $n$ or fewer times multiplication.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.8 ═══════════ -->
+
+<!-- Theorem 1.20 -->
+<div class="card thm-card" id="c1-20">
+  <div class="card-head">
+    <span class="thm-num">THM 1.20</span>
+    <span class="thm-title">거듭제곱 계산의 곱셈 횟수 <em>The Number of Multiplications for a Power</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a^N \ (\bmod\ m)$을 $2\lfloor \log_2 r \rfloor$번의 곱셈만으로 계산할 수 있다.</p>
+        <p><em>역주.</em> 원문은 지수를 $N$으로 쓰면서 로그 안에는 앞 단락의 문자 $r$을 그대로 두었는데, 둘은 같은 지수를 가리킨다. 즉 $a^N \ (\bmod\ m)$을 $2\lfloor \log_2 N \rfloor$번의 곱셈으로 계산할 수 있다는 뜻이다(연습문제 1.23이 이 형태를 묻는다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>It is possible to calculate $a^N \ (\bmod\ m)$ using only $2\lfloor \log_2 r \rfloor$ multiplication.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.8) -->
+<div class="card note-card" id="note02-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예를 들어 어떤 컴퓨터가 법 $n$에 대한 곱셈을 초당 10억 번 수행한다고 하자. $N = 10^{20}$일 때 $a^N \ (\bmod\ n)$을 계산하자. 곱셈을 그대로 $10^{20}$번 하면 약 3000년이 걸린다. 하지만 위 방법을 쓰면 곱셈을 $2\lfloor \log_2 10^{20} \rfloor$번만 해서 0.1마이크로초가 걸린다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For example, suppose a computer does 1 billion modulo $n$ multiplication per a second. Compute $a^N \ (\bmod\ n)$ when $N = 10^{20}$. By multiplication itself $10^{20}$times take about 3000 years. But using the above method, multiplication $2\lfloor \log_2 10^{20} \rfloor$ times take 0.1 micro seconds.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (p.8) : (Algorithm for powers mod n) -->
+<div class="card algo-card" id="algo02-1">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">법 n 거듭제곱 알고리즘 <em>Algorithm for Powers mod n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> $x \in \mathbb{Z}, n, N \in \mathbb{Z}_{>0}$이고 $n \le 2$.</p>
+        <p><strong>출력 :</strong> $\operatorname{power}(x, N)$ ($x^N \equiv \operatorname{power}(x, N) \ (\bmod\ n)$이고 $0 \le \operatorname{power}(x, N) \lt n$을 만족하는 정수)</p>
+        <p>(재귀 알고리즘)</p>
+        <div class="math-display">$$\operatorname{power}(x, N) = \begin{cases}
+\text{return} \quad x, N = 1\text{일 때} \\
+\text{return} \quad r \equiv \operatorname{power}\left(x, \frac{N}{2}\right)^{2} (\bmod\ n)\text{을 만족하는 } 0 \le r \lt n, N\text{이 짝수일 때} \\
+\text{return} \quad r \equiv x\operatorname{power}\left(x, \frac{N - 1}{2}\right)^{2} (\bmod\ n)\text{을 만족하는 } 0 \le r \lt n, \\
+\qquad\qquad N\text{이 홀수이고 } N \ge 2\text{일 때}
+\end{cases} \tag{1}$$</div>
+        <p><em>역주.</em> 원문의 입력 조건은 "$n \le 2$"로 인쇄되어 있으나 문맥상 법에 대한 조건 $n \ge 2$이다(출력이 $0 \le \operatorname{power}(x, N) \lt n$이려면 $n \ge 2$여야 하고, 정리 1.32·1.37도 법에 $n \ge 2$를 요구한다). 지수에 대한 조건 $N \ge 2$로 읽을 수는 없다 — $N = 1$이 이 재귀의 기저 단계이기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> $x \in \mathbb{Z}, n, N \in \mathbb{Z}_{>0}$ and $n \le 2$.</p>
+        <p><strong>Output :</strong> $\operatorname{power}(x, N)$ (integer such that $x^N \equiv \operatorname{power}(x, N) \ (\bmod\ n)$ and $0 \le \operatorname{power}(x, N) \lt n$</p>
+        <p>(a recursive algorithm)</p>
+        <div class="math-display">$$\operatorname{power}(x, N) = \begin{cases}
+\text{return} \quad x, \text{ if } N = 1 \\
+\text{return} \quad 0 \le r \lt n \text{ s.t. } r \equiv \operatorname{power}\left(x, \frac{N}{2}\right)^{2} (\bmod\ n), \text{ if } N \text{ even} \\
+\text{return} \quad 0 \le r \lt n \text{ s.t. } r \equiv x\operatorname{power}\left(x, \frac{N - 1}{2}\right)^{2} (\bmod\ n), \\
+\qquad\qquad \text{ if } N \text{ odd and } N \ge 2
+\end{cases} \tag{1}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.21 -->
+<div class="card ex-card" id="c1-21">
+  <div class="card-head">
+    <span class="ex-num">EX 1.21</span>
+    <span class="ex-title">24x + 9y = 3의 정수해 <em>An Integral Solution of 24x + 9y = 3</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$24x + 9y = 3$의 정수해를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$24, 9$에 유클리드 호제법을 적용하면</p>
+        <div class="math-display">$$24 = 9 \cdot 2 + 6, \qquad 9 = 6 \cdot 1 + 3, \qquad 6 = 3 \cdot 2 + 0$$</div>
+        <p>이므로 $\gcd(24, 9) = 3$이고, $3 \mid 3$이므로 정수해가 존재한다. 후진대입하면</p>
+        <div class="math-display">$$3 = 9 - 6 \cdot 1 = 9 - (24 - 9 \cdot 2) = 3 \cdot 9 - 24$$</div>
+        <p>이므로 $24 \cdot (-1) + 9 \cdot 3 = 3$이다. 즉 $(x_0, y_0) = (-1, 3)$은 하나의 특수해이다. $\gcd(24, 9) = 3$이므로 정리 1.9와 정리 1.10에 의해 일반해는</p>
+        <div class="math-display">$$(x, y) = \left(-1 + \frac{9}{3}n,\ 3 - \frac{24}{3}n\right) = (-1 + 3n,\ 3 - 8n), \qquad n \in \mathbb{Z}$$</div>
+        <p>이다. (검산: $24(-1 + 3n) + 9(3 - 8n) = -24 + 72n + 27 - 72n = 3$.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find an integral solution of $24x + 9y = 3$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Applying the Euclidean algorithm to $24, 9$,</p>
+        <div class="math-display">$$24 = 9 \cdot 2 + 6, \qquad 9 = 6 \cdot 1 + 3, \qquad 6 = 3 \cdot 2 + 0$$</div>
+        <p>so $\gcd(24, 9) = 3$, and since $3 \mid 3$ an integral solution exists. Back-substituting,</p>
+        <div class="math-display">$$3 = 9 - 6 \cdot 1 = 9 - (24 - 9 \cdot 2) = 3 \cdot 9 - 24$$</div>
+        <p>so $24 \cdot (-1) + 9 \cdot 3 = 3$. That is, $(x_0, y_0) = (-1, 3)$ is a particular solution. Since $\gcd(24, 9) = 3$, by Theorems 1.9 and 1.10 the general solution is</p>
+        <div class="math-display">$$(x, y) = \left(-1 + \frac{9}{3}n,\ 3 - \frac{24}{3}n\right) = (-1 + 3n,\ 3 - 8n), \qquad n \in \mathbb{Z}$$</div>
+        <p>(Check: $24(-1 + 3n) + 9(3 - 8n) = -24 + 72n + 27 - 72n = 3$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.22 -->
+<div class="card ex-card" id="c1-22">
+  <div class="card-head">
+    <span class="ex-num">EX 1.22</span>
+    <span class="ex-title">1001 · 409의 법 9 나머지 <em>Computing 1001 · 409 mod 9</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$1001 \cdot 409 \ (\bmod\ 9)$를 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$1001 = 9 \cdot 111 + 2$이므로 $1001 \equiv 2 \ (\bmod\ 9)$이고, $409 = 9 \cdot 45 + 4$이므로 $409 \equiv 4 \ (\bmod\ 9)$이다. 정리 1.16 (1)에 의해</p>
+        <div class="math-display">$$1001 \cdot 409 \equiv 2 \cdot 4 = 8 \ (\bmod\ 9)$$</div>
+        <p>이고 $0 \le 8 \lt 9$이므로 $1001 \cdot 409 \equiv 8 \ (\bmod\ 9)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $1001 \cdot 409 \ (\bmod\ 9)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $1001 = 9 \cdot 111 + 2$, $1001 \equiv 2 \ (\bmod\ 9)$, and since $409 = 9 \cdot 45 + 4$, $409 \equiv 4 \ (\bmod\ 9)$. By Theorem 1.16 (1),</p>
+        <div class="math-display">$$1001 \cdot 409 \equiv 2 \cdot 4 = 8 \ (\bmod\ 9)$$</div>
+        <p>and since $0 \le 8 \lt 9$, $1001 \cdot 409 \equiv 8 \ (\bmod\ 9)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.23 (빈칸 채우기) -->
+<div class="card ex-card" id="c1-23">
+  <div class="card-head">
+    <span class="ex-num">EX 1.23</span>
+    <span class="ex-title">곱셈 횟수 빈칸 채우기 <em>Completing the Bound on the Number of Multiplications</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 명제를 완성하라.</p>
+        <p>"$a^N \ (\bmod\ n)$은 곱셈을 $\boxed{\qquad\qquad}$번만 써서 계산할 수 있다."</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 1.20에 의해 $a^N \ (\bmod\ n)$은 곱셈을 $2\lfloor \log_2 N \rfloor$번만 써서 계산할 수 있다. 따라서 빈칸은 $2\lfloor \log_2 N \rfloor$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Complete the following statement.</p>
+        <p>It is possible to calculate $a^N \ (\bmod\ n)$ using only $\boxed{\qquad\qquad}$ times multiplications.&rdquo;</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By Theorem 1.20, it is possible to calculate $a^N \ (\bmod\ n)$ using only $2\lfloor \log_2 N \rfloor$ multiplications. Hence the blank is $2\lfloor \log_2 N \rfloor$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF pp.8–9 ═══════════ -->
+
+<!-- Exercise 1.24 (원문 풀이 인쇄됨) -->
+<div class="card ex-card" id="c1-24">
+  <div class="card-head">
+    <span class="ex-num">EX 1.24</span>
+    <span class="ex-title">2진 표현을 이용한 거듭제곱 계산 <em>Computing 2³⁴¹ mod 340 by the 2-digit Expression</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>2진 표현을 이용하여 $2^{341} \ (\bmod\ 340)$을 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$341 = 101010101_{(2)}$임에 유의하라.</p>
+        <div class="math-display">$$\begin{aligned}
+2^{341} &amp;\equiv 2^{101010101_{(2)}} \ (\bmod\ 340) \\
+&amp;\equiv 2^{256}2^{64}2^{16}2^{4}2 \ (\bmod\ 340)
+\end{aligned}$$</div>
+        <p>$2 \equiv 2 \ (\bmod\ 340)$, $2^2 \equiv 4 \ (\bmod\ 340)$, $2^4 \equiv 16 \ (\bmod\ 340)$, $2^8 \equiv 256 \ (\bmod\ 340)$, $2^{16} \equiv 65536 \equiv 256 \ (\bmod\ 340)$임을 안다. 마찬가지로 $2^{256} \equiv 2^{128} \equiv 2^{64} \equiv 2^{32} \equiv 256 \ (\bmod\ 340)$이다.</p>
+        <div class="math-display">$$\begin{aligned}
+2^{341} &amp;\equiv 2^{101010101_{(2)}} \ (\bmod\ 340) \\
+&amp;\equiv 2^{256}2^{64}2^{16}2^{4}2 \ (\bmod\ 340) \\
+&amp;\equiv 256 \times 256 \times 256 \times 16 \times 2 \ (\bmod\ 340) \\
+&amp;\equiv 256 \times 16 \times 2 \ (\bmod\ 340) \\
+&amp;\equiv 8192 \ (\bmod\ 340) \\
+&amp;\equiv 32 \ (\bmod\ 340)
+\end{aligned}$$</div>
+        <p>따라서 $2^{341} \equiv 32 \ (\bmod\ 340)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $2^{341} \ (\bmod\ 340)$ by using the 2-digit expression.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Note that $341 = 101010101_{(2)}$.</p>
+        <div class="math-display">$$\begin{aligned}
+2^{341} &amp;\equiv 2^{101010101_{(2)}} \ (\bmod\ 340) \\
+&amp;\equiv 2^{256}2^{64}2^{16}2^{4}2 \ (\bmod\ 340)
+\end{aligned}$$</div>
+        <p>We know that $2 \equiv 2 \ (\bmod\ 340)$, $2^2 \equiv 4 \ (\bmod\ 340)$, $2^4 \equiv 16 \ (\bmod\ 340)$, $2^8 \equiv 256 \ (\bmod\ 340)$, $2^{16} \equiv 65536 \equiv 256 \ (\bmod\ 340)$. Similarly $2^{256} \equiv 2^{128} \equiv 2^{64} \equiv 2^{32} \equiv 256 \ (\bmod\ 340)$.</p>
+        <div class="math-display">$$\begin{aligned}
+2^{341} &amp;\equiv 2^{101010101_{(2)}} \ (\bmod\ 340) \\
+&amp;\equiv 2^{256}2^{64}2^{16}2^{4}2 \ (\bmod\ 340) \\
+&amp;\equiv 256 \times 256 \times 256 \times 16 \times 2 \ (\bmod\ 340) \\
+&amp;\equiv 256 \times 16 \times 2 \ (\bmod\ 340) \\
+&amp;\equiv 8192 \ (\bmod\ 340) \\
+&amp;\equiv 32 \ (\bmod\ 340)
+\end{aligned}$$</div>
+        <p>Therefore $2^{341} \equiv 32 \ (\bmod\ 340)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF pp.9–10 ═══════════ -->
+
+<!-- Exercise 1.25 (원문 풀이 인쇄됨) -->
+<div class="card ex-card" id="c1-25">
+  <div class="card-head">
+    <span class="ex-num">EX 1.25</span>
+    <span class="ex-title">알고리즘을 단계별로 적용하기 <em>Computing 2³⁴¹ mod 340 by the Algorithm Step by Step</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>알고리즘을 단계별로 적용하여 $2^{341} \ (\bmod\ 340)$을 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <div class="math-display">$$\begin{aligned}
+\operatorname{power}(2, 341) &amp;= 2\big(\operatorname{power}(2, 170)\big)^{2} \\
+&amp;= 2\big(\big(\operatorname{power}(2, 85)\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\operatorname{power}(2, 42)\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\operatorname{power}(2, 42)\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(\operatorname{power}(2, 21)\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\operatorname{power}(2, 10)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(\operatorname{power}(2, 5)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(2\big(\operatorname{power}(2, 2)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(32\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(1024\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(32\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(1024\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(32\big)^{2}\big)^{2} \\
+&amp;= 2\big(1024\big)^{2} \\
+&amp;= 2\big(4\big)^{2} \\
+&amp;= 32
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $2^{341} \ (\bmod\ 340)$ by the algorithm step by step.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <div class="math-display">$$\begin{aligned}
+\operatorname{power}(2, 341) &amp;= 2\big(\operatorname{power}(2, 170)\big)^{2} \\
+&amp;= 2\big(\big(\operatorname{power}(2, 85)\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\operatorname{power}(2, 42)\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\operatorname{power}(2, 42)\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(\operatorname{power}(2, 21)\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\operatorname{power}(2, 10)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(\operatorname{power}(2, 5)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(2\big(\operatorname{power}(2, 2)\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(\big(32\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(1024\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(\big(32\big)^{2}\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(1024\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(2\big(4\big)^{2}\big)^{2}\big)^{2} \\
+&amp;= 2\big(\big(32\big)^{2}\big)^{2} \\
+&amp;= 2\big(1024\big)^{2} \\
+&amp;= 2\big(4\big)^{2} \\
+&amp;= 32
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.5 The inverse of an integer modulo n · 법 n에 대한 정수의 역원</h2></div>
+
+<!-- ═══════════ PDF p.10 ═══════════ -->
+
+<!-- §1.5 도입 서술 (p.10) -->
+<div class="card note-card" id="note02-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$3 \times 7 \equiv 1 \ (\bmod\ 5)$임에 유의하라. 그러면 3은 법 5에 대한 7의 곱셈 역원처럼 보인다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Note that $3 \times 7 \equiv 1 \ (\bmod\ 5)$. Then 3 looks like a multiplicative inverse of $7 \bmod 5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.26 -->
+<div class="card def-card" id="c1-26">
+  <div class="card-head">
+    <span class="def-num">DEF 1.26</span>
+    <span class="def-title">법 n에 대한 역원 <em>The Inverse of an Integer Modulo n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a \in \mathbb{Z}$에 대하여 $ab \equiv 1 \ (\bmod\ n)$을 만족하는 $b \in \mathbb{Z}$가 존재하면, $b$를 법 $n$에 대한 $a$의 역원이라 하고 $a^{-1}(\bmod\ n)$으로 나타낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $a \in \mathbb{Z}$, if $b \in \mathbb{Z}$ satisfies $ab \equiv 1 \ (\bmod\ n)$, then $b$ is called the inverse of $a$ modulo $n$, denoted by $a^{-1}(\bmod\ n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.27 -->
+<div class="card exam-card" id="c1-27">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.27</span>
+    <span class="exam-title">역원이 있는 경우와 없는 경우 <em>Integers With and Without an Inverse</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $3 \cdot 4 \equiv 1 \ (\bmod\ 11)$임에 유의하라. 그러면 3은 법 11에 대한 4의 역원이다.</p>
+        <p><strong>2.</strong> $5 \cdot 5 \equiv 1 \ (\bmod\ 12)$임에 유의하라. 그러면 5는 법 12에 대한 5의 역원이다.</p>
+        <p><strong>3.</strong> 법 10에 대한 2의 역원이 되는 $x \in \mathbb{Z}$가 존재한다고 하자. 그러면</p>
+        <div class="math-display">$$2x \equiv 1 \ (\bmod\ 10) \Rightarrow 10|(2x - 1).$$</div>
+        <p>그런데 $2x - 1$은 홀수이므로 이는 불가능하다. 따라서 2는 법 10에 대한 역원을 갖지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Note that $3 \cdot 4 \equiv 1 \ (\bmod\ 11)$. Then 3 is inverse of $4 \ (\bmod\ 11)$.</p>
+        <p><strong>2.</strong> Note that $5 \cdot 5 \equiv 1 \ (\bmod\ 12)$. Then 5 is inverse of $5 \ (\bmod\ 12)$.</p>
+        <p><strong>3.</strong> Suppose that there exists $x \in \mathbb{Z}$ such that a inverse of 2 mod 10. Then</p>
+        <div class="math-display">$$2x \equiv 1 \ (\bmod\ 10) \Rightarrow 10|(2x - 1).$$</div>
+        <p>However $2x - 1$ is odd and so it is impossible. Therefore 2 has no inverse mod 10.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.10) -->
+<div class="card note-card" id="note02-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$을 고정하자. 어떤 정수 $a$가 가역인가?</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let&rsquo;s fix $n$. Which integer $a$ is invertible?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.28 -->
+<div class="card thm-card" id="c1-28">
+  <div class="card-head">
+    <span class="thm-num">THM 1.28</span>
+    <span class="thm-title">합동인 두 정수의 최대공약수 <em>Congruent Integers Have the Same gcd with n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, b, n \in \mathbb{Z}$에 대하여 $a \equiv b \ (\bmod\ n)$이면 $\gcd(a, n) = \gcd(b, n)$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$a \equiv b \ (\bmod\ n)$이라 가정하자. 그러면 $n|(a - b)$이다. 따라서 어떤 $q \in \mathbb{Z}$에 대하여 $a - b = nq$이다. 그러므로 $\gcd(b, n)|nq + b = a$이고 $\gcd(a, n)|a - nq = b$이다. $\gcd(b, n)|n$이고 $\gcd(a, n)|n$임을 안다. 실제로 $a, b, m \in \mathbb{Z}$에 대하여 $m|a$이고 $m|b$이면 $m|\gcd(a, b)$이다. 따라서 $\gcd(b, n)|\gcd(a, n)$이고 $\gcd(a, n)|\gcd(b, n)$이다. $A, B \in \mathbb{Z}_{>0}$이고 $A|B$이며 $B|A$이면 $A = B$임에 유의하라. 따라서 $\gcd(a, n) = \gcd(b, n)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $a, b, n \in \mathbb{Z}$, if $a \equiv b \ (\bmod\ n)$, then $\gcd(a, n) = \gcd(b, n)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Assume that $a \equiv b \ (\bmod\ n)$. Then $n|(a - b)$. So $a - b = nq$ for some $q \in \mathbb{Z}$. Therefore $\gcd(b, n)|nq + b = a$ and $\gcd(a, n)|a - nq = b$. We know that $\gcd(b, n)|n$ and $\gcd(a, n)|n$. In fact, for $a, b, m \in \mathbb{Z}$, if $m|a$ and $m|b$, then $m|\gcd(a, b)$. Therefore $\gcd(b, n)|\gcd(a, n)$ and $\gcd(a, n)|\gcd(b, n)$. Note that if $A, B \in \mathbb{Z}_{>0}, A|B$, and $B|A$, then $A = B$. Therefore $\gcd(a, n) = \gcd(b, n)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF pp.10–11 ═══════════ -->
+
+<!-- Theorem 1.29 -->
+<div class="card thm-card" id="c1-29">
+  <div class="card-head">
+    <span class="thm-num">THM 1.29</span>
+    <span class="thm-title">가역일 필요충분조건 <em>Invertibility Modulo n and gcd(n, a) = 1</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, n \in \mathbb{Z}$에 대하여, 정수 $a$가 법 $n$에 대하여 가역일 필요충분조건은 $\gcd(n, a) = 1$인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <div class="math-display">$$\begin{aligned}
+&amp;\text{정수 } a\text{가 법 } n\text{에 대하여 가역이다} \\
+\Leftrightarrow\ &amp;ax \equiv 1 \ (\bmod\ n)\text{을 만족하는 } x \in \mathbb{Z}\text{가 존재한다} \\
+\Leftrightarrow\ &amp;n|ax - 1 \\
+\Leftrightarrow\ &amp;ny = ax - 1\ (\text{어떤 } y \in \mathbb{Z}\text{에 대하여}) \\
+\Leftrightarrow\ &amp;ax + ny = 1\ (\text{어떤 } y \in \mathbb{Z}\text{에 대하여}) \\
+\Leftrightarrow\ &amp;\gcd(a, n) = 1
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $a, n \in \mathbb{Z}$, integer $a$ is an invertible $\bmod n$ if and only if $\gcd(n, a) = 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <div class="math-display">$$\begin{aligned}
+&amp;\text{Integer } a \text{ is an invertible } \bmod n \\
+\Leftrightarrow\ &amp;\exists x \in \mathbb{Z} \text{ such that } ax \equiv 1 \ (\bmod\ n) \\
+\Leftrightarrow\ &amp;n|ax - 1 \\
+\Leftrightarrow\ &amp;ny = ax - 1 \text{ for some } y \in \mathbb{Z} \\
+\Leftrightarrow\ &amp;ax + ny = 1 \text{ for some } y \in \mathbb{Z} \\
+&amp;\gcd(a, n) = 1
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.11 ═══════════ -->
+
+<!-- Theorem 1.30 -->
+<div class="card thm-card" id="c1-30">
+  <div class="card-head">
+    <span class="thm-num">THM 1.30</span>
+    <span class="thm-title">합동인 정수의 가역성 <em>Congruent Integers Are Invertible Together</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a, n \in \mathbb{Z}$에 대하여 $a$가 법 $n$에 대하여 가역이라 하자. $b \equiv a \ (\bmod\ n)$이면 $b$도 법 $n$에 대하여 가역이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$b \equiv a \ (\bmod\ n)$이므로 $\gcd(n, a) = \gcd(n, b)$임을 안다. $a$가 법 $n$에 대하여 가역이므로 $\gcd(a, n) = 1$이다. 따라서 $\gcd(b, n) = 1$이다. 그러므로 $b$는 법 $n$에 대하여 가역이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $a, n \in \mathbb{Z}$, let $a$ be an invertible $\bmod n$. If $b \equiv a \ (\bmod\ n)$, then $b$ is an invertible $\bmod n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $b \equiv a \ (\bmod\ n)$, we know that $\gcd(n, a) = \gcd(n, b)$. Since $a$ invertible $\bmod n$, we have $\gcd(a, n) = 1$. Therefore $\gcd(b, n) = 1$. Finally, $b$ is invertible $\bmod n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.11) -->
+<div class="card note-card" id="note02-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \in \mathbb{Z}_{>0}$에 대하여, 법 $n$에 대한 $a$의 가역성은 $a \ (\bmod\ n)$에 의해 결정된다. $p$가 소수이면 $p \nmid a$인 모든 $a \in \mathbb{Z}$가 가역임에 유의하라.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $n \in \mathbb{Z}_{>0}$, the invertible of $a$ modulo $n$ is associated with $a \ (\bmod\ n)$. Note that if $p$ is a prime, then every $a \in \mathbb{Z}$ such that $p \nmid a$ is invertible.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.31 -->
+<div class="card exam-card" id="c1-31">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.31</span>
+    <span class="exam-title">법 12에 대하여 가역인 정수 <em>Integers Invertible Modulo 12</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$1, 5, 7$, $11$이 법 12에 대하여 가역임을 안다. 따라서 $12k + 1, 12k + 5, 12k + 7$, $12k + 11$은 법 12에 대하여 가역이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We know that $1, 5, 7$, and 11 is invertible $\bmod 12$. Therefore $12k + 1, 12k + 5, 12k + 7$, and $12k + 11$ are invertible $\bmod 12$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.32 -->
+<div class="card thm-card" id="c1-32">
+  <div class="card-head">
+    <span class="thm-num">THM 1.32</span>
+    <span class="thm-title">역원의 유일성과 이중 역원 <em>Uniqueness of the Inverse and (a⁻¹)⁻¹ = a</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \in \mathbb{Z}_{>0}$, $n \ge 2$이고 $a \in \mathbb{Z}$라 하자.</p>
+        <p><strong>1.</strong> $a$가 법 $n$에 대한 역원을 가지면 그 역원은 법 $n$에 대하여 유일하다. 즉 $ab \equiv 1 \ (\bmod\ n)$이고 $ac \equiv 1 \ (\bmod\ n)$이면 $b \equiv c \ (\bmod\ n)$이다.</p>
+        <p><strong>2.</strong> $a$가 법 $n$에 대하여 가역이면 $(a^{-1})^{-1} = a$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> $ab \equiv ac \equiv 1 \ (\bmod\ n)$이라 가정하자. 그러면 $ab - ac \equiv a(b - c) \equiv 0 \ (\bmod\ n)$이다. 그러므로 $n|a(b - c)$이다. $\gcd(n, a) = 1$이므로 $n|b - c$이다. 따라서 $b \equiv c \ (\bmod\ n)$이다.</p>
+        <p><strong>2.</strong> $a \cdot a^{-1} \equiv 1 \ (\bmod\ n)$이므로 $a$는 $a^{-1}$의 역원이다. 따라서 $(a^{-1})^{-1} = a$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n \in \mathbb{Z}_{>0}$, $n \ge 2$, and $a \in \mathbb{Z}$.</p>
+        <p><strong>1.</strong> If $a$ has an inverse modulo $n$, then its inverse is unique modulo $n$. In other words, if $ab \equiv 1 \ (\bmod\ n)$ and $ac \equiv 1 \ (\bmod\ n)$, then $b \equiv c \ (\bmod\ n)$.</p>
+        <p><strong>2.</strong> $(a^{-1})^{-1} = a$ if $a$ is an invertible $\bmod n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> Assume that $ab \equiv ac \equiv 1 \ (\bmod\ n)$. Then $ab - ac \equiv a(b - c) \equiv 0 \ (\bmod\ n)$. And so $n|a(b - c)$. Since $\gcd(n, a) = 1$, $n|b - c$. Therefore $b \equiv c \ (\bmod\ n)$.</p>
+        <p><strong>2.</strong> Since $a \cdot a^{-1} \equiv 1 \ (\bmod\ n)$, $a$ is inverse of $a^{-1}$. Therefore $(a^{-1})^{-1} = a$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.12 ═══════════ -->
+
+<!-- Algorithm box (p.12) : [Inverse mod n Algorithm] -->
+<div class="card algo-card" id="algo02-2">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">법 n 역원 알고리즘 <em>Inverse mod n Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> $\gcd(a, n) = 1$을 만족하는 0이 아닌 정수 $a, n$</p>
+        <p><strong>출력 :</strong> $a^{-1}(\bmod\ n)$</p>
+        <p>유클리드 호제법으로 $ax + ny = 1$을 만족하는 $x, y \in \mathbb{Z}$를 구한다. 그러면 $a^{-1} \equiv x \ (\bmod\ n)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> nonzero integers $a, n$ such that $\gcd(a, n) = 1$</p>
+        <p><strong>Output :</strong> $a^{-1}(\bmod\ n)$</p>
+        <p>Find $x, y \in \mathbb{Z}$ such that $ax + ny = 1$ by Euclidean algorithm. Then $a^{-1} \equiv x \ (\bmod\ n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.33 -->
+<div class="card ex-card" id="c1-33">
+  <div class="card-head">
+    <span class="ex-num">EX 1.33</span>
+    <span class="ex-title">법 20에 대하여 가역인 수 <em>Which Numbers Are Invertible Modulo 20</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$0 \le a \le 19$ 중 법 20에 대하여 가역인 수를 모두 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 1.29에 의해 $a$가 법 20에 대하여 가역일 필요충분조건은 $\gcd(a, 20) = 1$인 것이다. $20 = 2^2 \cdot 5$이므로 $\gcd(a, 20) = 1$은 $a$가 $2$의 배수도 $5$의 배수도 아님과 같다. $0 \le a \le 19$ 중 이를 만족하는 수를 모두 나열하면</p>
+        <div class="math-display">$$a \in \{1, 3, 7, 9, 11, 13, 17, 19\}$$</div>
+        <p>이고, 이 $8$개의 수가 법 20에 대하여 가역인 수 전부이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Which numbers $0 \le a \le 19$ are invertible modulo 20?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By Theorem 1.29, $a$ is invertible modulo 20 if and only if $\gcd(a, 20) = 1$. Since $20 = 2^2 \cdot 5$, $\gcd(a, 20) = 1$ is equivalent to $a$ being a multiple of neither $2$ nor $5$. Listing all such $a$ with $0 \le a \le 19$,</p>
+        <div class="math-display">$$a \in \{1, 3, 7, 9, 11, 13, 17, 19\}$$</div>
+        <p>and these $8$ numbers are exactly the numbers invertible modulo 20.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.34 -->
+<div class="card ex-card" id="c1-34">
+  <div class="card-head">
+    <span class="ex-num">EX 1.34</span>
+    <span class="ex-title">역원의 유일성 증명 <em>Proving the Inverse Is Unique</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$가 법 $n$에 대하여 가역이면 그 역원이 유일함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$a$의 역원이 법 $n$에 대하여 유일함을 보이면 된다. $b, c \in \mathbb{Z}$가 모두 $a$의 역원, 즉</p>
+        <div class="math-display">$$ab \equiv 1 \ (\bmod\ n), \qquad ac \equiv 1 \ (\bmod\ n)$$</div>
+        <p>이라 하자. 그러면 $ab \equiv ac \ (\bmod\ n)$이므로 $a(b - c) \equiv 0 \ (\bmod\ n)$, 즉 $n \mid a(b - c)$이다. $a$가 법 $n$에 대하여 가역이므로 정리 1.29에 의해 $\gcd(a, n) = 1$이다. $n \mid a(b - c)$이고 $\gcd(a, n) = 1$이므로 $n \mid (b - c)$이다. 따라서 $b \equiv c \ (\bmod\ n)$이다. 즉 $a$의 역원을 만족하는 정수는 법 $n$에 대하여 모두 서로 합동이므로, $a$의 역원은 법 $n$에 대하여 유일하다. (이는 정리 1.32 (1)의 내용이기도 하다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Prove that if $a$ is invertible modulo $n$, then its inverse is unique.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We must show that the inverse of $a$ is unique modulo $n$. Suppose $b, c \in \mathbb{Z}$ are both inverses of $a$, that is,</p>
+        <div class="math-display">$$ab \equiv 1 \ (\bmod\ n), \qquad ac \equiv 1 \ (\bmod\ n)$$</div>
+        <p>Then $ab \equiv ac \ (\bmod\ n)$, so $a(b - c) \equiv 0 \ (\bmod\ n)$, i.e. $n \mid a(b - c)$. Since $a$ is invertible modulo $n$, Theorem 1.29 gives $\gcd(a, n) = 1$. As $n \mid a(b - c)$ and $\gcd(a, n) = 1$, we get $n \mid (b - c)$. Hence $b \equiv c \ (\bmod\ n)$. That is, any two integers satisfying the inverse condition for $a$ are congruent modulo $n$, so the inverse of $a$ is unique modulo $n$. (This is also the content of Theorem 1.32 (1).)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.35 (빈칸 채우기) -->
+<div class="card ex-card" id="c1-35">
+  <div class="card-head">
+    <span class="ex-num">EX 1.35</span>
+    <span class="ex-title">가역 판정 조건 빈칸 채우기 <em>Completing the Criterion for Invertibility</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$가 법 $n$에 대하여 가역일 필요충분조건은 $\gcd(\text{“}\boxed{\ (A)\ }\text{”}) = \boxed{\ (B)\ }$이다. (A)와 (B)를 채워라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>정리 1.29(가역일 필요충분조건은 $\gcd(n, a) = 1$인 것)에 의해 $(A) = a, n$, $(B) = 1$이다. 즉 완성된 명제는 "$a$가 법 $n$에 대하여 가역일 필요충분조건은 $\gcd(a, n) = 1$인 것이다."이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$a$ is invertible modulo $n$ if and only if $\gcd(\text{“}\boxed{\ (A)\ }\text{”}) = \boxed{\ (B)\ }$. Fill the $(A)$ and $(B)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By Theorem 1.29 ($a$ is invertible if and only if $\gcd(n, a) = 1$), $(A) = a, n$ and $(B) = 1$. That is, the completed statement reads: &ldquo;$a$ is invertible modulo $n$ if and only if $\gcd(a, n) = 1$.&rdquo;</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.36 -->
+<div class="card ex-card" id="c1-36">
+  <div class="card-head">
+    <span class="ex-num">EX 1.36</span>
+    <span class="ex-title">유클리드 호제법으로 구하는 역원 <em>Finding 14⁻¹ mod 23 by the Euclidean Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유클리드 호제법으로 $14^{-1} \ (\bmod\ 23)$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>법 $n$ 역원 알고리즘에 따라, 유클리드 호제법으로 $14x + 23y = 1$을 만족하는 $x, y \in \mathbb{Z}$를 구하면 $14^{-1} \equiv x \ (\bmod\ 23)$이다. $23, 14$에 유클리드 호제법을 적용하면</p>
+        <div class="math-display">$$23 = 14 \cdot 1 + 9, \qquad 14 = 9 \cdot 1 + 5, \qquad 9 = 5 \cdot 1 + 4, \qquad 5 = 4 \cdot 1 + 1, \qquad 4 = 1 \cdot 4 + 0$$</div>
+        <p>이므로 $\gcd(14, 23) = 1$이다. 후진대입하면</p>
+        <div class="math-display">$$\begin{aligned}
+1 &amp;= 5 - 4 \cdot 1 \\
+&amp;= 5 - (9 - 5 \cdot 1) \cdot 1 = 2 \cdot 5 - 9 \\
+&amp;= 2 \cdot (14 - 9 \cdot 1) - 9 = 2 \cdot 14 - 3 \cdot 9 \\
+&amp;= 2 \cdot 14 - 3 \cdot (23 - 14 \cdot 1) = 5 \cdot 14 - 3 \cdot 23
+\end{aligned}$$</div>
+        <p>이므로 $1 = 5 \cdot 14 - 3 \cdot 23$, 즉 $14 \cdot 5 \equiv 1 \ (\bmod\ 23)$이다. 따라서</p>
+        <div class="math-display">$$14^{-1} \equiv 5 \ (\bmod\ 23)$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By the Euclidean algorithm, find $14^{-1} \ (\bmod\ 23)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>By the Inverse mod $n$ Algorithm, finding $x, y \in \mathbb{Z}$ with $14x + 23y = 1$ by the Euclidean algorithm gives $14^{-1} \equiv x \ (\bmod\ 23)$. Applying the Euclidean algorithm to $23, 14$,</p>
+        <div class="math-display">$$23 = 14 \cdot 1 + 9, \qquad 14 = 9 \cdot 1 + 5, \qquad 9 = 5 \cdot 1 + 4, \qquad 5 = 4 \cdot 1 + 1, \qquad 4 = 1 \cdot 4 + 0$$</div>
+        <p>so $\gcd(14, 23) = 1$. Back-substituting,</p>
+        <div class="math-display">$$\begin{aligned}
+1 &amp;= 5 - 4 \cdot 1 \\
+&amp;= 5 - (9 - 5 \cdot 1) \cdot 1 = 2 \cdot 5 - 9 \\
+&amp;= 2 \cdot (14 - 9 \cdot 1) - 9 = 2 \cdot 14 - 3 \cdot 9 \\
+&amp;= 2 \cdot 14 - 3 \cdot (23 - 14 \cdot 1) = 5 \cdot 14 - 3 \cdot 23
+\end{aligned}$$</div>
+        <p>so $1 = 5 \cdot 14 - 3 \cdot 23$, that is $14 \cdot 5 \equiv 1 \ (\bmod\ 23)$. Therefore</p>
+        <div class="math-display">$$14^{-1} \equiv 5 \ (\bmod\ 23)$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

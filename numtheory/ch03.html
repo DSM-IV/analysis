@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일차합동식·중국인의 나머지 정리·오일러 φ 함수·원시근 (§1.6–1.9 Linear Congruences, CRT, Euler's φ and Primitive Roots) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 3단원 — gcd(a, n) = 1일 때 일차합동식 ax ≡ b (mod n)의 유일한 해, 중국인의 나머지 정리(Chinese remainder theorem)와 그 알고리즘, 오일러 φ 함수(Euler phi function)의 값을 소인수분해로 구하는 방법, 법 n에 대한 a의 위수(order)와 법 n의 원시근(primitive root), 오일러 정리와 페르마 소정리를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 정수론, number theory, 일차합동식, linear congruence, 합동식의 풀이, 유일한 해, unique solution, 중국인의 나머지 정리, Chinese remainder theorem, CRT, 쌍마다 서로소, pairwise relatively prime, 연립합동식, system of congruences, 최소공배수, lcm, 오일러 φ 함수, 오일러 phi 함수, Euler phi function, 소인수분해, prime factorization, 위수, order of a modulo n, 원시근, primitive root, 아르틴 추측, Artin conjecture, 오일러 정리, Euler's theorem, 페르마 소정리, Fermat little theorem, 가역, invertible, 역원, inverse, 버튼, Burton">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="일차합동식·중국인의 나머지 정리·오일러 φ 함수·원시근 (§1.6–1.9 Linear Congruences, CRT, Euler's φ and Primitive Roots) — 응용정수론 한·영 대조">
+<meta property="og:description" content="일차합동식 ax ≡ b (mod n)의 해에서 중국인의 나머지 정리와 알고리즘, 오일러 φ 함수의 계산, 법 n에 대한 위수와 원시근, 오일러 정리와 페르마 소정리까지 — 응용정수론 세 번째 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "일차합동식·중국인의 나머지 정리·오일러 φ 함수·원시근 (§1.6–1.9 Linear Congruences, CRT, Euler's φ and Primitive Roots) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §1.6–1.9 — 일차합동식 ax ≡ b (mod n)의 유일한 해, 중국인의 나머지 정리와 알고리즘, 오일러 phi 함수의 계산, 법 n에 대한 a의 위수와 법 n의 원시근, 오일러 정리와 페르마 소정리를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch03.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html" class="active">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 03 · §1.6–1.9</p>
+  <h1>일차합동식·중국인의 나머지 정리·오일러 φ 함수·원시근<span>Linear Congruences, the Chinese Remainder Theorem, Euler's φ Function and Primitive Roots</span></h1>
+  <p class="header-desc">gcd(a, n) = 1이면 일차합동식 ax ≡ b (mod n)이 유일한 해를 가진다는 사실에서 출발해, 여러 합동식을 한꺼번에 푸는 중국인의 나머지 정리와 그 알고리즘을 정리합니다. 이어서 법 n에 대하여 가역인 수의 개수를 세는 오일러 φ 함수를 소인수분해로 계산하는 방법, 법 n에 대한 a의 위수와 법 n의 원시근, 그리고 오일러 정리와 페르마 소정리까지 따라갑니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-37"><span class="toc-num">THM 1.37</span> 일차합동식의 유일한 해 <em>A Unique Solution of ax ≡ b (mod n)</em></a></li>
+    <li><a href="#c1-38"><span class="toc-num">EXAM 1.38</span> 3x ≡ 2 (mod 8)의 해 <em>Solving 3x ≡ 2 (mod 8)</em></a></li>
+    <li><a href="#rem2"><span class="toc-num">REM 2</span> 해가 유일하지 않은 경우와 음의 지수 <em>Non-unique Solutions and Negative Exponents</em></a></li>
+    <li><a href="#c1-39"><span class="toc-num">THM 1.39</span> 중국인의 나머지 정리 <em>Chinese Remainder Theorem</em></a></li>
+    <li><a href="#algo03-1"><span class="toc-num">ALGO</span> 중국인의 나머지 정리 알고리즘 <em>Chinese Remainder Theorem (Algorithm)</em></a></li>
+    <li><a href="#c1-40"><span class="toc-num">EX 1.40</span> 13x ≡ 4 (mod 80) 풀기 <em>Solving 13x ≡ 4 (mod 80)</em></a></li>
+    <li><a href="#c1-41"><span class="toc-num">EX 1.41</span> 3x ≡ 0 (mod 18) 풀기 <em>Solving 3x ≡ 0 (mod 18)</em></a></li>
+    <li><a href="#c1-42"><span class="toc-num">EX 1.42</span> CRT 알고리즘으로 연립합동식 풀기 <em>Solving Systems by the CRT Algorithm</em></a></li>
+    <li><a href="#c1-43"><span class="toc-num">EX 1.43</span> x² + 1 ≡ 0 (mod 85) 풀기 <em>Solving x² + 1 ≡ 0 (mod 85)</em></a></li>
+    <li><a href="#c1-44"><span class="toc-num">DEF 1.44</span> 오일러 φ 함수 <em>The Euler phi Function</em></a></li>
+    <li><a href="#rem3"><span class="toc-num">REM 3</span> φ(n)이 세는 것 <em>φ(n) Counts the Invertible Residues</em></a></li>
+    <li><a href="#c1-45"><span class="toc-num">EXAM 1.45</span> φ(12)의 계산 <em>Calculating φ(12)</em></a></li>
+    <li><a href="#c1-46"><span class="toc-num">THM 1.46</span> 소수 거듭제곱에서의 φ 값 <em>The Value of φ(p^k)</em></a></li>
+    <li><a href="#c1-47"><span class="toc-num">THM 1.47</span> 서로소인 두 수에서의 곱셈성 <em>φ(mn) = φ(m)φ(n) for Relatively Prime m and n</em></a></li>
+    <li><a href="#rem4"><span class="toc-num">REM 4</span> 서로소 가정이 필요한 이유 <em>The Assumption (m, n) = 1 Is Necessary</em></a></li>
+    <li><a href="#c1-48"><span class="toc-num">THM 1.48</span> 소인수분해로 구하는 φ(n) <em>φ(n) from the Prime Factorization of n</em></a></li>
+    <li><a href="#c1-49"><span class="toc-num">DEF 1.49</span> 법 n에 대한 a의 위수 <em>The Order of a Modulo n</em></a></li>
+    <li><a href="#c1-50"><span class="toc-num">EXAM 1.50</span> 위수의 계산 예 <em>Computing Orders Modulo 5 and 11</em></a></li>
+    <li><a href="#c1-51"><span class="toc-num">THM 1.51</span> 위수와 지수의 관계 <em>The Order of a Modulo n and Exponents</em></a></li>
+    <li><a href="#c1-52"><span class="toc-num">COR 1.52</span> 서로 다른 거듭제곱 <em>1, a, ⋯, a^(t−1) Are Distinct Modulo n</em></a></li>
+    <li><a href="#c1-53"><span class="toc-num">EX 1.53</span> φ(2010)의 계산 <em>Calculating φ(2010)</em></a></li>
+    <li><a href="#c1-54"><span class="toc-num">EX 1.54</span> φ(mn) ≠ φ(m)φ(n)인 예 <em>An Example with φ(mn) ≠ φ(m)φ(n)</em></a></li>
+    <li><a href="#c1-55"><span class="toc-num">EX 1.55</span> φ의 값이 되지 않는 최소의 양의 정수 <em>The Least Positive Integer That Is Not a Value of φ</em></a></li>
+    <li><a href="#c1-56"><span class="toc-num">EX 1.56</span> 법 524에 대하여 가역인 수의 개수 <em>Counting the Invertible a Modulo 524</em></a></li>
+    <li><a href="#c1-57"><span class="toc-num">EX 1.57</span> 법 18에 대한 7의 위수 <em>The Order of 7 Modulo 18</em></a></li>
+    <li><a href="#c1-58"><span class="toc-num">DEF 1.58</span> 법 n의 원시근 <em>A Primitive Root of mod n</em></a></li>
+    <li><a href="#c1-59"><span class="toc-num">EXAM 1.59</span> 법 5, 7, 8에서의 원시근 <em>Primitive Roots of mod 5, 7 and 8</em></a></li>
+    <li><a href="#c1-60"><span class="toc-num">THM 1.60</span> 원시근이 존재할 조건 <em>When a Primitive Root of Modulo n Exists</em></a></li>
+    <li><a href="#c1-61"><span class="toc-num">THM 1.61</span> 오일러 정리 <em>Euler's Theorem</em></a></li>
+    <li><a href="#c1-62"><span class="toc-num">THM 1.62</span> 페르마 소정리 <em>Fermat Little Theorem</em></a></li>
+    <li><a href="#c1-63"><span class="toc-num">EXAM 1.63</span> 큰 거듭제곱의 나머지 계산 <em>Computing 3^205 (mod 101) and 5^10000 (mod 18)</em></a></li>
+    <li><a href="#c1-64"><span class="toc-num">EX 1.64</span> a^p ≡ a (mod p) 증명 <em>Proving a^p ≡ a (mod p)</em></a></li>
+    <li><a href="#c1-65"><span class="toc-num">EX 1.65</span> 법 12의 원시근 <em>All Primitive Roots of mod 12</em></a></li>
+    <li><a href="#c1-66"><span class="toc-num">EX 1.66</span> 법 10의 원시근 <em>All Primitive Roots of mod 10</em></a></li>
+    <li><a href="#c1-67"><span class="toc-num">EX 1.67</span> 6^10004 (mod 11) 구하기 <em>Finding 6^10004 (mod 11)</em></a></li>
+    <li><a href="#c1-68"><span class="toc-num">EX 1.68</span> 2^10000 (mod 13) 구하기 <em>Finding 2^10000 (mod 13)</em></a></li>
+    <li><a href="#c1-69"><span class="toc-num">EX 1.69</span> 법 18에 대하여 가역인 a의 개수 <em>Counting a Invertible of mod 18</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>1.6 Find a solution of ax ≡ b (mod n) · 일차합동식의 풀이</h2></div>
+
+<!-- ═══════════ PDF p.12 ═══════════ -->
+
+<!-- Theorem 1.37 -->
+<div class="card thm-card" id="c1-37">
+  <div class="card-head">
+    <span class="thm-num">THM 1.37</span>
+    <span class="thm-title">일차합동식의 유일한 해 <em>A Unique Solution of ax ≡ b (mod n)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \in \mathbb{N}$, $n \ge 2$이고 $a, b \in \mathbb{Z}$라 하자. $\gcd(a, n) = 1$이면 $ax \equiv b \ (\bmod\ n)$은 유일한 해를 가진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(a, n) = 1$이므로 $a^{-1} \ (\bmod\ n)$이 존재한다.</p>
+        <div class="math-display">$$\begin{aligned}
+& ax \equiv b \ (\bmod\ n) \\
+\Leftrightarrow & a^{-1}(ax) \equiv a^{-1}b \ (\bmod\ n) \\
+\Leftrightarrow & x \equiv a^{-1}b \ (\bmod\ n)
+\end{aligned}$$</div>
+        <p>따라서 $ax \equiv b \ (\bmod\ n)$은 유일한 해 $x \equiv a^{-1}b \ (\bmod\ n)$을 가진다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n \in \mathbb{N}$, $n \ge 2$, and $a, b \in \mathbb{Z}$. If $\gcd(a, n) = 1$, then $ax \equiv b \ (\bmod\ n)$ has a unique solution.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $\gcd(a, n) = 1$, there exists $a^{-1} \ (\bmod\ n)$.</p>
+        <div class="math-display">$$\begin{aligned}
+& ax \equiv b \ (\bmod\ n) \\
+\Leftrightarrow & a^{-1}(ax) \equiv a^{-1}b \ (\bmod\ n) \\
+\Leftrightarrow & x \equiv a^{-1}b \ (\bmod\ n)
+\end{aligned}$$</div>
+        <p>Therefore $ax \equiv b \ (\bmod\ n)$ has a unique solution $x \equiv a^{-1}b \ (\bmod\ n)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.38 -->
+<div class="card exam-card" id="c1-38">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.38</span>
+    <span class="exam-title">3x ≡ 2 (mod 8)의 해 <em>Solving 3x ≡ 2 (mod 8)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$3x \equiv 2 \ (\bmod\ 8)$의 해를 구하자. $\gcd(3, 8) = 1$이므로 정리 1.37에 의해 $3x \equiv 2 \ (\bmod\ 8)$은 유일한 해를 가진다. 그러면 $x \equiv 3^{-1}2 \equiv 3 \times 2 \equiv 6 \ (\bmod\ 8)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the solution of $3x \equiv 2 \ (\bmod\ 8)$. Since $\gcd(3, 8) = 1$, by theorem 1.37, $3x \equiv 2 \ (\bmod\ 8)$ has a unique solution. And then $x \equiv 3^{-1}2 \equiv 3 \times 2 \equiv 6 \ (\bmod\ 8)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 2 -->
+<div class="card rem-card" id="rem2">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">해가 유일하지 않은 경우와 음의 지수 <em>Non-unique Solutions and Negative Exponents</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 식 $3x \equiv 0 \ (\bmod\ 6)$은 해 $x \equiv 0, 2, 4 \ (\bmod\ 6)$을 가지며 유일한 해가 아니다.</p>
+        <p><strong>2.</strong> $a^{-1}$을 법 $n$에 대한 $a$의 역원이라 하자. $a^{-n} := a^{-1} \cdots a^{-1}$($a^{-1}$을 $n$번 곱한 것)로 정의한다. $m \in \mathbb{N}$에 대하여 $a^{-1}a^m \equiv a^{m-1} \ (\bmod\ n)$임에 주의하자. 따라서 모든 $m, m' \in \mathbb{Z}$에 대하여 $a^m a^{m'} \equiv a^{m+m'} \ (\bmod\ n)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> The formula $3x \equiv 0 \ (\bmod\ 6)$ has solutions $x \equiv 0, 2, 4 \ (\bmod\ 6)$ not a unique solution.</p>
+        <p><strong>2.</strong> Let $a^{-1}$ be the inverse of $a$ modulo $n$. Define $a^{-n} := a^{-1} \cdots a^{-1}$, $n$ times multiple of $a^{-1}$. For $m \in \mathbb{N}$, note that $a^{-1}a^m \equiv a^{m-1} \ (\bmod\ n)$. Therefore $a^m a^{m'} \equiv a^{m+m'} \ (\bmod\ n)$ for all $m, m' \in \mathbb{Z}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.7 Chinese remainder theorem · 중국인의 나머지 정리</h2></div>
+
+<!-- 서술 단락 (pp.12–13) : §1.7 도입 worked example -->
+<div class="card note-card" id="note03-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x \equiv 4 \ (\bmod\ 7)$, $x \equiv 9 \ (\bmod\ 11)$, $x \equiv 3 \ (\bmod\ 13)$이라 하자. $T_1 \equiv 4 \ (\bmod\ 7), T_2 \equiv 0 \ (\bmod\ 7), T_3 \equiv 0 \ (\bmod\ 7), T_1 \equiv 0 \ (\bmod\ 11), T_2 \equiv 9 \ (\bmod\ 11), T_3 \equiv 0 \ (\bmod\ 11), T_1 \equiv 0 \ (\bmod\ 13), T_2 \equiv 0 \ (\bmod\ 13)$, $T_3 \equiv 3 \ (\bmod\ 13)$을 만족하는 정수를 구하자. 그러면 $T_1 + T_2 + T_3$은 연립합동식의 해이다. 어떤 정수 $a_1, a_2, a_3$에 대하여 $T_1 = a_1 \cdot 11 \cdot 13$, $T_2 = a_2 \cdot 7 \cdot 13$, $T_3 = a_3 \cdot 7 \cdot 11$이라 하자. 그러면 $T_2 \equiv 0 \ (\bmod\ 7), T_3 \equiv 0 \ (\bmod\ 7), T_1 \equiv 0 \ (\bmod\ 11), T_3 \equiv 0 \ (\bmod\ 11), T_1 \equiv 0 \ (\bmod\ 13)$, $T_2 \equiv 0 \ (\bmod\ 13)$이다. 다음을 만족하는 $a_1, a_2, a_3 \in \mathbb{Z}$를 구하자.</p>
+        <div class="math-display">$$a_1 \cdot 11 \cdot 13 \equiv 4 \ (\bmod\ 7), a_2 \cdot 7 \cdot 13 \equiv 9 \ (\bmod\ 11), a_3 \cdot 7 \cdot 11 \equiv 3 \ (\bmod\ 13).$$</div>
+        <p>그러면 $a_1 \equiv (11 \cdot 13)^{-1} \cdot 4 \ (\bmod\ 7)$, $a_2 \equiv (7 \cdot 13)^{-1} \cdot 9 \ (\bmod\ 11)$, $a_3 \equiv (7 \cdot 11)^{-1}3 \ (\bmod\ 13)$이다. 따라서 $a_1 \equiv 6 \ (\bmod\ 7), a_2 \equiv 3 \ (\bmod\ 11), a_3 \equiv 10 \ (\bmod\ 13)$이다. 마지막으로</p>
+        <div class="math-display">$$x \equiv T_1 + T_2 + T_3 \equiv 6 \cdot 11 \cdot 13 + 3 \cdot 7 \cdot 13 + 10 \cdot 7 \cdot 11 \equiv 900 \ (\bmod\ 7 \cdot 11 \cdot 13).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $x \equiv 4 \ (\bmod\ 7)$, $x \equiv 9 \ (\bmod\ 11)$, and $x \equiv 3 \ (\bmod\ 13)$. Find the integer such that $T_1 \equiv 4 \ (\bmod\ 7), T_2 \equiv 0 \ (\bmod\ 7), T_3 \equiv 0 \ (\bmod\ 7), T_1 \equiv 0 \ (\bmod\ 11), T_2 \equiv 9 \ (\bmod\ 11), T_3 \equiv 0 \ (\bmod\ 11), T_1 \equiv 0 \ (\bmod\ 13), T_2 \equiv 0 \ (\bmod\ 13)$ and $T_3 \equiv 3 \ (\bmod\ 13)$. Then $T_1 + T_2 + T_3$ is a solution of the system. Let $T_1 = a_1 \cdot 11 \cdot 13$, $T_2 = a_2 \cdot 7 \cdot 13$ and $T_3 = a_3 \cdot 7 \cdot 11$ for some integer $a_1, a_2, a_3$. Then $T_2 \equiv 0 \ (\bmod\ 7), T_3 \equiv 0 \ (\bmod\ 7), T_1 \equiv 0 \ (\bmod\ 11), T_3 \equiv 0 \ (\bmod\ 11), T_1 \equiv 0 \ (\bmod\ 13)$ and $T_2 \equiv 0 \ (\bmod\ 13)$. Find $a_1, a_2, a_3 \in \mathbb{Z}$ such that</p>
+        <div class="math-display">$$a_1 \cdot 11 \cdot 13 \equiv 4 \ (\bmod\ 7), a_2 \cdot 7 \cdot 13 \equiv 9 \ (\bmod\ 11), a_3 \cdot 7 \cdot 11 \equiv 3 \ (\bmod\ 13).$$</div>
+        <p>Then $a_1 \equiv (11 \cdot 13)^{-1} \cdot 4 \ (\bmod\ 7)$, $a_2 \equiv (7 \cdot 13)^{-1} \cdot 9 \ (\bmod\ 11)$, $a_3 \equiv (7 \cdot 11)^{-1}3 \ (\bmod\ 13)$. So $a_1 \equiv 6 \ (\bmod\ 7), a_2 \equiv 3 \ (\bmod\ 11), a_3 \equiv 10 \ (\bmod\ 13)$. Finally</p>
+        <div class="math-display">$$x \equiv T_1 + T_2 + T_3 \equiv 6 \cdot 11 \cdot 13 + 3 \cdot 7 \cdot 13 + 10 \cdot 7 \cdot 11 \equiv 900 \ (\bmod\ 7 \cdot 11 \cdot 13).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.13 ═══════════ -->
+
+<!-- Theorem 1.39 -->
+<div class="card thm-card" id="c1-39">
+  <div class="card-head">
+    <span class="thm-num">THM 1.39</span>
+    <span class="thm-title">중국인의 나머지 정리 <em>Chinese Remainder Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$m_1, \cdots, m_n$이 쌍마다 서로소인 양의 정수라 하자. $a_i \in \mathbb{Z}$ $(1 \le i \le n)$에 대하여 연립합동식 $x \equiv a_1 \ (\bmod\ m_1), \cdots, x \equiv a_n \ (\bmod\ m_n)$은 법 $m_1 \cdots m_n$에 대하여 유일한 해를 가진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(유일성)</strong></p>
+        <p>$x, y \in \mathbb{Z}$가 위 연립합동식의 해라고 하자. 그러면 모든 $i$에 대하여 $x \equiv y \equiv a_i \ (\bmod\ m_i)$이다. 그러므로 모든 $i$에 대하여 $x - y \equiv 0 \ (\bmod\ m_i)$이다. 다시 말해 모든 $i$에 대하여 $m_i|(x - y)$이다. 따라서 $\operatorname{lcm}(m_1, \cdots, m_n)|(x - y)$이다. $m_1, \cdots, m_n$이 쌍마다 서로소인 양의 정수이면 $\operatorname{lcm}(m_1, \cdots, m_n) = m_1 \cdots m_n$임에 주의하자. 그러므로 $m_1 \cdots m_n|(x - y)$이다. 따라서 $x \equiv y \ (\bmod\ m_1 \cdots m_n)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $m_1, \cdots, m_n$ be the pairwise relatively prime positive integers. For $a_i \in \mathbb{Z}, 1 \le i \le n$, the system $x \equiv a_1 \ (\bmod\ m_1), \cdots, x \equiv a_n \ (\bmod\ m_n)$ has a unique solution modulo $m_1 \cdots m_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(Uniqueness)</strong></p>
+        <p>Assume that $x, y \in \mathbb{Z}$ are solutions of the above system. Then $x \equiv y \equiv a_i \ (\bmod\ m_i)$ for all $i$. So $x - y \equiv 0 \ (\bmod\ m_i)$ for all $i$. In other words, $m_i|(x - y)$ for all $i$. Therefore $\operatorname{lcm}(m_1, \cdots, m_n)|(x - y)$. Note that if $m_1, \cdots, m_n$ are the pairwise relatively prime positive integers, then $\operatorname{lcm}(m_1, \cdots, m_n) = m_1 \cdots m_n$. So $m_1 \cdots m_n|(x - y)$. Therefore $x \equiv y \ (\bmod\ m_1 \cdots m_n)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Algorithm box (p.13) : [Chinese remainder theorem] -->
+<div class="card algo-card" id="algo03-1">
+  <div class="card-head">
+    <span class="algo-num">ALGO</span>
+    <span class="algo-title">중국인의 나머지 정리 알고리즘 <em>Chinese Remainder Theorem (Algorithm)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>입력 :</strong> 쌍마다 서로소인 양의 정수 $m_1, \cdots, m_n$과 $a_1, \cdots, a_n \in \mathbb{Z}$</p>
+        <p><strong>출력 :</strong> 연립합동식 $x \equiv a_1 \ (\bmod\ m_1), \cdots, x \equiv a_n \ (\bmod\ m_n)$의 해</p>
+        <ol>
+          <li>$M = m_1 \cdots m_n$, $M_i = M/m_i$로 정의한다.</li>
+          <li>$N_i \in \mathbb{Z}$가 법 $m_i$에 대한 $M_i$의 역원이 되도록 하는 $N_i$를 구한다.</li>
+          <li>위 연립합동식의 해는 $x \equiv a_1N_1M_1 + \cdots + a_nN_nM_n \ (\bmod\ M)$이다.</li>
+        </ol>
+        <p><em>역주.</em> 원문 1단계는 "$M_i = M_i$"로 인쇄되어 있으나(항등식이 되어 뜻이 없음) 문맥상 $M_i = M/m_i$이다. 또한 원문 3단계는 "$x \equiv a_1N_1m_1 + \cdots + a_nN_nm_n$"으로 인쇄되어 있으나, $N_iM_i \equiv 1 \ (\bmod\ m_i)$이고 $j \neq i$이면 $m_i \mid M_j$이므로 해가 되는 식은 $x \equiv a_1N_1M_1 + \cdots + a_nN_nM_n$이다(소문자 $m_i$를 쓰면 성립하지 않는다). 위에서 둘 다 바로잡아 옮겼다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Input :</strong> pairwise relatively prime positive integers $m_1, \cdots, m_n$ and $a_1, \cdots, a_n \in \mathbb{Z}$</p>
+        <p><strong>Output :</strong> a solution of the system $x \equiv a_1 \ (\bmod\ m_1), \cdots, x \equiv a_n \ (\bmod\ m_n)$</p>
+        <ol>
+          <li>Define $M = m_1 \cdots m_n$ and $M_i = M_i$.</li>
+          <li>Find $N_i \in Z$ such that $N_i$ is inverse of $M_i$ modulo $m_i$.</li>
+          <li>A solution of the above system is $x \equiv a_1N_1m_1 + \cdots + a_nN_nm_n \ (\bmod\ M)$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.40 -->
+<div class="card ex-card" id="c1-40">
+  <div class="card-head">
+    <span class="ex-num">EX 1.40</span>
+    <span class="ex-title">13x ≡ 4 (mod 80) 풀기 <em>Solving 13x ≡ 4 (mod 80)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$13x \equiv 4 \ (\bmod\ 80)$을 풀어라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(13, 80) = 1$이므로 정리 1.37에 의해 $13x \equiv 4 \ (\bmod\ 80)$은 유일한 해를 가진다. 먼저 유클리드 호제법으로 $13^{-1} \ (\bmod\ 80)$을 구하자.</p>
+        <div class="math-display">$$80 = 13 \cdot 6 + 2, \qquad 13 = 2 \cdot 6 + 1, \qquad 2 = 1 \cdot 2 + 0.$$</div>
+        <p>역대입하면</p>
+        <div class="math-display">$$1 = 13 - 6 \cdot 2 = 13 - 6(80 - 6 \cdot 13) = 37 \cdot 13 - 6 \cdot 80$$</div>
+        <p>이므로 $13^{-1} \equiv 37 \ (\bmod\ 80)$이다(확인: $13 \times 37 = 481 = 6 \times 80 + 1$). 따라서</p>
+        <div class="math-display">$$x \equiv 37 \times 4 = 148 \equiv 68 \ (\bmod\ 80).$$</div>
+        <p>확인: $13 \times 68 = 884 = 11 \times 80 + 4$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Solve $13x \equiv 4 \ (\bmod\ 80)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $\gcd(13, 80) = 1$, by Theorem 1.37, $13x \equiv 4 \ (\bmod\ 80)$ has a unique solution. First find $13^{-1} \ (\bmod\ 80)$ by the Euclidean algorithm.</p>
+        <div class="math-display">$$80 = 13 \cdot 6 + 2, \qquad 13 = 2 \cdot 6 + 1, \qquad 2 = 1 \cdot 2 + 0.$$</div>
+        <p>Back-substituting,</p>
+        <div class="math-display">$$1 = 13 - 6 \cdot 2 = 13 - 6(80 - 6 \cdot 13) = 37 \cdot 13 - 6 \cdot 80$$</div>
+        <p>so $13^{-1} \equiv 37 \ (\bmod\ 80)$ (check: $13 \times 37 = 481 = 6 \times 80 + 1$). Therefore</p>
+        <div class="math-display">$$x \equiv 37 \times 4 = 148 \equiv 68 \ (\bmod\ 80).$$</div>
+        <p>Check: $13 \times 68 = 884 = 11 \times 80 + 4$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.41 -->
+<div class="card ex-card" id="c1-41">
+  <div class="card-head">
+    <span class="ex-num">EX 1.41</span>
+    <span class="ex-title">3x ≡ 0 (mod 18) 풀기 <em>Solving 3x ≡ 0 (mod 18)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$3x \equiv 0 \ (\bmod\ 18)$을 풀어라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(3, 18) = 3 \neq 1$이므로 정리 1.37을 적용할 수 없다(REM 2에서 본 것처럼 이 경우 해는 유일하지 않을 수 있다). $18 \mid 3x$인 것은 $6 \mid x$인 것과 동치이므로, $0 \le x \lt 18$ 범위에서 $6$의 배수인 $x$를 모두 찾으면 된다. 따라서 해는</p>
+        <div class="math-display">$$x \equiv 0, 6, 12 \ (\bmod\ 18)$$</div>
+        <p>세 개이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Solve $3x \equiv 0 \ (\bmod\ 18)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $\gcd(3, 18) = 3 \neq 1$, Theorem 1.37 does not apply (as in Remark 2, the solution need not be unique in this case). Since $18 \mid 3x$ if and only if $6 \mid x$, it suffices to find all multiples of $6$ with $0 \le x \lt 18$. So the solutions are</p>
+        <div class="math-display">$$x \equiv 0, 6, 12 \ (\bmod\ 18)$$</div>
+        <p>and there are three of them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.42 -->
+<div class="card ex-card" id="c1-42">
+  <div class="card-head">
+    <span class="ex-num">EX 1.42</span>
+    <span class="ex-title">CRT 알고리즘으로 연립합동식 풀기 <em>Solving Systems by the CRT Algorithm</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>CRT 알고리즘으로 연립합동식을 풀어라.</p>
+        <p><strong>1.</strong> $x \equiv 2 \ (\bmod\ 3)$, $x \equiv 4 \ (\bmod\ 5)$, $x \equiv 6 \ (\bmod\ 7)$</p>
+        <p><strong>2.</strong> $x \equiv 2 \ (\bmod\ 3)$, $x \equiv 4 \ (\bmod\ 5)$, $x \equiv 2 \ (\bmod\ 7)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>두 경우 모두 $m_1 = 3, m_2 = 5, m_3 = 7$이므로 알고리즘(ALGO, 중국인의 나머지 정리 알고리즘)의 1단계에 의해 $M = m_1m_2m_3 = 105$이고</p>
+        <div class="math-display">$$M_1 = \frac{M}{m_1} = 35, \qquad M_2 = \frac{M}{m_2} = 21, \qquad M_3 = \frac{M}{m_3} = 15.$$</div>
+        <p>2단계에서 $N_i$는 법 $m_i$에 대한 $M_i$의 역원이다. $M_1 = 35 \equiv 2 \ (\bmod\ 3)$이고 $2^{-1} \equiv 2 \ (\bmod\ 3)$이므로 $N_1 = 2$이다. $M_2 = 21 \equiv 1 \ (\bmod\ 5)$이므로 $N_2 = 1$이다. $M_3 = 15 \equiv 1 \ (\bmod\ 7)$이므로 $N_3 = 1$이다.</p>
+        <p><strong>1.</strong> $a_1 = 2, a_2 = 4, a_3 = 6$이므로 3단계에 의해</p>
+        <div class="math-display">$$x \equiv a_1N_1M_1 + a_2N_2M_2 + a_3N_3M_3 \equiv 2 \cdot 2 \cdot 35 + 4 \cdot 1 \cdot 21 + 6 \cdot 1 \cdot 15 \equiv 140 + 84 + 90 \equiv 314 \equiv 104 \ (\bmod\ 105).$$</div>
+        <p>확인: $104 \equiv 2 \ (\bmod\ 3)$, $104 \equiv 4 \ (\bmod\ 5)$, $104 \equiv 6 \ (\bmod\ 7)$이다.</p>
+        <p><strong>2.</strong> $a_1 = 2, a_2 = 4, a_3 = 2$이므로</p>
+        <div class="math-display">$$x \equiv 2 \cdot 2 \cdot 35 + 4 \cdot 1 \cdot 21 + 2 \cdot 1 \cdot 15 \equiv 140 + 84 + 30 \equiv 254 \equiv 44 \ (\bmod\ 105).$$</div>
+        <p>확인: $44 \equiv 2 \ (\bmod\ 3)$, $44 \equiv 4 \ (\bmod\ 5)$, $44 \equiv 2 \ (\bmod\ 7)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Solve the system by the algorithm CRT.</p>
+        <p><strong>1.</strong> $x \equiv 2 \ (\bmod\ 3)$, $x \equiv 4 \ (\bmod\ 5)$ and $x \equiv 6 \ (\bmod\ 7)$</p>
+        <p><strong>2.</strong> $x \equiv 2 \ (\bmod\ 3)$, $x \equiv 4 \ (\bmod\ 5)$ and $x \equiv 2 \ (\bmod\ 7)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>In both cases $m_1 = 3, m_2 = 5, m_3 = 7$, so by step 1 of the algorithm (ALGO, Chinese remainder theorem algorithm), $M = m_1m_2m_3 = 105$ and</p>
+        <div class="math-display">$$M_1 = \frac{M}{m_1} = 35, \qquad M_2 = \frac{M}{m_2} = 21, \qquad M_3 = \frac{M}{m_3} = 15.$$</div>
+        <p>In step 2, $N_i$ is the inverse of $M_i$ modulo $m_i$. Since $M_1 = 35 \equiv 2 \ (\bmod\ 3)$ and $2^{-1} \equiv 2 \ (\bmod\ 3)$, $N_1 = 2$. Since $M_2 = 21 \equiv 1 \ (\bmod\ 5)$, $N_2 = 1$. Since $M_3 = 15 \equiv 1 \ (\bmod\ 7)$, $N_3 = 1$.</p>
+        <p><strong>1.</strong> Since $a_1 = 2, a_2 = 4, a_3 = 6$, by step 3</p>
+        <div class="math-display">$$x \equiv a_1N_1M_1 + a_2N_2M_2 + a_3N_3M_3 \equiv 2 \cdot 2 \cdot 35 + 4 \cdot 1 \cdot 21 + 6 \cdot 1 \cdot 15 \equiv 140 + 84 + 90 \equiv 314 \equiv 104 \ (\bmod\ 105).$$</div>
+        <p>Check: $104 \equiv 2 \ (\bmod\ 3)$, $104 \equiv 4 \ (\bmod\ 5)$, $104 \equiv 6 \ (\bmod\ 7)$.</p>
+        <p><strong>2.</strong> Since $a_1 = 2, a_2 = 4, a_3 = 2$,</p>
+        <div class="math-display">$$x \equiv 2 \cdot 2 \cdot 35 + 4 \cdot 1 \cdot 21 + 2 \cdot 1 \cdot 15 \equiv 140 + 84 + 30 \equiv 254 \equiv 44 \ (\bmod\ 105).$$</div>
+        <p>Check: $44 \equiv 2 \ (\bmod\ 3)$, $44 \equiv 4 \ (\bmod\ 5)$, $44 \equiv 2 \ (\bmod\ 7)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.43 -->
+<div class="card ex-card" id="c1-43">
+  <div class="card-head">
+    <span class="ex-num">EX 1.43</span>
+    <span class="ex-title">x² + 1 ≡ 0 (mod 85) 풀기 <em>Solving x² + 1 ≡ 0 (mod 85)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x^2 + 1 \equiv 0 \ (\bmod\ 85)$를 풀어라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$85 = 5 \times 17$이므로 중국인의 나머지 정리(정리 1.39)에 의해 $x^2 + 1 \equiv 0 \ (\bmod\ 85)$인 것은 $x^2 \equiv -1 \ (\bmod\ 5)$이고 $x^2 \equiv -1 \ (\bmod\ 17)$인 것과 동치이다. 법 5에서 $2^2 = 4 \equiv -1$, $3^2 = 9 \equiv 4 \equiv -1$이므로 $x \equiv 2, 3 \ (\bmod\ 5)$이다. 법 17에서 $4^2 = 16 \equiv -1$, $13^2 = 169 = 170 - 1 \equiv -1$이므로 $x \equiv 4, 13 \ (\bmod\ 17)$이다.</p>
+        <p>네 조합을 CRT 알고리즘으로 결합하자. $M = 85, M_1 = 17, M_2 = 5$이고, $N_1$은 법 5에 대한 $17$의 역원, $N_2$는 법 17에 대한 $5$의 역원이다. $17 \equiv 2 \ (\bmod\ 5)$이고 $2 \times 3 \equiv 1 \ (\bmod\ 5)$이므로 $N_1 = 3$이다. $5 \times 7 = 35 = 34 + 1 \equiv 1 \ (\bmod\ 17)$이므로 $N_2 = 7$이다. 즉 $x \equiv a_1 \cdot 3 \cdot 17 + a_2 \cdot 7 \cdot 5 \ (\bmod\ 85)$이다.</p>
+        <div class="math-display">$$\begin{aligned}
+(x \equiv 2 \ (\bmod\ 5),\ x \equiv 4 \ (\bmod\ 17)) &: x \equiv 2 \cdot 3 \cdot 17 + 4 \cdot 7 \cdot 5 \equiv 102 + 140 \equiv 242 \equiv 72 \ (\bmod\ 85) \\
+(x \equiv 2 \ (\bmod\ 5),\ x \equiv 13 \ (\bmod\ 17)) &: x \equiv 102 + 455 \equiv 557 \equiv 47 \ (\bmod\ 85) \\
+(x \equiv 3 \ (\bmod\ 5),\ x \equiv 4 \ (\bmod\ 17)) &: x \equiv 153 + 140 \equiv 293 \equiv 38 \ (\bmod\ 85) \\
+(x \equiv 3 \ (\bmod\ 5),\ x \equiv 13 \ (\bmod\ 17)) &: x \equiv 153 + 455 \equiv 608 \equiv 13 \ (\bmod\ 85)
+\end{aligned}$$</div>
+        <p>따라서 해는 $x \equiv 13, 38, 47, 72 \ (\bmod\ 85)$이다. 예를 들어 $13^2 + 1 = 170 = 2 \times 85$로 확인된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Solve the equation $x^2 + 1 \equiv 0 \ (\bmod\ 85)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $85 = 5 \times 17$, by the Chinese remainder theorem (Theorem 1.39), $x^2 + 1 \equiv 0 \ (\bmod\ 85)$ is equivalent to $x^2 \equiv -1 \ (\bmod\ 5)$ and $x^2 \equiv -1 \ (\bmod\ 17)$. Modulo 5, $2^2 = 4 \equiv -1$ and $3^2 = 9 \equiv 4 \equiv -1$, so $x \equiv 2, 3 \ (\bmod\ 5)$. Modulo 17, $4^2 = 16 \equiv -1$ and $13^2 = 169 = 170 - 1 \equiv -1$, so $x \equiv 4, 13 \ (\bmod\ 17)$.</p>
+        <p>Combine the four cases by the CRT algorithm. $M = 85, M_1 = 17, M_2 = 5$, and $N_1$ is the inverse of $17$ modulo $5$, $N_2$ is the inverse of $5$ modulo $17$. Since $17 \equiv 2 \ (\bmod\ 5)$ and $2 \times 3 \equiv 1 \ (\bmod\ 5)$, $N_1 = 3$. Since $5 \times 7 = 35 = 34 + 1 \equiv 1 \ (\bmod\ 17)$, $N_2 = 7$. So $x \equiv a_1 \cdot 3 \cdot 17 + a_2 \cdot 7 \cdot 5 \ (\bmod\ 85)$.</p>
+        <div class="math-display">$$\begin{aligned}
+(x \equiv 2 \ (\bmod\ 5),\ x \equiv 4 \ (\bmod\ 17)) &: x \equiv 2 \cdot 3 \cdot 17 + 4 \cdot 7 \cdot 5 \equiv 102 + 140 \equiv 242 \equiv 72 \ (\bmod\ 85) \\
+(x \equiv 2 \ (\bmod\ 5),\ x \equiv 13 \ (\bmod\ 17)) &: x \equiv 102 + 455 \equiv 557 \equiv 47 \ (\bmod\ 85) \\
+(x \equiv 3 \ (\bmod\ 5),\ x \equiv 4 \ (\bmod\ 17)) &: x \equiv 153 + 140 \equiv 293 \equiv 38 \ (\bmod\ 85) \\
+(x \equiv 3 \ (\bmod\ 5),\ x \equiv 13 \ (\bmod\ 17)) &: x \equiv 153 + 455 \equiv 608 \equiv 13 \ (\bmod\ 85)
+\end{aligned}$$</div>
+        <p>So the solutions are $x \equiv 13, 38, 47, 72 \ (\bmod\ 85)$. For example, $13^2 + 1 = 170 = 2 \times 85$ confirms this.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.8 Euler φ function · 오일러 φ 함수</h2></div>
+
+<!-- ═══════════ PDF p.14 ═══════════ -->
+
+<!-- Definition 1.44 -->
+<div class="card def-card" id="c1-44">
+  <div class="card-head">
+    <span class="def-num">DEF 1.44</span>
+    <span class="def-title">오일러 φ 함수 <em>The Euler phi Function</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>양의 정수 $n$이 주어졌을 때, $\phi(n)$은 $1 \le a \le n$이고 $\gcd(a, n) = 1$인 $a$의 개수를 나타낸다. 함수 $\phi$를 오일러 $\phi$ 함수라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given a positive integer $n$, let $\phi(n)$ denote the number of $a$ such that $1 \le a \le n$ and $\gcd(a, n) = 1$. The function $\phi$ is called the Euler $phi$ function.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 3 -->
+<div class="card rem-card" id="rem3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">φ(n)이 세는 것 <em>φ(n) Counts the Invertible Residues</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>양의 정수 $n$에 대하여 정수 $\phi(n)$은 법 $n$에 대하여 가역인 $a(1 \le a \le n)$의 개수를 나타낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a positive integer $n$, the integer $\phi(n)$ denotes the number of invertible $a(1 \le a \le n)$ modulo $n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.45 -->
+<div class="card exam-card" id="c1-45">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.45</span>
+    <span class="exam-title">φ(12)의 계산 <em>Calculating φ(12)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\phi(12)$를 계산해 보자. $\gcd(a, 12) = 1$이려면 $a$는 2의 배수도 3의 배수도 아니어야 한다. 그러므로 $1 \le a \le 12$이고 $\gcd(a, 12) = 1$인 가능한 $a$는 $1, 5, 7, 11$이다. 따라서 $\phi(12) = 4$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let&rsquo;s calculate $\phi(12)$. With $\gcd(a, 12) = 1$, an $a$ must not be a multiple of 2 and 3. So possible $a$ such that $1 \le a \le 12$ and $\gcd(a, 12) = 1$ is $1, 5, 7, 11$. Therefore $\phi(12) = 4$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.14) -->
+<div class="card note-card" id="note03-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \in \mathbb{N}$에 대하여 $\phi(n)$의 값을 어떻게 구할 것인가? 이 문제를 다음 단계로 살펴본다.</p>
+        <p><strong>1.</strong> 소수 $p$와 $n \in \mathbb{Z}_{>0}$에 대하여 $\phi(p^n)$을 계산한다</p>
+        <p><strong>2.</strong> $\phi(p_1^{k_1} \cdots p_m^{k_m})$을 계산한다.</p>
+        <p>예를 들어 $\phi(9) = \phi(3^2)$이다. $\gcd(a, 9) = 1$인 것은 $\gcd(a, 3) = 1$인 것과 동치임에 주의하자. 다시 말해 $\gcd(a, 9) \gt 1$인 것은 어떤 $l \in \mathbb{N}$에 대하여 $a = 3l$인 것과 동치이다. 그러므로 $1 \le a \le 9$이고 $\gcd(a, 9) \gt 1$인 수는 $3, 6, 9$뿐이다. 따라서 $\phi(9) = 9 - 3 = 6$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>How to find the value of $\phi(n)$ for $n \in \mathbb{N}$? We consider this question as the following steps :</p>
+        <p><strong>1.</strong> Calculate $\phi(p^n)$ for prime $p$ and $n \in \mathbb{Z}_{>0}$</p>
+        <p><strong>2.</strong> Calculate $\phi(p_1^{k_1} \cdots p_m^{k_m})$.</p>
+        <p>For example, $\phi(9) = \phi(3^2)$. Note that $\gcd(a, 9) = 1$ if and only if $\gcd(a, 3) = 1$. In other words, $\gcd(a, 9) \gt 1$ if and only if $a = 3l$ for $l \in \mathbb{N}$. So $3, 6$, and $9$ are the only number for which $\gcd(a, 9 \gt 1$ and $1 \le a \le 9$. So $\phi(9) = 9 - 3 = 6$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.46 -->
+<div class="card thm-card" id="c1-46">
+  <div class="card-head">
+    <span class="thm-num">THM 1.46</span>
+    <span class="thm-title">소수 거듭제곱에서의 φ 값 <em>The Value of φ(p^k)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$p$가 소수이고 $k \in \mathbb{N}$이라 하자. 그러면 $\phi(p^k) = p^{k-1}(p - 1)$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(n, p^k) = 1$인 것은 $\gcd(n, p) = 1$인 것과 동치임에 주의하자. 따라서 $\phi(p^k)$는 $\gcd(a, p) = 1$인 $a$ $(1 \le a \le p^k)$의 개수이다. 그러므로 $p^k - \phi(p^k)$는 $\gcd(a, p) = p$인 $a$ $(1 \le a \le p^k)$의 개수이다. 다시 말해 이는 $p^k$ 이하인 $p$의 배수의 개수이다. 이는 $p, 2p, \cdots, p^{k-1}p = p^k$의 개수이다. 그러므로 $p^k - \phi(p^k) = p^{k-1}$이고, $\phi(p^k) = p^k - p^{k-1} = p^{k-1}(p - 1)$이다.</p>
+        <p><em>역주.</em> 원문은 마지막 등식을 "$p, 2p, \cdots, p^{k-1}p = p^{k-1}$"로 적었으나 $p^{k-1}p = p^k$이므로(그 개수가 $p^{k-1}$개) 위에서 바로잡아 옮겼다. 또한 원문은 두 곳의 범위를 "$1 \le a \le n$"으로 적었으나 이 정리에는 $n$이 등장하지 않으므로 $1 \le a \le p^k$의 오타이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $p$ be a prime and $k \in \mathbb{N}$. Then $\phi(p^k) = p^{k-1}(p - 1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Note that $\gcd(n, p^k) = 1$ if and only if $\gcd(n, p) = 1$. Therefore $\phi(p^k)$ is the number of $a$ $(1 \le a \le n)$ such that $\gcd(a, p) = 1$. So $p^k - \phi(p^k)$ is the number of $a$ $(1 \le a \le n)$ such that $\gcd(a, p) = p$. In other words, it is the number of the multiple of $p$ below $p^k$. It is the number of $p, 2p, \cdots, p^{k-1}p = p^{k-1}$. So $p^k - \phi(p^k) = p^{k-1}$, $\phi(p^k) = p^k - p^{k-1} = p^{k-1}(p - 1)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.14) -->
+<div class="card note-card" id="note03-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n = p_1^{a_1} \cdots p_m^{a_m}$을 양의 정수 $n$의 소인수분해라 하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n = p_1^{a_1} \cdots p_m^{a_m}$ be the prime factorization of the positive integer $n$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.47 -->
+<div class="card thm-card" id="c1-47">
+  <div class="card-head">
+    <span class="thm-num">THM 1.47</span>
+    <span class="thm-title">서로소인 두 수에서의 곱셈성 <em>φ(mn) = φ(m)φ(n) for Relatively Prime m and n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$m$과 $n$이 서로소인 양의 정수라 하자. 그러면 $\phi(mn) = \phi(m)\phi(n)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $m$ and $n$ be relatively prime positive integers. Then $\phi(mn) = \phi(m)\phi(n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.14) -->
+<div class="card note-card" id="note03-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>위 정리에 의해 $\phi(p_1^{a_1} \cdots p_m^{a_m}) = \phi(p_1^{a_1}) \cdots \phi(p_m^{a_m})$임을 안다. 예를 들어 $\phi(540)$을 계산해 보자. $540 = 2^2 3^3 5$임에 주의하자. 그러면 $\phi(540) = \phi(2^2)\phi(3^3)\phi(5) = 2(2 - 1) \cdot 3^2(3 - 1) \cdot (5 - 1) = 144$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Since above theorem, we know that $\phi(p_1^{a_1} \cdots p_m^{a_m}) = \phi(p_1^{a_1}) \cdots \phi(p_m^{a_m})$. For example, calculate $\phi(540)$. Note that $540 = 2^2 3^3 5$. Then $\phi(540) = \phi(2^2)\phi(3^3)\phi(5) = 2(2 - 1) \cdot 3^2(3 - 1) \cdot (5 - 1) = 144$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark 4 -->
+<div class="card rem-card" id="rem4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">서로소 가정이 필요한 이유 <em>The Assumption (m, n) = 1 Is Necessary</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\phi(3)\phi(3) = 2 \times 2 = 4$이고 $\phi(3^2) = 3(3 - 1) = 6$임에 주의하자. 위 정리는 가정 $(m, n) = 1$이 없으면 성립하지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Note that $\phi(3)\phi(3) = 2 \times 2 = 4$ and $\phi(3^2) = 3(3 - 1) = 6$. The above theorem is false without assumption $(m, n) = 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.48 (진술 p.14 · 증명 p.15) -->
+<div class="card thm-card" id="c1-48">
+  <div class="card-head">
+    <span class="thm-num">THM 1.48</span>
+    <span class="thm-title">소인수분해로 구하는 φ(n) <em>φ(n) from the Prime Factorization of n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n = p_1^{a_1} \cdots p_m^{a_m}$을 양의 정수 $n$의 소인수분해라 하자. 그러면</p>
+        <div class="math-display">$$\phi(n) = \prod_{i=1}^{k} p_i^{a_i - 1}(p_i - 1) = n\prod_{i=1}^{k}\left(1 - \frac{1}{p_i}\right)$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <div class="math-display">$$\begin{aligned}
+\phi(n) &= \phi(p_1^{a_1} \cdots p_k^{a_k}) \\
+&= \phi(p_1^{a_1}) \cdots \phi(p_k^{a_k}) \\
+&= p_1^{a_1 - 1}(p_1 - 1) \cdots p_k^{a_k - 1}(p_k - 1) \\
+&= np_1^{-1}(p_1 - 1) \cdots p_k^{-1}(p_k - 1) \\
+&= n\prod_{i=1}^{k}\left(1 - \frac{1}{p_i}\right)
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $n = p_1^{a_1} \cdots p_m^{a_m}$ be the prime factorization of the positive integer $n$. Then</p>
+        <div class="math-display">$$\phi(n) = \prod_{i=1}^{k} p_i^{a_i - 1}(p_i - 1) = n\prod_{i=1}^{k}\left(1 - \frac{1}{p_i}\right)$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <div class="math-display">$$\begin{aligned}
+\phi(n) &= \phi(p_1^{a_1} \cdots p_k^{a_k}) \\
+&= \phi(p_1^{a_1}) \cdots \phi(p_k^{a_k}) \\
+&= p_1^{a_1 - 1}(p_1 - 1) \cdots p_k^{a_k - 1}(p_k - 1) \\
+&= np_1^{-1}(p_1 - 1) \cdots p_k^{-1}(p_k - 1) \\
+&= n\prod_{i=1}^{k}\left(1 - \frac{1}{p_i}\right)
+\end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.15 ═══════════ -->
+
+<!-- 서술 단락 (p.15) -->
+<div class="card note-card" id="note03-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n, a \in \mathbb{N}$이 주어졌을 때 $a^m \equiv 1 \ (\bmod\ n)$을 만족하는 $m \in \mathbb{N}$을 구하자. 이제 이 문제를 살펴볼 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For given $n, a \in \mathbb{N}$, find $m \in \mathbb{N}$ such that $a^m \equiv 1 \ (\bmod\ n)$. We will study about above question.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 1.49 -->
+<div class="card def-card" id="c1-49">
+  <div class="card-head">
+    <span class="def-num">DEF 1.49</span>
+    <span class="def-title">법 n에 대한 a의 위수 <em>The Order of a Modulo n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\gcd(a, n) = 1$인 $a, n \in \mathbb{N}$이라 하자. 법 $n$에 대한 $a$의 위수는 $a^k \equiv 1 \ (\bmod\ n)$을 만족하는 최소의 양의 정수 $k$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Assume that $a, n \in \mathbb{N}$ such that $\gcd(a, n) = 1$. The order of $a$ modulo $n$ is the least positive integer $k$ such that $a^k \equiv 1 \ (\bmod\ n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.50 -->
+<div class="card exam-card" id="c1-50">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.50</span>
+    <span class="exam-title">위수의 계산 예 <em>Computing Orders Modulo 5 and 11</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 법 $n$에 대한 1의 위수는 1이다.</p>
+        <p><strong>2.</strong> 법 5에 대한 2의 위수를 생각해 보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$n$</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">$2^n(\bmod\ 5)$</th><td>2</td><td>4</td><td>3</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>따라서 법 5에 대한 2의 위수는 4이다.</p>
+        <p><strong>3.</strong> 법 11에 대한 2의 위수를 생각해 보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$n$</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">$2^n(\bmod\ 11)$</th><td>2</td><td>4</td><td>8</td><td>5</td><td>10</td><td>9</td><td>7</td><td>3</td><td>6</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>따라서 법 11에 대한 2의 위수는 10이다.</p>
+        <p><em>역주.</em> 원문 표의 머리글은 "$2^n(\bmod\ 1)$"로 인쇄되어 있으나, 법 11에 대한 위수를 구하는 예이므로 $2^n(\bmod\ 11)$의 오타이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> The order of 1 modulo $n$ is 1.</p>
+        <p><strong>2.</strong> Think about order of 2 mod 5.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$n$</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">$2^n(\bmod\ 5)$</th><td>2</td><td>4</td><td>3</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Therefore the order of 2 mod 5 is 4.</p>
+        <p><strong>3.</strong> Think about order of 2 mod 11.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>$n$</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">$2^n(\bmod\ 1)$</th><td>2</td><td>4</td><td>8</td><td>5</td><td>10</td><td>9</td><td>7</td><td>3</td><td>6</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Therefore the order of 2 mod 11 is 10.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.51 (진술 미완 — ERRATA 13) -->
+<div class="card thm-card" id="c1-51">
+  <div class="card-head">
+    <span class="thm-num">THM 1.51</span>
+    <span class="thm-title">위수와 지수의 관계 <em>The Order of a Modulo n and Exponents</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$와 $n$이 $\gcd(a,n)=1$인 양의 정수라 하고 $t$를 법 $n$에 대한 $a$의 위수라 하자. 그러면 임의의 $m \in \mathbb{N}$에 대하여 $a^m \equiv 1 \ (\bmod\ n)$인 것은 $t \mid m$인 것과 동치이다.</p>
+        <p><em>역주.</em> 원문 진술은 "$a$와 $n$이 양의 정수이고 $\gcd(a,n)=1$이다"에서 결론 없이 끝난다. 아래 증명 내용에 따라 결론을 보충하여 옮겼다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$t$를 법 $n$에 대한 $a$의 위수라 하자.</p>
+        <p>$\Rightarrow$) $a^m \equiv 1 \ (\bmod\ n)$이라 하자. 그러면 어떤 정수 $q$와 $0 \le r \lt t$에 대하여 $m = qt + r$이다. $1 \equiv a^m \equiv a^{qt+r} \equiv a^{qt}a^r \equiv (a^t)^q a^r \equiv a^r \ (\bmod\ n)$임을 안다. 법 $n$에 대한 $a$의 위수의 정의에 의해 $r = 0$임을 쉽게 확인할 수 있다. 따라서 $t|m$이다.</p>
+        <p>$\Leftarrow$) $m = tq$라 하자. 그러면 $a^m \equiv (a^t)^q \equiv 1^q \equiv 1 \ (\bmod\ n)$이다. 이제 증명이 끝났다.</p>
+        <p><em>역주.</em> 원문은 두 갈래의 라벨을 모두 "⇒)"로 적었으나 둘째 갈래는 "⇐)"이다. 또한 원문은 첫째 갈래에서 이탤릭 단어로 인쇄된 "$aqtar$"를 적었으나 뜻은 $a^{qt}a^r$이고, 둘째 갈래에서 "$a^m \equiv a^tq$"로 적었으나 뜻은 $a^m \equiv (a^t)^q$이다. 위에서 모두 바로잡아 옮겼다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a$ and $n$ be positive integers such that $\gcd(a, n) = 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $t$ be the order of $a$ modulo $n$.</p>
+        <p>$\Rightarrow$) Assume that $a^m \equiv 1 \ (\bmod\ n)$. Then $m = qt + r$ for some integer $q$ and $0 \le r \lt t$. We know that $1 \equiv a^m \equiv a^{qt+r} \equiv aqtar \equiv (a^t)^q a^r \equiv a^r \ (\bmod\ n)$. By definition of the order of $a$ modulo $n$, we can easily check that $r = 0$. Therefore $t|m$.</p>
+        <p>$\Rightarrow$) Assume that $m = tq$. Then $a^m \equiv a^t q \equiv (a^t)^q \equiv 1^q \equiv 1 \ (\bmod\ n)$. Now we are done.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Corollary 1.52 (진술 p.15 · 증명 p.16) -->
+<div class="card thm-card" id="c1-52">
+  <div class="card-head">
+    <span class="thm-num">COR 1.52</span>
+    <span class="thm-title">서로 다른 거듭제곱 <em>1, a, ⋯, a^(t−1) Are Distinct Modulo n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$와 $n$이 양의 정수라 하자. $t$를 법 $n$에 대한 $a$의 위수라 하자. 그러면 $1, a, \cdots, a^{t-1}$은 법 $n$에 대하여 서로 다른 정수이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$0 \le s \lt r \lt t$라 하자. 만약 $a^r \equiv a^s \ (\bmod\ n)$이면 $t|r - s$이다. $0 \lt r - s \lt t$이므로 이는 모순이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a$ and $n$ be positive integers. Let $t$ be the order of $a$ mod $n$. Then $1, a, \cdots, a^{t-1}$ are distinct integers modulo $n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Assume that $0 \le s \lt r \lt t$. If $a^r \equiv a^s \ (\bmod\ n)$, then $t|r - s$. Since $0 \lt r - s \lt t$, it is a contradiction.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.16 ═══════════ -->
+
+<!-- Exercise 1.53 -->
+<div class="card ex-card" id="c1-53">
+  <div class="card-head">
+    <span class="ex-num">EX 1.53</span>
+    <span class="ex-title">φ(2010)의 계산 <em>Calculating φ(2010)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\phi(2010)$을 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$2010 = 2 \times 3 \times 5 \times 67$이고 $2, 3, 5, 67$은 모두 소수이다. 정리 1.48에 의해</p>
+        <div class="math-display">$$\phi(2010) = \phi(2)\phi(3)\phi(5)\phi(67) = 1 \times 2 \times 4 \times 66 = 528.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Calculate $\phi(2010)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$2010 = 2 \times 3 \times 5 \times 67$, and $2, 3, 5, 67$ are all prime. By Theorem 1.48,</p>
+        <div class="math-display">$$\phi(2010) = \phi(2)\phi(3)\phi(5)\phi(67) = 1 \times 2 \times 4 \times 66 = 528.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.54 -->
+<div class="card ex-card" id="c1-54">
+  <div class="card-head">
+    <span class="ex-num">EX 1.54</span>
+    <span class="ex-title">φ(mn) ≠ φ(m)φ(n)인 예 <em>An Example with φ(mn) ≠ φ(m)φ(n)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\phi(mn) \neq \phi(m)\phi(n)$인 예를 들어라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$m = n = 2$로 두자. 정리 1.46에 의해 $\phi(4) = \phi(2^2) = 2^1(2 - 1) = 2$인 반면 $\phi(2)\phi(2) = 1 \times 1 = 1$이므로</p>
+        <div class="math-display">$$\phi(mn) = \phi(4) = 2 \neq 1 = \phi(2)\phi(2) = \phi(m)\phi(n).$$</div>
+        <p>(REM 4에서 본 $\phi(3)\phi(3) = 4 \neq 6 = \phi(9)$도 같은 성질의 예이다.) 정리 1.47이 $\gcd(m, n) = 1$이라는 가정을 두는 것은 바로 이 때문이다: $m, n$이 서로소가 아니면 곱셈성이 깨진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Give an example s.t. $\phi(mn) \neq \phi(m)\phi(n)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Let $m = n = 2$. By Theorem 1.46, $\phi(4) = \phi(2^2) = 2^1(2 - 1) = 2$, while $\phi(2)\phi(2) = 1 \times 1 = 1$, so</p>
+        <div class="math-display">$$\phi(mn) = \phi(4) = 2 \neq 1 = \phi(2)\phi(2) = \phi(m)\phi(n).$$</div>
+        <p>(The example $\phi(3)\phi(3) = 4 \neq 6 = \phi(9)$ from Remark 4 is of the same kind.) This is exactly why Theorem 1.47 requires the assumption $\gcd(m, n) = 1$: multiplicativity fails when $m$ and $n$ are not relatively prime.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.55 -->
+<div class="card ex-card" id="c1-55">
+  <div class="card-head">
+    <span class="ex-num">EX 1.55</span>
+    <span class="ex-title">φ의 값이 되지 않는 최소의 양의 정수 <em>The Least Positive Integer That Is Not a Value of φ</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $n \in \mathbb{N}$에 대하여 $\phi(n) \neq a$를 만족하는 최소의 양의 정수 $a$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>답은 $a = 3$이다.</p>
+        <p>$\phi(1) = 1$, $\phi(2) = 1$, $\phi(3) = 2$이므로 $1$과 $2$는 모두 $\phi$의 값으로 나타난다. 이제 $n \ge 3$이면 $\phi(n)$이 항상 짝수임을 보이자.</p>
+        <p>$n$이 홀수인 소수 $p$로 나누어떨어진다고 하자. $p^k \| n$인 $k \ge 1$을 잡으면 $\gcd(p^k, n/p^k) = 1$이므로 정리 1.47과 정리 1.46에 의해</p>
+        <div class="math-display">$$\phi(n) = \phi(p^k)\phi(n/p^k) = p^{k-1}(p - 1)\phi(n/p^k)$$</div>
+        <p>이고, $p$가 홀수이므로 $p - 1$은 짝수이다. 따라서 $\phi(n)$은 짝수이다.</p>
+        <p>$n$이 홀수인 소인수를 갖지 않으면 $n = 2^k$ 꼴이고, $n \ge 3$이므로 $k \ge 2$이다. 정리 1.46에 의해 $\phi(n) = \phi(2^k) = 2^{k-1}(2 - 1) = 2^{k-1}$이고 $k - 1 \ge 1$이므로 이 역시 짝수이다.</p>
+        <p>따라서 $n \ge 3$인 모든 $n$에 대해 $\phi(n)$은 짝수이므로 $\phi(n) = 3$을 만족하는 $n$은 존재하지 않는다. $1$과 $2$는 값으로 나타나므로, $\phi$의 값이 되지 않는 최소의 양의 정수는 $a = 3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the least positive integer $a$ such that for every $n \in \mathbb{N}$, $\phi(n) \neq a$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The answer is $a = 3$.</p>
+        <p>Since $\phi(1) = 1$, $\phi(2) = 1$, $\phi(3) = 2$, both $1$ and $2$ occur as values of $\phi$. We now show that $\phi(n)$ is always even for $n \ge 3$.</p>
+        <p>Suppose $n$ is divisible by an odd prime $p$. Take $k \ge 1$ with $p^k \| n$. Since $\gcd(p^k, n/p^k) = 1$, by Theorem 1.47 and Theorem 1.46,</p>
+        <div class="math-display">$$\phi(n) = \phi(p^k)\phi(n/p^k) = p^{k-1}(p - 1)\phi(n/p^k)$$</div>
+        <p>and since $p$ is odd, $p - 1$ is even. Hence $\phi(n)$ is even.</p>
+        <p>If $n$ has no odd prime factor, then $n = 2^k$, and since $n \ge 3$, $k \ge 2$. By Theorem 1.46, $\phi(n) = \phi(2^k) = 2^{k-1}(2 - 1) = 2^{k-1}$, and since $k - 1 \ge 1$, this is also even.</p>
+        <p>So $\phi(n)$ is even for every $n \ge 3$, hence no $n$ satisfies $\phi(n) = 3$. Since $1$ and $2$ both occur as values, the least positive integer that is not a value of $\phi$ is $a = 3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.56 -->
+<div class="card ex-card" id="c1-56">
+  <div class="card-head">
+    <span class="ex-num">EX 1.56</span>
+    <span class="ex-title">법 524에 대하여 가역인 수의 개수 <em>Counting the Invertible a Modulo 524</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 524에 대하여 가역인 $a$ $(1 \le a \le 524)$의 개수를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$524 = 2^2 \times 131$이고 $131$은 소수이다($11$ 이하의 모든 소수 $2, 3, 5, 7, 11$로 나누어보면 확인된다). REM 3에 의해 법 524에 대하여 가역인 $a$ $(1 \le a \le 524)$의 개수는 $\phi(524)$와 같다. 정리 1.48에 의해</p>
+        <div class="math-display">$$\phi(524) = \phi(2^2)\phi(131) = 2(2 - 1) \times 130 = 2 \times 130 = 260.$$</div>
+        <p>따라서 구하는 개수는 $260$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the number of invertible $a$ $(1 \le a \le 524)$ modulo 524.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$524 = 2^2 \times 131$, and $131$ is prime (checking division by every prime $2, 3, 5, 7, 11$ up to $11$ confirms this). By Remark 3, the number of invertible $a$ $(1 \le a \le 524)$ modulo 524 equals $\phi(524)$. By Theorem 1.48,</p>
+        <div class="math-display">$$\phi(524) = \phi(2^2)\phi(131) = 2(2 - 1) \times 130 = 2 \times 130 = 260.$$</div>
+        <p>So the number is $260$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.57 -->
+<div class="card ex-card" id="c1-57">
+  <div class="card-head">
+    <span class="ex-num">EX 1.57</span>
+    <span class="ex-title">법 18에 대한 7의 위수 <em>The Order of 7 Modulo 18</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 18에 대한 7의 위수를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$7^2 = 49 \equiv 13 \ (\bmod\ 18)$이고 $7^3 \equiv 13 \times 7 = 91 \equiv 1 \ (\bmod\ 18)$이다($91 = 5 \times 18 + 1$). $7^1 = 7 \not\equiv 1$이고 $7^2 = 13 \not\equiv 1$이므로 법 18에 대한 7의 위수는 $3$이다. $\phi(18) = 6$이고 $3 \mid 6$이므로 정리 1.51과도 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the order of 7 modulo 18.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$7^2 = 49 \equiv 13 \ (\bmod\ 18)$ and $7^3 \equiv 13 \times 7 = 91 \equiv 1 \ (\bmod\ 18)$ (since $91 = 5 \times 18 + 1$). Since $7^1 = 7 \not\equiv 1$ and $7^2 = 13 \not\equiv 1$, the order of 7 modulo 18 is $3$. Since $\phi(18) = 6$ and $3 \mid 6$, this is consistent with Theorem 1.51.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>1.9 Primitive root of mod n · 법 n의 원시근</h2></div>
+
+<!-- Definition 1.58 -->
+<div class="card def-card" id="c1-58">
+  <div class="card-head">
+    <span class="def-num">DEF 1.58</span>
+    <span class="def-title">법 n의 원시근 <em>A Primitive Root of mod n</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정수 $a$가 법 $n$의 원시근이라는 것은 법 $n$에 대한 $a$의 위수가 $\phi(n)$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The integer $a$ is called a primitive root of mod $n$ if the order of $a$ mod $n$ is $\phi(n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.59 -->
+<div class="card exam-card" id="c1-59">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.59</span>
+    <span class="exam-title">법 5, 7, 8에서의 원시근 <em>Primitive Roots of mod 5, 7 and 8</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> 법 5에 대한 2의 위수는 4이다. $\phi(5) = 5 - 1 = 4$임에 주의하자. 따라서 2는 법 5의 원시근이다.</p>
+        <p><strong>2.</strong> 법 7에 대한 2의 위수는 3이다. $\phi(7) = 7 - 1 = 6$임에 주의하자. 따라서 2는 법 7의 원시근이 아니다. 3이 소수이므로 3이 법 7에 대한 2의 위수임을 관찰할 수 있다.</p>
+        <p><strong>3.</strong> 법 8의 원시근은 존재하지 않는다. $1^2 \equiv 3^2 \equiv 5^2 \equiv 7^2 \equiv 1 \ (\bmod\ 8)$이기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> The order of 2 mod 5 is 4. Note that $\phi(5) = 5 - 1 = 4$. Therefore 2 is a primitive root of mod 5.</p>
+        <p><strong>2.</strong> The order of 2 mod 7 is 3. Note that $\phi(7) = 7 - 1 = 6$. Therefor 2 is not a primitive root of mod 7. Since 3 is prime, we can observe that 3 is the order of 2 modulo 7.</p>
+        <p><strong>3.</strong> There is no primitive root of mod 8. Because $1^2 \equiv 3^2 \equiv 5^2 \equiv 7^2 \equiv 1 \ (\bmod\ 8)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.60 -->
+<div class="card thm-card" id="c1-60">
+  <div class="card-head">
+    <span class="thm-num">THM 1.60</span>
+    <span class="thm-title">원시근이 존재할 조건 <em>When a Primitive Root of Modulo n Exists</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 $n$의 원시근이 존재하는 것은 어떤 홀수인 소수 $p$와 양의 정수 $k$에 대하여 $n = 2, 4, p^k$ 또는 $2p^k$인 것과 동치이다.</p>
+        <p><em>역주.</em> 원문은 "소수 $p$"라고만 적었으나 $p$는 홀수인 소수여야 한다. $p = 2$까지 허용하면 $n = 2^3 = 8$이 $p^k$ 꼴이 되어 법 8의 원시근이 존재한다는 결론이 나오지만, 예제 1.59 (3)에서 보았듯 법 8의 원시근은 존재하지 않는다. 위에서 바로잡아 옮겼다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>There is a primitive root of modulo $n$ if and only if $n = 2, 4, p^k$ or $2p^k$ for some prime $p$ and positive integer $k$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.16) -->
+<div class="card note-card" id="note03-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(아르틴 추측) $a (a \gt 1)$가 정수라 하자. $a$가 법 $p$의 원시근이 되는 소수 $p$가 무한히 많다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>(Artin conjecture) Let $a(a \gt 1)$ be an integer. There are infinitely many primes $p$ s.t. $a$ is a primitive root of modulo $p$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 1.61 -->
+<div class="card thm-card" id="c1-61">
+  <div class="card-head">
+    <span class="thm-num">THM 1.61</span>
+    <span class="thm-title">오일러 정리 <em>Euler's Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$a$와 $n$이 양의 정수라 하자. $\gcd(a, n) = 1$이라 가정하자. 그러면 $a^{\phi(n)} \equiv 1 \ (\bmod\ n)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $a$ and $n$ be positive integers. Suppose that $\gcd(a, n) = 1$. Then $a^{\phi(n)} \equiv 1 \ (\bmod\ n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 + 표 (p.16) -->
+<div class="card note-card" id="note03-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 7에 대하여 정리를 확인해 보자.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th></th><th>$x$</th><th>$x^2$</th><th>$x^3$</th><th>$x^4$</th><th>$x^5$</th><th>$x^6$</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+              <tr><th scope="row">2</th><td>2</td><td>4</td><td>1</td><td>2</td><td>4</td><td>1</td></tr>
+              <tr><th scope="row">3</th><td>3</td><td>2</td><td>6</td><td>4</td><td>5</td><td>1</td></tr>
+              <tr><th scope="row">4</th><td>4</td><td>2</td><td>1</td><td>4</td><td>2</td><td>1</td></tr>
+              <tr><th scope="row">5</th><td>5</td><td>4</td><td>6</td><td>2</td><td>3</td><td>1</td></tr>
+              <tr><th scope="row">6</th><td>6</td><td>1</td><td>6</td><td>1</td><td>6</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>그러면 3과 5는 법 7의 원시근이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let&rsquo;s confirm the theorem for mod 7.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th></th><th>$x$</th><th>$x^2$</th><th>$x^3$</th><th>$x^4$</th><th>$x^5$</th><th>$x^6$</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+              <tr><th scope="row">2</th><td>2</td><td>4</td><td>1</td><td>2</td><td>4</td><td>1</td></tr>
+              <tr><th scope="row">3</th><td>3</td><td>2</td><td>6</td><td>4</td><td>5</td><td>1</td></tr>
+              <tr><th scope="row">4</th><td>4</td><td>2</td><td>1</td><td>4</td><td>2</td><td>1</td></tr>
+              <tr><th scope="row">5</th><td>5</td><td>4</td><td>6</td><td>2</td><td>3</td><td>1</td></tr>
+              <tr><th scope="row">6</th><td>6</td><td>1</td><td>6</td><td>1</td><td>6</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Then 3 and 5 are primitive root of modulo 7.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.17 ═══════════ -->
+
+<!-- Theorem 1.62 -->
+<div class="card thm-card" id="c1-62">
+  <div class="card-head">
+    <span class="thm-num">THM 1.62</span>
+    <span class="thm-title">페르마 소정리 <em>Fermat Little Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$p$가 소수이고 $a$가 $\gcd(a, p) = 1$인 정수이면 $a^{p-1} \equiv 1 \ (\bmod\ p)$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>오일러 정리에 의해 $a^{\phi(p)} \equiv a^{p-1} \equiv 1 \ (\bmod\ p)$임을 쉽게 확인할 수 있다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $p$ is a prime and $a$ is an integer with $\gcd(a, p) = 1$, then $a^{p-1} \equiv 1 \ (\bmod\ p)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By the Euler&rsquo;s theorem, we can easily check that $a^{\phi(p)} \equiv a^{p-1} \equiv 1 \ (\bmod\ p)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 1.63 -->
+<div class="card exam-card" id="c1-63">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.63</span>
+    <span class="exam-title">큰 거듭제곱의 나머지 계산 <em>Computing 3^205 (mod 101) and 5^10000 (mod 18)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>1.</strong> $3^{205} \ (\bmod\ 101)$을 구하자. 페르마 소정리에 의해 $3^{\phi(101)} \equiv 3^{100} \equiv 1 \ (\bmod\ 101)$이다. 따라서</p>
+        <div class="math-display">$$3^{205} \equiv 3^{200}3^5 \equiv 3^5 \equiv 243 \equiv 41 \ (\bmod\ 101).$$</div>
+        <p><strong>2.</strong> $5^{10000} \ (\bmod\ 18)$을 구하자. $\phi(18) = 6$임에 주의하자. 오일러 정리에 의해 $5^6 \equiv 1 \ (\bmod\ 18)$이다. 따라서</p>
+        <div class="math-display">$$5^{10000} \equiv 5^4 \equiv 25^2 \equiv 7^2 \equiv 13 \ (\bmod\ 18).$$</div>
+        <p><em>역주.</em> 원문은 "$243 \equiv 38 \ (\bmod\ 101)$"로 계산했으나 $243 - 2 \cdot 101 = 41$이므로 $3^5 \equiv 41 \ (\bmod\ 101)$이다. 위에서 바로잡아 옮겼다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>1.</strong> Find $3^{205} \ (\bmod\ 101)$. By the Fermat little theorem, $3^{\phi(101)} \equiv 3^{100} \equiv 1 \ (\bmod\ 101)$. Therefore</p>
+        <div class="math-display">$$3^{205} \equiv 3^{200}3^5 \equiv 3^5 \equiv 243 \equiv 38 \ (\bmod\ 101).$$</div>
+        <p><strong>2.</strong> Find $5^{10000} \ (\bmod\ 18)$. Note that $\phi(18) = 6$. By Euler&rsquo;s theorem, $5^6 \equiv 1 \ (\bmod\ 18)$. Therefore</p>
+        <div class="math-display">$$5^{10000} \equiv 5^4 \equiv 25^2 \equiv 7^2 \equiv 13 \ (\bmod\ 18).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.64 -->
+<div class="card ex-card" id="c1-64">
+  <div class="card-head">
+    <span class="ex-num">EX 1.64</span>
+    <span class="ex-title">a^p ≡ a (mod p) 증명 <em>Proving a^p ≡ a (mod p)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$p$가 소수이고 $a$가 정수이면 $a^p \equiv a \ (\bmod\ p)$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$p \mid a$인 경우와 $p \nmid a$인 경우로 나눈다.</p>
+        <p>$p \mid a$이면 $a \equiv 0 \ (\bmod\ p)$이므로 $a^p \equiv 0 \equiv a \ (\bmod\ p)$이다.</p>
+        <p>$p \nmid a$이면 $\gcd(a, p) = 1$이므로 페르마 소정리(정리 1.62)에 의해 $a^{p-1} \equiv 1 \ (\bmod\ p)$이고, 양변에 $a$를 곱하면 $a^p \equiv a \ (\bmod\ p)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $p$ is a prime and $a$ is an integer, then $a^p \equiv a \ (\bmod\ p)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We split into two cases according to whether $p \mid a$.</p>
+        <p>If $p \mid a$, then $a \equiv 0 \ (\bmod\ p)$, so $a^p \equiv 0 \equiv a \ (\bmod\ p)$.</p>
+        <p>If $p \nmid a$, then $\gcd(a, p) = 1$, so by the Fermat little theorem (Theorem 1.62), $a^{p-1} \equiv 1 \ (\bmod\ p)$; multiplying both sides by $a$ gives $a^p \equiv a \ (\bmod\ p)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.65 -->
+<div class="card ex-card" id="c1-65">
+  <div class="card-head">
+    <span class="ex-num">EX 1.65</span>
+    <span class="ex-title">법 12의 원시근 <em>All Primitive Roots of mod 12</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 12의 원시근을 모두 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\phi(12) = 4$이다. 법 12에 대하여 가역인 원소는 $1, 5, 7, 11$이다(예제 1.31). 각각의 위수를 구하면</p>
+        <div class="math-display">$$5^2 = 25 \equiv 1, \qquad 7^2 = 49 \equiv 1, \qquad 11^2 = 121 \equiv 1 \ (\bmod\ 12)$$</div>
+        <p>이므로 $5, 7, 11$의 위수는 모두 $2$이고, $1$의 위수는 $1$이다. 위수가 $\phi(12) = 4$인 원소가 없으므로 법 12의 원시근은 존재하지 않는다. (이는 정리 1.60과도 일치한다. $12 = 2^2 \times 3$은 소수 $p$와 양의 정수 $k$에 대하여 $2, 4, p^k, 2p^k$의 어느 꼴도 아니기 때문이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all primitive roots of mod 12.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$\phi(12) = 4$. The invertible elements modulo 12 are $1, 5, 7, 11$ (Example 1.31). Computing their orders,</p>
+        <div class="math-display">$$5^2 = 25 \equiv 1, \qquad 7^2 = 49 \equiv 1, \qquad 11^2 = 121 \equiv 1 \ (\bmod\ 12)$$</div>
+        <p>so $5, 7, 11$ all have order $2$, and $1$ has order $1$. No element has order $\phi(12) = 4$, so there is no primitive root of mod 12. (This agrees with Theorem 1.60: $12 = 2^2 \times 3$ is not of the form $2, 4, p^k$ or $2p^k$ for any prime $p$ and positive integer $k$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.66 -->
+<div class="card ex-card" id="c1-66">
+  <div class="card-head">
+    <span class="ex-num">EX 1.66</span>
+    <span class="ex-title">법 10의 원시근 <em>All Primitive Roots of mod 10</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>법 10의 원시근을 모두 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\phi(10) = 4$이다. 법 10에 대하여 가역인 원소는 $1, 3, 7, 9$이다. 3의 거듭제곱을 계산하면</p>
+        <div class="math-display">$$3^1 = 3, \quad 3^2 = 9, \quad 3^3 = 27 \equiv 7, \quad 3^4 = 81 \equiv 1 \ (\bmod\ 10)$$</div>
+        <p>이므로 3의 위수는 4이다. 7의 거듭제곱을 계산하면</p>
+        <div class="math-display">$$7^1 = 7, \quad 7^2 = 49 \equiv 9, \quad 7^3 \equiv 63 \equiv 3, \quad 7^4 \equiv 21 \equiv 1 \ (\bmod\ 10)$$</div>
+        <p>이므로 7의 위수도 4이다. 한편 $9^2 = 81 \equiv 1 \ (\bmod\ 10)$이므로 9의 위수는 2이다. 위수가 $\phi(10) = 4$인 원소는 3과 7뿐이므로, 법 10의 원시근은 $\{3, 7\}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find all primitive roots of mod 10.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>$\phi(10) = 4$. The invertible elements modulo 10 are $1, 3, 7, 9$. Computing powers of 3,</p>
+        <div class="math-display">$$3^1 = 3, \quad 3^2 = 9, \quad 3^3 = 27 \equiv 7, \quad 3^4 = 81 \equiv 1 \ (\bmod\ 10)$$</div>
+        <p>so 3 has order 4. Computing powers of 7,</p>
+        <div class="math-display">$$7^1 = 7, \quad 7^2 = 49 \equiv 9, \quad 7^3 \equiv 63 \equiv 3, \quad 7^4 \equiv 21 \equiv 1 \ (\bmod\ 10)$$</div>
+        <p>so 7 also has order 4. Meanwhile $9^2 = 81 \equiv 1 \ (\bmod\ 10)$, so 9 has order 2. Only 3 and 7 have order $\phi(10) = 4$, so the primitive roots of mod 10 are $\{3, 7\}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.67 -->
+<div class="card ex-card" id="c1-67">
+  <div class="card-head">
+    <span class="ex-num">EX 1.67</span>
+    <span class="ex-title">6^10004 (mod 11) 구하기 <em>Finding 6^10004 (mod 11)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$6^{10004} \ (\bmod\ 11)$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(6, 11) = 1$이므로 페르마 소정리에 의해 $6^{10} \equiv 1 \ (\bmod\ 11)$이다. $10004 = 10 \times 1000 + 4$이므로</p>
+        <div class="math-display">$$6^{10004} \equiv (6^{10})^{1000} \times 6^4 \equiv 6^4 \ (\bmod\ 11).$$</div>
+        <p>$6^2 = 36 \equiv 3 \ (\bmod\ 11)$이므로 $6^4 = (6^2)^2 \equiv 3^2 = 9 \ (\bmod\ 11)$이다. 따라서</p>
+        <div class="math-display">$$6^{10004} \equiv 9 \ (\bmod\ 11).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $6^{10004} \ (\bmod\ 11)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $\gcd(6, 11) = 1$, by the Fermat little theorem, $6^{10} \equiv 1 \ (\bmod\ 11)$. Since $10004 = 10 \times 1000 + 4$,</p>
+        <div class="math-display">$$6^{10004} \equiv (6^{10})^{1000} \times 6^4 \equiv 6^4 \ (\bmod\ 11).$$</div>
+        <p>Since $6^2 = 36 \equiv 3 \ (\bmod\ 11)$, $6^4 = (6^2)^2 \equiv 3^2 = 9 \ (\bmod\ 11)$. Therefore</p>
+        <div class="math-display">$$6^{10004} \equiv 9 \ (\bmod\ 11).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.68 -->
+<div class="card ex-card" id="c1-68">
+  <div class="card-head">
+    <span class="ex-num">EX 1.68</span>
+    <span class="ex-title">2^10000 (mod 13) 구하기 <em>Finding 2^10000 (mod 13)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$2^{10000} \ (\bmod\ 13)$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gcd(2, 13) = 1$이므로 페르마 소정리에 의해 $2^{12} \equiv 1 \ (\bmod\ 13)$이다. $10000 = 12 \times 833 + 4$이므로</p>
+        <div class="math-display">$$2^{10000} \equiv (2^{12})^{833} \times 2^4 \equiv 2^4 = 16 \equiv 3 \ (\bmod\ 13).$$</div>
+        <p>따라서 $2^{10000} \equiv 3 \ (\bmod\ 13)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $2^{10000} \ (\bmod\ 13)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $\gcd(2, 13) = 1$, by the Fermat little theorem, $2^{12} \equiv 1 \ (\bmod\ 13)$. Since $10000 = 12 \times 833 + 4$,</p>
+        <div class="math-display">$$2^{10000} \equiv (2^{12})^{833} \times 2^4 \equiv 2^4 = 16 \equiv 3 \ (\bmod\ 13).$$</div>
+        <p>So $2^{10000} \equiv 3 \ (\bmod\ 13)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 1.69 -->
+<div class="card ex-card" id="c1-69">
+  <div class="card-head">
+    <span class="ex-num">EX 1.69</span>
+    <span class="ex-title">법 18에 대하여 가역인 a의 개수 <em>Counting a Invertible of mod 18</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$1 \le a \le 18$이고 법 18에 대하여 가역인 $a$의 개수를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$18 = 2 \times 3^2$이므로 정리 1.48에 의해 $\phi(18) = \phi(2)\phi(3^2) = 1 \times 6 = 6$이다. REM 3에 의해 이는 법 18에 대하여 가역인 $a$ $(1 \le a \le 18)$의 개수와 같다. 실제로 가역인 원소는</p>
+        <div class="math-display">$$1, 5, 7, 11, 13, 17$$</div>
+        <p>로(18과 서로소인, 즉 2의 배수도 3의 배수도 아닌 수들) 모두 $6$개이며, $\phi(18) = 6$과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the number of $a$ $(1 \le a \le 18)$ such that $a$ invertible of mod 18.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $18 = 2 \times 3^2$, by Theorem 1.48, $\phi(18) = \phi(2)\phi(3^2) = 1 \times 6 = 6$. By Remark 3, this equals the number of invertible $a$ $(1 \le a \le 18)$ modulo 18. Indeed, the invertible elements are</p>
+        <div class="math-display">$$1, 5, 7, 11, 13, 17$$</div>
+        <p>(those relatively prime to 18, i.e. not multiples of 2 or 3), which are $6$ in total, matching $\phi(18) = 6$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

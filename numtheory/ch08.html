@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>측정, 아다마르 게이트와 CNOT 게이트 (§4.5–4.6 Measurement, the Hadamard Gate and the CNOT Gate) | 응용정수론 학습 가이드</title>
+<meta name="description" content="응용정수론 8단원 — 상태(state)를 내적공간 H의 단위벡터로 정의하고, 에르미트 행렬 Ω의 정규직교 고유기저로 상태를 전개해 고유값 λᵢ가 확률 |aᵢ|²로 측정되고 상태가 vᵢ로 붕괴하는 측정 과정을 예제로 따라갑니다. 이어서 아다마르 게이트의 회로·|+⟩·|−⟩ 표기와 행렬 표현, CNOT 게이트와 SWAP 게이트의 기호를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="응용정수론, Applications of Number Theory, MATH463, 양자컴퓨터, quantum computer, 측정, measurement, 상태, state, 단위벡터, unit vector, 내적, inner product, 에르미트 행렬, Hermitian matrix, 켤레전치, conjugate transpose, 대각화, diagonalizable, 고유값, eigenvalue, 고유벡터, eigenvector, 정규직교기저, orthonormal basis, 확률, probability, 붕괴, collapse, 새 상태, new state, 아다마르 게이트, Hadamard gate, CNOT 게이트, controlled not gate, SWAP 게이트, SWAP gate, 큐비트, qubit, 양자 게이트, quantum gate, 버튼, Burton">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/numtheory/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="측정, 아다마르 게이트와 CNOT 게이트 (§4.5–4.6 Measurement, the Hadamard Gate and the CNOT Gate) — 응용정수론 한·영 대조">
+<meta property="og:description" content="상태를 내적공간의 단위벡터로 두고 에르미트 행렬로 측정하면 무슨 일이 일어나는지 — 고유값이 관측될 확률과 상태의 붕괴를 예제로 확인하고, 아다마르 게이트의 회로와 행렬, CNOT·SWAP 게이트의 기호까지 — 응용정수론 마지막 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/numtheory/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="응용정수론 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "측정, 아다마르 게이트와 CNOT 게이트 (§4.5–4.6 Measurement, the Hadamard Gate and the CNOT Gate) — 응용정수론 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "응용정수론 §4.5–4.6 — 상태의 정의, 에르미트 행렬의 정규직교 고유기저를 이용한 측정과 확률 |aᵢ|², 상태의 붕괴, 아다마르 게이트의 회로와 행렬 표현, CNOT 게이트와 SWAP 게이트의 기호를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/numtheory/ch08.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/numtheory/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html" class="active">08</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Unit 08 · §4.5–4.6</p>
+  <h1>측정, 아다마르 게이트와 CNOT 게이트<span>Measurement, the Hadamard Gate and the CNOT Gate</span></h1>
+  <p class="header-desc">상태를 내적공간의 단위벡터로 정의한 뒤, 에르미트 행렬의 정규직교 고유기저로 상태를 전개하면 측정이 무엇을 뜻하는지가 드러납니다. 고유값이 관측될 확률과 측정 직후 상태의 붕괴를 세 예제로 확인하고, 이어서 아다마르 게이트의 회로와 |+⟩·|−⟩ 표기, 그리고 그에 대응하는 행렬과 CNOT·SWAP 게이트의 기호까지 정리합니다.</p>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c4-17"><span class="toc-num">DEF 4.17</span> 상태 <em>State</em></a></li>
+    <li><a href="#c4-18"><span class="toc-num">EXAM 4.18</span> 대각 에르미트 행렬로 하는 측정 <em>Measuring with a Diagonal Hermitian Matrix</em></a></li>
+    <li><a href="#c4-19"><span class="toc-num">EXAM 4.19</span> 고유기저로 전개해서 하는 측정 <em>Measuring by Expanding in an Eigenbasis</em></a></li>
+    <li><a href="#c4-20"><span class="toc-num">EXAM 4.20</span> 중첩 상태의 측정 <em>Measuring a Superposed State</em></a></li>
+    <li><a href="#c4-21"><span class="toc-num">EX 4.21</span> 에르미트 행렬의 정의 <em>The Definition of a Hermitian Matrix</em></a></li>
+    <li><a href="#c4-22"><span class="toc-num">EX 4.22</span> 상태의 측정 설명하기 <em>Explaining Measurement for a State</em></a></li>
+    <li><a href="#c4-23"><span class="toc-num">EX 4.23</span> 측정값의 확률 구하기 <em>The Probabilities of the Measurements</em></a></li>
+    <li><a href="#c4-24"><span class="toc-num">EX 4.24</span> 아다마르 게이트 설명하기 <em>Explaining the Hadamard Gate</em></a></li>
+    <li><a href="#c4-25"><span class="toc-num">EX 4.25</span> 그림에 대응하는 상태 구하기 <em>The States Corresponding to Each Figure</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  응용정수론 카드 작성 규약 (ch01–ch08 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  0) 소스는 영문 강의노트(MATH463 Applications of Number Theory, Choi do hoon)다.
+     en 패널은 원문 verbatim 전사, ko 패널은 번역 단계 전까지 `[번역 예정]` 한 줄만 둔다.
+  1) 번호가 붙은 환경 하나 = 카드 하나. id는 원문 환경 번호를 그대로 쓴다.
+     id="c{장}-{번호}" (예: Definition 1.1 → id="c1-1", Theorem 1.37 → id="c1-37").
+     단원 파일 번호(ch01–ch08)와 무관하게 원문 장 번호를 쓰고, 소스 등장 순서대로 배치한다.
+       번호 충돌: Definition 3.1 / Theorem 3.1 → id="c3-1d" / id="c3-1t".
+       원문의 "Remark 1."~"Remark 4."는 별도 카운터 → id="rem1"~"rem4", 배지 REM 1 등.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation        → card def-card  · DEF n
+       Theorem / Lemma / Corollary  → card thm-card  · THM n / LEM n / COR n
+       Remark                       → card rem-card  · REM n
+       Example                      → card exam-card · EXAM n
+       Exercise                     → card ex-card   · EX n
+       번호 없는 서술 단락          → card note-card · NOTE
+       원문의 테두리 알고리즘 박스  → card algo-card · ALGO  (응용정수론 고유)
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num(제목 없음),
+     algo-card는 .algo-num/.algo-title.
+  3) 카드 제목 span은 한국어 제목 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 원문에 이름이 있으면 그대로 쓰고(The Euclidean Algorithm 등),
+     없으면 간결한 편집 제목을 새로 붙인다. 한국어 제목은 GLOSSARY 용어만 쓴다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : PDF 원문 verbatim 전사(어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     번호 없는 서술 단락도 버리지 않는다. 연속된 서술 덩어리마다 note-card를 만들고
+     id는 note{단원2자리}-{순번} (예: note01-3), 배지는 NOTE, 목차에는 넣지 않는다.
+  5) algo-card: 박스 표제([The Division Algorithm], (Algorithm of RSA) 등)는 카드 제목으로
+     흡수하고, 본문은 "Input :" / "Output :" / "Goal :"을 strong으로 연 p 태그로 옮긴다.
+     단계는 원문이 1. 2. 3.이면 ol 태그로, (a)(b)(c)이면 p 앞 strong 라벨로 옮긴다.
+     표제 없는 박스(p3–4 확장 유클리드, p8 거듭제곱, p18 디피-헬만, p19 RSA)에는
+     편집 제목을 붙인다. algo-card는 목차에 ALGO 항목으로 넣는다.
+  6) 원문에 Proof가 있는 환경은 진술 뒤에 proof-toggle + proof-content(ko) /
+     proof-toggle + en-proof-content(en)를 둔다.
+       토글 라벨: 한국어 쪽은 data-show 에 "증명 보기", data-hide 에 "증명 접기"를,
+       영어 쪽은 data-show 에 "Proof", data-hide 에 "Hide Proof"를 넣는다.
+     en 쪽은 원문 증명을 라벨("Proof.") 없이 verbatim 전사하고 div.qed(□)로 닫는다.
+     ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) Exercise 카드는 원칙적으로 소스에 풀이가 없다. 진술만 두고 풀이 자리에
+     ko-panel 안 PROOF-KO 마커, en-panel 안 PROOF-EN 마커만 HTML 주석으로 남긴다.
+     이 단계에서는 어떤 풀이도 작성하지 않는다.
+  8) 원문 풀이가 인쇄된 Exercise(1.8, 1.13(1), 1.24, 1.25)는 마커 대신 토글을 쓴다.
+     en은 data-show 가 "Solution", data-hide 가 "Hide Solution"인 토글에 원문 "Proof." 본문을
+     라벨 없이 verbatim으로 담고 끝의 □는 div.qed로 옮긴다. ko는 "풀이 보기/풀이 접기"
+     토글에 `[번역 예정]`만 둔다. 원문이 일부 항목만 푼 1.13은 en 토글 끝에
+     PROOF-EN-PART2, ko 토글 끝에 PROOF-KO-PART2 주석 마커를 두어 나머지 항목을 잇는다.
+  9) 원문 증명이 비어 있는 정리(3.9, 3.12, 3.30)는 토글 없이 PROOF-KO / PROOF-EN
+     마커만 두고, 풀이 단계에서 자체 증명을 채운다.
+ 10) 빈칸 채우기 문제(1.7, 1.23, 1.35, 4.2, 4.12)의 네모 박스는 라벨이 있으면
+     \boxed{ (A) }, 없으면 \boxed{\qquad\qquad}로 전사한다. 따옴표는 원문대로 둔다.
+ 11) 표는 div.table-wrap 안 table.truth-table로 옮기고 양 패널에 그대로 복제한다.
+     그림(원문 tikz)은 figure.fig 안 인라인 SVG로 그리고 색은 currentColor를 쓰며,
+     역시 양 패널에 복제한다.
+ 12) 수식은 $...$ / $$...$$. 원문의 이탤릭 gcd는 \gcd로, lcm은 \operatorname{lcm}으로
+     정규화하고, 합동은 원문 배치대로 a \equiv b \ (\bmod\ n)로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     화살표(⇒) 사슬은 aligned 환경 하나로 묶는다.
+ 13) 원문 절 번호 헤더는 div.section-title 안 h2로 단원 안에서 구분한다
+     (예: 1.4 Modulo arithmetic · 합동 산술).
+ 14) 원문의 오타·비문(different form zero, Let introduce, the all solutions, c|(a, b) 등)은
+     en에 그대로 두고 ko에서 바른 뜻으로 옮긴다(SOURCE-MAP ERRATA 참조).
+ 15) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+
+<div class="section-title"><h2>4.5 measurement · 측정</h2></div>
+
+<!-- ═══════════ PDF p.36 ═══════════ -->
+
+<!-- 서술 단락 (p.36) -->
+<div class="card note-card" id="note08-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절에서는 $H := \mathbb{C}^n$을 내적을 갖는 벡터공간이라 하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In this subsection, let $H := \mathbb{C}^n$ be a vector space with inner product.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 4.17 -->
+<div class="card def-card" id="c4-17">
+  <div class="card-head">
+    <span class="def-num">DEF 4.17</span>
+    <span class="def-title">상태 <em>State</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>상태는 $H$의 단위벡터 $v$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A state is a unit vector $v$ in $H$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.37 ═══════════ -->
+
+<!-- 서술 단락 + 측정 도식 (p.37) -->
+<div class="card note-card" id="note08-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\Omega \in M_n(\mathbb{C})$를 에르미트 행렬, 즉 $\Omega = (\overline{\Omega})^t$인 행렬이라 하자. 에르미트 행렬은 대각화가능하고 에르미트 행렬의 모든 고유값은 실수임에 주목하자. $\{v_i\}_{1 \le i \le n}$을 다음을 만족하는 $\Omega$의 정규직교기저라 하자.</p>
+        <div class="math-display">$$\Omega v_i = \lambda_i v_i \ (\text{모든 } i\text{에 대하여}).$$</div>
+        <p>편의상 모든 $\lambda_i$는 서로 다르다고 가정하자. $v = \Sigma_{i=1}^{n} a_i v_i$이고 $\Sigma_{i=1}^{n} |a_i|^2 = 1$임에 주목하자. 상태 $v$를 연산자 $\Omega$로 측정하면 다음 결과를 얻는다: 고유값 $\lambda_i$가 확률 $|a_i|^2$로 측정되고, 상태 $v$는 상태 $v_i$로 붕괴한다.</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{측정}]{\ \Omega\ }\ \begin{array}{l} \text{측정값 } \lambda_i,\ \text{확률 } |a_i|^2 \\ \text{새 상태 } v_i \end{array}$$</div>
+        <p>예제를 통해 측정을 더 잘 이해해 보자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\Omega \in M_n(\mathbb{C})$ be a Hermitian matrix, i.e., $\Omega = (\overline{\Omega})^t$. Note that a Hermitian matrix is diagonalizable and every eigenvalue of Hermitian matrix is real. Let $\{v_i\}_{1 \le i \le n}$ be the set of orthonormal basis of $\Omega$ such that</p>
+        <div class="math-display">$$\Omega v_i = \lambda_i v_i \text{ for all } i.$$</div>
+        <p>For convenience, assume that all $\lambda_i$&rsquo;s are distinct. Note that $v = \Sigma_{i=1}^{n} a_i v_i$ such that $\Sigma_{i=1}^{n} |a_i|^2 = 1$. When the state $v$ is measured using the operator $\Omega$, the following results are obtained: the eigenvalue $\lambda_i$ can be measured with a probability of $|a_i|^2$ and the state $v$ collapses to the state $v_i$.</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{measure}]{\ \Omega\ }\ \begin{array}{l} \text{measurement } \lambda_i \text{ with prob } |a_i|^2 \\ \text{new state } v_i \end{array}$$</div>
+        <p>Let&rsquo;s better understand measurement through an example.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4.18 -->
+<div class="card exam-card" id="c4-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.18</span>
+    <span class="exam-title">대각 에르미트 행렬로 하는 측정 <em>Measuring with a Diagonal Hermitian Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$v = \left(\frac{1}{2}, \frac{\sqrt{3}}{2}\right) \in \mathbb{C}^2$, $\Omega = \begin{pmatrix} -2 &amp; \\ &amp; 1 \end{pmatrix}$라 하자. 그러면 $\Omega$의 고유벡터는 $(1, 0)$과 $(0, 1)$이다. 이때 $(1, 0)$과 $(0, 1)$의 고유값은 각각 $-2$와 $1$이다. 그러므로</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{측정}]{\ \Omega\ }\ \begin{array}{l} \text{측정값 } -2,\ \text{확률 } (1/2)^2 \\ \text{새 상태 } (1, 0) \\ \text{측정값 } 1,\ \text{확률 } (\sqrt{3}/2)^2 \\ \text{새 상태 } (0, 1) \end{array}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $v = \left(\frac{1}{2}, \frac{\sqrt{3}}{2}\right) \in \mathbb{C}^2$ and $\Omega = \begin{pmatrix} -2 &amp; \\ &amp; 1 \end{pmatrix}$. Then eigenvectors of $\Omega$ are $(1, 0)$ and $(0, 1)$. Then eigenvalues of $(1, 0)$ and $(0, 1)$ are $-2$ and $1$, respectively. Therefore</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{measure}]{\ \Omega\ }\ \begin{array}{l} \text{measurement } -2 \text{ with prob } (1/2)^2 \text{ and new state } (1, 0) \\ \text{measurement } 1 \text{ with prob } (\sqrt{3}/2)^2 \text{ and new state } (0, 1) \end{array}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4.19 -->
+<div class="card exam-card" id="c4-19">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.19</span>
+    <span class="exam-title">고유기저로 전개해서 하는 측정 <em>Measuring by Expanding in an Eigenbasis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$v$를 1-큐비트의 상태라 하자. $\Omega$를 다음을 만족하는 에르미트 행렬이라 하자.</p>
+        <div class="math-display">$$\Omega \left( \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \right) = \lambda_1 \left( \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \right)$$</div>
+        <div class="math-display">$$\Omega \left( \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle \right) = \lambda_2 \left( \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle \right).$$</div>
+        <p>$v_1 := \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle$, $v_2 := \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle$이라 하고 $v = \frac{1}{\sqrt{3}}|0\rangle + \frac{\sqrt{2}}{\sqrt{3}}|1\rangle$이라 하자. 그러면 $v = \frac{1+\sqrt{2}}{\sqrt{6}}v_1 + \frac{1-\sqrt{2}}{\sqrt{6}}v_2$이다. 그러므로</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{측정}]{\ \Omega\ }\ \begin{array}{l} \text{측정값 } \lambda_1,\ \text{확률 } ((1+\sqrt{2})/\sqrt{6})^2 \\ \text{새 상태 } v_1 \\ \text{측정값 } \lambda_2,\ \text{확률 } ((1-\sqrt{2})/\sqrt{6})^2 \\ \text{새 상태 } v_2 \end{array}$$</div>
+        <p><em>역주.</em> 원문은 두 측정값의 확률이 모두 $((1+\sqrt2)/\sqrt6)^2$로 인쇄되어 있으나, $v = \frac{1+\sqrt2}{\sqrt6}v_1 + \frac{1-\sqrt2}{\sqrt6}v_2$이므로 둘째 확률은 $((1-\sqrt2)/\sqrt6)^2$이어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $v$ be a state in one qubit. Let $\Omega$ be a hermitian matrix such that</p>
+        <div class="math-display">$$\Omega \left( \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \right) = \lambda_1 \left( \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \right)$$</div>
+        <div class="math-display">$$\Omega \left( \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle \right) = \lambda_2 \left( \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle \right).$$</div>
+        <p>Let $v_1 := \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle$ and $v_2 := \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle$ Assume that $v = \frac{1}{\sqrt{3}}|0\rangle + \frac{\sqrt{2}}{\sqrt{3}}|1\rangle$. Then $v = \frac{1+\sqrt{2}}{\sqrt{6}}v_1 + \frac{1-\sqrt{2}}{\sqrt{6}}v_2$. Therefore</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{measure}]{\ \Omega\ }\ \begin{array}{l} \text{measurement } \lambda_1 \text{ with prob } ((1+\sqrt{2})/\sqrt{6})^2 \text{ and new state } v_1 \\ \text{measurement } \lambda_2 \text{ with prob } ((1+\sqrt{2})/\sqrt{6})^2 \text{ and new state } v_2 \end{array}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4.20 (pp.37–38) -->
+<div class="card exam-card" id="c4-20">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4.20</span>
+    <span class="exam-title">중첩 상태의 측정 <em>Measuring a Superposed State</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\Omega$를 다음을 만족하는 에르미트 행렬이라 하자.</p>
+        <div class="math-display">$$\Omega|0\rangle = \lambda_1|0\rangle, \Omega|1\rangle = \lambda_2|1\rangle.$$</div>
+        <p>$v = \frac{1}{\sqrt{2}}\left(|0\rangle + |1\rangle\right)$을 상태라 하자. 그러면</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{측정}]{\ \Omega\ }\ \begin{array}{l} \text{측정값 } \lambda_1,\ \text{확률 } 1/2 \\ \text{새 상태 } |0\rangle \\ \text{측정값 } \lambda_2,\ \text{확률 } 1/2 \\ \text{새 상태 } |1\rangle \end{array}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\Omega$ be a hermitian matrix such that</p>
+        <div class="math-display">$$\Omega|0\rangle = \lambda_1|0\rangle, \Omega|1\rangle = \lambda_2|1\rangle.$$</div>
+        <p>Let $v = \frac{1}{\sqrt{2}}\left(|0\rangle + |1\rangle\right)$ be a state. Then</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{measure}]{\ \Omega\ }\ \begin{array}{l} \text{measurement } \lambda_1 \text{ with prob } 1/2 \text{ and new state } |0\rangle \\ \text{measurement } \lambda_2 \text{ with prob } 1/2 \text{ and new state } |1\rangle \end{array}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.38 ═══════════ -->
+
+<!-- Exercise 4.21 -->
+<div class="card ex-card" id="c4-21">
+  <div class="card-head">
+    <span class="ex-num">EX 4.21</span>
+    <span class="ex-title">에르미트 행렬의 정의 <em>The Definition of a Hermitian Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>에르미트 행렬의 정의를 말하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>행렬 $\Omega \in M_n(\mathbb{C})$가 자신의 켤레전치와 같을 때, 즉</p>
+        <div class="math-display">$$\Omega = \overline{\Omega}^{T}$$</div>
+        <p>일 때(성분으로 쓰면 모든 $i, j$에 대하여 $\omega_{ji} = \overline{\omega_{ij}}$일 때) $\Omega$를 <strong>에르미트 행렬</strong>이라 한다. 노트에서 쓰이는 에르미트 행렬의 성질은 다음과 같다: 에르미트 행렬은 대각화가능하고, 모든 고유값이 실수이며, 고유벡터로 이루어진 정규직교기저를 가진다.</p>
+        <p>예를 들어 다음 행렬은 에르미트 행렬이다.</p>
+        <div class="math-display">$$\begin{pmatrix} 2 &amp; i \\ -i &amp; 1 \end{pmatrix}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Give the definition of Hermitian matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>A matrix $\Omega \in M_n(\mathbb{C})$ is called <strong>Hermitian</strong> if it equals its own conjugate transpose, i.e.,</p>
+        <div class="math-display">$$\Omega = \overline{\Omega}^{T}$$</div>
+        <p>(equivalently, $\omega_{ji} = \overline{\omega_{ij}}$ for all $i, j$). The properties of Hermitian matrices used in the notes are: a Hermitian matrix is diagonalizable, every eigenvalue is real, and it admits an orthonormal basis of eigenvectors.</p>
+        <p>For example, the following matrix is Hermitian.</p>
+        <div class="math-display">$$\begin{pmatrix} 2 &amp; i \\ -i &amp; 1 \end{pmatrix}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.22 -->
+<div class="card ex-card" id="c4-22">
+  <div class="card-head">
+    <span class="ex-num">EX 4.22</span>
+    <span class="ex-title">상태의 측정 설명하기 <em>Explaining Measurement for a State</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$v$를 상태라 하자. $v$에 대한 &ldquo;측정&rdquo;을 설명하라.</p>
+        <p><strong>1.</strong> 측정과 관련된 행렬 $\Omega$의 성질을 말하라.</p>
+        <p><strong>2.</strong> $v$를 $\Omega$로 측정할 때의 측정값을 구하라.</p>
+        <p><strong>3.</strong> $v$를 $\Omega$로 측정할 때 각 측정값에 대응하는 $v$의 상태를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>1.</strong> 측정과 관련된 행렬 $\Omega$는 $H = \mathbb{C}^n$ 위의 에르미트 행렬이다. 그러므로 $\Omega$는 실수인 고유값 $\lambda_i$들과, 그에 대응하는 정규직교 고유기저 $\{v_i\}_{1 \le i \le n}$를 가지며(편의상 $\lambda_i$들은 서로 다르다고 가정한다) $\Omega v_i = \lambda_i v_i$를 만족한다.</p>
+        <p><strong>2.</strong> $v = \Sigma_{i=1}^{n} a_i v_i$이고 $\Sigma_{i=1}^{n} |a_i|^2 = 1$이라 쓰면, $v$를 $\Omega$로 측정할 때 얻는 측정값은 고유값 $\lambda_i$이고, 그 확률은 $|a_i|^2$이다.</p>
+        <p><strong>3.</strong> 측정값 $\lambda_i$를 얻은 뒤 $v$의 상태는 그에 대응하는 고유벡터 $v_i$로 붕괴한다. 정리하면 다음과 같다.</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{측정}]{\ \Omega\ }\ \begin{array}{l} \text{측정값 } \lambda_i,\ \text{확률 } |a_i|^2 \\ \text{새 상태 } v_i \end{array}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $v$ be a state. Explain &ldquo;measure&rdquo; for $v$.</p>
+        <p><strong>1.</strong> Determine the properties of the matrix $\Omega$ related to measurement.</p>
+        <p><strong>2.</strong> Find the measurement when $v$ is measured using $\Omega$.</p>
+        <p><strong>3.</strong> Determine the state of $v$ corresponding to each measurement value when $v$ is measured using $\Omega$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>1.</strong> The matrix $\Omega$ related to measurement is a Hermitian matrix on $H = \mathbb{C}^n$. Hence $\Omega$ has real eigenvalues $\lambda_i$ and a corresponding orthonormal eigenbasis $\{v_i\}_{1 \le i \le n}$ (for convenience, assume the $\lambda_i$&rsquo;s are distinct) satisfying $\Omega v_i = \lambda_i v_i$.</p>
+        <p><strong>2.</strong> Writing $v = \Sigma_{i=1}^{n} a_i v_i$ with $\Sigma_{i=1}^{n} |a_i|^2 = 1$, measuring $v$ using $\Omega$ yields the eigenvalue $\lambda_i$ as the measurement, with probability $|a_i|^2$.</p>
+        <p><strong>3.</strong> After the eigenvalue $\lambda_i$ is measured, the state $v$ collapses to the corresponding eigenvector $v_i$. In summary,</p>
+        <div class="math-display">$$v \ \xrightarrow[\text{measure}]{\ \Omega\ }\ \begin{array}{l} \text{measurement } \lambda_i \text{ with prob } |a_i|^2 \\ \text{new state } v_i \end{array}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.23 -->
+<div class="card ex-card" id="c4-23">
+  <div class="card-head">
+    <span class="ex-num">EX 4.23</span>
+    <span class="ex-title">측정값의 확률 구하기 <em>The Probabilities of the Measurements</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$v = \frac{1}{\sqrt{5}}|0\rangle + \frac{2}{\sqrt{5}}|1\rangle$, $\Omega = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$라 하자.</p>
+        <p><strong>1.</strong> 측정값이 2일 확률은 얼마인가?</p>
+        <p><strong>2.</strong> 측정값이 1일 확률은 얼마인가?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\Omega$의 고유벡터는 $|0\rangle = (1, 0)$ (고유값 $2$)과 $|1\rangle = (0, 1)$ (고유값 $1$)이고, $\{|0\rangle, |1\rangle\}$은 이미 정규직교기저이다. $v = \frac{1}{\sqrt{5}}|0\rangle + \frac{2}{\sqrt{5}}|1\rangle$이므로,</p>
+        <p><strong>1.</strong> 측정값이 $2$일 확률은 $\left(\frac{1}{\sqrt{5}}\right)^2 = \frac{1}{5}$이고, 이때 새 상태는 $|0\rangle$이다.</p>
+        <p><strong>2.</strong> 측정값이 $1$일 확률은 $\left(\frac{2}{\sqrt{5}}\right)^2 = \frac{4}{5}$이고, 이때 새 상태는 $|1\rangle$이다.</p>
+        <p>두 확률의 합은 $\frac{1}{5} + \frac{4}{5} = 1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $v = \frac{1}{\sqrt{5}}|0\rangle + \frac{2}{\sqrt{5}}|1\rangle$ and $\Omega = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$.</p>
+        <p><strong>1.</strong> What is probability with measurement 2?</p>
+        <p><strong>2.</strong> What is probability with measurement 1?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The eigenvectors of $\Omega$ are $|0\rangle = (1, 0)$ (eigenvalue $2$) and $|1\rangle = (0, 1)$ (eigenvalue $1$), and $\{|0\rangle, |1\rangle\}$ is already orthonormal. Since $v = \frac{1}{\sqrt{5}}|0\rangle + \frac{2}{\sqrt{5}}|1\rangle$,</p>
+        <p><strong>1.</strong> the probability of measuring $2$ is $\left(\frac{1}{\sqrt{5}}\right)^2 = \frac{1}{5}$, with new state $|0\rangle$.</p>
+        <p><strong>2.</strong> the probability of measuring $1$ is $\left(\frac{2}{\sqrt{5}}\right)^2 = \frac{4}{5}$, with new state $|1\rangle$.</p>
+        <p>The two probabilities sum to $\frac{1}{5} + \frac{4}{5} = 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>4.6 Hadamard and CNOT gate · 아다마르 게이트와 CNOT 게이트</h2></div>
+
+<!-- 서술 단락 + 아다마르 게이트 회로 (p.38) -->
+<div class="card note-card" id="note08-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아다마르 게이트는 다음을 만족하는 1-큐비트 게이트이다.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 620 70" width="620" height="70" role="img" aria-label="아다마르 게이트 회로: 상태 α|0⟩ + β|1⟩가 선 하나를 따라 H라고 적힌 상자를 지나 α(1/√2)(|0⟩ + |1⟩) + β(1/√2)(|0⟩ − |1⟩)로 나온다." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">H</text>
+              <text x="322" y="40">α(1/√2)(|0⟩ + |1⟩) + β(1/√2)(|0⟩ − |1⟩)</text>
+            </g>
+          </svg>
+          <figcaption>아다마르 게이트</figcaption>
+        </figure>
+        <p>$|+\rangle$은 $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$을, $|-\rangle$은 $\frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$을 나타낸다고 하자. 그러면 간단히,</p>
+        <div class="math-display">$$|0\rangle \xrightarrow{H} |+\rangle, \quad |1\rangle \xrightarrow{H} |-\rangle.$$</div>
+        <p>$|0\rangle := (1, 0)$, $|1\rangle := (0, 1)$이라 정의하자. 그러면 아다마르 게이트에 대응하는 행렬은 다음과 같다.</p>
+        <div class="math-display">$$\frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The Hadamard gate is a 1-qubit gate such that</p>
+        <figure class="fig">
+          <svg viewBox="0 0 620 70" width="620" height="70" role="img" aria-label="A one-qubit circuit: the state alpha ket 0 plus beta ket 1 travels along a single wire through a box labelled H and leaves as alpha times one over root two times ket 0 plus ket 1, plus beta times one over root two times ket 0 minus ket 1." font-family="inherit" font-size="15">
+            <g stroke="currentColor" stroke-width="1.2" fill="none">
+              <line x1="112" y1="35" x2="196" y2="35"></line>
+              <rect x="196" y="18" width="36" height="34"></rect>
+              <line x1="232" y1="35" x2="316" y2="35"></line>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <text x="6" y="40">α|0⟩ + β|1⟩</text>
+              <text x="214" y="41" text-anchor="middle" font-style="italic">H</text>
+              <text x="322" y="40">α(1/√2)(|0⟩ + |1⟩) + β(1/√2)(|0⟩ − |1⟩)</text>
+            </g>
+          </svg>
+          <figcaption>Hadamard gate</figcaption>
+        </figure>
+        <p>Let $|+\rangle$ denote $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|-\rangle$ denote $\frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$. Then simply,</p>
+        <div class="math-display">$$|0\rangle \xrightarrow{H} |+\rangle, \quad |1\rangle \xrightarrow{H} |-\rangle.$$</div>
+        <p>Define $|0\rangle := (1, 0)$ and $|1\rangle := (0, 1)$. Then the matrix corresponding to the Hadamard gate is as follows</p>
+        <div class="math-display">$$\frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 서술 단락 (p.38) : CNOT·SWAP 기호 -->
+<div class="card note-card" id="note08-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>여러 게이트를 기호로 나타내자. 다음 기호는 CNOT 게이트와 SWAP 게이트를 나타낸다. $B \oplus A \equiv B + A \ (\bmod\ 2)$임에 주목하자.</p>
+        <p>그림 파일의 [Figure.1]은 CNOT 게이트의 기호에, [Figure.2]는 SWAP 게이트의 기호에 대응한다.</p>
+        <p><em>역주.</em> 노트에 첨부되지 않은 별도의 그림 파일을 가리킨다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let us represent various gates using symbols. The following symbols represent the controlled NOT gate and the SWAP gate. Note that $B \oplus A \equiv B + A \ (\bmod\ 2)$.</p>
+        <p>Figure file&rsquo;s [Figure.1] corresponds to the symbol for a CNOT gate, and [Figure.2] corresponds to the symbol for a SWAP gate.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF p.39 ═══════════ -->
+
+<!-- Exercise 4.24 -->
+<div class="card ex-card" id="c4-24">
+  <div class="card-head">
+    <span class="ex-num">EX 4.24</span>
+    <span class="ex-title">아다마르 게이트 설명하기 <em>Explaining the Hadamard Gate</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아다마르 게이트를 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>아다마르 게이트는 다음 행렬로 주어지는 1-큐비트 게이트이다.</p>
+        <div class="math-display">$$H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}$$</div>
+        <p>$|+\rangle := \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$, $|-\rangle := \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$라 하면</p>
+        <div class="math-display">$$H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = |+\rangle, \quad H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) = |-\rangle$$</div>
+        <p>이고, 일반적으로 $\alpha|0\rangle + \beta|1\rangle \mapsto \alpha|+\rangle + \beta|-\rangle$로 대응된다. $H\overline{H}^{T} = I$이므로 $H$는 유니터리 행렬이고, $H^2 = I$이므로 $H$는 자기 자신의 역행렬이다. 아다마르 게이트는 기저 상태 하나를 균등한 중첩 상태로 바꾼다. 예를 들어 $H|0\rangle$을 측정하면 확률 $\frac{1}{2}$로 $0$을, 확률 $\frac{1}{2}$로 $1$을 얻는다. 이러한 성질 때문에 아다마르 게이트는 양자 알고리즘의 시작 단계에서 중첩을 만드는 데 쓰인다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Explain the Hadamard gate.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The Hadamard gate is a 1-qubit gate given by the matrix</p>
+        <div class="math-display">$$H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}$$</div>
+        <p>Let $|+\rangle := \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|-\rangle := \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$. Then</p>
+        <div class="math-display">$$H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = |+\rangle, \quad H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) = |-\rangle$$</div>
+        <p>and in general $\alpha|0\rangle + \beta|1\rangle \mapsto \alpha|+\rangle + \beta|-\rangle$. Since $H\overline{H}^{T} = I$, $H$ is a unitary matrix, and since $H^2 = I$, $H$ is its own inverse. The Hadamard gate turns a basis state into an equal superposition; for instance, measuring $H|0\rangle$ gives $0$ with probability $\frac{1}{2}$ and $1$ with probability $\frac{1}{2}$. Because of this, the Hadamard gate is used to create superpositions at the start of quantum algorithms.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4.25 -->
+<div class="card ex-card" id="c4-25">
+  <div class="card-head">
+    <span class="ex-num">EX 4.25</span>
+    <span class="ex-title">그림에 대응하는 상태 구하기 <em>The States Corresponding to Each Figure</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그림 파일의 [Figure.3]과 [Figure.4]를 바탕으로, 각 그림에 대응하는 $|A\rangle|B\rangle$ 상태를 각각 구하라.</p>
+        <p><em>역주.</em> 노트에 첨부되지 않은 별도의 그림 파일을 가리킨다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 그림 파일이 노트에 첨부되어 있지 않으므로, 앞선 주석의 [Figure.1]이 CNOT 게이트, [Figure.2]가 SWAP 게이트의 기호였던 것과 일관되게 [Figure.3]은 CNOT 게이트, [Figure.4]는 SWAP 게이트가 두 큐비트 입력 $|A\rangle|B\rangle$ (첫 번째 큐비트 $A$가 제어 큐비트, 두 번째 큐비트 $B$가 표적 큐비트)에 작용한다고 가정하고, 이 해석 아래에서 풀이한다.</p>
+        <p><strong>[Figure.3] (CNOT 게이트).</strong> 예제 4.10의 진리표대로, CNOT 게이트는 제어 큐비트 $A$는 그대로 두고 표적 큐비트를 $B \oplus A$로 바꾸므로 출력 상태는 $|A\rangle|B \oplus A\rangle$이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>입력 $|A\rangle|B\rangle$</th><th>출력 $|A\rangle|B \oplus A\rangle$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|00\rangle$</td><td>$|00\rangle$</td></tr>
+              <tr><td>$|01\rangle$</td><td>$|01\rangle$</td></tr>
+              <tr><td>$|10\rangle$</td><td>$|11\rangle$</td></tr>
+              <tr><td>$|11\rangle$</td><td>$|10\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>$|00\rangle = (1, 0, 0, 0)$, $|01\rangle = (0, 1, 0, 0)$, $|10\rangle = (0, 0, 1, 0)$, $|11\rangle = (0, 0, 0, 1)$이라 하면, 예제 4.10의 행렬을 그대로 써서 CNOT 게이트에 대응하는 행렬은 다음과 같다.</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix}$$</div>
+        <p>따라서 일반적인 중첩 상태 $a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle$은 다음과 같이 대응된다.</p>
+        <div class="math-display">$$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle \ \longmapsto\ a|00\rangle + b|01\rangle + d|10\rangle + c|11\rangle$$</div>
+        <p><strong>[Figure.4] (SWAP 게이트).</strong> SWAP 게이트는 두 큐비트를 서로 맞바꾸므로 출력 상태는 $|B\rangle|A\rangle$이다.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>입력 $|A\rangle|B\rangle$</th><th>출력 $|B\rangle|A\rangle$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|00\rangle$</td><td>$|00\rangle$</td></tr>
+              <tr><td>$|01\rangle$</td><td>$|10\rangle$</td></tr>
+              <tr><td>$|10\rangle$</td><td>$|01\rangle$</td></tr>
+              <tr><td>$|11\rangle$</td><td>$|11\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>같은 기저 순서 $|00\rangle, |01\rangle, |10\rangle, |11\rangle$에서 SWAP 게이트에 대응하는 행렬은 다음과 같다.</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$$</div>
+        <p>따라서 일반적인 중첩 상태는 다음과 같이 대응된다.</p>
+        <div class="math-display">$$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle \ \longmapsto\ a|00\rangle + c|01\rangle + b|10\rangle + d|11\rangle$$</div>
+        <p>참고로 SWAP 게이트는 제어와 표적을 번갈아 맡은 세 번의 CNOT 게이트를 이어붙여 구현할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Based on [Figure.3] and [Figure.4] in the Figure file, determine the respective $|A\rangle|B\rangle$ states corresponding to each Figure.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The figure file is not included with the notes. Consistently with the preceding note, where [Figure.1] was the symbol for the CNOT gate and [Figure.2] for the SWAP gate, we take [Figure.3] to be the CNOT gate and [Figure.4] the SWAP gate, each acting on the two-qubit input $|A\rangle|B\rangle$ (the first qubit $A$ as control, the second qubit $B$ as target), and solve under this reading.</p>
+        <p><strong>[Figure.3] (CNOT gate).</strong> As in the truth table of Example 4.10, the CNOT gate leaves the control qubit $A$ unchanged and replaces the target qubit by $B \oplus A$, so the output state is $|A\rangle|B \oplus A\rangle$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>Input $|A\rangle|B\rangle$</th><th>Output $|A\rangle|B \oplus A\rangle$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|00\rangle$</td><td>$|00\rangle$</td></tr>
+              <tr><td>$|01\rangle$</td><td>$|01\rangle$</td></tr>
+              <tr><td>$|10\rangle$</td><td>$|11\rangle$</td></tr>
+              <tr><td>$|11\rangle$</td><td>$|10\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Letting $|00\rangle = (1, 0, 0, 0)$, $|01\rangle = (0, 1, 0, 0)$, $|10\rangle = (0, 0, 1, 0)$, $|11\rangle = (0, 0, 0, 1)$, the matrix of the CNOT gate from Example 4.10 is</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix}$$</div>
+        <p>Hence a general superposition $a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle$ maps as</p>
+        <div class="math-display">$$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle \ \longmapsto\ a|00\rangle + b|01\rangle + d|10\rangle + c|11\rangle$$</div>
+        <p><strong>[Figure.4] (SWAP gate).</strong> The SWAP gate exchanges the two qubits, so the output state is $|B\rangle|A\rangle$.</p>
+        <div class="table-wrap">
+          <table class="truth-table">
+            <thead>
+              <tr><th>Input $|A\rangle|B\rangle$</th><th>Output $|B\rangle|A\rangle$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>$|00\rangle$</td><td>$|00\rangle$</td></tr>
+              <tr><td>$|01\rangle$</td><td>$|10\rangle$</td></tr>
+              <tr><td>$|10\rangle$</td><td>$|01\rangle$</td></tr>
+              <tr><td>$|11\rangle$</td><td>$|11\rangle$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In the same basis order $|00\rangle, |01\rangle, |10\rangle, |11\rangle$, the matrix of the SWAP gate is</p>
+        <div class="math-display">$$\begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$$</div>
+        <p>Hence a general superposition maps as</p>
+        <div class="math-display">$$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle \ \longmapsto\ a|00\rangle + c|01\rangle + b|10\rangle + d|11\rangle$$</div>
+        <p>Incidentally, the SWAP gate can be implemented as three CNOT gates with alternating control and target.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>References · 참고문헌</h2></div>
+
+<!-- References (p.39) -->
+<div class="card note-card" id="note08-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>[1] D. Burton, <em>EBOOK: Elementary Number Theory.</em> McGraw Hill, 2010.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>[1] D. Burton, <em>EBOOK: Elementary Number Theory.</em> McGraw Hill, 2010.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="index.html">응용정수론 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
