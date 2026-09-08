@@ -4,6 +4,7 @@
 - `MATH222 Syllabus (2026 Fall).pdf` — 강의계획서 (Euisung Park, Korea Univ.; 교재 Friedberg–Insel–Spence 4e; 진도: Review → 5.1 → 5.2 → 5.4 → 6.1 → 6.2 → 6.3 → 6.4 → 6.5 → 6.6)
 - `Lecture 1 - Preliminaries (9월 1일 화요일).pdf` — 24장 슬라이드 (영문)
 - `Lecture 2 - Section 5.1  (9월 3일 목요일).pdf` — 14장 슬라이드 (영문)
+- `Lecture 3 - Section 5.1 (9월 8일 화요일).pdf` — 17장 슬라이드 (영문, 9/8)
 - `5.1 Linear Algebra Solution.pdf` — §5.1 추천 연습문제(Friedberg) 풀이 9쪽 (문항: 1(a)–(k), 3(b)(d), 4(e)(g)(j), 11, 14, 15(a), 16(a), 17)
 - `5.2 Linear Algebra Solution.pdf` — §5.2 추천 연습문제 풀이 6쪽 (문항: 1(a)–(h), 2(a)(d)(e), 3(a)(d)(e)(f), 7, 8, 9(a), 10, 11, 12, 18, 19)
 
@@ -26,14 +27,14 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-09-03 현재)
+## 전체 구조 (2026-09-08 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
 | ch01 | 예비 사항: 선형대수학 I 복습 | Lecture 1 (24장) | 29 (EX 1) | 4 | — |
-| ch02 | 5.1 고유값과 고유벡터 | Lecture 2 (14장) + §5.1 풀이 | 20 | 4 | 8 |
+| ch02 | 5.1 고유값과 고유벡터 | Lecture 2 (14장) + Lecture 3 (17장) + §5.1 풀이 | 33 | 3 | 8 |
 | ch03 | 5.2 대각화가능성 | §5.2 풀이 (강의 예정) | 0 | 1 | 11 |
-| 계 | | | **49** | **9** | **19** (+ ch01 EX 1 = 풀이 대상 **20**) |
+| 계 | | | **62** | **8** | **19** (+ ch01 EX 1 = 풀이 대상 **21**, THM 2.25 자체 증명 포함) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -53,6 +54,10 @@
 15. L2 p5: 산문은 $\mathcal{B}$, 첨자는 $\beta$로 혼용 인쇄 — 원문 그대로 전사. L2 p8 Example: 기저를 $\{v_1,v_2\}$로 두고 행렬은 $[T]_{\mathcal{B}}$로 씀($\mathcal{B}$ 미도입) — verbatim.
 16. L2 p14 Theorem 5.2 증명의 영벡터는 이중선 $\mathbb{O}$로 인쇄 — `\mathbb{O}`로 전사.
 12. **§5.2 풀이 PDF #3(d) 오류(기준값으로 확정)**: $[T]_\beta=\begin{pmatrix}1&0&0\\1&1&1\\1&1&1\end{pmatrix}$의 $E_1$ 기저를 $(1,0,-1)$로 적었으나 $A(1,0,-1)^t=(1,0,0)^t\neq(1,0,-1)^t$ — 고유벡터가 아님. 올바른 $E_1$ 기저는 $(-1,1,1)$ (다항식 $-1+x+x^2$). 따라서 게시된 $Q$의 2열도 틀림. 우리 풀이는 GROUND-TRUTH 값을 쓴다. 나머지 기준값(§5.1 #3·#4·#17, §5.2 #2·#3(a)(e)(f)·#7)은 게시 풀이와 일치.
+17. **L3 p7 Example 4 (1)–(3) 부호 오류(220 dpi 확인)**: 인쇄된 것은 $A-tI_2=\begin{pmatrix}1-t&-3\\-4&2-t\end{pmatrix}$, $A+2I_2=\begin{pmatrix}3&-3\\-4&4\end{pmatrix}$(→ $x-y=0$, $(1,1)$), $A-5I_2=\begin{pmatrix}-4&-3\\-4&-3\end{pmatrix}$(→ $4x+3y=0$, $(3,-4)$). 올바른 값은 $A-tI_2=\begin{pmatrix}1-t&3\\4&2-t\end{pmatrix}$, $A+2I_2=\begin{pmatrix}3&3\\4&4\end{pmatrix}$(→ $x+y=0$, $v_1=(1,-1)$), $A-5I_2=\begin{pmatrix}-4&3\\4&-3\end{pmatrix}$(→ $4x-3y=0$, $v_2=(3,4)$). 고유값 $-2,5$와 p8의 (4)(5)는 옳다. en은 verbatim 전사 + 말미 Note 로 정정, ko는 번역 단계에서 바른 값으로.
+18. L3 p11 Remark Step 3: "$v$ is an eigenvalue corresponding to $\lambda$ … $\phi_{\mathcal{B}}(v)$ is an eigenvalue corresponding to $\lambda$" — 두 곳 모두 eigenvector 여야 한다 — en verbatim, ko는 고유벡터로 번역.
+19. L3 p6 Theorem 5.3: 슬라이드에 "Proof : (1)" 만 있고 본문이 공란(수업 중 구두 증명) → 원문 증명 전사 불가. c2-25 에 `PROOF-KO`/`PROOF-EN` 마커만 두고 우리 증명을 나중에 작성한다(풀이 대상 21건에 포함).
+20. L3 p4 Remark: 마지막 행렬식 줄에서 가운데 두 개의 "det"만 이탤릭으로 인쇄됨(`det Q × det(...) × det Q⁻¹`) — 전사에서는 모두 `\det`으로 통일.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -96,8 +101,8 @@ Lecture 1, 24장. 카드 29 (DEF 12, THM 8, COR 1, EXAM 4, REM 3, EX 1) + note 4
 | c1-29 | REM 1.29 | p24 하 | Final Remark: 행렬식에서 고유값으로 | |
 
 ### ch02.html — 5.1 고유값과 고유벡터 / §5.1 Eigenvalues and Eigenvectors
-Lecture 2, 14장 (9/8 강의분 추가 예정). 카드 20 (DEF 5, THM 2, EXAM 4, REM 9) + note 4 + 연습문제 8.
-섹션 구분: `제5장 대각화 · Chapter 5. Diagonalization`(p2–7) → `§5.1 고유값과 고유벡터`(p8–14) → `연습문제 · Exercises (Friedberg §5.1)`.
+Lecture 2, 14장 + Lecture 3, 17장. 카드 33 (DEF 6, THM 4, EXAM 10, REM 13) + note 3 + 연습문제 8.
+섹션 구분: `제5장 대각화 · Chapter 5. Diagonalization`(L2 p2–7) → `§5.1 고유값과 고유벡터`(L2 p8–14 + L3 p2–17) → `연습문제 · Exercises (Friedberg §5.1)`.
 
 | id | 유형·배지 | 슬라이드 | 내용 | src-ref |
 |---|---|---|---|---|
@@ -124,7 +129,21 @@ Lecture 2, 14장 (9/8 강의분 추가 예정). 카드 20 (DEF 5, THM 2, EXAM 4,
 | c2-18 | THM 2.18 | p14 중 | Theorem 5.2 + **Proof** (verbatim 토글) | Theorem 5.2 |
 | c2-19 | DEF 2.19 | p14 하 | Definition: characteristic polynomial f(t)=det(A−tIₙ) | |
 | c2-20 | REM 2.20 | p14 하 | Remark: eigenvalues = zeros of det(A−tIₙ) | |
-| note02-4 | NOTE | (편집) | 갱신 안내: 9/8 강의분(§5.1 후반) 추가 예정 — 2언어 | |
+| c2-21 | RECALL 2.21 | L3 p2 | Recall (1) 고유벡터·고유값 (2) 고유벡터 기저 ⇒ [T]_B 대각, diagonalizable (3) A diagonalizable ⇔ L_A diagonalizable | |
+| c2-22 | DEF 2.22 | L3 p4 상 | Definition: 선형변환 T의 특성다항식 f(t) := det(A−tIₙ), A = [T]_B | |
+| c2-23 | REM 2.23 | L3 p4 하 | Remark: [T]_γ = Q[T]_B Q⁻¹, det로 기저 무관 확인, det(T−tI) 표기 | |
+| c2-24 | EXAM 2.24 | L3 p5 | Example 5: T(f)=f+(x+1)f′ on P₂(ℝ), [T]_B, 특성다항식, λ=1,2,3 | Example 5 |
+| c2-25 | THM 2.25 | L3 p6 상 | Theorem 5.3 (1) deg n·최고차계수 (−1)ⁿ (2) 서로 다른 고유값 최대 n개 — **마커**(슬라이드 증명 공란) | Theorem 5.3 |
+| c2-26 | THM 2.26 | L3 p6 하 | Theorem 5.4: v가 λ의 고유벡터 ⇔ v ∈ N(T−λI) | Theorem 5.4 |
+| c2-27 | EXAM 2.27 | L3 p7–8 | Example 4: A=(1 3;4 2) (1)–(5) 고유값 −2,5, v₁,v₂, A=QDQ⁻¹ — p7 부호 오류(ERRATA 17) + en 말미 Note | Example 4 |
+| c2-28 | EXAM 2.28 | L3 p9–10 | Example 6: A=(1 1;4 1) 모든 고유벡터, λ=3,−1, A=QDQ⁻¹ | Example 6 |
+| c2-29 | REM 2.29 | L3 p11 | Remark: 고유벡터 찾는 절차 Step 1–3, φ_B 가환도식(ko·en 동일 배치) — ERRATA 18 | |
+| c2-30 | EXAM 2.30 | L3 p12–15 | Example 7: [T]_B의 λ₁=1, λ₂=2, λ₃=3 고유벡터와 φ_B⁻¹, 기저 γ={1, x+1, x²+2x+1}, [T]_γ 대각 | Example 7 |
+| c2-31 | REM 2.31 | L3 p16 | Remark: W = span{v} 위의 T, CASE 1–5 (λ>1, =1, 0<λ<1, =0, <0) + 인라인 SVG 그림(ko·en 동일) | |
+| c2-32 | EXAM 2.32 | L3 p17 상 | Example A: x축에 대한 반사, e₁·e₂가 고유벡터 | Example A |
+| c2-33 | EXAM 2.33 | L3 p17 하 | Example B: 각 θ(0<θ<π) 회전, [T]_{e₁,e₂}, t²−(2cos θ)t+1 실근 없음 | Example B |
+
+L3 p1 제목·Studying Contents, L3 p3(L2 p14 재수록)은 카드 없음.
 
 연습문제 (Friedberg §5.1 추천문제; 진술은 재서술, 풀이는 자체 작성):
 
