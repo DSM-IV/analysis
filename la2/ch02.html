@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 고유값과 고유벡터 (§5.1 Eigenvalues and Eigenvectors) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제5장 대각화 §5.1 — 대각화 문제, 대각화가능한 선형연산자와 행렬, 고유값과 고유벡터, 행렬표현과 좌표벡터, 직선 y = 2x에 대한 반사, 각 π/2의 회전, 정리 5.1(고유벡터 기저)과 정리 5.2(det(A − λIₙ) = 0), 특성다항식을 한국어·영어 대조로 정리하고 Friedberg 4판 §5.1 추천 연습문제를 함께 실었습니다. Diagonalization, eigenvalue, eigenvector, characteristic polynomial.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 대각화, diagonalization, 대각화 문제, diagonalization problem, 대각화가능, diagonalizable, 고유값, eigenvalue, 고유벡터, eigenvector, 특성다항식, characteristic polynomial, 행렬표현, matrix representation, 좌표벡터, coordinate vector, 대각행렬, diagonal matrix, 반사, reflection, 회전, rotation, 정리 5.1, Theorem 5.1, 정리 5.2, Theorem 5.2, 닮은 행렬, similar matrices, 스칼라행렬, scalar matrix, 대각합, trace, 전치, transpose, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch02.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.1 고유값과 고유벡터 (§5.1 Eigenvalues and Eigenvectors) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="대각화 문제에서 출발해 고유값·고유벡터의 정의, 정리 5.1(고유벡터로 이루어진 기저)과 정리 5.2(특성다항식의 영점)까지 — 선형대수학 2 §5.1을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch02.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "5.1 고유값과 고유벡터 (§5.1 Eigenvalues and Eigenvectors) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 §5.1 — 대각화 문제, 대각화가능한 연산자와 행렬, 고유값과 고유벡터, 정리 5.1과 정리 5.2, 특성다항식을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch02.html",
+  "datePublished": "2026-09-03",
+  "dateModified": "2026-09-03",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch02.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학2</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html" class="active">02</a>
+      <a href="ch03.html">03</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 02</p>
+  <h1>5.1 고유값과 고유벡터<span>§5.1 Eigenvalues and Eigenvectors</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c2-1"><span class="toc-num">RECALL 2.1</span> 좌표벡터와 행렬표현 <em>Coordinate Vectors and Matrix Representations</em></a></li>
+    <li><a href="#c2-2"><span class="toc-num">REM 2.2</span> 왼쪽곱변환의 작용과 대각행렬 <em>The Action of L_A and Diagonal Matrices</em></a></li>
+    <li><a href="#c2-3"><span class="toc-num">Q 2.3</span> 대각화 문제 <em>The Diagonalization Problem</em></a></li>
+    <li><a href="#c2-4"><span class="toc-num">REM 2.4</span> 대각행렬 표현이 주는 이점 <em>Why a Diagonal Representation Helps</em></a></li>
+    <li><a href="#c2-5"><span class="toc-num">EXAM 2.5</span> 직선에 대한 반사 <em>Reflection along the Line y = 2x</em></a></li>
+    <li><a href="#c2-6"><span class="toc-num">RECALL 2.6</span> 제5장의 목표 <em>The Goal of Chapter 5</em></a></li>
+    <li><a href="#c2-7"><span class="toc-num">EXAM 2.7</span> 반사의 고유벡터 <em>Eigenvectors of the Reflection</em></a></li>
+    <li><a href="#c2-8"><span class="toc-num">DEF 2.8</span> 대각화가능한 선형변환 <em>Diagonalizable Linear Transformation</em></a></li>
+    <li><a href="#c2-9"><span class="toc-num">DEF 2.9</span> 대각화가능한 행렬 <em>Diagonalizable Matrix</em></a></li>
+    <li><a href="#c2-10"><span class="toc-num">REM 2.10</span> 가역행렬을 통한 대각행렬 분해 <em>The Factorization A = QDQ^{-1}</em></a></li>
+    <li><a href="#c2-11"><span class="toc-num">REM 2.11</span> 대각행렬 표현과 고유벡터 조건 <em>Diagonal Representation and T(v_i) = λ_i v_i</em></a></li>
+    <li><a href="#c2-12"><span class="toc-num">DEF 2.12</span> 선형변환의 고유벡터와 고유값 <em>Eigenvectors and Eigenvalues of a Linear Transformation</em></a></li>
+    <li><a href="#c2-13"><span class="toc-num">DEF 2.13</span> 행렬의 고유벡터와 고유값 <em>Eigenvectors and Eigenvalues of a Matrix</em></a></li>
+    <li><a href="#c2-14"><span class="toc-num">THM 2.14</span> 대각화가능성과 고유벡터 기저 <em>Diagonalizability and a Basis of Eigenvectors</em></a></li>
+    <li><a href="#c2-15"><span class="toc-num">REM 2.15</span> 대각화는 고유벡터 기저 찾기 <em>Diagonalization Means Finding an Eigenvector Basis</em></a></li>
+    <li><a href="#c2-16"><span class="toc-num">EXAM 2.16</span> 2×2 행렬의 대각화 <em>Diagonalizing a 2×2 Matrix</em></a></li>
+    <li><a href="#c2-17"><span class="toc-num">EXAM 2.17</span> 고유벡터가 없는 회전 <em>A Rotation with No Eigenvectors</em></a></li>
+    <li><a href="#c2-18"><span class="toc-num">THM 2.18</span> 고유값과 행렬식 <em>Eigenvalues and the Determinant</em></a></li>
+    <li><a href="#c2-19"><span class="toc-num">DEF 2.19</span> 특성다항식 <em>Characteristic Polynomial</em></a></li>
+    <li><a href="#c2-20"><span class="toc-num">REM 2.20</span> 고유값은 특성다항식의 영점 <em>Eigenvalues Are Zeros of the Characteristic Polynomial</em></a></li>
+    <li><a href="#e2-1"><span class="toc-num">EX 5.1-1</span> 참·거짓 판정 <em>True or False</em></a></li>
+    <li><a href="#e2-3"><span class="toc-num">EX 5.1-3</span> 행렬의 고유값·고유벡터와 대각화 <em>Eigenvalues, Eigenvectors and Diagonalization of Matrices</em></a></li>
+    <li><a href="#e2-4"><span class="toc-num">EX 5.1-4</span> 선형연산자의 고유값과 대각화 기저 <em>Eigenvalues and Diagonalizing Bases for Linear Operators</em></a></li>
+    <li><a href="#e2-11"><span class="toc-num">EX 5.1-11</span> 스칼라행렬 <em>Scalar Matrices</em></a></li>
+    <li><a href="#e2-14"><span class="toc-num">EX 5.1-14</span> 행렬과 전치행렬의 특성다항식 <em>A and A^t Have the Same Characteristic Polynomial</em></a></li>
+    <li><a href="#e2-15"><span class="toc-num">EX 5.1-15</span> 거듭제곱 연산자의 고유벡터 <em>Eigenvectors of T^m</em></a></li>
+    <li><a href="#e2-16"><span class="toc-num">EX 5.1-16</span> 닮은 행렬의 대각합 <em>Similar Matrices Have the Same Trace</em></a></li>
+    <li><a href="#e2-17"><span class="toc-num">EX 5.1-17</span> 전치 연산자 <em>The Transpose Operator on M_{n×n}(R)</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01–ch10 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 슬라이드의 한 항목(Recall / Remark / Definition / Theorem / Example …)
+     하나 = 카드 하나. id는 자체 순번 c{단원}-{순번} (예: c2-10), 슬라이드
+     등장 순서 그대로 배치한다. 배지는 TYPE {단원}.{순번} (예: THM 2.18).
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n
+       Theorem / Lemma / Corollary→ card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise (Friedberg 추천문제) → card ex-card · EX 5.1-n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 슬라이드가 붙인 원문 번호(Definition 1, Theorem 5.1, Example 2 …)는 제목 span
+     끝에 span.src-ref 로 표시한다. 번호 없는 라벨(Definition :, Remark :)에는
+     src-ref 를 두지 않는다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     영문 제목은 슬라이드 내용을 요약한 간결한 편집 제목으로 새로 붙인다.
+     제목 안에는 수식 구분자를 쓰지 않고 평문으로 적는다.
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     슬라이드의 색 강조와 밑줄은 옮기지 않는다.
+  6) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 원문의 검은 사각형 대신 div.qed 로 닫는다.
+       ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) 연습문제 카드(ex-card)는 Friedberg 4판 §5.1 추천문제다. 진술은 교재 문장을
+     그대로 베끼지 않고 우리 말로 다시 서술하되 수학적 데이터(행렬·사상·공간·문항
+     글자)는 정확히 동일하게 유지한다. 하위 문항 라벨은 교재 글자 그대로 strong 으로.
+     빌드 단계에서는 풀이를 쓰지 않고, ko-panel 안에 PROOF-KO 마커, en-panel 안에
+     PROOF-EN 마커만 HTML 주석으로 남긴다.
+  8) 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다 div.card.note-card 를
+     만들고 id는 note{단원 2자리}-{순번} (예: note02-3), 배지는 NOTE, 본문은 동일한
+     2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 행렬 괄호는 슬라이드 인쇄 그대로(대부분 둥근 괄호,
+     열벡터 나열 [v_1 v_2 ⋯ v_n]과 [T]_B 는 각괄호). 슬라이드가 칼리그래피 B 로
+     인쇄한 곳은 \mathcal{B}, 이탤릭 베타로 인쇄한 곳은 \beta 로 옮긴다.
+     체는 슬라이드 2–7 의 이탤릭 F, 슬라이드 8–14 의 blackboard F 를 각각 그대로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 실체 참조로 쓴다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>Chapter 5. Diagonalization · 제5장 대각화</h2></div>
+
+<!-- ═══════════ Slide p.2 ═══════════ -->
+
+<!-- Recall (p.2) -->
+<div class="card rem-card" id="c2-1">
+  <div class="card-head">
+    <span class="rem-num">RECALL 2.1</span>
+    <span class="rem-title">좌표벡터와 행렬표현 <em>Coordinate Vectors and Matrix Representations</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 체 $F$ 위의 $n$차원 벡터공간이라 하고,</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>를 선형변환이라 하자 (즉, $T$는 $V$ 위의 선형연산자이다).</p>
+        <p><strong>(1)</strong> $\mathcal{B} = \{v_1, \ldots, v_n\}$을 $V$의 기저라 하자. 그러면 각 $1 \le i \le n$에 대해,</p>
+        <div class="math-display">$$T(v_i) = a_{1i}v_1 + a_{2i}v_2 + \cdots + a_{ni}v_n \quad (\text{어떤 } a_{1i}, a_{2i}, \ldots, a_{ni} \in F \text{에 대하여}).$$</div>
+        <p>다음을</p>
+        <div class="math-display">$$[T(v_i)]_{\mathcal{B}} = \begin{pmatrix} a_{1i} \\ a_{2i} \\ \vdots \\ a_{ni} \end{pmatrix}$$</div>
+        <p>$\mathcal{B}$에 대한 $T(v_i)$의 좌표벡터라 부른다.</p>
+        <p>또한 $n \times n$ 정사각행렬</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \left[\, [T(v_1)]_{\mathcal{B}} \ \ [T(v_2)]_{\mathcal{B}} \ \ \cdots \ \ [T(v_n)]_{\mathcal{B}} \,\right] = \begin{pmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \end{pmatrix}$$</div>
+        <p>을 순서기저 $\mathcal{B}$에서의 $T$의 행렬표현이라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an $n$-dimensional vector space over a field $F$ and let</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>be a linear transformation (i.e. $T$ is a linear operator on $V$).</p>
+        <p><strong>(1)</strong> Let $\mathcal{B} = \{v_1, \ldots, v_n\}$ be a basis for $V$. Then for each $1 \le i \le n$,</p>
+        <div class="math-display">$$T(v_i) = a_{1i}v_1 + a_{2i}v_2 + \cdots + a_{ni}v_n \quad \text{for some } a_{1i}, a_{2i}, \ldots, a_{ni} \in F.$$</div>
+        <p>We call</p>
+        <div class="math-display">$$[T(v_i)]_{\mathcal{B}} = \begin{pmatrix} a_{1i} \\ a_{2i} \\ \vdots \\ a_{ni} \end{pmatrix}$$</div>
+        <p>the coordinate vector of $T(v_i)$ relative to $\mathcal{B}$.</p>
+        <p>Also the $n \times n$ square matrix</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \left[\, [T(v_1)]_{\mathcal{B}} \ \ [T(v_2)]_{\mathcal{B}} \ \ \cdots \ \ [T(v_n)]_{\mathcal{B}} \,\right] = \begin{pmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \end{pmatrix}$$</div>
+        <p>is called the matrix representation of $T$ in the ordered basis $\mathcal{B}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.3 ═══════════ -->
+
+<!-- 서술 단락 (p.3) -->
+<div class="card note-card" id="note02-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 장은 이른바 대각화 문제를 다룬다.</p>
+        <p>이 문제가 무엇인지 먼저 간단히 설명하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>This chapter is devoted to the so-called diagonalization problem.</p>
+        <p>Let us begin by briefly explaining what this problem is.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark (p.3 – p.5) -->
+<div class="card rem-card" id="c2-2">
+  <div class="card-head">
+    <span class="rem-num">REM 2.2</span>
+    <span class="rem-title">왼쪽곱변환의 작용과 대각행렬 <em>The Action of L_A and Diagonal Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$F$를 체라 하고 $A \in M_{n \times n}(F)$를 $n \times n$ 정사각행렬이라 하자.</p>
+        <p>선형변환 $L_A : F^n \to F^n$, $\ v \mapsto Av$를 생각하자.</p>
+        <p><strong>(1)</strong> $\mathcal{B} = \{u_1, \ldots, u_n\}$을 $F^n$의 기저라 하자.</p>
+        <p>$v = a_1u_1 + \cdots + a_nu_n$이면,</p>
+        <div class="math-display">$$L_A(v) = Av = A(a_1u_1 + \cdots + a_nu_n) = a_1Au_1 + \cdots + a_nAu_n.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$R(L_A) = \operatorname{span}(\{Au_1, Au_2, \ldots, Au_n\})$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$L_A \text{는 } Au_1, Au_2, \ldots, Au_n \text{에 의해 유일하게 결정된다.}$$</div>
+        <p><em>(계속)</em> $F$를 체라 하고 $A \in M_{n \times n}(F)$를 $n \times n$ 정사각행렬이라 하자.</p>
+        <p><strong>(2)</strong> $A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]$라 하자. 여기서 $v_1, \ldots, v_n \in F^n$은 $A$의 열벡터이다.</p>
+        <p>또한 $\{e_1, \ldots, e_n\}$을 $F^n$의 표준기저라 하자.</p>
+        <p>그러면 $L_A(e_i) = Ae_i = v_i$이다.</p>
+        <p>따라서 $v = (a_1, \ldots, a_n) = a_1e_1 + \cdots + a_ne_n$이면,</p>
+        <div class="math-display">$$L_A(v) = Av = A(a_1e_1 + \cdots + a_ne_n) = a_1Ae_1 + \cdots + a_nAe_n = a_1v_1 + \cdots + a_nv_n.$$</div>
+        <p><strong>(3)</strong> $A$가 대각행렬이라고 하자. 즉,</p>
+        <div class="math-display">$$A = \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix} \quad (\text{어떤 } \lambda_1, \lambda_2, \ldots, \lambda_n \in F \text{에 대하여}).$$</div>
+        <p>다시 말해, 모든 $1 \le i \le n$에 대해 $v_i = \lambda_ie_i$이다.</p>
+        <p>그러면 모든 $1 \le i \le n$에 대해 $L_A(e_i) = Ae_i = \lambda_ie_i$이고, 따라서</p>
+        <div class="math-display">$$L_A(a_1e_1 + \cdots + a_ne_n) = a_1\lambda_1e_1 + \cdots + a_n\lambda_ne_n.$$</div>
+        <p>따라서 $A$가 대각행렬이면,</p>
+        <p>대응하는 선형변환 $L_A : F^n \to F^n$은 매우 단순한 형태를 갖는다.</p>
+        <p><em>(계속)</em> $F$를 체라 하고 $A \in M_{n \times n}(F)$를 $n \times n$ 정사각행렬이라 하자.</p>
+        <p><strong>(4)</strong> $A$가 대각행렬인 경우를 다음과 같이 일반화하자.</p>
+        <p>$F^n$의 순서기저 $\mathcal{B} = \{u_1, \ldots, u_n\}$이 존재하여 다음을 만족한다고 하자.</p>
+        <div class="math-display">$$L_A(u_i) = Au_i \text{가 } \lambda_iu_i \text{와 같다} \quad (\text{어떤 } \lambda_1, \lambda_2, \ldots, \lambda_n \in F \text{에 대하여}).$$</div>
+        <p>그러면 다음을 얻는다.</p>
+        <div class="math-display">$$L_A(a_1u_1 + \cdots + a_nu_n) = A(a_1u_1 + \cdots + a_nu_n) = a_1Au_1 + \cdots + a_nAu_n = a_1\lambda_1u_1 + \cdots + a_n\lambda_nu_n.$$</div>
+        <p>또한</p>
+        <div class="math-display">$$\begin{aligned} \left[ L_A \right]_\beta &amp;= \left[\, \left[ Au_1 \right]_\beta \ \ \left[ Au_2 \right]_\beta \ \ \cdots \ \ \left[ Au_n \right]_\beta \,\right] \\[2pt] &amp;= \left[\, \left[ \lambda_1u_1 \right]_\beta \ \ \left[ \lambda_2u_2 \right]_\beta \ \ \cdots \ \ \left[ \lambda_nu_n \right]_\beta \,\right] \\[2pt] &amp;= \left[\, \lambda_1e_1 \ \ \lambda_2e_2 \ \ \cdots \ \ \lambda_ne_n \,\right] \\[2pt] &amp;= \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix}. \end{aligned}$$</div>
+        <p>즉, $\left[ L_A \right]_\beta$는 대각행렬이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $F$ be a field and let $A \in M_{n \times n}(F)$ be an $n \times n$ square matrix.</p>
+        <p>Consider the linear transformation $L_A : F^n \to F^n$, $\ v \mapsto Av$.</p>
+        <p><strong>(1)</strong> Let $\mathcal{B} = \{u_1, \ldots, u_n\}$ be a basis for $F^n$.</p>
+        <p>If $v = a_1u_1 + \cdots + a_nu_n$, then</p>
+        <div class="math-display">$$L_A(v) = Av = A(a_1u_1 + \cdots + a_nu_n) = a_1Au_1 + \cdots + a_nAu_n.$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$R(L_A) = \operatorname{span}(\{Au_1, Au_2, \ldots, Au_n\})$$</div>
+        <p>and</p>
+        <div class="math-display">$$L_A \ \text{is uniquely determined by } Au_1, Au_2, \ldots, Au_n.$$</div>
+        <p><em>(Continued)</em> Let $F$ be a field and let $A \in M_{n \times n}(F)$ be an $n \times n$ square matrix.</p>
+        <p><strong>(2)</strong> Let $A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]$ where $v_1, \ldots, v_n \in F^n$ are column vectors of $A$.</p>
+        <p>Also let $\{e_1, \ldots, e_n\}$ be the standard basis for $F^n$.</p>
+        <p>Then $L_A(e_i) = Ae_i = v_i$.</p>
+        <p>Therefore if $v = (a_1, \ldots, a_n) = a_1e_1 + \cdots + a_ne_n$, then</p>
+        <div class="math-display">$$L_A(v) = Av = A(a_1e_1 + \cdots + a_ne_n) = a_1Ae_1 + \cdots + a_nAe_n = a_1v_1 + \cdots + a_nv_n.$$</div>
+        <p><strong>(3)</strong> Suppose that $A$ is a diagonal matrix. That is,</p>
+        <div class="math-display">$$A = \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix} \quad \text{for some } \lambda_1, \lambda_2, \ldots, \lambda_n \in F.$$</div>
+        <p>Equivalently, $v_i = \lambda_ie_i$ for all $1 \le i \le n$.</p>
+        <p>Then $L_A(e_i) = Ae_i = \lambda_ie_i$ for all $1 \le i \le n$, and hence</p>
+        <div class="math-display">$$L_A(a_1e_1 + \cdots + a_ne_n) = a_1\lambda_1e_1 + \cdots + a_n\lambda_ne_n.$$</div>
+        <p>Thus if $A$ is a diagonal matrix, then</p>
+        <p>the corresponding linear transformation $L_A : F^n \to F^n$ has a very simple form.</p>
+        <p><em>(Continued)</em> Let $F$ be a field and let $A \in M_{n \times n}(F)$ be an $n \times n$ square matrix.</p>
+        <p><strong>(4)</strong> Let us generalize the case where $A$ is a diagonal matrix as follows.</p>
+        <p>Suppose that there exists an ordered basis $\mathcal{B} = \{u_1, \ldots, u_n\}$ for $F^n$ such that</p>
+        <div class="math-display">$$L_A(u_i) = Au_i \ \text{ is equal to } \ \lambda_iu_i \quad \text{for some } \lambda_1, \lambda_2, \ldots, \lambda_n \in F.$$</div>
+        <p>Then we have</p>
+        <div class="math-display">$$L_A(a_1u_1 + \cdots + a_nu_n) = A(a_1u_1 + \cdots + a_nu_n) = a_1Au_1 + \cdots a_nAu_n = a_1\lambda_1u_1 + \cdots a_n\lambda_nu_n.$$</div>
+        <p>Also</p>
+        <div class="math-display">$$\begin{aligned} \left[ L_A \right]_\beta &amp;= \left[\, \left[ Au_1 \right]_\beta \ \ \left[ Au_2 \right]_\beta \ \ \cdots \ \ \left[ Au_n \right]_\beta \,\right] \\[2pt] &amp;= \left[\, \left[ \lambda_1u_1 \right]_\beta \ \ \left[ \lambda_2u_2 \right]_\beta \ \ \cdots \ \ \left[ \lambda_nu_n \right]_\beta \,\right] \\[2pt] &amp;= \left[\, \lambda_1e_1 \ \ \lambda_2e_2 \ \ \cdots \ \ \lambda_ne_n \,\right] \\[2pt] &amp;= \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix}. \end{aligned}$$</div>
+        <p>That is, $\left[ L_A \right]_\beta$ is a diagonal matrix.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.6 ═══════════ -->
+
+<!-- Q1 · Q2 (p.6) -->
+<div class="card rem-card" id="c2-3">
+  <div class="card-head">
+    <span class="rem-num">Q 2.3</span>
+    <span class="rem-title">대각화 문제 <em>The Diagonalization Problem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$에서 자기 자신으로 가는 선형변환이라 하자. 이 장은 $T : V \to V$의 이른바 대각화 문제를 다룬다. 즉, 다음 두 질문에 대한 답을 구한다.</p>
+        <p><strong>Q1. :</strong> $[T]_{\mathcal{B}}$가 대각행렬이 되는 순서기저 $\mathcal{B}$가 존재하는가?</p>
+        <p><strong>Q2. :</strong> 그런 기저가 존재한다면, 어떻게 찾을 수 있는가?</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation from an $n$-dimensional vector space $V$ to itself. This chapter is concerned with the so-called diagonalization problem of $T : V \to V$. That is, we seek answers to the following two questions.</p>
+        <p><strong>Q1. :</strong> Does there exist an ordered basis $\mathcal{B}$ such that $[T]_{\mathcal{B}}$ is a diagonal matrix?</p>
+        <p><strong>Q2. :</strong> If such a basis exists, how can it be found?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark (p.6) -->
+<div class="card rem-card" id="c2-4">
+  <div class="card-head">
+    <span class="rem-num">REM 2.4</span>
+    <span class="rem-title">대각행렬 표현이 주는 이점 <em>Why a Diagonal Representation Helps</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[T]_{\mathcal{B}}$가 대각행렬이면, 모든 $1 \le i \le n$에 대해 $T(v_i) = a_{ii}v_i$이다.</p>
+        <p>따라서 임의의 $v = b_1v_1 + b_2v_2 + \cdots + b_nv_n \in V$에 대해 다음이 성립한다.</p>
+        <div class="math-display">$$T(v) = b_1T(v_1) + b_2T(v_2) + \cdots + b_nT(v_n) = b_1a_{11}v_1 + b_2a_{22}v_2 + \cdots + b_na_{nn}v_n.$$</div>
+        <p>따라서 $[T]_{\mathcal{B}}$가 대각행렬이면,</p>
+        <p>$T$가 $V$ 위에서 어떻게 작용하는지 더 명확하게 이해할 수 있다.</p>
+        <p>따라서 $[T]_{\mathcal{B}}$가 대각행렬이 되는 기저 $\mathcal{B}$가 존재하면, 다음에 대한 쉬운 해를 얻을 수 있을 것으로 기대할 수 있다.</p>
+        <p>선형대수의 언어로 정식화할 수 있는 많은 실제 문제.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $[T]_{\mathcal{B}}$ is a diagonal matrix, then $T(v_i) = a_{ii}v_i$ for all $1 \le i \le n$.</p>
+        <p>Therefore for any $v = b_1v_1 + b_2v_2 + \cdots + b_nv_n \in V$, it holds that</p>
+        <div class="math-display">$$T(v) = b_1T(v_1) + b_2T(v_2) + \cdots + b_nT(v_n) = b_1a_{11}v_1 + b_2a_{22}v_2 + \cdots + b_na_{nn}v_n.$$</div>
+        <p>Thus if $[T]_{\mathcal{B}}$ is a diagonal matrix, then</p>
+        <p>we can understand more clearly how $T$ acts on $V$.</p>
+        <p>Therefore if there exists a basis $\mathcal{B}$ such that $[T]_{\mathcal{B}}$ is a diagonal matrix, then we can expect to obtain easy solutions to</p>
+        <p>many practical problems that can be formulated in a linear algebra context.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.7 ═══════════ -->
+
+<!-- Example (p.7) -->
+<div class="card exam-card" id="c2-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.5</span>
+    <span class="exam-title">직선에 대한 반사 <em>Reflection along the Line y = 2x</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 직선 $y = 2x$에 대한 반사라 하자.</p>
+        <p><strong>(1)</strong> $T$는 선형변환이다.</p>
+        <p><strong>(2)</strong> $u = (1, 2)$를 직선 $y = 2x$ 위의 점이라 하자. 그러면 $T(u) = u$이다.</p>
+        <p><strong>(3)</strong> 직선 $y = -\dfrac{1}{2}x$는 직선 $y = 2x$에 수직임에 주목하자.</p>
+        <p>이제 $v = (2, -1)$을 직선 $y = -\dfrac{1}{2}x$ 위의 점이라 하자. 그러면 $T(v) = -v$이다.</p>
+        <p><strong>(4)</strong> $\beta = \{u, v\}$가 $\mathbb{R}^2$의 기저이므로, 다음이 성립한다.</p>
+        <div class="math-display">$$T(au + bv) = au - bv \quad (\text{모든 } a, b \in \mathbb{R} \text{에 대하여}).$$</div>
+        <p><strong>(5)</strong></p>
+        <div class="math-display">$$[T]_\beta = \left[\, [u]_\beta \ \ [-v]_\beta \,\right] = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \text{는 대각행렬이다.}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be the reflection along the line $y = 2x$.</p>
+        <p><strong>(1)</strong> $T$ is a linear transformation.</p>
+        <p><strong>(2)</strong> Let $u = (1, 2)$ be a point in the line $y = 2x$. Then $T(u) = u$.</p>
+        <p><strong>(3)</strong> Note that the line $y = -\dfrac{1}{2}x$ is perpendicular to the line $y = 2x$.</p>
+        <p>Now, let $v = (2, -1)$ be a point in the line $y = -\dfrac{1}{2}x$. Then $T(v) = -v$.</p>
+        <p><strong>(4)</strong> Since $\beta = \{u, v\}$ is a basis of $\mathbb{R}^2$, it holds that</p>
+        <div class="math-display">$$T(au + bv) = au - bv \quad \text{for all } a, b \in \mathbb{R}.$$</div>
+        <p><strong>(5)</strong></p>
+        <div class="math-display">$$[T]_\beta = \left[\, [u]_\beta \ \ [-v]_\beta \,\right] = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \ \text{ is a diagonal matrix.}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>§5.1 Eigenvalues and Eigenvectors · 고유값과 고유벡터</h2></div>
+
+<!-- ═══════════ Slide p.8 ═══════════ -->
+
+<!-- Recall (p.8) -->
+<div class="card rem-card" id="c2-6">
+  <div class="card-head">
+    <span class="rem-num">RECALL 2.6</span>
+    <span class="rem-title">제5장의 목표 <em>The Goal of Chapter 5</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 체 $\mathbb{F}$ 위의 $n$차원 벡터공간이라 하고,</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>를 선형변환이라 하자. 이 장의 주된 목표는</p>
+        <p>$[T]_{\mathcal{B}}$가 대각행렬이 되는 순서기저 $\mathcal{B}$를 찾는 것이다.</p>
+        <p>다시 말해, $V$의 기저 $\mathcal{B} = \{v_1, \ldots, v_n\}$을 찾아서 다음을 만족하게 해야 한다.</p>
+        <div class="math-display">$$T(v_i) = c_iv_i \quad (\text{어떤 } c_i \in \mathbb{F} \text{에 대하여}).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an $n$-dimensional vector space over a field $\mathbb{F}$ and let</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>be a linear transformation. The main goal of this chapter is</p>
+        <p>to find an ordered basis $\mathcal{B}$ such that $[T]_{\mathcal{B}}$ is a diagonal matrix.</p>
+        <p>In other words, it needs to find a basis $\mathcal{B} = \{v_1, \ldots, v_n\}$ for $V$ such that</p>
+        <div class="math-display">$$T(v_i) = c_iv_i \quad \text{for some } c_i \in \mathbb{F}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example (p.8) -->
+<div class="card exam-card" id="c2-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.7</span>
+    <span class="exam-title">반사의 고유벡터 <em>Eigenvectors of the Reflection</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 직선 $y = 2x$에 대한 $\mathbb{R}^2$의 반사라 하자. 그러면 두 벡터 $v_1 = (1, 2)$와 $v_2 = (-2, 1)$이 다음 등식을 만족함을 쉽게 알 수 있다.</p>
+        <div class="math-display">$$T(v_1) = v_1 \ \text{ 그리고 } \ T(v_2) = -v_2.$$</div>
+        <p>따라서 $\mathbb{R}^2$의 기저 $\{v_1, v_2\}$는 $[T]_{\mathcal{B}}$가 대각행렬이 되는 원하는 성질을 만족한다. 더 정확히는,</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be the reflection of $\mathbb{R}^2$ about the line $y = 2x$. Then one can easily see that the two vectors $v_1 = (1, 2)$ and $v_2 = (-2, 1)$ satisfy the equality</p>
+        <div class="math-display">$$T(v_1) = v_1 \ \text{ and } \ T(v_2) = -v_2.$$</div>
+        <p>Thus the basis $\{v_1, v_2\}$ for $\mathbb{R}^2$ satisfies the desired property that $[T]_{\mathcal{B}}$ is a diagonal matrix. More precisely,</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.9 ═══════════ -->
+
+<!-- Definition 1 (p.9) -->
+<div class="card def-card" id="c2-8">
+  <div class="card-head">
+    <span class="def-num">DEF 2.8</span>
+    <span class="def-title">대각화가능한 선형변환 <em>Diagonalizable Linear Transformation</em><span class="src-ref">Definition 1</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 체 $\mathbb{F}$ 위의 $n$차원 벡터공간이라 하고,</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>를 선형변환이라 하자. $T$가 <strong>대각화가능</strong>하다는 것은</p>
+        <p>$[T]_{\mathcal{B}}$가 대각행렬이 되는 순서기저 $\mathcal{B}$가 존재함을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an $n$-dimensional vector space over a field $\mathbb{F}$ and let</p>
+        <div class="math-display">$$T : V \to V$$</div>
+        <p>be a linear transformation. We say that $T$ is <strong>diagonalizable</strong> if</p>
+        <p>there exist an ordered basis $\mathcal{B}$ such that $[T]_{\mathcal{B}}$ is a diagonal matrix.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 2 (p.9) -->
+<div class="card def-card" id="c2-9">
+  <div class="card-head">
+    <span class="def-num">DEF 2.9</span>
+    <span class="def-title">대각화가능한 행렬 <em>Diagonalizable Matrix</em><span class="src-ref">Definition 2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 $n \times n$ 정사각행렬이라 하자. 그러면 $A$가 <strong>대각화가능</strong>하다는 것은</p>
+        <p>선형변환 $L_A : \mathbb{F}^n \to \mathbb{F}^n$이 대각화가능함을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be an $n \times n$ square matrix. Then we say that $A$ is <strong>diagonalizable</strong> if</p>
+        <p>the linear transformation $L_A : \mathbb{F}^n \to \mathbb{F}^n$ is diagonalizable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark (p.9) -->
+<div class="card rem-card" id="c2-10">
+  <div class="card-head">
+    <span class="rem-num">REM 2.10</span>
+    <span class="rem-title">가역행렬을 통한 대각행렬 분해 <em>The Factorization A = QDQ^{-1}</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n \times n$ 정사각행렬 $A$가 대각화가능하다고 하자.</p>
+        <p>$[L_A]_{\mathcal{B}}$가 대각행렬이 되는 $\mathbb{F}^n$의 기저 $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$을 잡자.</p>
+        <p>따라서 모든 $1 \le i \le n$에 대해 $L_A(v_i) = Av_i = c_iv_i$이다. 그러면</p>
+        <div class="math-display">$$A\left[ v_1 \ v_2 \ \cdots \ v_n \right] = \left[ c_1v_1 \ c_2v_2 \ \cdots \ c_nv_n \right] = \left[ v_1 \ v_2 \ \cdots \ v_n \right]D, \ \text{여기서 } D = \begin{pmatrix} c_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; c_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; c_n \end{pmatrix}.$$</div>
+        <p>또한 $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$이 기저이므로 정사각행렬 $Q := \left[ v_1 \ v_2 \ \cdots \ v_n \right]$은 가역이다.</p>
+        <p>따라서 $AQ = QD$이고, 그러므로 $A = QDQ^{-1}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose that the $n \times n$ square matrix $A$ is diagonalizable.</p>
+        <p>Let $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$ be a basis for $\mathbb{F}^n$ such that $[L_A]_{\mathcal{B}}$ is a diagonal matrix.</p>
+        <p>Thus $L_A(v_i) = Av_i = c_iv_i$ for all $1 \le i \le n$. Then</p>
+        <div class="math-display">$$A\left[ v_1 \ v_2 \ \cdots \ v_n \right] = \left[ c_1v_1 \ c_2v_2 \ \cdots \ c_nv_n \right] = \left[ v_1 \ v_2 \ \cdots \ v_n \right]D \ \text{ where } \ D = \begin{pmatrix} c_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; c_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; c_n \end{pmatrix}.$$</div>
+        <p>Also the square matrix $Q := \left[ v_1 \ v_2 \ \cdots \ v_n \right]$ is invertible since $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$ is a basis.</p>
+        <p>Thus we have $AQ = QD$ and hence $A = QDQ^{-1}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.10 ═══════════ -->
+
+<!-- Remark (p.10) -->
+<div class="card rem-card" id="c2-11">
+  <div class="card-head">
+    <span class="rem-num">REM 2.11</span>
+    <span class="rem-title">대각행렬 표현과 고유벡터 조건 <em>Diagonal Representation and T(v_i) = λ_i v_i</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$의 선형변환이라 하자. 우리는 다음을 알아내고자 한다.</p>
+        <p>언제 $T$가 대각화가능한지,</p>
+        <p>그리고 만약 그렇다면,</p>
+        <p>$[T]_{\mathcal{B}}$가 대각행렬이 되는 순서기저 $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$을 어떻게 구하는지.</p>
+        <p><strong>(1)</strong> $D = [T]_{\mathcal{B}}$가 대각행렬이면, 모든 $1 \le i \le n$에 대해 $T(v_i) = \lambda_iv_i$이다.</p>
+        <p><strong>(2)</strong> 역으로, $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$이 $V$의 순서기저이고 다음을 만족한다고 하자.</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \quad (\text{어떤 } \lambda_1, \lambda_2, \ldots, \lambda_n \in \mathbb{F} \text{에 대하여}).$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of an $n$-dimensional vector space $V$. We want to determine</p>
+        <p>when $T$ is diagonalizable</p>
+        <p>and, if so,</p>
+        <p>how to obtain an ordered basis $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$ such that $[T]_{\mathcal{B}}$ is a diagonal matrix.</p>
+        <p><strong>(1)</strong> If $D = [T]_{\mathcal{B}}$ is a diagonal matrix, then $T(v_i) = \lambda_iv_i$ for all $1 \le i \le n$.</p>
+        <p><strong>(2)</strong> Conversely, if $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$ is an ordered basis for $V$ such that</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \quad \text{for some } \lambda_1, \lambda_2, \ldots, \lambda_n \in \mathbb{F}.$$</div>
+        <p>Then</p>
+        <div class="math-display">$$[T]_{\mathcal{B}} = \begin{pmatrix} \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \lambda_n \end{pmatrix}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.11 ═══════════ -->
+
+<!-- 서술 단락 (p.11) -->
+<div class="card note-card" id="note02-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>앞 슬라이드에서, 기저 $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$의 각 벡터 $v$는 다음 조건을 만족한다.</p>
+        <div class="math-display">$$T(v) = \lambda v \quad (\text{어떤 스칼라 } \lambda \in \mathbb{F} \text{에 대하여}).$$</div>
+        <p>또한 $v$는 기저 $\mathcal{B}$의 원소이므로 $v \neq 0_V$이다.</p>
+        <p>이러한 관찰이 다음 정의들의 동기가 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In the preceding slide, each vector $v$ in the basis $\mathcal{B} = \{v_1, v_2, \ldots, v_n\}$ satisfies the condition</p>
+        <div class="math-display">$$T(v) = \lambda v \quad \text{for some scalar } \lambda \in \mathbb{F}.$$</div>
+        <p>Moreover, $v \neq 0_V$, since $v$ is a member of the basis $\mathcal{B}$.</p>
+        <p>These observations motivate the following definitions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 3 (p.11) -->
+<div class="card def-card" id="c2-12">
+  <div class="card-head">
+    <span class="def-num">DEF 2.12</span>
+    <span class="def-title">선형변환의 고유벡터와 고유값 <em>Eigenvectors and Eigenvalues of a Linear Transformation</em><span class="src-ref">Definition 3</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$의 선형변환이라 하자.</p>
+        <p>영벡터가 아닌 벡터 $v \in V$가 <strong>$T$의 고유벡터</strong>라 불리는 것은, 다음을 만족하는 스칼라 $\lambda \in \mathbb{F}$가 존재함을 뜻한다.</p>
+        <div class="math-display">$$T(v) = \lambda v.$$</div>
+        <p>이 스칼라 $\lambda$를 고유벡터 $v$에 대응하는 <strong>고유값</strong>이라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of an $n$-dimensional vector space $V$.</p>
+        <p>A nonzero vector $v \in V$ is called <strong>an eigenvector of $T$</strong> if there exists a scalar $\lambda \in \mathbb{F}$ such that</p>
+        <div class="math-display">$$T(v) = \lambda v.$$</div>
+        <p>The scalar $\lambda$ is called <strong>the eigenvalue</strong> corresponding to the eigenvector $v$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition 4 (p.11) -->
+<div class="card def-card" id="c2-13">
+  <div class="card-head">
+    <span class="def-num">DEF 2.13</span>
+    <span class="def-title">행렬의 고유벡터와 고유값 <em>Eigenvectors and Eigenvalues of a Matrix</em><span class="src-ref">Definition 4</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n \times n}(\mathbb{F})$를 정사각행렬이라 하자.</p>
+        <p>영벡터가 아닌 벡터 $v \in \mathbb{F}^n$가 <strong>$A$의 고유벡터</strong>라 불리는 것은, $v$가 $L_A$의 고유벡터임을 뜻한다.</p>
+        <p>이 경우, 어떤 스칼라 $\lambda \in \mathbb{F}$에 대해 $Av = \lambda v$이다.</p>
+        <p>이 스칼라 $\lambda$를 고유벡터 $v$에 대응하는 $A$의 <strong>고유값</strong>이라 부른다.</p>
+        <p>※ (용어) 고유벡터(eigenvector) = 특성벡터(characteristic vector) = 프로퍼 벡터(proper vector)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n \times n}(\mathbb{F})$ be a square matrix.</p>
+        <p>A nonzero vector $v \in \mathbb{F}^n$ is called <strong>an eigenvector of $A$</strong> if it is an eigenvector of $L_A$.</p>
+        <p>In this case, $Av = \lambda v$ for a scalar $\lambda \in \mathbb{F}$.</p>
+        <p>The scalar $\lambda$ is called <strong>the eigenvalue</strong> of $A$ corresponding to the eigenvector $v$.</p>
+        <p>※ (Terminologies) eigenvector = characteristic vector = proper vector</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.12 ═══════════ -->
+
+<!-- Theorem 5.1 (p.12) -->
+<div class="card thm-card" id="c2-14">
+  <div class="card-head">
+    <span class="thm-num">THM 2.14</span>
+    <span class="thm-title">대각화가능성과 고유벡터 기저 <em>Diagonalizability and a Basis of Eigenvectors</em><span class="src-ref">Theorem 5.1</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$의 선형변환이라 하자. 그러면 $T$가 대각화가능한 것은 다음과 동치이다.</p>
+        <p>$T$의 고유벡터로 이루어진 $V$의 순서기저 $\mathcal{B}$가 존재한다.</p>
+        <p>더욱이 $T$가 대각화가능하고 $\mathcal{B} = \{v_1, \ldots, v_n\}$이 $T$의 고유벡터로 이루어진 순서기저이면,</p>
+        <div class="math-display">$$D := [T]_{\mathcal{B}} \text{는 대각행렬이다}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$D_{jj} \text{는 } v_j \text{에 대응하는 고유값이다} \quad (1 \le j \le n).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of an $n$-dimensional vector space $V$. Then $T$ is diagonalizable if and only if</p>
+        <p>there exists an ordered basis $\mathcal{B}$ for $V$ consisting of eigenvectors of $T$.</p>
+        <p>Furthermore, if $T$ is diagonalizable and $\mathcal{B} = \{v_1, \ldots, v_n\}$ is an ordered basis of eigenvectors of $T$, then</p>
+        <div class="math-display">$$D := [T]_{\mathcal{B}} \ \text{ is a diagonal matrix}$$</div>
+        <p>and</p>
+        <div class="math-display">$$D_{jj} \ \text{ is the eigenvalue corresponding to } v_j \ \text{ for } 1 \le j \le n.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark (p.12) -->
+<div class="card rem-card" id="c2-15">
+  <div class="card-head">
+    <span class="rem-num">REM 2.15</span>
+    <span class="rem-title">대각화는 고유벡터 기저 찾기 <em>Diagonalization Means Finding an Eigenvector Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 5.1은 다음을 보여준다.</p>
+        <p>행렬 또는 선형연산자를 대각화하는 것은</p>
+        <p>다음과 동치이다.</p>
+        <p>고유벡터로 이루어진 기저와 그에 대응하는 고유값을 찾는 것.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Theorem 5.1 shows that</p>
+        <p>diagonalizing a matrix or a linear operator</p>
+        <p>is equivalent to</p>
+        <p>finding a basis of eigenvectors and the corresponding eigenvalues.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.13 ═══════════ -->
+
+<!-- Example 1 (p.13) -->
+<div class="card exam-card" id="c2-16">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.16</span>
+    <span class="exam-title">2×2 행렬의 대각화 <em>Diagonalizing a 2×2 Matrix</em><span class="src-ref">Example 1</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음과 같이 두자.</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}, \quad v_1 = \begin{pmatrix} 1 \\ -1 \end{pmatrix} \ \text{ 그리고 } \ v_2 = \begin{pmatrix} 3 \\ 4 \end{pmatrix}.$$</div>
+        <p><strong>(1)</strong></p>
+        <div class="math-display">$$L_A(v_1) = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}\begin{pmatrix} 1 \\ -1 \end{pmatrix} = \begin{pmatrix} -2 \\ 2 \end{pmatrix} = -2 \times \begin{pmatrix} 1 \\ -1 \end{pmatrix} = -2v_1.$$</div>
+        <p>따라서 $v_1$은 $L_A$의 고유벡터이고 (따라서 $A$의 고유벡터이기도 하며), $\lambda_1 = -2$는 $v_1$에 대응하는 고유값이다.</p>
+        <p><strong>(2)</strong></p>
+        <div class="math-display">$$L_A(v_2) = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}\begin{pmatrix} 3 \\ 4 \end{pmatrix} = \begin{pmatrix} 15 \\ 20 \end{pmatrix} = 5 \times \begin{pmatrix} 3 \\ 4 \end{pmatrix} = 5v_2.$$</div>
+        <p>따라서 $v_2$는 $L_A$의 고유벡터이고 (따라서 $A$의 고유벡터이기도 하며), $\lambda_2 = 5$는 $v_2$에 대응하는 고유값이다.</p>
+        <p><strong>(3)</strong> $\mathcal{B} = \{v_1, v_2\}$는 $A$와 $L_A$ 모두의 고유벡터로 이루어진 $\mathbb{R}^2$의 순서기저이다.</p>
+        <p>따라서 $A$와 $L_A$는 대각화가능하다.</p>
+        <p>더욱이, 정리 5.1에 의해 다음이 성립한다.</p>
+        <div class="math-display">$$[L_A]_{\mathcal{B}} = \begin{pmatrix} -2 &amp; 0 \\ 0 &amp; 5 \end{pmatrix}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}, \quad v_1 = \begin{pmatrix} 1 \\ -1 \end{pmatrix} \ \text{ and } \ v_2 = \begin{pmatrix} 3 \\ 4 \end{pmatrix}.$$</div>
+        <p><strong>(1)</strong></p>
+        <div class="math-display">$$L_A(v_1) = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}\begin{pmatrix} 1 \\ -1 \end{pmatrix} = \begin{pmatrix} -2 \\ 2 \end{pmatrix} = -2 \times \begin{pmatrix} 1 \\ -1 \end{pmatrix} = -2v_1.$$</div>
+        <p>Thus $v_1$ is an eigenvector of $L_A$ (and so of $A$), and $\lambda_1 = -2$ is the eigenvalue corresponding to $v_1$.</p>
+        <p><strong>(2)</strong></p>
+        <div class="math-display">$$L_A(v_2) = \begin{pmatrix} 1 &amp; 3 \\ 4 &amp; 2 \end{pmatrix}\begin{pmatrix} 3 \\ 4 \end{pmatrix} = \begin{pmatrix} 15 \\ 20 \end{pmatrix} = 5 \times \begin{pmatrix} 3 \\ 4 \end{pmatrix} = 5v_2.$$</div>
+        <p>Thus $v_2$ is an eigenvector of $L_A$ (and so of $A$), and $\lambda_2 = 5$ is the eigenvalue corresponding to $v_2$.</p>
+        <p><strong>(3)</strong> $\mathcal{B} = \{v_1, v_2\}$ is an ordered basis for $\mathbb{R}^2$ consisting of eigenvectors of both $A$ and $L_A$.</p>
+        <p>Therefore $A$ and $L_A$ are diagonalizable.</p>
+        <p>Moreover, by Theorem 5.1, it holds that</p>
+        <div class="math-display">$$[L_A]_{\mathcal{B}} = \begin{pmatrix} -2 &amp; 0 \\ 0 &amp; 5 \end{pmatrix}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 (p.13) -->
+<div class="card exam-card" id="c2-17">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.17</span>
+    <span class="exam-title">고유벡터가 없는 회전 <em>A Rotation with No Eigenvectors</em><span class="src-ref">Example 2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 각 $\pi/2$만큼의 회전이라 하자.</p>
+        <p>영벡터가 아닌 어떤 벡터도 $T$의 고유벡터가 될 수 없음이 기하학적으로 분명히 드러난다.</p>
+        <p>따라서 고유값이나 고유벡터를 전혀 갖지 않는 연산자(와 행렬)가 존재한다.</p>
+        <p>결과적으로, 대각화가능하지 않은 연산자와 행렬이 존재한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be the rotation through an angle of $\pi/2$.</p>
+        <p>It is clear geometrically that no nonzero vector can be an eigenvector of $T$.</p>
+        <p>Thus there exist operators (and matrices) with no eigenvalues or eigenvectors.</p>
+        <p>In consequence, there are operators and matrices which are not diagonalizable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Slide p.14 ═══════════ -->
+
+<!-- 서술 단락 (p.14) -->
+<div class="card note-card" id="note02-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>다음 문제 :</strong> 주어진 행렬 $A \in M_{n \times n}(\mathbb{F})$의 고유벡터와 고유값을 어떻게 찾을 것인가?</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Next Problem :</strong> How to find eigenvectors and eigenvalues of a given matrix $A \in M_{n \times n}(\mathbb{F})$?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 5.2 (p.14) -->
+<div class="card thm-card" id="c2-18">
+  <div class="card-head">
+    <span class="thm-num">THM 2.18</span>
+    <span class="thm-title">고유값과 행렬식 <em>Eigenvalues and the Determinant</em><span class="src-ref">Theorem 5.2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n \times n}(\mathbb{F})$이고 $\lambda \in \mathbb{F}$라 하자. 그러면</p>
+        <div class="math-display">$$\lambda \text{가 } A \text{의 고유값이다} \iff \det(A - \lambda I_n) = 0.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\lambda$가 $A$의 고유값이다 $\Leftrightarrow$ $Av = \lambda v$를 만족하는 영벡터가 아닌 벡터 $v \in \mathbb{F}^n$가 존재한다</p>
+        <div class="math-display">$$\begin{aligned} &amp; \left( Av = \lambda v \ \Leftrightarrow \ Av = \lambda I_nv \ \Leftrightarrow \ (A - \lambda I_n)v = \mathbb{O} \right) \\[2pt] \Leftrightarrow \ \ &amp; N(A - \lambda I_n) \neq \{0\} \ \text{이므로 } \operatorname{rank}(A - \lambda I_n) \lt n \\[2pt] \Leftrightarrow \ \ &amp; A - \lambda I_n \ \text{는 가역이 아니다} \\[2pt] \Leftrightarrow \ \ &amp; \det(A - \lambda I_n) = 0. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n \times n}(\mathbb{F})$ and let $\lambda \in \mathbb{F}$. Then</p>
+        <div class="math-display">$$\lambda \ \text{ is an eigenvalue of } A \ \text{ if and only if } \ \det(A - \lambda I_n) = 0.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$\lambda$ is an eigenvalue of $A$ $\Leftrightarrow$ there exists a nonzer vector $v \in \mathbb{F}^n$ such that $Av = \lambda v$</p>
+        <div class="math-display">$$\begin{aligned} &amp; \left( Av = \lambda v \ \Leftrightarrow \ Av = \lambda I_nv \ \Leftrightarrow \ (A - \lambda I_n)v = \mathbb{O} \right) \\[2pt] \Leftrightarrow \ \ &amp; N(A - \lambda I_n) \ \text{is not the zero space and so } \operatorname{rank}(A - \lambda I_n) \lt n \\[2pt] \Leftrightarrow \ \ &amp; A - \lambda I_n \ \text{is not invertible} \\[2pt] \Leftrightarrow \ \ &amp; \det(A - \lambda I_n) = 0. \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Definition (p.14) -->
+<div class="card def-card" id="c2-19">
+  <div class="card-head">
+    <span class="def-num">DEF 2.19</span>
+    <span class="def-title">특성다항식 <em>Characteristic Polynomial</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n \times n}(\mathbb{F})$에 대해,</p>
+        <p>다항식 $f(t) := \det(A - tI_n)$을 $A$의 <strong>특성다항식</strong>이라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $A \in M_{n \times n}(\mathbb{F})$,</p>
+        <p>the polynomial $f(t) := \det(A - tI_n)$ is called the <strong>characteristic polynomial</strong> of $A$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remark (p.14) -->
+<div class="card rem-card" id="c2-20">
+  <div class="card-head">
+    <span class="rem-num">REM 2.20</span>
+    <span class="rem-title">고유값은 특성다항식의 영점 <em>Eigenvalues Are Zeros of the Characteristic Polynomial</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 5.2는 다음을 말한다.</p>
+        <p>$A$의 고유값은 그 특성다항식 $\det(A - tI_n)$의 영점이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Theorem 5.2 states that</p>
+        <p>the eigenvalues of $A$ are the zeros of its characteristic polynomial $\det(A - tI_n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 갱신 안내 (편집) -->
+<div class="card note-card" id="note02-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 단원은 9월 8일(화) 강의분(§5.1 후반)이 추가되면 함께 갱신된다. 아래 연습문제는 Friedberg §5.1의 추천 문제이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>This unit will be extended when the September 8 lecture (the rest of §5.1) is posted. The exercises below are the recommended problems from Friedberg §5.1.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연습문제 · Exercises (Friedberg §5.1)</h2></div>
+
+<!-- Friedberg §5.1 #1 -->
+<div class="card ex-card" id="e2-1">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-1</span>
+    <span class="ex-title">참·거짓 판정 <em>True or False</em><span class="src-ref">Friedberg §5.1 #1</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 명제 각각의 참·거짓을 판정하고 그 근거를 제시하라.</p>
+        <p><strong>(a)</strong> $n$차원 벡터공간 위의 임의의 선형연산자는 서로 다른 $n$개의 고유값을 갖는다.</p>
+        <p><strong>(b)</strong> 적어도 하나의 고유벡터를 갖는 실행렬은 반드시 무한히 많은 고유벡터를 갖는다.</p>
+        <p><strong>(c)</strong> 고유벡터를 전혀 갖지 않는 정사각행렬이 존재한다.</p>
+        <p><strong>(d)</strong> 고유값은 결코 스칼라 $0$이 될 수 없다.</p>
+        <p><strong>(e)</strong> 두 고유벡터로 이루어진 임의의 집합은 일차독립이다.</p>
+        <p><strong>(f)</strong> $\lambda_1$과 $\lambda_2$가 선형연산자 $T$의 고유값이면, 스칼라 $\lambda_1 + \lambda_2$ 역시 $T$의 고유값이다.</p>
+        <p><strong>(g)</strong> 무한차원 벡터공간 위의 선형연산자는 고유값을 갖지 않는다.</p>
+        <p><strong>(h)</strong> 체 $F$의 원소를 성분으로 하는 행렬 $A \in M_{n \times n}(F)$에 대해, $A$가 대각행렬과 닮은 것은 정확히 $F^n$이 $A$의 고유벡터로 이루어진 기저를 가질 때이다.</p>
+        <p><strong>(i)</strong> 닮은 두 행렬은 반드시 모든 고유값을 공유한다.</p>
+        <p><strong>(j)</strong> 닮은 두 행렬은 반드시 모든 고유벡터를 공유한다.</p>
+        <p><strong>(k)</strong> $x$와 $y$가 연산자 $T$의 고유벡터이면, 벡터 $x + y$ 역시 $T$의 고유벡터이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 거짓. 예를 들어 $n \geq 2$인 $n$차원 벡터공간 위의 항등연산자 $I$는 영벡터가 아닌 모든 벡터가 고유값 $1$에 대응하는 고유벡터이므로, $I$는 오직 하나의 고유값 $1$만을 갖는다. 서로 다른 $n$개의 고유값을 가질 필요는 없다.</p>
+        <p><strong>(b)</strong> 참. $Av = \lambda v$ ($v \neq 0$)이면 임의의 스칼라 $c \neq 0$에 대해 $A(cv) = c(Av) = c\lambda v = \lambda(cv)$이므로 $cv$ 역시 고유값 $\lambda$에 대응하는 $A$의 고유벡터이다. 영이 아닌 실수 $c$가 무한히 많으므로, $A$는 무한히 많은 고유벡터를 갖는다.</p>
+        <p><strong>(c)</strong> 참. $A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix} \in M_{2\times 2}(\mathbb{R})$의 특성다항식은 $\det(A - tI) = t^2 + 1$이고 실근을 갖지 않으므로, 정리 5.2에 의해 $A$는 (실수) 고유값을 전혀 갖지 않고 따라서 고유벡터도 전혀 갖지 않는다.</p>
+        <p><strong>(d)</strong> 거짓. 영행렬 $O$는 $Ov = 0 = 0 \cdot v$이므로 영벡터가 아닌 모든 벡터 $v$가 고유값 $0$에 대응하는 고유벡터이다. (실제로 정리 5.2에 의해 $0$은 $A$가 가역이 아닐 때 정확히 고유값이 되며, 이는 얼마든지 일어날 수 있다.)</p>
+        <p><strong>(e)</strong> 거짓. $e_1$과 $2e_1$은 모두 항등행렬의 고유벡터(고유값 $1$)이지만, $2e_1 = 2 \cdot e_1$이므로 $\{e_1, 2e_1\}$은 일차종속이다.</p>
+        <p><strong>(f)</strong> 거짓. $A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$는 고유값 $\lambda_1 = 1$, $\lambda_2 = -1$을 가지지만 $\lambda_1 + \lambda_2 = 0$은 $A$의 고유값이 아니다. $\det A = -1 \neq 0$이므로 $A$는 가역이고, 정리 5.2에 의해 $0$은 고유값이 될 수 없다.</p>
+        <p><strong>(g)</strong> 거짓. 무한차원 벡터공간 $P(\mathbb{R})$ 위의 항등연산자 $I$는 영벡터가 아닌 모든 다항식 $f$에 대해 $I(f) = f = 1 \cdot f$이므로 고유값 $1$을 갖는다.</p>
+        <p><strong>(h)</strong> 참. ($\Rightarrow$) $A$가 대각행렬 $D$와 닮았다고 하면 어떤 가역행렬 $Q$에 대해 $Q^{-1}AQ = D$, 즉 $AQ = QD$이다. $Q$의 열을 $v_1, \ldots, v_n$이라 하면 $AQ$의 $j$번째 열은 $Av_j$이고 $QD$의 $j$번째 열은 $D_{jj}v_j$이므로 $Av_j = D_{jj}v_j$이다. $Q$가 가역이므로 $v_1, \ldots, v_n$은 일차독립이고, 따라서 $F^n$의 기저를 이루며 각각 $A$의 고유벡터이다. ($\Leftarrow$) 역으로 $F^n$이 $A$의 고유벡터로 이루어진 기저 $\{v_1, \ldots, v_n\}$을 가지면 $Q := \left[ v_1 \ \cdots \ v_n \right]$은 가역이고, 정리 5.1을 $L_A$에 적용하면(주의 2.10의 $A = QDQ^{-1}$도 참고) $Q^{-1}AQ$는 대각행렬이다.</p>
+        <p><strong>(i)</strong> 참. $B$가 $A$와 닮았다고 하면 $B = Q^{-1}AQ$인 가역행렬 $Q$가 존재한다. 그러면</p>
+        <div class="math-display">$$\det(B - tI) = \det(Q^{-1}AQ - tQ^{-1}Q) = \det(Q^{-1}(A - tI)Q) = \det(Q^{-1})\det(A - tI)\det(Q) = \det(A - tI)$$</div>
+        <p>이므로 $A$와 $B$는 같은 특성다항식을 갖고, 정리 5.2에 의해 같은 고유값을 갖는다.</p>
+        <p><strong>(j)</strong> 거짓. $A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}$와 $Q = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$을 생각하면, $B := Q^{-1}AQ = \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 2 \end{pmatrix}$는 $A$와 닮았다. $e_2 = (0,1)$은 $Ae_2 = 2e_2$이므로 $A$의 고유벡터이지만, $Be_2 = (-1, 2)$는 $e_2$의 스칼라배가 아니므로 $e_2$는 $B$의 고유벡터가 아니다. 즉 닮은 두 행렬이 반드시 고유벡터를 공유하는 것은 아니다.</p>
+        <p><strong>(k)</strong> 거짓. $D = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$에 대해 $e_1, e_2$는 각각 고유값 $1, -1$에 대응하는 고유벡터이지만, $D(e_1 + e_2) = (1, -1)$은 $e_1 + e_2 = (1,1)$의 스칼라배가 아니므로 $e_1 + e_2$는 $D$의 고유벡터가 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether each of the following statements is true or false, and justify your answer.</p>
+        <p><strong>(a)</strong> Any linear operator on a vector space of dimension $n$ possesses $n$ pairwise distinct eigenvalues.</p>
+        <p><strong>(b)</strong> A real matrix that admits at least one eigenvector necessarily admits infinitely many eigenvectors.</p>
+        <p><strong>(c)</strong> Some square matrix has no eigenvector at all.</p>
+        <p><strong>(d)</strong> An eigenvalue can never be the scalar $0$.</p>
+        <p><strong>(e)</strong> Any set consisting of two eigenvectors is linearly independent.</p>
+        <p><strong>(f)</strong> Whenever $\lambda_1$ and $\lambda_2$ are eigenvalues of a linear operator $T$, the scalar $\lambda_1 + \lambda_2$ is again an eigenvalue of $T$.</p>
+        <p><strong>(g)</strong> No linear operator on an infinite-dimensional vector space has an eigenvalue.</p>
+        <p><strong>(h)</strong> For a matrix $A \in M_{n \times n}(F)$ with entries in a field $F$, the matrix $A$ is similar to a diagonal matrix precisely when $F^n$ has a basis consisting of eigenvectors of $A$.</p>
+        <p><strong>(i)</strong> Two similar matrices necessarily share all their eigenvalues.</p>
+        <p><strong>(j)</strong> Two similar matrices necessarily share all their eigenvectors.</p>
+        <p><strong>(k)</strong> Whenever $x$ and $y$ are eigenvectors of an operator $T$, the vector $x + y$ is again an eigenvector of $T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> False. For instance, the identity operator $I$ on an $n$-dimensional vector space with $n \geq 2$ has every nonzero vector as an eigenvector corresponding to the single eigenvalue $1$, so $I$ has only the one eigenvalue $1$; it need not possess $n$ pairwise distinct eigenvalues.</p>
+        <p><strong>(b)</strong> True. If $Av = \lambda v$ with $v \neq 0$, then for any nonzero scalar $c$, $A(cv) = c(Av) = c\lambda v = \lambda(cv)$, so $cv$ is again an eigenvector of $A$ corresponding to the eigenvalue $\lambda$. Since there are infinitely many nonzero real scalars $c$, $A$ has infinitely many eigenvectors.</p>
+        <p><strong>(c)</strong> True. The matrix $A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix} \in M_{2\times 2}(\mathbb{R})$ has characteristic polynomial $\det(A - tI) = t^2 + 1$, which has no real root; hence by Theorem 5.2, $A$ has no real eigenvalue, and consequently no eigenvector.</p>
+        <p><strong>(d)</strong> False. The zero matrix $O$ satisfies $Ov = 0 = 0 \cdot v$ for every vector $v$, so every nonzero vector is an eigenvector belonging to the eigenvalue $0$. (Indeed, by Theorem 5.2, $0$ is an eigenvalue of $A$ precisely when $A$ is not invertible, which can certainly happen.)</p>
+        <p><strong>(e)</strong> False. $e_1$ and $2e_1$ are both eigenvectors of the identity matrix (with eigenvalue $1$), but $\{e_1, 2e_1\}$ is linearly dependent since $2e_1 = 2 \cdot e_1$.</p>
+        <p><strong>(f)</strong> False. $A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$ has eigenvalues $\lambda_1 = 1$ and $\lambda_2 = -1$, but $\lambda_1 + \lambda_2 = 0$ is not an eigenvalue of $A$: since $\det A = -1 \neq 0$, $A$ is invertible, so by Theorem 5.2, $0$ cannot be an eigenvalue.</p>
+        <p><strong>(g)</strong> False. The identity operator $I$ on the infinite-dimensional vector space $P(\mathbb{R})$ satisfies $I(f) = f = 1 \cdot f$ for every nonzero polynomial $f$, so $1$ is an eigenvalue of $I$.</p>
+        <p><strong>(h)</strong> True. ($\Rightarrow$) If $A$ is similar to a diagonal matrix $D$, then $Q^{-1}AQ = D$ for some invertible matrix $Q$, i.e. $AQ = QD$. Writing the columns of $Q$ as $v_1, \ldots, v_n$, the $j$-th column of $AQ$ is $Av_j$ and the $j$-th column of $QD$ is $D_{jj}v_j$, so $Av_j = D_{jj}v_j$. Since $Q$ is invertible, $v_1, \ldots, v_n$ are linearly independent, hence form a basis for $F^n$ consisting of eigenvectors of $A$. ($\Leftarrow$) Conversely, if $F^n$ has a basis $\{v_1, \ldots, v_n\}$ of eigenvectors of $A$, let $Q := \left[ v_1 \ \cdots \ v_n \right]$, which is invertible; applying Theorem 5.1 to $L_A$ (cf. Remark 2.10, $A = QDQ^{-1}$) shows that $Q^{-1}AQ$ is a diagonal matrix.</p>
+        <p><strong>(i)</strong> True. If $B$ is similar to $A$, then $B = Q^{-1}AQ$ for some invertible matrix $Q$. Then</p>
+        <div class="math-display">$$\det(B - tI) = \det(Q^{-1}AQ - tQ^{-1}Q) = \det(Q^{-1}(A - tI)Q) = \det(Q^{-1})\det(A - tI)\det(Q) = \det(A - tI),$$</div>
+        <p>so $A$ and $B$ have the same characteristic polynomial, and hence by Theorem 5.2, the same eigenvalues.</p>
+        <p><strong>(j)</strong> False. Consider $A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}$ and $Q = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$; then $B := Q^{-1}AQ = \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 2 \end{pmatrix}$ is similar to $A$. The vector $e_2 = (0,1)$ is an eigenvector of $A$ since $Ae_2 = 2e_2$, but $Be_2 = (-1, 2)$ is not a scalar multiple of $e_2$, so $e_2$ is not an eigenvector of $B$. Thus similar matrices need not share their eigenvectors.</p>
+        <p><strong>(k)</strong> False. For $D = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$, both $e_1$ and $e_2$ are eigenvectors (with eigenvalues $1$ and $-1$ respectively), but $D(e_1 + e_2) = (1, -1)$ is not a scalar multiple of $e_1 + e_2 = (1,1)$, so $e_1 + e_2$ is not an eigenvector of $D$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #3 -->
+<div class="card ex-card" id="e2-3">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-3</span>
+    <span class="ex-title">행렬의 고유값·고유벡터와 대각화 <em>Eigenvalues, Eigenvectors and Diagonalization of Matrices</em><span class="src-ref">Friedberg §5.1 #3 (b), (d)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 나열된 각 행렬 $A \in M_{n \times n}(F)$에 대해 다음 네 가지 작업을 수행하라.</p>
+        <p><strong>(i)</strong> $A$의 모든 고유값을 구하라.</p>
+        <p><strong>(ii)</strong> $A$의 각 고유값 $\lambda$에 대해, $\lambda$에 속하는 $A$의 모든 고유벡터의 집합을 구하라.</p>
+        <p><strong>(iii)</strong> $F^n$이 $A$의 고유벡터로 이루어진 기저를 갖는지 판정하고, 그렇다면 그러한 기저를 하나 제시하라.</p>
+        <p><strong>(iv)</strong> 그러한 기저를 찾았다면, $Q^{-1}AQ = D$를 만족하는 가역행렬 $Q$와 대각행렬 $D$를 구하라.</p>
+        <p><strong>(b)</strong> $F = \mathbb{R}$이고</p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; -2 &amp; -3 \\ -1 &amp; 1 &amp; -1 \\ 2 &amp; 2 &amp; 5 \end{pmatrix}.$$</div>
+        <p><strong>(d)</strong> $F = \mathbb{R}$이고</p>
+        <div class="math-display">$$A = \begin{pmatrix} 2 &amp; 0 &amp; -1 \\ 4 &amp; 1 &amp; -4 \\ 2 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(b)</strong> $A = \begin{pmatrix} 0 &amp; -2 &amp; -3 \\ -1 &amp; 1 &amp; -1 \\ 2 &amp; 2 &amp; 5 \end{pmatrix}$.</p>
+        <p><strong>(i)</strong> 첫 행을 따라 여인수전개하면</p>
+        <div class="math-display">$$\det(A - tI) = -t\begin{vmatrix} 1-t &amp; -1 \\ 2 &amp; 5-t \end{vmatrix} + 2\begin{vmatrix} -1 &amp; -1 \\ 2 &amp; 5-t \end{vmatrix} - 3\begin{vmatrix} -1 &amp; 1-t \\ 2 &amp; 2 \end{vmatrix}$$</div>
+        <div class="math-display">$$= -t\big[(1-t)(5-t) + 2\big] + 2\big[-(5-t) + 2\big] - 3\big[-2 - 2(1-t)\big] = -t(t^2 - 6t + 7) + 2(t - 3) - 3(2t - 4)$$</div>
+        <div class="math-display">$$= -t^3 + 6t^2 - 11t + 6 = -(t-1)(t-2)(t-3).$$</div>
+        <p>따라서 $A$의 고유값은 $\lambda = 1, 2, 3$이다 (모두 중복도 $1$).</p>
+        <p><strong>(ii)</strong> $\lambda = 1$일 때,</p>
+        <div class="math-display">$$A - I = \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ -1 &amp; 0 &amp; -1 \\ 2 &amp; 2 &amp; 4 \end{pmatrix} \ \xrightarrow[R_3 \to R_3 + 2R_1]{R_2 \to R_2 - R_1} \ \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ 0 &amp; 2 &amp; 2 \\ 0 &amp; -2 &amp; -2 \end{pmatrix} \ \xrightarrow{R_3 \to R_3 + R_2} \ \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ 0 &amp; 2 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}.$$</div>
+        <p>둘째 행에서 $y + z = 0$, 즉 $y = -z$이고, 첫째 행에서 $-x - 2y - 3z = 0$이므로 $x = -2y - 3z = 2z - 3z = -z$이다. $z = 1$로 두면 $(x,y,z) = (-1,-1,1)$을 얻으므로 $E_1 = \operatorname{span}\{(-1,-1,1)\}$이다. 같은 방식으로 (계산 생략)</p>
+        <div class="math-display">$$A - 2I = \begin{pmatrix} -2 &amp; -2 &amp; -3 \\ -1 &amp; -1 &amp; -1 \\ 2 &amp; 2 &amp; 3 \end{pmatrix} \implies E_2 = \operatorname{span}\{(-1,1,0)\}, \qquad A - 3I = \begin{pmatrix} -3 &amp; -2 &amp; -3 \\ -1 &amp; -2 &amp; -1 \\ 2 &amp; 2 &amp; 2 \end{pmatrix} \implies E_3 = \operatorname{span}\{(-1,0,1)\}.$$</div>
+        <p>각 고유값 $\lambda$에 속하는 $A$의 모든 고유벡터의 집합은 $E_\lambda \setminus \{0\}$이다. 예를 들어 $\lambda = 1$에 속하는 고유벡터의 집합은 $\{c(-1,-1,1) : c \in \mathbb{R}, \ c \neq 0\}$이다.</p>
+        <p><strong>(iii)</strong> $\begin{vmatrix} -1 &amp; -1 &amp; -1 \\ -1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \end{vmatrix} = -1 \neq 0$이므로 세 고유벡터 $(-1,-1,1), (-1,1,0), (-1,0,1)$은 일차독립이고, 따라서 $\mathbb{R}^3$은 $A$의 고유벡터로 이루어진 기저 $\{(-1,-1,1), (-1,1,0), (-1,0,1)\}$을 갖는다.</p>
+        <p><strong>(iv)</strong> 정리 5.1과 주의 2.10에 의해</p>
+        <div class="math-display">$$Q = \begin{pmatrix} -1 &amp; -1 &amp; -1 \\ -1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \end{pmatrix}, \qquad D = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>에 대해 $Q^{-1}AQ = D$가 성립한다.</p>
+        <p><strong>(d)</strong> $A = \begin{pmatrix} 2 &amp; 0 &amp; -1 \\ 4 &amp; 1 &amp; -4 \\ 2 &amp; 0 &amp; -1 \end{pmatrix}$.</p>
+        <p><strong>(i)</strong> 둘째 열의 성분이 $0, 1-t, 0$이므로 그 열을 따라 여인수전개하면</p>
+        <div class="math-display">$$\det(A - tI) = (1-t)\begin{vmatrix} 2-t &amp; -1 \\ 2 &amp; -1-t \end{vmatrix} = (1-t)\big[(2-t)(-1-t) + 2\big] = (1-t)(t^2 - t) = -t(t-1)^2.$$</div>
+        <p>따라서 $A$의 고유값은 $\lambda = 0$ (중복도 $1$)과 $\lambda = 1$ (중복도 $2$)이다.</p>
+        <p><strong>(ii)</strong> $\lambda = 0$일 때 $A - 0 \cdot I = A$이고, 첫째 행과 셋째 행이 같으므로 방정식은 $2x - z = 0$과 $4x + y - 4z = 0$뿐이다. $z = 2x$, $y = -4x + 4z = 4x$이므로 $(x,y,z) = x(1,4,2)$, 즉 $E_0 = \operatorname{span}\{(1,4,2)\}$이다.</p>
+        <p>$\lambda = 1$일 때</p>
+        <div class="math-display">$$A - I = \begin{pmatrix} 1 &amp; 0 &amp; -1 \\ 4 &amp; 0 &amp; -4 \\ 2 &amp; 0 &amp; -2 \end{pmatrix}$$</div>
+        <p>이고 둘째 행과 셋째 행이 각각 첫째 행의 $4$배, $2$배이므로 독립인 방정식은 $x - z = 0$뿐이다. $y$는 자유변수이므로 $(x,y,z) = (z,y,z) = z(1,0,1) + y(0,1,0)$, 즉 $E_1 = \operatorname{span}\{(0,1,0), (1,0,1)\}$은 $2$차원이다.</p>
+        <p>각 고유값에 속하는 $A$의 모든 고유벡터의 집합은 $E_0 \setminus \{0\}$과 $E_1 \setminus \{0\}$이다.</p>
+        <p><strong>(iii)</strong> $\begin{vmatrix} 1 &amp; 0 &amp; 1 \\ 4 &amp; 1 &amp; 0 \\ 2 &amp; 0 &amp; 1 \end{vmatrix} = -1 \neq 0$이므로 $(1,4,2), (0,1,0), (1,0,1)$은 일차독립이고, 따라서 $\mathbb{R}^3$은 $A$의 고유벡터로 이루어진 기저 $\{(1,4,2), (0,1,0), (1,0,1)\}$을 갖는다.</p>
+        <p><strong>(iv)</strong> 정리 5.1과 주의 2.10에 의해</p>
+        <div class="math-display">$$Q = \begin{pmatrix} 1 &amp; 0 &amp; 1 \\ 4 &amp; 1 &amp; 0 \\ 2 &amp; 0 &amp; 1 \end{pmatrix}, \qquad D = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}$$</div>
+        <p>에 대해 $Q^{-1}AQ = D$가 성립한다. (b), (d) 모두에서 고유벡터의 스칼라배·순서를 달리 잡거나, (d)의 $2$차원 고유공간 $E_1$에서 다른 기저를 택하면 $Q$와 $D$는 얼마든지 달라질 수 있다. 즉 $Q, D$는 유일하지 않다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each matrix $A \in M_{n \times n}(F)$ listed below, carry out the following four tasks.</p>
+        <p><strong>(i)</strong> Find every eigenvalue of $A$.</p>
+        <p><strong>(ii)</strong> For each eigenvalue $\lambda$ of $A$, describe the set of all eigenvectors of $A$ belonging to $\lambda$.</p>
+        <p><strong>(iii)</strong> Decide whether $F^n$ admits a basis consisting of eigenvectors of $A$, and exhibit one whenever it does.</p>
+        <p><strong>(iv)</strong> When such a basis has been found, produce an invertible matrix $Q$ and a diagonal matrix $D$ satisfying $Q^{-1}AQ = D$.</p>
+        <p><strong>(b)</strong> $F = \mathbb{R}$ and</p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; -2 &amp; -3 \\ -1 &amp; 1 &amp; -1 \\ 2 &amp; 2 &amp; 5 \end{pmatrix}.$$</div>
+        <p><strong>(d)</strong> $F = \mathbb{R}$ and</p>
+        <div class="math-display">$$A = \begin{pmatrix} 2 &amp; 0 &amp; -1 \\ 4 &amp; 1 &amp; -4 \\ 2 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(b)</strong> $A = \begin{pmatrix} 0 &amp; -2 &amp; -3 \\ -1 &amp; 1 &amp; -1 \\ 2 &amp; 2 &amp; 5 \end{pmatrix}$.</p>
+        <p><strong>(i)</strong> Expanding by cofactors along the first row,</p>
+        <div class="math-display">$$\det(A - tI) = -t\begin{vmatrix} 1-t &amp; -1 \\ 2 &amp; 5-t \end{vmatrix} + 2\begin{vmatrix} -1 &amp; -1 \\ 2 &amp; 5-t \end{vmatrix} - 3\begin{vmatrix} -1 &amp; 1-t \\ 2 &amp; 2 \end{vmatrix}$$</div>
+        <div class="math-display">$$= -t\big[(1-t)(5-t) + 2\big] + 2\big[-(5-t) + 2\big] - 3\big[-2 - 2(1-t)\big] = -t(t^2 - 6t + 7) + 2(t - 3) - 3(2t - 4)$$</div>
+        <div class="math-display">$$= -t^3 + 6t^2 - 11t + 6 = -(t-1)(t-2)(t-3).$$</div>
+        <p>Hence the eigenvalues of $A$ are $\lambda = 1, 2, 3$ (each of multiplicity $1$).</p>
+        <p><strong>(ii)</strong> For $\lambda = 1$,</p>
+        <div class="math-display">$$A - I = \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ -1 &amp; 0 &amp; -1 \\ 2 &amp; 2 &amp; 4 \end{pmatrix} \ \xrightarrow[R_3 \to R_3 + 2R_1]{R_2 \to R_2 - R_1} \ \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ 0 &amp; 2 &amp; 2 \\ 0 &amp; -2 &amp; -2 \end{pmatrix} \ \xrightarrow{R_3 \to R_3 + R_2} \ \begin{pmatrix} -1 &amp; -2 &amp; -3 \\ 0 &amp; 2 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}.$$</div>
+        <p>The second row gives $y + z = 0$, i.e. $y = -z$, and the first row gives $-x - 2y - 3z = 0$, so $x = -2y - 3z = 2z - 3z = -z$. Setting $z = 1$ gives $(x,y,z) = (-1,-1,1)$, so $E_1 = \operatorname{span}\{(-1,-1,1)\}$. In the same way (computation omitted),</p>
+        <div class="math-display">$$A - 2I = \begin{pmatrix} -2 &amp; -2 &amp; -3 \\ -1 &amp; -1 &amp; -1 \\ 2 &amp; 2 &amp; 3 \end{pmatrix} \implies E_2 = \operatorname{span}\{(-1,1,0)\}, \qquad A - 3I = \begin{pmatrix} -3 &amp; -2 &amp; -3 \\ -1 &amp; -2 &amp; -1 \\ 2 &amp; 2 &amp; 2 \end{pmatrix} \implies E_3 = \operatorname{span}\{(-1,0,1)\}.$$</div>
+        <p>The set of all eigenvectors of $A$ belonging to an eigenvalue $\lambda$ is $E_\lambda \setminus \{0\}$. For instance, the set of eigenvectors belonging to $\lambda = 1$ is $\{c(-1,-1,1) : c \in \mathbb{R}, \ c \neq 0\}$.</p>
+        <p><strong>(iii)</strong> Since $\begin{vmatrix} -1 &amp; -1 &amp; -1 \\ -1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \end{vmatrix} = -1 \neq 0$, the three eigenvectors $(-1,-1,1), (-1,1,0), (-1,0,1)$ are linearly independent, so $\mathbb{R}^3$ has a basis consisting of eigenvectors of $A$, namely $\{(-1,-1,1), (-1,1,0), (-1,0,1)\}$.</p>
+        <p><strong>(iv)</strong> By Theorem 5.1 and Remark 2.10,</p>
+        <div class="math-display">$$Q = \begin{pmatrix} -1 &amp; -1 &amp; -1 \\ -1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \end{pmatrix}, \qquad D = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>satisfy $Q^{-1}AQ = D$.</p>
+        <p><strong>(d)</strong> $A = \begin{pmatrix} 2 &amp; 0 &amp; -1 \\ 4 &amp; 1 &amp; -4 \\ 2 &amp; 0 &amp; -1 \end{pmatrix}$.</p>
+        <p><strong>(i)</strong> Since the entries of the second column are $0, 1-t, 0$, expanding by cofactors along that column gives</p>
+        <div class="math-display">$$\det(A - tI) = (1-t)\begin{vmatrix} 2-t &amp; -1 \\ 2 &amp; -1-t \end{vmatrix} = (1-t)\big[(2-t)(-1-t) + 2\big] = (1-t)(t^2 - t) = -t(t-1)^2.$$</div>
+        <p>Hence the eigenvalues of $A$ are $\lambda = 0$ (multiplicity $1$) and $\lambda = 1$ (multiplicity $2$).</p>
+        <p><strong>(ii)</strong> For $\lambda = 0$, $A - 0 \cdot I = A$, and since the first and third rows are equal, the equations reduce to $2x - z = 0$ and $4x + y - 4z = 0$. Then $z = 2x$ and $y = -4x + 4z = 4x$, so $(x,y,z) = x(1,4,2)$, i.e. $E_0 = \operatorname{span}\{(1,4,2)\}$.</p>
+        <p>For $\lambda = 1$,</p>
+        <div class="math-display">$$A - I = \begin{pmatrix} 1 &amp; 0 &amp; -1 \\ 4 &amp; 0 &amp; -4 \\ 2 &amp; 0 &amp; -2 \end{pmatrix}$$</div>
+        <p>and since the second and third rows are $4$ times and $2$ times the first row respectively, the only independent equation is $x - z = 0$. Since $y$ is a free variable, $(x,y,z) = (z,y,z) = z(1,0,1) + y(0,1,0)$, so $E_1 = \operatorname{span}\{(0,1,0), (1,0,1)\}$ is $2$-dimensional.</p>
+        <p>The set of all eigenvectors of $A$ belonging to each eigenvalue is $E_0 \setminus \{0\}$ and $E_1 \setminus \{0\}$.</p>
+        <p><strong>(iii)</strong> Since $\begin{vmatrix} 1 &amp; 0 &amp; 1 \\ 4 &amp; 1 &amp; 0 \\ 2 &amp; 0 &amp; 1 \end{vmatrix} = -1 \neq 0$, $(1,4,2), (0,1,0), (1,0,1)$ are linearly independent, so $\mathbb{R}^3$ has a basis consisting of eigenvectors of $A$, namely $\{(1,4,2), (0,1,0), (1,0,1)\}$.</p>
+        <p><strong>(iv)</strong> By Theorem 5.1 and Remark 2.10,</p>
+        <div class="math-display">$$Q = \begin{pmatrix} 1 &amp; 0 &amp; 1 \\ 4 &amp; 1 &amp; 0 \\ 2 &amp; 0 &amp; 1 \end{pmatrix}, \qquad D = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}$$</div>
+        <p>satisfy $Q^{-1}AQ = D$. In both (b) and (d), choosing different scalar multiples or a different order for the eigenvectors, or a different basis for the $2$-dimensional eigenspace $E_1$ in (d), can change $Q$ and $D$ arbitrarily; that is, $Q$ and $D$ are not unique.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #4 -->
+<div class="card ex-card" id="e2-4">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-4</span>
+    <span class="ex-title">선형연산자의 고유값과 대각화 기저 <em>Eigenvalues and Diagonalizing Bases for Linear Operators</em><span class="src-ref">Friedberg §5.1 #4 (e), (g), (j)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 나열된 벡터공간 $V$ 위의 각 선형연산자 $T$에 대해, $T$의 고유값을 구하고 $[T]_\beta$가 대각행렬이 되는 $V$의 순서기저 $\beta$를 제시하라.</p>
+        <p><strong>(e)</strong> $V = P_2(\mathbb{R})$이고 $T(f(x)) = xf'(x) + f(2)x + f(3)$.</p>
+        <p><strong>(g)</strong> $V = P_3(\mathbb{R})$이고 $T(f(x)) = xf'(x) + f''(x) - f(2)$.</p>
+        <p><strong>(j)</strong> $V = M_{2 \times 2}(\mathbb{R})$이고 $T(A) = A^t + 2 \cdot \operatorname{tr}(A) \cdot I_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(e)</strong> $V = P_2(\mathbb{R})$, $T(f(x)) = xf'(x) + f(2)x + f(3)$.</p>
+        <p>표준순서기저 $\beta = \{1, x, x^2\}$에 대해 $T(1) = 1 + x$, $T(x) = 3 + 3x$, $T(x^2) = 9 + 4x + 2x^2$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 3 &amp; 9 \\ 1 &amp; 3 &amp; 4 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}.$$</div>
+        <p>셋째 행을 따라 여인수전개하면</p>
+        <div class="math-display">$$\det([T]_\beta - tI) = (2-t)\begin{vmatrix} 1-t &amp; 3 \\ 1 &amp; 3-t \end{vmatrix} = (2-t)\big[(1-t)(3-t) - 3\big] = (2-t)(t^2 - 4t) = -t(t-2)(t-4).$$</div>
+        <p>따라서 $T$의 고유값은 $\lambda = 0, 2, 4$이다 (모두 중복도 $1$). 각 고유값에 대해 $([T]_\beta - \lambda I)v = 0$을 풀면 다음을 얻는다.</p>
+        <p>$\lambda = 0$일 때 셋째 행에서 $2c = 0$이므로 $c = 0$이고, 첫째 행 $a + 3b + 9c = 0$에서 $a = -3b$이다. $b=1$로 두면 $(a,b,c)=(-3,1,0)$이므로 대응하는 고유벡터는 다항식 $x - 3$이다.</p>
+        <p>$\lambda = 4$일 때 셋째 행 $-2c=0$에서 $c=0$이고, 남은 두 행 $-3a+3b=0$, $a-b=0$은 모두 $a=b$를 준다. $a=1$로 두면 $(1,1,0)$이므로 고유벡터는 $x+1$이다.</p>
+        <p>$\lambda = 2$일 때 셋째 행은 항등적으로 $0=0$이 되고, 첫째 행 $-a+3b+9c=0$과 둘째 행 $a+b+4c=0$을 연립하면 $4b+13c=0$, 즉 $b=-13c/4$이고 $a=-b-4c=-3c/4$이다. $c=4$로 두면 $(a,b,c)=(-3,-13,4)$이므로 고유벡터는 $4x^2-13x-3$이다.</p>
+        <p>$\beta' = \{x-3, 4x^2-13x-3, x+1\}$으로 두면 $[T]_{\beta'} = \operatorname{diag}(0,2,4)$이다. 실제로 $T(x+1) = x+3x+4 = 4(x+1)$이고 $T(x-3) = x + (-1)x + 0 = 0$이므로 확인된다.</p>
+        <p><strong>(g)</strong> $V = P_3(\mathbb{R})$, $T(f(x)) = xf'(x) + f''(x) - f(2)$.</p>
+        <p>표준순서기저 $\beta = \{1, x, x^2, x^3\}$에 대해 $T(1) = -1$, $T(x) = -2 + x$, $T(x^2) = -2 + 2x^2$, $T(x^3) = -8 + 6x + 3x^3$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} -1 &amp; -2 &amp; -2 &amp; -8 \\ 0 &amp; 1 &amp; 0 &amp; 6 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>는 상삼각행렬이므로 그 고유값은 대각성분 $\lambda = -1, 1, 2, 3$이다 (모두 중복도 $1$).</p>
+        <p>$\lambda = -1$일 때 셋째 행 $3c=0$, 넷째 행 $4d=0$에서 $c=d=0$이고, 둘째 행 $2b+6d=2b=0$에서 $b=0$이다. $a$는 자유변수이므로 $a=1$로 두면 고유벡터는 상수다항식 $1$이다.</p>
+        <p>$\lambda = 1$일 때 넷째 행 $2d=0$에서 $d=0$이고, 셋째 행에서 $c=0$이며, 첫째 행 $-2a-2b-2c-8d=0$에서 $a=-b$이다. $b=1$로 두면 $(a,b,c,d)=(-1,1,0,0)$이므로 고유벡터는 $x-1$이다.</p>
+        <p>$\lambda = 2$일 때 넷째 행 $d=0$이고, 둘째 행 $-b+6d=-b=0$에서 $b=0$이며, 첫째 행 $-3a-2b-2c-8d=0$에서 $a=-2c/3$이다. $c=3$으로 두면 $(a,b,c,d)=(-2,0,3,0)$이므로 고유벡터는 $3x^2-2$이다.</p>
+        <p>$\lambda = 3$일 때 셋째 행 $-c=0$에서 $c=0$이고, 둘째 행 $-2b+6d=0$에서 $b=3d$이다. $d=2$로 두면 $b=6$이고, 첫째 행 $-4a-2b-2c-8d=0$에서 $-4a-12-16=0$, 즉 $a=-7$이다. 따라서 $(a,b,c,d)=(-7,6,0,2)$이므로 고유벡터는 $2x^3+6x-7$이다.</p>
+        <p>$\beta' = \{1, x-1, 3x^2-2, 2x^3+6x-7\}$으로 두면 $[T]_{\beta'} = \operatorname{diag}(-1,1,2,3)$이다. 실제로 $T(3x^2-2) = 6x^2+6-10 = 2(3x^2-2)$이고 $T(2x^3+6x-7) = 6x^3+6x+12x-(16+12-7) = 6x^3+18x-21 = 3(2x^3+6x-7)$이므로 확인된다.</p>
+        <p><strong>(j)</strong> $V = M_{2 \times 2}(\mathbb{R})$, $T(A) = A^t + 2 \cdot \operatorname{tr}(A) \cdot I_2$.</p>
+        <p>표준순서기저 $\beta = \{E_{11}, E_{12}, E_{21}, E_{22}\}$에 대해 $T(E_{11}) = E_{11} + 2I_2$의 좌표가 $(3,0,0,2)$, $T(E_{12}) = E_{21}$의 좌표가 $(0,0,1,0)$, $T(E_{21}) = E_{12}$의 좌표가 $(0,1,0,0)$, $T(E_{22}) = E_{22} + 2I_2$의 좌표가 $(2,0,0,3)$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 3 &amp; 0 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 2 &amp; 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>이고, 특성다항식은 $\det([T]_\beta - tI) = (t-5)(t-1)^2(t+1)$이므로 고유값은 $\lambda = 5$ (중복도 $1$), $\lambda = 1$ (중복도 $2$), $\lambda = -1$ (중복도 $1$)이다.</p>
+        <p>$\lambda = 5$일 때 $([T]_\beta - 5I)v=0$을 풀면 $b=c=0$이고 $a=d$이므로 $(1,0,0,1)$을 얻는다. 이는 행렬 $E_{11}+E_{22} = I_2$에 대응한다.</p>
+        <p>$\lambda = 1$일 때 $([T]_\beta - I)v=0$을 풀면 $a=-d$이고 $b=c$가 자유변수로 남는 $2$차원 해공간을 얻으며, $(0,1,1,0)$과 $(-1,0,0,1)$을 기저로 잡을 수 있다. 이는 각각 행렬 $E_{12}+E_{21}$와 $E_{22}-E_{11}$에 대응한다.</p>
+        <p>$\lambda = -1$일 때 $([T]_\beta + I)v=0$을 풀면 $a=d=0$이고 $c=-b$이다. $b=-1,c=1$로 두면 $(0,-1,1,0)$을 얻으며, 이는 행렬 $E_{21}-E_{12}$에 대응한다.</p>
+        <p>$\beta' = \{I_2, E_{12}+E_{21}, E_{22}-E_{11}, E_{21}-E_{12}\}$으로 두면 $[T]_{\beta'} = \operatorname{diag}(5,1,1,-1)$이다. 실제로 $T(I_2) = I_2 + 4I_2 = 5I_2$이고, $T(E_{21}-E_{12}) = (E_{12}-E_{21}) + 0 = -(E_{21}-E_{12})$이므로 확인된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each linear operator $T$ on the vector space $V$ listed below, determine the eigenvalues of $T$ and exhibit an ordered basis $\beta$ for $V$ for which $[T]_\beta$ is a diagonal matrix.</p>
+        <p><strong>(e)</strong> $V = P_2(\mathbb{R})$ and $T(f(x)) = xf'(x) + f(2)x + f(3)$.</p>
+        <p><strong>(g)</strong> $V = P_3(\mathbb{R})$ and $T(f(x)) = xf'(x) + f''(x) - f(2)$.</p>
+        <p><strong>(j)</strong> $V = M_{2 \times 2}(\mathbb{R})$ and $T(A) = A^t + 2 \cdot \operatorname{tr}(A) \cdot I_2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(e)</strong> $V = P_2(\mathbb{R})$, $T(f(x)) = xf'(x) + f(2)x + f(3)$.</p>
+        <p>With respect to the standard ordered basis $\beta = \{1, x, x^2\}$, $T(1) = 1 + x$, $T(x) = 3 + 3x$, $T(x^2) = 9 + 4x + 2x^2$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 3 &amp; 9 \\ 1 &amp; 3 &amp; 4 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}.$$</div>
+        <p>Expanding by cofactors along the third row,</p>
+        <div class="math-display">$$\det([T]_\beta - tI) = (2-t)\begin{vmatrix} 1-t &amp; 3 \\ 1 &amp; 3-t \end{vmatrix} = (2-t)\big[(1-t)(3-t) - 3\big] = (2-t)(t^2 - 4t) = -t(t-2)(t-4).$$</div>
+        <p>Hence the eigenvalues of $T$ are $\lambda = 0, 2, 4$ (each of multiplicity $1$). Solving $([T]_\beta - \lambda I)v = 0$ for each eigenvalue gives the following.</p>
+        <p>For $\lambda = 0$, the third row gives $2c = 0$, so $c = 0$, and the first row $a + 3b + 9c = 0$ gives $a = -3b$. Setting $b=1$ gives $(a,b,c)=(-3,1,0)$, so the corresponding eigenvector is the polynomial $x - 3$.</p>
+        <p>For $\lambda = 4$, the third row $-2c=0$ gives $c=0$, and the remaining two rows $-3a+3b=0$, $a-b=0$ both give $a=b$. Setting $a=1$ gives $(1,1,0)$, so the eigenvector is $x+1$.</p>
+        <p>For $\lambda = 2$, the third row becomes the identity $0=0$, and combining the first row $-a+3b+9c=0$ with the second row $a+b+4c=0$ gives $4b+13c=0$, i.e. $b=-13c/4$ and $a=-b-4c=-3c/4$. Setting $c=4$ gives $(a,b,c)=(-3,-13,4)$, so the eigenvector is $4x^2-13x-3$.</p>
+        <p>Setting $\beta' = \{x-3, 4x^2-13x-3, x+1\}$ gives $[T]_{\beta'} = \operatorname{diag}(0,2,4)$. Indeed, $T(x+1) = x+3x+4 = 4(x+1)$ and $T(x-3) = x + (-1)x + 0 = 0$, confirming this.</p>
+        <p><strong>(g)</strong> $V = P_3(\mathbb{R})$, $T(f(x)) = xf'(x) + f''(x) - f(2)$.</p>
+        <p>With respect to the standard ordered basis $\beta = \{1, x, x^2, x^3\}$, $T(1) = -1$, $T(x) = -2 + x$, $T(x^2) = -2 + 2x^2$, $T(x^3) = -8 + 6x + 3x^3$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} -1 &amp; -2 &amp; -2 &amp; -8 \\ 0 &amp; 1 &amp; 0 &amp; 6 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>is upper triangular, so its eigenvalues are the diagonal entries $\lambda = -1, 1, 2, 3$ (each of multiplicity $1$).</p>
+        <p>For $\lambda = -1$, the third row $3c=0$ and fourth row $4d=0$ give $c=d=0$, and the second row $2b+6d=2b=0$ gives $b=0$. Since $a$ is free, setting $a=1$ gives the eigenvector as the constant polynomial $1$.</p>
+        <p>For $\lambda = 1$, the fourth row $2d=0$ gives $d=0$, the third row gives $c=0$, and the first row $-2a-2b-2c-8d=0$ gives $a=-b$. Setting $b=1$ gives $(a,b,c,d)=(-1,1,0,0)$, so the eigenvector is $x-1$.</p>
+        <p>For $\lambda = 2$, the fourth row gives $d=0$, the second row $-b+6d=-b=0$ gives $b=0$, and the first row $-3a-2b-2c-8d=0$ gives $a=-2c/3$. Setting $c=3$ gives $(a,b,c,d)=(-2,0,3,0)$, so the eigenvector is $3x^2-2$.</p>
+        <p>For $\lambda = 3$, the third row $-c=0$ gives $c=0$, and the second row $-2b+6d=0$ gives $b=3d$. Setting $d=2$ gives $b=6$, and the first row $-4a-2b-2c-8d=0$ gives $-4a-12-16=0$, i.e. $a=-7$. Hence $(a,b,c,d)=(-7,6,0,2)$, so the eigenvector is $2x^3+6x-7$.</p>
+        <p>Setting $\beta' = \{1, x-1, 3x^2-2, 2x^3+6x-7\}$ gives $[T]_{\beta'} = \operatorname{diag}(-1,1,2,3)$. Indeed, $T(3x^2-2) = 6x^2+6-10 = 2(3x^2-2)$ and $T(2x^3+6x-7) = 6x^3+6x+12x-(16+12-7) = 6x^3+18x-21 = 3(2x^3+6x-7)$, confirming this.</p>
+        <p><strong>(j)</strong> $V = M_{2 \times 2}(\mathbb{R})$, $T(A) = A^t + 2 \cdot \operatorname{tr}(A) \cdot I_2$.</p>
+        <p>With respect to the standard ordered basis $\beta = \{E_{11}, E_{12}, E_{21}, E_{22}\}$, the coordinate vector of $T(E_{11}) = E_{11} + 2I_2$ is $(3,0,0,2)$, that of $T(E_{12}) = E_{21}$ is $(0,0,1,0)$, that of $T(E_{21}) = E_{12}$ is $(0,1,0,0)$, and that of $T(E_{22}) = E_{22} + 2I_2$ is $(2,0,0,3)$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 3 &amp; 0 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 2 &amp; 0 &amp; 0 &amp; 3 \end{pmatrix}$$</div>
+        <p>and the characteristic polynomial is $\det([T]_\beta - tI) = (t-5)(t-1)^2(t+1)$, so the eigenvalues are $\lambda = 5$ (multiplicity $1$), $\lambda = 1$ (multiplicity $2$), and $\lambda = -1$ (multiplicity $1$).</p>
+        <p>For $\lambda = 5$, solving $([T]_\beta - 5I)v=0$ gives $b=c=0$ and $a=d$, so $(1,0,0,1)$, which corresponds to the matrix $E_{11}+E_{22} = I_2$.</p>
+        <p>For $\lambda = 1$, solving $([T]_\beta - I)v=0$ gives $a=-d$ with $b=c$ free, a $2$-dimensional solution space with basis $(0,1,1,0)$ and $(-1,0,0,1)$, corresponding to the matrices $E_{12}+E_{21}$ and $E_{22}-E_{11}$, respectively.</p>
+        <p>For $\lambda = -1$, solving $([T]_\beta + I)v=0$ gives $a=d=0$ and $c=-b$. Setting $b=-1,c=1$ gives $(0,-1,1,0)$, corresponding to the matrix $E_{21}-E_{12}$.</p>
+        <p>Setting $\beta' = \{I_2, E_{12}+E_{21}, E_{22}-E_{11}, E_{21}-E_{12}\}$ gives $[T]_{\beta'} = \operatorname{diag}(5,1,1,-1)$. Indeed, $T(I_2) = I_2 + 4I_2 = 5I_2$ and $T(E_{21}-E_{12}) = (E_{12}-E_{21}) + 0 = -(E_{21}-E_{12})$, confirming this.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #11 -->
+<div class="card ex-card" id="e2-11">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-11</span>
+    <span class="ex-title">스칼라행렬 <em>Scalar Matrices</em><span class="src-ref">Friedberg §5.1 #11</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정사각행렬이 어떤 스칼라 $\lambda$에 대해 $\lambda I$의 꼴일 때, 이를 <strong>스칼라행렬</strong>이라 부른다. 이는 대각성분이 모두 같은 대각행렬인 것과 동치이다.</p>
+        <p><strong>(a)</strong> 스칼라행렬 $\lambda I$와 닮은 정사각행렬 $A$는 반드시 $\lambda I$와 같음을 증명하라.</p>
+        <p><strong>(b)</strong> 고유값을 정확히 하나만 갖는 대각화가능한 행렬은 스칼라행렬임을 보여라.</p>
+        <p><strong>(c)</strong> 행렬 $\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$이 대각화가능하지 않음을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $A$가 스칼라행렬 $\lambda I$와 닮았다고 하면 어떤 가역행렬 $Q$에 대해 $A = Q^{-1}(\lambda I)Q$이다. 그러면</p>
+        <div class="math-display">$$A = Q^{-1}(\lambda I)Q = \lambda Q^{-1}Q = \lambda I.$$</div>
+        <p><strong>(b)</strong> $A$가 대각화가능하고 고유값을 정확히 하나, $\lambda$만 갖는다고 하자. $A$가 대각화가능하다는 것은 정의에 의해 $L_A$가 대각화가능하다는 뜻이므로, 정리 5.1에 의해 $A$의 고유벡터로 이루어진 $\mathbb{F}^n$의 순서기저 $\mathcal{B} = \{v_1, \ldots, v_n\}$이 존재하고, $D := [L_A]_{\mathcal{B}}$는 대각행렬이며 그 대각성분 $D_{jj}$는 $v_j$에 대응하는 $A$의 고유값이다. $A$의 고유값이 $\lambda$ 하나뿐이므로 $D$의 모든 대각성분은 $\lambda$이고, 즉 $D = \lambda I$이다. 한편 주의 2.10에 의해 $Q := \left[ v_1 \ \cdots \ v_n \right]$은 가역이고 $A = QDQ^{-1} = Q(\lambda I)Q^{-1}$이므로 $A$는 스칼라행렬 $\lambda I$와 닮았다. 따라서 (a)에 의해 $A = \lambda I$이다.</p>
+        <p><strong>(c)</strong> $A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$의 특성다항식은 $\det(A-tI) = (1-t)^2$이므로 $A$의 유일한 고유값은 $\lambda = 1$이다. 그런데 $A \neq I$이므로, (b)의 대우에 의해 $A$는 대각화가능하지 않다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Call a square matrix a <strong>scalar matrix</strong> when it has the form $\lambda I$ for some scalar $\lambda$; equivalently, when it is a diagonal matrix all of whose diagonal entries agree.</p>
+        <p><strong>(a)</strong> Prove that a square matrix $A$ which is similar to a scalar matrix $\lambda I$ must itself be equal to $\lambda I$.</p>
+        <p><strong>(b)</strong> Show that a diagonalizable matrix possessing exactly one eigenvalue is a scalar matrix.</p>
+        <p><strong>(c)</strong> Prove that the matrix $\begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$ is not diagonalizable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> If $A$ is similar to the scalar matrix $\lambda I$, then $A = Q^{-1}(\lambda I)Q$ for some invertible matrix $Q$. Then</p>
+        <div class="math-display">$$A = Q^{-1}(\lambda I)Q = \lambda Q^{-1}Q = \lambda I.$$</div>
+        <p><strong>(b)</strong> Suppose $A$ is diagonalizable and possesses exactly one eigenvalue $\lambda$. By definition, $A$ being diagonalizable means that $L_A$ is diagonalizable, so by Theorem 5.1 there is an ordered basis $\mathcal{B} = \{v_1, \ldots, v_n\}$ for $\mathbb{F}^n$ consisting of eigenvectors of $A$, and $D := [L_A]_{\mathcal{B}}$ is a diagonal matrix whose diagonal entry $D_{jj}$ is the eigenvalue of $A$ corresponding to $v_j$. Since $A$ has only the one eigenvalue $\lambda$, every diagonal entry of $D$ equals $\lambda$, i.e. $D = \lambda I$. Moreover, by Remark 2.10, $Q := \left[ v_1 \ \cdots \ v_n \right]$ is invertible and $A = QDQ^{-1} = Q(\lambda I)Q^{-1}$, so $A$ is similar to the scalar matrix $\lambda I$. Hence by (a), $A = \lambda I$.</p>
+        <p><strong>(c)</strong> The matrix $A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}$ has characteristic polynomial $\det(A-tI) = (1-t)^2$, so the only eigenvalue of $A$ is $\lambda = 1$. Since $A \neq I$, the contrapositive of (b) shows that $A$ is not diagonalizable.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #14 -->
+<div class="card ex-card" id="e2-14">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-14</span>
+    <span class="ex-title">행렬과 전치행렬의 특성다항식 <em>A and A^t Have the Same Characteristic Polynomial</em><span class="src-ref">Friedberg §5.1 #14</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 임의의 정사각행렬이라 하자. $A$와 그 전치행렬 $A^t$가 같은 특성다항식을 가짐을 증명하고, 이로부터 두 행렬이 같은 고유값을 가짐을 이끌어내라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>임의의 정사각행렬 $M$에 대해 $\det(M^t) = \det(M)$이 성립한다. $M = A - tI$로 두면 $(A-tI)^t = A^t - (tI)^t = A^t - tI$이므로</p>
+        <div class="math-display">$$\det(A^t - tI) = \det\big((A-tI)^t\big) = \det(A-tI).$$</div>
+        <p>따라서 $A$와 $A^t$는 같은 특성다항식을 갖는다. 정리 5.2에 의해 한 행렬의 고유값은 정확히 그 특성다항식의 영점이므로, $A$와 $A^t$는 같은 고유값을 갖는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be an arbitrary square matrix. Prove that $A$ and its transpose $A^t$ have the same characteristic polynomial, and deduce that the two matrices therefore have the same eigenvalues.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>For any square matrix $M$, $\det(M^t) = \det(M)$. Taking $M = A - tI$, since $(A-tI)^t = A^t - (tI)^t = A^t - tI$, we have</p>
+        <div class="math-display">$$\det(A^t - tI) = \det\big((A-tI)^t\big) = \det(A-tI).$$</div>
+        <p>Hence $A$ and $A^t$ have the same characteristic polynomial. By Theorem 5.2, the eigenvalues of a matrix are precisely the zeros of its characteristic polynomial, so $A$ and $A^t$ have the same eigenvalues.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #15 -->
+<div class="card ex-card" id="e2-15">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-15</span>
+    <span class="ex-title">거듭제곱 연산자의 고유벡터 <em>Eigenvectors of T^m</em><span class="src-ref">Friedberg §5.1 #15 (a)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a)</strong> $T$를 벡터공간 $V$ 위의 선형연산자라 하고, $x$를 대응하는 고유값이 $\lambda$인 $T$의 고유벡터라 하자. 모든 양의 정수 $m$에 대해 $x$가 대응하는 고유값이 $\lambda^m$인 $T^m$의 고유벡터임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$m$에 대한 수학적귀납법으로 증명한다. $m=1$일 때 $T^1(x) = T(x) = \lambda x = \lambda^1 x$이므로 성립한다. 어떤 양의 정수 $m$에 대해 $T^m(x) = \lambda^m x$가 성립한다고 가정하면</p>
+        <div class="math-display">$$T^{m+1}(x) = T(T^m(x)) = T(\lambda^m x) = \lambda^m T(x) = \lambda^m(\lambda x) = \lambda^{m+1}x$$</div>
+        <p>이므로 $m+1$에 대해서도 성립한다. 따라서 수학적귀납법에 의해 모든 양의 정수 $m$에 대해 $T^m(x) = \lambda^m x$이다. $x \neq 0$(고유벡터의 정의에 의해)이므로, $x$는 고유값 $\lambda^m$에 대응하는 $T^m$의 고유벡터이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> Let $T$ be a linear operator on a vector space $V$, and let $x$ be an eigenvector of $T$ whose corresponding eigenvalue is $\lambda$. Prove that for every positive integer $m$ the vector $x$ is an eigenvector of $T^m$ whose corresponding eigenvalue is $\lambda^m$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We proceed by induction on $m$. When $m=1$, $T^1(x) = T(x) = \lambda x = \lambda^1 x$, so the claim holds. Suppose that $T^m(x) = \lambda^m x$ holds for some positive integer $m$. Then</p>
+        <div class="math-display">$$T^{m+1}(x) = T(T^m(x)) = T(\lambda^m x) = \lambda^m T(x) = \lambda^m(\lambda x) = \lambda^{m+1}x,$$</div>
+        <p>so the claim also holds for $m+1$. Hence by induction, $T^m(x) = \lambda^m x$ for every positive integer $m$. Since $x \neq 0$ (by the definition of an eigenvector), $x$ is an eigenvector of $T^m$ corresponding to the eigenvalue $\lambda^m$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #16 -->
+<div class="card ex-card" id="e2-16">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-16</span>
+    <span class="ex-title">닮은 행렬의 대각합 <em>Similar Matrices Have the Same Trace</em><span class="src-ref">Friedberg §5.1 #16 (a)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a)</strong> 닮은 두 행렬은 항상 같은 대각합을 가짐을 증명하라. (힌트: $\operatorname{tr}(AB) = \operatorname{tr}(BA)$를 이용하라. 이는 2.3절 연습문제 13이다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>먼저 임의의 두 행렬 $X, Y \in M_{n \times n}(F)$에 대해 $\operatorname{tr}(XY) = \operatorname{tr}(YX)$임을 보인다. $(XY)_{ii} = \sum_j X_{ij}Y_{ji}$이므로</p>
+        <div class="math-display">$$\operatorname{tr}(XY) = \sum_i \sum_j X_{ij}Y_{ji} = \sum_j \sum_i Y_{ji}X_{ij} = \operatorname{tr}(YX).$$</div>
+        <p>이제 $A$와 $B$가 닮았다고 하면, $A = Q^{-1}BQ$인 가역행렬 $Q$가 존재한다. $X = Q^{-1}$, $Y = BQ$로 두면</p>
+        <div class="math-display">$$\operatorname{tr}(A) = \operatorname{tr}(Q^{-1}(BQ)) = \operatorname{tr}((BQ)Q^{-1}) = \operatorname{tr}(B)$$</div>
+        <p>이므로 닮은 두 행렬은 같은 대각합을 갖는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> Prove that any two similar matrices have the same trace. (Hint: use $\operatorname{tr}(AB) = \operatorname{tr}(BA)$, which is Exercise 13 of Section 2.3.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>First we show that $\operatorname{tr}(XY) = \operatorname{tr}(YX)$ for any two matrices $X, Y \in M_{n \times n}(F)$. Since $(XY)_{ii} = \sum_j X_{ij}Y_{ji}$,</p>
+        <div class="math-display">$$\operatorname{tr}(XY) = \sum_i \sum_j X_{ij}Y_{ji} = \sum_j \sum_i Y_{ji}X_{ij} = \operatorname{tr}(YX).$$</div>
+        <p>Now suppose $A$ is similar to $B$, so $A = Q^{-1}BQ$ for some invertible matrix $Q$. Taking $X = Q^{-1}$ and $Y = BQ$,</p>
+        <div class="math-display">$$\operatorname{tr}(A) = \operatorname{tr}(Q^{-1}(BQ)) = \operatorname{tr}((BQ)Q^{-1}) = \operatorname{tr}(B),$$</div>
+        <p>so any two similar matrices have the same trace.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Friedberg §5.1 #17 -->
+<div class="card ex-card" id="e2-17">
+  <div class="card-head">
+    <span class="ex-num">EX 5.1-17</span>
+    <span class="ex-title">전치 연산자 <em>The Transpose Operator on M_{n×n}(R)</em><span class="src-ref">Friedberg §5.1 #17</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 $M_{n \times n}(\mathbb{R})$ 위의 선형연산자로서 $T(A) = A^t$라 하자.</p>
+        <p><strong>(a)</strong> $\pm 1$이 $T$의 유일한 고유값임을 보여라.</p>
+        <p><strong>(b)</strong> $T$의 각 고유값에 속하는 고유벡터를 구하라.</p>
+        <p><strong>(c)</strong> $[T]_\beta$가 대각행렬이 되는 $M_{2 \times 2}(\mathbb{R})$의 순서기저 $\beta$를 제시하라.</p>
+        <p><strong>(d)</strong> $n > 2$에 대해, $[T]_\beta$가 대각행렬이 되는 $M_{n \times n}(\mathbb{R})$의 순서기저 $\beta$를 제시하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 임의의 $A \in M_{n\times n}(\mathbb{R})$에 대해 $T(T(A)) = (A^t)^t = A$이므로 $T^2 = I$ (항등연산자)이다. $A \neq 0$이고 $T(A) = \lambda A$라 하면</p>
+        <div class="math-display">$$A = T^2(A) = T(\lambda A) = \lambda T(A) = \lambda^2 A$$</div>
+        <p>이므로 $(\lambda^2 - 1)A = 0$이고, $A \neq 0$이므로 $\lambda^2 = 1$, 즉 $\lambda = \pm 1$이다. $n \geq 2$이면 두 값이 모두 실제로 고유값이 된다: $T(I) = I^t = I = 1 \cdot I$이므로 $I$는 고유값 $1$에 대응하는 고유벡터이고, $T(E_{12} - E_{21}) = E_{21} - E_{12} = -(E_{12}-E_{21})$이므로 $E_{12}-E_{21}$은 고유값 $-1$에 대응하는 고유벡터이다. 그러나 $n = 1$이면 유일한 반대칭행렬은 $0$뿐이므로($1\times 1$ 행렬 $A=(a)$가 $A^t = -A$를 만족하면 $a=-a$, 즉 $a=0$) $\lambda = -1$은 고유값이 될 수 없고, $T$의 고유값은 $\lambda = 1$뿐이다.</p>
+        <p><strong>(b)</strong> (a)에 의해 $T$의 고유값은 $\pm 1$뿐이므로, 각 고유값에 속하는 고유공간을 구하면 된다. $T(A) = A$는 $A^t = A$, 즉 $A$가 대칭행렬이라는 것과 동치이므로 $E_1 = \{A \in M_{n\times n}(\mathbb{R}) : A^t = A\}$는 대칭행렬 전체의 집합이다. 마찬가지로 $T(A) = -A$는 $A^t = -A$, 즉 $A$가 반대칭행렬이라는 것과 동치이므로 $E_{-1} = \{A \in M_{n\times n}(\mathbb{R}) : A^t = -A\}$는 반대칭행렬 전체의 집합이다. 따라서 $\lambda = 1$에 속하는 $T$의 고유벡터는 영행렬이 아닌 대칭행렬 전체이고, $\lambda = -1$에 속하는 고유벡터는 영행렬이 아닌 반대칭행렬 전체이다.</p>
+        <p><strong>(c)</strong> $n=2$일 때 $\beta = \{E_{11}, E_{22}, E_{12}+E_{21}, E_{12}-E_{21}\}$로 두자. $E_{11}, E_{22}, E_{12}+E_{21}$은 (b)에 의해 대칭행렬이므로 $E_1$에 속하고, $E_{12}-E_{21}$은 반대칭행렬이므로 $E_{-1}$에 속한다. 즉 $\beta$의 네 원소는 모두 $T$의 고유벡터이다. 네 행렬을 표준순서기저 $\{E_{11},E_{12},E_{21},E_{22}\}$에 대한 좌표벡터로 나타내면 각각 $(1,0,0,0), (0,0,0,1), (0,1,1,0), (0,1,-1,0)$이고, 이 네 벡터는 일차독립이다(예를 들어 이를 행으로 하는 행렬의 행렬식이 $0$이 아님을 확인할 수 있다). $\dim M_{2\times2}(\mathbb{R}) = 4$이므로 $\beta$는 $M_{2\times2}(\mathbb{R})$의 순서기저이고, $\beta$가 $T$의 고유벡터로 이루어진 순서기저이므로 정리 5.1에 의해</p>
+        <div class="math-display">$$[T]_\beta = \operatorname{diag}(1,1,1,-1).$$</div>
+        <p><strong>(d)</strong> 일반적인 $n$에 대해</p>
+        <div class="math-display">$$\beta = \{E_{ii} : 1 \leq i \leq n\} \cup \{E_{ij}+E_{ji} : i \lt j\} \cup \{E_{ij}-E_{ji} : i \lt j\}$$</div>
+        <p>로 두자. $\beta$의 원소 개수는 $n + \binom{n}{2} + \binom{n}{2} = n + n(n-1) = n^2 = \dim M_{n\times n}(\mathbb{R})$이다. 각 $E_{ii}$와 각 $E_{ij}+E_{ji}$ ($i \lt j$)는 대칭행렬이므로 $E_1$에 속하고, 각 $E_{ij}-E_{ji}$ ($i \lt j$)는 반대칭행렬이므로 $E_{-1}$에 속하며, 따라서 $\beta$의 모든 원소는 $T$의 고유벡터이다. 또한 $i \lt j$에 대해</p>
+        <div class="math-display">$$E_{ij} = \frac{1}{2}\big[(E_{ij}+E_{ji}) + (E_{ij}-E_{ji})\big], \qquad E_{ji} = \frac{1}{2}\big[(E_{ij}+E_{ji}) - (E_{ij}-E_{ji})\big]$$</div>
+        <p>이므로 $\beta$는 표준순서기저 $\{E_{ij} : 1 \leq i,j \leq n\}$ 전체를 생성하고, 따라서 $\beta$는 $M_{n\times n}(\mathbb{R})$을 생성하는 $n^2$개의 벡터로 이루어진 집합이다. $\dim M_{n\times n}(\mathbb{R}) = n^2$이므로 $\beta$는 $M_{n\times n}(\mathbb{R})$의 (순서)기저이고, $\beta$가 $T$의 고유벡터로 이루어져 있으므로 정리 5.1에 의해 $[T]_\beta$는 대각행렬이며, 대각성분은 $E_{ii}$와 $E_{ij}+E_{ji}$에 대응하는 $\binom{n}{2}+n = n(n+1)/2$개의 $1$과 $E_{ij}-E_{ji}$에 대응하는 $\binom{n}{2} = n(n-1)/2$개의 $-1$로 이루어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be the linear operator on $M_{n \times n}(\mathbb{R})$ with $T(A) = A^t$.</p>
+        <p><strong>(a)</strong> Show that $\pm 1$ are the only eigenvalues of $T$.</p>
+        <p><strong>(b)</strong> Describe the eigenvectors of $T$ belonging to each of its eigenvalues.</p>
+        <p><strong>(c)</strong> Exhibit an ordered basis $\beta$ for $M_{2 \times 2}(\mathbb{R})$ for which $[T]_\beta$ is a diagonal matrix.</p>
+        <p><strong>(d)</strong> For $n > 2$, exhibit an ordered basis $\beta$ for $M_{n \times n}(\mathbb{R})$ for which $[T]_\beta$ is a diagonal matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> For any $A \in M_{n\times n}(\mathbb{R})$, $T(T(A)) = (A^t)^t = A$, so $T^2 = I$ (the identity operator). Suppose $A \neq 0$ and $T(A) = \lambda A$. Then</p>
+        <div class="math-display">$$A = T^2(A) = T(\lambda A) = \lambda T(A) = \lambda^2 A,$$</div>
+        <p>so $(\lambda^2 - 1)A = 0$, and since $A \neq 0$, $\lambda^2 = 1$, i.e. $\lambda = \pm 1$. If $n \geq 2$, both values actually occur as eigenvalues: $T(I) = I^t = I = 1 \cdot I$, so $I$ is an eigenvector belonging to the eigenvalue $1$, and $T(E_{12}-E_{21}) = E_{21}-E_{12} = -(E_{12}-E_{21})$, so $E_{12}-E_{21}$ is an eigenvector belonging to $-1$. However, when $n=1$ the only skew-symmetric matrix is $0$ (a $1\times1$ matrix $A=(a)$ satisfying $A^t=-A$ must have $a=-a$, i.e. $a=0$), so $\lambda = -1$ cannot occur as an eigenvalue, and the only eigenvalue of $T$ is $\lambda = 1$.</p>
+        <p><strong>(b)</strong> By (a), the only possible eigenvalues of $T$ are $\pm 1$, so it suffices to find the eigenspace belonging to each. $T(A) = A$ is equivalent to $A^t = A$, i.e. $A$ is symmetric, so $E_1 = \{A \in M_{n\times n}(\mathbb{R}) : A^t = A\}$ is the set of all symmetric matrices. Likewise $T(A) = -A$ is equivalent to $A^t = -A$, i.e. $A$ is skew-symmetric, so $E_{-1} = \{A \in M_{n\times n}(\mathbb{R}) : A^t = -A\}$ is the set of all skew-symmetric matrices. Hence the eigenvectors of $T$ belonging to $\lambda = 1$ are exactly the nonzero symmetric matrices, and those belonging to $\lambda = -1$ are exactly the nonzero skew-symmetric matrices.</p>
+        <p><strong>(c)</strong> For $n=2$, let $\beta = \{E_{11}, E_{22}, E_{12}+E_{21}, E_{12}-E_{21}\}$. By (b), $E_{11}, E_{22}, E_{12}+E_{21}$ are symmetric matrices and hence lie in $E_1$, while $E_{12}-E_{21}$ is skew-symmetric and hence lies in $E_{-1}$; thus all four elements of $\beta$ are eigenvectors of $T$. Writing these four matrices as coordinate vectors relative to the standard ordered basis $\{E_{11},E_{12},E_{21},E_{22}\}$ gives $(1,0,0,0), (0,0,0,1), (0,1,1,0), (0,1,-1,0)$, and these four vectors are linearly independent (for instance, the determinant of the matrix having them as rows is nonzero). Since $\dim M_{2\times2}(\mathbb{R}) = 4$, $\beta$ is an ordered basis for $M_{2\times2}(\mathbb{R})$, and since $\beta$ consists of eigenvectors of $T$, Theorem 5.1 gives</p>
+        <div class="math-display">$$[T]_\beta = \operatorname{diag}(1,1,1,-1).$$</div>
+        <p><strong>(d)</strong> For general $n$, let</p>
+        <div class="math-display">$$\beta = \{E_{ii} : 1 \leq i \leq n\} \cup \{E_{ij}+E_{ji} : i \lt j\} \cup \{E_{ij}-E_{ji} : i \lt j\}.$$</div>
+        <p>The number of elements of $\beta$ is $n + \binom{n}{2} + \binom{n}{2} = n + n(n-1) = n^2 = \dim M_{n\times n}(\mathbb{R})$. Each $E_{ii}$ and each $E_{ij}+E_{ji}$ ($i \lt j$) is symmetric and hence lies in $E_1$, and each $E_{ij}-E_{ji}$ ($i \lt j$) is skew-symmetric and hence lies in $E_{-1}$, so every element of $\beta$ is an eigenvector of $T$. Moreover, for $i \lt j$,</p>
+        <div class="math-display">$$E_{ij} = \frac{1}{2}\big[(E_{ij}+E_{ji}) + (E_{ij}-E_{ji})\big], \qquad E_{ji} = \frac{1}{2}\big[(E_{ij}+E_{ji}) - (E_{ij}-E_{ji})\big],$$</div>
+        <p>so $\beta$ spans the entire standard ordered basis $\{E_{ij} : 1 \leq i,j \leq n\}$, and hence $\beta$ is a set of $n^2$ vectors spanning $M_{n\times n}(\mathbb{R})$. Since $\dim M_{n\times n}(\mathbb{R}) = n^2$, $\beta$ is an (ordered) basis for $M_{n\times n}(\mathbb{R})$, and since $\beta$ consists of eigenvectors of $T$, Theorem 5.1 shows that $[T]_\beta$ is a diagonal matrix, with diagonal entries consisting of $\binom{n}{2}+n = n(n+1)/2$ ones, corresponding to the $E_{ii}$ and $E_{ij}+E_{ji}$, and $\binom{n}{2} = n(n-1)/2$ entries equal to $-1$, corresponding to the $E_{ij}-E_{ji}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

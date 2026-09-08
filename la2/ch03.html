@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.2 대각화가능성 (§5.2 Diagonalizability) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제3단원 5.2 대각화가능성 — 대각화가능성 판정, 고유공간과 중복도, 특성다항식의 분해, 상삼각행렬로의 표현, 대각합과 행렬식, 행렬의 거듭제곱, 동시 대각화를 Friedberg §5.2 추천 연습문제와 함께 한국어·영어 대조로 정리했습니다. Diagonalizability, eigenspace, multiplicity, splitting of the characteristic polynomial, upper triangular matrices, trace and determinant, powers of a matrix, simultaneously diagonalizable operators.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 대각화가능성, diagonalizability, 대각화, diagonalization, 고유값, eigenvalue, 고유벡터, eigenvector, 고유공간, eigenspace, 중복도, multiplicity, 특성다항식, characteristic polynomial, 분해, splits, 직합, direct sum, 상삼각행렬, upper triangular matrix, 대각합, trace, 행렬식, determinant, A의 거듭제곱, powers of a matrix, 동시 대각화, simultaneously diagonalizable, 닮은 행렬, similar matrices, Friedberg, 프리드버그, Friedberg 5.2, 연습문제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.2 대각화가능성 (§5.2 Diagonalizability) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="대각화가능성 판정, 고유공간과 중복도, 특성다항식의 분해, 대각합·행렬식, 동시 대각화 — Friedberg §5.2 추천 연습문제 11문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "5.2 대각화가능성 (§5.2 Diagonalizability) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 5.2 대각화가능성. 고유공간과 중복도, 특성다항식의 분해, 상삼각행렬로의 표현, 대각합과 행렬식, 동시 대각화를 다루는 Friedberg §5.2 추천 연습문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch03.html",
+  "datePublished": "2026-09-03",
+  "dateModified": "2026-09-03",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학2</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html" class="active">03</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 03</p>
+  <h1>5.2 대각화가능성<span>§5.2 Diagonalizability</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#e3-1"><span class="toc-num">EX 5.2-1</span> 참·거짓 판정 <em>True or False</em></a></li>
+    <li><a href="#e3-2"><span class="toc-num">EX 5.2-2</span> 행렬의 대각화가능성 판정 <em>Testing Matrices for Diagonalizability</em></a></li>
+    <li><a href="#e3-3"><span class="toc-num">EX 5.2-3</span> 선형연산자의 대각화가능성 판정 <em>Testing Linear Operators for Diagonalizability</em></a></li>
+    <li><a href="#e3-7"><span class="toc-num">EX 5.2-7</span> A의 거듭제곱의 닫힌 식 <em>A Closed Form for $A^n$</em></a></li>
+    <li><a href="#e3-8"><span class="toc-num">EX 5.2-8</span> 두 고유값과 차원이 n−1인 고유공간 <em>Two Eigenvalues with $\dim E_{\lambda_1} = n - 1$</em></a></li>
+    <li><a href="#e3-9"><span class="toc-num">EX 5.2-9</span> 상삼각 행렬표현과 특성다항식의 분해 <em>Upper Triangular Representation Implies Splitting</em></a></li>
+    <li><a href="#e3-10"><span class="toc-num">EX 5.2-10</span> 상삼각 행렬표현의 대각성분 <em>Diagonal Entries of an Upper Triangular Representation</em></a></li>
+    <li><a href="#e3-11"><span class="toc-num">EX 5.2-11</span> 고유값으로 나타낸 대각합과 행렬식 <em>Trace and Determinant via Eigenvalues</em></a></li>
+    <li><a href="#e3-12"><span class="toc-num">EX 5.2-12</span> T와 그 역연산자의 고유공간 <em>Eigenspaces of $T$ and $T^{-1}$</em></a></li>
+    <li><a href="#e3-18"><span class="toc-num">EX 5.2-18</span> 동시에 대각화가능한 연산자는 교환한다 <em>Simultaneously Diagonalizable Operators Commute</em></a></li>
+    <li><a href="#e3-19"><span class="toc-num">EX 5.2-19</span> T와 그 거듭제곱의 동시 대각화 <em>$T$ and $T^m$ Are Simultaneously Diagonalizable</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c3-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 TYPE {단원}.{순번} (예: THM 1.5). 슬라이드가 붙인 원문 번호
+     (Theorem 1.3, Definition 3., Example 1. …)는 제목 span 끝에
+     span.src-ref 로 따로 표시한다. 번호 없는 라벨(Definition :, Remark :)은
+     src-ref 를 두지 않는다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "번역 예정" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     그 뒤에 필요하면 span.src-ref 로 원문 라벨을 적는다.
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e3-12), 배지는 EX 5.2-12,
+     출처는 span.src-ref 에 Friedberg §5.2 #12 (a), (b) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note03-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 칼리그래피 B는 \mathcal{B}, 풀이 PDF의 β는 \beta,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 &amp; 로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§5.2 Diagonalizability · 대각화가능성</h2></div>
+
+<!-- 편집자 안내 -->
+<div class="card note-card" id="note03-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절의 강의(9월 10일·15일 예정)는 아직 진행되지 않았다. 강의 슬라이드가 올라오면 정의·정리·예의 원문과 번역이 이 자리에 추가된다. 아래는 Friedberg §5.2의 추천 연습문제이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The lectures on this section (scheduled for September 10 and 15) have not yet taken place. Definitions, theorems and examples will be added here once the slides are posted. Below are the recommended exercises from Friedberg §5.2.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연습문제 · Exercises (Friedberg §5.2)</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="e3-1">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-1</span>
+    <span class="ex-title">참·거짓 판정 <em>True or False</em><span class="src-ref">Friedberg §5.2 #1 (a)–(h)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 각 명제의 참·거짓을 판정하고 그 이유를 밝히라.</p>
+        <p><strong>(a)</strong> $n$차원 벡터공간 위의 선형연산자가 서로 다른 고유값을 $n$개 미만으로 가지면 대각화가능하지 않다.</p>
+        <p><strong>(b)</strong> 같은 고유값에 속하는 서로 다른 두 고유벡터는 항상 일차종속이다.</p>
+        <p><strong>(c)</strong> 선형연산자 $T$의 고유값이 $\lambda$이면, $E_\lambda$의 모든 벡터는 $T$의 고유벡터이다.</p>
+        <p><strong>(d)</strong> 선형연산자 $T$의 서로 다른 고유값이 $\lambda_1$, $\lambda_2$이면 $E_{\lambda_1} \cap E_{\lambda_2} = \{0\}$이다.</p>
+        <p><strong>(e)</strong> $A \in M_{n\times n}(F)$이고 $\beta = \{v_1, v_2, \ldots, v_n\}$을 $A$의 고유벡터로 이루어진 $F^n$의 순서기저라 하자. $Q$를 $1 \le j \le n$에 대해 $v_j$를 $j$번째 열로 갖는 $n \times n$ 행렬이라 하면, $Q^{-1}AQ$는 대각행렬이다.</p>
+        <p><strong>(f)</strong> 유한차원 벡터공간 위의 선형연산자가 대각화가능할 필요충분조건은 모든 고유값 $\lambda$의 중복도가 $\dim E_\lambda$와 일치하는 것이다.</p>
+        <p><strong>(g)</strong> 영이 아닌 벡터공간 위의 대각화가능한 선형연산자는 적어도 하나의 고유값을 갖는다.</p>
+        <p><strong>(h)</strong> 벡터공간이 부분공간들의 직합 $V = W_1 \oplus \cdots \oplus W_k$으로 분해되면, $i \neq j$일 때마다 $W_i \cap W_j = \{0\}$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 거짓. $n$차원 벡터공간($n \ge 2$) 위의 항등연산자는 고유값을 $\lambda = 1$ 하나만 가지지만, 영이 아닌 모든 벡터가 고유값 $1$에 대응하는 고유벡터이므로 이 공간의 임의의 기저가 고유벡터로 이루어진 기저이고, 따라서 이 연산자는 대각화가능하다.</p>
+        <p><strong>(b)</strong> 거짓. $\mathbb{R}^n$($n \ge 2$) 위의 항등연산자를 생각하면, $e_1, e_2$는 같은 고유값 $1$에 대응하는 서로 다른 고유벡터이지만 일차독립이다.</p>
+        <p><strong>(c)</strong> 거짓. $E_\lambda$에는 영벡터도 속하지만, 영벡터는 정의상 고유벡터가 아니다.</p>
+        <p><strong>(d)</strong> 참. $v \in E_{\lambda_1} \cap E_{\lambda_2}$이면 $Tv = \lambda_1 v = \lambda_2 v$이므로 $(\lambda_1 - \lambda_2)v = 0$이고, $\lambda_1 \neq \lambda_2$이므로 $v = 0$이다. 따라서 $E_{\lambda_1} \cap E_{\lambda_2} = \{0\}$이다.</p>
+        <p><strong>(e)</strong> 참. $\beta$가 고유벡터로 이루어진 순서기저이므로 $L_A$의 $\beta$에 대한 행렬표현은 대각행렬이다(Theorem 5.1). 또한 $\beta$가 $F^n$의 기저이므로 $Q$의 $n$개의 열은 일차독립이고, 따라서 $Q$는 가역이다. 각 $v_j$가 대응하는 고유값을 $\lambda_j$라 하면 $1 \le j \le n$에 대해 $AQ$의 $j$번째 열은 $Av_j = \lambda_j v_j$이고, 이는 $\lambda_j$를 $j$번째 대각성분으로 갖는 대각행렬 $D$에 대해 $QD$의 $j$번째 열과 같다. 따라서 $AQ = QD$, 즉 $Q^{-1}AQ = D$이다.</p>
+        <p><strong>(f)</strong> 거짓. "모든 고유값 $\lambda$의 중복도가 $\dim E_\lambda$와 일치한다"는 조건만으로는 부족하다. 예를 들어 $\mathbb{R}^2$ 위에서 각 $\pi/2$만큼의 회전은 고유값을 전혀 갖지 않으므로 이 조건이 공허하게 성립하지만, 이 연산자는 대각화가능하지 않다. Theorem 5.9에 의하면 특성다항식이 분해된다는 조건이 추가로 필요하다.</p>
+        <p><strong>(g)</strong> 참. 영이 아닌 벡터공간 위의 대각화가능한 연산자는 고유벡터로 이루어진 기저 $\beta$를 가지는데, 기저는 공집합이 아니므로 그 원소 하나를 택하면 그것이 고유벡터이고 대응하는 고유값이 존재한다.</p>
+        <p><strong>(h)</strong> 참. 직합의 정의에 의해 각 $i$에 대해 $W_i \cap \sum_{j \neq i} W_j = \{0\}$이다. $i \neq j$이면 $W_i \cap W_j \subset W_i \cap \sum_{l \neq i} W_l = \{0\}$이므로 $W_i \cap W_j = \{0\}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether each of the following statements is true or false, and justify your answer.</p>
+        <p><strong>(a)</strong> A linear operator on an $n$-dimensional vector space with fewer than $n$ distinct eigenvalues is never diagonalizable.</p>
+        <p><strong>(b)</strong> Two distinct eigenvectors belonging to the same eigenvalue are always linearly dependent.</p>
+        <p><strong>(c)</strong> If $\lambda$ is an eigenvalue of a linear operator $T$, then every vector of $E_\lambda$ is an eigenvector of $T$.</p>
+        <p><strong>(d)</strong> If $\lambda_1$ and $\lambda_2$ are distinct eigenvalues of a linear operator $T$, then $E_{\lambda_1} \cap E_{\lambda_2} = \{0\}$.</p>
+        <p><strong>(e)</strong> Let $A \in M_{n\times n}(F)$ and let $\beta = \{v_1, v_2, \ldots, v_n\}$ be an ordered basis for $F^n$ made up of eigenvectors of $A$. If $Q$ is the $n \times n$ matrix having $v_j$ as its $j$th column for $1 \le j \le n$, then $Q^{-1}AQ$ is a diagonal matrix.</p>
+        <p><strong>(f)</strong> A linear operator on a finite-dimensional vector space is diagonalizable if and only if the multiplicity of every eigenvalue $\lambda$ agrees with $\dim E_\lambda$.</p>
+        <p><strong>(g)</strong> Every diagonalizable linear operator on a nonzero vector space possesses at least one eigenvalue.</p>
+        <p><strong>(h)</strong> If a vector space decomposes as a direct sum $V = W_1 \oplus \cdots \oplus W_k$ of subspaces, then $W_i \cap W_j = \{0\}$ whenever $i \neq j$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> False. The identity operator on an $n$-dimensional vector space ($n \ge 2$) has only one eigenvalue, $\lambda = 1$, yet every nonzero vector is an eigenvector belonging to $1$, so any basis of the space is a basis of eigenvectors and this operator is diagonalizable.</p>
+        <p><strong>(b)</strong> False. Consider the identity operator on $\mathbb{R}^n$ ($n \ge 2$): $e_1$ and $e_2$ are distinct eigenvectors belonging to the same eigenvalue $1$, yet they are linearly independent.</p>
+        <p><strong>(c)</strong> False. The zero vector lies in $E_\lambda$, but by definition the zero vector is never an eigenvector.</p>
+        <p><strong>(d)</strong> True. If $v \in E_{\lambda_1} \cap E_{\lambda_2}$ then $Tv = \lambda_1 v = \lambda_2 v$, so $(\lambda_1 - \lambda_2)v = 0$; since $\lambda_1 \neq \lambda_2$, this forces $v = 0$. Hence $E_{\lambda_1} \cap E_{\lambda_2} = \{0\}$.</p>
+        <p><strong>(e)</strong> True. Since $\beta$ is an ordered basis of eigenvectors, the matrix representation of $L_A$ with respect to $\beta$ is diagonal (Theorem 5.1). Moreover $\beta$ is a basis for $F^n$, so the $n$ columns of $Q$ are linearly independent and $Q$ is invertible. Writing $\lambda_j$ for the eigenvalue to which $v_j$ belongs, for $1 \le j \le n$ the $j$th column of $AQ$ is $Av_j = \lambda_j v_j$, which equals the $j$th column of $QD$, where $D$ has $\lambda_j$ as its $j$th diagonal entry. Hence $AQ = QD$, that is, $Q^{-1}AQ = D$.</p>
+        <p><strong>(f)</strong> False. The condition "the multiplicity of every eigenvalue $\lambda$ agrees with $\dim E_\lambda$" is not enough by itself. For instance, rotation of $\mathbb{R}^2$ by $\pi/2$ has no eigenvalues at all, so the condition holds vacuously, yet this operator is not diagonalizable. Theorem 5.9 also requires the characteristic polynomial to split.</p>
+        <p><strong>(g)</strong> True. A diagonalizable operator on a nonzero vector space has a basis $\beta$ of eigenvectors; since $\beta$ is nonempty, picking any one of its elements gives an eigenvector, and the eigenvalue it corresponds to exists.</p>
+        <p><strong>(h)</strong> True. By the definition of a direct sum, $W_i \cap \sum_{j \neq i} W_j = \{0\}$ for every $i$. If $i \neq j$, then $W_i \cap W_j \subset W_i \cap \sum_{l \neq i} W_l = \{0\}$, so $W_i \cap W_j = \{0\}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="e3-2">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-2</span>
+    <span class="ex-title">행렬의 대각화가능성 판정 <em>Testing Matrices for Diagonalizability</em><span class="src-ref">Friedberg §5.2 #2 (a), (d), (e)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래의 각 행렬 $A \in M_{n\times n}(\mathbb{R})$에 대하여 $A$가 대각화가능한지 판정하고, 대각화가능하면 $Q^{-1}AQ = D$를 만족하는 가역행렬 $Q$와 대각행렬 $D$를 구하라.</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 2 \\ 0 &amp; 1 \end{pmatrix}$$</div>
+        <p><strong>(d)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 7 &amp; -4 &amp; 0 \\ 8 &amp; -5 &amp; 0 \\ 6 &amp; -6 &amp; 3 \end{pmatrix}$$</div>
+        <p><strong>(e)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; -1 \\ 0 &amp; 1 &amp; 1 \end{pmatrix}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $A - tI = \begin{pmatrix} 1-t &amp; 2 \\ 0 &amp; 1-t \end{pmatrix}$이므로 특성다항식은 $f(t) = (1-t)^2$이고, 고유값은 $\lambda = 1$ 하나뿐이며 중복도는 $2$이다.</p>
+        <p>$A - I = \begin{pmatrix} 0 &amp; 2 \\ 0 &amp; 0 \end{pmatrix}$이므로 $E_1 = N(A - I) = \{(x_1, x_2) : 2x_2 = 0\} = \operatorname{span}\{(1,0)\}$이고 $\dim E_1 = 1$이다.</p>
+        <p>특성다항식 $f(t) = (1-t)^2$은 $\mathbb{R}$ 위에서 분해되지만 중복도 $2 \neq \dim E_1 = 1$이므로, Theorem 5.9(특성다항식이 분해될 때, 대각화가능할 필요충분조건은 모든 고유값에서 중복도와 $\dim E_\lambda$가 일치하는 것이다)에 의해 $A$는 대각화가능하지 않다.</p>
+        <p><strong>(d)</strong> 셋째 열이 $(0, 0, 3-t)^t$이므로 셋째 열을 따라 여인수전개하면</p>
+        <div class="math-display">$$f(t) = \det(A - tI) = (3-t)\det\begin{pmatrix} 7-t &amp; -4 \\ 8 &amp; -5-t \end{pmatrix} = (3-t)\big[(7-t)(-5-t) + 32\big] = (3-t)(t^2 - 2t - 3) = -(t-3)^2(t+1).$$</div>
+        <p>따라서 고유값은 $\lambda = 3$(중복도 $2$)과 $\lambda = -1$(중복도 $1$)이다.</p>
+        <p>$A - 3I = \begin{pmatrix} 4 &amp; -4 &amp; 0 \\ 8 &amp; -8 &amp; 0 \\ 6 &amp; -6 &amp; 0 \end{pmatrix}$을 행연산으로 정리하면 세 행이 모두 $x_1 - x_2 = 0$이라는 하나의 조건으로 귀결되므로 $E_3 = \operatorname{span}\{(1,1,0), (0,0,1)\}$이고 $\dim E_3 = 2$이다.</p>
+        <p>$A + I = \begin{pmatrix} 8 &amp; -4 &amp; 0 \\ 8 &amp; -4 &amp; 0 \\ 6 &amp; -6 &amp; 4 \end{pmatrix}$에서 $2x_1 - x_2 = 0$과 $6x_1 - 6x_2 + 4x_3 = 0$을 얻는다. $x_2 = 2x_1$을 대입하면 $x_3 = \tfrac{3}{2}x_1$이므로, $x_1 = 2$로 두면 $E_{-1} = \operatorname{span}\{(2,4,3)\}$이고 $\dim E_{-1} = 1$이다.</p>
+        <p>모든 고유값에 대해 중복도와 $\dim E_\lambda$가 일치하고 특성다항식이 분해되므로(Theorem 5.9), $A$는 대각화가능하다. $Q = \begin{pmatrix} 1 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; 4 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}$, $D = \begin{pmatrix} 3 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}$로 두면 $Q^{-1}AQ = D$이다. ($Q$, $D$는 유일하지 않다.)</p>
+        <p><strong>(e)</strong> 첫째 행이 $(-t, 0, 1)$이므로 첫째 행을 따라 여인수전개하면</p>
+        <div class="math-display">$$f(t) = \det(A - tI) = -t\det\begin{pmatrix} -t &amp; -1 \\ 1 &amp; 1-t \end{pmatrix} + \det\begin{pmatrix} 1 &amp; -t \\ 0 &amp; 1 \end{pmatrix} = -t(t^2 - t + 1) + 1 = -t^3 + t^2 - t + 1 = -(t-1)(t^2+1).$$</div>
+        <p>실수 범위에서 이 다항식의 근은 $\lambda = 1$ 하나뿐이고, 인수 $t^2+1$은 $\mathbb{R}$ 위에서 분해되지 않는다(근이 $\pm i$이다). Theorem 5.6에 의하면 대각화가능한 연산자의 특성다항식은 반드시 분해되어야 하므로, $A$는 $\mathbb{R}$ 위의 행렬로서 대각화가능하지 않다. (복소수체 $\mathbb{C}$ 위에서는 $f(t)$가 서로 다른 세 근 $1, i, -i$로 분해되므로 $A$는 $\mathbb{C}$ 위의 행렬로는 대각화가능하지만, 이 문제는 $A \in M_{3\times 3}(\mathbb{R})$을 다룬다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each matrix $A \in M_{n\times n}(\mathbb{R})$ below, decide whether $A$ is diagonalizable; when it is, exhibit an invertible matrix $Q$ and a diagonal matrix $D$ with $Q^{-1}AQ = D$.</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 2 \\ 0 &amp; 1 \end{pmatrix}$$</div>
+        <p><strong>(d)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 7 &amp; -4 &amp; 0 \\ 8 &amp; -5 &amp; 0 \\ 6 &amp; -6 &amp; 3 \end{pmatrix}$$</div>
+        <p><strong>(e)</strong></p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; -1 \\ 0 &amp; 1 &amp; 1 \end{pmatrix}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $A - tI = \begin{pmatrix} 1-t &amp; 2 \\ 0 &amp; 1-t \end{pmatrix}$, the characteristic polynomial is $f(t) = (1-t)^2$, so there is only one eigenvalue $\lambda = 1$, with multiplicity $2$.</p>
+        <p>Since $A - I = \begin{pmatrix} 0 &amp; 2 \\ 0 &amp; 0 \end{pmatrix}$, we get $E_1 = N(A - I) = \{(x_1, x_2) : 2x_2 = 0\} = \operatorname{span}\{(1,0)\}$, so $\dim E_1 = 1$.</p>
+        <p>The characteristic polynomial $f(t) = (1-t)^2$ splits over $\mathbb{R}$, but multiplicity $2 \neq \dim E_1 = 1$, so by Theorem 5.9 (when the characteristic polynomial splits, diagonalizability is equivalent to the multiplicity agreeing with $\dim E_\lambda$ at every eigenvalue), $A$ is not diagonalizable.</p>
+        <p><strong>(d)</strong> Since the third column is $(0, 0, 3-t)^t$, expanding along the third column gives</p>
+        <div class="math-display">$$f(t) = \det(A - tI) = (3-t)\det\begin{pmatrix} 7-t &amp; -4 \\ 8 &amp; -5-t \end{pmatrix} = (3-t)\big[(7-t)(-5-t) + 32\big] = (3-t)(t^2 - 2t - 3) = -(t-3)^2(t+1).$$</div>
+        <p>Hence the eigenvalues are $\lambda = 3$ (multiplicity $2$) and $\lambda = -1$ (multiplicity $1$).</p>
+        <p>Row-reducing $A - 3I = \begin{pmatrix} 4 &amp; -4 &amp; 0 \\ 8 &amp; -8 &amp; 0 \\ 6 &amp; -6 &amp; 0 \end{pmatrix}$, all three rows reduce to the single condition $x_1 - x_2 = 0$, so $E_3 = \operatorname{span}\{(1,1,0), (0,0,1)\}$ and $\dim E_3 = 2$.</p>
+        <p>From $A + I = \begin{pmatrix} 8 &amp; -4 &amp; 0 \\ 8 &amp; -4 &amp; 0 \\ 6 &amp; -6 &amp; 4 \end{pmatrix}$ we get $2x_1 - x_2 = 0$ and $6x_1 - 6x_2 + 4x_3 = 0$. Substituting $x_2 = 2x_1$ gives $x_3 = \tfrac{3}{2}x_1$, so taking $x_1 = 2$ gives $E_{-1} = \operatorname{span}\{(2,4,3)\}$ and $\dim E_{-1} = 1$.</p>
+        <p>Since the multiplicity agrees with $\dim E_\lambda$ for every eigenvalue and the characteristic polynomial splits (Theorem 5.9), $A$ is diagonalizable. Taking $Q = \begin{pmatrix} 1 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; 4 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}$ and $D = \begin{pmatrix} 3 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}$ gives $Q^{-1}AQ = D$. ($Q$ and $D$ are not unique.)</p>
+        <p><strong>(e)</strong> Since the first row is $(-t, 0, 1)$, expanding along the first row gives</p>
+        <div class="math-display">$$f(t) = \det(A - tI) = -t\det\begin{pmatrix} -t &amp; -1 \\ 1 &amp; 1-t \end{pmatrix} + \det\begin{pmatrix} 1 &amp; -t \\ 0 &amp; 1 \end{pmatrix} = -t(t^2 - t + 1) + 1 = -t^3 + t^2 - t + 1 = -(t-1)(t^2+1).$$</div>
+        <p>Over the reals, the only root of this polynomial is $\lambda = 1$; the factor $t^2+1$ does not split over $\mathbb{R}$ (its roots are $\pm i$). By Theorem 5.6, the characteristic polynomial of a diagonalizable operator must split, so $A$ is not diagonalizable as a matrix over $\mathbb{R}$. (Over $\mathbb{C}$, $f(t)$ splits into three distinct roots $1, i, -i$, so $A$ would be diagonalizable as a complex matrix, but this problem concerns $A \in M_{3\times 3}(\mathbb{R})$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 3 -->
+<div class="card ex-card" id="e3-3">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-3</span>
+    <span class="ex-title">선형연산자의 대각화가능성 판정 <em>Testing Linear Operators for Diagonalizability</em><span class="src-ref">Friedberg §5.2 #3 (a), (d), (e), (f)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래의 각 벡터공간 $V$ 위의 선형연산자 $T$에 대하여 $T$가 대각화가능한지 판정하고, 대각화가능하면 $[T]_\beta$가 대각행렬이 되는 $V$의 순서기저 $\beta$를 구하라.</p>
+        <p><strong>(a)</strong> $V = P_3(\mathbb{R})$이고 $T(f(x)) = f'(x) + f''(x)$.</p>
+        <p><strong>(d)</strong> $V = P_2(\mathbb{R})$이고 $T(f(x)) = f(0) + f(1)(x + x^2)$.</p>
+        <p><strong>(e)</strong> $V = \mathbb{C}^2$이고 $T(z, w) = (z + iw, iz + w)$.</p>
+        <p><strong>(f)</strong> $V = M_{2\times 2}(\mathbb{R})$이고 $T(A) = A^t$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $\beta = \{1, x, x^2, x^3\}$을 $P_3(\mathbb{R})$의 표준순서기저로 두자. $T(1) = 0$, $T(x) = 1$, $T(x^2) = 2 + 2x$, $T(x^3) = 6x + 3x^2$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 0 &amp; 1 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 6 \\ 0 &amp; 0 &amp; 0 &amp; 3 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}.$$</div>
+        <p>이는 대각성분이 모두 $0$인 상삼각행렬이므로 특성다항식은 $f(t) = t^4$이고, 고유값은 $\lambda = 0$ 하나뿐이며 중복도는 $4$이다.</p>
+        <p>$E_0 = N(T)$를 구하면, $[T]_\beta [x]_\beta = 0$은 $x_2 + 2x_3 = 0$, $2x_3 + 6x_4 = 0$, $3x_4 = 0$을 뜻한다. 마지막 식에서 $x_4 = 0$, 이를 대입해 $x_3 = 0$, $x_2 = 0$을 얻고 $x_1$은 자유변수이다. 따라서 $E_0 = \operatorname{span}\{1\}$이고 $\dim E_0 = 1 \lt 4 = $ 중복도이다. 특성다항식 $t^4$은 분해되지만 중복도와 $\dim E_0$이 일치하지 않으므로, Theorem 5.9(특성다항식이 분해될 때, 대각화가능할 필요충분조건은 모든 고유값에서 중복도와 $\dim E_\lambda$가 일치하는 것이다)에 의해 $T$는 대각화가능하지 않다.</p>
+        <p><strong>(d)</strong> $\beta = \{1, x, x^2\}$을 $P_2(\mathbb{R})$의 표준순서기저로 두자. $T(1) = 1 + 1\cdot(x+x^2) = 1+x+x^2$, $T(x) = 0 + 1\cdot(x+x^2) = x+x^2$, $T(x^2) = 0 + 1\cdot(x+x^2) = x+x^2$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{pmatrix}.$$</div>
+        <p>첫째 행을 따라 여인수전개하면 $f(t) = (1-t)\det\begin{pmatrix} 1-t &amp; 1 \\ 1 &amp; 1-t \end{pmatrix} = (1-t)\big[(1-t)^2 - 1\big] = (1-t)(t^2-2t) = -t(t-1)(t-2)$이고, 고유값은 $\lambda = 0, 1, 2$이며 모두 중복도 $1$이다.</p>
+        <p>$[T]_\beta x = 0$에서 $x_1 = 0$, $x_2 = -x_3$이므로 $x_3 = -1$로 두면 $E_0 = \operatorname{span}\{x - x^2\}$.</p>
+        <p>$([T]_\beta - I)x = 0$에서 $x_1 + x_3 = 0$, $x_1 + x_2 = 0$이므로 $x_3 = 1$로 두면 $x_1 = -1$, $x_2 = 1$이고 $E_1 = \operatorname{span}\{-1 + x + x^2\}$. (검산: $T(-1+x+x^2) = -1 + 1\cdot(x+x^2) = -1+x+x^2$.)</p>
+        <p>$([T]_\beta - 2I)x = 0$에서 $x_1 = 0$, $x_2 = x_3$이므로 $x_3 = 1$로 두면 $E_2 = \operatorname{span}\{x+x^2\}$.</p>
+        <p>$\beta' = \{x-x^2,\ -1+x+x^2,\ x+x^2\}$으로 두면 $[T]_{\beta'} = \operatorname{diag}(0,1,2)$이다. $T$는 대각화가능하다(세 고유값이 서로 다르고, Theorem 5.9에 의해 각 고유값의 중복도와 $\dim E_\lambda$가 모두 $1$로 일치한다).</p>
+        <p><strong>(e)</strong> $\mathbb{C}^2$의 표준순서기저 $\beta = \{(1,0), (0,1)\}$에 대해 $T(1,0) = (1,i)$, $T(0,1) = (i,1)$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; i \\ i &amp; 1 \end{pmatrix}.$$</div>
+        <p>$f(t) = (1-t)^2 - i^2 = (1-t)^2 + 1 = t^2 - 2t + 2$이고, 근의 공식으로 $\lambda = 1 \pm i$를 얻는다. 이 두 고유값은 서로 다르고 각각 중복도 $1$이다.</p>
+        <p>$([T]_\beta - (1-i)I)x = 0$은 $ix_1 + ix_2 = 0$, 즉 $x_1 = -x_2$이므로 $E_{1-i} = \operatorname{span}\{(-1,1)\}$.</p>
+        <p>$([T]_\beta - (1+i)I)x = 0$은 $-ix_1 + ix_2 = 0$, 즉 $x_1 = x_2$이므로 $E_{1+i} = \operatorname{span}\{(1,1)\}$. (검산: $\begin{pmatrix}1 &amp; i \\ i &amp; 1\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}1+i\\1+i\end{pmatrix} = (1+i)\begin{pmatrix}1\\1\end{pmatrix}$.)</p>
+        <p>$\beta' = \{(-1,1), (1,1)\}$로 두면 $[T]_{\beta'} = \operatorname{diag}(1-i, 1+i)$이다. $\mathbb{C}^2$는 $2$차원이고 서로 다른 두 고유값에 대응하는 고유벡터는 일차독립이므로(Theorem 5.5), $T$는 대각화가능하다.</p>
+        <p><strong>(f)</strong> $\beta = \{E_{11}, E_{12}, E_{21}, E_{22}\}$에 대해 $T(E_{11}) = E_{11}$, $T(E_{12}) = E_{21}$, $T(E_{21}) = E_{12}$, $T(E_{22}) = E_{22}$이므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>$1$행$1$열과 $4$행$4$열은 각각 대각성분 $1-t$만으로 분리되고, $2,3$행·열은 $\begin{pmatrix} -t &amp; 1 \\ 1 &amp; -t \end{pmatrix}$ 블록을 이루며 행렬식이 $t^2-1$이므로</p>
+        <div class="math-display">$$f(t) = (1-t)^2(t^2-1) = (t-1)^3(t+1).$$</div>
+        <p>고유값은 $\lambda = 1$(중복도 $3$)과 $\lambda = -1$(중복도 $1$)이다.</p>
+        <p>$([T]_\beta - I)x = 0$은 $-x_2+x_3 = 0$뿐이므로($x_1, x_4$는 자유) $E_1 = \operatorname{span}\{E_{11},\ E_{12}+E_{21},\ E_{22}\}$이고 $\dim E_1 = 3$. 이는 정확히 대칭행렬 전체이다.</p>
+        <p>$([T]_\beta + I)x = 0$은 $2x_1 = 0$, $x_2+x_3=0$, $2x_4=0$이므로 $E_{-1} = \operatorname{span}\{E_{12}-E_{21}\}$이고 $\dim E_{-1}=1$. 이는 반대칭행렬 전체이다.</p>
+        <p>$\beta' = \{E_{11},\ E_{12}+E_{21},\ E_{22},\ E_{12}-E_{21}\}$로 두면 $[T]_{\beta'} = \operatorname{diag}(1,1,1,-1)$이다. 중복도와 $\dim E_\lambda$가 두 고유값 모두에서 일치하고 특성다항식이 분해되므로(Theorem 5.9), $T$는 대각화가능하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each linear operator $T$ on the vector space $V$ below, decide whether $T$ is diagonalizable; when it is, exhibit an ordered basis $\beta$ for $V$ for which $[T]_\beta$ is a diagonal matrix.</p>
+        <p><strong>(a)</strong> $V = P_3(\mathbb{R})$ and $T(f(x)) = f'(x) + f''(x)$.</p>
+        <p><strong>(d)</strong> $V = P_2(\mathbb{R})$ and $T(f(x)) = f(0) + f(1)(x + x^2)$.</p>
+        <p><strong>(e)</strong> $V = \mathbb{C}^2$ and $T(z, w) = (z + iw, iz + w)$.</p>
+        <p><strong>(f)</strong> $V = M_{2\times 2}(\mathbb{R})$ and $T(A) = A^t$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Let $\beta = \{1, x, x^2, x^3\}$ be the standard ordered basis for $P_3(\mathbb{R})$. Since $T(1) = 0$, $T(x) = 1$, $T(x^2) = 2 + 2x$, and $T(x^3) = 6x + 3x^2$,</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 0 &amp; 1 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 6 \\ 0 &amp; 0 &amp; 0 &amp; 3 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}.$$</div>
+        <p>This is upper triangular with all diagonal entries $0$, so the characteristic polynomial is $f(t) = t^4$; there is only one eigenvalue, $\lambda = 0$, with multiplicity $4$.</p>
+        <p>To find $E_0 = N(T)$, the equation $[T]_\beta [x]_\beta = 0$ gives $x_2 + 2x_3 = 0$, $2x_3 + 6x_4 = 0$, $3x_4 = 0$. From the last equation $x_4 = 0$; substituting gives $x_3 = 0$, then $x_2 = 0$, while $x_1$ is free. Hence $E_0 = \operatorname{span}\{1\}$ and $\dim E_0 = 1 \lt 4 = $ the multiplicity. The characteristic polynomial $t^4$ splits, but the multiplicity does not agree with $\dim E_0$, so by Theorem 5.9 (when the characteristic polynomial splits, diagonalizability is equivalent to the multiplicity agreeing with $\dim E_\lambda$ at every eigenvalue), $T$ is not diagonalizable.</p>
+        <p><strong>(d)</strong> Let $\beta = \{1, x, x^2\}$ be the standard ordered basis for $P_2(\mathbb{R})$. Since $T(1) = 1 + 1\cdot(x+x^2) = 1+x+x^2$, $T(x) = 0 + 1\cdot(x+x^2) = x+x^2$, and $T(x^2) = 0 + 1\cdot(x+x^2) = x+x^2$,</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{pmatrix}.$$</div>
+        <p>Expanding along the first row, $f(t) = (1-t)\det\begin{pmatrix} 1-t &amp; 1 \\ 1 &amp; 1-t \end{pmatrix} = (1-t)\big[(1-t)^2 - 1\big] = (1-t)(t^2-2t) = -t(t-1)(t-2)$, so the eigenvalues are $\lambda = 0, 1, 2$, each with multiplicity $1$.</p>
+        <p>Solving $[T]_\beta x = 0$ gives $x_1 = 0$ and $x_2 = -x_3$; taking $x_3 = -1$ gives $E_0 = \operatorname{span}\{x - x^2\}$.</p>
+        <p>Solving $([T]_\beta - I)x = 0$ gives $x_1 + x_3 = 0$ and $x_1 + x_2 = 0$; taking $x_3 = 1$ gives $x_1 = -1$, $x_2 = 1$, so $E_1 = \operatorname{span}\{-1 + x + x^2\}$. (Check: $T(-1+x+x^2) = -1 + 1\cdot(x+x^2) = -1+x+x^2$.)</p>
+        <p>Solving $([T]_\beta - 2I)x = 0$ gives $x_1 = 0$ and $x_2 = x_3$; taking $x_3 = 1$ gives $E_2 = \operatorname{span}\{x+x^2\}$.</p>
+        <p>Taking $\beta' = \{x-x^2,\ -1+x+x^2,\ x+x^2\}$ gives $[T]_{\beta'} = \operatorname{diag}(0,1,2)$. $T$ is diagonalizable (the three eigenvalues are distinct, and by Theorem 5.9 the multiplicity of each eigenvalue agrees with $\dim E_\lambda$, all equal to $1$).</p>
+        <p><strong>(e)</strong> With respect to the standard ordered basis $\beta = \{(1,0), (0,1)\}$ for $\mathbb{C}^2$, $T(1,0) = (1,i)$ and $T(0,1) = (i,1)$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; i \\ i &amp; 1 \end{pmatrix}.$$</div>
+        <p>We have $f(t) = (1-t)^2 - i^2 = (1-t)^2 + 1 = t^2 - 2t + 2$, and the quadratic formula gives $\lambda = 1 \pm i$. These two eigenvalues are distinct, each with multiplicity $1$.</p>
+        <p>Solving $([T]_\beta - (1-i)I)x = 0$ gives $ix_1 + ix_2 = 0$, i.e. $x_1 = -x_2$, so $E_{1-i} = \operatorname{span}\{(-1,1)\}$.</p>
+        <p>Solving $([T]_\beta - (1+i)I)x = 0$ gives $-ix_1 + ix_2 = 0$, i.e. $x_1 = x_2$, so $E_{1+i} = \operatorname{span}\{(1,1)\}$. (Check: $\begin{pmatrix}1 &amp; i \\ i &amp; 1\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}1+i\\1+i\end{pmatrix} = (1+i)\begin{pmatrix}1\\1\end{pmatrix}$.)</p>
+        <p>Taking $\beta' = \{(-1,1), (1,1)\}$ gives $[T]_{\beta'} = \operatorname{diag}(1-i, 1+i)$. Since $\mathbb{C}^2$ is $2$-dimensional and eigenvectors belonging to distinct eigenvalues are linearly independent (Theorem 5.5), $T$ is diagonalizable.</p>
+        <p><strong>(f)</strong> With respect to $\beta = \{E_{11}, E_{12}, E_{21}, E_{22}\}$, $T(E_{11}) = E_{11}$, $T(E_{12}) = E_{21}$, $T(E_{21}) = E_{12}$, and $T(E_{22}) = E_{22}$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>Rows/columns $1$ and $4$ decouple, contributing only the diagonal entry $1-t$ each, while rows/columns $2,3$ form the block $\begin{pmatrix} -t &amp; 1 \\ 1 &amp; -t \end{pmatrix}$ with determinant $t^2-1$, so</p>
+        <div class="math-display">$$f(t) = (1-t)^2(t^2-1) = (t-1)^3(t+1).$$</div>
+        <p>The eigenvalues are $\lambda = 1$ (multiplicity $3$) and $\lambda = -1$ (multiplicity $1$).</p>
+        <p>Solving $([T]_\beta - I)x = 0$ leaves only $-x_2+x_3 = 0$ (with $x_1, x_4$ free), so $E_1 = \operatorname{span}\{E_{11},\ E_{12}+E_{21},\ E_{22}\}$ and $\dim E_1 = 3$ — precisely the symmetric matrices.</p>
+        <p>Solving $([T]_\beta + I)x = 0$ gives $2x_1 = 0$, $x_2+x_3=0$, $2x_4=0$, so $E_{-1} = \operatorname{span}\{E_{12}-E_{21}\}$ and $\dim E_{-1}=1$ — precisely the skew-symmetric matrices.</p>
+        <p>Taking $\beta' = \{E_{11},\ E_{12}+E_{21},\ E_{22},\ E_{12}-E_{21}\}$ gives $[T]_{\beta'} = \operatorname{diag}(1,1,1,-1)$. Since the multiplicity agrees with $\dim E_\lambda$ for both eigenvalues and the characteristic polynomial splits (Theorem 5.9), $T$ is diagonalizable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 7 -->
+<div class="card ex-card" id="e3-7">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-7</span>
+    <span class="ex-title">A의 거듭제곱의 닫힌 식 <em>A Closed Form for $A^n$</em><span class="src-ref">Friedberg §5.2 #7</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음과 같이 두자.</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 4 \\ 2 &amp; 3 \end{pmatrix} \in M_{2\times 2}(\mathbb{R}).$$</div>
+        <p>임의의 양의 정수 $n$에 대하여 $A^n$의 식을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$A - tI = \begin{pmatrix} 1-t &amp; 4 \\ 2 &amp; 3-t \end{pmatrix}$이므로 $f(t) = (1-t)(3-t) - 8 = t^2 - 4t - 5 = (t-5)(t+1)$이고, 고유값은 $\lambda = 5, -1$이다.</p>
+        <p>$(A - 5I)x = 0$은 $\begin{pmatrix} -4 &amp; 4 \\ 2 &amp; -2 \end{pmatrix}x = 0$, 즉 $x_1 = x_2$이므로 $E_5 = \operatorname{span}\{(1,1)\}$이다.</p>
+        <p>$(A + I)x = 0$은 $\begin{pmatrix} 2 &amp; 4 \\ 2 &amp; 4 \end{pmatrix}x = 0$, 즉 $x_1 = -2x_2$이므로 $E_{-1} = \operatorname{span}\{(-2,1)\}$이다.</p>
+        <p>$Q = \begin{pmatrix} 1 &amp; -2 \\ 1 &amp; 1 \end{pmatrix}$로 두면 $\det Q = 3$이고 $Q^{-1} = \dfrac{1}{3}\begin{pmatrix} 1 &amp; 2 \\ -1 &amp; 1 \end{pmatrix}$이며, $Q^{-1}AQ = D := \begin{pmatrix} 5 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$이다. 따라서 $A = QDQ^{-1}$이고, 임의의 양의 정수 $n$에 대해</p>
+        <div class="math-display">$$A^n = QD^nQ^{-1} = \begin{pmatrix} 1 &amp; -2 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 5^n &amp; 0 \\ 0 &amp; (-1)^n \end{pmatrix}\cdot\frac{1}{3}\begin{pmatrix} 1 &amp; 2 \\ -1 &amp; 1 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} 5^n + 2(-1)^n &amp; 2\cdot 5^n - 2(-1)^n \\ 5^n - (-1)^n &amp; 2\cdot 5^n + (-1)^n \end{pmatrix}.$$</div>
+        <p>$n=1$일 때 우변은 $\dfrac{1}{3}\begin{pmatrix} 5-2 &amp; 10+2 \\ 5+1 &amp; 10-1 \end{pmatrix} = \dfrac{1}{3}\begin{pmatrix} 3 &amp; 12 \\ 6 &amp; 9 \end{pmatrix} = \begin{pmatrix} 1 &amp; 4 \\ 2 &amp; 3 \end{pmatrix} = A$이므로 공식이 성립함을 확인할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 4 \\ 2 &amp; 3 \end{pmatrix} \in M_{2\times 2}(\mathbb{R}).$$</div>
+        <p>Find an expression for $A^n$, where $n$ is an arbitrary positive integer.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Since $A - tI = \begin{pmatrix} 1-t &amp; 4 \\ 2 &amp; 3-t \end{pmatrix}$, we get $f(t) = (1-t)(3-t) - 8 = t^2 - 4t - 5 = (t-5)(t+1)$, so the eigenvalues are $\lambda = 5, -1$.</p>
+        <p>Solving $(A - 5I)x = 0$, i.e. $\begin{pmatrix} -4 &amp; 4 \\ 2 &amp; -2 \end{pmatrix}x = 0$, gives $x_1 = x_2$, so $E_5 = \operatorname{span}\{(1,1)\}$.</p>
+        <p>Solving $(A + I)x = 0$, i.e. $\begin{pmatrix} 2 &amp; 4 \\ 2 &amp; 4 \end{pmatrix}x = 0$, gives $x_1 = -2x_2$, so $E_{-1} = \operatorname{span}\{(-2,1)\}$.</p>
+        <p>Let $Q = \begin{pmatrix} 1 &amp; -2 \\ 1 &amp; 1 \end{pmatrix}$; then $\det Q = 3$ and $Q^{-1} = \dfrac{1}{3}\begin{pmatrix} 1 &amp; 2 \\ -1 &amp; 1 \end{pmatrix}$, and $Q^{-1}AQ = D := \begin{pmatrix} 5 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}$. Hence $A = QDQ^{-1}$, and for any positive integer $n$,</p>
+        <div class="math-display">$$A^n = QD^nQ^{-1} = \begin{pmatrix} 1 &amp; -2 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 5^n &amp; 0 \\ 0 &amp; (-1)^n \end{pmatrix}\cdot\frac{1}{3}\begin{pmatrix} 1 &amp; 2 \\ -1 &amp; 1 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} 5^n + 2(-1)^n &amp; 2\cdot 5^n - 2(-1)^n \\ 5^n - (-1)^n &amp; 2\cdot 5^n + (-1)^n \end{pmatrix}.$$</div>
+        <p>At $n=1$, the right-hand side is $\dfrac{1}{3}\begin{pmatrix} 5-2 &amp; 10+2 \\ 5+1 &amp; 10-1 \end{pmatrix} = \dfrac{1}{3}\begin{pmatrix} 3 &amp; 12 \\ 6 &amp; 9 \end{pmatrix} = \begin{pmatrix} 1 &amp; 4 \\ 2 &amp; 3 \end{pmatrix} = A$, confirming the formula.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 8 -->
+<div class="card ex-card" id="e3-8">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-8</span>
+    <span class="ex-title">두 고유값과 차원이 n−1인 고유공간 <em>Two Eigenvalues with $\dim E_{\lambda_1} = n - 1$</em><span class="src-ref">Friedberg §5.2 #8</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(F)$가 서로 다른 고유값 $\lambda_1$, $\lambda_2$를 정확히 두 개 가지며 $\dim E_{\lambda_1} = n - 1$이라 하자. $A$가 대각화가능함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A$를 $F^n$ 위의 연산자 $L_A$로 여기자. $E_{\lambda_1}$의 기저 $\{v_1, \ldots, v_{n-1}\}$을 하나 택하자($\dim E_{\lambda_1} = n-1$로 주어졌다). 한편 $1 \le \dim E_{\lambda_2} \le$ ($\lambda_2$의 중복도)이므로(Theorem 5.7) $\dim E_{\lambda_2} \ge 1$이고, 따라서 $E_{\lambda_2}$에서 고유벡터 $v_n$을 하나 택할 수 있다.</p>
+        <p>서로 다른 고유공간에 속하는 일차독립 부분집합들의 합집합은 일차독립이므로(Theorem 5.8), $E_{\lambda_1}$의 일차독립 부분집합 $\{v_1, \ldots, v_{n-1}\}$과 $E_{\lambda_2}$의 일차독립 부분집합 $\{v_n\}$의 합집합 $\{v_1, \ldots, v_{n-1}, v_n\}$은 일차독립이다.</p>
+        <p>이는 $n$차원 공간 $F^n$에서 $n$개의 일차독립 벡터로 이루어진 집합이므로 $F^n$의 (고유벡터로 이루어진) 순서기저이다. 고유벡터로 이루어진 순서기저가 존재하면 그 연산자는 대각화가능하므로(Theorem 5.1), $L_A$는 대각화가능하고 따라서 $A$는 대각화가능하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Assume that $A \in M_{n\times n}(F)$ has exactly two distinct eigenvalues $\lambda_1$ and $\lambda_2$, and that $\dim E_{\lambda_1} = n - 1$. Prove that $A$ is diagonalizable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Regard $A$ as the operator $L_A$ on $F^n$. Choose a basis $\{v_1, \ldots, v_{n-1}\}$ for $E_{\lambda_1}$ (we are given $\dim E_{\lambda_1} = n-1$). Since $1 \le \dim E_{\lambda_2} \le$ (the multiplicity of $\lambda_2$) by Theorem 5.7, $\dim E_{\lambda_2} \ge 1$, so we may choose an eigenvector $v_n \in E_{\lambda_2}$.</p>
+        <p>The union of linearly independent subsets of distinct eigenspaces is linearly independent (Theorem 5.8), so the union $\{v_1, \ldots, v_{n-1}, v_n\}$ of the linearly independent subset $\{v_1, \ldots, v_{n-1}\}$ of $E_{\lambda_1}$ and the linearly independent subset $\{v_n\}$ of $E_{\lambda_2}$ is linearly independent.</p>
+        <p>This is a set of $n$ linearly independent vectors in the $n$-dimensional space $F^n$, hence it is an ordered basis for $F^n$ consisting of eigenvectors. An operator that admits an ordered basis of eigenvectors is diagonalizable (Theorem 5.1), so $L_A$ is diagonalizable, and therefore $A$ is diagonalizable.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 9 -->
+<div class="card ex-card" id="e3-9">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-9</span>
+    <span class="ex-title">상삼각 행렬표현과 특성다항식의 분해 <em>Upper Triangular Representation Implies Splitting</em><span class="src-ref">Friedberg §5.2 #9 (a)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 벡터공간 $V$ 위의 선형연산자라 하고, $V$의 어떤 순서기저 $\beta$에 대해 $[T]_\beta$가 상삼각행렬이라 하자.</p>
+        <p><strong>(a)</strong> $T$의 특성다항식이 분해됨을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$[T]_\beta = (a_{ij})$가 상삼각행렬이라 하자. 즉 $i > j$이면 $a_{ij} = 0$이고, 대각성분은 $a_{11}, a_{22}, \ldots, a_{nn}$이다. 그러면 $[T]_\beta - tI$ 역시 상삼각행렬이며, 그 대각성분은 $a_{11}-t, a_{22}-t, \ldots, a_{nn}-t$이다.</p>
+        <p>상삼각행렬의 행렬식은 대각성분의 곱이므로</p>
+        <div class="math-display">$$f(t) = \det([T]_\beta - tI) = \prod_{i=1}^{n} (a_{ii} - t).$$</div>
+        <p>이는 일차식들의 곱이므로 $T$의 특성다항식 $f(t)$는 분해된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on a finite-dimensional vector space $V$, and assume that some ordered basis $\beta$ for $V$ makes $[T]_\beta$ an upper triangular matrix.</p>
+        <p><strong>(a)</strong> Prove that the characteristic polynomial of $T$ splits.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $[T]_\beta = (a_{ij})$ be upper triangular, so $a_{ij} = 0$ whenever $i > j$, and its diagonal entries are $a_{11}, a_{22}, \ldots, a_{nn}$. Then $[T]_\beta - tI$ is also upper triangular, with diagonal entries $a_{11}-t, a_{22}-t, \ldots, a_{nn}-t$.</p>
+        <p>The determinant of an upper triangular matrix is the product of its diagonal entries, so</p>
+        <div class="math-display">$$f(t) = \det([T]_\beta - tI) = \prod_{i=1}^{n} (a_{ii} - t).$$</div>
+        <p>This is a product of linear factors, so the characteristic polynomial $f(t)$ of $T$ splits.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 10 -->
+<div class="card ex-card" id="e3-10">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-10</span>
+    <span class="ex-title">상삼각 행렬표현의 대각성분 <em>Diagonal Entries of an Upper Triangular Representation</em><span class="src-ref">Friedberg §5.2 #10</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 벡터공간 $V$ 위의 선형연산자라 하고, 그 서로 다른 고유값을 $\lambda_1, \lambda_2, \ldots, \lambda_k$, 대응하는 중복도를 $m_1, m_2, \ldots, m_k$라 하자. 또한 $\beta$를 $[T]_\beta$가 상삼각행렬이 되는 $V$의 순서기저라 하자. $[T]_\beta$의 대각성분이 정확히 $\lambda_1, \lambda_2, \ldots, \lambda_k$이고, $1 \le i \le k$에 대해 각 $\lambda_i$가 정확히 $m_i$번 나타남을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$[T]_\beta$의 대각성분을 $a_{11}, a_{22}, \ldots, a_{nn}$이라 하자. $[T]_\beta$가 상삼각행렬이므로 (연습문제 5.2-9(a)와 같이) $[T]_\beta - tI$도 상삼각행렬이고, 그 행렬식은 대각성분의 곱이다. 따라서</p>
+        <div class="math-display">$$f(t) = \det([T]_\beta - tI) = \prod_{i=1}^{n} (a_{ii} - t) = (-1)^n \prod_{i=1}^{n} (t - a_{ii}).$$</div>
+        <p>한편 위 식은 $f(t)$를 이미 일차식들의 곱으로 나타내므로 $f(t)$는 분해되고, 따라서 서로 다른 고유값 $\lambda_1, \ldots, \lambda_k$와 그 중복도 $m_1, \ldots, m_k$에 대해 $m_1+\cdots+m_k = \deg f = n$이다. 중복도 $m_i$는 $(t-\lambda_i)^{m_i}$이 $f(t)$를 나누도록 하는 가장 큰 지수이므로</p>
+        <div class="math-display">$$f(t) = (-1)^n \prod_{i=1}^{k} (t - \lambda_i)^{m_i}.$$</div>
+        <p>따라서 $\prod_{i=1}^{n}(t-a_{ii}) = \prod_{i=1}^{k}(t-\lambda_i)^{m_i}$이다. $F[t]$는 유일인수분해정역이므로 다항식을 일차식들의 곱으로 나타내는 방식은 인수의 순서를 제외하면 유일하다. 그러므로 다중집합 $\{a_{11}, a_{22}, \ldots, a_{nn}\}$은 다중집합 $\{\underbrace{\lambda_1, \ldots, \lambda_1}_{m_1}, \ldots, \underbrace{\lambda_k, \ldots, \lambda_k}_{m_k}\}$와 같다.</p>
+        <p>즉 $[T]_\beta$의 대각성분은 정확히 $\lambda_1, \lambda_2, \ldots, \lambda_k$이고, $1 \le i \le k$에 대해 각 $\lambda_i$는 정확히 $m_i$번 나타난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on a finite-dimensional vector space $V$ whose distinct eigenvalues are $\lambda_1, \lambda_2, \ldots, \lambda_k$, with corresponding multiplicities $m_1, m_2, \ldots, m_k$, and let $\beta$ be an ordered basis for $V$ for which $[T]_\beta$ is upper triangular. Prove that the diagonal entries of $[T]_\beta$ are precisely $\lambda_1, \lambda_2, \ldots, \lambda_k$, and that each $\lambda_i$ occurs exactly $m_i$ times for $1 \le i \le k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $a_{11}, a_{22}, \ldots, a_{nn}$ be the diagonal entries of $[T]_\beta$. Since $[T]_\beta$ is upper triangular, so is $[T]_\beta - tI$ (as in Exercise 5.2-9(a)), and its determinant is the product of its diagonal entries. Hence</p>
+        <div class="math-display">$$f(t) = \det([T]_\beta - tI) = \prod_{i=1}^{n} (a_{ii} - t) = (-1)^n \prod_{i=1}^{n} (t - a_{ii}).$$</div>
+        <p>On the other hand, the display above already writes $f(t)$ as a product of linear factors, so $f(t)$ splits, and hence the distinct eigenvalues $\lambda_1, \ldots, \lambda_k$ and their multiplicities $m_1, \ldots, m_k$ satisfy $m_1+\cdots+m_k = \deg f = n$. Since the multiplicity $m_i$ is the largest power of $(t-\lambda_i)$ dividing $f(t)$,</p>
+        <div class="math-display">$$f(t) = (-1)^n \prod_{i=1}^{k} (t - \lambda_i)^{m_i}.$$</div>
+        <p>Hence $\prod_{i=1}^{n}(t-a_{ii}) = \prod_{i=1}^{k}(t-\lambda_i)^{m_i}$. Since $F[t]$ is a unique factorization domain, the way of writing a polynomial as a product of linear factors is unique up to the order of the factors. Therefore the multiset $\{a_{11}, a_{22}, \ldots, a_{nn}\}$ equals the multiset $\{\underbrace{\lambda_1, \ldots, \lambda_1}_{m_1}, \ldots, \underbrace{\lambda_k, \ldots, \lambda_k}_{m_k}\}$.</p>
+        <p>That is, the diagonal entries of $[T]_\beta$ are precisely $\lambda_1, \lambda_2, \ldots, \lambda_k$, and each $\lambda_i$ occurs exactly $m_i$ times for $1 \le i \le k$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 11 -->
+<div class="card ex-card" id="e3-11">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-11</span>
+    <span class="ex-title">고유값으로 나타낸 대각합과 행렬식 <em>Trace and Determinant via Eigenvalues</em><span class="src-ref">Friedberg §5.2 #11 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(F)$가 어떤 상삼각행렬과 닮았고, 그 서로 다른 고유값이 $\lambda_1, \lambda_2, \ldots, \lambda_k$이며 대응하는 중복도가 $m_1, m_2, \ldots, m_k$라 하자. 다음을 증명하라.</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\operatorname{tr}(A) = \sum_{i=1}^{k} m_i \lambda_i$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\det(A) = (\lambda_1)^{m_1} (\lambda_2)^{m_2} \cdots (\lambda_k)^{m_k}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A$가 상삼각행렬 $U$와 닮았다고 하자. 즉 어떤 가역행렬 $Q$에 대해 $A = QUQ^{-1}$이다. 닮은 행렬은 같은 특성다항식을 가지므로 $U$의 서로 다른 고유값도 $\lambda_1, \ldots, \lambda_k$이고 대응하는 중복도도 $m_1, \ldots, m_k$이다. 한편 $F^n$의 표준순서기저 $\gamma$에 대해 $[L_U]_\gamma = U$가 상삼각행렬이므로, 연습문제 5.2-10을 연산자 $L_U$에 적용하면 $U$의 대각성분은 정확히 $\lambda_1, \ldots, \lambda_k$이며 각 $\lambda_i$가 정확히 $m_i$번 나타난다.</p>
+        <p><strong>(a)</strong> $\operatorname{tr}(XY) = \operatorname{tr}(YX)$이므로 $X=Q$, $Y=UQ^{-1}$로 두면</p>
+        <div class="math-display">$$\operatorname{tr}(A) = \operatorname{tr}(QUQ^{-1}) = \operatorname{tr}\big(Q(UQ^{-1})\big) = \operatorname{tr}\big((UQ^{-1})Q\big) = \operatorname{tr}(U).$$</div>
+        <p>대각합은 대각성분의 합이므로, 위에서 확인한 $U$의 대각성분에 의해 $\operatorname{tr}(U) = \sum_{i=1}^{k} m_i \lambda_i$이다. 따라서 $\operatorname{tr}(A) = \sum_{i=1}^{k} m_i \lambda_i$.</p>
+        <p><strong>(b)</strong> 행렬식은 곱셈적이므로</p>
+        <div class="math-display">$$\det(A) = \det(QUQ^{-1}) = \det(Q)\det(U)\det(Q^{-1}) = \det(Q)\det(U)\det(Q)^{-1} = \det(U).$$</div>
+        <p>상삼각행렬의 행렬식은 대각성분의 곱이므로, 위에서 확인한 $U$의 대각성분에 의해</p>
+        <div class="math-display">$$\det(U) = (\lambda_1)^{m_1}(\lambda_2)^{m_2}\cdots(\lambda_k)^{m_k}.$$</div>
+        <p>따라서 $\det(A) = (\lambda_1)^{m_1}(\lambda_2)^{m_2}\cdots(\lambda_k)^{m_k}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n\times n}(F)$ be similar to an upper triangular matrix, and suppose its distinct eigenvalues are $\lambda_1, \lambda_2, \ldots, \lambda_k$ with corresponding multiplicities $m_1, m_2, \ldots, m_k$. Prove the following.</p>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\operatorname{tr}(A) = \sum_{i=1}^{k} m_i \lambda_i$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\det(A) = (\lambda_1)^{m_1} (\lambda_2)^{m_2} \cdots (\lambda_k)^{m_k}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose $A$ is similar to an upper triangular matrix $U$, i.e. $A = QUQ^{-1}$ for some invertible matrix $Q$. Similar matrices have the same characteristic polynomial, so the distinct eigenvalues of $U$ are again $\lambda_1, \ldots, \lambda_k$, with the same multiplicities $m_1, \ldots, m_k$. Moreover $[L_U]_\gamma = U$ is upper triangular for the standard ordered basis $\gamma$ of $F^n$, so applying Exercise 5.2-10 to the operator $L_U$ shows that the diagonal entries of $U$ are precisely $\lambda_1, \ldots, \lambda_k$, with each $\lambda_i$ occurring exactly $m_i$ times.</p>
+        <p><strong>(a)</strong> Since $\operatorname{tr}(XY) = \operatorname{tr}(YX)$, taking $X=Q$ and $Y=UQ^{-1}$ gives</p>
+        <div class="math-display">$$\operatorname{tr}(A) = \operatorname{tr}(QUQ^{-1}) = \operatorname{tr}\big(Q(UQ^{-1})\big) = \operatorname{tr}\big((UQ^{-1})Q\big) = \operatorname{tr}(U).$$</div>
+        <p>The trace is the sum of the diagonal entries, so by the diagonal entries of $U$ established above, $\operatorname{tr}(U) = \sum_{i=1}^{k} m_i \lambda_i$. Hence $\operatorname{tr}(A) = \sum_{i=1}^{k} m_i \lambda_i$.</p>
+        <p><strong>(b)</strong> Since the determinant is multiplicative,</p>
+        <div class="math-display">$$\det(A) = \det(QUQ^{-1}) = \det(Q)\det(U)\det(Q^{-1}) = \det(Q)\det(U)\det(Q)^{-1} = \det(U).$$</div>
+        <p>The determinant of an upper triangular matrix is the product of its diagonal entries, so by the diagonal entries of $U$ established above,</p>
+        <div class="math-display">$$\det(U) = (\lambda_1)^{m_1}(\lambda_2)^{m_2}\cdots(\lambda_k)^{m_k}.$$</div>
+        <p>Hence $\det(A) = (\lambda_1)^{m_1}(\lambda_2)^{m_2}\cdots(\lambda_k)^{m_k}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 12 -->
+<div class="card ex-card" id="e3-12">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-12</span>
+    <span class="ex-title">T와 그 역연산자의 고유공간 <em>Eigenspaces of $T$ and $T^{-1}$</em><span class="src-ref">Friedberg §5.2 #12 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 벡터공간 $V$ 위의 가역 선형연산자라 하자. $\lambda$가 $T$의 고유값이면 $\lambda^{-1}$이 $T^{-1}$의 고유값임은 알려져 있다(§5.1 연습문제 8).</p>
+        <p><strong>(a)</strong> $\lambda$에 대응하는 $T$의 고유공간이 $\lambda^{-1}$에 대응하는 $T^{-1}$의 고유공간과 일치함을 증명하라.</p>
+        <p><strong>(b)</strong> $T$가 대각화가능하면 $T^{-1}$도 대각화가능함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $T$가 가역이므로 $0$은 $T$의 고유값이 아니다(만약 $Tv=0$인 $v \neq 0$이 존재하면 $T$는 단사가 아니어서 가역성에 모순된다). 따라서 $T$의 임의의 고유값 $\lambda$에 대해 $\lambda \neq 0$이고 $\lambda^{-1}$이 정의된다.</p>
+        <p>$v \in V$가 주어졌다고 하자. $T$가 가역이므로</p>
+        <div class="math-display">$$Tv = \lambda v \iff T^{-1}(Tv) = T^{-1}(\lambda v) \iff v = \lambda\, T^{-1}(v) \iff T^{-1}(v) = \lambda^{-1} v$$</div>
+        <p>이며, 마지막 동치는 $\lambda \neq 0$이므로 양변을 $\lambda$로 나눈 것이다(역으로 $v = \lambda T^{-1}(v)$의 양변에 $T$를 적용하면 $Tv = \lambda T(T^{-1}v) = \lambda v$를 얻으므로 위 동치들은 모두 쌍방향으로 성립한다). 따라서</p>
+        <div class="math-display">$$E_\lambda(T) = \{v \in V : Tv = \lambda v\} = \{v \in V : T^{-1}(v) = \lambda^{-1}v\} = E_{\lambda^{-1}}(T^{-1}).$$</div>
+        <p><strong>(b)</strong> $T$가 대각화가능하므로 $T$의 고유벡터로 이루어진 $V$의 순서기저 $\beta = \{v_1, \ldots, v_n\}$이 존재한다(Theorem 5.1). 각 $v_i$가 $T$의 어떤 고유값 $\lambda_i$에 대응하는 고유벡터라 하면, (a)에 의해 $v_i$는 $T^{-1}$의 고유값 $\lambda_i^{-1}$에 대응하는 고유벡터이기도 하다.</p>
+        <p>따라서 $\beta$는 $T^{-1}$의 고유벡터로 이루어진 $V$의 순서기저이기도 하다. Theorem 5.1에 의해 $T^{-1}$은 대각화가능하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be an invertible linear operator on a finite-dimensional vector space $V$. Recall that $\lambda^{-1}$ is an eigenvalue of $T^{-1}$ whenever $\lambda$ is an eigenvalue of $T$ (Exercise 8 of Section 5.1).</p>
+        <p><strong>(a)</strong> Prove that the eigenspace of $T$ corresponding to $\lambda$ coincides with the eigenspace of $T^{-1}$ corresponding to $\lambda^{-1}$.</p>
+        <p><strong>(b)</strong> Prove that if $T$ is diagonalizable, then so is $T^{-1}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $T$ is invertible, $0$ is not an eigenvalue of $T$ (if $Tv=0$ for some $v \neq 0$, then $T$ would not be injective, contradicting invertibility). Hence every eigenvalue $\lambda$ of $T$ satisfies $\lambda \neq 0$, so $\lambda^{-1}$ is defined.</p>
+        <p>Let $v \in V$. Since $T$ is invertible,</p>
+        <div class="math-display">$$Tv = \lambda v \iff T^{-1}(Tv) = T^{-1}(\lambda v) \iff v = \lambda\, T^{-1}(v) \iff T^{-1}(v) = \lambda^{-1} v$$</div>
+        <p>where the last equivalence divides both sides by $\lambda \neq 0$ (conversely, applying $T$ to both sides of $v = \lambda T^{-1}(v)$ gives $Tv = \lambda T(T^{-1}v) = \lambda v$, so all these equivalences hold in both directions). Hence</p>
+        <div class="math-display">$$E_\lambda(T) = \{v \in V : Tv = \lambda v\} = \{v \in V : T^{-1}(v) = \lambda^{-1}v\} = E_{\lambda^{-1}}(T^{-1}).$$</div>
+        <p><strong>(b)</strong> Since $T$ is diagonalizable, there is an ordered basis $\beta = \{v_1, \ldots, v_n\}$ for $V$ consisting of eigenvectors of $T$ (Theorem 5.1). Say each $v_i$ is an eigenvector of $T$ corresponding to some eigenvalue $\lambda_i$; by part (a), $v_i$ is also an eigenvector of $T^{-1}$ corresponding to the eigenvalue $\lambda_i^{-1}$.</p>
+        <p>Hence $\beta$ is also an ordered basis for $V$ consisting of eigenvectors of $T^{-1}$. By Theorem 5.1, $T^{-1}$ is diagonalizable.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 18 -->
+<div class="card ex-card" id="e3-18">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-18</span>
+    <span class="ex-title">동시에 대각화가능한 연산자는 교환한다 <em>Simultaneously Diagonalizable Operators Commute</em><span class="src-ref">Friedberg §5.2 #18 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$와 $U$를 유한차원 벡터공간 $V$ 위의 두 선형연산자라 하자. $V$의 어떤 하나의 순서기저 $\beta$에 대해 $[T]_\beta$와 $[U]_\beta$가 모두 대각행렬이면 $T$와 $U$를 <strong>동시에 대각화가능하다</strong>고 한다. 마찬가지로, 두 행렬 $A, B \in M_{n\times n}(F)$에 대해 어떤 하나의 가역행렬 $Q \in M_{n\times n}(F)$가 $Q^{-1}AQ$와 $Q^{-1}BQ$를 모두 대각행렬로 만들면 $A$와 $B$를 <strong>동시에 대각화가능하다</strong>고 한다.</p>
+        <p><strong>(a)</strong> 동시에 대각화가능한 연산자 $T$와 $U$는 교환함을, 즉 $TU = UT$임을 증명하라.</p>
+        <p><strong>(b)</strong> 동시에 대각화가능한 행렬 $A$와 $B$는 교환함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $T$와 $U$가 동시에 대각화가능하므로, $[T]_\beta$와 $[U]_\beta$가 모두 대각행렬이 되는 $V$의 순서기저 $\beta$가 존재한다. 두 대각행렬은 성분별 곱셈이므로 항상 교환한다. 즉 $[T]_\beta[U]_\beta = [U]_\beta[T]_\beta$이다.</p>
+        <p>한편 두 선형변환의 합성의 행렬표현은 각 행렬표현의 곱이므로(Theorem 2.11) $[TU]_\beta = [T]_\beta[U]_\beta$이고 $[UT]_\beta = [U]_\beta[T]_\beta$이며, 따라서 $[TU]_\beta = [UT]_\beta$이다. 또한 사상 $S \mapsto [S]_\beta$($V$ 위의 선형연산자에서 $M_{n\times n}(F)$로 가는 사상)는 동형사상이므로(Theorem 2.20) 특히 단사이고, 행렬표현이 같은 두 연산자는 서로 같다. 따라서 $TU = UT$이다.</p>
+        <p><strong>(b)</strong> $A$와 $B$가 동시에 대각화가능하므로, $D_1 := Q^{-1}AQ$와 $D_2 := Q^{-1}BQ$가 모두 대각행렬이 되는 가역행렬 $Q$가 존재한다. 대각행렬은 항상 교환하므로 $D_1D_2 = D_2D_1$이다. 즉</p>
+        <div class="math-display">$$Q^{-1}(AB)Q = (Q^{-1}AQ)(Q^{-1}BQ) = D_1D_2 = D_2D_1 = (Q^{-1}BQ)(Q^{-1}AQ) = Q^{-1}(BA)Q.$$</div>
+        <p>양변의 왼쪽에 $Q$를, 오른쪽에 $Q^{-1}$을 곱하면 $AB = BA$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two linear operators $T$ and $U$ on a finite-dimensional vector space $V$ are called <strong>simultaneously diagonalizable</strong> when a single ordered basis $\beta$ for $V$ makes both $[T]_\beta$ and $[U]_\beta$ diagonal. Likewise, two matrices $A, B \in M_{n\times n}(F)$ are called <strong>simultaneously diagonalizable</strong> when a single invertible matrix $Q \in M_{n\times n}(F)$ makes both $Q^{-1}AQ$ and $Q^{-1}BQ$ diagonal.</p>
+        <p><strong>(a)</strong> Prove that simultaneously diagonalizable operators $T$ and $U$ commute, that is, $TU = UT$.</p>
+        <p><strong>(b)</strong> Show that simultaneously diagonalizable matrices $A$ and $B$ commute.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $T$ and $U$ are simultaneously diagonalizable, there is an ordered basis $\beta$ for $V$ such that both $[T]_\beta$ and $[U]_\beta$ are diagonal. Two diagonal matrices always commute, since multiplication of diagonal matrices is entrywise. That is, $[T]_\beta[U]_\beta = [U]_\beta[T]_\beta$.</p>
+        <p>The matrix representation of a composition of linear transformations is the product of their matrix representations (Theorem 2.11), so $[TU]_\beta = [T]_\beta[U]_\beta$ and $[UT]_\beta = [U]_\beta[T]_\beta$, whence $[TU]_\beta = [UT]_\beta$. Moreover the map $S \mapsto [S]_\beta$ (from linear operators on $V$ to $M_{n\times n}(F)$) is an isomorphism (Theorem 2.20), hence in particular injective, so two operators with the same matrix representation are equal. Therefore $TU = UT$.</p>
+        <p><strong>(b)</strong> Since $A$ and $B$ are simultaneously diagonalizable, there is an invertible matrix $Q$ such that $D_1 := Q^{-1}AQ$ and $D_2 := Q^{-1}BQ$ are both diagonal. Diagonal matrices always commute, so $D_1D_2 = D_2D_1$. That is,</p>
+        <div class="math-display">$$Q^{-1}(AB)Q = (Q^{-1}AQ)(Q^{-1}BQ) = D_1D_2 = D_2D_1 = (Q^{-1}BQ)(Q^{-1}AQ) = Q^{-1}(BA)Q.$$</div>
+        <p>Multiplying both sides on the left by $Q$ and on the right by $Q^{-1}$ gives $AB = BA$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 19 -->
+<div class="card ex-card" id="e3-19">
+  <div class="card-head">
+    <span class="ex-num">EX 5.2-19</span>
+    <span class="ex-title">T와 그 거듭제곱의 동시 대각화 <em>$T$ and $T^m$ Are Simultaneously Diagonalizable</em><span class="src-ref">Friedberg §5.2 #19</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 벡터공간 $V$ 위의 대각화가능한 선형연산자라 하고, $m$을 임의의 양의 정수라 하자. $T$와 $T^m$이 동시에 대각화가능함을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$T$가 대각화가능하므로, 대각화가능성의 정의에 의해 $[T]_\beta$가 대각행렬이 되는 $V$의 순서기저 $\beta$가 존재한다. $[T]_\beta = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$이라 하자.</p>
+        <p>두 선형변환의 합성의 행렬표현은 각 행렬표현의 곱이므로(Theorem 2.11), $V$ 위의 임의의 두 연산자 $S$, $S'$에 대해 $[SS']_\beta = [S]_\beta[S']_\beta$이다. 이를 이용해 $m$에 대한 수학적 귀납법으로 $[T^m]_\beta = ([T]_\beta)^m$을 얻는다. $m=1$일 때는 자명하고, $[T^{m-1}]_\beta = ([T]_\beta)^{m-1}$을 가정하면</p>
+        <div class="math-display">$$[T^m]_\beta = [T\,T^{m-1}]_\beta = [T]_\beta\,[T^{m-1}]_\beta = [T]_\beta\,([T]_\beta)^{m-1} = ([T]_\beta)^m.$$</div>
+        <p>대각행렬의 거듭제곱은 각 대각성분을 거듭제곱한 대각행렬이므로</p>
+        <div class="math-display">$$[T^m]_\beta = ([T]_\beta)^m = \operatorname{diag}(\lambda_1^m, \ldots, \lambda_n^m)$$</div>
+        <p>이며, 이 역시 대각행렬이다. 따라서 같은 순서기저 $\beta$에 대해 $[T]_\beta$와 $[T^m]_\beta$가 모두 대각행렬이므로, $T$와 $T^m$은 동시에 대각화가능하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a diagonalizable linear operator on a finite-dimensional vector space $V$, and let $m$ be an arbitrary positive integer. Prove that $T$ and $T^m$ are simultaneously diagonalizable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $T$ is diagonalizable, by the definition of diagonalizability there is an ordered basis $\beta$ for $V$ such that $[T]_\beta$ is diagonal. Write $[T]_\beta = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$.</p>
+        <p>The matrix representation of a composition of linear transformations is the product of their matrix representations (Theorem 2.11), so $[SS']_\beta = [S]_\beta[S']_\beta$ for any operators $S$, $S'$ on $V$. Induction on $m$ then gives $[T^m]_\beta = ([T]_\beta)^m$: the case $m=1$ is trivial, and assuming $[T^{m-1}]_\beta = ([T]_\beta)^{m-1}$,</p>
+        <div class="math-display">$$[T^m]_\beta = [T\,T^{m-1}]_\beta = [T]_\beta\,[T^{m-1}]_\beta = [T]_\beta\,([T]_\beta)^{m-1} = ([T]_\beta)^m.$$</div>
+        <p>A power of a diagonal matrix is the diagonal matrix obtained by raising each diagonal entry to that power, so</p>
+        <div class="math-display">$$[T^m]_\beta = ([T]_\beta)^m = \operatorname{diag}(\lambda_1^m, \ldots, \lambda_n^m)$$</div>
+        <p>which is again diagonal. Hence, with respect to the same ordered basis $\beta$, both $[T]_\beta$ and $[T^m]_\beta$ are diagonal, so $T$ and $T^m$ are simultaneously diagonalizable.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
