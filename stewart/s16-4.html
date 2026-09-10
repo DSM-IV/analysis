@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.4 그린 정리 (Green's Theorem) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.4 그린 정리 — 양의 향 단순닫힌곡선 위의 선적분과 평면 영역 D 위의 이중적분을 잇는 그린 정리의 진술, ∂D 표기와 식 (1), 단순영역에 대한 증명, 넓이 공식 (5) 세 가지, 단순영역의 유한 합집합·구멍 있는 영역으로의 확장, 정리 16.3.6의 증명 개요를 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.4, 그린 정리, Green's Theorem, 양의 향, positive orientation, 단순닫힌곡선, simple closed curve, 단순영역, simple region, 넓이 공식, area formula, 구멍 있는 영역, region with holes, 단순연결영역, simply-connected, 플래니미터, planimeter, 정리 16.3.6, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-4.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.4 그린 정리 (Green's Theorem) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="양의 향 단순닫힌곡선 위의 선적분을 그 곡선이 둘러싼 평면 영역의 이중적분으로 바꾸는 그린 정리, 단순영역에서의 증명, 넓이 공식 세 가지, 유한 합집합과 구멍 있는 영역으로의 확장까지 §16.4 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-4.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.4 그린 정리 (Green's Theorem) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.4 그린 정리 — 양의 향 규약, 그린 정리의 진술과 ∂D 표기, 이중적분판 미적분학 기본정리로서의 해석, 단순영역에 대한 증명, 넓이 공식 (5) 세 가지, 단순영역의 유한 합집합과 구멍 있는 영역으로의 확장, 정리 16.3.6의 증명 개요를 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-4.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-4.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html" class="active">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.4 · 10주차</p>
+  <h1>§16.4 그린 정리<span>Green's Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-4-1"><span class="toc-num">NOTE</span> 그린 정리가 잇는 두 적분 <em>What Green's Theorem Relates</em></a></li>
+    <li><a href="#c16-4-2"><span class="toc-num">REM 2</span> 양의 향 <em>Positive Orientation</em></a></li>
+    <li><a href="#c16-4-3"><span class="toc-num">THM 3</span> 그린 정리 <em>Green's Theorem</em></a></li>
+    <li><a href="#c16-4-4"><span class="toc-num">REM 4</span> 폐적분 기호와 경계곡선 표기 <em>Notation for the Positively Oriented Boundary</em></a></li>
+    <li><a href="#c16-4-5"><span class="toc-num">NOTE</span> 이중적분판 미적분학 기본정리 <em>A Two-Dimensional Fundamental Theorem</em></a></li>
+    <li><a href="#c16-4-6"><span class="toc-num">NOTE</span> 단순영역에서의 증명 <em>Proof for a Simple Region</em></a></li>
+    <li><a href="#c16-4-7"><span class="toc-num">NOTE</span> 그린 정리를 거꾸로 쓰기 <em>Using the Theorem in Reverse</em></a></li>
+    <li><a href="#c16-4-8"><span class="toc-num">THM 8</span> 그린 정리로 넓이 구하기 <em>Areas by Green's Theorem</em></a></li>
+    <li><a href="#c16-4-9"><span class="toc-num">NOTE</span> 플래니미터 <em>The Planimeter</em></a></li>
+    <li><a href="#c16-4-10"><span class="toc-num">NOTE</span> 단순영역의 유한 합집합으로 확장 <em>Extension to Finite Unions</em></a></li>
+    <li><a href="#c16-4-11"><span class="toc-num">NOTE</span> 구멍 있는 영역으로 확장 <em>Extension to Regions with Holes</em></a></li>
+    <li><a href="#c16-4-12"><span class="toc-num">THM 12</span> 정리 16.3.6의 증명 개요 <em>Sketch Proof of Theorem 16.3.6</em></a></li>
+    <li><a href="#ex16-4-1"><span class="toc-num">EXAM 1</span> 삼각형 위의 선적분 <em>A Line Integral around a Triangle</em></a></li>
+    <li><a href="#ex16-4-2"><span class="toc-num">EXAM 2</span> 성분이 까다로운 원 위의 선적분 <em>A Circle Integral with Awkward Components</em></a></li>
+    <li><a href="#ex16-4-3"><span class="toc-num">EXAM 3</span> 타원이 둘러싸는 넓이 <em>The Area Enclosed by an Ellipse</em></a></li>
+    <li><a href="#ex16-4-4"><span class="toc-num">EXAM 4</span> 반환형 영역의 경계 위의 선적분 <em>A Line Integral over a Semiannular Boundary</em></a></li>
+    <li><a href="#ex16-4-5"><span class="toc-num">EXAM 5</span> 원점을 감싸는 모든 경로에서 같은 값 <em>The Same Value around Every Path Enclosing the Origin</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opener - what Green's Theorem relates (Figure 1) -->
+<div class="card note-card" id="c16-4-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">그린 정리가 잇는 두 적분 <em>What Green's Theorem Relates</em><span class="src-ref">Figure 1 · p.1192</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리는 차원이 다른 두 적분을 하나로 잇는다 &mdash; 평면의 단순닫힌곡선 $C$를 한 바퀴 도는 선적분과, $C$가 둘러싸는 평면 영역 $D$ 위의 이중적분이 바로 그 둘이다.</p>
+        <p>이 절에서는 $D$가 $C$ 내부의 점들과 $C$ 위의 점들을 모두 포함한다고 약속한다. 즉 곡선 $C$는 영역과 별개의 대상이 아니라 그 영역의 경계 자체이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Green's Theorem links two integrals that live in different dimensions: a line integral taken once around a simple closed curve $C$ in the plane, and a double integral over the region $D$ that $C$ encloses.</p>
+        <p>Throughout the section $D$ is understood to consist of every point lying inside $C$ together with the points of $C$ itself, so the curve is the boundary of the region rather than something separate from it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : positive orientation (Figure 2) -->
+<div class="card rem-card" id="c16-4-2">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">양의 향 <em>Positive Orientation</em><span class="src-ref">Figure 2 · p.1192</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단순닫힌곡선 $C$를 반시계 방향으로 정확히 한 바퀴 도는 향을 <strong>양의 향</strong>이라 한다. 아래 그림 (a)가 그 경우이다.</p>
+        <p>매개변수화 $\mathbf r(t)$, $a\le t\le b$로 서술하면, 점 $\mathbf r(t)$가 곡선을 따라 움직이는 매 순간 영역 $D$가 항상 왼쪽에 놓일 때 그 향이 양이라고 말할 수 있다. 그림 (b)는 그 반대인 음의 향(시계 방향)을 보여 주며, §16.2에서는 이를 $-C$로 쓴다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="같은 영역 D의 경계곡선 C를 (a) 반시계 방향으로 도는 양의 향과 (b) 시계 방향으로 도는 음의 향으로 각각 나타낸 그림" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="85" cy="95" rx="55" ry="45" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="76,50 85,46 85,54" fill="var(--g600)"/>
+            <polygon points="140,86 136,95 144,95" fill="var(--g600)"/>
+            <polygon points="94,140 85,136 85,144" fill="var(--g600)"/>
+            <text x="85" y="100" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="38" y="52" font-size="12" font-style="italic" fill="var(--g700)">C</text>
+            <text x="85" y="174" text-anchor="middle" font-size="11" fill="var(--grey600)">(a)</text>
+            <ellipse cx="275" cy="95" rx="55" ry="45" fill="var(--grey100)" stroke="var(--grey500)" stroke-width="1.8"/>
+            <polygon points="284,50 275,46 275,54" fill="var(--grey500)"/>
+            <polygon points="330,104 326,95 334,95" fill="var(--grey500)"/>
+            <polygon points="266,140 275,136 275,144" fill="var(--grey500)"/>
+            <text x="275" y="100" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">D</text>
+            <text x="222" y="52" font-size="12" font-style="italic" fill="var(--grey600)">C</text>
+            <text x="275" y="174" text-anchor="middle" font-size="11" fill="var(--grey600)">(b)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A simple closed curve $C$ is said to carry its <strong>positive orientation</strong> when it is traversed exactly once counterclockwise, as in panel (a) below.</p>
+        <p>Described through a parametrization $\mathbf r(t)$, $a\le t\le b$, the orientation is positive precisely when the enclosed region $D$ lies to the left of the moving point $\mathbf r(t)$ at every instant. Panel (b) shows the opposite choice, the negative (clockwise) orientation, which §16.2 writes as $-C$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="The boundary curve C of one region D drawn twice: (a) traversed counterclockwise, the positive orientation, and (b) traversed clockwise, the negative one" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="85" cy="95" rx="55" ry="45" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="76,50 85,46 85,54" fill="var(--g600)"/>
+            <polygon points="140,86 136,95 144,95" fill="var(--g600)"/>
+            <polygon points="94,140 85,136 85,144" fill="var(--g600)"/>
+            <text x="85" y="100" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="38" y="52" font-size="12" font-style="italic" fill="var(--g700)">C</text>
+            <text x="85" y="174" text-anchor="middle" font-size="11" fill="var(--grey600)">(a)</text>
+            <ellipse cx="275" cy="95" rx="55" ry="45" fill="var(--grey100)" stroke="var(--grey500)" stroke-width="1.8"/>
+            <polygon points="284,50 275,46 275,54" fill="var(--grey500)"/>
+            <polygon points="330,104 326,95 334,95" fill="var(--grey500)"/>
+            <polygon points="266,140 275,136 275,144" fill="var(--grey500)"/>
+            <text x="275" y="100" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">D</text>
+            <text x="222" y="52" font-size="12" font-style="italic" fill="var(--grey600)">C</text>
+            <text x="275" y="174" text-anchor="middle" font-size="11" fill="var(--grey600)">(b)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Green's Theorem (statement box) -->
+<div class="card thm-card" id="c16-4-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">그린 정리 <em>Green's Theorem</em><span class="src-ref">Green's Theorem · p.1192</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>그린 정리.</strong> $C$를 평면 위의 양의 향을 갖는 조각적으로 매끄러운 단순닫힌곡선이라 하고, $D$를 $C$가 둘러싸는 영역이라 하자. $P,Q$가 $D$를 포함하는 어떤 열린 영역에서 편도함수를 가지며 그 편도함수가 연속이라 하면, 다음이 성립한다.</p>
+          <div class="math-display">$$\oint_C P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA.$$</div>
+        </div>
+        <p>평면 벡터장 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$에 대해 좌변은 바로 $\int_C\mathbf F\cdot d\mathbf r$이므로, 이 정리는 $\mathbf F$가 $C$를 한 바퀴 도는 동안 하는 일에 관한 진술로 읽을 수도 있다.</p>
+        <p>$C$에 대한 가정은 정리의 진술에 쓰인 세 낱말 그대로다 &mdash; 단순(자기 교차가 없음), 닫힌곡선, 조각적으로 매끄러움. $D$가 단순영역일 때는 증명이 가능하며 그 논증은 바로 아래에서 이어지고, 일반적인 경우의 증명은 훨씬 어렵다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Green's Theorem.</strong> Let $C$ be a piecewise-smooth simple closed curve in the plane carrying its positive orientation, and let $D$ be the region that $C$ bounds. Suppose $P$ and $Q$ are functions whose partial derivatives exist and are continuous on some open region containing $D$. Then</p>
+          <div class="math-display">$$\oint_C P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA.$$</div>
+        </div>
+        <p>For the plane field $\mathbf F=P\,\mathbf i+Q\,\mathbf j$ the left-hand side is nothing but $\int_C\mathbf F\cdot d\mathbf r$, so the theorem may equally be read as a statement about the work done by $\mathbf F$ once around $C$.</p>
+        <p>The hypotheses on $C$ are exactly the three words in the statement: simple (no self-crossings), closed, and piecewise smooth. A proof is available whenever $D$ is a simple region; that argument is carried out below, and the general case is considerably harder.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : NOTE on notation, Equation (1) -->
+<div class="card rem-card" id="c16-4-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">폐적분 기호와 경계곡선 표기 <em>Notation for the Positively Oriented Boundary</em><span class="src-ref">NOTE · Eq. (1) · p.1192</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선이 양의 방향으로 지나감을 나타내는 표기가 두 가지 있다. 하나는 적분 기호에 원을 두른 $\oint_C P\,dx+Q\,dy$이고, 다른 하나는 $D$의 경계곡선에 양의 향을 준 것을 $\partial D$라는 기호로 부르는 것이다.</p>
+        <div class="formal-box">
+          <p><strong>식 (1).</strong> 경계를 $\partial D$로 쓰면 그린 정리의 결론은 다음과 같은 꼴이 된다.</p>
+          <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\int_{\partial D}P\,dx+Q\,dy.$$</div>
+        </div>
+        <p>이렇게 쓰면 왼쪽에는 영역이, 오른쪽에는 그 경계가 놓이는데, 이는 다음 카드에서 미적분학 기본정리와 비교할 때 쓰는 바로 그 형태이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two shorthands signal that a closed curve is being run through in the positive direction. One is the ring on the integral sign, $\oint_C P\,dx+Q\,dy$; the other names the positively oriented boundary of $D$ by the symbol $\partial D$.</p>
+        <div class="formal-box">
+          <p><strong>Equation (1).</strong> With the boundary written as $\partial D$, the conclusion of Green's Theorem takes the form</p>
+          <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\int_{\partial D}P\,dx+Q\,dy.$$</div>
+        </div>
+        <p>Written this way the region sits on the left and its boundary on the right, which is the shape the next card compares with the Fundamental Theorem of Calculus.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Green's Theorem as a two-dimensional FTC -->
+<div class="card note-card" id="c16-4-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">이중적분판 미적분학 기본정리 <em>A Two-Dimensional Fundamental Theorem</em><span class="src-ref">p.1192&ndash;1193</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리는 미적분학 기본정리의 이중적분판이라 할 만하다. 식 (1)을 미적분학 기본정리 제2부와 나란히 놓아 보자.</p>
+        <div class="math-display">$$\int_a^b F'(x)\,dx=F(b)-F(a).$$</div>
+        <p>두 등식 모두 한쪽 변에는 <em>도함수</em>의 적분이 놓인다 &mdash; 일변수의 경우는 $F'$, 평면의 경우는 $\partial Q/\partial x$와 $\partial P/\partial y$이다. 다른 쪽 변에는 원래 함수($F$, 또는 $P$와 $Q$)의 값이 <em>적분 영역의 경계</em>에서만 나타난다.</p>
+        <p>구간의 경우 그 경계는 두 끝점 $a,b$로 줄어들기 때문에 일변수 등식의 우변이 적분이 아니라 두 수의 차로 나타난다. 반면 평면 영역의 경계는 곡선 $\partial D$ 전체이므로, 그쪽에는 적분이 등장한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Green's Theorem deserves to be read as the double-integral counterpart of the Fundamental Theorem of Calculus. Set equation (1) beside Part 2 of that theorem,</p>
+        <div class="math-display">$$\int_a^b F'(x)\,dx=F(b)-F(a).$$</div>
+        <p>Each equality has an integral of <em>derivatives</em> on one side &mdash; $F'$ in the one-variable case, $\partial Q/\partial x$ and $\partial P/\partial y$ in the plane case &mdash; and on the other side only values of the original functions ($F$, and $P$ together with $Q$) taken on the <em>boundary of the domain of integration</em>.</p>
+        <p>For an interval that boundary shrinks to the two endpoints $a$ and $b$, which is why the right-hand side of the one-variable statement is a difference of two numbers rather than an integral. For a plane region the boundary is a whole curve $\partial D$, so an integral is what appears there.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : proof of Green's Theorem for a simple region (Figure 3) -->
+<div class="card note-card" id="c16-4-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">단순영역에서의 증명 <em>Proof for a Simple Region</em><span class="src-ref">Proof · p.1193&ndash;1194</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>일반적인 경우의 증명은 여기서 다루기 어렵지만, 한 가지 경우는 다룰 만하다 &mdash; $D$가 <strong>단순영역</strong>, 즉 제1형 영역(Type I)이면서 동시에 제2형 영역(Type II)이기도 한 경우이다(§15.2).</p>
+        <p>다음 두 식</p>
+        <div class="math-display">$$\text{(2)}\qquad \int_C P\,dx=-\iint_D\frac{\partial P}{\partial y}\,dA$$</div>
+        <div class="math-display">$$\text{(3)}\qquad \int_C Q\,dy=\iint_D\frac{\partial Q}{\partial x}\,dA$$</div>
+        <p>을 각각 보인 뒤 더하면 충분하다. $D$를 제1형 영역 $\{(x,y)\mid a\le x\le b,\ g_1(x)\le y\le g_2(x)\}$로 나타내면 미적분학 기본정리에 의해 (2)의 이중적분이 일변수 정적분으로 바뀌고, $C$를 네 조각으로 나누어 선적분을 계산한 뒤 두 결과를 견주면 (2)가 나온다. 식 (3)은 같은 방식을 제2형 영역의 서술에 적용하면 얻어지며, (2)와 (3)을 더하면 그린 정리가 나온다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $D$가 제1형 영역 $\{(x,y)\mid a\le x\le b,\ g_1(x)\le y\le g_2(x)\}$이기도 하다고 하자($g_1,g_2$는 연속함수). 미적분학 기본정리를 안쪽 변수에 대해 먼저 적용하면</p>
+        <div class="math-display">$$\iint_D\frac{\partial P}{\partial y}\,dA=\int_a^b\int_{g_1(x)}^{g_2(x)}\frac{\partial P}{\partial y}(x,y)\,dy\,dx=\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx.$$</div>
+        <p>한편 경계 $C$를 원문 Figure 3처럼 네 조각으로 나누자 &mdash; $C_1$은 $y=g_1(x)$를 따라 $x=a$에서 $x=b$로 가는 아래쪽 곡선, $C_2$는 $x=b$에서 위로 올라가는 수직선분, $C_3$는 $y=g_2(x)$를 따라 $x=b$에서 $x=a$로 되돌아가는 위쪽 곡선, $C_4$는 $x=a$에서 아래로 내려가는 수직선분이다. $C_2,C_4$에서는 $x$가 상수여서 $dx=0$이므로 두 조각은 기여가 없다(둘 중 하나가 한 점으로 줄어드는 경우에도 기여는 그대로 $0$이다). $C_1$은 $x=x,\ y=g_1(x)$ ($a\le x\le b$)로 곧바로 매개변수화되고, $C_3$는 향을 뒤집은 $-C_3$가 $x=x,\ y=g_2(x)$ ($a\le x\le b$)이므로 $\displaystyle\int_{C_3}P\,dx=-\int_{-C_3}P\,dx=-\int_a^b P(x,g_2(x))\,dx$이다. 따라서</p>
+        <div class="math-display">$$\int_C P\,dx=\int_{C_1}P\,dx+\int_{C_3}P\,dx=\int_a^b P(x,g_1(x))\,dx-\int_a^b P(x,g_2(x))\,dx=-\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx$$</div>
+        <p>를 얻는다. 두 계산의 우변에는 같은 적분 $\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx$가 부호만 반대로 나타나므로, 식 (2) $\displaystyle\int_C P\,dx=-\iint_D\frac{\partial P}{\partial y}\,dA$가 성립한다.</p>
+        <p>같은 방법을 $Q$에 적용하되, 이번에는 $D$를 제2형 영역 $\{(x,y)\mid c\le y\le d,\ h_1(y)\le x\le h_2(y)\}$로 나타낸다. 미적분학 기본정리에 의해</p>
+        <div class="math-display">$$\iint_D\frac{\partial Q}{\partial x}\,dA=\int_c^d\bigl[Q(h_2(y),y)-Q(h_1(y),y)\bigr]\,dy$$</div>
+        <p>이고, 경계를 오른쪽 곡선 $x=h_2(y)$($y$가 $c$에서 $d$로 증가하는 방향, $D$가 왼쪽에 놓임), 위아래 두 수평선분($dy=0$이므로 기여 없음), 왼쪽 곡선 $x=h_1(y)$($y$가 $d$에서 $c$로 감소하는 방향)로 나누면</p>
+        <div class="math-display">$$\int_C Q\,dy=\int_c^d Q(h_2(y),y)\,dy-\int_c^d Q(h_1(y),y)\,dy=\int_c^d\bigl[Q(h_2(y),y)-Q(h_1(y),y)\bigr]\,dy=\iint_D\frac{\partial Q}{\partial x}\,dA$$</div>
+        <p>가 되어 식 (3)을 얻는다. $D$가 단순영역이므로 두 서술을 모두 쓸 수 있고, (2)와 (3)을 변변 더하면</p>
+        <div class="math-display">$$\int_C P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA$$</div>
+        <p>즉 단순영역 $D$에 대한 그린 정리가 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A proof of the theorem in full generality is out of reach here, but one case is manageable: that in which $D$ is a <strong>simple region</strong>, meaning a region that qualifies as a type I region and as a type II region at the same time (§15.2).</p>
+        <p>It is enough to establish the two halves</p>
+        <div class="math-display">$$\text{(2)}\qquad \int_C P\,dx=-\iint_D\frac{\partial P}{\partial y}\,dA$$</div>
+        <div class="math-display">$$\text{(3)}\qquad \int_C Q\,dy=\iint_D\frac{\partial Q}{\partial x}\,dA$$</div>
+        <p>and then add them. Writing $D$ as a type I region $\{(x,y)\mid a\le x\le b,\ g_1(x)\le y\le g_2(x)\}$ turns the double integral in (2) into a single integral by the Fundamental Theorem of Calculus, and splitting $C$ into four pieces evaluates the line integral; comparing the two results gives (2). Equation (3) comes out the same way from the type II description, and adding (2) and (3) produces Green's Theorem.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Write $D$ also as a type I region $\{(x,y)\mid a\le x\le b,\ g_1(x)\le y\le g_2(x)\}$, with $g_1$ and $g_2$ continuous. Applying the Fundamental Theorem of Calculus to the inner variable first,</p>
+        <div class="math-display">$$\iint_D\frac{\partial P}{\partial y}\,dA=\int_a^b\int_{g_1(x)}^{g_2(x)}\frac{\partial P}{\partial y}(x,y)\,dy\,dx=\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx.$$</div>
+        <p>Now split the boundary $C$ into the four pieces of the textbook's Figure 3: $C_1$ is the lower curve $y=g_1(x)$ run from $x=a$ to $x=b$; $C_2$ is the vertical segment at $x=b$, travelled upward; $C_3$ is the upper curve $y=g_2(x)$ travelled back from $x=b$ to $x=a$; and $C_4$ is the vertical segment at $x=a$, travelled downward. On $C_2$ and $C_4$ the variable $x$ is constant, so $dx=0$ and neither contributes (either one may shrink to a single point, and the contribution is still $0$). The piece $C_1$ is parametrized directly by $x=x,\ y=g_1(x)$, $a\le x\le b$, while it is the reversed piece $-C_3$ that is given by $x=x,\ y=g_2(x)$, $a\le x\le b$, so $\displaystyle\int_{C_3}P\,dx=-\int_{-C_3}P\,dx=-\int_a^b P(x,g_2(x))\,dx$. Hence</p>
+        <div class="math-display">$$\int_C P\,dx=\int_{C_1}P\,dx+\int_{C_3}P\,dx=\int_a^b P(x,g_1(x))\,dx-\int_a^b P(x,g_2(x))\,dx=-\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx.$$</div>
+        <p>The same integral $\int_a^b\bigl[P(x,g_2(x))-P(x,g_1(x))\bigr]\,dx$ stands on both right-hand sides, carrying opposite signs, and that is equation (2), $\displaystyle\int_C P\,dx=-\iint_D\frac{\partial P}{\partial y}\,dA$.</p>
+        <p>The same idea proves (3) once $D$ is written as a type II region $\{(x,y)\mid c\le y\le d,\ h_1(y)\le x\le h_2(y)\}$. The Fundamental Theorem gives</p>
+        <div class="math-display">$$\iint_D\frac{\partial Q}{\partial x}\,dA=\int_c^d\bigl[Q(h_2(y),y)-Q(h_1(y),y)\bigr]\,dy,$$</div>
+        <p>and splitting the boundary into the right edge $x=h_2(y)$ (traversed upward, with $D$ on its left), two horizontal segments where $dy=0$, and the left edge $x=h_1(y)$ (traversed downward) gives</p>
+        <div class="math-display">$$\int_C Q\,dy=\int_c^d Q(h_2(y),y)\,dy-\int_c^d Q(h_1(y),y)\,dy=\int_c^d\bigl[Q(h_2(y),y)-Q(h_1(y),y)\bigr]\,dy=\iint_D\frac{\partial Q}{\partial x}\,dA,$$</div>
+        <p>which is equation (3). Since $D$ is a simple region both descriptions apply, so adding (2) and (3) gives</p>
+        <div class="math-display">$$\int_C P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA,$$</div>
+        <p>which is Green's Theorem for the simple region $D$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : using Green's Theorem in the reverse direction -->
+<div class="card note-card" id="c16-4-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">그린 정리를 거꾸로 쓰기 <em>Using the Theorem in Reverse</em><span class="src-ref">p.1194</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예제 1·2에서는 이중적분 쪽이 더 쉬웠고, 보통은 그렇다. 그러나 가끔은 거꾸로 선적분 쪽을 계산하고 싶은 경우도 있다.</p>
+        <p>다음은 거꾸로 읽어도 비용이 들지 않는 경우이다. $P,Q$가 곡선 $C$ 위의 모든 점에서 $0$이라고 하자. 그러면</p>
+        <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_C P\,dx+Q\,dy=0,$$</div>
+        <p>이 성립하며, 이 결론은 $D$ 내부의 점에서 $P,Q$가 어떤 값을 갖든 관계없이 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Examples 1 and 2 the double integral is the cheaper of the two sides, and that is the usual situation. Now and then the traffic runs the other way, and the line integral is what one would rather compute.</p>
+        <p>Here is a case where the reverse reading costs nothing. Suppose it is known that $P$ and $Q$ both vanish at every point of the curve $C$. Then</p>
+        <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_C P\,dx+Q\,dy=0,$$</div>
+        <p>and this conclusion holds no matter what values $P$ and $Q$ take at the interior points of $D$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : area formulas, Equation (5) -->
+<div class="card thm-card" id="c16-4-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">그린 정리로 넓이 구하기 <em>Areas by Green's Theorem</em><span class="src-ref">Eq. (5) · p.1194&ndash;1195</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>넓이를 구하는 것은 거꾸로 읽기의 두 번째 쓰임이다. $D$의 넓이는 $\iint_D 1\,dA$이므로, 그린 정리의 피적분함수가 항상 $1$이 되도록 $P,Q$를 고르면 된다.</p>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1.$$</div>
+        <p>편리한 선택 세 가지는 $(P,Q)=(0,x)$, $(P,Q)=(-y,0)$, $(P,Q)=\bigl(-\tfrac12 y,\tfrac12 x\bigr)$이며, 각각을 그린 정리에 대입하면 넓이 공식이 된다.</p>
+        <div class="formal-box">
+          <p><strong>식 (5) &mdash; 경계 선적분으로 나타낸 넓이.</strong> $C$가 $D$의 양의 향 경계이면, $D$의 넓이 $A$는 다음을 만족한다.</p>
+          <div class="math-display">$$A=\oint_C x\,dy=-\oint_C y\,dx=\frac12\oint_C x\,dy-y\,dx.$$</div>
+        </div>
+        <p>셋 중 어느 것이 가장 편리한지는 주어진 매개변수화에 따라 다른데, 대칭적인 세 번째 형태가 가장 깔끔한 경우가 많다 &mdash; 예제 3이 그 예이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $D$의 넓이는 $A=\iint_D 1\,dA$이므로, $Q_x-P_y\equiv1$을 만족하는 $P,Q$를 그린 정리에 대입하면 그대로 $A=\displaystyle\oint_C P\,dx+Q\,dy$를 얻는다. 세 가지 선택을 차례로 넣어 보자.</p>
+        <p>$(P,Q)=(0,x)$이면 $Q_x-P_y=1-0=1$이고 $\displaystyle A=\oint_C x\,dy$이다.</p>
+        <p>$(P,Q)=(-y,0)$이면 $Q_x-P_y=0-(-1)=1$이고 $\displaystyle A=\oint_C(-y)\,dx=-\oint_C y\,dx$이다.</p>
+        <p>$(P,Q)=\bigl(-\tfrac12y,\tfrac12x\bigr)$이면 $Q_x-P_y=\tfrac12-\bigl(-\tfrac12\bigr)=1$이고 $\displaystyle A=\oint_C\Bigl(-\frac12y\Bigr)dx+\frac12x\,dy=\frac12\oint_C x\,dy-y\,dx$이다.</p>
+        <p>세 등식을 모으면 식 (5) $\displaystyle A=\oint_C x\,dy=-\oint_C y\,dx=\frac12\oint_C x\,dy-y\,dx$가 된다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Computing areas is a second use of the reverse direction. The area of $D$ equals $\iint_D 1\,dA$, so the task is to pick $P$ and $Q$ making the integrand of Green's Theorem identically $1$:</p>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1.$$</div>
+        <p>Three convenient choices are $(P,Q)=(0,x)$, $(P,Q)=(-y,0)$, and $(P,Q)=\bigl(-\tfrac12 y,\tfrac12 x\bigr)$, and each one turns the theorem into an area formula.</p>
+        <div class="formal-box">
+          <p><strong>Equation (5) &mdash; area from a boundary line integral.</strong> If $C$ is the positively oriented boundary of $D$, then the area $A$ of $D$ satisfies</p>
+          <div class="math-display">$$A=\oint_C x\,dy=-\oint_C y\,dx=\frac12\oint_C x\,dy-y\,dx.$$</div>
+        </div>
+        <p>Which of the three is most convenient depends on the parametrization at hand; the symmetric third form is often the tidiest, as Example 3 shows.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since the area of $D$ is $A=\iint_D 1\,dA$, substituting any $P,Q$ with $Q_x-P_y\equiv1$ into Green's Theorem gives directly $A=\displaystyle\oint_C P\,dx+Q\,dy$. Try the three choices in turn.</p>
+        <p>With $(P,Q)=(0,x)$, $Q_x-P_y=1-0=1$ and $\displaystyle A=\oint_C x\,dy$.</p>
+        <p>With $(P,Q)=(-y,0)$, $Q_x-P_y=0-(-1)=1$ and $\displaystyle A=\oint_C(-y)\,dx=-\oint_C y\,dx$.</p>
+        <p>With $(P,Q)=\bigl(-\tfrac12y,\tfrac12x\bigr)$, $Q_x-P_y=\tfrac12-\bigl(-\tfrac12\bigr)=1$ and $\displaystyle A=\oint_C\Bigl(-\frac12y\Bigr)dx+\frac12x\,dy=\frac12\oint_C x\,dy-y\,dx$.</p>
+        <p>Collecting the three equalities produces equation (5), $\displaystyle A=\oint_C x\,dy=-\oint_C y\,dx=\frac12\oint_C x\,dy-y\,dx$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : the planimeter (Figure 5 - photo, not reproduced) -->
+<div class="card note-card" id="c16-4-9">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">플래니미터 <em>The Planimeter</em><span class="src-ref">Figure 5 · p.1195</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>플래니미터는 19세기에 발명된 기계 장치로, 포인터로 영역의 경계곡선을 따라 한 바퀴 그리기만 하면 그 영역의 넓이를 알려 준다. 나뭇잎이나 새 날개의 넓이를 재고 싶은 생물학자라면 찾았을 법한 도구다.</p>
+        <p>극 플래니미터에서는 극이 고정된 채로 추적침이 경계를 따라가며, 이때 작은 바퀴는 추적팔에 수직인 방향으로 일부는 미끄러지고 일부는 굴러간다. 장치가 실제로 기록하는 값은 이 바퀴가 굴러간 거리인데, 이 거리는 둘러싸인 넓이에 비례한다. 그 비례 관계를 설명해 주는 것이 바로 식 (5)이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A planimeter is a mechanical instrument, invented in the nineteenth century, that reports the area of a region once a pointer has been walked around its boundary curve. A biologist wanting the area of a leaf or of a bird's wing could reach for one.</p>
+        <p>In the polar version the pole stays fixed while the tracer follows the boundary; the small wheel then partly slides and partly rolls in the direction perpendicular to the tracer arm. What the instrument actually records is the distance the wheel rolls, and that distance turns out to be proportional to the enclosed area. Formula (5) is what accounts for the proportionality.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : extension to finite unions of simple regions (Figures 6-7) -->
+<div class="card note-card" id="c16-4-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">단순영역의 유한 합집합으로 확장 <em>Extension to Finite Unions</em><span class="src-ref">Figures 6&ndash;7 · p.1195&ndash;1196</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>위의 증명은 $D$가 단순영역인 경우만 다루지만, 이 결론은 겹치지 않는 단순영역들의 유한 합집합인 $D$ 전체로 확장된다.</p>
+        <p>$D=D_1\cup D_2$이고 두 조각 모두 단순영역이며, 경계가 $\partial D_1=C_1\cup C_3$, $\partial D_2=C_2\cup(-C_3)$라 하자 &mdash; 공통으로 나누는 곡선 $C_3$는 두 경계에서 서로 반대 방향으로 한 번씩 지나간다. $D_1$과 $D_2$ 각각에 정리를 적용한 뒤 두 식을 더하면 $C_3$와 $-C_3$의 기여가 서로 상쇄되어</p>
+        <div class="math-display">$$\oint_{C_1\cup C_2}P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA,$$</div>
+        <p>가 남는데, 이는 경계가 $C=C_1\cup C_2$인 $D$에 대한 그린 정리 바로 그것이다. 같은 계산을 조각 수를 늘려 되풀이하면 겹치지 않는 단순영역의 임의의 유한 합집합에서도 정리가 성립함을 알 수 있다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 200" role="img" aria-label="영역 D를 겹치지 않는 두 단순영역 D1과 D2로 가르는 그림 — 공통 경계 C3는 한 번은 위로, 한 번은 아래로 지나므로 두 선적분이 서로 상쇄된다" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="160" cy="105" rx="110" ry="65" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="155" y1="45" x2="155" y2="165" stroke="var(--grey600)" stroke-width="1.4"/>
+            <line x1="165" y1="45" x2="165" y2="165" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="155,50 151,59 159,59" fill="var(--grey600)"/>
+            <polygon points="165,160 161,151 169,151" fill="var(--grey600)"/>
+            <polygon points="50,114 46,105 54,105" fill="var(--g600)"/>
+            <polygon points="270,96 266,105 274,105" fill="var(--g600)"/>
+            <text x="98" y="112" font-size="13" font-style="italic" fill="var(--g800)">D<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="200" y="112" font-size="13" font-style="italic" fill="var(--g800)">D<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="24" y="74" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="282" y="74" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="148" y="32" text-anchor="end" font-size="12" font-style="italic" fill="var(--grey700)">C<tspan font-size="9" dy="3">3</tspan></text>
+            <text x="172" y="32" font-size="12" font-style="italic" fill="var(--grey700)">&#8722;C<tspan font-size="9" dy="3">3</tspan></text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Although the proof above covers only a simple $D$, the conclusion survives for any $D$ that is a finite union of simple regions with no overlap.</p>
+        <p>Take $D=D_1\cup D_2$ with both pieces simple, and suppose the boundaries are $\partial D_1=C_1\cup C_3$ and $\partial D_2=C_2\cup(-C_3)$, so the shared arc $C_3$ gets traversed once in each direction. Apply the theorem to $D_1$ and to $D_2$ separately and add the two equations: the contributions of $C_3$ and $-C_3$ cancel and what is left is</p>
+        <div class="math-display">$$\oint_{C_1\cup C_2}P\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA,$$</div>
+        <p>which is exactly Green's Theorem for $D$, whose boundary is $C=C_1\cup C_2$. Repeating the same bookkeeping over more pieces settles the case of any finite union of nonoverlapping simple regions.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 200" role="img" aria-label="A region D split into two nonoverlapping simple regions D1 and D2; the shared boundary C3 is traversed upward once and downward once, so the two line integrals along it cancel" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="160" cy="105" rx="110" ry="65" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="155" y1="45" x2="155" y2="165" stroke="var(--grey600)" stroke-width="1.4"/>
+            <line x1="165" y1="45" x2="165" y2="165" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="155,50 151,59 159,59" fill="var(--grey600)"/>
+            <polygon points="165,160 161,151 169,151" fill="var(--grey600)"/>
+            <polygon points="50,114 46,105 54,105" fill="var(--g600)"/>
+            <polygon points="270,96 266,105 274,105" fill="var(--g600)"/>
+            <text x="98" y="112" font-size="13" font-style="italic" fill="var(--g800)">D<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="200" y="112" font-size="13" font-style="italic" fill="var(--g800)">D<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="24" y="74" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="282" y="74" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="148" y="32" text-anchor="end" font-size="12" font-style="italic" fill="var(--grey700)">C<tspan font-size="9" dy="3">3</tspan></text>
+            <text x="172" y="32" font-size="12" font-style="italic" fill="var(--grey700)">&#8722;C<tspan font-size="9" dy="3">3</tspan></text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : extension to regions with holes (Figures 9-10) -->
+<div class="card note-card" id="c16-4-11">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">구멍 있는 영역으로 확장 <em>Extension to Regions with Holes</em><span class="src-ref">Figures 9&ndash;10 · p.1196</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리는 단순연결이 아닌 영역, 즉 구멍이 있는 영역에도 확장된다. $D$의 경계가 바깥쪽 단순닫힌곡선 $C_1$과 안쪽 단순닫힌곡선 $C_2$로 이루어진다고 하고, 둘 다 $D$가 항상 왼쪽에 놓이도록 향을 주자. 이 규칙 하나만으로 $C_1$은 반시계 방향, $C_2$는 시계 방향으로 정해진다.</p>
+        <p>이제 아래 그림처럼 절단선 두 개를 따라 $D$를 잘라 $D'$과 $D''$으로 나누면, 각 조각은 이미 정리가 다루는 경우가 된다. 두 조각에 대한 결론을 더하면 절단선 위의 적분은 반대 방향으로 두 번씩 나타나 서로 상쇄되고</p>
+        <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_{C_1}P\,dx+Q\,dy+\oint_{C_2}P\,dx+Q\,dy=\oint_{C}P\,dx+Q\,dy,$$</div>
+        <p>가 남는다. 여기서 $C=C_1\cup C_2$이다. 이것이 구멍 있는 영역에 대한 그린 정리이며, 예제 5에서 바로 이 확장판이 쓰인다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 300 200" role="img" aria-label="구멍이 있는 영역 D의 경계에 준 향 — 바깥 곡선 C1은 반시계 방향, 안쪽 곡선 C2는 시계 방향이며, 점선으로 그린 두 절단선이 D를 위쪽 D'과 아래쪽 D''으로 나눈다" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="150" cy="100" rx="115" ry="75" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <ellipse cx="150" cy="100" rx="45" ry="32" fill="var(--paper)" stroke="var(--grey600)" stroke-width="1.8"/>
+            <line x1="35" y1="100" x2="105" y2="100" stroke="var(--grey400)" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <line x1="197" y1="100" x2="265" y2="100" stroke="var(--grey400)" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <polygon points="141,25 150,21 150,29" fill="var(--g600)"/>
+            <polygon points="265,91 261,100 269,100" fill="var(--g600)"/>
+            <polygon points="159,175 150,171 150,179" fill="var(--g600)"/>
+            <polygon points="159,68 150,64 150,72" fill="var(--grey600)"/>
+            <polygon points="195,109 191,100 199,100" fill="var(--grey600)"/>
+            <polygon points="141,132 150,128 150,136" fill="var(--grey600)"/>
+            <text x="150" y="16" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="150" y="105" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey700)">C<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="150" y="48" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D&#8242;</text>
+            <text x="150" y="158" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D&#8243;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The theorem also reaches regions that fail to be simply-connected, that is, regions with holes in them. Let the boundary of $D$ consist of two simple closed curves, an outer one $C_1$ and an inner one $C_2$, and orient both so that $D$ always stays on the left of a point travelling along the boundary. That single rule forces $C_1$ to run counterclockwise and $C_2$ clockwise.</p>
+        <p>Now cut $D$ along the two segments drawn below, which splits it into regions $D'$ and $D''$, each already covered by the theorem. Adding the two conclusions, every cut appears twice with opposite directions and therefore cancels, leaving</p>
+        <div class="math-display">$$\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_{C_1}P\,dx+Q\,dy+\oint_{C_2}P\,dx+Q\,dy=\oint_{C}P\,dx+Q\,dy,$$</div>
+        <p>with $C=C_1\cup C_2$. This is Green's Theorem for the region with a hole, and Example 5 is where it earns its keep.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 300 200" role="img" aria-label="Boundary orientation for a region with a hole: the outer curve C1 runs counterclockwise, the inner curve C2 runs clockwise, and two dashed cuts divide D into an upper piece D' and a lower piece D''" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="150" cy="100" rx="115" ry="75" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8"/>
+            <ellipse cx="150" cy="100" rx="45" ry="32" fill="var(--paper)" stroke="var(--grey600)" stroke-width="1.8"/>
+            <line x1="35" y1="100" x2="105" y2="100" stroke="var(--grey400)" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <line x1="197" y1="100" x2="265" y2="100" stroke="var(--grey400)" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <polygon points="141,25 150,21 150,29" fill="var(--g600)"/>
+            <polygon points="265,91 261,100 269,100" fill="var(--g600)"/>
+            <polygon points="159,175 150,171 150,179" fill="var(--g600)"/>
+            <polygon points="159,68 150,64 150,72" fill="var(--grey600)"/>
+            <polygon points="195,109 191,100 199,100" fill="var(--grey600)"/>
+            <polygon points="141,132 150,128 150,136" fill="var(--grey600)"/>
+            <text x="150" y="16" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">C<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="150" y="105" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey700)">C<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="150" y="48" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D&#8242;</text>
+            <text x="150" y="158" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">D&#8243;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : sketch of proof of Theorem 16.3.6 -->
+<div class="card thm-card" id="c16-4-12">
+  <div class="card-head">
+    <span class="thm-num">THM 12</span>
+    <span class="thm-title">정리 16.3.6의 증명 개요 <em>Sketch Proof of Theorem 16.3.6</em><span class="src-ref">Sketch of Proof · p.1197</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절은 §16.3에서 미뤄 두었던 주장을 매듭지으며 마무리된다.</p>
+        <div class="formal-box">
+          <p><strong>정리 16.3.6.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j$를 열린 단순연결영역 $D$ 위의 벡터장이라 하고, $P,Q$가 그 위에서 연속인 일계 편도함수를 갖는다고 하자. 만약</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}\quad D\text{의 모든 점에서}$$</div>
+          <p>이면, $\mathbf F$는 보존적이다.</p>
+        </div>
+        <p>그린 정리는 이 논증의 개요를 제공한다. 가정에 의해 닫힌 경로가 둘러싸는 어떤 영역 위에서도 이중적분이 $0$이 되므로 $\mathbf F$의 모든 닫힌 선적분이 $0$이고, 정리 16.3.3에 의해 이는 경로 독립으로 이어진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명(개요).</strong> $D$ 안의 임의의 닫힌 경로 $C$를 생각하자. $C$가 단순닫힌곡선이라면, $D$가 단순연결영역이므로 $C$가 둘러싸는 영역 $R$은 전부 $D$ 안에 놓이고 $P,Q$가 $R$을 포함하는 열린 영역에서 그린 정리의 가정을 만족한다. 가정 $P_y=Q_x$를 대입하면</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C P\,dx+Q\,dy=\iint_R\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\iint_R 0\,dA=0.$$</div>
+        <p>$C$가 단순하지 않은 닫힌곡선이라면 자기 자신과 만나는 점에서 잘라 유한 개의 단순닫힌곡선으로 쪼갤 수 있고, 각 조각에서 위 계산으로 선적분이 $0$이므로 그 합인 $\oint_C\mathbf F\cdot d\mathbf r$도 $0$이다. 따라서 $D$ 안의 모든 닫힌 경로에서 $\oint_C\mathbf F\cdot d\mathbf r=0$이 성립한다. (이 마지막 분해가 언제나 유한 번에 끝난다는 점은 여기서 따지지 않는다. 원문이 이 논증을 완결된 증명이 아니라 &lsquo;개요&rsquo;라고 부르는 이유가 바로 여기에 있다.)</p>
+        <p>정리 16.3.3(경로에 무관한 것과 모든 닫힌 경로에서 적분이 $0$인 것이 동치라는 사실)에 의해, 이는 $\int_C\mathbf F\cdot d\mathbf r$가 $D$에서 경로에 무관함을 뜻한다. $D$는 열려 있고 연결되어 있으므로($D$가 단순연결이면 특히 연결이다) 정리 16.3.4의 가정이 모두 채워지고, 그 정리에 의해 경로에 무관한 벡터장은 보존적이다. 따라서 $\mathbf F$는 $D$에서 보존적이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The section closes by settling a claim left open in §16.3.</p>
+        <div class="formal-box">
+          <p><strong>Theorem 16.3.6.</strong> Let $\mathbf F=P\,\mathbf i+Q\,\mathbf j$ be a vector field on an open simply-connected region $D$, with $P$ and $Q$ possessing continuous first-order partial derivatives there. If</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}\quad\text{at every point of }D,$$</div>
+          <p>then $\mathbf F$ is conservative.</p>
+        </div>
+        <p>Green's Theorem supplies the argument in outline: the hypothesis makes the double integral over any region enclosed by a closed path vanish, so every closed line integral of $\mathbf F$ is zero, and Theorem 16.3.3 converts that into independence of path.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof (sketch).</strong> Let $C$ be any closed path in $D$. If $C$ is simple, then because $D$ is simply-connected the region $R$ it encloses lies entirely inside $D$, and $P,Q$ satisfy the hypotheses of Green's Theorem on an open region containing $R$. Substituting $P_y=Q_x$,</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C P\,dx+Q\,dy=\iint_R\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\iint_R 0\,dA=0.$$</div>
+        <p>If $C$ is not simple, cut it at the points where it meets itself and break it into finitely many simple closed curves; the line integral over each piece vanishes by the computation above, so the sum $\oint_C\mathbf F\cdot d\mathbf r$ vanishes too. Hence $\oint_C\mathbf F\cdot d\mathbf r=0$ for every closed path $C$ in $D$. (That this last decomposition always terminates after finitely many steps is not examined here; it is precisely why the textbook offers the argument as a sketch rather than a complete proof.)</p>
+        <p>By Theorem 16.3.3 (independence of path is equivalent to a zero integral around every closed path), this means $\int_C\mathbf F\cdot d\mathbf r$ is independent of path in $D$. Since $D$ is open and connected (a simply-connected region is in particular connected), the hypotheses of Theorem 16.3.4 are met, and that theorem turns path independence into conservativeness. Hence $\mathbf F$ is conservative on $D$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-4-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">삼각형 위의 선적분 <em>A Line Integral around a Triangle</em><span class="src-ref">Example 1 · p.1194</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리를 이용하여 선적분 $\displaystyle\oint_C x^{4}\,dx+xy\,dy$의 값을 구하여라. 여기서 $C$는 $(0,0)$에서 $(1,0)$으로, $(1,0)$에서 $(0,1)$로, 다시 $(0,1)$에서 $(0,0)$으로 가는 세 선분을 차례로 이어 만든 삼각형 곡선이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $P=x^4,\ Q=xy$로 두면 $Q_x-P_y=y-0=y$이므로, 그린 정리에 의해 선적분은 삼각형 영역 $D=\{(x,y)\mid 0\le x\le1,\ 0\le y\le1-x\}$ 위의 이중적분으로 바뀐다.</p>
+        <div class="math-display">$$\oint_C x^4\,dx+xy\,dy=\iint_D y\,dA=\int_0^1\int_0^{1-x}y\,dy\,dx.$$</div>
+        <p>안쪽 적분을 먼저 계산하면 $\displaystyle\int_0^{1-x}y\,dy=\frac{(1-x)^2}{2}$이고,</p>
+        <div class="math-display">$$\int_0^1\frac{(1-x)^2}{2}\,dx=\left[-\frac{(1-x)^3}{6}\right]_0^1=0-\left(-\frac16\right)=\frac16$$</div>
+        <p>이다. 세 변을 따라 직접 선적분해도 같은 값을 얻지만, 그 경우 변마다 별도의 적분 세 개를 계산해야 하므로 훨씬 번거롭다. 따라서 $\displaystyle\oint_C x^4\,dx+xy\,dy=\frac16$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\displaystyle\oint_C x^{4}\,dx+xy\,dy$ with Green's Theorem, where the closed path $C$ is assembled from three segments: the one running from $(0,0)$ to $(1,0)$, the one from $(1,0)$ to $(0,1)$, and the one carrying the point back from $(0,1)$ to $(0,0)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $P=x^4$ and $Q=xy$, $Q_x-P_y=y-0=y$, so Green's Theorem converts the line integral into a double integral over the triangular region $D=\{(x,y)\mid 0\le x\le1,\ 0\le y\le1-x\}$.</p>
+        <div class="math-display">$$\oint_C x^4\,dx+xy\,dy=\iint_D y\,dA=\int_0^1\int_0^{1-x}y\,dy\,dx.$$</div>
+        <p>Evaluating the inner integral first, $\displaystyle\int_0^{1-x}y\,dy=\frac{(1-x)^2}{2}$, and</p>
+        <div class="math-display">$$\int_0^1\frac{(1-x)^2}{2}\,dx=\left[-\frac{(1-x)^3}{6}\right]_0^1=0-\left(-\frac16\right)=\frac16.$$</div>
+        <p>Integrating directly along the three sides gives the same value, but that route requires three separate integrals, one per side, and is considerably more work. Hence $\displaystyle\oint_C x^4\,dx+xy\,dy=\frac16$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-4-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">성분이 까다로운 원 위의 선적분 <em>A Circle Integral with Awkward Components</em><span class="src-ref">Example 2 · p.1194</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리를 이용하여 $\displaystyle\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^{4}+1}\right)dy$의 값을 구하여라. 여기서 $C$는 양의 향을 갖는 원 $x^{2}+y^{2}=9$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $P=3y-e^{\sin x},\ Q=7x+\sqrt{y^4+1}$로 두자. 두 성분 모두 초등함수인 원시함수를 갖지 않는 항($e^{\sin x}$, $\sqrt{y^4+1}$)을 달고 있어 매개변수화해 곧장 적분하려 들면 손이 무거워진다. 그런데 그린 정리가 요구하는 것은 이 항들의 적분이 아니라 편미분이고, $\sqrt{y^4+1}$에는 $x$가, $e^{\sin x}$에는 $y$가 들어 있지 않으므로 두 항은 미분 단계에서 그대로 사라진다.</p>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=7-3=4$$</div>
+        <p>이렇게 피적분함수가 상수 $4$로 정리되므로, $C$가 둘러싸는 영역 $D$(반지름 $3$인 원판)에 대해</p>
+        <div class="math-display">$$\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^4+1}\right)dy=\iint_D 4\,dA=4\cdot(D\text{의 넓이})=4\cdot9\pi=36\pi$$</div>
+        <p>이다. 극좌표로 바꾸어 적분할 필요조차 없이, $D$가 반지름 $3$인 원판이라는 사실만으로 넓이를 바로 알 수 있다. 따라서 $\displaystyle\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^4+1}\right)dy=36\pi$이다.</p>
+        <p><em>덧붙임.</em> 직접 계산이 원리적으로 막혀 있는 것은 아니다. $-e^{\sin x}\,dx$는 $x$만의, $\sqrt{y^4+1}\,dy$는 $y$만의 미분형식이라 둘 다 완전미분이고, 따라서 닫힌 곡선을 한 바퀴 돌면 각각 $0$이 된다. 남는 것은 $\oint_C 3y\,dx+7x\,dy$뿐이고 $x=3\cos t,\ y=3\sin t$를 넣으면 $\int_0^{2\pi}(-27\sin^2t+63\cos^2t)\,dt=36\pi$로 같은 값이 나온다. 다만 이 지름길을 알아채는 것 자체가 이미 그린 정리가 말해 주는 바와 같다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate $\displaystyle\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^{4}+1}\right)dy$ by Green's Theorem, taking for $C$ the circle $x^{2}+y^{2}=9$ with its positive orientation.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Put $P=3y-e^{\sin x}$ and $Q=7x+\sqrt{y^4+1}$. Each component carries a term with no elementary antiderivative ($e^{\sin x}$, $\sqrt{y^4+1}$), which makes a parametrized computation look heavy. What Green's Theorem asks for, however, is not an antiderivative of those terms but a partial derivative, and since $\sqrt{y^4+1}$ holds no $x$ and $e^{\sin x}$ holds no $y$, both terms disappear at that step:</p>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=7-3=4,$$</div>
+        <p>a constant, so for the disk $D$ (of radius $3$) that $C$ encloses,</p>
+        <div class="math-display">$$\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^4+1}\right)dy=\iint_D 4\,dA=4\cdot(\text{area of }D)=4\cdot9\pi=36\pi.$$</div>
+        <p>There is no need even to switch to polar coordinates; knowing that $D$ is a disk of radius $3$ hands over its area directly. Hence $\displaystyle\oint_C\left(3y-e^{\sin x}\right)dx+\left(7x+\sqrt{y^4+1}\right)dy=36\pi$.</p>
+        <p><em>Remark.</em> The direct route is not actually blocked. The form $-e^{\sin x}\,dx$ involves $x$ alone and $\sqrt{y^4+1}\,dy$ involves $y$ alone, so both are exact and integrate to $0$ around any closed curve. Only $\oint_C 3y\,dx+7x\,dy$ survives, and $x=3\cos t,\ y=3\sin t$ turns it into $\int_0^{2\pi}(-27\sin^2t+63\cos^2t)\,dt=36\pi$, the same answer. Noticing that shortcut is, however, already the content of Green's Theorem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-4-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">타원이 둘러싸는 넓이 <em>The Area Enclosed by an Ellipse</em><span class="src-ref">Example 3 · p.1195</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (5)의 넓이 공식을 이용하여 타원 $\dfrac{x^{2}}{a^{2}}+\dfrac{y^{2}}{b^{2}}=1$이 둘러싸는 영역의 넓이를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 타원의 양의 향 경계 $C$를 $x=a\cos t,\ y=b\sin t$ ($0\le t\le2\pi$)로 매개변수화하면 $dx=-a\sin t\,dt$, $dy=b\cos t\,dt$이다. 식 (5)의 대칭형을 쓰기 위해 먼저</p>
+        <div class="math-display">$$x\,dy-y\,dx=(a\cos t)(b\cos t\,dt)-(b\sin t)(-a\sin t\,dt)=ab\cos^2t\,dt+ab\sin^2t\,dt=ab\,dt$$</div>
+        <p>를 계산하면, 넓이는</p>
+        <div class="math-display">$$A=\frac12\oint_C x\,dy-y\,dx=\frac12\int_0^{2\pi}ab\,dt=\frac12\cdot ab\cdot2\pi=\pi ab$$</div>
+        <p>이다. 나머지 두 형태 $\displaystyle\oint_C x\,dy$, $\displaystyle-\oint_C y\,dx$로 계산해도 같은 값 $\pi ab$가 나오지만, $\cos^2t+\sin^2t=1$로 곧바로 정리되는 대칭형의 계산이 가장 짧다. 따라서 타원이 둘러싸는 넓이는 $A=\pi ab$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine, by way of one of the area formulas collected in (5), how much area the ellipse $\dfrac{x^{2}}{a^{2}}+\dfrac{y^{2}}{b^{2}}=1$ encloses.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize the ellipse's positively oriented boundary $C$ by $x=a\cos t,\ y=b\sin t$ ($0\le t\le2\pi$), so $dx=-a\sin t\,dt$ and $dy=b\cos t\,dt$. Using the symmetric form of (5) requires</p>
+        <div class="math-display">$$x\,dy-y\,dx=(a\cos t)(b\cos t\,dt)-(b\sin t)(-a\sin t\,dt)=ab\cos^2t\,dt+ab\sin^2t\,dt=ab\,dt,$$</div>
+        <p>from which the area is</p>
+        <div class="math-display">$$A=\frac12\oint_C x\,dy-y\,dx=\frac12\int_0^{2\pi}ab\,dt=\frac12\cdot ab\cdot2\pi=\pi ab.$$</div>
+        <p>The other two forms, $\displaystyle\oint_C x\,dy$ and $\displaystyle-\oint_C y\,dx$, give the same value $\pi ab$, but the symmetric form is the shortest to compute since it collapses immediately via $\cos^2t+\sin^2t=1$. Hence the ellipse encloses area $A=\pi ab$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-4-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">반환형 영역의 경계 위의 선적분 <em>A Line Integral over a Semiannular Boundary</em><span class="src-ref">Example 4 · p.1196</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$D$를 두 원 $x^{2}+y^{2}=1$과 $x^{2}+y^{2}=4$ 사이에 끼인 반환형 영역 가운데 상반평면에 놓인 부분이라 하고, $C$를 $D$의 양의 향 경계라 하자. $D$ 자체는 단순영역이 아니므로 확장된 그린 정리를 이용하여 $\displaystyle\oint_C y^{2}\,dx+3xy\,dy$의 값을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $P=y^2,\ Q=3xy$로 두면 $Q_x-P_y=3y-2y=y$이다. $D$는 안쪽 반지름 $1$, 바깥쪽 반지름 $2$인 반환형 영역으로 그 자체는 단순영역이 아니지만, $y$축이 $D$를 두 개의 단순영역으로 가르므로 카드 10에서 확장한 그린 정리를 적용할 수 있다.</p>
+        <p>극좌표 $x=r\cos\theta,\ y=r\sin\theta$ ($1\le r\le2,\ 0\le\theta\le\pi$)로 이중적분을 바꾸면 변수가 분리되어</p>
+        <div class="math-display">$$\oint_C y^2\,dx+3xy\,dy=\iint_D y\,dA=\int_0^\pi\int_1^2(r\sin\theta)\,r\,dr\,d\theta=\left(\int_0^\pi\sin\theta\,d\theta\right)\left(\int_1^2 r^2\,dr\right)$$</div>
+        <p>이 되고, $\displaystyle\int_0^\pi\sin\theta\,d\theta=\bigl[-\cos\theta\bigr]_0^\pi=2$, $\displaystyle\int_1^2 r^2\,dr=\left[\frac{r^3}{3}\right]_1^2=\frac73$이므로</p>
+        <div class="math-display">$$\oint_C y^2\,dx+3xy\,dy=2\cdot\frac73=\frac{14}{3}$$</div>
+        <p>이다. 따라서 $\displaystyle\oint_C y^2\,dx+3xy\,dy=\frac{14}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $D$ be the semiannular region caught between the circles $x^{2}+y^{2}=1$ and $x^{2}+y^{2}=4$ and lying above the $x$-axis, and let $C$ be its positively oriented boundary. Find the value of $\displaystyle\oint_C y^{2}\,dx+3xy\,dy$. Note that $D$ itself is not a simple region, so the extended form of the theorem is what applies.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $P=y^2$ and $Q=3xy$, $Q_x-P_y=3y-2y=y$. The region $D$, a semiannulus with inner radius $1$ and outer radius $2$, is not itself simple, but the $y$-axis splits it into two simple regions, so the extended form of Green's Theorem from Card 10 applies.</p>
+        <p>Switching to polar coordinates $x=r\cos\theta,\ y=r\sin\theta$ ($1\le r\le2,\ 0\le\theta\le\pi$) separates the double integral,</p>
+        <div class="math-display">$$\oint_C y^2\,dx+3xy\,dy=\iint_D y\,dA=\int_0^\pi\int_1^2(r\sin\theta)\,r\,dr\,d\theta=\left(\int_0^\pi\sin\theta\,d\theta\right)\left(\int_1^2 r^2\,dr\right),$$</div>
+        <p>and since $\displaystyle\int_0^\pi\sin\theta\,d\theta=\bigl[-\cos\theta\bigr]_0^\pi=2$ and $\displaystyle\int_1^2 r^2\,dr=\left[\frac{r^3}{3}\right]_1^2=\frac73$,</p>
+        <div class="math-display">$$\oint_C y^2\,dx+3xy\,dy=2\cdot\frac73=\frac{14}{3}.$$</div>
+        <p>Hence $\displaystyle\oint_C y^2\,dx+3xy\,dy=\frac{14}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-4-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">원점을 감싸는 모든 경로에서 같은 값 <em>The Same Value around Every Path Enclosing the Origin</em><span class="src-ref">Example 5 · p.1196&ndash;1197</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y)=\dfrac{-y\,\mathbf i+x\,\mathbf j}{x^{2}+y^{2}}$에 대하여, 원점을 내부에 품는 임의의 양의 향 단순닫힌경로 $C$에서 $\displaystyle\oint_C\mathbf F\cdot d\mathbf r=2\pi$가 성립함을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 원점을 내부에 품는 임의의 양의 향 단순닫힌경로 $C$를 고정하자. $\mathbf F$는 원점에서 정의되지 않으므로 $C$가 둘러싸는 영역에 그린 정리를 곧바로 적용할 수 없다. 대신 원점을 중심으로 하고 $C$의 안쪽에 완전히 들어가는 반지름 $a>0$인 원 $C'$을 반시계 방향으로 잡고, $D$를 $C$의 안쪽이면서 $C'$의 바깥쪽인 영역이라 하자. $D$가 항상 왼쪽에 놓이도록 경계에 향을 주면 $\partial D=C\cup(-C')$이 되며, 이는 카드 11의 구멍 있는 영역에 대한 그린 정리가 다루는 상황이다.</p>
+        <p>$P=\dfrac{-y}{x^2+y^2},\ Q=\dfrac{x}{x^2+y^2}$에 몫의 미분법을 적용하면 원점을 포함하지 않는 $D$ 위의 모든 점에서</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{y^2-x^2}{(x^2+y^2)^2}=\frac{\partial Q}{\partial x}$$</div>
+        <p>이므로 $Q_x-P_y=0$이다. 따라서 구멍 있는 영역에 대한 확장된 그린 정리에 의해</p>
+        <div class="math-display">$$0=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_C\mathbf F\cdot d\mathbf r+\oint_{-C'}\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot d\mathbf r-\oint_{C'}\mathbf F\cdot d\mathbf r,$$</div>
+        <p>즉 $\displaystyle\oint_C\mathbf F\cdot d\mathbf r=\oint_{C'}\mathbf F\cdot d\mathbf r$이다. $C'$을 $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ ($0\le t\le2\pi$)로 매개변수화하면 그 위에서 $x^2+y^2=a^2$이므로</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=\frac{-a\sin t}{a^2}(-a\sin t)+\frac{a\cos t}{a^2}(a\cos t)=\sin^2t+\cos^2t=1$$</div>
+        <p>이고,</p>
+        <div class="math-display">$$\oint_{C'}\mathbf F\cdot d\mathbf r=\int_0^{2\pi}1\,dt=2\pi$$</div>
+        <p>를 얻는다. 이 값은 $a$의 크기에 의존하지 않으므로, 원점을 둘러싸는 임의의 양의 향 단순닫힌경로 $C$에서 $\displaystyle\oint_C\mathbf F\cdot d\mathbf r=2\pi$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf F(x,y)=\dfrac{-y\,\mathbf i+x\,\mathbf j}{x^{2}+y^{2}}$. Show that $\displaystyle\oint_C\mathbf F\cdot d\mathbf r$ comes out to $2\pi$ whenever $C$ is a positively oriented simple closed path having the origin in its interior.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Fix any positively oriented simple closed path $C$ having the origin in its interior. Since $\mathbf F$ is undefined at the origin, Green's Theorem cannot be applied directly to the region $C$ encloses. Instead choose a circle $C'$ of radius $a>0$ centered at the origin, small enough to lie entirely inside $C$, traversed counterclockwise, and let $D$ be the region inside $C$ and outside $C'$. Orienting the boundary of $D$ so that $D$ stays on the left gives $\partial D=C\cup(-C')$, exactly the region-with-a-hole setting of Card 11.</p>
+        <p>Applying the quotient rule to $P=\dfrac{-y}{x^2+y^2}$ and $Q=\dfrac{x}{x^2+y^2}$ shows that at every point of $D$ (which excludes the origin)</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{y^2-x^2}{(x^2+y^2)^2}=\frac{\partial Q}{\partial x},$$</div>
+        <p>so $Q_x-P_y=0$. The extended Green's Theorem for regions with holes then gives</p>
+        <div class="math-display">$$0=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA=\oint_C\mathbf F\cdot d\mathbf r+\oint_{-C'}\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot d\mathbf r-\oint_{C'}\mathbf F\cdot d\mathbf r,$$</div>
+        <p>that is, $\displaystyle\oint_C\mathbf F\cdot d\mathbf r=\oint_{C'}\mathbf F\cdot d\mathbf r$. Parametrizing $C'$ by $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ ($0\le t\le2\pi$), on which $x^2+y^2=a^2$,</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=\frac{-a\sin t}{a^2}(-a\sin t)+\frac{a\cos t}{a^2}(a\cos t)=\sin^2t+\cos^2t=1,$$</div>
+        <p>so</p>
+        <div class="math-display">$$\oint_{C'}\mathbf F\cdot d\mathbf r=\int_0^{2\pi}1\,dt=2\pi.$$</div>
+        <p>This value does not depend on the size of $a$, so $\displaystyle\oint_C\mathbf F\cdot d\mathbf r=2\pi$ for every positively oriented simple closed path $C$ enclosing the origin.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-4-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch12.html">단원 12</a></p>
+        <ul>
+          <li>그린 정리의 두 형태 &mdash; <a href="../calc2/ch12.html#ex05">ex05</a> (부분 대응: 접선 형식은 카드 3과 같은 정리, 발산 형식은 Stewart에서는 §16.5로 미뤄져 있다)</li>
+          <li>정사각형 위 선적분 &mdash; <a href="../calc2/ch12.html#yu05-1">yu05-1</a>, 단순닫힌곡선 선적분 &mdash; <a href="../calc2/ch12.html#yu05-2">yu05-2</a> (완전 대응: 예제 1·2와 같은 유형)</li>
+          <li>극좌표 영역의 순환 &mdash; <a href="../calc2/ch12.html#yu05-5">yu05-5</a> (완전 대응: 예제 4처럼 극좌표로 이중적분을 계산하는 유형)</li>
+          <li>그린 정리로 넓이 구하기 &mdash; <a href="../calc2/ch12.html#ex06">ex06</a>, 넓이에 의존하는 선적분 &mdash; <a href="../calc2/ch12.html#yu06">yu06</a> (부분 대응: 식 (5) 세 형태 가운데 $\tfrac12$형만 쓴다)</li>
+          <li>원 위의 선적분 &mdash; <a href="../calc2/ch12.html#pr07">pr07</a>, 그린 정리와 원 &mdash; <a href="../calc2/ch12.html#pr08">pr08</a>, 마름모 경로의 선적분 &mdash; <a href="../calc2/ch12.html#pr09">pr09</a> (완전 대응: 예제 1·2 유형의 임용 기출)</li>
+          <li>첨점 영역의 넓이와 선적분 &mdash; <a href="../calc2/ch12.html#pr10">pr10</a> (완전 대응: $\oint_C -y\,dx+x\,dy=2A$, 즉 식 (5)의 $\tfrac12$형)</li>
+          <li>라플라스 방정식과 선적분 &mdash; <a href="../calc2/ch12.html#pr03">pr03</a>, 일을 최대로 하는 곡선 &mdash; <a href="../calc2/ch12.html#pr04">pr04</a> (인접: 그린 정리를 도구로 쓰는 응용)</li>
+          <li>정사각형을 가로지르는 플럭스 &mdash; <a href="../calc2/ch12.html#yu05-3">yu05-3</a>, 심장형 곡선의 플럭스 &mdash; <a href="../calc2/ch12.html#yu05-4">yu05-4</a>, 플럭스를 가장 작게 하는 영역 &mdash; <a href="../calc2/ch12.html#pr05">pr05</a>, 로그장의 플럭스 &mdash; <a href="../calc2/ch12.html#pr06">pr06</a> (인접: 그린 정리의 발산 형식은 Stewart에서 §16.5 식 (13)에 나온다)</li>
+          <li>단순영역에서의 증명(카드 6), 유한 합집합·구멍 있는 영역으로의 확장(카드 10·11), 정리 16.3.6의 증명 개요(카드 12) &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 $\iint_R(N_x-M_y)\,dx\,dy$ 표기를 쓰고, Stewart는 $\iint_D(Q_x-P_y)\,dA$ 표기를 쓴다. 성분 문자와 영역 문자, 적분소 표기가 모두 다르므로 두 자료를 함께 볼 때 주의해야 한다.</p>
+        <p><strong>(b) 공통과제 (§16.4, 3차)</strong></p>
+        <p>제출 문항: 3, 9, 15, 17, 25, 31 &nbsp;/&nbsp; 학습 참고: 5&ndash;12, 13&ndash;18, 21&ndash;23, 25, 31&ndash;33</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-3.html">§16.3 선적분의 기본정리</a> &nbsp;/&nbsp; 다음: <a href="s16-5.html">§16.5 회전과 발산</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch12.html">Unit 12</a></p>
+        <ul>
+          <li>The two forms of Green's Theorem &mdash; <a href="../calc2/ch12.html#ex05">ex05</a> (partial match: the tangential form is the theorem of Card 3, while Stewart postpones the divergence form to §16.5)</li>
+          <li>A line integral around a square &mdash; <a href="../calc2/ch12.html#yu05-1">yu05-1</a>, and one around a simple closed curve &mdash; <a href="../calc2/ch12.html#yu05-2">yu05-2</a> (full match; the type of Examples 1 and 2)</li>
+          <li>Circulation over a region described in polar coordinates &mdash; <a href="../calc2/ch12.html#yu05-5">yu05-5</a> (full match; like Example 4, the double integral is evaluated in polar coordinates)</li>
+          <li>Finding area by Green's Theorem &mdash; <a href="../calc2/ch12.html#ex06">ex06</a>, and a line integral that depends only on area &mdash; <a href="../calc2/ch12.html#yu06">yu06</a> (partial match: only the $\tfrac12$ version among the three formulas in (5) is used)</li>
+          <li>A line integral around a circle &mdash; <a href="../calc2/ch12.html#pr07">pr07</a>, Green's Theorem and a circle &mdash; <a href="../calc2/ch12.html#pr08">pr08</a>, a line integral over a rhombus &mdash; <a href="../calc2/ch12.html#pr09">pr09</a> (full match; past teacher-certification problems of the Example 1 and 2 type)</li>
+          <li>Area of a cusped region and its boundary integral &mdash; <a href="../calc2/ch12.html#pr10">pr10</a> (full match: it uses $\oint_C -y\,dx+x\,dy=2A$, which is the $\tfrac12$ version of (5))</li>
+          <li>Laplace's equation and line integrals &mdash; <a href="../calc2/ch12.html#pr03">pr03</a>, and the curve that maximizes work &mdash; <a href="../calc2/ch12.html#pr04">pr04</a> (adjacent; Green's Theorem serves as a tool)</li>
+          <li>Flux across a square &mdash; <a href="../calc2/ch12.html#yu05-3">yu05-3</a>, flux for a cardioid &mdash; <a href="../calc2/ch12.html#yu05-4">yu05-4</a>, the region of least flux &mdash; <a href="../calc2/ch12.html#pr05">pr05</a>, flux of a logarithmic field &mdash; <a href="../calc2/ch12.html#pr06">pr06</a> (adjacent; in Stewart the divergence form of the theorem is Equation (13) of §16.5)</li>
+          <li>The proof for a simple region (Card 6), the extensions to finite unions and to regions with holes (Cards 10 and 11), and the sketch proof of Theorem 16.3.6 (Card 12) &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes write the conclusion as $\iint_R(N_x-M_y)\,dx\,dy$, whereas Stewart writes $\iint_D(Q_x-P_y)\,dA$. The component letters, the letter naming the plane region, and the symbol for the element of integration all differ, so the two sources need to be read side by side with care.</p>
+        <p><strong>(b) Assignment (§16.4, third set)</strong></p>
+        <p>Problems to submit: 3, 9, 15, 17, 25, 31 &nbsp;/&nbsp; Recommended practice: 5&ndash;12, 13&ndash;18, 21&ndash;23, 25, 31&ndash;33</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-3.html">§16.3 The Fundamental Theorem for Line Integrals</a> &nbsp;/&nbsp; Next: <a href="s16-5.html">§16.5 Curl and Divergence</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

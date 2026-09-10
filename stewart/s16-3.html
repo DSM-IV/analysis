@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.3 선적분의 기본정리 (The Fundamental Theorem for Line Integrals) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.3 선적분의 기본정리 — 기울기장의 선적분이 끝점 값만으로 결정된다는 정리 2, 경로 독립과 닫힌 경로 적분 0의 동치(정리 3), 경로 독립이면 보존적(정리 4), 평면 보존장의 필요조건 ∂P/∂y = ∂Q/∂x(정리 5)와 단순연결영역에서의 판정법(정리 6), 편적분으로 퍼텐셜 함수 구하기, 에너지 보존 법칙을 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.3, 선적분의 기본정리, Fundamental Theorem for Line Integrals, 경로 독립, independence of path, 닫힌곡선, closed curve, 단순곡선, simple curve, 단순연결영역, simply-connected region, 열린 영역, 연결 영역, 보존적 벡터장, conservative vector field, 퍼텐셜 함수, potential function, 편적분, 에너지 보존, conservation of energy, 운동에너지, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-3.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.3 선적분의 기본정리 (The Fundamental Theorem for Line Integrals) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="기울기장의 선적분은 끝점에서의 퍼텐셜 값 차이다. 경로 독립·닫힌 경로·보존장의 동치 관계, 평면 보존장 판정법, 퍼텐셜 함수 구하는 절차, 에너지 보존 법칙까지 §16.3 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-3.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.3 선적분의 기본정리 (The Fundamental Theorem for Line Integrals) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.3 선적분의 기본정리 — 정리 2(기울기장의 선적분과 끝점), 정리 3(경로 독립과 닫힌 경로), 정리 4(경로 독립이면 보존적), 정리 5·6(평면 보존장의 성분 판정법), 열린·연결·단순연결·단순곡선의 정의, 편적분에 의한 퍼텐셜 함수 구성, 에너지 보존 법칙을 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-3.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-3.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html" class="active">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.3 · 10주차</p>
+  <h1>§16.3 선적분의 기본정리<span>The Fundamental Theorem for Line Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-3-1"><span class="toc-num">NOTE</span> 미적분학 기본정리의 선적분판 <em>From the FTC to Line Integrals</em></a></li>
+    <li><a href="#c16-3-2"><span class="toc-num">THM 2</span> 선적분의 기본정리 <em>The Fundamental Theorem for Line Integrals</em></a></li>
+    <li><a href="#c16-3-3"><span class="toc-num">REM 3</span> 정리 2 읽는 법 <em>Reading Theorem 2</em></a></li>
+    <li><a href="#c16-3-4"><span class="toc-num">NOTE</span> 경로 독립과 닫힌곡선 <em>Independence of Path; Closed Curves</em></a></li>
+    <li><a href="#c16-3-5"><span class="toc-num">THM 5</span> 경로 독립과 닫힌 경로 <em>Path Independence vs. Closed Paths</em></a></li>
+    <li><a href="#c16-3-6"><span class="toc-num">REM 6</span> 보존력이 닫힌 경로에서 하는 일 <em>Work Around a Closed Path</em></a></li>
+    <li><a href="#c16-3-7"><span class="toc-num">DEF 7</span> 열린 영역과 연결 영역 <em>Open and Connected Regions</em></a></li>
+    <li><a href="#c16-3-8"><span class="toc-num">THM 8</span> 경로 독립이면 보존적 <em>Path Independence Implies Conservative</em></a></li>
+    <li><a href="#c16-3-9"><span class="toc-num">NOTE</span> 보존장 판정과 퍼텐셜 찾기 <em>Testing for Conservativeness</em></a></li>
+    <li><a href="#c16-3-10"><span class="toc-num">THM 10</span> 보존장의 필요조건 <em>A Necessary Condition</em></a></li>
+    <li><a href="#c16-3-11"><span class="toc-num">DEF 11</span> 단순곡선 <em>Simple Curve</em></a></li>
+    <li><a href="#c16-3-12"><span class="toc-num">DEF 12</span> 단순연결영역 <em>Simply-Connected Region</em></a></li>
+    <li><a href="#c16-3-13"><span class="toc-num">THM 13</span> 평면 보존장 판정법 <em>Test for Conservative Fields in the Plane</em></a></li>
+    <li><a href="#c16-3-14"><span class="toc-num">REM 14</span> 편적분으로 퍼텐셜 함수 구하기 <em>Finding a Potential by Partial Integration</em></a></li>
+    <li><a href="#c16-3-15"><span class="toc-num">NOTE</span> 에너지 보존 법칙 <em>The Law of Conservation of Energy</em></a></li>
+    <li><a href="#ex16-3-1"><span class="toc-num">EXAM 1</span> 중력장이 한 일 <em>Work Done by the Gravitational Field</em></a></li>
+    <li><a href="#ex16-3-2"><span class="toc-num">EXAM 2</span> 평면 벡터장의 보존성 판정 <em>Deciding Whether a Plane Field Is Conservative</em></a></li>
+    <li><a href="#ex16-3-3"><span class="toc-num">EXAM 3</span> 퍼텐셜 함수 구하기 <em>Constructing a Potential Function</em></a></li>
+    <li><a href="#ex16-3-4"><span class="toc-num">EXAM 4</span> 기본정리로 선적분 계산하기 <em>Evaluating a Line Integral by the Fundamental Theorem</em></a></li>
+    <li><a href="#ex16-3-5"><span class="toc-num">EXAM 5</span> 공간 벡터장의 퍼텐셜 함수 <em>A Potential Function for a Space Field</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening - FTC part 2 and Equation (1) -->
+<div class="card note-card" id="c16-3-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">미적분학 기본정리의 선적분판 <em>From the FTC to Line Integrals</em><span class="src-ref">Eq. (1) · p.1182</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>§4.3에서 배운 미적분학 기본정리 제2부는 다음과 같이 쓸 수 있다.</p>
+        <div class="math-display">$$\int_a^b F'(x)\,dx=F(b)-F(a),\tag{1}$$</div>
+        <p>$F'$이 $[a,b]$에서 연속이기만 하면 항상 성립하는 식이다. 식 (1)이 말해 주는 것은 일종의 절약이다 — $[a,b]$ 위에서 도함수를 적분하는 데는 구간 내부의 정보가 전혀 필요 없고, 오직 양 끝점에서 읽은 두 값 $F(a)$, $F(b)$만 있으면 된다.</p>
+        <p>이변수·삼변수 함수 $f$에서는 기울기 $\nabla f$가 도함수의 역할을 맡는다. 그렇다면 곡선을 따라가는 $\nabla f$의 선적분도 똑같이 곡선의 끝점만으로 결정되는지 물어볼 만하다. 이번 절은 실제로 그렇다는 것을 보인다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Part 2 of the Fundamental Theorem of Calculus, met back in Section 4.3, can be recorded as</p>
+        <div class="math-display">$$\int_a^b F'(x)\,dx=F(b)-F(a),\tag{1}$$</div>
+        <p>valid whenever $F'$ is continuous on $[a,b]$. What Equation (1) asserts is a kind of economy: to integrate a derivative over $[a,b]$ one needs no information from the interior of the interval, only the two numbers $F(a)$ and $F(b)$ read off at the endpoints.</p>
+        <p>For a function $f$ of two or three variables the gradient $\nabla f$ plays the part of a derivative. It is therefore natural to ask whether the line integral of $\nabla f$ along a curve is likewise settled by the endpoints of the curve. This section shows that it is.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Theorem 2 - FTLI (proof in text) -->
+<div class="card thm-card" id="c16-3-2">
+  <div class="card-head">
+    <span class="thm-num">THM 2</span>
+    <span class="thm-title">선적분의 기본정리 <em>The Fundamental Theorem for Line Integrals</em><span class="src-ref">Theorem 2 · p.1182</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 2.</strong> $C$가 벡터함수 $\mathbf r(t)$, $a\le t\le b$로 나타나는 매끄러운 곡선이고, $f$가 이변수 또는 삼변수 미분가능한 함수이며 그 기울기벡터 $\nabla f$가 $C$의 모든 점에서 연속이라 하자. 그러면</p>
+          <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(\mathbf r(b))-f(\mathbf r(a)).$$</div>
+        </div>
+        <p>우변을 잘 살펴보면, $\mathbf r(a)$와 $\mathbf r(b)$는 각각 $C$의 시점과 종점이므로 선적분 전체가 이 두 점에서의 $f$ 값만으로 결정된다. 아래 증명은 연쇄법칙을 거꾸로 적용한 뒤 식 (1)을 적용하는 방식이며, 삼변수 함수를 기준으로 적고 이변수의 경우는 항 하나만 빼면 똑같이 적용된다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 삼변수 함수의 경우로 쓰며, 이변수인 경우는 $z$에 관한 항 하나를 지우면 그대로 성립한다. 선적분의 정의에 의해</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=\int_a^b\nabla f(\mathbf r(t))\cdot\mathbf r'(t)\,dt$$</div>
+        <p>이다. $g(t)=f(\mathbf r(t))=f(x(t),y(t),z(t))$로 두면, §14.5의 연쇄법칙에 의해</p>
+        <div class="math-display">$$g'(t)=f_x(\mathbf r(t))\,x'(t)+f_y(\mathbf r(t))\,y'(t)+f_z(\mathbf r(t))\,z'(t)=\nabla f(\mathbf r(t))\cdot\mathbf r'(t)$$</div>
+        <p>이다. $C$가 매끄러운 곡선이므로 $\mathbf r'$은 $[a,b]$에서 연속이고, 가정에 의해 $\nabla f$는 $C$ 위에서 연속이므로 $g'$은 $[a,b]$에서 연속인 함수이다. 따라서 $g$에 미적분학 기본정리 제2부, 곧 식 (1)을 적용할 수 있어</p>
+        <div class="math-display">$$\int_a^b\nabla f(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_a^b g'(t)\,dt=g(b)-g(a)=f(\mathbf r(b))-f(\mathbf r(a))$$</div>
+        <p>를 얻는다. 앞의 두 식을 이으면 $\displaystyle\int_C\nabla f\cdot d\mathbf r=f(\mathbf r(b))-f(\mathbf r(a))$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 2.</strong> Let $C$ be a smooth curve described by a vector function $\mathbf r(t)$, $a\le t\le b$, and let $f$ be a differentiable function of two or three variables whose gradient vector $\nabla f$ is continuous at every point of $C$. Then</p>
+          <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(\mathbf r(b))-f(\mathbf r(a)).$$</div>
+        </div>
+        <p>Read the right-hand side carefully: $\mathbf r(a)$ and $\mathbf r(b)$ are the initial and terminal points of $C$, so the whole line integral is decided by the values of $f$ at those two points. The proof below runs the Chain Rule backwards and then applies Equation (1); it is written out for a function of three variables, the two-variable case being identical with one term dropped.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Write the argument for a function of three variables; the two-variable case is identical with the $z$-term dropped. By the definition of the line integral,</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=\int_a^b\nabla f(\mathbf r(t))\cdot\mathbf r'(t)\,dt.$$</div>
+        <p>Set $g(t)=f(\mathbf r(t))=f(x(t),y(t),z(t))$. The Chain Rule of Section 14.5 gives</p>
+        <div class="math-display">$$g'(t)=f_x(\mathbf r(t))\,x'(t)+f_y(\mathbf r(t))\,y'(t)+f_z(\mathbf r(t))\,z'(t)=\nabla f(\mathbf r(t))\cdot\mathbf r'(t).$$</div>
+        <p>Since $C$ is smooth, $\mathbf r'$ is continuous on $[a,b]$, and $\nabla f$ is continuous on $C$ by hypothesis, so $g'$ is continuous on $[a,b]$. Part 2 of the Fundamental Theorem of Calculus &mdash; Equation (1) &mdash; therefore applies to $g$:</p>
+        <div class="math-display">$$\int_a^b\nabla f(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_a^b g'(t)\,dt=g(b)-g(a)=f(\mathbf r(b))-f(\mathbf r(a)).$$</div>
+        <p>Combining the two displays gives $\displaystyle\int_C\nabla f\cdot d\mathbf r=f(\mathbf r(b))-f(\mathbf r(a))$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : NOTE 1, 2, 3 following Theorem 2 -->
+<div class="card rem-card" id="c16-3-3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">정리 2 읽는 법 <em>Reading Theorem 2</em><span class="src-ref">NOTES 1&ndash;3 · p.1182&ndash;1183</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>NOTE 1 &mdash; 선적분은 순변화이다.</strong> 보존적 벡터장은 어떤 퍼텐셜 함수 $f$의 기울기장이므로, 정리 2에 의해 그 선적분은 $f$의 두 끝점 값으로 계산된다. 달리 말하면 이 선적분은 $C$를 따라가는 동안 $f$가 겪는 순변화를 기록한다. 평면 곡선이 $A(x_1,y_1)$에서 $B(x_2,y_2)$까지 이어진다면</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(x_2,y_2)-f(x_1,y_1),$$</div>
+        <p>공간 곡선이 $A(x_1,y_1,z_1)$에서 $B(x_2,y_2,z_2)$까지 이어진다면</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(x_2,y_2,z_2)-f(x_1,y_1,z_1)$$</div>
+        <p>이다.</p>
+        <p><strong>NOTE 2 &mdash; 두 곡선, 같은 답.</strong> 정리 2의 가정을 그대로 유지한 채, $C_1$과 $C_2$를 시점과 종점을 공유하는 매끄러운 곡선이라 하자. 두 선적분 모두 같은 끝점 값의 차로 정해지므로</p>
+        <div class="math-display">$$\int_{C_1}\nabla f\cdot d\mathbf r=\int_{C_2}\nabla f\cdot d\mathbf r$$</div>
+        <p>이다.</p>
+        <p><strong>NOTE 3 &mdash; 조각적으로 매끄러운 곡선.</strong> $C$가 매끄러워야 한다는 조건은 실제로 필요한 것보다 강하다. 조각적으로 매끄러운 곡선을 유한 개의 매끄러운 조각으로 나눈 뒤 각 조각에 정리 2를 적용하여 더하면, 내부의 끝점 값들이 쌍을 이루어 상쇄되므로 결론은 그대로 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>NOTE 1 &mdash; the integral is a net change.</strong> A conservative field is the gradient field of a potential function $f$, so Theorem 2 evaluates its line integral from the two endpoint values of $f$; equivalently, the integral records the net change in $f$ along $C$. For a plane curve running from $A(x_1,y_1)$ to $B(x_2,y_2)$ this reads</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(x_2,y_2)-f(x_1,y_1),$$</div>
+        <p>and for a space curve joining $A(x_1,y_1,z_1)$ to $B(x_2,y_2,z_2)$,</p>
+        <div class="math-display">$$\int_C\nabla f\cdot d\mathbf r=f(x_2,y_2,z_2)-f(x_1,y_1,z_1).$$</div>
+        <p><strong>NOTE 2 &mdash; two curves, one answer.</strong> Keep the hypotheses of Theorem 2 and let $C_1$ and $C_2$ be smooth curves with a common initial point and a common terminal point. Both integrals then equal the same difference of endpoint values, so</p>
+        <div class="math-display">$$\int_{C_1}\nabla f\cdot d\mathbf r=\int_{C_2}\nabla f\cdot d\mathbf r.$$</div>
+        <p><strong>NOTE 3 &mdash; piecewise-smooth curves.</strong> Smoothness of $C$ is more than is needed. Split a piecewise-smooth curve into finitely many smooth pieces, apply Theorem 2 to each piece, and add: the interior endpoint values cancel in pairs and the conclusion survives unchanged.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Independence of Path; closed curves -->
+<div class="card note-card" id="c16-3-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">경로 독립과 닫힌곡선 <em>Independence of Path; Closed Curves</em><span class="src-ref">p.1183&ndash;1184</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>시점 $A$와 종점 $B$를 공유하는 조각적으로 매끄러운 곡선을 $A$에서 $B$로 가는 <strong>경로</strong>라 한다. 일반적인 연속 벡터장이라면 두 경로에 대한 선적분이 같을 이유가 없다 — 실제로 예제 16.2.4는</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r\neq\int_{C_2}\mathbf F\cdot d\mathbf r$$</div>
+        <p>인 벡터장을 보여 준다. 반면 앞의 NOTE 2는 $\mathbf F=\nabla f$이고 $\nabla f$가 연속이면 두 값이 항상 같음을 말한다.</p>
+        <p>이 대비에는 이름을 붙일 만하다. $\mathbf F$를 정의역 $D$ 위의 연속 벡터장이라 하자. 선적분 $\int_C\mathbf F\cdot d\mathbf r$가 <strong>경로에 무관</strong>하다는 것은, $D$ 안에서 시점과 종점이 각각 같은 임의의 두 경로에 대해 이 적분이 항상 같은 값을 준다는 뜻이다. 이 용어로 NOTE 2를 다시 쓰면: <em>보존적 벡터장의 선적분은 경로에 무관하다.</em></p>
+        <p>용어 하나만 더 정리하자. 곡선이 출발한 자리로 되돌아올 때, 즉 $\mathbf r(b)=\mathbf r(a)$일 때 그 곡선을 <strong>닫힌곡선</strong>이라 한다. 닫힌 경로는 다음 정리의 핵심이다. 닫힌 경로를 그 위의 두 점에서 자르면 언제나 두 개의 경로가 나오고, 그중 하나의 향을 뒤집으면 시점과 종점을 공유하는 한 쌍의 경로가 되기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Piecewise-smooth curves sharing an initial point $A$ and a terminal point $B$ are called <strong>paths</strong> from $A$ to $B$. For a general continuous field the two integrals along two such paths need not agree &mdash; Example 16.2.4 exhibits a field for which</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r\neq\int_{C_2}\mathbf F\cdot d\mathbf r,$$</div>
+        <p>whereas NOTE 2 above says the two do agree once $\mathbf F=\nabla f$ with $\nabla f$ continuous.</p>
+        <p>That contrast deserves a name. Let $\mathbf F$ be a continuous vector field with domain $D$. The line integral $\int_C\mathbf F\cdot d\mathbf r$ is <strong>independent of path</strong> if any two paths in $D$ that start at the same point and end at the same point assign it the same value. In this vocabulary, NOTE 2 reads: <em>a conservative vector field has line integrals that are independent of path.</em></p>
+        <p>One more term. A curve is <strong>closed</strong> when it returns to where it began, that is, when $\mathbf r(b)=\mathbf r(a)$. Closed paths are the key to the next theorem: cutting a closed path at two of its points always yields two paths, and reversing one of them turns the pair into two paths with a common initial point and a common terminal point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Theorem 3 - path independence <=> zero around closed paths (proof in text) -->
+<div class="card thm-card" id="c16-3-5">
+  <div class="card-head">
+    <span class="thm-num">THM 5</span>
+    <span class="thm-title">경로 독립과 닫힌 경로 <em>Path Independence vs. Closed Paths</em><span class="src-ref">Theorem 3 · p.1184</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 3.</strong> $\mathbf F$를 정의역 $D$ 위의 연속 벡터장이라 하자. 그러면 $\int_C\mathbf F\cdot d\mathbf r$가 $D$에서 경로에 무관한 것과, $D$ 안의 모든 닫힌 경로 $C$에 대해</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=0$$</div>
+          <p>이 성립하는 것은 동치이다.</p>
+        </div>
+        <p>양방향 모두 하나의 장치로 증명된다. 닫힌 경로를 그 위의 두 점 $A$, $B$에서 자르면 $A$에서 $B$로 가는 경로 $C_1$과 $B$에서 $A$로 가는 경로 $C_2$가 되고, 거꾸로 $A$에서 $B$로 가는 두 경로는 둘째 경로의 방향을 뒤집으면 하나의 닫힌 경로가 된다. 곡선의 방향을 뒤집으면 적분의 부호도 뒤집힌다는 사실, 즉 $\int_{-C}\mathbf F\cdot d\mathbf r=-\int_C\mathbf F\cdot d\mathbf r$이 바로 합을 차로 바꾸어 주는 열쇠다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 양방향을 각각 보인다.</p>
+        <p><strong>($\Rightarrow$)</strong> $\int_C\mathbf F\cdot d\mathbf r$가 $D$에서 경로에 무관하다고 하자. $C$를 $D$ 안의 임의의 닫힌 경로라 하고, $C$의 시점(=종점) $A$가 아닌 점 $B$를 $C$ 위에서 하나 고른다. $C$를 $A$에서 $B$까지 가는 조각 $C_1$과 $B$에서 다시 $A$로 돌아오는 조각 $C_2$로 자르면 $C=C_1\cup C_2$이다. $-C_2$는 $B$에서가 아니라 $A$에서 $B$로 가는 경로이므로 $C_1$과 $-C_2$는 시점·종점을 공유하고, 경로 무관성에 의해</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_{-C_2}\mathbf F\cdot d\mathbf r=-\int_{C_2}\mathbf F\cdot d\mathbf r$$</div>
+        <p>이다. 즉 $\int_{C_2}\mathbf F\cdot d\mathbf r=-\int_{C_1}\mathbf F\cdot d\mathbf r$이므로</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r+\int_{C_2}\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r-\int_{C_1}\mathbf F\cdot d\mathbf r=0$$</div>
+        <p>이다.</p>
+        <p><strong>($\Leftarrow$)</strong> $D$ 안의 모든 닫힌 경로에서 $\int_C\mathbf F\cdot d\mathbf r=0$이라 하자. $C_1$, $C_2$를 $D$ 안에서 같은 시점 $A$와 같은 종점 $B$를 갖는 임의의 두 경로라 하자. $C_1$을 따라 $A$에서 $B$로 간 다음 $-C_2$를 따라 $B$에서 $A$로 되돌아오는 경로 $C=C_1\cup(-C_2)$는 $D$ 안의 닫힌 경로이므로 가정에 의해</p>
+        <div class="math-display">$$0=\int_C\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r+\int_{-C_2}\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r-\int_{C_2}\mathbf F\cdot d\mathbf r$$</div>
+        <p>이다. 따라서 $\int_{C_1}\mathbf F\cdot d\mathbf r=\int_{C_2}\mathbf F\cdot d\mathbf r$이고, $C_1,C_2$는 임의로 고른 경로였으므로 $\int_C\mathbf F\cdot d\mathbf r$는 $D$에서 경로에 무관하다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 3.</strong> Let $\mathbf F$ be a continuous vector field with domain $D$. Then $\int_C\mathbf F\cdot d\mathbf r$ is independent of path in $D$ if and only if</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=0$$</div>
+          <p>for every closed path $C$ lying in $D$.</p>
+        </div>
+        <p>A single device drives both implications: a closed path, cut at two of its points $A$ and $B$, becomes a path $C_1$ from $A$ to $B$ followed by a path $C_2$ from $B$ to $A$; conversely two paths from $A$ to $B$ become a closed path once the second one is reversed. Reversing a curve reverses the sign of the integral, $\int_{-C}\mathbf F\cdot d\mathbf r=-\int_C\mathbf F\cdot d\mathbf r$, which is what converts a sum into a difference.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Both implications are proved.</p>
+        <p><strong>($\Rightarrow$)</strong> Suppose $\int_C\mathbf F\cdot d\mathbf r$ is independent of path in $D$. Let $C$ be an arbitrary closed path in $D$ and pick a point $B$ on $C$ other than the common initial and terminal point $A$. Cutting $C$ at $B$ splits it into a piece $C_1$ from $A$ to $B$ and a piece $C_2$ from $B$ back to $A$, so $C=C_1\cup C_2$. Since $-C_2$ runs from $A$ to $B$ (not from $B$ to $A$), $C_1$ and $-C_2$ share endpoints, and independence of path gives</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_{-C_2}\mathbf F\cdot d\mathbf r=-\int_{C_2}\mathbf F\cdot d\mathbf r.$$</div>
+        <p>Thus $\int_{C_2}\mathbf F\cdot d\mathbf r=-\int_{C_1}\mathbf F\cdot d\mathbf r$, and</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r+\int_{C_2}\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r-\int_{C_1}\mathbf F\cdot d\mathbf r=0.$$</div>
+        <p><strong>($\Leftarrow$)</strong> Suppose $\int_C\mathbf F\cdot d\mathbf r=0$ for every closed path $C$ in $D$. Let $C_1$ and $C_2$ be any two paths in $D$ sharing an initial point $A$ and a terminal point $B$. Traveling $C_1$ from $A$ to $B$ and then $-C_2$ from $B$ back to $A$ produces a closed path $C=C_1\cup(-C_2)$ in $D$, so by hypothesis</p>
+        <div class="math-display">$$0=\int_C\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r+\int_{-C_2}\mathbf F\cdot d\mathbf r=\int_{C_1}\mathbf F\cdot d\mathbf r-\int_{C_2}\mathbf F\cdot d\mathbf r.$$</div>
+        <p>Hence $\int_{C_1}\mathbf F\cdot d\mathbf r=\int_{C_2}\mathbf F\cdot d\mathbf r$, and since $C_1,C_2$ were arbitrary, $\int_C\mathbf F\cdot d\mathbf r$ is independent of path in $D$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : physical reading - work around a closed path is zero -->
+<div class="card rem-card" id="c16-3-6">
+  <div class="card-head">
+    <span class="rem-num">REM 6</span>
+    <span class="rem-title">보존력이 닫힌 경로에서 하는 일 <em>Work Around a Closed Path</em><span class="src-ref">p.1184</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 사실을 이어 붙여 보자. 보존적 벡터장의 선적분은 경로에 무관하고, 정리 3은 경로 무관성을 닫힌 경로에서의 적분값이 $0$이라는 사실로 바꾸어 준다. 따라서 보존적인 $\mathbf F$에 대해</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=0\qquad\text{모든 닫힌 경로 }C\text{에 대하여}$$</div>
+        <p>가 성립한다.</p>
+        <p>이 물리적 해석은 기억해 둘 가치가 있다. 보존적 힘장 — 이를테면 §16.1의 중력장이나 전기장 — 이 물체를 닫힌 경로를 따라 한 바퀴 옮겨서 물체가 출발한 자리로 되돌아왔다고 하자. 그때 이 물체에 한 총일은 $0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Chain the two facts together. Line integrals of a conservative field are independent of path, and Theorem 3 turns path independence into vanishing integrals around closed paths. Hence for a conservative $\mathbf F$,</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=0\qquad\text{for every closed path }C.$$</div>
+        <p>The physical reading is worth remembering. Let a conservative force field &mdash; the gravitational field or the electric field of Section 16.1, say &mdash; carry an object once around a closed path, so that the object ends where it started. The total work done on it is then $0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : open region, connected region -->
+<div class="card def-card" id="c16-3-7">
+  <div class="card-head">
+    <span class="def-num">DEF 7</span>
+    <span class="def-title">열린 영역과 연결 영역 <em>Open and Connected Regions</em><span class="src-ref">p.1184</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>열린 영역.</strong> 영역 $D$가 <strong>열린 영역</strong>이라는 것은, $D$의 모든 점 $P$가 어떤 원판의 중심이 되고 그 원판 전체가 $D$ 안에 들어간다는 뜻이다. 이는 $D$가 자신의 경계점을 하나도 포함하지 않는다는 것과 같다.</p>
+          <p><strong>연결 영역.</strong> 영역 $D$가 <strong>연결 영역</strong>이라는 것은, $D$의 임의의 두 점을 $D$를 벗어나지 않는 경로로 이을 수 있다는 뜻이다.</p>
+        </div>
+        <p>이 두 성질은 모두 아래 정리 4의 가정이며, 각각 다른 목적으로 쓰인다. 열림성은 한 점 주변에 여유 공간을 주어 짧은 수평·수직 선분을 따라 움직일 수 있게 해 주고, 연결성은 기준점에서 $D$의 임의의 점까지 가는 경로가 애초에 존재함을 보장해 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Open region.</strong> A region $D$ is <strong>open</strong> if every point $P$ of $D$ is the center of at least one disk that lies wholly inside $D$. Equivalently, $D$ owns none of its boundary points.</p>
+          <p><strong>Connected region.</strong> A region $D$ is <strong>connected</strong> if any two of its points can be joined by a path that never leaves $D$.</p>
+        </div>
+        <p>Both properties are hypotheses of Theorem 4 below, and each is used for a different purpose: openness supplies room around a point to move along a short horizontal or vertical segment, while connectedness guarantees that some path from the base point to an arbitrary point of $D$ exists at all.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Theorem 4 - path independence implies conservative (proof in text) -->
+<div class="card thm-card" id="c16-3-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">경로 독립이면 보존적 <em>Path Independence Implies Conservative</em><span class="src-ref">Theorem 4 · p.1184&ndash;1185</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 4.</strong> $\mathbf F$를 열린 연결 영역 $D$에서 연속인 벡터장이라 하고, $\int_C\mathbf F\cdot d\mathbf r$가 $D$에서 경로에 무관하다고 하자. 그러면 $\mathbf F$는 $D$에서 보존적 벡터장이다. 즉 $\nabla f=\mathbf F$를 만족하는 함수 $f$가 존재한다.</p>
+        </div>
+        <p>기울기장은 경로에 무관하다는 앞의 사실과 합쳐 보면, 정리 4는 하나의 순환 고리를 완성한다. 열린 연결 영역 위에서는 경로에 무관한 연속 벡터장과 보존적 벡터장이 정확히 일치한다. 정리와 증명은 평면 벡터장에 대해 쓰지만, 공간 벡터장에도 똑같은 논증이 그대로 적용된다.</p>
+        <p>증명은 구성적이다. $D$ 안에 기준점 $A(a,b)$를 고정하고</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x,y)}\mathbf F\cdot d\mathbf r$$</div>
+        <p>로 정의한다. 이 정의가 뜻을 갖는 이유는 바로 이 적분이 경로의 선택에 의존하지 않기 때문이다. 이렇게 얻은 $f$를 미분하면 $\mathbf F$의 성분이 그대로 되살아난다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 평면 벡터장의 경우로 쓴다(공간 벡터장에서도 축에 평행한 선분 하나를 더 쓰면 같은 논증이 그대로 통한다). $D$가 연결 영역이므로 임의로 고정한 기준점 $A(a,b)\in D$에서 $D$의 각 점 $(x,y)$까지 $D$ 안을 지나는 경로가 적어도 하나 존재하고, $D$에서 경로 무관성이 가정되어 있으므로</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x,y)}\mathbf F\cdot d\mathbf r$$</div>
+        <p>는 경로의 선택과 무관하게 값이 정해지는 잘 정의된 함수이다. 이제 $\nabla f=\mathbf F$, 곧 $f_x=P$이고 $f_y=Q$임을 보이면 된다.</p>
+        <p>$(x,y)\in D$를 하나 고정하자. $D$가 열린 영역이므로 $(x,y)$를 중심으로 하고 $D$ 안에 완전히 들어가는 원판이 존재하며, 그 원판 안에서 $x_1\lt x$인 $x_1$을 골라 $(x_1,y)$에서 $(x,y)$까지의 수평 선분이 원판을, 따라서 $D$를 벗어나지 않도록 할 수 있다. $A$에서 $(x_1,y)$까지의 임의의 경로 뒤에 이 수평 선분을 이으면 $A$에서 $(x,y)$까지의 한 경로가 되므로, 경로 무관성에 의해</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x_1,y)}\mathbf F\cdot d\mathbf r+\int_{(x_1,y)}^{(x,y)}\mathbf F\cdot d\mathbf r$$</div>
+        <p>이다. 우변 첫째 항은 $x_1$과 $y$에만 의존하고 $x$를 포함하지 않으므로 $x$에 대해서는 상수로 취급된다. 둘째 항의 선분을 $\mathbf r(t)=\langle t,y\rangle$, $x_1\le t\le x$로 매개변수화하면 $d\mathbf r=\langle dt,0\rangle$이므로</p>
+        <div class="math-display">$$\int_{(x_1,y)}^{(x,y)}\mathbf F\cdot d\mathbf r=\int_{x_1}^{x}P(t,y)\,dt$$</div>
+        <p>이고, $P$가 연속이므로 미적분학 기본정리 제1부에 의해 이를 $x$로 미분하면 $P(x,y)$가 된다. 첫째 항은 $x$에 무관하여 미분에 기여하지 않으므로</p>
+        <div class="math-display">$$f_x(x,y)=\frac{\partial}{\partial x}\int_{x_1}^{x}P(t,y)\,dt=P(x,y)$$</div>
+        <p>를 얻는다. $y$ 방향의 수직 선분에 완전히 대칭인 논증을 적용하면 $f_y(x,y)=Q(x,y)$가 나온다. $(x,y)$는 $D$의 임의의 점이었으므로 $D$ 전체에서 $\nabla f=P\,\mathbf i+Q\,\mathbf j=\mathbf F$이고, 따라서 $\mathbf F$는 $D$에서 보존적이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 4.</strong> Let $\mathbf F$ be a vector field that is continuous on an open connected region $D$, and suppose $\int_C\mathbf F\cdot d\mathbf r$ is independent of path in $D$. Then $\mathbf F$ is a conservative vector field on $D$; that is, some function $f$ satisfies $\nabla f=\mathbf F$.</p>
+        </div>
+        <p>Together with the remark that gradient fields are path independent, Theorem 4 closes a circle: on an open connected region the path-independent continuous fields are precisely the conservative ones. The statement and proof are given for a plane field, and a parallel argument covers space fields.</p>
+        <p>The proof is constructive. Fix a base point $A(a,b)$ in $D$ and define</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x,y)}\mathbf F\cdot d\mathbf r,$$</div>
+        <p>which makes sense exactly because the integral does not depend on which path is chosen. Differentiating $f$ then recovers the components of $\mathbf F$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Write the argument for a plane field (a space field needs only one more axis-parallel segment and the same reasoning goes through unchanged). Since $D$ is connected, some path inside $D$ joins the fixed base point $A(a,b)\in D$ to each point $(x,y)$ of $D$, and since path integrals are independent of path in $D$,</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x,y)}\mathbf F\cdot d\mathbf r$$</div>
+        <p>is a well-defined function whose value does not depend on which path is chosen. It remains to show $\nabla f=\mathbf F$, that is, $f_x=P$ and $f_y=Q$.</p>
+        <p>Fix $(x,y)\in D$. Because $D$ is open, some disk centered at $(x,y)$ lies entirely in $D$; choose $x_1\lt x$ inside that disk so that the horizontal segment from $(x_1,y)$ to $(x,y)$ stays inside the disk, hence inside $D$. Following any path from $A$ to $(x_1,y)$ with this segment produces a path from $A$ to $(x,y)$, so independence of path gives</p>
+        <div class="math-display">$$f(x,y)=\int_{(a,b)}^{(x_1,y)}\mathbf F\cdot d\mathbf r+\int_{(x_1,y)}^{(x,y)}\mathbf F\cdot d\mathbf r.$$</div>
+        <p>The first term on the right depends only on $x_1$ and $y$, not on $x$, so it is constant as far as differentiation with respect to $x$ is concerned. Parametrizing the segment in the second term by $\mathbf r(t)=\langle t,y\rangle$, $x_1\le t\le x$, so that $d\mathbf r=\langle dt,0\rangle$, gives</p>
+        <div class="math-display">$$\int_{(x_1,y)}^{(x,y)}\mathbf F\cdot d\mathbf r=\int_{x_1}^{x}P(t,y)\,dt,$$</div>
+        <p>and since $P$ is continuous, Part 1 of the Fundamental Theorem of Calculus differentiates this in $x$ to give $P(x,y)$. The first term contributes nothing to the $x$-derivative, so</p>
+        <div class="math-display">$$f_x(x,y)=\frac{\partial}{\partial x}\int_{x_1}^{x}P(t,y)\,dt=P(x,y).$$</div>
+        <p>An entirely symmetric argument with a vertical segment in the $y$-direction gives $f_y(x,y)=Q(x,y)$. Since $(x,y)$ was an arbitrary point of $D$, $\nabla f=P\,\mathbf i+Q\,\mathbf j=\mathbf F$ throughout $D$, and $\mathbf F$ is conservative on $D$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : the two open questions; Clairaut computation -->
+<div class="card note-card" id="c16-3-9">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">보존장 판정과 퍼텐셜 찾기 <em>Testing for Conservativeness</em><span class="src-ref">p.1185</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아직 답하지 못한 실용적인 물음이 두 가지 남아 있다. 첫째, 벡터장 $\mathbf F$가 주어졌을 때 그것이 보존적인지 어떻게 판정하는가? 둘째, $\mathbf F$가 보존적임을 안 다음에는 실제로 퍼텐셜 함수 $f$를 어떻게 구하는가?</p>
+        <p>먼저 첫 번째 물음부터 보자. $\mathbf F=P\,\mathbf i+Q\,\mathbf j$가 보존적이고 $P$, $Q$가 연속인 1계 편도함수를 갖는다고 하자. 그러면 어떤 $f$에 대해 $\mathbf F=\nabla f$이므로</p>
+        <div class="math-display">$$\begin{aligned}P&=\frac{\partial f}{\partial x},\\[2pt] Q&=\frac{\partial f}{\partial y}\end{aligned}$$</div>
+        <p>이다. 첫째 식을 $y$로, 둘째 식을 $x$로 미분하면 $f$의 두 혼합 이계 편도함수가 나오는데, 클레로 정리에 의해 이 둘은 같다.</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial^{2}f}{\partial y\,\partial x}=\frac{\partial^{2}f}{\partial x\,\partial y}=\frac{\partial Q}{\partial x}.$$</div>
+        <p>이 짧은 계산이 정리 5의 내용 전부이며, 이것만으로도 어떤 장이 보존적일 수 없음을 저렴하게 보일 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two practical questions are still unanswered. First, given a field $\mathbf F$, how does one decide whether it is conservative? Second, once $\mathbf F$ is known to be conservative, how does one actually produce a potential function $f$?</p>
+        <p>Start with the first question. Suppose $\mathbf F=P\,\mathbf i+Q\,\mathbf j$ is conservative, with $P$ and $Q$ possessing continuous first-order partial derivatives. Then $\mathbf F=\nabla f$ for some $f$, which is to say</p>
+        <div class="math-display">$$\begin{aligned}P&=\frac{\partial f}{\partial x},\\[2pt] Q&=\frac{\partial f}{\partial y}.\end{aligned}$$</div>
+        <p>Differentiating the first equation with respect to $y$ and the second with respect to $x$ produces the two mixed second-order partial derivatives of $f$, and Clairaut's Theorem says these agree:</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial^{2}f}{\partial y\,\partial x}=\frac{\partial^{2}f}{\partial x\,\partial y}=\frac{\partial Q}{\partial x}.$$</div>
+        <p>That short computation is the whole content of Theorem 5, and it already gives a cheap way to disqualify a field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Theorem 5 - necessary condition (proof in text, Clairaut) -->
+<div class="card thm-card" id="c16-3-10">
+  <div class="card-head">
+    <span class="thm-num">THM 10</span>
+    <span class="thm-title">보존장의 필요조건 <em>A Necessary Condition</em><span class="src-ref">Theorem 5 · p.1185</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 5.</strong> $\mathbf F(x,y)=P(x,y)\,\mathbf i+Q(x,y)\,\mathbf j$가 보존적 벡터장이고 그 성분 $P$, $Q$가 정의역 $D$에서 연속인 1계 편도함수를 갖는다고 하자. 그러면 $D$의 모든 점에서</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$</div>
+          <p>가 성립한다.</p>
+        </div>
+        <p>대우로 쓰면 이 정리는 하나의 기각 판정법이 된다. 두 편도함수가 어느 한 점에서라도 일치하지 않는 장은 보존적일 수 없으며, 퍼텐셜 함수를 굳이 찾아볼 필요조차 없다. 반대 방향의 명제는 더 섬세하다 — 편도함수가 일치한다는 것만으로는 충분하지 않고, $D$의 모양에 관한 가정이 하나 더 필요하다(정리 6).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F$가 보존적이므로 $\nabla f=\mathbf F$를 만족하는 함수 $f$가 존재하고, 성분별로 비교하면</p>
+        <div class="math-display">$$\begin{aligned}P&=\frac{\partial f}{\partial x},\\[2pt] Q&=\frac{\partial f}{\partial y}\end{aligned}$$</div>
+        <p>이다. 가정에 의해 $P$와 $Q$는 $D$에서 연속인 1계 편도함수를 가지므로, $f$의 이계 편도함수 중</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial^2 f}{\partial y\,\partial x}&=\frac{\partial P}{\partial y},\\[2pt] \frac{\partial^2 f}{\partial x\,\partial y}&=\frac{\partial Q}{\partial x}\end{aligned}$$</div>
+        <p>는 $D$에서 존재하고 연속이다. 따라서 클레로 정리(§14.3)의 가정이 $D$의 모든 점에서 충족되므로, 두 혼합 이계 편도함수는 그 점에서 같은 값을 갖는다.</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial^2 f}{\partial y\,\partial x}=\frac{\partial^2 f}{\partial x\,\partial y}=\frac{\partial Q}{\partial x}$$</div>
+        <p>이는 $D$의 모든 점에서 $\partial P/\partial y=\partial Q/\partial x$라는, 바로 보이려던 결론이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 5.</strong> Let $\mathbf F(x,y)=P(x,y)\,\mathbf i+Q(x,y)\,\mathbf j$ be a conservative vector field whose components $P$ and $Q$ have continuous first-order partial derivatives on a domain $D$. Then at every point of $D$,</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}.$$</div>
+        </div>
+        <p>Used in the contrapositive, this is a rejection test: a field whose two partial derivatives disagree anywhere cannot be conservative, and no search for a potential function is needed. The converse statement is more delicate &mdash; matching partial derivatives alone will not do, and a hypothesis on the shape of $D$ has to be added (Theorem 6).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since $\mathbf F$ is conservative, some function $f$ satisfies $\nabla f=\mathbf F$; comparing components gives</p>
+        <div class="math-display">$$\begin{aligned}P&=\frac{\partial f}{\partial x},\\[2pt] Q&=\frac{\partial f}{\partial y}.\end{aligned}$$</div>
+        <p>By hypothesis $P$ and $Q$ have continuous first-order partial derivatives on $D$, so the mixed second-order partial derivatives of $f$,</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial^2 f}{\partial y\,\partial x}&=\frac{\partial P}{\partial y},\\[2pt] \frac{\partial^2 f}{\partial x\,\partial y}&=\frac{\partial Q}{\partial x},\end{aligned}$$</div>
+        <p>exist and are continuous on $D$. Clairaut's Theorem (Section 14.3) therefore applies at every point of $D$, and the two mixed partial derivatives agree there:</p>
+        <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial^2 f}{\partial y\,\partial x}=\frac{\partial^2 f}{\partial x\,\partial y}=\frac{\partial Q}{\partial x}.$$</div>
+        <p>That is, $\partial P/\partial y=\partial Q/\partial x$ throughout $D$, which is exactly the claim.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : simple curve (Figure 7, own SVG) -->
+<div class="card def-card" id="c16-3-11">
+  <div class="card-head">
+    <span class="def-num">DEF 11</span>
+    <span class="def-title">단순곡선 <em>Simple Curve</em><span class="src-ref">Figure 7 · p.1185</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>단순곡선.</strong> 곡선이 양 끝점 사이의 매개변수 값에서 자기 자신과 만나지 않을 때 이 곡선을 <strong>단순곡선</strong>이라 한다. <em>닫힌</em> 단순곡선이라면 $\mathbf r(a)=\mathbf r(b)$이지만, $a\lt t_1\lt t_2\lt b$인 임의의 $t_1,t_2$에 대해서는 $\mathbf r(t_1)\neq\mathbf r(t_2)$이다.</p>
+        </div>
+        <p>"단순인가 아닌가"와 "닫혀 있는가 아닌가"를 짝지으면 곡선을 아래 그림의 네 종류로 나눌 수 있다. 이 개념이 필요한 이유는, 정리 5의 역이 어떤 영역이 담고 있는 단순닫힌곡선들을 통해 서술되기 때문이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 248" role="img" aria-label="네 종류의 곡선 — 자기 자신과 만나지 않는 열린 곡선, 한 번 교차하는 열린 곡선, 단순닫힌곡선, 8자 모양의 비단순 닫힌곡선" style="max-width:360px;width:100%;height:auto">
+            <g fill="none" stroke="var(--g600)" stroke-width="2" stroke-linecap="round">
+              <path d="M 25,100 C 45,42 75,42 85,76 C 95,110 115,110 145,52"/>
+              <path d="M 188,52 C 240,48 298,50 300,74 C 302,98 244,102 240,62 C 238,38 280,30 315,42"/>
+              <path d="M 85,146 C 122,146 140,164 133,186 C 126,209 96,218 66,212 C 36,206 28,178 42,161 C 54,147 66,146 85,146 Z"/>
+              <path d="M 255,180 C 232,158 202,162 202,181 C 202,200 232,203 255,180 C 278,157 308,161 308,180 C 308,199 278,202 255,180 Z"/>
+            </g>
+            <g fill="var(--grey700)" font-size="11" text-anchor="middle" font-family="sans-serif">
+              <text x="85" y="126">단순, 닫히지 않음</text>
+              <text x="250" y="126">단순 아님, 닫히지 않음</text>
+              <text x="85" y="238">단순, 닫힘</text>
+              <text x="255" y="238">단순 아님, 닫힘</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Simple curve.</strong> A curve is <strong>simple</strong> if it never meets itself at any parameter value strictly between its endpoints. For a simple <em>closed</em> curve one has $\mathbf r(a)=\mathbf r(b)$, while $\mathbf r(t_1)\neq\mathbf r(t_2)$ whenever $a\lt t_1\lt t_2\lt b$.</p>
+        </div>
+        <p>Pairing &ldquo;simple or not&rdquo; with &ldquo;closed or not&rdquo; sorts curves into the four kinds drawn below. The concept is needed because the converse of Theorem 5 will be phrased in terms of the simple closed curves that a region contains.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 248" role="img" aria-label="Four kinds of curves: an open curve that never meets itself, an open curve crossing itself once, a simple closed curve, and a figure-eight closed curve that is not simple" style="max-width:360px;width:100%;height:auto">
+            <g fill="none" stroke="var(--g600)" stroke-width="2" stroke-linecap="round">
+              <path d="M 25,100 C 45,42 75,42 85,76 C 95,110 115,110 145,52"/>
+              <path d="M 188,52 C 240,48 298,50 300,74 C 302,98 244,102 240,62 C 238,38 280,30 315,42"/>
+              <path d="M 85,146 C 122,146 140,164 133,186 C 126,209 96,218 66,212 C 36,206 28,178 42,161 C 54,147 66,146 85,146 Z"/>
+              <path d="M 255,180 C 232,158 202,162 202,181 C 202,200 232,203 255,180 C 278,157 308,161 308,180 C 308,199 278,202 255,180 Z"/>
+            </g>
+            <g fill="var(--grey700)" font-size="11" text-anchor="middle" font-family="sans-serif">
+              <text x="85" y="126">simple, not closed</text>
+              <text x="250" y="126">not simple, not closed</text>
+              <text x="85" y="238">simple, closed</text>
+              <text x="255" y="238">not simple, closed</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : simply-connected region (Figure 8, own SVG) -->
+<div class="card def-card" id="c16-3-12">
+  <div class="card-head">
+    <span class="def-num">DEF 12</span>
+    <span class="def-title">단순연결영역 <em>Simply-Connected Region</em><span class="src-ref">Figure 8 · p.1186</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>단순연결영역.</strong> 평면의 연결 영역 $D$가 <strong>단순연결영역</strong>이라는 것은, $D$ 안에 그려진 모든 단순닫힌곡선이 오직 $D$에 속하는 점들만을 둘러싼다는 뜻이다.</p>
+        </div>
+        <p>직관적으로 말하면, 이러한 영역에는 구멍이 뚫려 있지 않고 서로 떨어진 두 조각으로 갈라져 있지도 않다. 아래 그림에서 왼쪽 영역은 단순연결영역이고, 가운데 영역(구멍이 있음)과 오른쪽 영역(서로 떨어진 두 조각)은 단순연결이 아니다. 구멍을 둘러싸는 곡선은 그 영역 바깥의 점을 둘러싸게 되는데, 이는 정의가 정확히 금지하는 상황이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 148" role="img" aria-label="구멍 없는 한 덩어리 영역(단순연결)과, 가운데에 구멍이 뚫린 영역·서로 떨어진 두 조각으로 이루어진 영역(단순연결이 아님)" style="max-width:360px;width:100%;height:auto">
+            <g fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8">
+              <path d="M 58,22 C 88,22 100,42 96,66 C 92,92 62,108 38,98 C 16,89 12,54 26,36 C 36,24 46,22 58,22 Z"/>
+              <path fill-rule="evenodd" d="M 170,22 C 200,22 212,44 206,68 C 200,94 172,108 148,98 C 126,89 122,54 136,36 C 146,24 158,22 170,22 Z M 170,52 C 182,52 186,66 174,72 C 162,78 154,64 162,55 C 164,53 167,52 170,52 Z"/>
+              <path d="M 285,22 C 306,22 318,36 314,52 C 310,68 286,72 272,64 C 258,56 258,32 270,25 C 275,22 280,22 285,22 Z"/>
+              <path d="M 282,80 C 300,76 316,84 314,96 C 312,108 288,112 274,104 C 262,97 266,84 282,80 Z"/>
+            </g>
+            <g fill="var(--grey700)" font-size="11" text-anchor="middle" font-family="sans-serif">
+              <text x="58" y="132">단순연결영역</text>
+              <text x="228" y="132">단순연결이 아닌 영역</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Simply-connected region.</strong> A connected region $D$ in the plane is <strong>simply-connected</strong> if every simple closed curve drawn inside $D$ encloses only points that themselves belong to $D$.</p>
+        </div>
+        <p>Informally: no hole is punched in such a region, and it does not fall apart into two separate pieces. In the picture below the region on the left is simply-connected, while the middle region (a hole in it) and the right region (two disjoint pieces) are not. A curve encircling the hole encloses points outside the region, which is exactly what the definition forbids.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 148" role="img" aria-label="One blob with no hole, which is simply-connected, beside a blob with a hole punched in it and a region made of two disjoint blobs, neither of which is simply-connected" style="max-width:360px;width:100%;height:auto">
+            <g fill="var(--g50)" stroke="var(--g600)" stroke-width="1.8">
+              <path d="M 58,22 C 88,22 100,42 96,66 C 92,92 62,108 38,98 C 16,89 12,54 26,36 C 36,24 46,22 58,22 Z"/>
+              <path fill-rule="evenodd" d="M 170,22 C 200,22 212,44 206,68 C 200,94 172,108 148,98 C 126,89 122,54 136,36 C 146,24 158,22 170,22 Z M 170,52 C 182,52 186,66 174,72 C 162,78 154,64 162,55 C 164,53 167,52 170,52 Z"/>
+              <path d="M 285,22 C 306,22 318,36 314,52 C 310,68 286,72 272,64 C 258,56 258,32 270,25 C 275,22 280,22 285,22 Z"/>
+              <path d="M 282,80 C 300,76 316,84 314,96 C 312,108 288,112 274,104 C 262,97 266,84 282,80 Z"/>
+            </g>
+            <g fill="var(--grey700)" font-size="9.5" text-anchor="middle" font-family="sans-serif">
+              <text x="64" y="132">simply-connected region</text>
+              <text x="232" y="132">regions that are not simply-connected</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Theorem 6 - test for conservative plane fields (proof deferred to 16.4) -->
+<div class="card thm-card" id="c16-3-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">평면 보존장 판정법 <em>Test for Conservative Fields in the Plane</em><span class="src-ref">Theorem 6 · p.1186</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 6.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j$를 열린 단순연결영역 $D$ 위에서 정의된 벡터장이라 하고, $P$, $Q$가 연속인 1계 편도함수를 가지며 $D$의 모든 점에서</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$</div>
+          <p>가 성립한다고 하자. 그러면 $\mathbf F$는 보존적이다.</p>
+        </div>
+        <p>이것이 앞서 예고한 정리 5의 부분적인 역이며, $\mathbb R^2$ 위의 장에 대해 실제로 적용하는 판정 기준이다: 두 편도함수를 비교한 다음, 정의역이 열려 있고 단순연결인지 확인하면 된다. 두 가정 모두 반드시 필요하다 — 단순연결성을 빼면 결론은 일반적으로 성립하지 않는다.</p>
+        <p><em>증명: §16.4로 미룬다. 그린 정리를 얻은 뒤 그 따름결과로 개략적으로 다룬다.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 6.</strong> Let $\mathbf F=P\,\mathbf i+Q\,\mathbf j$ be a vector field defined on an open simply-connected region $D$, and suppose $P$ and $Q$ have continuous first-order partial derivatives with</p>
+          <div class="math-display">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$</div>
+          <p>at every point of $D$. Then $\mathbf F$ is conservative.</p>
+        </div>
+        <p>This is the partial converse of Theorem 5 announced earlier, and it is the working criterion for a field on $\mathbb R^{2}$: compare the two partial derivatives, then confirm that the domain is open and simply-connected. Both hypotheses matter &mdash; dropping simple connectedness makes the conclusion false in general.</p>
+        <p><em>Proof: deferred to Section 16.4, where it is sketched once Green's Theorem is available.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 : partial integration procedure for finding a potential -->
+<div class="card rem-card" id="c16-3-14">
+  <div class="card-head">
+    <span class="rem-num">REM 14</span>
+    <span class="rem-title">편적분으로 퍼텐셜 함수 구하기 <em>Finding a Potential by Partial Integration</em><span class="src-ref">p.1186&ndash;1188</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 6은 퍼텐셜 함수가 존재한다는 것만 보장할 뿐, 그것을 구하는 공식은 주지 않는다. 정리 4의 증명이 길을 암시해 주는데, 실제로는 <em>편적분</em>이라는 방법으로 진행하며 예제 3·5에서 이 절차를 보인다.</p>
+        <p><strong>평면 벡터장.</strong> $f_x=P$를 $x$에 대해 역미분한다. $x$에 대해서는 상수이더라도 $y$에는 여전히 의존할 수 있으므로, 적분상수 자리에는 미지의 함수 $g(y)$가 들어간다.</p>
+        <div class="math-display">$$f(x,y)=\int P(x,y)\,dx+g(y).$$</div>
+        <p>이제 이 식을 $y$에 대해 미분하고 그 결과를 $Q$와 같다고 두면 미지의 $g'(y)$가 결정되며, $y$에 대해 한 번 더 역미분하면 덧셈상수 $K$를 제외하고 $g$가 구해진다.</p>
+        <p><strong>공간 벡터장.</strong> 같은 순환을 한 바퀴 더 돌리면 된다. $f_x=P$를 $x$에 대해 역미분하면 미지의 $g(y,z)$가 남고, 이를 $y$에 대해 미분하여 $Q$와 맞추면 $g_y$가 정해져 $g(y,z)$가 미지의 $h(z)$를 제외하고 결정된다. 마지막으로 $z$에 대해 미분하여 $R$과 맞추면 $h'(z)$가 정해진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Theorem 6 certifies that a potential function exists but hands over no formula for it. The proof of Theorem 4 suggests the route, and in practice one proceeds by <em>partial integration</em>, illustrated in Examples 3 and 5.</p>
+        <p><strong>Plane fields.</strong> Antidifferentiate $f_x=P$ with respect to $x$. Whatever is constant in $x$ may still depend on $y$, so the &ldquo;constant&rdquo; of integration is an unknown function $g(y)$:</p>
+        <div class="math-display">$$f(x,y)=\int P(x,y)\,dx+g(y).$$</div>
+        <p>Now differentiate this expression with respect to $y$, set the outcome equal to $Q$, and the unknown $g'(y)$ is determined; one last antidifferentiation in $y$ produces $g$ up to an additive constant $K$.</p>
+        <p><strong>Space fields.</strong> The same loop simply runs one turn longer. Antidifferentiating $f_x=P$ in $x$ leaves an unknown $g(y,z)$; differentiating in $y$ and matching $Q$ pins down $g_y$, so that $g(y,z)$ is known up to an unknown $h(z)$; differentiating in $z$ and matching $R$ finally pins down $h'(z)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 15 : conservation of energy, Equations (15) and (16) -->
+<div class="card note-card" id="c16-3-15">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">에너지 보존 법칙 <em>The Law of Conservation of Energy</em><span class="src-ref">Eqs. (15)&ndash;(16) · p.1188&ndash;1189</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연속인 힘장 $\mathbf F$가 $\mathbf r(t)$, $a\le t\le b$로 주어지는 경로 $C$를 따라 물체를 시점 $A=\mathbf r(a)$에서 종점 $B=\mathbf r(b)$까지 옮긴다고 하자. 뉴턴의 제2법칙(§13.4)은 $C$ 위의 한 점에서 힘과 그 점에서의 가속도 $\mathbf a(t)=\mathbf r''(t)$를 다음과 같이 이어 준다.</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))=m\,\mathbf r''(t).$$</div>
+        <p>이를 일적분에 대입해 보자. 정리 13.2.3의 공식 4는 $\mathbf r''\cdot\mathbf r'$이 $\lvert\mathbf r'\rvert^{2}$의 도함수의 절반임을 알려 주므로</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=\frac m2\int_a^b\frac{d}{dt}\left\lvert\mathbf r'(t)\right\rvert^{2}dt$$</div>
+        <p>이고, 미적분학 기본정리로 우변을 양 끝에서 계산하면 식 (15)를 얻는다.</p>
+        <div class="math-display">$$W=\tfrac12 m\left\lvert\mathbf v(b)\right\rvert^{2}-\tfrac12 m\left\lvert\mathbf v(a)\right\rvert^{2},\tag{15}$$</div>
+        <p>여기서 $\mathbf v=\mathbf r'$는 속도이다. 질량의 절반에 속력의 제곱을 곱한 값 $\tfrac12 m\lvert\mathbf v(t)\rvert^{2}$을 물체의 <strong>운동 에너지</strong> $K$라 하므로, 식 (15)는 식 (16)으로 다시 쓸 수 있다.</p>
+        <div class="math-display">$$W=K(B)-K(A);\tag{16}$$</div>
+        <p>즉 $C$를 따라 힘장이 한 일은 두 끝점 사이의 운동 에너지 변화량과 같다.</p>
+        <p>이제 힘장이 보존적이어서 $\mathbf F=\nabla f$라고 추가로 가정하자. 물리학에서는 물체가 한 점에서 갖는 <strong>퍼텐셜 에너지</strong>를 $P=-f$로 정의하므로(이 문단에서 문자 $P$는 퍼텐셜 에너지를 가리키며, $\mathbf F$의 첫 성분이 아니다) $\mathbf F=-\nabla P$이고, 정리 2에 의해 일은 $W=P(A)-P(B)$가 된다. 이를 식 (16)과 나란히 놓으면</p>
+        <div class="math-display">$$P(A)+K(A)=P(B)+K(B)$$</div>
+        <p>가 남는다.</p>
+        <p>보존적 힘장에 의해 $A$에서 $B$로 옮겨진 물체는 그 퍼텐셜 에너지와 운동 에너지의 합을 일정하게 유지한다. 이것이 바로 <strong>에너지 보존 법칙</strong>이며, 이런 장을 애초에 "보존적"이라 부르는 이유이기도 하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let a continuous force field $\mathbf F$ carry an object along a path $C$ given by $\mathbf r(t)$, $a\le t\le b$, from the initial point $A=\mathbf r(a)$ to the terminal point $B=\mathbf r(b)$. Newton's Second Law (Section 13.4) links the force at a point of $C$ to the acceleration $\mathbf a(t)=\mathbf r''(t)$ there:</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))=m\,\mathbf r''(t).$$</div>
+        <p>Feed this into the work integral. Formula 4 of Theorem 13.2.3 identifies $\mathbf r''\cdot\mathbf r'$ as half the derivative of $\lvert\mathbf r'\rvert^{2}$, so</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=\frac m2\int_a^b\frac{d}{dt}\left\lvert\mathbf r'(t)\right\rvert^{2}dt,$$</div>
+        <p>and the Fundamental Theorem of Calculus evaluates the right-hand side at the two ends, giving Equation (15):</p>
+        <div class="math-display">$$W=\tfrac12 m\left\lvert\mathbf v(b)\right\rvert^{2}-\tfrac12 m\left\lvert\mathbf v(a)\right\rvert^{2},\tag{15}$$</div>
+        <p>where $\mathbf v=\mathbf r'$ is the velocity. The quantity $\tfrac12 m\lvert\mathbf v(t)\rvert^{2}$ &mdash; the mass of the object multiplied by its speed squared and then halved &mdash; is its <strong>kinetic energy</strong> $K$, so Equation (15) can be restated as Equation (16):</p>
+        <div class="math-display">$$W=K(B)-K(A);\tag{16}$$</div>
+        <p>the work of the field along $C$ is the change in kinetic energy between the endpoints.</p>
+        <p>Assume now in addition that the force field is conservative, $\mathbf F=\nabla f$. Physics calls $P=-f$ the <strong>potential energy</strong> of the object at a point (in this paragraph the letter $P$ stands for potential energy, not for the first component of $\mathbf F$), so that $\mathbf F=-\nabla P$, and Theorem 2 turns the work into $W=P(A)-P(B)$. Setting this beside Equation (16) leaves</p>
+        <div class="math-display">$$P(A)+K(A)=P(B)+K(B).$$</div>
+        <p>An object moved from $A$ to $B$ by a conservative force field therefore keeps the sum of its potential and kinetic energy constant. This is the <strong>Law of Conservation of Energy</strong> &mdash; and the reason such a field is called conservative in the first place.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-3-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">중력장이 한 일 <em>Work Done by the Gravitational Field</em><span class="src-ref">Example 1 · p.1183</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>질량이 $m$인 입자가 중력장</p>
+        <div class="math-display">$$\mathbf F(\mathbf x)=-\frac{mMG}{\lvert\mathbf x\rvert^{3}}\,\mathbf x$$</div>
+        <p>안에서 점 $(3,4,12)$로부터 점 $(2,2,0)$까지 조각적으로 매끄러운 곡선 $C$를 따라 움직인다. 선적분의 기본정리를 이용하여 이때 중력장이 한 일을 구하여라. (§16.1 예제 4를 참고하라.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> §16.1에서 이 중력장이 보존적임을 확인했고, 그때 쓰인 퍼텐셜 함수는</p>
+        <div class="math-display">$$f(x,y,z)=\frac{mMG}{\sqrt{x^2+y^2+z^2}}$$</div>
+        <p>로, $\nabla f=\mathbf F$가 성립한다. $f$는 원점을 제외한 곳에서 미분가능하고 $\nabla f$도 그곳에서 연속이므로, 입자가 원점을 지나지 않는 한 정리 2를 곡선 $C$ 전체에 적용할 수 있다. 곡선의 시점은 $(3,4,12)$, 종점은 $(2,2,0)$이므로</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=f(2,2,0)-f(3,4,12)$$</div>
+        <p>이다. 두 점에서 원점까지의 거리를 각각 구하면</p>
+        <div class="math-display">$$\begin{aligned}\lvert\langle3,4,12\rangle\rvert&=\sqrt{9+16+144}=\sqrt{169}=13,\\[2pt] \lvert\langle2,2,0\rangle\rvert&=\sqrt{4+4+0}=\sqrt8=2\sqrt2\end{aligned}$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$W=\frac{mMG}{2\sqrt2}-\frac{mMG}{13}=mMG\left(\frac{\sqrt2}{4}-\frac1{13}\right)=\frac{mMG(13\sqrt2-4)}{52}$$</div>
+        <p>이다. 정리 2를 쓰면 곡선 $C$의 구체적인 모양은 전혀 필요 없고 오직 두 끝점만으로 계산이 끝난다는 점이 핵심이다. 따라서 중력장이 한 일은 $W=\dfrac{mMG(13\sqrt2-4)}{52}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A particle of mass $m$ travels from the point $(3,4,12)$ to the point $(2,2,0)$ along a piecewise-smooth curve $C$, inside the gravitational field</p>
+        <div class="math-display">$$\mathbf F(\mathbf x)=-\frac{mMG}{\lvert\mathbf x\rvert^{3}}\,\mathbf x.$$</div>
+        <p>Apply the Fundamental Theorem for Line Integrals to determine how much work this field performs on the particle. (Compare Example 16.1.4.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Section 16.1 verified that this gravitational field is conservative, with potential function</p>
+        <div class="math-display">$$f(x,y,z)=\frac{mMG}{\sqrt{x^2+y^2+z^2}}$$</div>
+        <p>satisfying $\nabla f=\mathbf F$. Since $f$ is differentiable and $\nabla f$ continuous away from the origin, Theorem 2 applies to the whole curve $C$ as long as the particle never passes through the origin. With initial point $(3,4,12)$ and terminal point $(2,2,0)$,</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=f(2,2,0)-f(3,4,12).$$</div>
+        <p>Computing the two distances to the origin,</p>
+        <div class="math-display">$$\begin{aligned}\lvert\langle3,4,12\rangle\rvert&=\sqrt{9+16+144}=\sqrt{169}=13,\\[2pt] \lvert\langle2,2,0\rangle\rvert&=\sqrt{4+4+0}=\sqrt8=2\sqrt2,\end{aligned}$$</div>
+        <p>so</p>
+        <div class="math-display">$$W=\frac{mMG}{2\sqrt2}-\frac{mMG}{13}=mMG\left(\frac{\sqrt2}{4}-\frac1{13}\right)=\frac{mMG(13\sqrt2-4)}{52}.$$</div>
+        <p>The point of Theorem 2 is that the exact shape of $C$ never enters the computation, only its two endpoints. Hence the work done by the gravitational field is $W=\dfrac{mMG(13\sqrt2-4)}{52}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-3-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">평면 벡터장의 보존성 판정 <em>Deciding Whether a Plane Field Is Conservative</em><span class="src-ref">Example 2 · p.1186</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 두 평면 벡터장 각각에 대하여 보존적인지 아닌지를 판정하라.</p>
+        <p><strong>(a)</strong> $\mathbf F(x,y)=(x-y)\,\mathbf i+(x-2)\,\mathbf j$</p>
+        <p><strong>(b)</strong> $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $P(x,y)=x-y$, $Q(x,y)=x-2$라 하면 두 함수 모두 $\mathbb R^2$ 전체에서 연속인 1계 편도함수를 갖는다. 편미분하면</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial P}{\partial y}&=-1,\\[2pt] \frac{\partial Q}{\partial x}&=1\end{aligned}$$</div>
+        <p>이므로 $\partial P/\partial y\neq\partial Q/\partial x$이다. 정리 5의 대우에 의해 이 둘이 어긋나는 순간 $\mathbf F$는 보존적일 수 없으므로, 퍼텐셜 함수를 찾아볼 필요도 없이 $\mathbf F(x,y)=(x-y)\,\mathbf i+(x-2)\,\mathbf j$는 보존적이 아니다.</p>
+        <p><strong>(b)</strong> $P(x,y)=3+2xy$, $Q(x,y)=x^2-3y^2$라 하면</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial P}{\partial y}&=2x,\\[2pt] \frac{\partial Q}{\partial x}&=2x\end{aligned}$$</div>
+        <p>이므로 $\mathbb R^2$의 모든 점에서 $\partial P/\partial y=\partial Q/\partial x$이다. 정의역이 $\mathbb R^2$ 전체이므로 열려 있고 단순연결이며, $P,Q$는 다항식이라 연속인 1계 편도함수를 갖는다. 정리 6의 세 가지 가정 — 열린 단순연결 정의역, 연속인 1계 편도함수, 등식 $\partial P/\partial y=\partial Q/\partial x$ — 이 모두 충족되므로 $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$는 보존적이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each of the two plane vector fields below, decide whether or not it is conservative.</p>
+        <p><strong>(a)</strong> $\mathbf F(x,y)=(x-y)\,\mathbf i+(x-2)\,\mathbf j$</p>
+        <p><strong>(b)</strong> $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> With $P(x,y)=x-y$ and $Q(x,y)=x-2$, both functions have continuous first-order partial derivatives on all of $\mathbb R^2$. Differentiating,</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial P}{\partial y}&=-1,\\[2pt] \frac{\partial Q}{\partial x}&=1,\end{aligned}$$</div>
+        <p>so $\partial P/\partial y\neq\partial Q/\partial x$. By the contrapositive of Theorem 5, a single point of disagreement already rules out conservativeness, and no search for a potential function is needed: $\mathbf F(x,y)=(x-y)\,\mathbf i+(x-2)\,\mathbf j$ is not conservative.</p>
+        <p><strong>(b)</strong> With $P(x,y)=3+2xy$ and $Q(x,y)=x^2-3y^2$,</p>
+        <div class="math-display">$$\begin{aligned}\frac{\partial P}{\partial y}&=2x,\\[2pt] \frac{\partial Q}{\partial x}&=2x,\end{aligned}$$</div>
+        <p>so $\partial P/\partial y=\partial Q/\partial x$ at every point of $\mathbb R^2$. The domain is all of $\mathbb R^2$, which is open and simply-connected, and $P,Q$ are polynomials, hence have continuous first-order partial derivatives. All three hypotheses of Theorem 6 &mdash; an open simply-connected domain, continuous first-order partial derivatives, and the equality $\partial P/\partial y=\partial Q/\partial x$ &mdash; are satisfied, so $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$ is conservative.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-3-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">퍼텐셜 함수 구하기 <em>Constructing a Potential Function</em><span class="src-ref">Example 3 · p.1187</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 벡터장 $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$에 대하여 $\nabla f=\mathbf F$를 만족하는 함수 $f$를 하나 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 2(b)에서 $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$가 보존적임을 확인했으므로, $f_x=P=3+2xy$이고 $f_y=Q=x^2-3y^2$인 $f$가 존재한다. 편적분 절차에 따라 $f_x=P$를 $x$에 대해 역미분하면</p>
+        <div class="math-display">$$f(x,y)=\int(3+2xy)\,dx+g(y)=3x+x^2y+g(y)$$</div>
+        <p>이다. 여기서 적분상수 자리는 $y$만의 미지함수 $g(y)$이다. 이 식을 $y$로 미분하면</p>
+        <div class="math-display">$$f_y(x,y)=x^2+g'(y)$$</div>
+        <p>이고, 이것이 $Q=x^2-3y^2$과 같아야 하므로 $g'(y)=-3y^2$이다. 다시 $y$에 대해 역미분하면 $g(y)=-y^3+K$($K$는 상수)이고, 이를 대입하면</p>
+        <div class="math-display">$$f(x,y)=3x+x^2y-y^3+K$$</div>
+        <p>이다. 검산: $f_x=3+2xy=P$, $f_y=x^2-3y^2=Q$로 두 편도함수 모두 원래의 $\mathbf F$의 성분과 일치한다. 따라서 $K=0$으로 택하면 $f(x,y)=3x+x^2y-y^3$은 $\nabla f=\mathbf F$를 만족하는 퍼텐셜 함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Given the plane field $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$, produce a function $f$ that satisfies $\nabla f=\mathbf F$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Example 2(b) confirmed that $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$ is conservative, so some $f$ satisfies $f_x=P=3+2xy$ and $f_y=Q=x^2-3y^2$. Following the partial-integration procedure, antidifferentiate $f_x=P$ with respect to $x$:</p>
+        <div class="math-display">$$f(x,y)=\int(3+2xy)\,dx+g(y)=3x+x^2y+g(y),$$</div>
+        <p>where the constant of integration is an unknown function $g(y)$ of $y$ alone. Differentiating this in $y$ gives</p>
+        <div class="math-display">$$f_y(x,y)=x^2+g'(y),$$</div>
+        <p>and matching this to $Q=x^2-3y^2$ forces $g'(y)=-3y^2$. Antidifferentiating once more in $y$ gives $g(y)=-y^3+K$ for a constant $K$, so</p>
+        <div class="math-display">$$f(x,y)=3x+x^2y-y^3+K.$$</div>
+        <p>Checking: $f_x=3+2xy=P$ and $f_y=x^2-3y^2=Q$, so both partial derivatives reproduce the components of $\mathbf F$. Taking $K=0$, $f(x,y)=3x+x^2y-y^3$ is a potential function satisfying $\nabla f=\mathbf F$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-3-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">기본정리로 선적분 계산하기 <em>Evaluating a Line Integral by the Fundamental Theorem</em><span class="src-ref">Example 4 · p.1187&ndash;1188</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장이 $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$이고 곡선 $C$가</p>
+        <div class="math-display">$$\mathbf r(t)=e^{t}\sin t\,\mathbf i+e^{t}\cos t\,\mathbf j,\qquad 0\le t\le\pi$$</div>
+        <p>로 주어질 때, 선적분 $\displaystyle\int_C\mathbf F\cdot d\mathbf r$의 값을 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 2(b)에서 $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$가 보존적임을 확인했고, 예제 3에서 퍼텐셜 함수 $f(x,y)=3x+x^2y-y^3$을 구했으므로 정리 2를 곧바로 쓸 수 있다. 곡선의 끝점부터 구하면</p>
+        <div class="math-display">$$\begin{aligned}\mathbf r(0)&=\langle e^{0}\sin 0,\;e^{0}\cos 0\rangle=\langle 0,1\rangle,\\[2pt] \mathbf r(\pi)&=\langle e^{\pi}\sin\pi,\;e^{\pi}\cos\pi\rangle=\langle 0,-e^{\pi}\rangle\end{aligned}$$</div>
+        <p>이다. 정리 2에 의해</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=f(0,-e^\pi)-f(0,1)$$</div>
+        <p>이고, 각 값을 대입하면</p>
+        <div class="math-display">$$\begin{aligned}f(0,-e^{\pi})&=3(0)+0^{2}(-e^{\pi})-(-e^{\pi})^{3}=e^{3\pi},\\[2pt] f(0,1)&=3(0)+0^{2}(1)-1^{3}=-1\end{aligned}$$</div>
+        <p>이다. 따라서</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=e^{3\pi}-(-1)=e^{3\pi}+1$$</div>
+        <p>이다. $C$는 반지름이 $e^{t}$로 불어나면서 원점 둘레를 시계 방향으로 반 바퀴 도는 나선이고 매개변수식도 다루기 번거롭지만, 정리 2 덕분에 그 매개변수식을 적분할 필요 없이 두 끝점만으로 답이 나온다는 점이 이 계산의 핵심이다. 다른 방법으로도 확인할 수 있다 — 경로 무관성에 의해 $C$를 $(0,1)$에서 $(0,-e^\pi)$까지의 $y$축 위 수직 선분 $C_1$: $\mathbf r(t)=\langle 0,t\rangle$, $t$가 $1$에서 $-e^\pi$까지 감소로 바꾸어도 같은 값을 얻는다. 이 선분 위에서는 $x=0$이고 $dx=0$이므로 $\mathbf F\cdot d\mathbf r=P\,dx+Q\,dy=-3y^2\,dy$이고</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_1^{-e^\pi}(-3y^2)\,dy=\Bigl[-y^3\Bigr]_1^{-e^\pi}=-(-e^\pi)^3-(-1)=e^{3\pi}+1$$</div>
+        <p>로 정리 2의 답과 정확히 일치한다. 따라서 $\displaystyle\int_C\mathbf F\cdot d\mathbf r=e^{3\pi}+1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute the line integral $\displaystyle\int_C\mathbf F\cdot d\mathbf r$ for the field $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^{2}-3y^{2})\,\mathbf j$, where the curve $C$ is traced by</p>
+        <div class="math-display">$$\mathbf r(t)=e^{t}\sin t\,\mathbf i+e^{t}\cos t\,\mathbf j,\qquad 0\le t\le\pi.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Example 2(b) established that $\mathbf F(x,y)=(3+2xy)\,\mathbf i+(x^2-3y^2)\,\mathbf j$ is conservative, and Example 3 produced the potential function $f(x,y)=3x+x^2y-y^3$, so Theorem 2 applies directly. The endpoints of the curve are</p>
+        <div class="math-display">$$\begin{aligned}\mathbf r(0)&=\langle e^{0}\sin 0,\;e^{0}\cos 0\rangle=\langle 0,1\rangle,\\[2pt] \mathbf r(\pi)&=\langle e^{\pi}\sin\pi,\;e^{\pi}\cos\pi\rangle=\langle 0,-e^{\pi}\rangle.\end{aligned}$$</div>
+        <p>By Theorem 2,</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=f(0,-e^\pi)-f(0,1),$$</div>
+        <p>and substituting each point,</p>
+        <div class="math-display">$$\begin{aligned}f(0,-e^{\pi})&=3(0)+0^{2}(-e^{\pi})-(-e^{\pi})^{3}=e^{3\pi},\\[2pt] f(0,1)&=3(0)+0^{2}(1)-1^{3}=-1,\end{aligned}$$</div>
+        <p>so</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=e^{3\pi}-(-1)=e^{3\pi}+1.$$</div>
+        <p>The curve $C$ is a spiral whose radius grows like $e^{t}$ as it sweeps half a turn clockwise about the origin, and its parametrization is awkward; Theorem 2 nevertheless needs nothing beyond the two endpoints &mdash; no integration over that parametrization is required. A second route confirms this: independence of path lets $C$ be replaced by the vertical segment $C_1$ on the $y$-axis from $(0,1)$ to $(0,-e^\pi)$, namely $\mathbf r(t)=\langle 0,t\rangle$ with $t$ decreasing from $1$ to $-e^\pi$. On this segment $x=0$ and $dx=0$, so $\mathbf F\cdot d\mathbf r=P\,dx+Q\,dy=-3y^2\,dy$, and</p>
+        <div class="math-display">$$\int_{C_1}\mathbf F\cdot d\mathbf r=\int_1^{-e^\pi}(-3y^2)\,dy=\Bigl[-y^3\Bigr]_1^{-e^\pi}=-(-e^\pi)^3-(-1)=e^{3\pi}+1,$$</div>
+        <p>which matches the answer from Theorem 2 exactly. Hence $\displaystyle\int_C\mathbf F\cdot d\mathbf r=e^{3\pi}+1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-3-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">공간 벡터장의 퍼텐셜 함수 <em>A Potential Function for a Space Field</em><span class="src-ref">Example 5 · p.1188</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공간 벡터장 $\mathbf F(x,y,z)=y^{2}\,\mathbf i+(2xy+e^{3z})\,\mathbf j+3ye^{3z}\,\mathbf k$에 대하여 $\nabla f=\mathbf F$인 함수 $f$를 구하여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\nabla f=\mathbf F$이면 $f_x=P=y^2$, $f_y=Q=2xy+e^{3z}$, $f_z=R=3ye^{3z}$이어야 한다. 공간 벡터장에 대한 편적분 절차를 따라 $f_x=P$를 $x$에 대해 역미분하면</p>
+        <div class="math-display">$$f(x,y,z)=\int y^2\,dx+g(y,z)=xy^2+g(y,z)$$</div>
+        <p>이다. 여기서 적분상수는 $x$를 포함하지 않는 미지함수 $g(y,z)$이다. 이 식을 $y$로 미분하면</p>
+        <div class="math-display">$$f_y(x,y,z)=2xy+g_y(y,z)$$</div>
+        <p>이고, 이것이 $Q=2xy+e^{3z}$와 같아야 하므로 $g_y(y,z)=e^{3z}$이다. $y$에 대해 역미분하면 $g(y,z)=ye^{3z}+h(z)$($h$는 $z$만의 미지함수)를 얻고, 이를 대입하면</p>
+        <div class="math-display">$$f(x,y,z)=xy^2+ye^{3z}+h(z)$$</div>
+        <p>이다. 마지막으로 $z$로 미분하면</p>
+        <div class="math-display">$$f_z(x,y,z)=3ye^{3z}+h'(z)$$</div>
+        <p>이고, 이것이 $R=3ye^{3z}$와 같아야 하므로 $h'(z)=0$, 곧 $h(z)=K$(상수)이다. 검산: $f_x=y^2=P$, $f_y=2xy+e^{3z}=Q$, $f_z=3ye^{3z}=R$로 세 편도함수 모두 $\mathbf F$의 성분과 일치한다. 따라서 $K=0$으로 택하면</p>
+        <div class="math-display">$$f(x,y,z)=xy^2+ye^{3z}$$</div>
+        <p>는 $\nabla f=\mathbf F$를 만족하는 퍼텐셜 함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find a function $f$ whose gradient is the space field $\mathbf F(x,y,z)=y^{2}\,\mathbf i+(2xy+e^{3z})\,\mathbf j+3ye^{3z}\,\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> If $\nabla f=\mathbf F$, then $f_x=P=y^2$, $f_y=Q=2xy+e^{3z}$, and $f_z=R=3ye^{3z}$. Following the space-field version of the partial-integration procedure, antidifferentiate $f_x=P$ with respect to $x$:</p>
+        <div class="math-display">$$f(x,y,z)=\int y^2\,dx+g(y,z)=xy^2+g(y,z),$$</div>
+        <p>where the constant of integration is an unknown function $g(y,z)$ not involving $x$. Differentiating this in $y$,</p>
+        <div class="math-display">$$f_y(x,y,z)=2xy+g_y(y,z),$$</div>
+        <p>and matching this to $Q=2xy+e^{3z}$ forces $g_y(y,z)=e^{3z}$. Antidifferentiating in $y$ gives $g(y,z)=ye^{3z}+h(z)$, with $h$ an unknown function of $z$ alone, so</p>
+        <div class="math-display">$$f(x,y,z)=xy^2+ye^{3z}+h(z).$$</div>
+        <p>Differentiating once more, in $z$,</p>
+        <div class="math-display">$$f_z(x,y,z)=3ye^{3z}+h'(z),$$</div>
+        <p>and matching this to $R=3ye^{3z}$ forces $h'(z)=0$, so $h(z)=K$ for a constant $K$. Checking: $f_x=y^2=P$, $f_y=2xy+e^{3z}=Q$, and $f_z=3ye^{3z}=R$, so all three partial derivatives reproduce the components of $\mathbf F$. Taking $K=0$,</p>
+        <div class="math-display">$$f(x,y,z)=xy^2+ye^{3z}$$</div>
+        <p>is a potential function satisfying $\nabla f=\mathbf F$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-3-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch12.html">단원 12</a></p>
+        <ul>
+          <li>기울기장의 선적분 &mdash; <a href="../calc2/ch12.html#ex01">ex01</a> (완전 대응: 정리 2를 그대로 쓰는 계산, 예제 1·4와 같은 유형)</li>
+          <li>보존력이 한 일 &mdash; <a href="../calc2/ch12.html#yu01">yu01</a> (완전 대응: 예제 1과 같은 유형)</li>
+          <li>보존장과 퍼텐셜 함수 &mdash; <a href="../calc2/ch12.html#ex02">ex02</a> (완전 대응: 예제 3·5의 퍼텐셜 함수 구성)</li>
+          <li>보존적이 아님 보이기 &mdash; <a href="../calc2/ch12.html#yu02-1">yu02-1</a> (완전 대응: 예제 2(a)와 같은 판정)</li>
+          <li>닫힌 벡터장의 반례 &mdash; <a href="../calc2/ch12.html#yu02-2">yu02-2</a> (인접: 정리 6에서 정의역의 단순연결성이 왜 필요한지 보여 주는 예)</li>
+          <li>보존적이 되는 상수 &mdash; <a href="../calc2/ch12.html#yu02-3">yu02-3</a> (완전 대응: 예제 2(b)와 같은 성분 판정)</li>
+          <li>완전형식과 선적분 &mdash; <a href="../calc2/ch12.html#ex03">ex03</a>, <a href="../calc2/ch12.html#yu03-1">yu03-1</a>, <a href="../calc2/ch12.html#yu03-2">yu03-2</a> (인접: 퍼텐셜 함수를 먼저 구해 선적분을 계산하는 예제 4의 절차)</li>
+          <li>상수 힘이 한 일 &mdash; <a href="../calc2/ch12.html#pr01">pr01</a>, 중력장이 한 일 &mdash; <a href="../calc2/ch12.html#pr02">pr02</a> (인접: 보존적 힘장이 한 일)</li>
+          <li>정리 3(경로 독립 ⟺ 닫힌 경로에서 0), 정리 4(경로 독립이면 보존적)와 퍼텐셜 함수를 적분으로 구성하는 증명, 에너지 보존 법칙, 열린·연결·단순연결 영역과 단순곡선의 정의 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 평면 벡터장의 두 성분에 이 절과 다른 문자를 쓴다. 이 절에서는 §16.1과 마찬가지로 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$로 두므로, 판정 조건도 $\partial P/\partial y=\partial Q/\partial x$의 꼴로 읽어야 한다. 또 강의 노트는 3차원에서 $\nabla\times\mathbf F=\mathbf 0$을 쓰는 판정만 다루고 2변수 판정법(정리 5·6)을 따로 진술하지 않는다.</p>
+        <p><strong>(b) 공통과제 (§16.3, 3차)</strong></p>
+        <p>제출 문항: 14, 17, 24, 29, 41 &nbsp;/&nbsp; 학습 참고: 3&ndash;10, 13&ndash;15, 17&ndash;24, 25&ndash;26, 29&ndash;30, 36, 41</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-2.html">§16.2 선적분</a> &nbsp;/&nbsp; 다음: <a href="s16-4.html">§16.4 그린 정리</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch12.html">Unit 12</a></p>
+        <ul>
+          <li>Line integral of a gradient field &mdash; <a href="../calc2/ch12.html#ex01">ex01</a> (full match; a direct application of Theorem 2, same type as Examples 1 and 4)</li>
+          <li>Work done by a conservative force &mdash; <a href="../calc2/ch12.html#yu01">yu01</a> (full match; same type as Example 1)</li>
+          <li>Conservative fields and potential functions &mdash; <a href="../calc2/ch12.html#ex02">ex02</a> (full match; the construction carried out in Examples 3 and 5)</li>
+          <li>Showing a field is not conservative &mdash; <a href="../calc2/ch12.html#yu02-1">yu02-1</a> (full match; the test of Example 2(a))</li>
+          <li>A counterexample with matching partial derivatives &mdash; <a href="../calc2/ch12.html#yu02-2">yu02-2</a> (adjacent; shows why Theorem 6 insists that the domain be simply-connected)</li>
+          <li>Choosing a constant that makes a field conservative &mdash; <a href="../calc2/ch12.html#yu02-3">yu02-3</a> (full match; the component test of Example 2(b))</li>
+          <li>Exact forms and line integrals &mdash; <a href="../calc2/ch12.html#ex03">ex03</a>, <a href="../calc2/ch12.html#yu03-1">yu03-1</a>, <a href="../calc2/ch12.html#yu03-2">yu03-2</a> (adjacent; the route of Example 4, first a potential function and then the integral)</li>
+          <li>Work done by a constant force &mdash; <a href="../calc2/ch12.html#pr01">pr01</a>, and work done by the gravitational field &mdash; <a href="../calc2/ch12.html#pr02">pr02</a> (adjacent; work in a conservative force field)</li>
+          <li>Theorem 3 (path independence versus closed paths), Theorem 4 with its construction of a potential function as an integral, the Law of Conservation of Energy, and the definitions of open, connected and simply-connected regions and of simple curves &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes label the two components of a plane field with different letters than this section does. Here, as in Section 16.1, the field is written $\mathbf F=P\,\mathbf i+Q\,\mathbf j$, so the test has to be read in the form $\partial P/\partial y=\partial Q/\partial x$. The notes also test conservativeness only through $\nabla\times\mathbf F=\mathbf 0$ in three variables, and never state the two-variable criterion of Theorems 5 and 6 separately.</p>
+        <p><strong>(b) Assignment (§16.3, third set)</strong></p>
+        <p>Problems to submit: 14, 17, 24, 29, 41 &nbsp;/&nbsp; Recommended practice: 3&ndash;10, 13&ndash;15, 17&ndash;24, 25&ndash;26, 29&ndash;30, 36, 41</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-2.html">§16.2 Line Integrals</a> &nbsp;/&nbsp; Next: <a href="s16-4.html">§16.4 Green's Theorem</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.7 면적분 (Surface Integrals) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.7 면적분 — 스칼라 면적분의 정의 1과 매개곡면 계산 공식 (2), 그래프 위의 공식 (4), 얇은 판의 질량·질량중심, 유향(가향) 곡면과 뫼비우스 띠, 그래프의 위쪽 향 (5)·매개화가 유도하는 향 (6)·닫힌곡면의 양의 향, 플럭스의 정의 8과 계산 공식 (9)·(10), 전기다발과 가우스 법칙 (11), 열류를 한국어·영어 대조로 정리하고 예제 6개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.7, 면적분, surface integral, 곡면적분, 매개곡면, parametric surface, 유향곡면, oriented surface, 가향곡면, orientable, 뫼비우스 띠, Mobius strip, 닫힌곡면, closed surface, 바깥 법선, outward normal, 플럭스, flux, 전기다발, electric flux, 가우스 법칙, Gauss's Law, 열류, heat flow, 질량중심, center of mass, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-7.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.7 면적분 (Surface Integrals) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="스칼라 면적분의 정의와 매개곡면·그래프에서의 계산 공식, 유향곡면과 뫼비우스 띠, 닫힌곡면의 양의 향, 플럭스와 전기다발·열류까지 §16.7 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-7.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.7 면적분 (Surface Integrals) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.7 면적분 — 패치 분할과 리만 합으로 세운 스칼라 면적분의 정의, 매개곡면과 그래프에서의 계산 공식, 얇은 판의 질량과 질량중심, 유향곡면·뫼비우스 띠·닫힌곡면의 양의 향, 벡터장의 면적분(플럭스)과 그 계산 공식, 전기다발·가우스 법칙·열류를 한국어·영어 대조로 정리하고 본문 예제 6개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-7.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-7.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html" class="active">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.7 · 12주차</p>
+  <h1>§16.7 면적분<span>Surface Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-7-1"><span class="toc-num">NOTE</span> 면적분이란 무엇인가 <em>What a Surface Integral Is</em></a></li>
+    <li><a href="#c16-7-2"><span class="toc-num">NOTE</span> 패치 분할과 리만 합 <em>Patches and the Riemann Sum</em></a></li>
+    <li><a href="#c16-7-3"><span class="toc-num">DEF 3</span> 면적분 <em>Surface Integral</em></a></li>
+    <li><a href="#c16-7-4"><span class="toc-num">THM 4</span> 매개곡면 위에서의 계산 공식 <em>Evaluating over a Parametric Surface</em></a></li>
+    <li><a href="#c16-7-5"><span class="toc-num">REM 5</span> 선적분과의 대응, 그리고 넓이의 회수 <em>Analogy with Line Integrals; Recovering Area</em></a></li>
+    <li><a href="#c16-7-6"><span class="toc-num">THM 6</span> 얇은 판의 질량과 질량중심 <em>Mass and Center of Mass of a Thin Sheet</em></a></li>
+    <li><a href="#c16-7-7"><span class="toc-num">THM 7</span> 그래프 위의 면적분 <em>Surface Integrals over Graphs</em></a></li>
+    <li><a href="#c16-7-8"><span class="toc-num">REM 8</span> 다른 좌표평면으로의 정사영 <em>Projecting onto Another Coordinate Plane</em></a></li>
+    <li><a href="#c16-7-9"><span class="toc-num">DEF 9</span> 조각적으로 매끄러운 곡면 위의 적분 <em>Integrals over Piecewise-Smooth Surfaces</em></a></li>
+    <li><a href="#c16-7-10"><span class="toc-num">NOTE</span> 비가향 곡면: 뫼비우스 띠 <em>Nonorientable Surfaces: the M&ouml;bius Strip</em></a></li>
+    <li><a href="#c16-7-11"><span class="toc-num">DEF 11</span> 유향곡면 <em>Oriented Surfaces</em></a></li>
+    <li><a href="#c16-7-12"><span class="toc-num">THM 12</span> 그래프의 위쪽 향 <em>The Upward Orientation of a Graph</em></a></li>
+    <li><a href="#c16-7-13"><span class="toc-num">THM 13</span> 매개화가 유도하는 향 <em>Orientation Induced by a Parametrization</em></a></li>
+    <li><a href="#c16-7-14"><span class="toc-num">REM 14</span> 구면의 양의 향과 닫힌곡면 규약 <em>Positive Orientation of a Closed Surface</em></a></li>
+    <li><a href="#c16-7-15"><span class="toc-num">NOTE</span> 유체 흐름으로 본 플럭스 <em>Motivating Flux by Fluid Flow</em></a></li>
+    <li><a href="#c16-7-16"><span class="toc-num">THM 16</span> 흐름률 <em>Rate of Flow</em></a></li>
+    <li><a href="#c16-7-17"><span class="toc-num">DEF 17</span> 벡터장의 면적분과 플럭스 <em>Surface Integral of a Vector Field; Flux</em></a></li>
+    <li><a href="#c16-7-18"><span class="toc-num">THM 18</span> 매개곡면에서의 플럭스 계산 <em>Computing Flux from a Parametrization</em></a></li>
+    <li><a href="#c16-7-19"><span class="toc-num">THM 19</span> 그래프 위의 플럭스 <em>Flux across a Graph</em></a></li>
+    <li><a href="#c16-7-20"><span class="toc-num">REM 20</span> 전기다발과 가우스 법칙 <em>Electric Flux and Gauss's Law</em></a></li>
+    <li><a href="#c16-7-21"><span class="toc-num">THM 21</span> 열류 <em>Heat Flow</em></a></li>
+    <li><a href="#ex16-7-1"><span class="toc-num">EXAM 1</span> 단위구면 위의 면적분 <em>A Surface Integral over the Unit Sphere</em></a></li>
+    <li><a href="#ex16-7-2"><span class="toc-num">EXAM 2</span> 그래프 위의 면적분 <em>Integrating over a Graph</em></a></li>
+    <li><a href="#ex16-7-3"><span class="toc-num">EXAM 3</span> 조각으로 이루어진 닫힌곡면 위의 면적분 <em>A Piecewise-Smooth Closed Surface</em></a></li>
+    <li><a href="#ex16-7-4"><span class="toc-num">EXAM 4</span> 단위구면을 지나는 플럭스 <em>Flux across the Unit Sphere</em></a></li>
+    <li><a href="#ex16-7-5"><span class="toc-num">EXAM 5</span> 포물면과 원판으로 이루어진 닫힌곡면의 플럭스 <em>Flux across a Paraboloid Capped by a Disk</em></a></li>
+    <li><a href="#ex16-7-6"><span class="toc-num">EXAM 6</span> 구면을 가로지르는 열 흐름률 <em>Rate of Heat Flow across a Sphere</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opener -->
+<div class="card note-card" id="c16-7-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">면적분이란 무엇인가 <em>What a Surface Integral Is</em><span class="src-ref">절 도입 · p.1220&ndash;1221</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>면적분과 곡면 넓이의 관계는 선적분과 호의 길이의 관계와 정확히 같다. $f$를 세 변수의 함수라 하고 그 정의역이 곡면 $S$를 포함한다고 하자. 기호 $\iint_S f\,dS$는 상수함수 $f\equiv 1$을 넣었을 때 그 값이 $S$의 넓이가 되도록 — 마치 $\int_C 1\,ds$가 $C$의 길이가 되는 것과 같은 방식으로 — 세워져야 한다.</p>
+        <p>이 구성은 먼저 일반적인 경우인 매개곡면 $\mathbf r(u,v)$에 대해 수행하고, 그래프 $z=g(x,y)$는 특수한 매개화 $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$로 보아 그 결과에서 그대로 읽어낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A surface integral stands to surface area exactly as a line integral stands to arc length. Let $f$ be a function of three variables whose domain contains a surface $S$. The symbol $\iint_S f\,dS$ is to be set up so that the constant function $f\equiv 1$ returns the area of $S$ &mdash; the same normalization that makes $\int_C 1\,ds$ the length of $C$.</p>
+        <p>The construction is carried out first for a surface presented in parametric form $\mathbf r(u,v)$, since that is the general case; the graph $z=g(x,y)$ is then read off as the particular parametrization $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : patches and the Riemann sum (Figure 1) -->
+<div class="card note-card" id="c16-7-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">패치 분할과 리만 합 <em>Patches and the Riemann Sum</em><span class="src-ref">Figure 1 · p.1221</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$의 매개변수 정의역을 $uv$평면 위의 $D$라 하고, 우선 $D$가 직사각형인 경우를 생각하자. $D$를 $\Delta u\times\Delta v$ 크기의 소사각형 $R_{ij}$로 나누면, 그 상이 $S$를 대응하는 <strong>패치</strong> $S_{ij}$로 나눈다.</p>
+        <p>패치 $S_{ij}$ 안에서 표본점 $P_{ij}^{*}$를 아무렇게나 골라 그 점에서 $f$의 값을 재고, 그 값에 패치의 넓이 $\Delta S_{ij}$를 가중치로 곱한다. 이 기여들을 모두 더하면 다음과 같은 근사합을 얻는다.</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f(P_{ij}^{*})\,\Delta S_{ij},$$</div>
+        <p>이 합은 선적분에서 $\sum f(x_i^{*},y_i^{*})\,\Delta s_i$가 맡던 역할을 그대로 맡는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ have parametric domain $D$ in the $uv$-plane, taking $D$ to be a rectangle to begin with. Cut $D$ into subrectangles $R_{ij}$ of dimensions $\Delta u$ by $\Delta v$; their images cut $S$ into corresponding <strong>patches</strong> $S_{ij}$.</p>
+        <p>Pick any sample point $P_{ij}^{*}$ inside the patch $S_{ij}$, evaluate $f$ there, and weight the value by the area $\Delta S_{ij}$ of that patch. Adding the contributions gives the approximating sum</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f(P_{ij}^{*})\,\Delta S_{ij},$$</div>
+        <p>which plays here the role that $\sum f(x_i^{*},y_i^{*})\,\Delta s_i$ plays for a line integral.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Definition 1 -->
+<div class="card def-card" id="c16-7-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">면적분 <em>Surface Integral</em><span class="src-ref">Definition 1 · p.1221</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 1.</strong> 곡면 $S$ 위에서 $f$의 <strong>면적분</strong>은 분할을 두 방향 모두에서 세분해 갈 때 패치 합들이 이루는 극한이다.</p>
+          <div class="math-display">$$\iint_S f(x,y,z)\,dS=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n} f(P_{ij}^{*})\,\Delta S_{ij}.\tag{1}$$</div>
+        </div>
+        <p>이 꼴은 이미 두 번 본 것과 같은 패턴을 되풀이한다. 선적분의 정의(16.2.2)에서 호의 길이를 패치 넓이로 바꾼 것이고, 이중적분의 정의(15.1.5)에서 평평한 조각 $\Delta A$를 굽은 조각 $\Delta S$로 바꾼 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 1.</strong> The <strong>surface integral</strong> of $f$ over the surface $S$ is the limit of the patch sums as the subdivision is refined in both directions:</p>
+          <div class="math-display">$$\iint_S f(x,y,z)\,dS=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n} f(P_{ij}^{*})\,\Delta S_{ij}.\tag{1}$$</div>
+        </div>
+        <p>The pattern is the one already met twice: it repeats the definition of a line integral (16.2.2) with arc length replaced by patch area, and it repeats the definition of a double integral (15.1.5) with the flat pieces $\Delta A$ replaced by curved pieces $\Delta S$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Equation (2), evaluating over a parametric surface -->
+<div class="card thm-card" id="c16-7-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">매개곡면 위에서의 계산 공식 <em>Evaluating over a Parametric Surface</em><span class="src-ref">Eq. (2) · p.1221</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (2) — 매개곡면 위에서의 면적분 계산 공식.</strong> $S$가 매개화 $\mathbf r(u,v)$, $(u,v)\in D$에 의해 정확히 한 번씩 덮이고, $\mathbf r$의 성분함수들이 연속인 편도함수를 가지며, $D$의 내부에서 $\mathbf r_u$와 $\mathbf r_v$가 결코 $\mathbf 0$이 되지 않고 서로 평행하지도 않다고 하자. 그러면 다음이 성립한다.</p>
+          <div class="math-display">$$\iint_S f(x,y,z)\,dS=\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA.\tag{2}$$</div>
+        </div>
+        <p>$S$가 딱 한 번만 덮인다는 가정이 중요하다. 매개화가 $S$의 일부를 두 번 지나간다면 그 패치들이 계산에 두 번씩 들어가기 때문이다. 이 가정 아래서는 (2)가 내놓는 값이 어떤 매개화를 쓰든 달라지지 않는다. 또 정의 1은 직사각형 정의역에서 세웠지만, 공식 (2) 자체는 $D$가 직사각형이 아닐 때에도 성립한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 정의 1의 합 $\sum_{i,j} f(P_{ij}^{*})\,\Delta S_{ij}$에서 출발한다. §16.6에서 이미 확인했듯이, $R_{ij}$의 한 꼭짓점 $(u_i,v_j)$에서 곡면을 접평면으로 근사하면 패치의 넓이는 벡터 $\mathbf r_u\,\Delta u$와 $\mathbf r_v\,\Delta v$가 만드는 평행사변형의 넓이로</p>
+        <div class="math-display">$$\Delta S_{ij}\approx \lvert\mathbf r_u(u_i,v_j)\times\mathbf r_v(u_i,v_j)\rvert\,\Delta u\,\Delta v$$</div>
+        <p>와 같이 근사된다. 표본점을 $P_{ij}^{*}=\mathbf r(u_i,v_j)$로 고르고 이를 대입하면</p>
+        <div class="math-display">$$\sum_{i,j} f(P_{ij}^{*})\,\Delta S_{ij}\approx \sum_{i,j} f(\mathbf r(u_i,v_j))\,\lvert\mathbf r_u(u_i,v_j)\times\mathbf r_v(u_i,v_j)\rvert\,\Delta u\,\Delta v$$</div>
+        <p>를 얻는데, 우변은 정확히 함수 $(u,v)\mapsto f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert$의 $D$ 위에서의 리만 합이다. $m,n\to\infty$로 두면 좌변은 정의 1에 의해 $\iint_S f\,dS$로 수렴하고, 우변은 이중적분의 정의(15.1.5)에 의해 $\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA$로 수렴한다. $D$의 내부에서 $\mathbf r_u,\mathbf r_v$가 결코 $\mathbf 0$이 되지 않고 평행하지도 않다는 가정은 정확히 위 근사와 그 극한이 유효하도록 보장하는 역할을 한다. 따라서</p>
+        <div class="math-display">$$\iint_S f(x,y,z)\,dS=\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA$$</div>
+        <p>이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (2) &mdash; surface integral over a parametric surface.</strong> Suppose $S$ is covered exactly once by $\mathbf r(u,v)$, $(u,v)\in D$, that the components of $\mathbf r$ have continuous partial derivatives, and that $\mathbf r_u$ and $\mathbf r_v$ are never $\mathbf 0$ and never parallel on the interior of $D$. Then</p>
+          <div class="math-display">$$\iint_S f(x,y,z)\,dS=\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA.\tag{2}$$</div>
+        </div>
+        <p>The hypothesis that $S$ is traced out only once matters: a parametrization that sweeps part of $S$ twice would count those patches twice. Subject to it, the number produced by (2) does not depend on which parametrization is used. And although Definition 1 was set up over a rectangular parameter domain, formula (2) still holds when $D$ is not a rectangle.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Start from the sum $\sum_{i,j} f(P_{ij}^{*})\,\Delta S_{ij}$ of Definition 1. As already used in §16.6, approximating the surface by its tangent plane at a corner $(u_i,v_j)$ of $R_{ij}$ makes the patch area the area of the parallelogram spanned by $\mathbf r_u\,\Delta u$ and $\mathbf r_v\,\Delta v$,</p>
+        <div class="math-display">$$\Delta S_{ij}\approx \lvert\mathbf r_u(u_i,v_j)\times\mathbf r_v(u_i,v_j)\rvert\,\Delta u\,\Delta v.$$</div>
+        <p>Taking the sample point to be $P_{ij}^{*}=\mathbf r(u_i,v_j)$ and substituting gives</p>
+        <div class="math-display">$$\sum_{i,j} f(P_{ij}^{*})\,\Delta S_{ij}\approx \sum_{i,j} f(\mathbf r(u_i,v_j))\,\lvert\mathbf r_u(u_i,v_j)\times\mathbf r_v(u_i,v_j)\rvert\,\Delta u\,\Delta v,$$</div>
+        <p>and the right-hand side is exactly a Riemann sum, over $D$, for the function $(u,v)\mapsto f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert$. Letting $m,n\to\infty$, the left side converges by Definition 1 to $\iint_S f\,dS$, while the right side converges, by the definition of the double integral (15.1.5), to $\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA$. The hypothesis that $\mathbf r_u,\mathbf r_v$ are nowhere $\mathbf 0$ and never parallel on the interior of $D$ is exactly what keeps this approximation, and hence its limit, valid. Hence</p>
+        <div class="math-display">$$\iint_S f(x,y,z)\,dS=\iint_D f(\mathbf r(u,v))\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : analogy with line integrals; recovering area -->
+<div class="card rem-card" id="c16-7-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">선적분과의 대응, 그리고 넓이의 회수 <em>Analogy with Line Integrals; Recovering Area</em><span class="src-ref">p.1222</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공식 (2)는 한 매개변수짜리 공식</p>
+        <div class="math-display">$$\int_C f\,ds=\int_a^{b} f(\mathbf r(t))\,\lvert\mathbf r'(t)\rvert\,dt$$</div>
+        <p>과 똑같은 꼴을 하고 있다. 두 경우 모두 피적분함수는 $f$에 매개화를 합성한 것에, 그 매개화가 길이 또는 넓이를 얼마나 늘이거나 줄이는지를 나타내는 왜곡 인수를 곱한 것이다.</p>
+        <p>$f\equiv 1$로 두면 §16.6의 넓이 공식이 그대로 회수되는데, 이는 애초에 정의가 만족하도록 세워진 정규화 조건이다.</p>
+        <div class="math-display">$$\iint_S 1\,dS=\iint_D \lvert\mathbf r_u\times\mathbf r_v\rvert\,dA=A(S).$$</div>
+        <p>실제 계산에서 $f(\mathbf r(u,v))$는 $f$의 식에 좌표함수 $x=x(u,v)$, $y=y(u,v)$, $z=z(u,v)$를 대입해 얻는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Formula (2) has the same shape as the one-parameter formula</p>
+        <div class="math-display">$$\int_C f\,ds=\int_a^{b} f(\mathbf r(t))\,\lvert\mathbf r'(t)\rvert\,dt.$$</div>
+        <p>In both cases the integrand is $f$ composed with the parametrization, multiplied by the length or area distortion factor of that parametrization.</p>
+        <p>Taking $f\equiv 1$ recovers the area formula of §16.6, which is the normalization the definition was built to satisfy:</p>
+        <div class="math-display">$$\iint_S 1\,dS=\iint_D \lvert\mathbf r_u\times\mathbf r_v\rvert\,dA=A(S).$$</div>
+        <p>In practice $f(\mathbf r(u,v))$ is obtained by substituting the coordinate functions $x=x(u,v)$, $y=y(u,v)$, $z=z(u,v)$ into the formula for $f$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : mass and center of mass of a thin sheet -->
+<div class="card thm-card" id="c16-7-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6</span>
+    <span class="thm-title">얇은 판의 질량과 질량중심 <em>Mass and Center of Mass of a Thin Sheet</em><span class="src-ref">p.1222</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>질량과 질량중심.</strong> 곡면 $S$를 차지하는 얇은 판에 밀도(단위넓이당 질량) $\rho(x,y,z)$를 준다고 하자. 이 판의 전체 질량은</p>
+          <div class="math-display">$$m=\iint_S \rho(x,y,z)\,dS,$$</div>
+          <p>이고, 질량중심 $(\bar x,\bar y,\bar z)$는 각 좌표를 같은 밀도로 가중평균하여 얻는다.</p>
+          <div class="math-display">$$\begin{aligned}\bar x&=\frac1m\iint_S x\,\rho(x,y,z)\,dS,\\[2pt] \bar y&=\frac1m\iint_S y\,\rho(x,y,z)\,dS,\\[2pt] \bar z&=\frac1m\iint_S z\,\rho(x,y,z)\,dS.\end{aligned}$$</div>
+        </div>
+        <p>이는 §15.4에서 다룬 얇은 판 공식을 곡면으로 옮긴 것으로, 평면 영역 위의 이중적분이 곡면 위의 면적분으로 바뀌었을 뿐이다. 관성모멘트도 같은 방식으로, 축까지 거리의 제곱을 $\rho\,dS$에 곱해 적분하여 얻는다(연습문제 41).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Mass and center of mass.</strong> Give a thin sheet occupying the surface $S$ the density (mass per unit area) $\rho(x,y,z)$. Its total mass is</p>
+          <div class="math-display">$$m=\iint_S \rho(x,y,z)\,dS,$$</div>
+          <p>and its center of mass $(\bar x,\bar y,\bar z)$ is obtained by averaging each coordinate against that same density:</p>
+          <div class="math-display">$$\begin{aligned}\bar x&=\frac1m\iint_S x\,\rho(x,y,z)\,dS,\\[2pt] \bar y&=\frac1m\iint_S y\,\rho(x,y,z)\,dS,\\[2pt] \bar z&=\frac1m\iint_S z\,\rho(x,y,z)\,dS.\end{aligned}$$</div>
+        </div>
+        <p>These are the surface analogues of the plate formulas of §15.4, with the double integral over a plane region replaced by a surface integral. Moments of inertia are built the same way, by integrating the squared distance to an axis against $\rho\,dS$ (Exercise 41).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Equations (3), (4) - surface integrals over graphs -->
+<div class="card thm-card" id="c16-7-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">그래프 위의 면적분 <em>Surface Integrals over Graphs</em><span class="src-ref">Eqs. (3), (4) · p.1223</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (3)과 (4) — 그래프의 경우.</strong> 영역 $D$ 위의 그래프 $z=g(x,y)$로 주어진 곡면은 매개화 $\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+g(x,y)\,\mathbf k$를 가지며, 그 편도함수는 $\mathbf r_x=\mathbf i+g_x\,\mathbf k$, $\mathbf r_y=\mathbf j+g_y\,\mathbf k$이다. 이들의 외적은</p>
+          <div class="math-display">$$\mathbf r_x\times\mathbf r_y=-\frac{\partial g}{\partial x}\,\mathbf i-\frac{\partial g}{\partial y}\,\mathbf j+\mathbf k,\tag{3}$$</div>
+          <p>이므로 왜곡 인수는 $\lvert\mathbf r_x\times\mathbf r_y\rvert=\sqrt{\left(\dfrac{\partial z}{\partial x}\right)^{2}+\left(\dfrac{\partial z}{\partial y}\right)^{2}+1}$이고, (2)는 다음이 된다.</p>
+          <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,y,g(x,y)\bigr)\\[4pt] &\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}\;dA.\end{aligned}\tag{4}$$</div>
+        </div>
+        <p>즉 그래프 위에서 넓이 요소는 $dS=\sqrt{1+z_x^{2}+z_y^{2}}\,dA$이고, 면적분은 $S$가 $xy$평면에 드리우는 그림자 $D$ 위의 보통 이중적분으로 간단해진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 매개화 $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$의 편도함수는 $\mathbf r_x=\langle 1,0,g_x\rangle$, $\mathbf r_y=\langle 0,1,g_y\rangle$이다. 외적을 행렬식으로 전개하면</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_y=\langle\, 0\cdot g_y-g_x\cdot1,\ \ g_x\cdot0-1\cdot g_y,\ \ 1\cdot1-0\cdot0\,\rangle=\langle -g_x,-g_y,1\rangle,$$</div>
+        <p>이는 식 (3)과 일치한다. 이 벡터의 길이는 세 성분의 제곱합의 제곱근이므로</p>
+        <div class="math-display">$$\lvert\mathbf r_x\times\mathbf r_y\rvert=\sqrt{g_x^{2}+g_y^{2}+1}=\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}$$</div>
+        <p>이다. 이 매개화의 매개변수 영역은 $D$ 자체이고 $f(\mathbf r(x,y))=f(x,y,g(x,y))$이므로, 위 길이를 식 (2)의 왜곡 인수 자리에 그대로 대입하면 식 (4)</p>
+        <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,y,g(x,y)\bigr)\\[4pt] &\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}\;dA\end{aligned}$$</div>
+        <p>를 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equations (3) and (4) &mdash; the graph case.</strong> A surface given as a graph $z=g(x,y)$ over a region $D$ carries the parametrization $\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+g(x,y)\,\mathbf k$, whose partial derivatives are $\mathbf r_x=\mathbf i+g_x\,\mathbf k$ and $\mathbf r_y=\mathbf j+g_y\,\mathbf k$. Their cross product is</p>
+          <div class="math-display">$$\mathbf r_x\times\mathbf r_y=-\frac{\partial g}{\partial x}\,\mathbf i-\frac{\partial g}{\partial y}\,\mathbf j+\mathbf k,\tag{3}$$</div>
+          <p>so the distortion factor is $\lvert\mathbf r_x\times\mathbf r_y\rvert=\sqrt{\left(\dfrac{\partial z}{\partial x}\right)^{2}+\left(\dfrac{\partial z}{\partial y}\right)^{2}+1}$, and (2) becomes</p>
+          <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,y,g(x,y)\bigr)\\[4pt] &\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}\;dA.\end{aligned}\tag{4}$$</div>
+        </div>
+        <p>So on a graph the element of area is $dS=\sqrt{1+z_x^{2}+z_y^{2}}\,dA$, and the surface integral collapses into an ordinary double integral over the shadow $D$ of $S$ in the $xy$-plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> The parametrization $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$ has partial derivatives $\mathbf r_x=\langle 1,0,g_x\rangle$ and $\mathbf r_y=\langle 0,1,g_y\rangle$. Expanding the cross product as a determinant gives</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_y=\langle\, 0\cdot g_y-g_x\cdot1,\ \ g_x\cdot0-1\cdot g_y,\ \ 1\cdot1-0\cdot0\,\rangle=\langle -g_x,-g_y,1\rangle,$$</div>
+        <p>which agrees with Equation (3). The length of this vector, the square root of the sum of the squares of its components, is</p>
+        <div class="math-display">$$\lvert\mathbf r_x\times\mathbf r_y\rvert=\sqrt{g_x^{2}+g_y^{2}+1}=\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}.$$</div>
+        <p>Since the parameter domain of this parametrization is $D$ itself and $f(\mathbf r(x,y))=f(x,y,g(x,y))$, substituting this length for the distortion factor in Equation (2) directly gives Equation (4),</p>
+        <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,y,g(x,y)\bigr)\\[4pt] &\sqrt{\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}+1}\;dA.\end{aligned}$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : projecting onto the other coordinate planes -->
+<div class="card rem-card" id="c16-7-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">다른 좌표평면으로의 정사영 <em>Projecting onto Another Coordinate Plane</em><span class="src-ref">p.1223</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그림자를 꼭 $xy$평면에 드리워야 하는 것은 아니다. $S$가 대신 $y=h(x,z)$로 주어지고 $D$가 이제 $xz$평면으로의 정사영이라면, 문자의 역할만 바꾼 똑같은 계산으로 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,h(x,z),z\bigr)\\[4pt] &\qquad\sqrt{\left(\frac{\partial y}{\partial x}\right)^{2}+\left(\frac{\partial y}{\partial z}\right)^{2}+1}\;dA.\end{aligned}$$</div>
+        <p>$x=k(y,z)$ 꼴로 주어진 곡면도 $yz$평면에 정사영하여 같은 방식으로 다룬다. 세 형태 중 어느 것을 쓸지는 대개 $S$를 일변수함수의 그래프로 만들어 주는 정사영이 어느 쪽인지에 따라 정해진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Nothing forces the shadow to be taken in the $xy$-plane. If $S$ is described instead by $y=h(x,z)$ and $D$ is now its projection onto the $xz$-plane, the same computation with the roles of the letters permuted gives</p>
+        <div class="math-display">$$\begin{aligned}\iint_S f(x,y,z)\,dS&=\iint_D f\bigl(x,h(x,z),z\bigr)\\[4pt] &\qquad\sqrt{\left(\frac{\partial y}{\partial x}\right)^{2}+\left(\frac{\partial y}{\partial z}\right)^{2}+1}\;dA.\end{aligned}$$</div>
+        <p>A surface written as $x=k(y,z)$ is handled in the same fashion, projecting onto the $yz$-plane. Choosing the projection that makes $S$ a single-valued graph is usually what decides which of the three forms to use.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : piecewise-smooth surfaces -->
+<div class="card def-card" id="c16-7-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">조각적으로 매끄러운 곡면 위의 적분 <em>Integrals over Piecewise-Smooth Surfaces</em><span class="src-ref">p.1223</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>조각적으로 매끄러운 곡면.</strong> $S$가 경계곡선을 따라서만 서로 만나는 매끄러운 곡면 $S_1,S_2,\dots,S_n$의 유한 합집합이라 하자. $S$ 위의 적분은 각 조각 위의 적분들의 합으로 정의한다.</p>
+          <div class="math-display">$$\iint_S f\,dS=\iint_{S_1} f\,dS+\iint_{S_2} f\,dS+\cdots+\iint_{S_n} f\,dS.$$</div>
+        </div>
+        <p>이 덕분에 이론은 모서리를 가진 곡면 — 정육면체의 경계나, 밑면·윗면이 딸린 원기둥 — 까지 다룰 수 있다. 이런 곡면 전체를 매끄러운 매개화 하나로는 덮을 수 없는데도 말이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Piecewise-smooth surfaces.</strong> Let $S$ be a finite union $S_1\cup S_2\cup\cdots\cup S_n$ of smooth surfaces that meet only along their boundary curves. The integral over $S$ is declared to be the sum of the integrals over the pieces:</p>
+          <div class="math-display">$$\iint_S f\,dS=\iint_{S_1} f\,dS+\iint_{S_2} f\,dS+\cdots+\iint_{S_n} f\,dS.$$</div>
+        </div>
+        <p>This is what lets the theory reach surfaces with edges &mdash; the boundary of a cube, or a cylinder together with its lid and base &mdash; even though no single smooth parametrization covers them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Mobius strip (Figures 4, 5) -->
+<div class="card note-card" id="c16-7-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">비가향 곡면: 뫼비우스 띠 <em>Nonorientable Surfaces: the M&ouml;bius Strip</em><span class="src-ref">Figures 4&ndash;5 · p.1225</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장의 면적분을 정의하려면 그보다 먼저, 일관된 "면"의 개념이 없는 곡면을 배제해야 한다. 그 표준적인 예가 독일 기하학자 아우구스트 뫼비우스(August M&ouml;bius, 1790&ndash;1868)의 이름을 딴 <strong>뫼비우스 띠</strong>다.</p>
+        <p>직접 만들어 보자. 긴 직사각형 종이띠의 한쪽 끝을 반 바퀴 꼬아, 짧은 두 변을 서로 붙인다 — 즉 모서리 $A$를 $D$에, $B$를 $C$에 이어 붙인다. 이제 점 $P$에서 개미를 띠를 따라 걷게 하면, 개미는 모서리를 한 번도 넘지 않고도 처음에는 종이의 반대쪽 면처럼 보이던 자리에 이르고, 같은 방향으로 계속 걸으면 결국 $P$로 되돌아온다. 이 여정은 이 띠에 면이 단 하나뿐임을 보여주며, 따라서 띠 위에서는 연속적으로 변하는 단위법선을 전혀 고를 수 없다.</p>
+        <p>이 띠의 매개방정식은 연습문제 16.6.32에 제시되어 있으며, 이후의 모든 논의는 <strong>가향</strong>(양면을 가진) 곡면으로 국한한다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 200" role="img" aria-label="반 바퀴 꼬아 양 끝을 붙인 띠 모양의 뫼비우스 띠 — 오른쪽에서 두 모서리가 서로 엇갈린다" style="max-width:360px;width:100%;height:auto">
+            <path fill-rule="evenodd" d="M 272.2,116.1 A 118,52 0 0 1 90.6,142.1 A 118,52 0 0 1 90.6,57.9 A 118,52 0 0 1 272.2,83.9 L 243.7,109.3 A 88,30 0 0 1 108.3,124.3 A 88,30 0 0 1 108.3,75.7 A 88,30 0 0 1 243.7,90.7 Z" fill="var(--g100)" stroke="var(--g600)" stroke-width="1.4" stroke-linejoin="round"/>
+            <circle cx="160" cy="59" r="3.2" fill="var(--g700)"/>
+            <text x="167" y="54" font-size="12" font-style="italic" fill="var(--g700)">P</text>
+            <text x="160" y="186" text-anchor="middle" font-size="11" fill="var(--grey600)">반 바퀴 꼬아 붙인 띠 &mdash; 면이 하나뿐이다</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Before surface integrals of vector fields can be defined at all, surfaces with no consistent notion of side have to be ruled out. The standard specimen is the <strong>M&ouml;bius strip</strong>, named after the German geometer August M&ouml;bius (1790&ndash;1868).</p>
+        <p>Build one: take a long rectangular strip of paper, give one end a half-twist, and tape the two short edges together, so that the corner $A$ is joined to $D$ and $B$ to $C$. Now send an ant along the band from a point $P$. Without ever crossing an edge it reaches the place that had looked like the far face of the paper, and continuing in the same direction it returns to $P$ itself. Its journey shows that the band has a single side, so no continuous choice of unit normal can be made on it.</p>
+        <p>Parametric equations for the strip are given in Exercise 16.6.32, and everything below is restricted to <strong>orientable</strong> (two-sided) surfaces.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 200" role="img" aria-label="A band closed up with a half-twist: at the right the two edges cross over each other, so the band has only one side" style="max-width:360px;width:100%;height:auto">
+            <path fill-rule="evenodd" d="M 272.2,116.1 A 118,52 0 0 1 90.6,142.1 A 118,52 0 0 1 90.6,57.9 A 118,52 0 0 1 272.2,83.9 L 243.7,109.3 A 88,30 0 0 1 108.3,124.3 A 88,30 0 0 1 108.3,75.7 A 88,30 0 0 1 243.7,90.7 Z" fill="var(--g100)" stroke="var(--g600)" stroke-width="1.4" stroke-linejoin="round"/>
+            <circle cx="160" cy="59" r="3.2" fill="var(--g700)"/>
+            <text x="167" y="54" font-size="12" font-style="italic" fill="var(--g700)">P</text>
+            <text x="160" y="186" text-anchor="middle" font-size="11" fill="var(--grey600)">A band closed up with a half-twist &mdash; it has one side only</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Definition of an oriented surface (Figures 6, 7) -->
+<div class="card def-card" id="c16-7-11">
+  <div class="card-head">
+    <span class="def-num">DEF 11</span>
+    <span class="def-title">유향곡면 <em>Oriented Surfaces</em><span class="src-ref">Figures 6&ndash;7 · p.1225</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>유향곡면.</strong> 곡면 $S$가 경계점을 제외한 모든 점에서 접평면을 갖는다고 하자. 그런 점마다 단위법선벡터가 정확히 둘 존재한다: $\mathbf n_1$과 $\mathbf n_2=-\mathbf n_1$. $S$의 모든 점에서 단위법선 $\mathbf n$을 하나씩 골라, $\mathbf n$이 $S$ 위에서 <strong>연속적으로</strong> 변하도록 할 수 있다면, $S$를 <strong>유향곡면</strong>이라 하고 그 선택을 $S$의 <strong>향(orientation)</strong>이라 한다.</p>
+        </div>
+        <p>가향곡면의 향은 정확히 둘뿐이다. 연속인 단위법선장을 하나 고르고 나면, 나머지 하나는 모든 화살표의 방향을 뒤집어 $-\mathbf n$을 취함으로써 유일하게 얻어진다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 240" role="img" aria-label="굽은 곡면 조각 위의 한 점에서 서로 반대인 두 단위법선 n1과 n2 = -n1을 그린 그림" style="max-width:360px;width:100%;height:auto">
+            <path d="M 45,145 C 105,112 195,105 275,120 L 292,182 C 208,166 118,176 58,208 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.4" stroke-linejoin="round"/>
+            <line x1="85" y1="168" x2="97" y2="120" stroke="var(--grey400)" stroke-width="1.4"/>
+            <polygon points="97,120 98.7,129.7 90.9,127.8" fill="var(--grey400)"/>
+            <line x1="240" y1="140" x2="252" y2="92" stroke="var(--grey400)" stroke-width="1.4"/>
+            <polygon points="252,92 253.7,101.7 245.9,99.8" fill="var(--grey400)"/>
+            <line x1="160" y1="150" x2="176" y2="92" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="176,92 177.5,101.8 169.8,99.6" fill="var(--g700)"/>
+            <line x1="160" y1="150" x2="144" y2="208" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="144,208 142.5,198.2 150.3,200.4" fill="var(--g700)"/>
+            <circle cx="160" cy="150" r="3.2" fill="var(--g800)"/>
+            <text x="183" y="88" font-size="12" font-style="italic" fill="var(--g700)">n&#8321;</text>
+            <text x="122" y="216" font-size="12" font-style="italic" fill="var(--g700)">n&#8322;</text>
+            <text x="160" y="232" text-anchor="middle" font-size="11" fill="var(--grey600)">한 점에서의 두 단위법선: n&#8322; = &minus;n&#8321;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Oriented surface.</strong> Let $S$ have a tangent plane at each of its points except possibly the boundary points. Every such point carries exactly two unit normal vectors, $\mathbf n_1$ and $\mathbf n_2=-\mathbf n_1$. If a unit normal $\mathbf n$ can be selected at every point of $S$ in such a way that $\mathbf n$ varies <strong>continuously</strong> over $S$, then $S$ is an <strong>oriented surface</strong> and the selection is called an <strong>orientation</strong> of $S$.</p>
+        </div>
+        <p>An orientable surface has precisely two orientations: once one continuous field of unit normals has been chosen, the only other one is obtained by reversing every arrow, giving $-\mathbf n$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 240" role="img" aria-label="A curved surface patch with the two opposite unit normals n1 and n2 = -n1 drawn at one point" style="max-width:360px;width:100%;height:auto">
+            <path d="M 45,145 C 105,112 195,105 275,120 L 292,182 C 208,166 118,176 58,208 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.4" stroke-linejoin="round"/>
+            <line x1="85" y1="168" x2="97" y2="120" stroke="var(--grey400)" stroke-width="1.4"/>
+            <polygon points="97,120 98.7,129.7 90.9,127.8" fill="var(--grey400)"/>
+            <line x1="240" y1="140" x2="252" y2="92" stroke="var(--grey400)" stroke-width="1.4"/>
+            <polygon points="252,92 253.7,101.7 245.9,99.8" fill="var(--grey400)"/>
+            <line x1="160" y1="150" x2="176" y2="92" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="176,92 177.5,101.8 169.8,99.6" fill="var(--g700)"/>
+            <line x1="160" y1="150" x2="144" y2="208" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="144,208 142.5,198.2 150.3,200.4" fill="var(--g700)"/>
+            <circle cx="160" cy="150" r="3.2" fill="var(--g800)"/>
+            <text x="183" y="88" font-size="12" font-style="italic" fill="var(--g700)">n&#8321;</text>
+            <text x="122" y="216" font-size="12" font-style="italic" fill="var(--g700)">n&#8322;</text>
+            <text x="160" y="232" text-anchor="middle" font-size="11" fill="var(--grey600)">The two unit normals at a point: n&#8322; = &minus;n&#8321;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : Equation (5), upward orientation of a graph -->
+<div class="card thm-card" id="c16-7-12">
+  <div class="card-head">
+    <span class="thm-num">THM 12</span>
+    <span class="thm-title">그래프의 위쪽 향 <em>The Upward Orientation of a Graph</em><span class="src-ref">Eq. (5) · p.1225</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (5) — 그래프의 자연스러운 향.</strong> 곡면이 $z=g(x,y)$ 꼴로 주어질 때, 외적 (3)을 정규화하면 $S$에 다음과 같은 단위법선장이 붙는다.</p>
+          <div class="math-display">$$\mathbf n=\frac{-\dfrac{\partial g}{\partial x}\,\mathbf i-\dfrac{\partial g}{\partial y}\,\mathbf j+\mathbf k}{\sqrt{1+\left(\dfrac{\partial g}{\partial x}\right)^{2}+\left(\dfrac{\partial g}{\partial y}\right)^{2}}}.\tag{5}$$</div>
+        </div>
+        <p>이 법선의 $\mathbf k$성분은 $1/\sqrt{1+g_x^{2}+g_y^{2}}$이고 모든 점에서 양수이므로, (5)는 그래프의 <strong>위쪽</strong> 향이다. 아래쪽 향은 이것의 반대 부호다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (5) &mdash; natural orientation of a graph.</strong> On a surface presented as $z=g(x,y)$, normalizing the cross product (3) attaches to $S$ the unit normal field</p>
+          <div class="math-display">$$\mathbf n=\frac{-\dfrac{\partial g}{\partial x}\,\mathbf i-\dfrac{\partial g}{\partial y}\,\mathbf j+\mathbf k}{\sqrt{1+\left(\dfrac{\partial g}{\partial x}\right)^{2}+\left(\dfrac{\partial g}{\partial y}\right)^{2}}}.\tag{5}$$</div>
+        </div>
+        <p>Its $\mathbf k$-component is $1/\sqrt{1+g_x^{2}+g_y^{2}}$, which is positive at every point, so (5) is the <strong>upward</strong> orientation of the graph. The downward orientation is its negative.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Equation (6), orientation induced by a parametrization -->
+<div class="card thm-card" id="c16-7-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">매개화가 유도하는 향 <em>Orientation Induced by a Parametrization</em><span class="src-ref">Eq. (6) · p.1225</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (6) — 매개화가 유도하는 향.</strong> 가향인 매끄러운 곡면이 매개화 $\mathbf r(u,v)$로 주어지면, 그 곡면에는 이미 향이 딸려 있다: 벡터함수</p>
+          <div class="math-display">$$\mathbf n=\frac{\mathbf r_u\times\mathbf r_v}{\lvert\mathbf r_u\times\mathbf r_v\rvert}\tag{6}$$</div>
+          <p>는 $S$ 위의 연속적인 단위법선장이며, 반대쪽 향은 $-\mathbf n$이다.</p>
+        </div>
+        <p>따라서 두 향 중 어느 쪽을 얻는지는 매개화 자체가, 특히 두 매개변수를 나열하는 순서가 결정한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (6) &mdash; the induced orientation.</strong> A smooth orientable surface presented in parametric form by $\mathbf r(u,v)$ comes already oriented: the vector function</p>
+          <div class="math-display">$$\mathbf n=\frac{\mathbf r_u\times\mathbf r_v}{\lvert\mathbf r_u\times\mathbf r_v\rvert}\tag{6}$$</div>
+          <p>is a continuous field of unit normals on $S$, and the opposite orientation is $-\mathbf n$.</p>
+        </div>
+        <p>Which of the two orientations one gets is therefore decided by the parametrization itself, and in particular by the order in which its two parameters are listed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 : positive orientation of a closed surface (Figures 8, 9) -->
+<div class="card rem-card" id="c16-7-14">
+  <div class="card-head">
+    <span class="rem-num">REM 14</span>
+    <span class="rem-title">구면의 양의 향과 닫힌곡면 규약 <em>Positive Orientation of a Closed Surface</em><span class="src-ref">Figures 8&ndash;9 · p.1226</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구면 $x^{2}+y^{2}+z^{2}=a^{2}$을 구면각에 의한 통상적인 매개화 $\mathbf r(\phi,\theta)$로 살펴보자. §16.6에서 구한 외적은</p>
+        <div class="math-display">$$\begin{aligned}\mathbf r_\phi\times\mathbf r_\theta&=a^{2}\sin^{2}\!\phi\,\cos\theta\,\mathbf i+a^{2}\sin^{2}\!\phi\,\sin\theta\,\mathbf j\\[2pt] &\quad+a^{2}\sin\phi\,\cos\phi\,\mathbf k,\end{aligned}$$</div>
+        <p>이고 그 크기는 $\lvert\mathbf r_\phi\times\mathbf r_\theta\rvert=a^{2}\sin\phi$이므로, 공식 (6)은 다음을 준다.</p>
+        <div class="math-display">$$\mathbf n=\sin\phi\,\cos\theta\,\mathbf i+\sin\phi\,\sin\theta\,\mathbf j+\cos\phi\,\mathbf k=\frac1a\,\mathbf r(\phi,\theta).$$</div>
+        <p>각 점에서 $\mathbf n$은 위치벡터의 양의 배수이므로 중심에서 멀어지는 방향을 가리킨다. 즉 매개변수를 $(\phi,\theta)$ 순서로 나열하면 <em>바깥쪽</em> 향이 유도된다. 순서를 뒤바꾸면 $\mathbf r_\theta\times\mathbf r_\phi=-\,\mathbf r_\phi\times\mathbf r_\theta$이므로 향도 뒤집힌다.</p>
+        <p>입체 영역 $E$를 둘러싸는 <strong>닫힌곡면</strong>에 대해서는 규약이 한 번에 고정된다. 법선이 $E$의 바깥을 가리키는 쪽을 <strong>양의 향</strong>이라 하고, $E$의 안쪽을 가리키는 법선은 음의 향을 준다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 232" role="img" aria-label="구면 위 여덟 점에서 바깥쪽을 향하는 법선 화살표 — 입체 E를 둘러싼 닫힌곡면의 양의 향" style="max-width:360px;width:100%;height:auto">
+            <circle cx="160" cy="105" r="62" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.4"/>
+            <ellipse cx="160" cy="105" rx="62" ry="20" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="222" y1="105" x2="252" y2="105" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="252,105 244,108.5 244,101.5" fill="var(--g700)"/>
+            <line x1="203.8" y1="148.8" x2="225.1" y2="170.1" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="225.1,170.1 216.9,166.9 221.9,161.9" fill="var(--g700)"/>
+            <line x1="160" y1="167" x2="160" y2="197" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="160,197 156.5,189 163.5,189" fill="var(--g700)"/>
+            <line x1="116.2" y1="148.8" x2="94.9" y2="170.1" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="94.9,170.1 98.1,161.9 103.1,166.9" fill="var(--g700)"/>
+            <line x1="98" y1="105" x2="68" y2="105" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="68,105 76,101.5 76,108.5" fill="var(--g700)"/>
+            <line x1="116.2" y1="61.2" x2="94.9" y2="39.9" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="94.9,39.9 103.1,43.1 98.1,48.1" fill="var(--g700)"/>
+            <line x1="160" y1="43" x2="160" y2="13" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="160,13 163.5,21 156.5,21" fill="var(--g700)"/>
+            <line x1="203.8" y1="61.2" x2="225.1" y2="39.9" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="225.1,39.9 216.9,43.1 221.9,48.1" fill="var(--g700)"/>
+            <text x="160" y="150" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+            <text x="258" y="99" font-size="12" font-style="italic" fill="var(--g700)">n</text>
+            <text x="160" y="224" text-anchor="middle" font-size="11" fill="var(--grey600)">닫힌곡면의 양의 향 &mdash; 바깥쪽 법선</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Take the sphere $x^{2}+y^{2}+z^{2}=a^{2}$ with its usual parametrization $\mathbf r(\phi,\theta)$ by spherical angles. The cross product computed in §16.6 is</p>
+        <div class="math-display">$$\begin{aligned}\mathbf r_\phi\times\mathbf r_\theta&=a^{2}\sin^{2}\!\phi\,\cos\theta\,\mathbf i+a^{2}\sin^{2}\!\phi\,\sin\theta\,\mathbf j\\[2pt] &\quad+a^{2}\sin\phi\,\cos\phi\,\mathbf k,\end{aligned}$$</div>
+        <p>with length $\lvert\mathbf r_\phi\times\mathbf r_\theta\rvert=a^{2}\sin\phi$, so formula (6) returns</p>
+        <div class="math-display">$$\mathbf n=\sin\phi\,\cos\theta\,\mathbf i+\sin\phi\,\sin\theta\,\mathbf j+\cos\phi\,\mathbf k=\frac1a\,\mathbf r(\phi,\theta).$$</div>
+        <p>At each point $\mathbf n$ is a positive multiple of the position vector, so it points away from the center: the order $(\phi,\theta)$ induces the <em>outward</em> orientation. Listing the parameters the other way reverses it, since $\mathbf r_\theta\times\mathbf r_\phi=-\,\mathbf r_\phi\times\mathbf r_\theta$.</p>
+        <p>For a <strong>closed surface</strong> &mdash; one that bounds a solid region $E$ &mdash; the convention is fixed once and for all: the <strong>positive orientation</strong> is the one whose normals point out of $E$, and normals pointing into $E$ give the negative orientation.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 232" role="img" aria-label="Outward normal arrows at eight points of a sphere: the positive orientation of a closed surface bounding the solid E" style="max-width:360px;width:100%;height:auto">
+            <circle cx="160" cy="105" r="62" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.4"/>
+            <ellipse cx="160" cy="105" rx="62" ry="20" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="222" y1="105" x2="252" y2="105" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="252,105 244,108.5 244,101.5" fill="var(--g700)"/>
+            <line x1="203.8" y1="148.8" x2="225.1" y2="170.1" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="225.1,170.1 216.9,166.9 221.9,161.9" fill="var(--g700)"/>
+            <line x1="160" y1="167" x2="160" y2="197" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="160,197 156.5,189 163.5,189" fill="var(--g700)"/>
+            <line x1="116.2" y1="148.8" x2="94.9" y2="170.1" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="94.9,170.1 98.1,161.9 103.1,166.9" fill="var(--g700)"/>
+            <line x1="98" y1="105" x2="68" y2="105" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="68,105 76,101.5 76,108.5" fill="var(--g700)"/>
+            <line x1="116.2" y1="61.2" x2="94.9" y2="39.9" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="94.9,39.9 103.1,43.1 98.1,48.1" fill="var(--g700)"/>
+            <line x1="160" y1="43" x2="160" y2="13" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="160,13 163.5,21 156.5,21" fill="var(--g700)"/>
+            <line x1="203.8" y1="61.2" x2="225.1" y2="39.9" stroke="var(--g700)" stroke-width="1.8"/>
+            <polygon points="225.1,39.9 216.9,43.1 221.9,48.1" fill="var(--g700)"/>
+            <text x="160" y="150" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+            <text x="258" y="99" font-size="12" font-style="italic" fill="var(--g700)">n</text>
+            <text x="160" y="224" text-anchor="middle" font-size="11" fill="var(--grey600)">Positive orientation of a closed surface &mdash; outward normals</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 15 : fluid-flow motivation for flux (Figures 10, 11) -->
+<div class="card note-card" id="c16-7-15">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">유체 흐름으로 본 플럭스 <em>Motivating Flux by Fluid Flow</em><span class="src-ref">Figures 10&ndash;11 · p.1226&ndash;1227</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$를 단위법선 $\mathbf n$을 가진 유향곡면이라 하고, 밀도 $\rho(x,y,z)$인 유체가 속도장 $\mathbf v(x,y,z)$를 따라 움직인다고 하자. $S$는 흐름을 가로막지 않는 가상의 곡면 — 벽이 아니라 물줄기 속에 쳐 놓은 그물 — 이라고 그려보면 된다.</p>
+        <p>단위넓이·단위시간당 이동하는 양은 곧 벡터장 $\rho\mathbf v$다. 작은 패치 $S_{ij}$에서는 $\rho\mathbf v$ 중 법선 방향 성분만이 유체를 패치 너머로 실어 나르므로, 단위시간당 $S_{ij}$를 통과하는 질량은 근사적으로</p>
+        <div class="math-display">$$(\rho\mathbf v\cdot\mathbf n)\,A(S_{ij}),$$</div>
+        <p>이며, 여기서 $\rho,\mathbf v,\mathbf n$은 그 패치 위의 한 점에서 계산한다. 모든 패치에 대해 이를 더하고 극한을 취하면 이 근사가 면적분으로 바뀌는데, 그것이 바로 아래의 정의다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be an oriented surface with unit normal $\mathbf n$, and let a fluid of density $\rho(x,y,z)$ move with velocity field $\mathbf v(x,y,z)$. Picture $S$ as an imaginary surface that does not obstruct the motion &mdash; a net stretched across a stream rather than a wall.</p>
+        <p>The quantity transported per unit area and per unit time is then the vector field $\rho\mathbf v$. Over a small patch $S_{ij}$ only the part of $\rho\mathbf v$ along the normal carries fluid across the patch, so the mass crossing $S_{ij}$ per unit time is approximately</p>
+        <div class="math-display">$$(\rho\mathbf v\cdot\mathbf n)\,A(S_{ij}),$$</div>
+        <p>with $\rho$, $\mathbf v$ and $\mathbf n$ evaluated at a point of the patch. Summing over all patches and passing to the limit turns the approximation into a surface integral, which is the definition below.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 16 : Equation (7), rate of flow -->
+<div class="card thm-card" id="c16-7-16">
+  <div class="card-head">
+    <span class="thm-num">THM 16</span>
+    <span class="thm-title">흐름률 <em>Rate of Flow</em><span class="src-ref">Eq. (7) · p.1227</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (7) — 흐름률.</strong> 단위시간당 $\mathbf n$ 방향으로 $S$를 지나는 유체의 질량은</p>
+          <div class="math-display">$$\iint_S \rho\mathbf v\cdot\mathbf n\,dS=\iint_S \rho(x,y,z)\,\mathbf v(x,y,z)\cdot\mathbf n(x,y,z)\,dS.\tag{7}$$</div>
+        </div>
+        <p>이 식에는 벡터장 $\mathbf F=\rho\mathbf v$만 들어 있으므로, 적분은 $\iint_S \mathbf F\cdot\mathbf n\,dS$ 꼴 — 즉 벡터장의 법선 성분의 적분 — 로 정리된다. 이 형태는 유체가 관여하든 아니든 어떤 벡터장에 대해서도 뜻이 통하며, 바로 이것이 다음 정의로 승격되는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (7) &mdash; rate of flow.</strong> The mass of fluid crossing $S$ per unit time, in the direction of $\mathbf n$, is</p>
+          <div class="math-display">$$\iint_S \rho\mathbf v\cdot\mathbf n\,dS=\iint_S \rho(x,y,z)\,\mathbf v(x,y,z)\cdot\mathbf n(x,y,z)\,dS.\tag{7}$$</div>
+        </div>
+        <p>Only the field $\mathbf F=\rho\mathbf v$ enters this expression, so the integral takes the form $\iint_S \mathbf F\cdot\mathbf n\,dS$ &mdash; an integral of the normal component of a vector field. That form makes sense for any vector field, whether or not a fluid is involved, and it is what gets promoted to a definition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 17 : Definition 8, surface integral of a vector field; flux -->
+<div class="card def-card" id="c16-7-17">
+  <div class="card-head">
+    <span class="def-num">DEF 17</span>
+    <span class="def-title">벡터장의 면적분과 플럭스 <em>Surface Integral of a Vector Field; Flux</em><span class="src-ref">Definition 8 · p.1227</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 8.</strong> $\mathbf F$를 단위법선장이 $\mathbf n$인 유향곡면 $S$ 위에서 정의된 연속 벡터장이라 하자. <strong>$S$ 위에서의 $\mathbf F$의 면적분</strong>은</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_S \mathbf F\cdot\mathbf n\,dS,\tag{8}$$</div>
+          <p>이며, 이 적분을 $\mathbf F$가 $S$를 지나는 <strong>플럭스</strong>라고도 부른다.</p>
+        </div>
+        <p>말로 풀면: 벡터장의 면적분이란 그 <strong>법선 성분</strong> $\mathbf F\cdot\mathbf n$ — 즉 $S$ 위의 스칼라함수 — 를 보통의 면적분으로 적분한 것이다. 이 값은 향에 의존한다. $\mathbf n$을 $-\mathbf n$으로 바꾸면 부호가 바뀌기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 8.</strong> Let $\mathbf F$ be a continuous vector field defined on an oriented surface $S$ whose unit normal field is $\mathbf n$. The <strong>surface integral of $\mathbf F$ over $S$</strong> is</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_S \mathbf F\cdot\mathbf n\,dS,\tag{8}$$</div>
+          <p>and the number so obtained also goes by the name <strong>flux</strong> of $\mathbf F$ across $S$.</p>
+        </div>
+        <p>Read in words: the surface integral of a vector field is the ordinary surface integral of its <strong>normal component</strong> $\mathbf F\cdot\mathbf n$, a scalar function on $S$. The value depends on the orientation, because replacing $\mathbf n$ by $-\mathbf n$ changes the sign.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 18 : Equation (9), computing flux from a parametrization -->
+<div class="card thm-card" id="c16-7-18">
+  <div class="card-head">
+    <span class="thm-num">THM 18</span>
+    <span class="thm-title">매개곡면에서의 플럭스 계산 <em>Computing Flux from a Parametrization</em><span class="src-ref">Eq. (9) · p.1227</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (9) — $\mathbf r(u,v)$로부터의 플럭스 계산.</strong> $S$가 매개화 $\mathbf r(u,v)$(매개변수 영역 $D$)가 유도하는 향 (6)을 갖는다고 하자. 그러면 크기 인수가 서로 상쇄되어</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_u\times\mathbf r_v)\,dA.\tag{9}$$</div>
+          <p>반대 향에 대해서는 우변에 $-1$을 곱한다.</p>
+        </div>
+        <p>여기서 $\mathbf F$는 $\mathbf F(\mathbf r(u,v))$를 뜻한다. 식 (9)는 16.2.13의 선적분 공식 $\int_C\mathbf F\cdot d\mathbf r=\int_a^{b}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$와 정확히 대응한다. 두 경우 모두 다루기 번거로운 단위벡터가 사라지고, 매개화를 있는 그대로 미분한 것만 남는다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 정의 8에 의해 $\iint_S \mathbf F\cdot d\mathbf S=\iint_S(\mathbf F\cdot\mathbf n)\,dS$이고, 여기서 $\mathbf F\cdot\mathbf n$은 $S$ 위의 스칼라함수다. 이 스칼라함수에 식 (2)를 적용하면</p>
+        <div class="math-display">$$\iint_S(\mathbf F\cdot\mathbf n)\,dS=\iint_D \bigl(\mathbf F(\mathbf r(u,v))\cdot\mathbf n(\mathbf r(u,v))\bigr)\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA$$</div>
+        <p>를 얻는다. $S$가 $\mathbf r(u,v)$가 유도하는 향 (6), 즉 $\mathbf n=(\mathbf r_u\times\mathbf r_v)/\lvert\mathbf r_u\times\mathbf r_v\rvert$을 갖는다고 가정했으므로 이를 대입하면</p>
+        <div class="math-display">$$\bigl(\mathbf F\cdot\mathbf n\bigr)\,\lvert\mathbf r_u\times\mathbf r_v\rvert=\mathbf F\cdot\frac{\mathbf r_u\times\mathbf r_v}{\lvert\mathbf r_u\times\mathbf r_v\rvert}\,\lvert\mathbf r_u\times\mathbf r_v\rvert=\mathbf F\cdot(\mathbf r_u\times\mathbf r_v)$$</div>
+        <p>가 되어, 크기 인수 $\lvert\mathbf r_u\times\mathbf r_v\rvert$가 정확히 약분되어 사라진다($D$의 내부에서 $\mathbf r_u\times\mathbf r_v\neq\mathbf 0$이므로 이 약분은 정당하다). 이를 앞의 이중적분에 대입하면 식 (9)</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_u\times\mathbf r_v)\,dA$$</div>
+        <p>를 얻는다. 반대 향 $-\mathbf n$을 택하면 첫 등식의 $\mathbf n$이 $-\mathbf n$으로 바뀌어 모든 단계에 부호가 전달되므로 우변 전체에 $-1$이 곱해진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (9) &mdash; flux from $\mathbf r(u,v)$.</strong> Let $S$ carry the orientation (6) induced by a parametrization $\mathbf r(u,v)$ with parameter domain $D$. Then the length factors cancel and</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_u\times\mathbf r_v)\,dA.\tag{9}$$</div>
+          <p>For the opposite orientation the right-hand side is multiplied by $-1$.</p>
+        </div>
+        <p>Here $\mathbf F$ is understood as $\mathbf F(\mathbf r(u,v))$. Formula (9) is the exact counterpart of the line-integral formula $\int_C\mathbf F\cdot d\mathbf r=\int_a^{b}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$ from 16.2.13: in both, the awkward unit vector disappears and only the raw derivative of the parametrization is left.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> By Definition 8, $\iint_S \mathbf F\cdot d\mathbf S=\iint_S(\mathbf F\cdot\mathbf n)\,dS$, where $\mathbf F\cdot\mathbf n$ is a scalar function on $S$. Applying Equation (2) to this scalar function gives</p>
+        <div class="math-display">$$\iint_S(\mathbf F\cdot\mathbf n)\,dS=\iint_D \bigl(\mathbf F(\mathbf r(u,v))\cdot\mathbf n(\mathbf r(u,v))\bigr)\,\lvert\mathbf r_u\times\mathbf r_v\rvert\,dA.$$</div>
+        <p>Since $S$ is assumed to carry the orientation (6) induced by $\mathbf r(u,v)$, namely $\mathbf n=(\mathbf r_u\times\mathbf r_v)/\lvert\mathbf r_u\times\mathbf r_v\rvert$, substituting gives</p>
+        <div class="math-display">$$\bigl(\mathbf F\cdot\mathbf n\bigr)\,\lvert\mathbf r_u\times\mathbf r_v\rvert=\mathbf F\cdot\frac{\mathbf r_u\times\mathbf r_v}{\lvert\mathbf r_u\times\mathbf r_v\rvert}\,\lvert\mathbf r_u\times\mathbf r_v\rvert=\mathbf F\cdot(\mathbf r_u\times\mathbf r_v),$$</div>
+        <p>so the length factor $\lvert\mathbf r_u\times\mathbf r_v\rvert$ cancels exactly (valid since $\mathbf r_u\times\mathbf r_v\neq\mathbf 0$ on the interior of $D$). Substituting into the double integral above gives Equation (9),</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_u\times\mathbf r_v)\,dA.$$</div>
+        <p>Choosing the opposite orientation $-\mathbf n$ replaces $\mathbf n$ by $-\mathbf n$ in the first equality, and the sign propagates through every step, multiplying the right-hand side by $-1$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 19 : Equation (10), flux across a graph -->
+<div class="card thm-card" id="c16-7-19">
+  <div class="card-head">
+    <span class="thm-num">THM 19</span>
+    <span class="thm-title">그래프 위의 플럭스 <em>Flux across a Graph</em><span class="src-ref">Eq. (10) · p.1228</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (10) — $z=g(x,y)$를 지나는 플럭스.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$라 쓰고, $S$를 $D$ 위의 $g$의 그래프로서 위쪽 향을 준 것이라 하자. $\mathbf F$를 외적 (3)과 내적하면 $\mathbf F\cdot(\mathbf r_x\times\mathbf r_y)=-P\dfrac{\partial g}{\partial x}-Q\dfrac{\partial g}{\partial y}+R$이므로, (9)는 다음이 된다.</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D\left(-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R\right)dA.\tag{10}$$</div>
+          <p>아래쪽 향을 주면 결과에 $-1$을 곱한다.</p>
+        </div>
+        <p>$y=h(x,z)$나 $x=k(y,z)$ 꼴의 곡면도 문자만 바꿔 대응하는 공식을 따르며, 이는 연습문제 37, 38에서 다룬다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $S$가 $D$ 위의 그래프 $z=g(x,y)$이고 위쪽 향을 갖는다고 하자. 식 (5)에서 보았듯이 매개화 $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$가 식 (6)을 통해 유도하는 향은 $\mathbf k$ 성분이 양인 방향, 즉 바로 이 위쪽 향이다. 이 매개화의 매개변수 영역이 $D$ 자체이므로 식 (9)는</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_x\times\mathbf r_y)\,dA$$</div>
+        <p>가 된다. 식 (3)에서 $\mathbf r_x\times\mathbf r_y=\langle -g_x,-g_y,1\rangle$이므로, $\mathbf F=\langle P,Q,R\rangle$과의 내적은 성분별로 곱해 더한</p>
+        <div class="math-display">$$\mathbf F\cdot(\mathbf r_x\times\mathbf r_y)=P(-g_x)+Q(-g_y)+R\cdot1=-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R$$</div>
+        <p>이다. 이를 위 이중적분에 대입하면 식 (10)</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D\left(-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R\right)dA$$</div>
+        <p>을 얻는다. 아래쪽 향을 택하면 법선이 $-\mathbf n$으로 바뀌므로, 식 (9)의 증명에서 본 대로 우변 전체의 부호가 반대가 된다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (10) &mdash; flux across $z=g(x,y)$.</strong> Write $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ and let $S$ be the graph of $g$ over $D$, taken with the upward orientation. Pairing $\mathbf F$ with the cross product (3) gives $\mathbf F\cdot(\mathbf r_x\times\mathbf r_y)=-P\dfrac{\partial g}{\partial x}-Q\dfrac{\partial g}{\partial y}+R$, so (9) becomes</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D\left(-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R\right)dA.\tag{10}$$</div>
+          <p>With the downward orientation the result is multiplied by $-1$.</p>
+        </div>
+        <p>Surfaces of the forms $y=h(x,z)$ and $x=k(y,z)$ obey companion formulas obtained by permuting the letters; these are worked out in Exercises 37 and 38.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $S$ be the graph $z=g(x,y)$ over $D$, given the upward orientation. As noted at Equation (5), the orientation that the parametrization $\mathbf r(x,y)=\langle x,y,g(x,y)\rangle$ induces through Equation (6) is the one with positive $\mathbf k$-component, which is exactly this upward orientation. Since the parameter domain of this parametrization is $D$ itself, Equation (9) reads</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D \mathbf F\cdot(\mathbf r_x\times\mathbf r_y)\,dA.$$</div>
+        <p>By Equation (3), $\mathbf r_x\times\mathbf r_y=\langle -g_x,-g_y,1\rangle$, so pairing it with $\mathbf F=\langle P,Q,R\rangle$ component by component gives</p>
+        <div class="math-display">$$\mathbf F\cdot(\mathbf r_x\times\mathbf r_y)=P(-g_x)+Q(-g_y)+R\cdot1=-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R.$$</div>
+        <p>Substituting into the double integral above gives Equation (10),</p>
+        <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=\iint_D\left(-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R\right)dA.$$</div>
+        <p>With the downward orientation the normal becomes $-\mathbf n$, so, exactly as in the proof of Equation (9), the entire right-hand side changes sign.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 20 : Equation (11), electric flux and Gauss's Law -->
+<div class="card rem-card" id="c16-7-20">
+  <div class="card-head">
+    <span class="rem-num">REM 20</span>
+    <span class="rem-title">전기다발과 가우스 법칙 <em>Electric Flux and Gauss's Law</em><span class="src-ref">Eq. (11) · p.1229&ndash;1230</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>적분하는 대상이 전기장 $\mathbf E$일 때, 수 $\iint_S \mathbf E\cdot d\mathbf S$를 $S$를 지나는 $\mathbf E$의 <strong>전기다발</strong>이라 한다.</p>
+        <p>정전기학의 가우스 법칙은 이 플럭스가 곧 전하량을 측정한다고 말한다. $S$가 양의 향을 가진 닫힌곡면이면, $S$가 둘러싸는 순전하 $Q$는 다음을 만족한다.</p>
+        <div class="math-display">$$Q=\varepsilon_0\iint_S \mathbf E\cdot d\mathbf S.\tag{11}$$</div>
+        <p>상수 $\varepsilon_0$는 진공의 유전율로, SI 단위계에서 $\varepsilon_0\approx 8.8542\times10^{-12}\ \mathrm{C^{2}/N\cdot m^{2}}$이다. 이 법칙은 영역 안에 숨어 있는 전하에 관한 물음을 그 경계 위의 적분으로 바꾸어 준다. 예컨대 예제 4의 벡터장을 전기장으로 본다면, 거기서 구한 플럭스 $\tfrac43\pi$로부터 단위구면이 둘러싸는 전하가 $Q=\tfrac43\pi\varepsilon_0$임을 곧바로 얻는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>When the field being integrated is an electric field $\mathbf E$, the number $\iint_S \mathbf E\cdot d\mathbf S$ is called the <strong>electric flux</strong> of $\mathbf E$ through $S$.</p>
+        <p>Gauss's Law of electrostatics states that this flux measures charge: if $S$ is a closed surface with its positive orientation, the net charge $Q$ enclosed by $S$ satisfies</p>
+        <div class="math-display">$$Q=\varepsilon_0\iint_S \mathbf E\cdot d\mathbf S.\tag{11}$$</div>
+        <p>The constant $\varepsilon_0$ is the permittivity of free space; in SI units $\varepsilon_0\approx 8.8542\times10^{-12}\ \mathrm{C^{2}/N\cdot m^{2}}$. The law converts a question about charge hidden inside a region into an integral over its boundary. Read the field of Example 4, for instance, as an electric field: the flux $\tfrac43\pi$ found there gives at once the charge $Q=\tfrac43\pi\varepsilon_0$ enclosed by the unit sphere.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 21 : heat flow -->
+<div class="card thm-card" id="c16-7-21">
+  <div class="card-head">
+    <span class="thm-num">THM 21</span>
+    <span class="thm-title">열류 <em>Heat Flow</em><span class="src-ref">p.1230</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>열류.</strong> $u(x,y,z)$를 물체 내부의 한 점에서의 온도라 하자. 열은 온도의 기울기를 거슬러 흐르므로, <strong>열류 벡터장</strong>은</p>
+          <div class="math-display">$$\mathbf F=-K\,\nabla u,$$</div>
+          <p>이다. 여기서 양의 상수 $K$는 그 물질의 열전도도로, 실험으로 정해진다. 물체 안의 곡면 $S$를 지나는 열 흐름률은 다음과 같다.</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=-K\iint_S \nabla u\cdot d\mathbf S.$$</div>
+        </div>
+        <p>음의 부호는 열이 $u$가 가장 빨리 증가하는 방향과 반대로, 즉 더 뜨거운 곳에서 더 차가운 곳으로 이동함을 나타낸다. 따라서 이 적분값이 음수라는 것은, 정한 향을 거슬러 열이 순유입되고 있다는 뜻이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Heat flow.</strong> Let $u(x,y,z)$ be the temperature at a point of a body. Heat travels down the temperature gradient, and the <strong>heat flow vector field</strong> is</p>
+          <div class="math-display">$$\mathbf F=-K\,\nabla u,$$</div>
+          <p>where the positive constant $K$, the conductivity of the material, is determined experimentally. The rate of heat flow across a surface $S$ in the body is then</p>
+          <div class="math-display">$$\iint_S \mathbf F\cdot d\mathbf S=-K\iint_S \nabla u\cdot d\mathbf S.$$</div>
+        </div>
+        <p>The minus sign records that heat moves from hotter places to cooler ones, opposite to the direction in which $u$ increases most rapidly. A negative value of the integral therefore means net heat flowing in against the chosen orientation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-7-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">단위구면 위의 면적분 <em>A Surface Integral over the Unit Sphere</em><span class="src-ref">Example 1 · p.1222</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$가 단위구면 $x^{2}+y^{2}+z^{2}=1$일 때, 구면좌표에 의한 매개화를 이용하여 면적분 $\displaystyle\iint_S x^{2}\,dS$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 단위구면을 구면좌표로 매개화한다.</p>
+        <div class="math-display">$$\mathbf r(\phi,\theta)=\langle \sin\phi\cos\theta,\ \sin\phi\sin\theta,\ \cos\phi\rangle,\qquad 0\le\phi\le\pi,\ 0\le\theta\le2\pi.$$</div>
+        <p>§16.6에서 이미 계산한 대로 이 매개화는 $\lvert\mathbf r_\phi\times\mathbf r_\theta\rvert=\sin\phi$를 만족한다. $S$ 위에서 $x=\sin\phi\cos\theta$이므로 $x^{2}=\sin^{2}\phi\cos^{2}\theta$이고, 식 (2)에 의해</p>
+        <div class="math-display">$$\begin{aligned}\iint_S x^{2}\,dS&=\int_0^{2\pi}\!\!\int_0^{\pi} \sin^{2}\phi\cos^{2}\theta\cdot\sin\phi\;d\phi\,d\theta\\[2pt] &=\left(\int_0^{2\pi}\cos^{2}\theta\,d\theta\right)\left(\int_0^{\pi}\sin^{3}\phi\,d\phi\right).\end{aligned}$$</div>
+        <p>반각공식 $\cos^{2}\theta=\tfrac12(1+\cos2\theta)$를 쓰면 첫째 인수는 $\pi$이다. 둘째 인수는 $\sin^{3}\phi=\sin\phi\,(1-\cos^{2}\phi)$로 쓰고 $w=\cos\phi$로 치환하면</p>
+        <div class="math-display">$$\int_0^{\pi}\sin^{3}\phi\,d\phi=\int_{-1}^{1}(1-w^{2})\,dw=\frac43$$</div>
+        <p>이다. 두 인수를 곱하면 따라서 $\displaystyle\iint_S x^{2}\,dS=\pi\cdot\frac43=\frac{4\pi}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the unit sphere $x^{2}+y^{2}+z^{2}=1$. Using its spherical parametrization, evaluate the surface integral $\displaystyle\iint_S x^{2}\,dS$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize the unit sphere spherically,</p>
+        <div class="math-display">$$\mathbf r(\phi,\theta)=\langle \sin\phi\cos\theta,\ \sin\phi\sin\theta,\ \cos\phi\rangle,\qquad 0\le\phi\le\pi,\ 0\le\theta\le2\pi.$$</div>
+        <p>As already computed in §16.6, this parametrization satisfies $\lvert\mathbf r_\phi\times\mathbf r_\theta\rvert=\sin\phi$. On $S$, $x=\sin\phi\cos\theta$, so $x^{2}=\sin^{2}\phi\cos^{2}\theta$, and Equation (2) gives</p>
+        <div class="math-display">$$\begin{aligned}\iint_S x^{2}\,dS&=\int_0^{2\pi}\!\!\int_0^{\pi} \sin^{2}\phi\cos^{2}\theta\cdot\sin\phi\;d\phi\,d\theta\\[2pt] &=\left(\int_0^{2\pi}\cos^{2}\theta\,d\theta\right)\left(\int_0^{\pi}\sin^{3}\phi\,d\phi\right).\end{aligned}$$</div>
+        <p>The half-angle identity $\cos^{2}\theta=\tfrac12(1+\cos2\theta)$ gives the first factor as $\pi$. For the second, write $\sin^{3}\phi=\sin\phi\,(1-\cos^{2}\phi)$ and substitute $w=\cos\phi$:</p>
+        <div class="math-display">$$\int_0^{\pi}\sin^{3}\phi\,d\phi=\int_{-1}^{1}(1-w^{2})\,dw=\frac43.$$</div>
+        <p>Multiplying the two factors, $\displaystyle\iint_S x^{2}\,dS=\pi\cdot\frac43=\frac{4\pi}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-7-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">그래프 위의 면적분 <em>Integrating over a Graph</em><span class="src-ref">Example 2 · p.1223</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$를 직사각형 $0\le x\le 1$, $0\le y\le 2$ 위에 놓인 곡면 $z=x+y^{2}$의 부분이라 하자. 식 (4)를 이용하여 $\displaystyle\iint_S y\,dS$를 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 곡면은 $D=[0,1]\times[0,2]$ 위의 그래프 $z=g(x,y)=x+y^{2}$이다. $g_x=1$, $g_y=2y$이므로 식 (4)의 넓이 인수는</p>
+        <div class="math-display">$$\sqrt{g_x^{2}+g_y^{2}+1}=\sqrt{1+4y^{2}+1}=\sqrt{2+4y^{2}}$$</div>
+        <p>이며 $x$에는 의존하지 않는다. 따라서</p>
+        <div class="math-display">$$\begin{aligned}\iint_S y\,dS&=\int_0^1\!\!\int_0^2 y\sqrt{2+4y^{2}}\,dy\,dx\\[2pt] &=\left(\int_0^1 dx\right)\left(\int_0^2 y\sqrt{2+4y^{2}}\,dy\right)\\[2pt] &=\int_0^2 y\sqrt{2+4y^{2}}\,dy.\end{aligned}$$</div>
+        <p>치환 $u=2+4y^{2}$, $du=8y\,dy$를 쓰면 $y=0,2$가 $u=2,18$에 대응하고</p>
+        <div class="math-display">$$\int_0^2 y\sqrt{2+4y^{2}}\,dy=\frac18\int_2^{18}\sqrt u\,du=\frac{1}{12}\Bigl[u^{3/2}\Bigr]_2^{18}=\frac{18^{3/2}-2^{3/2}}{12}.$$</div>
+        <p>$18^{3/2}=18\cdot3\sqrt2=54\sqrt2$이고 $2^{3/2}=2\sqrt2$이므로 분자는 $52\sqrt2$이고, 따라서 $\displaystyle\iint_S y\,dS=\frac{52\sqrt2}{12}=\frac{13\sqrt2}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Take $S$ to be the piece of the surface $z=x+y^{2}$ lying over the rectangle $0\le x\le 1$, $0\le y\le 2$. Apply formula (4) to evaluate $\displaystyle\iint_S y\,dS$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The surface is the graph $z=g(x,y)=x+y^{2}$ over $D=[0,1]\times[0,2]$. Since $g_x=1$ and $g_y=2y$, the area factor of Equation (4) is</p>
+        <div class="math-display">$$\sqrt{g_x^{2}+g_y^{2}+1}=\sqrt{1+4y^{2}+1}=\sqrt{2+4y^{2}},$$</div>
+        <p>independent of $x$. Hence</p>
+        <div class="math-display">$$\begin{aligned}\iint_S y\,dS&=\int_0^1\!\!\int_0^2 y\sqrt{2+4y^{2}}\,dy\,dx\\[2pt] &=\left(\int_0^1 dx\right)\left(\int_0^2 y\sqrt{2+4y^{2}}\,dy\right)\\[2pt] &=\int_0^2 y\sqrt{2+4y^{2}}\,dy.\end{aligned}$$</div>
+        <p>Substituting $u=2+4y^{2}$, $du=8y\,dy$, so that $y=0,2$ correspond to $u=2,18$,</p>
+        <div class="math-display">$$\int_0^2 y\sqrt{2+4y^{2}}\,dy=\frac18\int_2^{18}\sqrt u\,du=\frac{1}{12}\Bigl[u^{3/2}\Bigr]_2^{18}=\frac{18^{3/2}-2^{3/2}}{12}.$$</div>
+        <p>Since $18^{3/2}=18\cdot3\sqrt2=54\sqrt2$ and $2^{3/2}=2\sqrt2$, the numerator is $52\sqrt2$, so $\displaystyle\iint_S y\,dS=\frac{52\sqrt2}{12}=\frac{13\sqrt2}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-7-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">조각으로 이루어진 닫힌곡면 위의 면적분 <em>A Piecewise-Smooth Closed Surface</em><span class="src-ref">Example 3 · p.1223&ndash;1224</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 조각을 이어 붙여 만든 닫힌곡면 $S$를 생각하자. $S_1$은 원기둥 $x^{2}+y^{2}=1$의 옆면 중 $z=0$과 $z=1+x$ 사이의 부분이고, $S_2$는 이 원기둥이 평면 $z=0$에서 잘라내는 원판이며, $S_3$은 $S_2$ 바로 위에 놓인 평면 $z=1+x$의 부분이다. $\displaystyle\iint_S z\,dS$를 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 조각적으로 매끄러운 곡면 위의 적분의 정의에 따라 $S=S_1\cup S_2\cup S_3$의 세 조각에서 적분을 따로 구해 더한다.</p>
+        <p>$S_1$(원기둥 옆면)은 $\mathbf r(\theta,z)=\langle\cos\theta,\sin\theta,z\rangle$, $0\le\theta\le2\pi$, $0\le z\le1+\cos\theta$로 매개화되고 $\lvert\mathbf r_\theta\times\mathbf r_z\rvert=1$이다. 따라서</p>
+        <div class="math-display">$$\iint_{S_1} z\,dS=\int_0^{2\pi}\!\!\int_0^{1+\cos\theta} z\,dz\,d\theta=\int_0^{2\pi}\frac{(1+\cos\theta)^{2}}{2}\,d\theta.$$</div>
+        <p>피적분함수를 $1+2\cos\theta+\cos^{2}\theta$로 펼치면 $\int_0^{2\pi}1\,d\theta=2\pi$, $\int_0^{2\pi}2\cos\theta\,d\theta=0$, $\int_0^{2\pi}\cos^{2}\theta\,d\theta=\pi$이므로 합은 $3\pi$이고, $\iint_{S_1} z\,dS=\dfrac{3\pi}{2}$이다.</p>
+        <p>$S_2$는 평면 $z=0$ 위에 놓이므로 피적분함수 $z$가 그 위에서 항등적으로 $0$이고, $\iint_{S_2} z\,dS=0$이다.</p>
+        <p>$S_3$은 단위원판 $D:x^{2}+y^{2}\le1$ 위의 그래프 $z=1+x$이고, $g_x=1,g_y=0$이므로 식 (4)의 넓이 인수는 상수 $\sqrt2$이다. 그러므로</p>
+        <div class="math-display">$$\iint_{S_3} z\,dS=\sqrt2\iint_D(1+x)\,dA=\sqrt2\left(\iint_D 1\,dA+\iint_D x\,dA\right).$$</div>
+        <p>$\iint_D 1\,dA=\pi$이고, $x$는 원판 위에서 원점에 대해 기함수이므로 $\iint_D x\,dA=0$이다. 따라서 $\iint_{S_3} z\,dS=\sqrt2\,\pi$이다.</p>
+        <p>세 값을 더하면 $\displaystyle\iint_S z\,dS=\frac{3\pi}{2}+0+\sqrt2\,\pi=\left(\frac32+\sqrt2\right)\pi$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A closed surface $S$ is assembled from three pieces: the lateral surface $S_1$ of the cylinder $x^{2}+y^{2}=1$ between the planes $z=0$ and $z=1+x$; the disk $S_2$ that this cylinder cuts out of the plane $z=0$; and the piece $S_3$ of the plane $z=1+x$ lying directly above $S_2$. Evaluate $\displaystyle\iint_S z\,dS$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By the definition of an integral over a piecewise-smooth surface, evaluate the three integrals over $S_1$, $S_2$, $S_3$ separately and add them.</p>
+        <p>The lateral piece $S_1$ is parametrized by $\mathbf r(\theta,z)=\langle\cos\theta,\sin\theta,z\rangle$, $0\le\theta\le2\pi$, $0\le z\le1+\cos\theta$, and $\lvert\mathbf r_\theta\times\mathbf r_z\rvert=1$. Hence</p>
+        <div class="math-display">$$\iint_{S_1} z\,dS=\int_0^{2\pi}\!\!\int_0^{1+\cos\theta} z\,dz\,d\theta=\int_0^{2\pi}\frac{(1+\cos\theta)^{2}}{2}\,d\theta.$$</div>
+        <p>Expanding the integrand as $1+2\cos\theta+\cos^{2}\theta$ gives $\int_0^{2\pi}1\,d\theta=2\pi$, $\int_0^{2\pi}2\cos\theta\,d\theta=0$, and $\int_0^{2\pi}\cos^{2}\theta\,d\theta=\pi$, so the sum is $3\pi$ and $\iint_{S_1} z\,dS=\dfrac{3\pi}{2}$.</p>
+        <p>$S_2$ lies in the plane $z=0$, so the integrand $z$ vanishes identically on it, and $\iint_{S_2} z\,dS=0$.</p>
+        <p>$S_3$ is the graph $z=1+x$ over the unit disk $D:x^{2}+y^{2}\le1$, and since $g_x=1,g_y=0$ the area factor of Equation (4) is the constant $\sqrt2$. Therefore</p>
+        <div class="math-display">$$\iint_{S_3} z\,dS=\sqrt2\iint_D(1+x)\,dA=\sqrt2\left(\iint_D 1\,dA+\iint_D x\,dA\right).$$</div>
+        <p>Here $\iint_D 1\,dA=\pi$, and $x$ is an odd function on the disk about the origin, so $\iint_D x\,dA=0$. Thus $\iint_{S_3} z\,dS=\sqrt2\,\pi$.</p>
+        <p>Adding the three values, $\displaystyle\iint_S z\,dS=\frac{3\pi}{2}+0+\sqrt2\,\pi=\left(\frac32+\sqrt2\right)\pi$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-7-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">단위구면을 지나는 플럭스 <em>Flux across the Unit Sphere</em><span class="src-ref">Example 4 · p.1228</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$가 단위구면 $x^{2}+y^{2}+z^{2}=1$을 바깥쪽 향으로 지날 때의 플럭스를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 1과 같은 구면좌표 매개화 $\mathbf r(\phi,\theta)=\langle\sin\phi\cos\theta,\sin\phi\sin\theta,\cos\phi\rangle$를 쓴다. 앞에서 구면의 향을 살펴볼 때 확인했듯이 이 순서의 매개화가 유도하는 $\mathbf r_\phi\times\mathbf r_\theta$는 위치벡터와 같은 방향, 즉 바깥쪽을 가리키므로 향을 맞추기 위한 별도의 부호 보정이 필요 없다.</p>
+        <div class="math-display">$$\mathbf r_\phi\times\mathbf r_\theta=\langle\sin^{2}\phi\cos\theta,\ \sin^{2}\phi\sin\theta,\ \sin\phi\cos\phi\rangle$$</div>
+        <p>이고, $S$ 위에서 $\mathbf F=\langle z,y,x\rangle=\langle\cos\phi,\ \sin\phi\sin\theta,\ \sin\phi\cos\theta\rangle$이므로, 내적을 성분별로 계산하면</p>
+        <div class="math-display">$$\begin{aligned}\mathbf F\cdot(\mathbf r_\phi\times\mathbf r_\theta)&=\cos\phi\sin^{2}\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta+\sin^{2}\phi\cos\phi\cos\theta\\[2pt] &=2\sin^{2}\phi\cos\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta\end{aligned}$$</div>
+        <p>이다. 식 (9)에 의해</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\int_0^{2\pi}\!\!\int_0^{\pi}\bigl(2\sin^{2}\phi\cos\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta\bigr)\,d\phi\,d\theta.$$</div>
+        <p>첫 항은 $\int_0^{2\pi}\cos\theta\,d\theta=0$이므로 통째로 사라진다. 둘째 항은 $\theta$에 대한 적분이 $\int_0^{2\pi}\sin^{2}\theta\,d\theta=\pi$이고 $\phi$에 대한 적분은 예제 1에서 구한 $\int_0^{\pi}\sin^{3}\phi\,d\phi=\dfrac43$이므로, 따라서</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\pi\cdot\frac43=\frac{4\pi}{3}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine the flux of the field $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$ across the unit sphere $x^{2}+y^{2}+z^{2}=1$, the sphere being given its outward orientation.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Use the same spherical parametrization as in Example 1, $\mathbf r(\phi,\theta)=\langle\sin\phi\cos\theta,\sin\phi\sin\theta,\cos\phi\rangle$. As was checked earlier when the sphere was oriented, the vector $\mathbf r_\phi\times\mathbf r_\theta$ arising from this ordering of the parameters is a positive multiple of the position vector, hence outward, so no sign correction is needed to match the orientation.</p>
+        <div class="math-display">$$\mathbf r_\phi\times\mathbf r_\theta=\langle\sin^{2}\phi\cos\theta,\ \sin^{2}\phi\sin\theta,\ \sin\phi\cos\phi\rangle,$$</div>
+        <p>and on $S$, $\mathbf F=\langle z,y,x\rangle=\langle\cos\phi,\ \sin\phi\sin\theta,\ \sin\phi\cos\theta\rangle$, so computing the dot product component by component gives</p>
+        <div class="math-display">$$\begin{aligned}\mathbf F\cdot(\mathbf r_\phi\times\mathbf r_\theta)&=\cos\phi\sin^{2}\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta+\sin^{2}\phi\cos\phi\cos\theta\\[2pt] &=2\sin^{2}\phi\cos\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta.\end{aligned}$$</div>
+        <p>By Equation (9),</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\int_0^{2\pi}\!\!\int_0^{\pi}\bigl(2\sin^{2}\phi\cos\phi\cos\theta+\sin^{3}\phi\sin^{2}\theta\bigr)\,d\phi\,d\theta.$$</div>
+        <p>The first term vanishes entirely because $\int_0^{2\pi}\cos\theta\,d\theta=0$. In the second, the $\theta$-integral is $\int_0^{2\pi}\sin^{2}\theta\,d\theta=\pi$ and the $\phi$-integral is the value $\int_0^{\pi}\sin^{3}\phi\,d\phi=\dfrac43$ already found in Example 1, so</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\pi\cdot\frac43=\frac{4\pi}{3}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-7-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">포물면과 원판으로 이루어진 닫힌곡면의 플럭스 <em>Flux across a Paraboloid Capped by a Disk</em><span class="src-ref">Example 5 · p.1229</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>포물면 $z=1-x^{2}-y^{2}$과 평면 $z=0$으로 둘러싸인 입체의 경계곡면을 $S$라 하고, $S$에 양의 향을 주자. 벡터장 $\mathbf F=y\,\mathbf i+x\,\mathbf j+z\,\mathbf k$에 대하여 $\displaystyle\iint_S \mathbf F\cdot d\mathbf S$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S=S_1\cup S_2$를 양의(바깥쪽) 향을 준 조각적으로 매끄러운 닫힌곡면으로 본다. 위쪽 포물면 조각 $S_1:z=1-x^{2}-y^{2}$은 입체의 위쪽 경계이므로 바깥쪽 향이 위쪽 향과 같고, 아래쪽 원판 $S_2:z=0$은 입체의 아래쪽 경계이므로 바깥쪽 향은 아래쪽 향 $\mathbf n=-\mathbf k$와 같다.</p>
+        <p>$S_1$에서 $g=1-x^{2}-y^{2}$이므로 $g_x=-2x$, $g_y=-2y$이고, $\mathbf F=\langle y,x,z\rangle$의 성분은 $P=y,Q=x,R=z$이다. 식 (10)에 대입하면</p>
+        <div class="math-display">$$-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R=2xy+2xy+(1-x^{2}-y^{2})=4xy+1-x^{2}-y^{2}$$</div>
+        <p>이므로, 극좌표 $x=r\cos\theta,y=r\sin\theta$로 바꾸면 $4xy=2r^{2}\sin2\theta$가 되어 $\theta$에 대해 적분하면 사라지고</p>
+        <div class="math-display">$$\iint_{S_1}\mathbf F\cdot d\mathbf S=\int_0^{2\pi}\!\!\int_0^1(1-r^{2})\,r\,dr\,d\theta=2\pi\left[\frac{r^{2}}2-\frac{r^{4}}4\right]_0^1=2\pi\cdot\frac14=\frac{\pi}{2}$$</div>
+        <p>이다.</p>
+        <p>$S_2$에서는 향이 $\mathbf n=-\mathbf k$이므로 $\mathbf F\cdot\mathbf n=-z$인데, $S_2$ 전체에서 $z=0$이므로 이 값은 항등적으로 $0$이다. 그러므로 $\iint_{S_2}\mathbf F\cdot d\mathbf S=0$이고, 따라서</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\frac{\pi}{2}+0=\frac{\pi}{2}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the boundary surface of the solid enclosed by the paraboloid $z=1-x^{2}-y^{2}$ and the plane $z=0$, taken with its positive orientation. For the field $\mathbf F=y\,\mathbf i+x\,\mathbf j+z\,\mathbf k$, find $\displaystyle\iint_S \mathbf F\cdot d\mathbf S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> View $S=S_1\cup S_2$ as a piecewise-smooth closed surface with the positive (outward) orientation. The upper piece $S_1:z=1-x^{2}-y^{2}$ is the top of the solid, so its outward orientation is the upward one; the lower piece $S_2:z=0$ is the bottom, so its outward orientation is the downward one, $\mathbf n=-\mathbf k$.</p>
+        <p>On $S_1$, $g=1-x^{2}-y^{2}$ gives $g_x=-2x$, $g_y=-2y$, and $\mathbf F=\langle y,x,z\rangle$ has components $P=y,Q=x,R=z$. Substituting into Equation (10),</p>
+        <div class="math-display">$$-P\,\frac{\partial g}{\partial x}-Q\,\frac{\partial g}{\partial y}+R=2xy+2xy+(1-x^{2}-y^{2})=4xy+1-x^{2}-y^{2},$$</div>
+        <p>so switching to polar coordinates $x=r\cos\theta,y=r\sin\theta$ turns $4xy$ into $2r^{2}\sin2\theta$, which vanishes upon integrating over $\theta$, leaving</p>
+        <div class="math-display">$$\iint_{S_1}\mathbf F\cdot d\mathbf S=\int_0^{2\pi}\!\!\int_0^1(1-r^{2})\,r\,dr\,d\theta=2\pi\left[\frac{r^{2}}2-\frac{r^{4}}4\right]_0^1=2\pi\cdot\frac14=\frac{\pi}{2}.$$</div>
+        <p>On $S_2$ the orientation is $\mathbf n=-\mathbf k$, so $\mathbf F\cdot\mathbf n=-z$, which is identically $0$ since $z=0$ throughout $S_2$. Hence $\iint_{S_2}\mathbf F\cdot d\mathbf S=0$, and</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\frac{\pi}{2}+0=\frac{\pi}{2}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex16-7-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">구면을 가로지르는 열 흐름률 <em>Rate of Heat Flow across a Sphere</em><span class="src-ref">Example 6 · p.1230</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>속이 꽉 찬 금속 공 안에서 각 점의 온도 $u$가 그 점과 공의 중심 사이의 거리의 제곱에 비례한다고 하자. 이 공과 중심이 같고 반지름이 $a$인 구면 $S$를 가로지르는 열 흐름률을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 공의 중심을 원점에 놓자. 중심에서 잰 거리의 제곱에 비례하는 온도이므로 비례상수를 $C$라 하면 $u(x,y,z)=C(x^{2}+y^{2}+z^{2})$이고, 열류 벡터장은</p>
+        <div class="math-display">$$\mathbf F=-K\nabla u=-2KC\langle x,y,z\rangle$$</div>
+        <p>이다($K$는 열전도도). 구면 $S$(중심이 원점, 반지름 $a$)의 바깥쪽 단위법선은 위치벡터를 스케일링한 $\mathbf n=\dfrac1a\langle x,y,z\rangle$이므로</p>
+        <div class="math-display">$$\mathbf F\cdot\mathbf n=-\frac{2KC}{a}(x^{2}+y^{2}+z^{2})$$</div>
+        <p>이다. $S$ 위의 모든 점은 $x^{2}+y^{2}+z^{2}=a^{2}$을 만족하므로 이 내적은 $S$ 위에서 상수</p>
+        <div class="math-display">$$\mathbf F\cdot\mathbf n=-\frac{2KC}{a}\cdot a^{2}=-2KCa$$</div>
+        <p>가 된다. 피적분함수가 상수이므로 면적분은 그 상수에 곡면의 넓이 $A(S)=4\pi a^{2}$를 곱한 것과 같고, 따라서</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=(-2KCa)(4\pi a^{2})=-8KC\pi a^{3}$$</div>
+        <p>이다. 음의 부호는 열이 정한 향(바깥쪽)을 거슬러, 즉 중심을 향해 순유입되고 있음을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Inside a solid metal ball the temperature $u$ at a point is proportional to the square of the distance from that point to the center of the ball. Find the rate at which heat flows across a sphere $S$ of radius $a$ concentric with the ball.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Put the center of the ball at the origin. Since the temperature is proportional to the squared distance from the center, write the proportionality constant as $C$, so $u(x,y,z)=C(x^{2}+y^{2}+z^{2})$ and the heat flow field is</p>
+        <div class="math-display">$$\mathbf F=-K\nabla u=-2KC\langle x,y,z\rangle$$</div>
+        <p>($K$ the conductivity). The outward unit normal on the sphere $S$ (center the origin, radius $a$) is the scaled position vector $\mathbf n=\dfrac1a\langle x,y,z\rangle$, so</p>
+        <div class="math-display">$$\mathbf F\cdot\mathbf n=-\frac{2KC}{a}(x^{2}+y^{2}+z^{2}).$$</div>
+        <p>Every point of $S$ satisfies $x^{2}+y^{2}+z^{2}=a^{2}$, so this dot product is constant on $S$:</p>
+        <div class="math-display">$$\mathbf F\cdot\mathbf n=-\frac{2KC}{a}\cdot a^{2}=-2KCa.$$</div>
+        <p>Since the integrand is constant, the surface integral is that constant times the area $A(S)=4\pi a^{2}$, so</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=(-2KCa)(4\pi a^{2})=-8KC\pi a^{3}.$$</div>
+        <p>The negative sign means heat is flowing net against the chosen (outward) orientation, that is, inward toward the center.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-7-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch13.html">단원 13</a></p>
+        <ul>
+          <li>매개곡면 위의 스칼라 면적분 &mdash; <a href="../calc2/ch13.html#ex03">ex03</a>(원뿔 위의 면적분), <a href="../calc2/ch13.html#yu03-1">yu03-1</a>(정육면체 경계), <a href="../calc2/ch13.html#yu03-2">yu03-2</a>(회전면 위) (부분 대응: 계산 유형은 같지만 정의 1과 리만 합 유도는 없음)</li>
+          <li>그래프 위의 면적분(식 (4)) &mdash; <a href="../calc2/ch13.html#yu03-3">yu03-3</a>(삼각형 위 곡면) (부분 대응: 공식이 명시되지 않고 계산 안에서 쓰인다)</li>
+          <li>얇은 판의 질량·질량중심 &mdash; <a href="../calc2/ch13.html#pr02">pr02</a>(액체가 곡면에 작용하는 힘) (인접: 밀도를 면적분하는 유형만 같고 질량중심 공식은 없음. 이 절의 과제 39번이 정확히 질량중심 문제다)</li>
+          <li>플럭스(정의 8·식 (9)) &mdash; <a href="../calc2/ch13.html#ex04">ex04</a>, <a href="../calc2/ch13.html#yu04-1">yu04-1</a>(반원기둥), <a href="../calc2/ch13.html#yu04-2">yu04-2</a>(포물면) (부분 대응: 향을 지정한 계산 유형은 같다)</li>
+          <li>유향곡면·뫼비우스 띠·닫힌곡면의 양의 향, 그래프 위의 플럭스(식 (10)), 전기다발과 가우스 법칙, 열류 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 면적소를 이 페이지와 다른 기호로 적고, 플럭스를 가리키는 용어도 다르게 쓴다. 이 페이지는 용어집에 따라 면적소를 $dS$로, 벡터장의 면적분을 "플럭스"로 통일한다.</p>
+        <p><strong>(b) 공통과제 (§16.7, 4차)</strong></p>
+        <p>제출 문항: 8, 16, 19, 24, 27, 39 &nbsp;/&nbsp; 학습 참고: 5~20, 21~32, 37~40</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-6.html">§16.6 매개곡면과 그 넓이</a> &nbsp;/&nbsp; 다음: <a href="s16-8.html">§16.8 스토크스 정리</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch13.html">Unit 13</a></p>
+        <ul>
+          <li>Scalar surface integrals over a parametric surface &mdash; <a href="../calc2/ch13.html#ex03">ex03</a> (over a cone), <a href="../calc2/ch13.html#yu03-1">yu03-1</a> (boundary of a cube), <a href="../calc2/ch13.html#yu03-2">yu03-2</a> (over a surface of revolution) (partial match: the computations agree in type, but Definition 1 and the Riemann-sum derivation are absent)</li>
+          <li>Surface integrals over a graph, formula (4) &mdash; <a href="../calc2/ch13.html#yu03-3">yu03-3</a> (a surface over a triangle) (partial match: the formula is used inside the computation rather than stated)</li>
+          <li>Mass and center of mass of a thin sheet &mdash; <a href="../calc2/ch13.html#pr02">pr02</a> (force of a liquid on a surface) (adjacent: only the pattern of integrating a density over a surface is shared, with no center-of-mass formula; Exercise 39 of this section is exactly a center-of-mass problem)</li>
+          <li>Flux, Definition 8 and formula (9) &mdash; <a href="../calc2/ch13.html#ex04">ex04</a>, <a href="../calc2/ch13.html#yu04-1">yu04-1</a> (a half-cylinder), <a href="../calc2/ch13.html#yu04-2">yu04-2</a> (a paraboloid) (partial match: the same type of oriented computation)</li>
+          <li>Oriented surfaces, the M&ouml;bius strip, the positive orientation of a closed surface, flux across a graph (formula (10)), electric flux and Gauss's Law, and heat flow &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes write the element of area with a different symbol from the one used here, and they call the surface integral of a vector field by a different Korean term. This page follows the glossary and writes the element of area as $dS$ and the integral itself as flux throughout.</p>
+        <p><strong>(b) Assignment (§16.7, fourth set)</strong></p>
+        <p>Problems to submit: 8, 16, 19, 24, 27, 39 &nbsp;/&nbsp; Recommended practice: 5&ndash;20, 21&ndash;32, 37&ndash;40</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-6.html">§16.6 Parametric Surfaces and Their Areas</a> &nbsp;/&nbsp; Next: <a href="s16-8.html">§16.8 Stokes' Theorem</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§15.9 중적분의 변수변환 (Change of Variables in Multiple Integrals) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §15.9 중적분의 변수변환 — 변환 T와 상(image)·일대일·C¹ 변환, 야코비안의 정의 (7)과 넓이소 근사 (8), 이중적분 변수변환 정리 9, 3×3 야코비안 (12)과 삼중적분 공식 (13), 극좌표·구면좌표가 특수 경우임을 한국어·영어 대조로 정리하고 예제 4개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 15.9, 중적분의 변수변환, change of variables in multiple integrals, 야코비안, Jacobian, 변환, transformation, 상, image, 일대일, one-to-one, C1 변환, 넓이소, area element, 정리 9, 삼중적분 변수변환, 3x3 야코비안, 극좌표 야코비안, 구면좌표 부피소, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s15-9.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§15.9 중적분의 변수변환 (Change of Variables in Multiple Integrals) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="변환 T와 상, 야코비안의 정의 (7)과 넓이소 (8), 이중적분 변수변환 정리 9, 삼중적분 공식 (13)까지 §15.9 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s15-9.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§15.9 중적분의 변수변환 (Change of Variables in Multiple Integrals) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §15.9 중적분의 변수변환 — 변환 T와 상, C¹ 변환·일대일·역변환, 야코비안의 정의 (7), 넓이소 근사 (8), 변수변환 정리 9, 3×3 야코비안 (12)과 삼중적분 공식 (13)을 한국어·영어 대조로 정리하고 본문 예제 4개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s15-9.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s15-9.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s15-1.html">15.1</a>
+      <a href="s15-2.html">15.2</a>
+      <a href="s15-3.html">15.3</a>
+      <a href="s15-4.html">15.4</a>
+      <a href="s15-5.html">15.5</a>
+      <a href="s15-6.html">15.6</a>
+      <a href="s15-7.html">15.7</a>
+      <a href="s15-8.html">15.8</a>
+      <a href="s15-9.html" class="active">15.9</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §15.9 · 8주차</p>
+  <h1>§15.9 중적분의 변수변환<span>Change of Variables in Multiple Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c15-9-1"><span class="toc-num">NOTE</span> 1변수 치환적분의 복습 <em>Review of Substitution</em></a></li>
+    <li><a href="#c15-9-2"><span class="toc-num">DEF 2</span> 변환 T와 상 <em>Transformation and Image</em></a></li>
+    <li><a href="#c15-9-3"><span class="toc-num">NOTE</span> 상 영역의 평행사변형 근사 <em>Approximating the Image by a Parallelogram</em></a></li>
+    <li><a href="#c15-9-4"><span class="toc-num">DEF 4</span> 야코비안 <em>The Jacobian</em></a></li>
+    <li><a href="#c15-9-5"><span class="toc-num">REM 5</span> 넓이소의 근사 <em>The Area Element</em></a></li>
+    <li><a href="#c15-9-6"><span class="toc-num">THM 6</span> 이중적분의 변수변환 정리 <em>Change of Variables in a Double Integral</em></a></li>
+    <li><a href="#c15-9-7"><span class="toc-num">REM 7</span> dA 교체 규칙과 1변수와의 유비 <em>Replacing dA by the Jacobian Factor</em></a></li>
+    <li><a href="#c15-9-8"><span class="toc-num">REM 8</span> 극좌표는 정리 9의 특수 경우 <em>Polar Coordinates as a Special Case</em></a></li>
+    <li><a href="#c15-9-9"><span class="toc-num">REM 9</span> 변환을 고르는 요령 <em>Choosing a Transformation</em></a></li>
+    <li><a href="#c15-9-10"><span class="toc-num">DEF 10</span> 3변수 야코비안 <em>The 3&times;3 Jacobian</em></a></li>
+    <li><a href="#c15-9-11"><span class="toc-num">THM 11</span> 삼중적분의 변수변환 <em>Change of Variables in a Triple Integral</em></a></li>
+    <li><a href="#c15-9-12"><span class="toc-num">NOTE</span> 평행사변형 근사와 격자의 대응 <em>Parallelogram Approximation and the Grid</em></a></li>
+    <li><a href="#ex15-9-1"><span class="toc-num">EXAM 1</span> 단위정사각형의 상 <em>The Image of the Unit Square</em></a></li>
+    <li><a href="#ex15-9-2"><span class="toc-num">EXAM 2</span> 변수변환으로 계산하는 이중적분 <em>A Double Integral Evaluated by a Change of Variables</em></a></li>
+    <li><a href="#ex15-9-3"><span class="toc-num">EXAM 3</span> 사다리꼴 위의 지수함수 적분 <em>An Exponential Integral over a Trapezoid</em></a></li>
+    <li><a href="#ex15-9-4"><span class="toc-num">EXAM 4</span> 구면좌표 부피소의 유도 <em>Deriving the Spherical Volume Element</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 · Review of substitution (Eq. 1, 2) -->
+<div class="card note-card" id="c15-9-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">1변수 치환적분의 복습 <em>Review of Substitution</em><span class="src-ref">Eq. (1)(2) · p.1147</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1변수 적분에서 계산을 간단히 만드는 표준적인 방법이 치환이다. 치환법칙(4.5.5)에서 $x$와 $u$의 역할을 서로 바꾸어 쓰면 다음과 같다.</p>
+        <div class="math-display">$$\int_a^b f(x)\,dx=\int_c^d f\big(g(u)\big)\,g'(u)\,du,\tag{1}$$</div>
+        <p>여기서 $x=g(u)$이고, 양 끝점은 $a=g(c)$, $b=g(d)$로 대응한다. 도함수를 라이프니츠 표기로 쓰면 같은 식을 다음과 같이 나타낼 수 있다.</p>
+        <div class="math-display">$$\int_a^b f(x)\,dx=\int_c^d f\big(x(u)\big)\,\frac{dx}{du}\,du.\tag{2}$$</div>
+        <p>이 절 전체는 바로 이 식 (2)를 이변수·삼변수로 확장한 내용이다. 변수변환은 이중적분과 삼중적분에서도 똑같이 유용하며, $dx/du$ 자리를 대신할 인자를 찾아내는 것이 이 절의 목표이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A substitution is the standard device for simplifying a one-variable integral. If in the Substitution Rule (4.5.5) the roles of $x$ and $u$ are interchanged, the rule reads</p>
+        <div class="math-display">$$\int_a^b f(x)\,dx=\int_c^d f\big(g(u)\big)\,g'(u)\,du,\tag{1}$$</div>
+        <p>where $x=g(u)$ and the endpoints correspond as $a=g(c)$, $b=g(d)$. Writing the derivative in Leibniz notation gives the same statement in the form</p>
+        <div class="math-display">$$\int_a^b f(x)\,dx=\int_c^d f\big(x(u)\big)\,\frac{dx}{du}\,du.\tag{2}$$</div>
+        <p>The whole of this section is the two- and three-variable version of formula (2): a change of variables is just as useful for double and triple integrals, and the factor that replaces $dx/du$ is the object we are after.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Transformation, image, one-to-one, inverse (Eq. 3, Figure 1) -->
+<div class="card def-card" id="c15-9-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">변환 T와 상 <em>Transformation and Image</em><span class="src-ref">Eq. (3) · Figure 1 · p.1147&ndash;1148</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이중적분에 대한 변수변환은 이미 §15.3에서 만난 적이 있다. 극좌표 치환 $x=r\cos\theta$, $y=r\sin\theta$가 $\iint_R f(x,y)\,dA$를 $r\theta$-평면의 대응 영역 $S$ 위의 적분으로 바꾸어 준 것이 그 예다. 일반적인 틀은 이 특정한 치환을 두 평면 사이의 임의의 사상으로 확장한 것이다.</p>
+        <div class="formal-box">
+          <p><strong>식 (3) &mdash; 변환.</strong> $uv$-평면에서 $xy$-평면으로 가는 <strong>변환</strong> $T$란 정의역과 치역이 모두 $\mathbb{R}^2$의 부분집합인 함수 $T(u,v)=(x,y)$로서, 다음과 같은 한 쌍의 식으로 나타난다.</p>
+          <div class="math-display">$$x=g(u,v),\qquad y=h(u,v)\tag{3}$$</div>
+          <p>(흔히 $x=x(u,v)$, $y=y(u,v)$로 줄여 쓴다.) $g$와 $h$가 모두 연속인 1계 편도함수를 가질 때 $T$를 <strong>$C^1$ 변환</strong>이라 한다.</p>
+        </div>
+        <p>$T(u_1,v_1)=(x_1,y_1)$이면 $(x_1,y_1)$을 $(u_1,v_1)$의 <strong>상</strong>이라 한다. 서로 다른 두 점이 결코 같은 상을 갖지 않으면 $T$는 <strong>일대일</strong>이며, 이때 $xy$-평면에서 $uv$-평면으로 돌아가는 <strong>역변환</strong> $T^{-1}$이 존재하여 식 (3)을 새 변수에 대해 풀 수도 있다.</p>
+        <div class="math-display">$$u=G(x,y),\qquad v=H(x,y).$$</div>
+        <p>$uv$-평면의 영역 $S$는, $S$의 모든 점의 상을 모은 집합 $R=T(S)$로 옮겨지며, 이 $R$을 $S$의 상이라 한다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 180" role="img" aria-label="변환 T가 uv-평면의 영역 S를 xy-평면의 상 R로 보내고, 역변환 T⁻¹이 되돌아오는 개념도" style="max-width:360px;width:100%;height:auto">
+            <line x1="18" y1="142" x2="140" y2="142" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 142,142 L 134,138.6 L 134,145.4 Z" fill="var(--grey700)"/>
+            <line x1="35" y1="155" x2="35" y2="28" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 35,26 L 31.6,34 L 38.4,34 Z" fill="var(--grey700)"/>
+            <text x="146" y="147" font-size="11" font-style="italic" fill="var(--grey700)">u</text>
+            <text x="24" y="30" font-size="11" font-style="italic" fill="var(--grey700)">v</text>
+            <text x="22" y="155" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 58,110 C 50,76 80,52 110,60 C 138,68 142,102 122,118 C 100,136 66,138 58,110 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <text x="72" y="82" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <circle cx="100" cy="100" r="2.8" fill="var(--grey900)"/>
+            <text x="100" y="116" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--grey900)">(u₁, v₁)</text>
+            <line x1="150" y1="70" x2="188" y2="70" stroke="var(--g700)" stroke-width="1.3"/>
+            <path d="M 190,70 L 182,66.6 L 182,73.4 Z" fill="var(--g700)"/>
+            <text x="169" y="62" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">T</text>
+            <line x1="190" y1="106" x2="152" y2="106" stroke="var(--grey500)" stroke-width="1.1" stroke-dasharray="4 3"/>
+            <path d="M 150,106 L 158,102.6 L 158,109.4 Z" fill="var(--grey500)"/>
+            <text x="170" y="121" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey600)">T ⁻¹</text>
+            <line x1="198" y1="142" x2="344" y2="142" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 346,142 L 338,138.6 L 338,145.4 Z" fill="var(--grey700)"/>
+            <line x1="215" y1="155" x2="215" y2="28" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 215,26 L 211.6,34 L 218.4,34 Z" fill="var(--grey700)"/>
+            <text x="348" y="147" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <text x="204" y="30" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="202" y="155" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 240,120 C 226,92 240,58 274,54 C 306,50 332,72 330,96 C 328,120 300,132 280,124 C 264,118 254,134 240,120 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="256" y="84" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <circle cx="288" cy="92" r="2.8" fill="var(--grey900)"/>
+            <text x="288" y="108" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--grey900)">(x₁, y₁)</text>
+            <text x="180" y="172" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--g700)">R = T(S)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>One change of variables for double integrals is already familiar: the polar substitution $x=r\cos\theta$, $y=r\sin\theta$ of Section 15.3, which rewrites $\iint_R f(x,y)\,dA$ as an integral over the corresponding region $S$ of the $r\theta$-plane. The general setting replaces that particular substitution by an arbitrary map between two planes.</p>
+        <div class="formal-box">
+          <p><strong>Equations (3) &mdash; transformation.</strong> A <strong>transformation</strong> $T$ from the $uv$-plane to the $xy$-plane is a function $T(u,v)=(x,y)$, with domain and range contained in $\mathbb{R}^2$, described by a pair of equations</p>
+          <div class="math-display">$$x=g(u,v),\qquad y=h(u,v)\tag{3}$$</div>
+          <p>(often abbreviated $x=x(u,v)$, $y=y(u,v)$). $T$ is called a <strong>$C^1$ transformation</strong> when $g$ and $h$ both have continuous first-order partial derivatives.</p>
+        </div>
+        <p>If $T(u_1,v_1)=(x_1,y_1)$, then $(x_1,y_1)$ is the <strong>image</strong> of $(u_1,v_1)$. Should no two points ever share an image, $T$ is <strong>one-to-one</strong>; it then has an <strong>inverse transformation</strong> $T^{-1}$ running from the $xy$-plane back to the $uv$-plane, and one may be able to solve Equations (3) for the new variables:</p>
+        <div class="math-display">$$u=G(x,y),\qquad v=H(x,y).$$</div>
+        <p>A region $S$ of the $uv$-plane is carried to the set $R=T(S)$ made up of the image of every point of $S$; this region $R$ is called the image of $S$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 180" role="img" aria-label="A transformation T carrying a region S in the uv-plane to its image R in the xy-plane, with the inverse transformation returning" style="max-width:360px;width:100%;height:auto">
+            <line x1="18" y1="142" x2="140" y2="142" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 142,142 L 134,138.6 L 134,145.4 Z" fill="var(--grey700)"/>
+            <line x1="35" y1="155" x2="35" y2="28" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 35,26 L 31.6,34 L 38.4,34 Z" fill="var(--grey700)"/>
+            <text x="146" y="147" font-size="11" font-style="italic" fill="var(--grey700)">u</text>
+            <text x="24" y="30" font-size="11" font-style="italic" fill="var(--grey700)">v</text>
+            <text x="22" y="155" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 58,110 C 50,76 80,52 110,60 C 138,68 142,102 122,118 C 100,136 66,138 58,110 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <text x="72" y="82" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <circle cx="100" cy="100" r="2.8" fill="var(--grey900)"/>
+            <text x="100" y="116" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--grey900)">(u₁, v₁)</text>
+            <line x1="150" y1="70" x2="188" y2="70" stroke="var(--g700)" stroke-width="1.3"/>
+            <path d="M 190,70 L 182,66.6 L 182,73.4 Z" fill="var(--g700)"/>
+            <text x="169" y="62" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">T</text>
+            <line x1="190" y1="106" x2="152" y2="106" stroke="var(--grey500)" stroke-width="1.1" stroke-dasharray="4 3"/>
+            <path d="M 150,106 L 158,102.6 L 158,109.4 Z" fill="var(--grey500)"/>
+            <text x="170" y="121" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey600)">T ⁻¹</text>
+            <line x1="198" y1="142" x2="344" y2="142" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 346,142 L 338,138.6 L 338,145.4 Z" fill="var(--grey700)"/>
+            <line x1="215" y1="155" x2="215" y2="28" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 215,26 L 211.6,34 L 218.4,34 Z" fill="var(--grey700)"/>
+            <text x="348" y="147" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <text x="204" y="30" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="202" y="155" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 240,120 C 226,92 240,58 274,54 C 306,50 332,72 330,96 C 328,120 300,132 280,124 C 264,118 254,134 240,120 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="256" y="84" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <circle cx="288" cy="92" r="2.8" fill="var(--grey900)"/>
+            <text x="288" y="108" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--grey900)">(x₁, y₁)</text>
+            <text x="180" y="172" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--g700)">R = T(S)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Approximating the image by a parallelogram (Eq. 6, Figures 3-5) -->
+<div class="card note-card" id="c15-9-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">상 영역의 평행사변형 근사 <em>Approximating the Image by a Parallelogram</em><span class="src-ref">Eq. (6) · Figures 3&ndash;5 · p.1148&ndash;1149</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>변수변환이 이중적분에 어떤 영향을 주는지 보려면, 작은 직사각형 하나가 변환 아래에서 어떻게 되는지 따라가 보면 된다. $S$를 $uv$-평면의 직사각형이라 하고, 왼쪽 아래 꼭짓점을 $(u_0,v_0)$, 두 변의 길이를 각각 $\Delta u$, $\Delta v$라 하자. 그 상 $R=T(S)$는 경계점 $(x_0,y_0)=T(u_0,v_0)$을 갖는다. 식 (3)의 두 식을 상의 위치벡터로 모으면</p>
+        <div class="math-display">$$\mathbf r(u,v)=g(u,v)\,\mathbf i+h(u,v)\,\mathbf j.$$</div>
+        <p>$S$의 아래쪽 변은 직선 $v=v_0$이므로, 그 상은 $\mathbf r(u,v_0)$가 그리는 곡선이고, 이 곡선이 $(x_0,y_0)$에서 갖는 접벡터는</p>
+        <div class="math-display">$$\mathbf r_u=g_u(u_0,v_0)\,\mathbf i+h_u(u_0,v_0)\,\mathbf j=\frac{\partial x}{\partial u}\,\mathbf i+\frac{\partial y}{\partial u}\,\mathbf j.$$</div>
+        <p>왼쪽 변 $u=u_0$도 같은 방식으로 다루면 두 번째 접벡터를 얻는다.</p>
+        <div class="math-display">$$\mathbf r_v=g_v(u_0,v_0)\,\mathbf i+h_v(u_0,v_0)\,\mathbf j=\frac{\partial x}{\partial v}\,\mathbf i+\frac{\partial y}{\partial v}\,\mathbf j.$$</div>
+        <p>$R$의 첫 근사는 두 할선벡터가 만드는 평행사변형이다.</p>
+        <div class="math-display">$$\mathbf a=\mathbf r(u_0+\Delta u,\,v_0)-\mathbf r(u_0,v_0),\qquad \mathbf b=\mathbf r(u_0,\,v_0+\Delta v)-\mathbf r(u_0,v_0).$$</div>
+        <p>$\mathbf r_u$는 정의상 $\Delta u\to0$일 때 $\mathbf a/\Delta u$의 극한이고 $\mathbf b$도 마찬가지이므로, 할선벡터를 $\mathbf a\approx\Delta u\,\mathbf r_u$, $\mathbf b\approx\Delta v\,\mathbf r_v$로 바꾸어 써도 된다. 따라서 $R$은 $\Delta u\,\mathbf r_u$와 $\Delta v\,\mathbf r_v$가 정하는 평행사변형으로 근사되며, 그 넓이는 §12.4의 외적으로 계산된다.</p>
+        <div class="math-display">$$\left|(\Delta u\,\mathbf r_u)\times(\Delta v\,\mathbf r_v)\right|=\left|\mathbf r_u\times\mathbf r_v\right|\,\Delta u\,\Delta v.\tag{6}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To see what a change of variables does to a double integral, follow one small rectangle. Let $S$ be a rectangle in the $uv$-plane whose lower left corner is $(u_0,v_0)$ and whose sides have lengths $\Delta u$ and $\Delta v$; its image $R=T(S)$ has the boundary point $(x_0,y_0)=T(u_0,v_0)$. Collect the two equations (3) into a position vector for the image point,</p>
+        <div class="math-display">$$\mathbf r(u,v)=g(u,v)\,\mathbf i+h(u,v)\,\mathbf j.$$</div>
+        <p>The bottom edge of $S$ is the line $v=v_0$, so its image is the curve traced by $\mathbf r(u,v_0)$, and the tangent vector to that curve at $(x_0,y_0)$ is</p>
+        <div class="math-display">$$\mathbf r_u=g_u(u_0,v_0)\,\mathbf i+h_u(u_0,v_0)\,\mathbf j=\frac{\partial x}{\partial u}\,\mathbf i+\frac{\partial y}{\partial u}\,\mathbf j.$$</div>
+        <p>The left edge $u=u_0$ is handled the same way and produces the second tangent vector</p>
+        <div class="math-display">$$\mathbf r_v=g_v(u_0,v_0)\,\mathbf i+h_v(u_0,v_0)\,\mathbf j=\frac{\partial x}{\partial v}\,\mathbf i+\frac{\partial y}{\partial v}\,\mathbf j.$$</div>
+        <p>A first approximation of $R$ is the parallelogram spanned by the two secant vectors</p>
+        <div class="math-display">$$\mathbf a=\mathbf r(u_0+\Delta u,\,v_0)-\mathbf r(u_0,v_0),\qquad \mathbf b=\mathbf r(u_0,\,v_0+\Delta v)-\mathbf r(u_0,v_0).$$</div>
+        <p>Since $\mathbf r_u$ is by definition the limit of $\mathbf a/\Delta u$ as $\Delta u\to0$, and likewise for $\mathbf b$, we may replace the secant vectors by $\mathbf a\approx\Delta u\,\mathbf r_u$ and $\mathbf b\approx\Delta v\,\mathbf r_v$. So $R$ is approximated by the parallelogram determined by $\Delta u\,\mathbf r_u$ and $\Delta v\,\mathbf r_v$, whose area is computed with the cross product of Section 12.4:</p>
+        <div class="math-display">$$\left|(\Delta u\,\mathbf r_u)\times(\Delta v\,\mathbf r_v)\right|=\left|\mathbf r_u\times\mathbf r_v\right|\,\Delta u\,\Delta v.\tag{6}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Definition 7, the Jacobian -->
+<div class="card def-card" id="c15-9-4">
+  <div class="card-head">
+    <span class="def-num">DEF 4</span>
+    <span class="def-title">야코비안 <em>The Jacobian</em><span class="src-ref">Definition 7 · p.1149</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 7 &mdash; 야코비안.</strong> $T$를 $x=g(u,v)$, $y=h(u,v)$로 주어지는 변환이라 하자. $T$의 <strong>야코비안</strong>은 다음 행렬식이다.</p>
+          <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}\dfrac{\partial x}{\partial u}&\dfrac{\partial x}{\partial v}\\[8pt]\dfrac{\partial y}{\partial u}&\dfrac{\partial y}{\partial v}\end{vmatrix}=\frac{\partial x}{\partial u}\,\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\,\frac{\partial y}{\partial u}.\tag{7}$$</div>
+        </div>
+        <p>왼쪽의 기호는 함수 $g,h$가 아니라 두 쌍의 변수 자체를 가리킨다. 옛 변수 $x,y$는 위쪽에, 새 변수 $u,v$는 아래쪽에 놓이고, 행렬식의 각 행은 $x$와 $y$의 기울기 벡터에 해당한다. 이 행렬식은 임의로 도입된 것이 아니라, 앞 카드에서 나온 외적 $\mathbf r_u\times\mathbf r_v$가 만들어 내는 바로 그 양이다.</p>
+        <p>이 이름은 독일 수학자 카를 구스타프 야코프 야코비(Carl Gustav Jacob Jacobi, 1804&ndash;1851)에서 왔다. 편도함수로 이루어진 이런 행렬식은 이미 코시가 사용한 바 있지만, 이를 다중적분을 계산하는 실질적인 방법으로 발전시킨 사람은 야코비였다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 7 &mdash; the Jacobian.</strong> Let $T$ be the transformation given by $x=g(u,v)$ and $y=h(u,v)$. The <strong>Jacobian</strong> of $T$ is the determinant</p>
+          <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}\dfrac{\partial x}{\partial u}&\dfrac{\partial x}{\partial v}\\[8pt]\dfrac{\partial y}{\partial u}&\dfrac{\partial y}{\partial v}\end{vmatrix}=\frac{\partial x}{\partial u}\,\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\,\frac{\partial y}{\partial u}.\tag{7}$$</div>
+        </div>
+        <p>The symbol on the left names the two pairs of variables rather than the functions $g$ and $h$: the old variables $x,y$ go on top, the new variables $u,v$ underneath, and the rows of the determinant are the gradients of $x$ and of $y$. This determinant is not introduced arbitrarily &mdash; it is exactly the quantity produced by the cross product $\mathbf r_u\times\mathbf r_v$ of the previous card.</p>
+        <p>The name honors the German mathematician Carl Gustav Jacob Jacobi (1804&ndash;1851). Determinants of partial derivatives had already been used by Cauchy, but it was Jacobi who developed them into a working method for evaluating multiple integrals.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Eq. (8), the area element -->
+<div class="card rem-card" id="c15-9-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">넓이소의 근사 <em>The Area Element</em><span class="src-ref">Eq. (8) · p.1149</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 접벡터는 모두 $xy$-평면에 놓이므로, 그 외적은 $\mathbf k$ 방향의 성분 하나만을 갖는다.</p>
+        <div class="math-display">$$\mathbf r_u\times\mathbf r_v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[4pt]\dfrac{\partial x}{\partial u}&\dfrac{\partial y}{\partial u}&0\\[8pt]\dfrac{\partial x}{\partial v}&\dfrac{\partial y}{\partial v}&0\end{vmatrix}=\left(\frac{\partial x}{\partial u}\,\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\,\frac{\partial y}{\partial u}\right)\mathbf k=\frac{\partial(x,y)}{\partial(u,v)}\,\mathbf k.$$</div>
+        <p>따라서 그 크기는 야코비안의 절댓값과 같고, (6)은 상 영역 $R$의 넓이 $\Delta A$에 대한 근삿값이 된다.</p>
+        <div class="math-display">$$\Delta A\approx\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v,\tag{8}$$</div>
+        <p>여기서 야코비안은 모서리 $(u_0,v_0)$에서 계산한다. 기하학적으로 $\left|\partial(x,y)/\partial(u,v)\right|$는 $T$가 그 점 근방에서 넓이를 얼마나 확대 또는 축소하는지를 나타내는 국소 확대율이다. 절댓값 기호는 장식이 아니다. $T$가 방향을 뒤집는 곳에서는 이 행렬식 자체가 음수가 되지만, 넓이는 결코 음수일 수 없기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Both tangent vectors lie in the $xy$-plane, so their cross product points along $\mathbf k$ and carries a single component:</p>
+        <div class="math-display">$$\mathbf r_u\times\mathbf r_v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[4pt]\dfrac{\partial x}{\partial u}&\dfrac{\partial y}{\partial u}&0\\[8pt]\dfrac{\partial x}{\partial v}&\dfrac{\partial y}{\partial v}&0\end{vmatrix}=\left(\frac{\partial x}{\partial u}\,\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\,\frac{\partial y}{\partial u}\right)\mathbf k=\frac{\partial(x,y)}{\partial(u,v)}\,\mathbf k.$$</div>
+        <p>Its length is therefore the absolute value of the Jacobian, and (6) becomes an estimate for the area $\Delta A$ of the image region $R$:</p>
+        <div class="math-display">$$\Delta A\approx\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v,\tag{8}$$</div>
+        <p>with the Jacobian evaluated at the corner $(u_0,v_0)$. Geometrically the number $\left|\partial(x,y)/\partial(u,v)\right|$ is the local magnification factor for area under $T$. The absolute value bars are not decoration: the determinant itself is negative whenever $T$ reverses orientation, and areas are never negative.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Theorem 9, change of variables in a double integral -->
+<div class="card thm-card" id="c15-9-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6</span>
+    <span class="thm-title">이중적분의 변수변환 정리 <em>Change of Variables in a Double Integral</em><span class="src-ref">Theorem 9 · Figure 6 · p.1150</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 9 &mdash; 이중적분의 변수변환.</strong> $T$를 야코비안이 결코 $0$이 되지 않는 $C^1$ 변환이라 하고, $T$가 $uv$-평면의 영역 $S$를 $xy$-평면의 영역 $R$ 위로 보낸다고 하자. 다음을 추가로 가정한다.</p>
+          <ul>
+            <li>$f$는 $R$에서 연속이고,</li>
+            <li>$R$과 $S$는 제1형 또는 제2형 평면 영역이며,</li>
+            <li>$T$는 $S$의 경계 위의 점을 예외로 하고 일대일이다.</li>
+          </ul>
+          <p>그러면 다음 두 적분은 같다.</p>
+          <div class="math-display">$$\iint_R f(x,y)\,dA=\iint_S f\big(x(u,v),\,y(u,v)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.\tag{9}$$</div>
+        </div>
+        <p>본문은 이 정리를 완전히 증명하는 대신 타당성만을 보이는 논증을 제시한다. $S$를 작은 직사각형 $S_{ij}$들로 나누고 그 상을 $R_{ij}$라 하면, 각 $R_{ij}$에 넓이 근사식 (8)을 적용하여 얻은 이중합이 (9)의 우변에 대한 리만 합임을 알 수 있다. 그 근사의 오차까지 통제하는 완전한 증명은 고등미적분학 교재에서 다룬다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $S$를 품는 직사각형 $[u_1,u_2]\times[v_1,v_2]$를 변의 길이가 $\Delta u=(u_2-u_1)/m$, $\Delta v=(v_2-v_1)/n$인 $mn$개의 작은 직사각형으로 나누고, 그중 $S$ 안에 놓인 것들을 $S_{ij}$, 그 왼쪽 아래 꼭짓점을 $(u_i,v_j)$라 하자. ($S$의 경계에 걸쳐 잘리는 직사각형들의 기여는 분할을 잘게 하면 사라진다.) $T$가 $C^1$이므로 앞선 두 카드의 논증이 $S_{ij}$에도 그대로 적용되어, 그 상 $R_{ij}=T(S_{ij})$은 $(u_i,v_j)$에서의 접벡터 $\Delta u\,\mathbf r_u$, $\Delta v\,\mathbf r_v$가 정하는 평행사변형으로 일차 근사되고, (8)에 의해 그 넓이는</p>
+        <div class="math-display">$$\Delta A_{ij}\approx\left|\frac{\partial(x,y)}{\partial(u,v)}\right|_{(u_i,v_j)}\Delta u\,\Delta v$$</div>
+        <p>로 근사된다. 야코비안이 결코 $0$이 되지 않는다는 가정 덕분에 이 평행사변형은 실제로 넓이를 갖는 비퇴화 사각형이다. 또한 $T$가 $S$의 경계를 예외로 하고 일대일이므로, 서로 다른 $R_{ij}$는 이웃한 $S_{ij}$가 공유하는 변의 상인 유한개의 곡선을 따라서만 만나고, 이들이 함께 $R$을 뒤덮는다. 각 $R_{ij}$ 안에서 표본점 $(x_i^*,y_j^*)=T(u_i,v_j)$를 고르면</p>
+        <div class="math-display">$$\sum_{i=1}^m\sum_{j=1}^n f(x_i^*,y_j^*)\,\Delta A_{ij}\approx\sum_{i=1}^m\sum_{j=1}^n f\big(x(u_i,v_j),y(u_i,v_j)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v$$</div>
+        <p>를 얻는다. $R$이 제1형 또는 제2형 영역이고 $f$가 $R$에서 연속이므로, 좌변은 분할을 잘게 할 때 $\iint_R f(x,y)\,dA$로 수렴하는 리만 합이다. 우변에서는 $f\circ T$와 야코비안이 모두 $S$ 위의 연속함수이므로, 같은 분할의 극한에서 우변은 $uv$-평면 위의 이중적분 $\iint_S f(x(u,v),y(u,v))\left|\partial(x,y)/\partial(u,v)\right|du\,dv$로 수렴한다. 두 극한이 하나의 같은 근사 과정에서 나온 것이므로</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\iint_S f\big(x(u,v),y(u,v)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$$</div>
+        <p>가 성립한다. 근사 (8)의 오차가 분할을 잘게 할수록 이중합에 기여하지 않고 고르게 사라짐을 보이는 일은 고등미적분학 교재의 몫으로 남긴다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 9 &mdash; Change of Variables in a Double Integral.</strong> Let $T$ be a $C^1$ transformation whose Jacobian never vanishes, carrying a region $S$ of the $uv$-plane onto a region $R$ of the $xy$-plane. Assume in addition that</p>
+          <ul>
+            <li>$f$ is continuous on $R$,</li>
+            <li>$R$ and $S$ are plane regions of Type I or Type II, and</li>
+            <li>$T$ is one-to-one, with the possible exception of points on the boundary of $S$.</li>
+          </ul>
+          <p>Then the two integrals below agree:</p>
+          <div class="math-display">$$\iint_R f(x,y)\,dA=\iint_S f\big(x(u,v),\,y(u,v)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.\tag{9}$$</div>
+        </div>
+        <p>The text supports the theorem with a plausibility argument rather than a proof: cut $S$ into rectangles $S_{ij}$, call their images $R_{ij}$, apply the area estimate (8) to each of them, and recognize the resulting double sum as a Riemann sum for the right-hand side of (9). A complete proof, which must control the error in that estimate, is given in advanced calculus texts.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Enclose $S$ in a rectangle $[u_1,u_2]\times[v_1,v_2]$ and cut that rectangle into $mn$ small rectangles with sides $\Delta u=(u_2-u_1)/m$ and $\Delta v=(v_2-v_1)/n$; write $S_{ij}$ for those that lie inside $S$, and $(u_i,v_j)$ for the lower-left corner of $S_{ij}$. (The rectangles straddling the boundary of $S$ contribute nothing in the limit.) Because $T$ is $C^1$, the argument of the two preceding cards applies verbatim to each $S_{ij}$: its image $R_{ij}=T(S_{ij})$ is approximated to first order by the parallelogram spanned by the tangent vectors $\Delta u\,\mathbf r_u$ and $\Delta v\,\mathbf r_v$ evaluated at $(u_i,v_j)$, and by (8) its area satisfies</p>
+        <div class="math-display">$$\Delta A_{ij}\approx\left|\frac{\partial(x,y)}{\partial(u,v)}\right|_{(u_i,v_j)}\Delta u\,\Delta v.$$</div>
+        <p>The hypothesis that the Jacobian never vanishes guarantees that this parallelogram is genuinely nondegenerate. Since $T$ is one-to-one apart from boundary points of $S$, the images $R_{ij}$ overlap only along a finite union of curves and together tile $R$. Choosing a sample point $(x_i^*,y_j^*)=T(u_i,v_j)$ in each $R_{ij}$ gives</p>
+        <div class="math-display">$$\sum_{i=1}^m\sum_{j=1}^n f(x_i^*,y_j^*)\,\Delta A_{ij}\approx\sum_{i=1}^m\sum_{j=1}^n f\big(x(u_i,v_j),y(u_i,v_j)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v.$$</div>
+        <p>Because $R$ is a Type I or Type II region and $f$ is continuous on $R$, the left side is a Riemann sum converging, as the partition is refined, to $\iint_R f(x,y)\,dA$. On the right, $f\circ T$ and the Jacobian are both continuous functions of $(u,v)$ on $S$, so under the same refinement the right side converges to the double integral $\iint_S f(x(u,v),y(u,v))\left|\partial(x,y)/\partial(u,v)\right|du\,dv$. Since both limits arise from one and the same refining process,</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\iint_S f\big(x(u,v),y(u,v)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.$$</div>
+        <p>Showing that the error in estimate (8) contributes nothing in the limit, uniformly as the partition is refined, is left to an advanced calculus text.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : replacing dA, analogy with the one-variable formula (2) -->
+<div class="card rem-card" id="c15-9-7">
+  <div class="card-head">
+    <span class="rem-num">REM 7</span>
+    <span class="rem-title">dA 교체 규칙과 1변수와의 유비 <em>Replacing dA by the Jacobian Factor</em><span class="src-ref">Following Theorem 9 · p.1150</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실제로 정리 9를 적용하는 과정은 두 단계로 이루어진다. 먼저 $f$ 안의 $x,y$를 새 변수로 바꾸어 쓰고, 그다음 넓이소를 다음으로 교체한다.</p>
+        <div class="math-display">$$dA=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.$$</div>
+        <p>이를 1변수 공식 (2)와 나란히 놓아 보자. 그곳에서는 피적분함수에 $dx/du$라는 인자가 붙었는데, 여기서는 야코비안의 절댓값이 그 자리를 대신한다. 즉 $\left|\partial(x,y)/\partial(u,v)\right|$는 도함수의 정확한 이차원 대응물이다. 절댓값 기호가 바로 유일한 차이를 드러낸다. 1변수에서는 $g'$이 음수이면 적분 한계 $c,d$의 순서가 이를 보정해 주지만, 이중적분은 방향이 없는 영역 위에서 이루어지므로 확대율의 크기만이 들어갈 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In practice Theorem 9 is a recipe with two steps: express $x$ and $y$ in terms of the new variables inside $f$, and then replace the area element by</p>
+        <div class="math-display">$$dA=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.$$</div>
+        <p>Set this beside the one-variable formula (2). There the integrand acquired the factor $dx/du$; here it acquires the absolute value of the Jacobian, so $\left|\partial(x,y)/\partial(u,v)\right|$ is the exact two-dimensional counterpart of the derivative. The bars mark the one real difference: in one variable a negative $g'$ is compensated by the order of the limits $c$ and $d$, whereas a double integral is taken over a region with no such orientation, so only the size of the magnification factor can enter.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : polar coordinates as a special case (Figure 7) -->
+<div class="card rem-card" id="c15-9-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">극좌표는 정리 9의 특수 경우 <em>Polar Coordinates as a Special Case</em><span class="src-ref">Figure 7 · p.1151</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 9를 가장 먼저 시험해 볼 대상은 극좌표 치환이며, 정리는 이를 그대로 재현해야 한다. $r\theta$-평면에서 $xy$-평면으로 가는 변환 $T$를 다음과 같이 정의하자.</p>
+        <div class="math-display">$$x=g(r,\theta)=r\cos\theta,\qquad y=h(r,\theta)=r\sin\theta.$$</div>
+        <p>기하학적으로 $T$는 $r\theta$-평면의 보통 직사각형 $a\le r\le b$, $\alpha\le\theta\le\beta$를, 원호 $r=a$, $r=b$와 반직선 $\theta=\alpha$, $\theta=\beta$로 둘러싸인 극좌표 직사각형 위로 보낸다. 그 야코비안은</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(r,\theta)}=\begin{vmatrix}\cos\theta&-r\sin\theta\\[4pt]\sin\theta&r\cos\theta\end{vmatrix}=r\cos^2\theta+r\sin^2\theta=r\gt 0,$$</div>
+        <p>이므로 절댓값 기호를 그냥 떼어 낼 수 있고, (9)는 다음이 된다.</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dx\,dy=\int_{\alpha}^{\beta}\!\!\int_a^b f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta,$$</div>
+        <p>이것이 바로 공식 15.3.2이다. 모든 극좌표 적분에 따라붙는 여분의 인자 $r$은 다름 아닌 야코비안인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The first test of Theorem 9 is the polar substitution, which it must reproduce. Take $T$ from the $r\theta$-plane to the $xy$-plane defined by</p>
+        <div class="math-display">$$x=g(r,\theta)=r\cos\theta,\qquad y=h(r,\theta)=r\sin\theta.$$</div>
+        <p>Geometrically $T$ sends an ordinary rectangle $a\le r\le b$, $\alpha\le\theta\le\beta$ of the $r\theta$-plane onto the polar rectangle bounded by the arcs $r=a$, $r=b$ and the rays $\theta=\alpha$, $\theta=\beta$. Its Jacobian is</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(r,\theta)}=\begin{vmatrix}\cos\theta&-r\sin\theta\\[4pt]\sin\theta&r\cos\theta\end{vmatrix}=r\cos^2\theta+r\sin^2\theta=r\gt 0,$$</div>
+        <p>so the absolute value bars may simply be dropped, and (9) becomes</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dx\,dy=\int_{\alpha}^{\beta}\!\!\int_a^b f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta,$$</div>
+        <p>which is Formula 15.3.2. The extra factor $r$ carried along in every polar integral is nothing but a Jacobian.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : NOTE after Example 2 - how to choose a transformation -->
+<div class="card rem-card" id="c15-9-9">
+  <div class="card-head">
+    <span class="rem-num">REM 9</span>
+    <span class="rem-title">변환을 고르는 요령 <em>Choosing a Transformation</em><span class="src-ref">NOTE after Example 2 · p.1151&ndash;1152</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예제 2가 손쉽게 풀리는 것은 순전히 치환이 문제에서 미리 주어졌기 때문이다. 변환이 주어지지 않을 때는 변환을 스스로 고안하는 일이 문제 풀이의 진짜 첫걸음이며, 적분의 두 가지 특징이 그 방향을 알려준다.</p>
+        <p><strong>(a)</strong> 계산을 가로막는 것이 피적분함수 $f(x,y)$ 자체라면, 대개 그 꼴이 새 변수를 알려준다 &mdash; 예제 3에서 $e^{(x+y)/(x-y)}$의 지수가 $u=x+y$, $v=x-y$를 요구하는 것이 그 예다.</p>
+        <p><strong>(b)</strong> 반대로 적분 영역 $R$이 다루기 까다로운 쪽이라면, $R$에 대응하는 $uv$-평면의 영역 $S$가 간단히 — 되도록 직사각형으로 — 기술되도록 $T$를 고른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Example 2 costs little effort only because the substitution is handed over in the statement. When no transformation is supplied, inventing one is the first and the real step of the problem, and two features of the integral point the way.</p>
+        <p><strong>(a)</strong> If the integrand $f(x,y)$ is what obstructs the computation, its own form usually names the new variables &mdash; the exponent of $e^{(x+y)/(x-y)}$ in Example 3 asks for $u=x+y$ and $v=x-y$.</p>
+        <p><strong>(b)</strong> If instead the region of integration $R$ is the awkward part, choose $T$ so that the region $S$ answering to $R$ in the $uv$-plane admits a convenient description &mdash; ideally a rectangle.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Eq. (12), the 3x3 Jacobian -->
+<div class="card def-card" id="c15-9-10">
+  <div class="card-head">
+    <span class="def-num">DEF 10</span>
+    <span class="def-title">3변수 야코비안 <em>The 3&times;3 Jacobian</em><span class="src-ref">Eq. (12) · p.1153</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼중적분도 같은 방식으로 다룬다. $T$를 $uvw$-공간의 영역 $S$를 $xyz$-공간의 영역 $R$ 위로 보내는 일대일 변환이라 하고, 다음 식으로 주어진다고 하자.</p>
+        <div class="math-display">$$x=g(u,v,w),\qquad y=h(u,v,w),\qquad z=k(u,v,w).$$</div>
+        <div class="formal-box">
+          <p><strong>식 (12) &mdash; 공간 변환의 야코비안.</strong> 이러한 $T$의 <strong>야코비안</strong>은 다음 $3\times3$ 행렬식이다.</p>
+          <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(u,v,w)}=\begin{vmatrix}\dfrac{\partial x}{\partial u}&\dfrac{\partial x}{\partial v}&\dfrac{\partial x}{\partial w}\\[8pt]\dfrac{\partial y}{\partial u}&\dfrac{\partial y}{\partial v}&\dfrac{\partial y}{\partial w}\\[8pt]\dfrac{\partial z}{\partial u}&\dfrac{\partial z}{\partial v}&\dfrac{\partial z}{\partial w}\end{vmatrix}.\tag{12}$$</div>
+        </div>
+        <p>(7)의 패턴이 그대로 이어진다. 각 행은 옛 변수 하나를 미분한 것이고, 각 열은 새 변수 하나에 대해 미분한 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Triple integrals are treated in the same fashion. Let $T$ be a one-to-one transformation carrying a region $S$ of $uvw$-space onto a region $R$ of $xyz$-space by means of</p>
+        <div class="math-display">$$x=g(u,v,w),\qquad y=h(u,v,w),\qquad z=k(u,v,w).$$</div>
+        <div class="formal-box">
+          <p><strong>Equation (12) &mdash; the Jacobian of a transformation of space.</strong> The <strong>Jacobian</strong> of such a $T$ is the $3\times3$ determinant</p>
+          <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(u,v,w)}=\begin{vmatrix}\dfrac{\partial x}{\partial u}&\dfrac{\partial x}{\partial v}&\dfrac{\partial x}{\partial w}\\[8pt]\dfrac{\partial y}{\partial u}&\dfrac{\partial y}{\partial v}&\dfrac{\partial y}{\partial w}\\[8pt]\dfrac{\partial z}{\partial u}&\dfrac{\partial z}{\partial v}&\dfrac{\partial z}{\partial w}\end{vmatrix}.\tag{12}$$</div>
+        </div>
+        <p>The pattern of (7) survives unchanged: each row differentiates one old variable, each column differentiates with respect to one new variable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Eq. (13), change of variables in a triple integral -->
+<div class="card thm-card" id="c15-9-11">
+  <div class="card-head">
+    <span class="thm-num">THM 11</span>
+    <span class="thm-title">삼중적분의 변수변환 <em>Change of Variables in a Triple Integral</em><span class="src-ref">Eq. (13) · p.1153</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>공식 (13) &mdash; 삼중적분의 변수변환.</strong> 정리 9와 나란한 가정 아래 &mdash; 야코비안이 $0$이 아닌 $C^1$ 변환 $T$, 경계 위의 점을 예외로 하는 일대일성, $f$가 $R$에서 연속 &mdash; 다음이 성립한다.</p>
+          <div class="math-display">$$\iiint_R f(x,y,z)\,dV=\iiint_S f\big(x(u,v,w),\,y(u,v,w),\,z(u,v,w)\big)\left|\frac{\partial(x,y,z)}{\partial(u,v,w)}\right|du\,dv\,dw.\tag{13}$$</div>
+        </div>
+        <p>따라서 부피소를 바꾸는 규칙은 $dV=\left|\partial(x,y,z)/\partial(u,v,w)\right|du\,dv\,dw$이다. 논증은 평면의 경우를 차원 하나 높여 그대로 되풀이한다. $uvw$-공간의 작은 직육면체의 상은 일차 근사로 $\Delta u\,\mathbf r_u$, $\Delta v\,\mathbf r_v$, $\Delta w\,\mathbf r_w$가 만드는 평행육면체이고, 그 부피는 삼중 스칼라곱 $\mathbf r_u\cdot(\mathbf r_v\times\mathbf r_w)$의 절댓값 &mdash; 곧 행렬식 (12)의 절댓값 &mdash; 이다.</p>
+        <p><em>증명. 정리 9의 논증을 세 변수로 옮겨 그대로 수행한다. 자세한 내용은 고등미적분학 교재를 참조하라.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (13) &mdash; Change of Variables in a Triple Integral.</strong> Under hypotheses parallel to those of Theorem 9 &mdash; a $C^1$ transformation $T$ with nonvanishing Jacobian, one-to-one apart from boundary points, and $f$ continuous on $R$ &mdash; one has</p>
+          <div class="math-display">$$\iiint_R f(x,y,z)\,dV=\iiint_S f\big(x(u,v,w),\,y(u,v,w),\,z(u,v,w)\big)\left|\frac{\partial(x,y,z)}{\partial(u,v,w)}\right|du\,dv\,dw.\tag{13}$$</div>
+        </div>
+        <p>So the rule for the volume element is $dV=\left|\partial(x,y,z)/\partial(u,v,w)\right|du\,dv\,dw$. The reasoning repeats that of the plane case one dimension higher: a small box in $uvw$-space has as image, to first order, the parallelepiped spanned by $\Delta u\,\mathbf r_u$, $\Delta v\,\mathbf r_v$ and $\Delta w\,\mathbf r_w$, and the volume of that parallelepiped is the absolute value of the triple scalar product $\mathbf r_u\cdot(\mathbf r_v\times\mathbf r_w)$ &mdash; that is, of the determinant (12).</p>
+        <p><em>Proof: the argument behind Theorem 9, carried out in three variables; see an advanced calculus text.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : Figures 5 and 6 - parallelogram approximation and the grid -->
+<div class="card note-card" id="c15-9-12">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">평행사변형 근사와 격자의 대응 <em>Parallelogram Approximation and the Grid</em><span class="src-ref">Figures 5&ndash;6 · p.1149&ndash;1150</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 9의 내용은 두 그림으로 요약된다. 첫 번째 그림은 작은 직사각형 하나의 상을 보여준다. 벡터 $\Delta u\,\mathbf r_u$와 $\Delta v\,\mathbf r_v$가 만드는 평행사변형이 $R=T(S)$를 일차 근사로 재현하며, (8)에 의해 그 넓이는 $\left|\partial(x,y)/\partial(u,v)\right|\Delta u\,\Delta v$이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 300 190" role="img" aria-label="벡터 Δu rᵤ와 Δv rᵥ가 정하는 평행사변형 — 작은 직사각형의 상에 대한 근사" style="max-width:300px;width:100%;height:auto">
+            <path d="M 60,150 L 180,128 L 228,40 L 108,62 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="60" y1="150" x2="174" y2="129" stroke="var(--grey800)" stroke-width="1.6"/>
+            <path d="M 180,128 L 171.7,133.1 L 170.5,126.2 Z" fill="var(--grey800)"/>
+            <line x1="60" y1="150" x2="104" y2="68" stroke="var(--grey800)" stroke-width="1.6"/>
+            <path d="M 108,62 L 106.8,71.6 L 100.6,68.2 Z" fill="var(--grey800)"/>
+            <circle cx="60" cy="150" r="3" fill="var(--grey900)"/>
+            <text x="58" y="168" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--grey900)">r(u₀, v₀)</text>
+            <text x="128" y="152" font-size="11.5" font-style="italic" fill="var(--grey800)">Δu rᵤ</text>
+            <text x="58" y="100" text-anchor="end" font-size="11.5" font-style="italic" fill="var(--grey800)">Δv rᵥ</text>
+            <text x="150" y="98" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <text x="150" y="184" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--g700)">ΔA ≈ |∂(x, y)/∂(u, v)| Δu Δv</text>
+          </svg>
+        </div>
+        <p>두 번째 그림은 $S$ 위에 격자를 올려놓는다. 격자를 이루는 직사각형 $S_{ij}$들의 상 $R_{ij}$는 $R$을 뒤덮는데, 일반적으로 굽어 있고 크기도 제각각이다. 각 $\Delta A_{ij}$를 (8)로 근사하면</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f(x_i,y_j)\,\Delta A_{ij}\approx\sum_{i=1}^{m}\sum_{j=1}^{n} f\big(g(u_i,v_j),h(u_i,v_j)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v$$</div>
+        <p>가 되어 $uv$-평면 위의 보통 리만 합으로 바뀌고, 격자를 잘게 쪼개면 (9)를 얻는다. 두 그림이 말하는 바는 결국 하나다. 야코비안은 $T$가 점마다 넓이를 얼마나 늘리는지 재는 양이며, 이것이 변수변환 공식의 전부이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two pictures carry the whole of Theorem 9. The first shows the image of one small rectangle: the vectors $\Delta u\,\mathbf r_u$ and $\Delta v\,\mathbf r_v$ span a parallelogram that matches $R=T(S)$ to first order, and its area is $\left|\partial(x,y)/\partial(u,v)\right|\Delta u\,\Delta v$ by (8).</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 300 190" role="img" aria-label="The parallelogram spanned by the vectors delta-u times r-sub-u and delta-v times r-sub-v, approximating the image of a small rectangle" style="max-width:300px;width:100%;height:auto">
+            <path d="M 60,150 L 180,128 L 228,40 L 108,62 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="60" y1="150" x2="174" y2="129" stroke="var(--grey800)" stroke-width="1.6"/>
+            <path d="M 180,128 L 171.7,133.1 L 170.5,126.2 Z" fill="var(--grey800)"/>
+            <line x1="60" y1="150" x2="104" y2="68" stroke="var(--grey800)" stroke-width="1.6"/>
+            <path d="M 108,62 L 106.8,71.6 L 100.6,68.2 Z" fill="var(--grey800)"/>
+            <circle cx="60" cy="150" r="3" fill="var(--grey900)"/>
+            <text x="58" y="168" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--grey900)">r(u₀, v₀)</text>
+            <text x="128" y="152" font-size="11.5" font-style="italic" fill="var(--grey800)">Δu rᵤ</text>
+            <text x="58" y="100" text-anchor="end" font-size="11.5" font-style="italic" fill="var(--grey800)">Δv rᵥ</text>
+            <text x="150" y="98" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <text x="150" y="184" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--g700)">ΔA ≈ |∂(x, y)/∂(u, v)| Δu Δv</text>
+          </svg>
+        </div>
+        <p>The second picture puts a grid on $S$: the rectangles $S_{ij}$ of the grid have images $R_{ij}$ that tile $R$, generally curved and of unequal size. Estimating each $\Delta A_{ij}$ by (8) turns</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f(x_i,y_j)\,\Delta A_{ij}\approx\sum_{i=1}^{m}\sum_{j=1}^{n} f\big(g(u_i,v_j),h(u_i,v_j)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v$$</div>
+        <p>into an ordinary Riemann sum over the $uv$-plane, and letting the grid shrink gives (9). The moral of both pictures is the same: the Jacobian measures how much $T$ stretches area from point to point, and that is the entire content of the change of variables formula.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex15-9-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">단위정사각형의 상 <em>The Image of the Unit Square</em><span class="src-ref">Example 1 · p.1148</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 $x=u^2-v^2$, $y=2uv$로 주어지는 변환이라 하자. 단위정사각형 $S=\{(u,v)\mid 0\le u\le 1,\ 0\le v\le 1\}$에 대하여 상 $T(S)$를 구하고, 그 영역을 그려라.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="단위정사각형 S와 변환 T에 의한 상 R — 두 포물선과 x축으로 둘러싸인 영역" style="max-width:360px;width:100%;height:auto">
+            <line x1="15" y1="150" x2="118" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 122,150 L 114,146.6 L 114,153.4 Z" fill="var(--grey700)"/>
+            <line x1="30" y1="165" x2="30" y2="82" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 30,78 L 26.6,86 L 33.4,86 Z" fill="var(--grey700)"/>
+            <text x="126" y="155" font-size="11" font-style="italic" fill="var(--grey700)">u</text>
+            <text x="19" y="84" font-size="11" font-style="italic" fill="var(--grey700)">v</text>
+            <text x="19" y="163" font-size="10" fill="var(--grey600)">0</text>
+            <rect x="30" y="95" width="55" height="55" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <text x="57" y="126" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <text x="57" y="164" text-anchor="middle" font-size="10" font-style="italic" fill="var(--grey700)">S₁</text>
+            <text x="90" y="126" font-size="10" font-style="italic" fill="var(--grey700)">S₂</text>
+            <text x="57" y="90" text-anchor="middle" font-size="10" font-style="italic" fill="var(--grey700)">S₃</text>
+            <text x="27" y="126" text-anchor="end" font-size="10" font-style="italic" fill="var(--grey700)">S₄</text>
+            <line x1="135" y1="122" x2="186" y2="122" stroke="var(--g700)" stroke-width="1.3"/>
+            <path d="M 190,122 L 182,118.6 L 182,125.4 Z" fill="var(--g700)"/>
+            <text x="162" y="114" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">T</text>
+            <line x1="200" y1="155" x2="336" y2="155" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 340,155 L 332,151.6 L 332,158.4 Z" fill="var(--grey700)"/>
+            <line x1="265" y1="168" x2="265" y2="38" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 265,34 L 261.6,42 L 268.4,42 Z" fill="var(--grey700)"/>
+            <text x="344" y="160" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <text x="253" y="44" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="253" y="168" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 320,155 Q 320,100 265,45 Q 210,100 210,155 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="265" y="122" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <circle cx="210" cy="155" r="2.4" fill="var(--grey900)"/>
+            <circle cx="320" cy="155" r="2.4" fill="var(--grey900)"/>
+            <circle cx="265" cy="45" r="2.4" fill="var(--grey900)"/>
+            <text x="206" y="170" text-anchor="middle" font-size="9.5" fill="var(--grey700)">(−1, 0)</text>
+            <text x="324" y="170" text-anchor="middle" font-size="9.5" fill="var(--grey700)">(1, 0)</text>
+            <text x="272" y="44" font-size="9.5" fill="var(--grey700)">(0, 2)</text>
+            <text x="265" y="184" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--g700)">x = 1 − y²/4,  x = y²/4 − 1</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S$의 네 변을 각각 따라가며 상을 구한다.</p>
+        <p>아래쪽 변 $S_1$: $v=0,\ 0\le u\le1$에서 $x=u^2,\ y=0$이므로 상은 $x$축 위의 선분 $0\le x\le1$이다.</p>
+        <p>오른쪽 변 $S_2$: $u=1,\ 0\le v\le1$에서 $x=1-v^2,\ y=2v$이다. $v=y/2$를 대입하면 $x=1-y^2/4$ ($0\le y\le2$)를 얻는다 &mdash; $(1,0)$에서 $(0,2)$까지 이어지는 포물선 호이다.</p>
+        <p>위쪽 변 $S_3$: $v=1,\ 0\le u\le1$에서 $x=u^2-1,\ y=2u$이다. $u=y/2$를 대입하면 $x=y^2/4-1$ ($0\le y\le2$)을 얻는다 &mdash; $(0,2)$에서 $(-1,0)$까지 이어지는 포물선 호이다.</p>
+        <p>왼쪽 변 $S_4$: $u=0,\ 0\le v\le1$에서 $x=-v^2,\ y=0$이므로 상은 $x$축 위의 선분 $-1\le x\le0$이다.</p>
+        <p>$S_1$과 $S_4$는 함께 $x$축 위의 선분 $-1\le x\le1$을 이루고, $S_2$와 $S_3$은 $(0,2)$에서 만나는 두 포물선 호를 이룬다. $S$의 경계를 $(u,v)=(0,0)\to(1,0)\to(1,1)\to(0,1)\to(0,0)$ 순으로 반시계 방향으로 돌면, 그 상도 $(0,0)\to(1,0)\to(0,2)\to(-1,0)\to(0,0)$ 순으로 반시계 방향을 유지하며 돈다. 따라서 상 $R=T(S)$는</p>
+        <div class="math-display">$$R=\left\{(x,y)\ \middle|\ \frac{y^2}{4}-1\le x\le 1-\frac{y^2}{4},\ 0\le y\le 2\right\}$$</div>
+        <p>즉 $x$축 위의 구간 $[-1,1]$과 두 포물선 $x=1-y^2/4$, $x=y^2/4-1$로 둘러싸이고 꼭짓점이 $(-1,0)$, $(1,0)$, $(0,2)$인 영역이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be the map $x=u^2-v^2$, $y=2uv$. Determine the image $T(S)$ of the unit square $S=\{(u,v)\mid 0\le u\le 1,\ 0\le v\le 1\}$ and sketch it.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="The unit square S and its image R under the transformation T, a region bounded by two parabolas and the x-axis" style="max-width:360px;width:100%;height:auto">
+            <line x1="15" y1="150" x2="118" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 122,150 L 114,146.6 L 114,153.4 Z" fill="var(--grey700)"/>
+            <line x1="30" y1="165" x2="30" y2="82" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 30,78 L 26.6,86 L 33.4,86 Z" fill="var(--grey700)"/>
+            <text x="126" y="155" font-size="11" font-style="italic" fill="var(--grey700)">u</text>
+            <text x="19" y="84" font-size="11" font-style="italic" fill="var(--grey700)">v</text>
+            <text x="19" y="163" font-size="10" fill="var(--grey600)">0</text>
+            <rect x="30" y="95" width="55" height="55" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <text x="57" y="126" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <text x="57" y="164" text-anchor="middle" font-size="10" font-style="italic" fill="var(--grey700)">S₁</text>
+            <text x="90" y="126" font-size="10" font-style="italic" fill="var(--grey700)">S₂</text>
+            <text x="57" y="90" text-anchor="middle" font-size="10" font-style="italic" fill="var(--grey700)">S₃</text>
+            <text x="27" y="126" text-anchor="end" font-size="10" font-style="italic" fill="var(--grey700)">S₄</text>
+            <line x1="135" y1="122" x2="186" y2="122" stroke="var(--g700)" stroke-width="1.3"/>
+            <path d="M 190,122 L 182,118.6 L 182,125.4 Z" fill="var(--g700)"/>
+            <text x="162" y="114" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g700)">T</text>
+            <line x1="200" y1="155" x2="336" y2="155" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 340,155 L 332,151.6 L 332,158.4 Z" fill="var(--grey700)"/>
+            <line x1="265" y1="168" x2="265" y2="38" stroke="var(--grey700)" stroke-width="1.2"/>
+            <path d="M 265,34 L 261.6,42 L 268.4,42 Z" fill="var(--grey700)"/>
+            <text x="344" y="160" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <text x="253" y="44" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="253" y="168" font-size="10" fill="var(--grey600)">0</text>
+            <path d="M 320,155 Q 320,100 265,45 Q 210,100 210,155 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="265" y="122" text-anchor="middle" font-size="13" font-style="italic" fill="var(--g800)">R</text>
+            <circle cx="210" cy="155" r="2.4" fill="var(--grey900)"/>
+            <circle cx="320" cy="155" r="2.4" fill="var(--grey900)"/>
+            <circle cx="265" cy="45" r="2.4" fill="var(--grey900)"/>
+            <text x="206" y="170" text-anchor="middle" font-size="9.5" fill="var(--grey700)">(−1, 0)</text>
+            <text x="324" y="170" text-anchor="middle" font-size="9.5" fill="var(--grey700)">(1, 0)</text>
+            <text x="272" y="44" font-size="9.5" fill="var(--grey700)">(0, 2)</text>
+            <text x="265" y="184" text-anchor="middle" font-size="9.5" font-style="italic" fill="var(--g700)">x = 1 − y²/4,  x = y²/4 − 1</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Track the image of each of the four sides of $S$ in turn.</p>
+        <p>Bottom side $S_1$: $v=0,\ 0\le u\le1$ gives $x=u^2,\ y=0$, so its image is the segment $0\le x\le1$ on the $x$-axis.</p>
+        <p>Right side $S_2$: $u=1,\ 0\le v\le1$ gives $x=1-v^2,\ y=2v$. Substituting $v=y/2$ yields $x=1-y^2/4$ for $0\le y\le2$ &mdash; an arc of a parabola running from $(1,0)$ to $(0,2)$.</p>
+        <p>Top side $S_3$: $v=1,\ 0\le u\le1$ gives $x=u^2-1,\ y=2u$. Substituting $u=y/2$ yields $x=y^2/4-1$ for $0\le y\le2$ &mdash; an arc running from $(0,2)$ to $(-1,0)$.</p>
+        <p>Left side $S_4$: $u=0,\ 0\le v\le1$ gives $x=-v^2,\ y=0$, so its image is the segment $-1\le x\le0$ on the $x$-axis.</p>
+        <p>Together $S_1$ and $S_4$ trace out the full segment $-1\le x\le1$ of the $x$-axis, while $S_2$ and $S_3$ trace two parabolic arcs meeting at $(0,2)$. Traversing the boundary of $S$ counterclockwise as $(u,v)=(0,0)\to(1,0)\to(1,1)\to(0,1)\to(0,0)$ carries its image around counterclockwise as well: $(0,0)\to(1,0)\to(0,2)\to(-1,0)\to(0,0)$. Hence the image $R=T(S)$ is</p>
+        <div class="math-display">$$R=\left\{(x,y)\ \middle|\ \frac{y^2}{4}-1\le x\le 1-\frac{y^2}{4},\ 0\le y\le 2\right\},$$</div>
+        <p>the region with vertices $(-1,0)$, $(1,0)$, $(0,2)$ bounded below by the segment $[-1,1]$ of the $x$-axis and above by the two parabolas $x=1-y^2/4$ and $x=y^2/4-1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex15-9-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">변수변환으로 계산하는 이중적분 <em>A Double Integral Evaluated by a Change of Variables</em><span class="src-ref">Example 2 · p.1151</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>변수변환 $x=u^2-v^2$, $y=2uv$를 이용하여 적분 $\displaystyle\iint_R y\,dA$를 계산하라. 여기서 $R$은 $x$축과 두 포물선 $y^2=4-4x$, $y^2=4+4x$로 둘러싸인 영역이고 $y\ge0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 앞 카드(예제 1)에서 확인했듯, 이 영역 $R$은 정확히 변환 $T(u,v)=(u^2-v^2,\,2uv)$가 단위정사각형 $S=[0,1]\times[0,1]$을 보내는 상이다 &mdash; 예제 1의 경계 곡선 $x=1-y^2/4$, $x=y^2/4-1$이 이 문제의 두 포물선 $y^2=4-4x$, $y^2=4+4x$와 같은 곡선이기 때문이다. 따라서 정리 9로 적분을 $S$ 위로 옮길 수 있다. 야코비안은</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}2u&-2v\\2v&2u\end{vmatrix}=4u^2+4v^2$$</div>
+        <p>이며 $S$ 위에서 원점을 제외하면 항상 양수이므로 절댓값 기호를 그냥 떼어 낼 수 있다. (야코비안이 $0$이 되는 점은 꼭짓점 $(u,v)=(0,0)$ 하나뿐이고 이는 넓이 $0$인 집합이므로, 정리 9를 적용하는 데에는 지장이 없다.) $y=2uv$를 대입하면</p>
+        <div class="math-display">$$\iint_R y\,dA=\iint_S (2uv)(4u^2+4v^2)\,du\,dv=\int_0^1\!\!\int_0^1\left(8u^3v+8uv^3\right)du\,dv.$$</div>
+        <p>$v$를 고정하고 안쪽 적분을 먼저 계산하면 $\displaystyle\int_0^1\left(8u^3v+8uv^3\right)du=\Big[2u^4v+4u^2v^3\Big]_0^1=2v+4v^3$이고, 이를 다시 $v$에 대해 적분하면</p>
+        <div class="math-display">$$\int_0^1\left(2v+4v^3\right)dv=\Big[v^2+v^4\Big]_0^1=2.$$</div>
+        <p>따라서 $\displaystyle\iint_R y\,dA=2$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Take the substitution $x=u^2-v^2$, $y=2uv$ and use it to compute $\displaystyle\iint_R y\,dA$, where $R$ is the region with $y\ge 0$ that the $x$-axis and the two parabolas $y^2=4-4x$ and $y^2=4+4x$ enclose.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The preceding card (Example 1) shows that this region $R$ is exactly the image of the unit square $S=[0,1]\times[0,1]$ under $T(u,v)=(u^2-v^2,\,2uv)$ &mdash; the bounding curves $x=1-y^2/4$ and $x=y^2/4-1$ found there are the very curves $y^2=4-4x$ and $y^2=4+4x$ named here. So Theorem 9 carries the integral over to $S$. The Jacobian is</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}2u&-2v\\2v&2u\end{vmatrix}=4u^2+4v^2,$$</div>
+        <p>which is positive on $S$ except at the origin, so the absolute value bars can simply be dropped. (The Jacobian vanishes only at the single corner $(u,v)=(0,0)$, a set of area zero, so Theorem 9 still applies.) Substituting $y=2uv$ gives</p>
+        <div class="math-display">$$\iint_R y\,dA=\iint_S (2uv)(4u^2+4v^2)\,du\,dv=\int_0^1\!\!\int_0^1\left(8u^3v+8uv^3\right)du\,dv.$$</div>
+        <p>Holding $v$ fixed, the inner integral is $\displaystyle\int_0^1\left(8u^3v+8uv^3\right)du=\Big[2u^4v+4u^2v^3\Big]_0^1=2v+4v^3$, and integrating this in $v$ gives</p>
+        <div class="math-display">$$\int_0^1\left(2v+4v^3\right)dv=\Big[v^2+v^4\Big]_0^1=2.$$</div>
+        <p>Hence $\displaystyle\iint_R y\,dA=2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex15-9-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">사다리꼴 위의 지수함수 적분 <em>An Exponential Integral over a Trapezoid</em><span class="src-ref">Example 3 · p.1152</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>네 꼭짓점이 $(1,0)$, $(2,0)$, $(0,-2)$, $(0,-1)$인 사다리꼴 영역을 $R$라 할 때, 적분 $\displaystyle\iint_R e^{(x+y)/(x-y)}\,dA$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 피적분함수의 지수 $(x+y)/(x-y)$가 곧바로 새 변수를 알려준다 &mdash; $u=x+y$, $v=x-y$로 두면 지수는 단순히 $u/v$가 된다. 이를 $x,y$에 대해 풀면</p>
+        <div class="math-display">$$x=\frac{u+v}{2},\qquad y=\frac{u-v}{2}.$$</div>
+        <p>$R$의 네 변을 이 대응으로 옮겨 보자. 위쪽 변 $y=0$은 $u=x=v$, 즉 $u=v$가 되고, $(2,0)$에서 $(0,-2)$로 가는 변 $x-y=2$는 $v=2$, $(0,-1)$에서 $(1,0)$으로 가는 변 $x-y=1$은 $v=1$, 왼쪽 변 $x=0$은 $u=y=-v$, 즉 $u=-v$가 된다. 네 꼭짓점 $(1,0),(2,0),(0,-2),(0,-1)$은 각각 $(1,1),(2,2),(-2,2),(-1,1)$로 옮겨지므로, $R$에 대응하는 $S$는</p>
+        <div class="math-display">$$S=\{(u,v)\mid 1\le v\le2,\ -v\le u\le v\}$$</div>
+        <p>인 사다리꼴이다. 야코비안은</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}\tfrac12&\tfrac12\\[4pt]\tfrac12&-\tfrac12\end{vmatrix}=-\frac14-\frac14=-\frac12$$</div>
+        <p>이므로 절댓값은 $1/2$이다. 정리 9에 의해</p>
+        <div class="math-display">$$\iint_R e^{(x+y)/(x-y)}\,dA=\iint_S e^{u/v}\cdot\frac12\,du\,dv=\frac12\int_1^2\!\!\int_{-v}^{v} e^{u/v}\,du\,dv.$$</div>
+        <p>$v$를 고정하고 $u$에 대해 먼저 적분하면 $\displaystyle\int_{-v}^{v}e^{u/v}\,du=v\Big[e^{u/v}\Big]_{-v}^{v}=v\left(e-e^{-1}\right)$이고, 이를 $v$에 대해 적분하면</p>
+        <div class="math-display">$$\frac12\int_1^2 v\left(e-e^{-1}\right)dv=\frac12\left(e-e^{-1}\right)\left[\frac{v^2}{2}\right]_1^2=\frac12\left(e-e^{-1}\right)\cdot\frac32=\frac34\left(e-e^{-1}\right).$$</div>
+        <p>따라서 $\displaystyle\iint_R e^{(x+y)/(x-y)}\,dA=\frac34\left(e-e^{-1}\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $R$ be the trapezoid whose four corners are $(1,0)$, $(2,0)$, $(0,-2)$ and $(0,-1)$. Compute $\displaystyle\iint_R e^{(x+y)/(x-y)}\,dA$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The exponent $(x+y)/(x-y)$ of the integrand names the new variables at once: setting $u=x+y$, $v=x-y$ turns the exponent into the plain ratio $u/v$. Solving for $x,y$ gives</p>
+        <div class="math-display">$$x=\frac{u+v}{2},\qquad y=\frac{u-v}{2}.$$</div>
+        <p>Carry the four sides of $R$ across this map. The top side $y=0$ becomes $u=x=v$, i.e. $u=v$; the side $x-y=2$ from $(2,0)$ to $(0,-2)$ becomes $v=2$; the side $x-y=1$ from $(0,-1)$ to $(1,0)$ becomes $v=1$; and the left side $x=0$ becomes $u=y=-v$, i.e. $u=-v$. The four corners $(1,0),(2,0),(0,-2),(0,-1)$ land at $(1,1),(2,2),(-2,2),(-1,1)$, so the region $S$ corresponding to $R$ is the trapezoid</p>
+        <div class="math-display">$$S=\{(u,v)\mid 1\le v\le2,\ -v\le u\le v\}.$$</div>
+        <p>The Jacobian is</p>
+        <div class="math-display">$$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}\tfrac12&\tfrac12\\[4pt]\tfrac12&-\tfrac12\end{vmatrix}=-\frac14-\frac14=-\frac12,$$</div>
+        <p>so its absolute value is $1/2$. By Theorem 9,</p>
+        <div class="math-display">$$\iint_R e^{(x+y)/(x-y)}\,dA=\iint_S e^{u/v}\cdot\frac12\,du\,dv=\frac12\int_1^2\!\!\int_{-v}^{v} e^{u/v}\,du\,dv.$$</div>
+        <p>With $v$ held fixed, the inner integral is $\displaystyle\int_{-v}^{v}e^{u/v}\,du=v\Big[e^{u/v}\Big]_{-v}^{v}=v\left(e-e^{-1}\right)$, and integrating this in $v$ gives</p>
+        <div class="math-display">$$\frac12\int_1^2 v\left(e-e^{-1}\right)dv=\frac12\left(e-e^{-1}\right)\left[\frac{v^2}{2}\right]_1^2=\frac12\left(e-e^{-1}\right)\cdot\frac32=\frac34\left(e-e^{-1}\right).$$</div>
+        <p>Hence $\displaystyle\iint_R e^{(x+y)/(x-y)}\,dA=\frac34\left(e-e^{-1}\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex15-9-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">구면좌표 부피소의 유도 <em>Deriving the Spherical Volume Element</em><span class="src-ref">Example 4 · p.1153</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공식 (13)에서 출발하여 구면좌표에서의 삼중적분 공식을 유도하라. 여기서 쓰는 변수변환은 다음과 같다.</p>
+        <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta,\qquad z=\rho\cos\phi.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 세 함수의 편도함수를 계산하면</p>
+        <div class="math-display">$$\frac{\partial x}{\partial\rho}=\sin\phi\cos\theta,\quad \frac{\partial x}{\partial\theta}=-\rho\sin\phi\sin\theta,\quad \frac{\partial x}{\partial\phi}=\rho\cos\phi\cos\theta,$$</div>
+        <div class="math-display">$$\frac{\partial y}{\partial\rho}=\sin\phi\sin\theta,\quad \frac{\partial y}{\partial\theta}=\rho\sin\phi\cos\theta,\quad \frac{\partial y}{\partial\phi}=\rho\cos\phi\sin\theta,$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial\rho}=\cos\phi,\quad \frac{\partial z}{\partial\theta}=0,\quad \frac{\partial z}{\partial\phi}=-\rho\sin\phi$$</div>
+        <p>이므로 (12)의 야코비안은 다음 $3\times3$ 행렬식이다.</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\begin{vmatrix}\sin\phi\cos\theta&-\rho\sin\phi\sin\theta&\rho\cos\phi\cos\theta\\[4pt]\sin\phi\sin\theta&\rho\sin\phi\cos\theta&\rho\cos\phi\sin\theta\\[4pt]\cos\phi&0&-\rho\sin\phi\end{vmatrix}.$$</div>
+        <p>세 번째 행에 $0$ 성분이 있으므로 이 행을 따라 전개하는 것이 가장 간단하다.</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\cos\phi\begin{vmatrix}-\rho\sin\phi\sin\theta&\rho\cos\phi\cos\theta\\ \rho\sin\phi\cos\theta&\rho\cos\phi\sin\theta\end{vmatrix}-\rho\sin\phi\begin{vmatrix}\sin\phi\cos\theta&-\rho\sin\phi\sin\theta\\ \sin\phi\sin\theta&\rho\sin\phi\cos\theta\end{vmatrix}.$$</div>
+        <p>첫 번째 $2\times2$ 행렬식은</p>
+        <div class="math-display">$$(-\rho\sin\phi\sin\theta)(\rho\cos\phi\sin\theta)-(\rho\cos\phi\cos\theta)(\rho\sin\phi\cos\theta)=-\rho^2\sin\phi\cos\phi\left(\sin^2\theta+\cos^2\theta\right)=-\rho^2\sin\phi\cos\phi$$</div>
+        <p>이고, 두 번째 $2\times2$ 행렬식은</p>
+        <div class="math-display">$$(\sin\phi\cos\theta)(\rho\sin\phi\cos\theta)-(-\rho\sin\phi\sin\theta)(\sin\phi\sin\theta)=\rho\sin^2\phi\left(\cos^2\theta+\sin^2\theta\right)=\rho\sin^2\phi$$</div>
+        <p>이다. 이 두 값을 대입하면</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\cos\phi\left(-\rho^2\sin\phi\cos\phi\right)-\rho\sin\phi\left(\rho\sin^2\phi\right)=-\rho^2\sin\phi\cos^2\phi-\rho^2\sin^3\phi=-\rho^2\sin\phi\left(\cos^2\phi+\sin^2\phi\right)=-\rho^2\sin\phi$$</div>
+        <p>를 얻는다. $0\le\phi\le\pi$에서 $\sin\phi\ge0$이므로 $\left|\partial(x,y,z)/\partial(\rho,\theta,\phi)\right|=\rho^2\sin\phi$이고, 공식 (13)에 대입하면</p>
+        <div class="math-display">$$\iiint_R f(x,y,z)\,dV=\iiint_S f(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi)\ \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$$</div>
+        <p>를 얻으며, 이는 §15.8의 구면좌표 삼중적분 공식(공식 15.8.3)과 정확히 일치한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Starting from Formula (13), obtain the rule for triple integration in spherical coordinates. The change of variables at hand is</p>
+        <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta,\qquad z=\rho\cos\phi.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Differentiating each of $x,y,z$ with respect to $\rho,\theta,\phi$ gives</p>
+        <div class="math-display">$$\frac{\partial x}{\partial\rho}=\sin\phi\cos\theta,\quad \frac{\partial x}{\partial\theta}=-\rho\sin\phi\sin\theta,\quad \frac{\partial x}{\partial\phi}=\rho\cos\phi\cos\theta,$$</div>
+        <div class="math-display">$$\frac{\partial y}{\partial\rho}=\sin\phi\sin\theta,\quad \frac{\partial y}{\partial\theta}=\rho\sin\phi\cos\theta,\quad \frac{\partial y}{\partial\phi}=\rho\cos\phi\sin\theta,$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial\rho}=\cos\phi,\quad \frac{\partial z}{\partial\theta}=0,\quad \frac{\partial z}{\partial\phi}=-\rho\sin\phi,$$</div>
+        <p>so the Jacobian (12) is the determinant</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\begin{vmatrix}\sin\phi\cos\theta&-\rho\sin\phi\sin\theta&\rho\cos\phi\cos\theta\\[4pt]\sin\phi\sin\theta&\rho\sin\phi\cos\theta&\rho\cos\phi\sin\theta\\[4pt]\cos\phi&0&-\rho\sin\phi\end{vmatrix}.$$</div>
+        <p>The zero entry in the third row makes expansion along that row the shortest route:</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\cos\phi\begin{vmatrix}-\rho\sin\phi\sin\theta&\rho\cos\phi\cos\theta\\ \rho\sin\phi\cos\theta&\rho\cos\phi\sin\theta\end{vmatrix}-\rho\sin\phi\begin{vmatrix}\sin\phi\cos\theta&-\rho\sin\phi\sin\theta\\ \sin\phi\sin\theta&\rho\sin\phi\cos\theta\end{vmatrix}.$$</div>
+        <p>The first $2\times2$ determinant works out to</p>
+        <div class="math-display">$$(-\rho\sin\phi\sin\theta)(\rho\cos\phi\sin\theta)-(\rho\cos\phi\cos\theta)(\rho\sin\phi\cos\theta)=-\rho^2\sin\phi\cos\phi\left(\sin^2\theta+\cos^2\theta\right)=-\rho^2\sin\phi\cos\phi,$$</div>
+        <p>and the second to</p>
+        <div class="math-display">$$(\sin\phi\cos\theta)(\rho\sin\phi\cos\theta)-(-\rho\sin\phi\sin\theta)(\sin\phi\sin\theta)=\rho\sin^2\phi\left(\cos^2\theta+\sin^2\theta\right)=\rho\sin^2\phi.$$</div>
+        <p>Substituting these values gives</p>
+        <div class="math-display">$$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\cos\phi\left(-\rho^2\sin\phi\cos\phi\right)-\rho\sin\phi\left(\rho\sin^2\phi\right)=-\rho^2\sin\phi\cos^2\phi-\rho^2\sin^3\phi=-\rho^2\sin\phi\left(\cos^2\phi+\sin^2\phi\right)=-\rho^2\sin\phi.$$</div>
+        <p>Since $\sin\phi\ge0$ on $0\le\phi\le\pi$, $\left|\partial(x,y,z)/\partial(\rho,\theta,\phi)\right|=\rho^2\sin\phi$, and Formula (13) becomes</p>
+        <div class="math-display">$$\iiint_R f(x,y,z)\,dV=\iiint_S f(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi)\ \rho^2\sin\phi\,d\rho\,d\theta\,d\phi,$$</div>
+        <p>exactly the spherical-coordinate triple integration formula of Section 15.8 (Formula 15.8.3).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c15-9-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch09.html">단원 09</a> · <a href="../calc2/ch10.html">단원 10</a></p>
+        <ul>
+          <li>이중적분의 변수변환 계산 &mdash; <a href="../calc2/ch09.html#ex06">ex06</a>, <a href="../calc2/ch09.html#yu06">yu06</a>, <a href="../calc2/ch09.html#pr20">pr20</a>(임용 18A-4) (부분 대응: 변환이 문제에 주어진 계산형만)</li>
+          <li>삼중적분의 변수변환($3\times3$ 야코비안) &mdash; <a href="../calc2/ch10.html#ex05">ex05</a>, <a href="../calc2/ch10.html#yu05-1">yu05-1</a>, <a href="../calc2/ch10.html#yu05-2">yu05-2</a> (부분 대응)</li>
+          <li>변환 $T$·상·일대일·역변환, 야코비안의 정의 7, 정리 9의 서술 &mdash; 대응 없음 (교안에는 개념 서술 블록이 없고 풀이 안에서 공식만 씀)</li>
+          <li>예제 1처럼 <strong>변환을 스스로 설계</strong>하거나 주어진 영역의 상을 추적하는 유형, 예제 4의 구면좌표 부피소 유도 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§15.9, 3차)</strong></p>
+        <p>제출 문항: 19, 21, 26, 27, 29, 31 &nbsp;/&nbsp; 학습 참고: 7&ndash;10, 11&ndash;16, 17&ndash;22, 23(a), 25&ndash;30, 31</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s15-8.html">§15.8 구면좌표에서의 삼중적분</a> &nbsp;/&nbsp; 다음: <a href="s16-1.html">§16.1 벡터장</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch09.html">Unit 09</a> and <a href="../calc2/ch10.html">Unit 10</a></p>
+        <ul>
+          <li>Double integrals evaluated by a change of variables &mdash; <a href="../calc2/ch09.html#ex06">ex06</a>, <a href="../calc2/ch09.html#yu06">yu06</a>, <a href="../calc2/ch09.html#pr20">pr20</a> (partial match: only computations in which the transformation is supplied)</li>
+          <li>Triple integrals and the $3\times3$ Jacobian &mdash; <a href="../calc2/ch10.html#ex05">ex05</a>, <a href="../calc2/ch10.html#yu05-1">yu05-1</a>, <a href="../calc2/ch10.html#yu05-2">yu05-2</a> (partial match)</li>
+          <li>The transformation $T$, images, one-to-one maps and inverses, Definition 7 and the statement of Theorem 9 &mdash; no match (the lecture notes carry no expository blocks and only use the formulas inside solutions)</li>
+          <li>Designing a transformation oneself or tracking the image of a given region, as in Example 1, and the derivation of the spherical volume element in Example 4 &mdash; no match</li>
+        </ul>
+        <p><strong>(b) Assignment (§15.9, third set)</strong></p>
+        <p>Problems to submit: 19, 21, 26, 27, 29, 31 &nbsp;/&nbsp; Recommended practice: 7&ndash;10, 11&ndash;16, 17&ndash;22, 23(a), 25&ndash;30, 31</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s15-8.html">§15.8 Triple Integrals in Spherical Coordinates</a> &nbsp;/&nbsp; Next: <a href="s16-1.html">§16.1 Vector Fields</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§12.6 주면과 이차곡면 (Cylinders and Quadric Surfaces) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §12.6 주면과 이차곡면 — 자취(trace)로 곡면을 그리는 방법, 변수가 빠지면 주면이 된다는 판별법, 이차곡면의 일반형과 두 표준형, 그리고 타원면·원뿔면·타원포물면·일엽쌍곡면·쌍곡포물면·이엽쌍곡면 6종(Table 1)을 한국어·영어 대조로 정리하고 예제 8개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 12.6, 주면, 기둥면, cylinder, 모선, rulings, 자취, trace, cross-section, 이차곡면, quadric surface, 타원면, ellipsoid, 원뿔면, cone, 타원포물면, elliptic paraboloid, 쌍곡포물면, hyperbolic paraboloid, 안장, saddle, 일엽쌍곡면, hyperboloid of one sheet, 이엽쌍곡면, hyperboloid of two sheets, 표준형, 완전제곱, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s12-6.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§12.6 주면과 이차곡면 (Cylinders and Quadric Surfaces) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="자취로 곡면을 읽는 법, 주면 판별법, 이차곡면의 두 표준형과 6종 분류표까지 §12.6 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s12-6.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§12.6 주면과 이차곡면 (Cylinders and Quadric Surfaces) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §12.6 주면과 이차곡면 — 자취의 정의, 변수 누락에 의한 주면 판별, 이차곡면의 일반형과 두 표준형, 표준 이차곡면 6종의 방정식과 자취를 한국어·영어 대조로 정리하고 본문 예제 8개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s12-6.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s12-6.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s12-6.html" class="active">12.6</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §12.6 · 1주차</p>
+  <h1>§12.6 주면과 이차곡면<span>Cylinders and Quadric Surfaces</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c12-6-1"><span class="toc-num">NOTE</span> 두 가지 새로운 곡면 <em>Two New Families of Surfaces</em></a></li>
+    <li><a href="#c12-6-2"><span class="toc-num">DEF 2</span> 자취 <em>Traces (Cross-Sections)</em></a></li>
+    <li><a href="#c12-6-3"><span class="toc-num">DEF 3</span> 주면과 모선 <em>Cylinders and Rulings</em></a></li>
+    <li><a href="#c12-6-4"><span class="toc-num">REM 4</span> 빠진 변수가 알려 주는 것 <em>A Missing Variable Signals a Cylinder</em></a></li>
+    <li><a href="#c12-6-5"><span class="toc-num">REM 5</span> 주면이지 원이 아니다 <em>Cylinder, Not a Circle</em></a></li>
+    <li><a href="#c12-6-6"><span class="toc-num">DEF 6</span> 이차곡면과 두 표준형 <em>Quadric Surfaces and Standard Forms</em></a></li>
+    <li><a href="#c12-6-7"><span class="toc-num">NOTE</span> 자취로 그리기 · 표준 이차곡면 6종 <em>Sketching by Traces and the Six Standard Quadrics</em></a></li>
+    <li><a href="#c12-6-8"><span class="toc-num">NOTE</span> 이차곡면의 응용 <em>Applications of Quadric Surfaces</em></a></li>
+    <li><a href="#ex12-6-1"><span class="toc-num">EXAM 1</span> 포물주면 <em>A Parabolic Cylinder</em></a></li>
+    <li><a href="#ex12-6-2"><span class="toc-num">EXAM 2</span> 축이 다른 두 원주면 <em>Two Circular Cylinders</em></a></li>
+    <li><a href="#ex12-6-3"><span class="toc-num">EXAM 3</span> 자취로 그리는 타원면 <em>Sketching an Ellipsoid from Its Traces</em></a></li>
+    <li><a href="#ex12-6-4"><span class="toc-num">EXAM 4</span> 타원포물면 그리기 <em>An Elliptic Paraboloid</em></a></li>
+    <li><a href="#ex12-6-5"><span class="toc-num">EXAM 5</span> 안장 모양의 쌍곡포물면 <em>A Hyperbolic Paraboloid</em></a></li>
+    <li><a href="#ex12-6-6"><span class="toc-num">EXAM 6</span> 일엽쌍곡면 그리기 <em>A Hyperboloid of One Sheet</em></a></li>
+    <li><a href="#ex12-6-7"><span class="toc-num">EXAM 7</span> 표준형으로 고쳐 판별하기 <em>Reducing an Equation to Standard Form</em></a></li>
+    <li><a href="#ex12-6-8"><span class="toc-num">EXAM 8</span> 완전제곱으로 분류하기 <em>Classifying by Completing the Square</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 -->
+<div class="card note-card" id="c12-6-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">두 가지 새로운 곡면 <em>Two New Families of Surfaces</em><span class="src-ref">Section opening · p.913</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>지금까지 다룬 곡면은 두 부류였다 — §12.5의 평면과 §12.1의 구면. 이 절에서는 여기에 <strong>주면</strong>과 <strong>이차곡면</strong> 두 가지를 새로 더한다.</p>
+        <p>두 곡면 모두 같은 방식으로 그린다. $\mathbb{R}^3$의 곡면은 한눈에 파악하기 어려우므로, 좌표평면에 평행한 평면들로 곡면을 잘라 그 교선인 평면곡선들을 살펴본다. 이 교선들이 원인지 타원인지 포물선인지 쌍곡선인지만 읽어 내면 곡면 전체의 모양을 재구성하기에 충분하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two families of surfaces have appeared so far: planes, in Section 12.5, and spheres, in Section 12.1. This section adds two more, <strong>cylinders</strong> and <strong>quadric surfaces</strong>.</p>
+        <p>Both are handled by the same drawing strategy. A surface in $\mathbb{R}^3$ is hard to see all at once, so one slices it by planes parallel to the coordinate planes and looks at the plane curves that result. Reading off which of those curves are circles, ellipses, parabolas or hyperbolas is enough to reconstruct the shape of the whole surface.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : traces -->
+<div class="card def-card" id="c12-6-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">자취 <em>Traces (Cross-Sections)</em><span class="src-ref">Definition (body) · p.913</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $S$가 $\mathbb{R}^3$ 안에 있다고 하자. $S$를 좌표평면에 평행한 평면, 즉 다음 꼴의 평면과 교차시킨다.</p>
+        <div class="math-display">$$x=k,\qquad y=k,\qquad\text{또는}\qquad z=k\quad(k\text{는 상수}).$$</div>
+        <p>이 교선을 그 평면에서의 $S$의 <strong>자취</strong>(또는 <strong>단면</strong>)라 한다. $z=k$에서의 자취는 수평 자취, $x=k$와 $y=k$에서의 자취는 수직 자취라 부른다.</p>
+        <p>각 자취는 2차원 평면 위의 곡선이므로 평면해석기하의 방법으로 그 정체를 파악할 수 있다. $k$를 변화시키면서 자취가 어떻게 커지고 작아지고 종류가 바뀌는지를 살피면, 그것이 바로 곡면 전체의 모양을 결정한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be a surface in $\mathbb{R}^3$. Intersect $S$ with a plane parallel to one of the coordinate planes, that is, with a plane of the form</p>
+        <div class="math-display">$$x=k,\qquad y=k,\qquad\text{or}\qquad z=k\quad(k\text{ constant}).$$</div>
+        <p>The curve of intersection is called a <strong>trace</strong> (or <strong>cross-section</strong>) of $S$ in that plane. Traces in $z=k$ are called horizontal, those in $x=k$ and $y=k$ vertical.</p>
+        <p>Each trace is a curve in a two-dimensional plane, so it can be identified by the methods of plane analytic geometry; letting $k$ vary then shows how the traces grow, shrink or change type, and that is what determines the surface.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : cylinder -->
+<div class="card def-card" id="c12-6-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">주면과 모선 <em>Cylinders and Rulings</em><span class="src-ref">Definition (body) · p.913</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직선 $\ell$과 평면곡선 $C$를 하나씩 고정하자. 이 둘로 정해지는 <strong>주면</strong>은 $\ell$에 평행하면서 $C$를 지나는 모든 직선이 쓸고 지나가는 곡면이다. 이때 그 직선들을 주면의 <strong>모선</strong>이라 한다.</p>
+        <p>달리 말하면 주면은 $C$를 $\ell$ 방향으로 이동시킨 무수히 많은 사본들의 합집합이며, 이동량마다 하나씩 대응한다. 여기서 "주면"이라는 말이 이렇게 일반적인 뜻으로 쓰인다는 점에 유의하자. 곡선 $C$가 반드시 원일 필요는 없으므로, 이 절에서 말하는 주면이 흔히 아는 원기둥일 필요는 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Fix a line $\ell$ and a plane curve $C$. The <strong>cylinder</strong> determined by them is the surface swept out by all lines that are parallel to $\ell$ and meet $C$. Those lines are the <strong>rulings</strong> of the cylinder.</p>
+        <p>Equivalently, the cylinder is the union of infinitely many translated copies of $C$, one for each displacement along $\ell$. Note that the word is used in this general sense: the curve $C$ need not be a circle, so a cylinder here need not be the familiar circular tube.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : missing variable -->
+<div class="card rem-card" id="c12-6-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">빠진 변수가 알려 주는 것 <em>A Missing Variable Signals a Cylinder</em><span class="src-ref">Remark after Example 1 · p.913</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면의 방정식에 $x,y,z$ 세 변수 가운데 하나가 아예 나타나지 않는다고 하자. 그러면 그 변수를 $k$로 놓아도 남는 방정식은 $k$에 의존하지 않으므로, 그 변수가 정하는 평행한 평면들 전체에서 자취가 모두 <em>같은</em> 곡선이 된다.</p>
+        <p>따라서 이 곡면은 그 하나의 곡선을 빠진 변수의 축 방향으로 평행이동시켜 얻어지는 것이며, 모선이 그 축에 평행한 주면이다. 예컨대 $z=x^2$에는 $y$가 나타나지 않으므로 모선은 $y$축에 평행하다.</p>
+        <p>이것이 이 절에서 가장 빠른 판별법이다. 다른 무엇보다 먼저 어떤 변수가 빠져 있는지부터 확인하라.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the equation of a surface fails to involve one of the three variables $x$, $y$, $z$. Then setting that variable equal to $k$ leaves an equation that does not depend on $k$, so every trace in the corresponding family of parallel planes is the <em>same</em> curve.</p>
+        <p>The surface is therefore that one curve translated along the axis of the missing variable — a cylinder, with rulings parallel to that axis. For instance $z=x^2$ has no $y$ in it, so its rulings are parallel to the $y$-axis.</p>
+        <p>This is the fastest classification test in the section: before anything else, check whether some variable is absent.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : NOTE box -->
+<div class="card rem-card" id="c12-6-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">주면이지 원이 아니다 <em>Cylinder, Not a Circle</em><span class="src-ref">NOTE box · p.914</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>같은 방정식이라도 어느 공간에서 보느냐에 따라 다른 대상을 나타낸다. 평면에서 $x^2+y^2=1$은 원이지만, $\mathbb{R}^3$에서는 곡면이다. 구체적으로는 $z$축을 중심축으로 하는 반지름 $1$인 원주면인데, 점 $(x,y,z)$가 $z$의 <em>모든</em> 값에 대해 이 방정식을 만족하기 때문이다.</p>
+        <p>원을 되찾으려면 방정식을 하나 더 붙여야 한다. 이 원주면의 $xy$-평면에서의 자취가 바로 그것이다.</p>
+        <div class="math-display">$$x^2+y^2=1,\qquad z=0.$$</div>
+        <p>그러므로 방정식을 읽을 때는 먼저 그것이 어느 공간에서 해석되고 있는지부터 물어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The same equation describes different objects in different ambient spaces. In the plane, $x^2+y^2=1$ is a circle; in $\mathbb{R}^3$ it is a surface, namely the circular cylinder of radius $1$ about the $z$-axis, because the point $(x,y,z)$ satisfies it for <em>every</em> value of $z$.</p>
+        <p>The circle is recovered only by adding a second equation: the trace of that cylinder in the $xy$-plane is</p>
+        <div class="math-display">$$x^2+y^2=1,\qquad z=0.$$</div>
+        <p>So when reading an equation, first ask in which space it is being interpreted.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : quadric surfaces -->
+<div class="card def-card" id="c12-6-6">
+  <div class="card-head">
+    <span class="def-num">DEF 6</span>
+    <span class="def-title">이차곡면과 두 표준형 <em>Quadric Surfaces and Standard Forms</em><span class="src-ref">Definition (body) · p.914</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>이차곡면</strong>은 세 변수 $x,y,z$에 대한 2차방정식의 그래프다. 가장 일반적인 형태는 다음과 같다.</p>
+        <div class="math-display">$$Ax^2+By^2+Cz^2+Dxy+Eyz+Fxz+Gx+Hy+Iz+J=0,$$</div>
+        <p>여기서 $A,B,C,\dots,J$는 상수 계수다.</p>
+        <p>원점을 평행이동하면 없앨 수 있는 일차항들을 없앨 수 있고, 좌표축을 회전하면 교차항 $xy,yz,xz$를 없앨 수 있다. 두 조작을 모두 거치면 방정식은 다음 두 <strong>표준형</strong> 가운데 하나가 된다.</p>
+        <div class="math-display">$$Ax^2+By^2+Cz^2+J=0$$</div>
+        <p>또는</p>
+        <div class="math-display">$$Ax^2+By^2+Iz=0.$$</div>
+        <p>이차곡면은 평면의 원뿔곡선(§10.5)에 대응하는 3차원 대상이다. 평면곡선이 두 변수에 대한 2차방정식의 그래프였다면, 이 곡면들은 세 변수에 대한 2차방정식의 그래프다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A <strong>quadric surface</strong> is the graph in $\mathbb{R}^3$ of a second-degree equation in the three variables $x$, $y$, $z$. The most general such equation is</p>
+        <div class="math-display">$$Ax^2+By^2+Cz^2+Dxy+Eyz+Fxz+Gx+Hy+Iz+J=0,$$</div>
+        <p>with constant coefficients $A,B,C,\dots,J$.</p>
+        <p>A translation of the origin removes the linear terms that can be removed, and a rotation of the axes removes the cross terms $xy$, $yz$, $xz$. After both, the equation takes one of the two <strong>standard forms</strong></p>
+        <div class="math-display">$$Ax^2+By^2+Cz^2+J=0$$</div>
+        <p>or</p>
+        <div class="math-display">$$Ax^2+By^2+Iz=0.$$</div>
+        <p>Quadric surfaces are the three-dimensional counterparts of the conic sections of the plane (Section 10.5): the plane curves are the graphs of second-degree equations in two variables, these surfaces the graphs of second-degree equations in three.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Table 1 -->
+<div class="card note-card" id="c12-6-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">자취로 그리기 · 표준 이차곡면 6종 <em>Sketching by Traces and the Six Standard Quadrics</em><span class="src-ref">Table 1 · p.916&ndash;917</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>자취 몇 개를 그려서 이어 붙이는 방법은 3차원 그래프 소프트웨어가 곡면을 렌더링하는 방식과 정확히 같다. 소프트웨어도 등간격으로 놓은 $k$ 값들에 대해 수직평면 $x=k$, $y=k$에서의 자취를 그린다.</p>
+        <p>교재의 Table 1은 표준형으로 나타낸 기본 이차곡면 6종을 모아 놓은 것이다. 아래 방정식은 모두 곡면이 $z$축에 대해 대칭이 되도록 쓴 것이며, 대칭축이 다른 이차곡면은 변수의 역할만 서로 바꾼 같은 방정식으로 나타난다. 따라서 곡면을 식별하는 일은 어느 변수가 $z$의 역할을 하는지를 가려내는 문제로 귀결된다.</p>
+        <p><strong>① 타원면</strong></p>
+        <div class="math-display">$$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="타원면의 개략도 — 모든 자취가 타원" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <ellipse cx="118" cy="100" rx="68" ry="54" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 50,100 A 68,20 0 0 0 186,100" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 50,100 A 68,20 0 0 1 186,100" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <ellipse cx="118" cy="100" rx="33" ry="54" transform="rotate(-16 118 100)" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <ellipse cx="118" cy="100" rx="68" ry="54" fill="none" stroke="var(--g600)" stroke-width="1.5"/>
+          </svg>
+          <div class="figcaption">① 타원면</div>
+        </div>
+        <p>모든 자취가 타원이다. $a=b=c$이면 이 곡면은 구가 된다.</p>
+        <p><strong>② 원뿔면</strong></p>
+        <div class="math-display">$$\frac{z^{2}}{c^{2}}=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="원뿔면의 개략도 — 꼭짓점에서 만나는 두 나팔" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 118,100 L 72,42 A 46,14 0 0 0 164,42 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 118,100 L 72,158 A 46,14 0 0 0 164,158 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 72,42 A 46,14 0 0 1 164,42" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 72,158 A 46,14 0 0 1 164,158" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 84,72 A 26,8 0 0 0 152,72" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <path d="M 84,128 A 26,8 0 0 0 152,128" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <circle cx="118" cy="100" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">② 원뿔면</div>
+        </div>
+        <p>수평 자취는 타원이다. $x=k$와 $y=k$에서의 수직 자취는 $k\neq 0$일 때는 쌍곡선이지만, $k=0$일 때는 두 직선으로 퇴화한다.</p>
+        <p><strong>③ 타원포물면</strong></p>
+        <div class="math-display">$$\frac{z}{c}=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="타원포물면의 개략도 — 위로 열린 사발 모양" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="120" x2="212" y2="120" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="83" x2="54" y2="157" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="116" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="166" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 56,40 Q 118,200 180,40 A 62,18 0 0 1 56,40 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 56,40 A 62,18 0 0 1 180,40" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 56,40 A 62,18 0 0 0 180,40" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 74,80 A 44,13 0 0 0 162,80" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <path d="M 74,80 A 44,13 0 0 1 162,80" fill="none" stroke="var(--g500)" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle cx="118" cy="120" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">③ 타원포물면</div>
+        </div>
+        <p>수평 자취는 타원, 수직 자취는 포물선이다. 방정식에서 1차로 나타나는 변수가 포물면의 대칭축을 알려 준다.</p>
+        <p><strong>④ 일엽쌍곡면</strong></p>
+        <div class="math-display">$$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}-\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="일엽쌍곡면의 개략도 — 허리가 잘록한 한 장의 곡면" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 60,36 Q 116,100 60,164 A 58,16 0 0 0 176,164 Q 120,100 176,36 A 58,16 0 0 0 60,36 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 60,36 A 58,16 0 0 0 176,36" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 60,164 A 58,16 0 0 1 176,164" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 88,100 A 30,9 0 0 0 148,100" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 88,100 A 30,9 0 0 1 148,100" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="figcaption">④ 일엽쌍곡면</div>
+        </div>
+        <p>수평 자취는 타원, 수직 자취는 쌍곡선이다. 계수가 음수인 변수의 축이 바로 대칭축이다.</p>
+        <p><strong>⑤ 쌍곡포물면</strong></p>
+        <div class="math-display">$$\frac{z}{c}=\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="쌍곡포물면의 개략도 — 한 방향으로는 위로, 다른 방향으로는 아래로 휘는 안장" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 95,78 Q 155,166 215,78 Q 178,12 141,122 Q 81,210 21,122 Q 58,12 95,78 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 58,56 Q 118,144 178,56" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 155,122 Q 118,56 81,166" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <circle cx="118" cy="100" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">⑤ 쌍곡포물면</div>
+        </div>
+        <p>수평 자취는 쌍곡선, 수직 자취는 포물선이다. 위 그림은 교재의 그림과 마찬가지로 $c\lt 0$인 경우, 즉 $y$축 방향으로는 올라가고 $x$축 방향으로는 내려가는 안장을 그린 것이다.</p>
+        <p><strong>⑥ 이엽쌍곡면</strong></p>
+        <div class="math-display">$$-\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="이엽쌍곡면의 개략도 — 서로 떨어진 두 장의 사발" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 74,32 Q 118,136 162,32 A 44,13 0 0 1 74,32 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 74,168 Q 118,64 162,168 A 44,13 0 0 1 74,168 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 74,32 A 44,13 0 0 1 162,32" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 74,168 A 44,13 0 0 0 162,168" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <circle cx="118" cy="84" r="2.6" fill="var(--g700)"/>
+        <circle cx="118" cy="116" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">⑥ 이엽쌍곡면</div>
+        </div>
+        <p>$z=k$에서의 자취는 $k\gt c$ 또는 $k\lt -c$일 때만 타원이 되고, 수직 자취는 쌍곡선이다. 두 개의 음의 부호가 바로 두 장(이엽)을 만들어 내는 원인이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Drawing a few traces and fitting them together is exactly how three-dimensional graphing software renders a surface: it draws the traces in the vertical planes $x=k$ and $y=k$ for equally spaced values of $k$.</p>
+        <p>Table 1 of the text collects the six basic quadric surfaces in standard form. Every equation below is written so that the surface is symmetric about the $z$-axis; a quadric with a different axis of symmetry has the same equation with the roles of the variables permuted, so identifying a surface amounts to deciding which variable plays the part of $z$.</p>
+        <p><strong>① <em>Ellipsoid</em></strong></p>
+        <div class="math-display">$$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of an ellipsoid: every trace is an ellipse" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <ellipse cx="118" cy="100" rx="68" ry="54" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 50,100 A 68,20 0 0 0 186,100" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 50,100 A 68,20 0 0 1 186,100" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <ellipse cx="118" cy="100" rx="33" ry="54" transform="rotate(-16 118 100)" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <ellipse cx="118" cy="100" rx="68" ry="54" fill="none" stroke="var(--g600)" stroke-width="1.5"/>
+          </svg>
+          <div class="figcaption">① Ellipsoid</div>
+        </div>
+        <p>All traces are ellipses. If $a=b=c$ the surface is a sphere.</p>
+        <p><strong>② <em>Cone</em></strong></p>
+        <div class="math-display">$$\frac{z^{2}}{c^{2}}=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of a cone: two nappes meeting at the vertex" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 118,100 L 72,42 A 46,14 0 0 0 164,42 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 118,100 L 72,158 A 46,14 0 0 0 164,158 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 72,42 A 46,14 0 0 1 164,42" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 72,158 A 46,14 0 0 1 164,158" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 84,72 A 26,8 0 0 0 152,72" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <path d="M 84,128 A 26,8 0 0 0 152,128" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <circle cx="118" cy="100" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">② Cone</div>
+        </div>
+        <p>Horizontal traces are ellipses. The vertical traces in $x=k$ and $y=k$ are hyperbolas when $k\neq 0$, but degenerate into a pair of lines when $k=0$.</p>
+        <p><strong>③ <em>Elliptic Paraboloid</em></strong></p>
+        <div class="math-display">$$\frac{z}{c}=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of an elliptic paraboloid: an upward-opening bowl" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="120" x2="212" y2="120" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="83" x2="54" y2="157" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="116" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="166" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 56,40 Q 118,200 180,40 A 62,18 0 0 1 56,40 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 56,40 A 62,18 0 0 1 180,40" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 56,40 A 62,18 0 0 0 180,40" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 74,80 A 44,13 0 0 0 162,80" fill="none" stroke="var(--g500)" stroke-width="1"/>
+        <path d="M 74,80 A 44,13 0 0 1 162,80" fill="none" stroke="var(--g500)" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle cx="118" cy="120" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">③ Elliptic Paraboloid</div>
+        </div>
+        <p>Horizontal traces are ellipses, vertical traces parabolas. The variable that appears to the first power tells which axis is the axis of the paraboloid.</p>
+        <p><strong>④ <em>Hyperboloid of One Sheet</em></strong></p>
+        <div class="math-display">$$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}-\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of a hyperboloid of one sheet: a single waisted surface" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 60,36 Q 116,100 60,164 A 58,16 0 0 0 176,164 Q 120,100 176,36 A 58,16 0 0 0 60,36 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 60,36 A 58,16 0 0 0 176,36" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 60,164 A 58,16 0 0 1 176,164" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 88,100 A 30,9 0 0 0 148,100" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 88,100 A 30,9 0 0 1 148,100" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="figcaption">④ Hyperboloid of One Sheet</div>
+        </div>
+        <p>Horizontal traces are ellipses, vertical traces hyperbolas. The axis of symmetry is the axis of the variable whose coefficient is negative.</p>
+        <p><strong>⑤ <em>Hyperbolic Paraboloid</em></strong></p>
+        <div class="math-display">$$\frac{z}{c}=\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of a hyperbolic paraboloid: a saddle, curving up one way and down the other" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 95,78 Q 155,166 215,78 Q 178,12 141,122 Q 81,210 21,122 Q 58,12 95,78 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 58,56 Q 118,144 178,56" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <path d="M 155,122 Q 118,56 81,166" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+        <circle cx="118" cy="100" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">⑤ Hyperbolic Paraboloid</div>
+        </div>
+        <p>Horizontal traces are hyperbolas, vertical traces parabolas. The sketch above, like the one in the text, is drawn for $c \lt 0$: the saddle rises along the $y$-axis and falls along the $x$-axis.</p>
+        <p><strong>⑥ <em>Hyperboloid of Two Sheets</em></strong></p>
+        <div class="math-display">$$-\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}=1$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="Sketch of a hyperboloid of two sheets: two separated bowls" style="max-width:240px;width:100%;height:auto">
+        <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+        <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+        <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+        <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+        <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+        <path d="M 74,32 Q 118,136 162,32 A 44,13 0 0 1 74,32 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 74,168 Q 118,64 162,168 A 44,13 0 0 1 74,168 Z" fill="var(--g50)" fill-opacity="0.8" stroke="var(--g600)" stroke-width="1.5"/>
+        <path d="M 74,32 A 44,13 0 0 1 162,32" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <path d="M 74,168 A 44,13 0 0 0 162,168" fill="none" stroke="var(--g600)" stroke-width="1.1" stroke-dasharray="4 3"/>
+        <circle cx="118" cy="84" r="2.6" fill="var(--g700)"/>
+        <circle cx="118" cy="116" r="2.6" fill="var(--g700)"/>
+          </svg>
+          <div class="figcaption">⑥ Hyperboloid of Two Sheets</div>
+        </div>
+        <p>The trace in $z=k$ is an ellipse only when $k \gt c$ or $k \lt -c$; vertical traces are hyperbolas. The two minus signs are what produce the two sheets.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Card 8 : applications -->
+<div class="card note-card" id="c12-6-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">이차곡면의 응용 <em>Applications of Quadric Surfaces</em><span class="src-ref">Applications · p.918&ndash;919</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>지구 자체가 한 가지 예다. 흔히 구로 모형화하지만 자전 때문에 극 쪽이 편평해졌으므로, 더 정확한 모형은 <strong>타원면</strong>이다(연습문제 51).</p>
+        <p>포물선을 그 축 둘레로 회전시키면 원형 포물면이 되는데, 이런 곡면은 축에 평행하게 들어오는 모든 광선을 한 초점으로 반사시킨다. 전파망원경·위성 안테나·마이크·반사경이 모두 이 성질을 이용한다. 사발 모양의 곡면에 부딪힌 신호가 초점에 놓인 수신기 한 곳으로 모여 증폭되는 것이다.</p>
+        <p>원자로 냉각탑은 <strong>일엽쌍곡면</strong> 모양으로 짓는데, 이는 구조적 안정성 때문에 선택된 형태다. 또한 쌍곡면 한 쌍은 서로 꼬인 두 축 사이에 회전운동을 전달할 수도 있으며, 이때 기어의 톱니가 곡면의 모선을 따라 놓인다(연습문제 53).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The earth itself is one example. It is commonly modeled as a sphere, but rotation has flattened it at the poles, so an <strong>ellipsoid</strong> is the more accurate model (Exercise 51).</p>
+        <p>Rotating a parabola about its axis produces a circular paraboloid, and such a surface reflects every incoming ray parallel to the axis to a single focus. Radio telescopes, satellite dishes, microphones and reflectors all exploit this: signals striking the bowl are concentrated at the receiver placed at the focus, and are thereby amplified.</p>
+        <p>Cooling towers for nuclear reactors are built as <strong>hyperboloids of one sheet</strong>, a shape chosen for structural stability. A pair of hyperboloids can also transmit rotational motion between two skew axes, the cogs of the gears lying along the rulings of the surfaces (Exercise 53).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex12-6-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">포물주면 <em>A Parabolic Cylinder</em><span class="src-ref">Example 1 · p.913</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^3$ 에서 방정식 $z=x^2$ 이 나타내는 곡면의 그래프를 그리고, 그것이 어떤 종류의 곡면인지 밝혀라. 아울러 모선이 어느 축에 평행한지도 말하라.</p>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="포물주면 z = x^2 — xz-평면의 포물선을 y축 방향으로 평행이동한 곡면" style="max-width:240px;width:100%;height:auto">
+            <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 155,34 Q 118,144 81,78 L 159,78 Q 196,144 233,34 Z" fill="var(--g50)" fill-opacity="0.8" stroke="none"/>
+            <path d="M 155,34 Q 118,144 81,78" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <path d="M 181,34 Q 144,144 107,78" fill="none" stroke="var(--g500)" stroke-width="1"/>
+            <path d="M 207,34 Q 170,144 133,78" fill="none" stroke="var(--g500)" stroke-width="1"/>
+            <path d="M 233,34 Q 196,144 159,78" fill="none" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="155" y1="34" x2="233" y2="34" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="118" y1="100" x2="196" y2="100" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="81" y1="78" x2="159" y2="78" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="figcaption">포물선 $z=x^2$ 을 $y$축 방향으로 밀어 만든 포물주면</div>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 방정식 $z=x^2$ 에는 변수 $y$ 가 나타나지 않는다. 평면 $y=k$ 를 대입해도 방정식은 그대로 $z=x^2$ 로 남아 $k$ 와 무관하므로, $y=k$ 에서의 자취는 $k$ 의 값과 관계없이 언제나 $xz$-평면의 포물선 $z=x^2$ 과 합동인 곡선이다.</p>
+        <p>따라서 이 곡면은 $xz$-평면 위의 포물선 $z=x^2$ 을 $y$축 방향으로 평행이동시켜 겹쳐 쌓은 것이며, 이는 정의 3의 주면이고 그 모선은 $y$축에 평행한 직선들이다.</p>
+        <p>따라서 곡면은 포물주면이고, 모선은 $y$축에 평행하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Sketch the graph of the surface $z=x^2$ in $\mathbb{R}^3$ and identify what kind of surface it is, saying which axis its rulings are parallel to.</p>
+        <div class="fig">
+          <svg viewBox="0 0 240 200" role="img" aria-label="The parabolic cylinder z = x^2, formed by translating a parabola along the y-axis" style="max-width:240px;width:100%;height:auto">
+            <line x1="118" y1="192" x2="118" y2="10" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="26" y1="100" x2="212" y2="100" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="182" y1="63" x2="54" y2="137" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="106" y="20" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="216" y="96" font-size="11" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="44" y="146" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 155,34 Q 118,144 81,78 L 159,78 Q 196,144 233,34 Z" fill="var(--g50)" fill-opacity="0.8" stroke="none"/>
+            <path d="M 155,34 Q 118,144 81,78" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <path d="M 181,34 Q 144,144 107,78" fill="none" stroke="var(--g500)" stroke-width="1"/>
+            <path d="M 207,34 Q 170,144 133,78" fill="none" stroke="var(--g500)" stroke-width="1"/>
+            <path d="M 233,34 Q 196,144 159,78" fill="none" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="155" y1="34" x2="233" y2="34" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="118" y1="100" x2="196" y2="100" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="81" y1="78" x2="159" y2="78" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="figcaption">The parabolic cylinder swept out by $z=x^2$ moving along the $y$-axis</div>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The variable $y$ does not appear in $z=x^2$. Substituting $y=k$ leaves the same equation $z=x^2$, independent of $k$, so the trace in every plane $y=k$ is congruent to the parabola $z=x^2$ lying in the $xz$-plane.</p>
+        <p>The surface is therefore the stack of translated copies of that parabola along the $y$-axis &mdash; the cylinder of Definition 3, whose rulings are the lines parallel to the $y$-axis.</p>
+        <p>Hence the surface is a parabolic cylinder, with rulings parallel to the $y$-axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex12-6-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">축이 다른 두 원주면 <em>Two Circular Cylinders</em><span class="src-ref">Example 2 · p.913&ndash;914</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 두 방정식이 $\mathbb{R}^3$ 에서 나타내는 곡면을 각각 판별하고 그려라. 각 경우에 대칭축과 모선의 방향도 밝혀라.</p>
+        <p><strong>(a)</strong> $x^2+y^2=1$</p>
+        <p><strong>(b)</strong> $y^2+z^2=1$</p>
+        <div class="fig">
+          <svg viewBox="0 0 360 190" role="img" aria-label="축이 z축인 원주면과 축이 x축인 원주면" style="max-width:340px;width:100%;height:auto">
+            <line x1="90" y1="178" x2="90" y2="12" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="79" y="22" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+            <rect x="42" y="45" width="96" height="100" fill="var(--g50)" fill-opacity="0.8"/>
+            <ellipse cx="90" cy="45" rx="48" ry="15" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="42" y1="45" x2="42" y2="145" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="138" y1="45" x2="138" y2="145" stroke="var(--g600)" stroke-width="1.5"/>
+            <path d="M 42,145 A 48,15 0 0 0 138,145" fill="none" stroke="var(--g700)" stroke-width="1.5"/>
+            <path d="M 42,145 A 48,15 0 0 1 138,145" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="66" y1="52" x2="66" y2="152" stroke="var(--g500)" stroke-width="1"/>
+            <line x1="114" y1="52" x2="114" y2="152" stroke="var(--g500)" stroke-width="1"/>
+            <text x="46" y="180" font-size="12" fill="var(--grey700)">(a) x&#178; + y&#178; = 1</text>
+            <line x1="168" y1="140" x2="340" y2="41" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="158" y="150" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 270,35 L 214,67 A 41,41 0 0 0 254,137 L 310,105 A 41,41 0 0 0 270,35 Z" fill="var(--g50)" fill-opacity="0.8" stroke="none"/>
+            <ellipse cx="290" cy="70" rx="40" ry="40" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <ellipse cx="234" cy="102" rx="40" ry="40" fill="var(--g50)" fill-opacity="0.7" stroke="var(--g700)" stroke-width="1.5"/>
+            <line x1="270" y1="35" x2="214" y2="67" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="310" y1="105" x2="254" y2="137" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="290" y1="30" x2="234" y2="62" stroke="var(--g500)" stroke-width="1"/>
+            <text x="228" y="180" font-size="12" fill="var(--grey700)">(b) y&#178; + z&#178; = 1</text>
+          </svg>
+          <div class="figcaption">(a) 축이 $z$축인 원주면 · (b) 축이 $x$축인 원주면</div>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 방정식 $x^2+y^2=1$ 에는 $z$ 가 나타나지 않는다. 평면 $z=k$ 에서의 자취는 $k$ 와 무관하게 언제나 반지름 $1$ 인 원 $x^2+y^2=1$ 이므로, 이 곡면은 $xy$-평면의 단위원을 $z$축 방향으로 쌓아 올린 원주면이다. 대칭축은 $z$축이고 모선은 $z$축에 평행하다.</p>
+        <p><strong>(b)</strong> 같은 논리로 $y^2+z^2=1$ 에는 $x$ 가 나타나지 않으므로, 평면 $x=k$ 에서의 자취는 언제나 $yz$-평면의 단위원 $y^2+z^2=1$ 이다. 이 곡면 역시 원주면이며, 대칭축은 $x$축, 모선은 $x$축에 평행하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Identify and sketch each of the following surfaces in $\mathbb{R}^3$, stating in each case the axis of the surface and the direction of its rulings.</p>
+        <p><strong>(a)</strong> $x^2+y^2=1$</p>
+        <p><strong>(b)</strong> $y^2+z^2=1$</p>
+        <div class="fig">
+          <svg viewBox="0 0 360 190" role="img" aria-label="A circular cylinder with axis the z-axis and one with axis the x-axis" style="max-width:340px;width:100%;height:auto">
+            <line x1="90" y1="178" x2="90" y2="12" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="79" y="22" font-size="11" font-style="italic" fill="var(--grey500)">z</text>
+            <rect x="42" y="45" width="96" height="100" fill="var(--g50)" fill-opacity="0.8"/>
+            <ellipse cx="90" cy="45" rx="48" ry="15" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="42" y1="45" x2="42" y2="145" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="138" y1="45" x2="138" y2="145" stroke="var(--g600)" stroke-width="1.5"/>
+            <path d="M 42,145 A 48,15 0 0 0 138,145" fill="none" stroke="var(--g700)" stroke-width="1.5"/>
+            <path d="M 42,145 A 48,15 0 0 1 138,145" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="66" y1="52" x2="66" y2="152" stroke="var(--g500)" stroke-width="1"/>
+            <line x1="114" y1="52" x2="114" y2="152" stroke="var(--g500)" stroke-width="1"/>
+            <text x="46" y="180" font-size="12" fill="var(--grey700)">(a) x&#178; + y&#178; = 1</text>
+            <line x1="168" y1="140" x2="340" y2="41" stroke="var(--grey300)" stroke-width="1"/>
+            <text x="158" y="150" font-size="11" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 270,35 L 214,67 A 41,41 0 0 0 254,137 L 310,105 A 41,41 0 0 0 270,35 Z" fill="var(--g50)" fill-opacity="0.8" stroke="none"/>
+            <ellipse cx="290" cy="70" rx="40" ry="40" fill="none" stroke="var(--g600)" stroke-width="1" stroke-dasharray="4 3"/>
+            <ellipse cx="234" cy="102" rx="40" ry="40" fill="var(--g50)" fill-opacity="0.7" stroke="var(--g700)" stroke-width="1.5"/>
+            <line x1="270" y1="35" x2="214" y2="67" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="310" y1="105" x2="254" y2="137" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="290" y1="30" x2="234" y2="62" stroke="var(--g500)" stroke-width="1"/>
+            <text x="228" y="180" font-size="12" fill="var(--grey700)">(b) y&#178; + z&#178; = 1</text>
+          </svg>
+          <div class="figcaption">(a) a circular cylinder about the $z$-axis &middot; (b) one about the $x$-axis</div>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> The equation $x^2+y^2=1$ has no $z$ in it. The trace in every plane $z=k$ is the same unit circle $x^2+y^2=1$, regardless of $k$, so the surface is the unit circle in the $xy$-plane stacked along the $z$-axis: a circular cylinder with axis the $z$-axis and rulings parallel to the $z$-axis.</p>
+        <p><strong>(b)</strong> By the same reasoning, $y^2+z^2=1$ has no $x$ in it, so the trace in every plane $x=k$ is the unit circle $y^2+z^2=1$ in the $yz$-plane. This surface is also a circular cylinder, with axis the $x$-axis and rulings parallel to the $x$-axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex12-6-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">자취로 그리는 타원면 <em>Sketching an Ellipsoid from Its Traces</em><span class="src-ref">Example 3 · p.914&ndash;915</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 이차곡면의 자취를 $x=k$, $y=k$, $z=k$ 세 방향에서 각각 구하고, 그것을 이용하여 곡면의 개형을 그린 뒤 곡면의 이름을 밝혀라. 아울러 세 좌표축과의 절편도 구하라.</p>
+        <div class="math-display">$$x^{2}+\frac{y^{2}}{9}+\frac{z^{2}}{4}=1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 세 변수 $x,y,z$ 가 모두 짝수 차수로만 나타나므로, 어느 한 변수의 부호를 바꾸어도 방정식은 변하지 않는다. 즉 곡면은 세 좌표평면 모두에 대해 대칭이다.</p>
+        <p>$z=k$ 를 대입하면 $x^2+\dfrac{y^2}{9}=1-\dfrac{k^2}{4}$ 를 얻는다. 우변이 양수인 $-2\lt k\lt2$ 에서는 타원, $k=\pm2$ 에서는 점 $(0,0,\pm2)$, $|k|\gt2$ 에서는 공집합이다. 같은 방식으로 $x=k$ 를 대입하면 $\dfrac{y^2}{9}+\dfrac{z^2}{4}=1-k^2$ 이므로 $-1\lt k\lt1$ 에서 타원이고, $y=k$ 를 대입하면 $x^2+\dfrac{z^2}{4}=1-\dfrac{k^2}{9}$ 이므로 $-3\lt k\lt3$ 에서 타원이다.</p>
+        <p>세 방향의 자취가 모두 (경계값에서 퇴화하는 것을 제외하면) 타원이므로 이 곡면은 타원면이다. $y=z=0$, $x=z=0$, $x=y=0$ 을 각각 대입하면 좌표축과의 절편은 $(\pm1,0,0)$, $(0,\pm3,0)$, $(0,0,\pm2)$ 임을 알 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine the traces of the quadric surface below in the three families of planes $x=k$, $y=k$ and $z=k$, use them to sketch the surface, and identify it. Find the intercepts on the three coordinate axes as well.</p>
+        <div class="math-display">$$x^{2}+\frac{y^{2}}{9}+\frac{z^{2}}{4}=1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> All three variables occur only to even powers, so reversing the sign of any one of them leaves the equation unchanged: the surface is symmetric in all three coordinate planes.</p>
+        <p>Substituting $z=k$ gives $x^2+\dfrac{y^2}{9}=1-\dfrac{k^2}{4}$, an ellipse when the right side is positive, i.e. $-2\lt k\lt2$; it is the point $(0,0,\pm2)$ at $k=\pm2$ and empty for $|k|\gt2$. In the same way, $x=k$ gives $\dfrac{y^2}{9}+\dfrac{z^2}{4}=1-k^2$, an ellipse for $-1\lt k\lt1$, and $y=k$ gives $x^2+\dfrac{z^2}{4}=1-\dfrac{k^2}{9}$, an ellipse for $-3\lt k\lt3$.</p>
+        <p>Since the traces in all three directions are ellipses (apart from the degenerate boundary values), the surface is an ellipsoid. Setting two coordinates to $0$ at a time gives the intercepts $(\pm1,0,0)$, $(0,\pm3,0)$, $(0,0,\pm2)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex12-6-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">타원포물면 그리기 <em>An Elliptic Paraboloid</em><span class="src-ref">Example 4 · p.915</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $z=4x^{2}+y^{2}$ 의 자취를 평면 $x=k$, $y=k$, $z=k$ 에서 각각 구하고, 그것을 이용하여 곡면을 그린 뒤 어떤 이차곡면인지 판별하라. 수평 자취가 타원이 되기 위한 $k$ 의 조건도 밝혀라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평면 $x=k$ 에서는 $z=y^2+4k^2$ 을 얻는데, 이는 기준 포물선 $z=y^2$ 을 $k$ 에 따라 위로 평행이동시킨 포물선이다. 평면 $y=k$ 에서는 $z=4x^2+k^2$ 이므로 역시 위로 열린 포물선이다.</p>
+        <p>평면 $z=k$ 에서는 $4x^2+y^2=k$ 를 얻는다. $k\gt0$ 이면 이는 타원이고, $k=0$ 이면 원점 한 점이며, $k\lt0$ 이면 공집합이다.</p>
+        <p>$x,y$ 는 이차로만, $z$ 는 일차로만 나타나므로 이 방정식은 표준형 $Ax^2+By^2+Iz=0$ 꼴이다. 수평 자취가 (퇴화를 제외하면) 타원, 수직 자취가 포물선이므로 Table 1의 분류에 따라 곡면은 타원포물면이고, 일차로 나타나는 변수 $z$ 의 축이 대칭축이다. 수평 자취가 (한 점으로 퇴화하지 않는) 타원이 되는 조건은 $k\gt0$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the traces of the surface $z=4x^{2}+y^{2}$ in the planes $x=k$, $y=k$ and $z=k$, sketch the surface from them, and identify which quadric it is. State also the condition on $k$ under which the horizontal trace is an ellipse.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In the plane $x=k$, $z=y^2+4k^2$: the base parabola $z=y^2$ translated upward as $k$ varies. In the plane $y=k$, $z=4x^2+k^2$, again an upward-opening parabola.</p>
+        <p>In the plane $z=k$, $4x^2+y^2=k$: an ellipse when $k\gt0$, the single point at the origin when $k=0$, and empty when $k\lt0$.</p>
+        <p>Since $x$ and $y$ occur only squared while $z$ occurs only to the first power, the equation has the standard form $Ax^2+By^2+Iz=0$. The horizontal traces are ellipses (apart from the degenerate case) and the vertical traces are parabolas, so by the classification of Table 1 the surface is an elliptic paraboloid whose axis is the axis of $z$, the variable appearing to the first power. The horizontal trace is a genuine (non-degenerate) ellipse exactly when $k\gt0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex12-6-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">안장 모양의 쌍곡포물면 <em>A Hyperbolic Paraboloid</em><span class="src-ref">Example 5 · p.915&ndash;916</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $z=y^{2}-x^{2}$ 을 자취를 이용하여 그려라. 평면 $x=k$ 와 $y=k$ 에서의 자취가 각각 어느 방향으로 열린 포물선인지, 그리고 수평 자취가 어떤 곡선족인지를 밝히고, 원점 근처에서 곡면이 어떤 모양인지 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평면 $x=k$ 에서는 $z=y^2-k^2$ 을 얻으므로 $y$ 방향으로 위로 열린 포물선이고, $|k|$ 가 커질수록 아래로 평행이동한다. 평면 $y=k$ 에서는 $z=-x^2+k^2$ 을 얻으므로 반대로 $x$ 방향으로 아래로 열린 포물선이다.</p>
+        <p>평면 $z=k$ 에서는 $y^2-x^2=k$ 를 얻는다. $k\gt0$ 이면 $y$축을 가로지르는 가지를 갖는 쌍곡선, $k\lt0$ 이면 $x$축을 가로지르는 가지를 갖는 쌍곡선이고, $k=0$ 이면 두 직선 $y=\pm x$ 로 퇴화한다.</p>
+        <p>원점 근처에서 $y$축 방향으로 움직이면 곡면은 올라가고, $x$축 방향으로 움직이면 곡면은 내려간다. 두 방향의 오목함이 서로 반대이므로 원점 부근은 말안장 모양이다. 곡면은 쌍곡포물면이고, 원점이 안장점이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Sketch the surface $z=y^{2}-x^{2}$ using its traces. Say in which direction the parabolic traces in the planes $x=k$ and in the planes $y=k$ open, describe the family of horizontal traces, and explain the shape of the surface near the origin.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In the plane $x=k$, $z=y^2-k^2$: a parabola opening upward in $y$, shifted downward as $|k|$ grows. In the plane $y=k$, $z=-x^2+k^2$: a parabola opening downward in $x$.</p>
+        <p>In the plane $z=k$, $y^2-x^2=k$. For $k\gt0$ this is a hyperbola with branches crossing the $y$-axis, for $k\lt0$ a hyperbola with branches crossing the $x$-axis, and at $k=0$ it degenerates to the pair of lines $y=\pm x$.</p>
+        <p>Near the origin the surface rises when moving along the $y$-axis and falls when moving along the $x$-axis; the opposite concavity in the two directions gives the shape of a saddle there. The surface is a hyperbolic paraboloid, and the origin is its saddle point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex12-6-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">일엽쌍곡면 그리기 <em>A Hyperboloid of One Sheet</em><span class="src-ref">Example 6 · p.916</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 곡면의 수평 자취와 $xz$-평면·$yz$-평면에서의 자취를 구하고, 그것을 이용하여 곡면을 그린 뒤 어떤 이차곡면인지 판별하라.</p>
+        <div class="math-display">$$\frac{x^{2}}{4}+y^{2}-\frac{z^{2}}{4}=1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평면 $z=k$ 에서는 $\dfrac{x^2}{4}+y^2=1+\dfrac{k^2}{4}$ 를 얻는다. 우변은 모든 실수 $k$ 에 대해 양수이므로, 수평 자취는 $k$ 의 값과 관계없이 언제나 타원이며 $|k|$ 가 커질수록 타원도 커진다.</p>
+        <p>$xz$-평면($y=0$)에서의 자취는 $\dfrac{x^2}{4}-\dfrac{z^2}{4}=1$, $yz$-평면($x=0$)에서의 자취는 $y^2-\dfrac{z^2}{4}=1$ 이며, 둘 다 쌍곡선이다. $z=0$ 을 함께 대입하면 각 쌍곡선의 꼭짓점은 $(\pm2,0,0)$ 과 $(0,\pm1,0)$ 이고, 이 네 점이 곡면의 목이 가장 좁은 자리를 이룬다.</p>
+        <p>수평 자취가 (퇴화 없이) 언제나 타원이고 수직 자취가 쌍곡선이므로 Table 1의 분류에 따라 이 곡면은 일엽쌍곡면이다. 음의 부호가 붙은 변수가 $z$ 이므로 대칭축은 $z$축이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the horizontal traces of the surface below, together with its traces in the $xz$- and $yz$-planes, then sketch the surface and identify which quadric it is.</p>
+        <div class="math-display">$$\frac{x^{2}}{4}+y^{2}-\frac{z^{2}}{4}=1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In the plane $z=k$, $\dfrac{x^2}{4}+y^2=1+\dfrac{k^2}{4}$. The right side is positive for every real $k$, so the horizontal trace is an ellipse for every $k$, growing larger as $|k|$ increases.</p>
+        <p>The trace in the $xz$-plane ($y=0$) is $\dfrac{x^2}{4}-\dfrac{z^2}{4}=1$, and the trace in the $yz$-plane ($x=0$) is $y^2-\dfrac{z^2}{4}=1$; both are hyperbolas. Setting $z=0$ in each gives the vertices $(\pm2,0,0)$ and $(0,\pm1,0)$, which mark where the surface pinches in most tightly.</p>
+        <p>Since the horizontal traces are always (non-degenerate) ellipses and the vertical traces are hyperbolas, the classification of Table 1 identifies this as a hyperboloid of one sheet. The variable with the negative sign is $z$, so the axis of symmetry is the $z$-axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex12-6-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">표준형으로 고쳐 판별하기 <em>Reducing an Equation to Standard Form</em><span class="src-ref">Example 7 · p.917&ndash;918</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>방정식 $4x^{2}-y^{2}+2z^{2}+4=0$ 을 적당한 수로 나누어 표준형으로 고치고, Table 1과 대조하여 어떤 이차곡면인지와 그 대칭축이 무엇인지 밝혀라. 또 세 좌표평면에서의 자취와 평면 $y=k$ 에서의 자취를 구하고, 곡면을 그려라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 주어진 방정식을 $-4$ 로 나누면</p>
+        <div class="math-display">$$-x^2+\frac{y^2}{4}-\frac{z^2}{2}=1$$</div>
+        <p>이라는 표준형을 얻는다. 음의 부호가 붙은 변수는 $x$ 와 $z$ 둘이고, 양의 계수를 갖는 변수는 $y$ 뿐이므로, Table 1의 분류에 따라 이는 이엽쌍곡면이며 대칭축은 $y$축이다.</p>
+        <p>세 좌표평면에서의 자취를 본다. $z=0$ 을 대입하면 $-x^2+\dfrac{y^2}{4}=1$ 로 쌍곡선이고, $x=0$ 을 대입하면 $\dfrac{y^2}{4}-\dfrac{z^2}{2}=1$ 로 역시 쌍곡선이다. 그런데 $y=0$ 을 대입하면 $-x^2-\dfrac{z^2}{2}=1$ 이 되는데, 좌변은 모든 실수 $x,z$ 에 대해 $0$ 이하이므로 이를 만족하는 점이 없다 — 즉 $xz$-평면에는 자취가 없다.</p>
+        <p>평면 $y=k$ 에서는 $x^2+\dfrac{z^2}{2}=\dfrac{k^2}{4}-1$ 을 얻는다. 우변이 양수인 $|k|\gt2$ 에서만 타원이고, $|k|=2$ 이면 한 점, $|k|\lt2$ 이면 공집합이다.</p>
+        <p>따라서 곡면은 $y$축을 대칭축으로 하는 이엽쌍곡면이며, 두 잎은 각각 $y\ge2$ 와 $y\le-2$ 쪽에 있고 꼭짓점은 $(0,\pm2,0)$ 이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Divide the equation $4x^{2}-y^{2}+2z^{2}+4=0$ by a suitable constant to put it in standard form, then compare it with Table 1 to identify the surface and its axis of symmetry. Find the traces in the three coordinate planes and in the planes $y=k$, and sketch the surface.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Dividing the given equation by $-4$ produces the standard form</p>
+        <div class="math-display">$$-x^2+\frac{y^2}{4}-\frac{z^2}{2}=1.$$</div>
+        <p>Two variables, $x$ and $z$, carry a negative sign, while only $y$ has a positive coefficient, so by the classification of Table 1 this is a hyperboloid of two sheets with axis the $y$-axis.</p>
+        <p>For the traces in the coordinate planes: setting $z=0$ gives $-x^2+\dfrac{y^2}{4}=1$, a hyperbola, and setting $x=0$ gives $\dfrac{y^2}{4}-\dfrac{z^2}{2}=1$, also a hyperbola. But setting $y=0$ gives $-x^2-\dfrac{z^2}{2}=1$, whose left side is at most $0$ for every real $x,z$, so no point satisfies it &mdash; the $xz$-plane carries no trace at all.</p>
+        <p>In the plane $y=k$, $x^2+\dfrac{z^2}{2}=\dfrac{k^2}{4}-1$. This is an ellipse only when the right side is positive, i.e. $|k|\gt2$; it is a single point at $|k|=2$ and empty for $|k|\lt2$.</p>
+        <p>Hence the surface is a hyperboloid of two sheets with axis the $y$-axis, its two sheets lying in $y\ge2$ and $y\le-2$, with vertices at $(0,\pm2,0)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex12-6-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">완전제곱으로 분류하기 <em>Classifying by Completing the Square</em><span class="src-ref">Example 8 · p.918</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>완전제곱을 이용하여 이차곡면 $x^{2}+2z^{2}-6x-y+10=0$ 을 분류하라. 곡면의 축이 어느 좌표축에 평행한지와 꼭짓점의 좌표를 밝히고, 평면 $y=k$ 에서의 자취와 $xy$-평면에서의 자취를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x$ 에 관한 항을 완전제곱으로 고치면 $x^2-6x=(x-3)^2-9$ 이므로, 주어진 방정식은 $(x-3)^2-9+2z^2-y+10=0$, 즉</p>
+        <div class="math-display">$$y-1=(x-3)^2+2z^2$$</div>
+        <p>으로 바뀐다.</p>
+        <p>이 방정식에서 $y$ 는 일차로만, $(x-3)$ 과 $z$ 는 이차로만 나타나고 두 이차항의 계수가 모두 양수이므로, Table 1의 분류에 따라 이는 대칭축이 $y$축에 평행한 타원포물면이다. 우변이 $0$ 이 되는 것은 $x=3,\ z=0$ 일 때뿐이고 그때 $y=1$ 이므로, 꼭짓점은 $(3,1,0)$ 이다.</p>
+        <p>평면 $y=k$ 에서의 자취는 $(x-3)^2+2z^2=k-1$ 이다. $k\gt1$ 이면 타원, $k=1$ 이면 꼭짓점 한 점, $k\lt1$ 이면 공집합이다. $xy$-평면($z=0$)에서의 자취는 $y=1+(x-3)^2,\ z=0$ 으로, 꼭짓점 $(3,1,0)$ 에서 시작해 $y$가 커지는 방향으로 열리는 포물선이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Classify the quadric surface $x^{2}+2z^{2}-6x-y+10=0$ by completing the square. State which coordinate axis the axis of the surface is parallel to, give the coordinates of its vertex, and find the traces in the planes $y=k$ and in the $xy$-plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Completing the square in $x$, $x^2-6x=(x-3)^2-9$, turns the given equation into $(x-3)^2-9+2z^2-y+10=0$, i.e.</p>
+        <div class="math-display">$$y-1=(x-3)^2+2z^2.$$</div>
+        <p>Here $y$ occurs only to the first power while $(x-3)$ and $z$ occur only squared, both with positive coefficients, so by the classification of Table 1 this is an elliptic paraboloid whose axis is parallel to the $y$-axis. The right side vanishes only at $x=3,\ z=0$, where $y=1$, so the vertex is $(3,1,0)$.</p>
+        <p>The trace in the plane $y=k$ is $(x-3)^2+2z^2=k-1$: an ellipse for $k\gt1$, the single point of the vertex at $k=1$, and empty for $k\lt1$. The trace in the $xy$-plane ($z=0$) is $y=1+(x-3)^2,\ z=0$, a parabola starting at the vertex $(3,1,0)$ and opening in the direction of increasing $y$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c12-6-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch02.html">단원 02</a></p>
+        <ul>
+          <li>주면(기둥면)의 판별과 스케치 — <a href="../calc2/ch02.html#ex03">ex03</a>, <a href="../calc2/ch02.html#yu03">yu03</a> (완전 대응)</li>
+          <li>이차곡면 6종의 표준형 — <a href="../calc2/ch02.html#ex04">ex04</a> (완전 대응)</li>
+          <li>완전제곱으로 표준형 환원 후 스케치 — <a href="../calc2/ch02.html#yu04-1">yu04-1</a> (부분 대응: 1문항뿐)</li>
+          <li>자취 개념과 대칭축 판별 규칙 — <a href="../calc2/ch02.html#ex04">ex04</a> 풀이 안에 산발적으로 등장 (부분 대응: 개념으로 정리되어 있지 않음)</li>
+          <li>곡면으로 둘러싸인 영역 — <a href="../calc2/ch02.html#pr07">pr07</a> (부분 대응: 부등식으로 주어진 영역만)</li>
+          <li>이차곡면으로 둘러싸인 입체의 부피 — <a href="../calc2/ch02.html#yu04-2">yu04-2</a>, <a href="../calc2/ch02.html#yu04-3">yu04-3</a> (Stewart §12.6에는 없는 내용 — 15장 소관)</li>
+          <li>회전면·궤적으로 정의된 곡면 (연습 47&ndash;50) — 대응 없음</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§12.6)</strong></p>
+        <p>제출 문항: 13, 19 &nbsp;/&nbsp; 학습 참고: 23&ndash;30</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: 없음 (이 노트의 첫 절) &nbsp;/&nbsp; 다음: <a href="s14-1.html">§14.1 다변수함수</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch02.html">Unit 02</a></p>
+        <ul>
+          <li>Identifying and sketching cylinders — <a href="../calc2/ch02.html#ex03">ex03</a>, <a href="../calc2/ch02.html#yu03">yu03</a> (full match)</li>
+          <li>The six standard forms of quadric surfaces — <a href="../calc2/ch02.html#ex04">ex04</a> (full match)</li>
+          <li>Reducing to standard form by completing the square, then sketching — <a href="../calc2/ch02.html#yu04-1">yu04-1</a> (partial: a single problem)</li>
+          <li>Traces and the rules for reading off the axis of symmetry — scattered through the solution of <a href="../calc2/ch02.html#ex04">ex04</a> (partial: never stated as a concept)</li>
+          <li>Solid regions bounded by surfaces — <a href="../calc2/ch02.html#pr07">pr07</a> (partial: only regions given by inequalities)</li>
+          <li>Volume of a solid bounded by quadric surfaces — <a href="../calc2/ch02.html#yu04-2">yu04-2</a>, <a href="../calc2/ch02.html#yu04-3">yu04-3</a> (not part of Stewart §12.6; it belongs to Chapter 15)</li>
+          <li>Surfaces of revolution and surfaces defined as loci (Exercises 47&ndash;50) — no match</li>
+        </ul>
+        <p><strong>(b) Assignment (§12.6)</strong></p>
+        <p>Problems to submit: 13, 19 &nbsp;/&nbsp; Recommended practice: 23&ndash;30</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: none (this is the first section of these notes) &nbsp;/&nbsp; Next: <a href="s14-1.html">§14.1 Functions of Several Variables</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

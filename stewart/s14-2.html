@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.2 극한과 연속 (Limits and Continuity) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.2 극한과 연속 — 수치표로 본 두 극한의 비교, 이변수함수 극한의 ε-δ 정의와 그 기하적 의미, 경로 판정법으로 극한의 비존재 보이기, 극한 법칙과 다항·유리함수의 직접대입, 조임정리, 연속의 정의와 합성함수의 연속, n차원 공간에서의 통합 정의를 한국어·영어 대조로 정리하고 예제 11개를 재서술·풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.2, 극한, limit, 연속, continuity, 엡실론 델타, epsilon-delta, 경로 판정, two-path test, 극한이 존재하지 않음, 극한 법칙, limit laws, 다항함수, 유리함수, 직접대입, 조임정리, Squeeze Theorem, 합성함수의 연속, 삼변수 함수, R^n, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-2.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.2 극한과 연속 (Limits and Continuity) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="이변수함수 극한의 ε-δ 정의와 기하적 의미, 경로 판정법, 극한 법칙과 직접대입, 조임정리, 연속과 합성함수의 연속까지 §14.2 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-2.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.2 극한과 연속 (Limits and Continuity) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.2 극한과 연속 — ε-δ 정의, 경로 판정법, 극한 법칙과 다항·유리함수의 직접대입, 조임정리, 연속의 정의와 합성함수의 연속, n차원 공간에서의 통합 정의를 한국어·영어 대조로 정리하고 본문 예제 11개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-2.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-2.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html" class="active">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html">14.4</a>
+      <a href="s14-5.html">14.5</a>
+      <a href="s14-6.html">14.6</a>
+      <a href="s14-7.html">14.7</a>
+      <a href="s14-8.html">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.2 · 1주차</p>
+  <h1>§14.2 극한과 연속<span>Limits and Continuity</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-2-1"><span class="toc-num">NOTE</span> 수치표로 본 두 극한 <em>A Numerical Comparison</em></a></li>
+    <li><a href="#c14-2-2"><span class="toc-num">DEF 2</span> 이변수함수의 극한 (ε-δ) <em>Limit of a Function of Two Variables</em></a></li>
+    <li><a href="#c14-2-3"><span class="toc-num">NOTE</span> 정의의 기하적 의미 <em>Geometric Reading of the Definition</em></a></li>
+    <li><a href="#c14-2-4"><span class="toc-num">NOTE</span> 접근 방향이 무한히 많다 <em>Infinitely Many Paths of Approach</em></a></li>
+    <li><a href="#c14-2-5"><span class="toc-num">THM 5</span> 경로 판정법 <em>Two-Path Test</em></a></li>
+    <li><a href="#c14-2-6"><span class="toc-num">REM 6</span> 극한 법칙 <em>Limit Laws</em></a></li>
+    <li><a href="#c14-2-7"><span class="toc-num">THM 7</span> 다항·유리함수의 극한은 직접대입 <em>Limits of Polynomials and Rational Functions</em></a></li>
+    <li><a href="#c14-2-8"><span class="toc-num">REM 8</span> 조임정리도 성립한다 <em>The Squeeze Theorem Extends</em></a></li>
+    <li><a href="#c14-2-9"><span class="toc-num">DEF 9</span> 한 점에서의 연속 <em>Continuity at a Point</em></a></li>
+    <li><a href="#c14-2-10"><span class="toc-num">NOTE</span> 연속함수를 만드는 방법 <em>Building Continuous Functions</em></a></li>
+    <li><a href="#c14-2-11"><span class="toc-num">NOTE</span> 합성함수의 연속 <em>Continuity of Composites</em></a></li>
+    <li><a href="#c14-2-12"><span class="toc-num">NOTE</span> 삼변수 이상의 극한과 연속 <em>Limits and Continuity in Higher Dimensions</em></a></li>
+    <li><a href="#c14-2-13"><span class="toc-num">DEF 13</span> n차원 공간에서의 극한 <em>Limit in n-Space</em></a></li>
+    <li><a href="#ex14-2-1"><span class="toc-num">EXAM 1</span> 두 축을 따른 극한이 다른 경우 <em>Different Limits Along the Two Axes</em></a></li>
+    <li><a href="#ex14-2-2"><span class="toc-num">EXAM 2</span> 축과 직선 y=x를 비교하는 경우 <em>Axes Versus the Line y = x</em></a></li>
+    <li><a href="#ex14-2-3"><span class="toc-num">EXAM 3</span> 모든 직선으로는 부족한 경우 <em>When All Lines Are Not Enough</em></a></li>
+    <li><a href="#ex14-2-4"><span class="toc-num">EXAM 4</span> 다항함수의 극한 <em>Limit of a Polynomial</em></a></li>
+    <li><a href="#ex14-2-5"><span class="toc-num">EXAM 5</span> 유리함수의 극한 <em>Limit of a Rational Function</em></a></li>
+    <li><a href="#ex14-2-6"><span class="toc-num">EXAM 6</span> 정의와 조임정리로 구하는 극한 <em>A Limit by Definition and by Squeezing</em></a></li>
+    <li><a href="#ex14-2-7"><span class="toc-num">EXAM 7</span> 유리함수가 연속인 곳 <em>Where a Rational Function Is Continuous</em></a></li>
+    <li><a href="#ex14-2-8"><span class="toc-num">EXAM 8</span> 값을 정해 주어도 불연속인 함수 <em>Defining the Value Does Not Restore Continuity</em></a></li>
+    <li><a href="#ex14-2-9"><span class="toc-num">EXAM 9</span> 원점에서도 연속인 조각함수 <em>A Piecewise Function Continuous at the Origin</em></a></li>
+    <li><a href="#ex14-2-10"><span class="toc-num">EXAM 10</span> 지수 합성함수의 연속 <em>Continuity of an Exponential Composite</em></a></li>
+    <li><a href="#ex14-2-11"><span class="toc-num">EXAM 11</span> arctan 합성함수의 불연속선 <em>A Line of Discontinuity for an Arctangent Composite</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening, Tables 1-2 -->
+<div class="card note-card" id="c14-2-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">수치표로 본 두 극한 <em>A Numerical Comparison</em><span class="src-ref">Table 1–2 · p.989–990</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 함수 $f(x,y)=\dfrac{\sin(x^2+y^2)}{x^2+y^2}$ 와 $g(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ 가 $(x,y)\to(0,0)$일 때, 즉 점 $(x,y)$가 원점에 가까워질 때 어떻게 움직이는지 비교해 보자. 두 함수 모두 원점에서는 정의되지 않으므로, 아래 표에는 원점 근방의 값만을 소수점 아래 셋째 자리까지 적었다.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <caption>표 1 · $f(x,y)=\dfrac{\sin(x^2+y^2)}{x^2+y^2}$ 의 값 (소수점 아래 셋째 자리까지)</caption>
+            <tr><th rowspan="2">$x$</th><th colspan="7">$y$</th></tr>
+            <tr><th>−1.0</th><th>−0.5</th><th>−0.2</th><th>0</th><th>0.2</th><th>0.5</th><th>1.0</th></tr>
+            <tr><th>−1.0</th><td>0.455</td><td>0.759</td><td>0.829</td><td>0.841</td><td>0.829</td><td>0.759</td><td>0.455</td></tr>
+            <tr><th>−0.5</th><td>0.759</td><td>0.959</td><td>0.986</td><td>0.990</td><td>0.986</td><td>0.959</td><td>0.759</td></tr>
+            <tr><th>−0.2</th><td>0.829</td><td>0.986</td><td>0.999</td><td>1.000</td><td>0.999</td><td>0.986</td><td>0.829</td></tr>
+            <tr><th>0</th><td>0.841</td><td>0.990</td><td>1.000</td><td style="background:var(--grey100)">—</td><td>1.000</td><td>0.990</td><td>0.841</td></tr>
+            <tr><th>0.2</th><td>0.829</td><td>0.986</td><td>0.999</td><td>1.000</td><td>0.999</td><td>0.986</td><td>0.829</td></tr>
+            <tr><th>0.5</th><td>0.759</td><td>0.959</td><td>0.986</td><td>0.990</td><td>0.986</td><td>0.959</td><td>0.759</td></tr>
+            <tr><th>1.0</th><td>0.455</td><td>0.759</td><td>0.829</td><td>0.841</td><td>0.829</td><td>0.759</td><td>0.455</td></tr>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <caption>표 2 · $g(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ 의 값 (소수점 아래 셋째 자리까지)</caption>
+            <tr><th rowspan="2">$x$</th><th colspan="7">$y$</th></tr>
+            <tr><th>−1.0</th><th>−0.5</th><th>−0.2</th><th>0</th><th>0.2</th><th>0.5</th><th>1.0</th></tr>
+            <tr><th>−1.0</th><td>0.000</td><td>0.600</td><td>0.923</td><td>1.000</td><td>0.923</td><td>0.600</td><td>0.000</td></tr>
+            <tr><th>−0.5</th><td>−0.600</td><td>0.000</td><td>0.724</td><td>1.000</td><td>0.724</td><td>0.000</td><td>−0.600</td></tr>
+            <tr><th>−0.2</th><td>−0.923</td><td>−0.724</td><td>0.000</td><td>1.000</td><td>0.000</td><td>−0.724</td><td>−0.923</td></tr>
+            <tr><th>0</th><td>−1.000</td><td>−1.000</td><td>−1.000</td><td style="background:var(--grey100)">—</td><td>−1.000</td><td>−1.000</td><td>−1.000</td></tr>
+            <tr><th>0.2</th><td>−0.923</td><td>−0.724</td><td>0.000</td><td>1.000</td><td>0.000</td><td>−0.724</td><td>−0.923</td></tr>
+            <tr><th>0.5</th><td>−0.600</td><td>0.000</td><td>0.724</td><td>1.000</td><td>0.724</td><td>0.000</td><td>−0.600</td></tr>
+            <tr><th>1.0</th><td>0.000</td><td>0.600</td><td>0.923</td><td>1.000</td><td>0.923</td><td>0.600</td><td>0.000</td></tr>
+          </table>
+        </div>
+        <p>어느 표든 가운데로 갈수록, $f$의 값은 $1$ 근처로 모이는 반면 $g$의 값은 어느 한 수로도 모이지 않는다. 한 축을 따라가면 $1$에 가까워지고 다른 축을 따라가면 $-1$에 가까워진다. 이 두 수치적 추측은 실제로 모두 옳으며, 이 절의 나머지 부분에서 이를 증명한다.</p>
+        <div class="math-display">$$\lim_{(x,y)\to(0,0)}\frac{\sin(x^2+y^2)}{x^2+y^2}=1$$</div>
+        <div class="math-display">$$\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}\text{는 존재하지 않는다.}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compare the behavior of the two functions</p>
+        <div class="math-display">$$f(x,y)=\frac{\sin(x^2+y^2)}{x^2+y^2}$$</div>
+        <div class="math-display">$$g(x,y)=\frac{x^2-y^2}{x^2+y^2}$$</div>
+        <p>as $x$ and $y$ both tend to $0$, that is, as the point $(x,y)$ approaches the origin. Neither function is defined at the origin, so the tables below record values at nearby points only, rounded to three decimal places.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <caption>Table 1 · Values of $f(x,y)=\dfrac{\sin(x^2+y^2)}{x^2+y^2}$</caption>
+            <tr><th rowspan="2">$x$</th><th colspan="7">$y$</th></tr>
+            <tr><th>−1.0</th><th>−0.5</th><th>−0.2</th><th>0</th><th>0.2</th><th>0.5</th><th>1.0</th></tr>
+            <tr><th>−1.0</th><td>0.455</td><td>0.759</td><td>0.829</td><td>0.841</td><td>0.829</td><td>0.759</td><td>0.455</td></tr>
+            <tr><th>−0.5</th><td>0.759</td><td>0.959</td><td>0.986</td><td>0.990</td><td>0.986</td><td>0.959</td><td>0.759</td></tr>
+            <tr><th>−0.2</th><td>0.829</td><td>0.986</td><td>0.999</td><td>1.000</td><td>0.999</td><td>0.986</td><td>0.829</td></tr>
+            <tr><th>0</th><td>0.841</td><td>0.990</td><td>1.000</td><td style="background:var(--grey100)">—</td><td>1.000</td><td>0.990</td><td>0.841</td></tr>
+            <tr><th>0.2</th><td>0.829</td><td>0.986</td><td>0.999</td><td>1.000</td><td>0.999</td><td>0.986</td><td>0.829</td></tr>
+            <tr><th>0.5</th><td>0.759</td><td>0.959</td><td>0.986</td><td>0.990</td><td>0.986</td><td>0.959</td><td>0.759</td></tr>
+            <tr><th>1.0</th><td>0.455</td><td>0.759</td><td>0.829</td><td>0.841</td><td>0.829</td><td>0.759</td><td>0.455</td></tr>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <caption>Table 2 · Values of $g(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$</caption>
+            <tr><th rowspan="2">$x$</th><th colspan="7">$y$</th></tr>
+            <tr><th>−1.0</th><th>−0.5</th><th>−0.2</th><th>0</th><th>0.2</th><th>0.5</th><th>1.0</th></tr>
+            <tr><th>−1.0</th><td>0.000</td><td>0.600</td><td>0.923</td><td>1.000</td><td>0.923</td><td>0.600</td><td>0.000</td></tr>
+            <tr><th>−0.5</th><td>−0.600</td><td>0.000</td><td>0.724</td><td>1.000</td><td>0.724</td><td>0.000</td><td>−0.600</td></tr>
+            <tr><th>−0.2</th><td>−0.923</td><td>−0.724</td><td>0.000</td><td>1.000</td><td>0.000</td><td>−0.724</td><td>−0.923</td></tr>
+            <tr><th>0</th><td>−1.000</td><td>−1.000</td><td>−1.000</td><td style="background:var(--grey100)">—</td><td>−1.000</td><td>−1.000</td><td>−1.000</td></tr>
+            <tr><th>0.2</th><td>−0.923</td><td>−0.724</td><td>0.000</td><td>1.000</td><td>0.000</td><td>−0.724</td><td>−0.923</td></tr>
+            <tr><th>0.5</th><td>−0.600</td><td>0.000</td><td>0.724</td><td>1.000</td><td>0.724</td><td>0.000</td><td>−0.600</td></tr>
+            <tr><th>1.0</th><td>0.000</td><td>0.600</td><td>0.923</td><td>1.000</td><td>0.923</td><td>0.600</td><td>0.000</td></tr>
+          </table>
+        </div>
+        <p>Reading either table toward its centre, the values of $f$ crowd around $1$, while the values of $g$ settle on no single number at all: they stay near $1$ along one axis and near $-1$ along the other. Both numerical guesses are in fact correct, and the rest of the section proves them:</p>
+        <div class="math-display">$$\lim_{(x,y)\to(0,0)}\frac{\sin(x^2+y^2)}{x^2+y^2}=1$$</div>
+        <div class="math-display">$$\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}\ \text{does not exist.}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Definition 1 -->
+<div class="card def-card" id="c14-2-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">이변수함수의 극한 (ε-δ) <em>Limit of a Function of Two Variables</em><span class="src-ref">Definition 1 · p.990</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>표기</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)=L$$</div>
+        <p>은 직관적으로, $(x,y)$를 $(a,b)$에—단 $(a,b)$와 같지는 않게—충분히 가깝게 잡으면 $f(x,y)$를 원하는 만큼 $L$에 가깝게 만들 수 있다는 뜻이다. 이를 엄밀하게 정의하면 다음과 같다.</p>
+        <div class="formal-box">
+          <p><strong>정의 1.</strong> 정의역 $D$가 $(a,b)$에 임의로 가까운 점들을 포함하는 이변수함수 $f$가 있다고 하자. 이때 $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L$이란, 모든 수 $\varepsilon\gt 0$에 대해 어떤 수 $\delta\gt 0$이 존재하여</p>
+          <div class="math-display">$$(x,y)\in D\ \text{이고}\ 0\lt\sqrt{(x-a)^2+(y-b)^2}\lt\delta\ \Longrightarrow\ |f(x,y)-L|\lt\varepsilon$$</div>
+          <p>을 만족시킨다는 뜻이다.</p>
+        </div>
+        <p>$D$가 $(a,b)$에 임의로 가까운 점들을 포함해야 한다는 조건이 이 정의를 공허하지 않게 만든다. $(a,b)$ 자신은 $D$에 속하지 않아도 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Informally, the notation</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)=L$$</div>
+        <p>says that $f(x,y)$ can be forced as close to $L$ as one likes by taking $(x,y)$ in the domain of $f$ close enough to $(a,b)$ — but never equal to $(a,b)$. Made precise:</p>
+        <div class="formal-box">
+          <p><strong>Definition 1.</strong> Let $f$ be a function of two variables whose domain $D$ contains points arbitrarily close to $(a,b)$. Then $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L$ means: for every number $\varepsilon\gt 0$ there is a number $\delta\gt 0$ such that</p>
+          <div class="math-display">$$(x,y)\in D\ \text{ and }\ 0\lt\sqrt{(x-a)^2+(y-b)^2}\lt\delta\ \Longrightarrow\ |f(x,y)-L|\lt\varepsilon .$$</div>
+        </div>
+        <p>The condition that $D$ contain points arbitrarily close to $(a,b)$ is what makes the definition non-vacuous; $(a,b)$ itself need not lie in $D$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : geometric reading, Figures 1-2 -->
+<div class="card note-card" id="c14-2-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">정의의 기하적 의미 <em>Geometric Reading of the Definition</em><span class="src-ref">Figure 1–2 · p.990–991</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>같은 진술을 나타내는 다른 두 표기법은 다음과 같다.</p>
+        <div class="math-display">$$\lim_{\substack{x\to a\\ y\to b}}f(x,y)=L$$</div>
+        <div class="math-display">$$(x,y)\to(a,b)\ \text{일 때}\ f(x,y)\to L$$</div>
+        <p>정의 1에 나오는 두 양은 모두 거리이다. $|f(x,y)-L|$은 두 수 $f(x,y)$와 $L$ 사이의 거리이고, $\sqrt{(x-a)^2+(y-b)^2}$는 두 점 $(x,y)$와 $(a,b)$ 사이의 거리이다. 즉 이 정의는, 두 번째 거리를—단 $0$은 아니게—충분히 작게 만들면 첫 번째 거리를 원하는 만큼 작게 만들 수 있다고 말한다.</p>
+        <p>화살표 그림으로 읽으면: $L$을 중심으로 하는 구간 $(L-\varepsilon,L+\varepsilon)$이 어떻게 주어지든, 중심이 $(a,b)$이고 반지름이 $\delta\gt 0$인 원판 $D_\delta$를 잡아 $f$가 그 구간 안으로 사상되게 할 수 있다.</p>
+        <div class="math-display">$$f\bigl(D_\delta\setminus\{(a,b)\}\bigr)\subset(L-\varepsilon,\,L+\varepsilon).$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 360 200" role="img" aria-label="원판 D_delta의 점들이 구간 (L-epsilon, L+epsilon) 안으로 옮겨지는 화살표 그림" style="max-width:360px;width:100%;height:auto">
+            <line x1="45" y1="170" x2="45" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="45,24 41,35 49,35" fill="var(--grey800)"/>
+            <line x1="45" y1="170" x2="176" y2="170" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="184,170 173,166 173,174" fill="var(--grey800)"/>
+            <text x="36" y="30" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="180" y="186" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="33" y="184" font-size="11" fill="var(--grey500)">0</text>
+            <circle cx="112" cy="104" r="34" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="112" y1="104" x2="136" y2="80" stroke="var(--g700)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="126" y="96" font-size="11" fill="var(--g700)">δ</text>
+            <circle cx="112" cy="104" r="3.2" fill="var(--grey900)"/>
+            <text x="90" y="122" font-size="11" fill="var(--grey700)">(a, b)</text>
+            <text x="72" y="72" font-size="12" font-style="italic" fill="var(--g700)">D<tspan font-size="9" dy="3">δ</tspan></text>
+            <path d="M 156,96 Q 200,72 244,96" fill="none" stroke="var(--grey600)" stroke-width="1.2"/>
+            <polygon points="250,99 239,93 240,101" fill="var(--grey600)"/>
+            <text x="196" y="70" font-size="12" font-style="italic" fill="var(--grey700)">f</text>
+            <line x1="278" y1="176" x2="278" y2="38" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="278,30 274,41 282,41" fill="var(--grey800)"/>
+            <rect x="270" y="78" width="16" height="44" fill="var(--g50)" stroke="none"/>
+            <line x1="270" y1="78" x2="286" y2="78" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="270" y1="122" x2="286" y2="122" stroke="var(--g600)" stroke-width="1.4"/>
+            <circle cx="278" cy="100" r="3" fill="var(--grey900)"/>
+            <text x="292" y="82" font-size="11" fill="var(--g700)">L + ε</text>
+            <text x="292" y="104" font-size="11" fill="var(--grey900)">L</text>
+            <text x="292" y="126" font-size="11" fill="var(--g700)">L − ε</text>
+          </svg>
+          <p class="figcaption">$f(D_\delta\setminus\{(a,b)\})\subset(L-\varepsilon,\,L+\varepsilon)$</p>
+        </div>
+        <p>그래프로 읽으면: $S$를 곡면 $z=f(x,y)$라 하자. $\varepsilon\gt 0$이 주어질 때마다, 뚫린 원판 $D_\delta$ 위에 놓인 $S$의 부분이 두 수평평면 $z=L-\varepsilon$과 $z=L+\varepsilon$ 사이에 완전히 들어가도록 $\delta\gt 0$을 잡을 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two other notations for the same statement are</p>
+        <div class="math-display">$$\lim_{\substack{x\to a\\ y\to b}}f(x,y)=L$$</div>
+        <div class="math-display">$$f(x,y)\to L\ \text{ as }\ (x,y)\to(a,b)$$</div>
+        <p>Both quantities in Definition 1 are distances: $|f(x,y)-L|$ is the distance between the two numbers $f(x,y)$ and $L$, and $\sqrt{(x-a)^2+(y-b)^2}$ is the distance between the two points $(x,y)$ and $(a,b)$. So the definition says that the first distance can be made arbitrarily small by making the second one small enough — but not zero.</p>
+        <p>Read as an arrow diagram: given any interval $(L-\varepsilon,L+\varepsilon)$ around $L$, one can produce a disk $D_\delta$ with centre $(a,b)$ and radius $\delta\gt 0$ that $f$ maps into that interval,</p>
+        <div class="math-display">$$f\bigl(D_\delta\setminus\{(a,b)\}\bigr)\subset(L-\varepsilon,\,L+\varepsilon).$$</div>
+        <div class="fig">
+          <svg viewBox="0 0 360 200" role="img" aria-label="Arrow diagram: the disk D_delta is mapped into the interval (L-epsilon, L+epsilon)" style="max-width:360px;width:100%;height:auto">
+            <line x1="45" y1="170" x2="45" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="45,24 41,35 49,35" fill="var(--grey800)"/>
+            <line x1="45" y1="170" x2="176" y2="170" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="184,170 173,166 173,174" fill="var(--grey800)"/>
+            <text x="36" y="30" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="180" y="186" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="33" y="184" font-size="11" fill="var(--grey500)">0</text>
+            <circle cx="112" cy="104" r="34" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="112" y1="104" x2="136" y2="80" stroke="var(--g700)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="126" y="96" font-size="11" fill="var(--g700)">δ</text>
+            <circle cx="112" cy="104" r="3.2" fill="var(--grey900)"/>
+            <text x="90" y="122" font-size="11" fill="var(--grey700)">(a, b)</text>
+            <text x="72" y="72" font-size="12" font-style="italic" fill="var(--g700)">D<tspan font-size="9" dy="3">δ</tspan></text>
+            <path d="M 156,96 Q 200,72 244,96" fill="none" stroke="var(--grey600)" stroke-width="1.2"/>
+            <polygon points="250,99 239,93 240,101" fill="var(--grey600)"/>
+            <text x="196" y="70" font-size="12" font-style="italic" fill="var(--grey700)">f</text>
+            <line x1="278" y1="176" x2="278" y2="38" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="278,30 274,41 282,41" fill="var(--grey800)"/>
+            <rect x="270" y="78" width="16" height="44" fill="var(--g50)" stroke="none"/>
+            <line x1="270" y1="78" x2="286" y2="78" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="270" y1="122" x2="286" y2="122" stroke="var(--g600)" stroke-width="1.4"/>
+            <circle cx="278" cy="100" r="3" fill="var(--grey900)"/>
+            <text x="292" y="82" font-size="11" fill="var(--g700)">L + ε</text>
+            <text x="292" y="104" font-size="11" fill="var(--grey900)">L</text>
+            <text x="292" y="126" font-size="11" fill="var(--g700)">L − ε</text>
+          </svg>
+          <p class="figcaption">$f(D_\delta\setminus\{(a,b)\})\subset(L-\varepsilon,\,L+\varepsilon)$</p>
+        </div>
+        <p>Read on the graph instead: let $S$ be the surface $z=f(x,y)$. Given $\varepsilon\gt 0$, one can choose $\delta\gt 0$ so that the part of $S$ lying above the punctured disk $D_\delta$ is trapped between the two horizontal planes $z=L-\varepsilon$ and $z=L+\varepsilon$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : infinitely many paths -->
+<div class="card note-card" id="c14-2-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">접근 방향이 무한히 많다 <em>Infinitely Many Paths of Approach</em><span class="src-ref">Showing That a Limit Does Not Exist · p.991</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>일변수함수의 경우 $a$에 접근하는 방법은 왼쪽에서와 오른쪽에서, 정확히 두 가지뿐이다. 두 편극한이 서로 다르면 $\lim_{x\to a}f(x)$는 존재하지 않는다.</p>
+        <p>이변수에서는 사정이 훨씬 자유롭다. 점 $(x,y)$는 $f$의 정의역 안에만 머물러 있으면, 무한히 많은 방향과 무한히 많은 곡선을 따라 어떤 방식으로도 $(a,b)$에 접근할 수 있다.</p>
+        <p>정의 1은 $(x,y)$와 $(a,b)$ 사이의 <em>거리</em>만을 제한할 뿐, 접근하는 방향에 대해서는 아무것도 말하지 않는다. 따라서 극한이 존재한다면 $f(x,y)$는 어떤 접근 방식을 택하더라도 같은 값 $L$로 다가가야 한다. 대우를 취하면, 서로 다른 극한값을 주는 두 접근 방식을 찾아내는 것만으로 극한이 존재하지 않음을 보일 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a function of one variable there are exactly two ways to approach $a$: from the left and from the right. If the two one-sided limits disagree, $\lim_{x\to a}f(x)$ fails to exist.</p>
+        <p>In two variables the situation is far less rigid. The point $(x,y)$ may approach $(a,b)$ from infinitely many directions and along infinitely many curves, in any manner whatsoever, as long as it stays inside the domain of $f$.</p>
+        <p>Definition 1 constrains only the <em>distance</em> from $(x,y)$ to $(a,b)$; it says nothing about the direction of approach. Consequently, if the limit exists, then $f(x,y)$ must tend to that same value $L$ along every possible approach. Contrapositively, exhibiting two approaches with different limiting values proves that the limit does not exist.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : two-path test -->
+<div class="card thm-card" id="c14-2-5">
+  <div class="card-head">
+    <span class="thm-num">THM 5</span>
+    <span class="thm-title">경로 판정법 <em>Two-Path Test</em><span class="src-ref">Boxed statement · p.991</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>경로 판정법.</strong> 경로 $C_1$을 따라 $(x,y)\to(a,b)$일 때 $f(x,y)\to L_1$이고, 경로 $C_2$를 따라 $(x,y)\to(a,b)$일 때 $f(x,y)\to L_2$라 하자. 이때 $L_1\ne L_2$이면</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)\text{는 존재하지 않는다.}$$</div>
+        </div>
+        <p>이는 정의 1에서 바로 따라 나온다. 극한이 존재한다면 그 값은 어떤 허용 가능한 경로를 따라 접근하더라도 같아야 하므로, 서로 다른 극한값을 주는 두 경로가 있으면 극한은 존재할 수 없다. 다만 이 판정법은 한쪽 방향으로만 성립한다 — 두 경로는 물론이고 $(a,b)$를 지나는 모든 직선처럼 무한히 많은 경로를 따라 값이 일치하더라도, 그것만으로 극한의 존재가 증명되지는 않는다(예제 3).</p>
+        <div class="fig">
+          <svg viewBox="0 0 360 200" role="img" aria-label="점 (a, b)로 접근하는 두 경로 C1, C2와 서로 다른 극한값 L1, L2" style="max-width:360px;width:100%;height:auto">
+            <line x1="40" y1="165" x2="332" y2="165" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="340,165 329,161 329,169" fill="var(--grey800)"/>
+            <line x1="40" y1="165" x2="40" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="40,24 36,35 44,35" fill="var(--grey800)"/>
+            <text x="336" y="182" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="31" y="30" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="28" y="180" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 62,158 C 104,148 156,122 190,98" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="196,94 184,95 189,103" fill="var(--g600)"/>
+            <path d="M 320,52 C 274,54 228,70 192,90" fill="none" stroke="var(--orange)" stroke-width="2"/>
+            <polygon points="186,93 197,97 194,88" fill="var(--orange)"/>
+            <circle cx="196" cy="95" r="3.6" fill="var(--grey900)"/>
+            <text x="204" y="112" font-size="11" fill="var(--grey900)">(a, b)</text>
+            <text x="76" y="146" font-size="11" font-style="italic" fill="var(--g700)">C₁</text>
+            <text x="300" y="44" font-size="11" font-style="italic" fill="var(--orange)">C₂</text>
+            <text x="112" y="128" font-size="11" fill="var(--g700)">f → L₁</text>
+            <text x="230" y="54" font-size="11" fill="var(--orange)">f → L₂</text>
+            <text x="120" y="192" font-size="11.5" fill="var(--grey700)">L₁ ≠ L₂</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Two-Path Test.</strong> Suppose $f(x,y)\to L_1$ as $(x,y)\to(a,b)$ along a path $C_1$, and $f(x,y)\to L_2$ as $(x,y)\to(a,b)$ along a path $C_2$. If $L_1\ne L_2$, then</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)\ \text{does not exist.}$$</div>
+        </div>
+        <p>This is immediate from Definition 1: a limit, if it exists, is approached along every admissible path, so two paths with different limiting values rule one out. The test runs one way only: agreement along two paths — or even along an infinite family, such as every line through $(a,b)$ — proves nothing (see Example 3).</p>
+        <div class="fig">
+          <svg viewBox="0 0 360 200" role="img" aria-label="Two paths C1 and C2 approaching (a, b) with different limiting values L1 and L2" style="max-width:360px;width:100%;height:auto">
+            <line x1="40" y1="165" x2="332" y2="165" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="340,165 329,161 329,169" fill="var(--grey800)"/>
+            <line x1="40" y1="165" x2="40" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="40,24 36,35 44,35" fill="var(--grey800)"/>
+            <text x="336" y="182" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="31" y="30" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="28" y="180" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 62,158 C 104,148 156,122 190,98" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="196,94 184,95 189,103" fill="var(--g600)"/>
+            <path d="M 320,52 C 274,54 228,70 192,90" fill="none" stroke="var(--orange)" stroke-width="2"/>
+            <polygon points="186,93 197,97 194,88" fill="var(--orange)"/>
+            <circle cx="196" cy="95" r="3.6" fill="var(--grey900)"/>
+            <text x="204" y="112" font-size="11" fill="var(--grey900)">(a, b)</text>
+            <text x="76" y="146" font-size="11" font-style="italic" fill="var(--g700)">C₁</text>
+            <text x="300" y="44" font-size="11" font-style="italic" fill="var(--orange)">C₂</text>
+            <text x="112" y="128" font-size="11" fill="var(--g700)">f → L₁</text>
+            <text x="230" y="54" font-size="11" fill="var(--orange)">f → L₂</text>
+            <text x="120" y="192" font-size="11.5" fill="var(--grey700)">L₁ ≠ L₂</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : limit laws and special limits (2) -->
+<div class="card rem-card" id="c14-2-6">
+  <div class="card-head">
+    <span class="rem-num">REM 6</span>
+    <span class="rem-title">극한 법칙 <em>Limit Laws</em><span class="src-ref">Properties of Limits, Eq. (2) · p.993</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>§1.6의 극한 법칙은 그대로 이변수함수로 확장된다. 우변의 극한들이 존재한다고 가정하면:</p>
+        <ol>
+          <li>합의 극한은 극한의 합이다;</li>
+          <li>차의 극한은 극한의 차이다;</li>
+          <li>상수배는 극한을 그대로 통과한다;</li>
+          <li>곱의 극한은 극한의 곱이다;</li>
+          <li>몫의 극한은 극한의 몫이다, 단 분모의 극한이 $0$이 아닐 때.</li>
+        </ol>
+        <p>이 법칙들과 함께 세 가지 특수한 극한이 필요하며, 이 셋을 증명하는 것이 연습문제 54의 과제이다.</p>
+        <div class="math-display">$$\begin{gathered}\lim_{(x,y)\to(a,b)}x=a,\\[2pt] \lim_{(x,y)\to(a,b)}y=b,\\[2pt] \lim_{(x,y)\to(a,b)}c=c.\end{gathered}\tag{2}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The Limit Laws of Section 1.6 carry over verbatim to functions of two variables. Assuming the limits on the right exist:</p>
+        <ol>
+          <li>the limit of a sum is the sum of the limits;</li>
+          <li>the limit of a difference is the difference of the limits;</li>
+          <li>a constant factor passes through the limit;</li>
+          <li>the limit of a product is the product of the limits;</li>
+          <li>the limit of a quotient is the quotient of the limits, as long as the denominator's limit is not $0$.</li>
+        </ol>
+        <p>Together with the laws one needs three special limits; proving these three is the task set by Exercise 54:</p>
+        <div class="math-display">$$\begin{gathered}\lim_{(x,y)\to(a,b)}x=a,\\[2pt] \lim_{(x,y)\to(a,b)}y=b,\\[2pt] \lim_{(x,y)\to(a,b)}c=c.\end{gathered}\tag{2}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : polynomials and rational functions, (3) (4) -->
+<div class="card thm-card" id="c14-2-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">다항·유리함수의 극한은 직접대입 <em>Limits of Polynomials and Rational Functions</em><span class="src-ref">Eq. (3)–(4) · p.993</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이변수함수의 <strong>다항함수</strong>란 $c$가 상수이고 $m,n$이 음이 아닌 정수인 항 $c\,x^my^n$들의 유한합이며, <strong>유리함수</strong>는 그런 두 다항식의 몫이다. 예를 들어 $p(x,y)=x^4+5x^3y^2+6xy^4-7y+6$은 다항함수이고 $q(x,y)=\dfrac{2xy+1}{x^2+y^2}$는 유리함수이다.</p>
+        <div class="formal-box">
+          <p>모든 이변수 다항함수 $p$에 대해</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}p(x,y)=p(a,b).\tag{3}$$</div>
+          <p>유리함수 $q=p/r$과 $q$의 정의역에 속하는 점 $(a,b)$(즉 $r(a,b)\ne 0$)에 대해</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}q(x,y)=\frac{p(a,b)}{r(a,b)}=q(a,b).\tag{4}$$</div>
+        </div>
+        <p>요컨대 이 두 종류의 함수에서는 극한을 직접대입으로 계산할 수 있다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>증명.</strong> 다항함수 $p(x,y)=\sum c_k x^{m_k}y^{n_k}$(유한합)의 각 항 $x^my^n$을 보자. $m+n\ge1$이면 곱 법칙을 $m+n-1$번 적용하고 특수 극한 $\lim x=a$, $\lim y=b$(식 (2))를 대입하여 $\lim_{(x,y)\to(a,b)}x^my^n=a^mb^n$을 얻고, $m=n=0$인 상수항은 (2)의 $\lim c=c$가 곧바로 처리한다. 여기에 상수배 법칙을 적용한 뒤, 항이 유한 개이므로 합 법칙을 반복 적용하면</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}p(x,y)=\sum c_k a^{m_k}b^{n_k}=p(a,b)$$</div>
+        <p>가 되어 (3)이 성립한다.</p>
+        <p>유리함수 $q=p/r$에 대해 $(a,b)$가 $q$의 정의역에 있다는 것은 $r(a,b)\ne0$을 뜻한다. (3)을 분자 $p$와 분모 $r$에 각각 적용하면 $\lim_{(x,y)\to(a,b)}p(x,y)=p(a,b)$이고 $\lim_{(x,y)\to(a,b)}r(x,y)=r(a,b)\ne0$이므로, 몫 법칙(분모의 극한이 $0$이 아닐 때 성립)을 적용할 수 있어</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}q(x,y)=\frac{p(a,b)}{r(a,b)}=q(a,b)$$</div>
+        <p>를 얻는다. 이것이 (4)이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A <strong>polynomial function of two variables</strong> is a finite sum of terms $c\,x^m y^n$ with $c$ constant and $m,n$ nonnegative integers; a <strong>rational function</strong> is a quotient of two such polynomials. For instance $p(x,y)=x^4+5x^3y^2+6xy^4-7y+6$ is a polynomial and $q(x,y)=\dfrac{2xy+1}{x^2+y^2}$ is a rational function.</p>
+        <div class="formal-box">
+          <p>For every polynomial $p$ of two variables,</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}p(x,y)=p(a,b).\tag{3}$$</div>
+          <p>For a rational function $q=p/r$ and a point $(a,b)$ in the domain of $q$ (that is, $r(a,b)\ne 0$),</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}q(x,y)=\frac{p(a,b)}{r(a,b)}=q(a,b).\tag{4}$$</div>
+        </div>
+        <p>In short: for these two classes of functions the limit is computed by direct substitution.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Proof.</strong> Take a term $x^my^n$ of the polynomial $p(x,y)=\sum c_k x^{m_k}y^{n_k}$ (a finite sum). If $m+n\ge1$, applying the product law $m+n-1$ times and substituting the special limits $\lim x=a$, $\lim y=b$ from (2) gives $\lim_{(x,y)\to(a,b)}x^my^n=a^mb^n$; a constant term ($m=n=0$) is settled at once by $\lim c=c$ in (2). Multiplying by the constant-factor law and then applying the sum law across the finitely many terms gives</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}p(x,y)=\sum c_k a^{m_k}b^{n_k}=p(a,b),$$</div>
+        <p>which is (3).</p>
+        <p>For a rational function $q=p/r$, the hypothesis that $(a,b)$ lies in the domain of $q$ means $r(a,b)\ne0$. Applying (3) to the numerator and denominator separately gives $\lim_{(x,y)\to(a,b)}p(x,y)=p(a,b)$ and $\lim_{(x,y)\to(a,b)}r(x,y)=r(a,b)\ne0$, so the quotient law (valid whenever the limit of the denominator is nonzero) applies and yields</p>
+        <div class="math-display">$$\lim_{(x,y)\to(a,b)}q(x,y)=\frac{p(a,b)}{r(a,b)}=q(a,b),$$</div>
+        <p>which is (4).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Squeeze Theorem, inequality (5) -->
+<div class="card rem-card" id="c14-2-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">조임정리도 성립한다 <em>The Squeeze Theorem Extends</em><span class="src-ref">Eq. (5) · p.994</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>조임정리는 이변수 이상의 함수에서도 성립한다. $(a,b)$ 근방에서 $u\le f\le v$이고 $u,v$가 그곳에서 같은 극한 $L$을 가지면 $f$도 $L$로 수렴한다. 이는 이미 짐작한 극한값을 확인하는 표준적인 도구이다.</p>
+        <p>예제 6에서 쓰이는 다음 부등식이 이 기법을 보여 준다. $y^2\ge 0$이므로 $x^2\le x^2+y^2$이고 따라서 $x^2/(x^2+y^2)\le 1$이므로,</p>
+        <div class="math-display">$$\frac{3x^2|y|}{x^2+y^2}\le 3|y|=3\sqrt{y^2}\le 3\sqrt{x^2+y^2}.\tag{5}$$</div>
+        <p>우변의 값은 $(x,y)$와 원점 사이의 거리에만 의존하며, 이는 정의 1이 다루는 바로 그 양이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The Squeeze Theorem carries over unchanged to two or more variables: if $u\le f\le v$ near $(a,b)$ and $u,v$ share the limit $L$ there, then $f\to L$ as well. It is the standard tool for confirming a limit whose value has already been guessed.</p>
+        <p>The estimate used in Example 6 illustrates the technique. Since $y^2\ge 0$ gives $x^2\le x^2+y^2$, hence $x^2/(x^2+y^2)\le 1$,</p>
+        <div class="math-display">$$\frac{3x^2|y|}{x^2+y^2}\le 3|y|=3\sqrt{y^2}\le 3\sqrt{x^2+y^2}.\tag{5}$$</div>
+        <p>The right-hand bound depends only on the distance from $(x,y)$ to the origin, which is exactly what Definition 1 controls.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Definition 6, continuity -->
+<div class="card def-card" id="c14-2-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">한 점에서의 연속 <em>Continuity at a Point</em><span class="src-ref">Definition 6 · p.995</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>일변수함수에서 연속함수의 극한은 직접대입으로 계산되는데, 이는 대입 성질 $\lim_{x\to a}f(x)=f(a)$ 자체가 연속의 정의이기 때문이다. 이변수의 연속도 같은 방식으로 정의한다.</p>
+        <div class="formal-box">
+          <p><strong>정의 6.</strong> 이변수함수 $f$가 $(a,b)$에서 <strong>연속</strong>이라 함은</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b)$$</div>
+          <p>인 것을 말한다. $D$의 모든 점 $(a,b)$에서 연속이면 $f$는 <strong>$D$에서 연속</strong>이라 한다.</p>
+        </div>
+        <p>이 등식 하나에 세 가지 요구가 담겨 있다: $f(a,b)$가 정의되어 있어야 하고, 극한이 존재해야 하며, 두 값이 서로 같아야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For one variable, limits of continuous functions are evaluated by direct substitution, because that substitution property $\lim_{x\to a}f(x)=f(a)$ is precisely what continuity means. Two-variable continuity is defined the same way.</p>
+        <div class="formal-box">
+          <p><strong>Definition 6.</strong> A function $f$ of two variables is <strong>continuous at $(a,b)$</strong> if</p>
+          <div class="math-display">$$\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b).$$</div>
+          <p>$f$ is <strong>continuous on $D$</strong> if it is continuous at every point $(a,b)$ of $D$.</p>
+        </div>
+        <p>The equation packs three demands into one: $f(a,b)$ is defined, the limit exists, and the two numbers agree.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : building continuous functions -->
+<div class="card note-card" id="c14-2-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">연속함수를 만드는 방법 <em>Building Continuous Functions</em><span class="src-ref">p.995</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직관적으로 연속이란, 점 $(x,y)$의 작은 변화가 값 $f(x,y)$에도 작은 변화만을 일으킨다는 뜻이며, 이때 곡면 $z=f(x,y)$에는 구멍도 끊김도 없다.</p>
+        <p>다음 세 가지 사실 덕분에 연속함수를 쉽게 알아볼 수 있다.</p>
+        <p><strong>(a)</strong> 식 (3)은 다항함수의 극한을 대입으로 계산하므로, 모든 다항함수는 $\mathbb{R}^2$ 전체에서 연속이다.</p>
+        <p><strong>(b)</strong> 식 (4)는 유리함수에 대해 그 정의역의 모든 점에서 같은 일을 하므로, 모든 유리함수는 자신의 정의역에서 연속이다.</p>
+        <p><strong>(c)</strong> 극한 법칙에 의해, 연속함수의 합·차·곱·몫도 각자의 정의역에서 연속이다 — 몫은 분모가 $0$이 아닌 곳에서.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Intuitively, continuity says that a small change in the point $(x,y)$ produces only a small change in the value $f(x,y)$; the surface $z=f(x,y)$ then has no hole and no break in it.</p>
+        <p>Three consequences make continuous functions easy to recognize.</p>
+        <p><strong>(a)</strong> Equation (3) evaluates the limit of a polynomial by substitution, so every polynomial is continuous on all of $\mathbb{R}^2$.</p>
+        <p><strong>(b)</strong> Equation (4) does the same for a rational function at every point of its domain, so every rational function is continuous on its domain.</p>
+        <p><strong>(c)</strong> By the Limit Laws, adding, subtracting, multiplying or dividing two continuous functions again produces a function continuous on the resulting domain — for a quotient, wherever the denominator stays nonzero.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : composites -->
+<div class="card note-card" id="c14-2-11">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">합성함수의 연속 <em>Continuity of Composites</em><span class="src-ref">p.996</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>합성은 연속함수를 만드는 네 번째 방법이다. $f$를 이변수 연속함수, $g$를 $f$의 치역에서 정의된 일변수 연속함수라 하자. 그러면 다음 식으로 정의되는 합성함수 $h=g\circ f$</p>
+        <div class="math-display">$$h(x,y)=g\bigl(f(x,y)\bigr)$$</div>
+        <p>도 연속이다. 교재는 이를 증명 없이 서술하며, 예제 10과 11에서 각각 $g(t)=e^{-t}$와 $g(t)=\arctan t$에 적용한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Composition is a fourth way of manufacturing continuous functions. Let $f$ be a continuous function of two variables and let $g$ be a continuous function of one variable defined on the range of $f$. Then the composite $h=g\circ f$ given by</p>
+        <div class="math-display">$$h(x,y)=g\bigl(f(x,y)\bigr)$$</div>
+        <p>is continuous as well. The text states this without proof; Examples 10 and 11 apply it to $g(t)=e^{-t}$ and $g(t)=\arctan t$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : three or more variables -->
+<div class="card note-card" id="c14-2-12">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">삼변수 이상의 극한과 연속 <em>Limits and Continuity in Higher Dimensions</em><span class="src-ref">Functions of Three or More Variables · p.997</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절의 내용은 모두 삼변수 이상으로 확장된다. $\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=L$이란, 점 $(x,y,z)$가 $f$의 정의역 안에서 $(a,b,c)$에 접근할 때 $f$가 $L$에 접근한다는 뜻이다. $\mathbb{R}^3$에서의 거리는 $\sqrt{(x-a)^2+(y-b)^2+(z-c)^2}$이므로, 엄밀한 정의는 다음과 같다: 모든 $\varepsilon\gt 0$에 대해 어떤 $\delta\gt 0$이 있어</p>
+        <div class="math-display">$$0\lt\sqrt{(x-a)^2+(y-b)^2+(z-c)^2}\lt\delta\ \Longrightarrow\ |f(x,y,z)-L|\lt\varepsilon$$</div>
+        <p>가 $f$의 정의역에 속한 모든 $(x,y,z)$에 대해 성립한다. $(a,b,c)$에서의 연속 역시 $\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=f(a,b,c)$로 정의된다.</p>
+        <p>예를 들어 $f(x,y,z)=\dfrac{1}{x^2+y^2+z^2-1}$은 삼변수 유리함수이므로 분모가 $0$이 아닌 $\mathbb{R}^3$의 모든 점에서 연속이며, 불연속점은 오직 단위구면 $x^2+y^2+z^2=1$ 위에만 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Everything in this section extends to three or more variables. The statement $\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=L$ means that $f$ approaches $L$ as the point $(x,y,z)$ approaches $(a,b,c)$ inside the domain of $f$, and since the distance in $\mathbb{R}^3$ is $\sqrt{(x-a)^2+(y-b)^2+(z-c)^2}$, the precise version reads: for every $\varepsilon\gt 0$ there is $\delta\gt 0$ with</p>
+        <div class="math-display">$$0\lt\sqrt{(x-a)^2+(y-b)^2+(z-c)^2}\lt\delta\ \Longrightarrow\ |f(x,y,z)-L|\lt\varepsilon$$</div>
+        <p>for every $(x,y,z)$ in the domain of $f$. Continuity at $(a,b,c)$ again means $\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=f(a,b,c)$.</p>
+        <p>For example, $f(x,y,z)=\dfrac{1}{x^2+y^2+z^2-1}$ is a rational function of three variables, hence continuous at every point of $\mathbb{R}^3$ where its denominator does not vanish; its only discontinuities lie on the unit sphere $x^2+y^2+z^2=1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Definition (7), limit in R^n -->
+<div class="card def-card" id="c14-2-13">
+  <div class="card-head">
+    <span class="def-num">DEF 13</span>
+    <span class="def-title">n차원 공간에서의 극한 <em>Limit in n-Space</em><span class="src-ref">Definition (7) · p.997</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터 표기를 쓰면 이변수·삼변수의 정의를 하나로 통합할 수 있다.</p>
+        <div class="formal-box">
+          <p><strong>정의 (7).</strong> $f$가 $\mathbb{R}^n$의 부분집합 $D$에서 정의되어 있다고 하자. 이때 $\displaystyle\lim_{\mathbf{x}\to\mathbf{a}}f(\mathbf{x})=L$이란, 모든 $\varepsilon\gt 0$에 대해 어떤 $\delta\gt 0$이 존재하여</p>
+          <div class="math-display">$$\mathbf{x}\in D\ \text{이고}\ 0\lt|\mathbf{x}-\mathbf{a}|\lt\delta\ \Longrightarrow\ |f(\mathbf{x})-L|\lt\varepsilon$$</div>
+          <p>을 만족시킨다는 뜻이다.</p>
+        </div>
+        <p>지금까지 다룬 세 경우는 $n=1,2,3$일 때의 특수한 경우이다. $n=1$이면 $\mathbf{x}=x$, $\mathbf{a}=a$이므로 (7)은 일변수 정의가 된다. $n=2$이면 $\mathbf{x}=\langle x,y\rangle$, $\mathbf{a}=\langle a,b\rangle$이므로 $|\mathbf{x}-\mathbf{a}|=\sqrt{(x-a)^2+(y-b)^2}$이고 (7)은 정의 1이 된다. $n=3$이면 앞의 삼변수 정의가 된다.</p>
+        <p>연속 역시 모든 차원에서 하나의 간결한 형태를 갖는다: $f$가 $\mathbf{a}$에서 연속이라 함은 $\lim_{\mathbf{x}\to\mathbf{a}}f(\mathbf{x})=f(\mathbf{a})$인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Vector notation collapses the two-variable and three-variable definitions into a single one.</p>
+        <div class="formal-box">
+          <p><strong>Definition (7).</strong> Let $f$ be defined on a subset $D$ of $\mathbb{R}^n$. Then $\displaystyle\lim_{\mathbf{x}\to\mathbf{a}}f(\mathbf{x})=L$ means: for every $\varepsilon\gt 0$ there is $\delta\gt 0$ such that</p>
+          <div class="math-display">$$\mathbf{x}\in D\ \text{ and }\ 0\lt|\mathbf{x}-\mathbf{a}|\lt\delta\ \Longrightarrow\ |f(\mathbf{x})-L|\lt\varepsilon .$$</div>
+        </div>
+        <p>The three cases already met are the special cases $n=1,2,3$. For $n=1$ one has $\mathbf{x}=x$, $\mathbf{a}=a$ and (7) is the one-variable definition. For $n=2$, $\mathbf{x}=\langle x,y\rangle$ and $\mathbf{a}=\langle a,b\rangle$, so $|\mathbf{x}-\mathbf{a}|=\sqrt{(x-a)^2+(y-b)^2}$ and (7) becomes Definition 1. For $n=3$ it becomes the three-variable definition above.</p>
+        <p>Continuity likewise has one compact form in every dimension: $f$ is continuous at $\mathbf{a}$ if $\lim_{\mathbf{x}\to\mathbf{a}}f(\mathbf{x})=f(\mathbf{a})$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-2-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">두 축을 따른 극한이 다른 경우 <em>Different Limits Along the Two Axes</em><span class="src-ref">Example 1 · p.991–992</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ 에 대하여 두 좌표축을 경로로 삼아, 극한 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ 가 존재하지 않음을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>증명.</strong> $x$축(즉 $y=0$, $x\ne0$)을 따라 원점에 접근하면 $f(x,0)=\dfrac{x^2-0}{x^2+0}=1$이므로 $f(x,0)\to1$이다. $y$축(즉 $x=0$, $y\ne0$)을 따라 접근하면 $f(0,y)=\dfrac{0-y^2}{0+y^2}=-1$이므로 $f(0,y)\to-1$이다. 두 좌표축은 모두 원점을 지나는 경로이고 두 극한값 $1\ne-1$이 서로 다르므로, 경로 판정법에 의해 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}$는 존재하지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}$ does not exist, by comparing the values of the function along the two coordinate axes.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Proof.</strong> Along the $x$-axis ($y=0$, $x\ne0$), $f(x,0)=\dfrac{x^2-0}{x^2+0}=1$, so $f(x,0)\to1$. Along the $y$-axis ($x=0$, $y\ne0$), $f(0,y)=\dfrac{0-y^2}{0+y^2}=-1$, so $f(0,y)\to-1$. Both axes are paths through the origin, and the two limiting values $1\ne-1$ disagree, so by the Two-Path Test, $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}$ does not exist.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-2-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">축과 직선 y=x를 비교하는 경우 <em>Axes Versus the Line y = x</em><span class="src-ref">Example 2 · p.992</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=\dfrac{xy}{x^2+y^2}$ 에 대하여 극한 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ 가 존재하는지 판정하라. 두 좌표축을 따른 극한과 직선 $y=x$ 를 따른 극한을 각각 구하여 결론의 근거로 삼아라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>증명.</strong> 두 좌표축을 따르면 $f(x,0)=\dfrac{0}{x^2}=0$이고 $f(0,y)=\dfrac{0}{y^2}=0$이므로, 어느 축으로 접근하더라도 $f\to0$이다. 그러나 직선 $y=x$ ($x\ne0$)를 따르면 $f(x,x)=\dfrac{x\cdot x}{x^2+x^2}=\dfrac{x^2}{2x^2}=\dfrac12$이므로 $f(x,x)\to\dfrac12$이다. 두 축을 따른 극한 $0$과 직선 $y=x$를 따른 극한 $\dfrac12$이 서로 다르므로, 경로 판정법에 의해 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{x^2+y^2}$는 존재하지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{x^2+y^2}$ exists. Compute the limit along each coordinate axis and along the line $y=x$, and use those values to justify the conclusion.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Proof.</strong> Along either coordinate axis, $f(x,0)=\dfrac{0}{x^2}=0$ and $f(0,y)=\dfrac{0}{y^2}=0$, so $f\to0$ regardless of which axis is used. Along the line $y=x$ ($x\ne0$), however, $f(x,x)=\dfrac{x\cdot x}{x^2+x^2}=\dfrac{x^2}{2x^2}=\dfrac12$, so $f(x,x)\to\dfrac12$. Since the axis limit $0$ and the limit $\dfrac12$ along $y=x$ disagree, the Two-Path Test shows $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{x^2+y^2}$ does not exist.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-2-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">모든 직선으로는 부족한 경우 <em>When All Lines Are Not Enough</em><span class="src-ref">Example 3 · p.992–993</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=\dfrac{xy^2}{x^2+y^4}$ 에 대하여 극한 $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ 가 존재하는지 판정하라. 먼저 원점을 지나는 모든 직선을 따른 극한을 구하고, 그 값들만으로는 결론을 내릴 수 없음을 포물선 $x=y^2$ 을 따른 극한으로 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>증명.</strong> 원점을 지나는 직선 $y=mx$($m$은 상수)를 따르면 $f(x,mx)=\dfrac{x(mx)^2}{x^2+(mx)^4}=\dfrac{m^2x^3}{x^2+m^4x^4}=\dfrac{m^2x}{1+m^4x^2}$이고, $x\to0$일 때 분자는 $0$으로, 분모는 $1$로 가므로 $f(x,mx)\to0$이다. $y$축($x=0$)을 따를 때도 $f(0,y)=0$이므로 마찬가지다. 즉 원점을 지나는 모든 직선을 따른 극한은 하나같이 $0$이다.</p>
+        <p>그러나 포물선 $x=y^2$ ($y\ne0$)을 따르면 $f(y^2,y)=\dfrac{y^2\cdot y^2}{(y^2)^2+y^4}=\dfrac{y^4}{2y^4}=\dfrac12$이므로 $f(y^2,y)\to\dfrac12$이다. 이는 직선을 따른 공통값 $0$과 다르므로, 경로 판정법에 의해 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy^2}{x^2+y^4}$는 존재하지 않는다 — 원점을 지나는 모든 직선에서 값이 일치해도 극한의 존재를 보장하지는 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy^2}{x^2+y^4}$ exists. First find the limit along every line through the origin; then show that this evidence settles nothing by computing the limit along the parabola $x=y^2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Proof.</strong> Along a line $y=mx$ through the origin ($m$ constant), $f(x,mx)=\dfrac{x(mx)^2}{x^2+(mx)^4}=\dfrac{m^2x^3}{x^2+m^4x^4}=\dfrac{m^2x}{1+m^4x^2}$, and as $x\to0$ the numerator tends to $0$ while the denominator tends to $1$, so $f(x,mx)\to0$. Along the $y$-axis ($x=0$), $f(0,y)=0$ as well. So the limit along every line through the origin equals $0$.</p>
+        <p>Along the parabola $x=y^2$ ($y\ne0$), however, $f(y^2,y)=\dfrac{y^2\cdot y^2}{(y^2)^2+y^4}=\dfrac{y^4}{2y^4}=\dfrac12$, so $f(y^2,y)\to\dfrac12$. This disagrees with the common value $0$ along lines, so by the Two-Path Test $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy^2}{x^2+y^4}$ does not exist — agreement along every line through the origin does not guarantee that the limit exists.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-2-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">다항함수의 극한 <em>Limit of a Polynomial</em><span class="src-ref">Example 4 · p.994</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>극한 $\displaystyle\lim_{(x,y)\to(1,2)}\left(x^2y^3-x^3y^2+3x+2y\right)$ 의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $p(x,y)=x^2y^3-x^3y^2+3x+2y$는 다항함수이므로 (3)에 의해 극한은 $(1,2)$를 직접 대입해 구할 수 있다.</p>
+        <div class="math-display">$$p(1,2)=1^2\cdot2^3-1^3\cdot2^2+3\cdot1+2\cdot2=8-4+3+4=11.$$</div>
+        <p>따라서 $\displaystyle\lim_{(x,y)\to(1,2)}\left(x^2y^3-x^3y^2+3x+2y\right)=11$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate $\displaystyle\lim_{(x,y)\to(1,2)}\left(x^2y^3-x^3y^2+3x+2y\right)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> Since $p(x,y)=x^2y^3-x^3y^2+3x+2y$ is a polynomial, (3) allows the limit to be evaluated by substituting $(1,2)$ directly.</p>
+        <div class="math-display">$$p(1,2)=1^2\cdot2^3-1^3\cdot2^2+3\cdot1+2\cdot2=8-4+3+4=11.$$</div>
+        <p>Hence $\displaystyle\lim_{(x,y)\to(1,2)}\left(x^2y^3-x^3y^2+3x+2y\right)=11$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-2-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">유리함수의 극한 <em>Limit of a Rational Function</em><span class="src-ref">Example 5 · p.994</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>극한 $\displaystyle\lim_{(x,y)\to(-2,3)}\frac{x^2y+1}{x^3y^2-2x}$ 가 존재하는지 확인하고, 존재하면 그 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $q(x,y)=\dfrac{x^2y+1}{x^3y^2-2x}$의 분모 $r(x,y)=x^3y^2-2x$는 $(-2,3)$에서 $r(-2,3)=(-2)^3\cdot3^2-2(-2)=-72+4=-68\ne0$이므로, $(-2,3)$은 $q$의 정의역에 속한다. 따라서 (4)에 의해 극한은 직접대입으로 구해진다.</p>
+        <div class="math-display">$$q(-2,3)=\frac{(-2)^2\cdot3+1}{(-2)^3\cdot3^2-2(-2)}=\frac{4\cdot3+1}{-72+4}=\frac{13}{-68}=-\frac{13}{68}.$$</div>
+        <p>따라서 $\displaystyle\lim_{(x,y)\to(-2,3)}\frac{x^2y+1}{x^3y^2-2x}=-\frac{13}{68}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether $\displaystyle\lim_{(x,y)\to(-2,3)}\frac{x^2y+1}{x^3y^2-2x}$ exists, and evaluate it if it does.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> For $q(x,y)=\dfrac{x^2y+1}{x^3y^2-2x}$, the denominator $r(x,y)=x^3y^2-2x$ satisfies $r(-2,3)=(-2)^3\cdot3^2-2(-2)=-72+4=-68\ne0$ at $(-2,3)$, so $(-2,3)$ lies in the domain of $q$. Hence (4) allows the limit to be evaluated by direct substitution.</p>
+        <div class="math-display">$$q(-2,3)=\frac{(-2)^2\cdot3+1}{(-2)^3\cdot3^2-2(-2)}=\frac{4\cdot3+1}{-72+4}=\frac{13}{-68}=-\frac{13}{68}.$$</div>
+        <p>Hence $\displaystyle\lim_{(x,y)\to(-2,3)}\frac{x^2y+1}{x^3y^2-2x}=-\frac{13}{68}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex14-2-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">정의와 조임정리로 구하는 극한 <em>A Limit by Definition and by Squeezing</em><span class="src-ref">Example 6 · p.994–995</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>극한 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}$ 가 존재하면 그 값을 구하라. 단, 다음 두 가지 방법으로 각각 구하라.</p>
+        <p><strong>(a)</strong> 정의 1의 ε-δ 논법을 직접 사용한다.</p>
+        <p><strong>(b)</strong> 부등식 (5)와 조임정리를 사용한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> 두 방법 모두 극한값이 $0$임을 보인다.</p>
+        <p><strong>(a)</strong> $\varepsilon\gt0$이 주어졌다고 하자. $\delta=\varepsilon/3$로 잡는다. $0\lt\sqrt{x^2+y^2}\lt\delta$이면 $x^2\le x^2+y^2$이므로 $x^2/(x^2+y^2)\le1$이고, 따라서</p>
+        <div class="math-display">$$\left|\frac{3x^2y}{x^2+y^2}-0\right|=3|y|\cdot\frac{x^2}{x^2+y^2}\le3|y|=3\sqrt{y^2}\le3\sqrt{x^2+y^2}\lt3\delta=\varepsilon$$</div>
+        <p>이 성립한다. 이는 정의 1이 요구하는 함의를 그대로 확인해 주므로 극한값은 $0$이다.</p>
+        <p><strong>(b)</strong> $x^2/(x^2+y^2)\le1$이므로 $-3|y|\le\dfrac{3x^2y}{x^2+y^2}\le3|y|$가 모든 $(x,y)\ne(0,0)$에서 성립한다. 이는 부등식 (5)의 첫 부등호를 절댓값 없이 쓴 것이다. $(x,y)\to(0,0)$이면 $|y|\to0$이므로 위·아래 두 경계가 모두 $0$으로 수렴하고, 조임정리에 의해 가운데 항도 $0$으로 수렴한다.</p>
+        <p>따라서 두 방법 모두 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}=0$을 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}$ if it exists, in two ways.</p>
+        <p><strong>(a)</strong> Directly from the $\varepsilon$-$\delta$ statement of Definition 1.</p>
+        <p><strong>(b)</strong> From inequality (5) together with the Squeeze Theorem.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> Both methods show the limit equals $0$.</p>
+        <p><strong>(a)</strong> Let $\varepsilon\gt0$ be given, and set $\delta=\varepsilon/3$. If $0\lt\sqrt{x^2+y^2}\lt\delta$, then $x^2\le x^2+y^2$ gives $x^2/(x^2+y^2)\le1$, so</p>
+        <div class="math-display">$$\left|\frac{3x^2y}{x^2+y^2}-0\right|=3|y|\cdot\frac{x^2}{x^2+y^2}\le3|y|=3\sqrt{y^2}\le3\sqrt{x^2+y^2}\lt3\delta=\varepsilon .$$</div>
+        <p>This is precisely the implication Definition 1 demands, so the limit is $0$.</p>
+        <p><strong>(b)</strong> Since $x^2/(x^2+y^2)\le1$, the bound $-3|y|\le\dfrac{3x^2y}{x^2+y^2}\le3|y|$ holds for every $(x,y)\ne(0,0)$; this is the first estimate of inequality (5) written without absolute values. As $(x,y)\to(0,0)$, $|y|\to0$, so both bounds tend to $0$, and the Squeeze Theorem forces the middle expression to tend to $0$ as well.</p>
+        <p>Both methods therefore give $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex14-2-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">유리함수가 연속인 곳 <em>Where a Rational Function Is Continuous</em><span class="src-ref">Example 7 · p.995</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ 가 연속인 점들의 집합을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$는 유리함수이므로 (4)에 의해 자신의 정의역, 즉 분모가 $0$이 아닌 점들에서 연속이다. $x^2+y^2=0$은 $x=y=0$일 때만 성립하므로 분모가 $0$이 되는 점은 원점 하나뿐이다. 따라서 $f$는 집합</p>
+        <div class="math-display">$$D=\{(x,y)\mid(x,y)\ne(0,0)\}$$</div>
+        <p>에서 연속이며, 원점에서는 애초에 정의되지 않으므로 그곳에서는 불연속으로 취급한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine the set of points at which $f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ is continuous.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> The function $f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}$ is rational, so by (4) it is continuous throughout its domain, namely wherever the denominator is nonzero. Since $x^2+y^2=0$ only at $x=y=0$, the origin is the sole point where the denominator vanishes. Hence $f$ is continuous on the set</p>
+        <div class="math-display">$$D=\{(x,y)\mid(x,y)\ne(0,0)\},$$</div>
+        <p>and since $f$ is not even defined at the origin, that point counts as a point of discontinuity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex14-2-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">값을 정해 주어도 불연속인 함수 <em>Defining the Value Does Not Restore Continuity</em><span class="src-ref">Example 8 · p.995</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $g$ 를</p>
+        <div class="math-display">$$g(x,y)=\begin{cases}\dfrac{x^2-y^2}{x^2+y^2}, & (x,y)\ne(0,0),\\[6pt] 0, & (x,y)=(0,0)\end{cases}$$</div>
+        <p>로 정의한다. $g$ 가 원점에서 연속인지 판정하고, 그 근거를 밝혀라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $g(0,0)=0$으로 값이 정의되어 있으므로 연속의 정의(정의 6)가 요구하는 첫 조건("$g(0,0)$이 정의됨")은 충족된다. 그러나 예제 1에서 이미 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}$가 존재하지 않음을 보였고, $(x,y)\ne(0,0)$에서 $g$는 그 유리함수와 같으므로 $\displaystyle\lim_{(x,y)\to(0,0)}g(x,y)$도 존재하지 않는다. 극한 자체가 없으므로 정의 6의 등식 $\lim g=g(0,0)$이 성립할 수 없다. 따라서 $g$는 원점에서 <strong>불연속</strong>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$g(x,y)=\begin{cases}\dfrac{x^2-y^2}{x^2+y^2}, & (x,y)\ne(0,0),\\[6pt] 0, & (x,y)=(0,0).\end{cases}$$</div>
+        <p>Decide whether $g$ is continuous at the origin, and say why.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> The value $g(0,0)=0$ is defined, so the first requirement of Definition 6 (that $g(0,0)$ exist) is met. But Example 1 already showed that $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}$ fails to exist, and since $g$ agrees with that rational function for $(x,y)\ne(0,0)$, $\displaystyle\lim_{(x,y)\to(0,0)}g(x,y)$ fails to exist as well. With no limit to speak of, the equality $\lim g=g(0,0)$ required by Definition 6 cannot hold. So $g$ is <strong>discontinuous</strong> at the origin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 9 -->
+<div class="card exam-card" id="ex14-2-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 9</span>
+    <span class="exam-title">원점에서도 연속인 조각함수 <em>A Piecewise Function Continuous at the Origin</em><span class="src-ref">Example 9 · p.996</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f$ 를</p>
+        <div class="math-display">$$f(x,y)=\begin{cases}\dfrac{3x^2y}{x^2+y^2}, & (x,y)\ne(0,0),\\[6pt] 0, & (x,y)=(0,0)\end{cases}$$</div>
+        <p>으로 정의한다. $f$ 가 연속인 점들의 집합을 구하라. (원점에서의 연속성은 예제 6의 결과를 이용하라.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> 원점이 아닌 곳에서 $f$는 유리함수 $\dfrac{3x^2y}{x^2+y^2}$와 같고 그 분모는 원점 밖에서 $0$이 아니므로, (4)에 의해 그곳에서는 연속이다. 원점에서는 예제 6에서 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}=0$임을 이미 보였고, 이는 정의된 값 $f(0,0)=0$과 일치한다. 즉 정의 6의 등식 $\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)$이 성립하므로 원점에서도 연속이다. 두 경우를 합치면 $f$는 $\mathbb{R}^2$ 전체에서 연속이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$f(x,y)=\begin{cases}\dfrac{3x^2y}{x^2+y^2}, & (x,y)\ne(0,0),\\[6pt] 0, & (x,y)=(0,0).\end{cases}$$</div>
+        <p>Determine the set of points at which $f$ is continuous, using the value of the limit found in Example 6 to settle the origin.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> Away from the origin, $f$ coincides with the rational function $\dfrac{3x^2y}{x^2+y^2}$, whose denominator is nonzero there, so (4) makes $f$ continuous at every such point. At the origin, Example 6 already showed $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}=0$, which matches the defined value $f(0,0)=0$; thus the equality $\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)$ required by Definition 6 holds, and $f$ is continuous there too. Combining both cases, $f$ is continuous on all of $\mathbb{R}^2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 10 -->
+<div class="card exam-card" id="ex14-2-10">
+  <div class="card-head">
+    <span class="exam-num">EXAM 10</span>
+    <span class="exam-title">지수 합성함수의 연속 <em>Continuity of an Exponential Composite</em><span class="src-ref">Example 10 · p.996</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $h(x,y)=e^{-(x^2+y^2)}$ 가 연속인 점들의 집합을 구하라. 합성함수의 연속 성질을 근거로 답하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $f(x,y)=x^2+y^2$는 다항함수이므로 $\mathbb{R}^2$ 전체에서 연속이고, $g(t)=e^{-t}$는 모든 실수 $t$에서 연속이다. $h(x,y)=e^{-(x^2+y^2)}=g(f(x,y))$이므로 $h$는 합성함수 $g\circ f$이며, 합성함수의 연속성에 의해 $f$가 연속인 곳에서 $h$도 연속이다. 따라서 $h$는 $\mathbb{R}^2$ 전체에서 연속이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine where $h(x,y)=e^{-(x^2+y^2)}$ is continuous, justifying the answer by the continuity of composites.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> The function $f(x,y)=x^2+y^2$ is a polynomial, hence continuous on all of $\mathbb{R}^2$, and $g(t)=e^{-t}$ is continuous for every real $t$. Since $h(x,y)=e^{-(x^2+y^2)}=g(f(x,y))$, $h$ is the composite $g\circ f$, and the continuity of composites shows $h$ is continuous wherever $f$ is. Hence $h$ is continuous on all of $\mathbb{R}^2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 11 -->
+<div class="card exam-card" id="ex14-2-11">
+  <div class="card-head">
+    <span class="exam-num">EXAM 11</span>
+    <span class="exam-title">arctan 합성함수의 불연속선 <em>A Line of Discontinuity for an Arctangent Composite</em><span class="src-ref">Example 11 · p.996–997</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $h(x,y)=\arctan(y/x)$ 가 연속인 점들의 집합을 구하고, 불연속인 점들이 이루는 도형을 말하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+                <p><strong>풀이.</strong> $f(x,y)=y/x$는 유리함수이므로 분모가 $0$이 아닌 곳, 즉 $x\ne0$인 점들에서 연속이고, $g(t)=\arctan t$는 모든 실수 $t$에서 연속이다. $h(x,y)=\arctan(y/x)=g(f(x,y))$는 합성함수 $g\circ f$이므로, 합성함수의 연속성에 의해 $f$가 연속인 영역 $\{(x,y)\mid x\ne0\}$에서 $h$도 연속이다. $h$는 $x=0$인 점에서는 애초에 정의되지 않으므로, 불연속인 점들은 정확히 직선 $x=0$(즉 $y$축) 위에 놓인다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine where $h(x,y)=\arctan(y/x)$ is continuous, and describe the set of points at which it fails to be continuous.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+                <p><strong>Solution.</strong> The function $f(x,y)=y/x$ is rational, so it is continuous wherever the denominator is nonzero, that is, on $\{(x,y)\mid x\ne0\}$, and $g(t)=\arctan t$ is continuous for every real $t$. Since $h(x,y)=\arctan(y/x)=g(f(x,y))$ is the composite $g\circ f$, continuity of composites makes $h$ continuous on that same region $\{(x,y)\mid x\ne0\}$. As $h$ is not even defined where $x=0$, its points of discontinuity form exactly the line $x=0$ (the $y$-axis).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-2-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch05.html">단원 05</a></p>
+        <ul>
+          <li>경로 판정으로 극한의 비존재 보이기 — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a>, <a href="../calc2/ch05.html#pr03">pr03</a> (완전 대응)</li>
+          <li>극한 법칙·다항/유리함수의 직접대입 — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a> (부분 대응: 법칙을 명시적으로 서술하지 않음)</li>
+          <li>조임정리로 극한 구하기 — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a>, <a href="../calc2/ch05.html#yu02-4">yu02-4</a> (완전 대응)</li>
+          <li>연속의 정의·합성함수의 연속 — <a href="../calc2/ch05.html#yu02-1">yu02-1</a>, <a href="../calc2/ch05.html#yu02-4">yu02-4</a>, <a href="../calc2/ch05.html#pr02">pr02</a>, <a href="../calc2/ch05.html#pr04">pr04</a> (부분 대응: 정의 자체는 서술되지 않음)</li>
+          <li>조각함수의 극한·연속 판정(연습문제 57 유형) — <a href="../calc2/ch05.html#yu02-3">yu02-3</a> (완전 대응)</li>
+          <li>극한의 ε-δ 정의(정의 1)와 $\mathbb{R}^n$ 통합 정의 (7) — 대응 없음</li>
+          <li>극좌표를 이용한 극한 계산(연습문제 51–53) — 대응 없음</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.2)</strong></p>
+        <p>제출 문항: 23, 30, 31, 49, 53 &nbsp;/&nbsp; 학습 참고: 19–30, 31–34, 51–53, 57 (57번은 포함 여부 미정)</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-1.html">§14.1 다변수함수</a> &nbsp;/&nbsp; 다음: <a href="s14-3.html">§14.3 편도함수</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch05.html">Unit 05</a></p>
+        <ul>
+          <li>Showing a limit does not exist by comparing paths — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a>, <a href="../calc2/ch05.html#pr03">pr03</a> (full match)</li>
+          <li>Limit laws and direct substitution for polynomials and rational functions — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a> (partial: the laws are used but never stated)</li>
+          <li>Limits by the Squeeze Theorem — <a href="../calc2/ch05.html#ex02">ex02</a>, <a href="../calc2/ch05.html#yu02-2">yu02-2</a>, <a href="../calc2/ch05.html#yu02-4">yu02-4</a> (full match)</li>
+          <li>Definition of continuity and continuity of composites — <a href="../calc2/ch05.html#yu02-1">yu02-1</a>, <a href="../calc2/ch05.html#yu02-4">yu02-4</a>, <a href="../calc2/ch05.html#pr02">pr02</a>, <a href="../calc2/ch05.html#pr04">pr04</a> (partial: the definition itself is not stated)</li>
+          <li>Limits and continuity of piecewise-defined functions (the Exercise 57 type) — <a href="../calc2/ch05.html#yu02-3">yu02-3</a> (full match)</li>
+          <li>The $\varepsilon$-$\delta$ definition (Definition 1) and the unified definition (7) in $\mathbb{R}^n$ — no match</li>
+          <li>Evaluating limits in polar coordinates (Exercises 51–53) — no match</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.2)</strong></p>
+        <p>Problems to submit: 23, 30, 31, 49, 53 &nbsp;/&nbsp; Recommended practice: 19–30, 31–34, 51–53, 57 (inclusion of 57 not yet fixed)</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-1.html">§14.1 Functions of Several Variables</a> &nbsp;/&nbsp; Next: <a href="s14-3.html">§14.3 Partial Derivatives</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

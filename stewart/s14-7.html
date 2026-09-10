@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.7 최댓값과 최솟값 (Maximum and Minimum Values) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.7 최댓값과 최솟값 — 이변수함수의 극댓값·극솟값 정의, 임계점과 페르마 정리의 이변수판, 안장점, 판별식 D로 판정하는 이계도함수 판정법과 그 증명, 절대 최대·최소와 닫힌 유계집합 위의 극값정리, 경계를 나누어 비교하는 절차를 한국어·영어 대조로 정리하고 예제 7개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.7, 최댓값, 최솟값, 극댓값, 극솟값, local maximum, local minimum, 임계점, critical point, 정류점, 안장점, saddle point, 이계도함수 판정법, Second Derivatives Test, 판별식, discriminant, 절대최댓값, absolute maximum, 닫힌집합, closed set, 유계집합, bounded set, 경계점, 극값정리, Extreme Value Theorem, 최적화, 최단거리, 상자 부피, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-7.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.7 최댓값과 최솟값 (Maximum and Minimum Values) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="임계점과 이계도함수 판정법, 안장점, 닫힌 유계집합 위의 극값정리와 절대극값 찾기 절차까지 §14.7 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-7.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.7 최댓값과 최솟값 (Maximum and Minimum Values) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.7 최댓값과 최솟값 — 극값의 정의와 임계점, 안장점, 이계도함수 판정법과 그 증명, 극값정리와 닫힌 유계집합에서의 절대극값 찾기 절차를 한국어·영어 대조로 정리하고 본문 예제 7개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-7.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-7.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html">14.4</a>
+      <a href="s14-5.html">14.5</a>
+      <a href="s14-6.html">14.6</a>
+      <a href="s14-7.html" class="active">14.7</a>
+      <a href="s14-8.html">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.7 · 3주차</p>
+  <h1>§14.7 최댓값과 최솟값<span>Maximum and Minimum Values</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-7-1"><span class="toc-num">NOTE</span> 언덕과 골짜기 <em>Hills and Valleys</em></a></li>
+    <li><a href="#c14-7-2"><span class="toc-num">DEF 2</span> 극댓값과 극솟값 <em>Local Maximum and Minimum</em></a></li>
+    <li><a href="#c14-7-3"><span class="toc-num">THM 3</span> 극값의 필요조건 <em>Necessary Condition for a Local Extremum</em></a></li>
+    <li><a href="#c14-7-4"><span class="toc-num">REM 4</span> 기울기 벡터로 쓴 형태 <em>Gradient Form of the Condition</em></a></li>
+    <li><a href="#c14-7-5"><span class="toc-num">NOTE</span> 임계점과 수평 접평면 <em>Critical Points and Horizontal Tangent Planes</em></a></li>
+    <li><a href="#c14-7-6"><span class="toc-num">NOTE</span> 안장점 <em>Saddle Points</em></a></li>
+    <li><a href="#c14-7-7"><span class="toc-num">THM 7</span> 이계도함수 판정법 <em>Second Derivatives Test</em></a></li>
+    <li><a href="#c14-7-8"><span class="toc-num">REM 8</span> 판정 불능과 행렬식 기억법 <em>When the Test Fails; a Determinant Mnemonic</em></a></li>
+    <li><a href="#c14-7-9"><span class="toc-num">DEF 9</span> 절대최댓값과 절대최솟값 <em>Absolute Maximum and Minimum</em></a></li>
+    <li><a href="#c14-7-10"><span class="toc-num">NOTE</span> 닫힌집합과 유계집합 <em>Closed and Bounded Sets</em></a></li>
+    <li><a href="#c14-7-11"><span class="toc-num">THM 11</span> 이변수함수의 극값정리 <em>Extreme Value Theorem for Functions of Two Variables</em></a></li>
+    <li><a href="#c14-7-12"><span class="toc-num">REM 12</span> 절대극값을 찾는 절차 <em>Closed-Set Method</em></a></li>
+    <li><a href="#c14-7-13"><span class="toc-num">NOTE</span> 이계도함수 판정법의 증명 <em>Proof of the Second Derivatives Test</em></a></li>
+    <li><a href="#ex14-7-1"><span class="toc-num">EXAM 1</span> 완전제곱으로 읽는 극솟값 <em>A Minimum Found by Completing the Square</em></a></li>
+    <li><a href="#ex14-7-2"><span class="toc-num">EXAM 2</span> 극값이 없는 임계점 <em>A Critical Point with No Extreme Value</em></a></li>
+    <li><a href="#ex14-7-3"><span class="toc-num">EXAM 3</span> 임계점 세 개의 분류 <em>Classifying Three Critical Points</em></a></li>
+    <li><a href="#ex14-7-4"><span class="toc-num">EXAM 4</span> 임계점 다섯 개와 그래프의 최고점 <em>Five Critical Points and the Highest Point</em></a></li>
+    <li><a href="#ex14-7-5"><span class="toc-num">EXAM 5</span> 점과 평면 사이의 최단거리 <em>Shortest Distance from a Point to a Plane</em></a></li>
+    <li><a href="#ex14-7-6"><span class="toc-num">EXAM 6</span> 뚜껑 없는 상자의 최대 부피 <em>Largest Volume of a Lidless Box</em></a></li>
+    <li><a href="#ex14-7-7"><span class="toc-num">EXAM 7</span> 직사각형 위의 절대극값 <em>Absolute Extrema on a Rectangle</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening, Figure 1 -->
+<div class="card note-card" id="c14-7-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">언덕과 골짜기 <em>Hills and Valleys</em><span class="src-ref">절 도입 · p.1046</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1변수 미적분학에서 도함수가 가장 요긴하게 쓰인 곳은 극값을 찾는 일이었다. 이변수함수에서는 그 역할을 편도함수가 대신 맡는다. 이 절 뒤쪽의 예제 6에서는 이 도구로 정해진 넓이의 판지로 만들 수 있는 뚜껑 없는 상자의 부피를 최대로 만든다.</p>
+        <p>$f$의 그래프를 지형으로 읽으면 이해하기 쉽다. 점 $(a,b)$ 근처의 모든 $(x,y)$에서 $f(a,b)$가 $f(x,y)$보다 크면 그 점은 언덕 꼭대기에 해당하고 이를 <strong>극댓값</strong>이라 한다. 반대로 $f(a,b)$가 근처의 값보다 작으면 그 점은 골짜기 바닥에 해당하고 <strong>극솟값</strong>이라 한다. 정의역 전체에서 $f$가 가장 큰 값을 <strong>절대최댓값</strong>, 가장 작은 값을 <strong>절대최솟값</strong>이라 한다. 아래 그림의 곡면에는 언덕 두 개와 골짜기 두 개가 있으며, 그중 한 언덕이 절대최댓값을, 한 골짜기가 절대최솟값을 이룬다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="언덕 두 개와 골짜기 두 개가 있는 곡면에서 극대·극소와 절대최대·절대최소를 표시한 개념도" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="215" x2="60" y2="28" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="60,20 56,31 64,31" fill="var(--grey800)"/>
+            <line x1="60" y1="215" x2="26" y2="256" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="21,260 28,250 32,257" fill="var(--grey800)"/>
+            <line x1="60" y1="215" x2="338" y2="238" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="344,239 334,242 335,234" fill="var(--grey800)"/>
+            <text x="48" y="26" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="266" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="347" y="244" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="46" y="229" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 86,156 C 106,98 130,98 150,152 C 168,196 186,196 204,138 C 223,74 250,74 270,146 C 286,202 308,210 330,174 L 330,196 C 308,232 286,224 270,168 C 250,96 223,96 204,160 C 186,218 168,218 150,174 C 130,120 106,120 86,178 Z" fill="var(--grey100)" fill-opacity="0.85" stroke="none"/>
+            <path d="M 68,168 C 88,110 112,110 132,164 C 150,208 168,208 186,150 C 205,86 232,86 252,158 C 268,214 290,222 312,186" fill="none" stroke="var(--grey400)" stroke-width="1.4"/>
+            <path d="M 86,156 C 106,98 130,98 150,152 C 168,196 186,196 204,138 C 223,74 250,74 270,146 C 286,202 308,210 330,174" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="68" y1="168" x2="86" y2="156" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="312" y1="186" x2="330" y2="174" stroke="var(--grey400)" stroke-width="1"/>
+            <circle cx="100" cy="124" r="3.2" fill="var(--grey900)"/>
+            <circle cx="159" cy="195" r="3.2" fill="var(--grey900)"/>
+            <circle cx="219" cy="103" r="3.6" fill="var(--orange)"/>
+            <circle cx="280" cy="206" r="3.6" fill="var(--orange)"/>
+            <text x="96" y="114" text-anchor="middle" font-size="11" fill="var(--grey800)">극대</text>
+            <text x="152" y="212" text-anchor="middle" font-size="11" fill="var(--grey800)">극소</text>
+            <text x="219" y="92" text-anchor="middle" font-size="11" fill="var(--orange)">절대최대</text>
+            <text x="284" y="224" text-anchor="middle" font-size="11" fill="var(--orange)">절대최소</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In one variable the derivative earned much of its keep by locating extreme values; here the same job is handed to the partial derivatives of a function of two variables. Later in this section, Example 6 uses them to make the volume of a lidless box as large as a fixed amount of cardboard allows.</p>
+        <p>Read the graph of $f$ as a landscape. A point $(a,b)$ where $f(a,b)$ is larger than the nearby values of $f(x,y)$ sits on top of a hill and is called a <strong>local maximum</strong>; a point where $f(a,b)$ is smaller than the nearby values sits at the bottom of a valley and is a <strong>local minimum</strong>. The largest value $f$ takes anywhere on its domain is the <strong>absolute maximum</strong>, and the smallest is the <strong>absolute minimum</strong>. The surface sketched below has two hills and two valleys; one hill carries the absolute maximum and one valley the absolute minimum.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="A surface with two hills and two valleys, marking the local maxima and minima and the absolute maximum and minimum" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="215" x2="60" y2="28" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="60,20 56,31 64,31" fill="var(--grey800)"/>
+            <line x1="60" y1="215" x2="26" y2="256" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="21,260 28,250 32,257" fill="var(--grey800)"/>
+            <line x1="60" y1="215" x2="338" y2="238" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="344,239 334,242 335,234" fill="var(--grey800)"/>
+            <text x="48" y="26" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="266" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="347" y="244" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="46" y="229" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 86,156 C 106,98 130,98 150,152 C 168,196 186,196 204,138 C 223,74 250,74 270,146 C 286,202 308,210 330,174 L 330,196 C 308,232 286,224 270,168 C 250,96 223,96 204,160 C 186,218 168,218 150,174 C 130,120 106,120 86,178 Z" fill="var(--grey100)" fill-opacity="0.85" stroke="none"/>
+            <path d="M 68,168 C 88,110 112,110 132,164 C 150,208 168,208 186,150 C 205,86 232,86 252,158 C 268,214 290,222 312,186" fill="none" stroke="var(--grey400)" stroke-width="1.4"/>
+            <path d="M 86,156 C 106,98 130,98 150,152 C 168,196 186,196 204,138 C 223,74 250,74 270,146 C 286,202 308,210 330,174" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="68" y1="168" x2="86" y2="156" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="312" y1="186" x2="330" y2="174" stroke="var(--grey400)" stroke-width="1"/>
+            <circle cx="100" cy="124" r="3.2" fill="var(--grey900)"/>
+            <circle cx="159" cy="195" r="3.2" fill="var(--grey900)"/>
+            <circle cx="219" cy="103" r="3.6" fill="var(--orange)"/>
+            <circle cx="280" cy="206" r="3.6" fill="var(--orange)"/>
+            <text x="96" y="114" text-anchor="middle" font-size="11" fill="var(--grey800)">local max</text>
+            <text x="152" y="212" text-anchor="middle" font-size="11" fill="var(--grey800)">local min</text>
+            <text x="219" y="92" text-anchor="middle" font-size="11" fill="var(--orange)">absolute max</text>
+            <text x="286" y="224" text-anchor="middle" font-size="11" fill="var(--orange)">absolute min</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Definition 1 -->
+<div class="card def-card" id="c14-7-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">극댓값과 극솟값 <em>Local Maximum and Minimum</em><span class="src-ref">Definition 1 · p.1046</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 1.</strong> 이변수함수 $f$가 $(a,b)$에서 <strong>극댓값</strong>을 갖는다는 것은</p>
+          <div class="math-display">$$f(x,y)\le f(a,b)\qquad (a,b)\text{ 근처의 모든 }(x,y)\text{에 대해},$$</div>
+          <p>가 성립함을 뜻하며, 이는 중심이 $(a,b)$인 어떤 원판 위의 모든 점에서 이 부등식이 성립한다는 뜻이다. 이때 $f(a,b)$를 <strong>극댓값</strong>이라 한다. 반대로 중심이 $(a,b)$인 어떤 원판 전체에서 $f(x,y)\ge f(a,b)$가 성립하면 $f$는 $(a,b)$에서 <strong>극솟값</strong>을 가지며, $f(a,b)$를 극솟값이라 한다.</p>
+        </div>
+        <p>두 조건 모두 순전히 국소적이다. $f(a,b)$를 $(a,b)$ 주변의 작은 원판 위의 값들과만 비교할 뿐, 멀리 떨어진 값과는 비교하지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 1.</strong> A function $f$ of two variables has a <strong>local maximum</strong> at $(a,b)$ if</p>
+          <div class="math-display">$$f(x,y)\le f(a,b)\qquad\text{for all }(x,y)\text{ near }(a,b),$$</div>
+          <p>meaning that the inequality holds at every point of some disk with center $(a,b)$. The number $f(a,b)$ is then called a <strong>local maximum value</strong>. If instead $f(x,y)\ge f(a,b)$ throughout some disk with center $(a,b)$, then $f$ has a <strong>local minimum</strong> at $(a,b)$ and $f(a,b)$ is a <strong>local minimum value</strong>.</p>
+        </div>
+        <p>Both conditions are purely local: they compare $f(a,b)$ only with the values of $f$ on a small disk around $(a,b)$, never with values far away.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Theorem 2 (with proof in the text) -->
+<div class="card thm-card" id="c14-7-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">극값의 필요조건 <em>Necessary Condition for a Local Extremum</em><span class="src-ref">Theorem 2 · p.1047</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 2.</strong> $f$가 $(a,b)$에서 극댓값 또는 극솟값을 갖고 그 점에서 $f$의 1계 편도함수가 존재하면 다음이 성립한다.</p>
+          <div class="math-display">$$f_x(a,b)=0\qquad\text{그리고}\qquad f_y(a,b)=0.$$</div>
+        </div>
+        <p>이는 §3.1의 페르마 정리를 이변수로 확장한 것이다. 한 변수를 고정하면 $f$는 여전히 극값을 갖는 1변수 함수가 되고, 1변수 함수의 극값에서는 도함수가 반드시 $0$이 되기 때문이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f$가 $(a,b)$에서 극댓값을 갖는다고 가정한다(극솟값이면 이어지는 부등호의 방향만 반대로 바꾸면 논증이 그대로 통한다). $y=b$를 고정하고 한 변수 함수 $g(x)=f(x,b)$를 만들면, $(a,b)$ 근처의 모든 $(x,y)$에서 $f(x,y)\le f(a,b)$이므로 특히 $a$ 근처의 모든 $x$에 대해 $g(x)=f(x,b)\le f(a,b)=g(a)$이다. 즉 $g$는 $x=a$에서 극댓값을 갖는다.</p>
+        <p>가정에 의해 $f_x(a,b)$가 존재하므로 $g'(a)=f_x(a,b)$도 존재한다. 따라서 §3.1의 페르마 정리를 $g$에 적용하면 $g'(a)=0$, 곧 $f_x(a,b)=0$을 얻는다.</p>
+        <p>이번에는 $x=a$를 고정하고 $G(y)=f(a,y)$를 만들면 같은 이유로 $G$는 $y=b$에서 극댓값을 가지며, $G'(b)=f_y(a,b)$가 존재하므로 페르마 정리에 의해 $f_y(a,b)=0$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 2.</strong> If $f$ has a local maximum or a local minimum at $(a,b)$ and the first-order partial derivatives of $f$ exist there, then</p>
+          <div class="math-display">$$f_x(a,b)=0\qquad\text{and}\qquad f_y(a,b)=0.$$</div>
+        </div>
+        <p>This is the two-variable form of Fermat's Theorem from §3.1: freezing one variable turns $f$ into a function of a single variable that still has a local extremum, and a one-variable extremum forces the derivative to vanish.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Suppose $f$ has a local maximum at $(a,b)$ (if it is a local minimum, the same argument works with every inequality reversed). Fix $y=b$ and set $g(x)=f(x,b)$. Since $f(x,y)\le f(a,b)$ for all $(x,y)$ near $(a,b)$, in particular $g(x)=f(x,b)\le f(a,b)=g(a)$ for all $x$ near $a$, so $g$ has a local maximum at $x=a$.</p>
+        <p>By hypothesis $f_x(a,b)$ exists, so $g'(a)=f_x(a,b)$ exists as well. Applying Fermat's Theorem from §3.1 to $g$ gives $g'(a)=0$, that is, $f_x(a,b)=0$.</p>
+        <p>Now fix $x=a$ and set $G(y)=f(a,y)$; the same reasoning shows $G$ has a local maximum at $y=b$, and since $G'(b)=f_y(a,b)$ exists, Fermat's Theorem gives $f_y(a,b)=0$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : margin note, gradient form -->
+<div class="card rem-card" id="c14-7-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">기울기 벡터로 쓴 형태 <em>Gradient Form of the Condition</em><span class="src-ref">여백 노트 · p.1047</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\nabla f=\langle f_x,f_y\rangle$이므로, 정리 2의 결론에 있는 두 스칼라 방정식은 하나의 벡터 방정식으로 합쳐 쓸 수 있다.</p>
+        <div class="math-display">$$\nabla f(a,b)=\mathbf{0}.$$</div>
+        <p>이렇게 쓰면 이 조건은 1변수의 $f'(c)=0$과 똑같은 모양이 되며, 기울기 벡터가 도함수의 역할을 대신한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Because $\nabla f=\langle f_x,f_y\rangle$, the two scalar equations in the conclusion of Theorem 2 are one vector equation:</p>
+        <div class="math-display">$$\nabla f(a,b)=\mathbf{0}.$$</div>
+        <p>Written this way the condition looks exactly like the one-variable statement $f'(c)=0$, with the gradient playing the role of the derivative.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : critical points, horizontal tangent plane -->
+<div class="card note-card" id="c14-7-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">임계점과 수평 접평면 <em>Critical Points and Horizontal Tangent Planes</em><span class="src-ref">임계점 · p.1047</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f_x(a,b)=0$이고 $f_y(a,b)=0$이거나, 이 두 편도함수 중 하나라도 존재하지 않으면 점 $(a,b)$를 $f$의 <strong>임계점</strong>(또는 <strong>정류점</strong>)이라 한다. 이 용어로 정리 2를 다시 쓰면, $f$의 극댓값과 극솟값은 오직 임계점에서만 나타날 수 있다.</p>
+        <p>$f_x(a,b)=0$과 $f_y(a,b)=0$을 접평면의 방정식 (14.4.2)에 대입하면 $z=z_0$만 남는다. 즉 기하적으로, $f$의 그래프가 극값점에서 접평면을 가지면 그 접평면은 반드시 <strong>수평</strong>이다.</p>
+        <p>다만 그 역은 성립하지 않는다. 1변수 미적분학에서와 마찬가지로 임계점이라고 해서 반드시 극값점인 것은 아니며, 이어지는 카드들에서 두 경우를 구별하는 방법을 다룬다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A point $(a,b)$ is called a <strong>critical point</strong> (or <strong>stationary point</strong>) of $f$ if $f_x(a,b)=0$ and $f_y(a,b)=0$, or if one of these two partial derivatives fails to exist. In this language Theorem 2 reads: a local maximum or minimum of $f$ can occur only at a critical point.</p>
+        <p>Putting $f_x(a,b)=0$ and $f_y(a,b)=0$ into the tangent-plane equation (14.4.2) leaves nothing but $z=z_0$. Geometrically, then, wherever the graph of $f$ has a tangent plane at a local extremum, that plane is <strong>horizontal</strong>.</p>
+        <p>The converse is false, exactly as in single-variable calculus: being a critical point does not make a point an extremum, and the next few cards are about telling the two apart.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : saddle points, Figure 3 -->
+<div class="card note-card" id="c14-7-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">안장점 <em>Saddle Points</em><span class="src-ref">안장점 · p.1048</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(a,b)$가 $f$의 임계점이어서 $f_x(a,b)=f_y(a,b)=0$이라 하자. 이때 $f(a,b)$는 극댓값일 수도, 극솟값일 수도 있지만, 둘 다 아닐 수도 있다. 이 세 번째 경우 $(a,b)$를 $f$의 <strong>안장점</strong>이라 한다.</p>
+        <p>이 이름은 원점 근처에서 쌍곡포물면 $z=y^2-x^2$이 갖는 모양에서 왔다. $x$축을 따라서는 원점이 최댓값을 주고 $y$축을 따라서는 최솟값을 주므로, 곡면이 서로 반대 방향으로 휘어진다. 안장점에서 그래프가 실제로 안장 모양을 하고 있을 필요는 없지만, 그 점에서는 항상 접평면을 가로질러 지나간다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="쌍곡포물면 z = y제곱 빼기 x제곱 — 원점에서 x 방향으로는 최대, y 방향으로는 최소인 안장점" style="max-width:360px;width:100%;height:auto">
+            <path d="M 35,142 Q 105,82 175,202 Q 250,270 325,158 Q 255,38 185,98 Q 110,210 35,142 Z" fill="var(--grey100)" fill-opacity="0.9" stroke="var(--grey400)" stroke-width="1.2"/>
+            <path d="M 110,165 Q 180,105 250,225" fill="none" stroke="var(--orange)" stroke-width="2"/>
+            <path d="M 105,127 Q 180,195 255,83" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <circle cx="180" cy="150" r="4" fill="var(--grey900)"/>
+            <text x="180" y="140" text-anchor="middle" font-size="11" fill="var(--grey900)">안장점</text>
+            <text x="255" y="243" font-size="11" font-style="italic" fill="var(--orange)">x 방향: 최대</text>
+            <text x="262" y="80" font-size="11" font-style="italic" fill="var(--g700)">y 방향: 최소</text>
+            <text x="30" y="285" font-size="12" fill="var(--grey700)">z = y² − x² 의 그래프 (쌍곡포물면)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $(a,b)$ is a critical point of $f$, so $f_x(a,b)=f_y(a,b)=0$. Then $f(a,b)$ may be a local maximum, a local minimum, or neither. In that third case $(a,b)$ is called a <strong>saddle point</strong> of $f$.</p>
+        <p>The name comes from the shape of the hyperbolic paraboloid $z=y^2-x^2$ near the origin: along the $x$-axis the origin gives a maximum, while along the $y$-axis it gives a minimum, so the surface bends the two opposite ways. A graph need not literally look like a saddle at such a point, but it always <em>crosses</em> its tangent plane there.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="The hyperbolic paraboloid z = y squared minus x squared, whose origin is a maximum along the x-axis and a minimum along the y-axis" style="max-width:360px;width:100%;height:auto">
+            <path d="M 35,142 Q 105,82 175,202 Q 250,270 325,158 Q 255,38 185,98 Q 110,210 35,142 Z" fill="var(--grey100)" fill-opacity="0.9" stroke="var(--grey400)" stroke-width="1.2"/>
+            <path d="M 110,165 Q 180,105 250,225" fill="none" stroke="var(--orange)" stroke-width="2"/>
+            <path d="M 105,127 Q 180,195 255,83" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <circle cx="180" cy="150" r="4" fill="var(--grey900)"/>
+            <text x="180" y="140" text-anchor="middle" font-size="11" fill="var(--grey900)">saddle point</text>
+            <text x="255" y="243" font-size="11" font-style="italic" fill="var(--orange)">max along x</text>
+            <text x="262" y="80" font-size="11" font-style="italic" fill="var(--g700)">min along y</text>
+            <text x="30" y="285" font-size="12" fill="var(--grey700)">graph of z = y² − x² (hyperbolic paraboloid)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Theorem 3, Second Derivatives Test -->
+<div class="card thm-card" id="c14-7-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">이계도함수 판정법 <em>Second Derivatives Test</em><span class="src-ref">Theorem 3 · p.1048</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 3 — 이계도함수 판정법.</strong> $f$의 2계 편도함수가 중심 $(a,b)$인 어떤 원판에서 연속이고, $(a,b)$가 $f_x(a,b)=0$, $f_y(a,b)=0$인 임계점이라 하자. 다음과 같이 둔다.</p>
+          <div class="math-display">$$D=D(a,b)=f_{xx}(a,b)\,f_{yy}(a,b)-\big[f_{xy}(a,b)\big]^2.$$</div>
+          <p><strong>(a)</strong> $D>0$이고 $f_{xx}(a,b)>0$이면 $f(a,b)$는 극솟값이다.</p>
+          <p><strong>(b)</strong> $D>0$이고 $f_{xx}(a,b)\lt 0$이면 $f(a,b)$는 극댓값이다.</p>
+          <p><strong>(c)</strong> $D\lt 0$이면 $(a,b)$는 $f$의 안장점이다.</p>
+        </div>
+        <p>$D\ne0$이면 그 부호가 먼저 그 점이 극값점인지 안장점인지를 결정하고, $D>0$일 때에 한해 $f_{xx}(a,b)$의 부호가 극댓값인지 극솟값인지를 가른다($D=0$인 경우는 다음 카드 참조). 이는 1변수 미적분학의 이계도함수 판정법을 이변수로 확장한 것이다.</p>
+        <p><em>증명: 부록이 아니라 이 절의 끝에서 다룬다. <a href="#c14-7-13">이계도함수 판정법의 증명</a> 카드를 참조하라.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 3 — Second Derivatives Test.</strong> Suppose the second partial derivatives of $f$ are continuous on a disk with center $(a,b)$, and suppose $(a,b)$ is a critical point with $f_x(a,b)=0$ and $f_y(a,b)=0$. Put</p>
+          <div class="math-display">$$D=D(a,b)=f_{xx}(a,b)\,f_{yy}(a,b)-\big[f_{xy}(a,b)\big]^2.$$</div>
+          <p><strong>(a)</strong> If $D>0$ and $f_{xx}(a,b)>0$, then $f(a,b)$ is a local minimum.</p>
+          <p><strong>(b)</strong> If $D>0$ and $f_{xx}(a,b)\lt 0$, then $f(a,b)$ is a local maximum.</p>
+          <p><strong>(c)</strong> If $D\lt 0$, then $(a,b)$ is a saddle point of $f$.</p>
+        </div>
+        <p>When $D\ne0$ its sign decides first whether the point is an extremum or a saddle; only when $D>0$ does the sign of $f_{xx}(a,b)$ get to say which kind (the case $D=0$ is the subject of the next card). This is the two-variable analogue of the Second Derivative Test of one-variable calculus.</p>
+        <p><em>Proof: not in an appendix — it is carried out at the end of this section; see the card <a href="#c14-7-13">Proof of the Second Derivatives Test</a>.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : NOTE 1 and NOTE 2 -->
+<div class="card rem-card" id="c14-7-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">판정 불능과 행렬식 기억법 <em>When the Test Fails; a Determinant Mnemonic</em><span class="src-ref">NOTE 1–2 · p.1048</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>NOTE 1.</strong> $D=0$인 경우는 이 판정법의 범위 밖이다. 판정법이 아무 정보도 주지 못하며, 그런 점에서 $f$는 극댓값·극솟값·안장점 중 어느 것이든 가질 수 있어 다른 방법으로 따로 판정해야 한다.</p>
+        <p><strong>NOTE 2.</strong> $D$의 공식은 2계 편도함수로 이루어진 행렬식으로 기억하면 가장 쉽다.</p>
+        <div class="math-display">$$D=\begin{vmatrix} f_{xx} & f_{xy}\\ f_{yx} & f_{yy}\end{vmatrix}=f_{xx}f_{yy}-(f_{xy})^2,$$</div>
+        <p>여기서 마지막 등호는 $f_{yx}=f_{xy}$를 사용한 것이며, 이는 연속성 가정 아래 클레로 정리에 의해 성립한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>NOTE 1.</strong> The case $D=0$ is not covered: the test simply gives no information. At such a point $f$ may have a local maximum, a local minimum, or a saddle point, and deciding which one requires some other argument.</p>
+        <p><strong>NOTE 2.</strong> The formula for $D$ is easiest to remember as a determinant of second partial derivatives:</p>
+        <div class="math-display">$$D=\begin{vmatrix} f_{xx} & f_{xy}\\ f_{yx} & f_{yy}\end{vmatrix}=f_{xx}f_{yy}-(f_{xy})^2,$$</div>
+        <p>where the last equality uses $f_{yx}=f_{xy}$, which holds under the continuity hypothesis by Clairaut's Theorem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Definition 7, absolute extrema -->
+<div class="card def-card" id="c14-7-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">절대최댓값과 절대최솟값 <em>Absolute Maximum and Minimum</em><span class="src-ref">Definition 7 · p.1052</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 7.</strong> $(a,b)$를 이변수함수 $f$의 정의역 $D$ 위의 한 점이라 하자. 이때 $f(a,b)$는</p>
+          <p>&#9679;&nbsp; $D$의 모든 $(x,y)$에 대해 $f(a,b)\ge f(x,y)$이면 $D$에서 $f$의 <strong>절대최댓값</strong>이고,</p>
+          <p>&#9679;&nbsp; $D$의 모든 $(x,y)$에 대해 $f(a,b)\le f(x,y)$이면 $D$에서 $f$의 <strong>절대최솟값</strong>이다.</p>
+        </div>
+        <p>정의 1과 달리 이 비교는 작은 원판이 아니라 정의역 $D$ 전체에 걸쳐 이루어진다. 따라서 절대최댓값·절대최솟값이 정의역의 내부점에서 나타나면 그 값은 극댓값·극솟값이기도 하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 7.</strong> Let $(a,b)$ be a point of the domain $D$ of a function $f$ of two variables. Then $f(a,b)$ is</p>
+          <p>&#9679;&nbsp; the <strong>absolute maximum value</strong> of $f$ on $D$ if $f(a,b)\ge f(x,y)$ for every $(x,y)$ in $D$;</p>
+          <p>&#9679;&nbsp; the <strong>absolute minimum value</strong> of $f$ on $D$ if $f(a,b)\le f(x,y)$ for every $(x,y)$ in $D$.</p>
+        </div>
+        <p>Unlike Definition 1, these comparisons run over the whole set $D$, not merely over a small disk; an absolute extremum is therefore also a local one whenever it happens to occur at an interior point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : closed and bounded sets -->
+<div class="card note-card" id="c14-7-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">닫힌집합과 유계집합 <em>Closed and Bounded Sets</em><span class="src-ref">닫힌집합·유계집합 · p.1052</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>닫힌구간이 양 끝점을 포함하듯, 그에 대응하는 이차원 개념이 $\mathbb R^2$의 <strong>닫힌집합</strong>이다 — 자신의 경계점을 모두 포함하는 집합을 말한다. 여기서 $(a,b)$가 $D$의 <strong>경계점</strong>이라는 것은 중심이 $(a,b)$인 모든 원판이 $D$의 점과 $D$의 여집합의 점을 모두 포함한다는 뜻이다.</p>
+        <p>예를 들어 원 $x^2+y^2=1$ 위와 그 안쪽의 점들로 이루어진 원판</p>
+        <div class="math-display">$$D=\{(x,y)\mid x^2+y^2\le 1\},$$</div>
+        <p>은 닫힌집합이다. 그 경계점은 정확히 이 원 위의 점들이고, 그 점들이 모두 $D$에 속하기 때문이다. 이 원 위의 점을 단 하나라도 빼면 $D$는 더 이상 닫힌집합이 아니다.</p>
+        <p>$\mathbb R^2$의 <strong>유계집합</strong>은 어떤 원판 안에 통째로 들어가는 집합, 즉 퍼진 정도가 유한한 집합이다. 다음 정리는 이 두 성질을 동시에 필요로 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A closed interval contains its endpoints; the two-dimensional counterpart is a <strong>closed set</strong> in $\mathbb R^2$, one that contains all of its boundary points. Here $(a,b)$ is a <strong>boundary point</strong> of $D$ when every disk centered at $(a,b)$ meets both $D$ and the complement of $D$.</p>
+        <p>For example, the disk</p>
+        <div class="math-display">$$D=\{(x,y)\mid x^2+y^2\le 1\},$$</div>
+        <p>consisting of the points on or inside the circle $x^2+y^2=1$, is closed, because its boundary points are exactly the points of that circle and all of them belong to $D$. Delete even a single point of the circle and the set stops being closed.</p>
+        <p>A <strong>bounded set</strong> in $\mathbb R^2$ is one that fits inside some disk — a set that is finite in extent. The next theorem needs both properties at once.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Theorem 8, Extreme Value Theorem -->
+<div class="card thm-card" id="c14-7-11">
+  <div class="card-head">
+    <span class="thm-num">THM 11</span>
+    <span class="thm-title">이변수함수의 극값정리 <em>Extreme Value Theorem for Functions of Two Variables</em><span class="src-ref">Theorem 8 · p.1052</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 8 — 이변수함수의 극값정리.</strong> $f$가 $\mathbb R^2$의 닫히고 유계인 집합 $D$에서 연속이면, $D$의 어떤 점 $(x_1,y_1)$과 $(x_2,y_2)$에서 $f$는 각각 절대최댓값 $f(x_1,y_1)$과 절대최솟값 $f(x_2,y_2)$를 갖는다.</p>
+        </div>
+        <p>이 정리는 두 극값이 존재한다는 것만 보장할 뿐, 그 점이 어디인지는 말해 주지 않는다. 정리 2와 결합하면 탐색 범위가 좁혀진다. $D$ 위에서 $f$의 극값은 $f$의 임계점이거나 $D$의 경계점에서만 나타난다.</p>
+        <p><em>증명: 여기서는 생략한다. 고급 미적분학 과목에서 다루는 내용이다.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 8 — Extreme Value Theorem for Functions of Two Variables.</strong> If $f$ is continuous on a closed, bounded set $D$ in $\mathbb R^2$, then $f$ attains an absolute maximum value $f(x_1,y_1)$ and an absolute minimum value $f(x_2,y_2)$ at some points $(x_1,y_1)$ and $(x_2,y_2)$ of $D$.</p>
+        </div>
+        <p>The theorem guarantees that the two extreme values exist but says nothing about where they sit. Combining it with Theorem 2 narrows the search: an extreme value of $f$ on $D$ occurs either at a critical point of $f$ or at a boundary point of $D$.</p>
+        <p><em>Proof: omitted here; it belongs to a course in advanced calculus.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : Procedure (9), Figure 12 -->
+<div class="card rem-card" id="c14-7-12">
+  <div class="card-head">
+    <span class="rem-num">REM 12</span>
+    <span class="rem-title">절대극값을 찾는 절차 <em>Closed-Set Method</em><span class="src-ref">Procedure (9) · p.1053</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>절차 (9).</strong> 닫히고 유계인 집합 $D$ 위에서 연속함수 $f$의 절대최댓값과 절대최솟값을 구하려면 다음과 같이 한다.</p>
+          <p><strong>1.</strong> $D$ 안에 있는 $f$의 임계점에서 $f$의 값을 구한다.</p>
+          <p><strong>2.</strong> $D$의 경계 위에서 $f$의 극값을 구한다.</p>
+          <p><strong>3.</strong> 1단계와 2단계에서 얻은 값들 중 가장 큰 것이 절대최댓값이고, 가장 작은 것이 절대최솟값이다.</p>
+        </div>
+        <p>이는 §3.1의 닫힌구간 방법을 확장한 것이다. 그곳에서는 경계가 두 끝점뿐이었지만 여기서는 경계가 하나의 곡선이므로, 2단계 자체가 또 하나의 극값 문제가 된다 — 경계를 몇 조각으로 나누고 나면 대개 1변수 문제가 된다. 아래 직사각형에서는 경계가 네 선분 $L_1,L_2,L_3,L_4$로 나뉘고, 각 선분으로 제한한 $f$는 1변수 함수가 된다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 250" role="img" aria-label="직사각형 영역 D와 그 경계를 이루는 네 선분 L1, L2, L3, L4" style="max-width:340px;width:100%;height:auto">
+            <line x1="46" y1="200" x2="306" y2="200" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="312,200 302,203 302,197" fill="var(--grey800)"/>
+            <line x1="70" y1="228" x2="70" y2="42" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="70,36 67,46 73,46" fill="var(--grey800)"/>
+            <text x="314" y="205" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="64" y="32" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <rect x="70" y="80" width="180" height="120" fill="var(--g50)" stroke="var(--g600)" stroke-width="2"/>
+            <text x="150" y="148" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <circle cx="130" cy="140" r="3.4" fill="var(--orange)"/>
+            <text x="136" y="136" font-size="11" fill="var(--orange)">(1, 1)</text>
+            <text x="160" y="219" text-anchor="middle" font-size="12" fill="var(--g700)">L₁</text>
+            <text x="264" y="144" font-size="12" fill="var(--g700)">L₂</text>
+            <text x="160" y="72" text-anchor="middle" font-size="12" fill="var(--g700)">L₃</text>
+            <text x="44" y="144" font-size="12" fill="var(--g700)">L₄</text>
+            <text x="58" y="216" text-anchor="middle" font-size="11" fill="var(--grey600)">(0, 0)</text>
+            <text x="250" y="216" text-anchor="middle" font-size="11" fill="var(--grey600)">(3, 0)</text>
+            <text x="272" y="78" text-anchor="middle" font-size="11" fill="var(--grey600)">(3, 2)</text>
+            <text x="48" y="76" text-anchor="middle" font-size="11" fill="var(--grey600)">(0, 2)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Procedure (9).</strong> To find the absolute maximum and minimum values of a continuous function $f$ on a closed, bounded set $D$:</p>
+          <p><strong>1.</strong> Evaluate $f$ at the critical points of $f$ lying in $D$.</p>
+          <p><strong>2.</strong> Find the extreme values of $f$ on the boundary of $D$.</p>
+          <p><strong>3.</strong> The largest of the numbers produced in steps 1 and 2 is the absolute maximum value, and the smallest is the absolute minimum value.</p>
+        </div>
+        <p>This extends the Closed Interval Method of §3.1: there the boundary consisted of two endpoints, here it is a curve, so step 2 is itself an extremum problem — usually a one-variable one after the boundary is cut into pieces. For the rectangle below, the boundary splits into the four segments $L_1,L_2,L_3,L_4$, and $f$ restricted to each of them is a function of one variable.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 250" role="img" aria-label="A rectangular region D whose boundary splits into the four segments L1, L2, L3, L4" style="max-width:340px;width:100%;height:auto">
+            <line x1="46" y1="200" x2="306" y2="200" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="312,200 302,203 302,197" fill="var(--grey800)"/>
+            <line x1="70" y1="228" x2="70" y2="42" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="70,36 67,46 73,46" fill="var(--grey800)"/>
+            <text x="314" y="205" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="64" y="32" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <rect x="70" y="80" width="180" height="120" fill="var(--g50)" stroke="var(--g600)" stroke-width="2"/>
+            <text x="150" y="148" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <circle cx="130" cy="140" r="3.4" fill="var(--orange)"/>
+            <text x="136" y="136" font-size="11" fill="var(--orange)">(1, 1)</text>
+            <text x="160" y="219" text-anchor="middle" font-size="12" fill="var(--g700)">L₁</text>
+            <text x="264" y="144" font-size="12" fill="var(--g700)">L₂</text>
+            <text x="160" y="72" text-anchor="middle" font-size="12" fill="var(--g700)">L₃</text>
+            <text x="44" y="144" font-size="12" fill="var(--g700)">L₄</text>
+            <text x="58" y="216" text-anchor="middle" font-size="11" fill="var(--grey600)">(0, 0)</text>
+            <text x="250" y="216" text-anchor="middle" font-size="11" fill="var(--grey600)">(3, 0)</text>
+            <text x="272" y="78" text-anchor="middle" font-size="11" fill="var(--grey600)">(3, 2)</text>
+            <text x="48" y="76" text-anchor="middle" font-size="11" fill="var(--grey600)">(0, 2)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : proof of the Second Derivatives Test (proof at the end of the section) -->
+<div class="card note-card" id="c14-7-13">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">이계도함수 판정법의 증명 <em>Proof of the Second Derivatives Test</em><span class="src-ref">Proof of Theorem 3 · p.1054</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절은 정리 3의 (a) — $D(a,b)>0$이고 $f_{xx}(a,b)>0$인 경우 — 를 증명하며 마무리된다. (b)도 같은 방법으로 다룬다(아래 증명에서는 (b)와 (c)까지 함께 정리했다).</p>
+        <p>핵심은 단위벡터 $\mathbf u=\langle h,k\rangle$ 방향의 2계 방향도함수를 살펴보는 것이다. 정리 14.6.3을 두 번 적용하고 클레로 정리를 이용하면 다음을 얻는다.</p>
+        <div class="math-display">$$D_{\mathbf u}^2f=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2,$$</div>
+        <p>이 이차형식을 완전제곱하면 그 부호가 $f_{xx}$와 $D=f_{xx}f_{yy}-f_{xy}^2$로 표현된다는 것이 드러난다. 작은 원판 위의 모든 방향 $\mathbf u$에서 이 값이 양수라는 것은, 그래프 위 점 $P$를 지나는 모든 수직 단면 곡선이 아래로 볼록함(즉 위로 오목함)을 뜻하고, 이는 곧 그래프가 그 점에서의 수평 접평면 위쪽에 놓인다는 것을 의미한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $(a,b)$가 임계점이므로 $f_x(a,b)=f_y(a,b)=0$이다. $D(a,b)\gt0$이고 $f_{xx}(a,b)\gt0$인 (a)의 경우를 증명한다. 단위벡터 $\mathbf u=\langle h,k\rangle$를 하나 고정하고 $g(t)=f(a+th,\,b+tk)$라 두면, 연쇄법칙을 두 번 적용하고 클레로 정리($f_{yx}=f_{xy}$)를 쓰면</p>
+        <div class="math-display">$$g'(t)=f_xh+f_yk,$$</div>
+        <div class="math-display">$$g''(t)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2=D_{\mathbf u}^2f$$</div>
+        <p>를 얻으며, 우변은 모두 $(a+th,b+tk)$에서 계산한 값이다. 특히 $t=0$에서는 $g'(0)=f_x(a,b)h+f_y(a,b)k=0$이다.</p>
+        <p>이제 $D_{\mathbf u}^2f$를 $h$에 대해 완전제곱하면($f_{xx}\ne0$인 점에서) 교재의 식 (10)</p>
+        <div class="math-display">$$D_{\mathbf u}^2f=f_{xx}\Big(h+\frac{f_{xy}}{f_{xx}}k\Big)^2+\frac{k^2}{f_{xx}}\big(f_{xx}f_{yy}-f_{xy}^2\big)\tag{10}$$</div>
+        <p>을 얻는다. 마지막 괄호가 곧 $D$이므로 둘째 항은 $\dfrac{D}{f_{xx}}k^2$이다. $f_{xx}$와 $D$가 연속이고 $(a,b)$에서 각각 양수이므로, $(a,b)$ 중심의 원판 $B$를 충분히 작게 잡으면 $B$ 위의 모든 점에서 $f_{xx}\gt0$, $D\gt0$이 되도록 할 수 있다. 이 원판 위에서는 $(h,k)\ne(0,0)$일 때 위 등식의 두 항이 동시에 $0$이 될 수 없으므로(둘째 항이 $0$이려면 $k=0$이고, 그러면 $h\ne0$이라 첫째 항이 양수) 모든 방향 $\mathbf u$와 $B$의 모든 점에서 $D_{\mathbf u}^2f\gt0$이다.</p>
+        <p>따라서 $(a+th,b+tk)$가 $B$ 안에 머무는 한 $g''(t)\gt0$이므로 $g$는 아래로 볼록하며, $g'(0)=0$이므로 $t=0$은 $g$의 엄밀한 극솟값이다. 이는 임의의 방향 $\mathbf u$에서 성립하므로 $B$의 모든 점 $(x,y)\ne(a,b)$에서 $f(x,y)\gt f(a,b)$이고, 곧 $f(a,b)$는 극솟값이다. 이로써 (a)가 증명된다.</p>
+        <p>(b)는 $f_{xx}(a,b)\lt0$인 경우이다. 같은 방식으로 $f_{xx}\lt0$이고 $D\gt0$인 원판을 잡으면 $(10)$의 두 항이 모두 $0$ 이하이고 동시에 $0$이 될 수 없으므로 그 위에서 $D_{\mathbf u}^2f\lt0$이며, $g$가 위로 볼록해져 부호만 뒤집힌 같은 논법이 극댓값을 준다.</p>
+        <p>(c)는 $D(a,b)\lt0$인 경우이다. 이때 이차형식 $q(h,k)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2$은 $(a,b)$에서 부정부호이다. $f_{xx}\ne0$이면 $q(1,0)=f_{xx}$와 $q(-f_{xy},f_{xx})=f_{xx}\big(f_{xx}f_{yy}-f_{xy}^2\big)=f_{xx}D$의 부호가 서로 반대이고, $f_{xx}=0$이면 $D=-f_{xy}^2\lt0$에서 $f_{xy}\ne0$이므로 $q(h,1)=2f_{xy}h+f_{yy}$가 $h$에 따라 부호를 바꾸기 때문이다. 따라서 $D_{\mathbf u}^2f(a,b)\gt0$인 방향 $\mathbf u$와 $D_{\mathbf v}^2f(a,b)\lt0$인 방향 $\mathbf v$가 모두 존재하고, 각 방향의 단면 $g$에 대해 $g'(0)=0$이면서 $g''(0)\ne0$이므로 $t=0$은 $\mathbf u$ 방향에서는 $g$의 극솟값, $\mathbf v$ 방향에서는 극댓값이다. 즉 $(a,b)$에서 멀어질 때 $f$는 어떤 방향으로는 커지고 다른 방향으로는 작아지므로 $f(a,b)$는 극값이 될 수 없으며, $(a,b)$는 안장점이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The section closes by proving part (a) of Theorem 3, the case $D(a,b)>0$ and $f_{xx}(a,b)>0$; part (b) is handled the same way (the proof below carries out (b) and (c) as well).</p>
+        <p>The idea is to look at the second-order directional derivative of $f$ in the direction of a unit vector $\mathbf u=\langle h,k\rangle$. Applying Theorem 14.6.3 twice and using Clairaut's Theorem gives</p>
+        <div class="math-display">$$D_{\mathbf u}^2f=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2,$$</div>
+        <p>and completing the square in this quadratic form makes its sign visible in terms of $f_{xx}$ and $D=f_{xx}f_{yy}-f_{xy}^2$. Positivity in every direction $\mathbf u$ on a small disk says that every vertical cross-section of the graph through $P$ is concave upward, which pins the graph above its horizontal tangent plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since $(a,b)$ is a critical point, $f_x(a,b)=f_y(a,b)=0$. We prove case (a), where $D(a,b)\gt0$ and $f_{xx}(a,b)\gt0$. Fix a unit vector $\mathbf u=\langle h,k\rangle$ and set $g(t)=f(a+th,\,b+tk)$; applying the Chain Rule twice and using Clairaut's Theorem ($f_{yx}=f_{xy}$) gives</p>
+        <div class="math-display">$$g'(t)=f_xh+f_yk,$$</div>
+        <div class="math-display">$$g''(t)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2=D_{\mathbf u}^2f,$$</div>
+        <p>with the right-hand sides evaluated at $(a+th,b+tk)$. In particular, at $t=0$, $g'(0)=f_x(a,b)h+f_y(a,b)k=0$.</p>
+        <p>Completing the square in $h$ (at points where $f_{xx}\ne0$) turns $D_{\mathbf u}^2f$ into the textbook's Equation (10),</p>
+        <div class="math-display">$$D_{\mathbf u}^2f=f_{xx}\Big(h+\frac{f_{xy}}{f_{xx}}k\Big)^2+\frac{k^2}{f_{xx}}\big(f_{xx}f_{yy}-f_{xy}^2\big).\tag{10}$$</div>
+        <p>The final bracket is $D$, so the second term is $\dfrac{D}{f_{xx}}k^2$. Because $f_{xx}$ and $D$ are continuous and both positive at $(a,b)$, some disk $B$ centered at $(a,b)$ has $f_{xx}\gt0$ and $D\gt0$ throughout. On $B$, for $(h,k)\ne(0,0)$ the two terms above cannot both vanish (the second vanishes only if $k=0$, and then $h\ne0$ makes the first term positive), so $D_{\mathbf u}^2f\gt0$ at every point of $B$ and in every direction $\mathbf u$.</p>
+        <p>Hence $g''(t)\gt0$ as long as $(a+th,b+tk)$ stays in $B$, so $g$ is concave upward there, and $g'(0)=0$ makes $t=0$ a strict local minimum of $g$. Since this holds for every direction $\mathbf u$, $f(x,y)\gt f(a,b)$ at every point $(x,y)\ne(a,b)$ of $B$, so $f(a,b)$ is a local minimum. This proves (a).</p>
+        <p>Case (b) has $f_{xx}(a,b)\lt0$. Choosing in the same way a disk on which $f_{xx}\lt0$ and $D\gt0$, both terms of $(10)$ are $\le0$ and cannot vanish together, so $D_{\mathbf u}^2f\lt0$ there, $g$ is concave downward, and reversing every sign in the argument above yields a local maximum.</p>
+        <p>Case (c) has $D(a,b)\lt0$, which makes the quadratic form $q(h,k)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2$ indefinite at $(a,b)$: if $f_{xx}\ne0$, then $q(1,0)=f_{xx}$ and $q(-f_{xy},f_{xx})=f_{xx}\big(f_{xx}f_{yy}-f_{xy}^2\big)=f_{xx}D$ have opposite signs; if $f_{xx}=0$, then $D=-f_{xy}^2\lt0$ forces $f_{xy}\ne0$, and $q(h,1)=2f_{xy}h+f_{yy}$ changes sign with $h$. So there are directions $\mathbf u$ with $D_{\mathbf u}^2f(a,b)\gt0$ and $\mathbf v$ with $D_{\mathbf v}^2f(a,b)\lt0$; along each of them the cross-section $g$ has $g'(0)=0$ and $g''(0)\ne0$, so $t=0$ is a local minimum of $g$ in the direction $\mathbf u$ and a local maximum in the direction $\mathbf v$. Moving away from $(a,b)$, $f$ therefore grows in one direction and drops in another, so $f(a,b)$ is no extreme value and $(a,b)$ is a saddle point.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-7-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">완전제곱으로 읽는 극솟값 <em>A Minimum Found by Completing the Square</em><span class="src-ref">Example 1 · p.1047</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=x^2+y^2-2x-6y+14$ 의 임계점을 모두 찾고, 그 점에서 $f$ 가 어떤 극값을 갖는지 판정하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x(x,y)=2x-2$, $f_y(x,y)=2y-6$이므로 $f_x=f_y=0$을 동시에 풀면 유일한 임계점 $(1,3)$을 얻는다.</p>
+        <p>$x,y$에 대해 각각 완전제곱을 하면</p>
+        <div class="math-display">$$f(x,y)=(x^2-2x+1)+(y^2-6y+9)+4=(x-1)^2+(y-3)^2+4$$</div>
+        <p>이므로 두 제곱항이 모두 $0$ 이상이라 임의의 $(x,y)$에서 $f(x,y)\ge4$이고, 등호는 $(x,y)=(1,3)$일 때만 성립한다. 따라서 $f(1,3)=4$는 평면 전체에서의 절대최솟값이며, 특히 극솟값이다.</p>
+        <p>이 결론은 이계도함수 판정법으로도 확인된다. $f_{xx}=2$, $f_{yy}=2$, $f_{xy}=0$이므로 $D=f_{xx}f_{yy}-f_{xy}^2=4\gt0$이고 $f_{xx}=2\gt0$이라 $(1,3)$은 극솟값을 준다. 따라서 $f$는 $(1,3)$에서 극솟값 $4$를 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Locate every critical point of $f(x,y)=x^2+y^2-2x-6y+14$ and determine what kind of extreme value $f$ has there.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x(x,y)=2x-2$ and $f_y(x,y)=2y-6$, solving $f_x=f_y=0$ simultaneously gives the unique critical point $(1,3)$.</p>
+        <p>Completing the square in $x$ and in $y$ gives</p>
+        <div class="math-display">$$f(x,y)=(x^2-2x+1)+(y^2-6y+9)+4=(x-1)^2+(y-3)^2+4,$$</div>
+        <p>and since both squared terms are $\ge0$, $f(x,y)\ge4$ for every $(x,y)$, with equality exactly at $(x,y)=(1,3)$. So $f(1,3)=4$ is the absolute minimum of $f$ over the whole plane, and in particular a local minimum.</p>
+        <p>The Second Derivatives Test confirms this: $f_{xx}=2$, $f_{yy}=2$, $f_{xy}=0$, so $D=f_{xx}f_{yy}-f_{xy}^2=4\gt0$ and $f_{xx}=2\gt0$, making $(1,3)$ a local minimum. Hence $f$ has a local minimum value of $4$ at $(1,3)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-7-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">극값이 없는 임계점 <em>A Critical Point with No Extreme Value</em><span class="src-ref">Example 2 · p.1047</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=y^2-x^2$ 의 극값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x(x,y)=-2x$, $f_y(x,y)=2y$이므로 유일한 임계점은 $(0,0)$이고 $f(0,0)=0$이다.</p>
+        <p>$x$축 위($y=0$)에서는 $f(x,0)=-x^2\le0$이고 $x\ne0$이면 $f(x,0)\lt0$이며, $y$축 위($x=0$)에서는 $f(0,y)=y^2\ge0$이고 $y\ne0$이면 $f(0,y)\gt0$이다. 따라서 $(0,0)$을 중심으로 한 원판을 아무리 작게 잡아도 그 안에는 $f$가 $0$보다 작은 점과 $0$보다 큰 점이 함께 있으므로, $f(0,0)=0$은 극댓값도 극솟값도 아니다.</p>
+        <p>이계도함수 판정법으로도 같은 결론을 얻는다. $f_{xx}=-2$, $f_{yy}=2$, $f_{xy}=0$이므로 $D=f_{xx}f_{yy}-f_{xy}^2=-4\lt0$이라 $(0,0)$은 안장점이다. 따라서 $f$는 극값을 갖지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the extreme values of $f(x,y)=y^2-x^2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x(x,y)=-2x$ and $f_y(x,y)=2y$, the only critical point is $(0,0)$, with $f(0,0)=0$.</p>
+        <p>On the $x$-axis ($y=0$), $f(x,0)=-x^2\le0$ and $f(x,0)\lt0$ whenever $x\ne0$; on the $y$-axis ($x=0$), $f(0,y)=y^2\ge0$ and $f(0,y)\gt0$ whenever $y\ne0$. So no matter how small a disk is drawn around $(0,0)$, it contains points where $f$ is negative and points where $f$ is positive, and $f(0,0)=0$ is neither a local maximum nor a local minimum.</p>
+        <p>The Second Derivatives Test gives the same conclusion: $f_{xx}=-2$, $f_{yy}=2$, $f_{xy}=0$, so $D=f_{xx}f_{yy}-f_{xy}^2=-4\lt0$, making $(0,0)$ a saddle point. So $f$ has no extreme values.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-7-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">임계점 세 개의 분류 <em>Classifying Three Critical Points</em><span class="src-ref">Example 3 · p.1048–1049</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=x^4+y^4-4xy+1$ 의 극댓값과 극솟값, 그리고 안장점을 모두 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x(x,y)=4x^3-4y$, $f_y(x,y)=4y^3-4x$이므로 임계점은 연립방정식 $y=x^3$, $x=y^3$의 해이다. 첫 식을 둘째 식에 대입하면 $x=(x^3)^3=x^9$, 즉 $x^9-x=x(x^8-1)=0$이므로 $x=0$ 또는 $x=\pm1$이다(나머지 $x^8=1$의 근은 모두 허수이다). 각 $x$에 대해 $y=x^3$이 정해지므로 임계점은 $(0,0)$, $(1,1)$, $(-1,-1)$ 세 개이다.</p>
+        <p>2계 편도함수는 $f_{xx}=12x^2$, $f_{yy}=12y^2$, $f_{xy}=-4$이므로 $D(x,y)=144x^2y^2-16$이다. 세 임계점에서의 값을 정리하면 다음과 같다.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>$(x,y)$</th><th>$f(x,y)$</th><th>$f_{xx}$</th><th>$D$</th><th>판정</th></tr>
+            <tr><td>$(0,0)$</td><td>$1$</td><td>$0$</td><td>$-16$</td><td>안장점</td></tr>
+            <tr><td>$(1,1)$</td><td>$-1$</td><td>$12$</td><td>$128$</td><td>극솟값</td></tr>
+            <tr><td>$(-1,-1)$</td><td>$-1$</td><td>$12$</td><td>$128$</td><td>극솟값</td></tr>
+          </table>
+        </div>
+        <p>$D(0,0)=-16\lt0$이므로 $(0,0)$은 안장점이다. $(\pm1,\pm1)$에서는 $D=128\gt0$이고 $f_{xx}=12\gt0$이므로 두 점 모두 극솟값을 주며, 그 값은 $f(\pm1,\pm1)=1+1-4+1=-1$로 같다. 따라서 $f$는 $(1,1)$과 $(-1,-1)$에서 극솟값 $-1$을 가지며, $(0,0)$은 안장점이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the local maximum and minimum values and the saddle points of $f(x,y)=x^4+y^4-4xy+1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f_x(x,y)=4x^3-4y$ and $f_y(x,y)=4y^3-4x$, the critical points solve the system $y=x^3$, $x=y^3$. Substituting the first into the second gives $x=(x^3)^3=x^9$, i.e. $x^9-x=x(x^8-1)=0$, so $x=0$ or $x=\pm1$ (the remaining roots of $x^8=1$ are all non-real). Each $x$ fixes $y=x^3$, so there are three critical points: $(0,0)$, $(1,1)$, $(-1,-1)$.</p>
+        <p>The second partials are $f_{xx}=12x^2$, $f_{yy}=12y^2$, $f_{xy}=-4$, so $D(x,y)=144x^2y^2-16$. The values at the three critical points are:</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>$(x,y)$</th><th>$f(x,y)$</th><th>$f_{xx}$</th><th>$D$</th><th>Type</th></tr>
+            <tr><td>$(0,0)$</td><td>$1$</td><td>$0$</td><td>$-16$</td><td>saddle</td></tr>
+            <tr><td>$(1,1)$</td><td>$-1$</td><td>$12$</td><td>$128$</td><td>local min</td></tr>
+            <tr><td>$(-1,-1)$</td><td>$-1$</td><td>$12$</td><td>$128$</td><td>local min</td></tr>
+          </table>
+        </div>
+        <p>Since $D(0,0)=-16\lt0$, $(0,0)$ is a saddle point. At $(\pm1,\pm1)$, $D=128\gt0$ and $f_{xx}=12\gt0$, so both points give local minima, with equal value $f(\pm1,\pm1)=1+1-4+1=-1$. Hence $f$ has local minimum value $-1$ at $(1,1)$ and $(-1,-1)$, and a saddle point at $(0,0)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-7-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">임계점 다섯 개와 그래프의 최고점 <em>Five Critical Points and the Highest Point</em><span class="src-ref">Example 4 · p.1049–1050</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=10x^2y-5x^2-4y^2-x^4-2y^4$ 의 임계점을 모두 찾아 분류하라. 또한 이 함수의 그래프 위에서 가장 높은 점을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 교재 표에는 $(\pm2.64,\,1.90)$에서 $f_{xx}=-55.93$으로 적혀 있으나, 임계점에서 $f_{xx}=20-40y$이므로 근 $y=1.8983844\ldots$를 넣으면 $-55.9354\ldots$이고 소수 둘째 자리로 반올림하면 $-55.94$이다. 아래 표는 이 값을 쓴다(나머지 항목은 교재와 일치한다).</p>
+        <p><strong>풀이.</strong> 편도함수는 $f_x(x,y)=20xy-10x-4x^3=2x(10y-5-2x^2)$이고 $f_y(x,y)=10x^2-8y-8y^3$이다.</p>
+        <p>$f_x=0$은 $x=0$이거나 $10y-5-2x^2=0$일 때 성립한다. $x=0$이면 $f_y=-8y-8y^3=-8y(1+y^2)=0$에서 실수해는 $y=0$뿐이므로 임계점 $(0,0)$을 얻는다.</p>
+        <p>$x\ne0$인 경우 $x^2=5y-\tfrac52$를 $f_y=0$에 대입하면 $10\big(5y-\tfrac52\big)-8y-8y^3=0$, 곧</p>
+        <div class="math-display">$$4y^3-21y+\frac{25}{2}=0$$</div>
+        <p>을 얻는다(양변에 $-\tfrac12$을 곱함). 이 삼차방정식의 실근은 수치적으로 $y\approx-2.5452,\;0.6468,\;1.8984$인데, $x^2=5y-\tfrac52\ge0$이려면 $y\ge\tfrac12$이어야 하므로 첫 번째 근은 버리고 $y\approx0.6468$, $y\approx1.8984$만 남는다. 각각 $x=\pm\sqrt{5y-\tfrac52}$를 계산하면 $(\pm0.86,\,0.65)$와 $(\pm2.64,\,1.90)$, 네 개의 임계점이 추가된다.</p>
+        <p>2계 편도함수 $f_{xx}=20y-10-12x^2$, $f_{yy}=-8-24y^2$, $f_{xy}=20x$로 $D=f_{xx}f_{yy}-f_{xy}^2$를 계산해 다섯 임계점을 판정하면 다음과 같다.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>임계점</th><th>$f$</th><th>$f_{xx}$</th><th>$D$</th><th>판정</th></tr>
+            <tr><td>$(0,0)$</td><td>$0.00$</td><td>$-10.00$</td><td>$80.00$</td><td>극댓값</td></tr>
+            <tr><td>$(\pm0.86,\,0.65)$</td><td>$-1.48$</td><td>$-5.87$</td><td>$-187.64$</td><td>안장점</td></tr>
+            <tr><td>$(\pm2.64,\,1.90)$</td><td>$8.50$</td><td>$-55.94$</td><td>$2488.72$</td><td>극댓값</td></tr>
+          </table>
+        </div>
+        <p>따라서 극댓값은 $(0,0)$에서 $f=0$, $(\pm2.64,\,1.90)$에서 $f\approx8.50$이며, $(\pm0.86,\,0.65)$는 안장점이다. $f$의 최고차항이 $-x^4-2y^4$이므로 $(x,y)\to\infty$일 때 $f(x,y)\to-\infty$이고, $f$는 다항식이라 미분가능하지 않은 점이 없으므로 그래프의 가장 높은 점은 반드시 임계점에서 나타난다. 다섯 임계점의 값 중 가장 큰 것은 $8.50$이므로, 그래프의 최고점은 $\big(\pm2.64,\,1.90,\,8.50\big)$ 두 곳이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find and classify all critical points of $f(x,y)=10x^2y-5x^2-4y^2-x^4-2y^4$. Then determine the highest point on the graph of $f$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The textbook's chart records $f_{xx}=-55.93$ at $(\pm2.64,\,1.90)$, but $f_{xx}=20-40y$ at a critical point, and the root $y=1.8983844\ldots$ gives $-55.9354\ldots$, which rounds to $-55.94$ at two decimal places. The chart below uses that value; every other entry agrees with the textbook.</p>
+        <p><strong>Solution.</strong> The partial derivatives are $f_x(x,y)=20xy-10x-4x^3=2x(10y-5-2x^2)$ and $f_y(x,y)=10x^2-8y-8y^3$.</p>
+        <p>$f_x=0$ holds when $x=0$ or $10y-5-2x^2=0$. If $x=0$, then $f_y=-8y-8y^3=-8y(1+y^2)=0$ forces $y=0$ (the only real root), giving the critical point $(0,0)$.</p>
+        <p>If $x\ne0$, substituting $x^2=5y-\tfrac52$ into $f_y=0$ gives $10(5y-\tfrac52)-8y-8y^3=0$, that is,</p>
+        <div class="math-display">$$4y^3-21y+\frac{25}{2}=0$$</div>
+        <p>(after multiplying by $-\tfrac12$). Its real roots are, numerically, $y\approx-2.5452,\;0.6468,\;1.8984$; since $x^2=5y-\tfrac52\ge0$ requires $y\ge\tfrac12$, the first root is discarded and only $y\approx0.6468$ and $y\approx1.8984$ remain. Solving $x=\pm\sqrt{5y-\tfrac52}$ for each gives four more critical points, $(\pm0.86,\,0.65)$ and $(\pm2.64,\,1.90)$.</p>
+        <p>With $f_{xx}=20y-10-12x^2$, $f_{yy}=-8-24y^2$, $f_{xy}=20x$, computing $D=f_{xx}f_{yy}-f_{xy}^2$ at the five critical points gives:</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>Critical point</th><th>$f$</th><th>$f_{xx}$</th><th>$D$</th><th>Type</th></tr>
+            <tr><td>$(0,0)$</td><td>$0.00$</td><td>$-10.00$</td><td>$80.00$</td><td>local max</td></tr>
+            <tr><td>$(\pm0.86,\,0.65)$</td><td>$-1.48$</td><td>$-5.87$</td><td>$-187.64$</td><td>saddle</td></tr>
+            <tr><td>$(\pm2.64,\,1.90)$</td><td>$8.50$</td><td>$-55.94$</td><td>$2488.72$</td><td>local max</td></tr>
+          </table>
+        </div>
+        <p>So $f$ has local maxima $f=0$ at $(0,0)$ and $f\approx8.50$ at $(\pm2.64,\,1.90)$, while $(\pm0.86,\,0.65)$ are saddle points. Because the leading terms $-x^4-2y^4$ send $f(x,y)\to-\infty$ as $(x,y)\to\infty$, and $f$ is a polynomial with no points of non-differentiability, the highest point of the graph must occur at a critical point. The largest of the five critical values is $8.50$, so the highest points of the graph are $\big(\pm2.64,\,1.90,\,8.50\big)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-7-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">점과 평면 사이의 최단거리 <em>Shortest Distance from a Point to a Plane</em><span class="src-ref">Example 5 · p.1051</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $(1,0,-2)$ 에서 평면 $x+2y+z=4$ 까지의 최단거리를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 평면 위의 점은 $z=4-x-2y$로 매개변수화되므로, $(1,0,-2)$에서 평면 위의 점 $(x,y,4-x-2y)$까지 거리의 제곱은</p>
+        <div class="math-display">$$f(x,y)=(x-1)^2+y^2+(4-x-2y+2)^2=(x-1)^2+y^2+(6-x-2y)^2$$</div>
+        <p>이다. 이 함수를 최소화하면 된다. 편도함수는</p>
+        <div class="math-display">$$f_x=2(x-1)-2(6-x-2y)=4x+4y-14,$$</div>
+        <div class="math-display">$$f_y=2y-4(6-x-2y)=4x+10y-24$$</div>
+        <p>이므로 $f_x=f_y=0$은 $x+y=\tfrac72$, $2x+5y=12$와 동치이다. 첫 식에서 $x=\tfrac72-y$를 얻어 둘째 식에 대입하면 $3y=5$, 곧 $y=\tfrac53$, $x=\tfrac{11}6$이 유일한 임계점이다.</p>
+        <p>$f_{xx}=4$, $f_{yy}=10$, $f_{xy}=4$는 모두 상수이므로 $D=f_{xx}f_{yy}-f_{xy}^2=24$도 $xy$평면 전체에서 일정하게 양수이고 $f_{xx}=4\gt0$이다. 이계도함수 판정법에 의해 이 유일한 임계점은 극솟값을 주며, $D,f_{xx}$가 $xy$평면의 어느 점에서나 양수여서 $f$가 아래로 볼록하므로 이 극솟값은 사실 $f$의 절대최솟값이다.</p>
+        <p>$\Big(\tfrac{11}6,\tfrac53\Big)$에서 $z=4-\tfrac{11}6-\tfrac{10}3=-\tfrac76$이므로 세 성분의 차는 각각 $\tfrac56,\tfrac53,\tfrac56$이고</p>
+        <div class="math-display">$$f\Big(\frac{11}6,\frac53\Big)=\Big(\frac56\Big)^2+\Big(\frac53\Big)^2+\Big(\frac56\Big)^2=\frac{25}{36}+\frac{100}{36}+\frac{25}{36}=\frac{150}{36}=\frac{25}6$$</div>
+        <p>이다. 따라서 최단거리는 $\sqrt{25/6}=\dfrac5{\sqrt6}=\dfrac{5\sqrt6}6$이다. 이는 §12.5의 점–평면 거리 공식 $\dfrac{|1\cdot1+2\cdot0+1\cdot(-2)-4|}{\sqrt{1^2+2^2+1^2}}=\dfrac5{\sqrt6}$으로도 바로 확인된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the shortest distance from the point $(1,0,-2)$ to the plane $x+2y+z=4$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Points of the plane are parametrized by $z=4-x-2y$, so the squared distance from $(1,0,-2)$ to the plane point $(x,y,4-x-2y)$ is</p>
+        <div class="math-display">$$f(x,y)=(x-1)^2+y^2+(4-x-2y+2)^2=(x-1)^2+y^2+(6-x-2y)^2,$$</div>
+        <p>and it suffices to minimize $f$. Its partial derivatives are</p>
+        <div class="math-display">$$f_x=2(x-1)-2(6-x-2y)=4x+4y-14,$$</div>
+        <div class="math-display">$$f_y=2y-4(6-x-2y)=4x+10y-24,$$</div>
+        <p>so $f_x=f_y=0$ is equivalent to $x+y=\tfrac72$ and $2x+5y=12$. Substituting $x=\tfrac72-y$ from the first equation into the second gives $3y=5$, so $y=\tfrac53$ and $x=\tfrac{11}6$ is the only critical point.</p>
+        <p>Since $f_{xx}=4$, $f_{yy}=10$, $f_{xy}=4$ are constants, $D=f_{xx}f_{yy}-f_{xy}^2=24$ is positive at every point of the $xy$-plane, as is $f_{xx}=4$. The Second Derivatives Test makes this unique critical point a local minimum, and since $D\gt0$ and $f_{xx}\gt0$ hold everywhere, $f$ is convex and that local minimum is in fact its absolute minimum.</p>
+        <p>At $\Big(\tfrac{11}6,\tfrac53\Big)$, $z=4-\tfrac{11}6-\tfrac{10}3=-\tfrac76$, so the three differences are $\tfrac56,\tfrac53,\tfrac56$ and</p>
+        <div class="math-display">$$f\Big(\frac{11}6,\frac53\Big)=\Big(\frac56\Big)^2+\Big(\frac53\Big)^2+\Big(\frac56\Big)^2=\frac{25}{36}+\frac{100}{36}+\frac{25}{36}=\frac{150}{36}=\frac{25}6.$$</div>
+        <p>Hence the shortest distance is $\sqrt{25/6}=\dfrac5{\sqrt6}=\dfrac{5\sqrt6}6$, which matches the point-to-plane distance formula of §12.5, $\dfrac{|1\cdot1+2\cdot0+1\cdot(-2)-4|}{\sqrt{1^2+2^2+1^2}}=\dfrac5{\sqrt6}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex14-7-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">뚜껑 없는 상자의 최대 부피 <em>Largest Volume of a Lidless Box</em><span class="src-ref">Example 6 · p.1051–1052</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>넓이 $12\ \mathrm{m^2}$ 의 판지로 뚜껑이 없는 직육면체 상자를 만들려고 한다. 이렇게 만들 수 있는 상자의 최대 부피를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 밑면의 두 변을 $x,y$, 높이를 $z$라 하면(모두 양수), 뚜껑이 없으므로 필요한 판지의 넓이는 밑면 $xy$와 옆면 두 쌍 $2xz,\,2yz$의 합이다.</p>
+        <div class="math-display">$$xy+2xz+2yz=12\quad\Longrightarrow\quad z=\frac{12-xy}{2(x+y)}.$$</div>
+        <p>이를 부피 $V=xyz$에 대입하면 $x,y$만의 함수</p>
+        <div class="math-display">$$V(x,y)=\frac{xy(12-xy)}{2(x+y)}=\frac{12xy-x^2y^2}{2(x+y)}$$</div>
+        <p>를 얻고, 최대화할 대상은 이 $V$이다. 몫의 미분법으로 계산하면</p>
+        <div class="math-display">$$V_x=\frac{y^2(12-2xy-x^2)}{2(x+y)^2},$$</div>
+        <div class="math-display">$$V_y=\frac{x^2(12-2xy-y^2)}{2(x+y)^2}$$</div>
+        <p>이다. $x,y\gt0$이므로 $V_x=V_y=0$은 $12-2xy-x^2=0$과 $12-2xy-y^2=0$을 동시에 요구하고, 두 식을 빼면 $x^2=y^2$, 곧 $x=y$이다. 이를 첫 식에 넣으면 $12-3x^2=0$에서 $x=2$이므로 유일한 (양의) 임계점은 $x=y=2$이고, 그때 $z=(12-4)/8=1$이다.</p>
+        <p>이 점에서 이계도함수 판정법을 적용하면 $D(2,2)=\tfrac34\gt0$, $V_{xx}(2,2)=-1\lt0$이므로 $(2,2)$는 $V$의 극댓값을 준다. 한편 상자가 실제로 만들어지려면 $z\gt0$, 곧 $xy\lt12$이어야 하므로 정의역은 $R=\{(x,y)\mid x,y\gt0,\ xy\lt12\}$이고 그 위에서 $V\gt0$이다. $R$의 경계($x\to0^+$, $y\to0^+$, $xy\to12^-$)에서는 $V\to0$이고, $xy(12-xy)\le36$이므로 $V\le\dfrac{18}{x+y}$가 되어 $R$ 안에서 원점으로부터 무한히 멀어질 때에도 $V\to0$이다. 따라서 $V$의 최댓값은 $R$의 내부 임계점에서 달성되어야 하는데 그런 점은 $(2,2)$ 하나뿐이다. 그러므로 상자의 최대 부피는 $V(2,2)=2\cdot2\cdot1=4\ \mathrm{m^3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A rectangular box with no lid is to be built from $12\ \mathrm{m^2}$ of cardboard. Find the largest volume such a box can have.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $x,y$ be the dimensions of the base and $z$ the height, all positive. Since the box has no lid, the cardboard used is the base $xy$ plus the two pairs of sides $2xz$ and $2yz$:</p>
+        <div class="math-display">$$xy+2xz+2yz=12\quad\Longrightarrow\quad z=\frac{12-xy}{2(x+y)}.$$</div>
+        <p>Substituting into the volume $V=xyz$ gives a function of $x,y$ alone,</p>
+        <div class="math-display">$$V(x,y)=\frac{xy(12-xy)}{2(x+y)}=\frac{12xy-x^2y^2}{2(x+y)},$$</div>
+        <p>and this is what must be maximized. The quotient rule gives</p>
+        <div class="math-display">$$V_x=\frac{y^2(12-2xy-x^2)}{2(x+y)^2},$$</div>
+        <div class="math-display">$$V_y=\frac{x^2(12-2xy-y^2)}{2(x+y)^2}.$$</div>
+        <p>Since $x,y\gt0$, $V_x=V_y=0$ forces $12-2xy-x^2=0$ and $12-2xy-y^2=0$ simultaneously; subtracting gives $x^2=y^2$, so $x=y$. Substituting into the first equation gives $12-3x^2=0$, so $x=2$, and the only positive critical point is $x=y=2$, with $z=(12-4)/8=1$.</p>
+        <p>The Second Derivatives Test there gives $D(2,2)=\tfrac34\gt0$ and $V_{xx}(2,2)=-1\lt0$, so $(2,2)$ is a local maximum of $V$. An actual box needs $z\gt0$, that is $xy\lt12$, so the domain is $R=\{(x,y)\mid x,y\gt0,\ xy\lt12\}$, on which $V\gt0$. Approaching the boundary of $R$ ($x\to0^+$, $y\to0^+$, or $xy\to12^-$) drives $V\to0$, and $xy(12-xy)\le36$ gives $V\le\dfrac{18}{x+y}$, so $V\to0$ far out in $R$ as well. The maximum of $V$ must therefore be attained at an interior critical point, and $(2,2)$ is the only one. Hence the largest possible volume of the box is $V(2,2)=2\cdot2\cdot1=4\ \mathrm{m^3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex14-7-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">직사각형 위의 절대극값 <em>Absolute Extrema on a Rectangle</em><span class="src-ref">Example 7 · p.1053</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직사각형 $D=\{(x,y)\mid 0\le x\le 3,\ 0\le y\le 2\}$ 위에서 함수 $f(x,y)=x^2-2xy+2y$ 의 절대최댓값과 절대최솟값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 $D$의 내부에서 $f_x=2x-2y=0$, $f_y=-2x+2=0$을 풀면 $x=1,y=1$이므로 유일한 내부 임계점은 $(1,1)$이고 $f(1,1)=1-2+2=1$이다.</p>
+        <p>다음으로 절차 (9)에 따라 $D=[0,3]\times[0,2]$의 경계를 네 변 $L_1,L_2,L_3,L_4$로 나누고, 각 변 위에서 $f$를 한 변수의 함수로 바꾸어 그 최댓값·최솟값을 구한다.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>변</th><th>제한한 $f$</th><th>최솟값</th><th>최댓값</th></tr>
+            <tr><td>$L_1\colon y=0,\ 0\le x\le3$</td><td>$f(x,0)=x^2$</td><td>$(0,0)$에서 $0$</td><td>$(3,0)$에서 $9$</td></tr>
+            <tr><td>$L_2\colon x=3,\ 0\le y\le2$</td><td>$f(3,y)=9-4y$</td><td>$(3,2)$에서 $1$</td><td>$(3,0)$에서 $9$</td></tr>
+            <tr><td>$L_3\colon y=2,\ 0\le x\le3$</td><td>$f(x,2)=(x-2)^2$</td><td>$(2,2)$에서 $0$</td><td>$(0,2)$에서 $4$</td></tr>
+            <tr><td>$L_4\colon x=0,\ 0\le y\le2$</td><td>$f(0,y)=2y$</td><td>$(0,0)$에서 $0$</td><td>$(0,2)$에서 $4$</td></tr>
+          </table>
+        </div>
+        <p>내부 임계값 $1$과 네 변에서 나온 값들을 모두 모아 비교하면, 가장 큰 값은 $L_1$과 $L_2$가 공유하는 $9$로 $(3,0)$에서 나타나고, 가장 작은 값은 $0$으로 $(0,0)$과 $(2,2)$ 두 점에서 나타난다. 따라서 $f$는 $D$에서 절대최댓값 $f(3,0)=9$, 절대최솟값 $f(0,0)=f(2,2)=0$을 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the absolute maximum and absolute minimum values of $f(x,y)=x^2-2xy+2y$ on the rectangle $D=\{(x,y)\mid 0\le x\le 3,\ 0\le y\le 2\}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First, solving $f_x=2x-2y=0$ and $f_y=-2x+2=0$ in the interior of $D$ gives $x=1,y=1$, so the only interior critical point is $(1,1)$, with $f(1,1)=1-2+2=1$.</p>
+        <p>Next, following Procedure (9), split the boundary of $D=[0,3]\times[0,2]$ into the four sides $L_1,L_2,L_3,L_4$ and reduce $f$ on each to a function of one variable to find its extreme values.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>Side</th><th>$f$ restricted</th><th>Min</th><th>Max</th></tr>
+            <tr><td>$L_1\colon y=0,\ 0\le x\le3$</td><td>$f(x,0)=x^2$</td><td>$0$ at $(0,0)$</td><td>$9$ at $(3,0)$</td></tr>
+            <tr><td>$L_2\colon x=3,\ 0\le y\le2$</td><td>$f(3,y)=9-4y$</td><td>$1$ at $(3,2)$</td><td>$9$ at $(3,0)$</td></tr>
+            <tr><td>$L_3\colon y=2,\ 0\le x\le3$</td><td>$f(x,2)=(x-2)^2$</td><td>$0$ at $(2,2)$</td><td>$4$ at $(0,2)$</td></tr>
+            <tr><td>$L_4\colon x=0,\ 0\le y\le2$</td><td>$f(0,y)=2y$</td><td>$0$ at $(0,0)$</td><td>$4$ at $(0,2)$</td></tr>
+          </table>
+        </div>
+        <p>Comparing the interior value $1$ with everything the four sides produced, the largest value is the $9$ shared by $L_1$ and $L_2$ at $(3,0)$, and the smallest is the $0$ occurring at both $(0,0)$ and $(2,2)$. Hence $f$ has absolute maximum $f(3,0)=9$ and absolute minimum $f(0,0)=f(2,2)=0$ on $D$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-7-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch08.html">단원 08</a></p>
+        <ul>
+          <li>극값의 정의 1·정리 2·임계점 — <a href="../calc2/ch08.html#ex01">ex01</a>, <a href="../calc2/ch08.html#yu01-1">yu01-1</a>, <a href="../calc2/ch08.html#yu01-2">yu01-2</a> (부분 대응: 정의·정리를 진술하지 않고, 임계점도 $f_x=f_y=0$ 인 경우만 다룸)</li>
+          <li>이계도함수 판정법 (정리 3) — <a href="../calc2/ch08.html#ex01">ex01</a>, <a href="../calc2/ch08.html#yu01-1">yu01-1</a>, <a href="../calc2/ch08.html#yu01-2">yu01-2</a>, <a href="../calc2/ch08.html#yu01-3">yu01-3</a> (완전 대응, 증명 제외)</li>
+          <li>판정법의 증명 (절 끝) — 대응 없음</li>
+          <li>절대 최대·최소, 닫힌 유계집합, 극값정리 8, 절차 (9) — <a href="../calc2/ch08.html#yu01-4">yu01-4</a>, <a href="../calc2/ch08.html#pr09">pr09</a> (부분 대응: 절차만 사용하고 정의·정리 진술은 없음)</li>
+          <li>최적화 응용 (예제 5·6 유형) — <a href="../calc2/ch08.html#yu01-5">yu01-5</a>, <a href="../calc2/ch08.html#pr01">pr01</a>, <a href="../calc2/ch08.html#pr02">pr02</a>, <a href="../calc2/ch08.html#pr03">pr03</a>, <a href="../calc2/ch08.html#pr04">pr04</a> (부분 대응)</li>
+          <li>연습문제 61 최소제곱 회귀 — <a href="../calc2/ch08.html#pr05">pr05</a> (완전 대응, 추세선)</li>
+          <li>연습문제 60 하디–바인베르크 — <a href="../calc2/ch08.html#pr06">pr06</a> (완전 대응, 혈액형)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.7)</strong></p>
+        <p>제출 문항: 7, 13, 15, 21, 33, 39 &nbsp;/&nbsp; 학습 참고: 8, 14, 16, 22, 23, 24, 38, 40</p>
+        <p>(과제표에서 §14.7 다음 줄의 "Problems Plus 학습 참고 4, 5" 는 이 절의 연습문제가 아니라 14장 Problems Plus 문항이다.)</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-6.html">§14.6 방향도함수와 기울기 벡터</a> &nbsp;/&nbsp; 다음: <a href="s14-8.html">§14.8 라그랑주 승수법</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch08.html">Unit 08</a></p>
+        <ul>
+          <li>Definition 1, Theorem 2 and critical points — <a href="../calc2/ch08.html#ex01">ex01</a>, <a href="../calc2/ch08.html#yu01-1">yu01-1</a>, <a href="../calc2/ch08.html#yu01-2">yu01-2</a> (partial: neither statement is given, and only the case $f_x=f_y=0$ is treated)</li>
+          <li>Second Derivatives Test (Theorem 3) — <a href="../calc2/ch08.html#ex01">ex01</a>, <a href="../calc2/ch08.html#yu01-1">yu01-1</a>, <a href="../calc2/ch08.html#yu01-2">yu01-2</a>, <a href="../calc2/ch08.html#yu01-3">yu01-3</a> (full match, proof excluded)</li>
+          <li>Proof of the test (end of the section) — no match</li>
+          <li>Absolute extrema, closed and bounded sets, Theorem 8, procedure (9) — <a href="../calc2/ch08.html#yu01-4">yu01-4</a>, <a href="../calc2/ch08.html#pr09">pr09</a> (partial: the procedure is used, but neither definition nor theorem is stated)</li>
+          <li>Applied optimization (the type of Examples 5 and 6) — <a href="../calc2/ch08.html#yu01-5">yu01-5</a>, <a href="../calc2/ch08.html#pr01">pr01</a>, <a href="../calc2/ch08.html#pr02">pr02</a>, <a href="../calc2/ch08.html#pr03">pr03</a>, <a href="../calc2/ch08.html#pr04">pr04</a> (partial)</li>
+          <li>Exercise 61, least-squares regression — <a href="../calc2/ch08.html#pr05">pr05</a> (full match, trend line)</li>
+          <li>Exercise 60, Hardy&ndash;Weinberg — <a href="../calc2/ch08.html#pr06">pr06</a> (full match, blood types)</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.7)</strong></p>
+        <p>Problems to submit: 7, 13, 15, 21, 33, 39 &nbsp;/&nbsp; Recommended practice: 8, 14, 16, 22, 23, 24, 38, 40</p>
+        <p>(The line "Problems Plus, practice 4, 5" that follows §14.7 in the assignment table refers to the Chapter 14 Problems Plus, not to the exercises of this section.)</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-6.html">§14.6 Directional Derivatives and the Gradient Vector</a> &nbsp;/&nbsp; Next: <a href="s14-8.html">§14.8 Lagrange Multipliers</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

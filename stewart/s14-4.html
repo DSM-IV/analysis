@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.4 접평면과 선형근사 (Tangent Planes and Linear Approximations) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.4 접평면과 선형근사 — 접평면의 정의와 방정식, 선형화와 선형근사, 편도함수가 존재해도 근사가 나쁠 수 있는 반례, 증분과 미분가능성의 정의, 미분가능성의 충분조건(정리 8), 전미분 dz와 오차 추정 응용을 한국어·영어 대조로 정리하고 예제 6개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.4, 접평면, tangent plane, 선형근사, linear approximation, 선형화, linearization, 미분가능, differentiable, 증분, increment, 전미분, total differential, 미분, differential, 오차 추정, 타원포물면, 체감온도, heat index, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-4.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.4 접평면과 선형근사 (Tangent Planes and Linear Approximations) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="접평면의 방정식과 선형화, 미분가능성의 정의와 충분조건, 전미분 dz와 증분 Δz의 비교, 오차 추정 응용까지 §14.4 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-4.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.4 접평면과 선형근사 (Tangent Planes and Linear Approximations) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.4 접평면과 선형근사 — 접평면의 정의와 방정식, 선형화와 선형근사, 증분과 미분가능성, 미분가능성의 충분조건, 전미분과 오차 추정을 한국어·영어 대조로 정리하고 본문 예제 6개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-4.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-4.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html" class="active">14.4</a>
+      <a href="s14-5.html">14.5</a>
+      <a href="s14-6.html">14.6</a>
+      <a href="s14-7.html">14.7</a>
+      <a href="s14-8.html">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.4 · 2주차</p>
+  <h1>§14.4 접평면과 선형근사<span>Tangent Planes and Linear Approximations</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-4-1"><span class="toc-num">NOTE</span> 확대하면 평면이 된다 <em>Zooming In Toward a Point</em></a></li>
+    <li><a href="#c14-4-2"><span class="toc-num">NOTE</span> 접평면의 정의와 유도 <em>Defining the Tangent Plane</em></a></li>
+    <li><a href="#c14-4-3"><span class="toc-num">THM 3</span> 접평면의 방정식 <em>Equation of a Tangent Plane</em></a></li>
+    <li><a href="#c14-4-4"><span class="toc-num">REM 4</span> 접선과의 유비 <em>Analogy with the Tangent Line</em></a></li>
+    <li><a href="#c14-4-5"><span class="toc-num">NOTE</span> 선형화와 선형근사 <em>Linearization and Linear Approximation</em></a></li>
+    <li><a href="#c14-4-6"><span class="toc-num">NOTE</span> 편도함수만으로는 부족하다 — 증분 <em>Partials Are Not Enough: The Increment</em></a></li>
+    <li><a href="#c14-4-7"><span class="toc-num">DEF 7</span> 2변수 함수의 미분가능성 <em>Differentiability</em></a></li>
+    <li><a href="#c14-4-8"><span class="toc-num">THM 8</span> 미분가능성의 충분조건 <em>Sufficient Condition for Differentiability</em></a></li>
+    <li><a href="#c14-4-9"><span class="toc-num">NOTE</span> 미분과 전미분 <em>Differentials and the Total Differential</em></a></li>
+    <li><a href="#c14-4-10"><span class="toc-num">NOTE</span> 3변수 이상으로의 확장 <em>Extension to Three or More Variables</em></a></li>
+    <li><a href="#ex14-4-1"><span class="toc-num">EXAM 1</span> 타원포물면의 접평면 <em>Tangent Plane to an Elliptic Paraboloid</em></a></li>
+    <li><a href="#ex14-4-2"><span class="toc-num">EXAM 2</span> 선형화로 값 근사하기 <em>Approximating a Value by Linearization</em></a></li>
+    <li><a href="#ex14-4-3"><span class="toc-num">EXAM 3</span> 표에서 얻는 선형근사 — 체감온도 <em>Linear Approximation from a Table</em></a></li>
+    <li><a href="#ex14-4-4"><span class="toc-num">EXAM 4</span> 증분과 미분의 비교 <em>Comparing the Increment and the Differential</em></a></li>
+    <li><a href="#ex14-4-5"><span class="toc-num">EXAM 5</span> 원뿔 부피의 오차 추정 <em>Estimating the Error in the Volume of a Cone</em></a></li>
+    <li><a href="#ex14-4-6"><span class="toc-num">EXAM 6</span> 직육면체 부피의 오차 추정 <em>Estimating the Error in the Volume of a Box</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening -->
+<div class="card note-card" id="c14-4-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">확대하면 평면이 된다 <em>Zooming In Toward a Point</em><span class="src-ref">절 도입 · p.1012</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1변수 미적분학에서 미분가능한 함수의 그래프를 한 점 근처로 확대하면 그래프는 접선과 구별할 수 없게 되고, 그 점 근처에서 함수를 일차함수로 대체할 수 있다.</p>
+        <p>이 절에서는 같은 발상을 3차원으로 옮긴다. 이변수 미분가능함수의 그래프인 곡면 $z=f(x,y)$ 위의 한 점 근처로 확대해 들어가면 곡면은 하나의 평면 — 그 점에서의 <strong>접평면</strong> — 으로 납작해지고, 그 점 근처에서 $f$를 이변수 일차함수로 대체할 수 있다.</p>
+        <p>여기에 두 가지 개념이 더 따라온다. 다변수함수의 <strong>미분가능성</strong>을 엄밀하게 정의하는 일과, 1변수의 <strong>미분</strong>을 2변수 이상으로 확장하는 일이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In single-variable calculus, magnifying the graph of a differentiable function near one of its points makes it indistinguishable from its tangent line, so the function can be replaced there by a linear function.</p>
+        <p>This section carries the same idea into three dimensions. Zoom in toward a point on the surface $z=f(x,y)$, the graph of a differentiable function of two variables, and the surface flattens out into a plane — its <strong>tangent plane</strong> — so that $f$ can be replaced near that point by a linear function of two variables.</p>
+        <p>Two further notions come along with it: a precise meaning for <strong>differentiability</strong> of a function of several variables, and an extension of the <strong>differential</strong> from one variable to two or more.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Tangent Planes (Figure 1) -->
+<div class="card note-card" id="c14-4-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">접평면의 정의와 유도 <em>Defining the Tangent Plane</em><span class="src-ref">Tangent Planes · Figure 1 · p.1012–1013</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $S:z=f(x,y)$에서 $f$의 1계 편도함수가 모두 연속이라 하고, $P(x_0,y_0,z_0)$을 $S$ 위의 한 점이라 하자. §14.3에서처럼 수직평면 $y=y_0$과 $x=x_0$으로 $S$를 자르면 $P$를 지나는 두 곡선 $C_1,C_2$가 생기고, $P$에서 이 두 곡선의 접선을 각각 $T_1,T_2$라 하자.</p>
+        <p>$S$의 $P$에서의 <strong>접평면</strong>은 $P$를 지나며 $T_1$과 $T_2$를 모두 포함하는 평면으로 정의한다.</p>
+        <p>§14.6에서 보이듯이, $P$를 지나고 $S$ 위에 놓인 <em>임의의</em> 곡선의 $P$에서의 접선도 이 평면에 놓인다. 따라서 접평면은 $P$를 지나며 $S$ 위에 놓인 곡선들의 접선을 모두 모은 평면으로 볼 수 있고, $P$ 근처에서 $S$를 가장 잘 근사하는 평면이다.</p>
+        <p>방정식을 구하려면, $P(x_0,y_0,z_0)$을 지나는 모든 평면이 (식 12.5.7에 의해) $A(x-x_0)+B(y-y_0)+C(z-z_0)=0$을 만족한다는 사실에서 출발한다. 양변을 $C$로 나누고 $a=-A/C$, $b=-B/C$로 두면, 수직이 아닌 한 이런 평면은 다음 꼴로 쓸 수 있다.</p>
+        <div class="math-display">$$z-z_0=a(x-x_0)+b(y-y_0).\tag{1}$$</div>
+        <p>이 평면이 $T_1$과 $T_2$를 모두 포함해야 한다는 조건으로부터 두 수 $a,b$가 결정되는데, 이는 다음 카드에서 진행한다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="곡면 S 위의 점 P에서 두 접선을 담는 접평면" style="max-width:360px;width:100%;height:auto">
+            <line x1="100" y1="210" x2="100" y2="22" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="100,14 96,25 104,25" fill="var(--grey800)"/>
+            <line x1="100" y1="210" x2="27" y2="254" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,257 29,248 33,255" fill="var(--grey800)"/>
+            <line x1="100" y1="210" x2="332" y2="238" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,238 328,241 329,233" fill="var(--grey800)"/>
+            <text x="88" y="20" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="264" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="341" y="243" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="86" y="224" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 45,150 Q 120,112 200,95 Q 262,110 320,130 Q 245,172 165,190 Q 102,172 45,150 Z" fill="var(--grey100)" fill-opacity="0.9" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="55" y="140" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="299,141 163,113 67,155 203,183" fill="var(--g100)" fill-opacity="0.55" stroke="var(--g600)" stroke-width="1.2"/>
+            <path d="M 95,188 C 130,175 155,160 183,148 S 240,118 268,102" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <path d="M 100,130 C 130,137 158,143 183,148 S 255,166 305,170" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <line x1="140" y1="167" x2="226" y2="129" stroke="var(--orange)" stroke-width="1.6"/>
+            <line x1="122" y1="135" x2="244" y2="161" stroke="var(--orange)" stroke-width="1.6"/>
+            <line x1="183" y1="148" x2="183" y2="232" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="183" cy="148" r="3.4" fill="var(--grey900)"/>
+            <circle cx="183" cy="232" r="2.4" fill="var(--grey500)"/>
+            <text x="175" y="141" text-anchor="end" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="188" y="246" font-size="11" fill="var(--grey600)">(x₀, y₀, 0)</text>
+            <text x="272" y="99" font-size="11" font-style="italic" fill="var(--g700)">C₁</text>
+            <text x="309" y="174" font-size="11" font-style="italic" fill="var(--g700)">C₂</text>
+            <text x="231" y="121" font-size="11" font-style="italic" fill="var(--orange)">T₁</text>
+            <text x="248" y="166" font-size="11" font-style="italic" fill="var(--orange)">T₂</text>
+            <text x="196" y="202" font-size="11" fill="var(--g700)">접평면</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the surface $z=f(x,y)$, where $f$ has continuous first partial derivatives, and let $P(x_0,y_0,z_0)$ be a point of $S$. As in §14.3, cutting $S$ by the vertical planes $y=y_0$ and $x=x_0$ produces two curves $C_1$ and $C_2$, both passing through $P$; let $T_1$ and $T_2$ be their tangent lines at $P$.</p>
+        <p>The <strong>tangent plane</strong> to $S$ at $P$ is defined to be the plane through $P$ that contains both $T_1$ and $T_2$.</p>
+        <p>It will be shown in §14.6 that the tangent line at $P$ to <em>any</em> curve lying on $S$ and passing through $P$ also lies in this plane. So the tangent plane may be pictured as the totality of tangent lines at $P$ to curves on $S$ through $P$; it is the plane that best approximates $S$ near $P$.</p>
+        <p>To find its equation, start from the fact (Equation 12.5.7) that every plane through $P(x_0,y_0,z_0)$ satisfies $A(x-x_0)+B(y-y_0)+C(z-z_0)=0$. Dividing by $C$ and writing $a=-A/C$, $b=-B/C$ puts any such plane — provided it is not vertical — in the form</p>
+        <div class="math-display">$$z-z_0=a(x-x_0)+b(y-y_0).\tag{1}$$</div>
+        <p>The two numbers $a$ and $b$ are pinned down by the requirement that the plane contain $T_1$ and $T_2$, which is carried out in the next card.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="Tangent plane at P containing the tangent lines to the two trace curves" style="max-width:360px;width:100%;height:auto">
+            <line x1="100" y1="210" x2="100" y2="22" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="100,14 96,25 104,25" fill="var(--grey800)"/>
+            <line x1="100" y1="210" x2="27" y2="254" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,257 29,248 33,255" fill="var(--grey800)"/>
+            <line x1="100" y1="210" x2="332" y2="238" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,238 328,241 329,233" fill="var(--grey800)"/>
+            <text x="88" y="20" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="264" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="341" y="243" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="86" y="224" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 45,150 Q 120,112 200,95 Q 262,110 320,130 Q 245,172 165,190 Q 102,172 45,150 Z" fill="var(--grey100)" fill-opacity="0.9" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="55" y="140" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="299,141 163,113 67,155 203,183" fill="var(--g100)" fill-opacity="0.55" stroke="var(--g600)" stroke-width="1.2"/>
+            <path d="M 95,188 C 130,175 155,160 183,148 S 240,118 268,102" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <path d="M 100,130 C 130,137 158,143 183,148 S 255,166 305,170" fill="none" stroke="var(--g700)" stroke-width="2"/>
+            <line x1="140" y1="167" x2="226" y2="129" stroke="var(--orange)" stroke-width="1.6"/>
+            <line x1="122" y1="135" x2="244" y2="161" stroke="var(--orange)" stroke-width="1.6"/>
+            <line x1="183" y1="148" x2="183" y2="232" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="183" cy="148" r="3.4" fill="var(--grey900)"/>
+            <circle cx="183" cy="232" r="2.4" fill="var(--grey500)"/>
+            <text x="175" y="141" text-anchor="end" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="188" y="246" font-size="11" fill="var(--grey600)">(x₀, y₀, 0)</text>
+            <text x="272" y="99" font-size="11" font-style="italic" fill="var(--g700)">C₁</text>
+            <text x="309" y="174" font-size="11" font-style="italic" fill="var(--g700)">C₂</text>
+            <text x="231" y="121" font-size="11" font-style="italic" fill="var(--orange)">T₁</text>
+            <text x="248" y="166" font-size="11" font-style="italic" fill="var(--orange)">T₂</text>
+            <text x="188" y="202" font-size="11" fill="var(--g700)">tangent plane</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Equation 2 -->
+<div class="card thm-card" id="c14-4-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">접평면의 방정식 <em>Equation of a Tangent Plane</em><span class="src-ref">Equation (2) · p.1013</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (2) — 접평면의 방정식.</strong> $f$의 편도함수가 연속이라 하자. 그러면 곡면 $z=f(x,y)$ 위의 점 $P(x_0,y_0,z_0)$에서의 접평면은 다음 방정식을 갖는다.</p>
+          <div class="math-display">$$z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0).\tag{2}$$</div>
+        </div>
+        <p>두 계수는 정확히 접점에서 계산한 두 편도함수이므로, 평면을 써 내려가는 데 $f_x(x_0,y_0)$와 $f_y(x_0,y_0)$ 외에는 아무 정보도 필요 없다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 식 (1)의 평면 $z-z_0=a(x-x_0)+b(y-y_0)$이 $T_1,T_2$를 담아야 한다는 조건을 두 단계로 나누어 적용한다.</p>
+        <p>먼저 $y=y_0$을 대입하면 (1)은 평면 $y=y_0$ 안에서 직선 $z-z_0=a(x-x_0)$이 된다. 곡면 $S$를 이 평면으로 자른 곡선 $C_1$은 일변수함수 $x\mapsto f(x,y_0)$의 그래프이므로, $x_0$에서 이 함수의 접선 $T_1$의 기울기는 그 함수를 $x_0$에서 미분한 값 $f_x(x_0,y_0)$이다. (1)의 직선이 $T_1$과 같으려면 기울기가 일치해야 하므로 $a=f_x(x_0,y_0)$이다.</p>
+        <p>같은 방식으로 $x=x_0$을 대입하면 (1)은 직선 $z-z_0=b(y-y_0)$이 되고, 곡선 $C_2$는 $y\mapsto f(x_0,y)$의 그래프이므로 $T_2$의 기울기는 $f_y(x_0,y_0)$이다. 따라서 $b=f_y(x_0,y_0)$이다.</p>
+        <p>이렇게 얻은 $a,b$를 (1)에 대입하면 곧바로 식 (2)가 나온다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (2) — Equation of a Tangent Plane.</strong> Suppose $f$ has continuous partial derivatives. Then the tangent plane to the surface $z=f(x,y)$ at the point $P(x_0,y_0,z_0)$ has the equation</p>
+          <div class="math-display">$$z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0).\tag{2}$$</div>
+        </div>
+        <p>The two coefficients are exactly the two partial derivatives evaluated at the point of tangency, so no information beyond $f_x(x_0,y_0)$ and $f_y(x_0,y_0)$ is needed to write the plane down.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Impose the requirement that the plane $z-z_0=a(x-x_0)+b(y-y_0)$ of equation (1) contain $T_1$ and $T_2$, one at a time.</p>
+        <p>Setting $y=y_0$ first reduces (1), within the plane $y=y_0$, to the line $z-z_0=a(x-x_0)$. The curve $C_1$ obtained by cutting $S$ with that plane is the graph of the one-variable function $x\mapsto f(x,y_0)$, so the slope of its tangent line $T_1$ at $x_0$ is the derivative of that function at $x_0$, which is $f_x(x_0,y_0)$. For the line in (1) to coincide with $T_1$ the slopes must match, so $a=f_x(x_0,y_0)$.</p>
+        <p>In the same way, setting $x=x_0$ reduces (1) to the line $z-z_0=b(y-y_0)$, and $C_2$ is the graph of $y\mapsto f(x_0,y)$, whose tangent line $T_2$ has slope $f_y(x_0,y_0)$; hence $b=f_y(x_0,y_0)$.</p>
+        <p>Substituting these values of $a$ and $b$ back into (1) yields equation (2) directly.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : margin note, analogy with the tangent line -->
+<div class="card rem-card" id="c14-4-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">접선과의 유비 <em>Analogy with the Tangent Line</em><span class="src-ref">여백 노트 · p.1013</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (2)는 1변수에서 이미 익숙한 공식을 2변수로 그대로 옮긴 것이다. $x_0$에서 $y=f(x)$의 접선은</p>
+        <div class="math-display">$$y-y_0=f'(x_0)(x-x_0),$$</div>
+        <p>인데, (2)는 여기에 독립변수마다 하나씩 같은 꼴의 항을 하나 더 더한 것일 뿐이다. 각 편도함수에 그 변수 자신의 변위를 곱해 더하면 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Equation (2) is the two-variable copy of a formula already familiar from one variable. The tangent line to $y=f(x)$ at $x_0$ is</p>
+        <div class="math-display">$$y-y_0=f'(x_0)(x-x_0),$$</div>
+        <p>and (2) simply adds a second term of the same shape, one for each independent variable: each derivative is multiplied by the displacement of its own variable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Linear Approximations -->
+<div class="card note-card" id="c14-4-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">선형화와 선형근사 <em>Linearization and Linear Approximation</em><span class="src-ref">Eq. (3)–(4) · Figures 2–3 · p.1014</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (2)를 $z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$ 꼴로 다시 쓰면, $(a,b,f(a,b))$에서의 접평면은 이변수 일차함수의 그래프로 나타난다. 이 함수</p>
+        <div class="math-display">$$L(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b),\tag{3}$$</div>
+        <p>를 $(a,b)$에서 $f$의 <strong>선형화</strong>라 하고, 근사</p>
+        <div class="math-display">$$f(x,y)\approx f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\tag{4}$$</div>
+        <p>를 $(a,b)$에서 $f$의 <strong>선형근사</strong>, 또는 <strong>접평면 근사</strong>라 한다.</p>
+        <p>$(1,1)$에서 $f(x,y)=2x^2+y^2$의 선형화는 $L(x,y)=4x+2y-3$이다(예제 1). 접점 근처에서는 근사가 정확해서 $L(1.1,0.95)=3.3$이 참값 $f(1.1,0.95)=3.3225$에 가깝지만, 접점에서 멀어지면 쓸모가 없어져서 $L(2,3)=11$인 반면 $f(2,3)=17$이다.</p>
+        <p>확대해 보면 이를 시각적으로 확인할 수 있다. 그래프에서는 곡면이 접평면 위로 납작해지고, 등고선 지도에서는 $(1,1)$ 근처의 등위선들이 간격이 일정한 평행 직선들로 곧게 펴지는데, 이는 평면의 등고선 지도가 보이는 모습 그대로다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Written in the form $z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$, equation (2) exhibits the tangent plane at $(a,b,f(a,b))$ as the graph of a linear function of two variables. That function,</p>
+        <div class="math-display">$$L(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b),\tag{3}$$</div>
+        <p>is called the <strong>linearization</strong> of $f$ at $(a,b)$, and the approximation</p>
+        <div class="math-display">$$f(x,y)\approx f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\tag{4}$$</div>
+        <p>is the <strong>linear approximation</strong>, or <strong>tangent plane approximation</strong>, of $f$ at $(a,b)$.</p>
+        <p>For $f(x,y)=2x^2+y^2$ at $(1,1)$ the linearization is $L(x,y)=4x+2y-3$ (Example 1). Near the point of tangency it is accurate: $L(1.1,0.95)=3.3$ against the true value $f(1.1,0.95)=3.3225$. Far from it the approximation is worthless: $L(2,3)=11$ while $f(2,3)=17$.</p>
+        <p>Zooming in confirms this visually — on the graph the surface flattens onto its tangent plane, and on a contour map the level curves near $(1,1)$ straighten into equally spaced parallel lines, which is what the contour map of a plane looks like.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Figure 4 counterexample + increments (5)(6) -->
+<div class="card note-card" id="c14-4-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">편도함수만으로는 부족하다 — 증분 <em>Partials Are Not Enough: The Increment</em><span class="src-ref">Figure 4 · Eq. (5)–(6) · p.1015</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>앞서 접평면을 정의할 때는 $f_x$와 $f_y$가 연속이라는 가정을 두었다. 이 가정을 빼면 상황이 크게 나빠질 수 있다. 다음 함수를 생각해 보자.</p>
+        <div class="math-display">$$f(x,y)=\begin{cases}\dfrac{xy}{x^2+y^2} &amp; (x,y)\neq(0,0)\text{일 때},\\[4pt] 0 &amp; (x,y)=(0,0)\text{일 때}.\end{cases}$$</div>
+        <p>원점에서 두 편도함수는 모두 존재하며 $f_x(0,0)=f_y(0,0)=0$이지만(연습문제 54), $f_x$와 $f_y$는 원점에서 연속이 아니다. 선형근사 (4)는 $f(x,y)\approx 0$이라 말하지만, 실제로는 직선 $y=x$ 위의 원점 아닌 모든 점에서 — 원점에 아무리 가까워도 — $f(x,y)=\tfrac12$이다. 즉 두 편도함수가 존재한다는 사실만으로는 평면이 곡면에 얼마나 잘 들어맞는지에 대해 아무것도 말해 주지 않는다.</p>
+        <p>이런 병적인 상황을 배제하려면 정말로 중요한 성질을 증분을 이용해 따로 떼어내야 한다. 1변수에서 $x$가 $a$에서 $a+\Delta x$로 변할 때 $y=f(x)$의 증분은 $\Delta y=f(a+\Delta x)-f(a)$이고, $a$에서의 미분가능성은 다음과 동치이다.</p>
+        <div class="math-display">$$\Delta y=f'(a)\,\Delta x+\varepsilon\,\Delta x,\qquad \Delta x\to 0\text{일 때 }\varepsilon\to 0.\tag{5}$$</div>
+        <p>$z=f(x,y)$의 경우, $x$가 $a$에서 $a+\Delta x$로, $y$가 $b$에서 $b+\Delta y$로 변할 때 그에 대응하는 $z$의 증분은</p>
+        <div class="math-display">$$\Delta z=f(a+\Delta x,\,b+\Delta y)-f(a,b),\tag{6}$$</div>
+        <p>즉 $(a,b)$에서 $(a+\Delta x,b+\Delta y)$로 옮겨 갈 때 $f$의 값이 변하는 양이다. 정의 7은 이 $\Delta z$를 써서 (5)를 그대로 흉내 낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Tangent planes were defined above under the hypothesis that $f_x$ and $f_y$ are continuous. Dropping that hypothesis can go badly wrong. Consider</p>
+        <div class="math-display">$$f(x,y)=\begin{cases}\dfrac{xy}{x^2+y^2} &amp; \text{if }(x,y)\neq(0,0),\\[4pt] 0 &amp; \text{if }(x,y)=(0,0).\end{cases}$$</div>
+        <p>Both partial derivatives exist at the origin, with $f_x(0,0)=f_y(0,0)=0$ (Exercise 54), but $f_x$ and $f_y$ are not continuous there. The linear approximation (4) would read $f(x,y)\approx 0$, whereas $f(x,y)=\tfrac12$ at every point of the line $y=x$ other than the origin itself, no matter how close to the origin that point lies. So the mere existence of both partial derivatives says nothing about how well the plane fits.</p>
+        <p>To rule out such behavior one isolates the property that really matters, using increments. In one variable, when $x$ changes from $a$ to $a+\Delta x$ the increment of $y=f(x)$ is $\Delta y=f(a+\Delta x)-f(a)$, and differentiability at $a$ is equivalent to</p>
+        <div class="math-display">$$\Delta y=f'(a)\,\Delta x+\varepsilon\,\Delta x,\qquad \varepsilon\to 0\ \text{ as }\ \Delta x\to 0.\tag{5}$$</div>
+        <p>For $z=f(x,y)$, when $x$ changes from $a$ to $a+\Delta x$ and $y$ from $b$ to $b+\Delta y$, the corresponding increment of $z$ is</p>
+        <div class="math-display">$$\Delta z=f(a+\Delta x,\,b+\Delta y)-f(a,b),\tag{6}$$</div>
+        <p>the change in the value of $f$ produced by moving from $(a,b)$ to $(a+\Delta x,b+\Delta y)$. Definition 7 imitates (5) with this $\Delta z$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Definition 7 -->
+<div class="card def-card" id="c14-4-7">
+  <div class="card-head">
+    <span class="def-num">DEF 7</span>
+    <span class="def-title">2변수 함수의 미분가능성 <em>Differentiability</em><span class="src-ref">Definition 7 · p.1015</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 7.</strong> $z=f(x,y)$라 하자. (6)의 증분 $\Delta z$가 다음과 같이 나타내어질 때 $f$는 <strong>$(a,b)$에서 미분가능</strong>하다고 한다.</p>
+          <div class="math-display">$$\Delta z=f_x(a,b)\,\Delta x+f_y(a,b)\,\Delta y+\varepsilon_1\,\Delta x+\varepsilon_2\,\Delta y,$$</div>
+          <p>여기서 $\varepsilon_1,\varepsilon_2$는 $\Delta x,\Delta y$의 함수이고 $(\Delta x,\Delta y)\to(0,0)$일 때 $\varepsilon_1\to 0$, $\varepsilon_2\to 0$을 만족한다.</p>
+        </div>
+        <p>기하적으로 읽으면, 이 정의는 $f$의 증분이 접평면이 예측하는 증분과 변위에 비해 작은 오차만큼만 다르다는 것을 말한다. 다시 말해 $f$가 $(a,b)$에서 미분가능하다는 것은 정확히 선형근사 (4)가 $(a,b)$ 근처에서 좋은 근사라는 것 — 접평면이 접점에서 그래프에 실제로 밀착한다는 것 — 과 같다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 7.</strong> Let $z=f(x,y)$. Then $f$ is <strong>differentiable at $(a,b)$</strong> provided the increment $\Delta z$ of (6) admits the representation</p>
+          <div class="math-display">$$\Delta z=f_x(a,b)\,\Delta x+f_y(a,b)\,\Delta y+\varepsilon_1\,\Delta x+\varepsilon_2\,\Delta y,$$</div>
+          <p>in which $\varepsilon_1$ and $\varepsilon_2$ are functions of $\Delta x$ and $\Delta y$ satisfying $\varepsilon_1\to 0$ and $\varepsilon_2\to 0$ as $(\Delta x,\Delta y)\to(0,0)$.</p>
+        </div>
+        <p>Read geometrically, the definition says that the increment of $f$ agrees with the increment predicted by the tangent plane up to an error that is small compared with the displacement. In other words, $f$ is differentiable at $(a,b)$ exactly when the linear approximation (4) is a good approximation near $(a,b)$ — when the tangent plane really does hug the graph at the point of tangency.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Theorem 8 -->
+<div class="card thm-card" id="c14-4-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">미분가능성의 충분조건 <em>Sufficient Condition for Differentiability</em><span class="src-ref">Theorem 8 · p.1015</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의 7을 직접 확인하려면 두 오차함수 $\varepsilon_1,\varepsilon_2$를 구체적으로 만들어야 하므로 번거로운 경우가 많다. 다음 정리는 이 작업을, 편도함수의 식만 보고 바로 판단할 수 있는 조건으로 대체해 준다.</p>
+        <div class="formal-box">
+          <p><strong>정리 8.</strong> 편도함수 $f_x,f_y$가 $(a,b)$ 근방에 존재하고 $(a,b)$에서 연속이면, $f$는 $(a,b)$에서 미분가능하다.</p>
+        </div>
+        <p>$f(x,y)=xy/(x^2+y^2)$가 원점에서 걸리는 곳이 바로 이 가정이다. 두 편도함수는 존재하지만 원점에서 연속이 아니어서, 정리 8을 적용할 수 없다.</p>
+        <p><em>증명은 교재 Appendix F 참조.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Checking Definition 7 directly is often awkward, since it requires producing the two error functions. The next theorem replaces that work by a condition that can be read off from formulas for the partial derivatives.</p>
+        <div class="formal-box">
+          <p><strong>Theorem 8.</strong> If the partial derivatives $f_x$ and $f_y$ exist near $(a,b)$ and are continuous at $(a,b)$, then $f$ is differentiable at $(a,b)$.</p>
+        </div>
+        <p>The hypothesis is exactly what fails for $f(x,y)=xy/(x^2+y^2)$ at the origin: the two partial derivatives exist there but are not continuous, so Theorem 8 does not apply.</p>
+        <p><em>Proof: see Appendix F.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Differentials (Figure 7) -->
+<div class="card note-card" id="c14-4-9">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">미분과 전미분 <em>Differentials and the Total Differential</em><span class="src-ref">Eq. (9)–(10) · Figures 6–7 · p.1017</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1변수 미분가능함수 $y=f(x)$에서 미분 $dx$는 독립변수로 취급되어 임의의 실수값을 가질 수 있고, 이때 $y$의 미분은</p>
+        <div class="math-display">$$dy=f'(x)\,dx.\tag{9}$$</div>
+        <p>그 의미는 두 높이의 비교이다. $x$가 $dx=\Delta x$만큼 움직일 때, 증분 $\Delta y$는 곡선의 높이 변화이고 $dy$는 접선의 높이 변화이다.</p>
+        <p>2변수 미분가능함수 $z=f(x,y)$에서는 $dx$와 $dy$를 둘 다 독립변수로 두고, 미분 $dz$ — <strong>전미분</strong> — 을 다음과 같이 정의한다.</p>
+        <div class="math-display">$$dz=f_x(x,y)\,dx+f_y(x,y)\,dy=\frac{\partial z}{\partial x}\,dx+\frac{\partial z}{\partial y}\,dy.\tag{10}$$</div>
+        <p>표기 $df$도 $dz$와 같은 뜻으로 쓴다. $dx=\Delta x=x-a$, $dy=\Delta y=y-b$로 두면 (10)은 $dz=f_x(a,b)(x-a)+f_y(a,b)(y-b)$가 되므로, 선형근사 (4)는 그저</p>
+        <div class="math-display">$$f(x,y)\approx f(a,b)+dz$$</div>
+        <p>로 쓸 수 있다. 기하적으로, $(x,y)$가 $(a,b)$에서 $(a+\Delta x,b+\Delta y)$로 움직일 때 증분 $\Delta z$는 곡면 $z=f(x,y)$의 높이 변화이고, $dz$는 접평면의 높이 변화이다 — 1변수에서의 그림을 3차원으로 옮긴 것과 같다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="곡면의 높이 변화 증분과 접평면의 높이 변화 미분의 비교" style="max-width:360px;width:100%;height:auto">
+            <line x1="70" y1="240" x2="70" y2="42" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="70,34 66,45 74,45" fill="var(--grey800)"/>
+            <line x1="70" y1="240" x2="30" y2="268" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="24,272 31,262 35,269" fill="var(--grey800)"/>
+            <line x1="70" y1="240" x2="330" y2="262" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="336,263 326,265 327,257" fill="var(--grey800)"/>
+            <text x="58" y="40" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="20" y="262" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="339" y="268" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <polygon points="150,205 128,221 222,230 244,214" fill="none" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <polygon points="128,121 80,143 254,138 302,116" fill="var(--g100)" fill-opacity="0.55" stroke="var(--g600)" stroke-width="1.2"/>
+            <path d="M 104,110 Q 126,118 150,125 Q 186,122 222,118" fill="none" stroke="var(--grey700)" stroke-width="2.2"/>
+            <line x1="150" y1="205" x2="150" y2="125" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="222" y1="230" x2="222" y2="118" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="150" y1="125" x2="222" y2="150" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="222" y1="150" x2="222" y2="132" stroke="var(--g600)" stroke-width="2.6"/>
+            <line x1="222" y1="150" x2="242" y2="150" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="222" y1="118" x2="242" y2="118" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="242" y1="150" x2="242" y2="118" stroke="var(--orange)" stroke-width="2.6"/>
+            <circle cx="150" cy="125" r="3.4" fill="var(--grey900)"/>
+            <circle cx="222" cy="118" r="3" fill="var(--grey700)"/>
+            <circle cx="222" cy="132" r="3" fill="var(--g700)"/>
+            <circle cx="150" cy="205" r="2.4" fill="var(--grey500)"/>
+            <circle cx="222" cy="230" r="2.4" fill="var(--grey500)"/>
+            <text x="137" y="117" font-size="11" font-style="italic" fill="var(--grey900)">P</text>
+            <text x="84" y="106" font-size="10.5" font-style="italic" fill="var(--grey700)">z = f(x, y)</text>
+            <text x="94" y="164" font-size="10.5" fill="var(--g700)">접평면</text>
+            <text x="216" y="145" text-anchor="end" font-size="11" font-style="italic" fill="var(--g700)">dz</text>
+            <text x="249" y="136" font-size="11" font-style="italic" fill="var(--orange)">Δz</text>
+            <text x="144" y="202" text-anchor="end" font-size="10" fill="var(--grey600)">(a, b, 0)</text>
+            <text x="120" y="238" font-size="10" font-style="italic" fill="var(--grey600)">Δx</text>
+            <text x="166" y="247" font-size="10" font-style="italic" fill="var(--grey600)">Δy</text>
+            <text x="230" y="248" font-size="9" fill="var(--grey600)">(a+Δx, b+Δy, 0)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a differentiable function of one variable $y=f(x)$, the differential $dx$ is treated as an independent variable — it may be assigned any real value — and the differential of $y$ is then</p>
+        <div class="math-display">$$dy=f'(x)\,dx.\tag{9}$$</div>
+        <p>Its meaning is a comparison of two heights: when $x$ moves by $dx=\Delta x$, the increment $\Delta y$ is the change in height of the curve, while $dy$ is the change in height of the tangent line.</p>
+        <p>For a differentiable function of two variables $z=f(x,y)$, both $dx$ and $dy$ are taken as independent variables, and the differential $dz$ — the <strong>total differential</strong> — is defined by</p>
+        <div class="math-display">$$dz=f_x(x,y)\,dx+f_y(x,y)\,dy=\frac{\partial z}{\partial x}\,dx+\frac{\partial z}{\partial y}\,dy.\tag{10}$$</div>
+        <p>The notation $df$ is also used for $dz$. Choosing $dx=\Delta x=x-a$ and $dy=\Delta y=y-b$ turns (10) into $dz=f_x(a,b)(x-a)+f_y(a,b)(y-b)$, so the linear approximation (4) becomes simply</p>
+        <div class="math-display">$$f(x,y)\approx f(a,b)+dz.$$</div>
+        <p>Geometrically, as $(x,y)$ moves from $(a,b)$ to $(a+\Delta x,b+\Delta y)$, the increment $\Delta z$ is the change in height of the surface $z=f(x,y)$, whereas $dz$ is the change in height of the tangent plane — the three-dimensional counterpart of the picture for one variable.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="The increment of the surface height compared with the differential, the change in height of the tangent plane" style="max-width:360px;width:100%;height:auto">
+            <line x1="70" y1="240" x2="70" y2="42" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="70,34 66,45 74,45" fill="var(--grey800)"/>
+            <line x1="70" y1="240" x2="30" y2="268" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="24,272 31,262 35,269" fill="var(--grey800)"/>
+            <line x1="70" y1="240" x2="330" y2="262" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="336,263 326,265 327,257" fill="var(--grey800)"/>
+            <text x="58" y="40" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="20" y="262" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="339" y="268" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <polygon points="150,205 128,221 222,230 244,214" fill="none" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <polygon points="128,121 80,143 254,138 302,116" fill="var(--g100)" fill-opacity="0.55" stroke="var(--g600)" stroke-width="1.2"/>
+            <path d="M 104,110 Q 126,118 150,125 Q 186,122 222,118" fill="none" stroke="var(--grey700)" stroke-width="2.2"/>
+            <line x1="150" y1="205" x2="150" y2="125" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="222" y1="230" x2="222" y2="118" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="150" y1="125" x2="222" y2="150" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="222" y1="150" x2="222" y2="132" stroke="var(--g600)" stroke-width="2.6"/>
+            <line x1="222" y1="150" x2="242" y2="150" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="222" y1="118" x2="242" y2="118" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="242" y1="150" x2="242" y2="118" stroke="var(--orange)" stroke-width="2.6"/>
+            <circle cx="150" cy="125" r="3.4" fill="var(--grey900)"/>
+            <circle cx="222" cy="118" r="3" fill="var(--grey700)"/>
+            <circle cx="222" cy="132" r="3" fill="var(--g700)"/>
+            <circle cx="150" cy="205" r="2.4" fill="var(--grey500)"/>
+            <circle cx="222" cy="230" r="2.4" fill="var(--grey500)"/>
+            <text x="137" y="117" font-size="11" font-style="italic" fill="var(--grey900)">P</text>
+            <text x="84" y="106" font-size="10.5" font-style="italic" fill="var(--grey700)">z = f(x, y)</text>
+            <text x="82" y="164" font-size="10.5" fill="var(--g700)">tangent plane</text>
+            <text x="216" y="145" text-anchor="end" font-size="11" font-style="italic" fill="var(--g700)">dz</text>
+            <text x="249" y="136" font-size="11" font-style="italic" fill="var(--orange)">Δz</text>
+            <text x="144" y="202" text-anchor="end" font-size="10" fill="var(--grey600)">(a, b, 0)</text>
+            <text x="120" y="238" font-size="10" font-style="italic" fill="var(--grey600)">Δx</text>
+            <text x="166" y="247" font-size="10" font-style="italic" fill="var(--grey600)">Δy</text>
+            <text x="230" y="248" font-size="9" fill="var(--grey600)">(a+Δx, b+Δy, 0)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : three or more variables -->
+<div class="card note-card" id="c14-4-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">3변수 이상으로의 확장 <em>Extension to Three or More Variables</em><span class="src-ref">Functions of Three or More Variables · p.1018–1019</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>선형근사·미분가능성·미분은 모두 3변수 이상으로 그대로 확장되며, 미분가능성도 정의 7과 똑같은 방식으로 정의된다. 3변수 함수의 경우 $(a,b,c)$ 근처에서 선형근사는</p>
+        <div class="math-display">$$f(x,y,z)\approx f(a,b,c)+f_x(a,b,c)(x-a)+f_y(a,b,c)(y-b)+f_z(a,b,c)(z-c),$$</div>
+        <p>이고, 우변이 선형화 $L(x,y,z)$이다.</p>
+        <p>$w=f(x,y,z)$에 대해 증분은 $\Delta w=f(x+\Delta x,\,y+\Delta y,\,z+\Delta z)-f(x,y,z)$이고, 독립변수의 미분 $dx,dy,dz$를 이용해 미분 $dw$를 다음과 같이 정의한다.</p>
+        <div class="math-display">$$dw=\frac{\partial w}{\partial x}\,dx+\frac{\partial w}{\partial y}\,dy+\frac{\partial w}{\partial z}\,dz.$$</div>
+        <p>독립변수마다 항을 하나씩 더하는 패턴이 그대로 이어질 뿐, 달라지는 것은 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Linear approximations, differentiability and differentials all carry over to more than two variables, with differentiability defined by an expression built exactly as in Definition 7. For a function of three variables the linear approximation near $(a,b,c)$ reads</p>
+        <div class="math-display">$$f(x,y,z)\approx f(a,b,c)+f_x(a,b,c)(x-a)+f_y(a,b,c)(y-b)+f_z(a,b,c)(z-c),$$</div>
+        <p>and the right-hand side is the linearization $L(x,y,z)$.</p>
+        <p>For $w=f(x,y,z)$ the increment is $\Delta w=f(x+\Delta x,\,y+\Delta y,\,z+\Delta z)-f(x,y,z)$, and the differential $dw$ is defined in terms of the differentials $dx,dy,dz$ of the independent variables by</p>
+        <div class="math-display">$$dw=\frac{\partial w}{\partial x}\,dx+\frac{\partial w}{\partial y}\,dy+\frac{\partial w}{\partial z}\,dz.$$</div>
+        <p>One term per independent variable is the pattern; nothing else changes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-4-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">타원포물면의 접평면 <em>Tangent Plane to an Elliptic Paraboloid</em><span class="src-ref">Example 1 · p.1013</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>타원포물면 $z=2x^2+y^2$ 위의 점 $(1,1,3)$ 에서 이 곡면에 접하는 평면의 방정식을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=2x^2+y^2$라 하면 $f_x(x,y)=4x$, $f_y(x,y)=2y$이므로 $(1,1)$에서 $f_x(1,1)=4$, $f_y(1,1)=2$이다.</p>
+        <p>식 (2)에 $x_0=1,y_0=1,z_0=3$과 이 두 값을 대입하면 접평면은</p>
+        <div class="math-display">$$z-3=4(x-1)+2(y-1)$$</div>
+        <p>이고, 정리하면 $z=4x+2y-3$이다. 따라서 접평면의 방정식은 $z=4x+2y-3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find an equation of the plane tangent to the elliptic paraboloid $z=2x^2+y^2$ at the point $(1,1,3)$ of that surface.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $f(x,y)=2x^2+y^2$, the partial derivatives are $f_x(x,y)=4x$ and $f_y(x,y)=2y$, so $f_x(1,1)=4$ and $f_y(1,1)=2$.</p>
+        <p>Substituting $x_0=1,y_0=1,z_0=3$ and these two values into equation (2) gives the tangent plane</p>
+        <div class="math-display">$$z-3=4(x-1)+2(y-1),$$</div>
+        <p>which simplifies to $z=4x+2y-3$. Hence the tangent plane has equation $z=4x+2y-3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-4-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">선형화로 값 근사하기 <em>Approximating a Value by Linearization</em><span class="src-ref">Example 2 · p.1016</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=xe^{xy}$ 가 점 $(1,0)$ 에서 미분가능함을 보이고, 그 점에서의 선형화 $L(x,y)$ 를 구하라. 이어서 그 선형화를 이용하여 $f(1.1,-0.1)$ 의 근삿값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f_x(x,y)=e^{xy}+xye^{xy}=(1+xy)e^{xy}$이고 $f_y(x,y)=x^2e^{xy}$이다. 두 편도함수 모두 다항식과 지수함수의 곱과 합성으로 이루어져 있어 평면 전체에서 연속이므로, 정리 8에 의해 $f$는 $(1,0)$을 포함한 모든 점에서 미분가능하다.</p>
+        <p>$(1,0)$에서 $f(1,0)=1$, $f_x(1,0)=(1+0)e^0=1$, $f_y(1,0)=1^2e^0=1$이므로, 선형화는</p>
+        <div class="math-display">$$L(x,y)=1+1\cdot(x-1)+1\cdot(y-0)=x+y$$</div>
+        <p>이다. 이를 이용하면 $f(1.1,-0.1)\approx L(1.1,-0.1)=1.1+(-0.1)=1$이다. 따라서 $f(1.1,-0.1)\approx1$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that $f(x,y)=xe^{xy}$ is differentiable at $(1,0)$ and find its linearization $L(x,y)$ there. Then use that linearization to approximate $f(1.1,-0.1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The partial derivatives are $f_x(x,y)=e^{xy}+xye^{xy}=(1+xy)e^{xy}$ and $f_y(x,y)=x^2e^{xy}$, each built from products and compositions of polynomials and the exponential function, so both are continuous on the whole plane. By Theorem 8, $f$ is differentiable at every point, including $(1,0)$.</p>
+        <p>At $(1,0)$, $f(1,0)=1$, $f_x(1,0)=(1+0)e^0=1$, and $f_y(1,0)=1^2e^0=1$, so the linearization is</p>
+        <div class="math-display">$$L(x,y)=1+1\cdot(x-1)+1\cdot(y-0)=x+y.$$</div>
+        <p>Using it, $f(1.1,-0.1)\approx L(1.1,-0.1)=1.1+(-0.1)=1$. Hence $f(1.1,-0.1)\approx1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-4-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">표에서 얻는 선형근사 — 체감온도 <em>Linear Approximation from a Table</em><span class="src-ref">Example 3 · p.1016</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>체감온도 $I=f(T,H)$ 는 실제 기온 $T$ (°F)와 상대습도 $H$ (%)의 함수이며, 미국 기상청의 표(<a href="s14-3.html#c14-3-1">§14.3 표 1</a>)에서 $f(96,70)=125$ 를 읽을 수 있고 같은 표로부터 $f_T(96,70)\approx 3.75$, $f_H(96,70)\approx 0.9$ 로 추정하였다. $T$ 가 $96$°F 근처, $H$ 가 $70$% 근처일 때 $f$ 의 선형근사를 구하고, 이를 이용하여 기온이 $97$°F이고 상대습도가 $72$%일 때의 체감온도를 추정하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $(a,b)=(96,70)$에서 식 (4)의 선형근사를 그대로 적용하면 되며, 필요한 세 값 $f(96,70)=125$, $f_T(96,70)\approx3.75$, $f_H(96,70)\approx0.9$는 모두 문제에서 주어졌다.</p>
+        <div class="math-display">$$f(T,H)\approx f(96,70)+f_T(96,70)(T-96)+f_H(96,70)(H-70)=125+3.75(T-96)+0.9(H-70)$$</div>
+        <p>이 선형근사에 $T=97$, $H=72$를 대입하면</p>
+        <div class="math-display">$$f(97,72)\approx125+3.75(1)+0.9(2)=125+3.75+1.8=130.55$$</div>
+        <p>이다. 따라서 기온 $97$°F, 습도 $72$%일 때 체감온도는 약 $131$°F로 추정된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The heat index $I=f(T,H)$ depends on the actual temperature $T$ (°F) and the relative humidity $H$ (%). The National Weather Service table (<a href="s14-3.html#c14-3-1">Table 1 of §14.3</a>) gives $f(96,70)=125$, and the same table was used there to estimate $f_T(96,70)\approx 3.75$ and $f_H(96,70)\approx 0.9$. Find the linear approximation of $f$ for $T$ near $96$°F and $H$ near $70$%, then apply it to a reading of $97$°F at $72$% relative humidity to estimate the perceived temperature there.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> This is a direct application of the linear approximation (4) at $(a,b)=(96,70)$; the three needed values $f(96,70)=125$, $f_T(96,70)\approx3.75$, and $f_H(96,70)\approx0.9$ are all given in the statement.</p>
+        <div class="math-display">$$f(T,H)\approx f(96,70)+f_T(96,70)(T-96)+f_H(96,70)(H-70)=125+3.75(T-96)+0.9(H-70)$$</div>
+        <p>Substituting $T=97$ and $H=72$ into this linear approximation gives</p>
+        <div class="math-display">$$f(97,72)\approx125+3.75(1)+0.9(2)=125+3.75+1.8=130.55.$$</div>
+        <p>Hence, at $97$°F and $72$% relative humidity, the heat index is estimated to be about $131$°F.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-4-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">증분과 미분의 비교 <em>Comparing the Increment and the Differential</em><span class="src-ref">Example 4 · p.1017–1018</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $z=f(x,y)=x^2+3xy-y^2$ 에 대하여 다음에 답하라.</p>
+        <p><strong>(a)</strong> 미분 $dz$ 를 구하라.</p>
+        <p><strong>(b)</strong> $x$ 가 $2$ 에서 $2.05$ 로, $y$ 가 $3$ 에서 $2.96$ 으로 변할 때 증분 $\Delta z$ 와 미분 $dz$ 의 값을 각각 구하여 비교하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $\dfrac{\partial z}{\partial x}=2x+3y$, $\dfrac{\partial z}{\partial y}=3x-2y$이므로, 식 (10)에 의해</p>
+        <div class="math-display">$$dz=(2x+3y)\,dx+(3x-2y)\,dy.$$</div>
+        <p><strong>(b)</strong> $dx=\Delta x=2.05-2=0.05$, $dy=\Delta y=2.96-3=-0.04$이고, $(x,y)=(2,3)$에서 $2x+3y=13$, $3x-2y=0$이므로 (a)의 식에 대입하면</p>
+        <div class="math-display">$$dz=13(0.05)+0\cdot(-0.04)=0.65.$$</div>
+        <p>한편 정확한 증분은 정의 (6)에서 직접 계산한다. $f(2,3)=4+18-9=13$이고 $f(2.05,2.96)=2.05^2+3(2.05)(2.96)-2.96^2=13.6449$이므로</p>
+        <div class="math-display">$$\Delta z=f(2.05,2.96)-f(2,3)=13.6449-13=0.6449.$$</div>
+        <p>따라서 $dz=0.65$는 $\Delta z=0.6449$와 $0.0051$밖에 차이 나지 않을 만큼 가까우면서도, $\Delta z$처럼 두 번 함숫값을 구할 필요 없이 (a)의 일차식 하나로 계산된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $z=f(x,y)=x^2+3xy-y^2$.</p>
+        <p><strong>(a)</strong> Find the differential $dz$.</p>
+        <p><strong>(b)</strong> Compute and compare the increment $\Delta z$ and the differential $dz$ when $x$ changes from $2$ to $2.05$ and $y$ changes from $3$ to $2.96$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $\dfrac{\partial z}{\partial x}=2x+3y$ and $\dfrac{\partial z}{\partial y}=3x-2y$, formula (10) gives</p>
+        <div class="math-display">$$dz=(2x+3y)\,dx+(3x-2y)\,dy.$$</div>
+        <p><strong>(b)</strong> Here $dx=\Delta x=2.05-2=0.05$ and $dy=\Delta y=2.96-3=-0.04$, and at $(x,y)=(2,3)$ the coefficients are $2x+3y=13$ and $3x-2y=0$, so substituting into the formula from (a) gives</p>
+        <div class="math-display">$$dz=13(0.05)+0\cdot(-0.04)=0.65.$$</div>
+        <p>The exact increment, on the other hand, is computed directly from definition (6). Since $f(2,3)=4+18-9=13$ and $f(2.05,2.96)=2.05^2+3(2.05)(2.96)-2.96^2=13.6449$,</p>
+        <div class="math-display">$$\Delta z=f(2.05,2.96)-f(2,3)=13.6449-13=0.6449.$$</div>
+        <p>So $dz=0.65$ differs from $\Delta z=0.6449$ by only $0.0051$, yet it comes from the single linear expression in (a) rather than from evaluating $f$ twice as $\Delta z$ requires.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-4-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">원뿔 부피의 오차 추정 <em>Estimating the Error in the Volume of a Cone</em><span class="src-ref">Example 5 · p.1018</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>어떤 직원뿔의 밑면 반지름과 높이를 재어 각각 $10$ cm와 $25$ cm를 얻었고, 두 측정 모두 최대 $\varepsilon$ cm의 오차를 가질 수 있다.</p>
+        <p><strong>(a)</strong> 미분을 이용하여, 이 측정값으로 계산한 부피의 최대 오차를 추정하라.</p>
+        <p><strong>(b)</strong> 각 측정의 오차가 최대 $0.1$ cm일 때 (a)의 추정값이 얼마인지 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 원뿔의 부피는 $V=\dfrac{\pi}{3}r^2h$이고, 반지름과 높이의 측정 오차는 각각 $|\Delta r|\le\varepsilon$, $|\Delta h|\le\varepsilon$을 만족한다. 실제 오차 $\Delta V$를 미분 $dV$로 근사하면</p>
+        <div class="math-display">$$\Delta V\approx dV=\frac{\partial V}{\partial r}\,dr+\frac{\partial V}{\partial h}\,dh=\frac{2\pi rh}{3}\,dr+\frac{\pi r^2}{3}\,dh.$$</div>
+        <p>오차가 최악인 경우를 잡으면 $dr,dh$를 모두 $\varepsilon$으로 두어도 되므로, $r=10$, $h=25$를 대입하면</p>
+        <div class="math-display">$$dV=\frac{2\pi(10)(25)}{3}\varepsilon+\frac{\pi(10)^2}{3}\varepsilon=\frac{500\pi}{3}\varepsilon+\frac{100\pi}{3}\varepsilon=200\pi\varepsilon\ \text{cm}^3.$$</div>
+        <p><strong>(b)</strong> $\varepsilon=0.1$을 대입하면 $dV=200\pi(0.1)=20\pi\approx62.8$이므로, 계산된 부피의 오차는 약 $63\text{ cm}^3$에 이를 수 있다. 측정값으로 계산한 부피가 $V=\dfrac{\pi}{3}(10)^2(25)\approx2618\text{ cm}^3$이므로, 이 오차는 부피의 $63/2618\approx2.4\%$ 수준이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The base radius and the height of a right circular cone are measured as $10$ cm and $25$ cm, each measurement carrying a possible error of as much as $\varepsilon$ cm.</p>
+        <p><strong>(a)</strong> Use differentials to estimate the maximum error in the volume computed from these measurements.</p>
+        <p><strong>(b)</strong> Evaluate that estimate when the largest error in each measurement is $0.1$ cm.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> The volume of the cone is $V=\dfrac{\pi}{3}r^2h$, and the measurement errors in the radius and the height satisfy $|\Delta r|\le\varepsilon$ and $|\Delta h|\le\varepsilon$. Approximating the actual error $\Delta V$ by the differential $dV$,</p>
+        <div class="math-display">$$\Delta V\approx dV=\frac{\partial V}{\partial r}\,dr+\frac{\partial V}{\partial h}\,dh=\frac{2\pi rh}{3}\,dr+\frac{\pi r^2}{3}\,dh.$$</div>
+        <p>The worst case sets both $dr$ and $dh$ equal to $\varepsilon$, so substituting $r=10$, $h=25$ gives</p>
+        <div class="math-display">$$dV=\frac{2\pi(10)(25)}{3}\varepsilon+\frac{\pi(10)^2}{3}\varepsilon=\frac{500\pi}{3}\varepsilon+\frac{100\pi}{3}\varepsilon=200\pi\varepsilon\ \text{cm}^3.$$</div>
+        <p><strong>(b)</strong> Setting $\varepsilon=0.1$ gives $dV=200\pi(0.1)=20\pi\approx62.8$, so the error in the computed volume can be as large as about $63\text{ cm}^3$. Since the volume computed from the measurements is $V=\dfrac{\pi}{3}(10)^2(25)\approx2618\text{ cm}^3$, this error amounts to $63/2618\approx2.4\%$ of the volume.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex14-4-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">직육면체 부피의 오차 추정 <em>Estimating the Error in the Volume of a Box</em><span class="src-ref">Example 6 · p.1019</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직육면체 상자의 세 모서리 길이를 재어 $75$ cm, $60$ cm, $40$ cm를 얻었고, 각 측정값은 최대 $\varepsilon$ cm 이내의 오차로 정확하다.</p>
+        <p><strong>(a)</strong> 미분을 이용하여, 이 측정값으로 부피를 계산할 때 생길 수 있는 최대 오차를 추정하라.</p>
+        <p><strong>(b)</strong> 각 측정값이 $0.2$ cm 이내로 정확할 때 (a)의 추정값이 얼마인지 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 세 모서리의 길이를 $x,y,z$라 하면 부피는 $V=xyz$이고, 세 측정값 모두 최대 $\varepsilon$까지 오차를 가질 수 있다. 미분으로 근사하면</p>
+        <div class="math-display">$$\Delta V\approx dV=\frac{\partial V}{\partial x}\,dx+\frac{\partial V}{\partial y}\,dy+\frac{\partial V}{\partial z}\,dz=yz\,dx+xz\,dy+xy\,dz.$$</div>
+        <p>최악의 경우 $dx,dy,dz$를 모두 $\varepsilon$으로 두고 $x=75,y=60,z=40$을 대입하면</p>
+        <div class="math-display">$$dV=(60\cdot40)\varepsilon+(75\cdot40)\varepsilon+(75\cdot60)\varepsilon=2400\varepsilon+3000\varepsilon+4500\varepsilon=9900\varepsilon\ \text{cm}^3.$$</div>
+        <p><strong>(b)</strong> $\varepsilon=0.2$를 대입하면 $dV=9900(0.2)=1980\text{ cm}^3$이다. 측정값으로 계산한 부피가 $V=75\cdot60\cdot40=180000\text{ cm}^3$이므로, 이 오차는 부피의 $1980/180000\approx1.1\%$, 즉 대략 $1\%$ 수준이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The dimensions of a rectangular box are measured as $75$ cm, $60$ cm and $40$ cm, each measurement correct to within $\varepsilon$ cm.</p>
+        <p><strong>(a)</strong> Use differentials to estimate the largest possible error in the volume computed from these measurements.</p>
+        <p><strong>(b)</strong> Evaluate that estimate when each dimension is correct to within $0.2$ cm.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Let $x,y,z$ denote the three edge lengths, so that the volume is $V=xyz$, and each of the three measurements can carry an error of at most $\varepsilon$. Approximating by the differential,</p>
+        <div class="math-display">$$\Delta V\approx dV=\frac{\partial V}{\partial x}\,dx+\frac{\partial V}{\partial y}\,dy+\frac{\partial V}{\partial z}\,dz=yz\,dx+xz\,dy+xy\,dz.$$</div>
+        <p>In the worst case $dx,dy,dz$ are all equal to $\varepsilon$, so substituting $x=75,y=60,z=40$ gives</p>
+        <div class="math-display">$$dV=(60\cdot40)\varepsilon+(75\cdot40)\varepsilon+(75\cdot60)\varepsilon=2400\varepsilon+3000\varepsilon+4500\varepsilon=9900\varepsilon\ \text{cm}^3.$$</div>
+        <p><strong>(b)</strong> Setting $\varepsilon=0.2$ gives $dV=9900(0.2)=1980\text{ cm}^3$. Since the volume computed from the measurements is $V=75\cdot60\cdot40=180000\text{ cm}^3$, this error amounts to $1980/180000\approx1.1\%$ of the volume, that is, about $1\%$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-4-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch07.html">단원 07</a></p>
+        <ul>
+          <li>접평면의 방정식 (식 2) — <a href="../calc2/ch07.html#ex02">ex02</a>, <a href="../calc2/ch07.html#yu02-1">yu02-1</a>, <a href="../calc2/ch07.html#yu02-2">yu02-2</a>, <a href="../calc2/ch07.html#yu02-3">yu02-3</a>, <a href="../calc2/ch07.html#pr06">pr06</a>, <a href="../calc2/ch07.html#pr07">pr07</a> (완전 대응, 단 교안은 §14.6의 등위면 방식으로만 서술)</li>
+          <li>선형화·선형근사 (식 3·4) — <a href="../calc2/ch07.html#ex03">ex03</a>, <a href="../calc2/ch07.html#yu03">yu03</a> (완전 대응)</li>
+          <li>전미분 $dz$·$dw$ (식 9·10) — <a href="../calc2/ch07.html#yu05-1">yu05-1</a>, <a href="../calc2/ch07.html#yu05-2">yu05-2</a>, <a href="../calc2/ch07.html#yu05-3">yu05-3</a>, <a href="../calc2/ch07.html#yu05-4">yu05-4</a> (부분 대응: $dV$·$dT$ 계산에만 쓰고 기호를 정의하지 않으며 $\Delta z$ 와의 비교도 없음)</li>
+          <li>3변수 이상의 선형근사 — <a href="../calc2/ch07.html#ex04">ex04</a> (부분 대응: 3변수 선형화는 있으나 수치 근사 예가 없음)</li>
+          <li>미분가능성의 정의 7과 정리 8 — 대응 없음</li>
+          <li>수치표로부터의 선형근사(예제 3 체감온도) — 대응 없음 (교안 yu03은 공식이 주어진 체감온도라 유형이 다름)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.4)</strong></p>
+        <p>제출 문항: 8, 17, 27, 37, 40, 41 &nbsp;/&nbsp; 학습 참고: 3–10, 15–22, 31–38, 42, 53, 54</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-3.html">§14.3 편도함수</a> &nbsp;/&nbsp; 다음: <a href="s14-5.html">§14.5 연쇄법칙</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch07.html">Unit 07</a></p>
+        <ul>
+          <li>Equation of a tangent plane (Eq. 2) — <a href="../calc2/ch07.html#ex02">ex02</a>, <a href="../calc2/ch07.html#yu02-1">yu02-1</a>, <a href="../calc2/ch07.html#yu02-2">yu02-2</a>, <a href="../calc2/ch07.html#yu02-3">yu02-3</a>, <a href="../calc2/ch07.html#pr06">pr06</a>, <a href="../calc2/ch07.html#pr07">pr07</a> (full match, though the lecture notes present it only through the level-surface formula of §14.6)</li>
+          <li>Linearization and linear approximation (Eq. 3, 4) — <a href="../calc2/ch07.html#ex03">ex03</a>, <a href="../calc2/ch07.html#yu03">yu03</a> (full match)</li>
+          <li>Total differential $dz$, $dw$ (Eq. 9, 10) — <a href="../calc2/ch07.html#yu05-1">yu05-1</a>, <a href="../calc2/ch07.html#yu05-2">yu05-2</a>, <a href="../calc2/ch07.html#yu05-3">yu05-3</a>, <a href="../calc2/ch07.html#yu05-4">yu05-4</a> (partial: used only to compute $dV$ and $dT$, with no definition of the symbol and no comparison with $\Delta z$)</li>
+          <li>Linear approximation for three or more variables — <a href="../calc2/ch07.html#ex04">ex04</a> (partial: the three-variable linearization appears, but no numerical approximation)</li>
+          <li>Definition 7 of differentiability and Theorem 8 — no match</li>
+          <li>Linear approximation built from a table of values (Example 3, heat index) — no match; yu03 of the lecture notes starts from a formula, not a table</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.4)</strong></p>
+        <p>Problems to submit: 8, 17, 27, 37, 40, 41 &nbsp;/&nbsp; Recommended practice: 3–10, 15–22, 31–38, 42, 53, 54</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-3.html">§14.3 Partial Derivatives</a> &nbsp;/&nbsp; Next: <a href="s14-5.html">§14.5 The Chain Rule</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

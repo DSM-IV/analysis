@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.6 방향도함수와 기울기 벡터 (Directional Derivatives and the Gradient Vector) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.6 방향도함수와 기울기 벡터 — 임의의 단위벡터 방향의 변화율인 방향도함수의 극한 정의와 계산 공식, 기울기 벡터와 내적 표현, 최대 증가 방향과 최대 변화율, 등위면의 접평면과 법선까지 한국어·영어 대조로 정리하고 예제 9개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.6, 방향도함수, directional derivative, 기울기 벡터, gradient vector, del f, 단위벡터, 최대 증가율, maximum rate of change, 등위선, level curve, 등위면, level surface, 접평면, tangent plane, 법선, normal line, 최급경사 곡선, steepest ascent, 기울기 벡터장, gradient vector field, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-6.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.6 방향도함수와 기울기 벡터 (Directional Derivatives and the Gradient Vector) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="방향도함수의 정의와 계산 공식, 기울기 벡터와 내적 표현, 최대 증가 방향, 등위면의 접평면과 법선까지 §14.6 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-6.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.6 방향도함수와 기울기 벡터 (Directional Derivatives and the Gradient Vector) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.6 방향도함수와 기울기 벡터 — 방향도함수의 극한 정의와 계산 공식, 기울기 벡터, 최대 증가 방향과 최대 변화율, 등위면의 접평면·법선을 한국어·영어 대조로 정리하고 본문 예제 9개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-6.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-6.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html">14.4</a>
+      <a href="s14-5.html">14.5</a>
+      <a href="s14-6.html" class="active">14.6</a>
+      <a href="s14-7.html">14.7</a>
+      <a href="s14-8.html">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.6 · 2주차</p>
+  <h1>§14.6 방향도함수와 기울기 벡터<span>Directional Derivatives and the Gradient Vector</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-6-1"><span class="toc-num">NOTE</span> 임의의 방향에서의 변화율 <em>Rates of Change in Any Direction</em></a></li>
+    <li><a href="#c14-6-2"><span class="toc-num">NOTE</span> 방향도함수의 기하적 유도 <em>Geometric Setup for the Directional Derivative</em></a></li>
+    <li><a href="#c14-6-3"><span class="toc-num">DEF 3</span> 방향도함수 (이변수) <em>Directional Derivative</em></a></li>
+    <li><a href="#c14-6-4"><span class="toc-num">THM 4</span> 방향도함수 계산 공식 <em>Computing the Directional Derivative</em></a></li>
+    <li><a href="#c14-6-5"><span class="toc-num">REM 5</span> 각으로 나타낸 방향 <em>Angle Form of the Formula</em></a></li>
+    <li><a href="#c14-6-6"><span class="toc-num">NOTE</span> 기울기 벡터의 도입 <em>Introducing the Gradient</em></a></li>
+    <li><a href="#c14-6-7"><span class="toc-num">DEF 7</span> 기울기 벡터 (이변수) <em>The Gradient Vector</em></a></li>
+    <li><a href="#c14-6-8"><span class="toc-num">THM 8</span> 방향도함수와 기울기 벡터의 내적 <em>The Directional Derivative as a Dot Product</em></a></li>
+    <li><a href="#c14-6-9"><span class="toc-num">DEF 9</span> 방향도함수 (삼변수) <em>Directional Derivative in Space</em></a></li>
+    <li><a href="#c14-6-10"><span class="toc-num">THM 10</span> 공간에서의 기울기 벡터와 계산 공식 <em>Gradient in Space</em></a></li>
+    <li><a href="#c14-6-11"><span class="toc-num">THM 11</span> 방향도함수의 최대화 <em>Maximizing the Directional Derivative</em></a></li>
+    <li><a href="#c14-6-12"><span class="toc-num">NOTE</span> 등위면의 접평면 준비 <em>Setting Up Tangent Planes to Level Surfaces</em></a></li>
+    <li><a href="#c14-6-13"><span class="toc-num">THM 13</span> 등위면의 접평면 <em>Tangent Plane to a Level Surface</em></a></li>
+    <li><a href="#c14-6-14"><span class="toc-num">THM 14</span> 법선 <em>The Normal Line</em></a></li>
+    <li><a href="#c14-6-15"><span class="toc-num">REM 15</span> §14.4와의 일관성 <em>Consistency with §14.4</em></a></li>
+    <li><a href="#c14-6-16"><span class="toc-num">REM 16</span> 기울기 벡터의 성질 <em>Properties of the Gradient Vector</em></a></li>
+    <li><a href="#c14-6-17"><span class="toc-num">NOTE</span> 기울기 벡터의 의미와 최급경사 곡선 <em>Steepest Ascent and Gradient Fields</em></a></li>
+    <li><a href="#ex14-6-1"><span class="toc-num">EXAM 1</span> 기상도에서 읽는 방향도함수 <em>Estimating a Directional Derivative from a Weather Map</em></a></li>
+    <li><a href="#ex14-6-2"><span class="toc-num">EXAM 2</span> 각으로 주어진 방향의 방향도함수 <em>A Directional Derivative Given by an Angle</em></a></li>
+    <li><a href="#ex14-6-3"><span class="toc-num">EXAM 3</span> 기울기 벡터 구하기 <em>Computing a Gradient Vector</em></a></li>
+    <li><a href="#ex14-6-4"><span class="toc-num">EXAM 4</span> 벡터 방향의 방향도함수 <em>A Directional Derivative in the Direction of a Vector</em></a></li>
+    <li><a href="#ex14-6-5"><span class="toc-num">EXAM 5</span> 삼변수 함수의 기울기 벡터와 방향도함수 <em>Gradient and Directional Derivative in Space</em></a></li>
+    <li><a href="#ex14-6-6"><span class="toc-num">EXAM 6</span> 최대 증가 방향과 최대 변화율 <em>Direction of Fastest Increase</em></a></li>
+    <li><a href="#ex14-6-7"><span class="toc-num">EXAM 7</span> 온도가 가장 빨리 증가하는 방향 <em>Fastest Temperature Increase in Space</em></a></li>
+    <li><a href="#ex14-6-8"><span class="toc-num">EXAM 8</span> 타원면의 접평면과 법선 <em>Tangent Plane and Normal Line to an Ellipsoid</em></a></li>
+    <li><a href="#ex14-6-9"><span class="toc-num">EXAM 9</span> 등위면 방법으로 구한 접평면 <em>A Tangent Plane by the Level-Surface Method</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opener (Figure 1, weather map) -->
+<div class="card note-card" id="c14-6-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">임의의 방향에서의 변화율 <em>Rates of Change in Any Direction</em><span class="src-ref">절 도입 · p.1032</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>캘리포니아·네바다 지역의 기상도는 기온 함수 $T(x,y)$의 등고선 지도이며, 그 등위선인 등온선은 기온이 같은 지점들을 이어 놓은 곡선이다.</p>
+        <p>Reno와 같은 도시에서 편도함수 $T_x$는 정동쪽으로 단위거리만큼 이동할 때의 기온 변화율을, $T_y$는 정북쪽으로 이동할 때의 변화율을 나타낸다. 그러나 이 두 값만으로는 Las Vegas 쪽 남동 방향이나 그 밖의 임의의 방향으로 이동할 때 기온이 얼마나 빨리 변하는지는 알 수 없다.</p>
+        <p>이 절에서는 이변수 이상 함수의 임의의 방향에서의 변화율을 기록하는 새로운 도함수인 <strong>방향도함수</strong>와, 이 모든 변화율을 한꺼번에 담아내는 벡터인 <strong>기울기 벡터</strong>를 도입한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A weather map of California and Nevada is a contour map of a temperature function $T(x,y)$: its level curves, the isothermals, join the places that share a temperature.</p>
+        <p>At a city such as Reno the partial derivative $T_x$ is the rate of change of temperature per unit distance travelled due east, and $T_y$ is the rate travelled due north. Neither number answers the question of how fast the temperature changes on the way southeast toward Las Vegas, or along any other heading.</p>
+        <p>This section introduces a derivative — the <strong>directional derivative</strong> — that measures how fast a function of two or more variables changes along an arbitrarily chosen heading, together with the vector that packages all of these rates at once, the <strong>gradient</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : geometric setup, Figures 2 and 3 -->
+<div class="card note-card" id="c14-6-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">방향도함수의 기하적 유도 <em>Geometric Setup for the Directional Derivative</em><span class="src-ref">Eq. (1) · p.1032–1033</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=f(x,y)$의 편도함수가 다음 극한</p>
+        <div class="math-display">$$\begin{aligned}f_x(x_0,y_0)&=\lim_{h\to 0}\frac{f(x_0+h,\,y_0)-f(x_0,y_0)}{h},\\[2pt] f_y(x_0,y_0)&=\lim_{h\to 0}\frac{f(x_0,\,y_0+h)-f(x_0,y_0)}{h},\end{aligned}\tag{1}$$</div>
+        <p>으로 주어졌음을 상기하자. 이는 단위벡터 $\mathbf i,\mathbf j$ 방향으로의 $z$의 변화율이다. 이제 임의의 단위벡터 $\mathbf u=\langle a,b\rangle$를 고정하고, 그 방향으로 $(x_0,y_0)$에서의 $z$의 변화율을 구해 보자.</p>
+        <p>곡면 $S$를 $z=f(x,y)$라 하고 $z_0=f(x_0,y_0)$로 두면 점 $P(x_0,y_0,z_0)$는 $S$ 위에 있다. $P$를 지나 $\mathbf u$ 방향인 수직평면이 $S$와 만나 곡선 $C$를 이루며, $C$의 $P$에서의 접선 $T$의 기울기가 바로 구하려는 변화율이다.</p>
+        <p>$C$ 위의 다른 점을 $Q(x,y,z)$라 하고, $P,Q$를 $xy$평면에 정사영한 점을 각각 $P',Q'$이라 하자. $\overrightarrow{P'Q'}$은 $\mathbf u$에 평행하므로 어떤 스칼라 $h$에 대해 $\overrightarrow{P'Q'}=h\mathbf u=\langle ha,\,hb\rangle$이고, 따라서 $x-x_0=ha$, $y-y_0=hb$이며</p>
+        <div class="math-display">$$\frac{\Delta z}{h}=\frac{z-z_0}{h}=\frac{f(x_0+ha,\;y_0+hb)-f(x_0,y_0)}{h}.$$</div>
+        <p>$h\to 0$일 때 이 몫의 극한이 $\mathbf u$ 방향으로 거리에 대한 $z$의 변화율이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="단위벡터 u 방향의 수직평면이 곡면 S를 잘라 만든 곡선 C와 점 P에서의 접선 T" style="max-width:360px;width:100%;height:auto">
+            <line x1="95" y1="215" x2="95" y2="30" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="95,22 91,33 99,33" fill="var(--grey800)"/>
+            <line x1="95" y1="215" x2="30" y2="256" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="25,259 32,250 36,257" fill="var(--grey800)"/>
+            <line x1="95" y1="215" x2="332" y2="240" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,241 328,244 329,236" fill="var(--grey800)"/>
+            <text x="83" y="28" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="18" y="266" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="341" y="245" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <path d="M 45,140 Q 120,100 205,92 Q 275,108 330,132 Q 250,178 165,192 Q 100,170 45,140 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="58" y="132" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="150,238 232,222 232,110 150,126" fill="var(--grey200)" fill-opacity="0.55" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 150,158 C 175,140 205,128 232,118" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <line x1="128" y1="174" x2="216" y2="119" stroke="var(--orange)" stroke-width="1.4"/>
+            <line x1="150" y1="158" x2="150" y2="238" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="232" y1="118" x2="232" y2="222" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="150" y1="238" x2="232" y2="222" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="238,221 228,225 227,217" fill="var(--g700)"/>
+            <circle cx="150" cy="158" r="3.2" fill="var(--grey900)"/>
+            <circle cx="232" cy="118" r="2.8" fill="var(--grey900)"/>
+            <circle cx="150" cy="238" r="2.4" fill="var(--grey500)"/>
+            <circle cx="232" cy="222" r="2.4" fill="var(--grey500)"/>
+            <text x="103" y="152" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="238" y="114" font-size="11" fill="var(--grey900)">Q(x, y, z)</text>
+            <text x="112" y="252" font-size="11" fill="var(--grey600)">P′(x₀, y₀, 0)</text>
+            <text x="238" y="236" font-size="11" fill="var(--grey600)">Q′(x, y, 0)</text>
+            <text x="180" y="245" font-size="11" font-style="italic" fill="var(--g700)">h u</text>
+            <text x="255" y="132" font-size="11" font-style="italic" fill="var(--g700)">C</text>
+            <text x="219" y="112" font-size="11" font-style="italic" fill="var(--orange)">T</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Recall that for $z=f(x,y)$ the partial derivatives are the limits</p>
+        <div class="math-display">$$\begin{aligned}f_x(x_0,y_0)&=\lim_{h\to 0}\frac{f(x_0+h,\,y_0)-f(x_0,y_0)}{h},\\[2pt] f_y(x_0,y_0)&=\lim_{h\to 0}\frac{f(x_0,\,y_0+h)-f(x_0,y_0)}{h},\end{aligned}\tag{1}$$</div>
+        <p>which give the rates of change of $z$ in the directions of the unit vectors $\mathbf i$ and $\mathbf j$. Now fix an arbitrary unit vector $\mathbf u=\langle a,b\rangle$ and ask for the rate of change of $z$ at $(x_0,y_0)$ in that direction.</p>
+        <p>Let $S$ be the surface $z=f(x,y)$ and put $z_0=f(x_0,y_0)$, so that $P(x_0,y_0,z_0)$ lies on $S$. The vertical plane through $P$ in the direction of $\mathbf u$ cuts $S$ in a curve $C$, and the slope at $P$ of the tangent line $T$ to $C$ is exactly the rate of change sought.</p>
+        <p>Let $Q(x,y,z)$ be another point of $C$, and let $P'$ and $Q'$ be the projections of $P$ and $Q$ onto the $xy$-plane. Since $\overrightarrow{P'Q'}$ is parallel to $\mathbf u$, there is a scalar $h$ with $\overrightarrow{P'Q'}=h\mathbf u=\langle ha,\,hb\rangle$, so $x-x_0=ha$ and $y-y_0=hb$, and therefore</p>
+        <div class="math-display">$$\frac{\Delta z}{h}=\frac{z-z_0}{h}=\frac{f(x_0+ha,\;y_0+hb)-f(x_0,y_0)}{h}.$$</div>
+        <p>The limit of this quotient as $h\to 0$ is the rate of change of $z$ with respect to distance in the direction of $\mathbf u$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="The vertical plane in the direction of a unit vector u cuts the surface S in a curve C with tangent line T at P" style="max-width:360px;width:100%;height:auto">
+            <line x1="95" y1="215" x2="95" y2="30" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="95,22 91,33 99,33" fill="var(--grey800)"/>
+            <line x1="95" y1="215" x2="30" y2="256" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="25,259 32,250 36,257" fill="var(--grey800)"/>
+            <line x1="95" y1="215" x2="332" y2="240" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,241 328,244 329,236" fill="var(--grey800)"/>
+            <text x="83" y="28" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="18" y="266" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="341" y="245" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <path d="M 45,140 Q 120,100 205,92 Q 275,108 330,132 Q 250,178 165,192 Q 100,170 45,140 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="58" y="132" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="150,238 232,222 232,110 150,126" fill="var(--grey200)" fill-opacity="0.55" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 150,158 C 175,140 205,128 232,118" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <line x1="128" y1="174" x2="216" y2="119" stroke="var(--orange)" stroke-width="1.4"/>
+            <line x1="150" y1="158" x2="150" y2="238" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="232" y1="118" x2="232" y2="222" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="150" y1="238" x2="232" y2="222" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="238,221 228,225 227,217" fill="var(--g700)"/>
+            <circle cx="150" cy="158" r="3.2" fill="var(--grey900)"/>
+            <circle cx="232" cy="118" r="2.8" fill="var(--grey900)"/>
+            <circle cx="150" cy="238" r="2.4" fill="var(--grey500)"/>
+            <circle cx="232" cy="222" r="2.4" fill="var(--grey500)"/>
+            <text x="103" y="152" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="238" y="114" font-size="11" fill="var(--grey900)">Q(x, y, z)</text>
+            <text x="112" y="252" font-size="11" fill="var(--grey600)">P′(x₀, y₀, 0)</text>
+            <text x="238" y="236" font-size="11" fill="var(--grey600)">Q′(x, y, 0)</text>
+            <text x="180" y="245" font-size="11" font-style="italic" fill="var(--g700)">h u</text>
+            <text x="255" y="132" font-size="11" font-style="italic" fill="var(--g700)">C</text>
+            <text x="219" y="112" font-size="11" font-style="italic" fill="var(--orange)">T</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Definition 2 -->
+<div class="card def-card" id="c14-6-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">방향도함수 (이변수) <em>Directional Derivative</em><span class="src-ref">Definition 2 · p.1033</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 2.</strong> 단위벡터 $\mathbf u=\langle a,b\rangle$ 방향으로 $(x_0,y_0)$에서의 $f$의 <strong>방향도함수</strong>는</p>
+          <div class="math-display">$$D_{\mathbf u}f(x_0,y_0)=\lim_{h\to 0}\frac{f(x_0+ha,\;y_0+hb)-f(x_0,y_0)}{h},\tag{2}$$</div>
+          <p>이 극한이 존재할 때 정의된다.</p>
+        </div>
+        <p>(2)에 $\mathbf u=\mathbf i=\langle 1,0\rangle$을 대입하면 (1)의 첫 번째 극한이, $\mathbf u=\mathbf j=\langle 0,1\rangle$을 대입하면 두 번째 극한이 그대로 나온다.</p>
+        <div class="math-display">$$D_{\mathbf i}f=f_x,\qquad D_{\mathbf j}f=f_y.$$</div>
+        <p>즉 두 편도함수는 좌표축 방향의 방향도함수에 지나지 않으며, $D_{\mathbf u}f$는 이 둘을 아우르는 공통의 일반화이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 2.</strong> The <strong>directional derivative of $f$ at $(x_0,y_0)$ in the direction of a unit vector</strong> $\mathbf u=\langle a,b\rangle$ is</p>
+          <div class="math-display">$$D_{\mathbf u}f(x_0,y_0)=\lim_{h\to 0}\frac{f(x_0+ha,\;y_0+hb)-f(x_0,y_0)}{h},\tag{2}$$</div>
+          <p>provided that this limit exists.</p>
+        </div>
+        <p>Setting $\mathbf u=\mathbf i=\langle 1,0\rangle$ in (2) reproduces the first limit in (1), and $\mathbf u=\mathbf j=\langle 0,1\rangle$ reproduces the second:</p>
+        <div class="math-display">$$D_{\mathbf i}f=f_x,\qquad D_{\mathbf j}f=f_y.$$</div>
+        <p>So the two partial derivatives are nothing but the directional derivatives along the two coordinate directions, and $D_{\mathbf u}f$ is the common generalization of both.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Theorem 3 (proof in text) -->
+<div class="card thm-card" id="c14-6-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">방향도함수 계산 공식 <em>Computing the Directional Derivative</em><span class="src-ref">Theorem 3 · p.1034</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 3.</strong> $f$가 $x,y$에 대해 미분가능한 함수이면, $f$는 <em>모든</em> 단위벡터 $\mathbf u=\langle a,b\rangle$ 방향으로 방향도함수를 가지며</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\,a+f_y(x,y)\,b.\tag{3}$$</div>
+        </div>
+        <p>이 정리는 정의 2의 극한을 두 편도함수의 계산으로 바꾸어 주므로, 식으로 주어진 함수의 방향도함수는 보통의 미분만으로 얻어진다. 증명은 $f$를 $(x_0,y_0)$를 지나 $\mathbf u$ 방향인 직선으로 제한한 뒤, 그 결과로 얻는 일변수함수에 연쇄법칙(정리 14.5.1)의 경우 1을 적용한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf u=\langle a,b\rangle$를 단위벡터로 고정하고, 매개변수 $h$에 대하여 함수 $g(h)=f(x_0+ha,\;y_0+hb)$를 정의하자. 정의 2에 의해</p>
+        <div class="math-display">$$D_{\mathbf u}f(x_0,y_0)=\lim_{h\to0}\frac{f(x_0+ha,y_0+hb)-f(x_0,y_0)}{h}=\lim_{h\to0}\frac{g(h)-g(0)}{h}=g'(0)\tag{4}$$</div>
+        <p>이며, 마지막 등식은 $g'(0)$이 존재한다는 전제 아래 성립한다. 이제 $x(h)=x_0+ha$, $y(h)=y_0+hb$로 두면 $g(h)=f(x(h),y(h))$이고, $x,y$는 $h$에 대해 미분가능한 함수로서 $x'(h)=a$, $y'(h)=b$이다. 가정에 의해 $f$는 미분가능하므로 이 직선 위의 각 점에서 연쇄법칙(경우 1)을 $g$에 적용할 수 있고,</p>
+        <div class="math-display">$$g'(h)=f_x(x(h),y(h))\,x'(h)+f_y(x(h),y(h))\,y'(h)=f_x(x_0+ha,y_0+hb)\,a+f_y(x_0+ha,y_0+hb)\,b$$</div>
+        <p>를 얻으며, 특히 $h=0$에서</p>
+        <div class="math-display">$$g'(0)=f_x(x_0,y_0)\,a+f_y(x_0,y_0)\,b\tag{5}$$</div>
+        <p>이다. 연쇄법칙이 $g$의 미분가능성을 보장하므로 $D_{\mathbf u}f(x_0,y_0)=g'(0)$이 실제로 존재하고, (4)(5)에 의해 그 값이 $f_x(x_0,y_0)a+f_y(x_0,y_0)b$와 같음이 확인된다. $(x_0,y_0)$와 $\mathbf u$는 임의로 고른 것이었으므로 식 (3)이 $f$가 미분가능한 모든 점과 모든 단위벡터 방향에 대해 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 3.</strong> If $f$ is a differentiable function of $x$ and $y$, then $f$ has a directional derivative in the direction of <em>every</em> unit vector $\mathbf u=\langle a,b\rangle$, and</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\,a+f_y(x,y)\,b.\tag{3}$$</div>
+        </div>
+        <p>The theorem replaces the limit of Definition 2 by two partial derivatives, so for a function given by a formula the directional derivative is obtained by ordinary differentiation. The proof restricts $f$ to the line through $(x_0,y_0)$ in the direction of $\mathbf u$ and applies Case 1 of the Chain Rule (Theorem 14.5.1) to the resulting function of one variable.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Fix the unit vector $\mathbf u=\langle a,b\rangle$ and, for a parameter $h$, define $g(h)=f(x_0+ha,\;y_0+hb)$. By Definition 2,</p>
+        <div class="math-display">$$D_{\mathbf u}f(x_0,y_0)=\lim_{h\to0}\frac{f(x_0+ha,y_0+hb)-f(x_0,y_0)}{h}=\lim_{h\to0}\frac{g(h)-g(0)}{h}=g'(0),\tag{4}$$</div>
+        <p>the last equality holding provided $g'(0)$ exists. Set $x(h)=x_0+ha$ and $y(h)=y_0+hb$, so that $g(h)=f(x(h),y(h))$; both $x$ and $y$ are differentiable functions of $h$ with $x'(h)=a$ and $y'(h)=b$. Since $f$ is differentiable by hypothesis, Case 1 of the Chain Rule applies to $g$ at each point of this line and gives</p>
+        <div class="math-display">$$g'(h)=f_x(x(h),y(h))\,x'(h)+f_y(x(h),y(h))\,y'(h)=f_x(x_0+ha,y_0+hb)\,a+f_y(x_0+ha,y_0+hb)\,b,$$</div>
+        <p>and in particular, at $h=0$,</p>
+        <div class="math-display">$$g'(0)=f_x(x_0,y_0)\,a+f_y(x_0,y_0)\,b.\tag{5}$$</div>
+        <p>Because the Chain Rule guarantees that $g$ is differentiable, $D_{\mathbf u}f(x_0,y_0)=g'(0)$ indeed exists, and (4)&#8211;(5) show it equals $f_x(x_0,y_0)a+f_y(x_0,y_0)b$. Since $(x_0,y_0)$ and $\mathbf u$ were arbitrary, formula (3) holds at every point where $f$ is differentiable, in every unit-vector direction.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Equation (6), angle form -->
+<div class="card rem-card" id="c14-6-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">각으로 나타낸 방향 <em>Angle Form of the Formula</em><span class="src-ref">Eq. (6) · p.1035</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면에서 방향은 벡터 대신 각으로 주어지는 경우가 많다. 단위벡터 $\mathbf u$가 양의 $x$축과 이루는 각이 $\theta$이면, 그 성분은 코사인과 사인이다.</p>
+        <div class="math-display">$$\mathbf u=\langle\cos\theta,\;\sin\theta\rangle,$$</div>
+        <p>이를 $a=\cos\theta$, $b=\sin\theta$로 정리 3의 식 (3)에 대입하면 다음을 얻는다.</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\cos\theta+f_y(x,y)\sin\theta.\tag{6}$$</div>
+        <p>방향이 양의 $x$축에서 잰 각으로 주어질 때는 언제나 식 (6)을 사용한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A direction in the plane is often specified by an angle rather than by a vector. If the unit vector $\mathbf u$ makes an angle $\theta$ with the positive $x$-axis, then its components are its cosine and sine,</p>
+        <div class="math-display">$$\mathbf u=\langle\cos\theta,\;\sin\theta\rangle,$$</div>
+        <p>and substituting $a=\cos\theta$, $b=\sin\theta$ into Theorem 3 turns formula (3) into</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\cos\theta+f_y(x,y)\sin\theta.\tag{6}$$</div>
+        <p>Formula (6) is the version to use whenever the direction is given as an angle measured from the positive $x$-axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Equation (7), the dot product observation -->
+<div class="card note-card" id="c14-6-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">기울기 벡터의 도입 <em>Introducing the Gradient</em><span class="src-ref">Eq. (7) · p.1035</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 3의 우변은 두 곱의 합이며, 이는 정확히 내적의 형태이다.</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\,a+f_y(x,y)\,b=\langle f_x(x,y),\,f_y(x,y)\rangle\cdot\langle a,b\rangle=\langle f_x(x,y),\,f_y(x,y)\rangle\cdot\mathbf u.\tag{7}$$</div>
+        <p>둘째 인수가 방향을 담당하고, 첫째 인수 $\langle f_x,f_y\rangle$는 오직 $f$로부터만 만들어지며 $\mathbf u$에 의존하지 않는다. 이 벡터는 다른 여러 맥락에서도 등장하므로 그 자체로 이름을 얻는데, 바로 $f$의 <strong>기울기 벡터</strong>이며 $\nabla f$ 또는 $\operatorname{grad}f$("델 $f$"라 읽는다)로 표기한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The right-hand side of Theorem 3 is a sum of two products, which is precisely a dot product:</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x(x,y)\,a+f_y(x,y)\,b=\langle f_x(x,y),\,f_y(x,y)\rangle\cdot\langle a,b\rangle=\langle f_x(x,y),\,f_y(x,y)\rangle\cdot\mathbf u.\tag{7}$$</div>
+        <p>The second factor carries the direction; the first factor $\langle f_x,f_y\rangle$ is built from $f$ alone and does not depend on $\mathbf u$. That vector appears in many other contexts as well, so it is given a name of its own — the <strong>gradient</strong> of $f$ — and a notation of its own, $\nabla f$ or $\operatorname{grad}f$, read "del $f$".</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Definition 8, the gradient vector -->
+<div class="card def-card" id="c14-6-7">
+  <div class="card-head">
+    <span class="def-num">DEF 7</span>
+    <span class="def-title">기울기 벡터 (이변수) <em>The Gradient Vector</em><span class="src-ref">Definition 8 · p.1036</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 8.</strong> 이변수함수 $f(x,y)$에 대해, $f$의 <strong>기울기 벡터</strong>는 다음과 같이 정의되는 벡터함수 $\nabla f$이다.</p>
+          <div class="math-display">$$\nabla f(x,y)=\langle f_x(x,y),\,f_y(x,y)\rangle=\frac{\partial f}{\partial x}\,\mathbf i+\frac{\partial f}{\partial y}\,\mathbf j.\tag{8}$$</div>
+        </div>
+        <p>$f$ 자체는 스칼라값 함수이지만, 기울기 벡터는 $f$의 정의역의 각 점에 벡터를 대응시킨다. 두 편도함수가 모두 존재하는 점에서 정의된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 8.</strong> For a function $f$ of two variables $x$ and $y$, the <strong>gradient of $f$</strong> is the vector function $\nabla f$ defined by</p>
+          <div class="math-display">$$\nabla f(x,y)=\langle f_x(x,y),\,f_y(x,y)\rangle=\frac{\partial f}{\partial x}\,\mathbf i+\frac{\partial f}{\partial y}\,\mathbf j.\tag{8}$$</div>
+        </div>
+        <p>The gradient assigns a <em>vector</em> to each point of the domain of $f$, although $f$ itself is scalar-valued; it is defined wherever both partial derivatives exist.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Equation (9) -->
+<div class="card thm-card" id="c14-6-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">방향도함수와 기울기 벡터의 내적 <em>The Directional Derivative as a Dot Product</em><span class="src-ref">Eq. (9) · p.1036</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>기울기 벡터 표기를 쓰면 식 (7)은 다음과 같이 다시 쓸 수 있다. $f$가 미분가능하고 $\mathbf u$가 단위벡터이면</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y)=\nabla f(x,y)\cdot\mathbf u.\tag{9}$$</div>
+        </div>
+        <p>$\lvert\mathbf u\rvert=1$이므로 우변은 $\mathbf u$ 위로의 $\nabla f$의 스칼라 정사영 $\operatorname{comp}_{\mathbf u}\nabla f$이다. 이렇게 읽으면, 주어진 방향의 방향도함수는 그 방향을 향하는 기울기 벡터의 성분에 지나지 않으며, 한 점에서의 모든 방향도함수는 오직 하나의 벡터 $\nabla f$로부터 복원된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>With the gradient notation, equation (7) reads: if $f$ is differentiable and $\mathbf u$ is a unit vector, then</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y)=\nabla f(x,y)\cdot\mathbf u.\tag{9}$$</div>
+        </div>
+        <p>Since $\lvert\mathbf u\rvert=1$, the right-hand side is the scalar projection $\operatorname{comp}_{\mathbf u}\nabla f$ of the gradient onto $\mathbf u$. Reading (9) this way, the directional derivative in a given direction is just the amount of the gradient that points that way, and all the directional derivatives at a point are recovered from the single vector $\nabla f$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Definition 10 and Equation (11) -->
+<div class="card def-card" id="c14-6-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">방향도함수 (삼변수) <em>Directional Derivative in Space</em><span class="src-ref">Definition 10, Eq. (11) · p.1037</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼변수함수에서도 같은 형태의 차분의 극한이 단위벡터 방향의 $f$의 변화율을 정의한다.</p>
+        <div class="formal-box">
+          <p><strong>정의 10.</strong> 단위벡터 $\mathbf u=\langle a,b,c\rangle$ 방향으로 $(x_0,y_0,z_0)$에서의 $f$의 <strong>방향도함수</strong>는</p>
+          <div class="math-display">$$D_{\mathbf u}f(x_0,y_0,z_0)=\lim_{h\to 0}\frac{f(x_0+ha,\;y_0+hb,\;z_0+hc)-f(x_0,y_0,z_0)}{h},\tag{10}$$</div>
+          <p>이 극한이 존재할 때 정의된다.</p>
+        </div>
+        <p>$n=2$일 때 $\mathbf x_0=\langle x_0,y_0\rangle$, $n=3$일 때 $\mathbf x_0=\langle x_0,y_0,z_0\rangle$로 쓰면, 정의 2와 정의 10은 하나의 벡터 공식으로 합쳐진다.</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x_0)=\lim_{h\to 0}\frac{f(\mathbf x_0+h\mathbf u)-f(\mathbf x_0)}{h}.\tag{11}$$</div>
+        <p>이는 자연스러운데, $\mathbf x_0$를 지나 $\mathbf u$ 방향인 직선의 벡터방정식이 $\mathbf x=\mathbf x_0+t\mathbf u$이므로, $f(\mathbf x_0+h\mathbf u)$는 그 직선 위에서 매개변수가 $h$인 점에서의 $f$의 값이기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a function of three variables the same difference quotient defines the rate of change of $f$ along a unit vector.</p>
+        <div class="formal-box">
+          <p><strong>Definition 10.</strong> The <strong>directional derivative of $f$ at $(x_0,y_0,z_0)$ in the direction of a unit vector</strong> $\mathbf u=\langle a,b,c\rangle$ is</p>
+          <div class="math-display">$$D_{\mathbf u}f(x_0,y_0,z_0)=\lim_{h\to 0}\frac{f(x_0+ha,\;y_0+hb,\;z_0+hc)-f(x_0,y_0,z_0)}{h},\tag{10}$$</div>
+          <p>provided that this limit exists.</p>
+        </div>
+        <p>Writing $\mathbf x_0=\langle x_0,y_0\rangle$ when $n=2$ and $\mathbf x_0=\langle x_0,y_0,z_0\rangle$ when $n=3$, Definitions 2 and 10 collapse into one vector formula:</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x_0)=\lim_{h\to 0}\frac{f(\mathbf x_0+h\mathbf u)-f(\mathbf x_0)}{h}.\tag{11}$$</div>
+        <p>This is natural because the line through $\mathbf x_0$ in the direction of $\mathbf u$ has vector equation $\mathbf x=\mathbf x_0+t\mathbf u$, so $f(\mathbf x_0+h\mathbf u)$ is the value of $f$ at the point of that line at parameter $h$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Equations (12)(13)(14) -->
+<div class="card thm-card" id="c14-6-10">
+  <div class="card-head">
+    <span class="thm-num">THM 10</span>
+    <span class="thm-title">공간에서의 기울기 벡터와 계산 공식 <em>Gradient in Space</em><span class="src-ref">Eq. (12)–(14) · p.1037</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>$f(x,y,z)$가 미분가능하고 $\mathbf u=\langle a,b,c\rangle$가 단위벡터이면, 정리 3을 증명할 때와 같은 논법으로</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y,z)=f_x(x,y,z)\,a+f_y(x,y,z)\,b+f_z(x,y,z)\,c.\tag{12}$$</div>
+          <p>를 얻는다. 이러한 $f$의 <strong>기울기 벡터</strong>는 다음 벡터함수이다.</p>
+          <div class="math-display">$$\nabla f=\langle f_x,\,f_y,\,f_z\rangle=\frac{\partial f}{\partial x}\,\mathbf i+\frac{\partial f}{\partial y}\,\mathbf j+\frac{\partial f}{\partial z}\,\mathbf k,\tag{13}$$</div>
+          <p>이를 이용하면 식 (12)는 평면의 경우와 같은 내적 형태로 쓰인다.</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y,z)=\nabla f(x,y,z)\cdot\mathbf u.\tag{14}$$</div>
+        </div>
+        <p>식 (9)와 (14)는 성분의 개수만 다를 뿐이므로, 아래에서 $\nabla f\cdot\mathbf u$에 대해 서술하는 모든 내용은 이변수함수와 삼변수함수에 똑같이 적용된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>If $f(x,y,z)$ is differentiable and $\mathbf u=\langle a,b,c\rangle$ is a unit vector, then the argument that proves Theorem 3 gives</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y,z)=f_x(x,y,z)\,a+f_y(x,y,z)\,b+f_z(x,y,z)\,c.\tag{12}$$</div>
+          <p>The <strong>gradient</strong> of such an $f$ is the vector function</p>
+          <div class="math-display">$$\nabla f=\langle f_x,\,f_y,\,f_z\rangle=\frac{\partial f}{\partial x}\,\mathbf i+\frac{\partial f}{\partial y}\,\mathbf j+\frac{\partial f}{\partial z}\,\mathbf k,\tag{13}$$</div>
+          <p>and with it formula (12) takes the same dot-product form as in the plane:</p>
+          <div class="math-display">$$D_{\mathbf u}f(x,y,z)=\nabla f(x,y,z)\cdot\mathbf u.\tag{14}$$</div>
+        </div>
+        <p>Formulas (9) and (14) differ only in the number of components, so every statement made below about $\nabla f\cdot\mathbf u$ applies to functions of two and of three variables alike.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Theorem 15 (proof in text) -->
+<div class="card thm-card" id="c14-6-11">
+  <div class="card-head">
+    <span class="thm-num">THM 11</span>
+    <span class="thm-title">방향도함수의 최대화 <em>Maximizing the Directional Derivative</em><span class="src-ref">Theorem 15 · p.1038</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>한 점에서 $f$의 모든 방향도함수를 모아 보면, 이는 가능한 모든 방향에서의 $f$의 변화율을 알려 준다. 그렇다면 어느 방향에서 증가가 가장 빠르며, 그 속도는 얼마인가? 기울기 벡터는 이 두 물음에 한꺼번에 답한다.</p>
+        <div class="formal-box">
+          <p><strong>정리 15.</strong> $f$가 이변수 또는 삼변수의 미분가능한 함수라 하자. 모든 단위벡터 $\mathbf u$에 대한 방향도함수 $D_{\mathbf u}f(\mathbf x)$의 최댓값은</p>
+          <div class="math-display">$$\max_{\lvert\mathbf u\rvert=1}D_{\mathbf u}f(\mathbf x)=\lvert\nabla f(\mathbf x)\rvert,$$</div>
+          <p>이며, $\mathbf u$가 기울기 벡터 $\nabla f(\mathbf x)$와 같은 방향일 때 이 최댓값이 얻어진다.</p>
+        </div>
+        <p>증명은 오직 식 (9)와 (14)에 있는 내적의 기하적 형태만을 사용한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\nabla f(\mathbf x)=\mathbf 0$이면 식 (9)(또는 (14))에 의해 모든 단위벡터 $\mathbf u$에 대해 $D_{\mathbf u}f(\mathbf x)=\mathbf 0\cdot\mathbf u=0=\lvert\nabla f(\mathbf x)\rvert$이므로, 최댓값이 $\lvert\nabla f(\mathbf x)\rvert$라는 주장은 성립하며 그 값은 모든 방향에서 동시에 달성된다(영벡터는 방향을 정하지 않으므로 방향에 관한 주장은 이 경우 내용이 없다). 이제 $\nabla f(\mathbf x)\neq\mathbf 0$라 하자. $\theta$를 $\nabla f(\mathbf x)$와 $\mathbf u$ 사이의 각이라 하면, 내적의 기하적 정의에 의해</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x)=\nabla f(\mathbf x)\cdot\mathbf u=\lvert\nabla f(\mathbf x)\rvert\,\lvert\mathbf u\rvert\cos\theta=\lvert\nabla f(\mathbf x)\rvert\cos\theta$$</div>
+        <p>이다(마지막 등식은 $\lvert\mathbf u\rvert=1$에서 나온다). $\lvert\nabla f(\mathbf x)\rvert\ge0$이고 $-1\le\cos\theta\le1$이므로</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x)=\lvert\nabla f(\mathbf x)\rvert\cos\theta\le\lvert\nabla f(\mathbf x)\rvert$$</div>
+        <p>이며, 등호는 $\cos\theta=1$, 즉 $\theta=0$일 때, 다시 말해 $\mathbf u$가 $\nabla f(\mathbf x)$와 같은 방향(즉 $\mathbf u=\nabla f(\mathbf x)/\lvert\nabla f(\mathbf x)\rvert$)일 때만 성립한다. 따라서 $D_{\mathbf u}f(\mathbf x)$는 모든 단위벡터 $\mathbf u$ 중에서 $\lvert\nabla f(\mathbf x)\rvert$를 최댓값으로 가지며, 이는 $\mathbf u$가 기울기 벡터의 방향을 향할 때 정확히 달성된다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Collect all the directional derivatives of $f$ at one point: they give the rates of change of $f$ in every possible direction. Which direction gives the fastest increase, and how fast is it? The gradient answers both questions at once.</p>
+        <div class="formal-box">
+          <p><strong>Theorem 15.</strong> Let $f$ be a differentiable function of two or three variables. The maximum value of the directional derivative $D_{\mathbf u}f(\mathbf x)$, taken over all unit vectors $\mathbf u$, is</p>
+          <div class="math-display">$$\max_{\lvert\mathbf u\rvert=1}D_{\mathbf u}f(\mathbf x)=\lvert\nabla f(\mathbf x)\rvert,$$</div>
+          <p>and it is attained when $\mathbf u$ has the same direction as the gradient vector $\nabla f(\mathbf x)$.</p>
+        </div>
+        <p>The proof only uses the geometric form of the dot product in (9) and (14).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> If $\nabla f(\mathbf x)=\mathbf 0$, then by (9) (or (14)) $D_{\mathbf u}f(\mathbf x)=\mathbf 0\cdot\mathbf u=0=\lvert\nabla f(\mathbf x)\rvert$ for every unit vector $\mathbf u$: the maximum value is $\lvert\nabla f(\mathbf x)\rvert$ and every direction attains it, while the assertion about the direction says nothing here, the zero vector determining no direction. Suppose now $\nabla f(\mathbf x)\neq\mathbf 0$, and let $\theta$ be the angle between $\nabla f(\mathbf x)$ and $\mathbf u$. By the geometric description of the dot product,</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x)=\nabla f(\mathbf x)\cdot\mathbf u=\lvert\nabla f(\mathbf x)\rvert\,\lvert\mathbf u\rvert\cos\theta=\lvert\nabla f(\mathbf x)\rvert\cos\theta,$$</div>
+        <p>the last step using $\lvert\mathbf u\rvert=1$. Since $\lvert\nabla f(\mathbf x)\rvert\ge0$ and $-1\le\cos\theta\le1$,</p>
+        <div class="math-display">$$D_{\mathbf u}f(\mathbf x)=\lvert\nabla f(\mathbf x)\rvert\cos\theta\le\lvert\nabla f(\mathbf x)\rvert,$$</div>
+        <p>with equality exactly when $\cos\theta=1$, i.e. $\theta=0$ &#8212; that is, when $\mathbf u$ has the same direction as $\nabla f(\mathbf x)$ (so $\mathbf u=\nabla f(\mathbf x)/\lvert\nabla f(\mathbf x)\rvert$). Hence, among all unit vectors $\mathbf u$, the quantity $D_{\mathbf u}f(\mathbf x)$ attains the maximum value $\lvert\nabla f(\mathbf x)\rvert$, and it does so precisely when $\mathbf u$ points in the direction of the gradient.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : setting up tangent planes to level surfaces, Equations (16)(17)(18), Figure 10 -->
+<div class="card note-card" id="c14-6-12">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">등위면의 접평면 준비 <em>Setting Up Tangent Planes to Level Surfaces</em><span class="src-ref">Eq. (16)–(18) · p.1040</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼변수함수 $F$의 등위면 $S:F(x,y,z)=k$ 위의 한 점을 $P(x_0,y_0,z_0)$라 하자. $C$를 $S$ 위에 있으면서 $P$를 지나는 임의의 곡선이라 하고, (§13.1에서처럼) 연속인 벡터함수 $\mathbf r(t)=\langle x(t),y(t),z(t)\rangle$로 나타내어 $\mathbf r(t_0)=\langle x_0,y_0,z_0\rangle$이 되게 하자. $C$의 모든 점이 $S$ 위에 있으므로</p>
+        <div class="math-display">$$F\big(x(t),\,y(t),\,z(t)\big)=k.\tag{16}$$</div>
+        <p>$x,y,z$가 $t$에 대해 미분가능하고 $F$가 미분가능하면, (16)의 양변에 연쇄법칙을 적용하여</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\frac{dx}{dt}+\frac{\partial F}{\partial y}\frac{dy}{dt}+\frac{\partial F}{\partial z}\frac{dz}{dt}=0,\tag{17}$$</div>
+        <p>을 얻는다. $\nabla F=\langle F_x,F_y,F_z\rangle$이고 $\mathbf r'(t)=\langle x'(t),y'(t),z'(t)\rangle$이므로 식 (17)은 $\nabla F\cdot\mathbf r'(t)=0$이라는 진술이다. 매개변수값 $t_0$에서는</p>
+        <div class="math-display">$$\nabla F(x_0,y_0,z_0)\cdot\mathbf r'(t_0)=0.\tag{18}$$</div>
+        <p>따라서 $\nabla F(x_0,y_0,z_0)$는 $P$를 지나 $S$ 위에 있는 모든 곡선의 접벡터에 수직이다. $\nabla F(x_0,y_0,z_0)\neq\mathbf 0$일 때, $P$에서 $S$의 접평면을 $\nabla F(x_0,y_0,z_0)$를 법선벡터로 갖고 $P$를 지나는 평면으로 <em>정의</em>하는 것은 자연스럽다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 260" role="img" aria-label="등위면 S 위의 곡선 C와 접벡터, 그에 수직인 기울기 벡터와 접평면" style="max-width:360px;width:100%;height:auto">
+            <path d="M 50,190 Q 90,120 175,105 Q 265,95 320,150 Q 300,215 200,235 Q 100,240 50,190 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="66" y="205" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="118,150 208,124 262,150 172,176" fill="var(--grey200)" fill-opacity="0.6" stroke="var(--grey500)" stroke-width="1"/>
+            <path d="M 105,175 C 140,158 175,152 215,146 S 275,150 302,160" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <text x="308" y="164" font-size="11" font-style="italic" fill="var(--g700)">C</text>
+            <line x1="188" y1="150" x2="196" y2="78" stroke="var(--grey900)" stroke-width="1.6"/>
+            <polygon points="197,68 191,80 202,81" fill="var(--grey900)"/>
+            <line x1="188" y1="150" x2="252" y2="141" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="259,140 249,145 248,137" fill="var(--orange)"/>
+            <circle cx="188" cy="150" r="3.2" fill="var(--grey900)"/>
+            <text x="160" y="168" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="200" y="66" font-size="11" font-style="italic" fill="var(--grey900)">∇F(x₀, y₀, z₀)</text>
+            <text x="256" y="136" font-size="11" font-style="italic" fill="var(--orange)">r′(t₀)</text>
+            <text x="99" y="132" font-size="11" fill="var(--grey600)">접평면</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the level surface $F(x,y,z)=k$ of a function $F$ of three variables, and let $P(x_0,y_0,z_0)$ be a point of $S$. Let $C$ be <em>any</em> curve lying on $S$ and passing through $P$, described (as in §13.1) by a continuous vector function $\mathbf r(t)=\langle x(t),y(t),z(t)\rangle$, with $\mathbf r(t_0)=\langle x_0,y_0,z_0\rangle$. Because every point of $C$ lies on $S$,</p>
+        <div class="math-display">$$F\big(x(t),\,y(t),\,z(t)\big)=k.\tag{16}$$</div>
+        <p>If $x,y,z$ are differentiable functions of $t$ and $F$ is differentiable, the Chain Rule applied to both sides of (16) gives</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\frac{dx}{dt}+\frac{\partial F}{\partial y}\frac{dy}{dt}+\frac{\partial F}{\partial z}\frac{dz}{dt}=0,\tag{17}$$</div>
+        <p>and since $\nabla F=\langle F_x,F_y,F_z\rangle$ and $\mathbf r'(t)=\langle x'(t),y'(t),z'(t)\rangle$, equation (17) is the statement $\nabla F\cdot\mathbf r'(t)=0$. At the parameter value $t_0$ this reads</p>
+        <div class="math-display">$$\nabla F(x_0,y_0,z_0)\cdot\mathbf r'(t_0)=0.\tag{18}$$</div>
+        <p>So $\nabla F(x_0,y_0,z_0)$ is orthogonal to the tangent vector of every curve on $S$ through $P$. When $\nabla F(x_0,y_0,z_0)\neq\mathbf 0$ it is therefore natural to <em>define</em> the tangent plane to $S$ at $P$ as the plane through $P$ having $\nabla F(x_0,y_0,z_0)$ as normal vector.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 260" role="img" aria-label="A curve C on the level surface S, its tangent vector at P, and the gradient vector normal to the tangent plane" style="max-width:360px;width:100%;height:auto">
+            <path d="M 50,190 Q 90,120 175,105 Q 265,95 320,150 Q 300,215 200,235 Q 100,240 50,190 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="66" y="205" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <polygon points="118,150 208,124 262,150 172,176" fill="var(--grey200)" fill-opacity="0.6" stroke="var(--grey500)" stroke-width="1"/>
+            <path d="M 105,175 C 140,158 175,152 215,146 S 275,150 302,160" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <text x="308" y="164" font-size="11" font-style="italic" fill="var(--g700)">C</text>
+            <line x1="188" y1="150" x2="196" y2="78" stroke="var(--grey900)" stroke-width="1.6"/>
+            <polygon points="197,68 191,80 202,81" fill="var(--grey900)"/>
+            <line x1="188" y1="150" x2="252" y2="141" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="259,140 249,145 248,137" fill="var(--orange)"/>
+            <circle cx="188" cy="150" r="3.2" fill="var(--grey900)"/>
+            <text x="160" y="168" font-size="11" fill="var(--grey900)">P(x₀, y₀, z₀)</text>
+            <text x="200" y="66" font-size="11" font-style="italic" fill="var(--grey900)">∇F(x₀, y₀, z₀)</text>
+            <text x="256" y="136" font-size="11" font-style="italic" fill="var(--orange)">r′(t₀)</text>
+            <text x="99" y="132" font-size="11" fill="var(--grey600)">tangent plane</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Equation (19) -->
+<div class="card thm-card" id="c14-6-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">등위면의 접평면 <em>Tangent Plane to a Level Surface</em><span class="src-ref">Eq. (19) · p.1040</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>$S$를 등위면 $F(x,y,z)=k$라 하고, $P(x_0,y_0,z_0)\in S$에서 $\nabla F(x_0,y_0,z_0)\neq\mathbf 0$이라 하자. 법선벡터 $\nabla F(x_0,y_0,z_0)$를 $P$를 지나는 평면의 표준방정식(식 12.5.7)에 대입하면 $P$에서 $S$의 <strong>접평면</strong>을 얻는다.</p>
+          <div class="math-display">$$F_x(x_0,y_0,z_0)(x-x_0)+F_y(x_0,y_0,z_0)(y-y_0)+F_z(x_0,y_0,z_0)(z-z_0)=0.\tag{19}$$</div>
+        </div>
+        <p>실제로는 곡면을 $F(x,y,z)=k$의 형태로 쓰고 세 편도함수를 그 점에서 계산해 (19)에 대입하면 되며, $z$에 대해 따로 풀 필요가 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>Let $S$ be the level surface $F(x,y,z)=k$ and let $P(x_0,y_0,z_0)\in S$ with $\nabla F(x_0,y_0,z_0)\neq\mathbf 0$. Feeding the normal vector $\nabla F(x_0,y_0,z_0)$ into the standard equation of a plane through $P$ (Equation 12.5.7) gives the <strong>tangent plane</strong> to $S$ at $P$:</p>
+          <div class="math-display">$$F_x(x_0,y_0,z_0)(x-x_0)+F_y(x_0,y_0,z_0)(y-y_0)+F_z(x_0,y_0,z_0)(z-z_0)=0.\tag{19}$$</div>
+        </div>
+        <p>In practice one writes the surface in the form $F(x,y,z)=k$, evaluates the three partial derivatives at the point, and reads off (19); no solving for $z$ is required.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 : Equation (20) -->
+<div class="card thm-card" id="c14-6-14">
+  <div class="card-head">
+    <span class="thm-num">THM 14</span>
+    <span class="thm-title">법선 <em>The Normal Line</em><span class="src-ref">Eq. (20) · p.1040</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>$P$에서 $S$의 <strong>법선</strong>은 $P$를 지나고 접평면에 수직인 직선이다. 그 방향은 $\nabla F(x_0,y_0,z_0)$의 방향이므로, 식 12.5.3에 의해 대칭방정식은</p>
+          <div class="math-display">$$\frac{x-x_0}{F_x(x_0,y_0,z_0)}=\frac{y-y_0}{F_y(x_0,y_0,z_0)}=\frac{z-z_0}{F_z(x_0,y_0,z_0)}.\tag{20}$$</div>
+        </div>
+        <p>이다. 같은 직선을 매개변수식 $x=x_0+F_x t$, $y=y_0+F_y t$, $z=z_0+F_z t$(편도함수는 모두 $P$에서 계산)로 나타낼 수도 있으며, 이 형태는 편도함수 중 하나가 $0$이 되는 경우에도 그대로 쓸 수 있다. 이때 (20)은 해당 좌표를 상수로 고정한 채 읽어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>The <strong>normal line</strong> to $S$ at $P$ is the line through $P$ perpendicular to the tangent plane. Its direction is that of $\nabla F(x_0,y_0,z_0)$, so by Equation 12.5.3 its symmetric equations are</p>
+          <div class="math-display">$$\frac{x-x_0}{F_x(x_0,y_0,z_0)}=\frac{y-y_0}{F_y(x_0,y_0,z_0)}=\frac{z-z_0}{F_z(x_0,y_0,z_0)}.\tag{20}$$</div>
+        </div>
+        <p>Equivalently, the same line has parametric equations $x=x_0+F_x t$, $y=y_0+F_y t$, $z=z_0+F_z t$, with the partial derivatives evaluated at $P$; this form remains usable when one of them vanishes, in which case (20) must be read with the corresponding coordinate held constant.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 15 : consistency with §14.4 -->
+<div class="card rem-card" id="c14-6-15">
+  <div class="card-head">
+    <span class="rem-num">REM 15</span>
+    <span class="rem-title">§14.4와의 일관성 <em>Consistency with §14.4</em><span class="src-ref">p.1041</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그래프 $z=f(x,y)$로 주어진 곡면은 특수한 경우이다. 이를</p>
+        <div class="math-display">$$F(x,y,z)=f(x,y)-z=0,$$</div>
+        <p>으로 다시 쓰면 $S$는 $k=0$인 $F$의 등위면이 된다. 이때</p>
+        <div class="math-display">$$\begin{aligned}F_x(x_0,y_0,z_0)&=f_x(x_0,y_0),\\[2pt] F_y(x_0,y_0,z_0)&=f_y(x_0,y_0),\\[2pt] F_z(x_0,y_0,z_0)&=-1,\end{aligned}$$</div>
+        <p>이므로 식 (19)는</p>
+        <div class="math-display">$$f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)-(z-z_0)=0,$$</div>
+        <p>이 되어, 이는 정확히 접평면 방정식 (14.4.2)이다. 따라서 새로운 정의는 §14.4에서 그래프에 대해 주어졌던 정의보다 더 일반적이면서도 그와 일관된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A surface given as a graph $z=f(x,y)$ is a special case: rewrite it as</p>
+        <div class="math-display">$$F(x,y,z)=f(x,y)-z=0,$$</div>
+        <p>so that $S$ is the level surface of $F$ with $k=0$. Then</p>
+        <div class="math-display">$$\begin{aligned}F_x(x_0,y_0,z_0)&=f_x(x_0,y_0),\\[2pt] F_y(x_0,y_0,z_0)&=f_y(x_0,y_0),\\[2pt] F_z(x_0,y_0,z_0)&=-1,\end{aligned}$$</div>
+        <p>and equation (19) becomes</p>
+        <div class="math-display">$$f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)-(z-z_0)=0,$$</div>
+        <p>which is exactly the tangent plane equation (14.4.2). The new definition is therefore more general than, and consistent with, the one given for graphs in §14.4.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 16 : Properties of the Gradient Vector, Figure 12 -->
+<div class="card rem-card" id="c14-6-16">
+  <div class="card-head">
+    <span class="rem-num">REM 16</span>
+    <span class="rem-title">기울기 벡터의 성질 <em>Properties of the Gradient Vector</em><span class="src-ref">Properties box · p.1042</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>기울기 벡터의 성질.</strong> $f$를 이변수 또는 삼변수의 미분가능한 함수라 하고 $\nabla f(\mathbf x)\neq\mathbf 0$이라 하자.</p>
+          <ul>
+            <li>단위벡터 $\mathbf u$ 방향으로 $\mathbf x$에서의 $f$의 방향도함수는 $D_{\mathbf u}f(\mathbf x)=\nabla f(\mathbf x)\cdot\mathbf u$이다.</li>
+            <li>$\nabla f(\mathbf x)$는 $\mathbf x$에서 $f$가 가장 빠르게 증가하는 방향을 가리키며, 그 최대 변화율은 $\lvert\nabla f(\mathbf x)\rvert$이다.</li>
+            <li>$\nabla f(\mathbf x)$는 $\mathbf x$를 지나는 $f$의 등위선 또는 등위면에 수직이다.</li>
+          </ul>
+        </div>
+        <p>앞의 두 성질은 각각 식 (9), (14)와 정리 15이다. 삼변수의 경우 세 번째 성질은 식 (18)이며, 이변수의 경우는 그 점을 지나는 등위선 $f(x,y)=k$의 매개변수화에 같은 방식의 논법을 적용하면 얻어진다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="등위선 위의 점 P에서 등위선에 수직인 기울기 벡터" style="max-width:340px;width:100%;height:auto">
+            <line x1="35" y1="205" x2="322" y2="205" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="328,205 318,209 318,201" fill="var(--grey800)"/>
+            <line x1="35" y1="205" x2="35" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="35,25 31,36 39,36" fill="var(--grey800)"/>
+            <text x="326" y="217" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="24" y="32" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="24" y="218" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 60,170 Q 155,65 295,55" fill="none" stroke="var(--grey300)" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <path d="M 95,196 Q 180,105 310,95" fill="none" stroke="var(--grey300)" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <path d="M 70,190 Q 165,85 305,75" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <line x1="176" y1="109" x2="149" y2="53" stroke="var(--grey900)" stroke-width="1.6"/>
+            <polygon points="146,44 143,57 154,52" fill="var(--grey900)"/>
+            <circle cx="176" cy="109" r="3.2" fill="var(--grey900)"/>
+            <text x="184" y="124" font-size="11" fill="var(--grey900)">P(x₀, y₀)</text>
+            <text x="66" y="46" font-size="11" font-style="italic" fill="var(--grey900)">∇f(x₀, y₀)</text>
+            <text x="240" y="100" font-size="11" font-style="italic" fill="var(--g700)">f(x, y) = k</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Properties of the Gradient Vector.</strong> Let $f$ be a differentiable function of two or three variables and suppose $\nabla f(\mathbf x)\neq\mathbf 0$.</p>
+          <ul>
+            <li>The directional derivative of $f$ at $\mathbf x$ in the direction of a unit vector $\mathbf u$ is $D_{\mathbf u}f(\mathbf x)=\nabla f(\mathbf x)\cdot\mathbf u$.</li>
+            <li>$\nabla f(\mathbf x)$ points in the direction of the maximum rate of increase of $f$ at $\mathbf x$, and that maximum rate of change is $\lvert\nabla f(\mathbf x)\rvert$.</li>
+            <li>$\nabla f(\mathbf x)$ is perpendicular to the level curve or level surface of $f$ through $\mathbf x$.</li>
+          </ul>
+        </div>
+        <p>The first two items are (9), (14) and Theorem 15. For three variables the third item is (18); for two variables it follows from the same kind of argument applied to a parametrization of the level curve $f(x,y)=k$ through the point.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="The gradient vector at a point P is perpendicular to the level curve through P" style="max-width:340px;width:100%;height:auto">
+            <line x1="35" y1="205" x2="322" y2="205" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="328,205 318,209 318,201" fill="var(--grey800)"/>
+            <line x1="35" y1="205" x2="35" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="35,25 31,36 39,36" fill="var(--grey800)"/>
+            <text x="326" y="217" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="24" y="32" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="24" y="218" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 60,170 Q 155,65 295,55" fill="none" stroke="var(--grey300)" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <path d="M 95,196 Q 180,105 310,95" fill="none" stroke="var(--grey300)" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <path d="M 70,190 Q 165,85 305,75" fill="none" stroke="var(--g600)" stroke-width="2"/>
+            <line x1="176" y1="109" x2="149" y2="53" stroke="var(--grey900)" stroke-width="1.6"/>
+            <polygon points="146,44 143,57 154,52" fill="var(--grey900)"/>
+            <circle cx="176" cy="109" r="3.2" fill="var(--grey900)"/>
+            <text x="184" y="124" font-size="11" fill="var(--grey900)">P(x₀, y₀)</text>
+            <text x="66" y="46" font-size="11" font-style="italic" fill="var(--grey900)">∇f(x₀, y₀)</text>
+            <text x="240" y="100" font-size="11" font-style="italic" fill="var(--g700)">f(x, y) = k</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 17 : significance of the gradient, Figures 13 and 14 -->
+<div class="card note-card" id="c14-6-17">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">기울기 벡터의 의미와 최급경사 곡선 <em>Steepest Ascent and Gradient Fields</em><span class="src-ref">p.1042</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>뒤의 두 성질은 직관과도 잘 들어맞는다. $P$에서 등위면을 <em>따라</em> 움직이면 $f$의 값은 변하지 않으므로, 가장 큰 증가가 그 곡면에 수직인 방향 — 바로 $\nabla f(P)$의 방향 — 에서 일어난다는 것은 자연스럽다.</p>
+        <p>언덕의 지형도에서 $(x,y)$ 지점의 해발고도를 $f(x,y)$라 할 때, <strong>최급경사 곡선</strong>은 모든 등고선과 직각으로 만나도록 그은 곡선이다.</p>
+        <p>여러 표본점 $(a,b)$마다 시점을 $(a,b)$로 하는 벡터 $\nabla f(a,b)$를 그리면 <strong>기울기 벡터장</strong>을 얻는다. 예를 들어 $f(x,y)=x^2-y^2$의 등고선 지도 위에 겹쳐 그리면, 위의 성질들이 예측하는 대로 벡터들은 "오르막"을 향하고 등위선과 수직으로 교차한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The last two properties agree with intuition. Moving away from $P$ <em>along</em> the level surface leaves the value of $f$ unchanged, so it is reasonable that the largest increase should occur in the direction perpendicular to that surface — which is exactly the direction of $\nabla f(P)$.</p>
+        <p>On a topographic map of a hill, with $f(x,y)$ the height above sea level at the point $(x,y)$, a <strong>curve of steepest ascent</strong> is one drawn so as to meet every contour line at a right angle.</p>
+        <p>Plotting the vector $\nabla f(a,b)$ with initial point $(a,b)$ at many sample points produces a <strong>gradient vector field</strong>. Superimposed on a contour map — for instance that of $f(x,y)=x^2-y^2$ — the plotted vectors point "uphill" and cross the level curves perpendicularly, as the properties above predict.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-6-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">기상도에서 읽는 방향도함수 <em>Estimating a Directional Derivative from a Weather Map</em><span class="src-ref">Example 1 · p.1034</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>어느 10월 오후 3시 캘리포니아·네바다 지역의 기온 함수 $T(x,y)$를 나타낸 등온선 지도가 주어져 있다. 이 지도에서 Reno를 지나 남동쪽으로 그은 직선이 등온선 $T=50$과 $T=60$을 자르는 두 점 사이의 거리를 읽어, Reno에서 남동쪽 방향 $\mathbf u=(\mathbf i-\mathbf j)/\sqrt2$의 방향도함수 $D_{\mathbf u}T$의 값을 °F/mi 단위로 어림하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $D_{\mathbf u}T(\text{Reno})$는 정의 2의 극한 $\lim_{h\to0}\dfrac{T(\text{Reno}+h\mathbf u)-T(\text{Reno})}{h}$이므로 지도만으로 직접 계산할 수는 없지만, $h$의 작은 값 하나에 대응하는 차분몫으로 근사할 수 있다. Reno를 지나 $\mathbf u=(\mathbf i-\mathbf j)/\sqrt2$ 방향(남동쪽)으로 직선을 그으면, 이 직선은 등온선 $T=50$과 $T=60$을 각각 한 점씩에서 지난다. 지도의 축척으로 이 두 교점 사이의 거리를 재면 약 $75$ mi이다.</p>
+        <p>두 등온선 사이의 온도 변화는 $\Delta T=60-50=10\;{}^\circ\text F$이고 이동 거리는 $\Delta s\approx75$ mi이므로, 방향도함수를 이 유한한 구간에서의 평균변화율로 근사하면</p>
+        <div class="math-display">$$D_{\mathbf u}T(\text{Reno})\approx\frac{\Delta T}{\Delta s}=\frac{10}{75}=\frac2{15}\approx0.13\;{}^\circ\text{F/mi}$$</div>
+        <p>를 얻는다. 이 값은 지도 판독에 의존하므로 정확한 극한값이 아니라 근삿값이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A contour map shows the isothermals of the temperature function $T(x,y)$ recorded over California and Nevada at 3:00 pm one October afternoon. Draw the line through Reno heading southeast, in the direction of $\mathbf u=(\mathbf i-\mathbf j)/\sqrt2$, and read off the distance between the points where it crosses the isothermals $T=50$ and $T=60$. Use this to estimate $D_{\mathbf u}T$ at Reno in degrees Fahrenheit per mile.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $D_{\mathbf u}T(\text{Reno})$ is the limit $\lim_{h\to0}\dfrac{T(\text{Reno}+h\mathbf u)-T(\text{Reno})}{h}$ from Definition 2, which a map cannot evaluate directly; instead it is approximated by a difference quotient over one small displacement read off the map. Drawing the line through Reno in the direction $\mathbf u=(\mathbf i-\mathbf j)/\sqrt2$ (southeast), this line crosses the isothermals $T=50$ and $T=60$ at two points, and the distance between them, read from the map's scale, is about $75$ mi.</p>
+        <p>The change in temperature between the two isothermals is $\Delta T=60-50=10\;{}^\circ\text F$ over a distance $\Delta s\approx75$ mi, so approximating the directional derivative by this average rate of change gives</p>
+        <div class="math-display">$$D_{\mathbf u}T(\text{Reno})\approx\frac{\Delta T}{\Delta s}=\frac{10}{75}=\frac2{15}\approx0.13\;{}^\circ\text{F/mi}.$$</div>
+        <p>Since the value rests on reading distances off a map, it is only an estimate rather than an exact limit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-6-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">각으로 주어진 방향의 방향도함수 <em>A Directional Derivative Given by an Angle</em><span class="src-ref">Example 2 · p.1035</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=x^3-3xy+4y^2$이고, $\mathbf u$는 양의 $x$축에서 잰 각이 $\theta=\pi/6$인 방향의 단위벡터이다. 방향도함수 $D_{\mathbf u}f(x,y)$를 $x,y$에 대한 식으로 구하고, 이를 이용해 $D_{\mathbf u}f(1,2)$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=x^3-3xy+4y^2$의 편도함수는</p>
+        <div class="math-display">$$f_x(x,y)=3x^2-3y,\qquad f_y(x,y)=-3x+8y$$</div>
+        <p>이다. $\mathbf u$가 양의 $x$축과 각 $\theta=\pi/6$을 이루므로 $\mathbf u=\big\langle\cos\tfrac\pi6,\sin\tfrac\pi6\big\rangle=\big\langle\tfrac{\sqrt3}2,\tfrac12\big\rangle$이고, 이를 각 형태의 공식 (6)에 대입하면</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x\cos\frac\pi6+f_y\sin\frac\pi6=(3x^2-3y)\frac{\sqrt3}2+(-3x+8y)\frac12$$</div>
+        <p>이며, 우변을 정리하면</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=\frac{3\sqrt3}2x^2-\frac32x+\Big(4-\frac{3\sqrt3}2\Big)y=\frac12\Big[3\sqrt3\,x^2-3x+(8-3\sqrt3)y\Big]$$</div>
+        <p>이다. 이제 $(1,2)$를 대입하면</p>
+        <div class="math-display">$$D_{\mathbf u}f(1,2)=\frac12\big[3\sqrt3-3+2(8-3\sqrt3)\big]=\frac12\big[3\sqrt3-3+16-6\sqrt3\big]=\frac12(13-3\sqrt3)=\frac{13-3\sqrt3}2$$</div>
+        <p>를 얻는다. 따라서 $D_{\mathbf u}f(x,y)=\dfrac12\big[3\sqrt3\,x^2-3x+(8-3\sqrt3)y\big]$이고 $D_{\mathbf u}f(1,2)=\dfrac{13-3\sqrt3}2\approx3.90$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y)=x^3-3xy+4y^2$ and let $\mathbf u$ be the unit vector whose direction makes the angle $\theta=\pi/6$ with the positive $x$-axis. Find $D_{\mathbf u}f(x,y)$ as a formula in $x$ and $y$, and then evaluate $D_{\mathbf u}f(1,2)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The partial derivatives of $f(x,y)=x^3-3xy+4y^2$ are</p>
+        <div class="math-display">$$f_x(x,y)=3x^2-3y,\qquad f_y(x,y)=-3x+8y.$$</div>
+        <p>Since $\mathbf u$ makes angle $\theta=\pi/6$ with the positive $x$-axis, $\mathbf u=\big\langle\cos\tfrac\pi6,\sin\tfrac\pi6\big\rangle=\big\langle\tfrac{\sqrt3}2,\tfrac12\big\rangle$, and substituting into the angle form (6) gives</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=f_x\cos\frac\pi6+f_y\sin\frac\pi6=(3x^2-3y)\frac{\sqrt3}2+(-3x+8y)\frac12,$$</div>
+        <p>which simplifies to</p>
+        <div class="math-display">$$D_{\mathbf u}f(x,y)=\frac{3\sqrt3}2x^2-\frac32x+\Big(4-\frac{3\sqrt3}2\Big)y=\frac12\Big[3\sqrt3\,x^2-3x+(8-3\sqrt3)y\Big].$$</div>
+        <p>Evaluating at $(1,2)$,</p>
+        <div class="math-display">$$D_{\mathbf u}f(1,2)=\frac12\big[3\sqrt3-3+2(8-3\sqrt3)\big]=\frac12\big[3\sqrt3-3+16-6\sqrt3\big]=\frac12(13-3\sqrt3)=\frac{13-3\sqrt3}2.$$</div>
+        <p>Hence $D_{\mathbf u}f(x,y)=\dfrac12\big[3\sqrt3\,x^2-3x+(8-3\sqrt3)y\big]$ and $D_{\mathbf u}f(1,2)=\dfrac{13-3\sqrt3}2\approx3.90$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-6-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">기울기 벡터 구하기 <em>Computing a Gradient Vector</em><span class="src-ref">Example 3 · p.1036</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=\sin x+e^{xy}$일 때, 기울기 벡터 $\nabla f(x,y)$를 성분으로 나타내고 점 $(0,1)$에서의 값 $\nabla f(0,1)$을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=\sin x+e^{xy}$를 한 변수로 미분할 때 다른 변수는 상수로 두고, 두 경우 모두 $e^{xy}$에 연쇄법칙을 적용하면</p>
+        <div class="math-display">$$f_x(x,y)=\cos x+y\,e^{xy},\qquad f_y(x,y)=x\,e^{xy}$$</div>
+        <p>이므로 정의 8에 의해</p>
+        <div class="math-display">$$\nabla f(x,y)=\big\langle\cos x+y\,e^{xy},\;x\,e^{xy}\big\rangle$$</div>
+        <p>이다. 점 $(0,1)$에서는 $\cos0=1$, $e^{0\cdot1}=e^0=1$이므로 $f_x(0,1)=1+1\cdot1=2$이고, $f_y(0,1)=0\cdot e^0=0$이다. 따라서</p>
+        <div class="math-display">$$\nabla f(0,1)=\langle2,0\rangle$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $f(x,y)=\sin x+e^{xy}$, write the gradient vector $\nabla f(x,y)$ in component form and evaluate it at the point $(0,1)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Differentiate $f(x,y)=\sin x+e^{xy}$ with respect to one variable while the other is held fixed, applying the Chain Rule to $e^{xy}$ in both cases:</p>
+        <div class="math-display">$$f_x(x,y)=\cos x+y\,e^{xy},\qquad f_y(x,y)=x\,e^{xy},$$</div>
+        <p>so by Definition 8</p>
+        <div class="math-display">$$\nabla f(x,y)=\big\langle\cos x+y\,e^{xy},\;x\,e^{xy}\big\rangle.$$</div>
+        <p>At $(0,1)$, $\cos0=1$ and $e^{0\cdot1}=e^0=1$, so $f_x(0,1)=1+1\cdot1=2$ and $f_y(0,1)=0\cdot e^0=0$. Hence</p>
+        <div class="math-display">$$\nabla f(0,1)=\langle2,0\rangle.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-6-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">벡터 방향의 방향도함수 <em>A Directional Derivative in the Direction of a Vector</em><span class="src-ref">Example 4 · p.1036</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>함수 $f(x,y)=x^2y^3-4y$의 점 $(2,-1)$에서 벡터 $\mathbf v=2\mathbf i+5\mathbf j$ 방향의 방향도함수를 구하라. ($\mathbf v$는 단위벡터가 아님에 주의하라.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=x^2y^3-4y$의 편도함수는</p>
+        <div class="math-display">$$f_x(x,y)=2xy^3,\qquad f_y(x,y)=3x^2y^2-4$$</div>
+        <p>이므로 $\nabla f(x,y)=\langle2xy^3,\,3x^2y^2-4\rangle$이고, 점 $(2,-1)$에서는</p>
+        <div class="math-display">$$\nabla f(2,-1)=\langle2\cdot2\cdot(-1)^3,\;3\cdot4\cdot1-4\rangle=\langle-4,\,8\rangle$$</div>
+        <p>이다. 방향벡터 $\mathbf v=2\mathbf i+5\mathbf j$는 $\lvert\mathbf v\rvert=\sqrt{2^2+5^2}=\sqrt{29}$로 단위벡터가 아니므로 먼저 정규화하여</p>
+        <div class="math-display">$$\mathbf u=\frac{\mathbf v}{\lvert\mathbf v\rvert}=\Big\langle\frac2{\sqrt{29}},\,\frac5{\sqrt{29}}\Big\rangle$$</div>
+        <p>를 얻는다. 식 (9)에 의해</p>
+        <div class="math-display">$$D_{\mathbf u}f(2,-1)=\nabla f(2,-1)\cdot\mathbf u=(-4)\cdot\frac2{\sqrt{29}}+8\cdot\frac5{\sqrt{29}}=\frac{-8+40}{\sqrt{29}}=\frac{32}{\sqrt{29}}=\frac{32\sqrt{29}}{29}$$</div>
+        <p>이다. 따라서 $D_{\mathbf u}f(2,-1)=\dfrac{32}{\sqrt{29}}\approx5.94$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the directional derivative of $f(x,y)=x^2y^3-4y$ at the point $(2,-1)$ in the direction of the vector $\mathbf v=2\mathbf i+5\mathbf j$. (Note that $\mathbf v$ is not a unit vector.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The partial derivatives of $f(x,y)=x^2y^3-4y$ are</p>
+        <div class="math-display">$$f_x(x,y)=2xy^3,\qquad f_y(x,y)=3x^2y^2-4,$$</div>
+        <p>so $\nabla f(x,y)=\langle2xy^3,\,3x^2y^2-4\rangle$, and at $(2,-1)$</p>
+        <div class="math-display">$$\nabla f(2,-1)=\langle2\cdot2\cdot(-1)^3,\;3\cdot4\cdot1-4\rangle=\langle-4,\,8\rangle.$$</div>
+        <p>The vector $\mathbf v=2\mathbf i+5\mathbf j$ has $\lvert\mathbf v\rvert=\sqrt{2^2+5^2}=\sqrt{29}\neq1$, so it must first be normalized:</p>
+        <div class="math-display">$$\mathbf u=\frac{\mathbf v}{\lvert\mathbf v\rvert}=\Big\langle\frac2{\sqrt{29}},\,\frac5{\sqrt{29}}\Big\rangle.$$</div>
+        <p>By formula (9),</p>
+        <div class="math-display">$$D_{\mathbf u}f(2,-1)=\nabla f(2,-1)\cdot\mathbf u=(-4)\cdot\frac2{\sqrt{29}}+8\cdot\frac5{\sqrt{29}}=\frac{-8+40}{\sqrt{29}}=\frac{32}{\sqrt{29}}=\frac{32\sqrt{29}}{29}.$$</div>
+        <p>Hence $D_{\mathbf u}f(2,-1)=\dfrac{32}{\sqrt{29}}\approx5.94$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-6-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">삼변수 함수의 기울기 벡터와 방향도함수 <em>Gradient and Directional Derivative in Space</em><span class="src-ref">Example 5 · p.1037–1038</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼변수함수 $f(x,y,z)=x\sin yz$에 대하여 다음을 구하라.</p>
+        <p><strong>(a)</strong> 기울기 벡터 $\nabla f(x,y,z)$.</p>
+        <p><strong>(b)</strong> 점 $(1,3,0)$에서 벡터 $\mathbf v=\mathbf i+2\mathbf j-\mathbf k$ 방향의 방향도함수.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $f(x,y,z)=x\sin yz$의 편도함수는 $x$에 대해서는 $\sin yz$를 상수로 보고 미분하며, $y,z$에 대해서는 $x$를 상수로 보고 합성함수 $\sin(yz)$에 연쇄법칙을 적용한다.</p>
+        <div class="math-display">$$\begin{aligned}f_x&=\sin yz,\\[2pt] f_y&=xz\cos yz,\\[2pt] f_z&=xy\cos yz\end{aligned}$$</div>
+        <p>이므로 식 (13)에 의해</p>
+        <div class="math-display">$$\nabla f(x,y,z)=\big\langle\sin yz,\;xz\cos yz,\;xy\cos yz\big\rangle$$</div>
+        <p>이다.</p>
+        <p><strong>(b)</strong> 점 $(1,3,0)$에서는 $yz=3\cdot0=0$이므로 $\sin0=0$, $\cos0=1$이고,</p>
+        <div class="math-display">$$\nabla f(1,3,0)=\langle\sin0,\;1\cdot0\cdot\cos0,\;1\cdot3\cdot\cos0\rangle=\langle0,\,0,\,3\rangle$$</div>
+        <p>이다. $\mathbf v=\mathbf i+2\mathbf j-\mathbf k$는 $\lvert\mathbf v\rvert=\sqrt{1+4+1}=\sqrt6$로 단위벡터가 아니므로 정규화하면 $\mathbf u=\dfrac1{\sqrt6}\langle1,2,-1\rangle$이고, 식 (14)에 의해</p>
+        <div class="math-display">$$D_{\mathbf u}f(1,3,0)=\nabla f(1,3,0)\cdot\mathbf u=\langle0,0,3\rangle\cdot\frac1{\sqrt6}\langle1,2,-1\rangle=\frac1{\sqrt6}(0+0-3)=-\frac3{\sqrt6}$$</div>
+        <p>를 얻는다. 분모를 유리화하면 $D_{\mathbf u}f(1,3,0)=-\dfrac3{\sqrt6}=-\dfrac{\sqrt6}2=-\sqrt{\dfrac32}\approx-1.22$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y,z)=x\sin yz$.</p>
+        <p><strong>(a)</strong> Find the gradient $\nabla f(x,y,z)$.</p>
+        <p><strong>(b)</strong> Find the directional derivative of $f$ at the point $(1,3,0)$ in the direction of $\mathbf v=\mathbf i+2\mathbf j-\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Compute the three partial derivatives of $f(x,y,z)=x\sin yz$: with respect to $x$ hold $\sin yz$ fixed, and with respect to $y,z$ hold $x$ fixed and apply the Chain Rule to $\sin(yz)$.</p>
+        <div class="math-display">$$\begin{aligned}f_x&=\sin yz,\\[2pt] f_y&=xz\cos yz,\\[2pt] f_z&=xy\cos yz,\end{aligned}$$</div>
+        <p>so by (13)</p>
+        <div class="math-display">$$\nabla f(x,y,z)=\big\langle\sin yz,\;xz\cos yz,\;xy\cos yz\big\rangle.$$</div>
+        <p><strong>(b)</strong> At $(1,3,0)$, $yz=3\cdot0=0$, so $\sin0=0$ and $\cos0=1$, giving</p>
+        <div class="math-display">$$\nabla f(1,3,0)=\langle\sin0,\;1\cdot0\cdot\cos0,\;1\cdot3\cdot\cos0\rangle=\langle0,\,0,\,3\rangle.$$</div>
+        <p>Since $\mathbf v=\mathbf i+2\mathbf j-\mathbf k$ has $\lvert\mathbf v\rvert=\sqrt{1+4+1}=\sqrt6\neq1$, normalize it to $\mathbf u=\dfrac1{\sqrt6}\langle1,2,-1\rangle$, and by (14)</p>
+        <div class="math-display">$$D_{\mathbf u}f(1,3,0)=\nabla f(1,3,0)\cdot\mathbf u=\langle0,0,3\rangle\cdot\frac1{\sqrt6}\langle1,2,-1\rangle=\frac1{\sqrt6}(0+0-3)=-\frac3{\sqrt6}.$$</div>
+        <p>Rationalizing, $D_{\mathbf u}f(1,3,0)=-\dfrac3{\sqrt6}=-\dfrac{\sqrt6}2=-\sqrt{\dfrac32}\approx-1.22$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex14-6-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">최대 증가 방향과 최대 변화율 <em>Direction of Fastest Increase</em><span class="src-ref">Example 6 · p.1038–1039</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f(x,y)=xe^{y}$에 대하여 다음을 구하라.</p>
+        <p><strong>(a)</strong> 점 $P(2,0)$에서 점 $Q\!\left(\tfrac12,\,2\right)$로 향하는 방향의 $f$의 변화율.</p>
+        <p><strong>(b)</strong> 점 $P(2,0)$에서 $f$가 가장 빠르게 증가하는 방향과 그때의 최대 변화율.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $f(x,y)=xe^y$의 편도함수는 $f_x=e^y$, $f_y=xe^y$이므로 $\nabla f(x,y)=\langle e^y,\,xe^y\rangle$이고, 점 $P(2,0)$에서는 $e^0=1$이므로</p>
+        <div class="math-display">$$\nabla f(2,0)=\langle1,\,2\rangle$$</div>
+        <p>이다. $P$에서 $Q\!\left(\tfrac12,2\right)$로 향하는 방향은 $\overrightarrow{PQ}=\big\langle\tfrac12-2,\;2-0\big\rangle=\big\langle-\tfrac32,\,2\big\rangle$이며, 그 크기는 $\lvert\overrightarrow{PQ}\rvert=\sqrt{\big(\tfrac32\big)^2+2^2}=\sqrt{\tfrac94+4}=\sqrt{\tfrac{25}4}=\tfrac52$이다. 이를 정규화하면</p>
+        <div class="math-display">$$\mathbf u=\frac{\overrightarrow{PQ}}{\lvert\overrightarrow{PQ}\rvert}=\frac{\big\langle-\tfrac32,2\big\rangle}{\tfrac52}=\Big\langle-\frac35,\,\frac45\Big\rangle$$</div>
+        <p>이고, 구하는 변화율은</p>
+        <div class="math-display">$$D_{\mathbf u}f(2,0)=\nabla f(2,0)\cdot\mathbf u=1\cdot\Big(-\frac35\Big)+2\cdot\frac45=-\frac35+\frac85=1$$</div>
+        <p>이다.</p>
+        <p><strong>(b)</strong> 정리 15에 의해 $f$가 가장 빠르게 증가하는 방향은 $\nabla f(2,0)=\langle1,2\rangle$의 방향(단위벡터로는 $\tfrac1{\sqrt5}\langle1,2\rangle$)이고, 그때의 최대 변화율은</p>
+        <div class="math-display">$$\lvert\nabla f(2,0)\rvert=\sqrt{1^2+2^2}=\sqrt5$$</div>
+        <p>이다. (a)의 답 $1$이 이 최댓값 $\sqrt5\approx2.24$보다 작다는 사실은 $\overrightarrow{PQ}$ 방향이 기울기 방향과 다르다는 것과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f(x,y)=xe^{y}$.</p>
+        <p><strong>(a)</strong> Find the rate of change of $f$ at the point $P(2,0)$ in the direction from $P$ to $Q\!\left(\tfrac12,\,2\right)$.</p>
+        <p><strong>(b)</strong> In which direction does $f$ increase fastest at $P(2,0)$, and what is that maximum rate of change?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $f(x,y)=xe^y$ has $f_x=e^y$ and $f_y=xe^y$, $\nabla f(x,y)=\langle e^y,\,xe^y\rangle$, and at $P(2,0)$, using $e^0=1$,</p>
+        <div class="math-display">$$\nabla f(2,0)=\langle1,\,2\rangle.$$</div>
+        <p>The direction from $P$ to $Q\!\left(\tfrac12,2\right)$ is $\overrightarrow{PQ}=\big\langle\tfrac12-2,\;2-0\big\rangle=\big\langle-\tfrac32,\,2\big\rangle$, with magnitude $\lvert\overrightarrow{PQ}\rvert=\sqrt{\big(\tfrac32\big)^2+2^2}=\sqrt{\tfrac94+4}=\sqrt{\tfrac{25}4}=\tfrac52$. Normalizing,</p>
+        <div class="math-display">$$\mathbf u=\frac{\overrightarrow{PQ}}{\lvert\overrightarrow{PQ}\rvert}=\frac{\big\langle-\tfrac32,2\big\rangle}{\tfrac52}=\Big\langle-\frac35,\,\frac45\Big\rangle,$$</div>
+        <p>and the requested rate of change is</p>
+        <div class="math-display">$$D_{\mathbf u}f(2,0)=\nabla f(2,0)\cdot\mathbf u=1\cdot\Big(-\frac35\Big)+2\cdot\frac45=-\frac35+\frac85=1.$$</div>
+        <p><strong>(b)</strong> By Theorem 15, $f$ increases fastest at $P$ in the direction of $\nabla f(2,0)=\langle1,2\rangle$ (unit vector $\tfrac1{\sqrt5}\langle1,2\rangle$), with maximum rate of change</p>
+        <div class="math-display">$$\lvert\nabla f(2,0)\rvert=\sqrt{1^2+2^2}=\sqrt5.$$</div>
+        <p>The answer $1$ from part (a) is smaller than this maximum $\sqrt5\approx2.24$, consistent with the fact that the direction of $\overrightarrow{PQ}$ is not the direction of the gradient.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex14-6-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">온도가 가장 빨리 증가하는 방향 <em>Fastest Temperature Increase in Space</em><span class="src-ref">Example 7 · p.1039</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>공간의 점 $(x,y,z)$에서의 온도가</p>
+        <div class="math-display">$$T(x,y,z)=\frac{80}{1+x^2+2y^2+3z^2}$$</div>
+        <p>로 주어져 있다. 여기서 $T$의 단위는 °C이고 $x,y,z$의 단위는 m이다. 점 $(1,1,-2)$에서 온도가 가장 빠르게 증가하는 방향을 구하고, 그때의 최대 증가율을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $q(x,y,z)=1+x^2+2y^2+3z^2$로 두면 $T=80/q$이고, 몫의 미분(또는 연쇄법칙)에 의해</p>
+        <div class="math-display">$$\begin{aligned}T_x&=-\frac{80\cdot2x}{q^2}=-\frac{160x}{q^2},\\[2pt] T_y&=-\frac{320y}{q^2},\\[2pt] T_z&=-\frac{480z}{q^2}\end{aligned}$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$\nabla T=\frac{160}{q^2}\big(-x\,\mathbf i-2y\,\mathbf j-3z\,\mathbf k\big)$$</div>
+        <p>이다. 점 $(1,1,-2)$에서는 $q=1+1+2+3\cdot4=1+1+2+12=16$이므로 $q^2=256$이고,</p>
+        <div class="math-display">$$\nabla T(1,1,-2)=\frac{160}{256}\langle-1,\,-2,\,6\rangle=\frac58\langle-1,\,-2,\,6\rangle$$</div>
+        <p>를 얻는다($-3z=-3\cdot(-2)=6$에 유의). 정리 15에 의해 온도가 가장 빠르게 증가하는 방향은 $\nabla T(1,1,-2)$, 즉 $-\mathbf i-2\mathbf j+6\mathbf k$의 방향(단위벡터로는 $\tfrac1{\sqrt{41}}\langle-1,-2,6\rangle$)이고, 최대 증가율은</p>
+        <div class="math-display">$$\lvert\nabla T(1,1,-2)\rvert=\frac58\sqrt{(-1)^2+(-2)^2+6^2}=\frac58\sqrt{41}\approx4.00\;{}^\circ\text{C/m}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The temperature at a point $(x,y,z)$ in space is</p>
+        <div class="math-display">$$T(x,y,z)=\frac{80}{1+x^2+2y^2+3z^2},$$</div>
+        <p>where $T$ is measured in degrees Celsius and $x,y,z$ in meters. Determine the direction in which the temperature increases fastest at the point $(1,1,-2)$, and find that maximum rate of increase.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $q(x,y,z)=1+x^2+2y^2+3z^2$, so $T=80/q$; the quotient (or chain) rule gives</p>
+        <div class="math-display">$$\begin{aligned}T_x&=-\frac{80\cdot2x}{q^2}=-\frac{160x}{q^2},\\[2pt] T_y&=-\frac{320y}{q^2},\\[2pt] T_z&=-\frac{480z}{q^2},\end{aligned}$$</div>
+        <p>so</p>
+        <div class="math-display">$$\nabla T=\frac{160}{q^2}\big(-x\,\mathbf i-2y\,\mathbf j-3z\,\mathbf k\big).$$</div>
+        <p>At $(1,1,-2)$, $q=1+1+2+3\cdot4=1+1+2+12=16$, so $q^2=256$, and</p>
+        <div class="math-display">$$\nabla T(1,1,-2)=\frac{160}{256}\langle-1,\,-2,\,6\rangle=\frac58\langle-1,\,-2,\,6\rangle$$</div>
+        <p>(note $-3z=-3\cdot(-2)=6$). Theorem 15 then says that the temperature climbs fastest along $\nabla T(1,1,-2)$, that is, in the direction of $-\mathbf i-2\mathbf j+6\mathbf k$ (unit vector $\tfrac1{\sqrt{41}}\langle-1,-2,6\rangle$), with maximum rate of increase</p>
+        <div class="math-display">$$\lvert\nabla T(1,1,-2)\rvert=\frac58\sqrt{(-1)^2+(-2)^2+6^2}=\frac58\sqrt{41}\approx4.00\;{}^\circ\text{C/m}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex14-6-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">타원면의 접평면과 법선 <em>Tangent Plane and Normal Line to an Ellipsoid</em><span class="src-ref">Example 8 · p.1040–1041</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>타원면</p>
+        <div class="math-display">$$\frac{x^2}{4}+y^2+\frac{z^2}{9}=3$$</div>
+        <p>위의 점 $(-2,1,-3)$에서, 이 곡면의 접평면의 방정식과 법선의 대칭방정식을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 타원면을 $F(x,y,z)=\dfrac{x^2}4+y^2+\dfrac{z^2}9$로 놓으면 이 곡면은 $F(x,y,z)=3$인 $F$의 등위면이다. 편도함수는</p>
+        <div class="math-display">$$F_x=\frac x2,\qquad F_y=2y,\qquad F_z=\frac{2z}9$$</div>
+        <p>이며, 점 $(-2,1,-3)$에서는</p>
+        <div class="math-display">$$\begin{aligned}F_x(-2,1,-3)&=-1,\\[2pt] F_y(-2,1,-3)&=2,\\[2pt] F_z(-2,1,-3)&=\frac{2(-3)}9=-\frac23\end{aligned}$$</div>
+        <p>이다(이 점이 실제로 곡면 위에 있음은 $\tfrac{(-2)^2}4+1^2+\tfrac{(-3)^2}9=1+1+1=3$으로 확인된다). 식 (19)에 대입하면 접평면은</p>
+        <div class="math-display">$$-1(x+2)+2(y-1)-\frac23(z+3)=0$$</div>
+        <p>이고, 양변에 $-3$을 곱해 분수를 없애면</p>
+        <div class="math-display">$$3(x+2)-6(y-1)+2(z+3)=0\;\Longrightarrow\;3x-6y+2z+18=0$$</div>
+        <p>이다. 법선은 방향벡터 $\nabla F(-2,1,-3)=\big\langle-1,2,-\tfrac23\big\rangle$을 가지므로, 식 (20)에 의해 대칭방정식은</p>
+        <div class="math-display">$$\frac{x+2}{-1}=\frac{y-1}2=\frac{z+3}{-2/3}$$</div>
+        <p>이다. 따라서 접평면은 $3x-6y+2z+18=0$이고, 법선은 위 대칭방정식으로 주어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find equations of the tangent plane and of the normal line to the ellipsoid</p>
+        <div class="math-display">$$\frac{x^2}{4}+y^2+\frac{z^2}{9}=3$$</div>
+        <p>at the point $(-2,1,-3)$, giving the normal line in symmetric form.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Write the ellipsoid as the level surface $F(x,y,z)=3$ of $F(x,y,z)=\dfrac{x^2}4+y^2+\dfrac{z^2}9$. The partial derivatives are</p>
+        <div class="math-display">$$F_x=\frac x2,\qquad F_y=2y,\qquad F_z=\frac{2z}9,$$</div>
+        <p>and at $(-2,1,-3)$,</p>
+        <div class="math-display">$$\begin{aligned}F_x(-2,1,-3)&=-1,\\[2pt] F_y(-2,1,-3)&=2,\\[2pt] F_z(-2,1,-3)&=\frac{2(-3)}9=-\frac23\end{aligned}$$</div>
+        <p>(the point does lie on the surface, since $\tfrac{(-2)^2}4+1^2+\tfrac{(-3)^2}9=1+1+1=3$). Substituting into (19) gives the tangent plane</p>
+        <div class="math-display">$$-1(x+2)+2(y-1)-\frac23(z+3)=0,$$</div>
+        <p>and multiplying through by $-3$ to clear the fraction,</p>
+        <div class="math-display">$$3(x+2)-6(y-1)+2(z+3)=0\;\Longrightarrow\;3x-6y+2z+18=0.$$</div>
+        <p>The normal line has direction vector $\nabla F(-2,1,-3)=\big\langle-1,2,-\tfrac23\big\rangle$, so by (20) its symmetric equations are</p>
+        <div class="math-display">$$\frac{x+2}{-1}=\frac{y-1}2=\frac{z+3}{-2/3}.$$</div>
+        <p>Hence the tangent plane is $3x-6y+2z+18=0$, and the normal line is given by the symmetric equations above.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 9 -->
+<div class="card exam-card" id="ex14-6-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 9</span>
+    <span class="exam-title">등위면 방법으로 구한 접평면 <em>A Tangent Plane by the Level-Surface Method</em><span class="src-ref">Example 9 · p.1041</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $z=2x^2+y^2$ 위의 점 $(1,1,3)$에서의 접평면의 방정식을, 이 곡면을 적당한 삼변수함수의 등위면으로 보는 방법으로 구하라. (§14.4 예제 1의 답과 비교하라.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 곡면 $z=2x^2+y^2$을 $F(x,y,z)=2x^2+y^2-z$의 등위면 $F=0$ (즉 $k=0$)으로 본다. 편도함수는</p>
+        <div class="math-display">$$F_x=4x,\qquad F_y=2y,\qquad F_z=-1$$</div>
+        <p>이며, 점 $(1,1,3)$에서는 $F_x=4$, $F_y=2$, $F_z=-1$이다. 식 (19)에 대입하면</p>
+        <div class="math-display">$$4(x-1)+2(y-1)-(z-3)=0$$</div>
+        <p>이고, 이를 정리하면</p>
+        <div class="math-display">$$4x-4+2y-2-z+3=0\;\Longrightarrow\;4x+2y-z-3=0\;\Longrightarrow\;z=4x+2y-3$$</div>
+        <p>이다. 이는 §14.4 예제 1에서 그래프의 접평면 공식 $z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$으로 직접 구한 답과 정확히 일치하며, 이는 REM 15에서 확인한 대로 등위면 방법이 그래프의 접평면 정의를 특수한 경우로 포함하기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the tangent plane to the surface $z=2x^2+y^2$ at the point $(1,1,3)$ by regarding the surface as a level surface of a suitable function of three variables. (Compare the answer with Example 14.4.1.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> View the surface $z=2x^2+y^2$ as the level surface $F=0$ (i.e. $k=0$) of $F(x,y,z)=2x^2+y^2-z$. The partial derivatives are</p>
+        <div class="math-display">$$F_x=4x,\qquad F_y=2y,\qquad F_z=-1,$$</div>
+        <p>and at $(1,1,3)$, $F_x=4$, $F_y=2$, $F_z=-1$. Substituting into (19) gives</p>
+        <div class="math-display">$$4(x-1)+2(y-1)-(z-3)=0,$$</div>
+        <p>which simplifies to</p>
+        <div class="math-display">$$4x-4+2y-2-z+3=0\;\Longrightarrow\;4x+2y-z-3=0\;\Longrightarrow\;z=4x+2y-3.$$</div>
+        <p>This is exactly the answer obtained directly from the graph formula $z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$ in Example 14.4.1, as it must be, since the level-surface method contains the graph definition as a special case (REM 15).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-6-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch07.html">단원 07</a></p>
+        <ul>
+          <li>방향도함수의 정의와 계산 공식 — <a href="../calc2/ch07.html#ex01">ex01</a>, <a href="../calc2/ch07.html#yu01-2">yu01-2</a>, <a href="../calc2/ch07.html#yu01-3">yu01-3</a>, <a href="../calc2/ch07.html#pr02">pr02</a> (부분 대응: 교안에는 극한 정의와 각 $\theta$ 형태가 없다)</li>
+          <li>기울기 벡터 — <a href="../calc2/ch07.html#ex01">ex01</a>, <a href="../calc2/ch07.html#yu01-1">yu01-1</a>, <a href="../calc2/ch07.html#pr04">pr04</a>, <a href="../calc2/ch07.html#pr05">pr05</a> (완전 대응)</li>
+          <li>삼변수 방향도함수와 공간의 기울기 — <a href="../calc2/ch07.html#yu01-5">yu01-5</a>, <a href="../calc2/ch07.html#pr09">pr09</a> (완전 대응)</li>
+          <li>최대 증가 방향과 최대 변화율 — <a href="../calc2/ch07.html#yu01-4">yu01-4</a>, <a href="../calc2/ch07.html#yu01-5">yu01-5</a>, <a href="../calc2/ch07.html#pr03">pr03</a>, <a href="../calc2/ch07.html#pr09">pr09</a> (부분 대응: 정리로 진술하지 않고 계산에만 사용)</li>
+          <li>등위면의 접평면과 법선 — <a href="../calc2/ch07.html#ex02">ex02</a>, <a href="../calc2/ch07.html#yu02-1">yu02-1</a>, <a href="../calc2/ch07.html#yu02-2">yu02-2</a>, <a href="../calc2/ch07.html#yu02-3">yu02-3</a>, <a href="../calc2/ch07.html#pr06">pr06</a> (완전 대응: 다만 법선을 매개변수식으로만 제시)</li>
+          <li>이계 방향도함수 $D^2_{\mathbf u}f=f_{xx}a^2+2f_{xy}ab+f_{yy}b^2$ (과제 45·46) — 대응 없음</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.6)</strong></p>
+        <p>제출 문항: 17, 30, 34, 45, 51, 62 &nbsp;/&nbsp; 학습 참고: 4–7, 8–12, 13–19, 21–25, 27–32, 35, 38, 45–46, 47–52, 55–69</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-5.html">§14.5 연쇄법칙</a> &nbsp;/&nbsp; 다음: <a href="s14-7.html">§14.7 최댓값과 최솟값</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch07.html">Unit 07</a></p>
+        <ul>
+          <li>Definition and computation of the directional derivative — <a href="../calc2/ch07.html#ex01">ex01</a>, <a href="../calc2/ch07.html#yu01-2">yu01-2</a>, <a href="../calc2/ch07.html#yu01-3">yu01-3</a>, <a href="../calc2/ch07.html#pr02">pr02</a> (partial: the notes have neither the limit definition nor the angle form)</li>
+          <li>The gradient vector — <a href="../calc2/ch07.html#ex01">ex01</a>, <a href="../calc2/ch07.html#yu01-1">yu01-1</a>, <a href="../calc2/ch07.html#pr04">pr04</a>, <a href="../calc2/ch07.html#pr05">pr05</a> (full match)</li>
+          <li>Directional derivatives and gradients in space — <a href="../calc2/ch07.html#yu01-5">yu01-5</a>, <a href="../calc2/ch07.html#pr09">pr09</a> (full match)</li>
+          <li>Direction of fastest increase and maximum rate of change — <a href="../calc2/ch07.html#yu01-4">yu01-4</a>, <a href="../calc2/ch07.html#yu01-5">yu01-5</a>, <a href="../calc2/ch07.html#pr03">pr03</a>, <a href="../calc2/ch07.html#pr09">pr09</a> (partial: used in computations, never stated as a theorem)</li>
+          <li>Tangent plane and normal line to a level surface — <a href="../calc2/ch07.html#ex02">ex02</a>, <a href="../calc2/ch07.html#yu02-1">yu02-1</a>, <a href="../calc2/ch07.html#yu02-2">yu02-2</a>, <a href="../calc2/ch07.html#yu02-3">yu02-3</a>, <a href="../calc2/ch07.html#pr06">pr06</a> (full match, except that the normal line is given only in parametric form)</li>
+          <li>Second directional derivative $D^2_{\mathbf u}f=f_{xx}a^2+2f_{xy}ab+f_{yy}b^2$ (Exercises 45, 46) — no match</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.6)</strong></p>
+        <p>Problems to submit: 17, 30, 34, 45, 51, 62 &nbsp;/&nbsp; Recommended practice: 4–7, 8–12, 13–19, 21–25, 27–32, 35, 38, 45–46, 47–52, 55–69</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-5.html">§14.5 The Chain Rule</a> &nbsp;/&nbsp; Next: <a href="s14-7.html">§14.7 Maximum and Minimum Values</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.8 스토크스 정리 (Stokes' Theorem) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.8 스토크스 정리 — 유향곡면이 유도하는 경계곡선의 양의 방향 규약, 정리의 진술과 ∂S 표기(식 (1)), 그린 정리가 특수경우가 되는 이유, 곡면이 그래프인 경우의 증명, 경계가 같으면 곡면을 바꿔도 값이 같다는 식 (3), 순환의 정의와 회전의 극한 해석(식 (4))을 한국어·영어 대조로 정리하고 예제 2개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.8, 스토크스 정리, Stokes' Theorem, 경계곡선, boundary curve, 유향곡면, oriented surface, 양의 향, positive orientation, 순환, circulation, 회전, curl, 곡면 독립성, 그린 정리, Green's Theorem, 물레방아, paddle wheel, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-8.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.8 스토크스 정리 (Stokes' Theorem) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="경계곡선의 양의 방향 규약, 스토크스 정리의 진술과 ∂S 표기, 그린 정리와의 관계, 그래프에 대한 증명, 곡면 독립성, 순환과 회전의 극한 해석까지 §16.8 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-8.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.8 스토크스 정리 (Stokes' Theorem) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.8 스토크스 정리 — 유향곡면이 유도하는 경계곡선의 양의 방향, 정리의 진술과 경계 표기, 그린 정리가 특수경우가 되는 이유, 곡면이 그래프인 경우의 증명, 곡면 독립성, 순환의 정의와 회전의 극한 해석을 한국어·영어 대조로 정리하고 본문 예제 2개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-8.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-8.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html" class="active">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.8 · 13주차</p>
+  <h1>§16.8 스토크스 정리<span>Stokes' Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-8-1"><span class="toc-num">NOTE</span> 그린 정리의 3차원판 <em>Stokes as a Higher-Dimensional Green</em></a></li>
+    <li><a href="#c16-8-2"><span class="toc-num">REM 2</span> 경계곡선의 양의 방향 <em>Positive Orientation of the Boundary Curve</em></a></li>
+    <li><a href="#c16-8-3"><span class="toc-num">THM 3</span> 스토크스 정리 <em>Stokes' Theorem</em></a></li>
+    <li><a href="#c16-8-4"><span class="toc-num">REM 4</span> 접선성분과 법선성분, 경계 표기 <em>Tangential vs Normal; the Boundary Notation</em></a></li>
+    <li><a href="#c16-8-5"><span class="toc-num">NOTE</span> 기본정리·그린 정리와의 유비 <em>Analogy with the FTC and Green's Theorem</em></a></li>
+    <li><a href="#c16-8-6"><span class="toc-num">NOTE</span> 곡면이 그래프인 경우의 증명 <em>Proof for a Graph</em></a></li>
+    <li><a href="#c16-8-7"><span class="toc-num">REM 7</span> 경계가 같으면 값도 같다 <em>Same Boundary, Same Integral</em></a></li>
+    <li><a href="#c16-8-8"><span class="toc-num">DEF 8</span> 순환 <em>Circulation</em></a></li>
+    <li><a href="#c16-8-9"><span class="toc-num">THM 9</span> 회전의 순환 해석 <em>Curl as Circulation per Unit Area</em></a></li>
+    <li><a href="#c16-8-10"><span class="toc-num">NOTE</span> 정리 16.5.4의 증명 <em>Proving Theorem 16.5.4</em></a></li>
+    <li><a href="#ex16-8-1"><span class="toc-num">EXAM 1</span> 원기둥과 평면이 자르는 타원 위의 선적분 <em>A Line Integral around an Ellipse Cut from a Cylinder</em></a></li>
+    <li><a href="#ex16-8-2"><span class="toc-num">EXAM 2</span> 구면 모자 위 회전의 면적분 <em>A Surface Integral of the Curl over a Spherical Cap</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 -->
+<div class="card note-card" id="c16-8-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">그린 정리의 3차원판 <em>Stokes as a Higher-Dimensional Green</em><span class="src-ref">절 도입 · p.1233</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그린 정리는 평면 영역 $D$ 위의 이중적분을 $D$의 경계를 이루는 평면곡선 위의 선적분과 이어준다. 스토크스 정리는 같은 진술을 한 차원 끌어올린 것이다 — 이중적분은 공간 속에 놓인 곡면 $S$ 위의 면적분으로 바뀌고, 선적분은 $S$의 경계곡선을 따라 돈다. 그런데 이 경계곡선은 더 이상 평면곡선이 아니라 공간곡선이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Green's Theorem ties a double integral over a plane region $D$ to a line integral taken once around the plane curve that bounds $D$. Stokes' Theorem raises the same statement by one dimension: the double integral is replaced by a surface integral over a surface $S$ sitting in space, and the line integral runs around the boundary curve of $S$ &mdash; a space curve now, no longer a plane curve.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : 경계곡선의 양의 방향 (Figure 1) -->
+<div class="card rem-card" id="c16-8-2">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">경계곡선의 양의 방향 <em>Positive Orientation of the Boundary Curve</em><span class="src-ref">Figure 1 · p.1233</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$의 향은 $S$ 위 각 점에서 단위법선 $\mathbf n$을 하나씩 고르는 선택이며, 이 선택이 경계곡선 $C$를 도는 두 방향 중 하나를 가려낸다. 이렇게 정해지는 방향을 $C$의 <strong>양의 방향</strong>이라 하고, 걷기 규칙으로 기술한다: 머리를 $\mathbf n$이 가리키는 쪽에 두고 $C$를 따라 걸을 때 곡면이 줄곧 왼쪽에 있으면, 그 방향이 바로 양의 방향이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 238" role="img" aria-label="유향곡면 S 위의 단위법선 n 세 개와, 그 향이 유도하는 경계곡선 C의 진행 방향 화살표" style="max-width:360px;width:100%;height:auto">
+            <path d="M 50,170 C 70,96 250,96 270,170 A 110,34 0 0 1 50,170 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.6"/>
+            <path d="M 50,170 A 110,34 0 0 1 270,170" fill="none" stroke="var(--grey400)" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <polygon points="195,202 186,197.5 186,206.5" fill="var(--g700)"/>
+            <polygon points="82,194 72.1,195.6 74.7,187" fill="var(--g700)"/>
+            <polygon points="238,146 247.9,144.4 245.3,153" fill="var(--grey500)"/>
+            <line x1="90" y1="128" x2="78" y2="105" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="75.7,97.2 83.6,103.5 75.4,107.3" fill="var(--grey700)"/>
+            <line x1="160" y1="114" x2="160" y2="82" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="160,74 156,84 164,84" fill="var(--grey700)"/>
+            <line x1="230" y1="128" x2="242" y2="105" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="244.3,97.2 244.6,107.3 236.4,103.5" fill="var(--grey700)"/>
+            <text x="62" y="94" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="150" y="68" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="250" y="94" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="150" y="161" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <text x="196" y="222" font-size="13" font-style="italic" fill="var(--g800)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>An orientation of $S$ is a choice of unit normal vector $\mathbf n$ at each of its points, and that choice picks out one of the two ways of running around the boundary curve $C$. The one it picks is called the <strong>positive orientation</strong> of $C$, and it is described by a walking rule: travel along $C$ with your head pointing the way $\mathbf n$ points, and you are going the positive way exactly when the surface stays on your left the whole time.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 238" role="img" aria-label="An oriented surface S with three unit normals n, together with the direction arrows of the boundary curve C induced by that orientation" style="max-width:360px;width:100%;height:auto">
+            <path d="M 50,170 C 70,96 250,96 270,170 A 110,34 0 0 1 50,170 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.6"/>
+            <path d="M 50,170 A 110,34 0 0 1 270,170" fill="none" stroke="var(--grey400)" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <polygon points="195,202 186,197.5 186,206.5" fill="var(--g700)"/>
+            <polygon points="82,194 72.1,195.6 74.7,187" fill="var(--g700)"/>
+            <polygon points="238,146 247.9,144.4 245.3,153" fill="var(--grey500)"/>
+            <line x1="90" y1="128" x2="78" y2="105" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="75.7,97.2 83.6,103.5 75.4,107.3" fill="var(--grey700)"/>
+            <line x1="160" y1="114" x2="160" y2="82" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="160,74 156,84 164,84" fill="var(--grey700)"/>
+            <line x1="230" y1="128" x2="242" y2="105" stroke="var(--grey700)" stroke-width="1.6"/>
+            <polygon points="244.3,97.2 244.6,107.3 236.4,103.5" fill="var(--grey700)"/>
+            <text x="62" y="94" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="150" y="68" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="250" y="94" font-size="12" font-weight="700" font-style="italic" fill="var(--grey800)">n</text>
+            <text x="150" y="161" font-size="13" font-style="italic" fill="var(--g800)">S</text>
+            <text x="196" y="222" font-size="13" font-style="italic" fill="var(--g800)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Stokes' Theorem -->
+<div class="card thm-card" id="c16-8-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">스토크스 정리 <em>Stokes' Theorem</em><span class="src-ref">Stokes' Theorem · p.1233</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>스토크스 정리.</strong> $S$를 조각적으로 매끄러운 유향곡면이라 하고, 그 경계는 $S$가 유도하는 향을 갖는 하나의 단순 닫힌 조각적으로 매끄러운 곡선 $C$로 이루어진다고 하자. $\mathbf F$를, $S$가 놓인 $\mathbb R^{3}$의 어떤 열린 영역 전체에서 성분함수들이 연속인 편도함수를 갖는 벡터장이라 하자. 그러면</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S.$$</div>
+        </div>
+        <p><em>증명: 일반적인 경우의 증명은 이 강의의 범위를 벗어나며, $S$가 그래프인 특수한 경우는 아래 note에서 증명한다.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Stokes' Theorem.</strong> Let $S$ be an oriented surface, piecewise smooth, whose boundary consists of a single simple closed piecewise-smooth curve $C$ carrying the orientation induced by $S$. Let $\mathbf F$ be a vector field each of whose component functions has continuous partial derivatives throughout some open region of $\mathbb R^{3}$ in which $S$ lies. Then</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S.$$</div>
+        </div>
+        <p><em>Proof: the general case is beyond the scope of this course; the special case in which $S$ is a graph is proved in the note below.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Equation (1), tangential vs normal component -->
+<div class="card rem-card" id="c16-8-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">접선성분과 법선성분, 경계 표기 <em>Tangential vs Normal; the Boundary Notation</em><span class="src-ref">Eq. (1) · p.1233</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>양변을 다시 써 보면 실제로 무엇을 적분하는지가 드러난다. 좌변은 $\int_C\mathbf F\cdot d\mathbf r=\int_C\mathbf F\cdot\mathbf T\,ds$이므로 $C$를 따라 도는 것은 $\mathbf F$의 접선성분이다. 우변은 $\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_S\operatorname{curl}\mathbf F\cdot\mathbf n\,dS$이므로 $S$ 위에 퍼져 있는 것은 $\operatorname{curl}\mathbf F$의 법선성분이다. 이렇게 읽으면 정리는 다음을 말한다: $\mathbf F$의 접선성분을 경계곡선을 따라 적분한 값은 $\operatorname{curl}\mathbf F$의 법선성분을 곡면 위에서 적분한 값과 같다.</p>
+        <p>유향곡면 $S$의 경계곡선을, 양의 방향을 취한 채로 $\partial S$라 쓰는 것이 관례다. 이 표기로 정리는 다음과 같이 된다.</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_{\partial S}\mathbf F\cdot d\mathbf r.\tag{1}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Rewriting each side makes visible what is actually being integrated. On the left, $\int_C\mathbf F\cdot d\mathbf r=\int_C\mathbf F\cdot\mathbf T\,ds$, so what runs around $C$ is the tangential component of $\mathbf F$. On the right, $\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_S\operatorname{curl}\mathbf F\cdot\mathbf n\,dS$, so what is spread over $S$ is the normal component of $\operatorname{curl}\mathbf F$. Read that way the theorem says: the tangential component of $\mathbf F$, integrated around the boundary curve, equals the normal component of the curl of $\mathbf F$, integrated over the surface.</p>
+        <p>It is common to write $\partial S$ for the boundary curve of the oriented surface $S$, taken with its positive orientation. In that notation the theorem becomes</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_{\partial S}\mathbf F\cdot d\mathbf r.\tag{1}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : analogy with FTC and Green -->
+<div class="card note-card" id="c16-8-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">기본정리·그린 정리와의 유비 <em>Analogy with the FTC and Green's Theorem</em><span class="src-ref">p.1233</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (1)은 그린 정리, 나아가 미적분학의 기본정리와 같은 골격을 갖는다. 한쪽 변은 도함수로 조립된 것을 적분하고 — $\operatorname{curl}\mathbf F$가 $\mathbf F$의 일종의 도함수임을 기억하자 — 다른 쪽 변은 $S$의 경계에서만 $\mathbf F$를 참조할 뿐, 그 밖의 곳에서는 전혀 쓰지 않는다.</p>
+        <p>그린 정리와의 인연은 단순한 유비를 넘어선다. $S$가 평평하여 $xy$-평면 안에 위쪽 방향으로 놓여 있다고 하자. 그러면 단위법선은 $\mathbf n=\mathbf k$가 되고 면적분은 보통의 이중적분으로 바뀌어 정리는 다음과 같이 된다.</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA,$$</div>
+        <p>이는 식 16.5.12에 진술된 그린 정리의 벡터형 그 자체다. 따라서 그린 정리는 스토크스 정리의 한 특수경우에 지나지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Equation (1) has the same shape as Green's Theorem and as the Fundamental Theorem of Calculus. One side integrates something assembled from derivatives &mdash; recall that $\operatorname{curl}\mathbf F$ is a kind of derivative of $\mathbf F$ &mdash; while the other side consults $\mathbf F$ only along the boundary of $S$, and nowhere else.</p>
+        <p>The kinship with Green's Theorem is more than an analogy. Suppose $S$ is flat, lying inside the $xy$-plane with the upward orientation. Its unit normal is then $\mathbf n=\mathbf k$, the surface integral turns into an ordinary double integral, and the theorem reads</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA,$$</div>
+        <p>which is the vector form of Green's Theorem stated in Equation 16.5.12. So Green's Theorem is nothing but one special case of Stokes' Theorem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : proof of a special case (graph), Equation (2) -->
+<div class="card note-card" id="c16-8-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">곡면이 그래프인 경우의 증명 <em>Proof for a Graph</em><span class="src-ref">Proof of a Special Case, Eq. (2) · p.1233&ndash;1234</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리는 완전히 일반적인 경우에는 손이 닿지 않지만, $S$가 그래프이고 등장하는 모든 것이 충분히 좋은 성질을 가질 때는 증명할 수 있다. $S$를 단순영역 $D$ 위의 곡면 $z=g(x,y)$로 두되 $g$는 이계 편도함수가 연속이고, $D$의 경계곡선 $C_{1}$이 $C$에 대응한다고 하자. $S$에는 위쪽 방향을 주어 $C$의 양의 방향이 $C_{1}$의 양의 방향과 일치하게 한다. $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$라 쓰고, $P$, $Q$, $R$의 편도함수는 연속이라 하자.</p>
+        <p>$S$가 그래프이므로 식 16.7.10을 $\mathbf F$ 자리에 $\operatorname{curl}\mathbf F$를 넣어 적용하면</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_D\left[-\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\frac{\partial z}{\partial x}-\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\frac{\partial z}{\partial y}+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\right]dA,\tag{2}$$</div>
+        <p>를 얻으며, 여기서 $P$, $Q$, $R$의 편도함수는 모두 $(x,y,g(x,y))$에서의 값이다. 선적분은 따로 다룬다: $C_{1}$의 매개화를 끌어올려 $C$를 매개화하고 $z=g(x(t),y(t))$에 연쇄법칙을 적용한 다음, 그린 정리를 쓴다. 연쇄법칙으로 한 번 더 전개하면 항이 모두 열 개 나오는데, 그중 넷은 쌍을 이루어 상쇄되고 남은 여섯 항이 정확히 (2)의 피적분함수가 된다. 이때 이계 편도함수 항이 사라지게 만드는 것은 $R_{xy}=R_{yx}$라는 사실이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $C$의 점들은 $C_{1}$의 매개화 $x=x(t),\,y=y(t)$ ($a\le t\le b$)를 그래프 $z=g(x,y)$ 위로 끌어올려 $z=g(x(t),y(t))$로 얻어지므로, 연쇄법칙에 의해 $dz=\dfrac{\partial z}{\partial x}\,dx+\dfrac{\partial z}{\partial y}\,dy$가 성립한다. 이를 $\mathbf F\cdot d\mathbf r=P\,dx+Q\,dy+R\,dz$에 대입하면</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_{C_{1}}\left(P+R\frac{\partial z}{\partial x}\right)dx+\left(Q+R\frac{\partial z}{\partial y}\right)dy$$</div>
+        <p>를 얻는데, 오른쪽은 $C_{1}$을 양의 향 경계로 갖는 평면영역 $D$ 위의 선적분이므로 그린 정리를 적용할 수 있다:</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_D\left[\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)-\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)\right]dA.$$</div>
+        <p>$P,Q,R$이 $(x,y,g(x,y))$에서 값을 취하므로, 각 항을 연쇄법칙으로 다시 미분하면</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)=\frac{\partial Q}{\partial x}+\frac{\partial Q}{\partial z}\frac{\partial z}{\partial x}+\frac{\partial R}{\partial x}\frac{\partial z}{\partial y}+\frac{\partial R}{\partial z}\frac{\partial z}{\partial x}\frac{\partial z}{\partial y}+R\frac{\partial^{2}z}{\partial x\,\partial y},$$</div>
+        <div class="math-display">$$\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)=\frac{\partial P}{\partial y}+\frac{\partial P}{\partial z}\frac{\partial z}{\partial y}+\frac{\partial R}{\partial y}\frac{\partial z}{\partial x}+\frac{\partial R}{\partial z}\frac{\partial z}{\partial y}\frac{\partial z}{\partial x}+R\frac{\partial^{2}z}{\partial y\,\partial x}$$</div>
+        <p>이다. 위 식에서 아래 식을 빼면 $\dfrac{\partial R}{\partial z}\dfrac{\partial z}{\partial x}\dfrac{\partial z}{\partial y}$를 담은 두 항이 그대로 상쇄되고, $g$의 이계 편도함수가 연속이므로 $\dfrac{\partial^{2}z}{\partial x\,\partial y}=\dfrac{\partial^{2}z}{\partial y\,\partial x}$(클레로 정리)에 의해 $R$을 담은 두 항도 상쇄되어</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)-\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)=\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)+\left(\frac{\partial Q}{\partial z}-\frac{\partial R}{\partial y}\right)\frac{\partial z}{\partial x}+\left(\frac{\partial R}{\partial x}-\frac{\partial P}{\partial z}\right)\frac{\partial z}{\partial y}$$</div>
+        <p>만 남는다. 부호를 정리하면 이는 (2)의 피적분함수 $-\left(\dfrac{\partial R}{\partial y}-\dfrac{\partial Q}{\partial z}\right)\dfrac{\partial z}{\partial x}-\left(\dfrac{\partial P}{\partial z}-\dfrac{\partial R}{\partial x}\right)\dfrac{\partial z}{\partial y}+\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)$와 정확히 일치하므로, (2)에 의해</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_D\left[-\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\frac{\partial z}{\partial x}-\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\frac{\partial z}{\partial y}+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\right]dA=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S$$</div>
+        <p>를 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The theorem is out of reach in full generality, but it can be established when $S$ is a graph and everything in sight is well behaved. Take $S$ to be the surface $z=g(x,y)$ over a simple plane region $D$, with $g$ twice continuously differentiable and with the boundary curve $C_{1}$ of $D$ corresponding to $C$; orient $S$ upward, so that the positive orientation of $C$ matches the positive orientation of $C_{1}$. Write $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$, the partial derivatives of $P$, $Q$, $R$ being continuous.</p>
+        <p>Since $S$ is a graph, Formula 16.7.10 may be used with $\operatorname{curl}\mathbf F$ in the role of $\mathbf F$, which yields</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_D\left[-\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\frac{\partial z}{\partial x}-\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\frac{\partial z}{\partial y}+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\right]dA,\tag{2}$$</div>
+        <p>where the partial derivatives of $P$, $Q$, $R$ are evaluated at $(x,y,g(x,y))$. The line integral is handled separately: parametrize $C$ by lifting a parametrization of $C_{1}$, apply the Chain Rule to $z=g(x(t),y(t))$, and Green's Theorem afterwards. Expanding once more by the Chain Rule leaves ten terms in all, four of which cancel in pairs; the remaining six are exactly the integrand of (2), the equality $R_{xy}=R_{yx}$ being what makes the second-order terms disappear.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Every point of $C$ arises by lifting the parametrization $x=x(t),\,y=y(t)$ ($a\le t\le b$) of $C_{1}$ onto the graph $z=g(x,y)$, giving $z=g(x(t),y(t))$; the Chain Rule then supplies $dz=\dfrac{\partial z}{\partial x}\,dx+\dfrac{\partial z}{\partial y}\,dy$. Substituting this into $\mathbf F\cdot d\mathbf r=P\,dx+Q\,dy+R\,dz$ gives</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_{C_{1}}\left(P+R\frac{\partial z}{\partial x}\right)dx+\left(Q+R\frac{\partial z}{\partial y}\right)dy,$$</div>
+        <p>and the right side is a line integral over the positively oriented boundary $C_{1}$ of the plane region $D$, so Green's Theorem applies:</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_D\left[\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)-\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)\right]dA.$$</div>
+        <p>Since $P,Q,R$ are evaluated at $(x,y,g(x,y))$, differentiating each term again by the Chain Rule gives</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)=\frac{\partial Q}{\partial x}+\frac{\partial Q}{\partial z}\frac{\partial z}{\partial x}+\frac{\partial R}{\partial x}\frac{\partial z}{\partial y}+\frac{\partial R}{\partial z}\frac{\partial z}{\partial x}\frac{\partial z}{\partial y}+R\frac{\partial^{2}z}{\partial x\,\partial y},$$</div>
+        <div class="math-display">$$\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)=\frac{\partial P}{\partial y}+\frac{\partial P}{\partial z}\frac{\partial z}{\partial y}+\frac{\partial R}{\partial y}\frac{\partial z}{\partial x}+\frac{\partial R}{\partial z}\frac{\partial z}{\partial y}\frac{\partial z}{\partial x}+R\frac{\partial^{2}z}{\partial y\,\partial x}.$$</div>
+        <p>Subtracting the second from the first, the two terms carrying $\dfrac{\partial R}{\partial z}\dfrac{\partial z}{\partial x}\dfrac{\partial z}{\partial y}$ cancel outright, and since $g$ has continuous second-order partial derivatives, $\dfrac{\partial^{2}z}{\partial x\,\partial y}=\dfrac{\partial^{2}z}{\partial y\,\partial x}$ (Clairaut's Theorem) cancels the two terms carrying $R$ as well, leaving</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\left(Q+R\frac{\partial z}{\partial y}\right)-\frac{\partial}{\partial y}\left(P+R\frac{\partial z}{\partial x}\right)=\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)+\left(\frac{\partial Q}{\partial z}-\frac{\partial R}{\partial y}\right)\frac{\partial z}{\partial x}+\left(\frac{\partial R}{\partial x}-\frac{\partial P}{\partial z}\right)\frac{\partial z}{\partial y}.$$</div>
+        <p>Rearranged, this matches the integrand of (2), $-\left(\dfrac{\partial R}{\partial y}-\dfrac{\partial Q}{\partial z}\right)\dfrac{\partial z}{\partial x}-\left(\dfrac{\partial P}{\partial z}-\dfrac{\partial R}{\partial x}\right)\dfrac{\partial z}{\partial y}+\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)$, term for term, so by (2)</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_D\left[-\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\frac{\partial z}{\partial x}-\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\frac{\partial z}{\partial y}+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\right]dA=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : same boundary, same integral (Equation 3) -->
+<div class="card rem-card" id="c16-8-7">
+  <div class="card-head">
+    <span class="rem-num">REM 7</span>
+    <span class="rem-title">경계가 같으면 값도 같다 <em>Same Boundary, Same Integral</em><span class="src-ref">Note, Eq. (3) · p.1235</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (1)의 선적분은 $C$를 따라서만 $\mathbf F$를 참조하므로, 회전의 면적분은 경계에서의 자료만으로 계산할 수 있고 — 그러므로 어떤 곡면을 펼쳐서 채웠는지에는 의존할 수 없다. 정확히 말하면, $S_{1}$과 $S_{2}$가 동일한 유향 경계곡선 $C$를 공유하는 유향곡면이고 둘 다 정리의 가정을 만족하면</p>
+        <div class="math-display">$$\iint_{S_{1}}\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_C\mathbf F\cdot d\mathbf r=\iint_{S_{2}}\operatorname{curl}\mathbf F\cdot d\mathbf S.\tag{3}$$</div>
+        <p>바로 이 성질이 정리를 계산 도구로 만든다: 두 곡면 중 한쪽에서 적분하기 번거로우면 다른 곡면으로 바꾸어 그곳에서 적분하면 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Since the line integral in (1) consults $\mathbf F$ only along $C$, a surface integral of a curl can be computed from boundary data alone &mdash; and therefore cannot depend on which surface was spanned. Precisely: whenever $S_{1}$ and $S_{2}$ are oriented surfaces sharing one and the same oriented boundary curve $C$, both satisfying the hypotheses of the theorem,</p>
+        <div class="math-display">$$\iint_{S_{1}}\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_C\mathbf F\cdot d\mathbf r=\iint_{S_{2}}\operatorname{curl}\mathbf F\cdot d\mathbf S.\tag{3}$$</div>
+        <p>This is what makes the theorem a computational tool: if integrating over one of the two surfaces is awkward, trade it for the other one and integrate there instead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : circulation (Figure 6) -->
+<div class="card def-card" id="c16-8-8">
+  <div class="card-head">
+    <span class="def-num">DEF 8</span>
+    <span class="def-title">순환 <em>Circulation</em><span class="src-ref">Figure 6 · p.1236</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의.</strong> $\mathbf v$를 운동하는 유체의 속도장이라 하고, $C$를 향이 주어진 닫힌곡선이라 하자. 수</p>
+          <div class="math-display">$$\int_C\mathbf v\cdot d\mathbf r=\int_C\mathbf v\cdot\mathbf T\,ds$$</div>
+          <p>를 $C$ 둘레의 $\mathbf v$의 <strong>순환</strong>이라 한다.</p>
+        </div>
+        <p>적분되는 것은 $\mathbf v\cdot\mathbf T$, 즉 단위접선 $\mathbf T$ 방향으로의 $\mathbf v$의 성분이다. 유체의 흐름이 $C$가 도는 방향에 가까울수록 이 성분은 커지고, 유체가 정해진 방향을 거슬러 흐르는 곳에서는 이 성분이 음수가 된다. 따라서 순환은 유체가 $C$에 주어진 방향으로 얼마나 강하게 돌려는 경향이 있는지를 재는 척도다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 212" role="img" aria-label="회전하는 유동 안에 놓인 두 닫힌곡선 — 유동과 같은 방향으로 도는 C1에서는 순환이 양수, 반대 방향으로 도는 C2에서는 음수" style="max-width:420px;width:100%;height:auto">
+            <rect x="10" y="18" width="152" height="160" rx="12" fill="var(--grey50)" stroke="var(--grey200)" stroke-width="1"/>
+            <line x1="154.0" y1="107.0" x2="154.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="154.0,89.0 157.0,95.5 151.0,95.5" fill="var(--grey400)"/>
+            <line x1="18.0" y1="89.0" x2="18.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="18.0,107.0 15.0,100.5 21.0,100.5" fill="var(--grey400)"/>
+            <line x1="31.6" y1="139.7" x2="40.0" y2="148.2" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="44.3,152.4 37.6,150.0 41.8,145.7" fill="var(--grey400)"/>
+            <line x1="127.7" y1="152.4" x2="136.2" y2="144.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="140.4,139.7 138.0,146.4 133.7,142.2" fill="var(--grey400)"/>
+            <line x1="120.0" y1="107.0" x2="120.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="120.0,89.0 123.0,95.5 117.0,95.5" fill="var(--grey400)"/>
+            <line x1="95.0" y1="64.0" x2="83.0" y2="64.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="77.0,64.0 83.5,61.0 83.5,67.0" fill="var(--grey400)"/>
+            <line x1="52.0" y1="89.0" x2="52.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="52.0,107.0 49.0,100.5 55.0,100.5" fill="var(--grey400)"/>
+            <line x1="77.0" y1="132.0" x2="89.0" y2="132.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="95.0,132.0 88.5,135.0 88.5,129.0" fill="var(--grey400)"/>
+            <circle cx="86" cy="98" r="52" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="134.9,80.2 142.6,88.0 134.0,91.2" fill="var(--g700)"/>
+            <polygon points="38.9,76.0 38.9,65.0 47.3,68.9" fill="var(--g700)"/>
+            <polygon points="68.2,146.9 57.2,147.8 60.4,139.1" fill="var(--g700)"/>
+            <line x1="98" y1="32" x2="70" y2="32" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="62.0,32.0 71.0,27.8 71.0,36.2" fill="var(--g600)"/>
+            <text x="48" y="36" font-size="11.5" font-weight="700" font-style="italic" fill="var(--g700)">v</text>
+            <line x1="86" y1="46" x2="70" y2="46" stroke="var(--grey800)" stroke-width="2"/>
+            <polygon points="62.0,46.0 71.0,41.8 71.0,50.2" fill="var(--grey800)"/>
+            <circle cx="86" cy="46" r="2.4" fill="var(--grey800)"/>
+            <text x="49" y="50" font-size="11.5" font-weight="700" font-style="italic" fill="var(--grey800)">T</text>
+            <text x="86" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g800)">C<tspan font-size="8.5" dy="3">1</tspan></text>
+            <rect x="178" y="18" width="152" height="160" rx="12" fill="var(--grey50)" stroke="var(--grey200)" stroke-width="1"/>
+            <line x1="322.0" y1="107.0" x2="322.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="322.0,89.0 325.0,95.5 319.0,95.5" fill="var(--grey400)"/>
+            <line x1="186.0" y1="89.0" x2="186.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="186.0,107.0 183.0,100.5 189.0,100.5" fill="var(--grey400)"/>
+            <line x1="199.6" y1="139.7" x2="208.0" y2="148.2" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="212.3,152.4 205.6,150.0 209.8,145.7" fill="var(--grey400)"/>
+            <line x1="295.7" y1="152.4" x2="304.2" y2="144.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="308.4,139.7 306.0,146.4 301.7,142.2" fill="var(--grey400)"/>
+            <line x1="288.0" y1="107.0" x2="288.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="288.0,89.0 291.0,95.5 285.0,95.5" fill="var(--grey400)"/>
+            <line x1="263.0" y1="64.0" x2="251.0" y2="64.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="245.0,64.0 251.5,61.0 251.5,67.0" fill="var(--grey400)"/>
+            <line x1="220.0" y1="89.0" x2="220.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="220.0,107.0 217.0,100.5 223.0,100.5" fill="var(--grey400)"/>
+            <line x1="245.0" y1="132.0" x2="257.0" y2="132.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="263.0,132.0 256.5,135.0 256.5,129.0" fill="var(--grey400)"/>
+            <circle cx="254" cy="98" r="52" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="302.9,80.2 295.1,72.4 303.8,69.2" fill="var(--g700)"/>
+            <polygon points="206.9,76.0 206.8,87.0 198.5,83.1" fill="var(--g700)"/>
+            <polygon points="236.2,146.9 247.2,146.0 244.0,154.6" fill="var(--g700)"/>
+            <line x1="266" y1="32" x2="238" y2="32" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="230.0,32.0 239.0,27.8 239.0,36.2" fill="var(--g600)"/>
+            <text x="216" y="36" font-size="11.5" font-weight="700" font-style="italic" fill="var(--g700)">v</text>
+            <line x1="254" y1="46" x2="270" y2="46" stroke="var(--grey800)" stroke-width="2"/>
+            <polygon points="278.0,46.0 269.0,50.2 269.0,41.8" fill="var(--grey800)"/>
+            <circle cx="254" cy="46" r="2.4" fill="var(--grey800)"/>
+            <text x="285" y="50" font-size="11.5" font-weight="700" font-style="italic" fill="var(--grey800)">T</text>
+            <text x="254" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g800)">C<tspan font-size="8.5" dy="3">2</tspan></text>
+            <text x="86" y="200" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey700)">&#8750; v &#183; dr &gt; 0</text>
+            <text x="254" y="200" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey700)">&#8750; v &#183; dr &lt; 0</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition.</strong> Let $\mathbf v$ be the velocity field of a fluid in motion and let $C$ be a closed curve carrying an orientation. The number</p>
+          <div class="math-display">$$\int_C\mathbf v\cdot d\mathbf r=\int_C\mathbf v\cdot\mathbf T\,ds$$</div>
+          <p>is called the <strong>circulation</strong> of $\mathbf v$ around $C$.</p>
+        </div>
+        <p>What is being integrated is $\mathbf v\cdot\mathbf T$, the component of $\mathbf v$ along the unit tangent $\mathbf T$. The nearer the flow comes to running the way $C$ is traversed, the larger that component; where the fluid runs back against the chosen direction, the component is negative. The circulation therefore measures how strongly the fluid tends to move around $C$ in the direction $C$ has been given.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 212" role="img" aria-label="Two closed curves in one rotating flow: the circulation around C1, traversed with the flow, is positive, while that around C2, traversed against it, is negative" style="max-width:420px;width:100%;height:auto">
+            <rect x="10" y="18" width="152" height="160" rx="12" fill="var(--grey50)" stroke="var(--grey200)" stroke-width="1"/>
+            <line x1="154.0" y1="107.0" x2="154.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="154.0,89.0 157.0,95.5 151.0,95.5" fill="var(--grey400)"/>
+            <line x1="18.0" y1="89.0" x2="18.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="18.0,107.0 15.0,100.5 21.0,100.5" fill="var(--grey400)"/>
+            <line x1="31.6" y1="139.7" x2="40.0" y2="148.2" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="44.3,152.4 37.6,150.0 41.8,145.7" fill="var(--grey400)"/>
+            <line x1="127.7" y1="152.4" x2="136.2" y2="144.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="140.4,139.7 138.0,146.4 133.7,142.2" fill="var(--grey400)"/>
+            <line x1="120.0" y1="107.0" x2="120.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="120.0,89.0 123.0,95.5 117.0,95.5" fill="var(--grey400)"/>
+            <line x1="95.0" y1="64.0" x2="83.0" y2="64.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="77.0,64.0 83.5,61.0 83.5,67.0" fill="var(--grey400)"/>
+            <line x1="52.0" y1="89.0" x2="52.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="52.0,107.0 49.0,100.5 55.0,100.5" fill="var(--grey400)"/>
+            <line x1="77.0" y1="132.0" x2="89.0" y2="132.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="95.0,132.0 88.5,135.0 88.5,129.0" fill="var(--grey400)"/>
+            <circle cx="86" cy="98" r="52" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="134.9,80.2 142.6,88.0 134.0,91.2" fill="var(--g700)"/>
+            <polygon points="38.9,76.0 38.9,65.0 47.3,68.9" fill="var(--g700)"/>
+            <polygon points="68.2,146.9 57.2,147.8 60.4,139.1" fill="var(--g700)"/>
+            <line x1="98" y1="32" x2="70" y2="32" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="62.0,32.0 71.0,27.8 71.0,36.2" fill="var(--g600)"/>
+            <text x="48" y="36" font-size="11.5" font-weight="700" font-style="italic" fill="var(--g700)">v</text>
+            <line x1="86" y1="46" x2="70" y2="46" stroke="var(--grey800)" stroke-width="2"/>
+            <polygon points="62.0,46.0 71.0,41.8 71.0,50.2" fill="var(--grey800)"/>
+            <circle cx="86" cy="46" r="2.4" fill="var(--grey800)"/>
+            <text x="49" y="50" font-size="11.5" font-weight="700" font-style="italic" fill="var(--grey800)">T</text>
+            <text x="86" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g800)">C<tspan font-size="8.5" dy="3">1</tspan></text>
+            <rect x="178" y="18" width="152" height="160" rx="12" fill="var(--grey50)" stroke="var(--grey200)" stroke-width="1"/>
+            <line x1="322.0" y1="107.0" x2="322.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="322.0,89.0 325.0,95.5 319.0,95.5" fill="var(--grey400)"/>
+            <line x1="186.0" y1="89.0" x2="186.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="186.0,107.0 183.0,100.5 189.0,100.5" fill="var(--grey400)"/>
+            <line x1="199.6" y1="139.7" x2="208.0" y2="148.2" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="212.3,152.4 205.6,150.0 209.8,145.7" fill="var(--grey400)"/>
+            <line x1="295.7" y1="152.4" x2="304.2" y2="144.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="308.4,139.7 306.0,146.4 301.7,142.2" fill="var(--grey400)"/>
+            <line x1="288.0" y1="107.0" x2="288.0" y2="95.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="288.0,89.0 291.0,95.5 285.0,95.5" fill="var(--grey400)"/>
+            <line x1="263.0" y1="64.0" x2="251.0" y2="64.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="245.0,64.0 251.5,61.0 251.5,67.0" fill="var(--grey400)"/>
+            <line x1="220.0" y1="89.0" x2="220.0" y2="101.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="220.0,107.0 217.0,100.5 223.0,100.5" fill="var(--grey400)"/>
+            <line x1="245.0" y1="132.0" x2="257.0" y2="132.0" stroke="var(--grey400)" stroke-width="1.3"/>
+            <polygon points="263.0,132.0 256.5,135.0 256.5,129.0" fill="var(--grey400)"/>
+            <circle cx="254" cy="98" r="52" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="302.9,80.2 295.1,72.4 303.8,69.2" fill="var(--g700)"/>
+            <polygon points="206.9,76.0 206.8,87.0 198.5,83.1" fill="var(--g700)"/>
+            <polygon points="236.2,146.9 247.2,146.0 244.0,154.6" fill="var(--g700)"/>
+            <line x1="266" y1="32" x2="238" y2="32" stroke="var(--g600)" stroke-width="2"/>
+            <polygon points="230.0,32.0 239.0,27.8 239.0,36.2" fill="var(--g600)"/>
+            <text x="216" y="36" font-size="11.5" font-weight="700" font-style="italic" fill="var(--g700)">v</text>
+            <line x1="254" y1="46" x2="270" y2="46" stroke="var(--grey800)" stroke-width="2"/>
+            <polygon points="278.0,46.0 269.0,50.2 269.0,41.8" fill="var(--grey800)"/>
+            <circle cx="254" cy="46" r="2.4" fill="var(--grey800)"/>
+            <text x="285" y="50" font-size="11.5" font-weight="700" font-style="italic" fill="var(--grey800)">T</text>
+            <text x="254" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="var(--g800)">C<tspan font-size="8.5" dy="3">2</tspan></text>
+            <text x="86" y="200" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey700)">&#8750; v &#183; dr &gt; 0</text>
+            <text x="254" y="200" text-anchor="middle" font-size="11" font-style="italic" fill="var(--grey700)">&#8750; v &#183; dr &lt; 0</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Equation (4), curl as circulation per unit area (Figure 7) -->
+<div class="card thm-card" id="c16-8-9">
+  <div class="card-head">
+    <span class="thm-num">THM 9</span>
+    <span class="thm-title">회전의 순환 해석 <em>Curl as Circulation per Unit Area</em><span class="src-ref">Eq. (4) · p.1237</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (4) &mdash; 회전과 순환의 관계.</strong> $P_{0}$을 속도장이 $\mathbf v$인 유체 속의 한 점이라 하고, $S_{a}$를 $P_{0}$을 중심으로 하는 반지름 $a$인 원판(단위법선 $\mathbf n$)이라 하며, $C_{a}$를 $S_{a}$의 경계원이라 하자. $\operatorname{curl}\mathbf v$가 연속이면</p>
+          <div class="math-display">$$\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})=\lim_{a\to0}\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r.\tag{4}$$</div>
+        </div>
+        <p>(4)를 오른쪽에서 왼쪽으로 읽으면, 방향 $\mathbf n$으로의 $\operatorname{curl}\mathbf v$의 성분은 $\mathbf n$에 수직인 평면 안에 놓인 작은 원 둘레의 순환을 그 원이 둘러싸는 넓이로 나눈 값이 원을 한 점으로 줄일 때 가지는 극한이다. 이는 곧 유체가 축 $\mathbf n$ 둘레로 얼마나 강하게 회전하는지를 재는 척도이며, $P_{0}$을 지나는 모든 축 가운데 이 효과는 $\operatorname{curl}\mathbf v$ 자체와 평행한 축에서 가장 크다. 유체 속에 작은 물레방아를 담그면, 축을 $\operatorname{curl}\mathbf v$ 방향으로 맞출 때 가장 빨리 돈다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="72 24 168 168" role="img" aria-label="유체 속의 작은 물레방아 — 회전축을 curl v 방향으로 맞추었을 때 날개가 가장 빨리 돈다" style="max-width:360px;width:100%;height:auto">
+            <rect x="80" y="32" width="152" height="152" rx="14" fill="var(--g50)" stroke="var(--g200)" stroke-width="1"/>
+            <ellipse cx="150" cy="120" rx="50" ry="18" transform="rotate(22.5 150 120)" fill="none" stroke="var(--grey400)" stroke-width="1.1" stroke-dasharray="4 3"/>
+            <line x1="128.9" y1="170.8" x2="173.7" y2="62.8" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="177.6,53.5 178.0,65.6 168.7,61.8" fill="var(--pink)"/>
+            <line x1="150.0" y1="120.0" x2="173.7" y2="62.8" stroke="var(--pink)" stroke-width="2.2"/>
+            <line x1="150.0" y1="120.0" x2="177.8" y2="145.3" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="189.3,144.4 182.4,161.0 166.2,146.2 173.1,129.6" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="112.5" y2="118.2" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="105.0,109.4 98.1,126.0 120.0,127.0 126.9,110.4" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="122.2" y2="94.7" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="117.6,79.0 110.7,95.6 126.9,110.4 133.8,93.8" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="187.5" y2="121.8" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="201.9,114.0 195.0,130.6 173.1,129.6 180.0,113.0" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <circle cx="150" cy="120" r="3" fill="var(--grey700)"/>
+            <path d="M 106,156 Q 146,178 186,156" fill="none" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="192.0,150.0 186.8,158.5 182.2,151.5" fill="var(--g600)"/>
+            <path d="M 196,84 Q 156,62 116,80" fill="none" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="110.0,84.0 115.2,75.5 119.8,82.5" fill="var(--g600)"/>
+            <text x="182" y="50" font-size="11.5" font-style="italic" fill="var(--pink)">curl v</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $S_{a}$는 스토크스 정리의 가정을 만족하는 유향곡면이므로, $S_{a}$에 스토크스 정리를 적용하면</p>
+        <div class="math-display">$$\int_{C_{a}}\mathbf v\cdot d\mathbf r=\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot d\mathbf S=\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot\mathbf n\,dS$$</div>
+        <p>이다. $\operatorname{curl}\mathbf v$가 연속이므로 $\varepsilon(a)=\max_{P\in S_{a}}\bigl|\operatorname{curl}\mathbf v(P)\cdot\mathbf n(P)-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\bigr|$로 두면 $a\to0$일 때 $\varepsilon(a)\to0$이고,</p>
+        <div class="math-display">$$\left|\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot\mathbf n\,dS-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\cdot(\text{넓이}(S_{a}))\right|\le\varepsilon(a)\cdot(\text{넓이}(S_{a}))$$</div>
+        <p>가 성립한다. $S_{a}$는 반지름 $a$인 원판이므로 넓이는 $\pi a^{2}$이고, 두 식을 결합해 $\pi a^{2}$로 나누면</p>
+        <div class="math-display">$$\left|\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\right|\le\varepsilon(a)$$</div>
+        <p>를 얻는다. $a\to0$일 때 오른쪽이 $0$으로 가므로</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})=\lim_{a\to0}\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r,$$</div>
+        <p>즉 식 (4)가 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (4) &mdash; the curl as circulation per unit area.</strong> Let $P_{0}$ be a point of a fluid whose velocity field is $\mathbf v$, let $S_{a}$ be the disk of radius $a$ centered at $P_{0}$ with unit normal $\mathbf n$, and let $C_{a}$ be the boundary circle of $S_{a}$. If $\operatorname{curl}\mathbf v$ is continuous, then</p>
+          <div class="math-display">$$\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})=\lim_{a\to0}\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r.\tag{4}$$</div>
+        </div>
+        <p>Read (4) from right to left: the component of $\operatorname{curl}\mathbf v$ in a direction $\mathbf n$ is the circulation around a small circle lying in the plane perpendicular to $\mathbf n$, divided by the area that circle encloses, in the limit as the circle shrinks to the point. It is thus a measure of how strongly the fluid rotates about the axis $\mathbf n$, and among all axes through $P_{0}$ that effect is greatest for the one parallel to $\operatorname{curl}\mathbf v$ itself. A tiny paddle wheel held in the fluid at $P_{0}$ spins fastest when its axle is set along $\operatorname{curl}\mathbf v$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="72 24 168 168" role="img" aria-label="A small paddle wheel in a fluid with its axle along curl v, the axis about which it spins fastest" style="max-width:360px;width:100%;height:auto">
+            <rect x="80" y="32" width="152" height="152" rx="14" fill="var(--g50)" stroke="var(--g200)" stroke-width="1"/>
+            <ellipse cx="150" cy="120" rx="50" ry="18" transform="rotate(22.5 150 120)" fill="none" stroke="var(--grey400)" stroke-width="1.1" stroke-dasharray="4 3"/>
+            <line x1="128.9" y1="170.8" x2="173.7" y2="62.8" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="177.6,53.5 178.0,65.6 168.7,61.8" fill="var(--pink)"/>
+            <line x1="150.0" y1="120.0" x2="173.7" y2="62.8" stroke="var(--pink)" stroke-width="2.2"/>
+            <line x1="150.0" y1="120.0" x2="177.8" y2="145.3" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="189.3,144.4 182.4,161.0 166.2,146.2 173.1,129.6" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="112.5" y2="118.2" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="105.0,109.4 98.1,126.0 120.0,127.0 126.9,110.4" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="122.2" y2="94.7" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="117.6,79.0 110.7,95.6 126.9,110.4 133.8,93.8" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <line x1="150.0" y1="120.0" x2="187.5" y2="121.8" stroke="var(--grey600)" stroke-width="1.3"/>
+            <polygon points="201.9,114.0 195.0,130.6 173.1,129.6 180.0,113.0" fill="var(--grey200)" stroke="var(--grey600)" stroke-width="1.2"/>
+            <circle cx="150" cy="120" r="3" fill="var(--grey700)"/>
+            <path d="M 106,156 Q 146,178 186,156" fill="none" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="192.0,150.0 186.8,158.5 182.2,151.5" fill="var(--g600)"/>
+            <path d="M 196,84 Q 156,62 116,80" fill="none" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="110.0,84.0 115.2,75.5 119.8,82.5" fill="var(--g600)"/>
+            <text x="182" y="50" font-size="11.5" font-style="italic" fill="var(--pink)">curl v</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since $S_{a}$ is an oriented surface satisfying the hypotheses of Stokes' Theorem, applying the theorem to $S_{a}$ gives</p>
+        <div class="math-display">$$\int_{C_{a}}\mathbf v\cdot d\mathbf r=\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot d\mathbf S=\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot\mathbf n\,dS.$$</div>
+        <p>Because $\operatorname{curl}\mathbf v$ is continuous, setting $\varepsilon(a)=\max_{P\in S_{a}}\bigl|\operatorname{curl}\mathbf v(P)\cdot\mathbf n(P)-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\bigr|$ gives $\varepsilon(a)\to0$ as $a\to0$, and</p>
+        <div class="math-display">$$\left|\iint_{S_{a}}\operatorname{curl}\mathbf v\cdot\mathbf n\,dS-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\cdot(\text{area of }S_{a})\right|\le\varepsilon(a)\cdot(\text{area of }S_{a}).$$</div>
+        <p>Since $S_{a}$ is a disk of radius $a$, its area is $\pi a^{2}$; combining the two displays and dividing by $\pi a^{2}$ gives</p>
+        <div class="math-display">$$\left|\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r-\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})\right|\le\varepsilon(a).$$</div>
+        <p>The right side tends to $0$ as $a\to0$, so</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf v(P_{0})\cdot\mathbf n(P_{0})=\lim_{a\to0}\frac{1}{\pi a^{2}}\int_{C_{a}}\mathbf v\cdot d\mathbf r,$$</div>
+        <p>which is equation (4).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : proving Theorem 16.5.4 -->
+<div class="card note-card" id="c16-8-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">정리 16.5.4의 증명 <em>Proving Theorem 16.5.4</em><span class="src-ref">절 마무리 · p.1237</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>§16.5에 남겨 두었던 주장 하나를 이제 마무리 지을 수 있다: $\mathbb R^{3}$의 모든 점에서 회전이 $\mathbf 0$인 벡터장 $\mathbf F$는 보존적이다(정리 16.5.4). 정리 16.3.3과 16.3.4에 의해 모든 닫힌 경로 $C$에 대해 $\int_C\mathbf F\cdot d\mathbf r=0$임을 보이면 충분한데, $C$를 경계로 갖는 가향곡면을 잡을 수 있기만 하면 — 이는 언제나 가능하지만 그 근거를 대려면 이 강의의 범위를 넘어서는 도구가 필요하다 — 스토크스 정리가 정확히 그 결론을 내어 준다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명(개요).</strong> $\operatorname{curl}\mathbf F=\mathbf 0$이 $\mathbb R^{3}$ 전체에서 성립한다고 하자. $C$가 단순닫힌곡선인 경우만 보이면 충분하다(단순하지 않은 닫힌 경로는 유한 개의 단순닫힌곡선으로 쪼개어 같은 논증을 각각에 적용한 값을 더하면 된다). $C$를 양의 향 경계로 갖는 조각적으로 매끄러운 유향곡면 $S$를 하나 잡을 수 있으므로(그런 곡면이 항상 존재한다는 사실은 증명 없이 받아들인다), 스토크스 정리에 의해</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_S\mathbf 0\cdot d\mathbf S=0$$</div>
+        <p>이다. 따라서 $\mathbb R^{3}$의 모든 닫힌 경로 $C$에 대해 $\int_C\mathbf F\cdot d\mathbf r=0$이고, 정리 16.3.3에 의해 이는 $\mathbf F$가 경로 독립임을 뜻하며, 정리 16.3.4에 의해 경로 독립인 벡터장은 보존적이므로 $\mathbf F$는 보존적이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>One claim left standing in Section 16.5 can now be settled: a field $\mathbf F$ whose curl vanishes at every point of $\mathbb R^{3}$ is conservative (Theorem 16.5.4). By Theorems 16.3.3 and 16.3.4 it suffices to show that $\int_C\mathbf F\cdot d\mathbf r=0$ for every closed path $C$, and Stokes' Theorem supplies exactly that once $C$ has been spanned by an orientable surface &mdash; which can always be arranged, though the argument for it needs machinery beyond this course.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof (sketch).</strong> Suppose $\operatorname{curl}\mathbf F=\mathbf 0$ throughout $\mathbb R^{3}$. It suffices to treat a simple closed curve $C$ (a closed path that is not simple splits into finitely many simple closed curves, and applying the same argument to each and summing gives the result for the whole path). Choose a piecewise-smooth oriented surface $S$ whose positively oriented boundary is $C$ &mdash; that such a surface always exists is taken for granted here, without proof. By Stokes' Theorem,</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_S\mathbf 0\cdot d\mathbf S=0,$$</div>
+        <p>so $\int_C\mathbf F\cdot d\mathbf r=0$ for every closed path $C$ in $\mathbb R^{3}$. By Theorem 16.3.3 this means $\mathbf F$ is independent of path, and by Theorem 16.3.4 a path-independent field is conservative; hence $\mathbf F$ is conservative.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-8-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">원기둥과 평면이 자르는 타원 위의 선적분 <em>A Line Integral around an Ellipse Cut from a Cylinder</em><span class="src-ref">Example 1 · p.1235</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $y+z=2$와 원기둥 $x^{2}+y^{2}=1$의 교선을 $C$라 하고, 위에서 내려다볼 때 반시계 방향이 되도록 $C$에 향을 주자. 벡터장 $\mathbf F(x,y,z)=-y^{2}\,\mathbf i+x\,\mathbf j+z^{2}\,\mathbf k$에 대하여 $\displaystyle\int_C\mathbf F\cdot d\mathbf r$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf F=-y^{2}\,\mathbf i+x\,\mathbf j+z^{2}\,\mathbf k$, 즉 $P=-y^{2},\,Q=x,\,R=z^{2}$이므로</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=\left\langle\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z},\ \frac{\partial P}{\partial z}-\frac{\partial R}{\partial x},\ \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right\rangle=\langle0,\ 0,\ 1+2y\rangle=(1+2y)\,\mathbf k$$</div>
+        <p>이다. 경계가 $C$인 곡면 가운데 가장 다루기 쉬운 것은 평면 $y+z=2$가 원기둥 $x^{2}+y^{2}=1$ 안에서 잘라내는 타원영역 $S$이다. $S$를 그래프 $z=g(x,y)=2-y$ ($(x,y)\in D$, $D=\{x^{2}+y^{2}\le1\}$)로 보고 위쪽 방향(법선의 $z$성분이 양수)을 주면 $g_{x}=0,\,g_{y}=-1$이고, 이 방향이 유도하는 $C$의 양의 향은 위에서 볼 때 반시계 방향이므로(카드 6의 증명과 같은 원리) 문제에서 주어진 향과 일치한다. 스토크스 정리와 (2)의 면적분 공식을 적용하면</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_D\Bigl[-(0)\,g_x-(0)\,g_y+(1+2y)\Bigr]dA=\iint_D(1+2y)\,dA$$</div>
+        <p>이다. $D$가 단위원판이므로 극좌표 $x=r\cos\theta,\,y=r\sin\theta$를 쓰면</p>
+        <div class="math-display">$$\iint_D(1+2y)\,dA=\int_0^{2\pi}\int_0^1(1+2r\sin\theta)\,r\,dr\,d\theta=\int_0^{2\pi}\left[\frac{r^{2}}{2}+\frac{2r^{3}}{3}\sin\theta\right]_0^1d\theta=\int_0^{2\pi}\left(\frac12+\frac23\sin\theta\right)d\theta$$</div>
+        <p>이고, $\displaystyle\int_0^{2\pi}\sin\theta\,d\theta=0$이므로 마지막 적분은 $\dfrac12\cdot2\pi=\pi$가 된다. 따라서 $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\pi$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the ellipse along which the plane $y+z=2$ meets the cylinder $x^{2}+y^{2}=1$, oriented so that it runs counterclockwise for an observer looking down from above. Evaluate the line integral $\displaystyle\int_C\mathbf F\cdot d\mathbf r$ of the field $\mathbf F(x,y,z)=-y^{2}\,\mathbf i+x\,\mathbf j+z^{2}\,\mathbf k$ around it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> With $\mathbf F=-y^{2}\,\mathbf i+x\,\mathbf j+z^{2}\,\mathbf k$, i.e. $P=-y^{2}$, $Q=x$, $R=z^{2}$,</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=\left\langle\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z},\ \frac{\partial P}{\partial z}-\frac{\partial R}{\partial x},\ \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right\rangle=\langle0,\ 0,\ 1+2y\rangle=(1+2y)\,\mathbf k.$$</div>
+        <p>The most convenient surface bounded by $C$ is the elliptical region $S$ that the plane $y+z=2$ cuts out inside the cylinder $x^{2}+y^{2}=1$. Taking $S$ to be the graph $z=g(x,y)=2-y$ over $D=\{x^{2}+y^{2}\le1\}$ with the upward orientation (unit normal with positive $z$-component) gives $g_{x}=0$, $g_{y}=-1$, and this orientation induces on $C$ the counterclockwise direction seen from above (the same mechanism as in the proof of Card 6), matching the orientation given in the problem. Applying Stokes' Theorem together with the surface-integral formula from (2),</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\iint_D\Bigl[-(0)\,g_x-(0)\,g_y+(1+2y)\Bigr]dA=\iint_D(1+2y)\,dA.$$</div>
+        <p>Since $D$ is the unit disk, polar coordinates $x=r\cos\theta$, $y=r\sin\theta$ give</p>
+        <div class="math-display">$$\iint_D(1+2y)\,dA=\int_0^{2\pi}\int_0^1(1+2r\sin\theta)\,r\,dr\,d\theta=\int_0^{2\pi}\left[\frac{r^{2}}{2}+\frac{2r^{3}}{3}\sin\theta\right]_0^1d\theta=\int_0^{2\pi}\left(\frac12+\frac23\sin\theta\right)d\theta,$$</div>
+        <p>and since $\displaystyle\int_0^{2\pi}\sin\theta\,d\theta=0$, this last integral is $\dfrac12\cdot2\pi=\pi$. Hence $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\pi$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-8-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">구면 모자 위 회전의 면적분 <em>A Surface Integral of the Curl over a Spherical Cap</em><span class="src-ref">Example 2 · p.1235&ndash;1236</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구 $x^{2}+y^{2}+z^{2}=4$ 가운데 원기둥 $x^{2}+y^{2}=1$의 안쪽에 있으면서 $xy$-평면보다 위에 놓인 부분을 $S$라 하자. 스토크스 정리를 이용하여, 벡터장 $\mathbf F(x,y,z)=xz\,\mathbf i+yz\,\mathbf j+xy\,\mathbf k$에 대한 $\displaystyle\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $S$의 경계곡선 $C$부터 찾자. 구 $x^{2}+y^{2}+z^{2}=4$와 원기둥 $x^{2}+y^{2}=1$이 만나는 자리에서는 $1+z^{2}=4$, 즉 $z^{2}=3$이고 $S$가 $xy$-평면 위쪽 부분이므로 $z=\sqrt3$이다. 따라서 $C$는 평면 $z=\sqrt3$ 안의 원 $x^{2}+y^{2}=1$이며, $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+\sqrt3\,\mathbf k$ ($0\le t\le2\pi$)로 매개변수화된다. $S$에 바깥쪽(원점에서 먼 쪽, 대략 위쪽) 방향을 주면 &mdash; 문제에서 향을 지정하지 않았으므로 자연스러운 선택이다 &mdash; 오른손 법칙에 의해 유도되는 $C$의 양의 방향은 위에서 볼 때 반시계 방향, 즉 $t$가 증가하는 방향과 같다. 스토크스 정리에 의해</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$$</div>
+        <p>이므로, $\operatorname{curl}\mathbf F$를 직접 계산할 필요 없이 경계 위의 선적분만 구하면 된다. $\mathbf F=xz\,\mathbf i+yz\,\mathbf j+xy\,\mathbf k$이므로 $\mathbf F(\mathbf r(t))=\sqrt3\cos t\,\mathbf i+\sqrt3\sin t\,\mathbf j+\cos t\sin t\,\mathbf k$이고 $\mathbf r'(t)=-\sin t\,\mathbf i+\cos t\,\mathbf j$이므로</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-\sqrt3\cos t\sin t+\sqrt3\sin t\cos t+0=0$$</div>
+        <p>가 $t$에 관계없이 항상 $0$이다. 그러므로 $\displaystyle\int_0^{2\pi}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=0$이고, 식 (3)에 의해 이 값은 $C$를 양의 향 경계로 갖는 어떤 유향곡면에 대해서도 같다. ($S$의 향을 반대로 잡으면 면적분의 부호가 뒤집히지만 값이 $0$이므로 답은 달라지지 않는다.) 따라서 $\displaystyle\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S$ be the cap that the cylinder $x^{2}+y^{2}=1$ cuts out of the sphere $x^{2}+y^{2}+z^{2}=4$, only the piece lying above the $xy$-plane being kept. Apply Stokes' Theorem to find $\displaystyle\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S$ for the field $\mathbf F(x,y,z)=xz\,\mathbf i+yz\,\mathbf j+xy\,\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Start with the boundary curve $C$ of $S$. Where the sphere $x^{2}+y^{2}+z^{2}=4$ meets the cylinder $x^{2}+y^{2}=1$, $1+z^{2}=4$, so $z^{2}=3$, and since $S$ lies above the $xy$-plane, $z=\sqrt3$. Thus $C$ is the circle $x^{2}+y^{2}=1$ in the plane $z=\sqrt3$, parametrized by $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+\sqrt3\,\mathbf k$ for $0\le t\le2\pi$. Giving $S$ the outward orientation (away from the origin, roughly upward) &mdash; a natural choice since the problem specifies none &mdash; the right-hand rule induces on $C$ the counterclockwise direction seen from above, which is the direction of increasing $t$. By Stokes' Theorem,</p>
+        <div class="math-display">$$\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=\int_C\mathbf F\cdot d\mathbf r=\int_0^{2\pi}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt,$$</div>
+        <p>so it suffices to evaluate the boundary line integral, without ever computing $\operatorname{curl}\mathbf F$ directly. Since $\mathbf F=xz\,\mathbf i+yz\,\mathbf j+xy\,\mathbf k$, one has $\mathbf F(\mathbf r(t))=\sqrt3\cos t\,\mathbf i+\sqrt3\sin t\,\mathbf j+\cos t\sin t\,\mathbf k$ and $\mathbf r'(t)=-\sin t\,\mathbf i+\cos t\,\mathbf j$, so</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=-\sqrt3\cos t\sin t+\sqrt3\sin t\cos t+0=0$$</div>
+        <p>identically in $t$. Hence $\displaystyle\int_0^{2\pi}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=0$, and by equation (3) the same value is obtained for every oriented surface whose positively oriented boundary is $C$. (Reversing the orientation of $S$ reverses the sign of the surface integral, but that sign change leaves $0$ alone.) Therefore $\displaystyle\iint_S\operatorname{curl}\mathbf F\cdot d\mathbf S=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-8-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch14.html">단원 14</a></p>
+        <ul>
+          <li>스토크스 정리의 진술·경계 방향 규약 &mdash; <a href="../calc2/ch14.html#ex02">ex02</a>, <a href="../calc2/ch14.html#yu02-1">yu02-1</a> (부분 대응: 양변을 각각 계산해 정리를 확인하는 유형만 있고, 향을 정하는 규약 자체는 진술되지 않는다)</li>
+          <li>곡면 독립성, 식 (3) &mdash; <a href="../calc2/ch14.html#ex02">ex02</a> (부분 대응: 경계가 같은 다른 곡면으로 바꿔 계산하는 사례만 나오고 일반 진술은 없다)</li>
+          <li>순환과 회전의 물리적 해석, 식 (4) &mdash; <a href="../calc2/ch14.html#yu02-2">yu02-2</a>, <a href="../calc2/ch14.html#yu02-3">yu02-3</a> (부분 대응: 교선을 따른 순환을 계산하며 "순환"이라는 말은 쓰지만, 넓이로 나눈 극한 해석은 없다)</li>
+          <li>스토크스 정리로 계산하는 선적분·면적분 &mdash; <a href="../calc2/ch14.html#yu02-4">yu02-4</a>(평면 조각의 경계를 따른 선적분), <a href="../calc2/ch14.html#yu02-5">yu02-5</a>·<a href="../calc2/ch14.html#pr03">pr03</a>(곡면을 가로지르는 회전의 플럭스) &mdash; 이 절 연습문제 2~6, 7~14와 같은 유형</li>
+          <li><a href="../calc2/ch14.html#pr04">pr04</a> (평면 위 닫힌곡선의 선적분이 넓이에만 의존) &mdash; 이 절 연습문제 20과 동형</li>
+          <li><a href="../calc2/ch14.html#pr05">pr05</a> (회전이 $\mathbf 0$인데도 순환이 0이 아닌 예) &mdash; 위 카드 10에서 정리 16.5.4가 $\mathbb R^{3}$ 전체를 요구하는 이유를 보여 준다</li>
+          <li>곡면이 그래프인 경우의 증명 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 회전을 나블라 기호로 적고 면적소도 다른 문자로 쓰기 때문에, 같은 정리인데도 우변의 겉모습이 이 페이지와 다르다.</p>
+        <p><strong>(b) 공통과제 (§16.8, 4차)</strong></p>
+        <p>제출 문항: 4, 9, 13, 14, 22 &nbsp;/&nbsp; 학습 참고: 1~6, 7~14, 15-(a), 16-(a), 17~24</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-7.html">§16.7 면적분</a> &nbsp;/&nbsp; 다음: <a href="s16-9.html">§16.9 발산정리</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch14.html">Unit 14</a></p>
+        <ul>
+          <li>Statement of Stokes' Theorem and the orientation convention &mdash; <a href="../calc2/ch14.html#ex02">ex02</a>, <a href="../calc2/ch14.html#yu02-1">yu02-1</a> (partial match: both sides get computed and compared, but the rule fixing the orientation is never stated)</li>
+          <li>Independence of the surface, formula (3) &mdash; <a href="../calc2/ch14.html#ex02">ex02</a> (partial match: one instance of trading a surface for another with the same boundary, with no general statement)</li>
+          <li>Circulation and the physical reading of the curl, formula (4) &mdash; <a href="../calc2/ch14.html#yu02-2">yu02-2</a>, <a href="../calc2/ch14.html#yu02-3">yu02-3</a> (partial match: the circulation along a curve of intersection is computed and named, but not the limit of circulation over area)</li>
+          <li>Line and surface integrals evaluated by the theorem &mdash; <a href="../calc2/ch14.html#yu02-4">yu02-4</a> (around the boundary of a piece of a plane), <a href="../calc2/ch14.html#yu02-5">yu02-5</a> and <a href="../calc2/ch14.html#pr03">pr03</a> (flux of the curl across a surface) &mdash; the types of Exercises 2&ndash;6 and 7&ndash;14 of this section</li>
+          <li><a href="../calc2/ch14.html#pr04">pr04</a> (a line integral around a closed curve in a plane depending on the enclosed area alone) &mdash; the same problem as Exercise 20 here</li>
+          <li><a href="../calc2/ch14.html#pr05">pr05</a> (a field with vanishing curl whose circulation is not zero) &mdash; it shows why Theorem 16.5.4, discussed in card 10 above, asks for all of $\mathbb R^{3}$</li>
+          <li>The proof for the case of a graph &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes write the curl with the nabla symbol and use another letter for the element of area, so the right-hand side of the same theorem looks different there from the way it is written here.</p>
+        <p><strong>(b) Assignment (§16.8, fourth set)</strong></p>
+        <p>Problems to submit: 4, 9, 13, 14, 22 &nbsp;/&nbsp; Recommended practice: 1&ndash;6, 7&ndash;14, 15(a), 16(a), 17&ndash;24</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-7.html">§16.7 Surface Integrals</a> &nbsp;/&nbsp; Next: <a href="s16-9.html">§16.9 The Divergence Theorem</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.8 라그랑주 승수법 (Lagrange Multipliers) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.8 라그랑주 승수법 — 등위선이 제약곡선에 접한다는 기하적 직관, 라그랑주 조건 ∇f=λ∇g(식 1)의 유도, 승수법의 절차와 성분 방정식, ∇g≠0 가정이 깨질 때의 주의, 두 제약의 조건 ∇f=λ∇g+μ∇h(식 16)를 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.8, 라그랑주 승수법, Lagrange multipliers, 제약조건, constraint, 등위선, level curve, 기울기 벡터, gradient, 두 제약, two constraints, 최댓값, 최솟값, 조건부 극값, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-8.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.8 라그랑주 승수법 (Lagrange Multipliers) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="제약 g=k 아래에서 f의 최대·최소를 찾는 라그랑주 승수법 — 접하는 등위선의 기하, 식 (1)과 절차, 두 제약의 식 (16)까지 §14.8 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-8.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.8 라그랑주 승수법 (Lagrange Multipliers) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.8 라그랑주 승수법 — 등위선과 제약곡선의 접촉이라는 기하적 직관, 라그랑주 조건 (식 1)의 유도와 승수법 절차, 성분 방정식과 λ=0의 의미, 두 제약의 조건 (식 16)을 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-8.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-8.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html">14.4</a>
+      <a href="s14-5.html">14.5</a>
+      <a href="s14-6.html">14.6</a>
+      <a href="s14-7.html">14.7</a>
+      <a href="s14-8.html" class="active">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.8 · 3주차</p>
+  <h1>§14.8 라그랑주 승수법<span>Lagrange Multipliers</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-8-1"><span class="toc-num">NOTE</span> 제약이 있는 최적화 <em>Optimization with a Side Condition</em></a></li>
+    <li><a href="#c14-8-2"><span class="toc-num">NOTE</span> 등위선이 스치는 순간 <em>Level Curves That Just Touch</em></a></li>
+    <li><a href="#c14-8-3"><span class="toc-num">THM 3</span> 라그랑주 조건 <em>The Lagrange Condition</em></a></li>
+    <li><a href="#c14-8-4"><span class="toc-num">REM 4</span> 라그랑주 <em>Joseph-Louis Lagrange</em></a></li>
+    <li><a href="#c14-8-5"><span class="toc-num">REM 5</span> 라그랑주 승수법 <em>The Method of Lagrange Multipliers</em></a></li>
+    <li><a href="#c14-8-6"><span class="toc-num">NOTE</span> 성분 방정식과 승수의 의미 <em>The Component Equations</em></a></li>
+    <li><a href="#c14-8-7"><span class="toc-num">REM 7</span> 방법의 전제 <em>When the Method Can Fail</em></a></li>
+    <li><a href="#c14-8-8"><span class="toc-num">NOTE</span> 두 제약: 곡면들의 교선 위에서 <em>Two Constraints</em></a></li>
+    <li><a href="#c14-8-9"><span class="toc-num">THM 9</span> 두 제약의 라그랑주 조건 <em>The Two-Multiplier Condition</em></a></li>
+    <li><a href="#ex14-8-1"><span class="toc-num">EXAM 1</span> 원 위에서의 극값 <em>Extreme Values on a Circle</em></a></li>
+    <li><a href="#ex14-8-2"><span class="toc-num">EXAM 2</span> 뚜껑 없는 상자의 최대 부피 <em>Largest Volume of a Lidless Box</em></a></li>
+    <li><a href="#ex14-8-3"><span class="toc-num">EXAM 3</span> 구 위의 최근접점과 최원점 <em>Closest and Farthest Points on a Sphere</em></a></li>
+    <li><a href="#ex14-8-4"><span class="toc-num">EXAM 4</span> 원판 위에서의 극값 <em>Extreme Values on a Disk</em></a></li>
+    <li><a href="#ex14-8-5"><span class="toc-num">EXAM 5</span> 두 제약 아래에서의 최댓값 <em>A Maximum Subject to Two Constraints</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening -->
+<div class="card note-card" id="c14-8-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">제약이 있는 최적화 <em>Optimization with a Side Condition</em><span class="src-ref">절 도입 · p.1058</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>§14.7 예제 6에서 이미 이런 유형의 문제를 한 번 다뤘다. 부피 $V=xyz$를 최대로 만들되, 세 변 $x,y,z$가 겉넓이 $12\ \mathrm{m^2}$라는 조건, 즉 $2xz+2yz+xy=12$를 만족해야 한다는 것이었다.</p>
+        <p>이 절은 그 문제의 패턴을 따로 떼어 일반적으로 다룬다. 점 $(x,y,z)$가 다음 방정식 하나를</p>
+        <div class="math-display">$$g(x,y,z)=k$$</div>
+        <p>만족해야 한다는 조건 아래에서 함수 $f(x,y,z)$의 최댓값·최솟값을 구하는 문제다. 이런 조건을 <strong>제약조건</strong>(constraint, side condition)이라 한다. 라그랑주의 방법은 제약조건을 어느 한 변수에 대해 풀어 대입하는 과정 없이 이 문제에 답한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Example 14.7.6 already solved one problem of this type: the volume $V=xyz$ was made as large as possible while the numbers $x,y,z$ were forced to satisfy $2xz+2yz+xy=12$, the condition that the surface area equal $12\ \mathrm{m^2}$.</p>
+        <p>The present section isolates that pattern and treats it in general. The problem is to maximize or minimize a function $f(x,y,z)$ while the point $(x,y,z)$ is required to satisfy one equation</p>
+        <div class="math-display">$$g(x,y,z)=k,$$</div>
+        <p>called a <strong>constraint</strong> (or side condition). Lagrange's method answers it without solving the constraint for one variable and substituting.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : geometric basis, Figure 1 -->
+<div class="card note-card" id="c14-8-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">등위선이 스치는 순간 <em>Level Curves That Just Touch</em><span class="src-ref">One Constraint · Figure 1 · p.1058</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 발상은 이변수의 경우로 보면 가장 알아보기 쉽다. 점 $(x,y)$가 등위선 $g(x,y)=k$ 위에 있어야 한다는 조건 아래 $f(x,y)$의 극값을 찾고 싶다고 하자. 이 등위선을, $f$의 등위선 $f(x,y)=c$ 몇 개와 함께 그려 보자. 이를테면 $c=7,8,9,10,11$일 때의 등위선들이며, 아래 그림에는 그중 $c=9,10,11$에 해당하는 세 개만 그렸다.</p>
+        <p>제약조건 아래 $f$를 최대로 만드는 일은 결국 이런 질문이 된다: 곡선 $f(x,y)=c$가 $g(x,y)=k$와 여전히 만나도록 $c$를 얼마나 크게 잡을 수 있는가? 그림을 보면 그렇게 잡을 수 있는 가장 큰 $c$는 두 곡선이 <strong>스치듯 만나는</strong> 순간, 즉 그 점에서 접선을 공유하는 순간에 얻어짐을 알 수 있다. 두 곡선이 그보다 덜 밀착해 서로 가로지르면, $c$를 아직 더 키울 여지가 남아 있다.</p>
+        <p>접점 $(x_0,y_0)$에서는 두 곡선의 법선이 같은 직선을 이루므로, 두 기울기벡터도 같은 직선 방향을 가리킨다. 즉 서로 평행하다.</p>
+        <div class="math-display">$$\nabla f(x_0,y_0)=\lambda\,\nabla g(x_0,y_0)\quad\text{인 어떤 스칼라 }\lambda\text{가 존재한다.}$$</div>
+        <p>같은 논리가 삼변수의 경우에도 그대로 옮아간다. $(x,y,z)$가 등위면 $S:g(x,y,z)=k$ 위에 있어야 한다는 제약 아래에서, 최대가 되는 점에서는 등위면 $f(x,y,z)=c$가 $S$에 접하므로 이번에도 두 기울기벡터는 평행하다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="제약곡선 g=k와 f의 등위선들이 접하는 그림, 접점에서 두 기울기벡터가 평행하다" style="max-width:360px;width:100%;height:auto">
+            <line x1="22" y1="264" x2="22" y2="20" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,12 18,23 26,23" fill="var(--grey800)"/>
+            <line x1="22" y1="264" x2="348" y2="264" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="354,264 344,260 344,268" fill="var(--grey800)"/>
+            <text x="12" y="22" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="340" y="278" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="8" y="278" font-size="11" fill="var(--grey500)">0</text>
+            <circle cx="135" cy="150" r="105" fill="none" stroke="var(--blue)" stroke-width="1.2"/>
+            <circle cx="135" cy="150" r="75" fill="none" stroke="var(--blue)" stroke-width="1.9"/>
+            <circle cx="135" cy="150" r="45" fill="none" stroke="var(--blue)" stroke-width="1.2"/>
+            <text x="135" y="41" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 9</text>
+            <text x="135" y="71" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 10</text>
+            <text x="135" y="101" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 11</text>
+            <line x1="210" y1="38" x2="210" y2="258" stroke="var(--pink)" stroke-width="2"/>
+            <text x="216" y="46" font-size="11" fill="var(--pink)">g(x, y) = k</text>
+            <line x1="210" y1="145" x2="194" y2="145" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="184,145 194,141 194,149" fill="var(--g700)"/>
+            <line x1="210" y1="157" x2="202" y2="157" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="192,157 202,153 202,161" fill="var(--orange)"/>
+            <circle cx="210" cy="150" r="3.4" fill="var(--grey900)"/>
+            <text x="197" y="136" text-anchor="middle" font-size="11" fill="var(--g700)">&#8711;f</text>
+            <text x="197" y="176" text-anchor="middle" font-size="11" fill="var(--orange)">&#8711;g</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The idea is easiest to see for two variables. Suppose the extreme values of $f(x,y)$ are wanted while $(x,y)$ is confined to the level curve $g(x,y)=k$. Draw that curve together with several level curves $f(x,y)=c$ of $f$, say for $c=7,8,9,10,11$; the figure below shows only the three with $c=9,10,11$.</p>
+        <p>Maximizing $f$ under the constraint then amounts to asking: how large can $c$ be while the curve $f(x,y)=c$ still meets $g(x,y)=k$? The picture says that the largest such $c$ is reached when the two curves <em>just touch</em> — they share a tangent line there. For any smaller degree of contact the curves cross, and $c$ could still be pushed up.</p>
+        <p>At a point $(x_0,y_0)$ of tangency the two curves have the same normal line, so their gradient vectors point along the same line; that is, they are parallel:</p>
+        <div class="math-display">$$\nabla f(x_0,y_0)=\lambda\,\nabla g(x_0,y_0)\quad\text{for some scalar }\lambda.$$</div>
+        <p>The same reasoning transfers to three variables: $(x,y,z)$ is confined to the level surface $S:g(x,y,z)=k$, and at a maximizing point the level surface $f(x,y,z)=c$ is tangent to $S$, so again the two gradient vectors are parallel.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="Level curves of f touching the constraint curve g=k, with parallel gradient vectors at the point of contact" style="max-width:360px;width:100%;height:auto">
+            <line x1="22" y1="264" x2="22" y2="20" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,12 18,23 26,23" fill="var(--grey800)"/>
+            <line x1="22" y1="264" x2="348" y2="264" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="354,264 344,260 344,268" fill="var(--grey800)"/>
+            <text x="12" y="22" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="340" y="278" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="8" y="278" font-size="11" fill="var(--grey500)">0</text>
+            <circle cx="135" cy="150" r="105" fill="none" stroke="var(--blue)" stroke-width="1.2"/>
+            <circle cx="135" cy="150" r="75" fill="none" stroke="var(--blue)" stroke-width="1.9"/>
+            <circle cx="135" cy="150" r="45" fill="none" stroke="var(--blue)" stroke-width="1.2"/>
+            <text x="135" y="41" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 9</text>
+            <text x="135" y="71" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 10</text>
+            <text x="135" y="101" text-anchor="middle" font-size="10.5" fill="var(--blue)">f(x, y) = 11</text>
+            <line x1="210" y1="38" x2="210" y2="258" stroke="var(--pink)" stroke-width="2"/>
+            <text x="216" y="46" font-size="11" fill="var(--pink)">g(x, y) = k</text>
+            <line x1="210" y1="145" x2="194" y2="145" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="184,145 194,141 194,149" fill="var(--g700)"/>
+            <line x1="210" y1="157" x2="202" y2="157" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="192,157 202,153 202,161" fill="var(--orange)"/>
+            <circle cx="210" cy="150" r="3.4" fill="var(--grey900)"/>
+            <text x="197" y="136" text-anchor="middle" font-size="11" fill="var(--g700)">&#8711;f</text>
+            <text x="197" y="176" text-anchor="middle" font-size="11" fill="var(--orange)">&#8711;g</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Equation (1) -->
+<div class="card thm-card" id="c14-8-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">라그랑주 조건 <em>The Lagrange Condition</em><span class="src-ref">Equation (1) · p.1058&ndash;1059</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (1) — 라그랑주 조건.</strong> $f$가 미분가능하고 $g$의 1계 편도함수가 연속이며, 곡면 $S:g(x,y,z)=k$로 제한된 $f$가 $S$ 위의 점 $P(x_0,y_0,z_0)$에서 극값을 갖는다고 하자. 이때 $\nabla g(x_0,y_0,z_0)\neq\mathbf 0$이면, 다음을 만족하는 수 $\lambda$가 존재한다.</p>
+          <div class="math-display">$$\nabla f(x_0,y_0,z_0)=\lambda\,\nabla g(x_0,y_0,z_0).\tag{1}$$</div>
+        </div>
+        <p>$(1)$에 나오는 수 $\lambda$를 <strong>라그랑주 승수</strong>라 한다. 방법 전체가 이 벡터 방정식 하나에 근거한다. 제약 아래의 극값은 오직 두 기울기벡터가 나란해지는 지점에서만 일어날 수 있다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $P$를 지나며 $S$ 위에서 벗어나지 않는 매끄러운 곡선 $\mathbf r(t)=\langle x(t),y(t),z(t)\rangle$을 하나 잡고, $\mathbf r(t_0)=P$가 되도록 $t_0$을 정하자. 합성함수 $\varphi(t)=f(\mathbf r(t))$는 이 곡선을 따라가며 $f$가 취하는 값이므로, $f$가 $S$ 위에서 $P$에서 극값을 갖는다는 가정에서 $\varphi$도 $t=t_0$에서 극값을 갖고, 따라서 $\varphi'(t_0)=0$이다. $f$가 미분가능하므로 연쇄법칙에 의해</p>
+        <div class="math-display">$$0=\varphi'(t_0)=\nabla f(P)\cdot\mathbf r'(t_0)$$</div>
+        <p>을 얻는다. 곡선 $\mathbf r$은 $P$를 지나며 $S$ 안에 놓인 임의의 매끄러운 곡선이었으므로, $\nabla f(P)$는 이런 모든 곡선의 접벡터에 수직하다. 여기서 $\nabla g(P)\neq\mathbf 0$이라는 가정이 처음 쓰인다. 이 가정 덕분에 음함수 정리에 의해 $S$는 $P$ 근방에서 매끄러운 곡면이고, $P$를 지나는 $S$ 위 곡선들의 접벡터가 2차원 접평면을 남김없이 채우기 때문이다. 따라서 $\nabla f(P)$는 $S$의 $P$에서의 접평면 전체에 수직하다.</p>
+        <p>한편 $S$는 $g(x,y,z)=k$로 정의되므로 $g(\mathbf r(t))\equiv k$이고, 이 항등식의 양변을 $t$에 대해 미분하면 같은 방식으로 $\nabla g(P)\cdot\mathbf r'(t_0)=0$을 얻는다. 즉 $\nabla g(P)$ 역시 같은 접평면에 수직하다. $\mathbb R^3$에서 하나의 평면(2차원 부분공간)에 수직한 방향은 (영벡터를 빼면) 하나뿐이므로, $\nabla f(P)$와 $\nabla g(P)$는 같은 직선 위에 놓인다 — 즉 서로 평행하다. $\nabla g(P)\neq\mathbf 0$을 가정했으므로, $\nabla f(P)=\lambda\,\nabla g(P)$를 만족하는 실수 $\lambda$가 (유일하게) 존재한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (1) — The Lagrange Condition.</strong> Let $f$ be differentiable, let the first-order partial derivatives of $g$ be continuous, and suppose $f$, restricted to the surface $S:g(x,y,z)=k$, has an extreme value at a point $P(x_0,y_0,z_0)$ of $S$. If $\nabla g(x_0,y_0,z_0)\neq\mathbf 0$, then there is a number $\lambda$ such that</p>
+          <div class="math-display">$$\nabla f(x_0,y_0,z_0)=\lambda\,\nabla g(x_0,y_0,z_0).\tag{1}$$</div>
+        </div>
+        <p>The number $\lambda$ appearing in $(1)$ is called a <strong>Lagrange multiplier</strong>. The entire method rests on this one vector equation: a constrained extremum can occur only where the two gradient vectors line up.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Choose a smooth curve $\mathbf r(t)=\langle x(t),y(t),z(t)\rangle$ that stays on $S$ and passes through $P$, with $\mathbf r(t_0)=P$. The composite $\varphi(t)=f(\mathbf r(t))$ records the values $f$ takes along this curve, so from the hypothesis that $f$ restricted to $S$ has an extreme value at $P$, $\varphi$ has an extreme value at $t=t_0$, and hence $\varphi'(t_0)=0$. Since $f$ is differentiable, the Chain Rule gives</p>
+        <div class="math-display">$$0=\varphi'(t_0)=\nabla f(P)\cdot\mathbf r'(t_0).$$</div>
+        <p>Because $\mathbf r$ was an arbitrary smooth curve on $S$ through $P$, $\nabla f(P)$ is orthogonal to the tangent vector of every such curve. This is where the hypothesis $\nabla g(P)\neq\mathbf 0$ first enters: it makes $S$ a smooth surface near $P$ by the Implicit Function Theorem, so those tangent vectors fill out the whole 2-dimensional tangent plane. Hence $\nabla f(P)$ is orthogonal to the entire tangent plane of $S$ at $P$.</p>
+        <p>Now $S$ is defined by $g(x,y,z)=k$, so $g(\mathbf r(t))\equiv k$; differentiating this identity in $t$ gives, by the same computation, $\nabla g(P)\cdot\mathbf r'(t_0)=0$, so $\nabla g(P)$ is orthogonal to that same tangent plane. In $\mathbb R^3$ there is, up to scalar multiples, only one direction orthogonal to a given plane (a 2-dimensional subspace), so $\nabla f(P)$ and $\nabla g(P)$ lie on the same line — that is, they are parallel. Since $\nabla g(P)\neq\mathbf 0$ by hypothesis, there is a (unique) real number $\lambda$ with $\nabla f(P)=\lambda\,\nabla g(P)$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : margin note, Lagrange biography -->
+<div class="card rem-card" id="c14-8-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">라그랑주 <em>Joseph-Louis Lagrange</em><span class="src-ref">여백 노트 · p.1059</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>승수의 이름은 프랑스-이탈리아 수학자 조제프루이 라그랑주(Joseph-Louis Lagrange, 1736&ndash;1813)에게서 왔다. 그의 짧은 약전이 교재 §3.2에 실려 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The multipliers carry the name of the French-Italian mathematician Joseph-Louis Lagrange (1736&ndash;1813). A short biographical sketch of him appears in §3.2 of the text.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Method box -->
+<div class="card rem-card" id="c14-8-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">라그랑주 승수법 <em>The Method of Lagrange Multipliers</em><span class="src-ref">Method of Lagrange Multipliers · p.1059</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>라그랑주 승수법.</strong> $g(x,y,z)=k$ 아래에서 $f(x,y,z)$의 최댓값과 최솟값을 구하려면 — 이 극값들이 존재하고, 곡면 $g(x,y,z)=k$ 위의 모든 점에서 $\nabla g\neq\mathbf 0$이라고 가정하고 — 다음과 같이 한다.</p>
+          <p><strong>1단계.</strong> 다음 두 식을 동시에 만족하는 네 수의 조 $(x,y,z,\lambda)$를 빠짐없이 구한다.</p>
+          <div class="math-display">$$\nabla f(x,y,z)=\lambda\,\nabla g(x,y,z)\qquad\text{그리고}\qquad g(x,y,z)=k.$$</div>
+          <p><strong>2단계.</strong> 1단계에서 얻은 각 점 $(x,y,z)$에서 $f$의 값을 계산한다. 이 값들 중 가장 큰 것이 $f$의 최댓값이고, 가장 작은 것이 최솟값이다.</p>
+        </div>
+        <p>2단계는 후보점들에서의 $f$ 값을 견주어 보는 것일 뿐, 도함수 판정은 필요 없다. 극값의 존재는 이미 가정되어 있고, 1단계에서 그 극값이 일어날 수 있는 자리를 후보 목록으로 이미 좁혀 놓았기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Method of Lagrange Multipliers.</strong> To locate the largest and smallest values taken by $f(x,y,z)$ subject to $g(x,y,z)=k$ — assuming that these extreme values exist and that $\nabla g\neq\mathbf 0$ everywhere on the surface $g(x,y,z)=k$:</p>
+          <p><strong>Step 1.</strong> Find every quadruple $x,y,z,\lambda$ satisfying both</p>
+          <div class="math-display">$$\nabla f(x,y,z)=\lambda\,\nabla g(x,y,z)\qquad\text{and}\qquad g(x,y,z)=k.$$</div>
+          <p><strong>Step 2.</strong> Evaluate $f$ at each point $(x,y,z)$ produced by Step 1. The largest of these values is the maximum of $f$, and the smallest is the minimum.</p>
+        </div>
+        <p>Step 2 merely weighs the values of $f$ at the candidates against one another, with no derivative test involved: the existence of the extreme values is assumed in advance, and Step 1 has already trapped them among a list of candidates.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : component equations and the meaning of lambda -->
+<div class="card note-card" id="c14-8-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">성분 방정식과 승수의 의미 <em>The Component Equations</em><span class="src-ref">본문 · p.1059</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>성분으로 풀어 쓰면 방법의 1단계는 다음 연립방정식이 된다.</p>
+        <div class="math-display">$$f_x=\lambda g_x,\qquad f_y=\lambda g_y,\qquad f_z=\lambda g_z,\qquad g(x,y,z)=k.$$</div>
+        <p>미지수 $x,y,z,\lambda$ 네 개짜리 방정식 네 개이며, 이 연립을 만족하는 해를 모두 찾아야 한다 — 다만 $\lambda$의 수치 자체는 결론에 들어가지 않으므로, 편리해지는 순간 소거해 버려도 좋다.</p>
+        <p>그렇다고 $\lambda$의 값이 아무 정보도 담지 않는 것은 아니다. 어떤 해에서 $\lambda\neq0$이면, 앞서 본 기하적 그림대로 그 점에서 $\nabla f$와 $\nabla g$는 실제로 평행하다. 반대로 $\lambda=0$이면 $(1)$에 의해 $\nabla f(x_0,y_0,z_0)=\mathbf 0$이 강제되므로, 그 점은 $f$ 자체의 임계점이다. 그러면 $f(x_0,y_0,z_0)$은 정의역 전체에서 본 $f$의 극값 후보이고, 그 점이 제약집합 위에도 놓여 있으므로 제약 아래의 극값 후보이기도 하다 — $\lambda=0$으로 나왔다고 해서 버릴 후보가 아니라는 뜻이다(연습문제 61 참고).</p>
+        <p>이변수의 경우 연립방정식은 한 개가 줄어든다.</p>
+        <div class="math-display">$$f_x=\lambda g_x,\qquad f_y=\lambda g_y,\qquad g(x,y)=k,$$</div>
+        <p>미지수 $x,y,\lambda$ 세 개짜리 방정식 세 개다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Written out in components, Step 1 of the method becomes a system:</p>
+        <div class="math-display">$$f_x=\lambda g_x,\qquad f_y=\lambda g_y,\qquad f_z=\lambda g_z,\qquad g(x,y,z)=k.$$</div>
+        <p>These are four equations in the four unknowns $x,y,z,\lambda$, and all solutions must be found — although the numerical value of $\lambda$ itself never enters the conclusion, so it may be eliminated as soon as it is convenient.</p>
+        <p>The value of $\lambda$ does carry information about the solution, though. If a solution has $\lambda\neq0$, then $\nabla f$ and $\nabla g$ are genuinely parallel there, as the geometric picture suggested. If instead $\lambda=0$, then $(1)$ forces $\nabla f(x_0,y_0,z_0)=\mathbf 0$, so the point is a critical point of $f$ itself. Then $f(x_0,y_0,z_0)$ is a candidate local extreme value of $f$ on its whole domain and, because the point also lies on the constraint set, a candidate extreme value under the constraint as well — a solution with $\lambda=0$ is not one to discard (see Exercise 61).</p>
+        <p>For two variables the system is one equation shorter:</p>
+        <div class="math-display">$$f_x=\lambda g_x,\qquad f_y=\lambda g_y,\qquad g(x,y)=k,$$</div>
+        <p>three equations in the three unknowns $x,y,\lambda$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : margin note, the assumption grad g nonzero -->
+<div class="card rem-card" id="c14-8-7">
+  <div class="card-head">
+    <span class="rem-num">REM 7</span>
+    <span class="rem-title">방법의 전제 <em>When the Method Can Fail</em><span class="src-ref">여백 노트 · p.1059</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$(1)$의 유도는 $\nabla g\neq\mathbf 0$이라는 가정을 사용했으므로, 문제마다 제약집합 $g(x,y,z)=k$의 모든 점에서 $\nabla g\neq\mathbf 0$인지 확인해 볼 가치가 있다. 아래 예제들에서는 모두 이 확인이 성립한다.</p>
+        <p>이 가정은 장식이 아니다. 연습문제 35는 $\nabla g=\mathbf 0$인 점에서 무엇이 잘못될 수 있는지를, 연습문제 34는 $\nabla g$가 정의되지 않는 점에서 어떤 일이 일어날 수 있는지를 보여 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The derivation of $(1)$ used the hypothesis $\nabla g\neq\mathbf 0$, and it is worth checking in each problem that $\nabla g\neq\mathbf 0$ at every point of the constraint set $g(x,y,z)=k$; in all of the worked examples below this check succeeds.</p>
+        <p>The hypothesis is not decorative. Exercise 35 exhibits what can go wrong at a point where $\nabla g=\mathbf 0$, and Exercise 34 what can happen where $\nabla g$ fails to exist.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : two constraints, geometry, Figure 7 -->
+<div class="card note-card" id="c14-8-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">두 제약: 곡면들의 교선 위에서 <em>Two Constraints</em><span class="src-ref">Two Constraints · Figure 7 · p.1063</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이번에는 $g(x,y,z)=k$와 $h(x,y,z)=c$, 두 제약조건이 동시에 부과된다고 하자. 기하적으로 점 $(x,y,z)$는 두 등위면이 만나서 이루는 곡선 $C$ 위로 제한되며, 이 곡선 위에서 $f$의 극값을 구하고자 한다.</p>
+        <p>$f$가 $C$ 위의 점 $P(x_0,y_0,z_0)$에서 그런 극값을 갖는다고 하자. 이 절 도입부의 논증을 그대로 쓰면 $\nabla f$는 $P$에서 $C$에 직교한다. 그런데 $\nabla g$는 곡면 $g=k$에 직교하고 $\nabla h$는 곡면 $h=c$에 직교하며, $C$는 두 곡면 위에 모두 놓여 있으므로 $\nabla g$와 $\nabla h$ 역시 $C$에 직교한다.</p>
+        <p>$\nabla g(x_0,y_0,z_0)$와 $\nabla h(x_0,y_0,z_0)$가 영벡터가 아니고 서로 평행하지도 않다고 가정하자. 그러면 이 둘은 하나의 평면을 생성하는데, 이 평면은 다름 아니라 $P$에서 $C$에 직교하는 모든 벡터로 이루어진 평면이다 — 그리고 $\nabla f(x_0,y_0,z_0)$는 반드시 이 평면 안에 놓인다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="두 등위곡면의 교선 C 위의 점 P에서 기울기벡터 세 개가 놓이는 모습" style="max-width:360px;width:100%;height:auto">
+            <polygon points="55,250 285,130 315,30 85,150" fill="var(--grey300)" fill-opacity="0.45" stroke="var(--grey500)" stroke-width="1"/>
+            <polygon points="30,140 260,20 340,140 110,260" fill="var(--g100)" fill-opacity="0.5" stroke="var(--g600)" stroke-width="1"/>
+            <line x1="70" y1="200" x2="300" y2="80" stroke="var(--grey900)" stroke-width="1.8"/>
+            <text x="306" y="78" font-size="12" font-style="italic" fill="var(--grey900)">C</text>
+            <text x="286" y="50" font-size="11" fill="var(--grey700)">h = c</text>
+            <text x="296" y="155" font-size="11" fill="var(--g700)">g = k</text>
+            <line x1="185" y1="140" x2="152" y2="66" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="150,62 157.7,69.5 150.4,72.8" fill="var(--g700)"/>
+            <line x1="185" y1="140" x2="185" y2="70" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="185,66 189,76 181,76" fill="var(--blue)"/>
+            <line x1="185" y1="140" x2="245" y2="91" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="248,88 242.8,97.5 237.8,91.3" fill="var(--orange)"/>
+            <circle cx="185" cy="140" r="3.4" fill="var(--grey900)"/>
+            <text x="178" y="154" text-anchor="end" font-size="12" font-style="italic" fill="var(--grey900)">P</text>
+            <text x="147" y="56" text-anchor="end" font-size="11" fill="var(--g700)">&#8711;g</text>
+            <text x="185" y="58" text-anchor="middle" font-size="11" fill="var(--blue)">&#8711;f</text>
+            <text x="252" y="84" font-size="11" fill="var(--orange)">&#8711;h</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose now that two side conditions are imposed at once, say $g(x,y,z)=k$ and $h(x,y,z)=c$. Geometrically the point $(x,y,z)$ is then confined to the curve $C$ along which the two level surfaces meet, and the extreme values of $f$ along that curve are wanted.</p>
+        <p>Let $f$ have such an extreme value at a point $P(x_0,y_0,z_0)$ of $C$. The argument at the start of the section shows that $\nabla f$ is orthogonal to $C$ at $P$. But $\nabla g$ is orthogonal to the surface $g=k$ and $\nabla h$ is orthogonal to the surface $h=c$, and $C$ lies on both surfaces, so $\nabla g$ and $\nabla h$ are orthogonal to $C$ as well.</p>
+        <p>Assume that $\nabla g(x_0,y_0,z_0)$ and $\nabla h(x_0,y_0,z_0)$ are nonzero and not parallel. They then span a plane, namely the plane of all vectors orthogonal to $C$ at $P$ — and $\nabla f(x_0,y_0,z_0)$ must lie in it.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 280" role="img" aria-label="The curve of intersection C of two level surfaces, with the three gradient vectors at a point P of C" style="max-width:360px;width:100%;height:auto">
+            <polygon points="55,250 285,130 315,30 85,150" fill="var(--grey300)" fill-opacity="0.45" stroke="var(--grey500)" stroke-width="1"/>
+            <polygon points="30,140 260,20 340,140 110,260" fill="var(--g100)" fill-opacity="0.5" stroke="var(--g600)" stroke-width="1"/>
+            <line x1="70" y1="200" x2="300" y2="80" stroke="var(--grey900)" stroke-width="1.8"/>
+            <text x="306" y="78" font-size="12" font-style="italic" fill="var(--grey900)">C</text>
+            <text x="286" y="50" font-size="11" fill="var(--grey700)">h = c</text>
+            <text x="296" y="155" font-size="11" fill="var(--g700)">g = k</text>
+            <line x1="185" y1="140" x2="152" y2="66" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="150,62 157.7,69.5 150.4,72.8" fill="var(--g700)"/>
+            <line x1="185" y1="140" x2="185" y2="70" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="185,66 189,76 181,76" fill="var(--blue)"/>
+            <line x1="185" y1="140" x2="245" y2="91" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="248,88 242.8,97.5 237.8,91.3" fill="var(--orange)"/>
+            <circle cx="185" cy="140" r="3.4" fill="var(--grey900)"/>
+            <text x="178" y="154" text-anchor="end" font-size="12" font-style="italic" fill="var(--grey900)">P</text>
+            <text x="147" y="56" text-anchor="end" font-size="11" fill="var(--g700)">&#8711;g</text>
+            <text x="185" y="58" text-anchor="middle" font-size="11" fill="var(--blue)">&#8711;f</text>
+            <text x="252" y="84" font-size="11" fill="var(--orange)">&#8711;h</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Equation (16) -->
+<div class="card thm-card" id="c14-8-9">
+  <div class="card-head">
+    <span class="thm-num">THM 9</span>
+    <span class="thm-title">두 제약의 라그랑주 조건 <em>The Two-Multiplier Condition</em><span class="src-ref">Equation (16) · p.1063</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (16) — 두 제약의 라그랑주 조건.</strong> $f$가 미분가능하고 $g,h$의 1계 편도함수가 연속이며, $g(x,y,z)=k$와 $h(x,y,z)=c$의 교선으로 제한된 $f$가 점 $P(x_0,y_0,z_0)$에서 극값을 갖고, $\nabla g(x_0,y_0,z_0)$와 $\nabla h(x_0,y_0,z_0)$가 영벡터가 아니며 서로 평행하지도 않다고 하자. 그러면 다음을 만족하는 수 $\lambda$와 $\mu$(둘 다 라그랑주 승수라 부른다)가 존재한다.</p>
+          <div class="math-display">$$\nabla f(x_0,y_0,z_0)=\lambda\,\nabla g(x_0,y_0,z_0)+\mu\,\nabla h(x_0,y_0,z_0).\tag{16}$$</div>
+        </div>
+        <p>$(16)$을 성분으로 쓰고 두 제약식을 덧붙이면 풀어야 할 연립방정식이 나온다.</p>
+        <div class="math-display">$$f_x=\lambda g_x+\mu h_x,\qquad f_y=\lambda g_y+\mu h_y,\qquad f_z=\lambda g_z+\mu h_z,$$</div>
+        <div class="math-display">$$g(x,y,z)=k,\qquad h(x,y,z)=c.$$</div>
+        <p>미지수 $x,y,z,\lambda,\mu$ 다섯 개짜리 방정식 다섯 개다 — 제약이 하나일 때보다 승수 하나와 제약식 하나가 더 늘어난 셈이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\nabla g(P)$와 $\nabla h(P)$가 일차독립이라는 가정에서 음함수 정리에 의해 $C$는 $P$ 근방에서 매끄러운 곡선이므로, $\mathbf r(t_0)=P$이고 $\mathbf r'(t_0)\neq\mathbf 0$인 매개변수화 $\mathbf r(t)$를 잡을 수 있다. $C$는 두 곡면 $g=k$와 $h=c$의 교선이므로 이 $\mathbf r$은 $g=k$ 위에도, $h=c$ 위에도 놓여 있다. 식 $(1)$의 증명과 똑같은 논증을 $S_1:g=k$에 적용하면 $\nabla g(P)\cdot\mathbf r'(t_0)=0$을 얻고, $S_2:h=c$에 적용하면 $\nabla h(P)\cdot\mathbf r'(t_0)=0$을 얻는다. 또한 $f$가 $C$ 위 $P$에서 극값을 가지므로, 합성함수를 $\varphi(t)=f(\mathbf r(t))$로 두고 같은 논증을 쓰면 $\nabla f(P)\cdot\mathbf r'(t_0)=0$도 얻는다. 즉 세 기울기벡터 $\nabla f(P),\nabla g(P),\nabla h(P)$가 모두 방향벡터 $\mathbf r'(t_0)\neq\mathbf 0$에 수직하다.</p>
+        <p>$\mathbb R^3$에서 한 방향에 수직한 벡터 전체는 2차원 부분공간, 즉 평면 $\Pi$를 이룬다. 가정에 의해 $\nabla g(P)$와 $\nabla h(P)$는 영벡터가 아니고 서로 평행하지 않으므로 일차독립이며, 둘 다 $\Pi$ 안에 있으므로 $\{\nabla g(P),\nabla h(P)\}$는 $\Pi$의 기저를 이룬다. 그런데 $\nabla f(P)$도 $\Pi$ 안에 있으므로 이 기저의 일차결합으로 유일하게 나타나고, 그 계수를 $\lambda,\mu$라 하면</p>
+        <div class="math-display">$$\nabla f(P)=\lambda\,\nabla g(P)+\mu\,\nabla h(P)$$</div>
+        <p>가 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (16) — Two Constraints.</strong> Suppose $f$ is differentiable, that $g$ and $h$ have continuous first-order partial derivatives, that $f$, restricted to the curve of intersection of $g(x,y,z)=k$ and $h(x,y,z)=c$, has an extreme value at $P(x_0,y_0,z_0)$, and that $\nabla g(x_0,y_0,z_0)$ and $\nabla h(x_0,y_0,z_0)$ are nonzero and not parallel. Then there are numbers $\lambda$ and $\mu$ — both called Lagrange multipliers — with</p>
+          <div class="math-display">$$\nabla f(x_0,y_0,z_0)=\lambda\,\nabla g(x_0,y_0,z_0)+\mu\,\nabla h(x_0,y_0,z_0).\tag{16}$$</div>
+        </div>
+        <p>Writing $(16)$ in components and appending the two constraints gives the system to be solved:</p>
+        <div class="math-display">$$f_x=\lambda g_x+\mu h_x,\qquad f_y=\lambda g_y+\mu h_y,\qquad f_z=\lambda g_z+\mu h_z,$$</div>
+        <div class="math-display">$$g(x,y,z)=k,\qquad h(x,y,z)=c.$$</div>
+        <p>That is five equations in the five unknowns $x,y,z,\lambda,\mu$ — one more multiplier and one more constraint equation than in the case of a single side condition.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Because $\nabla g(P)$ and $\nabla h(P)$ are linearly independent, the Implicit Function Theorem makes $C$ a smooth curve near $P$, so it may be parametrized by $\mathbf r(t)$ with $\mathbf r(t_0)=P$ and $\mathbf r'(t_0)\neq\mathbf 0$. Since $C$ is the curve of intersection of $g=k$ and $h=c$, this $\mathbf r$ lies on $g=k$ and also on $h=c$. Applying the same argument used to prove $(1)$ to the surface $S_1:g=k$ gives $\nabla g(P)\cdot\mathbf r'(t_0)=0$, and applying it to $S_2:h=c$ gives $\nabla h(P)\cdot\mathbf r'(t_0)=0$. Since $f$ has an extreme value at $P$ along $C$, writing the composite as $\varphi(t)=f(\mathbf r(t))$ and running the same argument gives $\nabla f(P)\cdot\mathbf r'(t_0)=0$ as well. So all three gradient vectors $\nabla f(P),\nabla g(P),\nabla h(P)$ are orthogonal to the direction vector $\mathbf r'(t_0)\neq\mathbf 0$.</p>
+        <p>In $\mathbb R^3$, the vectors orthogonal to a fixed direction form a 2-dimensional subspace, a plane $\Pi$. By hypothesis $\nabla g(P)$ and $\nabla h(P)$ are nonzero and not parallel, hence linearly independent, and both lie in $\Pi$, so $\{\nabla g(P),\nabla h(P)\}$ is a basis of $\Pi$. Since $\nabla f(P)$ also lies in $\Pi$, it is a unique linear combination of that basis; calling the coefficients $\lambda$ and $\mu$,</p>
+        <div class="math-display">$$\nabla f(P)=\lambda\,\nabla g(P)+\mu\,\nabla h(P).$$</div>
+        <p>This is $(16)$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-8-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">원 위에서의 극값 <em>Extreme Values on a Circle</em><span class="src-ref">Example 1 · p.1059&ndash;1060</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $(x,y)$ 가 원 $x^2+y^2=1$ 위에 있다는 제약 아래에서, 함수 $f(x,y)=x^2+2y^2$ 가 갖는 최댓값과 최솟값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 제약함수를 $g(x,y)=x^2+y^2$로 두면 원은 $g=1$이고, 이 곡선 위 모든 점에서 $\nabla g(x,y)=\langle2x,2y\rangle\neq\mathbf 0$이므로(원점은 원 위에 있지 않다) 라그랑주 승수법의 전제가 성립한다. $\nabla f=\langle2x,4y\rangle$이므로 $\nabla f=\lambda\nabla g$와 제약식을 함께 쓰면</p>
+        <div class="math-display">$$2x=2\lambda x,\qquad 4y=2\lambda y,\qquad x^2+y^2=1.$$</div>
+        <p>첫 식을 $2x(1-\lambda)=0$으로 정리하면 $x=0$이거나 $\lambda=1$이다.</p>
+        <p>$x=0$인 경우, 제약식에서 $y^2=1$, 즉 $y=\pm1$이므로 후보 $(0,1),(0,-1)$을 얻는다. $\lambda=1$인 경우, 둘째 식은 $4y=2y$가 되어 $y=0$이 강제되고, 제약식에서 $x^2=1$, 즉 $x=\pm1$이므로 후보 $(1,0),(-1,0)$을 얻는다. 첫 식의 두 갈래가 모든 경우를 덮고 서로 겹치지도 않으므로($\lambda=1$이면 $y=0$이라 제약식에서 $x=\pm1\neq0$이다), 연립방정식의 해는 이 네 점뿐이다.</p>
+        <p>네 후보에서 $f$의 값을 비교하면 $f(0,\pm1)=0+2=2$, $f(\pm1,0)=1+0=1$이다. 원은 유계인 닫힌집합이고 $f$는 다항함수라 연속이므로 극값정리에 의해 최댓값·최솟값이 실제로 존재하고, 그 값은 이 네 후보 중에 있다. 따라서 $f$는 원 위에서 최댓값 $f(0,\pm1)=2$, 최솟값 $f(\pm1,0)=1$을 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine the largest and the smallest values taken by $f(x,y)=x^2+2y^2$ at the points of the unit circle $x^2+y^2=1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Take $g(x,y)=x^2+y^2$, so the circle is $g=1$; since $\nabla g(x,y)=\langle2x,2y\rangle\neq\mathbf 0$ at every point of that curve (the origin is not on it), the hypotheses of the method hold. With $\nabla f=\langle2x,4y\rangle$, the system $\nabla f=\lambda\nabla g$ together with the constraint reads</p>
+        <div class="math-display">$$2x=2\lambda x,\qquad 4y=2\lambda y,\qquad x^2+y^2=1.$$</div>
+        <p>The first equation rearranges to $2x(1-\lambda)=0$, so $x=0$ or $\lambda=1$.</p>
+        <p>If $x=0$, the constraint gives $y^2=1$, i.e. $y=\pm1$, producing the candidates $(0,1),(0,-1)$. If $\lambda=1$, the second equation becomes $4y=2y$, forcing $y=0$, and the constraint gives $x^2=1$, i.e. $x=\pm1$, producing the candidates $(1,0),(-1,0)$. The two branches of the first equation cover every case and do not overlap ($\lambda=1$ forces $y=0$, so the constraint gives $x=\pm1\neq0$), so these four points are all the solutions of the system.</p>
+        <p>Comparing $f$ at the four candidates gives $f(0,\pm1)=0+2=2$ and $f(\pm1,0)=1+0=1$. The circle is a closed, bounded set and $f$ is a polynomial, hence continuous, so the Extreme Value Theorem guarantees that a maximum and a minimum actually exist, and they must occur among these four candidates. Hence $f$ has maximum value $f(0,\pm1)=2$ and minimum value $f(\pm1,0)=1$ on the circle.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-8-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">뚜껑 없는 상자의 최대 부피 <em>Largest Volume of a Lidless Box</em><span class="src-ref">Example 2 · p.1060&ndash;1061</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>뚜껑이 없는 직육면체 상자의 겉넓이가 $12\ \mathrm{m^2}$ 로 고정되어 있다. 즉 세 모서리 길이 $x,y,z$ 가 제약 $2xz+2yz+xy=12$ 를 만족한다. 이때 부피 $V=xyz$ 를 최대로 하는 상자의 크기를 라그랑주 승수법으로 구하고, 최대 부피를 구하라. (§14.7 예제 6을 다른 방법으로 다시 푸는 것이다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $g(x,y,z)=2xz+2yz+xy$로 두면 제약은 $g=12$이고, $x,y,z\gt0$인 물리적 영역에서 $\nabla g=\langle2z+y,\,2z+x,\,2x+2y\rangle$는 항상 영벡터가 아니다(각 성분이 양수의 합이다). $\nabla V=\langle yz,xz,xy\rangle$이므로 $\nabla V=\lambda\nabla g$를 성분으로 쓰면</p>
+        <div class="math-display">$$yz=\lambda(2z+y),\qquad xz=\lambda(2z+x),\qquad xy=\lambda(2x+2y),$$</div>
+        <div class="math-display">$$2xz+2yz+xy=12.$$</div>
+        <p>$\lambda=0$이면 세 식의 좌변이 모두 $0$이 되어 $yz=xz=xy=0$인데, $x,y,z\gt0$이므로 이는 불가능하다. 따라서 $\lambda\neq0$이다.</p>
+        <p>첫 식에 $x$를, 둘째 식에 $y$를, 셋째 식에 $z$를 곱하면 세 식의 좌변이 모두 $xyz$로 같아지므로</p>
+        <div class="math-display">$$\lambda(2xz+xy)=\lambda(2yz+xy)=\lambda(2xz+2yz).$$</div>
+        <p>$\lambda\neq0$이므로 괄호 안끼리 서로 같다. 처음 두 개를 비교하면 $2xz=2yz$, 즉 $z\neq0$이므로 $x=y$이다. 뒤의 두 개를 비교하면 $2yz+xy=2xz+2yz$에서 $xy=2xz$, 즉 $x\neq0$이므로 $y=2z$. 이제 $x=y=2z$를 제약식에 대입하면</p>
+        <div class="math-display">$$2(2z)z+2(2z)z+(2z)(2z)=12z^2=12,$$</div>
+        <p>이므로 $z^2=1$이고 $z\gt0$에서 $z=1$, 따라서 $x=y=2$이다. 라그랑주 조건과 제약을 만족하는 양수 후보점은 $(2,2,1)$ 하나뿐이며, 그 부피는 $V(2,2,1)=2\cdot2\cdot1=4$이다.</p>
+        <p>이 유일한 후보가 실제로 최대인지는 §14.7 예제 6에서와 같은 이유로 확인된다: 겉넓이가 $12\ \mathrm{m^2}$로 고정된 뚜껑 없는 상자 가운데 어느 한 변의 길이가 $0$에 가까워지거나 무한히 커지면 부피는 $0$에 가까워지므로, 부피는 이 제약면의 양수 부분에서 최댓값을 가져야 하고 그 최댓값은 찾은 유일한 임계후보에서 일어날 수밖에 없다. 따라서 상자의 크기가 $x=y=2\ \mathrm m$, $z=1\ \mathrm m$일 때 부피가 최대이고, 최대 부피는 $4\ \mathrm{m^3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A rectangular box without a lid has edge lengths $x,y,z$ and fixed surface area $12\ \mathrm{m^2}$, so that $2xz+2yz+xy=12$. Use Lagrange multipliers to find the dimensions that maximize the volume $V=xyz$, and give that maximum volume. (This is the problem of Example 14.7.6 solved a second way.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Set $g(x,y,z)=2xz+2yz+xy$, so the constraint is $g=12$; on the physical region $x,y,z\gt0$, $\nabla g=\langle2z+y,\,2z+x,\,2x+2y\rangle$ is never the zero vector (each component is a sum of positive numbers). With $\nabla V=\langle yz,xz,xy\rangle$, the system $\nabla V=\lambda\nabla g$ in components together with the constraint is</p>
+        <div class="math-display">$$yz=\lambda(2z+y),\qquad xz=\lambda(2z+x),\qquad xy=\lambda(2x+2y),$$</div>
+        <div class="math-display">$$2xz+2yz+xy=12.$$</div>
+        <p>If $\lambda=0$, all three left-hand sides vanish, forcing $yz=xz=xy=0$, which is impossible since $x,y,z\gt0$. So $\lambda\neq0$.</p>
+        <p>Multiplying the first equation by $x$, the second by $y$, and the third by $z$ makes every left-hand side equal to $xyz$, so</p>
+        <div class="math-display">$$\lambda(2xz+xy)=\lambda(2yz+xy)=\lambda(2xz+2yz).$$</div>
+        <p>Since $\lambda\neq0$, the quantities in parentheses agree pairwise. Comparing the first two gives $2xz=2yz$, and since $z\neq0$, $x=y$. Comparing the last two gives $2yz+xy=2xz+2yz$, so $xy=2xz$, and since $x\neq0$, $y=2z$. Substituting $x=y=2z$ into the constraint,</p>
+        <div class="math-display">$$2(2z)z+2(2z)z+(2z)(2z)=12z^2=12,$$</div>
+        <p>so $z^2=1$; since $z\gt0$, $z=1$ and $x=y=2$. The only positive candidate satisfying the Lagrange condition and the constraint is $(2,2,1)$, with volume $V(2,2,1)=2\cdot2\cdot1=4$.</p>
+        <p>That this unique candidate is indeed the maximum follows for the same reason as in Example 14.7.6: among lidless boxes with fixed surface area $12\ \mathrm{m^2}$, the volume approaches $0$ as any edge shrinks toward $0$ or grows without bound, so the volume must attain a maximum somewhere on the positive part of the constraint surface, and that maximum can only occur at the one critical candidate found. Hence the box of dimensions $x=y=2\ \mathrm m$, $z=1\ \mathrm m$ has the largest volume, namely $4\ \mathrm{m^3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-8-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">구 위의 최근접점과 최원점 <em>Closest and Farthest Points on a Sphere</em><span class="src-ref">Example 3 · p.1061&ndash;1062</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구 $x^2+y^2+z^2=4$ 위의 점들 가운데 점 $(3,1,-1)$ 에 가장 가까운 점과 가장 먼 점을 각각 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 거리 자체 대신 거리의 제곱 $f(x,y,z)=(x-3)^2+(y-1)^2+(z+1)^2$을 목적함수로 삼으면 계산이 간단해지고, 최솟값·최댓값이 일어나는 점은 거리의 최솟값·최댓값이 일어나는 점과 같다(제곱함수가 음이 아닌 값에서 증가함수이므로). 제약은 $g(x,y,z)=x^2+y^2+z^2=4$이고, 구 위에서 $\nabla g=\langle2x,2y,2z\rangle\neq\mathbf 0$이다(원점은 구 위에 없다). $\nabla f=\langle2(x-3),2(y-1),2(z+1)\rangle$이므로 $\nabla f=\lambda\nabla g$의 성분식은 $2(x-3)=2\lambda x$, $2(y-1)=2\lambda y$, $2(z+1)=2\lambda z$이고, 양변의 $2$를 약분하면</p>
+        <div class="math-display">$$x-3=\lambda x,\qquad y-1=\lambda y,\qquad z+1=\lambda z.$$</div>
+        <p>이 되고, 각각을 $x,y,z$에 대해 정리하면 $x(1-\lambda)=3$, $y(1-\lambda)=1$, $z(1-\lambda)=-1$이다. 첫 식에서 $\lambda=1$이면 좌변이 $0$인데 우변이 $3\neq0$이므로 모순이다. 따라서 $1-\lambda\neq0$이고</p>
+        <div class="math-display">$$x=\frac{3}{1-\lambda},\qquad y=\frac{1}{1-\lambda},\qquad z=-\frac{1}{1-\lambda}.$$</div>
+        <p>이를 제약식 $x^2+y^2+z^2=4$에 대입하면 $\dfrac{9+1+1}{(1-\lambda)^2}=4$, 즉 $(1-\lambda)^2=\dfrac{11}{4}$이므로 $1-\lambda=\pm\dfrac{\sqrt{11}}{2}$이다. 이 두 값을 각각 대입하면 두 후보점을 얻는다.</p>
+        <div class="math-display">$$P_1=\left(\frac{6}{\sqrt{11}},\frac{2}{\sqrt{11}},-\frac{2}{\sqrt{11}}\right)\quad\Big(1-\lambda=\tfrac{\sqrt{11}}{2}\Big),$$</div>
+        <div class="math-display">$$P_2=\left(-\frac{6}{\sqrt{11}},-\frac{2}{\sqrt{11}},\frac{2}{\sqrt{11}}\right)\quad\Big(1-\lambda=-\tfrac{\sqrt{11}}{2}\Big).$$</div>
+        <p>구는 유계인 닫힌집합이고 $f$는 연속이므로 극값정리에 의해 최근접점·최원점이 실제로 존재하며 이 두 후보 중에 있다. $P_1=\dfrac{2}{\sqrt{11}}\,(3,1,-1)$이므로 $P_1$은 원점에서 $(3,1,-1)$ 쪽으로 거리 $2$만큼 나아간 점이고, 원점에서 $(3,1,-1)$까지의 거리는 $\sqrt{9+1+1}=\sqrt{11}\gt2$이므로 $P_1$은 원점과 $(3,1,-1)$ 사이에 놓인다. 따라서 $P_1$이 더 가까운 점이고, 원점에 대해 그 반대쪽에 있는 $P_2=-P_1$이 더 먼 점이다. 따라서 구 위에서 $(3,1,-1)$에 가장 가까운 점은 $P_1=\left(\dfrac{6}{\sqrt{11}},\dfrac{2}{\sqrt{11}},-\dfrac{2}{\sqrt{11}}\right)$이고, 가장 먼 점은 $P_2=\left(-\dfrac{6}{\sqrt{11}},-\dfrac{2}{\sqrt{11}},\dfrac{2}{\sqrt{11}}\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Among the points of the sphere $x^2+y^2+z^2=4$, locate the one nearest to $(3,1,-1)$ and the one farthest from it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Working with the squared distance $f(x,y,z)=(x-3)^2+(y-1)^2+(z+1)^2$ instead of the distance itself simplifies the algebra, and it locates the same points, since squaring is increasing on nonnegative values. The constraint is $g(x,y,z)=x^2+y^2+z^2=4$, and $\nabla g=\langle2x,2y,2z\rangle\neq\mathbf 0$ everywhere on the sphere (the origin is not on it). With $\nabla f=\langle2(x-3),2(y-1),2(z+1)\rangle$, the components of $\nabla f=\lambda\nabla g$ are $2(x-3)=2\lambda x$, $2(y-1)=2\lambda y$ and $2(z+1)=2\lambda z$; cancelling the factor $2$ in each,</p>
+        <div class="math-display">$$x-3=\lambda x,\qquad y-1=\lambda y,\qquad z+1=\lambda z,$$</div>
+        <p>which rearrange to $x(1-\lambda)=3$, $y(1-\lambda)=1$, $z(1-\lambda)=-1$. If $\lambda=1$ the first equation reads $0=3$, a contradiction, so $1-\lambda\neq0$ and</p>
+        <div class="math-display">$$x=\frac{3}{1-\lambda},\qquad y=\frac{1}{1-\lambda},\qquad z=-\frac{1}{1-\lambda}.$$</div>
+        <p>Substituting into $x^2+y^2+z^2=4$ gives $\dfrac{9+1+1}{(1-\lambda)^2}=4$, i.e. $(1-\lambda)^2=\dfrac{11}{4}$, so $1-\lambda=\pm\dfrac{\sqrt{11}}{2}$. The two values produce the two candidates</p>
+        <div class="math-display">$$P_1=\left(\frac{6}{\sqrt{11}},\frac{2}{\sqrt{11}},-\frac{2}{\sqrt{11}}\right)\quad\Big(1-\lambda=\tfrac{\sqrt{11}}{2}\Big),$$</div>
+        <div class="math-display">$$P_2=\left(-\frac{6}{\sqrt{11}},-\frac{2}{\sqrt{11}},\frac{2}{\sqrt{11}}\right)\quad\Big(1-\lambda=-\tfrac{\sqrt{11}}{2}\Big).$$</div>
+        <p>The sphere is closed and bounded and $f$ is continuous, so the Extreme Value Theorem guarantees that the nearest and farthest points actually exist and must be among these two candidates. Since $P_1=\dfrac{2}{\sqrt{11}}\,(3,1,-1)$ lies in the same direction from the origin as $(3,1,-1)$, at distance $2$ from the origin, and the origin is at distance $\sqrt{9+1+1}=\sqrt{11}\gt2$ from $(3,1,-1)$, the point $P_1$ sits between the origin and $(3,1,-1)$ and is the nearer one, while $P_2=-P_1$ sits on the opposite side and is the farther one. Hence the point of the sphere nearest to $(3,1,-1)$ is $P_1=\left(\dfrac{6}{\sqrt{11}},\dfrac{2}{\sqrt{11}},-\dfrac{2}{\sqrt{11}}\right)$, and the farthest is $P_2=\left(-\dfrac{6}{\sqrt{11}},-\dfrac{2}{\sqrt{11}},\dfrac{2}{\sqrt{11}}\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-8-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">원판 위에서의 극값 <em>Extreme Values on a Disk</em><span class="src-ref">Example 4 · p.1062&ndash;1063</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>닫힌 원판 $D=\{(x,y)\mid x^2+y^2\le 1\}$ 위에서 함수 $f(x,y)=x^2+2y^2$ 의 최댓값과 최솟값을 구하라. (제약이 등식이 아니라 부등식이므로, 내부의 임계점과 경계 위의 후보점을 함께 살펴야 한다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $D$는 유계인 닫힌집합이고 $f$는 다항함수라 연속이므로 극값정리에 의해 $D$ 위에서 $f$의 절대최댓값과 절대최솟값이 존재한다. 이런 절대극값은 §14.7의 절차대로 $D$의 내부에 있는 $f$ 자체의 임계점과, $D$의 경계 위에서 제약 아래 일어나는 후보점을 모두 모아 비교하면 찾을 수 있다.</p>
+        <p>내부에서는 제약이 없으므로 $\nabla f=\mathbf 0$을 풀면 된다. $f_x=2x=0$, $f_y=4y=0$에서 유일한 임계점은 $(0,0)$이고 $f(0,0)=0$이다.</p>
+        <p>경계 $x^2+y^2=1$ 위에서 $f$의 후보점은 정확히 예제 1에서 라그랑주 승수법으로 구한 네 점이다: $\nabla f=\lambda\nabla g$ ($g=x^2+y^2$)와 $g=1$의 연립을 풀면 $(0,\pm1)$, $(\pm1,0)$을 얻고, $f(0,\pm1)=2$, $f(\pm1,0)=1$이었다.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>후보</th><th>구분</th><th>$f$의 값</th></tr>
+            <tr><td>$(0,0)$</td><td>내부 임계점</td><td>$0$</td></tr>
+            <tr><td>$(\pm1,0)$</td><td>경계(라그랑주)</td><td>$1$</td></tr>
+            <tr><td>$(0,\pm1)$</td><td>경계(라그랑주)</td><td>$2$</td></tr>
+          </table>
+        </div>
+        <p>다섯 후보의 값 $0,1,1,2,2$ 가운데 가장 큰 값은 $2$, 가장 작은 값은 $0$이다. 따라서 $f$는 $D$ 위에서 최댓값 $f(0,\pm1)=2$, 최솟값 $f(0,0)=0$을 갖는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find the maximum and the minimum value of $f(x,y)=x^2+2y^2$ on the closed disk $D=\{(x,y)\mid x^2+y^2\le 1\}$. (The constraint is an inequality, so the interior critical points and the boundary candidates must both be examined.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> $D$ is closed and bounded and $f$ is a polynomial, hence continuous, so by the Extreme Value Theorem $f$ attains an absolute maximum and an absolute minimum on $D$. Following the procedure of §14.7, these absolute extrema can be located by collecting the interior critical points of $f$ itself together with the constrained candidates on the boundary of $D$, and comparing.</p>
+        <p>In the interior there is no constraint, so solve $\nabla f=\mathbf 0$: from $f_x=2x=0$ and $f_y=4y=0$, the only critical point is $(0,0)$, with $f(0,0)=0$.</p>
+        <p>On the boundary $x^2+y^2=1$, the candidates for $f$ are exactly the four points found in Example 1 by Lagrange multipliers: solving $\nabla f=\lambda\nabla g$ (with $g=x^2+y^2$) together with $g=1$ gives $(0,\pm1)$ and $(\pm1,0)$, where $f(0,\pm1)=2$ and $f(\pm1,0)=1$.</p>
+        <div class="table-wrap">
+          <table class="formal-table">
+            <tr><th>Candidate</th><th>Type</th><th>Value of $f$</th></tr>
+            <tr><td>$(0,0)$</td><td>interior critical point</td><td>$0$</td></tr>
+            <tr><td>$(\pm1,0)$</td><td>boundary (Lagrange)</td><td>$1$</td></tr>
+            <tr><td>$(0,\pm1)$</td><td>boundary (Lagrange)</td><td>$2$</td></tr>
+          </table>
+        </div>
+        <p>Among the five candidate values $0,1,1,2,2$, the largest is $2$ and the smallest is $0$. Hence $f$ has maximum value $f(0,\pm1)=2$ and minimum value $f(0,0)=0$ on $D$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-8-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">두 제약 아래에서의 최댓값 <em>A Maximum Subject to Two Constraints</em><span class="src-ref">Example 5 · p.1064</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $x-y+z=1$ 과 원기둥 $x^2+y^2=1$ 은 하나의 곡선에서 만난다. 이 교선 위에서 함수 $f(x,y,z)=x+2y+3z$ 가 갖는 최댓값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $g(x,y,z)=x-y+z$, $h(x,y,z)=x^2+y^2$로 두면 두 제약은 $g=1$, $h=1$이다. 교선 $C$ 위에서 $\nabla g=\langle1,-1,1\rangle$은 항상 영벡터가 아니고, $\nabla h=\langle2x,2y,0\rangle$은 $C$ 위의 점이 $x^2+y^2=1$을 만족하므로 역시 영벡터가 아니다. 두 벡터가 평행하려면 $\nabla h$의 세 번째 성분이 $0$이므로 $\nabla g$의 세 번째 성분도 비례해 $0$이어야 하는데 실제로는 $1$이므로, $\nabla g$와 $\nabla h$는 $C$ 위 어디서도 평행하지 않다. 따라서 두 제약 라그랑주 조건의 전제가 성립하고, $\nabla f=\langle1,2,3\rangle$이므로 $\nabla f=\lambda\nabla g+\mu\nabla h$를 성분으로 쓰면</p>
+        <div class="math-display">$$1=\lambda+2x\mu,\qquad 2=-\lambda+2y\mu,\qquad 3=\lambda,$$</div>
+        <div class="math-display">$$x-y+z=1,\qquad x^2+y^2=1.$$</div>
+        <p>셋째 식에서 곧바로 $\lambda=3$이다. 이를 첫째 식에 넣으면 $2x\mu=1-3=-2$이므로 $\mu\neq0$이고 $x=-1/\mu$이다. 둘째 식에 넣으면 $2y\mu=2+3=5$이므로 $y=5/(2\mu)$이다. 이 둘을 $x^2+y^2=1$에 대입하면</p>
+        <div class="math-display">$$\frac{1}{\mu^2}+\frac{25}{4\mu^2}=1\quad\Longrightarrow\quad \frac{29}{4\mu^2}=1$$</div>
+        <div class="math-display">$$\Longrightarrow\quad \mu^2=\frac{29}{4}\quad\Longrightarrow\quad \mu=\pm\frac{\sqrt{29}}{2}.$$</div>
+        <p>$\mu=\dfrac{\sqrt{29}}{2}$인 경우 $x=-\dfrac{2}{\sqrt{29}}$, $y=\dfrac{5}{\sqrt{29}}$이고, $z=1-x+y=1+\dfrac{7}{\sqrt{29}}$이므로</p>
+        <div class="math-display">$$f=x+2y+3z=-\frac{2}{\sqrt{29}}+\frac{10}{\sqrt{29}}+3+\frac{21}{\sqrt{29}}=3+\frac{29}{\sqrt{29}}=3+\sqrt{29}.$$</div>
+        <p>$\mu=-\dfrac{\sqrt{29}}{2}$인 경우는 부호가 모두 반대가 되어 $x=\dfrac{2}{\sqrt{29}}$, $y=-\dfrac{5}{\sqrt{29}}$, $z=1-\dfrac{7}{\sqrt{29}}$이고 같은 계산으로 $f=3-\sqrt{29}$를 얻는다.</p>
+        <p>$C$는 평면과 원기둥의 교선인 타원이다. 닫힌집합 두 개의 교집합이므로 $C$는 닫혀 있고, $x^2+y^2=1$이 $x,y$를 묶으면 $z=1-x+y$도 묶이므로 $C$는 유계이다. $f$는 연속이므로 극값정리에 의해 $C$ 위에서 최댓값이 실제로 존재하고, 그 값은 위에서 구한 두 후보 $3\pm\sqrt{29}$ 중 하나이다. 둘을 비교하면 $3+\sqrt{29}\gt3-\sqrt{29}$이므로, $f$가 $C$ 위에서 갖는 최댓값은 $3+\sqrt{29}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The plane $x-y+z=1$ and the cylinder $x^2+y^2=1$ meet in a curve. Find the largest value that $f(x,y,z)=x+2y+3z$ attains on that curve.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Set $g(x,y,z)=x-y+z$ and $h(x,y,z)=x^2+y^2$, so the two constraints are $g=1$ and $h=1$. Along the curve of intersection $C$, $\nabla g=\langle1,-1,1\rangle$ is never zero, and $\nabla h=\langle2x,2y,0\rangle$ is never zero either, since points of $C$ satisfy $x^2+y^2=1$. For the two to be parallel, the vanishing third component of $\nabla h$ would force the third component of $\nabla g$ to vanish proportionally, but that component is $1$; so $\nabla g$ and $\nabla h$ are never parallel on $C$. The hypotheses of the two-multiplier condition therefore hold, and with $\nabla f=\langle1,2,3\rangle$, the system $\nabla f=\lambda\nabla g+\mu\nabla h$ reads, in components,</p>
+        <div class="math-display">$$1=\lambda+2x\mu,\qquad 2=-\lambda+2y\mu,\qquad 3=\lambda,$$</div>
+        <div class="math-display">$$x-y+z=1,\qquad x^2+y^2=1.$$</div>
+        <p>The third equation gives $\lambda=3$ at once. Substituting into the first gives $2x\mu=1-3=-2$, so $\mu\neq0$ and $x=-1/\mu$. Substituting into the second gives $2y\mu=2+3=5$, so $y=5/(2\mu)$. Putting both into $x^2+y^2=1$,</p>
+        <div class="math-display">$$\frac{1}{\mu^2}+\frac{25}{4\mu^2}=1\quad\Longrightarrow\quad \frac{29}{4\mu^2}=1$$</div>
+        <div class="math-display">$$\Longrightarrow\quad \mu^2=\frac{29}{4}\quad\Longrightarrow\quad \mu=\pm\frac{\sqrt{29}}{2}.$$</div>
+        <p>For $\mu=\dfrac{\sqrt{29}}{2}$, $x=-\dfrac{2}{\sqrt{29}}$ and $y=\dfrac{5}{\sqrt{29}}$, and $z=1-x+y=1+\dfrac{7}{\sqrt{29}}$, so</p>
+        <div class="math-display">$$f=x+2y+3z=-\frac{2}{\sqrt{29}}+\frac{10}{\sqrt{29}}+3+\frac{21}{\sqrt{29}}=3+\frac{29}{\sqrt{29}}=3+\sqrt{29}.$$</div>
+        <p>For $\mu=-\dfrac{\sqrt{29}}{2}$, every sign flips: $x=\dfrac{2}{\sqrt{29}}$, $y=-\dfrac{5}{\sqrt{29}}$, $z=1-\dfrac{7}{\sqrt{29}}$, and the same computation gives $f=3-\sqrt{29}$.</p>
+        <p>The curve $C$ — the ellipse where the plane meets the cylinder — is closed, being the intersection of two closed sets, and bounded, since $x^2+y^2=1$ confines $x$ and $y$ and $z=1-x+y$ is then confined as well. Since $f$ is continuous, the Extreme Value Theorem guarantees that a maximum actually exists on $C$, and it must be one of the two candidate values $3\pm\sqrt{29}$ found above. Comparing them, $3+\sqrt{29}\gt3-\sqrt{29}$, so the maximum value of $f$ on $C$ is $3+\sqrt{29}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-8-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch08.html">단원 08</a></p>
+        <ul>
+          <li>제약이 하나인 라그랑주 승수법 (식 1) — <a href="../calc2/ch08.html#ex02">ex02</a> (1)(2), <a href="../calc2/ch08.html#yu02-1">yu02-1</a>, <a href="../calc2/ch08.html#yu02-2">yu02-2</a>, <a href="../calc2/ch08.html#pr03">pr03</a>, <a href="../calc2/ch08.html#pr04">pr04</a>, <a href="../calc2/ch08.html#pr06">pr06</a>, <a href="../calc2/ch08.html#pr07">pr07</a>, <a href="../calc2/ch08.html#pr08">pr08</a> (완전 대응)</li>
+          <li>제약이 둘인 경우 (식 16) — <a href="../calc2/ch08.html#ex02">ex02</a> (3), <a href="../calc2/ch08.html#yu02-3">yu02-3</a> (완전 대응, 교안도 승수 두 개를 씀)</li>
+          <li>부등식 영역에서의 극값 (예제 4 — 내부 임계점과 경계 라그랑주의 결합) — 대응 없음 (과제 제출 문항 27이 이 유형)</li>
+          <li>$\nabla g=\mathbf 0$ 이거나 $\nabla g$ 가 정의되지 않아 방법이 실패하는 경우 (문제 34·35) — 대응 없음 (교안은 $\nabla g\neq\mathbf 0$ 가정을 언급하지 않음)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.8)</strong></p>
+        <p>제출 문항: 7, 11, 27, 33, 57 &nbsp;/&nbsp; 학습 참고: 6, 12, 28, 31, 32, 61</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-7.html">§14.7 최댓값과 최솟값</a> &nbsp;/&nbsp; 다음: <a href="s15-1.html">§15.1 직사각형 위의 이중적분</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch08.html">Unit 08</a></p>
+        <ul>
+          <li>Lagrange multipliers with one constraint (Eq. 1) — <a href="../calc2/ch08.html#ex02">ex02</a> (1)(2), <a href="../calc2/ch08.html#yu02-1">yu02-1</a>, <a href="../calc2/ch08.html#yu02-2">yu02-2</a>, <a href="../calc2/ch08.html#pr03">pr03</a>, <a href="../calc2/ch08.html#pr04">pr04</a>, <a href="../calc2/ch08.html#pr06">pr06</a>, <a href="../calc2/ch08.html#pr07">pr07</a>, <a href="../calc2/ch08.html#pr08">pr08</a> (full match)</li>
+          <li>Two constraints (Eq. 16) — <a href="../calc2/ch08.html#ex02">ex02</a> (3), <a href="../calc2/ch08.html#yu02-3">yu02-3</a> (full match; the lecture notes also use two multipliers)</li>
+          <li>Extreme values on a region defined by an inequality (Example 4 — interior critical points combined with Lagrange multipliers on the boundary) — no match, although assigned problem 27 is of exactly this type</li>
+          <li>Failure of the method where $\nabla g=\mathbf 0$ or $\nabla g$ is undefined (Exercises 34, 35) — no match; the lecture notes never state the hypothesis $\nabla g\neq\mathbf 0$</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.8)</strong></p>
+        <p>Problems to submit: 7, 11, 27, 33, 57 &nbsp;/&nbsp; Recommended practice: 6, 12, 28, 31, 32, 61</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-7.html">§14.7 Maximum and Minimum Values</a> &nbsp;/&nbsp; Next: <a href="s15-1.html">§15.1 Double Integrals over Rectangles</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§15.5 곡면 넓이 (Surface Area) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §15.5 곡면 넓이 — 접평면 조각으로 곡면을 근사하는 정의 (1), 외적 | a × b |에서 나오는 인자 √(fx²+fy²+1), 곡면 넓이 공식 (2)와 편미분 기호 표기 (3), 호의 길이 공식과의 유비를 한국어·영어 대조로 정리하고 예제 2개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 15.5, 곡면 넓이, surface area, 접평면, tangent plane, 외적, cross product, 이중적분, 포물면 넓이, paraboloid area, 호의 길이, arc length, 매개곡면, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s15-5.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§15.5 곡면 넓이 (Surface Area) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="접평면 평행사변형으로 곡면을 근사하는 넓이의 정의 (1)에서 출발해 외적으로 곡면 넓이 공식 (2)·(3)을 얻고, 삼각영역 위 곡면과 포물면 조각의 넓이를 계산한 §15.5 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s15-5.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§15.5 곡면 넓이 (Surface Area) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §15.5 곡면 넓이 — 접평면 조각에 의한 근사와 곡면 넓이의 정의 (1), 외적으로 얻는 곡면 넓이 공식 (2)와 편미분 기호 표기 (3), 호의 길이 공식과의 유비를 한국어·영어 대조로 정리하고 본문 예제 2개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s15-5.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s15-5.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s15-1.html">15.1</a>
+      <a href="s15-2.html">15.2</a>
+      <a href="s15-3.html">15.3</a>
+      <a href="s15-4.html">15.4</a>
+      <a href="s15-5.html" class="active">15.5</a>
+      <a href="s15-6.html">15.6</a>
+      <a href="s15-7.html">15.7</a>
+      <a href="s15-8.html">15.8</a>
+      <a href="s15-9.html">15.9</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §15.5 · 6주차</p>
+  <h1>§15.5 곡면 넓이<span>Surface Area</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c15-5-1"><span class="toc-num">NOTE</span> 곡면 넓이 문제 <em>The Surface Area Problem</em></a></li>
+    <li><a href="#c15-5-2"><span class="toc-num">NOTE</span> 접평면 조각에 의한 근사 <em>Approximation by Tangent-Plane Pieces</em></a></li>
+    <li><a href="#c15-5-3"><span class="toc-num">DEF 3</span> 곡면 넓이의 정의 <em>Definition of Surface Area</em></a></li>
+    <li><a href="#c15-5-4"><span class="toc-num">NOTE</span> 외적으로 구하는 접평면 조각의 넓이 <em>Computing the Tangent-Plane Area by a Cross Product</em></a></li>
+    <li><a href="#c15-5-5"><span class="toc-num">THM 5</span> 곡면 넓이 공식 <em>The Surface Area Formula</em></a></li>
+    <li><a href="#c15-5-6"><span class="toc-num">REM 6</span> 편미분 기호 표기와 호의 길이와의 유비 <em>Alternative Notation and the Arc Length Analogy</em></a></li>
+    <li><a href="#ex15-5-1"><span class="toc-num">EXAM 1</span> 삼각형 영역 위 곡면의 넓이 <em>Surface Area over a Triangular Region</em></a></li>
+    <li><a href="#ex15-5-2"><span class="toc-num">EXAM 2</span> 평면에 잘린 포물면의 넓이 <em>Area of a Paraboloid Cut by a Plane</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 · The surface area problem -->
+<div class="card note-card" id="c15-5-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">곡면 넓이 문제 <em>The Surface Area Problem</em><span class="src-ref">Section opening · p.1117</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이중적분은 이제 새로운 기하학적 쓰임을 얻는다. 곡면이 얼마만큼의 넓이를 갖는지를 재는 문제이다. 특수한 경우 하나는 이미 §8.2에서 해결되었다. 거기서는 1변수 미적분만으로 회전면의 넓이를 구했다. 이 절이 다루는 것은 그와 달리 이변수함수의 그래프이다. 곡면 $S$는 $z=f(x,y)$이고 $(x,y)$는 평면 영역 $D$ 위를 움직이며, $f$는 편도함수 $f_x$와 $f_y$가 연속이라고 가정한다.</p>
+        <p>훨씬 더 넓은 부류의 곡면인 <strong>매개곡면</strong>과 그 넓이는 §16.6에서 다루는데, 여기서 얻는 공식은 그곳에서 얻는 공식의 특수한 경우이다. §16.6을 배울 예정인 독자라면 이 절은 건너뛰어도 좋다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Double integrals now serve a new geometric purpose: measuring how much area a surface carries. One special case was settled long ago — Section 8.2 obtained the area of a surface of revolution by single-variable methods. The object of this section is instead the graph of a function of two variables: $S$ is the surface $z=f(x,y)$, with $(x,y)$ running over a plane region $D$, and $f$ is assumed to have continuous partial derivatives $f_x$ and $f_y$.</p>
+        <p>A far wider class of surfaces, the <strong>parametric surfaces</strong>, together with their areas, is treated in Section 16.6; the formula found here is a special case of the one found there. A reader who will study that section may therefore skip this one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : approximation by tangent-plane pieces (Figure 1) -->
+<div class="card note-card" id="c15-5-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">접평면 조각에 의한 근사 <em>Approximation by Tangent-Plane Pieces</em><span class="src-ref">Figure 1 · p.1117&ndash;1118</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유도를 짧게 하기 위해 $f(x,y)\ge 0$이고 정의역 $D$는 직사각형이라 하자. $D$를 넓이 $\Delta A=\Delta x\,\Delta y$인 작은 직사각형 $R_{ij}$들로 나누고, $R_{ij}$의 꼭짓점 가운데 원점에 가장 가까운 것을 $(x_i,y_j)$라 쓴다. 그리고</p>
+        <div class="math-display">$$P_{ij}\bigl(x_i,\ y_j,\ f(x_i,y_j)\bigr)$$</div>
+        <p>을 이 꼭짓점 바로 위에 놓인 $S$ 위의 점이라 하자.</p>
+        <p>$P_{ij}$ 근처에서는 $P_{ij}$에서의 접평면이 $S$를 훌륭히 대신한다. 이 접평면 가운데 $R_{ij}$ 바로 위에 놓인 부분은 평행사변형이며, 그 넓이를 $\Delta T_{ij}$라 쓰고 $R_{ij}$ 바로 위에 놓인 $S$ 조각의 넓이를 $\Delta S_{ij}$라 쓴다. 그러면 $\Delta T_{ij}$가 $\Delta S_{ij}$를 근사하므로 모든 $\Delta T_{ij}$의 합은 $S$ 전체의 넓이를 근사하며, 직사각형을 잘게 나눌수록 이 근사는 더 정확해지는 것으로 보인다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 335 360" role="img" aria-label="정의역의 부분직사각형 위에 놓인 곡면 조각과 접평면 평행사변형, 두 변 벡터 a와 b" style="max-width:360px;width:100%;height:auto">
+            <line x1="122.4" y1="273.6" x2="122.4" y2="21.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="122.4,13 118.4,24 126.4,24" fill="var(--grey800)"/>
+            <line x1="122.4" y1="273.6" x2="23.4" y2="327.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="23.4,327.6 34.98,325.84 31.14,318.82" fill="var(--grey800)"/>
+            <line x1="122.4" y1="273.6" x2="311.4" y2="273.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="317,273.6 307,269.6 307,277.6" fill="var(--grey800)"/>
+            <text x="112" y="18" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="10" y="338" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="318" y="278" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="116" y="268" text-anchor="end" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 122.4,273.6 L 46.4,315 L 207.7,315 L 283.7,273.6 Z" fill="var(--grey100)" fill-opacity="0.95" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 145.6,285.7 L 113.9,303 L 174.4,303 L 206.1,285.7 Z" fill="var(--g200)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.1"/>
+            <text x="160" y="299" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">Rᵢⱼ</text>
+            <text x="228" y="302" font-size="12" font-style="italic" fill="var(--grey600)">D</text>
+            <path d="M 122.4,49 Q 84.4,69.7 46.4,176.8 Q 127.1,176.8 207.7,258.1 Q 245.7,151.3 283.7,130.5 Q 203,48.9 122.4,49 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="72" y="160" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <line x1="145.6" y1="285.7" x2="145.6" y2="74.9" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="174.4" y1="303" x2="174.4" y2="156.8" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 145.6,74.9 L 113.9,128 L 174.4,156.8 L 206.1,103.5 Z" fill="var(--g200)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 145.6,74.9 L 113.9,113 L 174.4,130.3 L 206.1,92 Z" fill="var(--orange-bg)" fill-opacity="0.6" stroke="var(--orange)" stroke-width="1.3"/>
+            <line x1="145.6" y1="74.9" x2="120.3" y2="105.3" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="113.9,113 123.2,107.8 117.4,102.9" fill="var(--orange)"/>
+            <line x1="145.6" y1="74.9" x2="196.5" y2="89.3" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="206.1,92 195.5,92.9 197.5,85.6" fill="var(--orange)"/>
+            <circle cx="145.6" cy="74.9" r="3.2" fill="var(--grey900)"/>
+            <text x="141" y="68" text-anchor="end" font-size="11" fill="var(--grey900)">Pᵢⱼ</text>
+            <text x="122" y="92" text-anchor="end" font-size="12" font-style="italic" font-weight="600" fill="var(--orange)">a</text>
+            <text x="176" y="76" text-anchor="middle" font-size="12" font-style="italic" font-weight="600" fill="var(--orange)">b</text>
+            <text x="108" y="108" text-anchor="end" font-size="11" font-style="italic" fill="var(--orange)">ΔTᵢⱼ</text>
+            <text x="147" y="138" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">ΔSᵢⱼ</text>
+            <text x="168" y="345" text-anchor="middle" font-size="11" fill="var(--g700)">ΔTᵢⱼ = | a × b | = √(1 + (∂z/∂x)² + (∂z/∂y)²) ΔA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To keep the derivation short, assume $f(x,y)\ge 0$ and let the domain $D$ be a rectangle. Cut $D$ into small rectangles $R_{ij}$, each of area $\Delta A=\Delta x\,\Delta y$. Write $(x_i,y_j)$ for the corner of $R_{ij}$ nearest the origin, and let</p>
+        <div class="math-display">$$P_{ij}\bigl(x_i,\ y_j,\ f(x_i,y_j)\bigr)$$</div>
+        <p>be the point of $S$ sitting straight above that corner.</p>
+        <p>Near $P_{ij}$ the tangent plane at $P_{ij}$ is a good stand-in for $S$. The piece of that plane lying straight over $R_{ij}$ is a parallelogram; write $\Delta T_{ij}$ for its area, and write $\Delta S_{ij}$ for the area of the piece of $S$ lying straight over $R_{ij}$. Then $\Delta T_{ij}$ approximates $\Delta S_{ij}$, so the sum of all the $\Delta T_{ij}$ approximates the total area of $S$, and shrinking the rectangles appears to sharpen that approximation.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 335 360" role="img" aria-label="A surface patch above a subrectangle of the domain, and the tangent-plane parallelogram with edge vectors a and b" style="max-width:360px;width:100%;height:auto">
+            <line x1="122.4" y1="273.6" x2="122.4" y2="21.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="122.4,13 118.4,24 126.4,24" fill="var(--grey800)"/>
+            <line x1="122.4" y1="273.6" x2="23.4" y2="327.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="23.4,327.6 34.98,325.84 31.14,318.82" fill="var(--grey800)"/>
+            <line x1="122.4" y1="273.6" x2="311.4" y2="273.6" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="317,273.6 307,269.6 307,277.6" fill="var(--grey800)"/>
+            <text x="112" y="18" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="10" y="338" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="318" y="278" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="116" y="268" text-anchor="end" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 122.4,273.6 L 46.4,315 L 207.7,315 L 283.7,273.6 Z" fill="var(--grey100)" fill-opacity="0.95" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 145.6,285.7 L 113.9,303 L 174.4,303 L 206.1,285.7 Z" fill="var(--g200)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.1"/>
+            <text x="160" y="299" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">Rᵢⱼ</text>
+            <text x="228" y="302" font-size="12" font-style="italic" fill="var(--grey600)">D</text>
+            <path d="M 122.4,49 Q 84.4,69.7 46.4,176.8 Q 127.1,176.8 207.7,258.1 Q 245.7,151.3 283.7,130.5 Q 203,48.9 122.4,49 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="72" y="160" font-size="12" font-style="italic" fill="var(--grey600)">S</text>
+            <line x1="145.6" y1="285.7" x2="145.6" y2="74.9" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="174.4" y1="303" x2="174.4" y2="156.8" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 145.6,74.9 L 113.9,128 L 174.4,156.8 L 206.1,103.5 Z" fill="var(--g200)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 145.6,74.9 L 113.9,113 L 174.4,130.3 L 206.1,92 Z" fill="var(--orange-bg)" fill-opacity="0.6" stroke="var(--orange)" stroke-width="1.3"/>
+            <line x1="145.6" y1="74.9" x2="120.3" y2="105.3" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="113.9,113 123.2,107.8 117.4,102.9" fill="var(--orange)"/>
+            <line x1="145.6" y1="74.9" x2="196.5" y2="89.3" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="206.1,92 195.5,92.9 197.5,85.6" fill="var(--orange)"/>
+            <circle cx="145.6" cy="74.9" r="3.2" fill="var(--grey900)"/>
+            <text x="141" y="68" text-anchor="end" font-size="11" fill="var(--grey900)">Pᵢⱼ</text>
+            <text x="122" y="92" text-anchor="end" font-size="12" font-style="italic" font-weight="600" fill="var(--orange)">a</text>
+            <text x="176" y="76" text-anchor="middle" font-size="12" font-style="italic" font-weight="600" fill="var(--orange)">b</text>
+            <text x="108" y="108" text-anchor="end" font-size="11" font-style="italic" fill="var(--orange)">ΔTᵢⱼ</text>
+            <text x="147" y="138" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">ΔSᵢⱼ</text>
+            <text x="168" y="345" text-anchor="middle" font-size="11" fill="var(--g700)">ΔTᵢⱼ = | a × b | = √(1 + (∂z/∂x)² + (∂z/∂y)²) ΔA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Definition (1) -->
+<div class="card def-card" id="c15-5-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">곡면 넓이의 정의 <em>Definition of Surface Area</em><span class="src-ref">Definition (1) · p.1118</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 (1) &mdash; 곡면 넓이.</strong> $S$를 $D$ 위의 곡면 $z=f(x,y)$라 하고, $\Delta T_{ij}$를 앞서 설명한 접평면 평행사변형의 넓이라 하자. $S$의 <strong>곡면 넓이</strong>를 다음과 같이 정의한다.</p>
+          <div class="math-display">$$A(S)=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n}\Delta T_{ij}.\tag{1}$$</div>
+        </div>
+        <p>이 극한은 §15.1의 이중적분에서와 똑같이 분할을 두 방향 모두에서 동시에 세분한다. 달라진 것은 합의 항뿐이다. 표본점에서의 함숫값에 $\Delta A$를 곱한 자리에, 접평면 한 조각의 평평한 넓이가 대신 들어선다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition (1) &mdash; Surface area.</strong> Let $S$ be the surface $z=f(x,y)$ over $D$, and let $\Delta T_{ij}$ be the tangent-plane parallelogram areas described above. The <strong>surface area</strong> of $S$ is defined to be</p>
+          <div class="math-display">$$A(S)=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n}\Delta T_{ij}.\tag{1}$$</div>
+        </div>
+        <p>The limit refines the partition in both directions at once, exactly as in the double integral of Section 15.1. Only the summand is new: in place of a sampled value of a function times $\Delta A$ stands the area of one flat piece of tangent plane.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : computing Delta T by a cross product (Figure 2) -->
+<div class="card note-card" id="c15-5-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">외적으로 구하는 접평면 조각의 넓이 <em>Computing the Tangent-Plane Area by a Cross Product</em><span class="src-ref">Figure 2 · p.1118</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (1)은 넓이를 정의할 뿐 계산에는 별 쓸모가 없으므로, 다음 단계로 $\Delta T_{ij}$의 닫힌 형태를 구해야 한다. $P_{ij}$에서 시작하는 평행사변형의 두 변 벡터를 $\mathbf a$, $\mathbf b$라 하자(그림은 앞 카드 참조). 평행사변형의 넓이는 두 변 벡터의 외적의 길이이므로 $\Delta T_{ij}=|\mathbf a\times\mathbf b|$이다.</p>
+        <p>이 두 변 벡터가 무엇인지는 §14.3에서 이미 알려준다. $f_x(x_i,y_j)$와 $f_y(x_i,y_j)$는 각각 $P_{ij}$에서 $\mathbf a$, $\mathbf b$ 방향으로 그은 접선의 기울기이다. 따라서</p>
+        <div class="math-display">$$\mathbf a=\Delta x\,\mathbf i+f_x(x_i,y_j)\,\Delta x\,\mathbf k,$$</div>
+        <div class="math-display">$$\mathbf b=\Delta y\,\mathbf j+f_y(x_i,y_j)\,\Delta y\,\mathbf k.$$</div>
+        <p>외적을 행렬식으로 전개하고 $\Delta x\,\Delta y=\Delta A$를 쓰면,</p>
+        <div class="math-display">$$\mathbf a\times\mathbf b=\begin{vmatrix}\mathbf i & \mathbf j & \mathbf k\\[2pt] \Delta x & 0 & f_x(x_i,y_j)\,\Delta x\\[2pt] 0 & \Delta y & f_y(x_i,y_j)\,\Delta y\end{vmatrix}=\bigl[-f_x(x_i,y_j)\,\mathbf i-f_y(x_i,y_j)\,\mathbf j+\mathbf k\bigr]\Delta A.$$</div>
+        <p>길이를 취하면 이것이 곧 평행사변형의 넓이가 된다.</p>
+        <div class="math-display">$$\Delta T_{ij}=|\mathbf a\times\mathbf b|=\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A.$$</div>
+        <p>즉 접평면 조각 하나하나는 평평한 셀 $\Delta A$가 인자 $\sqrt{f_x^2+f_y^2+1}$만큼 늘어난 것이며, 이 인자는 표본점에서의 기울기에만 의존한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Equation (1) defines the area but is not convenient for computation, so the next step is a closed form for $\Delta T_{ij}$. Let $\mathbf a$ and $\mathbf b$ be the two edge vectors of the parallelogram that start at $P_{ij}$ (see the figure in the previous card); the area of a parallelogram is the length of the cross product of its edge vectors, so $\Delta T_{ij}=|\mathbf a\times\mathbf b|$.</p>
+        <p>Section 14.3 tells us what those edge vectors are: $f_x(x_i,y_j)$ and $f_y(x_i,y_j)$ are the slopes of the tangent lines drawn at $P_{ij}$ in the directions of $\mathbf a$ and of $\mathbf b$. Hence</p>
+        <div class="math-display">$$\mathbf a=\Delta x\,\mathbf i+f_x(x_i,y_j)\,\Delta x\,\mathbf k,$$</div>
+        <div class="math-display">$$\mathbf b=\Delta y\,\mathbf j+f_y(x_i,y_j)\,\Delta y\,\mathbf k.$$</div>
+        <p>Expanding the cross product as a determinant and using $\Delta x\,\Delta y=\Delta A$,</p>
+        <div class="math-display">$$\mathbf a\times\mathbf b=\begin{vmatrix}\mathbf i & \mathbf j & \mathbf k\\[2pt] \Delta x & 0 & f_x(x_i,y_j)\,\Delta x\\[2pt] 0 & \Delta y & f_y(x_i,y_j)\,\Delta y\end{vmatrix}=\bigl[-f_x(x_i,y_j)\,\mathbf i-f_y(x_i,y_j)\,\mathbf j+\mathbf k\bigr]\Delta A.$$</div>
+        <p>Taking lengths turns this into the area of the parallelogram:</p>
+        <div class="math-display">$$\Delta T_{ij}=|\mathbf a\times\mathbf b|=\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A.$$</div>
+        <p>So each tangent-plane piece is the flat cell $\Delta A$ stretched by the factor $\sqrt{f_x^2+f_y^2+1}$, a factor that depends only on the slopes at the sample point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Formula (2), the surface area formula -->
+<div class="card thm-card" id="c15-5-5">
+  <div class="card-head">
+    <span class="thm-num">THM 5</span>
+    <span class="thm-title">곡면 넓이 공식 <em>The Surface Area Formula</em><span class="src-ref">Formula (2) · p.1118</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (2) &mdash; 곡면 $z=f(x,y)$의 넓이.</strong> $f_x$와 $f_y$가 연속이라 하자. 방정식 $z=f(x,y)$, $(x,y)\in D$로 주어지는 곡면의 넓이는</p>
+          <div class="math-display">$$A(S)=\iint_D\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}\;dA.\tag{2}$$</div>
+        </div>
+        <p>피적분함수는 앞 카드에서 얻은 늘임 인자를 이제 $D$ 위를 움직이는 점에서 계산한 것이다. 이 인자는 결코 $1$보다 작아지지 않는다. 곡면이 수평인 곳에서는 인자가 $1$이 되어 그 부근의 조각이 자기 그림자만큼의 넓이만 갖고(곡면이 어디서나 수평이면 $A(S)$는 곧 $D$의 넓이이다), 곡면이 가파른 곳에서는 인자가 커져 곡면이 그 그림자보다 더 큰 넓이를 갖게 된다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 카드 4에서 구한 것을 정의 (1)에 그대로 대입한다. 표본점 $(x_i,y_j)$ 위 접평면 조각의 넓이는</p>
+        <div class="math-display">$$\Delta T_{ij}=\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A$$</div>
+        <p>이었으므로, 곡면 넓이는</p>
+        <div class="math-display">$$A(S)=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n}\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A.$$</div>
+        <p>우변은 함수 $g(x,y)=\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}$을 표본점 $(x_i,y_j)$에서 계산해 $\Delta A$를 곱하고 모두 더한 것, 즉 $g$의 리만 합이다. $f_x,f_y$가 연속이므로 $g$도 $D$에서 연속이고, 따라서 §15.1의 이중적분의 정의에 의해 이 극한은 $D$ 위에서의 $g$의 이중적분과 같다. 그러므로</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}\;dA.$$</div>
+        <p>카드 2에서 $D$를 직사각형으로 두었으므로 이 논증이 곧바로 덮는 것은 직사각형 정의역이다. 일반 영역 $D$에 대해서는 §15.2에서처럼 $D$를 품는 직사각형을 잡고 피적분함수를 $D$ 밖에서 $0$으로 확장하면 같은 결론에 이른다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (2) &mdash; Area of the surface $z=f(x,y)$.</strong> Let $f_x$ and $f_y$ be continuous. The surface with equation $z=f(x,y)$, $(x,y)\in D$, has area</p>
+          <div class="math-display">$$A(S)=\iint_D\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}\;dA.\tag{2}$$</div>
+        </div>
+        <p>The integrand is the stretching factor of the previous card, now evaluated at a running point of $D$. That factor never drops below $1$. Where the surface is horizontal the factor equals $1$ and the piece there carries exactly the area of its shadow (for a surface that is horizontal everywhere, $A(S)$ is just the area of $D$); where the surface is steep the factor grows, and the surface carries more area than its shadow.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Substitute the result of Card 4 directly into Definition (1). The area of the tangent-plane piece over the sample point $(x_i,y_j)$ was</p>
+        <div class="math-display">$$\Delta T_{ij}=\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A,$$</div>
+        <p>so the surface area becomes</p>
+        <div class="math-display">$$A(S)=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n}\sqrt{[f_x(x_i,y_j)]^2+[f_y(x_i,y_j)]^2+1}\;\Delta A.$$</div>
+        <p>The right side is exactly a Riemann sum for the function $g(x,y)=\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}$: evaluate $g$ at the sample point $(x_i,y_j)$, multiply by $\Delta A$, and add. Since $f_x,f_y$ are continuous, $g$ is continuous on $D$, so by the definition of the double integral from Section 15.1 this limit equals the double integral of $g$ over $D$. Hence</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{[f_x(x,y)]^2+[f_y(x,y)]^2+1}\;dA.$$</div>
+        <p>Card 2 took $D$ to be a rectangle, so what the argument covers directly is a rectangular domain. For a general $D$, enclose it in a rectangle and extend the integrand by $0$ outside $D$, exactly as in Section 15.2; the same conclusion follows.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Formula (3) and the arc length analogy -->
+<div class="card rem-card" id="c15-5-6">
+  <div class="card-head">
+    <span class="rem-num">REM 6</span>
+    <span class="rem-title">편미분 기호 표기와 호의 길이와의 유비 <em>Alternative Notation and the Arc Length Analogy</em><span class="src-ref">Formula (3) · p.1118</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>편미분 기호 $\partial$을 써서 나타내면, 식 (2)는 다음과 같이 쓰인다.</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2}\,dA.\tag{3}$$</div>
+        <p>이를 §8.1의 호의 길이 공식</p>
+        <div class="math-display">$$L=\int_a^b\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx,$$</div>
+        <p>과 나란히 놓아 보면 그 대응이 뚜렷하다. 근호 안의 도함수 하나가 두 개의 편도함수로 바뀌고, 구간 위의 적분이 평면 영역 위의 적분으로 바뀐다. 두 경우 모두 근호는 그래프가 그 정사영보다 얼마나 더 길거나 더 넓은지를 재는 역할을 한다.</p>
+        <p>식 (2)가 §8.2에서 얻은 회전면 넓이 공식과 모순되지 않음은 §16.6에서 확인한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Written with the $\partial$-notation for partial derivatives, Formula (2) reads</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2}\,dA.\tag{3}$$</div>
+        <p>Set this beside the arc length formula of Section 8.1,</p>
+        <div class="math-display">$$L=\int_a^b\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx,$$</div>
+        <p>and the parallel is hard to miss: a single derivative under the radical becomes two partial derivatives, and integration over an interval becomes integration over a plane region. In both cases the radical measures how much longer, or larger, the graph is than its projection.</p>
+        <p>That Formula (2) does not conflict with the formula for the area of a surface of revolution obtained in Section 8.2 is verified in Section 16.6.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex15-5-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">삼각형 영역 위 곡면의 넓이 <em>Surface Area over a Triangular Region</em><span class="src-ref">Example 1 · p.1119</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$xy$-평면 위의 삼각형 영역 $T$의 꼭짓점이 $(0,0)$, $(1,0)$, $(1,1)$이라 하자. 곡면 $z=x^2+2y+2$ 가운데 $T$ 바로 위에 놓인 부분의 넓이를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=x^2+2y+2$이므로 $f_x=2x$, $f_y=2$이고, 공식 (2)의 피적분함수는</p>
+        <div class="math-display">$$\sqrt{(2x)^2+2^2+1}=\sqrt{4x^2+5}$$</div>
+        <p>이다. 정의역 $T$의 세 변은 $y=0$($0\le x\le1$), $x=1$($0\le y\le1$), 그리고 $(0,0)$과 $(1,1)$을 잇는 대각선 $y=x$이다. 세 번째 변이 위쪽 경계이므로 $T$는 제1형 영역</p>
+        <div class="math-display">$$T=\{(x,y)\mid 0\le x\le1,\ 0\le y\le x\}$$</div>
+        <p>로 나타난다. 피적분함수가 $y$를 포함하지 않으므로 $y$를 안쪽 변수로 잡으면 안쪽 적분이 즉시 끝난다.</p>
+        <div class="math-display">$$A(S)=\int_0^1\!\!\int_0^x\sqrt{4x^2+5}\;dy\,dx=\int_0^1 x\sqrt{4x^2+5}\;dx.$$</div>
+        <p>$u=4x^2+5$로 치환하면 $du=8x\,dx$이고 $x=0,1$에서 각각 $u=5,9$이므로</p>
+        <div class="math-display">$$\int_0^1 x\sqrt{4x^2+5}\,dx=\frac18\int_5^9\sqrt{u}\,du=\frac18\cdot\frac23\Bigl[u^{3/2}\Bigr]_5^9=\frac{1}{12}\bigl(27-5\sqrt5\bigr).$$</div>
+        <p>따라서 $A(S)=\dfrac{1}{12}\bigl(27-5\sqrt5\bigr)\approx1.318$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be the triangular region of the $xy$-plane whose vertices are $(0,0)$, $(1,0)$ and $(1,1)$. Find the area of the portion of the surface $z=x^2+2y+2$ that lies directly above $T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f(x,y)=x^2+2y+2$, we have $f_x=2x$ and $f_y=2$, so the integrand in Formula (2) is</p>
+        <div class="math-display">$$\sqrt{(2x)^2+2^2+1}=\sqrt{4x^2+5}.$$</div>
+        <p>The three sides of $T$ are $y=0$ ($0\le x\le1$), $x=1$ ($0\le y\le1$), and the diagonal $y=x$ joining $(0,0)$ to $(1,1)$. Since that diagonal is the upper boundary, $T$ is the type I region</p>
+        <div class="math-display">$$T=\{(x,y)\mid 0\le x\le1,\ 0\le y\le x\}.$$</div>
+        <p>The integrand does not involve $y$, so taking $y$ as the inner variable finishes the inner integral at once:</p>
+        <div class="math-display">$$A(S)=\int_0^1\!\!\int_0^x\sqrt{4x^2+5}\;dy\,dx=\int_0^1 x\sqrt{4x^2+5}\;dx.$$</div>
+        <p>Substituting $u=4x^2+5$ gives $du=8x\,dx$, and $x=0,1$ correspond to $u=5,9$, so</p>
+        <div class="math-display">$$\int_0^1 x\sqrt{4x^2+5}\,dx=\frac18\int_5^9\sqrt{u}\,du=\frac18\cdot\frac23\Bigl[u^{3/2}\Bigr]_5^9=\frac{1}{12}\bigl(27-5\sqrt5\bigr).$$</div>
+        <p>Hence $A(S)=\dfrac{1}{12}\bigl(27-5\sqrt5\bigr)\approx1.318$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex15-5-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">평면에 잘린 포물면의 넓이 <em>Area of a Paraboloid Cut by a Plane</em><span class="src-ref">Example 2 · p.1119</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $z=9$가 포물면 $z=x^2+y^2$을 자른다. 이 평면보다 아래에 놓인 포물면 부분의 넓이를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x,y)=x^2+y^2$이므로 $f_x=2x$, $f_y=2y$이고, 공식 (2)의 피적분함수는</p>
+        <div class="math-display">$$\sqrt{(2x)^2+(2y)^2+1}=\sqrt{1+4(x^2+y^2)}$$</div>
+        <p>이다. 평면 $z=9$가 포물면과 만나는 교선은 $x^2+y^2=9$, $z=9$이므로, 구하는 포물면 조각은 정확히 원판</p>
+        <div class="math-display">$$D=\{(x,y)\mid x^2+y^2\le9\}$$</div>
+        <p> — 반지름 $3$인 원판 — 위에 놓인다. 피적분함수가 $x^2+y^2$에만 의존하고 정의역도 원판이므로 극좌표 $x=r\cos\theta$, $y=r\sin\theta$, $dA=r\,dr\,d\theta$로 바꾸면 계산이 크게 줄어든다.</p>
+        <div class="math-display">$$A(S)=\int_0^{2\pi}\!\!\int_0^3\sqrt{1+4r^2}\,r\,dr\,d\theta.$$</div>
+        <p>피적분함수가 $\theta$에 무관하므로 바깥 적분은 인자 $2\pi$를 내어 준다. 남은 것은 $w=1+4r^2$로 치환한 안쪽 적분이다. $dw=8r\,dr$이고 $r=0,3$에서 각각 $w=1,37$이므로</p>
+        <div class="math-display">$$\int_0^3 r\sqrt{1+4r^2}\,dr=\frac18\int_1^{37}\sqrt{w}\,dw=\frac18\cdot\frac23\Bigl[w^{3/2}\Bigr]_1^{37}=\frac{1}{12}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>여기에 $2\pi$를 곱하면</p>
+        <div class="math-display">$$A(S)=2\pi\cdot\frac{1}{12}\bigl(37\sqrt{37}-1\bigr)=\frac{\pi}{6}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>따라서 $A(S)=\dfrac{\pi}{6}\bigl(37\sqrt{37}-1\bigr)\approx117.319$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The plane $z=9$ slices the paraboloid $z=x^2+y^2$. Determine the area of the portion of the paraboloid lying below that plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $f(x,y)=x^2+y^2$, we have $f_x=2x$ and $f_y=2y$, so the integrand in Formula (2) is</p>
+        <div class="math-display">$$\sqrt{(2x)^2+(2y)^2+1}=\sqrt{1+4(x^2+y^2)}.$$</div>
+        <p>The plane $z=9$ meets the paraboloid along $x^2+y^2=9$, $z=9$, so the piece of the paraboloid in question lies exactly over the disk</p>
+        <div class="math-display">$$D=\{(x,y)\mid x^2+y^2\le9\},$$</div>
+        <p>a disk of radius $3$. Since the integrand depends only on $x^2+y^2$ and $D$ itself is a disk, switching to polar coordinates $x=r\cos\theta$, $y=r\sin\theta$, $dA=r\,dr\,d\theta$ cuts the work substantially.</p>
+        <div class="math-display">$$A(S)=\int_0^{2\pi}\!\!\int_0^3\sqrt{1+4r^2}\,r\,dr\,d\theta.$$</div>
+        <p>The integrand does not involve $\theta$, so the outer integral simply contributes a factor of $2\pi$. What remains is the inner integral with $w=1+4r^2$: $dw=8r\,dr$, and $r=0,3$ correspond to $w=1,37$, so</p>
+        <div class="math-display">$$\int_0^3 r\sqrt{1+4r^2}\,dr=\frac18\int_1^{37}\sqrt{w}\,dw=\frac18\cdot\frac23\Bigl[w^{3/2}\Bigr]_1^{37}=\frac{1}{12}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>Multiplying by $2\pi$,</p>
+        <div class="math-display">$$A(S)=2\pi\cdot\frac{1}{12}\bigl(37\sqrt{37}-1\bigr)=\frac{\pi}{6}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>Hence $A(S)=\dfrac{\pi}{6}\bigl(37\sqrt{37}-1\bigr)\approx117.319$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c15-5-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch13.html">단원 13 면적분</a></p>
+        <p>이 절의 내용은 강의 노트에서 이중적분 단원(단원 09)이 아니라 <strong>면적분 단원(단원 13)</strong>에 들어 있다. 교안은 매개곡면·음함수·양함수 세 가지 넓이 공식을 나란히 두고 면적요소 기호도 교재와 다르게 쓰는 반면, 교재 §15.5는 양함수 $z=f(x,y)$ 한 가지만 다룬다.</p>
+        <ul>
+          <li>양함수 곡면의 넓이 공식 $\sqrt{1+g_x^2+g_y^2}$ — <a href="../calc2/ch13.html#ex02">ex02</a>의 (3) (완전 대응: 공식 (2)와 같은 내용)</li>
+          <li>포물면을 수평면으로 자른 부분의 넓이 — <a href="../calc2/ch13.html#ex02">ex02</a> (예제 2와 같은 유형: 교안은 $z=4$, 교재는 $z=9$로 자름)</li>
+          <li>여러 곡면의 넓이 계산 — <a href="../calc2/ch13.html#yu02-1">yu02-1</a></li>
+          <li>회전면(원환면)의 넓이 — <a href="../calc2/ch13.html#yu02-2">yu02-2</a> (교재는 §16.6에서 매개곡면으로 다룸)</li>
+          <li>구면 중 원뿔 위쪽 부분의 넓이 — <a href="../calc2/ch13.html#yu02-3">yu02-3</a> (과제 14번과 매우 유사한 유형)</li>
+          <li>정의 (1)과 접평면 평행사변형 $|\mathbf a\times\mathbf b|$에 의한 공식 유도 — 대응 없음 (교안은 공식만 제시)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§15.5, 2차)</strong></p>
+        <p>제출 문항: 6, 10, 14, 25 &nbsp;/&nbsp; 학습 참고: 1&ndash;2, 3&ndash;14, 23, 26</p>
+        <ul>
+          <li>25번은 $y=x^2+z^2$ 꼴이므로 교재의 힌트대로 $xz$-평면 위의 영역으로 사영해 공식 (2)를 적용한다.</li>
+        </ul>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s15-4.html">§15.4 이중적분의 응용</a> &nbsp;/&nbsp; 다음: <a href="s15-6.html">§15.6 삼중적분</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch13.html">Unit 13, Surface Integrals</a></p>
+        <p>In the lecture notes this material sits in the surface-integral unit (Unit 13), not in the double-integral unit (Unit 09). The notes place three area formulas side by side (parametric, implicit, explicit) and write the area element with a different symbol, whereas Section 15.5 treats only the explicit graph $z=f(x,y)$.</p>
+        <ul>
+          <li>Area formula for an explicit graph, $\sqrt{1+g_x^2+g_y^2}$ — part (3) of <a href="../calc2/ch13.html#ex02">ex02</a> (full match with Formula (2))</li>
+          <li>Area of a paraboloid cut by a horizontal plane — <a href="../calc2/ch13.html#ex02">ex02</a> (same type as Example 2; the notes cut at $z=4$, the text at $z=9$)</li>
+          <li>Areas of several surfaces — <a href="../calc2/ch13.html#yu02-1">yu02-1</a></li>
+          <li>Area of a torus, a surface of revolution — <a href="../calc2/ch13.html#yu02-2">yu02-2</a> (handled parametrically in Section 16.6)</li>
+          <li>Area of the part of a sphere above a cone — <a href="../calc2/ch13.html#yu02-3">yu02-3</a> (close in type to assigned problem 14)</li>
+          <li>Definition (1) and the derivation from the tangent-plane parallelogram $|\mathbf a\times\mathbf b|$ — no match (the notes state the formulas only)</li>
+        </ul>
+        <p><strong>(b) Assignment (§15.5, second set)</strong></p>
+        <p>Problems to submit: 6, 10, 14, 25 &nbsp;/&nbsp; Recommended practice: 1&ndash;2, 3&ndash;14, 23, 26</p>
+        <ul>
+          <li>No. 25: the surface is $y=x^2+z^2$, so follow the textbook hint and project onto the $xz$-plane before applying Formula (2).</li>
+        </ul>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s15-4.html">§15.4 Applications of Double Integrals</a> &nbsp;/&nbsp; Next: <a href="s15-6.html">§15.6 Triple Integrals</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

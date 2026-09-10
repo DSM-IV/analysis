@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.2 선적분 (Line Integrals) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.2 선적분 — 호의 길이에 관한 선적분(정의 2)과 계산 공식 (3), 철사의 질량·질량중심 (4), x·y에 관한 선적분 (5)(6)과 계산 공식 (7), 선분의 매개변수 표현 (8), 향 반전 -C의 부호 규칙, 공간곡선 위의 선적분 (9)(10), 힘장이 한 일 (11)(12), 벡터장의 선적분(정의 13)과 성분 형태 (14)를 한국어·영어 대조로 정리하고 예제 8개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.2, 선적분, line integral, 호의 길이에 관한 선적분, arc length, 리만합, 조각적으로 매끄러운 곡선, piecewise-smooth curve, 철사의 질량, 질량중심, center of mass, 향, orientation, 공간곡선, 일, work, 벡터장의 선적분, 접선성분, 비틀린 삼차곡선, twisted cubic, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-2.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.2 선적분 (Line Integrals) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="곡선 위의 리만합으로 정의되는 선적분, ds = |r'(t)| dt 를 이용한 계산, 질량·질량중심, x·y에 관한 선적분과 향 반전의 부호, 힘장이 한 일과 벡터장의 선적분까지 §16.2 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-2.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.2 선적분 (Line Integrals) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.2 선적분 — 곡선의 소호 분할과 리만합, 호의 길이에 관한 선적분의 정의와 계산 공식, 넓이(울타리) 해석, 조각적으로 매끄러운 곡선, 철사의 질량과 질량중심, x·y에 관한 선적분, 선분의 매개변수 표현, 향 반전의 부호 규칙, 공간곡선 위의 선적분, 힘장이 한 일, 벡터장의 선적분과 성분 형태를 한국어·영어 대조로 정리하고 본문 예제 8개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-2.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-2.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html" class="active">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.2 · 9주차</p>
+  <h1>§16.2 선적분<span>Line Integrals</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-2-1"><span class="toc-num">NOTE</span> 선적분이란 <em>What a Line Integral Is</em></a></li>
+    <li><a href="#c16-2-2"><span class="toc-num">NOTE</span> 매개곡선의 분할과 리만합 <em>Partitioning a Smooth Curve</em></a></li>
+    <li><a href="#c16-2-3"><span class="toc-num">DEF 3</span> 호의 길이에 관한 선적분 <em>Line Integral with Respect to Arc Length</em></a></li>
+    <li><a href="#c16-2-4"><span class="toc-num">THM 4</span> 선적분의 계산 공식 <em>Evaluation Formula</em></a></li>
+    <li><a href="#c16-2-5"><span class="toc-num">REM 5</span> $ds$의 기억법과 특수한 경우 <em>Remembering $ds$; a Special Case</em></a></li>
+    <li><a href="#c16-2-6"><span class="toc-num">NOTE</span> 선적분의 넓이 해석 <em>Area Interpretation</em></a></li>
+    <li><a href="#c16-2-7"><span class="toc-num">REM 7</span> 조각적으로 매끄러운 곡선 <em>Piecewise-Smooth Curves</em></a></li>
+    <li><a href="#c16-2-8"><span class="toc-num">NOTE</span> 철사의 질량과 질량중심 <em>Mass and Center of Mass of a Wire</em></a></li>
+    <li><a href="#c16-2-9"><span class="toc-num">DEF 9</span> $x$·$y$에 관한 선적분 <em>Line Integrals with Respect to $x$ and $y$</em></a></li>
+    <li><a href="#c16-2-10"><span class="toc-num">THM 10</span> $dx$·$dy$ 선적분의 계산 <em>Evaluating the $dx$, $dy$ Integrals</em></a></li>
+    <li><a href="#c16-2-11"><span class="toc-num">REM 11</span> 선분의 매개변수 표현 <em>Parametrizing a Line Segment</em></a></li>
+    <li><a href="#c16-2-12"><span class="toc-num">REM 12</span> 곡선의 향과 부호 <em>Orientation Matters</em></a></li>
+    <li><a href="#c16-2-13"><span class="toc-num">THM 13</span> 공간곡선 위의 선적분 <em>Line Integrals in Space</em></a></li>
+    <li><a href="#c16-2-14"><span class="toc-num">NOTE</span> 힘장이 한 일 <em>Work Done by a Force Field</em></a></li>
+    <li><a href="#c16-2-15"><span class="toc-num">DEF 15</span> 벡터장의 선적분 <em>Line Integral of a Vector Field</em></a></li>
+    <li><a href="#c16-2-16"><span class="toc-num">REM 16</span> 벡터장 선적분과 향 반전 <em>Orientation Reverses the Sign</em></a></li>
+    <li><a href="#c16-2-17"><span class="toc-num">THM 17</span> 벡터장 선적분 = 성분 선적분 <em>Vector and Scalar Forms Agree</em></a></li>
+    <li><a href="#ex16-2-1"><span class="toc-num">EXAM 1</span> 단위원 상반부 위의 선적분 <em>A Line Integral over a Semicircle</em></a></li>
+    <li><a href="#ex16-2-2"><span class="toc-num">EXAM 2</span> 두 조각으로 이어붙인 경로 <em>A Path Made of Two Smooth Pieces</em></a></li>
+    <li><a href="#ex16-2-3"><span class="toc-num">EXAM 3</span> 반원 철사의 질량중심 <em>Center of Mass of a Semicircular Wire</em></a></li>
+    <li><a href="#ex16-2-4"><span class="toc-num">EXAM 4</span> 끝점이 같은 두 경로 <em>Two Paths with the Same Endpoints</em></a></li>
+    <li><a href="#ex16-2-5"><span class="toc-num">EXAM 5</span> 나선 위의 선적분 <em>A Line Integral along a Helix</em></a></li>
+    <li><a href="#ex16-2-6"><span class="toc-num">EXAM 6</span> 꺾인 공간 경로 위의 성분 선적분 <em>Components along a Broken Space Path</em></a></li>
+    <li><a href="#ex16-2-7"><span class="toc-num">EXAM 7</span> 사분원 위에서 힘장이 한 일 <em>Work along a Quarter-Circle</em></a></li>
+    <li><a href="#ex16-2-8"><span class="toc-num">EXAM 8</span> 비틀린 삼차곡선 위의 벡터장 선적분 <em>A Vector Field along the Twisted Cubic</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening - what a line integral is -->
+<div class="card note-card" id="c16-2-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">선적분이란 <em>What a Line Integral Is</em><span class="src-ref">Section opening · p.1169</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절에서는 정적분 $\int_a^b f(x)\,dx$와 비슷하게 움직이는 적분을 하나 구성한다. 다만 적분 영역이 구간 $[a,b]$가 아니라 <strong>곡선</strong> $C$라는 점이 다르다. 이런 적분은 관행적으로 <strong>선적분</strong>(line integral)이라 부르지만, 사실은 "곡선적분"(curve integral)이라는 이름이 더 정직할 것이다.</p>
+        <p>선적분은 19세기 초, 유체의 흐름과 힘, 전기·자기 현상을 다루는 과정에서 고안되었다. 이 장 뒤에서 전개할 물리적 해석들도 모두 그 뿌리를 여기에 두고 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>This section builds an integral that behaves much like the single integral $\int_a^b f(x)\,dx$, except that the domain of integration is a <strong>curve</strong> $C$ rather than an interval $[a,b]$. Integrals of this kind carry the traditional name <strong>line integral</strong>, though <em>curve integral</em> would describe them more honestly.</p>
+        <p>They were devised in the early nineteenth century, in work on moving fluids, on forces, and on electricity and magnetism; the physical readings developed later in this chapter all trace back to those origins.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : partitioning a smooth plane curve into subarcs (Figure 1) -->
+<div class="card note-card" id="c16-2-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">매개곡선의 분할과 리만합 <em>Partitioning a Smooth Curve</em><span class="src-ref">Equations (1) · p.1169&ndash;1170</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면곡선 $C$가 매개변수 표현</p>
+        <div class="math-display">$$x=x(t),\quad y=y(t),\quad a\le t\le b,$$</div>
+        <p>또는 이와 동치인 벡터방정식 $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j$로 주어져 있고, $C$는 <strong>매끄럽다</strong>고 하자. 즉 $\mathbf r'$이 연속이고 $\mathbf r'(t)\neq\mathbf 0$이다(§13.3 참조).</p>
+        <p>$[a,b]$를 폭이 같은 $n$개의 소구간 $[t_{i-1},t_i]$로 나누고 $x_i=x(t_i)$, $y_i=y(t_i)$로 두자. 이렇게 얻은 점 $P_i(x_i,y_i)$들은 $C$를 길이가 각각 $\Delta s_1,\Delta s_2,\dots,\Delta s_n$인 $n$개의 소호로 나눈다. $i$번째 소호 위에서 임의의 점 $P_i^*(x_i^*,y_i^*)$를 하나 고르면, 이는 $[t_{i-1},t_i]$ 안의 어떤 매개변수값 $t_i^*$에 대응한다.</p>
+        <p>이제 정의역이 $C$를 포함하는 이변수함수 $f$를 하나 잡아, 각 표본점에서 그 값을 읽고 그 값에 해당 소호의 길이를 곱한 뒤 모두 더하면 다음을 얻는다.</p>
+        <div class="math-display">$$\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta s_i.$$</div>
+        <p>이 결과는 정확히 리만합의 모양을 하고 있으므로, 적분의 정의를 일변수의 경우와 같은 방식으로 본뜰 수 있다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 230" role="img" aria-label="매끄러운 평면곡선 C를 분점 P0, P1, …, Pn으로 나누어 길이 Δs_i인 소호를 만들고, i번째 소호 위의 표본점 P_i*를 표시한 그림" style="max-width:360px;width:100%;height:auto">
+            <line x1="26" y1="212" x2="304" y2="212" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="26" y1="216" x2="26" y2="28" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="310,212 301,215 301,209" fill="var(--grey400)"/>
+            <polygon points="26,22 23,31 29,31" fill="var(--grey400)"/>
+            <text x="296" y="226" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="33" y="34" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="12" y="226" font-size="10.5" fill="var(--grey500)">O</text>
+            <path d="M40,195 Q62,182 85,168 T132,152 T180,128 T230,110 T285,78" fill="none" stroke="var(--grey700)" stroke-width="1.6"/>
+            <path d="M132,152 Q156,150 180,128" fill="none" stroke="var(--g600)" stroke-width="3.4" stroke-linecap="round"/>
+            <line x1="140" y1="178" x2="151" y2="159" stroke="var(--grey400)" stroke-width="0.9"/>
+            <circle cx="40" cy="195" r="2.6" fill="var(--grey700)"/>
+            <circle cx="85" cy="168" r="2.6" fill="var(--grey700)"/>
+            <circle cx="132" cy="152" r="2.6" fill="var(--grey700)"/>
+            <circle cx="180" cy="128" r="2.6" fill="var(--grey700)"/>
+            <circle cx="230" cy="110" r="2.6" fill="var(--grey700)"/>
+            <circle cx="285" cy="78" r="2.6" fill="var(--grey700)"/>
+            <circle cx="156" cy="145" r="3.2" fill="var(--g700)"/>
+            <text x="30" y="209" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">0</tspan></text>
+            <text x="72" y="184" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">1</tspan></text>
+            <text x="108" y="168" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">i&#8722;1</tspan></text>
+            <text x="185" y="142" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">i</tspan></text>
+            <text x="270" y="70" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">n</tspan></text>
+            <text x="140" y="134" font-size="10.5" font-style="italic" fill="var(--g800)">P<tspan font-size="7.5" dy="2.5">i</tspan><tspan font-size="7.5" dy="-6">*</tspan></text>
+            <text x="112" y="192" font-size="10.5" font-style="italic" fill="var(--g800)">&#916;s<tspan font-size="7.5" dy="2.5">i</tspan></text>
+            <text x="243" y="102" font-size="12" font-style="italic" fill="var(--grey700)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Start from a plane curve $C$ carrying the parametric description</p>
+        <div class="math-display">$$x=x(t),\quad y=y(t),\quad a\le t\le b,$$</div>
+        <p>or equivalently the vector equation $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j$, and assume $C$ is <strong>smooth</strong>: $\mathbf r'$ is continuous and $\mathbf r'(t)\neq\mathbf 0$ (see Section 13.3).</p>
+        <p>Chop $[a,b]$ into $n$ subintervals $[t_{i-1},t_i]$ of equal width and set $x_i=x(t_i)$, $y_i=y(t_i)$. The resulting points $P_i(x_i,y_i)$ cut $C$ into $n$ subarcs whose lengths are $\Delta s_1,\Delta s_2,\dots,\Delta s_n$. On the $i$th subarc select any point $P_i^*(x_i^*,y_i^*)$; it corresponds to some parameter value $t_i^*$ in $[t_{i-1},t_i]$.</p>
+        <p>Now take any function $f$ of two variables whose domain contains $C$, read off its value at each sample point, weight that value by the length of the subarc it came from, and add:</p>
+        <div class="math-display">$$\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta s_i.$$</div>
+        <p>The result has exactly the shape of a Riemann sum, so the definition of the integral can be modeled on the single-variable one.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 230" role="img" aria-label="A smooth plane curve C divided by the points P0, P1, ..., Pn into subarcs of length delta s sub i, with a sample point P sub i star marked on the i-th subarc" style="max-width:360px;width:100%;height:auto">
+            <line x1="26" y1="212" x2="304" y2="212" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="26" y1="216" x2="26" y2="28" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="310,212 301,215 301,209" fill="var(--grey400)"/>
+            <polygon points="26,22 23,31 29,31" fill="var(--grey400)"/>
+            <text x="296" y="226" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="33" y="34" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="12" y="226" font-size="10.5" fill="var(--grey500)">O</text>
+            <path d="M40,195 Q62,182 85,168 T132,152 T180,128 T230,110 T285,78" fill="none" stroke="var(--grey700)" stroke-width="1.6"/>
+            <path d="M132,152 Q156,150 180,128" fill="none" stroke="var(--g600)" stroke-width="3.4" stroke-linecap="round"/>
+            <line x1="140" y1="178" x2="151" y2="159" stroke="var(--grey400)" stroke-width="0.9"/>
+            <circle cx="40" cy="195" r="2.6" fill="var(--grey700)"/>
+            <circle cx="85" cy="168" r="2.6" fill="var(--grey700)"/>
+            <circle cx="132" cy="152" r="2.6" fill="var(--grey700)"/>
+            <circle cx="180" cy="128" r="2.6" fill="var(--grey700)"/>
+            <circle cx="230" cy="110" r="2.6" fill="var(--grey700)"/>
+            <circle cx="285" cy="78" r="2.6" fill="var(--grey700)"/>
+            <circle cx="156" cy="145" r="3.2" fill="var(--g700)"/>
+            <text x="30" y="209" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">0</tspan></text>
+            <text x="72" y="184" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">1</tspan></text>
+            <text x="108" y="168" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">i&#8722;1</tspan></text>
+            <text x="185" y="142" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">i</tspan></text>
+            <text x="270" y="70" font-size="10.5" font-style="italic" fill="var(--grey700)">P<tspan font-size="7.5" dy="2.5">n</tspan></text>
+            <text x="140" y="134" font-size="10.5" font-style="italic" fill="var(--g800)">P<tspan font-size="7.5" dy="2.5">i</tspan><tspan font-size="7.5" dy="-6">*</tspan></text>
+            <text x="112" y="192" font-size="10.5" font-style="italic" fill="var(--g800)">&#916;s<tspan font-size="7.5" dy="2.5">i</tspan></text>
+            <text x="243" y="102" font-size="12" font-style="italic" fill="var(--grey700)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Definition 2 - line integral with respect to arc length -->
+<div class="card def-card" id="c16-2-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">호의 길이에 관한 선적분 <em>Line Integral with Respect to Arc Length</em><span class="src-ref">Definition 2 · p.1170</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 2.</strong> $f$가 식 (1)로 서술되는 매끄러운 곡선 $C$의 모든 점에서 정의되어 있다고 하자. <strong>$C$를 따르는 $f$의 선적분</strong>은 다음 수이다.</p>
+          <div class="math-display">$$\int_C f(x,y)\,ds=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta s_i,$$</div>
+          <p>단, 이 극한이 존재할 때에 한한다.</p>
+        </div>
+        <p>정신적으로는 새로울 것이 없다 &mdash; 구간이 곡선으로, 폭 $\Delta x_i$가 소호의 길이 $\Delta s_i$로 바뀌었을 뿐, 나머지는 모두 일변수 정적분의 방식을 그대로 따른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 2.</strong> Suppose $f$ is defined at every point of a smooth curve $C$ described by Equations (1). The <strong>line integral of $f$ along $C$</strong> is the number</p>
+          <div class="math-display">$$\int_C f(x,y)\,ds=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta s_i,$$</div>
+          <p>provided this limit exists.</p>
+        </div>
+        <p>Nothing here is new in spirit: the interval has been replaced by a curve and the width $\Delta x_i$ by the subarc length $\Delta s_i$, and everything else follows the single-variable pattern.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Formula (3) - evaluation formula -->
+<div class="card thm-card" id="c16-2-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">선적분의 계산 공식 <em>Evaluation Formula</em><span class="src-ref">Formula (3) · p.1170</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (3) &mdash; 선적분의 계산.</strong> $f$가 연속이면 정의 2의 극한은 반드시 존재하며, 매개변수에 관한 보통의 정적분으로 계산할 수 있다.</p>
+          <div class="math-display">$$\int_C f(x,y)\,ds=\int_a^b f\bigl(x(t),y(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}\,dt.$$</div>
+        </div>
+        <p>$C$를 다른 매개변수화로 서술하더라도, $t$가 $a$에서 $b$까지 증가하는 동안 곡선을 정확히 한 번만 지난다면 이렇게 얻은 값은 달라지지 않는다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $C$ 위에서 시작점 $\mathbf r(a)$부터 잰 호의 길이를 $s(t)=\displaystyle\int_a^t|\mathbf r'(u)|\,du$ 라 하면, 미적분학의 기본정리에 의해 $s$는 $[a,b]$에서 미분가능하고</p>
+        <div class="math-display">$$s'(t)=|\mathbf r'(t)|=\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}$$</div>
+        <p>이다. $C$가 매끄럽다는 가정에 의해 $\mathbf r'(t)\neq\mathbf 0$이므로 $s'(t)\gt0$이고, 따라서 $s$는 $[a,b]$에서 값 $[0,L]$($L$은 $C$ 전체의 길이)로 가는 증가함수이다.</p>
+        <p>이제 $a=t_0\lt t_1\lt\cdots\lt t_n=b$가 정의 2의 소호 분할을 준다고 하자. $i$번째 소호의 길이는 $\Delta s_i=s(t_i)-s(t_{i-1})$인데, 평균값 정리를 구간 $[t_{i-1},t_i]$ 위의 $s$에 적용하면 어떤 $t_i^{*}\in(t_{i-1},t_i)$가 있어</p>
+        <div class="math-display">$$\Delta s_i=s'(t_i^{*})\,\Delta t_i=\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i$$</div>
+        <p>를 만족한다. 다만 이 $t_i^{*}$는 평균값 정리가 지정해 준 점일 뿐이므로, 그것만 표본점으로 삼아서는 정의 2의 극한이 <em>모든</em> 표본점 선택에 대해 존재한다는 것을 알 수 없다. 그러니 표본점을 임의로 잡아 두고 출발하자. $i$번째 소호의 표본점 $P_i^{*}$가 매개변수값 $\tau_i\in[t_{i-1},t_i]$에 대응한다 하고 $h(t)=f\bigl(x(t),y(t)\bigr)$로 두면</p>
+        <div class="math-display">$$\sum_{i=1}^{n}f(P_i^{*})\,\Delta s_i=\sum_{i=1}^{n}h(\tau_i)\,\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i$$</div>
+        <p>이다. 이 합은 $g(t)=h(t)\,\lvert\mathbf r'(t)\rvert$의 리만합 $\sum_i g(t_i^{*})\,\Delta t_i$와 표본점이 어긋나 있지만, $M=\max_{[a,b]}\lvert\mathbf r'\rvert$(연속함수이므로 유한하다)라 두면 두 합의 차는</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n}\bigl[h(\tau_i)-h(t_i^{*})\bigr]\,\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i\right|\le M\,(b-a)\max_{1\le i\le n}\bigl|h(\tau_i)-h(t_i^{*})\bigr|$$</div>
+        <p>로 억제된다. $f$와 $\mathbf r$이 연속이므로 $h$는 닫힌구간 $[a,b]$에서 균등연속이고, $\tau_i$와 $t_i^{*}$는 같은 소구간에 들어 있어 $\lvert\tau_i-t_i^{*}\rvert\le\Delta t_i$이다. 따라서 분할의 폭을 $0$으로 보내면 이 오차는 $0$으로 간다. 한편 $g$는 $f$와 $\mathbf r'$의 연속성에 의해 $[a,b]$에서 연속이므로 리만합 $\sum_i g(t_i^{*})\,\Delta t_i$ 자체는 정적분으로 수렴한다. 두 사실을 합치면, 표본점을 어떻게 고르든</p>
+        <div class="math-display">$$\lim_{n\to\infty}\sum_{i=1}^{n}f(P_i^{*})\,\Delta s_i=\int_a^b f\bigl(x(t),y(t)\bigr)\,\bigl|\mathbf r'(t)\bigr|\,dt=\int_a^b f\bigl(x(t),y(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}\,dt$$</div>
+        <p>를 얻는다. 좌변이 정의 2에서 $\int_C f(x,y)\,ds$로 정의한 극한이므로, 이 극한은 항상 존재하고 식 (3)이 성립한다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (3) &mdash; evaluating a line integral.</strong> If $f$ is continuous, the limit in Definition 2 is certain to exist, and it can be computed as an ordinary definite integral in the parameter:</p>
+          <div class="math-display">$$\int_C f(x,y)\,ds=\int_a^b f\bigl(x(t),y(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}\,dt.$$</div>
+        </div>
+        <p>The number produced does not change if $C$ is described by a different parametrization, as long as the curve is traced out exactly once while $t$ increases from $a$ to $b$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $s(t)=\displaystyle\int_a^t|\mathbf r'(u)|\,du$ measure arc length along $C$ from the initial point $\mathbf r(a)$. By the Fundamental Theorem of Calculus, $s$ is differentiable on $[a,b]$ and</p>
+        <div class="math-display">$$s'(t)=|\mathbf r'(t)|=\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}.$$</div>
+        <p>Smoothness of $C$ gives $\mathbf r'(t)\neq\mathbf 0$, so $s'(t)\gt0$ and $s$ increases from $0$ to the total length $L$ of $C$ as $t$ runs from $a$ to $b$.</p>
+        <p>Let $a=t_0\lt t_1\lt\cdots\lt t_n=b$ produce the subarcs of Definition 2. The length of the $i$th subarc is $\Delta s_i=s(t_i)-s(t_{i-1})$, and the Mean Value Theorem applied to $s$ on $[t_{i-1},t_i]$ supplies some $t_i^{*}\in(t_{i-1},t_i)$ with</p>
+        <div class="math-display">$$\Delta s_i=s'(t_i^{*})\,\Delta t_i=\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i.$$</div>
+        <p>These $t_i^{*}$ are handed over by the Mean Value Theorem, so using them alone as sample points would not show that the limit in Definition 2 exists for <em>every</em> choice of sample points. Start instead from an arbitrary choice: let the sample point $P_i^{*}$ on the $i$th subarc sit at parameter value $\tau_i\in[t_{i-1},t_i]$, and abbreviate $h(t)=f\bigl(x(t),y(t)\bigr)$. Then</p>
+        <div class="math-display">$$\sum_{i=1}^{n}f(P_i^{*})\,\Delta s_i=\sum_{i=1}^{n}h(\tau_i)\,\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i.$$</div>
+        <p>This sum carries mismatched tags relative to the Riemann sum $\sum_i g(t_i^{*})\,\Delta t_i$ of $g(t)=h(t)\,\lvert\mathbf r'(t)\rvert$, but with $M=\max_{[a,b]}\lvert\mathbf r'\rvert$ (finite, the function being continuous) the gap between them obeys</p>
+        <div class="math-display">$$\left|\sum_{i=1}^{n}\bigl[h(\tau_i)-h(t_i^{*})\bigr]\,\bigl|\mathbf r'(t_i^{*})\bigr|\,\Delta t_i\right|\le M\,(b-a)\max_{1\le i\le n}\bigl|h(\tau_i)-h(t_i^{*})\bigr|.$$</div>
+        <p>Continuity of $f$ and $\mathbf r$ makes $h$ uniformly continuous on the closed interval $[a,b]$, and $\tau_i$ and $t_i^{*}$ lie in the same subinterval, so $\lvert\tau_i-t_i^{*}\rvert\le\Delta t_i$; hence this error tends to $0$ as the mesh shrinks to $0$. Meanwhile $g$ is continuous on $[a,b]$, since $f$ and $\mathbf r'$ are, so the Riemann sums $\sum_i g(t_i^{*})\,\Delta t_i$ themselves converge to the definite integral. Combining the two facts, for every choice of sample points</p>
+        <div class="math-display">$$\lim_{n\to\infty}\sum_{i=1}^{n}f(P_i^{*})\,\Delta s_i=\int_a^b f\bigl(x(t),y(t)\bigr)\,\bigl|\mathbf r'(t)\bigr|\,dt=\int_a^b f\bigl(x(t),y(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}}\,dt.$$</div>
+        <p>The left side is exactly the limit that Definition 2 calls $\int_C f(x,y)\,ds$; hence that limit always exists and Formula (3) holds.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : how to remember ds; the special case of a segment on the x-axis -->
+<div class="card rem-card" id="c16-2-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">$ds$의 기억법과 특수한 경우 <em>Remembering $ds$; a Special Case</em><span class="src-ref">Equation 13.3.7 &amp; NOTE · p.1170</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$s(t)$를 $\mathbf r(a)$에서 $\mathbf r(t)$까지 $C$의 길이라 하면, 식 13.3.7에 의해</p>
+        <div class="math-display">$$\frac{ds}{dt}=\lvert\mathbf r'(t)\rvert=\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}},$$</div>
+        <p>이므로 식 (3)은 외워 둘 만한 요령으로 바뀐다. 모든 것을 매개변수 방정식에 실어 $x,y$를 $t$의 함수로 바꾸고, 기호 $ds$는 $\sqrt{(dx/dt)^{2}+(dy/dt)^{2}}\,dt$로 대신하면 된다.</p>
+        <p><strong>주의.</strong> $C$가 $(a,0)$에서 $(b,0)$까지의 선분인 극단적인 경우를 생각해 보자. $x$ 자신을 매개변수로 삼으면 $x=x$, $y=0$, $a\le x\le b$가 되어 근호 안의 값이 $1$이 되고, 식 (3)은 다음으로 간단해진다.</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds=\int_a^b f(x,0)\,dx.$$</div>
+        <p>이렇게 되면 선적분은 보통의 정적분으로 되돌아가는데, 바로 이런 의미에서 선적분이 정적분을 일반화한 것이라 할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $s(t)$ measure the length of $C$ between $\mathbf r(a)$ and $\mathbf r(t)$. Then, by Equation 13.3.7,</p>
+        <div class="math-display">$$\frac{ds}{dt}=\lvert\mathbf r'(t)\rvert=\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}},$$</div>
+        <p>which turns Formula (3) into a recipe worth memorizing: push every ingredient through the parametric equations so that $x$ and $y$ become functions of $t$, and replace the symbol $ds$ by $\sqrt{(dx/dt)^{2}+(dy/dt)^{2}}\,dt$.</p>
+        <p><strong>NOTE.</strong> Take the extreme case in which $C$ is the segment joining $(a,0)$ to $(b,0)$. Using $x$ itself as the parameter gives $x=x$, $y=0$, $a\le x\le b$, so the radical equals $1$ and Formula (3) collapses to</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds=\int_a^b f(x,0)\,dx.$$</div>
+        <p>The line integral has become an ordinary single integral, which is the sense in which it generalizes one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : area interpretation - the fence / curtain (Figure 2) -->
+<div class="card note-card" id="c16-2-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">선적분의 넓이 해석 <em>Area Interpretation</em><span class="src-ref">Figure 2 · p.1171</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>음이 아닌 함수의 정적분이 넓이를 나타내듯, 선적분도 같은 방식으로 읽을 수 있다. $C$ 위에서 $f(x,y)\ge0$이라 하자. 곡선 위의 각 점 $(x,y)$ 바로 위에 높이 $f(x,y)$인 연직 선분을 세운다. 이 선분들이 훑고 지나가면서 $C$를 밑변으로 삼는 곡면의 띠 &mdash; 울타리, 또는 드리운 커튼 &mdash; 을 이루는데,</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds$$</div>
+        <p>는 바로 그 울타리 한쪽 면의 넓이이다. 울타리의 밑변은 곡선 $C$이고, 점 $(x,y)$ 위에서의 높이는 $f(x,y)$이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 250" role="img" aria-label="xy평면 위의 곡선 C를 밑변으로 삼고 점 (x, y) 위의 높이가 f(x, y)인 담장(커튼) 모양의 곡면 조각 — 그 한쪽 면의 넓이가 선적분의 값" style="max-width:360px;width:100%;height:auto">
+            <path d="M55,195 C105,225 165,150 275,175 L275,110 C165,60 105,145 55,125 Z" fill="var(--g100)" stroke="none"/>
+            <line x1="40" y1="225" x2="40" y2="46" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="40" y1="225" x2="300" y2="225" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="40" y1="225" x2="16" y2="246" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="40,40 37,49 43,49" fill="var(--grey400)"/>
+            <polygon points="306,225 297,228 297,222" fill="var(--grey400)"/>
+            <text x="46" y="48" font-size="11" font-style="italic" fill="var(--grey600)">z</text>
+            <text x="294" y="240" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="14" y="238" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="45" y="241" font-size="10.5" fill="var(--grey500)">O</text>
+            <line x1="55" y1="195" x2="55" y2="125" stroke="var(--g600)" stroke-width="1"/>
+            <line x1="95" y1="201" x2="95" y2="124" stroke="var(--g500)" stroke-width="0.9"/>
+            <line x1="142.5" y1="187" x2="142.5" y2="106" stroke="var(--g500)" stroke-width="0.9"/>
+            <line x1="201" y1="172" x2="201" y2="94" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="275" y1="175" x2="275" y2="110" stroke="var(--g600)" stroke-width="1"/>
+            <path d="M55,125 C105,145 165,60 275,110" fill="none" stroke="var(--g700)" stroke-width="1.7"/>
+            <path d="M55,195 C105,225 165,150 275,175" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <circle cx="201" cy="172" r="2.6" fill="var(--grey700)"/>
+            <text x="206" y="188" font-size="10" font-style="italic" fill="var(--grey700)">(x, y)</text>
+            <text x="207" y="132" font-size="10" font-style="italic" fill="var(--g800)">f(x, y)</text>
+            <text x="118" y="212" font-size="12" font-style="italic" fill="var(--grey700)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A single integral of a nonnegative function measures an area, and the line integral admits the same reading. Suppose $f(x,y)\ge0$ on $C$. Above each point $(x,y)$ of the curve raise a vertical segment of height $f(x,y)$. The segments sweep out a strip of surface standing on $C$ &mdash; a fence, or a hanging curtain &mdash; and</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds$$</div>
+        <p>is the area of one side of that fence. The base of the fence is the curve $C$ and its height above $(x,y)$ is $f(x,y)$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 250" role="img" aria-label="A curtain-shaped strip of surface standing on the curve C in the xy-plane, its height above the point (x, y) equal to f(x, y); the line integral is the area of one side of this fence" style="max-width:360px;width:100%;height:auto">
+            <path d="M55,195 C105,225 165,150 275,175 L275,110 C165,60 105,145 55,125 Z" fill="var(--g100)" stroke="none"/>
+            <line x1="40" y1="225" x2="40" y2="46" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="40" y1="225" x2="300" y2="225" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="40" y1="225" x2="16" y2="246" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="40,40 37,49 43,49" fill="var(--grey400)"/>
+            <polygon points="306,225 297,228 297,222" fill="var(--grey400)"/>
+            <text x="46" y="48" font-size="11" font-style="italic" fill="var(--grey600)">z</text>
+            <text x="294" y="240" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="14" y="238" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="45" y="241" font-size="10.5" fill="var(--grey500)">O</text>
+            <line x1="55" y1="195" x2="55" y2="125" stroke="var(--g600)" stroke-width="1"/>
+            <line x1="95" y1="201" x2="95" y2="124" stroke="var(--g500)" stroke-width="0.9"/>
+            <line x1="142.5" y1="187" x2="142.5" y2="106" stroke="var(--g500)" stroke-width="0.9"/>
+            <line x1="201" y1="172" x2="201" y2="94" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="275" y1="175" x2="275" y2="110" stroke="var(--g600)" stroke-width="1"/>
+            <path d="M55,125 C105,145 165,60 275,110" fill="none" stroke="var(--g700)" stroke-width="1.7"/>
+            <path d="M55,195 C105,225 165,150 275,175" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <circle cx="201" cy="172" r="2.6" fill="var(--grey700)"/>
+            <text x="206" y="188" font-size="10" font-style="italic" fill="var(--grey700)">(x, y)</text>
+            <text x="207" y="132" font-size="10" font-style="italic" fill="var(--g800)">f(x, y)</text>
+            <text x="118" y="212" font-size="12" font-style="italic" fill="var(--grey700)">C</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : piecewise-smooth curves -->
+<div class="card rem-card" id="c16-2-7">
+  <div class="card-head">
+    <span class="rem-num">REM 7</span>
+    <span class="rem-title">조각적으로 매끄러운 곡선 <em>Piecewise-Smooth Curves</em><span class="src-ref">Figure 4 · p.1171</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유한 개의 매끄러운 곡선 $C_1,C_2,\dots,C_n$을 끝에서 끝으로 이어 붙여 만든 곡선 &mdash; $C_{i+1}$의 시점이 $C_i$의 종점과 같은 &mdash; 을 <strong>조각적으로 매끄러운 곡선</strong>이라 한다. 이런 곡선은 모서리를 가질 수 있으므로 정의 2를 곧바로 적용할 수 없다. 대신 $C$ 위의 적분은 각 매끄러운 조각의 적분을 모두 더한 값으로 <em>정의</em>한다.</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds=\int_{C_1}f(x,y)\,ds+\int_{C_2}f(x,y)\,ds+\cdots+\int_{C_n}f(x,y)\,ds.$$</div>
+        <p>실제로는 조각마다 따로 매개변수화하여 식 (3)으로 계산한 뒤 그 값들을 더하면 된다. 예제 2가 정확히 이 방식으로 두 조각을 다룬다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Call $C$ <strong>piecewise-smooth</strong> when it is assembled from finitely many smooth curves $C_1,C_2,\dots,C_n$ laid end to end &mdash; the initial point of $C_{i+1}$ being the terminal point of $C_i$. Such a curve may have corners, so Definition 2 does not apply to it directly; instead the integral over $C$ is <em>declared</em> to be the total collected from its smooth pieces:</p>
+        <div class="math-display">$$\int_C f(x,y)\,ds=\int_{C_1}f(x,y)\,ds+\int_{C_2}f(x,y)\,ds+\cdots+\int_{C_n}f(x,y)\,ds.$$</div>
+        <p>In practice each piece gets its own parametrization, is handled by Formula (3), and the answers are added; Example 2 does exactly this with two pieces.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : mass and center of mass of a wire, Formula (4) -->
+<div class="card note-card" id="c16-2-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">철사의 질량과 질량중심 <em>Mass and Center of Mass of a Wire</em><span class="src-ref">Formulas (4) · p.1172</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>선적분 $\int_C f(x,y)\,ds$가 지니는 물리적 의미는 모두 $f$ 자신이 지니는 물리적 의미에서 물려받은 것이다. 가느다란 철사가 곡선 $C$ 모양을 하고 있고, 점 $(x,y)$에서의 선밀도가 $\rho(x,y)$라 하자. $P_{i-1}$에서 $P_i$까지 이어지는 철사 조각의 질량은 $\rho(x_i^*,y_i^*)\,\Delta s_i$에 가깝고, 이 근삿값들을 모든 소호에 걸쳐 더하면 철사 전체의 질량을 근사한다. 곡선을 점점 더 잘게 표본화하면 이 근삿값들은 정확한 값으로 수렴한다.</p>
+        <div class="math-display">$$m=\lim_{n\to\infty}\sum_{i=1}^{n}\rho(x_i^*,y_i^*)\,\Delta s_i=\int_C\rho(x,y)\,ds.$$</div>
+        <p>이렇게 읽으면 예제 1의 적분은 밀도가 $2+x^{2}y$인 반원 철사의 질량을 나타내는 셈이 된다.</p>
+        <p>철사의 균형점, 즉 <strong>질량중심</strong>은 다음을 만족하는 점 $(\bar x,\bar y)$이다.</p>
+        <div class="math-display">$$\begin{aligned}\bar x&=\frac{1}{m}\int_C x\,\rho(x,y)\,ds\\ \bar y&=\frac{1}{m}\int_C y\,\rho(x,y)\,ds\end{aligned}$$</div>
+        <p>선적분의 물리적 해석은 이 장 뒤에서 더 나온다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Whatever physical content a line integral $\int_C f(x,y)\,ds$ carries is inherited from the physical content of $f$. Let a thin wire occupy the curve $C$, and let $\rho(x,y)$ be its linear density at the point $(x,y)$. The stretch of wire from $P_{i-1}$ to $P_i$ then has mass close to $\rho(x_i^*,y_i^*)\,\Delta s_i$, and adding these estimates over all the subarcs approximates the mass of the whole wire. Sampling the curve ever more finely turns the approximations into an exact value:</p>
+        <div class="math-display">$$m=\lim_{n\to\infty}\sum_{i=1}^{n}\rho(x_i^*,y_i^*)\,\Delta s_i=\int_C\rho(x,y)\,ds.$$</div>
+        <p>Read this way, the integral of Example 1 would give the mass of a semicircular wire of density $2+x^{2}y$.</p>
+        <p>The balance point of the wire, its <strong>center of mass</strong>, is the point $(\bar x,\bar y)$ with</p>
+        <div class="math-display">$$\begin{aligned}\bar x&=\frac{1}{m}\int_C x\,\rho(x,y)\,ds\\ \bar y&=\frac{1}{m}\int_C y\,\rho(x,y)\,ds\end{aligned}$$</div>
+        <p>Further physical readings of line integrals appear later in the chapter.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Formulas (5), (6) - line integrals with respect to x and y -->
+<div class="card def-card" id="c16-2-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">$x$&middot;$y$에 관한 선적분 <em>Line Integrals with Respect to $x$ and $y$</em><span class="src-ref">Formulas (5), (6) · p.1173</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (5)와 (6).</strong> 정의 2에서 소호의 길이 $\Delta s_i$ 대신 좌표의 증분 $\Delta x_i=x_i-x_{i-1}$, 또는 $\Delta y_i=y_i-y_{i-1}$을 쓰면 된다. 이렇게 얻은 두 극한을 각각 <strong>$C$를 따르는 $f$의 $x$에 관한 선적분</strong>과 <strong>$y$에 관한 선적분</strong>이라 한다.</p>
+          <div class="math-display">$$\begin{aligned}\int_C f(x,y)\,dx&=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta x_i\\ \int_C f(x,y)\,dy&=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta y_i\end{aligned}$$</div>
+        </div>
+        <p>이제 세 가지 선적분이 함께 쓰이므로, 원래의 것도 이름을 따로 가질 필요가 있다. $\int_C f(x,y)\,ds$는 <strong>호의 길이에 관한</strong> 선적분이라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formulas (5) and (6).</strong> In Definition 2 replace the subarc length $\Delta s_i$ by the coordinate increment $\Delta x_i=x_i-x_{i-1}$, or by $\Delta y_i=y_i-y_{i-1}$. The two limits so obtained are the <strong>line integrals of $f$ along $C$ with respect to $x$ and to $y$</strong>:</p>
+          <div class="math-display">$$\begin{aligned}\int_C f(x,y)\,dx&=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta x_i\\ \int_C f(x,y)\,dy&=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*)\,\Delta y_i\end{aligned}$$</div>
+        </div>
+        <p>With three integrals now in circulation, the original one needs a name of its own: $\int_C f(x,y)\,ds$ is called the line integral <strong>with respect to arc length</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Formulas (7) - evaluating the dx and dy integrals -->
+<div class="card thm-card" id="c16-2-10">
+  <div class="card-head">
+    <span class="thm-num">THM 10</span>
+    <span class="thm-title">$dx$&middot;$dy$ 선적분의 계산 <em>Evaluating the $dx$, $dy$ Integrals</em><span class="src-ref">Formulas (7) · p.1173</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (7).</strong> (5)·(6)의 적분도 마찬가지로 모든 것을 매개변수화에 실어 계산한다 &mdash; $x=x(t)$, $y=y(t)$, $dx=x'(t)\,dt$, $dy=y'(t)\,dt$.</p>
+          <div class="math-display">$$\begin{aligned}\int_C f(x,y)\,dx&=\int_a^b f\bigl(x(t),y(t)\bigr)\,x'(t)\,dt\\ \int_C f(x,y)\,dy&=\int_a^b f\bigl(x(t),y(t)\bigr)\,y'(t)\,dt\end{aligned}$$</div>
+        </div>
+        <p>여기에는 근호가 등장하지 않는다는 점에 주목하자. $ds$와 달리 $dx$, $dy$의 증분은 한 좌표의 순수한 도함수로만 이루어진다.</p>
+        <p>이 장 전체에서 이 둘은 짝을 이루어 나타나는 일이 많다 &mdash; 식 (14)가 한 예이다 &mdash; 그럴 때는 관례적으로 하나의 적분 기호 아래 합쳐 쓴다.</p>
+        <div class="math-display">$$\int_C P(x,y)\,dx+\int_C Q(x,y)\,dy=\int_C P(x,y)\,dx+Q(x,y)\,dy.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formulas (7).</strong> The integrals of (5) and (6) are again computed by pushing everything through the parametrization &mdash; $x=x(t)$, $y=y(t)$, $dx=x'(t)\,dt$, $dy=y'(t)\,dt$:</p>
+          <div class="math-display">$$\begin{aligned}\int_C f(x,y)\,dx&=\int_a^b f\bigl(x(t),y(t)\bigr)\,x'(t)\,dt\\ \int_C f(x,y)\,dy&=\int_a^b f\bigl(x(t),y(t)\bigr)\,y'(t)\,dt\end{aligned}$$</div>
+        </div>
+        <p>Notice that no square root appears here: unlike $ds$, the increments $dx$ and $dy$ come with the plain derivative of a single coordinate.</p>
+        <p>Throughout this chapter the two turn up as a pair &mdash; Equation (14) is one instance &mdash; and when they do it is customary to run them together under one integral sign:</p>
+        <div class="math-display">$$\int_C P(x,y)\,dx+\int_C Q(x,y)\,dy=\int_C P(x,y)\,dx+Q(x,y)\,dy.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Equation (8) - parametrizing a line segment -->
+<div class="card rem-card" id="c16-2-11">
+  <div class="card-head">
+    <span class="rem-num">REM 11</span>
+    <span class="rem-title">선분의 매개변수 표현 <em>Parametrizing a Line Segment</em><span class="src-ref">Equation (8) · p.1173</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>선적분을 설정하는 일은 흔히 맨 첫 단계에서 가장 까다롭다 &mdash; 곡선에 대한 기하학적 서술을 매개변수 방정식으로 바꾸는 일 말이다. 선분은 너무나 자주 등장하므로 표준적인 서술을 미리 기억해 둘 만하다. 점 $\mathbf r_0$에서 시작해 $\mathbf r_1$에서 끝나는 선분은 다음과 같이 주어진다.</p>
+        <div class="math-display">$$\mathbf r(t)=(1-t)\,\mathbf r_0+t\,\mathbf r_1,\qquad 0\le t\le1$$</div>
+        <p>(식 12.5.4). $t=0$에서 이 공식은 $\mathbf r_0$을 내어 주고 $t=1$에서는 $\mathbf r_1$을 내어 주므로, 이동 방향은 두 끝점을 어떻게 표기하느냐에 따라 자동으로 정해진다. 예제 4와 6이 모두 이 표현을 사용한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Setting up a line integral is frequently hardest at its very first step: converting a geometric description of the curve into parametric equations. Segments occur so often that their standard description is worth keeping at hand. The segment that starts at $\mathbf r_0$ and finishes at $\mathbf r_1$ is given by</p>
+        <div class="math-display">$$\mathbf r(t)=(1-t)\,\mathbf r_0+t\,\mathbf r_1,\qquad 0\le t\le1$$</div>
+        <p>(Equation 12.5.4). At $t=0$ the formula returns $\mathbf r_0$ and at $t=1$ it returns $\mathbf r_1$, so the direction of travel is built into the labelling of the two endpoints. Examples 4 and 6 both use it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : orientation and sign (Figure 8) -->
+<div class="card rem-card" id="c16-2-12">
+  <div class="card-head">
+    <span class="rem-num">REM 12</span>
+    <span class="rem-title">곡선의 향과 부호 <em>Orientation Matters</em><span class="src-ref">Figure 8 · p.1174</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>매개변수화 $x=x(t)$, $y=y(t)$, $a\le t\le b$는 $C$의 점들에 이름을 붙이는 데 그치지 않고 <strong>향</strong>도 함께 정한다 &mdash; $t$가 증가하는 방향이 양의 방향이다. 시점 $A$는 $t=a$에, 종점 $B$는 $t=b$에 대응한다.</p>
+        <p>같은 점들로 이루어져 있지만 방향만 반대인, 즉 $B$에서 $A$로 가는 곡선을 $-C$로 쓰자. 그러면</p>
+        <div class="math-display">$$\begin{aligned}\int_{-C}f(x,y)\,dx&=-\int_C f(x,y)\,dx\\ \int_{-C}f(x,y)\,dy&=-\int_C f(x,y)\,dy\end{aligned}$$</div>
+        <p>이지만, 호의 길이에 관한 적분은 영향을 받지 않는다.</p>
+        <div class="math-display">$$\int_{-C}f(x,y)\,ds=\int_C f(x,y)\,ds.$$</div>
+        <p>이유는 리만합을 보면 분명해진다. $\Delta s_i$는 길이이므로 곡선을 어느 방향으로 지나든 항상 양수이지만, $\Delta x_i$와 $\Delta y_i$는 좌표의 차이이므로 이동 방향이 반대가 되면 부호도 바뀐다. 예제 4가 이 두 사실을 수치로 직접 확인해 준다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 175" role="img" aria-label="같은 점들로 이루어졌지만 향이 반대인 두 곡선 — 왼쪽은 시점 A에서 종점 B로 가는 C, 오른쪽은 B에서 A로 가는 -C" style="max-width:360px;width:100%;height:auto">
+            <path d="M30,120 Q70,40 120,110" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="55.6,84.4 51.3,94.3 45.7,88.7" fill="var(--g600)"/>
+            <polygon points="79.5,76.7 69.9,81.8 69.1,73.8" fill="var(--g600)"/>
+            <polygon points="101.4,88.4 90.8,86.0 95.4,79.4" fill="var(--g600)"/>
+            <circle cx="30" cy="120" r="3" fill="var(--grey800)"/>
+            <circle cx="120" cy="110" r="3" fill="var(--grey800)"/>
+            <text x="17" y="134" font-size="11" font-style="italic" fill="var(--grey700)">A</text>
+            <text x="124" y="124" font-size="11" font-style="italic" fill="var(--grey700)">B</text>
+            <text x="75" y="158" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">C : A &#8594; B</text>
+            <path d="M190,120 Q230,40 280,110" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="205.7,94.4 209.9,84.5 215.5,90.1" fill="var(--g600)"/>
+            <polygon points="225.5,78.3 235.1,73.2 235.9,81.2" fill="var(--g600)"/>
+            <polygon points="249.8,80.4 260.4,82.8 255.8,89.4" fill="var(--g600)"/>
+            <circle cx="190" cy="120" r="3" fill="var(--grey800)"/>
+            <circle cx="280" cy="110" r="3" fill="var(--grey800)"/>
+            <text x="177" y="134" font-size="11" font-style="italic" fill="var(--grey700)">A</text>
+            <text x="284" y="124" font-size="11" font-style="italic" fill="var(--grey700)">B</text>
+            <text x="235" y="158" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">&#8722;C : B &#8594; A</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A parametrization $x=x(t)$, $y=y(t)$, $a\le t\le b$ does more than name the points of $C$: it also fixes an <strong>orientation</strong>, the positive direction being the one in which $t$ increases. The initial point $A$ belongs to $t=a$ and the terminal point $B$ to $t=b$.</p>
+        <p>Write $-C$ for the curve made of the same points as $C$ but run the other way, from $B$ to $A$. Then</p>
+        <div class="math-display">$$\begin{aligned}\int_{-C}f(x,y)\,dx&=-\int_C f(x,y)\,dx\\ \int_{-C}f(x,y)\,dy&=-\int_C f(x,y)\,dy\end{aligned}$$</div>
+        <p>while the arc length integral is left alone:</p>
+        <div class="math-display">$$\int_{-C}f(x,y)\,ds=\int_C f(x,y)\,ds.$$</div>
+        <p>The reason is legible in the Riemann sums. Each $\Delta s_i$ is a length and stays positive whichever way the curve is traversed, whereas $\Delta x_i$ and $\Delta y_i$ are coordinate differences and flip sign when the direction of travel is reversed. Example 4 exhibits both facts numerically.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 175" role="img" aria-label="Two curves with the same points but opposite orientations: on the left C runs from the initial point A to the terminal point B, on the right minus C runs from B back to A" style="max-width:360px;width:100%;height:auto">
+            <path d="M30,120 Q70,40 120,110" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="55.6,84.4 51.3,94.3 45.7,88.7" fill="var(--g600)"/>
+            <polygon points="79.5,76.7 69.9,81.8 69.1,73.8" fill="var(--g600)"/>
+            <polygon points="101.4,88.4 90.8,86.0 95.4,79.4" fill="var(--g600)"/>
+            <circle cx="30" cy="120" r="3" fill="var(--grey800)"/>
+            <circle cx="120" cy="110" r="3" fill="var(--grey800)"/>
+            <text x="17" y="134" font-size="11" font-style="italic" fill="var(--grey700)">A</text>
+            <text x="124" y="124" font-size="11" font-style="italic" fill="var(--grey700)">B</text>
+            <text x="75" y="158" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">C : A &#8594; B</text>
+            <path d="M190,120 Q230,40 280,110" fill="none" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="205.7,94.4 209.9,84.5 215.5,90.1" fill="var(--g600)"/>
+            <polygon points="225.5,78.3 235.1,73.2 235.9,81.2" fill="var(--g600)"/>
+            <polygon points="249.8,80.4 260.4,82.8 255.8,89.4" fill="var(--g600)"/>
+            <circle cx="190" cy="120" r="3" fill="var(--grey800)"/>
+            <circle cx="280" cy="110" r="3" fill="var(--grey800)"/>
+            <text x="177" y="134" font-size="11" font-style="italic" fill="var(--grey700)">A</text>
+            <text x="284" y="124" font-size="11" font-style="italic" fill="var(--grey700)">B</text>
+            <text x="235" y="158" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g800)">&#8722;C : B &#8594; A</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Formulas (9), (10) - line integrals along space curves -->
+<div class="card thm-card" id="c16-2-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">공간곡선 위의 선적분 <em>Line Integrals in Space</em><span class="src-ref">Formulas (9), (10) · p.1175</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (9).</strong> $C$가 $x=x(t)$, $y=y(t)$, $z=z(t)$, $a\le t\le b$로 주어지는 매끄러운 공간곡선, 즉 $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j+z(t)\,\mathbf k$이고, $f$는 $C$를 포함하는 영역에서 연속인 삼변수함수라 하자. 평면에서와 같은 소호의 극한으로 $\int_C f\,ds$를 정의하면 그 값은 다음과 같다.</p>
+          <div class="math-display">$$\int_C f(x,y,z)\,ds=\int_a^b f\bigl(x(t),y(t),z(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}+\left(\frac{dz}{dt}\right)^{2}}\,dt=\int_a^b f(\mathbf r(t))\,\lvert\mathbf r'(t)\rvert\,dt.$$</div>
+        </div>
+        <p>오른쪽의 간결한 벡터 형태는 식 (3)도 함께 포괄한다. 근호 안의 값이 평면이든 공간이든 똑같이 $\lvert\mathbf r'(t)\rvert$이기 때문이다. $f$를 항등적으로 $1$로 두면 곡선의 길이 $\int_C ds=\int_a^b\lvert\mathbf r'(t)\rvert\,dt=L$이 나온다(식 13.3.3).</p>
+        <p>각 좌표에 관한 적분도 같은 방식으로 정의한다. 예컨대 $z$좌표에 관해서는</p>
+        <div class="math-display">$$\int_C f(x,y,z)\,dz=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*,z_i^*)\,\Delta z_i=\int_a^b f\bigl(x(t),y(t),z(t)\bigr)\,z'(t)\,dt.$$</div>
+        <p>따라서 (10)의 결합 형태</p>
+        <div class="math-display">$$\int_C P(x,y,z)\,dx+Q(x,y,z)\,dy+R(x,y,z)\,dz,$$</div>
+        <p>도 평면에서와 완전히 같은 방식으로 다룬다. $x,y,z,dx,dy,dz$를 모두 $t$로 나타낸 다음 $[a,b]$에 걸쳐 적분하면 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (9).</strong> Let $C$ be a smooth space curve $x=x(t)$, $y=y(t)$, $z=z(t)$, $a\le t\le b$, equivalently $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j+z(t)\,\mathbf k$, and let $f$ be a function of three variables continuous on a region containing $C$. Defining $\int_C f\,ds$ by the same subarc limit used in the plane, its value is</p>
+          <div class="math-display">$$\int_C f(x,y,z)\,ds=\int_a^b f\bigl(x(t),y(t),z(t)\bigr)\sqrt{\left(\frac{dx}{dt}\right)^{2}+\left(\frac{dy}{dt}\right)^{2}+\left(\frac{dz}{dt}\right)^{2}}\,dt=\int_a^b f(\mathbf r(t))\,\lvert\mathbf r'(t)\rvert\,dt.$$</div>
+        </div>
+        <p>The compact vector form on the right also covers Formula (3), since the radical is exactly $\lvert\mathbf r'(t)\rvert$ in either dimension. Taking $f$ identically $1$ recovers the length of the curve, $\int_C ds=\int_a^b\lvert\mathbf r'(t)\rvert\,dt=L$ (Formula 13.3.3).</p>
+        <p>Integrals with respect to the individual coordinates are defined the same way; for the $z$-coordinate, for instance,</p>
+        <div class="math-display">$$\int_C f(x,y,z)\,dz=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*,y_i^*,z_i^*)\,\Delta z_i=\int_a^b f\bigl(x(t),y(t),z(t)\bigr)\,z'(t)\,dt.$$</div>
+        <p>So an integral of the combined shape (10),</p>
+        <div class="math-display">$$\int_C P(x,y,z)\,dx+Q(x,y,z)\,dy+R(x,y,z)\,dz,$$</div>
+        <p>is handled exactly as in the plane: express each of $x,y,z,dx,dy,dz$ in terms of $t$ and integrate over $[a,b]$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 : work done by a force field, Riemann sum (11) and Equation (12) -->
+<div class="card note-card" id="c16-2-14">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">힘장이 한 일 <em>Work Done by a Force Field</em><span class="src-ref">Equations (11), (12) · p.1176&ndash;1177</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 물음을 가늠할 수 있는 결과가 이미 두 가지 나와 있다. §5.4에서는 입자를 $x$축을 따라 $a$에서 $b$까지 옮기는 변력 $f(x)$가 한 일을 $W=\int_a^b f(x)\,dx$로 구했고, §12.3에서는 <em>일정한</em> 힘 $\mathbf F$가 변위 $\mathbf D$를 통해 한 일을 $W=\mathbf F\cdot\mathbf D$로 구했다. 이제 구하려는 것은 $\mathbb R^3$ 위의 연속인 힘장 $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ &mdash; 이를테면 예제 16.1.4의 중력장이나 예제 16.1.5의 전기장 &mdash; 이 매끄러운 곡선 $C$를 따라 입자를 옮길 때 한 일이다. 평면 힘장은 $R=0$이고 $P,Q$가 $z$와 무관한 경우로 포함된다.</p>
+        <p>$[a,b]$를 폭이 같은 소구간으로 나누어 $C$를 길이 $\Delta s_i$인 소호로 자르고, $i$번째 소호 위에서 매개변수값 $t_i^*$에 대응하는 점 $P_i^*(x_i^*,y_i^*,z_i^*)$를 고르자. $\Delta s_i$가 작으면 입자는 그 소호를 단위접선벡터 $\mathbf T(t_i^*)$ 방향을 따라 거의 그대로 지나가므로, 그때의 변위는 $\Delta s_i\,\mathbf T(t_i^*)$에 가깝고 그 구간에서 입자에 한 일은 다음에 가깝다.</p>
+        <div class="math-display">$$\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\bigl[\Delta s_i\,\mathbf T(t_i^*)\bigr]=\bigl[\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\mathbf T(t_i^*)\bigr]\Delta s_i.$$</div>
+        <p>이 기여들을 모두 더하면 전체 일에 대한 리만합 (11)을 얻는다.</p>
+        <div class="math-display">$$\sum_{i=1}^{n}\bigl[\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\mathbf T(x_i^*,y_i^*,z_i^*)\bigr]\Delta s_i,$$</div>
+        <p>여기서 $\mathbf T(x,y,z)$는 $C$의 점 $(x,y,z)$에서의 단위접선벡터이다. $n$이 커질수록 이 근삿값은 더 정확해질 것이므로, 힘장이 한 일 $W$는 그 극한으로 <em>정의</em>한다.</p>
+        <div class="math-display">$$W=\int_C\mathbf F(x,y,z)\cdot\mathbf T(x,y,z)\,ds=\int_C\mathbf F\cdot\mathbf T\,ds.$$</div>
+        <p>식 (12)는 이를 말로 풀어 쓴 것이다 &mdash; 일은 힘의 접선성분을 호의 길이에 관하여 적분한 선적분이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two earlier results bracket the question. Section 5.4 computed the work done by a variable force $f(x)$ that moves a particle along the $x$-axis from $a$ to $b$ as $W=\int_a^b f(x)\,dx$; Section 12.3 computed the work done by a <em>constant</em> force $\mathbf F$ through a displacement $\mathbf D$ as $W=\mathbf F\cdot\mathbf D$. What is wanted now is the work done by a continuous force field $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ on $\mathbb R^3$ &mdash; the gravitational field of Example 16.1.4 or the electric field of Example 16.1.5, say &mdash; as it moves a particle along a smooth curve $C$. A plane force field is covered as the case $R=0$ with $P$ and $Q$ independent of $z$.</p>
+        <p>Split $C$ into subarcs of length $\Delta s_i$ by dividing $[a,b]$ into subintervals of equal width, and choose $P_i^*(x_i^*,y_i^*,z_i^*)$ on the $i$th subarc, at parameter value $t_i^*$. When $\Delta s_i$ is small the particle crosses that subarc travelling nearly along the unit tangent $\mathbf T(t_i^*)$, so its displacement there is close to $\Delta s_i\,\mathbf T(t_i^*)$ and the work done on it is close to</p>
+        <div class="math-display">$$\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\bigl[\Delta s_i\,\mathbf T(t_i^*)\bigr]=\bigl[\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\mathbf T(t_i^*)\bigr]\Delta s_i.$$</div>
+        <p>Adding these contributions gives the Riemann sum (11) for the total work,</p>
+        <div class="math-display">$$\sum_{i=1}^{n}\bigl[\mathbf F(x_i^*,y_i^*,z_i^*)\cdot\mathbf T(x_i^*,y_i^*,z_i^*)\bigr]\Delta s_i,$$</div>
+        <p>where $\mathbf T(x,y,z)$ is the unit tangent vector at the point $(x,y,z)$ of $C$. These estimates should improve as $n$ grows, so the work $W$ done by the field is <em>defined</em> to be their limit:</p>
+        <div class="math-display">$$W=\int_C\mathbf F(x,y,z)\cdot\mathbf T(x,y,z)\,ds=\int_C\mathbf F\cdot\mathbf T\,ds.$$</div>
+        <p>Put in words, Equation (12) says that only the component of $\mathbf F$ along the curve contributes to the work, and that this tangential component is accumulated with respect to arc length.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 15 : Definition 13 - line integral of a vector field -->
+<div class="card def-card" id="c16-2-15">
+  <div class="card-head">
+    <span class="def-num">DEF 15</span>
+    <span class="def-title">벡터장의 선적분 <em>Line Integral of a Vector Field</em><span class="src-ref">Definition 13 · p.1177</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C$가 벡터방정식 $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j+z(t)\,\mathbf k$로 주어지면 단위접선벡터는 $\mathbf T(t)=\mathbf r'(t)/\lvert\mathbf r'(t)\rvert$이므로, 식 (9)를 이용해 식 (12)를 다시 쓰면 $\lvert\mathbf r'(t)\rvert$가 두 번 나타났다 서로 약분되어 사라진다.</p>
+        <div class="math-display">$$W=\int_a^b\left[\mathbf F(\mathbf r(t))\cdot\frac{\mathbf r'(t)}{\lvert\mathbf r'(t)\rvert}\right]\lvert\mathbf r'(t)\rvert\,dt=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt.$$</div>
+        <p>이 적분은 $\int_C\mathbf F\cdot d\mathbf r$로 줄여 쓰는데, 일과는 무관한 물리학의 다른 분야에서도 등장하므로 역학적 맥락에서 따로 떼어 낼 이유가 충분하다.</p>
+        <div class="formal-box">
+          <p><strong>정의 13.</strong> $\mathbf F$가 벡터함수 $\mathbf r(t)$, $a\le t\le b$로 주어지는 매끄러운 곡선 $C$ 위에서 정의된 연속인 벡터장이라 하자. <strong>$C$를 따르는 $\mathbf F$의 선적분</strong>은</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_C\mathbf F\cdot\mathbf T\,ds.$$</div>
+        </div>
+        <p>사용할 때 유의할 점이 두 가지 있다. 첫째, $\mathbf F(\mathbf r(t))$는 $\mathbf F\bigl(x(t),y(t),z(t)\bigr)$를 줄여 쓴 것이므로, $\mathbf F(x,y,z)$의 식에 $x=x(t)$, $y=y(t)$, $z=z(t)$를 대입해서 계산한다. 둘째, 형식적으로 $d\mathbf r=\mathbf r'(t)\,dt$라 쓸 수 있는데, 이렇게 보면 표기 $\int_C\mathbf F\cdot d\mathbf r$는 알쏭달쏭한 기호가 아니라 그 자체로 기억을 돕는 표기가 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>When $C$ carries the vector equation $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j+z(t)\,\mathbf k$ the unit tangent is $\mathbf T(t)=\mathbf r'(t)/\lvert\mathbf r'(t)\rvert$, so Formula (9) rewrites Equation (12) with the two occurrences of $\lvert\mathbf r'(t)\rvert$ cancelling:</p>
+        <div class="math-display">$$W=\int_a^b\left[\mathbf F(\mathbf r(t))\cdot\frac{\mathbf r'(t)}{\lvert\mathbf r'(t)\rvert}\right]\lvert\mathbf r'(t)\rvert\,dt=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt.$$</div>
+        <p>This integral is abbreviated $\int_C\mathbf F\cdot d\mathbf r$, and it occurs in parts of physics that have nothing to do with work, which is reason enough to detach it from the mechanical setting.</p>
+        <div class="formal-box">
+          <p><strong>Definition 13.</strong> Let $\mathbf F$ be a continuous vector field defined on a smooth curve $C$ given by a vector function $\mathbf r(t)$, $a\le t\le b$. The <strong>line integral of $\mathbf F$ along $C$</strong> is</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_C\mathbf F\cdot\mathbf T\,ds.$$</div>
+        </div>
+        <p>Two reminders when using it. First, $\mathbf F(\mathbf r(t))$ abbreviates $\mathbf F\bigl(x(t),y(t),z(t)\bigr)$, so it is evaluated by substituting $x=x(t)$, $y=y(t)$, $z=z(t)$ into the formula for $\mathbf F(x,y,z)$. Second, one may formally write $d\mathbf r=\mathbf r'(t)\,dt$, which makes the notation $\int_C\mathbf F\cdot d\mathbf r$ mnemonic rather than mysterious.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 16 : NOTE - reversing orientation reverses the sign -->
+<div class="card rem-card" id="c16-2-16">
+  <div class="card-head">
+    <span class="rem-num">REM 16</span>
+    <span class="rem-title">벡터장 선적분과 향 반전 <em>Orientation Reverses the Sign</em><span class="src-ref">NOTE · p.1178</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의 13에 의해 $\int_C\mathbf F\cdot d\mathbf r=\int_C\mathbf F\cdot\mathbf T\,ds$이고, 앞서 호의 길이에 관한 적분은 향에 영향을 받지 않음을 보았다. 그렇다면 $\int_C\mathbf F\cdot d\mathbf r$도 향에 무관하리라 짐작할 법하다. 그러나 실제로는 그렇지 않다 &mdash; 향이 피적분함수 안에 숨어 있기 때문이다. $C$를 $-C$로 바꾸면 단위접선벡터 $\mathbf T$가 $-\mathbf T$로 바뀌므로,</p>
+        <div class="math-display">$$\int_{-C}\mathbf F\cdot d\mathbf r=-\int_C\mathbf F\cdot d\mathbf r.$$</div>
+        <p>물리적으로 말하면, 경로를 거꾸로 되짚어 가면 힘장이 한 일의 부호가 반대가 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Definition 13 gives $\int_C\mathbf F\cdot d\mathbf r=\int_C\mathbf F\cdot\mathbf T\,ds$, and integrals with respect to arc length were just seen to be indifferent to orientation. One might therefore expect $\int_C\mathbf F\cdot d\mathbf r$ to be indifferent too. It is not, because the orientation is hidden in the integrand: replacing $C$ by $-C$ replaces the unit tangent $\mathbf T$ by $-\mathbf T$, and so</p>
+        <div class="math-display">$$\int_{-C}\mathbf F\cdot d\mathbf r=-\int_C\mathbf F\cdot d\mathbf r.$$</div>
+        <p>Physically: retracing the path reverses the sign of the work done by the field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 17 : Formula (14) - vector form equals component form -->
+<div class="card thm-card" id="c16-2-17">
+  <div class="card-head">
+    <span class="thm-num">THM 17</span>
+    <span class="thm-title">벡터장 선적분 = 성분 선적분 <em>Vector and Scalar Forms Agree</em><span class="src-ref">Formula (14) · p.1178&ndash;1179</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (14).</strong> $\mathbb R^3$ 위의 장을 성분으로 $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$라 쓰면, $C$를 따르는 그 선적분은 결합적분 (10)과 같다.</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy+R\,dz.$$</div>
+          <p>원문에서 번호 (14)가 붙은 것은 평면 장 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$에 대한 다음 등식이다.</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy.$$</div>
+        </div>
+        <p>그러므로 벡터 표기와 성분 표기는 같은 수를 가리키며, 편한 쪽을 골라 쓰면 된다. 예컨대 예제 6의 적분 $\int_C y\,dx+z\,dy+x\,dz$는 장 $\mathbf F(x,y,z)=y\,\mathbf i+z\,\mathbf j+x\,\mathbf k$에 대한 $\int_C\mathbf F\cdot d\mathbf r$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 정의 13에 의해 $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$이다. $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$이고 $\mathbf r'(t)=x'(t)\,\mathbf i+y'(t)\,\mathbf j+z'(t)\,\mathbf k$이므로, 두 벡터의 내적을 성분별로 전개하면</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=P\bigl(\mathbf r(t)\bigr)\,x'(t)+Q\bigl(\mathbf r(t)\bigr)\,y'(t)+R\bigl(\mathbf r(t)\bigr)\,z'(t)$$</div>
+        <p>를 얻는다. 이 식을 $a$에서 $b$까지 적분하고 적분의 선형성을 쓰면</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_a^b P\bigl(\mathbf r(t)\bigr)\,x'(t)\,dt+\int_a^b Q\bigl(\mathbf r(t)\bigr)\,y'(t)\,dt+\int_a^b R\bigl(\mathbf r(t)\bigr)\,z'(t)\,dt$$</div>
+        <p>이다. 우변의 세 항은 각각 식 (7)의 계산 공식(그리고 $z$에 대해서도 같은 꼴로 성립하는 식)이 $\int_C P\,dx$, $\int_C Q\,dy$, $\int_C R\,dz$에 대해 내어 주는 값과 정확히 같으므로</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+\int_C Q\,dy+\int_C R\,dz=\int_C P\,dx+Q\,dy+R\,dz$$</div>
+        <p>이고, 이것이 곧 식 (10)의 결합적분이다. 평면장 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$의 경우는 $R\equiv0$, $z'(t)\equiv0$으로 두면 세 번째 항이 사라져 $\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy$가 된다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (14).</strong> Let the field on $\mathbb R^3$ be written in components as $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$. Then its line integral along $C$ is the combined integral (10):</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy+R\,dz.$$</div>
+          <p>The number (14) is attached in the text to the plane case $\mathbf F=P\,\mathbf i+Q\,\mathbf j$:</p>
+          <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy.$$</div>
+        </div>
+        <p>The vector notation and the component notation therefore name the same number, and either may be used as convenience dictates. The integral $\int_C y\,dx+z\,dy+x\,dz$ of Example 6, for instance, is $\int_C\mathbf F\cdot d\mathbf r$ for the field $\mathbf F(x,y,z)=y\,\mathbf i+z\,\mathbf j+x\,\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Definition 13 gives $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$. Writing $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ and $\mathbf r'(t)=x'(t)\,\mathbf i+y'(t)\,\mathbf j+z'(t)\,\mathbf k$ and expanding the dot product componentwise gives</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=P\bigl(\mathbf r(t)\bigr)\,x'(t)+Q\bigl(\mathbf r(t)\bigr)\,y'(t)+R\bigl(\mathbf r(t)\bigr)\,z'(t).$$</div>
+        <p>Integrating this from $a$ to $b$ and using linearity of the integral,</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_a^b P\bigl(\mathbf r(t)\bigr)\,x'(t)\,dt+\int_a^b Q\bigl(\mathbf r(t)\bigr)\,y'(t)\,dt+\int_a^b R\bigl(\mathbf r(t)\bigr)\,z'(t)\,dt.$$</div>
+        <p>Each term on the right is exactly what Formula (7) &mdash; and the analogous formula in $z$ &mdash; gives for $\int_C P\,dx$, $\int_C Q\,dy$, $\int_C R\,dz$, so</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+\int_C Q\,dy+\int_C R\,dz=\int_C P\,dx+Q\,dy+R\,dz,$$</div>
+        <p>which is precisely the combined integral of Formula (10). For a plane field $\mathbf F=P\,\mathbf i+Q\,\mathbf j$, setting $R\equiv0$ and $z'(t)\equiv0$ makes the third term vanish, leaving $\int_C\mathbf F\cdot d\mathbf r=\int_C P\,dx+Q\,dy$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-2-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">단위원 상반부 위의 선적분 <em>A Line Integral over a Semicircle</em><span class="src-ref">Example 1 · p.1171</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C$가 단위원 $x^{2}+y^{2}=1$ 가운데 $x$축 위쪽에 놓인 반원일 때, 선적분 $\int_C(2+x^{2}y)\,ds$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C$를 $x=\cos t,\ y=\sin t\ (0\le t\le\pi)$로 매개변수화하면 $x$축 위쪽 단위원의 절반을 정확히 한 번 지난다. 이때</p>
+        <div class="math-display">$$ds=\sqrt{(-\sin t)^{2}+(\cos t)^{2}}\,dt=dt$$</div>
+        <p>이므로 식 (3)에 의해</p>
+        <div class="math-display">$$\int_C(2+x^{2}y)\,ds=\int_0^{\pi}\bigl(2+\cos^{2}t\sin t\bigr)\,dt=\int_0^{\pi}2\,dt+\int_0^{\pi}\cos^{2}t\sin t\,dt$$</div>
+        <p>이다. 첫 항은 $2\pi$이다. 둘째 항은 $u=\cos t$로 치환하면 $du=-\sin t\,dt$이므로</p>
+        <div class="math-display">$$\int_0^{\pi}\cos^{2}t\sin t\,dt=-\int_{1}^{-1}u^{2}\,du=\int_{-1}^{1}u^{2}\,du=\left[\frac{u^{3}}{3}\right]_{-1}^{1}=\frac23$$</div>
+        <p>이다. 따라서 $\displaystyle\int_C(2+x^{2}y)\,ds=2\pi+\frac23$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\int_C(2+x^{2}y)\,ds$, taking for $C$ the half of the unit circle $x^{2}+y^{2}=1$ that lies above the $x$-axis.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize $C$ by $x=\cos t,\ y=\sin t$ for $0\le t\le\pi$, which traces the upper half of the unit circle exactly once. Then</p>
+        <div class="math-display">$$ds=\sqrt{(-\sin t)^{2}+(\cos t)^{2}}\,dt=dt,$$</div>
+        <p>so Formula (3) gives</p>
+        <div class="math-display">$$\int_C(2+x^{2}y)\,ds=\int_0^{\pi}\bigl(2+\cos^{2}t\sin t\bigr)\,dt=\int_0^{\pi}2\,dt+\int_0^{\pi}\cos^{2}t\sin t\,dt.$$</div>
+        <p>The first term is $2\pi$. For the second, substitute $u=\cos t$, $du=-\sin t\,dt$:</p>
+        <div class="math-display">$$\int_0^{\pi}\cos^{2}t\sin t\,dt=-\int_{1}^{-1}u^{2}\,du=\int_{-1}^{1}u^{2}\,du=\left[\frac{u^{3}}{3}\right]_{-1}^{1}=\frac23.$$</div>
+        <p>Hence $\displaystyle\int_C(2+x^{2}y)\,ds=2\pi+\frac23$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-2-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">두 조각으로 이어붙인 경로 <em>A Path Made of Two Smooth Pieces</em><span class="src-ref">Example 2 · p.1171&ndash;1172</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>경로 $C$는 포물선 $y=x^{2}$의 호 $C_1$(점 $(0,0)$에서 $(1,1)$까지)에 연직 선분 $C_2$(점 $(1,1)$에서 $(1,2)$까지)를 이어붙인 곡선이다. 선적분 $\int_C 2x\,ds$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C_1$은 $x=t,\ y=t^{2}\ (0\le t\le1)$로 매개변수화되고, $dx/dt=1,\ dy/dt=2t$이므로 $ds=\sqrt{1+4t^{2}}\,dt$이다. $u=1+4t^{2}$로 치환하면 $du=8t\,dt$이므로</p>
+        <div class="math-display">$$\int_{C_1}2x\,ds=\int_0^{1}2t\sqrt{1+4t^{2}}\,dt=\frac14\int_{1}^{5}\sqrt u\,du=\frac14\left[\frac23u^{3/2}\right]_1^{5}=\frac{5\sqrt5-1}{6}$$</div>
+        <p>이다. $C_2$는 $x=1,\ y=t\ (1\le t\le2)$로, $ds=dt$이므로</p>
+        <div class="math-display">$$\int_{C_2}2x\,ds=\int_1^{2}2\,dt=2$$</div>
+        <p>이다. $C=C_1\cup C_2$는 조각적으로 매끄러운 곡선이므로</p>
+        <div class="math-display">$$\int_C2x\,ds=\int_{C_1}2x\,ds+\int_{C_2}2x\,ds=\frac{5\sqrt5-1}{6}+2=\frac{5\sqrt5+11}{6}$$</div>
+        <p>이다. 따라서 $\displaystyle\int_C2x\,ds=\frac{5\sqrt5+11}{6}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be the path built from the parabolic arc $C_1$ of $y=x^{2}$ running from $(0,0)$ to $(1,1)$, followed by the vertical segment $C_2$ that climbs from $(1,1)$ to $(1,2)$. Compute $\int_C 2x\,ds$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize $C_1$ by $x=t,\ y=t^{2}$ for $0\le t\le1$; then $dx/dt=1$, $dy/dt=2t$, so $ds=\sqrt{1+4t^{2}}\,dt$. Substituting $u=1+4t^{2}$, $du=8t\,dt$,</p>
+        <div class="math-display">$$\int_{C_1}2x\,ds=\int_0^{1}2t\sqrt{1+4t^{2}}\,dt=\frac14\int_{1}^{5}\sqrt u\,du=\frac14\left[\frac23u^{3/2}\right]_1^{5}=\frac{5\sqrt5-1}{6}.$$</div>
+        <p>For $C_2$, parametrized by $x=1,\ y=t$ for $1\le t\le2$, $ds=dt$ and</p>
+        <div class="math-display">$$\int_{C_2}2x\,ds=\int_1^{2}2\,dt=2.$$</div>
+        <p>Since $C=C_1\cup C_2$ is piecewise smooth,</p>
+        <div class="math-display">$$\int_C2x\,ds=\int_{C_1}2x\,ds+\int_{C_2}2x\,ds=\frac{5\sqrt5-1}{6}+2=\frac{5\sqrt5+11}{6}.$$</div>
+        <p>Hence $\displaystyle\int_C2x\,ds=\frac{5\sqrt5+11}{6}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-2-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">반원 철사의 질량중심 <em>Center of Mass of a Semicircular Wire</em><span class="src-ref">Example 3 · p.1172&ndash;1173</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반원 $x^{2}+y^{2}=1,\ y\ge0$ 모양으로 구부린 철사가 있다. 각 점에서의 선밀도가 그 점과 직선 $y=1$ 사이의 거리에 비례하므로, 이 철사는 꼭대기 쪽보다 밑동 쪽이 더 굵다. 철사의 질량중심을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C$를 $x=\cos t,\ y=\sin t\ (0\le t\le\pi)$로 매개변수화하면 $ds=dt$이고, 선밀도는 직선 $y=1$까지의 거리에 비례하므로 $\rho(x,y)=k(1-y)$이다($k$는 비례상수). 질량은</p>
+        <div class="math-display">$$m=\int_C\rho\,ds=k\int_0^{\pi}(1-\sin t)\,dt=k\Bigl[t+\cos t\Bigr]_0^{\pi}=k\bigl[(\pi-1)-1\bigr]=k(\pi-2)$$</div>
+        <p>이다. $\bar x$는 계산 없이도 알 수 있다: $\rho$가 $y$만의 함수이고 $x=\cos t$는 $t\mapsto\pi-t$에 대해 부호가 바뀌는 반면 $\rho$는 이 치환으로 값이 그대로이므로, $x\rho\,ds$의 적분은 자신의 반수(反數)와 같아 $0$이다. 따라서 $\bar x=0$이다. 한편</p>
+        <div class="math-display">$$\int_Cy\,\rho\,ds=k\int_0^{\pi}\sin t\,(1-\sin t)\,dt=k\left(\int_0^{\pi}\sin t\,dt-\int_0^{\pi}\sin^{2}t\,dt\right)=k\left(2-\frac{\pi}{2}\right)=\frac{k(4-\pi)}{2}$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$\bar y=\frac1m\int_Cy\,\rho\,ds=\frac{k(4-\pi)/2}{k(\pi-2)}=\frac{4-\pi}{2(\pi-2)}\approx0.38$$</div>
+        <p>이다. 따라서 질량중심은 $\Bigl(0,\ \dfrac{4-\pi}{2(\pi-2)}\Bigr)\approx(0,0.38)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A wire is bent into the semicircle $x^{2}+y^{2}=1$, $y\ge0$. Its linear density at each point is proportional to the distance from that point to the line $y=1$, so the wire is thicker near its base than near its top. Locate the center of mass of the wire.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Parametrize $C$ by $x=\cos t,\ y=\sin t$ for $0\le t\le\pi$, so $ds=dt$; the linear density, proportional to distance from the line $y=1$, is $\rho(x,y)=k(1-y)$ for some constant $k$. The mass is</p>
+        <div class="math-display">$$m=\int_C\rho\,ds=k\int_0^{\pi}(1-\sin t)\,dt=k\Bigl[t+\cos t\Bigr]_0^{\pi}=k\bigl[(\pi-1)-1\bigr]=k(\pi-2).$$</div>
+        <p>No computation is needed for $\bar x$: $\rho$ depends on $y$ alone, and under $t\mapsto\pi-t$ the factor $x=\cos t$ changes sign while $\rho$ is unchanged, so the integral of $x\rho\,ds$ equals its own negative and must vanish. Hence $\bar x=0$. For $\bar y$,</p>
+        <div class="math-display">$$\int_Cy\,\rho\,ds=k\int_0^{\pi}\sin t\,(1-\sin t)\,dt=k\left(\int_0^{\pi}\sin t\,dt-\int_0^{\pi}\sin^{2}t\,dt\right)=k\left(2-\frac{\pi}{2}\right)=\frac{k(4-\pi)}{2},$$</div>
+        <p>so</p>
+        <div class="math-display">$$\bar y=\frac1m\int_Cy\,\rho\,ds=\frac{k(4-\pi)/2}{k(\pi-2)}=\frac{4-\pi}{2(\pi-2)}\approx0.38.$$</div>
+        <p>Hence the center of mass is $\Bigl(0,\ \dfrac{4-\pi}{2(\pi-2)}\Bigr)\approx(0,0.38)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-2-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">끝점이 같은 두 경로 <em>Two Paths with the Same Endpoints</em><span class="src-ref">Example 4 · p.1173&ndash;1174</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $(-5,-3)$에서 점 $(0,2)$로 가는 서로 다른 두 경로를 따라 선적분 $\int_C y^{2}\,dx+x\,dy$를 각각 계산하라.</p>
+        <p><strong>(a)</strong> $C=C_1$은 두 점을 잇는 선분이다.</p>
+        <p><strong>(b)</strong> $C=C_2$는 포물선 $x=4-y^{2}$의 호이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 215" role="img" aria-label="점 (&#8722;5, &#8722;3)에서 점 (0, 2)로 가는 두 경로 &#8212; 직선 C1과 포물선 x = 4 &#8722; y&#178;의 호 C2 &#8212; 를 xy평면에 나란히 그린 그림" style="max-width:360px;width:100%;height:auto">
+            <line x1="20" y1="95" x2="296" y2="95" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="170" y1="200" x2="170" y2="24" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="302,95 293,98 293,92" fill="var(--grey400)"/>
+            <polygon points="170,18 167,27 173,27" fill="var(--grey400)"/>
+            <text x="291" y="109" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="177" y="30" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="159" y="108" font-size="10.5" fill="var(--grey500)">0</text>
+            <line x1="270" y1="92" x2="270" y2="98" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="266" y="109" font-size="10.5" fill="var(--grey600)">4</text>
+            <path d="M45.0,170.0 L63.4,166.9 L80.9,163.8 L97.7,160.6 L113.8,157.5 L129.0,154.4 L143.4,151.2 L157.1,148.1 L170.0,145.0 L182.1,141.9 L193.4,138.8 L204.0,135.6 L213.8,132.5 L222.7,129.4 L230.9,126.2 L238.4,123.1 L245.0,120.0 L250.9,116.9 L255.9,113.8 L260.2,110.6 L263.8,107.5 L266.5,104.4 L268.4,101.2 L269.6,98.1 L270.0,95.0 L269.6,91.9 L268.4,88.8 L266.5,85.6 L263.8,82.5 L260.2,79.4 L255.9,76.2 L250.9,73.1 L245.0,70.0 L238.4,66.9 L230.9,63.8 L222.7,60.6 L213.8,57.5 L204.0,54.4 L193.4,51.2 L182.1,48.1 L170.0,45.0" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="45" y1="170" x2="170" y2="45" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="110.0,105.0 106.4,111.4 103.6,108.6" fill="var(--grey700)"/>
+            <polygon points="217.1,131.4 211.1,135.5 209.8,131.7" fill="var(--g600)"/>
+            <polygon points="253.0,74.3 260.0,76.5 257.7,79.9" fill="var(--g600)"/>
+            <circle cx="45" cy="170" r="3" fill="var(--grey800)"/>
+            <circle cx="170" cy="45" r="3" fill="var(--grey800)"/>
+            <text x="124" y="41" font-size="10" font-style="italic" fill="var(--grey700)">(0, 2)</text>
+            <text x="24" y="186" font-size="10" font-style="italic" fill="var(--grey700)">(&#8722;5, &#8722;3)</text>
+            <text x="66" y="120" font-size="11" font-style="italic" fill="var(--grey700)">C<tspan font-size="8" dy="2.5">1</tspan></text>
+            <text x="220" y="50" font-size="11" font-style="italic" fill="var(--g800)">C<tspan font-size="8" dy="2.5">2</tspan></text>
+            <text x="222" y="160" font-size="10.5" font-style="italic" fill="var(--g800)">x = 4 &#8722; y<tspan font-size="7.5" dy="-4">2</tspan></text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 식 (8)에 의해 선분은 $\mathbf r(t)=(1-t)\langle-5,-3\rangle+t\langle0,2\rangle$, 즉 $x=-5+5t,\ y=-3+5t\ (0\le t\le1)$로 매개변수화된다. $dx=5\,dt,\ dy=5\,dt$이므로</p>
+        <div class="math-display">$$\int_{C_1}y^{2}\,dx+x\,dy=\int_0^{1}\Bigl[(-3+5t)^{2}\cdot5+(-5+5t)\cdot5\Bigr]dt=\int_0^{1}\bigl(125t^{2}-125t+20\bigr)\,dt$$</div>
+        <p>이고, 이를 적분하면</p>
+        <div class="math-display">$$\int_0^{1}\bigl(125t^{2}-125t+20\bigr)\,dt=\frac{125}{3}-\frac{125}{2}+20=-\frac56$$</div>
+        <p>를 얻는다. 즉 $\displaystyle\int_{C_1}y^{2}\,dx+x\,dy=-\frac56$이다.</p>
+        <p><strong>(b)</strong> $C_2$는 포물선 $x=4-y^{2}$의 호이므로 $y=t$로 두면 $x=4-t^{2}$이고, $(-5,-3)$에서 $(0,2)$까지 가려면 $t$가 $-3$에서 $2$까지 증가해야 한다. $dx=-2t\,dt,\ dy=dt$이므로</p>
+        <div class="math-display">$$\int_{C_2}y^{2}\,dx+x\,dy=\int_{-3}^{2}\Bigl[t^{2}(-2t)+(4-t^{2})\Bigr]dt=\int_{-3}^{2}\bigl(-2t^{3}-t^{2}+4\bigr)\,dt$$</div>
+        <p>이다. 부정적분은 $-\dfrac{t^{4}}{2}-\dfrac{t^{3}}{3}+4t$이므로</p>
+        <div class="math-display">$$\left[-\frac{t^{4}}{2}-\frac{t^{3}}{3}+4t\right]_{-3}^{2}=\left(-8-\frac83+8\right)-\left(-\frac{81}{2}+9-12\right)=-\frac83+\frac{87}{2}=\frac{245}{6}$$</div>
+        <p>를 얻는다. 즉 $\displaystyle\int_{C_2}y^{2}\,dx+x\,dy=\frac{245}{6}$이다.</p>
+        <p>두 값 $-\dfrac56$과 $\dfrac{245}{6}$이 서로 다르므로, 이 선적분은 끝점만으로 결정되지 않고 경로 전체에 의존한다.</p>
+        <p><strong>향에 따른 부호.</strong> 값은 향에도 달려 있다. $-C_1$은 $(0,2)$에서 $(-5,-3)$으로 되짚어 가는 선분이므로 식 (8)에서 $\mathbf r_0=\langle0,2\rangle$, $\mathbf r_1=\langle-5,-3\rangle$로 두면 $x=-5t,\ y=2-5t\ (0\le t\le1)$이고, $dx=-5\,dt,\ dy=-5\,dt$이므로</p>
+        <div class="math-display">$$\int_{-C_1}y^{2}\,dx+x\,dy=\int_0^{1}\Bigl[(2-5t)^{2}(-5)+(-5t)(-5)\Bigr]dt=\int_0^{1}\bigl(-125t^{2}+125t-20\bigr)\,dt=\frac56$$</div>
+        <p>이다. $x$&middot;$y$에 관한 두 적분이 모두 부호를 바꾸었으므로 합도 $-\dfrac56$에서 $\dfrac56$으로 부호만 뒤집혔다 &mdash; 카드 12의 향 반전 규칙 그대로이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\int_C y^{2}\,dx+x\,dy$ along each of two curves that join $(-5,-3)$ to $(0,2)$.</p>
+        <p><strong>(a)</strong> Take $C=C_1$, the straight segment between those two points.</p>
+        <p><strong>(b)</strong> Take $C=C_2$, the arc of the parabola $x=4-y^{2}$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 215" role="img" aria-label="Two curves joining (&#8722;5, &#8722;3) to (0, 2) in the xy-plane: the straight segment C1 and the arc C2 of the parabola x = 4 &#8722; y&#178;" style="max-width:360px;width:100%;height:auto">
+            <line x1="20" y1="95" x2="296" y2="95" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="170" y1="200" x2="170" y2="24" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="302,95 293,98 293,92" fill="var(--grey400)"/>
+            <polygon points="170,18 167,27 173,27" fill="var(--grey400)"/>
+            <text x="291" y="109" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="177" y="30" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <text x="159" y="108" font-size="10.5" fill="var(--grey500)">0</text>
+            <line x1="270" y1="92" x2="270" y2="98" stroke="var(--grey400)" stroke-width="1"/>
+            <text x="266" y="109" font-size="10.5" fill="var(--grey600)">4</text>
+            <path d="M45.0,170.0 L63.4,166.9 L80.9,163.8 L97.7,160.6 L113.8,157.5 L129.0,154.4 L143.4,151.2 L157.1,148.1 L170.0,145.0 L182.1,141.9 L193.4,138.8 L204.0,135.6 L213.8,132.5 L222.7,129.4 L230.9,126.2 L238.4,123.1 L245.0,120.0 L250.9,116.9 L255.9,113.8 L260.2,110.6 L263.8,107.5 L266.5,104.4 L268.4,101.2 L269.6,98.1 L270.0,95.0 L269.6,91.9 L268.4,88.8 L266.5,85.6 L263.8,82.5 L260.2,79.4 L255.9,76.2 L250.9,73.1 L245.0,70.0 L238.4,66.9 L230.9,63.8 L222.7,60.6 L213.8,57.5 L204.0,54.4 L193.4,51.2 L182.1,48.1 L170.0,45.0" fill="none" stroke="var(--g600)" stroke-width="1.8"/>
+            <line x1="45" y1="170" x2="170" y2="45" stroke="var(--grey700)" stroke-width="1.8"/>
+            <polygon points="110.0,105.0 106.4,111.4 103.6,108.6" fill="var(--grey700)"/>
+            <polygon points="217.1,131.4 211.1,135.5 209.8,131.7" fill="var(--g600)"/>
+            <polygon points="253.0,74.3 260.0,76.5 257.7,79.9" fill="var(--g600)"/>
+            <circle cx="45" cy="170" r="3" fill="var(--grey800)"/>
+            <circle cx="170" cy="45" r="3" fill="var(--grey800)"/>
+            <text x="124" y="41" font-size="10" font-style="italic" fill="var(--grey700)">(0, 2)</text>
+            <text x="24" y="186" font-size="10" font-style="italic" fill="var(--grey700)">(&#8722;5, &#8722;3)</text>
+            <text x="66" y="120" font-size="11" font-style="italic" fill="var(--grey700)">C<tspan font-size="8" dy="2.5">1</tspan></text>
+            <text x="220" y="50" font-size="11" font-style="italic" fill="var(--g800)">C<tspan font-size="8" dy="2.5">2</tspan></text>
+            <text x="222" y="160" font-size="10.5" font-style="italic" fill="var(--g800)">x = 4 &#8722; y<tspan font-size="7.5" dy="-4">2</tspan></text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> By Equation (8), the segment is $\mathbf r(t)=(1-t)\langle-5,-3\rangle+t\langle0,2\rangle$, i.e. $x=-5+5t,\ y=-3+5t$ for $0\le t\le1$. Since $dx=5\,dt$ and $dy=5\,dt$,</p>
+        <div class="math-display">$$\int_{C_1}y^{2}\,dx+x\,dy=\int_0^{1}\Bigl[(-3+5t)^{2}\cdot5+(-5+5t)\cdot5\Bigr]dt=\int_0^{1}\bigl(125t^{2}-125t+20\bigr)\,dt,$$</div>
+        <p>and integrating gives</p>
+        <div class="math-display">$$\int_0^{1}\bigl(125t^{2}-125t+20\bigr)\,dt=\frac{125}{3}-\frac{125}{2}+20=-\frac56.$$</div>
+        <p>So $\displaystyle\int_{C_1}y^{2}\,dx+x\,dy=-\frac56$.</p>
+        <p><strong>(b)</strong> Since $C_2$ is the arc of $x=4-y^{2}$, set $y=t$, so $x=4-t^{2}$; going from $(-5,-3)$ to $(0,2)$ means $t$ increases from $-3$ to $2$. Since $dx=-2t\,dt$ and $dy=dt$,</p>
+        <div class="math-display">$$\int_{C_2}y^{2}\,dx+x\,dy=\int_{-3}^{2}\Bigl[t^{2}(-2t)+(4-t^{2})\Bigr]dt=\int_{-3}^{2}\bigl(-2t^{3}-t^{2}+4\bigr)\,dt.$$</div>
+        <p>An antiderivative is $-\dfrac{t^{4}}{2}-\dfrac{t^{3}}{3}+4t$, so</p>
+        <div class="math-display">$$\left[-\frac{t^{4}}{2}-\frac{t^{3}}{3}+4t\right]_{-3}^{2}=\left(-8-\frac83+8\right)-\left(-\frac{81}{2}+9-12\right)=-\frac83+\frac{87}{2}=\frac{245}{6}.$$</div>
+        <p>So $\displaystyle\int_{C_2}y^{2}\,dx+x\,dy=\frac{245}{6}$.</p>
+        <p>Because the two values $-\dfrac56$ and $\dfrac{245}{6}$ disagree, this line integral is not determined by the endpoints alone but depends on the full path.</p>
+        <p><strong>Reversing the orientation.</strong> The value also depends on the direction of travel. For $-C_1$, the segment retraced from $(0,2)$ back to $(-5,-3)$, Equation (8) with $\mathbf r_0=\langle0,2\rangle$ and $\mathbf r_1=\langle-5,-3\rangle$ gives $x=-5t,\ y=2-5t$ for $0\le t\le1$, whence $dx=-5\,dt$, $dy=-5\,dt$ and</p>
+        <div class="math-display">$$\int_{-C_1}y^{2}\,dx+x\,dy=\int_0^{1}\Bigl[(2-5t)^{2}(-5)+(-5t)(-5)\Bigr]dt=\int_0^{1}\bigl(-125t^{2}+125t-20\bigr)\,dt=\frac56.$$</div>
+        <p>Both the $x$- and the $y$-integral changed sign, so the total moved from $-\dfrac56$ to $\dfrac56$ &mdash; exactly the sign rule of card 12.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-2-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">나선 위의 선적분 <em>A Line Integral along a Helix</em><span class="src-ref">Example 5 · p.1175</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원기둥나선 $x=\cos t,\ y=\sin t,\ z=t\ (0\le t\le 2\pi)$를 $C$라 할 때, 선적분 $\int_C y\sin z\,ds$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $C$는 $x=\cos t,\ y=\sin t,\ z=t\ (0\le t\le2\pi)$이므로</p>
+        <div class="math-display">$$ds=\sqrt{(-\sin t)^{2}+(\cos t)^{2}+1^{2}}\,dt=\sqrt2\,dt$$</div>
+        <p>이다. 식 (9)에 의해</p>
+        <div class="math-display">$$\int_Cy\sin z\,ds=\int_0^{2\pi}\sin t\,\sin t\cdot\sqrt2\,dt=\sqrt2\int_0^{2\pi}\sin^{2}t\,dt$$</div>
+        <p>인데, $\sin^{2}t$의 $[0,2\pi]$ 위 평균은 $\tfrac12$이므로 $\displaystyle\int_0^{2\pi}\sin^{2}t\,dt=\pi$이다. 따라서 $\displaystyle\int_Cy\sin z\,ds=\sqrt2\,\pi$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Compute $\int_C y\sin z\,ds$, taking for $C$ the circular helix traced out by $x=\cos t$, $y=\sin t$, $z=t$ as the parameter runs from $0$ to $2\pi$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $C$ is given by $x=\cos t,\ y=\sin t,\ z=t$ for $0\le t\le2\pi$,</p>
+        <div class="math-display">$$ds=\sqrt{(-\sin t)^{2}+(\cos t)^{2}+1^{2}}\,dt=\sqrt2\,dt.$$</div>
+        <p>By Formula (9),</p>
+        <div class="math-display">$$\int_Cy\sin z\,ds=\int_0^{2\pi}\sin t\,\sin t\cdot\sqrt2\,dt=\sqrt2\int_0^{2\pi}\sin^{2}t\,dt,$$</div>
+        <p>and since the average of $\sin^{2}t$ over $[0,2\pi]$ is $\tfrac12$, $\displaystyle\int_0^{2\pi}\sin^{2}t\,dt=\pi$. Hence $\displaystyle\int_Cy\sin z\,ds=\sqrt2\,\pi$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex16-2-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">꺾인 공간 경로 위의 성분 선적분 <em>Components along a Broken Space Path</em><span class="src-ref">Example 6 · p.1176</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$C_1$은 점 $(2,0,0)$에서 $(3,4,5)$로 가는 선분이고, $C_2$는 이어서 $(3,4,5)$에서 $(3,4,0)$으로 내려가는 연직 선분이다. 이 둘을 이어붙인 경로 $C$에 대하여 선적분 $\int_C y\,dx+z\,dy+x\,dz$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 식 (8)에 의해 $C_1$은 $\mathbf r(t)=(1-t)\langle2,0,0\rangle+t\langle3,4,5\rangle$, 즉 $x=2+t,\ y=4t,\ z=5t\ (0\le t\le1)$이다. $dx=dt,\ dy=4\,dt,\ dz=5\,dt$이므로</p>
+        <div class="math-display">$$\int_{C_1}y\,dx+z\,dy+x\,dz=\int_0^{1}\bigl[4t+5t\cdot4+(2+t)\cdot5\bigr]dt=\int_0^{1}(29t+10)\,dt=\frac{29}{2}+10=\frac{49}{2}$$</div>
+        <p>이다. $C_2$는 $x=3,\ y=4$는 고정한 채 $z$가 $5$에서 $0$으로 내려가므로 $z=5-5t\ (0\le t\le1)$이고, $dx=0,\ dy=0,\ dz=-5\,dt$이므로</p>
+        <div class="math-display">$$\int_{C_2}y\,dx+z\,dy+x\,dz=\int_0^{1}3\cdot(-5)\,dt=-15$$</div>
+        <p>이다. $C=C_1\cup C_2$는 조각적으로 매끄러우므로</p>
+        <div class="math-display">$$\int_Cy\,dx+z\,dy+x\,dz=\frac{49}{2}+(-15)=\frac{19}{2}$$</div>
+        <p>이다. 따라서 $\displaystyle\int_Cy\,dx+z\,dy+x\,dz=\frac{19}{2}$이다. (식 (14)에 의해 이 값은 벡터장 $\mathbf F=y\,\mathbf i+z\,\mathbf j+x\,\mathbf k$에 대한 $\int_C\mathbf F\cdot d\mathbf r$과 같다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $C$ be made up of the segment $C_1$ running from $(2,0,0)$ to $(3,4,5)$ and then the vertical segment $C_2$ dropping from $(3,4,5)$ to $(3,4,0)$. Compute $\int_C y\,dx+z\,dy+x\,dz$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> By Equation (8), $C_1$ is $\mathbf r(t)=(1-t)\langle2,0,0\rangle+t\langle3,4,5\rangle$, i.e. $x=2+t,\ y=4t,\ z=5t$ for $0\le t\le1$. Since $dx=dt$, $dy=4\,dt$, $dz=5\,dt$,</p>
+        <div class="math-display">$$\int_{C_1}y\,dx+z\,dy+x\,dz=\int_0^{1}\bigl[4t+5t\cdot4+(2+t)\cdot5\bigr]dt=\int_0^{1}(29t+10)\,dt=\frac{29}{2}+10=\frac{49}{2}.$$</div>
+        <p>On $C_2$, $x=3$ and $y=4$ stay fixed while $z$ drops from $5$ to $0$, so $z=5-5t$ for $0\le t\le1$, $dx=0$, $dy=0$, $dz=-5\,dt$, and</p>
+        <div class="math-display">$$\int_{C_2}y\,dx+z\,dy+x\,dz=\int_0^{1}3\cdot(-5)\,dt=-15.$$</div>
+        <p>Since $C=C_1\cup C_2$ is piecewise smooth,</p>
+        <div class="math-display">$$\int_Cy\,dx+z\,dy+x\,dz=\frac{49}{2}+(-15)=\frac{19}{2}.$$</div>
+        <p>Hence $\displaystyle\int_Cy\,dx+z\,dy+x\,dz=\frac{19}{2}$. (By Formula (14) this equals $\int_C\mathbf F\cdot d\mathbf r$ for the field $\mathbf F=y\,\mathbf i+z\,\mathbf j+x\,\mathbf k$.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex16-2-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">사분원 위에서 힘장이 한 일 <em>Work along a Quarter-Circle</em><span class="src-ref">Example 7 · p.1178</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>힘장 $\mathbf F(x,y)=x^{2}\,\mathbf i-xy\,\mathbf j$가 사분원 $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j\ (0\le t\le\pi/2)$를 따라 입자를 옮긴다. 이때 힘장이 한 일을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$이므로 $\mathbf r'(t)=-\sin t\,\mathbf i+\cos t\,\mathbf j$이고, $\mathbf F(\mathbf r(t))=\cos^{2}t\,\mathbf i-\cos t\sin t\,\mathbf j$이다. 일은 식 (12)와 정의 13에 의해</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=\int_0^{\pi/2}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_0^{\pi/2}\bigl[-\cos^{2}t\sin t-\cos^{2}t\sin t\bigr]dt=\int_0^{\pi/2}-2\cos^{2}t\sin t\,dt$$</div>
+        <p>이다. $\dfrac{d}{dt}\Bigl(\dfrac23\cos^{3}t\Bigr)=-2\cos^{2}t\sin t$이므로</p>
+        <div class="math-display">$$W=\left[\frac23\cos^{3}t\right]_0^{\pi/2}=0-\frac23=-\frac23$$</div>
+        <p>이다. 따라서 $W=-\dfrac23$이며, 음수라는 것은 힘장이 입자의 운동을 방해하는 방향으로 작용함을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A particle is carried along the quarter-circle $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$, $0\le t\le\pi/2$, by the force field $\mathbf F(x,y)=x^{2}\,\mathbf i-xy\,\mathbf j$. Determine how much work the field does.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$, we have $\mathbf r'(t)=-\sin t\,\mathbf i+\cos t\,\mathbf j$ and $\mathbf F(\mathbf r(t))=\cos^{2}t\,\mathbf i-\cos t\sin t\,\mathbf j$. By Equation (12) and Definition 13, the work is</p>
+        <div class="math-display">$$W=\int_C\mathbf F\cdot d\mathbf r=\int_0^{\pi/2}\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt=\int_0^{\pi/2}\bigl[-\cos^{2}t\sin t-\cos^{2}t\sin t\bigr]dt=\int_0^{\pi/2}-2\cos^{2}t\sin t\,dt.$$</div>
+        <p>Since $\dfrac{d}{dt}\Bigl(\dfrac23\cos^{3}t\Bigr)=-2\cos^{2}t\sin t$,</p>
+        <div class="math-display">$$W=\left[\frac23\cos^{3}t\right]_0^{\pi/2}=0-\frac23=-\frac23.$$</div>
+        <p>Hence $W=-\dfrac23$; the negative sign means the force field works against the particle's motion.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex16-2-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">비틀린 삼차곡선 위의 벡터장 선적분 <em>A Vector Field along the Twisted Cubic</em><span class="src-ref">Example 8 · p.1178</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장이 $\mathbf F(x,y,z)=xy\,\mathbf i+yz\,\mathbf j+zx\,\mathbf k$이고 $C$가 비틀린 삼차곡선 $x=t,\ y=t^{2},\ z=t^{3}\ (0\le t\le1)$일 때, 선적분 $\int_C\mathbf F\cdot d\mathbf r$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf r(t)=\langle t,t^{2},t^{3}\rangle$이므로 $\mathbf r'(t)=\langle1,2t,3t^{2}\rangle$이고, $\mathbf F(\mathbf r(t))=\langle t\cdot t^{2},\,t^{2}\cdot t^{3},\,t^{3}\cdot t\rangle=\langle t^{3},t^{5},t^{4}\rangle$이다. 따라서</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=t^{3}\cdot1+t^{5}\cdot2t+t^{4}\cdot3t^{2}=t^{3}+2t^{6}+3t^{6}=t^{3}+5t^{6}$$</div>
+        <p>이고, 정의 13에 의해</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_0^{1}\bigl(t^{3}+5t^{6}\bigr)\,dt=\left[\frac{t^{4}}{4}+\frac{5t^{7}}{7}\right]_0^{1}=\frac14+\frac57=\frac{7+20}{28}=\frac{27}{28}$$</div>
+        <p>이다. 따라서 $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\frac{27}{28}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Take the field $\mathbf F(x,y,z)=xy\,\mathbf i+yz\,\mathbf j+zx\,\mathbf k$, and let $C$ be the twisted cubic described by $x=t$, $y=t^{2}$, $z=t^{3}$ for $0\le t\le1$. Compute $\int_C\mathbf F\cdot d\mathbf r$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf r(t)=\langle t,t^{2},t^{3}\rangle$, we have $\mathbf r'(t)=\langle1,2t,3t^{2}\rangle$ and $\mathbf F(\mathbf r(t))=\langle t\cdot t^{2},\,t^{2}\cdot t^{3},\,t^{3}\cdot t\rangle=\langle t^{3},t^{5},t^{4}\rangle$. Hence</p>
+        <div class="math-display">$$\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)=t^{3}\cdot1+t^{5}\cdot2t+t^{4}\cdot3t^{2}=t^{3}+2t^{6}+3t^{6}=t^{3}+5t^{6},$$</div>
+        <p>and by Definition 13,</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot d\mathbf r=\int_0^{1}\bigl(t^{3}+5t^{6}\bigr)\,dt=\left[\frac{t^{4}}{4}+\frac{5t^{7}}{7}\right]_0^{1}=\frac14+\frac57=\frac{7+20}{28}=\frac{27}{28}.$$</div>
+        <p>Hence $\displaystyle\int_C\mathbf F\cdot d\mathbf r=\frac{27}{28}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-2-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch11.html">단원 11</a></p>
+        <ul>
+          <li>선분 위의 선적분 &mdash; <a href="../calc2/ch11.html#ex01">ex01</a> (완전 대응: 식 (3)·(9)로 계산하는 기본 유형)</li>
+          <li>꺾은선 경로의 선적분 &mdash; <a href="../calc2/ch11.html#yu01-1">yu01-1</a> (완전 대응: 조각적으로 매끄러운 곡선, 예제 2와 같은 유형)</li>
+          <li>나선 위의 선적분 &mdash; <a href="../calc2/ch11.html#yu01-2">yu01-2</a> (완전 대응: 예제 5와 같은 유형)</li>
+          <li>호의 길이 선적분 &mdash; <a href="../calc2/ch11.html#yu01-3">yu01-3</a> (완전 대응: 식 (9))</li>
+          <li>벡터장의 선적분 &mdash; <a href="../calc2/ch11.html#ex03">ex03</a> (완전 대응: 정의 13, 예제 8과 같은 유형)</li>
+          <li>두 경로의 선적분 &mdash; <a href="../calc2/ch11.html#yu03-1">yu03-1</a> (완전 대응: 예제 4와 같은 유형 &mdash; 값이 경로에 의존함)</li>
+          <li>성분별 선적분 계산 &mdash; <a href="../calc2/ch11.html#yu03-2">yu03-2</a> (완전 대응: 식 (10)·(14))</li>
+          <li>일과 유동을 함께 구하는 문제 &mdash; <a href="../calc2/ch11.html#ex04">ex04</a>, <a href="../calc2/ch11.html#yu04-1">yu04-1</a> (부분 대응: 일 $W=\int_C\mathbf F\cdot d\mathbf r$는 식 (12)·정의 13과 같음)</li>
+          <li>중심력이 한 일 &mdash; <a href="../calc2/ch11.html#yu04-2">yu04-2</a>, 중력이 줄에 한 일 &mdash; <a href="../calc2/ch11.html#pr03">pr03</a> (인접: 예제 7과 같은 일 계산)</li>
+          <li>교선을 따른 유동 &mdash; <a href="../calc2/ch11.html#yu04-3">yu04-3</a> (인접: 공간곡선 위의 벡터장 선적분)</li>
+          <li>곡면의 넓이 &mdash; <a href="../calc2/ch11.html#pr01">pr01</a> (인접: 카드 6의 "울타리" 넓이 해석과 사실상 같은 유형)</li>
+          <li>비꼬임과 선적분 &mdash; <a href="../calc2/ch11.html#pr04">pr04</a> (인접)</li>
+          <li>철사의 질량과 질량중심(식 (4), 예제 3), 곡선의 관성모멘트, 향 반전 $-C$의 부호 규칙, 선분의 표준 매개화 (8) &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트의 $\oint_C\mathbf F\cdot\mathbf n\,ds$(평면 플럭스)는 Stewart에서는 이 절이 아니라 §16.5에 나온다.</p>
+        <p><strong>(b) 공통과제 (§16.2, 3차)</strong></p>
+        <p>제출 문항: 8, 18, 22, 36, 41, 43 &nbsp;/&nbsp; 학습 참고: 1&ndash;8, 9&ndash;18, 21&ndash;24, 35&ndash;38, 41&ndash;43</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-1.html">§16.1 벡터장</a> &nbsp;/&nbsp; 다음: <a href="s16-3.html">§16.3 선적분의 기본정리</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch11.html">Unit 11</a></p>
+        <ul>
+          <li>Line integral over a segment &mdash; <a href="../calc2/ch11.html#ex01">ex01</a> (full match; the basic computation by Formulas (3) and (9))</li>
+          <li>Line integral over a broken path &mdash; <a href="../calc2/ch11.html#yu01-1">yu01-1</a> (full match; a piecewise-smooth curve, as in Example 2)</li>
+          <li>Line integral along a helix &mdash; <a href="../calc2/ch11.html#yu01-2">yu01-2</a> (full match; same type as Example 5)</li>
+          <li>Integral with respect to arc length &mdash; <a href="../calc2/ch11.html#yu01-3">yu01-3</a> (full match; Formula (9))</li>
+          <li>Line integral of a vector field &mdash; <a href="../calc2/ch11.html#ex03">ex03</a> (full match; Definition 13, same type as Example 8)</li>
+          <li>The same integral along two paths &mdash; <a href="../calc2/ch11.html#yu03-1">yu03-1</a> (full match; same type as Example 4, where the value depends on the path)</li>
+          <li>Componentwise evaluation &mdash; <a href="../calc2/ch11.html#yu03-2">yu03-2</a> (full match; Formulas (10) and (14))</li>
+          <li>Work and flow computed together &mdash; <a href="../calc2/ch11.html#ex04">ex04</a>, <a href="../calc2/ch11.html#yu04-1">yu04-1</a> (partial match; the work part $W=\int_C\mathbf F\cdot d\mathbf r$ is Equation (12) and Definition 13)</li>
+          <li>Work done by a central force &mdash; <a href="../calc2/ch11.html#yu04-2">yu04-2</a>, and work done by gravity on a hanging rope &mdash; <a href="../calc2/ch11.html#pr03">pr03</a> (adjacent; the work computation of Example 7)</li>
+          <li>Flow along a curve of intersection &mdash; <a href="../calc2/ch11.html#yu04-3">yu04-3</a> (adjacent; a vector field integrated along a space curve)</li>
+          <li>Area of a surface strip &mdash; <a href="../calc2/ch11.html#pr01">pr01</a> (adjacent; essentially the fence reading of card 6)</li>
+          <li>Torsion and a line integral &mdash; <a href="../calc2/ch11.html#pr04">pr04</a> (adjacent)</li>
+          <li>Mass and center of mass of a wire (Formulas (4), Example 3), moments of inertia of a curve, the sign rules for the reversed curve $-C$, and the standard parametrization (8) of a segment &mdash; no match</li>
+        </ul>
+        <p><strong>A note on scope</strong> &mdash; the integral $\oint_C\mathbf F\cdot\mathbf n\,ds$ (flux across a plane curve) used in the lecture notes does not belong to this section of Stewart; it appears in Section 16.5.</p>
+        <p><strong>(b) Assignment (§16.2, third set)</strong></p>
+        <p>Problems to submit: 8, 18, 22, 36, 41, 43 &nbsp;/&nbsp; Recommended practice: 1&ndash;8, 9&ndash;18, 21&ndash;24, 35&ndash;38, 41&ndash;43</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-1.html">§16.1 Vector Fields</a> &nbsp;/&nbsp; Next: <a href="s16-3.html">§16.3 The Fundamental Theorem for Line Integrals</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

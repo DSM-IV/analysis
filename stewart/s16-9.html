@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.9 발산정리 (The Divergence Theorem) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.9 발산정리 — 그린 정리 벡터형의 3차원 확장(식 (1)), 단순 입체 영역과 양의(바깥) 향, 발산정리의 진술과 증명 개요(식 (2)~(6)), 구멍 있는 입체로의 확장(식 (7)), 단위부피당 플럭스로서의 발산(식 (9))과 원천·흡입을 한국어·영어 대조로 정리하고 예제 3개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.9, 발산정리, Divergence Theorem, 가우스 정리, Gauss's Theorem, 오스트로그라드스키 정리, 단순 입체 영역, simple solid region, 바깥 법선, 플럭스, flux, 삼중적분, 전기다발, 가우스 법칙, 원천, 흡입, source, sink, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-9.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.9 발산정리 (The Divergence Theorem) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="단순 입체 영역의 경계를 가로지르는 플럭스와 내부의 발산을 잇는 발산정리, 증명 개요, 구멍 있는 입체로의 확장, 발산의 물리적 의미까지 §16.9 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-9.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.9 발산정리 (The Divergence Theorem) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.9 발산정리 — 그린 정리 벡터형의 3차원 확장, 단순 입체 영역과 양의(바깥) 향, 발산정리의 진술과 증명 개요, 구멍 있는 입체로의 확장(식 (7)), 단위부피당 플럭스로서의 발산(식 (9))과 원천·흡입을 한국어·영어 대조로 정리하고 본문 예제 3개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-9.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-9.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html" class="active">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.9 · 13주차</p>
+  <h1>§16.9 발산정리<span>The Divergence Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-9-1"><span class="toc-num">NOTE</span> 그린 정리의 벡터형을 3차원으로 <em>Guessing the Three-Dimensional Version</em></a></li>
+    <li><a href="#c16-9-2"><span class="toc-num">DEF 2</span> 단순 입체 영역과 양의 향 <em>Simple Solid Regions and Outward Orientation</em></a></li>
+    <li><a href="#c16-9-3"><span class="toc-num">REM 3</span> 정리의 다른 이름 <em>Gauss's Theorem, Ostrogradsky's Theorem</em></a></li>
+    <li><a href="#c16-9-4"><span class="toc-num">THM 4</span> 발산정리 <em>The Divergence Theorem</em></a></li>
+    <li><a href="#c16-9-5"><span class="toc-num">REM 5</span> 정리가 말하는 것 <em>What the Theorem Says</em></a></li>
+    <li><a href="#c16-9-6"><span class="toc-num">NOTE</span> 증명 개요 <em>Outline of the Proof</em></a></li>
+    <li><a href="#c16-9-7"><span class="toc-num">THM 7</span> 구멍 있는 입체로의 확장 <em>Extension to Solids with Cavities</em></a></li>
+    <li><a href="#c16-9-8"><span class="toc-num">THM 8</span> 단위부피당 플럭스로서의 발산 <em>Divergence as Flux per Unit Volume</em></a></li>
+    <li><a href="#c16-9-9"><span class="toc-num">DEF 9</span> 원천과 흡입 <em>Sources and Sinks</em></a></li>
+    <li><a href="#ex16-9-1"><span class="toc-num">EXAM 1</span> 단위구면을 지나는 플럭스 <em>Flux across the Unit Sphere</em></a></li>
+    <li><a href="#ex16-9-2"><span class="toc-num">EXAM 2</span> 포물기둥이 자르는 입체의 경계 플럭스 <em>Flux across the Boundary of a Solid Cut by a Parabolic Cylinder</em></a></li>
+    <li><a href="#ex16-9-3"><span class="toc-num">EXAM 3</span> 점전하가 만드는 전기다발 <em>The Electric Flux of a Point Charge</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 - vector form of Green's Theorem, guess (1) -->
+<div class="card note-card" id="c16-9-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">그린 정리의 벡터형을 3차원으로 <em>Guessing the Three-Dimensional Version</em><span class="src-ref">Eq. (1) · p.1239</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>16.5절에서 그린 정리의 벡터형을 다음과 같이 썼다.</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA,$$</div>
+        <p>여기서 $C$는 평면 영역 $D$의 경계곡선이며 양의 향을 갖는다. 같은 등식을 $\mathbb R^3$ 위의 벡터장에 대해서는 어떻게 써야 할지 물으면 자연스럽게 다음을 추측하게 된다.</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot\mathbf n\,dS=\iiint_E\operatorname{div}\mathbf F(x,y,z)\,dV,\tag{1}$$</div>
+        <p>이때 $S$는 입체 영역 $E$의 경계곡면이다. $E$와 $\mathbf F$에 적절한 가정을 붙이면 식 (1)은 실제로 성립하며, 이를 <strong>발산정리</strong>라 한다.</p>
+        <p>이 패턴은 그린 정리와 스토크스 정리에서 이미 본 것과 같다: 한쪽에는 영역 위에서 함수의 도함수 &mdash; 여기서는 $\operatorname{div}\mathbf F$ &mdash; 를 적분한 값이 있고, 다른 쪽에는 그 영역의 경계 위에서 함수 자체를 적분한 값이 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Section 16.5 restated Green's Theorem in the vector form</p>
+        <div class="math-display">$$\int_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA,$$</div>
+        <p>where $C$ is the boundary curve of the plane region $D$, carrying its positive orientation. Asking what the corresponding statement should be for a vector field on $\mathbb R^3$ leads to the guess</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot\mathbf n\,dS=\iiint_E\operatorname{div}\mathbf F(x,y,z)\,dV,\tag{1}$$</div>
+        <p>in which $S$ is now the boundary surface of a solid region $E$. Equation (1) turns out to be correct once suitable hypotheses are imposed on $E$ and $\mathbf F$; it is called the <strong>Divergence Theorem</strong>.</p>
+        <p>The pattern is the one already met in Green's Theorem and in Stokes' Theorem: on one side stands the integral over a region of a derivative of a function &mdash; here $\operatorname{div}\mathbf F$ &mdash; and on the other side the integral of the function itself over the boundary of that region.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : simple solid region, outward orientation -->
+<div class="card def-card" id="c16-9-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">단순 입체 영역과 양의 향 <em>Simple Solid Regions and Outward Orientation</em><span class="src-ref">p.1239</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의.</strong> 입체 영역 $E$가 제1형 입체·제2형 입체·제3형 입체를 한꺼번에 만족시킬 때, $E$를 <strong>단순 입체 영역</strong>이라 한다.</p>
+        </div>
+        <p>여기서 15.6절에서 삼중적분을 계산할 수 있었던 입체 영역의 종류들을 다시 떠올려 볼 만하다. 타원면이나 직육면체로 둘러싸인 입체는 모두 단순 입체 영역의 예이고, 아래 정리는 (그런 예들만이 아니라) 단순 입체 영역 전체에 대해 진술되고 증명된다.</p>
+        <p>이러한 $E$의 경계는 하나의 닫힌곡면을 이루고, 16.7절에서 정한 규약에 따라 향을 준다: <strong>양의 향은 바깥쪽 향</strong>이며, 이는 경계 위의 모든 점에서 단위법선벡터 $\mathbf n$이 $E$의 바깥을 향함을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition.</strong> A solid region $E$ that is of type 1, of type 2 and of type 3 all at once is called a <strong>simple solid region</strong>.</p>
+        </div>
+        <p>It is worth reviewing at this point the types of solid regions over which §15.6 was able to evaluate triple integrals. Solids bounded by an ellipsoid, or by a rectangular box, are examples of simple solid regions; the theorem below is stated and proved for every simple solid region, not merely for such examples.</p>
+        <p>The boundary of such an $E$ is a closed surface, and it is oriented by the convention adopted in §16.7: the <strong>positive orientation is the outward one</strong>, meaning that the unit normal vector $\mathbf n$ points away from $E$ at every point of the boundary.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : margin note - Gauss, Ostrogradsky -->
+<div class="card rem-card" id="c16-9-3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">정리의 다른 이름 <em>Gauss's Theorem, Ostrogradsky's Theorem</em><span class="src-ref">Margin note · p.1239</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 정리는 정전기학을 연구하던 중 이 결과에 이른 카를 프리드리히 가우스(Karl Friedrich Gauss, 1777&ndash;1855)의 이름을 따 <strong>가우스 정리</strong>라고도 불린다.</p>
+        <p>동유럽에서는 대신 1826년에 같은 결과를 발표한 러시아 수학자 미하일 오스트로그라드스키(Mikhail Ostrogradsky, 1801&ndash;1862)의 이름을 따 이 정리를 <strong>오스트로그라드스키 정리</strong>라 부른다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The theorem is also known as <strong>Gauss's Theorem</strong>, after Karl Friedrich Gauss (1777&ndash;1855), who arrived at it while studying electrostatics.</p>
+        <p>In Eastern Europe the same result is attributed instead to the Russian mathematician Mikhail Ostrogradsky (1801&ndash;1862), who published it in 1826, and it is accordingly called <strong>Ostrogradsky's Theorem</strong> there.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : The Divergence Theorem -->
+<div class="card thm-card" id="c16-9-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">발산정리 <em>The Divergence Theorem</em><span class="src-ref">The Divergence Theorem · p.1239</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>발산정리.</strong> $E$를 단순 입체 영역이라 하고, 그 경계곡면 $S=\partial E$에는 양의(바깥) 향을 주자. $\mathbf F$를 $E$를 포함하는 어떤 열린 영역에서 각 성분함수가 연속인 편도함수를 갖는 벡터장이라 하면, 다음이 성립한다.</p>
+          <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_E\operatorname{div}\mathbf F\,dV.$$</div>
+        </div>
+        <p>이 진술에는 세 가지 가정이 각각 제 역할을 맡고 있으며 증명에서도 그대로 쓰인다: $E$는 단순 입체 영역이어야 하는데, 이는 $E$를 제1형·제2형·제3형 입체로 번갈아 읽을 수 있어야 하기 때문이다. $S$는 바깥 법선을 가져야 하는데, 법선을 뒤집으면 좌변의 부호가 바뀐다. 그리고 $P,Q,R$의 편도함수는 $E$를 둘러싼 열린 집합에서 연속이어야 우변의 삼중적분이 존재한다.</p>
+        <p>정리를 뒷받침하는 논증은 아래 <em>증명 개요</em> 카드에서 스케치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>The Divergence Theorem.</strong> Let $E$ be a simple solid region whose boundary surface $S$ has been given the positive (outward) orientation, and let $\mathbf F$ be a vector field each of whose component functions has continuous partial derivatives on some open region containing $E$. Then</p>
+          <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_E\operatorname{div}\mathbf F\,dV.$$</div>
+        </div>
+        <p>Three hypotheses are doing work here and each of them is used in the proof: $E$ must be simple (so that it can be read as a type 1, a type 2 and a type 3 solid in turn), $S$ must carry the outward normal (a reversed normal flips the sign of the left-hand side), and the partial derivatives of $P$, $Q$, $R$ must be continuous on an open set around $E$, so that the triple integral on the right exists.</p>
+        <p>The argument that establishes the theorem is sketched below, in the card <em>Outline of the Proof</em>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : what the theorem says -->
+<div class="card rem-card" id="c16-9-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">정리가 말하는 것 <em>What the Theorem Says</em><span class="src-ref">p.1240</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>등식의 양변을 하나씩 읽어 보자. 좌변은 $E$의 경계를 이루는 곡면을 가로지르는 $\mathbf F$의 플럭스이고, 우변은 $E$ 전체에 걸친 $\operatorname{div}\mathbf F$의 삼중적분이다.</p>
+        <p>따라서 정리가 말하는 바는, 앞의 가정 아래에서 이 두 값이 정확히 일치한다는 것이다: 벡터장이 경계를 가로질러 실어 나르는 양은 내부에 쌓인 발산으로 남김없이 설명된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Read the two sides of the identity one at a time. The left-hand side is the flux of $\mathbf F$ across the surface that bounds $E$; the right-hand side is the triple integral of $\operatorname{div}\mathbf F$ taken over the whole of $E$.</p>
+        <p>So the theorem says that, under the stated hypotheses, these two numbers agree: what the field carries across the boundary is accounted for exactly by the divergence accumulated inside.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : proof outline, Equations (2)-(6), Figure 1 -->
+<div class="card note-card" id="c16-9-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">증명 개요 <em>Outline of the Proof</em><span class="src-ref">Proof · Eq. (2)&ndash;(6) · p.1240&ndash;1241</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ 라 쓰면 $\operatorname{div}\mathbf F=\dfrac{\partial P}{\partial x}+\dfrac{\partial Q}{\partial y}+\dfrac{\partial R}{\partial z}$ 이므로, 정리의 양변은 각각 세 항으로 쪼개진다. 따라서 다음 세 등식만 확인하면 정리가 증명된다.</p>
+        <div class="math-display">$$\iint_S P\,\mathbf i\cdot\mathbf n\,dS=\iiint_E\frac{\partial P}{\partial x}\,dV,\tag{2}$$</div>
+        <div class="math-display">$$\iint_S Q\,\mathbf j\cdot\mathbf n\,dS=\iiint_E\frac{\partial Q}{\partial y}\,dV,\tag{3}$$</div>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E\frac{\partial R}{\partial z}\,dV.\tag{4}$$</div>
+        <p>식 (4)를 자세히 다루어 보자. $E$를 제1형 입체</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid (x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\}$$</div>
+        <p>로 보면, 여기서 $D$는 $E$를 $xy$평면에 정사영한 영역이다. 공식 15.6.6에 이어 미적분학의 기본정리를 적용하면 삼중적분이 $D$ 위의 이중적분으로 줄어든다.</p>
+        <div class="math-display">$$\iiint_E\frac{\partial R}{\partial z}\,dV=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA.\tag{5}$$</div>
+        <p>한편 경계곡면 $S$는 밑면 $S_1$, 윗면 $S_2$, 그리고 $D$의 경계곡선 위에 서는 연직 옆면 $S_3$ 로 나뉜다(구처럼 이런 옆면이 아예 없는 경우도 있다). $S_3$ 위에서는 법선이 수평이고 $\mathbf k$는 연직이므로 그곳에서는 $\mathbf k\cdot\mathbf n=0$ 이 되어 이 조각의 기여가 없다.</p>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iint_{S_1}R\,\mathbf k\cdot\mathbf n\,dS+\iint_{S_2}R\,\mathbf k\cdot\mathbf n\,dS.\tag{6}$$</div>
+        <p>공식 16.7.10을 벡터장 $R\,\mathbf k$ 에 적용하면 남은 두 조각의 값이 구해진다: $S_2$ 위쪽 법선에서는 $+\iint_D R(x,y,u_2(x,y))\,dA$ 를, $S_1$ 아래쪽 법선에서는 $-\iint_D R(x,y,u_1(x,y))\,dA$ 를 얻으며, 두 값의 합은 정확히 식 (5)의 우변과 같다. 식 (2)와 (3)도 같은 방식으로 얻어지는데, 이번에는 $E$를 각각 제2형 입체·제3형 입체로 본다.</p>
+        <p>지금까지의 경로는 그린 정리의 증명과 매우 닮아 있다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="제1형 입체 E의 경계가 밑면 S1, 윗면 S2, 연직 옆면 S3의 세 조각으로 나뉘고 그 정사영이 xy평면의 영역 D인 그림" style="max-width:360px;width:100%;height:auto">
+            <line x1="75" y1="255" x2="75" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="75,24 71,36 79,36" fill="var(--grey800)"/>
+            <line x1="75" y1="255" x2="28" y2="288" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,292 30,282 34,289" fill="var(--grey800)"/>
+            <line x1="75" y1="255" x2="332" y2="272" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,273 328,276 329,268" fill="var(--grey800)"/>
+            <text x="63" y="30" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="298" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="340" y="278" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="62" y="268" font-size="11" fill="var(--grey500)">0</text>
+            <ellipse cx="200" cy="276" rx="68" ry="15" fill="var(--grey100)" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 132,205 Q 200,231 268,205 L 268,110 Q 200,136 132,110 Z" fill="var(--g50)" fill-opacity="0.9" stroke="none"/>
+            <path d="M 132,110 Q 200,72 268,110 Q 200,136 132,110 Z" fill="var(--g100)" fill-opacity="0.9" stroke="none"/>
+            <path d="M 132,205 Q 200,181 268,205" fill="none" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 132,205 Q 200,231 268,205" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <path d="M 132,110 Q 200,136 268,110" fill="none" stroke="var(--grey500)" stroke-width="1.2"/>
+            <path d="M 132,110 Q 200,72 268,110" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <line x1="132" y1="110" x2="132" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="268" y1="110" x2="268" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="132" y1="205" x2="132" y2="276" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="268" y1="205" x2="268" y2="276" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="200" y="80" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g700)">S₂: z = u₂(x, y)</text>
+            <text x="276" y="160" font-size="11" font-style="italic" fill="var(--grey700)">S₃</text>
+            <text x="200" y="250" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g700)">S₁: z = u₁(x, y)</text>
+            <text x="200" y="170" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+            <text x="200" y="281" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey600)">D</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$라 하면 $\operatorname{div}\mathbf F=P_x+Q_y+R_z$이고, 곡면적분 $\iint_S\mathbf F\cdot\mathbf n\,dS$도 세 성분으로 선형이게 나뉘므로, 다음 세 등식만 보이면 정리가 증명된다.</p>
+        <div class="math-display">$$\iint_S P\,\mathbf i\cdot\mathbf n\,dS=\iiint_E P_x\,dV,$$</div>
+        <div class="math-display">$$\iint_S Q\,\mathbf j\cdot\mathbf n\,dS=\iiint_E Q_y\,dV,$$</div>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E R_z\,dV.$$</div>
+        <p>세 등식은 좌표축의 이름만 바꾼 동일한 논증이므로, $R$항만 자세히 다룬다.</p>
+        <p>$E$가 제1형 입체 $E=\{(x,y,z)\mid(x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\}$라 하자. $z$에 대해 먼저 적분하면(안쪽 변수에 대한 미적분학의 기본정리)</p>
+        <div class="math-display">$$\iiint_E\frac{\partial R}{\partial z}\,dV=\iint_D\left[\int_{u_1(x,y)}^{u_2(x,y)}\frac{\partial R}{\partial z}(x,y,z)\,dz\right]dA=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA.$$</div>
+        <p>이제 이 값을 $S$ 위의 면적분으로 다시 얻는다. 경계곡면 $S$는 아랫면 $S_1:z=u_1(x,y)$, 윗면 $S_2:z=u_2(x,y)$, 그리고 $D$의 경계 위에 서는 연직 옆면 $S_3$로 나뉜다(옆면이 아예 없는 경우도 있다). $S_3$의 각 점에서 접평면은 연직이므로 법선 $\mathbf n$은 $xy$평면에 평행하고, 따라서 그곳에서 $\mathbf k\cdot\mathbf n=0$이다 &mdash; $S_3$는 $\iint_S R\,\mathbf k\cdot\mathbf n\,dS$에 기여하지 않는다. $S_2$는 그래프 $z=u_2(x,y)$ 위의 위쪽(양의) 방향이므로 공식 16.7.10을 벡터장 $R\mathbf k$에 곧바로 적용하면</p>
+        <div class="math-display">$$\iint_{S_2}R\,\mathbf k\cdot\mathbf n\,dS=\iint_D R(x,y,u_2(x,y))\,dA.$$</div>
+        <p>$S_1$도 같은 그래프꼴이지만 향이 아래쪽이다 &mdash; $E$ 바깥을 향해야 하므로 &mdash; 그래서 부호가 뒤집힌다.</p>
+        <div class="math-display">$$\iint_{S_1}R\,\mathbf k\cdot\mathbf n\,dS=-\iint_D R(x,y,u_1(x,y))\,dA.$$</div>
+        <p>세 조각을 모으면</p>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iint_D R(x,y,u_2(x,y))\,dA-\iint_D R(x,y,u_1(x,y))\,dA=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA,$$</div>
+        <p>이는 위에서 구한 삼중적분의 값과 정확히 일치한다. 그러므로 $\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E R_z\,dV$이다.</p>
+        <p>$P$항은 $E$를 제2형 입체로(경계를 $x=v_1(y,z)$, $x=v_2(y,z)$, 옆면으로 나누어 $x$에 대해 적분), $Q$항은 $E$를 제3형 입체로(경계를 $y=w_1(x,z)$, $y=w_2(x,z)$, 옆면으로 나누어 $y$에 대해 적분) 보면 글자만 바꾼 같은 논증으로 성립한다. $E$가 단순 입체 영역이므로 세 가지 서술이 모두 가능하고, 세 등식을 변변 더하면</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iint_S P\,\mathbf i\cdot\mathbf n\,dS+\iint_S Q\,\mathbf j\cdot\mathbf n\,dS+\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E(P_x+Q_y+R_z)\,dV=\iiint_E\operatorname{div}\mathbf F\,dV$$</div>
+        <p>을 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Write $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$, so that $\operatorname{div}\mathbf F=\partial P/\partial x+\partial Q/\partial y+\partial R/\partial z$. Both integrals in the theorem then break into three summands apiece, and the theorem follows once these three identities are in hand:</p>
+        <div class="math-display">$$\iint_S P\,\mathbf i\cdot\mathbf n\,dS=\iiint_E\frac{\partial P}{\partial x}\,dV,\tag{2}$$</div>
+        <div class="math-display">$$\iint_S Q\,\mathbf j\cdot\mathbf n\,dS=\iiint_E\frac{\partial Q}{\partial y}\,dV,\tag{3}$$</div>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E\frac{\partial R}{\partial z}\,dV.\tag{4}$$</div>
+        <p>Identity (4) is the one carried out in detail. Read $E$ as a type 1 solid,</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid (x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\},$$</div>
+        <p>where $D$ is the projection of $E$ onto the $xy$-plane. Formula 15.6.6 followed by the Fundamental Theorem of Calculus collapses the triple integral to a double integral over $D$:</p>
+        <div class="math-display">$$\iiint_E\frac{\partial R}{\partial z}\,dV=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA.\tag{5}$$</div>
+        <p>On the other side, the boundary $S$ falls into a bottom piece $S_1$, a top piece $S_2$ and possibly a vertical piece $S_3$ standing over the boundary curve of $D$ (for a sphere no such piece occurs). Along $S_3$ the normal is horizontal while $\mathbf k$ is vertical, so $\mathbf k\cdot\mathbf n=0$ there and that piece contributes nothing:</p>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iint_{S_1}R\,\mathbf k\cdot\mathbf n\,dS+\iint_{S_2}R\,\mathbf k\cdot\mathbf n\,dS.\tag{6}$$</div>
+        <p>Formula 16.7.10, applied to the field $R\,\mathbf k$, evaluates the two surviving pieces: the upward normal on $S_2$ gives $+\iint_D R(x,y,u_2(x,y))\,dA$ and the downward normal on $S_1$ gives $-\iint_D R(x,y,u_1(x,y))\,dA$, whose sum is precisely the right side of (5). Identities (2) and (3) come out the same way, this time reading $E$ as a type 2 and as a type 3 solid.</p>
+        <p>The route just described runs closely parallel to the proof of Green's Theorem.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="A type 1 solid E lying over its projection D in the xy-plane, with the boundary split into the bottom piece S1, the top piece S2 and the vertical side S3" style="max-width:360px;width:100%;height:auto">
+            <line x1="75" y1="255" x2="75" y2="32" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="75,24 71,36 79,36" fill="var(--grey800)"/>
+            <line x1="75" y1="255" x2="28" y2="288" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="22,292 30,282 34,289" fill="var(--grey800)"/>
+            <line x1="75" y1="255" x2="332" y2="272" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="338,273 328,276 329,268" fill="var(--grey800)"/>
+            <text x="63" y="30" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="14" y="298" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="340" y="278" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="62" y="268" font-size="11" fill="var(--grey500)">0</text>
+            <ellipse cx="200" cy="276" rx="68" ry="15" fill="var(--grey100)" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 132,205 Q 200,231 268,205 L 268,110 Q 200,136 132,110 Z" fill="var(--g50)" fill-opacity="0.9" stroke="none"/>
+            <path d="M 132,110 Q 200,72 268,110 Q 200,136 132,110 Z" fill="var(--g100)" fill-opacity="0.9" stroke="none"/>
+            <path d="M 132,205 Q 200,181 268,205" fill="none" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M 132,205 Q 200,231 268,205" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <path d="M 132,110 Q 200,136 268,110" fill="none" stroke="var(--grey500)" stroke-width="1.2"/>
+            <path d="M 132,110 Q 200,72 268,110" fill="none" stroke="var(--g700)" stroke-width="1.6"/>
+            <line x1="132" y1="110" x2="132" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="268" y1="110" x2="268" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="132" y1="205" x2="132" y2="276" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="268" y1="205" x2="268" y2="276" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="200" y="80" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g700)">S₂: z = u₂(x, y)</text>
+            <text x="276" y="160" font-size="11" font-style="italic" fill="var(--grey700)">S₃</text>
+            <text x="200" y="250" text-anchor="middle" font-size="11" font-style="italic" fill="var(--g700)">S₁: z = u₁(x, y)</text>
+            <text x="200" y="170" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+            <text x="200" y="281" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey600)">D</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Write $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$, so $\operatorname{div}\mathbf F=P_x+Q_y+R_z$, and the surface integral $\iint_S\mathbf F\cdot\mathbf n\,dS$ splits linearly into the same three summands. It is enough to establish</p>
+        <div class="math-display">$$\iint_S P\,\mathbf i\cdot\mathbf n\,dS=\iiint_E P_x\,dV,$$</div>
+        <div class="math-display">$$\iint_S Q\,\mathbf j\cdot\mathbf n\,dS=\iiint_E Q_y\,dV,$$</div>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E R_z\,dV.$$</div>
+        <p>The three identities are the same argument with the axes relabeled, so only the $R$-term is carried out in detail.</p>
+        <p>Let $E$ be a type 1 solid, $E=\{(x,y,z)\mid(x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\}$. Integrating in $z$ first (the Fundamental Theorem of Calculus applied to the inner variable) gives</p>
+        <div class="math-display">$$\iiint_E\frac{\partial R}{\partial z}\,dV=\iint_D\left[\int_{u_1(x,y)}^{u_2(x,y)}\frac{\partial R}{\partial z}(x,y,z)\,dz\right]dA=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA.$$</div>
+        <p>This value is now recovered as a surface integral over $S$. The boundary $S$ splits into a bottom piece $S_1:z=u_1(x,y)$, a top piece $S_2:z=u_2(x,y)$, and possibly a vertical piece $S_3$ standing over the boundary curve of $D$. At every point of $S_3$ the tangent plane is vertical, so the normal $\mathbf n$ is parallel to the $xy$-plane and $\mathbf k\cdot\mathbf n=0$ there &mdash; $S_3$ contributes nothing to $\iint_S R\,\mathbf k\cdot\mathbf n\,dS$. Since $S_2$ carries the upward orientation of the graph $z=u_2(x,y)$, Formula 16.7.10 applied to the field $R\mathbf k$ gives directly</p>
+        <div class="math-display">$$\iint_{S_2}R\,\mathbf k\cdot\mathbf n\,dS=\iint_D R(x,y,u_2(x,y))\,dA.$$</div>
+        <p>$S_1$ is the same kind of graph but carries the downward orientation &mdash; it must point out of $E$ &mdash; so the sign flips:</p>
+        <div class="math-display">$$\iint_{S_1}R\,\mathbf k\cdot\mathbf n\,dS=-\iint_D R(x,y,u_1(x,y))\,dA.$$</div>
+        <p>Adding the three pieces,</p>
+        <div class="math-display">$$\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iint_D R(x,y,u_2(x,y))\,dA-\iint_D R(x,y,u_1(x,y))\,dA=\iint_D\bigl[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\bigr]\,dA,$$</div>
+        <p>which matches the triple integral found above exactly. Hence $\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E R_z\,dV$.</p>
+        <p>The $P$-term follows the same argument, letter for letter, once $E$ is read as a type 2 solid (boundary split into $x=v_1(y,z)$, $x=v_2(y,z)$, and a side piece, integrating in $x$); the $Q$-term follows once $E$ is read as a type 3 solid (boundary split into $y=w_1(x,z)$, $y=w_2(x,z)$, and a side piece, integrating in $y$). Since $E$ is a simple solid region all three descriptions apply, and adding the three identities gives</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iint_S P\,\mathbf i\cdot\mathbf n\,dS+\iint_S Q\,\mathbf j\cdot\mathbf n\,dS+\iint_S R\,\mathbf k\cdot\mathbf n\,dS=\iiint_E(P_x+Q_y+R_z)\,dV=\iiint_E\operatorname{div}\mathbf F\,dV.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Equation (7), region between two closed surfaces, Figure 3 -->
+<div class="card thm-card" id="c16-9-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">구멍 있는 입체로의 확장 <em>Extension to Solids with Cavities</em><span class="src-ref">Eq. (7) · p.1242</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>증명은 단순 입체 영역에 대해서만 이루어졌지만, 정리는 그런 조각들의 유한 합집합인 임의의 영역에서도 그대로 성립한다. 조각들을 이어붙이는 방법은 16.4절에서 그린 정리를 확장할 때와 같다.</p>
+        <p>따로 적어둘 만한 경우는 구멍이 있는 입체이다. 닫힌곡면 $S_1$이 또 다른 닫힌곡면 $S_2$의 내부에 놓여 있다고 하고, $E$를 두 곡면 사이에 낀 영역이라 하자. $\mathbf n_1,\mathbf n_2$는 각각 $S_1,S_2$의 바깥 법선이다. $E$의 경계는 $S=S_1\cup S_2$이고, $E$의 바깥을 향하는 법선은 $S_1$ 위에서는 $\mathbf n=-\mathbf n_1$(구멍 안쪽을 향한다)이고 $S_2$ 위에서는 $\mathbf n=\mathbf n_2$이다. 따라서 $S$에 발산정리를 적용하면 다음을 얻는다.</p>
+        <div class="formal-box">
+          <p><strong>식 (7) &mdash; 구멍이 있는 입체.</strong></p>
+          <div class="math-display">$$\iiint_E\operatorname{div}\mathbf F\,dV=-\iint_{S_1}\mathbf F\cdot d\mathbf S+\iint_{S_2}\mathbf F\cdot d\mathbf S.\tag{7}$$</div>
+        </div>
+        <p>아래 예제 3은 바로 이 형태의 정리로 풀린다: 임의의 닫힌곡면 위의 적분을, 실제로 계산할 수 있는 구면 위의 적분으로 바꾸어 주기 때문이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="바깥 닫힌곡면 S2와 그 안에 놓인 닫힌곡면 S1 사이의 영역 E, 그리고 각각의 바깥 법선 n1, n2 와 E의 경계 법선 -n1" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="180" cy="125" rx="125" ry="78" fill="var(--g50)" stroke="var(--grey700)" stroke-width="1.5"/>
+            <ellipse cx="180" cy="132" rx="50" ry="34" fill="#ffffff" stroke="var(--grey700)" stroke-width="1.5"/>
+            <line x1="268" y1="70" x2="285" y2="43" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="285,43 284,53 277,49" fill="var(--g700)"/>
+            <text x="289" y="40" font-size="12" font-style="italic" fill="var(--g700)">n₂</text>
+            <line x1="215" y1="108" x2="232" y2="83" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="232,83 230,92 224,88" fill="var(--g700)"/>
+            <text x="236" y="79" font-size="12" font-style="italic" fill="var(--g700)">n₁</text>
+            <line x1="133" y1="144" x2="161" y2="137" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="161,137 153,143 151,135" fill="var(--orange)"/>
+            <text x="96" y="150" font-size="12" font-style="italic" fill="var(--orange)">&#8722;n₁</text>
+            <text x="78" y="95" font-size="12" font-style="italic" fill="var(--grey700)">S₂</text>
+            <text x="180" y="137" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey700)">S₁</text>
+            <text x="180" y="196" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Only simple solid regions were covered by the proof, but the theorem survives for any region that is a finite union of such pieces; the pieces are joined exactly as they were in §16.4, where Green's Theorem was widened in the same manner.</p>
+        <p>The case worth recording separately is a solid with a cavity. Let $S_1$ be a closed surface lying inside a second closed surface $S_2$, and let $E$ be the region trapped between them, with $\mathbf n_1$ and $\mathbf n_2$ denoting the outward normals of $S_1$ and $S_2$. The boundary of $E$ is $S=S_1\cup S_2$, and the normal pointing out of $E$ is $\mathbf n=-\mathbf n_1$ along $S_1$ &mdash; there it aims into the cavity &mdash; while $\mathbf n=\mathbf n_2$ along $S_2$. Applying the Divergence Theorem to $S$ therefore yields</p>
+        <div class="formal-box">
+          <p><strong>Equation (7) &mdash; a solid with a cavity.</strong></p>
+          <div class="math-display">$$\iiint_E\operatorname{div}\mathbf F\,dV=-\iint_{S_1}\mathbf F\cdot d\mathbf S+\iint_{S_2}\mathbf F\cdot d\mathbf S.\tag{7}$$</div>
+        </div>
+        <p>Example 3 below is settled by this version of the theorem: it replaces an integral over an arbitrary closed surface by an integral over a sphere, where the computation can actually be carried out.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="The region E between an outer closed surface S2 and an inner closed surface S1, showing the outward normals n1 and n2 of the two surfaces together with the boundary normal -n1 of E" style="max-width:360px;width:100%;height:auto">
+            <ellipse cx="180" cy="125" rx="125" ry="78" fill="var(--g50)" stroke="var(--grey700)" stroke-width="1.5"/>
+            <ellipse cx="180" cy="132" rx="50" ry="34" fill="#ffffff" stroke="var(--grey700)" stroke-width="1.5"/>
+            <line x1="268" y1="70" x2="285" y2="43" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="285,43 284,53 277,49" fill="var(--g700)"/>
+            <text x="289" y="40" font-size="12" font-style="italic" fill="var(--g700)">n₂</text>
+            <line x1="215" y1="108" x2="232" y2="83" stroke="var(--g700)" stroke-width="1.6"/>
+            <polygon points="232,83 230,92 224,88" fill="var(--g700)"/>
+            <text x="236" y="79" font-size="12" font-style="italic" fill="var(--g700)">n₁</text>
+            <line x1="133" y1="144" x2="161" y2="137" stroke="var(--orange)" stroke-width="1.6"/>
+            <polygon points="161,137 153,143 151,135" fill="var(--orange)"/>
+            <text x="96" y="150" font-size="12" font-style="italic" fill="var(--orange)">&#8722;n₁</text>
+            <text x="78" y="95" font-size="12" font-style="italic" fill="var(--grey700)">S₂</text>
+            <text x="180" y="137" text-anchor="middle" font-size="12" font-style="italic" fill="var(--grey700)">S₁</text>
+            <text x="180" y="196" text-anchor="middle" font-size="13" font-style="italic" fill="var(--grey700)">E</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Equation (9), divergence as flux per unit volume -->
+<div class="card thm-card" id="c16-9-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">단위부피당 플럭스로서의 발산 <em>Divergence as Flux per Unit Volume</em><span class="src-ref">Eq. (9) · p.1243</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>유체의 흐름은 정리를 활용할 수 있는 또 다른 무대다. 밀도 $\rho$가 일정한 유체의 속도장을 $\mathbf v(x,y,z)$ 라 하고, 단위 넓이당 유량 $\mathbf F=\rho\mathbf v$ 를 생각하자. 유체 속 한 점 $P_0(x_0,y_0,z_0)$을 고정하고, $P_0$을 중심으로 반지름이 아주 작은 $a$인 공 $B_a$를 잡으면 그 경계구면은 $S_a$이다.</p>
+        <div class="formal-box">
+          <p><strong>식 (9) &mdash; 플럭스의 극한으로 나타낸 한 점에서의 발산.</strong> $\mathbf F$의 성분함수가 $P_0$을 포함하는 열린 영역에서 연속인 편도함수를 가지면(따라서 $\operatorname{div}\mathbf F$는 그곳에서 연속이다),</p>
+          <div class="math-display">$$\operatorname{div}\mathbf F(P_0)=\lim_{a\to0}\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S.\tag{9}$$</div>
+        </div>
+        <p>식 (9)가 말해 주는 것은, $\operatorname{div}\mathbf F(P_0)$가 $P_0$에서 단위부피당 순(純) 바깥 플럭스를 재는 양이라는 사실이다 &mdash; 그리고 바로 여기서 &ldquo;발산&rdquo;이라는 이름이 나왔다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 공 $B_a$의 경계구면 $S_a$에 발산정리를 적용하면</p>
+        <div class="math-display">$$\iint_{S_a}\mathbf F\cdot d\mathbf S=\iiint_{B_a}\operatorname{div}\mathbf F\,dV.$$</div>
+        <p>$\operatorname{div}\mathbf F$가 $P_0$에서 연속이므로, 임의의 $\varepsilon\gt0$에 대해 $P_0$과의 거리가 $\delta$보다 작은 모든 점 $P$에서 $|\operatorname{div}\mathbf F(P)-\operatorname{div}\mathbf F(P_0)|\lt\varepsilon$이 되는 $\delta\gt0$가 존재한다. $0\lt a\lt\delta$이면 $B_a$의 모든 점이 이 조건을 만족하므로</p>
+        <div class="math-display">$$\left|\iiint_{B_a}\operatorname{div}\mathbf F\,dV-\operatorname{div}\mathbf F(P_0)\,V(B_a)\right|=\left|\iiint_{B_a}\bigl[\operatorname{div}\mathbf F(P)-\operatorname{div}\mathbf F(P_0)\bigr]\,dV\right|\le\iiint_{B_a}\varepsilon\,dV=\varepsilon\,V(B_a).$$</div>
+        <p>양변을 $V(B_a)$로 나누면</p>
+        <div class="math-display">$$\left|\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S-\operatorname{div}\mathbf F(P_0)\right|\le\varepsilon\qquad(0\lt a\lt\delta).$$</div>
+        <p>$\varepsilon\gt0$을 아무리 작게 택해도 그에 맞는 $\delta$가 존재하므로, $a\to0$일 때 좌변이 $0$으로 수렴한다. 즉</p>
+        <div class="math-display">$$\lim_{a\to0}\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S=\operatorname{div}\mathbf F(P_0),$$</div>
+        <p>이는 식 (9)이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Fluid flow supplies another use of the theorem. Let $\mathbf v(x,y,z)$ be the velocity field of a fluid whose density $\rho$ is constant, and put $\mathbf F=\rho\mathbf v$, the rate of flow per unit area. Fix a point $P_0(x_0,y_0,z_0)$ of the fluid and let $B_a$ be the ball of very small radius $a$ centered at $P_0$, whose boundary sphere is $S_a$.</p>
+        <div class="formal-box">
+          <p><strong>Equation (9) &mdash; divergence at a point as a limit of fluxes.</strong> If each component function of $\mathbf F$ has continuous partial derivatives on some open region containing $P_0$ (so that $\operatorname{div}\mathbf F$ is continuous there), then</p>
+          <div class="math-display">$$\operatorname{div}\mathbf F(P_0)=\lim_{a\to0}\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S.\tag{9}$$</div>
+        </div>
+        <p>What (9) reports is that $\operatorname{div}\mathbf F(P_0)$ measures the net rate of outward flux per unit volume at $P_0$ &mdash; and that is where the name <em>divergence</em> comes from.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Apply the Divergence Theorem to the boundary sphere $S_a$ of $B_a$:</p>
+        <div class="math-display">$$\iint_{S_a}\mathbf F\cdot d\mathbf S=\iiint_{B_a}\operatorname{div}\mathbf F\,dV.$$</div>
+        <p>Since $\operatorname{div}\mathbf F$ is continuous at $P_0$, for every $\varepsilon\gt0$ there is a $\delta\gt0$ such that $|\operatorname{div}\mathbf F(P)-\operatorname{div}\mathbf F(P_0)|\lt\varepsilon$ for every point $P$ within distance $\delta$ of $P_0$. For $0\lt a\lt\delta$ every point of $B_a$ satisfies this bound, so</p>
+        <div class="math-display">$$\left|\iiint_{B_a}\operatorname{div}\mathbf F\,dV-\operatorname{div}\mathbf F(P_0)\,V(B_a)\right|=\left|\iiint_{B_a}\bigl[\operatorname{div}\mathbf F(P)-\operatorname{div}\mathbf F(P_0)\bigr]\,dV\right|\le\iiint_{B_a}\varepsilon\,dV=\varepsilon\,V(B_a).$$</div>
+        <p>Dividing by $V(B_a)$,</p>
+        <div class="math-display">$$\left|\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S-\operatorname{div}\mathbf F(P_0)\right|\le\varepsilon\qquad(0\lt a\lt\delta).$$</div>
+        <p>Since $\delta$ can be found for every choice of $\varepsilon\gt0$, the left side tends to $0$ as $a\to0$; that is,</p>
+        <div class="math-display">$$\lim_{a\to0}\frac{1}{V(B_a)}\iint_{S_a}\mathbf F\cdot d\mathbf S=\operatorname{div}\mathbf F(P_0),$$</div>
+        <p>which is equation (9).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : sources and sinks (Figure 4) -->
+<div class="card def-card" id="c16-9-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">원천과 흡입 <em>Sources and Sinks</em><span class="src-ref">Figure 4 · p.1243</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의.</strong> 점 $P$에서 $\operatorname{div}\mathbf F(P)\gt 0$이면 $P$ 근처의 순 흐름은 바깥으로 향하며, 이런 점 $P$를 <strong>원천</strong>이라 한다. 반대로 $\operatorname{div}\mathbf F(P)\lt 0$이면 $P$ 근처의 순 흐름은 안쪽으로 향하며, 이런 점 $P$를 <strong>흡입</strong>이라 한다.</p>
+        </div>
+        <p>평면 벡터장 $\mathbf F=x^2\,\mathbf i+y^2\,\mathbf j$가 두 경우를 모두 보여 준다. 그 발산은</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=2x+2y,$$</div>
+        <p>이며, 이는 정확히 $y\gt-x$일 때 양이다. 따라서 직선 $y=-x$ 위쪽의 점들은 원천이고 아래쪽의 점들은 흡입이다.</p>
+        <p>이 벡터장을 그려 보면 눈으로도 이 분류를 확인할 수 있다: 직선 위쪽의 한 점 $P_1$ 근처에서는 들어오는 화살표가 나가는 화살표보다 짧아 순 흐름이 바깥으로 향하는 반면, 직선 아래쪽의 한 점 $P_2$ 근처에서는 들어오는 화살표가 더 길어 순 흐름이 안쪽으로 향한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition.</strong> Let $P$ be a point at which $\operatorname{div}\mathbf F(P)\gt 0$; the net flow near $P$ is then directed outward, and $P$ is called a <strong>source</strong>. If instead $\operatorname{div}\mathbf F(P)\lt 0$, the net flow near $P$ is directed inward and $P$ is called a <strong>sink</strong>.</p>
+        </div>
+        <p>The plane field $\mathbf F=x^2\,\mathbf i+y^2\,\mathbf j$ illustrates both. Its divergence is</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=2x+2y,$$</div>
+        <p>which is positive precisely when $y\gt-x$. Points above the line $y=-x$ are therefore sources and points below it are sinks.</p>
+        <p>A plot of the field confirms the classification by eye: near a point $P_1$ above the line the arrows arriving are shorter than the arrows leaving, so the net flow there is outward, whereas near a point $P_2$ below the line the incoming arrows are the longer ones and the net flow is inward.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-9-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">단위구면을 지나는 플럭스 <em>Flux across the Unit Sphere</em><span class="src-ref">Example 1 · p.1241</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$ 가 주어져 있다. 바깥쪽 향을 준 단위구면 $x^2+y^2+z^2=1$ 을 가로지르는 $\mathbf F$의 플럭스를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$이므로</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial}{\partial x}(z)+\frac{\partial}{\partial y}(y)+\frac{\partial}{\partial z}(x)=0+1+0=1.$$</div>
+        <p>단위구면은 단위공 $B=\{(x,y,z)\mid x^2+y^2+z^2\le1\}$의 경계이고 바깥쪽 향을 이미 갖추었으므로, 발산정리에 의해</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_B\operatorname{div}\mathbf F\,dV=\iiint_B1\,dV=V(B)=\frac43\pi(1)^3=\frac{4\pi}{3}.$$</div>
+        <p>구면을 $x=\sin\phi\cos\theta,\ y=\sin\phi\sin\theta,\ z=\cos\phi$로 직접 매개변수화해 $\mathbf F\cdot\mathbf n$을 계산하고 적분해도(향은 그대로) 같은 값을 얻지만, 그 경우 삼각함수가 섞인 적분 몇 개를 따로 다뤄야 한다. 발산이 상수 $1$이라는 사실 하나로 답이 부피 계산으로 곧장 줄어드는 지금 쪽이 훨씬 짧다. 따라서 $\displaystyle\iint_S\mathbf F\cdot d\mathbf S=\frac{4\pi}{3}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$. Find the flux of $\mathbf F$ through the unit sphere $x^2+y^2+z^2=1$, taken with its outward orientation.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\mathbf F(x,y,z)=z\,\mathbf i+y\,\mathbf j+x\,\mathbf k$,</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial}{\partial x}(z)+\frac{\partial}{\partial y}(y)+\frac{\partial}{\partial z}(x)=0+1+0=1.$$</div>
+        <p>The unit sphere is the boundary of the unit ball $B=\{(x,y,z)\mid x^2+y^2+z^2\le1\}$, already carrying the outward orientation, so the Divergence Theorem gives</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_B\operatorname{div}\mathbf F\,dV=\iiint_B1\,dV=V(B)=\frac43\pi(1)^3=\frac{4\pi}{3}.$$</div>
+        <p>Parametrizing the sphere directly by $x=\sin\phi\cos\theta,\ y=\sin\phi\sin\theta,\ z=\cos\phi$ and integrating $\mathbf F\cdot\mathbf n$ (with the same orientation) gives the same value, but that route requires several trigonometric integrals handled separately. Here the constant divergence $1$ collapses the whole computation to a volume, which is far shorter. Hence $\displaystyle\iint_S\mathbf F\cdot d\mathbf S=\frac{4\pi}{3}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-9-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">포물기둥이 자르는 입체의 경계 플럭스 <em>Flux across the Boundary of a Solid Cut by a Parabolic Cylinder</em><span class="src-ref">Example 2 · p.1241&ndash;1242</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>포물기둥 $z=1-x^2$ 과 세 평면 $z=0$, $y=0$, $y+z=2$ 로 둘러싸인 입체를 $E$라 하고, $E$의 경계곡면 $S$에는 바깥쪽 향을 주자. 벡터장</p>
+        <div class="math-display">$$\mathbf F(x,y,z)=xy\,\mathbf i+\left(y^2+e^{xz^2}\right)\mathbf j+\sin(xy)\,\mathbf k$$</div>
+        <p>에 대하여 면적분 $\iint_S\mathbf F\cdot d\mathbf S$ 의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf F=xy\,\mathbf i+\left(y^2+e^{xz^2}\right)\mathbf j+\sin(xy)\,\mathbf k$의 발산은</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial}{\partial x}(xy)+\frac{\partial}{\partial y}\bigl(y^2+e^{xz^2}\bigr)+\frac{\partial}{\partial z}\sin(xy)=y+2y+0=3y,$$</div>
+        <p>즉 초등함수로 원시함수를 잡기 까다로운 $e^{xz^2}$, $\sin(xy)$ 항은 편미분 단계에서 모두 사라진다. $S$의 네 곡면 조각(포물기둥, 세 평면)마다 $\mathbf F\cdot d\mathbf S$를 따로 매개변수화해 더하는 것보다, 발산정리로 삼중적분 하나로 바꾸는 쪽이 훨씬 짧다.</p>
+        <p>$E$를 제3형 입체</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid-1\le x\le1,\ 0\le z\le1-x^2,\ 0\le y\le2-z\}$$</div>
+        <p>로 쓰면(포물기둥 $z=1-x^2$이 $z$의 위 경계, 평면 $z=0$이 아래 경계, 평면 $y=0$이 $y$의 아래 경계, 평면 $y+z=2$가 $y$의 위 경계),</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_E3y\,dV=3\int_{-1}^{1}\int_0^{1-x^2}\int_0^{2-z}y\,dy\,dz\,dx.$$</div>
+        <p>안쪽부터 적분하면 $\displaystyle\int_0^{2-z}y\,dy=\frac{(2-z)^2}{2}$이고, $z=1-x^2$일 때 $2-z=1+x^2$이므로</p>
+        <div class="math-display">$$\int_0^{1-x^2}\frac{(2-z)^2}{2}\,dz=\left[-\frac{(2-z)^3}{6}\right]_0^{1-x^2}=\frac{8-(1+x^2)^3}{6}.$$</div>
+        <p>$(1+x^2)^3=1+3x^2+3x^4+x^6$이므로 $8-(1+x^2)^3=7-3x^2-3x^4-x^6$이고, 이 식은 짝함수이므로</p>
+        <div class="math-display">$$\int_{-1}^{1}\frac{7-3x^2-3x^4-x^6}{6}\,dx=\frac13\int_0^1\bigl(7-3x^2-3x^4-x^6\bigr)\,dx=\frac13\left[7x-x^3-\frac35x^5-\frac17x^7\right]_0^1=\frac13\left(6-\frac35-\frac17\right)=\frac13\cdot\frac{184}{35}=\frac{184}{105}.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=3\cdot\frac{184}{105}=\frac{184}{35}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E$ be the solid enclosed by the parabolic cylinder $z=1-x^2$ together with the three planes $z=0$, $y=0$ and $y+z=2$, and give its boundary surface $S$ the outward orientation. For the field</p>
+        <div class="math-display">$$\mathbf F(x,y,z)=xy\,\mathbf i+\left(y^2+e^{xz^2}\right)\mathbf j+\sin(xy)\,\mathbf k,$$</div>
+        <p>evaluate the surface integral $\iint_S\mathbf F\cdot d\mathbf S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The divergence of $\mathbf F=xy\,\mathbf i+\left(y^2+e^{xz^2}\right)\mathbf j+\sin(xy)\,\mathbf k$ is</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial}{\partial x}(xy)+\frac{\partial}{\partial y}\bigl(y^2+e^{xz^2}\bigr)+\frac{\partial}{\partial z}\sin(xy)=y+2y+0=3y,$$</div>
+        <p>so the terms $e^{xz^2}$ and $\sin(xy)$, neither of which has an elementary antiderivative, both disappear at the differentiation step. Rather than parametrizing and summing $\mathbf F\cdot d\mathbf S$ over the four pieces of $S$ (the parabolic cylinder and three planes), the Divergence Theorem reduces the whole computation to a single triple integral.</p>
+        <p>Writing $E$ as the type 3 solid</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid-1\le x\le1,\ 0\le z\le1-x^2,\ 0\le y\le2-z\}$$</div>
+        <p>(the parabolic cylinder $z=1-x^2$ bounds $z$ above, the plane $z=0$ below, the plane $y=0$ bounds $y$ below, and the plane $y+z=2$ bounds $y$ above),</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=\iiint_E3y\,dV=3\int_{-1}^{1}\int_0^{1-x^2}\int_0^{2-z}y\,dy\,dz\,dx.$$</div>
+        <p>Integrating from the inside out, $\displaystyle\int_0^{2-z}y\,dy=\frac{(2-z)^2}{2}$, and since $2-z=1+x^2$ when $z=1-x^2$,</p>
+        <div class="math-display">$$\int_0^{1-x^2}\frac{(2-z)^2}{2}\,dz=\left[-\frac{(2-z)^3}{6}\right]_0^{1-x^2}=\frac{8-(1+x^2)^3}{6}.$$</div>
+        <p>Since $(1+x^2)^3=1+3x^2+3x^4+x^6$, this is $8-(1+x^2)^3=7-3x^2-3x^4-x^6$, an even function, so</p>
+        <div class="math-display">$$\int_{-1}^{1}\frac{7-3x^2-3x^4-x^6}{6}\,dx=\frac13\int_0^1\bigl(7-3x^2-3x^4-x^6\bigr)\,dx=\frac13\left[7x-x^3-\frac35x^5-\frac17x^7\right]_0^1=\frac13\left(6-\frac35-\frac17\right)=\frac13\cdot\frac{184}{35}=\frac{184}{105}.$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$\iint_S\mathbf F\cdot d\mathbf S=3\cdot\frac{184}{105}=\frac{184}{35}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-9-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">점전하가 만드는 전기다발 <em>The Electric Flux of a Point Charge</em><span class="src-ref">Example 3 · p.1242&ndash;1243</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원점에 놓인 전하 $Q$가 만드는 전기장은 예제 16.1.5에서 보았듯이</p>
+        <div class="math-display">$$\mathbf E(\mathbf x)=\frac{\varepsilon Q}{\lvert\mathbf x\rvert^{3}}\,\mathbf x$$</div>
+        <p>이다. 여기서 $\mathbf x=\langle x,y,z\rangle$ 는 위치벡터이다. 원점을 내부에 품는 닫힌곡면 $S$가 어떤 모양이든, 발산정리를 이용하여 $S$를 지나는 $\mathbf E$의 전기다발이 $\iint_S\mathbf E\cdot d\mathbf S=4\pi\varepsilon Q$ 임을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf E$는 원점에서 정의되지 않으므로 발산정리를 $S$가 둘러싼 입체에 곧바로 적용할 수 없다. 대신 원점을 중심으로 하고 반지름 $a$가 충분히 작아 $S$ 안에 완전히 들어가는 구면 $S_1$을 그리고, $E$를 $S_1$과 $S$ 사이에 낀 입체라 하자(원문의 문자 사용을 따라 굵은 $\mathbf E$는 전기장, 가는 $E$는 이 입체 영역을 가리킨다). $\mathbf E$의 성분은 원점을 뺀 곳에서 매끄러우므로 $E$ 전체에서 매끄럽고, 식 (7)을 적용할 수 있다.</p>
+        <div class="math-display">$$\iiint_E\operatorname{div}\mathbf E\,dV=-\iint_{S_1}\mathbf E\cdot d\mathbf S+\iint_S\mathbf E\cdot d\mathbf S.$$</div>
+        <p>원점을 제외한 모든 점에서 $\operatorname{div}\mathbf E=0$임을 직접 확인할 수 있다. $\mathbf x=\langle x,y,z\rangle$, $r=|\mathbf x|$라 하면 $\mathbf E$의 $x$성분은 $\varepsilon Qx\,r^{-3}$이고</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\bigl(\varepsilon Qx\,r^{-3}\bigr)=\varepsilon Q\bigl(r^{-3}-3x^2r^{-5}\bigr),$$</div>
+        <p>$y,z$성분의 편도함수도 같은 꼴이므로 셋을 더하면</p>
+        <div class="math-display">$$\operatorname{div}\mathbf E=\varepsilon Q\bigl(3r^{-3}-3(x^2+y^2+z^2)r^{-5}\bigr)=\varepsilon Q\bigl(3r^{-3}-3r^{-3}\bigr)=0\qquad(r\ne0).$$</div>
+        <p>$E$ 전체가 $r\ne0$인 영역에 놓이므로 $\iiint_E\operatorname{div}\mathbf E\,dV=0$이고, 위 식은</p>
+        <div class="math-display">$$\iint_S\mathbf E\cdot d\mathbf S=\iint_{S_1}\mathbf E\cdot d\mathbf S$$</div>
+        <p>로 줄어든다 &mdash; $S$의 모양이 무엇이든 구면 $S_1$ 위의 값만 계산하면 된다.</p>
+        <p>$S_1$ 위에서는 $|\mathbf x|=a$이고 바깥쪽 법선이 $\mathbf n=\mathbf x/a$이므로</p>
+        <div class="math-display">$$\mathbf E\cdot\mathbf n=\frac{\varepsilon Q}{a^3}\,\mathbf x\cdot\frac{\mathbf x}{a}=\frac{\varepsilon Q}{a^4}\lvert\mathbf x\rvert^2=\frac{\varepsilon Q}{a^4}\cdot a^2=\frac{\varepsilon Q}{a^2},$$</div>
+        <p>즉 $S_1$ 위에서 $\mathbf E\cdot\mathbf n$은 상수이다. 따라서</p>
+        <div class="math-display">$$\iint_{S_1}\mathbf E\cdot d\mathbf S=\frac{\varepsilon Q}{a^2}\cdot A(S_1)=\frac{\varepsilon Q}{a^2}\cdot4\pi a^2=4\pi\varepsilon Q.$$</div>
+        <p>두 결과를 합치면 $\displaystyle\iint_S\mathbf E\cdot d\mathbf S=4\pi\varepsilon Q$이고, 이 값은 $a$의 크기나 $S$의 모양에 전혀 의존하지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A charge $Q$ sitting at the origin produces the electric field of Example 16.1.5,</p>
+        <div class="math-display">$$\mathbf E(\mathbf x)=\frac{\varepsilon Q}{\lvert\mathbf x\rvert^{3}}\,\mathbf x,$$</div>
+        <p>in which $\mathbf x=\langle x,y,z\rangle$ is a position vector. Using the Divergence Theorem, show that every closed surface $S$ enclosing the origin receives one and the same electric flux, namely $\iint_S\mathbf E\cdot d\mathbf S=4\pi\varepsilon Q$, whatever the shape of $S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since $\mathbf E$ is undefined at the origin, the Divergence Theorem cannot be applied directly to the solid enclosed by $S$. Instead, draw a sphere $S_1$ centered at the origin with radius $a$ small enough that $S_1$ lies entirely inside $S$, and let $E$ be the solid trapped between $S_1$ and $S$ (following the source, boldface $\mathbf E$ is the electric field while the lightface $E$ names this solid region). The components of $\mathbf E$ are smooth away from the origin, hence smooth throughout $E$, so equation (7) applies:</p>
+        <div class="math-display">$$\iiint_E\operatorname{div}\mathbf E\,dV=-\iint_{S_1}\mathbf E\cdot d\mathbf S+\iint_S\mathbf E\cdot d\mathbf S.$$</div>
+        <p>A direct computation shows $\operatorname{div}\mathbf E=0$ at every point but the origin. Writing $\mathbf x=\langle x,y,z\rangle$ and $r=|\mathbf x|$, the $x$-component of $\mathbf E$ is $\varepsilon Qx\,r^{-3}$, and</p>
+        <div class="math-display">$$\frac{\partial}{\partial x}\bigl(\varepsilon Qx\,r^{-3}\bigr)=\varepsilon Q\bigl(r^{-3}-3x^2r^{-5}\bigr);$$</div>
+        <p>the $y$- and $z$-derivatives take the same form, so adding all three gives</p>
+        <div class="math-display">$$\operatorname{div}\mathbf E=\varepsilon Q\bigl(3r^{-3}-3(x^2+y^2+z^2)r^{-5}\bigr)=\varepsilon Q\bigl(3r^{-3}-3r^{-3}\bigr)=0\qquad(r\ne0).$$</div>
+        <p>Since $E$ lies entirely in the region $r\ne0$, $\iiint_E\operatorname{div}\mathbf E\,dV=0$, and the identity above collapses to</p>
+        <div class="math-display">$$\iint_S\mathbf E\cdot d\mathbf S=\iint_{S_1}\mathbf E\cdot d\mathbf S$$</div>
+        <p>&mdash; whatever the shape of $S$, only the value on the sphere $S_1$ needs computing.</p>
+        <p>On $S_1$, $|\mathbf x|=a$ and the outward normal is $\mathbf n=\mathbf x/a$, so</p>
+        <div class="math-display">$$\mathbf E\cdot\mathbf n=\frac{\varepsilon Q}{a^3}\,\mathbf x\cdot\frac{\mathbf x}{a}=\frac{\varepsilon Q}{a^4}\lvert\mathbf x\rvert^2=\frac{\varepsilon Q}{a^4}\cdot a^2=\frac{\varepsilon Q}{a^2},$$</div>
+        <p>a constant on $S_1$. Hence</p>
+        <div class="math-display">$$\iint_{S_1}\mathbf E\cdot d\mathbf S=\frac{\varepsilon Q}{a^2}\cdot A(S_1)=\frac{\varepsilon Q}{a^2}\cdot4\pi a^2=4\pi\varepsilon Q.$$</div>
+        <p>Combining the two results, $\displaystyle\iint_S\mathbf E\cdot d\mathbf S=4\pi\varepsilon Q$, a value that depends on neither the radius $a$ nor the shape of $S$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-9-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch14.html">단원 14</a></p>
+        <ul>
+          <li>발산정리의 진술과 적용 &mdash; <a href="../calc2/ch14.html#ex04">ex04</a> (완전 대응)</li>
+          <li>주어진 벡터장·입체에서 발산정리 확인 &mdash; <a href="../calc2/ch14.html#yu04-1">yu04-1</a> (예제 1과 같은 유형)</li>
+          <li>향을 지정한 경계곡면 위의 플럭스 계산 &mdash; <a href="../calc2/ch14.html#yu04-2">yu04-2</a> (예제 2와 같은 유형)</li>
+          <li>구멍 있는 입체와 역제곱장 &mdash; <a href="../calc2/ch14.html#yu04-3">yu04-3</a> (부분 대응: 사례만 다루고 식 (7)의 일반 진술은 없음. 예제 3과 같은 역제곱장이지만 물리적 해석은 빠져 있음)</li>
+          <li>발산정리를 쓰는 문제들 &mdash; <a href="../calc2/ch14.html#pr06">pr06</a>, <a href="../calc2/ch14.html#pr07">pr07</a>, <a href="../calc2/ch14.html#pr08">pr08</a>, <a href="../calc2/ch14.html#pr10">pr10</a></li>
+          <li>조화함수와 그린 항등식 (연습 30&ndash;32에 대응) &mdash; <a href="../calc2/ch14.html#pr09">pr09</a>, <a href="../calc2/ch14.html#pr11">pr11</a></li>
+          <li>정리의 증명(제1형·제2형·제3형 입체로의 분해), 식 (9)의 극한 표현, 원천과 흡입 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 발산정리의 입체 영역을 D로 적고 면적소 기호도 이 절과 다르게 쓴다. 표기만 다를 뿐 정리의 내용은 같으므로, 두 자료를 나란히 볼 때 문자만 바꿔 읽으면 된다.</p>
+        <p><strong>(b) 공통과제 (§16.9, 4차)</strong></p>
+        <p>제출 문항: 2, 7, 11, 15, 20 &nbsp;/&nbsp; 학습 참고: 1&ndash;4, 5&ndash;17, 19, 20, 26, 27, 29</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-8.html">§16.8 스토크스 정리</a> &nbsp;/&nbsp; 다음: <a href="s16-10.html">§16.10 요약</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch14.html">Unit 14</a></p>
+        <ul>
+          <li>Statement and use of the Divergence Theorem &mdash; <a href="../calc2/ch14.html#ex04">ex04</a> (full match)</li>
+          <li>Verifying the theorem for a given field and solid &mdash; <a href="../calc2/ch14.html#yu04-1">yu04-1</a> (same type as Example 1)</li>
+          <li>Flux across an oriented boundary surface &mdash; <a href="../calc2/ch14.html#yu04-2">yu04-2</a> (same type as Example 2)</li>
+          <li>A solid with a cavity and an inverse square field &mdash; <a href="../calc2/ch14.html#yu04-3">yu04-3</a> (partial match: one instance only, with no general statement of (7); the field is the one of Example 3, but the physical reading is left out)</li>
+          <li>Problems solved with the theorem &mdash; <a href="../calc2/ch14.html#pr06">pr06</a>, <a href="../calc2/ch14.html#pr07">pr07</a>, <a href="../calc2/ch14.html#pr08">pr08</a>, <a href="../calc2/ch14.html#pr10">pr10</a></li>
+          <li>Harmonic functions and Green's identities (matching Exercises 30&ndash;32) &mdash; <a href="../calc2/ch14.html#pr09">pr09</a>, <a href="../calc2/ch14.html#pr11">pr11</a></li>
+          <li>The proof by decomposition into type 1, type 2 and type 3 solids, the limit formula (9), and sources and sinks &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes call the solid region D and write the element of surface area with a different symbol than this section does. Only the notation differs; read one letter for the other and the two accounts agree.</p>
+        <p><strong>(b) Assignment (§16.9, fourth set)</strong></p>
+        <p>Problems to submit: 2, 7, 11, 15, 20 &nbsp;/&nbsp; Recommended practice: 1&ndash;4, 5&ndash;17, 19, 20, 26, 27, 29</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-8.html">§16.8 Stokes' Theorem</a> &nbsp;/&nbsp; Next: <a href="s16-10.html">§16.10 Summary</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

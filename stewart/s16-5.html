@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.5 회전과 발산 (Curl and Divergence) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.5 회전과 발산 — curl F = ∇ × F(정의 (1)·(2))와 div F = ∇ · F(정의 (9)·(10)), 기울기장의 회전은 0(정리 3)과 그 역(정리 4), 회전의 발산은 0(정리 11), 비회전·비압축 흐름의 뜻, 라플라스 연산자 ∇², 그린 정리의 회전형 (12)·발산형 (13)을 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.5, 회전, curl, 발산, divergence, del 연산자, 나블라, 기울기장의 회전, 보존적 벡터장, 비회전, irrotational, 비압축, incompressible, 라플라스 연산자, 라플라스 방정식, 그린 정리 벡터형, 바깥 법선, 스토크스 정리, 발산정리, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-5.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.5 회전과 발산 (Curl and Divergence) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="회전과 발산의 정의, 기울기장의 회전이 0이라는 정리와 그 역, 회전의 발산이 0이라는 정리, 비회전·비압축 흐름의 뜻, 라플라스 연산자, 그린 정리의 회전형·발산형까지 §16.5 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-5.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.5 회전과 발산 (Curl and Divergence) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.5 회전과 발산 — 회전과 발산의 정의와 del 연산자 표기, 기울기장의 회전이 0이라는 정리 3과 그 역인 정리 4, 회전의 발산이 0이라는 정리 11, 비회전·비압축 흐름의 물리적 의미, 라플라스 연산자, 그린 정리의 회전형·발산형을 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-5.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-5.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html" class="active">16.5</a>
+      <a href="s16-6.html">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.5 · 11주차</p>
+  <h1>§16.5 회전과 발산<span>Curl and Divergence</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-5-1"><span class="toc-num">NOTE</span> 벡터장에 대한 두 연산 <em>Two Operations on Vector Fields</em></a></li>
+    <li><a href="#c16-5-2"><span class="toc-num">DEF 2</span> 회전 <em>Curl</em></a></li>
+    <li><a href="#c16-5-3"><span class="toc-num">REM 3</span> del 연산자 <em>The del Operator</em></a></li>
+    <li><a href="#c16-5-4"><span class="toc-num">THM 4</span> 기울기장의 회전은 0 <em>Curl of a Gradient Field</em></a></li>
+    <li><a href="#c16-5-5"><span class="toc-num">REM 5</span> 보존장이 아님을 가려내는 판정 <em>A Test for Non-Conservativeness</em></a></li>
+    <li><a href="#c16-5-6"><span class="toc-num">THM 6</span> 회전이 0이면 보존적 <em>Converse: Curl-Free Implies Conservative</em></a></li>
+    <li><a href="#c16-5-7"><span class="toc-num">NOTE</span> 회전의 물리적 의미 <em>Why It Is Called Curl</em></a></li>
+    <li><a href="#c16-5-8"><span class="toc-num">DEF 8</span> 발산 <em>Divergence</em></a></li>
+    <li><a href="#c16-5-9"><span class="toc-num">THM 9</span> 회전의 발산은 0 <em>Divergence of a Curl</em></a></li>
+    <li><a href="#c16-5-10"><span class="toc-num">NOTE</span> 발산의 물리적 의미 <em>Why It Is Called Divergence</em></a></li>
+    <li><a href="#c16-5-11"><span class="toc-num">NOTE</span> 라플라스 연산자 <em>The Laplace Operator</em></a></li>
+    <li><a href="#c16-5-12"><span class="toc-num">THM 12</span> 그린 정리의 벡터형 I — 회전형 <em>Vector Form of Green's Theorem: Curl</em></a></li>
+    <li><a href="#c16-5-13"><span class="toc-num">THM 13</span> 그린 정리의 벡터형 II — 발산형 <em>Vector Form of Green's Theorem: Divergence</em></a></li>
+    <li><a href="#ex16-5-1"><span class="toc-num">EXAM 1</span> 벡터장의 회전 구하기 <em>Computing a Curl</em></a></li>
+    <li><a href="#ex16-5-2"><span class="toc-num">EXAM 2</span> 보존적이 아님을 보이기 <em>Ruling Out Conservativeness</em></a></li>
+    <li><a href="#ex16-5-3"><span class="toc-num">EXAM 3</span> 보존장 확인과 퍼텐셜 함수 <em>A Conservative Field and Its Potential</em></a></li>
+    <li><a href="#ex16-5-4"><span class="toc-num">EXAM 4</span> 벡터장의 발산 구하기 <em>Computing a Divergence</em></a></li>
+    <li><a href="#ex16-5-5"><span class="toc-num">EXAM 5</span> 회전으로 나타낼 수 없는 장 <em>A Field That Is Not a Curl</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening - two operations on vector fields -->
+<div class="card note-card" id="c16-5-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">벡터장에 대한 두 연산 <em>Two Operations on Vector Fields</em><span class="src-ref">절 도입 · p.1199</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절에서는 벡터장에 대한 두 가지 연산을 도입한다. 두 연산 모두 미분과 비슷하게 작동하며, 벡터미적분학을 유체 흐름이나 전기·자기 현상에 적용할 때 기본이 되는 도구이다.</p>
+        <p>두 연산을 가르는 것은 결과로 얻는 대상의 종류이다. 첫째 연산인 <strong>회전</strong>(curl)은 벡터장을 다시 벡터장으로 보내고, 둘째 연산인 <strong>발산</strong>(divergence)은 벡터장을 스칼라장으로 보낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Two operations on vector fields are set up in this section. Both behave much like differentiation, and both are basic tools once vector calculus is applied to fluid flow or to electricity and magnetism.</p>
+        <p>What separates them is the kind of object each returns. The first, the <strong>curl</strong>, sends a vector field to another vector field; the second, the <strong>divergence</strong>, sends a vector field to a scalar field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Definition (1) - curl -->
+<div class="card def-card" id="c16-5-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">회전 <em>Curl</em><span class="src-ref">Definition (1) · p.1199</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (1) — 벡터장의 회전.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$를 $\mathbb R^3$ 위의 벡터장이라 하고 $P,Q,R$의 편도함수가 모두 존재한다고 하자. $\mathbf F$의 <strong>회전</strong>은 $\mathbb R^3$ 위의 다음 벡터장이다.</p>
+          <div class="math-display">$$\operatorname{curl}\mathbf F=\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\mathbf i+\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\mathbf j+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathbf k.$$</div>
+        </div>
+        <p>세 성분은 저마다 일계 편도함수 두 개의 차이이며, 한 가지 순환 패턴을 따른다 — $\mathbf i$성분은 $y,z$에 대해, $\mathbf j$성분은 $z,x$에 대해, $\mathbf k$성분은 $x,y$에 대해 미분한다. 결과는 수가 아니라 다시 $\mathbb R^3$ 위의 벡터장이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (1) &mdash; the curl of a vector field.</strong> Let $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ be a vector field on $\mathbb R^3$ for which all the partial derivatives of $P$, $Q$, $R$ exist. The <strong>curl</strong> of $\mathbf F$ is the vector field on $\mathbb R^3$</p>
+          <div class="math-display">$$\operatorname{curl}\mathbf F=\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\mathbf i+\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\mathbf j+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathbf k.$$</div>
+        </div>
+        <p>Each entry is a difference of two first partial derivatives, and the three entries follow one cyclic pattern: the $\mathbf i$-entry differentiates in $y$ and $z$, the $\mathbf j$-entry in $z$ and $x$, the $\mathbf k$-entry in $x$ and $y$. The output is again a vector field on $\mathbb R^3$, not a number.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : the del operator and Equation (2) -->
+<div class="card rem-card" id="c16-5-3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">del 연산자 <em>The del Operator</em><span class="src-ref">Equation (2) · p.1199&ndash;1200</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연산자 표기를 쓰면 식 (1)을 외우기 쉬워진다. 벡터 미분연산자 $\nabla$(델이라 읽는다)를 다음과 같이 도입하자.</p>
+        <div class="math-display">$$\nabla=\mathbf i\,\frac{\partial}{\partial x}+\mathbf j\,\frac{\partial}{\partial y}+\mathbf k\,\frac{\partial}{\partial z}.$$</div>
+        <p>$\nabla$를 스칼라함수에 작용시키면 기울기 $\nabla f=f_x\,\mathbf i+f_y\,\mathbf j+f_z\,\mathbf k$를 얻는다. 반대로 $\nabla$를 세 성분이 편미분 기호로 이루어진 벡터로 보면, 벡터장과의 형식적인 외적도 만들 수 있다.</p>
+        <div class="math-display">$$\nabla\times\mathbf F=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[4pt]\dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\[4pt]P&Q&R\end{vmatrix}.$$</div>
+        <p>이 행렬식을 첫 행을 따라 전개하면 식 (1)의 세 성분이 정확히 다시 나오므로, 다음과 같은 기호적 표현을 식 (2)로 얻는다.</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=\nabla\times\mathbf F.$$</div>
+        <p>따라서 이 행렬식을 기억해 두는 것이 정의 (1)을 떠올리는 가장 빠른 길이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Operator notation makes Equation (1) easy to recall. Introduce the vector differential operator $\nabla$, read &ldquo;del&rdquo;:</p>
+        <div class="math-display">$$\nabla=\mathbf i\,\frac{\partial}{\partial x}+\mathbf j\,\frac{\partial}{\partial y}+\mathbf k\,\frac{\partial}{\partial z}.$$</div>
+        <p>Acting on a scalar function it returns the gradient, $\nabla f=f_x\,\mathbf i+f_y\,\mathbf j+f_z\,\mathbf k$. Treating $\nabla$ instead as a vector whose three entries are the partial-derivative symbols, one may also form its formal cross product with a vector field:</p>
+        <div class="math-display">$$\nabla\times\mathbf F=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[4pt]\dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\[4pt]P&Q&R\end{vmatrix}.$$</div>
+        <p>Expanding this determinant along the first row reproduces the three components of Equation (1) exactly, which gives the symbolic form recorded as Equation (2):</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=\nabla\times\mathbf F.$$</div>
+        <p>Remembering the determinant is therefore the shortest route to the definition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Theorem 3 - curl of a gradient field is zero -->
+<div class="card thm-card" id="c16-5-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">기울기장의 회전은 0 <em>Curl of a Gradient Field</em><span class="src-ref">Theorem 3 · p.1200</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 3.</strong> $f$를 이계 편도함수가 모두 연속인 세 변수 함수라 하자. 그러면</p>
+          <div class="math-display">$$\operatorname{curl}(\nabla f)=\mathbf 0.$$</div>
+        </div>
+        <p>이런 $f$의 기울기는 그 자체로 $\mathbb R^3$ 위의 벡터장이므로 회전을 취할 수 있는데, 정리는 그 결과가 정의역의 모든 점에서 영벡터임을 말해 준다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\nabla f=f_x\,\mathbf i+f_y\,\mathbf j+f_z\,\mathbf k$이므로 회전의 정의 (1)에 $P=f_x,\ Q=f_y,\ R=f_z$를 대입하면 $\operatorname{curl}(\nabla f)$의 각 성분은 다음과 같은 이계 혼합 편도함수의 차이가 된다.</p>
+        <div class="math-display">$$\operatorname{curl}(\nabla f)=(f_{zy}-f_{yz})\,\mathbf i+(f_{xz}-f_{zx})\,\mathbf j+(f_{yx}-f_{xy})\,\mathbf k.$$</div>
+        <p>세 성분은 모두 같은 두 변수에 대한 이계 편도함수를 미분 순서만 바꾸어 구한 것들의 차이이다. $f$의 이계 편도함수가 모두 연속이라는 가정 아래 클레로 정리를 세 번 적용하면 $f_{zy}=f_{yz}$, $f_{xz}=f_{zx}$, $f_{yx}=f_{xy}$를 얻으므로 세 성분이 모두 $0$이 된다. 따라서 $\operatorname{curl}(\nabla f)=\mathbf 0$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 3.</strong> Let $f$ be a function of three variables whose second-order partial derivatives are all continuous. Then</p>
+          <div class="math-display">$$\operatorname{curl}(\nabla f)=\mathbf 0.$$</div>
+        </div>
+        <p>The gradient of such an $f$ is itself a vector field on $\mathbb R^3$, so its curl can be formed; the theorem says that the result is the zero vector at every point of the domain.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Since $\nabla f=f_x\,\mathbf i+f_y\,\mathbf j+f_z\,\mathbf k$, substituting $P=f_x$, $Q=f_y$, $R=f_z$ into the defining formula (1) for the curl expresses each component of $\operatorname{curl}(\nabla f)$ as a difference of second-order mixed partial derivatives.</p>
+        <div class="math-display">$$\operatorname{curl}(\nabla f)=(f_{zy}-f_{yz})\,\mathbf i+(f_{xz}-f_{zx})\,\mathbf j+(f_{yx}-f_{xy})\,\mathbf k.$$</div>
+        <p>Each entry compares the same second-order partial derivative taken in the two possible orders. Since all second-order partial derivatives of $f$ are assumed continuous, Clairaut's Theorem applied three times gives $f_{zy}=f_{yz}$, $f_{xz}=f_{zx}$, and $f_{yx}=f_{xy}$, so every entry vanishes. Hence $\operatorname{curl}(\nabla f)=\mathbf 0$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : rephrasing Theorem 3 as a test -->
+<div class="card rem-card" id="c16-5-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">보존장이 아님을 가려내는 판정 <em>A Test for Non-Conservativeness</em><span class="src-ref">Theorem 3 (재진술) · p.1201</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>보존적 벡터장이란 정의상 $\mathbf F=\nabla f$로 쓸 수 있는 장이므로, 정리 3은 보존적 벡터장에 대한 다음 명제로 다시 쓸 수 있다.</p>
+        <div class="math-display">$$\mathbf F\ \text{가 보존적이면}\ \operatorname{curl}\mathbf F=\mathbf 0.$$</div>
+        <p>실제로 쓰이는 것은 이 명제의 대우이다 — 어떤 점에서라도 회전이 $\mathbf 0$이 아닌 장은 보존적일 수 없다. 세 개의 편도함수 차이만 계산하면 되므로, 이는 보존성을 배제하는 손쉬운 방법이다.</p>
+        <p>정리 3의 배후에 있는 항등식은 §12.4의 한 사실, 즉 모든 3차원 벡터 $\mathbf a$에 대해 $\mathbf a\times\mathbf a=\mathbf 0$이라는 사실의 유비이다. 여기서는 자기 자신과 외적을 취하는 그 벡터가 $\nabla$인 셈이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A conservative field is by definition one that can be written as $\mathbf F=\nabla f$, so Theorem 3 may be restated as a statement about conservative fields:</p>
+        <div class="math-display">$$\mathbf F\ \text{conservative}\ \Longrightarrow\ \operatorname{curl}\mathbf F=\mathbf 0.$$</div>
+        <p>In practice the contrapositive is what gets used: a field whose curl differs from $\mathbf 0$ somewhere cannot be conservative. This is a cheap way to rule out conservativeness, since it only asks for three partial-derivative differences.</p>
+        <p>The identity behind Theorem 3 is the analogue of a fact from §12.4: $\mathbf a\times\mathbf a=\mathbf 0$ holds for every three-dimensional vector $\mathbf a$, and here the &ldquo;vector&rdquo; crossed with itself is $\nabla$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Theorem 4 - the converse on a simply-connected domain -->
+<div class="card thm-card" id="c16-5-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6</span>
+    <span class="thm-title">회전이 0이면 보존적 <em>Converse: Curl-Free Implies Conservative</em><span class="src-ref">Theorem 4 · p.1201</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 4.</strong> $\mathbf F$를 정의역이 $\mathbb R^3$ 전체이고 성분함수 $P,Q,R$가 연속인 편도함수를 갖는 벡터장이라 하자. $\operatorname{curl}\mathbf F=\mathbf 0$이면 $\mathbf F$는 보존적이다.</p>
+        </div>
+        <p>정리 3의 역은 일반적으로 성립하지 않는다. 여기서 그것을 성립하게 해 주는 것은 정의역의 조건이다. 사실 $\mathbb R^3$ 전체에서 정의될 필요까지는 없고, 구멍이 없는 영역인 단순연결 정의역이기만 하면 이미 충분하다.</p>
+        <p>정리 4는 평면 벡터장에 대해 같은 물음에 답했던 정리 16.3.6의 3차원판이다.</p>
+        <p><em>증명은 §16.8 끝에서 스토크스 정리로부터 이끌어내는 방식으로 개요만 제시한다.</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 4.</strong> Let $\mathbf F$ be a vector field whose domain is the whole of $\mathbb R^3$ and whose components $P$, $Q$, $R$ have continuous partial derivatives. If $\operatorname{curl}\mathbf F=\mathbf 0$, then $\mathbf F$ is conservative.</p>
+        </div>
+        <p>The converse of Theorem 3 is false in general; what saves it here is the domain. Being defined on the whole of $\mathbb R^3$ is more than is really needed &mdash; a simply-connected domain, one that &ldquo;has no hole&rdquo;, already suffices.</p>
+        <p>Theorem 4 is the three-dimensional counterpart of Theorem 16.3.6, which settled the same question for plane fields.</p>
+        <p><em>Proof: sketched at the end of §16.8, where it is deduced from Stokes' Theorem.</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : why the name curl (Figures 1-2) -->
+<div class="card note-card" id="c16-5-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">회전의 물리적 의미 <em>Why It Is Called Curl</em><span class="src-ref">Figures 1&ndash;2 · p.1202&ndash;1203</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>회전이라는 이름은 회전 운동을 가리킨다. $\mathbf F$를 예제 16.1.3에서처럼 움직이는 유체의 속도장으로 보자. §16.8에서 보이듯, 점 $(x,y,z)$ 근처의 입자들은 그 점을 지나면서 $\operatorname{curl}\mathbf F(x,y,z)$ 방향을 가리키는 축 둘레로 회전하려는 경향을 보이는데, 회전 방향은 오른손 법칙으로 정해지고 이 회전 벡터의 길이는 도는 빠르기를 나타낸다.</p>
+        <p>어떤 점 $P$에서 $\operatorname{curl}\mathbf F=\mathbf 0$이면 그 점에는 회전이 없으며, 이때 $\mathbf F$는 그 점에서 <strong>비회전</strong>(irrotational)이라 한다 — $P$에 작은 물레바퀴를 떨어뜨리면 유체를 따라 떠내려가기는 하지만 자신의 축을 중심으로 돌지는 않는다. 반대로 $\operatorname{curl}\mathbf F\neq\mathbf 0$이면 물레바퀴는 실제로 돈다.</p>
+        <p>두 평면 속도장을 비교하면 이 차이가 뚜렷이 드러난다. $\mathbf F=\sin y\,\mathbf i+\cos x\,\mathbf j$에 대해서는 $\operatorname{curl}\mathbf F=-(\sin x+\cos y)\,\mathbf k$를 얻는데, 이는 대부분의 점에서 $\mathbf 0$이 아니다. 유체가 대체로 한 방향으로 흐르지만 그 점의 한쪽에서 더 빠른 어떤 점 $P_1$에서는 물레바퀴가 반시계 방향으로 돌고 회전 벡터는 $\mathbf k$ 방향을 향하며, 회전이 시계 방향인 어떤 점 $P_2$에서는 회전 벡터가 $-\mathbf k$ 방향을 향한다.</p>
+        <p>반면 $\mathbf F=2xy\,\mathbf i+(x^{2}+y)\,\mathbf j$에서는 모든 점에서 $\operatorname{curl}\mathbf F=\mathbf 0$이어서, 어디에 물레바퀴를 놓아도 유체를 따라 떠내려갈 뿐 자신의 축을 중심으로 도는 일은 없다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="회전축 방향의 curl F 벡터와 그 둘레를 도는 작은 물레바퀴" style="max-width:360px;width:100%;height:auto">
+            <line x1="170" y1="150" x2="170" y2="46" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="170,34 165,48 175,48" fill="var(--g700)"/>
+            <text x="180" y="48" font-size="12" font-style="italic" fill="var(--g700)">curl F</text>
+            <ellipse cx="170" cy="150" rx="58" ry="18" fill="none" stroke="var(--grey400)" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <polygon points="192,167 180,163 181,171" fill="var(--grey600)"/>
+            <polygon points="146,133 157,129 158,137" fill="var(--grey600)"/>
+            <line x1="170" y1="150" x2="228" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="112" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="170" y2="168" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="170" y2="132" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="228" y1="139" x2="228" y2="161" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="112" y1="139" x2="112" y2="161" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="159" y1="170" x2="181" y2="170" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="159" y1="131" x2="181" y2="131" stroke="var(--grey800)" stroke-width="3"/>
+            <circle cx="170" cy="150" r="4.5" fill="var(--grey900)"/>
+            <line x1="170" y1="176" x2="170" y2="196" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="170" y="212" text-anchor="middle" font-size="11" fill="var(--grey700)">(x, y, z)</text>
+            <text x="170" y="236" text-anchor="middle" font-size="11" fill="var(--grey500)">right-hand rule</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The name <em>curl</em> points at rotation. Read $\mathbf F$ as the velocity field of a moving fluid, as in Example 16.1.3. It is shown in §16.8 that the particles sitting near a point $(x,y,z)$ tend to turn about the axis through that point in the direction of $\operatorname{curl}\mathbf F(x,y,z)$, the sense of the turning being fixed by the right-hand rule, and that the length of that curl vector records how fast they go around.</p>
+        <p>Where $\operatorname{curl}\mathbf F=\mathbf 0$ at a point $P$, no rotation is present at $P$ and $\mathbf F$ is said to be <strong>irrotational</strong> there: a tiny paddle wheel dropped in at $P$ is carried along by the fluid but does not spin about its own axis. If instead $\operatorname{curl}\mathbf F\ne\mathbf 0$, the wheel does spin.</p>
+        <p>Two plane velocity fields make the contrast visible. For $\mathbf F=\sin y\,\mathbf i+\cos x\,\mathbf j$ one computes $\operatorname{curl}\mathbf F=-(\sin x+\cos y)\,\mathbf k$, which is nonzero at most points: at a point $P_1$ where the fluid runs in roughly one direction but faster on one side of the point than the other, the wheel turns counterclockwise and the curl vector points along $\mathbf k$; at a point $P_2$ where the turning is clockwise, it points along $-\mathbf k$.</p>
+        <p>For $\mathbf F=2xy\,\mathbf i+(x^{2}+y)\,\mathbf j$, on the other hand, $\operatorname{curl}\mathbf F=\mathbf 0$ at every point, and a wheel placed anywhere drifts with the fluid without ever turning about its axis.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="The curl vector as the axis of rotation of a small paddle wheel" style="max-width:360px;width:100%;height:auto">
+            <line x1="170" y1="150" x2="170" y2="46" stroke="var(--g700)" stroke-width="2"/>
+            <polygon points="170,34 165,48 175,48" fill="var(--g700)"/>
+            <text x="180" y="48" font-size="12" font-style="italic" fill="var(--g700)">curl F</text>
+            <ellipse cx="170" cy="150" rx="58" ry="18" fill="none" stroke="var(--grey400)" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <polygon points="192,167 180,163 181,171" fill="var(--grey600)"/>
+            <polygon points="146,133 157,129 158,137" fill="var(--grey600)"/>
+            <line x1="170" y1="150" x2="228" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="112" y2="150" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="170" y2="168" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="170" y1="150" x2="170" y2="132" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="228" y1="139" x2="228" y2="161" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="112" y1="139" x2="112" y2="161" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="159" y1="170" x2="181" y2="170" stroke="var(--grey800)" stroke-width="3"/>
+            <line x1="159" y1="131" x2="181" y2="131" stroke="var(--grey800)" stroke-width="3"/>
+            <circle cx="170" cy="150" r="4.5" fill="var(--grey900)"/>
+            <line x1="170" y1="176" x2="170" y2="196" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="170" y="212" text-anchor="middle" font-size="11" fill="var(--grey700)">(x, y, z)</text>
+            <text x="170" y="236" text-anchor="middle" font-size="11" fill="var(--grey500)">right-hand rule</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Definition (9)(10) - divergence -->
+<div class="card def-card" id="c16-5-8">
+  <div class="card-head">
+    <span class="def-num">DEF 8</span>
+    <span class="def-title">발산 <em>Divergence</em><span class="src-ref">Equations (9), (10) · p.1203</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (9) — 벡터장의 발산.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$를 $\partial P/\partial x$, $\partial Q/\partial y$, $\partial R/\partial z$가 모두 존재하는 $\mathbb R^3$ 위의 벡터장이라 하자. 이때 $\mathbf F$의 <strong>발산</strong>은 다음과 같은 세 변수 함수이다.</p>
+          <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}.$$</div>
+        </div>
+        <p>$\nabla$를 다시 편미분 기호로 이루어진 벡터로 읽으면 같은 세 항이 형식적인 내적으로 정확히 만들어지는데, 이것이 식 (10)으로 기록되는 기호적 표현이다.</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\nabla\cdot\mathbf F.$$</div>
+        <p>$\mathbb R^2$ 위의 벡터장도 같은 방식으로 다루되 남는 두 항만 쓰므로, 이 경우 발산은 두 변수 함수가 된다.</p>
+        <p>이 절의 두 연산은 결과의 종류가 다르다는 점을 기억해 둘 만하다. $\operatorname{curl}\mathbf F$는 벡터장이지만 $\operatorname{div}\mathbf F$는 스칼라장이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (9) &mdash; the divergence of a vector field.</strong> Let $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ be a vector field on $\mathbb R^3$ for which $\partial P/\partial x$, $\partial Q/\partial y$ and $\partial R/\partial z$ exist. Its <strong>divergence</strong> is then the function of three variables</p>
+          <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}.$$</div>
+        </div>
+        <p>Reading $\nabla$ once more as a vector of partial-derivative symbols, the same three terms are exactly what a formal dot product produces, and this is the symbolic form recorded as Equation (10):</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\nabla\cdot\mathbf F.$$</div>
+        <p>A field on $\mathbb R^2$ is treated the same way, with only the two surviving terms, so that its divergence is a function of two variables.</p>
+        <p>The two operations of this section differ in type, and the difference is worth fixing in mind: $\operatorname{curl}\mathbf F$ is a vector field, whereas $\operatorname{div}\mathbf F$ is a scalar field.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : Theorem 11 - divergence of a curl is zero -->
+<div class="card thm-card" id="c16-5-9">
+  <div class="card-head">
+    <span class="thm-num">THM 9</span>
+    <span class="thm-title">회전의 발산은 0 <em>Divergence of a Curl</em><span class="src-ref">Theorem 11 · p.1203&ndash;1204</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정리 11.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$를 성분함수 $P,Q,R$가 연속인 이계 편도함수를 갖는 $\mathbb R^3$ 위의 벡터장이라 하자. 그러면</p>
+          <div class="math-display">$$\operatorname{div}\operatorname{curl}\mathbf F=0.$$</div>
+        </div>
+        <p>$\operatorname{curl}\mathbf F$는 다시 $\mathbb R^3$ 위의 벡터장이므로 그 발산을 취할 수 있는데, 정리는 $\mathbf F$가 무엇이든 이 스칼라장이 항등적으로 $0$임을 말해 준다.</p>
+        <p>여기에도 대수적 유비가 있다. 임의의 벡터 $\mathbf a,\mathbf b$에 대해 스칼라 삼중곱 $\mathbf a\cdot(\mathbf a\times\mathbf b)$가 $0$이 되는 것과 같이, $\operatorname{div}\operatorname{curl}\mathbf F$는 $\nabla\cdot(\nabla\times\mathbf F)$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 회전의 정의 (1)에서 $\operatorname{curl}\mathbf F=(R_y-Q_z)\,\mathbf i+(P_z-R_x)\,\mathbf j+(Q_x-P_y)\,\mathbf k$이므로, 발산의 정의 (9)에 따라 이 세 성분을 각각 $x,y,z$로 미분하여 더하면</p>
+        <div class="math-display">$$\operatorname{div}\operatorname{curl}\mathbf F=\frac{\partial}{\partial x}(R_y-Q_z)+\frac{\partial}{\partial y}(P_z-R_x)+\frac{\partial}{\partial z}(Q_x-P_y)$$</div>
+        <div class="math-display">$$=R_{yx}-Q_{zx}+P_{zy}-R_{xy}+Q_{xz}-P_{yz}$$</div>
+        <p>을 얻는다. 여섯 개의 이계 편도함수를 같은 함수·같은 두 변수끼리 짝지으면 $R_{yx}-R_{xy}$, $Q_{xz}-Q_{zx}$, $P_{zy}-P_{yz}$의 세 쌍으로 나뉜다. $P,Q,R$의 이계 편도함수가 모두 연속이므로 클레로 정리에 의해 각 쌍의 두 항이 서로 같아 세 쌍 모두 $0$이 되고, 따라서 $\operatorname{div}\operatorname{curl}\mathbf F=0$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Theorem 11.</strong> Let $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ be a vector field on $\mathbb R^3$ whose components $P$, $Q$, $R$ have continuous second-order partial derivatives. Then</p>
+          <div class="math-display">$$\operatorname{div}\operatorname{curl}\mathbf F=0.$$</div>
+        </div>
+        <p>Since $\operatorname{curl}\mathbf F$ is again a vector field on $\mathbb R^3$, its divergence may be formed; the theorem says that this scalar field vanishes identically, whatever $\mathbf F$ was.</p>
+        <p>Here too there is an algebraic analogue: the scalar triple product $\mathbf a\cdot(\mathbf a\times\mathbf b)$ equals $0$ for all vectors $\mathbf a$ and $\mathbf b$, and $\operatorname{div}\operatorname{curl}\mathbf F$ is $\nabla\cdot(\nabla\times\mathbf F)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> By the defining formula (1), $\operatorname{curl}\mathbf F=(R_y-Q_z)\,\mathbf i+(P_z-R_x)\,\mathbf j+(Q_x-P_y)\,\mathbf k$, so by the defining formula (9) for the divergence, differentiating these three entries in $x$, $y$, $z$ respectively and adding gives</p>
+        <div class="math-display">$$\operatorname{div}\operatorname{curl}\mathbf F=\frac{\partial}{\partial x}(R_y-Q_z)+\frac{\partial}{\partial y}(P_z-R_x)+\frac{\partial}{\partial z}(Q_x-P_y)$$</div>
+        <div class="math-display">$$=R_{yx}-Q_{zx}+P_{zy}-R_{xy}+Q_{xz}-P_{yz}.$$</div>
+        <p>Pairing these six second-order partial derivatives by which function and which pair of variables they involve splits the sum into three pairs, $R_{yx}-R_{xy}$, $Q_{xz}-Q_{zx}$, and $P_{zy}-P_{yz}$. Since $P$, $Q$, $R$ all have continuous second-order partial derivatives, Clairaut's Theorem makes each pair equal, so all three vanish and $\operatorname{div}\operatorname{curl}\mathbf F=0$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : why the name divergence (Figure 3) -->
+<div class="card note-card" id="c16-5-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">발산의 물리적 의미 <em>Why It Is Called Divergence</em><span class="src-ref">Figure 3 · p.1204</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>발산이라는 이름도 유체 흐름을 통해 가장 잘 이해된다. $\mathbf F(x,y,z)$가 유체나 기체의 속도를 나타낸다면, $\operatorname{div}\mathbf F(x,y,z)$는 단위 부피당 점 $(x,y,z)$에서 질량이 빠져나가는 순 비율(시간에 대한)이다. 대략적으로 말하면 이 값은 유체가 그 점에서 퍼져 나가려는 경향이 얼마나 강한지를 잰다. $\operatorname{div}\mathbf F=0$인 벡터장을 <strong>비압축</strong>(incompressible)이라 한다. 이러한 해석의 근거는 §16.9 끝에서 발산정리의 한 따름정리로 제시된다.</p>
+        <p>평면 벡터장 $\mathbf F=(1+x^{2})\,\mathbf i+y\,\mathbf j$를 예로 들면 발산은 $2x+1$이어서 항등적으로 $0$은 아니다. $\operatorname{div}\mathbf F$가 음인 점 $P_1$ 근처에서는 그 점으로 들어오는 화살표가 나가는 화살표보다 길어 전체적으로 안쪽으로 흐르고, $\operatorname{div}\mathbf F$가 양인 점 $P_2$ 근처에서는 길이 관계가 반대가 되어 바깥쪽으로 흐른다.</p>
+        <p>벡터장 $\mathbf F=-x\,\mathbf i+y\,\mathbf j$는 다르게 행동한다. 이 경우 발산은 어디서나 $0$이며, 어느 점 주위에서도 들어오는 화살표와 나가는 화살표의 길이가 거의 같다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="발산이 음인 점 P₁에서는 흐름이 안쪽으로 모이고, 발산이 양인 점 P₂에서는 바깥쪽으로 퍼진다" style="max-width:360px;width:100%;height:auto">
+            <line x1="122" y1="90" x2="98" y2="90" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="94,90 103,86 103,94" fill="var(--blue)"/>
+            <line x1="58" y1="90" x2="82" y2="90" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="86,90 77,86 77,94" fill="var(--blue)"/>
+            <line x1="90" y1="58" x2="90" y2="82" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="90,86 86,77 94,77" fill="var(--blue)"/>
+            <line x1="90" y1="122" x2="90" y2="98" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="90,94 86,103 94,103" fill="var(--blue)"/>
+            <line x1="113" y1="67" x2="99" y2="81" stroke="var(--blue)" stroke-width="1.4"/>
+            <polygon points="96,84 100,75 105,80" fill="var(--blue)"/>
+            <line x1="67" y1="113" x2="81" y2="99" stroke="var(--blue)" stroke-width="1.4"/>
+            <polygon points="84,96 80,105 75,100" fill="var(--blue)"/>
+            <circle cx="90" cy="90" r="3.4" fill="var(--pink)"/>
+            <text x="98" y="107" font-size="11" font-style="italic" fill="var(--grey800)">P₁</text>
+            <text x="90" y="150" text-anchor="middle" font-size="11" fill="var(--grey700)">net flow inward</text>
+            <text x="90" y="170" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--grey900)">div F &lt; 0</text>
+            <line x1="278" y1="90" x2="302" y2="90" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="306,90 297,86 297,94" fill="var(--g600)"/>
+            <line x1="262" y1="90" x2="238" y2="90" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="234,90 243,86 243,94" fill="var(--g600)"/>
+            <line x1="270" y1="82" x2="270" y2="58" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="270,54 266,63 274,63" fill="var(--g600)"/>
+            <line x1="270" y1="98" x2="270" y2="122" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="270,126 266,117 274,117" fill="var(--g600)"/>
+            <line x1="277" y1="83" x2="293" y2="67" stroke="var(--g600)" stroke-width="1.4"/>
+            <polygon points="296,64 292,73 287,68" fill="var(--g600)"/>
+            <line x1="263" y1="97" x2="247" y2="113" stroke="var(--g600)" stroke-width="1.4"/>
+            <polygon points="244,116 248,107 253,112" fill="var(--g600)"/>
+            <circle cx="270" cy="90" r="3.4" fill="var(--pink)"/>
+            <text x="278" y="107" font-size="11" font-style="italic" fill="var(--grey800)">P₂</text>
+            <text x="270" y="150" text-anchor="middle" font-size="11" fill="var(--grey700)">net flow outward</text>
+            <text x="270" y="170" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--grey900)">div F &gt; 0</text>
+            <line x1="180" y1="40" x2="180" y2="140" stroke="var(--grey200)" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The name <em>divergence</em> is best understood through fluid flow as well. If $\mathbf F(x,y,z)$ gives the velocity of a fluid or a gas, then $\operatorname{div}\mathbf F(x,y,z)$ is the net rate, per unit volume and with respect to time, at which mass leaves the point $(x,y,z)$. Put loosely, the number measures how strongly the fluid tends to spread away from that point. A field for which $\operatorname{div}\mathbf F=0$ is called <strong>incompressible</strong>. The justification for this reading comes at the end of §16.9, as a consequence of the Divergence Theorem.</p>
+        <p>Take the plane field $\mathbf F=(1+x^{2})\,\mathbf i+y\,\mathbf j$, whose divergence is $2x+1$ and so is not identically zero. Near a point $P_1$ at which $\operatorname{div}\mathbf F$ is negative, the arrows arriving at the point are longer than those leaving it, so the flow there is inward on balance; near a point $P_2$ at which $\operatorname{div}\mathbf F$ is positive, the lengths compare the other way and the flow is outward.</p>
+        <p>The field $\mathbf F=-x\,\mathbf i+y\,\mathbf j$ behaves differently: its divergence is $0$ everywhere, and around any point the arrows that arrive and the arrows that leave have about the same length.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 190" role="img" aria-label="A point with negative divergence, where the net flow is inward, and one with positive divergence, where it is outward" style="max-width:360px;width:100%;height:auto">
+            <line x1="122" y1="90" x2="98" y2="90" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="94,90 103,86 103,94" fill="var(--blue)"/>
+            <line x1="58" y1="90" x2="82" y2="90" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="86,90 77,86 77,94" fill="var(--blue)"/>
+            <line x1="90" y1="58" x2="90" y2="82" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="90,86 86,77 94,77" fill="var(--blue)"/>
+            <line x1="90" y1="122" x2="90" y2="98" stroke="var(--blue)" stroke-width="1.6"/>
+            <polygon points="90,94 86,103 94,103" fill="var(--blue)"/>
+            <line x1="113" y1="67" x2="99" y2="81" stroke="var(--blue)" stroke-width="1.4"/>
+            <polygon points="96,84 100,75 105,80" fill="var(--blue)"/>
+            <line x1="67" y1="113" x2="81" y2="99" stroke="var(--blue)" stroke-width="1.4"/>
+            <polygon points="84,96 80,105 75,100" fill="var(--blue)"/>
+            <circle cx="90" cy="90" r="3.4" fill="var(--pink)"/>
+            <text x="98" y="107" font-size="11" font-style="italic" fill="var(--grey800)">P₁</text>
+            <text x="90" y="150" text-anchor="middle" font-size="11" fill="var(--grey700)">net flow inward</text>
+            <text x="90" y="170" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--grey900)">div F &lt; 0</text>
+            <line x1="278" y1="90" x2="302" y2="90" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="306,90 297,86 297,94" fill="var(--g600)"/>
+            <line x1="262" y1="90" x2="238" y2="90" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="234,90 243,86 243,94" fill="var(--g600)"/>
+            <line x1="270" y1="82" x2="270" y2="58" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="270,54 266,63 274,63" fill="var(--g600)"/>
+            <line x1="270" y1="98" x2="270" y2="122" stroke="var(--g600)" stroke-width="1.6"/>
+            <polygon points="270,126 266,117 274,117" fill="var(--g600)"/>
+            <line x1="277" y1="83" x2="293" y2="67" stroke="var(--g600)" stroke-width="1.4"/>
+            <polygon points="296,64 292,73 287,68" fill="var(--g600)"/>
+            <line x1="263" y1="97" x2="247" y2="113" stroke="var(--g600)" stroke-width="1.4"/>
+            <polygon points="244,116 248,107 253,112" fill="var(--g600)"/>
+            <circle cx="270" cy="90" r="3.4" fill="var(--pink)"/>
+            <text x="278" y="107" font-size="11" font-style="italic" fill="var(--grey800)">P₂</text>
+            <text x="270" y="150" text-anchor="middle" font-size="11" fill="var(--grey700)">net flow outward</text>
+            <text x="270" y="170" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--grey900)">div F &gt; 0</text>
+            <line x1="180" y1="40" x2="180" y2="140" stroke="var(--grey200)" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : the Laplace operator -->
+<div class="card note-card" id="c16-5-11">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">라플라스 연산자 <em>The Laplace Operator</em><span class="src-ref">p.1205</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 연산을 특정한 순서로 결합하면 세 번째 연산자를 얻는다. 세 변수 함수 $f$를 하나 잡아 그 기울기장을 만들고, 이 벡터장의 발산을 다시 취해 보자.</p>
+        <div class="math-display">$$\operatorname{div}(\nabla f)=\nabla\cdot(\nabla f)=\frac{\partial^{2}f}{\partial x^{2}}+\frac{\partial^{2}f}{\partial y^{2}}+\frac{\partial^{2}f}{\partial z^{2}}=\nabla^{2}f.$$</div>
+        <p>이 세 개의 순수 이계 편도함수의 합은 아주 자주 나타나므로 $\nabla^{2}f$라는 약자로 쓰이며, 연산자</p>
+        <div class="math-display">$$\nabla^{2}=\nabla\cdot\nabla$$</div>
+        <p>를 <strong>라플라스 연산자</strong>라 한다. 이 이름은 라플라스 방정식 $\nabla^{2}f=0$에서 이 연산자가 맡는 역할에서 왔다.</p>
+        <p>이 연산자는 벡터장 $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$에도 각 성분에 따로 작용시키는 방식으로 적용할 수 있다.</p>
+        <div class="math-display">$$\nabla^{2}\mathbf F=\nabla^{2}P\,\mathbf i+\nabla^{2}Q\,\mathbf j+\nabla^{2}R\,\mathbf k.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Combining the two operations in one particular order produces a third operator. Take a function $f$ of three variables, form its gradient field, and then take the divergence of that field:</p>
+        <div class="math-display">$$\operatorname{div}(\nabla f)=\nabla\cdot(\nabla f)=\frac{\partial^{2}f}{\partial x^{2}}+\frac{\partial^{2}f}{\partial y^{2}}+\frac{\partial^{2}f}{\partial z^{2}}=\nabla^{2}f.$$</div>
+        <p>This sum of the three unmixed second partial derivatives turns up so often that it gets the abbreviation $\nabla^{2}f$, and the operator</p>
+        <div class="math-display">$$\nabla^{2}=\nabla\cdot\nabla$$</div>
+        <p>is called the <strong>Laplace operator</strong>, the name coming from its role in <strong>Laplace's equation</strong> $\nabla^{2}f=0$.</p>
+        <p>The operator applies to a vector field $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$ as well, simply by acting on each component separately:</p>
+        <div class="math-display">$$\nabla^{2}\mathbf F=\nabla^{2}P\,\mathbf i+\nabla^{2}Q\,\mathbf j+\nabla^{2}R\,\mathbf k.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : Equation (12) - curl form of Green's Theorem -->
+<div class="card thm-card" id="c16-5-12">
+  <div class="card-head">
+    <span class="thm-num">THM 12</span>
+    <span class="thm-title">그린 정리의 벡터형 I — 회전형 <em>Vector Form of Green's Theorem: Curl</em><span class="src-ref">Equation (12) · p.1205</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (12) — 그린 정리의 회전형.</strong> 평면 영역 $D$와 그 경계곡선 $C$, 함수 $P,Q$가 그린 정리의 가정을 만족한다고 하고 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$라 하자. 그러면</p>
+          <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot\mathbf T\,ds=\iint_D(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA.$$</div>
+        </div>
+        <p>말로 풀면, $C$를 따라 도는 $\mathbf F$의 접선성분의 선적분이 $D$ 위에서 $\operatorname{curl}\mathbf F$의 평면에 수직인 성분의 이중적분과 같다는 것이다.</p>
+        <p>여기서 새로 증명되는 사실은 없다 — 회전과 내적은 그린 정리의 피적분함수 $\partial Q/\partial x-\partial P/\partial y$를 다시 포장한 것일 뿐이다 — 하지만 이렇게 다시 포장된 진술이야말로 일반화되는 형태이다. §16.8의 스토크스 정리는 정확히 이 식 (12)에서 $D$를 공간 속 곡면으로 바꾼 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $\mathbf F=P\,\mathbf i+Q\,\mathbf j$를 세 번째 성분이 $R=0$인 $\mathbb R^3$ 위의 벡터장으로 보자. $R$가 항등적으로 $0$이므로 $R_x=R_y=0$이고, $P,Q$는 $x,y$에만 의존하므로 $P_z=Q_z=0$이다. 따라서 회전의 정의 (1)에서 살아남는 성분은 하나뿐이다.</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=(R_y-Q_z)\,\mathbf i+(P_z-R_x)\,\mathbf j+(Q_x-P_y)\,\mathbf k=(Q_x-P_y)\,\mathbf k.$$</div>
+        <p>$\mathbf k\cdot\mathbf k=1$이고 $\mathbf i\cdot\mathbf k=\mathbf j\cdot\mathbf k=0$이므로 $(\operatorname{curl}\mathbf F)\cdot\mathbf k=Q_x-P_y$를 얻는다. 한편 선적분의 정의에 의해 $\oint_C\mathbf F\cdot d\mathbf r=\oint_C P\,dx+Q\,dy$이고, $d\mathbf r=\mathbf T\,ds$이므로 이는 다시 $\oint_C\mathbf F\cdot\mathbf T\,ds$와도 같다. 그린 정리를 $\oint_C P\,dx+Q\,dy=\iint_D\Bigl(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\Bigr)dA$의 형태로 적용하면 우변의 피적분함수가 바로 방금 구한 $(\operatorname{curl}\mathbf F)\cdot\mathbf k$이므로</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot\mathbf T\,ds=\iint_D(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA$$</div>
+        <p>를 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (12) &mdash; Green's Theorem in curl form.</strong> Let the plane region $D$, its boundary curve $C$ and the functions $P$ and $Q$ satisfy the hypotheses of Green's Theorem, and put $\mathbf F=P\,\mathbf i+Q\,\mathbf j$. Then</p>
+          <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot\mathbf T\,ds=\iint_D(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA.$$</div>
+        </div>
+        <p>In words: the line integral around $C$ of the tangential component of $\mathbf F$ equals the double integral over $D$ of the component of $\operatorname{curl}\mathbf F$ perpendicular to the plane.</p>
+        <p>Nothing new is being proved here &mdash; the curl and the dot product only repackage the integrand $\partial Q/\partial x-\partial P/\partial y$ of Green's Theorem &mdash; but the repackaged statement is the one that generalizes: Stokes' Theorem in §16.8 is exactly Equation (12) with $D$ replaced by a surface in space.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> View $\mathbf F=P\,\mathbf i+Q\,\mathbf j$ as a vector field on $\mathbb R^3$ whose third component is $R=0$. Because $R$ vanishes identically, $R_x=R_y=0$; because $P$ and $Q$ depend only on $x$ and $y$, $P_z=Q_z=0$. So only one entry of the defining formula (1) survives:</p>
+        <div class="math-display">$$\operatorname{curl}\mathbf F=(R_y-Q_z)\,\mathbf i+(P_z-R_x)\,\mathbf j+(Q_x-P_y)\,\mathbf k=(Q_x-P_y)\,\mathbf k.$$</div>
+        <p>Because $\mathbf k\cdot\mathbf k=1$ while $\mathbf i\cdot\mathbf k=\mathbf j\cdot\mathbf k=0$, this gives $(\operatorname{curl}\mathbf F)\cdot\mathbf k=Q_x-P_y$. On the other hand, by the definition of the line integral $\oint_C\mathbf F\cdot d\mathbf r=\oint_C P\,dx+Q\,dy$, and since $d\mathbf r=\mathbf T\,ds$ this equals $\oint_C\mathbf F\cdot\mathbf T\,ds$ as well. Applying Green's Theorem in the form $\oint_C P\,dx+Q\,dy=\iint_D\Bigl(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\Bigr)dA$, the integrand on the right is exactly the $(\operatorname{curl}\mathbf F)\cdot\mathbf k$ found above, so</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot d\mathbf r=\oint_C\mathbf F\cdot\mathbf T\,ds=\iint_D(\operatorname{curl}\mathbf F)\cdot\mathbf k\,dA.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Equation (13) - divergence form of Green's Theorem (Figure 4) -->
+<div class="card thm-card" id="c16-5-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">그린 정리의 벡터형 II — 발산형 <em>Vector Form of Green's Theorem: Divergence</em><span class="src-ref">Equation (13) · Figure 4 · p.1206</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이와 짝을 이루는 공식은 $\mathbf F$의 접선성분 대신 <strong>법선성분</strong>을 기록한다. $C$가 $a\le t\le b$에서 벡터방정식 $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j$로 그려진다고 하자. 그 단위접선은 §13.2에서 구한 대로 다음과 같다.</p>
+        <div class="math-display">$$\mathbf T(t)=\frac{x'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf i+\frac{y'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf j.$$</div>
+        <p>두 성분을 맞바꾸고 부호 하나를 뒤집으면 $\mathbf T$에 수직인 단위벡터를 얻는데, 그중 영역 바깥쪽을 향하는 부호를 택한 것이 <strong>바깥 단위법선</strong>이다.</p>
+        <div class="math-display">$$\mathbf n(t)=\frac{y'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf i-\frac{x'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf j.$$</div>
+        <div class="formal-box">
+          <p><strong>식 (13) — 그린 정리의 발산형.</strong> 그린 정리의 가정 아래, $\mathbf n$을 $C$를 따르는 바깥 단위법선이라 하고 $\mathbf F=P\,\mathbf i+Q\,\mathbf j$라 하면</p>
+          <div class="math-display">$$\oint_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA.$$</div>
+        </div>
+        <p>즉 이 형태는 $C$를 따르는 $\mathbf F$의 법선성분의 선적분이 $C$가 둘러싸는 영역 위에서의 $\operatorname{div}\mathbf F$의 이중적분과 같다고 말한다. 이는 §16.9의 발산정리의 평면판으로, 식 (12)가 스토크스 정리의 평면판인 것과 같은 관계이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="영역 D를 두르는 닫힌 곡선 C 위 한 점에서의 단위접선 T와 바깥 단위법선 n" style="max-width:360px;width:100%;height:auto">
+            <line x1="40" y1="215" x2="342" y2="215" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="348,215 338,211 338,219" fill="var(--grey800)"/>
+            <line x1="40" y1="228" x2="40" y2="24" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="40,16 36,27 44,27" fill="var(--grey800)"/>
+            <text x="345" y="232" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="28" y="24" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="27" y="230" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 90,120 C 90,160 105,176 150,185 C 200,195 260,175 268,135 C 275,100 250,75 200,60 C 150,45 90,60 90,120 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="211,183 203.1,189.6 200.9,180.8" fill="var(--g600)"/>
+            <text x="163" y="126" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="146" y="203" font-size="12" font-style="italic" fill="var(--g700)">C</text>
+            <line x1="40" y1="215" x2="268" y2="135" stroke="var(--grey500)" stroke-width="1.1"/>
+            <polygon points="268,135 259.7,141.6 257.4,135.0" fill="var(--grey500)"/>
+            <text x="140" y="163" font-size="11" font-style="italic" fill="var(--grey600)">r(t)</text>
+            <line x1="268" y1="135" x2="277" y2="91" stroke="var(--orange)" stroke-width="1.8"/>
+            <polygon points="277,91 278.6,100.5 271.8,99.1" fill="var(--orange)"/>
+            <text x="282" y="88" font-size="11.5" font-style="italic" fill="var(--orange)">T(t)</text>
+            <line x1="268" y1="135" x2="312" y2="144" stroke="var(--purple)" stroke-width="1.8"/>
+            <polygon points="312,144 302.5,145.6 303.9,138.8" fill="var(--purple)"/>
+            <text x="316" y="152" font-size="11.5" font-style="italic" fill="var(--purple)">n(t)</text>
+            <circle cx="268" cy="135" r="3.2" fill="var(--grey900)"/>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 먼저 $\mathbf n(t)=\dfrac{y'(t)}{|\mathbf r'(t)|}\,\mathbf i-\dfrac{x'(t)}{|\mathbf r'(t)|}\,\mathbf j$가 실제로 바깥을 향하는 단위법선임을 확인하자. $\mathbf n\cdot\mathbf T=\dfrac{x'y'-y'x'}{|\mathbf r'|^{2}}=0$이므로 $\mathbf n$은 $\mathbf T$에 수직이고, $|\mathbf n|=\dfrac{\sqrt{(y')^{2}+(-x')^{2}}}{|\mathbf r'|}=1$이므로 단위벡터이다. 방향을 보면 대응 $\langle x',y'\rangle\mapsto\langle y',-x'\rangle$는 시계 방향 $90^\circ$ 회전이므로, $\mathbf n$은 $\mathbf T$를 시계 방향으로 $90^\circ$ 돌린 벡터 — 곧 진행 방향의 <em>오른쪽</em>을 가리키는 벡터이다. 그런데 $C$가 양의 향을 가지면 영역 $D$는 언제나 진행 방향의 왼쪽에 놓이므로(§16.4의 양의 향 규약), 오른쪽을 가리키는 $\mathbf n$은 $D$의 바깥쪽을 향한다. 반시계로 도는 단위원 $\mathbf r(t)=\langle\cos t,\sin t\rangle$이 그 전형이다 — $\mathbf T(t)=\langle-\sin t,\cos t\rangle$이고 $\mathbf n(t)=\langle\cos t,\sin t\rangle$은 원점에서 멀어지는 방향, 즉 바깥 방향이다.</p>
+        <p>이제 식 16.2.3(호의 길이에 관한 선적분을 매개변수 $t$의 적분으로 바꾸는 공식)에 따라</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot\mathbf n\,ds=\int_a^b(\mathbf F\cdot\mathbf n)(t)\,|\mathbf r'(t)|\,dt=\int_a^b\left(P\,\frac{y'}{|\mathbf r'|}-Q\,\frac{x'}{|\mathbf r'|}\right)|\mathbf r'|\,dt=\int_a^b\bigl(P\,y'-Q\,x'\bigr)\,dt$$</div>
+        <p>이고, 마지막 적분은 $\displaystyle\oint_C P\,dy-Q\,dx$와 같다. 이를 $\oint_C(-Q)\,dx+P\,dy$로 보면 $dx$의 계수가 $-Q$, $dy$의 계수가 $P$이므로, 이 두 함수에 그린 정리를 적용하면</p>
+        <div class="math-display">$$\oint_C P\,dy-Q\,dx=\iint_D\left(\frac{\partial P}{\partial x}-\frac{\partial(-Q)}{\partial y}\right)dA=\iint_D\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}\right)dA=\iint_D\operatorname{div}\mathbf F\,dA$$</div>
+        <p>를 얻는다. 앞의 두 계산을 이으면 $\oint_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA$이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A companion formula records the <em>normal</em> component of $\mathbf F$ instead of the tangential one. Suppose $C$ is traced by the vector equation $\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j$ for $a\le t\le b$. Its unit tangent vector was found in §13.2:</p>
+        <div class="math-display">$$\mathbf T(t)=\frac{x'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf i+\frac{y'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf j.$$</div>
+        <p>Exchanging the two entries and reversing one sign turns $\mathbf T$ into a unit vector perpendicular to it, and the choice of sign that points away from the region gives the <strong>outward unit normal vector</strong>:</p>
+        <div class="math-display">$$\mathbf n(t)=\frac{y'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf i-\frac{x'(t)}{\lvert\mathbf r'(t)\rvert}\,\mathbf j.$$</div>
+        <div class="formal-box">
+          <p><strong>Equation (13) &mdash; Green's Theorem in divergence form.</strong> Under the hypotheses of Green's Theorem, with $\mathbf n$ the outward unit normal along $C$ and $\mathbf F=P\,\mathbf i+Q\,\mathbf j$,</p>
+          <div class="math-display">$$\oint_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA.$$</div>
+        </div>
+        <p>So this version equates the integral along $C$ of the component of $\mathbf F$ normal to the curve with the double integral of $\operatorname{div}\mathbf F$ over the region that $C$ encloses. It is the plane ancestor of the Divergence Theorem of §16.9, just as Equation (12) is the plane ancestor of Stokes' Theorem.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="The unit tangent T and the outward unit normal n at a point of a closed curve C bounding a region D" style="max-width:360px;width:100%;height:auto">
+            <line x1="40" y1="215" x2="342" y2="215" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="348,215 338,211 338,219" fill="var(--grey800)"/>
+            <line x1="40" y1="228" x2="40" y2="24" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="40,16 36,27 44,27" fill="var(--grey800)"/>
+            <text x="345" y="232" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="28" y="24" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="27" y="230" font-size="11" fill="var(--grey500)">0</text>
+            <path d="M 90,120 C 90,160 105,176 150,185 C 200,195 260,175 268,135 C 275,100 250,75 200,60 C 150,45 90,60 90,120 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.8"/>
+            <polygon points="211,183 203.1,189.6 200.9,180.8" fill="var(--g600)"/>
+            <text x="163" y="126" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="146" y="203" font-size="12" font-style="italic" fill="var(--g700)">C</text>
+            <line x1="40" y1="215" x2="268" y2="135" stroke="var(--grey500)" stroke-width="1.1"/>
+            <polygon points="268,135 259.7,141.6 257.4,135.0" fill="var(--grey500)"/>
+            <text x="140" y="163" font-size="11" font-style="italic" fill="var(--grey600)">r(t)</text>
+            <line x1="268" y1="135" x2="277" y2="91" stroke="var(--orange)" stroke-width="1.8"/>
+            <polygon points="277,91 278.6,100.5 271.8,99.1" fill="var(--orange)"/>
+            <text x="282" y="88" font-size="11.5" font-style="italic" fill="var(--orange)">T(t)</text>
+            <line x1="268" y1="135" x2="312" y2="144" stroke="var(--purple)" stroke-width="1.8"/>
+            <polygon points="312,144 302.5,145.6 303.9,138.8" fill="var(--purple)"/>
+            <text x="316" y="152" font-size="11.5" font-style="italic" fill="var(--purple)">n(t)</text>
+            <circle cx="268" cy="135" r="3.2" fill="var(--grey900)"/>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> First check that $\mathbf n(t)=\dfrac{y'(t)}{|\mathbf r'(t)|}\,\mathbf i-\dfrac{x'(t)}{|\mathbf r'(t)|}\,\mathbf j$ really is an outward unit normal. Since $\mathbf n\cdot\mathbf T=\dfrac{x'y'-y'x'}{|\mathbf r'|^{2}}=0$, $\mathbf n$ is perpendicular to $\mathbf T$, and $|\mathbf n|=\dfrac{\sqrt{(y')^{2}+(-x')^{2}}}{|\mathbf r'|}=1$, so it is a unit vector. As for direction, the map $\langle x',y'\rangle\mapsto\langle y',-x'\rangle$ is rotation through $90^\circ$ clockwise, so $\mathbf n$ is $\mathbf T$ turned clockwise &mdash; the vector pointing to the <em>right</em> of the direction of travel. When $C$ carries the positive orientation, the region $D$ always lies to the left of that direction (the convention of §16.4), and a vector pointing right therefore points out of $D$. The counterclockwise unit circle $\mathbf r(t)=\langle\cos t,\sin t\rangle$ is the model case: $\mathbf T(t)=\langle-\sin t,\cos t\rangle$, and the formula gives $\mathbf n(t)=\langle\cos t,\sin t\rangle$, which points away from the origin, that is, outward.</p>
+        <p>Now Equation 16.2.3, which converts an arc-length line integral into an integral over the parameter $t$, gives</p>
+        <div class="math-display">$$\oint_C\mathbf F\cdot\mathbf n\,ds=\int_a^b(\mathbf F\cdot\mathbf n)(t)\,|\mathbf r'(t)|\,dt=\int_a^b\left(P\,\frac{y'}{|\mathbf r'|}-Q\,\frac{x'}{|\mathbf r'|}\right)|\mathbf r'|\,dt=\int_a^b\bigl(P\,y'-Q\,x'\bigr)\,dt,$$</div>
+        <p>and the last integral is exactly $\displaystyle\oint_C P\,dy-Q\,dx$. Reading this as $\oint_C(-Q)\,dx+P\,dy$, the coefficient of $dx$ is $-Q$ and the coefficient of $dy$ is $P$, so Green's Theorem applied to that pair gives</p>
+        <div class="math-display">$$\oint_C P\,dy-Q\,dx=\iint_D\left(\frac{\partial P}{\partial x}-\frac{\partial(-Q)}{\partial y}\right)dA=\iint_D\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}\right)dA=\iint_D\operatorname{div}\mathbf F\,dA.$$</div>
+        <p>Combining the two computations yields $\oint_C\mathbf F\cdot\mathbf n\,ds=\iint_D\operatorname{div}\mathbf F(x,y)\,dA$.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-5-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">벡터장의 회전 구하기 <em>Computing a Curl</em><span class="src-ref">Example 1 · p.1200</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ 에 대하여 회전 $\operatorname{curl}\mathbf F$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\mathbf F=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$이므로 성분함수는 $P=xz,\ Q=xyz,\ R=-y^{2}$이다. 정의 (1)의 세 성분을 하나씩 계산한다.</p>
+        <div class="math-display">$$\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}=-2y-xy=-y(x+2),$$</div>
+        <div class="math-display">$$\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}=x-0=x,$$</div>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=yz-0=yz.$$</div>
+        <p>따라서 $\operatorname{curl}\mathbf F=-y(x+2)\,\mathbf i+x\,\mathbf j+yz\,\mathbf k$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine $\operatorname{curl}\mathbf F$ for the field $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Here $\mathbf F=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$, so the component functions are $P=xz$, $Q=xyz$, $R=-y^{2}$. Compute the three entries of the defining formula (1) one at a time.</p>
+        <div class="math-display">$$\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}=-2y-xy=-y(x+2),$$</div>
+        <div class="math-display">$$\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}=x-0=x,$$</div>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=yz-0=yz.$$</div>
+        <p>Hence $\operatorname{curl}\mathbf F=-y(x+2)\,\mathbf i+x\,\mathbf j+yz\,\mathbf k$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-5-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">보존적이 아님을 보이기 <em>Ruling Out Conservativeness</em><span class="src-ref">Example 2 · p.1201</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예제 1에서 구한 회전을 이용하여, 벡터장 $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ 가 보존적 벡터장이 아님을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 예제 1에서 $\operatorname{curl}\mathbf F=-y(x+2)\,\mathbf i+x\,\mathbf j+yz\,\mathbf k$를 얻었다. 이를테면 점 $(1,1,1)$에서는 $\operatorname{curl}\mathbf F=-3\,\mathbf i+\mathbf j+\mathbf k\neq\mathbf 0$이므로, $\operatorname{curl}\mathbf F$는 정의역 전체에서 항등적으로 $\mathbf 0$이 아니다. 정리 3(의 대우)에 따르면 $\mathbf F$가 보존적이면 $\operatorname{curl}\mathbf F=\mathbf 0$이어야 하는데 이것이 성립하지 않으므로, $\mathbf F$는 보존적 벡터장이 아니다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using the curl found in Example 1, show that the field $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ fails to be conservative.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Example 1 found $\operatorname{curl}\mathbf F=-y(x+2)\,\mathbf i+x\,\mathbf j+yz\,\mathbf k$. At the point $(1,1,1)$, for instance, this equals $-3\,\mathbf i+\mathbf j+\mathbf k\neq\mathbf 0$, so $\operatorname{curl}\mathbf F$ is not identically $\mathbf 0$ on the domain. By (the contrapositive of) Theorem 3, a conservative field must satisfy $\operatorname{curl}\mathbf F=\mathbf 0$ everywhere; since that fails here, $\mathbf F$ cannot be conservative.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-5-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">보존장 확인과 퍼텐셜 함수 <em>A Conservative Field and Its Potential</em><span class="src-ref">Example 3 · p.1201&ndash;1202</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y,z)=y^{2}z^{3}\,\mathbf i+2xyz^{3}\,\mathbf j+3xy^{2}z^{2}\,\mathbf k$ 에 대하여 다음에 답하라.</p>
+        <p><strong>(a)</strong> $\mathbf F$가 보존적 벡터장임을 보여라.</p>
+        <p><strong>(b)</strong> $\nabla f=\mathbf F$를 만족하는 함수 $f$를 하나 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $\mathbf F=y^{2}z^{3}\,\mathbf i+2xyz^{3}\,\mathbf j+3xy^{2}z^{2}\,\mathbf k$의 성분함수는 $P=y^{2}z^{3}$, $Q=2xyz^{3}$, $R=3xy^{2}z^{2}$이다. 정의 (1)의 세 성분을 계산하면</p>
+        <div class="math-display">$$\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}=6xyz^{2}-6xyz^{2}=0,$$</div>
+        <div class="math-display">$$\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}=3y^{2}z^{2}-3y^{2}z^{2}=0,$$</div>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=2yz^{3}-2yz^{3}=0$$</div>
+        <p>이므로 $\operatorname{curl}\mathbf F=\mathbf 0$이다. $\mathbf F$의 성분함수는 $\mathbb R^3$ 전체에서 정의되고 편도함수도 모두 연속이므로 정리 4의 가정이 만족되고, 따라서 $\mathbf F$는 보존적이다.</p>
+        <p><strong>(b)</strong> $\nabla f=\mathbf F$인 $f$를 §16.3의 편적분법으로 구성한다. $f_x=y^{2}z^{3}$를 $x$에 관해 적분하면 $f(x,y,z)=xy^{2}z^{3}+g(y,z)$인데, 여기서 적분상수는 $y,z$만의 함수 $g(y,z)$일 수 있다. 이 $f$를 $y$로 미분하면 $f_y=2xyz^{3}+g_y(y,z)$인데 이것이 $Q=2xyz^{3}$과 같아야 하므로 $g_y=0$, 즉 $g=h(z)$이다. 이어서 $f_z=3xy^{2}z^{2}+h'(z)$가 $R=3xy^{2}z^{2}$과 같아야 하므로 $h'(z)=0$, 즉 $h$는 상수이다. 따라서</p>
+        <div class="math-display">$$f(x,y,z)=xy^{2}z^{3}+K$$</div>
+        <p>가 (임의의 상수 $K$에 대해) 조건을 만족하는 함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the field $\mathbf F(x,y,z)=y^{2}z^{3}\,\mathbf i+2xyz^{3}\,\mathbf j+3xy^{2}z^{2}\,\mathbf k$.</p>
+        <p><strong>(a)</strong> Verify that this field is conservative.</p>
+        <p><strong>(b)</strong> Produce a potential function for it, that is, a function $f$ satisfying $\nabla f=\mathbf F$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> The field $\mathbf F=y^{2}z^{3}\,\mathbf i+2xyz^{3}\,\mathbf j+3xy^{2}z^{2}\,\mathbf k$ has components $P=y^{2}z^{3}$, $Q=2xyz^{3}$, $R=3xy^{2}z^{2}$. Computing the three entries of the defining formula (1),</p>
+        <div class="math-display">$$\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}=6xyz^{2}-6xyz^{2}=0,$$</div>
+        <div class="math-display">$$\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}=3y^{2}z^{2}-3y^{2}z^{2}=0,$$</div>
+        <div class="math-display">$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=2yz^{3}-2yz^{3}=0,$$</div>
+        <p>so $\operatorname{curl}\mathbf F=\mathbf 0$. The components of $\mathbf F$ are defined on all of $\mathbb R^3$ with continuous partial derivatives, so the hypotheses of Theorem 4 hold, and $\mathbf F$ is conservative.</p>
+        <p><strong>(b)</strong> Build an $f$ with $\nabla f=\mathbf F$ by the partial-integration method of §16.3. Integrating $f_x=y^{2}z^{3}$ with respect to $x$ gives $f(x,y,z)=xy^{2}z^{3}+g(y,z)$, the constant of integration now being an arbitrary function $g(y,z)$ of the remaining variables. Differentiating in $y$ gives $f_y=2xyz^{3}+g_y(y,z)$, which must equal $Q=2xyz^{3}$, forcing $g_y=0$, i.e., $g=h(z)$. Then $f_z=3xy^{2}z^{2}+h'(z)$ must equal $R=3xy^{2}z^{2}$, forcing $h'(z)=0$, i.e., $h$ is constant. Hence</p>
+        <div class="math-display">$$f(x,y,z)=xy^{2}z^{3}+K$$</div>
+        <p>works, for any constant $K$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-5-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">벡터장의 발산 구하기 <em>Computing a Divergence</em><span class="src-ref">Example 4 · p.1203</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예제 1과 같은 벡터장 $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ 에 대하여 발산 $\operatorname{div}\mathbf F$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 1과 같은 $\mathbf F=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$에서 $P=xz,\ Q=xyz,\ R=-y^{2}$이다. 정의 (9)에 따라 세 편도함수를 구하면 $\dfrac{\partial P}{\partial x}=z$, $\dfrac{\partial Q}{\partial y}=xz$, $\dfrac{\partial R}{\partial z}=0$이므로</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}=z+xz+0=z+xz.$$</div>
+        <p>따라서 $\operatorname{div}\mathbf F=z+xz$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine $\operatorname{div}\mathbf F$ for the field of Example 1, namely $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> For the same field $\mathbf F=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ as in Example 1, $P=xz$, $Q=xyz$, $R=-y^{2}$. By the defining formula (9), $\dfrac{\partial P}{\partial x}=z$, $\dfrac{\partial Q}{\partial y}=xz$, and $\dfrac{\partial R}{\partial z}=0$, so</p>
+        <div class="math-display">$$\operatorname{div}\mathbf F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}=z+xz+0=z+xz.$$</div>
+        <p>Hence $\operatorname{div}\mathbf F=z+xz$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-5-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">회전으로 나타낼 수 없는 장 <em>A Field That Is Not a Curl</em><span class="src-ref">Example 5 · p.1204</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터장 $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$ 에 대하여, 어떤 벡터장 $\mathbf G$를 가져와도 $\mathbf F=\operatorname{curl}\mathbf G$가 될 수 없음을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 예제 4에서 $\operatorname{div}\mathbf F=z+xz$를 구했다. 이를테면 $(0,0,1)$에서는 $\operatorname{div}\mathbf F=1\neq0$이므로 $\operatorname{div}\mathbf F$는 항등적으로 $0$이 아니다. 만약 어떤 벡터장 $\mathbf G$에 대해 $\mathbf F=\operatorname{curl}\mathbf G$라면, 정리 11에 의해 $\operatorname{div}\mathbf F=\operatorname{div}\operatorname{curl}\mathbf G=0$이어야 하는데, 이는 방금 확인한 $\operatorname{div}\mathbf F\neq0$과 모순이다. 따라서 그런 $\mathbf G$는 존재하지 않으며, $\mathbf F$는 어떤 벡터장의 회전으로도 쓸 수 없다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Show that no vector field $\mathbf G$ can satisfy $\operatorname{curl}\mathbf G=\mathbf F$ when $\mathbf F(x,y,z)=xz\,\mathbf i+xyz\,\mathbf j-y^{2}\,\mathbf k$; that is, this $\mathbf F$ is not the curl of any vector field.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Example 4 gave $\operatorname{div}\mathbf F=z+xz$. At $(0,0,1)$, for instance, this equals $1\neq0$, so $\operatorname{div}\mathbf F$ is not identically $0$. If $\mathbf F=\operatorname{curl}\mathbf G$ for some vector field $\mathbf G$, then Theorem 11 would force $\operatorname{div}\mathbf F=\operatorname{div}\operatorname{curl}\mathbf G=0$, contradicting $\operatorname{div}\mathbf F\neq0$ just established. So no such $\mathbf G$ exists, and $\mathbf F$ cannot be written as the curl of any vector field.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-5-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch14.html">단원 14</a> + <a href="../calc2/ch12.html">단원 12</a></p>
+        <p><strong>단원 경계 주의</strong> &mdash; 강의 노트에서는 3차원 $\operatorname{curl}\mathbf F$·$\operatorname{div}\mathbf F$가 단원 12가 아니라 <strong>단원 14</strong>(스토크스 정리·발산정리 단원)에 있다. 11주차에 이 절을 배우면서 단원 12만 보면 3차원 회전·발산이 나오지 않는다.</p>
+        <ul>
+          <li>벡터장의 회전 &mdash; <a href="../calc2/ch14.html#ex01">ch14 ex01</a> (완전 대응: 예제 1과 같은 유형)</li>
+          <li>회전이 $\mathbf 0$인 벡터장 &mdash; <a href="../calc2/ch14.html#yu01">ch14 yu01</a> (완전 대응: 예제 3(a)와 같은 유형)</li>
+          <li>벡터장의 발산 &mdash; <a href="../calc2/ch14.html#ex03">ch14 ex03</a> (완전 대응: 예제 4와 같은 유형)</li>
+          <li>발산·회전의 연산 법칙 &mdash; <a href="../calc2/ch14.html#yu03">ch14 yu03</a> (인접: 정리 3·11과 같은 계열의 항등식)</li>
+          <li>회전으로 나타낼 수 없는 장 &mdash; <a href="../calc2/ch14.html#pr01">ch14 pr01</a> (완전 대응: 예제 5와 같은 유형)</li>
+          <li>발산·회전이 모두 $0$인 장 &mdash; <a href="../calc2/ch14.html#pr02">ch14 pr02</a> (인접)</li>
+          <li>조화함수의 성질 &mdash; <a href="../calc2/ch14.html#pr09">ch14 pr09</a> (인접: 라플라스 연산자 $\nabla^{2}$)</li>
+          <li>그린 항등식 &mdash; <a href="../calc2/ch14.html#pr11">ch14 pr11</a> (인접: 강의 노트는 3차원판, 이 절의 연습문제 35&ndash;38은 2차원판)</li>
+          <li>그린 정리의 두 형태 &mdash; <a href="../calc2/ch12.html#ex05">ch12 ex05</a> (식 (12)·(13)에 대응: 접선 형식과 법선 형식)</li>
+          <li>평면에서의 2차원 회전량·발산량 &mdash; <a href="../calc2/ch12.html#ex04">ch12 ex04</a>, <a href="../calc2/ch12.html#yu04">ch12 yu04</a> (Thomas 교재 고유의 2차원 개념이라 이 절에 대응 문단은 없고, 식 (12)·(13)의 성분 표현에 해당)</li>
+          <li>회전의 물리적 해석(물레바퀴·오른손 법칙), 비회전·비압축의 정의, 라플라스 방정식 자체 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 공간 벡터장을 $\mathbf F=M\,\mathbf i+N\,\mathbf j+P\,\mathbf k$로 쓰므로 $P$의 뜻이 다르다. 이 절에서 $P$는 $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$의 첫 성분이다.</p>
+        <p><strong>(b) 공통과제 (§16.5, 3차)</strong></p>
+        <p>제출 문항: 8, 20, 21, 28 &nbsp;/&nbsp; 학습 참고: 1&ndash;8, 15&ndash;20, 21&ndash;23, 25&ndash;30</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-4.html">§16.4 그린 정리</a> &nbsp;/&nbsp; 다음: <a href="s16-6.html">§16.6 매개곡면과 그 넓이</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch14.html">Unit 14</a> together with <a href="../calc2/ch12.html">Unit 12</a></p>
+        <p><strong>A mismatch of unit boundaries</strong> &mdash; in the lecture notes the three-dimensional $\operatorname{curl}\mathbf F$ and $\operatorname{div}\mathbf F$ are placed in <strong>Unit 14</strong>, the unit on Stokes' Theorem and the Divergence Theorem, rather than in Unit 12. A reader who follows only Unit 12 during week 11 will not meet them.</p>
+        <ul>
+          <li>The curl of a vector field &mdash; <a href="../calc2/ch14.html#ex01">ch14 ex01</a> (full match; same type as Example 1)</li>
+          <li>A field whose curl is $\mathbf 0$ &mdash; <a href="../calc2/ch14.html#yu01">ch14 yu01</a> (full match; same type as Example 3(a))</li>
+          <li>The divergence of a vector field &mdash; <a href="../calc2/ch14.html#ex03">ch14 ex03</a> (full match; same type as Example 4)</li>
+          <li>Algebraic rules for curl and divergence &mdash; <a href="../calc2/ch14.html#yu03">ch14 yu03</a> (adjacent; identities of the same family as Theorems 3 and 11)</li>
+          <li>A field that is not the curl of anything &mdash; <a href="../calc2/ch14.html#pr01">ch14 pr01</a> (full match; same type as Example 5)</li>
+          <li>A field with vanishing curl and divergence &mdash; <a href="../calc2/ch14.html#pr02">ch14 pr02</a> (adjacent)</li>
+          <li>Properties of harmonic functions &mdash; <a href="../calc2/ch14.html#pr09">ch14 pr09</a> (adjacent; the Laplace operator $\nabla^{2}$)</li>
+          <li>Green's identities &mdash; <a href="../calc2/ch14.html#pr11">ch14 pr11</a> (adjacent; the lecture notes give the space version, while Exercises 35&ndash;38 of this section give the plane one)</li>
+          <li>The two forms of Green's Theorem &mdash; <a href="../calc2/ch12.html#ex05">ch12 ex05</a> (matches Equations (12) and (13): the tangential and the normal form)</li>
+          <li>Plane measures of turning and spreading &mdash; <a href="../calc2/ch12.html#ex04">ch12 ex04</a>, <a href="../calc2/ch12.html#yu04">ch12 yu04</a> (a notion peculiar to the Thomas text, with no paragraph of its own here; it amounts to the components appearing in Equations (12) and (13))</li>
+          <li>The paddle-wheel reading of the curl, the terms irrotational and incompressible, and Laplace's equation itself &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes write a space field as $\mathbf F=M\,\mathbf i+N\,\mathbf j+P\,\mathbf k$, so the letter $P$ carries a different meaning there. In this section $P$ is the first component of $\mathbf F=P\,\mathbf i+Q\,\mathbf j+R\,\mathbf k$.</p>
+        <p><strong>(b) Assignment (§16.5, third set)</strong></p>
+        <p>Problems to submit: 8, 20, 21, 28 &nbsp;/&nbsp; Recommended practice: 1&ndash;8, 15&ndash;20, 21&ndash;23, 25&ndash;30</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-4.html">§16.4 Green's Theorem</a> &nbsp;/&nbsp; Next: <a href="s16-6.html">§16.6 Parametric Surfaces and Their Areas</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

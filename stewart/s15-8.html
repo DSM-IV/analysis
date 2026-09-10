@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§15.8 구면좌표에서의 삼중적분 (Triple Integrals in Spherical Coordinates) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §15.8 구면좌표에서의 삼중적분 — 구면좌표 (ρ, θ, φ)의 정의와 좌표면(구·반평면·반원뿔), 변환식 (1)(2), 구면 쐐기와 부피소 dV = ρ² sin φ dρ dθ dφ, 삼중적분 공식 (3)을 한국어·영어 대조로 정리하고 예제 4개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 15.8, 구면좌표에서의 삼중적분, triple integral in spherical coordinates, 구면좌표, spherical coordinates, rho theta phi, 구면 쐐기, spherical wedge, 부피소, volume element, rho squared sin phi, 좌표면, 반원뿔, half-cone, 단위공, unit ball, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s15-8.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§15.8 구면좌표에서의 삼중적분 (Triple Integrals in Spherical Coordinates) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="구면좌표 (ρ, θ, φ)의 정의와 좌표면, 직교좌표와의 변환식 (1)(2), 구면 쐐기에서 나오는 부피소 dV = ρ² sin φ dρ dθ dφ와 삼중적분 공식 (3)까지 §15.8 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s15-8.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§15.8 구면좌표에서의 삼중적분 (Triple Integrals in Spherical Coordinates) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §15.8 구면좌표에서의 삼중적분 — 구면좌표의 정의와 좌표면, 변환식 (1)(2), 구면 쐐기와 부피소, 삼중적분 공식 (3)을 한국어·영어 대조로 정리하고 본문 예제 4개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s15-8.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s15-8.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s15-1.html">15.1</a>
+      <a href="s15-2.html">15.2</a>
+      <a href="s15-3.html">15.3</a>
+      <a href="s15-4.html">15.4</a>
+      <a href="s15-5.html">15.5</a>
+      <a href="s15-6.html">15.6</a>
+      <a href="s15-7.html">15.7</a>
+      <a href="s15-8.html" class="active">15.8</a>
+      <a href="s15-9.html">15.9</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §15.8 · 7주차</p>
+  <h1>§15.8 구면좌표에서의 삼중적분<span>Triple Integrals in Spherical Coordinates</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c15-8-1"><span class="toc-num">DEF 1</span> 구면좌표 <em>Spherical Coordinates</em></a></li>
+    <li><a href="#c15-8-2"><span class="toc-num">REM 2</span> 좌표면 <em>Coordinate Surfaces</em></a></li>
+    <li><a href="#c15-8-3"><span class="toc-num">THM 3</span> 구면좌표와 직교좌표의 변환 <em>Conversion Formulas</em></a></li>
+    <li><a href="#c15-8-4"><span class="toc-num">REM 4</span> 표기에 대한 경고 <em>Notation Warning</em></a></li>
+    <li><a href="#c15-8-5"><span class="toc-num">DEF 5</span> 구면 쐐기 <em>Spherical Wedge</em></a></li>
+    <li><a href="#c15-8-6"><span class="toc-num">NOTE</span> 구면 쐐기의 부피와 리만 합 <em>Volume of a Spherical Wedge and the Riemann Sum</em></a></li>
+    <li><a href="#c15-8-7"><span class="toc-num">THM 7</span> 구면좌표에서의 삼중적분 <em>Triple Integration in Spherical Coordinates</em></a></li>
+    <li><a href="#c15-8-8"><span class="toc-num">REM 8</span> 부피소와 일반화, 쓰는 시점 <em>Volume Element, Extension, and When to Use It</em></a></li>
+    <li><a href="#ex15-8-1"><span class="toc-num">EXAM 1</span> 구면좌표에서 직교좌표로 <em>From Spherical to Rectangular Coordinates</em></a></li>
+    <li><a href="#ex15-8-2"><span class="toc-num">EXAM 2</span> 직교좌표에서 구면좌표로 <em>From Rectangular to Spherical Coordinates</em></a></li>
+    <li><a href="#ex15-8-3"><span class="toc-num">EXAM 3</span> 단위공 위의 지수함수 삼중적분 <em>An Exponential Integral over the Unit Ball</em></a></li>
+    <li><a href="#ex15-8-4"><span class="toc-num">EXAM 4</span> 원뿔 위·구 안에 놓인 입체의 부피 <em>Volume of a Solid above a Cone and inside a Sphere</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : Spherical coordinates (Figure 1) -->
+<div class="card def-card" id="c15-8-1">
+  <div class="card-head">
+    <span class="def-num">DEF 1</span>
+    <span class="def-title">구면좌표 <em>Spherical Coordinates</em><span class="src-ref">Figure 1 · p.1140</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>구면좌표.</strong> 공간에 있는 점 $P$의 위치는 세 수의 순서쌍 $(\rho,\theta,\phi)$로 정해지며, 각각은 다음을 뜻한다.</p>
+          <p><strong>(a)</strong> $\rho=|OP|$는 $P$가 원점에서 떨어진 거리이고;</p>
+          <p><strong>(b)</strong> $\theta$는 원기둥좌표에서와 똑같은 각으로, $xy$평면에서 잰다;</p>
+          <p><strong>(c)</strong> $\phi$는 선분 $OP$가 양의 $z$축과 이루는 각이다.</p>
+          <p>이 좌표들은 $\rho\ge 0$, $0\le\phi\le\pi$의 범위로 제한된다.</p>
+        </div>
+        <p>$\phi$는 양의 $z$축에서 재고 $\pi$를 넘지 않으므로, $\phi$가 북극에서 남극까지 움직이는 동안 $\theta$가 한 바퀴 돌면 공간의 모든 방향이 빠짐없이 나타난다(다만 $z$축 방향인 $\phi=0$과 $\phi=\pi$에서는 $\theta$가 무엇이든 같은 방향이 된다). 이 좌표계는 한 점에 대해 대칭인 문제에서 진가를 발휘한다. 그 점을 원점으로 잡으면 구나 원뿔로 둘러싸인 영역 위의 삼중적분을 세우기가 훨씬 쉬워진다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="구면좌표 (rho, theta, phi)로 나타낸 점 P: rho는 원점까지의 거리, theta는 xy-평면에서 잰 각, phi는 양의 z축에서 잰 각" style="max-width:360px;width:100%;height:auto">
+            <line x1="110" y1="228" x2="110" y2="40" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="110" y1="205" x2="320" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="110" y1="205" x2="28" y2="280" stroke="var(--grey700)" stroke-width="1.2"/>
+            <text x="99" y="38" font-size="11" font-style="italic" fill="var(--grey700)">z</text>
+            <text x="326" y="209" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="18" y="290" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <line x1="186" y1="251" x2="236" y2="205" stroke="var(--grey300)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <line x1="186" y1="251" x2="60" y2="251" stroke="var(--grey300)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <line x1="110" y1="205" x2="186" y2="251" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="5 3"/>
+            <line x1="186" y1="251" x2="186" y2="118" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="5 3"/>
+            <line x1="110" y1="205" x2="186" y2="118" stroke="var(--g600)" stroke-width="1.7"/>
+            <path d="M 84.9,228.0 A 34 34 0 0 0 139.0,222.7" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <path d="M 110,165 A 40 40 0 0 1 136.3,174.8" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <circle cx="110" cy="205" r="2.8" fill="var(--grey800)"/>
+            <circle cx="186" cy="118" r="3.2" fill="var(--g700)"/>
+            <circle cx="186" cy="251" r="2.4" fill="var(--grey500)"/>
+            <text x="93" y="200" font-size="11" font-style="italic" fill="var(--grey700)">O</text>
+            <text x="194" y="112" font-size="11.5" font-style="italic" fill="var(--g800)">P(&#961;, &#952;, &#966;)</text>
+            <text x="192" y="264" font-size="10" font-style="italic" fill="var(--grey500)">P&#8242;</text>
+            <text x="128" y="152" font-size="12" font-style="italic" fill="var(--g700)">&#961;</text>
+            <text x="115" y="180" font-size="11.5" font-style="italic" fill="var(--orange)">&#966;</text>
+            <text x="108" y="252" font-size="11.5" font-style="italic" fill="var(--orange)">&#952;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Spherical Coordinates.</strong> A point $P$ in space is located by the triple $(\rho,\theta,\phi)$, in which</p>
+          <p><strong>(a)</strong> $\rho=|OP|$ is how far $P$ lies from the origin;</p>
+          <p><strong>(b)</strong> $\theta$ is the very same angle used in cylindrical coordinates, measured in the $xy$-plane;</p>
+          <p><strong>(c)</strong> $\phi$ is the angle that the segment $OP$ makes with the positive $z$-axis.</p>
+          <p>These coordinates are restricted by $\rho\ge 0$ and $0\le\phi\le\pi$.</p>
+        </div>
+        <p>Because $\phi$ is measured from the positive $z$-axis and never exceeds $\pi$, letting $\phi$ run from the north pole to the south pole while $\theta$ runs once around reaches every direction in space (only the two axial directions $\phi=0$ and $\phi=\pi$ come out the same for every $\theta$). The system earns its keep on problems with symmetry about a single point: place the origin there, and a triple integral over a solid whose boundary is made of spheres or cones becomes far easier to set up.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 300" role="img" aria-label="The point P in spherical coordinates: rho is the distance from the origin, theta the angle in the xy-plane, phi the angle from the positive z-axis" style="max-width:360px;width:100%;height:auto">
+            <line x1="110" y1="228" x2="110" y2="40" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="110" y1="205" x2="320" y2="205" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="110" y1="205" x2="28" y2="280" stroke="var(--grey700)" stroke-width="1.2"/>
+            <text x="99" y="38" font-size="11" font-style="italic" fill="var(--grey700)">z</text>
+            <text x="326" y="209" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="18" y="290" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <line x1="186" y1="251" x2="236" y2="205" stroke="var(--grey300)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <line x1="186" y1="251" x2="60" y2="251" stroke="var(--grey300)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <line x1="110" y1="205" x2="186" y2="251" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="5 3"/>
+            <line x1="186" y1="251" x2="186" y2="118" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="5 3"/>
+            <line x1="110" y1="205" x2="186" y2="118" stroke="var(--g600)" stroke-width="1.7"/>
+            <path d="M 84.9,228.0 A 34 34 0 0 0 139.0,222.7" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <path d="M 110,165 A 40 40 0 0 1 136.3,174.8" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <circle cx="110" cy="205" r="2.8" fill="var(--grey800)"/>
+            <circle cx="186" cy="118" r="3.2" fill="var(--g700)"/>
+            <circle cx="186" cy="251" r="2.4" fill="var(--grey500)"/>
+            <text x="93" y="200" font-size="11" font-style="italic" fill="var(--grey700)">O</text>
+            <text x="194" y="112" font-size="11.5" font-style="italic" fill="var(--g800)">P(&#961;, &#952;, &#966;)</text>
+            <text x="192" y="264" font-size="10" font-style="italic" fill="var(--grey500)">P&#8242;</text>
+            <text x="128" y="152" font-size="12" font-style="italic" fill="var(--g700)">&#961;</text>
+            <text x="115" y="180" font-size="11.5" font-style="italic" fill="var(--orange)">&#966;</text>
+            <text x="108" y="252" font-size="11.5" font-style="italic" fill="var(--orange)">&#952;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Coordinate surfaces (Figures 2-4) -->
+<div class="card rem-card" id="c15-8-2">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">좌표면 <em>Coordinate Surfaces</em><span class="src-ref">Figures 2&ndash;4 · p.1140</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 좌표 중 하나를 상수 $c$로 고정하면 곡면이 하나 남는데, 셋 다 낯익은 모양이다. $\rho=c$로 고정하면 원점을 중심으로 하는 반지름 $c$의 구가 되며, 바로 이것이 이 좌표계의 이름이 유래한 곳이다. $\theta=c$로 고정하면 $z$축에 경첩처럼 붙은 수직 반평면이 되고, $\phi=c$로 고정하면 $z$축을 축으로 하는 반원뿔이 된다 &mdash; $0\lt c\lt\pi/2$이면 위쪽으로 열리고 $\pi/2\lt c\lt\pi$이면 아래쪽으로 열린다. 따라서 경계가 구와 원뿔로 이루어진 입체는 구면좌표에서 상수들 사이의 부등식만으로 기술된다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 156" role="img" aria-label="세 좌표면: rho = c 는 원, theta = c 는 수직 반평면, phi = c 는 반원뿔" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="116" x2="60" y2="34" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="60" y1="88" x2="112" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="60" y1="88" x2="26" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="52" y="32" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="116" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="18" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <circle cx="60" cy="88" r="27" fill="var(--g50)" fill-opacity="0.85" stroke="var(--g600)" stroke-width="1.3"/>
+            <ellipse cx="60" cy="88" rx="27" ry="9" fill="none" stroke="var(--g600)" stroke-width="0.9"/>
+            <ellipse cx="60" cy="88" rx="9" ry="27" fill="none" stroke="var(--g500)" stroke-width="0.8"/>
+            <text x="60" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#961; = c</text>
+            <line x1="180" y1="116" x2="180" y2="34" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="180" y1="88" x2="232" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="180" y1="88" x2="146" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="172" y="32" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="236" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="138" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 180,44 L 218,56 L 218,112 L 180,100 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.2"/>
+            <text x="180" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#952; = c</text>
+            <line x1="300" y1="116" x2="300" y2="28" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="300" y1="88" x2="344" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="300" y1="88" x2="266" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="292" y="26" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="348" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="258" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 300,88 L 272,46 A 28 8 0 0 0 328,46 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.2"/>
+            <ellipse cx="300" cy="46" rx="28" ry="8" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.1"/>
+            <path d="M 300,68 A 20 20 0 0 1 311.1,71.4" fill="none" stroke="var(--orange)" stroke-width="1"/>
+            <text x="304" y="64" font-size="9.5" font-style="italic" fill="var(--orange)">c</text>
+            <text x="300" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#966; = c</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Freezing one coordinate at a value $c$ leaves a surface, and all three of them are familiar shapes. Setting $\rho=c$ gives the sphere of radius $c$ centered at the origin, which is exactly where the name of the system comes from. Setting $\theta=c$ gives a vertical half-plane hinged on the $z$-axis, and setting $\phi=c$ gives a half-cone whose axis is the $z$-axis &mdash; opening upward for $0\lt c\lt\pi/2$ and downward for $\pi/2\lt c\lt\pi$. Consequently a solid whose boundary is made of spheres and cones is described in spherical coordinates by nothing more than inequalities between constants.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 156" role="img" aria-label="The three coordinate surfaces: rho = c is a sphere, theta = c is a vertical half-plane, phi = c is a half-cone" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="116" x2="60" y2="34" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="60" y1="88" x2="112" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="60" y1="88" x2="26" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="52" y="32" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="116" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="18" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <circle cx="60" cy="88" r="27" fill="var(--g50)" fill-opacity="0.85" stroke="var(--g600)" stroke-width="1.3"/>
+            <ellipse cx="60" cy="88" rx="27" ry="9" fill="none" stroke="var(--g600)" stroke-width="0.9"/>
+            <ellipse cx="60" cy="88" rx="9" ry="27" fill="none" stroke="var(--g500)" stroke-width="0.8"/>
+            <text x="60" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#961; = c</text>
+            <line x1="180" y1="116" x2="180" y2="34" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="180" y1="88" x2="232" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="180" y1="88" x2="146" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="172" y="32" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="236" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="138" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 180,44 L 218,56 L 218,112 L 180,100 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.2"/>
+            <text x="180" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#952; = c</text>
+            <line x1="300" y1="116" x2="300" y2="28" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="300" y1="88" x2="344" y2="88" stroke="var(--grey600)" stroke-width="1"/>
+            <line x1="300" y1="88" x2="266" y2="106" stroke="var(--grey600)" stroke-width="1"/>
+            <text x="292" y="26" font-size="9" font-style="italic" fill="var(--grey500)">z</text>
+            <text x="348" y="92" font-size="9" font-style="italic" fill="var(--grey500)">y</text>
+            <text x="258" y="114" font-size="9" font-style="italic" fill="var(--grey500)">x</text>
+            <path d="M 300,88 L 272,46 A 28 8 0 0 0 328,46 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.2"/>
+            <ellipse cx="300" cy="46" rx="28" ry="8" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.1"/>
+            <path d="M 300,68 A 20 20 0 0 1 311.1,71.4" fill="none" stroke="var(--orange)" stroke-width="1"/>
+            <text x="304" y="64" font-size="9.5" font-style="italic" fill="var(--orange)">c</text>
+            <text x="300" y="140" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g800)">&#966; = c</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Conversion formulas (1) and (2) -->
+<div class="card thm-card" id="c15-8-3">
+  <div class="card-head">
+    <span class="thm-num">THM 3</span>
+    <span class="thm-title">구면좌표와 직교좌표의 변환 <em>Conversion Formulas</em><span class="src-ref">Eq. (1)(2) · Figure 5 · p.1140</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (1)과 (2) &mdash; 두 좌표계 사이를 오가는 변환식.</strong> 어떤 점의 구면좌표가 $(\rho,\theta,\phi)$이고 직교좌표가 $(x,y,z)$이면,</p>
+          <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta,\qquad z=\rho\cos\phi.\tag{1}$$</div>
+          <p>이고, 원점으로부터의 거리는 다음을 만족시킨다.</p>
+          <div class="math-display">$$\rho^2=x^2+y^2+z^2.\tag{2}$$</div>
+        </div>
+        <p>식 (1)은 구면좌표로 기술된 것을 $x,y,z$로 바꾸어 써야 할 때 쓰는 식이고, 식 (2)는 거리공식을 다시 쓴 것에 지나지 않으며 반대 방향 &mdash; 즉 직교좌표에서 구면좌표를 구하는 &mdash; 의 출발점이 된다. 이후 남은 두 각은 $\cos\phi=z/\rho$와 식 (1)로부터 구한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $P$에서 $z$축에 내린 수선의 발을 $Q$, $xy$평면에 내린 수선의 발을 $P'$이라 하자. 직각삼각형 $OPQ$는 $Q$에서 직각이고 빗변이 $OP=\rho$이며, $O$에서의 각이 바로 $\phi$의 정의이므로 $OQ=\rho\cos\phi$, $QP=\rho\sin\phi$이다. 그런데 $OQ$는 $P$의 $z$좌표이고 $QP$는 $P$에서 $z$축까지의 거리, 곧 원기둥좌표의 $r$이므로 $z=\rho\cos\phi$, $r=\rho\sin\phi$를 얻는다. 이 값은 직각삼각형 $OPP'$(빗변 $OP=\rho$, 직각은 $P'$, 다리는 $OP'=r$과 $PP'=|z|$)의 피타고라스 정리 $r^2+z^2=\rho^2$과도 들어맞는다 &mdash; 실제로 $\sin^2\phi+\cos^2\phi=1$이 정확히 그 등식이다. (그림은 $0\lt\phi\lt\pi/2$인 경우이다. $\phi\gt\pi/2$이면 $Q$가 원점 아래에 놓여 삼각형 $OPQ$의 $O$에서의 각이 $\pi-\phi$가 되므로 $OQ=-\rho\cos\phi$, 곧 $z=\rho\cos\phi\lt0$이 되어 부호까지 그대로 성립하며, $\phi=0,\pi/2,\pi$인 경우는 직접 확인된다.)</p>
+        <p>한편 $P'$은 $xy$평면 위의 점이고, $\theta$는 정의상 $OP'$이 양의 $x$축과 이루는 각이므로 원기둥좌표(또는 극좌표)에서와 똑같이 $x=r\cos\theta$, $y=r\sin\theta$이다. 여기에 $r=\rho\sin\phi$를 대입하면</p>
+        <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta$$</div>
+        <p>가 되고, 앞서 얻은 $z=\rho\cos\phi$와 합쳐 식 (1)이 완성된다. 마지막으로 식 (1)의 세 등식을 각각 제곱하여 더하면</p>
+        <div class="math-display">$$x^2+y^2+z^2=\rho^2\sin^2\phi\cos^2\theta+\rho^2\sin^2\phi\sin^2\theta+\rho^2\cos^2\phi=\rho^2\sin^2\phi(\cos^2\theta+\sin^2\theta)+\rho^2\cos^2\phi=\rho^2(\sin^2\phi+\cos^2\phi)=\rho^2$$</div>
+        <p>이므로 식 (2)를 얻는다. 이는 애초에 $\rho=|OP|$가 거리공식으로 정의되었다는 사실의 재확인이기도 하다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equations (1) and (2) &mdash; passing between the two coordinate systems.</strong> If a point has spherical coordinates $(\rho,\theta,\phi)$ and rectangular coordinates $(x,y,z)$, then</p>
+          <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta,\qquad z=\rho\cos\phi.\tag{1}$$</div>
+          <p>and the distance from the origin satisfies</p>
+          <div class="math-display">$$\rho^2=x^2+y^2+z^2.\tag{2}$$</div>
+        </div>
+        <p>Equations (1) are the ones to use when a spherical description has to be rewritten in $x$, $y$, $z$; equation (2), which is only the distance formula in disguise, is the starting point in the opposite direction, after which the remaining two angles come from $\cos\phi=z/\rho$ and from (1).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $Q$ be the foot of the perpendicular from $P$ to the $z$-axis, and let $P'$ be the foot of the perpendicular from $P$ to the $xy$-plane. In the right triangle $OPQ$, the right angle sits at $Q$, the hypotenuse is $OP=\rho$, and the angle at $O$ is precisely the angle $\phi$ used to define spherical coordinates; hence $OQ=\rho\cos\phi$ and $QP=\rho\sin\phi$. Since $OQ$ is the $z$-coordinate of $P$ and $QP$ is the distance from $P$ to the $z$-axis &mdash; that is, the cylindrical radius $r$ &mdash; this reads $z=\rho\cos\phi$ and $r=\rho\sin\phi$. These values also agree with the right triangle $OPP'$ (hypotenuse $OP=\rho$, right angle at $P'$, legs $OP'=r$ and $PP'=|z|$), whose Pythagorean identity $r^2+z^2=\rho^2$ is exactly the statement $\sin^2\phi+\cos^2\phi=1$. (The figure shows the case $0\lt\phi\lt\pi/2$. For $\phi\gt\pi/2$ the point $Q$ falls below the origin, the angle at $O$ in triangle $OPQ$ is $\pi-\phi$, and $OQ=-\rho\cos\phi$, so $z=\rho\cos\phi\lt0$ and the formulas hold with their signs intact; the cases $\phi=0,\pi/2,\pi$ are immediate.)</p>
+        <p>Meanwhile $P'$ lies in the $xy$-plane, and $\theta$ is by definition the angle that $OP'$ makes with the positive $x$-axis, so exactly as in cylindrical (or polar) coordinates, $x=r\cos\theta$ and $y=r\sin\theta$. Substituting $r=\rho\sin\phi$ turns these into</p>
+        <div class="math-display">$$x=\rho\sin\phi\cos\theta,\qquad y=\rho\sin\phi\sin\theta,$$</div>
+        <p>which together with $z=\rho\cos\phi$ constitute equations (1). Finally, squaring and adding the three equations in (1) gives</p>
+        <div class="math-display">$$x^2+y^2+z^2=\rho^2\sin^2\phi\cos^2\theta+\rho^2\sin^2\phi\sin^2\theta+\rho^2\cos^2\phi=\rho^2\sin^2\phi(\cos^2\theta+\sin^2\theta)+\rho^2\cos^2\phi=\rho^2(\sin^2\phi+\cos^2\phi)=\rho^2,$$</div>
+        <p>which is equation (2) &mdash; consistent with the fact that $\rho=|OP|$ was defined via the distance formula in the first place.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : WARNING box on notation -->
+<div class="card rem-card" id="c15-8-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">표기에 대한 경고 <em>Notation Warning</em><span class="src-ref">Warning box · p.1141</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구면좌표의 기호는 표준화되어 있지 않다. 대부분의 물리학 교재에서는 $\theta$와 $\phi$의 역할이 서로 바뀌어 있어서, 그 책들에서는 $\phi$가 $xy$평면에서 잰 각이고 $\theta$가 양의 $z$축에서 아래로 잰 각이다. 또한 이 책이 $\rho$로 쓰는 자리에 그 책들은 $r$을 쓴다. 다른 자료에서 공식을 가져다 쓸 때는 두 관례 가운데 어느 쪽을 따르고 있는지 먼저 확인해야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The symbols used for spherical coordinates are not standardized. In most physics texts the roles of $\theta$ and $\phi$ are interchanged, so that there $\phi$ is the angle in the $xy$-plane and $\theta$ is the angle measured down from the positive $z$-axis; those texts also write $r$ where this book writes $\rho$. Before borrowing a formula from another source, check which of the two conventions it follows.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Spherical wedge -->
+<div class="card def-card" id="c15-8-5">
+  <div class="card-head">
+    <span class="def-num">DEF 5</span>
+    <span class="def-title">구면 쐐기 <em>Spherical Wedge</em><span class="src-ref">Spherical wedge · p.1141</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>구면 쐐기.</strong> 직교좌표에서 직육면체가 하는 역할을 구면좌표에서는 <strong>구면 쐐기</strong>가 한다. 즉 각 좌표가 두 상수 사이에 갇힌 입체로,</p>
+          <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid a\le\rho\le b,\ \alpha\le\theta\le\beta,\ c\le\phi\le d\},$$</div>
+          <p>단 $a\ge 0$, $\beta-\alpha\le 2\pi$, $d-c\le\pi$를 만족시킨다.</p>
+        </div>
+        <p>이런 입체의 모든 면은 앞 카드의 좌표면 가운데 하나에 놓인다. 즉 동심구 두 개, 수직 반평면 두 개, 반원뿔 두 개이다. 세 조건은 $\rho$가 음수가 되지 않게 하고, $\theta$와 $\phi$의 범위가 각각 한 바퀴와 반 바퀴를 넘지 않게 하여, 입체의 어느 부분도 두 번 훑히지 않도록 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Spherical Wedge.</strong> What a rectangular box is to rectangular coordinates, a <strong>spherical wedge</strong> is to spherical coordinates: a solid on which each coordinate is trapped between two constants,</p>
+          <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid a\le\rho\le b,\ \alpha\le\theta\le\beta,\ c\le\phi\le d\},$$</div>
+          <p>subject to $a\ge 0$, $\beta-\alpha\le 2\pi$, and $d-c\le\pi$.</p>
+        </div>
+        <p>Every face of such a solid sits on one of the coordinate surfaces of the previous card: two concentric spheres, two vertical half-planes, two half-cones. The three side conditions keep $\rho$ from going negative and keep the ranges of $\theta$ and $\phi$ from exceeding one full turn and one half-turn respectively, so that no part of the solid gets swept twice.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Volume of a spherical wedge, Riemann sum (Figure 7) -->
+<div class="card note-card" id="c15-8-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">구면 쐐기의 부피와 리만 합 <em>Volume of a Spherical Wedge and the Riemann Sum</em><span class="src-ref">Figure 7 · p.1141&ndash;1142</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>삼중적분은 입체를 작은 직육면체로 나누어 정의했지만, 작은 구면 쐐기로 나누어도 언제나 같은 값이 나온다는 것이 알려져 있다. 그래서 $E$를 등간격의 구 $\rho=\rho_i$, 반평면 $\theta=\theta_j$, 반원뿔 $\phi=\phi_k$로 잘라내면, 조각 $E_{ijk}$는 직육면체에 매우 가까워서 그 부피를 세 변의 길이만으로 읽어낼 수 있다. 한 변은 반지름 방향이고 길이는 $\Delta\rho$이다. 두 번째 변은 반지름 $\rho_i$인 원에서 각 $\Delta\phi$에 대응하는 호이므로 길이는 $\rho_i\,\Delta\phi$이다. 세 번째 변은 반지름이 $\rho_i\sin\phi_k$ &mdash; 즉 $z$축까지의 거리 &mdash; 인 원에서 각 $\Delta\theta$에 대응하는 호이므로 길이는 $\rho_i\sin\phi_k\,\Delta\theta$이다. 이 세 길이를 곱하면</p>
+        <div class="math-display">$$\Delta V_{ijk}\approx(\Delta\rho)\left(\rho_i\,\Delta\phi\right)\left(\rho_i\sin\phi_k\,\Delta\theta\right)=\rho_i^{\,2}\sin\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi,$$</div>
+        <p>를 얻는다. 평균값 정리(연습문제 51)를 쓰면 이 근사는 $E_{ijk}$ 안의 어떤 점 $(\tilde\rho_i,\tilde\theta_j,\tilde\phi_k)$에서 등식 $\Delta V_{ijk}=\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi$가 된다. 이를 $f$의 삼중 리만 합에 대입하면 다음 함수에 대한 보통의 리만 합이 얻어진다.</p>
+        <div class="math-display">$$F(\rho,\theta,\phi)=f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi$$</div>
+        <p>이는 직육면체 $[a,b]\times[\alpha,\beta]\times[c,d]$ 위에서의 리만 합이며, 분할을 잘게 할수록 다음 카드의 공식 (3)에 이른다. 즉 인자 $\rho^2\sin\phi$는 장식이 아니라 얇은 셀 하나의 부피 그 자체이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 285" role="img" aria-label="구면 쐐기 E_ijk의 세 변: 반지름 방향 delta rho, 자오선 방향 호 rho delta phi, 위도선 방향 호 rho sin phi delta theta" style="max-width:360px;width:100%;height:auto">
+            <line x1="70" y1="240" x2="70" y2="42" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="70" y1="220" x2="305" y2="240" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="70" y1="220" x2="34" y2="266" stroke="var(--grey700)" stroke-width="1.2"/>
+            <text x="60" y="38" font-size="11" font-style="italic" fill="var(--grey700)">z</text>
+            <text x="311" y="246" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="24" y="276" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <line x1="70" y1="220" x2="185" y2="120" stroke="var(--grey500)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <path d="M 70,165 A 55 55 0 0 1 111.5,183.9" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <circle cx="70" cy="220" r="2.8" fill="var(--grey800)"/>
+            <text x="55" y="216" font-size="11" font-style="italic" fill="var(--grey700)">O</text>
+            <text x="78" y="194" font-size="11.5" font-style="italic" fill="var(--orange)">&#966;</text>
+            <text x="108" y="158" font-size="12" font-style="italic" fill="var(--g700)">&#961;</text>
+            <path d="M 185,120 L 211,96 L 223,66 L 197,90 Z" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 211,96 L 239,126 L 251,96 L 223,66 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 185,120 L 211,96 L 239,126 L 213,150 Z" fill="var(--g50)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <line x1="176" y1="100" x2="194" y2="110" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="140" y="98" font-size="11" font-style="italic" fill="var(--orange)">&#916;&#961;</text>
+            <line x1="180" y1="146" x2="196" y2="137" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="136" y="152" font-size="11" font-style="italic" fill="var(--orange)">&#961; &#916;&#966;</text>
+            <line x1="274" y1="98" x2="249" y2="107" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="276" y="94" font-size="11" font-style="italic" fill="var(--orange)">&#961; sin &#966; &#916;&#952;</text>
+            <text x="180" y="270" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g700)">&#916;V = &#961;&#178; sin &#966; &#916;&#961; &#916;&#952; &#916;&#966;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Triple integrals were defined by cutting a solid into small boxes, but cutting it into small spherical wedges is known to give the same value every time. So cut $E$ with equally spaced spheres $\rho=\rho_i$, half-planes $\theta=\theta_j$, and half-cones $\phi=\phi_k$; the pieces $E_{ijk}$ are so nearly rectangular boxes that their volumes can be read off from their edges. One edge is radial and has length $\Delta\rho$; a second is an arc of a circle of radius $\rho_i$ subtending the angle $\Delta\phi$, hence of length $\rho_i\,\Delta\phi$; the third is an arc of a circle of radius $\rho_i\sin\phi_k$ &mdash; the distance from the $z$-axis &mdash; subtending $\Delta\theta$, hence of length $\rho_i\sin\phi_k\,\Delta\theta$. Multiplying the three gives</p>
+        <div class="math-display">$$\Delta V_{ijk}\approx(\Delta\rho)\left(\rho_i\,\Delta\phi\right)\left(\rho_i\sin\phi_k\,\Delta\theta\right)=\rho_i^{\,2}\sin\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi,$$</div>
+        <p>and the Mean Value Theorem (Exercise 51) turns the approximation into an equality at some point $(\tilde\rho_i,\tilde\theta_j,\tilde\phi_k)$ of $E_{ijk}$, namely $\Delta V_{ijk}=\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi$. Substituting this into a triple Riemann sum for $f$ produces an ordinary Riemann sum for the function</p>
+        <div class="math-display">$$F(\rho,\theta,\phi)=f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi$$</div>
+        <p>on the box $[a,b]\times[\alpha,\beta]\times[c,d]$, and letting the mesh shrink yields formula (3) of the next card. So the factor $\rho^2\sin\phi$ is not decoration: it is the volume of one thin cell.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 285" role="img" aria-label="The three edges of a spherical wedge E_ijk: the radial edge delta rho, the arc rho delta phi, and the arc rho sin phi delta theta" style="max-width:360px;width:100%;height:auto">
+            <line x1="70" y1="240" x2="70" y2="42" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="70" y1="220" x2="305" y2="240" stroke="var(--grey700)" stroke-width="1.2"/>
+            <line x1="70" y1="220" x2="34" y2="266" stroke="var(--grey700)" stroke-width="1.2"/>
+            <text x="60" y="38" font-size="11" font-style="italic" fill="var(--grey700)">z</text>
+            <text x="311" y="246" font-size="11" font-style="italic" fill="var(--grey700)">y</text>
+            <text x="24" y="276" font-size="11" font-style="italic" fill="var(--grey700)">x</text>
+            <line x1="70" y1="220" x2="185" y2="120" stroke="var(--grey500)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <path d="M 70,165 A 55 55 0 0 1 111.5,183.9" fill="none" stroke="var(--orange)" stroke-width="1.2"/>
+            <circle cx="70" cy="220" r="2.8" fill="var(--grey800)"/>
+            <text x="55" y="216" font-size="11" font-style="italic" fill="var(--grey700)">O</text>
+            <text x="78" y="194" font-size="11.5" font-style="italic" fill="var(--orange)">&#966;</text>
+            <text x="108" y="158" font-size="12" font-style="italic" fill="var(--g700)">&#961;</text>
+            <path d="M 185,120 L 211,96 L 223,66 L 197,90 Z" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 211,96 L 239,126 L 251,96 L 223,66 Z" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 185,120 L 211,96 L 239,126 L 213,150 Z" fill="var(--g50)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <line x1="176" y1="100" x2="194" y2="110" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="140" y="98" font-size="11" font-style="italic" fill="var(--orange)">&#916;&#961;</text>
+            <line x1="180" y1="146" x2="196" y2="137" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="136" y="152" font-size="11" font-style="italic" fill="var(--orange)">&#961; &#916;&#966;</text>
+            <line x1="274" y1="98" x2="249" y2="107" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="276" y="94" font-size="11" font-style="italic" fill="var(--orange)">&#961; sin &#966; &#916;&#952;</text>
+            <text x="180" y="270" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g700)">&#916;V = &#961;&#178; sin &#966; &#916;&#961; &#916;&#952; &#916;&#966;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Formula (3) -->
+<div class="card thm-card" id="c15-8-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">구면좌표에서의 삼중적분 <em>Triple Integration in Spherical Coordinates</em><span class="src-ref">Formula (3) · p.1142</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (3) &mdash; 구면좌표에서의 삼중적분.</strong> $E$가 구면 쐐기 $a\le\rho\le b$, $\alpha\le\theta\le\beta$, $c\le\phi\le d$라 하자. 그러면</p>
+          <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi\ d\rho\,d\theta\,d\phi.\tag{3}$$</div>
+        </div>
+        <p>안쪽부터 읽으면, 이 반복적분은 먼저 반지름 방향 선분을 훑고, 그 선분을 $z$축 둘레로 돌려 원뿔면 위의 띠를 만든 다음, 그 띠를 $\phi=c$에서 $\phi=d$까지 기울여 $E$ 전체를 쓸어낸다. $0\le\phi\le\pi$ 전체에서 $\sin\phi\ge 0$이므로, 가중치 $\rho^2\sin\phi$의 부호는 결코 바뀌지 않는다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 앞 카드처럼 $E$를 구 $\rho=\rho_i$, 반평면 $\theta=\theta_j$, 반원뿔 $\phi=\phi_k$로 잘게 나누어 조각 $E_{ijk}$를 만들면, 평균값 정리에 의해 어떤 점 $(\tilde\rho_i,\tilde\theta_j,\tilde\phi_k)\in E_{ijk}$에서 정확히</p>
+        <div class="math-display">$$\Delta V_{ijk}=\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi$$</div>
+        <p>이다. 이 분할로 $\iiint_E f\,dV$의 리만 합을 만들면, 조각 $E_{ijk}$를 대표하는 점의 직교좌표는 식 (1)에 의해 $(\tilde\rho_i\sin\tilde\phi_k\cos\tilde\theta_j,\ \tilde\rho_i\sin\tilde\phi_k\sin\tilde\theta_j,\ \tilde\rho_i\cos\tilde\phi_k)$이므로 그 합은</p>
+        <div class="math-display">$$\sum_{i,j,k} f\!\left(\tilde\rho_i\sin\tilde\phi_k\cos\tilde\theta_j,\ \tilde\rho_i\sin\tilde\phi_k\sin\tilde\theta_j,\ \tilde\rho_i\cos\tilde\phi_k\right)\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi$$</div>
+        <p>가 된다. 이것은 다름 아니라 직육면체 $[a,b]\times[\alpha,\beta]\times[c,d]$ 위에서 함수 $F(\rho,\theta,\phi)=f(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi)\rho^2\sin\phi$에 대한 통상적인(직교좌표계에서의) 리만 합이다. 이 장의 관례대로 $f$가 $E$에서 연속이라고 하면 $F$도 그 직육면체에서 연속이다. 따라서 분할을 $\Delta\rho,\Delta\theta,\Delta\phi\to0$으로 잘게 하면, 이 하나의 합이 한편으로는 $\iiint_E f\,dV$로 수렴하고 다른 한편으로는 직육면체 위 $F$의 통상적인 삼중적분으로 수렴한다. 극한값은 유일하므로</p>
+        <div class="math-display">$$\begin{aligned}\iiint_E f\,dV&=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b F(\rho,\theta,\phi)\,d\rho\,d\theta\,d\phi\\&=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi\ d\rho\,d\theta\,d\phi\end{aligned}$$</div>
+        <p>이 성립하며, 이것이 곧 식 (3)이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (3) &mdash; triple integration in spherical coordinates.</strong> Let $E$ be the spherical wedge $a\le\rho\le b$, $\alpha\le\theta\le\beta$, $c\le\phi\le d$. Then</p>
+          <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi\ d\rho\,d\theta\,d\phi.\tag{3}$$</div>
+        </div>
+        <p>Read from the inside out, the iterated integral first sweeps a radial segment, then swings that segment around the $z$-axis into a band lying on a cone, and finally tilts the band from $\phi=c$ down to $\phi=d$ until all of $E$ has been swept out. Note that $\sin\phi\ge 0$ throughout $0\le\phi\le\pi$, so the weight $\rho^2\sin\phi$ never changes sign.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> As in the previous card, cut $E$ with spheres $\rho=\rho_i$, half-planes $\theta=\theta_j$, and half-cones $\phi=\phi_k$ into pieces $E_{ijk}$; the Mean Value Theorem guarantees that at some point $(\tilde\rho_i,\tilde\theta_j,\tilde\phi_k)\in E_{ijk}$,</p>
+        <div class="math-display">$$\Delta V_{ijk}=\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi.$$</div>
+        <p>Building a Riemann sum for $\iiint_E f\,dV$ from this partition, the rectangular coordinates of the representative point of $E_{ijk}$ are $(\tilde\rho_i\sin\tilde\phi_k\cos\tilde\theta_j,\ \tilde\rho_i\sin\tilde\phi_k\sin\tilde\theta_j,\ \tilde\rho_i\cos\tilde\phi_k)$ by equations (1), so the sum reads</p>
+        <div class="math-display">$$\sum_{i,j,k} f\!\left(\tilde\rho_i\sin\tilde\phi_k\cos\tilde\theta_j,\ \tilde\rho_i\sin\tilde\phi_k\sin\tilde\theta_j,\ \tilde\rho_i\cos\tilde\phi_k\right)\tilde\rho_i^{\,2}\sin\tilde\phi_k\;\Delta\rho\,\Delta\theta\,\Delta\phi.$$</div>
+        <p>This is nothing but an ordinary (rectangular-coordinate) Riemann sum for the function $F(\rho,\theta,\phi)=f(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi)\rho^2\sin\phi$ on the box $[a,b]\times[\alpha,\beta]\times[c,d]$. Taking $f$ continuous on $E$, as is standing practice in this chapter, $F$ is continuous on that box. Hence, as the mesh shrinks ($\Delta\rho,\Delta\theta,\Delta\phi\to0$), this one sum converges on the one hand to $\iiint_E f\,dV$ and on the other to the ordinary triple integral of $F$ over the box. A limit is unique, so</p>
+        <div class="math-display">$$\begin{aligned}\iiint_E f\,dV&=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b F(\rho,\theta,\phi)\,d\rho\,d\theta\,d\phi\\&=\int_c^d\!\!\int_\alpha^\beta\!\!\int_a^b f\!\left(\rho\sin\phi\cos\theta,\ \rho\sin\phi\sin\theta,\ \rho\cos\phi\right)\rho^2\sin\phi\ d\rho\,d\theta\,d\phi,\end{aligned}$$</div>
+        <p>which is precisely equation (3).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Volume element, extension to general regions, when to use (Figure 8) -->
+<div class="card rem-card" id="c15-8-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">부피소와 일반화, 쓰는 시점 <em>Volume Element, Extension, and When to Use It</em><span class="src-ref">Figure 8 · p.1142</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실제로 공식 (3)은 세 단계로 적용된다. $x,y,z$ 자리에 식 (1)의 표현을 대입하고, 입체를 $\rho,\theta,\phi$로 기술하는 적분 한계를 정하고, $dV$를 부피소</p>
+        <div class="math-display">$$dV=\rho^2\sin\phi\ d\rho\,d\theta\,d\phi$$</div>
+        <p>로 바꾸는 것이다. 이 공식은 구면 쐐기에만 국한되지 않는다. 반지름 방향 한계가 두 각에 의존해도 되어, 예를 들어</p>
+        <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid \alpha\le\theta\le\beta,\ c\le\phi\le d,\ g_1(\theta,\phi)\le\rho\le g_2(\theta,\phi)\},$$</div>
+        <p>인 경우에도 안쪽 적분 한계의 상수 $a,b$를 $g_1(\theta,\phi)$, $g_2(\theta,\phi)$로 바꾸기만 하면 식 (3)이 그대로 성립한다. 대체로 적분 영역의 경계가 구나 원뿔일 때 구면좌표를 쓰는 것이 적절하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In practice formula (3) is applied as a three-step recipe: substitute the expressions of (1) for $x$, $y$, $z$; choose limits that describe the solid in terms of $\rho$, $\theta$, $\phi$; and trade $dV$ for the volume element</p>
+        <div class="math-display">$$dV=\rho^2\sin\phi\ d\rho\,d\theta\,d\phi.$$</div>
+        <p>The formula is not confined to wedges. If the radial limits are allowed to depend on the two angles, say</p>
+        <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid \alpha\le\theta\le\beta,\ c\le\phi\le d,\ g_1(\theta,\phi)\le\rho\le g_2(\theta,\phi)\},$$</div>
+        <p>then (3) still holds word for word, with the constants $a$ and $b$ in the inner limits replaced by $g_1(\theta,\phi)$ and $g_2(\theta,\phi)$. As a rule of thumb, spherical coordinates are the right choice when the region of integration is bounded by spheres or cones.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex15-8-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">구면좌표에서 직교좌표로 <em>From Spherical to Rectangular Coordinates</em><span class="src-ref">Example 1 · p.1140&ndash;1141</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>구면좌표가 $\left(2,\ \dfrac{\pi}{4},\ \dfrac{\pi}{3}\right)$인 점이 있다. 이 점의 위치를 그림으로 나타내고, 직교좌표를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $\phi=\pi/3\lt\pi/2$이므로 점은 $xy$평면 위쪽에 있고, $\theta=\pi/4$이므로 양의 $x$축에서 반시계 방향으로 $45^\circ$ 돌아간 수직 반평면 위에 놓인다. 직교좌표는 식 (1)에 $\rho=2$, $\theta=\pi/4$, $\phi=\pi/3$을 대입해 얻는다. $\sin\dfrac\pi3=\dfrac{\sqrt3}2$, $\cos\dfrac\pi3=\dfrac12$, $\cos\dfrac\pi4=\sin\dfrac\pi4=\dfrac{\sqrt2}2$이므로</p>
+        <div class="math-display">$$\begin{aligned}x&=2\sin\frac\pi3\cos\frac\pi4=2\cdot\frac{\sqrt3}2\cdot\frac{\sqrt2}2=\frac{\sqrt6}2,\\ y&=2\sin\frac\pi3\sin\frac\pi4=2\cdot\frac{\sqrt3}2\cdot\frac{\sqrt2}2=\frac{\sqrt6}2,\\ z&=2\cos\frac\pi3=2\cdot\frac12=1.\end{aligned}$$</div>
+        <p>($\theta=\pi/4$에서 $\cos\theta=\sin\theta$이므로 $x=y$가 되는 것은 당연하다.) 세 좌표가 모두 양수이므로 점은 제1팔분공간에 있으며, 이는 앞서 말한 위치와 일치한다. 따라서 직교좌표는 $\left(\dfrac{\sqrt6}2,\ \dfrac{\sqrt6}2,\ 1\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A point is described in spherical coordinates by $\left(2,\ \dfrac{\pi}{4},\ \dfrac{\pi}{3}\right)$. Sketch where it sits, and determine its rectangular coordinates.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $\phi=\pi/3\lt\pi/2$, the point lies above the $xy$-plane, and since $\theta=\pi/4$, it sits on the vertical half-plane turned $45^\circ$ counterclockwise from the positive $x$-axis. The rectangular coordinates come from substituting $\rho=2$, $\theta=\pi/4$, $\phi=\pi/3$ into equations (1). With $\sin\dfrac\pi3=\dfrac{\sqrt3}2$, $\cos\dfrac\pi3=\dfrac12$, and $\cos\dfrac\pi4=\sin\dfrac\pi4=\dfrac{\sqrt2}2$,</p>
+        <div class="math-display">$$\begin{aligned}x&=2\sin\frac\pi3\cos\frac\pi4=2\cdot\frac{\sqrt3}2\cdot\frac{\sqrt2}2=\frac{\sqrt6}2,\\ y&=2\sin\frac\pi3\sin\frac\pi4=2\cdot\frac{\sqrt3}2\cdot\frac{\sqrt2}2=\frac{\sqrt6}2,\\ z&=2\cos\frac\pi3=2\cdot\frac12=1.\end{aligned}$$</div>
+        <p>(Since $\cos\theta=\sin\theta$ at $\theta=\pi/4$, it is expected that $x=y$.) All three coordinates are positive, placing the point in the first octant, which matches the location described above. Hence the rectangular coordinates are $\left(\dfrac{\sqrt6}2,\ \dfrac{\sqrt6}2,\ 1\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex15-8-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">직교좌표에서 구면좌표로 <em>From Rectangular to Spherical Coordinates</em><span class="src-ref">Example 2 · p.1141</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직교좌표가 $\left(0,\ 2\sqrt{3},\ -2\right)$인 점의 구면좌표 $(\rho,\theta,\phi)$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 식 (2)로 $\rho$부터 구한다.</p>
+        <div class="math-display">$$\rho^2=0^2+(2\sqrt3)^2+(-2)^2=12+4=16\ \Longrightarrow\ \rho=4.$$</div>
+        <p>$\cos\phi=z/\rho=-2/4=-1/2$인데 코사인은 $0\le\phi\le\pi$에서 일대일이므로 $\phi=2\pi/3$이다($z\lt0$이므로 점이 $xy$평면 아래, 즉 $\phi\gt\pi/2$ 쪽에 있다는 것과도 맞는다). 남은 것은 $\theta$인데, $\sin\phi=\sin(2\pi/3)=\sqrt3/2\gt0$이므로 $r=\rho\sin\phi=4\cdot\dfrac{\sqrt3}2=2\sqrt3$이고, 식 (1)은 $x=\rho\sin\phi\cos\theta=r\cos\theta$, $y=\rho\sin\phi\sin\theta=r\sin\theta$를 뜻하므로</p>
+        <div class="math-display">$$\cos\theta=\frac{x}{r}=\frac0{2\sqrt3}=0,\qquad \sin\theta=\frac{y}{r}=\frac{2\sqrt3}{2\sqrt3}=1.$$</div>
+        <p>$\cos\theta=0$을 만족시키는 값은 $\pi/2$와 $3\pi/2$ 두 개이지만, $\sin\theta=1\gt0$인 쪽은 $\theta=\pi/2$뿐이다. 따라서 구면좌표는 $(\rho,\theta,\phi)=\left(4,\ \dfrac\pi2,\ \dfrac{2\pi}3\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine spherical coordinates $(\rho,\theta,\phi)$ for the point whose rectangular coordinates are $\left(0,\ 2\sqrt{3},\ -2\right)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Find $\rho$ first, from equation (2).</p>
+        <div class="math-display">$$\rho^2=0^2+(2\sqrt3)^2+(-2)^2=12+4=16\ \Longrightarrow\ \rho=4.$$</div>
+        <p>Then $\cos\phi=z/\rho=-2/4=-1/2$, and since cosine is one-to-one on $0\le\phi\le\pi$, $\phi=2\pi/3$ (consistent with $z\lt0$ placing the point below the $xy$-plane, i.e. on the side where $\phi\gt\pi/2$). It remains to find $\theta$: since $\sin\phi=\sin(2\pi/3)=\sqrt3/2\gt0$, $r=\rho\sin\phi=4\cdot\dfrac{\sqrt3}2=2\sqrt3$, and equations (1) read $x=\rho\sin\phi\cos\theta=r\cos\theta$ and $y=\rho\sin\phi\sin\theta=r\sin\theta$, so</p>
+        <div class="math-display">$$\cos\theta=\frac{x}{r}=\frac0{2\sqrt3}=0,\qquad \sin\theta=\frac{y}{r}=\frac{2\sqrt3}{2\sqrt3}=1.$$</div>
+        <p>Both $\pi/2$ and $3\pi/2$ satisfy $\cos\theta=0$, but only $\theta=\pi/2$ also satisfies $\sin\theta=1\gt0$. Hence the spherical coordinates are $(\rho,\theta,\phi)=\left(4,\ \dfrac\pi2,\ \dfrac{2\pi}3\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex15-8-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">단위공 위의 지수함수 삼중적분 <em>An Exponential Integral over the Unit Ball</em><span class="src-ref">Example 3 · p.1142&ndash;1143</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$B$가 단위공 $B=\{(x,y,z)\mid x^2+y^2+z^2\le 1\}$일 때, 삼중적분</p>
+        <div class="math-display">$$\iiint_B e^{\left(x^2+y^2+z^2\right)^{3/2}}\,dV$$</div>
+        <p>의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 단위공은 구면좌표에서 $0\le\rho\le1$, $0\le\theta\le2\pi$, $0\le\phi\le\pi$인 구면 쐐기이다. $x^2+y^2+z^2=\rho^2$이므로 피적분함수는 $e^{(\rho^2)^{3/2}}=e^{\rho^3}$이 되어 세 변수로 완전히 분리되며, 이는 직교좌표에서는 원시함수를 구할 수조차 없는 함수가 구면좌표에서는 다루기 쉬워지는 전형적인 예이다. 식 (3)에서</p>
+        <div class="math-display">$$\begin{aligned}\iiint_B e^{\left(x^2+y^2+z^2\right)^{3/2}}\,dV&=\int_0^\pi\!\!\int_0^{2\pi}\!\!\int_0^1 e^{\rho^3}\,\rho^2\sin\phi\ d\rho\,d\theta\,d\phi\\&=\left(\int_0^\pi\sin\phi\,d\phi\right)\left(\int_0^{2\pi}d\theta\right)\left(\int_0^1\rho^2e^{\rho^3}\,d\rho\right).\end{aligned}$$</div>
+        <p>첫 두 인자는 $\displaystyle\int_0^\pi\sin\phi\,d\phi=\bigl[-\cos\phi\bigr]_0^\pi=2$, $\displaystyle\int_0^{2\pi}d\theta=2\pi$이다. 마지막 인자는 $u=\rho^3$, $du=3\rho^2\,d\rho$로 치환하면</p>
+        <div class="math-display">$$\int_0^1\rho^2e^{\rho^3}\,d\rho=\frac13\int_0^1e^u\,du=\frac13\bigl(e-1\bigr).$$</div>
+        <p>세 인자를 곱하면 $2\cdot2\pi\cdot\dfrac13(e-1)=\dfrac{4\pi}3(e-1)$이다. 따라서 $\displaystyle\iiint_B e^{(x^2+y^2+z^2)^{3/2}}\,dV=\dfrac{4\pi}3(e-1)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $B$ denote the unit ball $B=\{(x,y,z)\mid x^2+y^2+z^2\le 1\}$. Compute the triple integral</p>
+        <div class="math-display">$$\iiint_B e^{\left(x^2+y^2+z^2\right)^{3/2}}\,dV.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In spherical coordinates the unit ball is the spherical wedge $0\le\rho\le1$, $0\le\theta\le2\pi$, $0\le\phi\le\pi$. Since $x^2+y^2+z^2=\rho^2$, the integrand becomes $e^{(\rho^2)^{3/2}}=e^{\rho^3}$, which separates completely into the three variables &mdash; a typical instance of a function with no elementary antiderivative in rectangular coordinates becoming manageable once written in spherical ones. By formula (3),</p>
+        <div class="math-display">$$\begin{aligned}\iiint_B e^{\left(x^2+y^2+z^2\right)^{3/2}}\,dV&=\int_0^\pi\!\!\int_0^{2\pi}\!\!\int_0^1 e^{\rho^3}\,\rho^2\sin\phi\ d\rho\,d\theta\,d\phi\\&=\left(\int_0^\pi\sin\phi\,d\phi\right)\left(\int_0^{2\pi}d\theta\right)\left(\int_0^1\rho^2e^{\rho^3}\,d\rho\right).\end{aligned}$$</div>
+        <p>The first two factors are $\displaystyle\int_0^\pi\sin\phi\,d\phi=\bigl[-\cos\phi\bigr]_0^\pi=2$ and $\displaystyle\int_0^{2\pi}d\theta=2\pi$. For the last factor, substitute $u=\rho^3$, $du=3\rho^2\,d\rho$:</p>
+        <div class="math-display">$$\int_0^1\rho^2e^{\rho^3}\,d\rho=\frac13\int_0^1e^u\,du=\frac13\bigl(e-1\bigr).$$</div>
+        <p>Multiplying the three factors gives $2\cdot2\pi\cdot\dfrac13(e-1)=\dfrac{4\pi}3(e-1)$. Hence $\displaystyle\iiint_B e^{(x^2+y^2+z^2)^{3/2}}\,dV=\dfrac{4\pi}3(e-1)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex15-8-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">원뿔 위·구 안에 놓인 입체의 부피 <em>Volume of a Solid above a Cone and inside a Sphere</em><span class="src-ref">Example 4 · p.1143</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원뿔 $z=\sqrt{x^2+y^2}$ 의 위쪽이면서 구 $x^2+y^2+z^2=z$ 의 안쪽에 놓인 입체의 부피를 구면좌표를 이용하여 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 두 경계면을 먼저 구면좌표로 바꾼다. 구 $x^2+y^2+z^2=z$는 $\rho^2=\rho\cos\phi$이므로, $\rho\neq0$인 부분에서는 $\rho=\cos\phi$이다(이는 중심이 $(0,0,\tfrac12)$이고 반지름이 $\tfrac12$인 구이며 원점을 지난다). 원뿔 $z=\sqrt{x^2+y^2}$는 $0\le\phi\le\pi$에서 $\sqrt{x^2+y^2}=\rho\sin\phi$이므로 $\rho\cos\phi=\rho\sin\phi$가 되고, $\rho\neq0$인 부분에서 $\cos\phi=\sin\phi$, 곧 $\phi=\pi/4$이다. 원뿔의 <em>위쪽</em>이라는 조건 $z\ge\sqrt{x^2+y^2}$는 같은 계산으로 $\rho\cos\phi\ge\rho\sin\phi$, 즉 $\rho\gt0$에서 $\cos\phi\ge\sin\phi$가 되는데, $0\le\phi\le\pi$에서 이것은 정확히 $\phi\le\pi/4$를 뜻한다. 구의 안쪽이라는 조건 $x^2+y^2+z^2\le z$는 $\rho\le\cos\phi$로 바뀌고, $\theta$에는 아무 제약이 없다. 따라서 입체는</p>
+        <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid 0\le\theta\le2\pi,\ 0\le\phi\le\pi/4,\ 0\le\rho\le\cos\phi\}$$</div>
+        <p>이다. $f=1$로 두고 식 (3)을 적용하면</p>
+        <div class="math-display">$$\begin{aligned}V(E)&=\int_0^{\pi/4}\!\!\int_0^{2\pi}\!\!\int_0^{\cos\phi}\rho^2\sin\phi\ d\rho\,d\theta\,d\phi=\int_0^{\pi/4}\sin\phi\left(\int_0^{2\pi}d\theta\right)\left(\int_0^{\cos\phi}\rho^2\,d\rho\right)d\phi\\&=\int_0^{\pi/4}\sin\phi\cdot2\pi\cdot\frac{\cos^3\phi}3\,d\phi=\frac{2\pi}3\int_0^{\pi/4}\sin\phi\cos^3\phi\,d\phi.\end{aligned}$$</div>
+        <p>안쪽 적분은 $u=\cos\phi$, $du=-\sin\phi\,d\phi$로 치환하면 $\displaystyle\int\sin\phi\cos^3\phi\,d\phi=-\frac{\cos^4\phi}4+C$이므로</p>
+        <div class="math-display">$$\int_0^{\pi/4}\sin\phi\cos^3\phi\,d\phi=\left[-\frac{\cos^4\phi}4\right]_0^{\pi/4}=-\frac14\left(\frac{\sqrt2}2\right)^4+\frac14=-\frac1{16}+\frac4{16}=\frac3{16}.$$</div>
+        <p>이를 대입하면 $V(E)=\dfrac{2\pi}3\cdot\dfrac3{16}=\dfrac{2\pi}{16}=\dfrac\pi8$이다. 따라서 입체의 부피는 $\dfrac\pi8$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Working in spherical coordinates, compute the volume of the solid trapped above the cone $z=\sqrt{x^2+y^2}$ and inside the sphere $x^2+y^2+z^2=z$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Rewrite the two bounding surfaces in spherical coordinates first. The sphere $x^2+y^2+z^2=z$ becomes $\rho^2=\rho\cos\phi$, so away from $\rho=0$, $\rho=\cos\phi$ (this is the sphere of radius $\tfrac12$ centered at $(0,0,\tfrac12)$, passing through the origin). For the cone $z=\sqrt{x^2+y^2}$, note that $\sqrt{x^2+y^2}=\rho\sin\phi$ because $\sin\phi\ge0$ on $0\le\phi\le\pi$; the equation therefore reads $\rho\cos\phi=\rho\sin\phi$, so away from $\rho=0$, $\cos\phi=\sin\phi$, i.e. $\phi=\pi/4$. Lying <em>above</em> the cone, $z\ge\sqrt{x^2+y^2}$, becomes $\rho\cos\phi\ge\rho\sin\phi$ by the same computation, i.e. $\cos\phi\ge\sin\phi$ when $\rho\gt0$, and on $0\le\phi\le\pi$ that says exactly $\phi\le\pi/4$. Lying inside the sphere, $x^2+y^2+z^2\le z$, becomes $\rho\le\cos\phi$, and $\theta$ is unrestricted. So the solid is</p>
+        <div class="math-display">$$E=\{(\rho,\theta,\phi)\mid 0\le\theta\le2\pi,\ 0\le\phi\le\pi/4,\ 0\le\rho\le\cos\phi\}.$$</div>
+        <p>Taking $f=1$ in formula (3),</p>
+        <div class="math-display">$$\begin{aligned}V(E)&=\int_0^{\pi/4}\!\!\int_0^{2\pi}\!\!\int_0^{\cos\phi}\rho^2\sin\phi\ d\rho\,d\theta\,d\phi=\int_0^{\pi/4}\sin\phi\left(\int_0^{2\pi}d\theta\right)\left(\int_0^{\cos\phi}\rho^2\,d\rho\right)d\phi\\&=\int_0^{\pi/4}\sin\phi\cdot2\pi\cdot\frac{\cos^3\phi}3\,d\phi=\frac{2\pi}3\int_0^{\pi/4}\sin\phi\cos^3\phi\,d\phi.\end{aligned}$$</div>
+        <p>For the inner integral, substitute $u=\cos\phi$, $du=-\sin\phi\,d\phi$, so $\displaystyle\int\sin\phi\cos^3\phi\,d\phi=-\frac{\cos^4\phi}4+C$, and</p>
+        <div class="math-display">$$\int_0^{\pi/4}\sin\phi\cos^3\phi\,d\phi=\left[-\frac{\cos^4\phi}4\right]_0^{\pi/4}=-\frac14\left(\frac{\sqrt2}2\right)^4+\frac14=-\frac1{16}+\frac4{16}=\frac3{16}.$$</div>
+        <p>Substituting back, $V(E)=\dfrac{2\pi}3\cdot\dfrac3{16}=\dfrac{2\pi}{16}=\dfrac\pi8$. Hence the volume of the solid is $\dfrac\pi8$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c15-8-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch10.html">단원 10</a></p>
+        <ul>
+          <li>곡면·부등식을 구면좌표로 나타내고 입체를 작도 &mdash; <a href="../calc2/ch10.html#ex03">ex03</a>, <a href="../calc2/ch10.html#yu03">yu03</a>, <a href="../calc2/ch10.html#pr01">pr01</a>(2) (완전 대응)</li>
+          <li>구면좌표로 부피·삼중적분 계산 &mdash; <a href="../calc2/ch10.html#ex04">ex04</a>, <a href="../calc2/ch10.html#yu04-1">yu04-1</a>, <a href="../calc2/ch10.html#yu04-2">yu04-2</a>, <a href="../calc2/ch10.html#yu04-3">yu04-3</a>, <a href="../calc2/ch10.html#pr04">pr04</a> (완전 대응: 예제 3·4와 같은 유형)</li>
+          <li>구면좌표의 정의와 변환식 (1)(2), 구면 쐐기와 부피소 $dV=\rho^2\sin\phi\,d\rho\,d\theta\,d\phi$의 유도 &mdash; 대응 없음 (교안에는 개념 서술 블록이 없고 풀이 안에서 쓰기만 함)</li>
+          <li>구면좌표의 응용(질량·도심·관성모멘트) &mdash; 대응 없음</li>
+          <li><strong>표기 주의</strong>: 강의 노트는 좌표를 $(\rho,\phi,\theta)$ 순서로 쓰지만, $\phi$의 의미는 이 교재와 같다(양의 $z$축에서 잰 각).</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§15.8, 2차)</strong></p>
+        <p>제출 문항: 18, 20, 31, 43 &nbsp;/&nbsp; 학습 참고: 1&ndash;2, 3&ndash;4, 5&ndash;6, 7&ndash;8, 9&ndash;10, 11&ndash;14, 15&ndash;16, 17&ndash;18, 19&ndash;20, 21&ndash;22, 23&ndash;36, 37&ndash;40, 42, 43&ndash;45</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s15-7.html">§15.7 원기둥좌표에서의 삼중적분</a> &nbsp;/&nbsp; 다음: <a href="s15-9.html">§15.9 중적분의 변수변환</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch10.html">Unit 10</a></p>
+        <ul>
+          <li>Describing surfaces and solids by spherical inequalities &mdash; <a href="../calc2/ch10.html#ex03">ex03</a>, <a href="../calc2/ch10.html#yu03">yu03</a>, <a href="../calc2/ch10.html#pr01">pr01</a>(2) (full match)</li>
+          <li>Volumes and triple integrals evaluated in spherical coordinates &mdash; <a href="../calc2/ch10.html#ex04">ex04</a>, <a href="../calc2/ch10.html#yu04-1">yu04-1</a>, <a href="../calc2/ch10.html#yu04-2">yu04-2</a>, <a href="../calc2/ch10.html#yu04-3">yu04-3</a>, <a href="../calc2/ch10.html#pr04">pr04</a> (full match; same type as Examples 3 and 4)</li>
+          <li>The definition of the coordinates, formulas (1) and (2), the spherical wedge, and the derivation of $dV=\rho^2\sin\phi\,d\rho\,d\theta\,d\phi$ &mdash; no match (the lecture notes carry no expository blocks and only use these inside solutions)</li>
+          <li>Applications in spherical coordinates (mass, centroid, moment of inertia) &mdash; no match</li>
+          <li><strong>Notation caution</strong>: the lecture notes list the coordinates in the order $(\rho,\phi,\theta)$, but $\phi$ carries the same meaning as here &mdash; the angle measured from the positive $z$-axis.</li>
+        </ul>
+        <p><strong>(b) Assignment (§15.8, second set)</strong></p>
+        <p>Problems to submit: 18, 20, 31, 43 &nbsp;/&nbsp; Recommended practice: 1&ndash;2, 3&ndash;4, 5&ndash;6, 7&ndash;8, 9&ndash;10, 11&ndash;14, 15&ndash;16, 17&ndash;18, 19&ndash;20, 21&ndash;22, 23&ndash;36, 37&ndash;40, 42, 43&ndash;45</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s15-7.html">§15.7 Triple Integrals in Cylindrical Coordinates</a> &nbsp;/&nbsp; Next: <a href="s15-9.html">§15.9 Change of Variables in Multiple Integrals</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

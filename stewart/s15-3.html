@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§15.3 극좌표에서의 이중적분 (Double Integrals in Polar Coordinates) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §15.3 극좌표에서의 이중적분 — 극좌표 직사각형과 극부분직사각형의 넓이 r Δr Δθ, 이중적분의 극좌표 변환 공식 (2), 일반 극영역 h₁(θ)≤r≤h₂(θ)에 대한 공식 (3), 극좌표 넓이 공식을 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 15.3, 극좌표에서의 이중적분, double integral in polar coordinates, 극좌표 직사각형, polar rectangle, 넓이소, area element, r dr dtheta, 야코비안, 일반 극영역, 극좌표 넓이 공식, 네잎장미, four-leaved rose, 포물면 부피, 반원환, half-ring, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s15-3.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§15.3 극좌표에서의 이중적분 (Double Integrals in Polar Coordinates) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="극좌표 직사각형과 넓이소 dA = r dr dθ의 유도, 극좌표 변환 공식 (2)와 일반 극영역 공식 (3), 극좌표 넓이 공식까지 §15.3 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s15-3.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§15.3 극좌표에서의 이중적분 (Double Integrals in Polar Coordinates) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §15.3 극좌표에서의 이중적분 — 극좌표 직사각형, 극부분직사각형의 넓이와 넓이소, 극좌표 변환 공식 (2)와 일반 극영역 공식 (3), 극좌표 넓이 공식을 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s15-3.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s15-3.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s15-1.html">15.1</a>
+      <a href="s15-2.html">15.2</a>
+      <a href="s15-3.html" class="active">15.3</a>
+      <a href="s15-4.html">15.4</a>
+      <a href="s15-5.html">15.5</a>
+      <a href="s15-6.html">15.6</a>
+      <a href="s15-7.html">15.7</a>
+      <a href="s15-8.html">15.8</a>
+      <a href="s15-9.html">15.9</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §15.3 · 5주차</p>
+  <h1>§15.3 극좌표에서의 이중적분<span>Double Integrals in Polar Coordinates</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c15-3-1"><span class="toc-num">NOTE</span> 극좌표의 복습 <em>Review of Polar Coordinates</em></a></li>
+    <li><a href="#c15-3-2"><span class="toc-num">DEF 2</span> 극좌표 직사각형 <em>Polar Rectangle</em></a></li>
+    <li><a href="#c15-3-3"><span class="toc-num">NOTE</span> 극좌표 리만 합과 넓이소 <em>Polar Riemann Sums and the Area Element</em></a></li>
+    <li><a href="#c15-3-4"><span class="toc-num">THM 4</span> 이중적분의 극좌표 변환 <em>Change to Polar Coordinates in a Double Integral</em></a></li>
+    <li><a href="#c15-3-5"><span class="toc-num">REM 5</span> 여분의 인자 r <em>Remembering the Extra Factor r</em></a></li>
+    <li><a href="#c15-3-6"><span class="toc-num">THM 6</span> 일반 극영역에서의 이중적분 <em>Double Integrals over General Polar Regions</em></a></li>
+    <li><a href="#c15-3-7"><span class="toc-num">THM 7</span> 극좌표에서의 넓이 공식 <em>Area in Polar Coordinates</em></a></li>
+    <li><a href="#c15-3-8"><span class="toc-num">REM 8</span> 극좌표를 쓰는 이유 <em>Why Polar Coordinates Help</em></a></li>
+    <li><a href="#ex15-3-1"><span class="toc-num">EXAM 1</span> 반원환 위의 이중적분 <em>A Double Integral over a Half-Ring</em></a></li>
+    <li><a href="#ex15-3-2"><span class="toc-num">EXAM 2</span> 반복적분을 극좌표로 바꾸어 계산 <em>Converting an Iterated Integral to Polar Coordinates</em></a></li>
+    <li><a href="#ex15-3-3"><span class="toc-num">EXAM 3</span> 포물면과 평면 사이 입체의 부피 <em>Volume of a Solid Capped by a Paraboloid</em></a></li>
+    <li><a href="#ex15-3-4"><span class="toc-num">EXAM 4</span> 네잎장미 한 잎의 넓이 <em>Area of One Loop of a Four-Leaved Rose</em></a></li>
+    <li><a href="#ex15-3-5"><span class="toc-num">EXAM 5</span> 원기둥 안쪽 포물면 아래 입체의 부피 <em>Volume inside a Cylinder and under a Paraboloid</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 · Review of Polar Coordinates (Figures 1-2) -->
+<div class="card note-card" id="c15-3-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">극좌표의 복습 <em>Review of Polar Coordinates</em><span class="src-ref">Figures 1&ndash;2 · p.1100&ndash;1101</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$R$이 원점을 중심으로 한 원판일 때 이중적분 $\iint_R f(x,y)\,dA$를 계산하고 싶다고 하자. 이런 $R$을 직교좌표로 기술하면 번거롭지만 극좌표로는 한눈에 나타난다. 적분 영역이 극좌표로 더 간단히 기술되는 경우라면, 이중적분을 먼저 극좌표로 바꾸는 쪽이 대개 지름길이다.</p>
+        <p>극좌표는 §10.3에서 도입했다. 점의 극좌표 $(r,\theta)$와 직교좌표 $(x,y)$는 다음 관계로 이어진다.</p>
+        <div class="math-display">$$r^2=x^2+y^2,\qquad x=r\cos\theta,\qquad y=r\sin\theta.$$</div>
+        <p>원점을 중심으로 한 원은 특히 간단해진다. 단위원은 $r=1$이고, 그것이 둘러싸는 원판은</p>
+        <div class="math-display">$$R=\{(r,\theta)\mid 0\le r\le 1,\ 0\le\theta\le 2\pi\}.$$</div>
+        <p>마찬가지로 쉽게 다루어지는 또 다른 영역은 $x$축 위쪽에서 두 원 $x^2+y^2=1$과 $x^2+y^2=4$ 사이에 놓인 반원환이며,</p>
+        <div class="math-display">$$R=\{(r,\theta)\mid 1\le r\le 2,\ 0\le\theta\le\pi\}.$$</div>
+        <p>극좌표로 편리하게 기술되는 그 밖의 곡선들은 표 10.3.1에 정리되어 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose we want to evaluate $\iint_R f(x,y)\,dA$ when $R$ is a circular disk centered at the origin. Describing such an $R$ in rectangular coordinates is clumsy, while polar coordinates describe it at a glance. Whenever the region of integration is more easily described in polar coordinates, converting the double integral first is usually the shorter route.</p>
+        <p>Polar coordinates were introduced in Section 10.3. The polar coordinates $(r,\theta)$ of a point and its rectangular coordinates $(x,y)$ are related by</p>
+        <div class="math-display">$$r^2=x^2+y^2,\qquad x=r\cos\theta,\qquad y=r\sin\theta.$$</div>
+        <p>Circles centered at the origin become especially simple: the unit circle is $r=1$, and the disk it encloses is</p>
+        <div class="math-display">$$R=\{(r,\theta)\mid 0\le r\le 1,\ 0\le\theta\le 2\pi\}.$$</div>
+        <p>A second region handled just as easily is the half-ring between the circles $x^2+y^2=1$ and $x^2+y^2=4$ lying above the $x$-axis, namely</p>
+        <div class="math-display">$$R=\{(r,\theta)\mid 1\le r\le 2,\ 0\le\theta\le\pi\}.$$</div>
+        <p>Table 10.3.1 lists other curves that are conveniently described in polar coordinates.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Polar rectangle (Figure 3) -->
+<div class="card def-card" id="c15-3-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">극좌표 직사각형 <em>Polar Rectangle</em><span class="src-ref">Figure 3 · p.1101</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>극좌표 직사각형.</strong> 다음과 같은 꼴의 집합</p>
+          <div class="math-display">$$R=\{(r,\theta)\mid a\le r\le b,\ \alpha\le\theta\le\beta\}$$</div>
+          <p>을 <strong>극좌표 직사각형</strong>이라 한다. 이는 두 동심원호 $r=a$, $r=b$와 두 반직선 $\theta=\alpha$, $\theta=\beta$로 둘러싸인다.</p>
+        </div>
+        <p>앞 카드의 두 영역은 모두 이 특수한 경우이다. 단위원판은 $a=0$, $b=1$, $\alpha=0$, $\beta=2\pi$에, 반원환은 $a=1$, $b=2$, $\alpha=0$, $\beta=\pi$에 해당한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Polar rectangle.</strong> A set of the form</p>
+          <div class="math-display">$$R=\{(r,\theta)\mid a\le r\le b,\ \alpha\le\theta\le\beta\}$$</div>
+          <p>is called a <strong>polar rectangle</strong>. It is bounded by the two concentric circular arcs $r=a$ and $r=b$ and by the two rays $\theta=\alpha$ and $\theta=\beta$.</p>
+        </div>
+        <p>Both regions of the previous card are special cases: the unit disk takes $a=0$, $b=1$, $\alpha=0$, $\beta=2\pi$, and the half-ring takes $a=1$, $b=2$, $\alpha=0$, $\beta=\pi$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Polar Riemann sums and the area element (Eq. 1, Figure 4) -->
+<div class="card note-card" id="c15-3-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">극좌표 리만 합과 넓이소 <em>Polar Riemann Sums and the Area Element</em><span class="src-ref">Eq. (1) · Figure 4 · p.1101&ndash;1102</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[a,b]$를 폭 $\Delta r=(b-a)/m$인 $m$개의 부분구간 $[r_{i-1},r_i]$로, $[\alpha,\beta]$를 폭 $\Delta\theta=(\beta-\alpha)/n$인 $n$개의 부분구간 $[\theta_{j-1},\theta_j]$로 등분하자. 원 $r=r_i$와 반직선 $\theta=\theta_j$는 극좌표 직사각형 $R$을 작은 극부분직사각형</p>
+        <div class="math-display">$$R_{ij}=\{(r,\theta)\mid r_{i-1}\le r\le r_i,\ \theta_{j-1}\le\theta\le\theta_j\},$$</div>
+        <p>들로 잘라낸다. 이 $R_{ij}$의 &ldquo;중심&rdquo;은 극좌표 $r_i^*=\tfrac12(r_{i-1}+r_i)$, $\theta_j^*=\tfrac12(\theta_{j-1}+\theta_j)$를 갖는다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 270" role="img" aria-label="극좌표 직사각형을 원호와 반직선으로 나눈 극부분직사각형과 그 중심" style="max-width:360px;width:100%;height:auto">
+            <path d="M 126.9,206.7 A 90,90 0 0 0 70.8,145.4 L 108.4,42.1 A 200,200 0 0 1 233.2,178.2 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--g600)" stroke-width="1.3"/>
+            <path d="M 146.5,155.4 A 130,130 0 0 0 123.6,130.4 L 146.1,103.6 A 165,165 0 0 1 175.2,135.4 Z" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 165.6,196.4 A 130,130 0 0 0 84.5,107.8" fill="none" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 199.4,187.3 A 165,165 0 0 0 96.4,75.0" fill="none" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="113.7" y1="178.4" x2="203.8" y2="115.3" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="97.9" y1="161.1" x2="168.6" y2="76.8" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="126.9" y1="206.7" x2="233.2" y2="178.2" stroke="var(--grey800)" stroke-width="1.2"/>
+            <line x1="70.8" y1="145.4" x2="108.4" y2="42.1" stroke="var(--grey800)" stroke-width="1.2"/>
+            <line x1="40" y1="230" x2="126.9" y2="206.7" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="40" y1="230" x2="70.8" y2="145.4" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="40" cy="230" r="2.6" fill="var(--grey700)"/>
+            <text x="28" y="245" font-size="11" fill="var(--grey600)">O</text>
+            <circle cx="148.8" cy="130.4" r="3" fill="var(--grey900)"/>
+            <line x1="151" y1="132" x2="182" y2="152" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="185" y="157" font-size="10.5" font-style="italic" fill="var(--grey900)">(rᵢ*, θⱼ*)</text>
+            <text x="130" y="120" font-size="11" font-style="italic" fill="var(--g800)">Rᵢⱼ</text>
+            <text x="118" y="222" font-size="10.5" font-style="italic" fill="var(--grey700)">r = a</text>
+            <text x="236" y="174" font-size="10.5" font-style="italic" fill="var(--grey700)">r = b</text>
+            <text x="180" y="212" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = α</text>
+            <text x="76" y="34" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = β</text>
+            <text x="176" y="200" font-size="10.5" font-style="italic" fill="var(--orange)">Δr</text>
+            <text x="196" y="98" font-size="10.5" font-style="italic" fill="var(--orange)">Δθ</text>
+            <text x="180" y="258" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g700)">ΔAᵢ = rᵢ* Δr Δθ</text>
+          </svg>
+        </div>
+        <p>$R_{ij}$의 넓이를 구하려면, 반지름 $r$이고 중심각 $\theta$인 부채꼴의 넓이가 $\tfrac12 r^2\theta$라는 사실을 이용한다. 중심각이 똑같이 $\Delta\theta=\theta_j-\theta_{j-1}$인 두 부채꼴의 넓이를 서로 빼면</p>
+        <div class="math-display">$$\Delta A_i=\tfrac12 r_i^2\,\Delta\theta-\tfrac12 r_{i-1}^2\,\Delta\theta=\tfrac12\left(r_i^2-r_{i-1}^2\right)\Delta\theta=\tfrac12\left(r_i+r_{i-1}\right)\left(r_i-r_{i-1}\right)\Delta\theta=r_i^*\,\Delta r\,\Delta\theta,$$</div>
+        <p>을 얻는데, 이는 $i$에는 의존하지만 $j$에는 의존하지 않는 양이다. 이중적분은 본래 보통의 직사각형으로 정의되었지만, $f$가 연속이면 극좌표 직사각형을 써도 같은 값이 나온다. $R_{ij}$의 중심은 직교좌표로 $(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*)$이므로, 전형적인 리만 합은 다음과 같다.</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)\Delta A_i=\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)r_i^*\,\Delta r\,\Delta\theta.\tag{1}$$</div>
+        <p>$g(r,\theta)=r\,f(r\cos\theta,\ r\sin\theta)$로 두면 (1)의 합은 $\sum_i\sum_j g(r_i^*,\theta_j^*)\,\Delta r\,\Delta\theta$가 되고, 이는 다음 이중적분에 대한 보통의 리만 합이다.</p>
+        <div class="math-display">$$\int_{\alpha}^{\beta}\!\!\int_{a}^{b} g(r,\theta)\,dr\,d\theta.$$</div>
+        <p>따라서 넓이소에 붙는 여분의 인자 $r$은 관례가 아니라, 얇은 극좌표 셀 하나의 넓이 $\Delta A_i=r_i^*\,\Delta r\,\Delta\theta$에서 나온 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Divide $[a,b]$ into $m$ subintervals $[r_{i-1},r_i]$ of equal width $\Delta r=(b-a)/m$ and $[\alpha,\beta]$ into $n$ subintervals $[\theta_{j-1},\theta_j]$ of equal width $\Delta\theta=(\beta-\alpha)/n$. The circles $r=r_i$ and the rays $\theta=\theta_j$ cut the polar rectangle $R$ into small polar subrectangles</p>
+        <div class="math-display">$$R_{ij}=\{(r,\theta)\mid r_{i-1}\le r\le r_i,\ \theta_{j-1}\le\theta\le\theta_j\},$$</div>
+        <p>whose &ldquo;center&rdquo; has polar coordinates $r_i^*=\tfrac12(r_{i-1}+r_i)$ and $\theta_j^*=\tfrac12(\theta_{j-1}+\theta_j)$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 270" role="img" aria-label="A polar rectangle divided by circles and rays into polar subrectangles" style="max-width:360px;width:100%;height:auto">
+            <path d="M 126.9,206.7 A 90,90 0 0 0 70.8,145.4 L 108.4,42.1 A 200,200 0 0 1 233.2,178.2 Z" fill="var(--g50)" fill-opacity="0.85" stroke="var(--g600)" stroke-width="1.3"/>
+            <path d="M 146.5,155.4 A 130,130 0 0 0 123.6,130.4 L 146.1,103.6 A 165,165 0 0 1 175.2,135.4 Z" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <path d="M 165.6,196.4 A 130,130 0 0 0 84.5,107.8" fill="none" stroke="var(--grey400)" stroke-width="1"/>
+            <path d="M 199.4,187.3 A 165,165 0 0 0 96.4,75.0" fill="none" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="113.7" y1="178.4" x2="203.8" y2="115.3" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="97.9" y1="161.1" x2="168.6" y2="76.8" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="126.9" y1="206.7" x2="233.2" y2="178.2" stroke="var(--grey800)" stroke-width="1.2"/>
+            <line x1="70.8" y1="145.4" x2="108.4" y2="42.1" stroke="var(--grey800)" stroke-width="1.2"/>
+            <line x1="40" y1="230" x2="126.9" y2="206.7" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="40" y1="230" x2="70.8" y2="145.4" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="40" cy="230" r="2.6" fill="var(--grey700)"/>
+            <text x="28" y="245" font-size="11" fill="var(--grey600)">O</text>
+            <circle cx="148.8" cy="130.4" r="3" fill="var(--grey900)"/>
+            <line x1="151" y1="132" x2="182" y2="152" stroke="var(--grey400)" stroke-width="0.9"/>
+            <text x="185" y="157" font-size="10.5" font-style="italic" fill="var(--grey900)">(rᵢ*, θⱼ*)</text>
+            <text x="130" y="120" font-size="11" font-style="italic" fill="var(--g800)">Rᵢⱼ</text>
+            <text x="118" y="222" font-size="10.5" font-style="italic" fill="var(--grey700)">r = a</text>
+            <text x="236" y="174" font-size="10.5" font-style="italic" fill="var(--grey700)">r = b</text>
+            <text x="180" y="212" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = α</text>
+            <text x="76" y="34" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = β</text>
+            <text x="176" y="200" font-size="10.5" font-style="italic" fill="var(--orange)">Δr</text>
+            <text x="196" y="98" font-size="10.5" font-style="italic" fill="var(--orange)">Δθ</text>
+            <text x="180" y="258" text-anchor="middle" font-size="11.5" font-style="italic" fill="var(--g700)">ΔAᵢ = rᵢ* Δr Δθ</text>
+          </svg>
+        </div>
+        <p>To find the area of $R_{ij}$, use the fact that a circular sector of radius $r$ and central angle $\theta$ has area $\tfrac12 r^2\theta$. Subtracting two such sectors, each of central angle $\Delta\theta=\theta_j-\theta_{j-1}$, gives</p>
+        <div class="math-display">$$\Delta A_i=\tfrac12 r_i^2\,\Delta\theta-\tfrac12 r_{i-1}^2\,\Delta\theta=\tfrac12\left(r_i^2-r_{i-1}^2\right)\Delta\theta=\tfrac12\left(r_i+r_{i-1}\right)\left(r_i-r_{i-1}\right)\Delta\theta=r_i^*\,\Delta r\,\Delta\theta,$$</div>
+        <p>a quantity depending on $i$ but not on $j$. The double integral was defined using ordinary rectangles, but for a continuous $f$ one gets the same value using polar rectangles. Since the center of $R_{ij}$ has rectangular coordinates $(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*)$, a typical Riemann sum is</p>
+        <div class="math-display">$$\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)\Delta A_i=\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)r_i^*\,\Delta r\,\Delta\theta.\tag{1}$$</div>
+        <p>Writing $g(r,\theta)=r\,f(r\cos\theta,\ r\sin\theta)$ turns the sum in (1) into $\sum_i\sum_j g(r_i^*,\theta_j^*)\,\Delta r\,\Delta\theta$, which is an ordinary Riemann sum for the double integral</p>
+        <div class="math-display">$$\int_{\alpha}^{\beta}\!\!\int_{a}^{b} g(r,\theta)\,dr\,d\theta.$$</div>
+        <p>So the extra factor $r$ in the area element is not a convention: it comes from the area $\Delta A_i=r_i^*\,\Delta r\,\Delta\theta$ of a thin polar cell.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Formula (2) Change to polar coordinates -->
+<div class="card thm-card" id="c15-3-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">이중적분의 극좌표 변환 <em>Change to Polar Coordinates in a Double Integral</em><span class="src-ref">Eq. (2) · p.1102</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (2) &mdash; 이중적분의 극좌표 변환.</strong> $f$가 $0\le a\le r\le b$, $\alpha\le\theta\le\beta$ (단 $0\le\beta-\alpha\le2\pi$)로 주어지는 극좌표 직사각형 $R$에서 연속이면</p>
+          <div class="math-display">$$\iint_R f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.\tag{2}$$</div>
+        </div>
+        <p>제약 $0\le\beta-\alpha\le2\pi$는 반직선이 한 바퀴를 넘겨 돌지 못하게 막아, $R$가 두 번 이상 겹쳐 훑이는 일이 없도록 한다. 원점이나 $\beta-\alpha=2\pi$일 때의 경계 반직선처럼 넓이가 $0$인 부분은 여러 번 기술될 수 있으나, 적분값에는 영향을 주지 않는다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $R$을 폭 $\Delta r=(b-a)/m$인 $m$개의 $r$-구간과 폭 $\Delta\theta=(\beta-\alpha)/n$인 $n$개의 $\theta$-구간으로 잘라 극부분직사각형 $R_{ij}$를 만들고, 그 중심을 $(r_i^*,\theta_j^*)$라 하자. 앞 카드에서 본 대로 $R_{ij}$의 넓이는 두 부채꼴의 넓이 차 $\Delta A_i=\tfrac12(r_i^2-r_{i-1}^2)\Delta\theta=r_i^*\,\Delta r\,\Delta\theta$이며, $j$에 의존하지 않는다. $f$가 $R$에서 연속이므로, 보통의 직사각형 분할로 정의된 이중적분의 값은 극부분직사각형에 의한 리만 합의 극한으로도 얻어진다.</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)\Delta A_i.$$</div>
+        <p>$g(r,\theta)=r\,f(r\cos\theta,\ r\sin\theta)$로 두면 위 합은 $g$에 대한 보통 직사각형 $[a,b]\times[\alpha,\beta]$ 위의 리만 합 $\sum_i\sum_j g(r_i^*,\theta_j^*)\,\Delta r\,\Delta\theta$와 정확히 같다. $f$와 $(r,\theta)\mapsto(r\cos\theta,r\sin\theta)$가 모두 연속이므로 $g$도 $[a,b]\times[\alpha,\beta]$에서 연속이고, 이 리만 합의 극한은 $\displaystyle\iint_{[a,b]\times[\alpha,\beta]} g\,dr\,d\theta$이다. $g$가 연속이므로 §15.1 정리 10(푸비니 정리)에 의해 이 이중적분은 반복적분과 같다.</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} g(r,\theta)\,dr\,d\theta=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (2) &mdash; Change to Polar Coordinates in a Double Integral.</strong> If $f$ is continuous on a polar rectangle $R$ given by $0\le a\le r\le b$ and $\alpha\le\theta\le\beta$, where $0\le\beta-\alpha\le 2\pi$, then</p>
+          <div class="math-display">$$\iint_R f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.\tag{2}$$</div>
+        </div>
+        <p>The restriction $0\le\beta-\alpha\le2\pi$ keeps the rays from sweeping past a full turn, so that no part of $R$ is swept more than once. Sets of area zero &mdash; the origin, or the boundary ray when $\beta-\alpha=2\pi$ &mdash; may still be described repeatedly, which does not affect the integral.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Cut $R$ into $m$ subintervals of $r$ of width $\Delta r=(b-a)/m$ and $n$ subintervals of $\theta$ of width $\Delta\theta=(\beta-\alpha)/n$, producing polar subrectangles $R_{ij}$ with centers $(r_i^*,\theta_j^*)$. As in the previous card, the area of $R_{ij}$ is the difference of two sector areas, $\Delta A_i=\tfrac12(r_i^2-r_{i-1}^2)\Delta\theta=r_i^*\,\Delta r\,\Delta\theta$, independent of $j$. Since $f$ is continuous on $R$, the value of the double integral obtained from ordinary rectangles also arises as the limit of Riemann sums built from the polar subrectangles:</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n} f\!\left(r_i^*\cos\theta_j^*,\ r_i^*\sin\theta_j^*\right)\Delta A_i.$$</div>
+        <p>Writing $g(r,\theta)=r\,f(r\cos\theta,\ r\sin\theta)$, this sum equals exactly the ordinary Riemann sum $\sum_i\sum_j g(r_i^*,\theta_j^*)\,\Delta r\,\Delta\theta$ for $g$ on the ordinary rectangle $[a,b]\times[\alpha,\beta]$. Since $f$ and the map $(r,\theta)\mapsto(r\cos\theta,r\sin\theta)$ are continuous, so is $g$, and the limit of this Riemann sum is $\displaystyle\iint_{[a,b]\times[\alpha,\beta]} g\,dr\,d\theta$. Because $g$ is continuous, §15.1 Theorem 10 (Fubini's Theorem) turns this double integral into an iterated one:</p>
+        <div class="math-display">$$\iint_R f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} g(r,\theta)\,dr\,d\theta=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : the extra factor r (Figure 5) -->
+<div class="card rem-card" id="c15-3-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">여분의 인자 r <em>Remembering the Extra Factor r</em><span class="src-ref">Figure 5 · p.1102</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (2)는 이중적분을 직교좌표에서 극좌표로 바꾸는 세 단계 절차를 제시한다.</p>
+        <p><strong>(a)</strong> 피적분함수에서 $x=r\cos\theta$, $y=r\sin\theta$로 놓는다.</p>
+        <p><strong>(b)</strong> $r$과 $\theta$에 알맞은 적분 한계를 정한다.</p>
+        <p><strong>(c)</strong> $dA$를 $r\,dr\,d\theta$로 바꾼다.</p>
+        <p>흔히 잊어버리는 것이 바로 (c) 단계이다. 이를 기억하는 고전적인 방법은, &ldquo;미소&rdquo; 극좌표 직사각형을 변의 길이가 $dr$과 $r\,d\theta$인 보통의 직사각형으로 보는 것이다. 그러면 그 넓이는</p>
+        <div class="math-display">$$dA=r\,dr\,d\theta.$$</div>
+        <p>이 인자 $r$은 야코비안 인자의 첫 사례이며, 일반적인 변수변환은 §15.9에서 다룬다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Formula (2) prescribes a three-step recipe for converting a double integral from rectangular to polar coordinates.</p>
+        <p><strong>(a)</strong> Write $x=r\cos\theta$ and $y=r\sin\theta$ in the integrand.</p>
+        <p><strong>(b)</strong> Choose limits of integration appropriate for $r$ and $\theta$.</p>
+        <p><strong>(c)</strong> Replace $dA$ by $r\,dr\,d\theta$.</p>
+        <p>Step (c) is the one that is forgotten. A classical way to keep it in mind: an &ldquo;infinitesimal&rdquo; polar rectangle may be regarded as an ordinary rectangle with sides $dr$ and $r\,d\theta$, so its area is</p>
+        <div class="math-display">$$dA=r\,dr\,d\theta.$$</div>
+        <p>The factor $r$ is the first instance of a Jacobian factor; the general change of variables is treated in Section 15.9.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Formula (3), general polar regions (Figure 8) -->
+<div class="card thm-card" id="c15-3-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6</span>
+    <span class="thm-title">일반 극영역에서의 이중적분 <em>Double Integrals over General Polar Regions</em><span class="src-ref">Eq. (3) · Figure 8 · p.1103</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (3).</strong> $f$가 다음과 같은 꼴의 극영역</p>
+          <div class="math-display">$$D=\{(r,\theta)\mid \alpha\le\theta\le\beta,\ h_1(\theta)\le r\le h_2(\theta)\},$$</div>
+          <p>에서 연속이면</p>
+          <div class="math-display">$$\iint_D f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.\tag{3}$$</div>
+        </div>
+        <p>이런 $D$는 §15.2의 제2형 영역에 대응하는 극좌표 버전이다. 바깥 변수 $\theta$는 두 상수 사이를 움직이고, $\theta$를 하나씩 고정할 때마다 안쪽 변수 $r$은 $\theta$의 두 함수 사이를 움직인다. 식 (3)은 식 (2)와 §15.2의 식 15.2.4를 결합하면 얻어진다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="일반 극영역 — 두 반직선 사이에서 r = h₁(θ)와 r = h₂(θ)로 둘러싸인 영역" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="220" x2="335" y2="220" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="341,220 331,223 331,217" fill="var(--grey400)"/>
+            <line x1="60" y1="220" x2="60" y2="34" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="60,28 57,38 63,38" fill="var(--grey400)"/>
+            <text x="342" y="234" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="46" y="34" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <path d="M 111.7,201.2 L 113.7,189.0 L 113.6,175.0 L 102.4,169.4 L 89.0,169.8 L 72.9,171.7 L 94.2,92.5 L 132.5,94.4 L 162.8,97.4 L 188.7,112.0 L 194.2,142.5 L 191.6,172.1 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="60" y1="220" x2="205.7" y2="167.0" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="60" y1="220" x2="97.5" y2="79.9" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="220" r="2.6" fill="var(--grey700)"/>
+            <text x="47" y="235" font-size="11" fill="var(--grey600)">O</text>
+            <text x="209" y="164" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = α</text>
+            <text x="100" y="72" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = β</text>
+            <text x="139" y="146" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="120" y="208" font-size="10.5" font-style="italic" fill="var(--g700)">r = h₁(θ)</text>
+            <text x="200" y="104" font-size="10.5" font-style="italic" fill="var(--g700)">r = h₂(θ)</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 식 (2)를 쓸 수 있도록 $0\le\beta-\alpha\le2\pi$라 하자. $h_1,h_2$가 유계이므로, 모든 $\theta\in[\alpha,\beta]$에 대해 $a\le h_1(\theta)$이고 $h_2(\theta)\le b$가 되는 극좌표 직사각형 $R=\{(r,\theta)\mid 0\le a\le r\le b,\ \alpha\le\theta\le\beta\}$를 골라 $D\subset R$로 둘 수 있다. $D$ 위에서는 $f$와 같고 $R\setminus D$ 위에서는 $0$인 함수 $F$를 정의하면, §15.2의 일반 영역에 대한 이중적분의 정의에 의해 $\iint_D f\,dA=\iint_R F\,dA$이다. 이 $F$는 $D$의 경계에서 불연속일 수 있지만, §15.2에서와 마찬가지로 $f$가 $D$에서 연속이고 $D$의 경계가 잘 다루어지는 곡선이면 $F$는 $R$에서 적분가능하며, 식 (2)는 이런 적분가능한 $F$에 대해서도 성립함이 알려져 있다. $F$에 식 (2)를 적용하면</p>
+        <div class="math-display">$$\iint_D f(x,y)\,dA=\iint_R F(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} F(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.$$</div>
+        <p>고정된 $\theta\in[\alpha,\beta]$에 대해, 점 $(r\cos\theta,r\sin\theta)$가 $D$에 속하는 것은 정확히 $h_1(\theta)\le r\le h_2(\theta)$일 때이다 &mdash; $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$라는 이 기술은 §15.2에서 제2형 영역을 $c\le y\le d$, $h_1(y)\le x\le h_2(y)$로 기술한 것의 극좌표 판이고, 안쪽 한계를 이렇게 좁히는 단계가 §15.2 식 (4)(제2형 영역의 반복적분 공식)를 얻을 때의 단계에 대응한다. 따라서 안쪽 피적분함수는 이 구간 밖에서 $0$이고,</p>
+        <div class="math-display">$$\int_{a}^{b} F(r\cos\theta,\ r\sin\theta)\ r\,dr=\int_{h_1(\theta)}^{h_2(\theta)} f(r\cos\theta,\ r\sin\theta)\ r\,dr.$$</div>
+        <p>이를 앞의 식에 대입하면 식 (3)을 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (3).</strong> If $f$ is continuous on a polar region of the form</p>
+          <div class="math-display">$$D=\{(r,\theta)\mid \alpha\le\theta\le\beta,\ h_1(\theta)\le r\le h_2(\theta)\},$$</div>
+          <p>then</p>
+          <div class="math-display">$$\iint_D f(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)} f(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.\tag{3}$$</div>
+        </div>
+        <p>Such a $D$ is the polar counterpart of a type II region of Section 15.2: the outer variable $\theta$ runs between two constants, and for each fixed $\theta$ the inner variable $r$ runs between two functions of $\theta$. Formula (3) follows by combining Formula (2) with Formula 15.2.4.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 250" role="img" aria-label="A general polar region between the curves r equals h1 of theta and r equals h2 of theta" style="max-width:360px;width:100%;height:auto">
+            <line x1="60" y1="220" x2="335" y2="220" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="341,220 331,223 331,217" fill="var(--grey400)"/>
+            <line x1="60" y1="220" x2="60" y2="34" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="60,28 57,38 63,38" fill="var(--grey400)"/>
+            <text x="342" y="234" font-size="11" font-style="italic" fill="var(--grey600)">x</text>
+            <text x="46" y="34" font-size="11" font-style="italic" fill="var(--grey600)">y</text>
+            <path d="M 111.7,201.2 L 113.7,189.0 L 113.6,175.0 L 102.4,169.4 L 89.0,169.8 L 72.9,171.7 L 94.2,92.5 L 132.5,94.4 L 162.8,97.4 L 188.7,112.0 L 194.2,142.5 L 191.6,172.1 Z" fill="var(--g50)" fill-opacity="0.9" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="60" y1="220" x2="205.7" y2="167.0" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="60" y1="220" x2="97.5" y2="79.9" stroke="var(--grey500)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="220" r="2.6" fill="var(--grey700)"/>
+            <text x="47" y="235" font-size="11" fill="var(--grey600)">O</text>
+            <text x="209" y="164" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = α</text>
+            <text x="100" y="72" font-size="10.5" font-style="italic" fill="var(--grey700)">θ = β</text>
+            <text x="139" y="146" font-size="13" font-style="italic" fill="var(--g800)">D</text>
+            <text x="120" y="208" font-size="10.5" font-style="italic" fill="var(--g700)">r = h₁(θ)</text>
+            <text x="200" y="104" font-size="10.5" font-style="italic" fill="var(--g700)">r = h₂(θ)</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Assume $0\le\beta-\alpha\le2\pi$, so that Formula (2) is available. Since $h_1,h_2$ are bounded, a polar rectangle $R=\{(r,\theta)\mid 0\le a\le r\le b,\ \alpha\le\theta\le\beta\}$ can be chosen with $a\le h_1(\theta)$ and $h_2(\theta)\le b$ for every $\theta\in[\alpha,\beta]$, so that $D\subset R$. Let $F$ agree with $f$ on $D$ and equal $0$ on $R\setminus D$; by the definition of the double integral over a general region from Section 15.2, $\iint_D f\,dA=\iint_R F\,dA$. This $F$ may be discontinuous on the boundary of $D$, but &mdash; exactly as in Section 15.2 &mdash; it is integrable on $R$ when $f$ is continuous on $D$ and the boundary of $D$ is a well-behaved curve, and Formula (2) is known to hold for such integrable $F$ as well. Applying Formula (2) to $F$ gives</p>
+        <div class="math-display">$$\iint_D f(x,y)\,dA=\iint_R F(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{a}^{b} F(r\cos\theta,\ r\sin\theta)\ r\,dr\,d\theta.$$</div>
+        <p>For a fixed $\theta\in[\alpha,\beta]$, the point $(r\cos\theta,r\sin\theta)$ lies in $D$ exactly when $h_1(\theta)\le r\le h_2(\theta)$ &mdash; the description $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$ is the polar analogue of a type II region $c\le y\le d$, $h_1(y)\le x\le h_2(y)$, and narrowing the inner limits in this way is the step that yields Formula 15.2.4, the iterated-integral formula for type II regions. Hence the inner integrand vanishes outside that interval, and</p>
+        <div class="math-display">$$\int_{a}^{b} F(r\cos\theta,\ r\sin\theta)\ r\,dr=\int_{h_1(\theta)}^{h_2(\theta)} f(r\cos\theta,\ r\sin\theta)\ r\,dr.$$</div>
+        <p>Substituting into the previous equality gives Formula (3).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Area in polar coordinates -->
+<div class="card thm-card" id="c15-3-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">극좌표에서의 넓이 공식 <em>Area in Polar Coordinates</em><span class="src-ref">Eq. (3)의 특수화 · p.1104</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>극영역의 넓이.</strong> 식 (3)에서 $f(x,y)=1$, $h_1(\theta)=0$, $h_2(\theta)=h(\theta)$로 두면, $\theta=\alpha$, $\theta=\beta$, $r=h(\theta)$로 둘러싸인 영역 $D$의 넓이는</p>
+          <div class="math-display">$$A(D)=\iint_D 1\,dA=\int_{\alpha}^{\beta}\!\!\int_{0}^{h(\theta)} r\,dr\,d\theta=\int_{\alpha}^{\beta}\tfrac12\left[h(\theta)\right]^2 d\theta.$$</div>
+        </div>
+        <p>이는 §10.4에서 얻은 식 10.4.3, 곧 극좌표 곡선의 넓이 공식과 정확히 같다. 여기서는 그 공식이 $f=1$인 특수한 경우로서 이중적분에서 저절로 나온다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 식 (3)에서 $f(x,y)=1$ (모든 $(x,y)$에 대해), $h_1(\theta)=0$, $h_2(\theta)=h(\theta)$로 두면 $f(r\cos\theta,r\sin\theta)=1$이므로</p>
+        <div class="math-display">$$A(D)=\iint_D 1\,dA=\int_{\alpha}^{\beta}\!\!\int_{0}^{h(\theta)} r\,dr\,d\theta.$$</div>
+        <p>안쪽 적분은 $\theta$를 고정한 채 $r$의 원시함수 $r^2/2$를 두 끝점에서 계산하면 되므로</p>
+        <div class="math-display">$$\int_{0}^{h(\theta)} r\,dr=\left[\frac{r^2}{2}\right]_{0}^{h(\theta)}=\tfrac12\left[h(\theta)\right]^2,$$</div>
+        <p>이를 대입하면</p>
+        <div class="math-display">$$A(D)=\int_{\alpha}^{\beta}\tfrac12\left[h(\theta)\right]^2 d\theta.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Area of a polar region.</strong> Taking $f(x,y)=1$, $h_1(\theta)=0$ and $h_2(\theta)=h(\theta)$ in Formula (3), the area of the region $D$ bounded by $\theta=\alpha$, $\theta=\beta$ and $r=h(\theta)$ is</p>
+          <div class="math-display">$$A(D)=\iint_D 1\,dA=\int_{\alpha}^{\beta}\!\!\int_{0}^{h(\theta)} r\,dr\,d\theta=\int_{\alpha}^{\beta}\tfrac12\left[h(\theta)\right]^2 d\theta.$$</div>
+        </div>
+        <p>This is exactly Formula 10.4.3, the area formula obtained there for polar curves; here it drops out of the double integral as the special case $f=1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> In Formula (3), take $f(x,y)=1$ for all $(x,y)$, $h_1(\theta)=0$ and $h_2(\theta)=h(\theta)$; then $f(r\cos\theta,r\sin\theta)=1$, so</p>
+        <div class="math-display">$$A(D)=\iint_D 1\,dA=\int_{\alpha}^{\beta}\!\!\int_{0}^{h(\theta)} r\,dr\,d\theta.$$</div>
+        <p>For fixed $\theta$, the inner integral is the antiderivative $r^2/2$ of $r$ evaluated at the endpoints,</p>
+        <div class="math-display">$$\int_{0}^{h(\theta)} r\,dr=\left[\frac{r^2}{2}\right]_{0}^{h(\theta)}=\tfrac12\left[h(\theta)\right]^2,$$</div>
+        <p>and substituting this gives</p>
+        <div class="math-display">$$A(D)=\int_{\alpha}^{\beta}\tfrac12\left[h(\theta)\right]^2 d\theta.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Why polar coordinates help -->
+<div class="card rem-card" id="c15-3-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">극좌표를 쓰는 이유 <em>Why Polar Coordinates Help</em><span class="src-ref">p.1103</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예제 3은 극좌표를 쓸 때 얻는 이득을 잘 보여준다. 직교좌표를 그대로 쓰면 같은 부피는</p>
+        <div class="math-display">$$V=\iint_D\left(1-x^2-y^2\right)dA=\int_{-1}^{1}\!\!\int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}}\left(1-x^2-y^2\right)dy\,dx,$$</div>
+        <p>로 쓰이는데, 안쪽 적분을 마치고 나면 $\int\left(1-x^2\right)^{3/2}dx$가 남아 계산이 성가시다. 극좌표에서는 같은 계산이 초등적인 적분 두 번으로 끝난다.</p>
+        <p>극좌표로 바꾸어야 함을 알려주는 신호는 크게 두 가지이다. 하나는 영역이 원점을 중심으로 한 원, 또는 원점에서 뻗어나가는 반직선으로 둘러싸인 경우 — 원판·원환·부채꼴·장미곡선 등이다. 다른 하나는 피적분함수가 $x^2+y^2$의 꼴로 이루어진 경우인데, 이는 $r^2$이 되어 간단해지기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Example 3 shows what is gained. Kept in rectangular coordinates, the same volume would read</p>
+        <div class="math-display">$$V=\iint_D\left(1-x^2-y^2\right)dA=\int_{-1}^{1}\!\!\int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}}\left(1-x^2-y^2\right)dy\,dx,$$</div>
+        <p>which is unpleasant because the inner integration leaves $\int\left(1-x^2\right)^{3/2}dx$. In polar coordinates the same computation is two elementary integrations.</p>
+        <p>Two signals suggest switching to polar coordinates: the region is bounded by circles centered at the origin, or by rays from it &mdash; a disk, a ring, a sector, a rose &mdash; or the integrand is built from $x^2+y^2$, since that becomes $r^2$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex15-3-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">반원환 위의 이중적분 <em>A Double Integral over a Half-Ring</em><span class="src-ref">Example 1 · p.1102</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$R$가 상반평면 $y\ge 0$에서 두 원 $x^2+y^2=1$과 $x^2+y^2=4$ 사이에 놓인 반원환일 때, 이중적분 $\iint_R\left(3x+4y^2\right)dA$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 반원환 $R$을 극좌표로 기술하면 $R=\{(r,\theta)\mid 1\le r\le2,\ 0\le\theta\le\pi\}$인 극좌표 직사각형이므로 식 (2)를 바로 쓸 수 있다. $x=r\cos\theta$, $y=r\sin\theta$를 대입하면 $3x+4y^2=3r\cos\theta+4r^2\sin^2\theta$이고 $dA=r\,dr\,d\theta$이므로</p>
+        <div class="math-display">$$\iint_R(3x+4y^2)\,dA=\int_0^\pi\!\!\int_1^2\left(3r\cos\theta+4r^2\sin^2\theta\right)r\,dr\,d\theta=\int_0^\pi\!\!\int_1^2\left(3r^2\cos\theta+4r^3\sin^2\theta\right)dr\,d\theta.$$</div>
+        <p>피적분함수의 두 항이 각각 $r$만의 함수와 $\theta$만의 함수의 곱이므로, 직사각형 영역 위에서 이중적분을 두 개의 곱으로 분리할 수 있다.</p>
+        <div class="math-display">$$=3\left(\int_1^2 r^2\,dr\right)\left(\int_0^\pi\cos\theta\,d\theta\right)+4\left(\int_1^2 r^3\,dr\right)\left(\int_0^\pi\sin^2\theta\,d\theta\right).$$</div>
+        <p>첫째 항에서 $\int_0^\pi\cos\theta\,d\theta=\left[\sin\theta\right]_0^\pi=0$이므로 그 항은 사라진다. 둘째 항에서는 $\int_1^2 r^3\,dr=\left[\dfrac{r^4}{4}\right]_1^2=\dfrac{15}{4}$이고, 배각공식 $\sin^2\theta=\tfrac12(1-\cos2\theta)$에 의해 $\int_0^\pi\sin^2\theta\,d\theta=\tfrac12\left[\theta-\tfrac12\sin2\theta\right]_0^\pi=\dfrac{\pi}{2}$이다. 이 값들을 모으면</p>
+        <div class="math-display">$$\iint_R(3x+4y^2)\,dA=0+4\cdot\frac{15}{4}\cdot\frac{\pi}{2}=\frac{15\pi}{2}.$$</div>
+        <p>따라서 $\displaystyle\iint_R(3x+4y^2)\,dA=\frac{15\pi}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $R$ be the half-ring in the upper half-plane $y\ge 0$ lying between the circles $x^2+y^2=1$ and $x^2+y^2=4$. Evaluate the double integral $\iint_R\left(3x+4y^2\right)dA$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> In polar form the half-ring is the polar rectangle $R=\{(r,\theta)\mid 1\le r\le2,\ 0\le\theta\le\pi\}$, so Formula (2) applies directly. Substituting $x=r\cos\theta$, $y=r\sin\theta$ gives $3x+4y^2=3r\cos\theta+4r^2\sin^2\theta$, and $dA=r\,dr\,d\theta$, so</p>
+        <div class="math-display">$$\iint_R(3x+4y^2)\,dA=\int_0^\pi\!\!\int_1^2\left(3r\cos\theta+4r^2\sin^2\theta\right)r\,dr\,d\theta=\int_0^\pi\!\!\int_1^2\left(3r^2\cos\theta+4r^3\sin^2\theta\right)dr\,d\theta.$$</div>
+        <p>Each term in the integrand is a function of $r$ times a function of $\theta$, so over this rectangular domain the double integral splits into a sum of two products:</p>
+        <div class="math-display">$$=3\left(\int_1^2 r^2\,dr\right)\left(\int_0^\pi\cos\theta\,d\theta\right)+4\left(\int_1^2 r^3\,dr\right)\left(\int_0^\pi\sin^2\theta\,d\theta\right).$$</div>
+        <p>In the first term the $\theta$-factor $\int_0^\pi\cos\theta\,d\theta=\left[\sin\theta\right]_0^\pi=0$ vanishes, so that term drops out. For the second, $\int_1^2 r^3\,dr=\left[\dfrac{r^4}{4}\right]_1^2=\dfrac{15}{4}$, and the double-angle identity $\sin^2\theta=\tfrac12(1-\cos2\theta)$ gives $\int_0^\pi\sin^2\theta\,d\theta=\tfrac12\left[\theta-\tfrac12\sin2\theta\right]_0^\pi=\dfrac{\pi}{2}$. Combining these,</p>
+        <div class="math-display">$$\iint_R(3x+4y^2)\,dA=0+4\cdot\frac{15}{4}\cdot\frac{\pi}{2}=\frac{15\pi}{2}.$$</div>
+        <p>Hence $\displaystyle\iint_R(3x+4y^2)\,dA=\frac{15\pi}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex15-3-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">반복적분을 극좌표로 바꾸어 계산 <em>Converting an Iterated Integral to Polar Coordinates</em><span class="src-ref">Example 2 · p.1103</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반복적분</p>
+        <div class="math-display">$$\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx$$</div>
+        <p>를 극좌표로 바꾸어 그 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 바깥 적분의 한계 $-1\le x\le1$과 안쪽 적분의 한계 $0\le y\le\sqrt{1-x^2}$은 함께 상반 단위원판 $x^2+y^2\le1,\ y\ge0$을 기술한다. 극좌표로는 $D=\{(r,\theta)\mid 0\le r\le1,\ 0\le\theta\le\pi\}$인 극좌표 직사각형이다. 피적분함수는 $x^2+y^2=r^2$이고 $dA=r\,dr\,d\theta$이므로</p>
+        <div class="math-display">$$\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx=\iint_D r^2\,dA=\int_0^\pi\!\!\int_0^1 r^2\cdot r\,dr\,d\theta=\int_0^\pi\!\!\int_0^1 r^3\,dr\,d\theta.$$</div>
+        <p>안쪽 적분과 바깥 적분이 모두 상수 한계를 가지므로 곱으로 분리하면 $\displaystyle\int_0^1 r^3\,dr=\left[\frac{r^4}{4}\right]_0^1=\frac14$이고 $\displaystyle\int_0^\pi d\theta=\pi$이다.</p>
+        <div class="math-display">$$\int_0^\pi\!\!\int_0^1 r^3\,dr\,d\theta=\frac14\cdot\pi=\frac{\pi}{4}.$$</div>
+        <p>따라서 $\displaystyle\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx=\frac{\pi}{4}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Evaluate the iterated integral</p>
+        <div class="math-display">$$\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx$$</div>
+        <p>by first converting it to polar coordinates.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The outer limits $-1\le x\le1$ together with the inner limits $0\le y\le\sqrt{1-x^2}$ describe the upper half of the unit disk, $x^2+y^2\le1$, $y\ge0$. In polar coordinates this is the polar rectangle $D=\{(r,\theta)\mid 0\le r\le1,\ 0\le\theta\le\pi\}$. Since $x^2+y^2=r^2$ and $dA=r\,dr\,d\theta$,</p>
+        <div class="math-display">$$\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx=\iint_D r^2\,dA=\int_0^\pi\!\!\int_0^1 r^2\cdot r\,dr\,d\theta=\int_0^\pi\!\!\int_0^1 r^3\,dr\,d\theta.$$</div>
+        <p>Both the inner and outer limits are constants, so the integral splits into a product: $\displaystyle\int_0^1 r^3\,dr=\left[\frac{r^4}{4}\right]_0^1=\frac14$ and $\displaystyle\int_0^\pi d\theta=\pi$, so</p>
+        <div class="math-display">$$\int_0^\pi\!\!\int_0^1 r^3\,dr\,d\theta=\frac14\cdot\pi=\frac{\pi}{4}.$$</div>
+        <p>Hence $\displaystyle\int_{-1}^{1}\!\!\int_{0}^{\sqrt{1-x^2}}\left(x^2+y^2\right)dy\,dx=\frac{\pi}{4}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex15-3-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">포물면과 평면 사이 입체의 부피 <em>Volume of a Solid Capped by a Paraboloid</em><span class="src-ref">Example 3 · p.1103</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $z=0$과 포물면 $z=1-x^2-y^2$으로 둘러싸인 입체의 부피를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 입체는 평면 $z=0$ 위, 포물면 $z=1-x^2-y^2$ 아래에 놓인다. 두 곡면의 교선은 $1-x^2-y^2=0$, 즉 $x^2+y^2=1$이므로, 포물면이 평면 위쪽에 있는 $xy$-평면 영역은 단위원판 $D=\{(x,y)\mid x^2+y^2\le1\}$이다. 이 원판 위에서 입체의 높이는 $z=1-x^2-y^2\ge0$이므로 부피는</p>
+        <div class="math-display">$$V=\iint_D\left(1-x^2-y^2\right)dA.$$</div>
+        <p>$D$는 극좌표로 $0\le r\le1$, $0\le\theta\le2\pi$이고 $1-x^2-y^2=1-r^2$이므로</p>
+        <div class="math-display">$$V=\int_0^{2\pi}\!\!\int_0^1\left(1-r^2\right)r\,dr\,d\theta=\int_0^{2\pi}\!\!\int_0^1\left(r-r^3\right)dr\,d\theta.$$</div>
+        <p>안쪽 적분은 $\displaystyle\int_0^1\left(r-r^3\right)dr=\left[\frac{r^2}{2}-\frac{r^4}{4}\right]_0^1=\frac12-\frac14=\frac14$이고, 이는 $\theta$에 무관하므로 바깥 적분은 단순히 $2\pi$를 곱한다.</p>
+        <div class="math-display">$$V=2\pi\cdot\frac14=\frac{\pi}{2}.$$</div>
+        <p>따라서 구하는 부피는 $V=\dfrac{\pi}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The plane $z=0$ and the paraboloid $z=1-x^2-y^2$ enclose a solid. Compute its volume.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The solid lies above the plane $z=0$ and below the paraboloid $z=1-x^2-y^2$. The two surfaces meet where $1-x^2-y^2=0$, i.e. $x^2+y^2=1$, so the region of the $xy$-plane over which the paraboloid sits above the plane is the unit disk $D=\{(x,y)\mid x^2+y^2\le1\}$. On this disk the height of the solid is $z=1-x^2-y^2\ge0$, so the volume is</p>
+        <div class="math-display">$$V=\iint_D\left(1-x^2-y^2\right)dA.$$</div>
+        <p>In polar coordinates $D$ is $0\le r\le1$, $0\le\theta\le2\pi$, and $1-x^2-y^2=1-r^2$, so</p>
+        <div class="math-display">$$V=\int_0^{2\pi}\!\!\int_0^1\left(1-r^2\right)r\,dr\,d\theta=\int_0^{2\pi}\!\!\int_0^1\left(r-r^3\right)dr\,d\theta.$$</div>
+        <p>The inner integral is $\displaystyle\int_0^1\left(r-r^3\right)dr=\left[\frac{r^2}{2}-\frac{r^4}{4}\right]_0^1=\frac12-\frac14=\frac14$, independent of $\theta$, so the outer integral just multiplies by $2\pi$:</p>
+        <div class="math-display">$$V=2\pi\cdot\frac14=\frac{\pi}{2}.$$</div>
+        <p>Hence the volume is $V=\dfrac{\pi}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex15-3-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">네잎장미 한 잎의 넓이 <em>Area of One Loop of a Four-Leaved Rose</em><span class="src-ref">Example 4 · p.1104</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>네잎장미 $r=\cos 2\theta$의 한 잎이 둘러싸는 넓이를 이중적분을 이용하여 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $r=\cos2\theta$는 $\theta=0$에서 최댓값 $r=1$을 가지며, $\cos2\theta=0$이 되는 첫 값은 $\theta=\pm\pi/4$이다. $-\pi/4\le\theta\le\pi/4$에서는 $2\theta\in[-\pi/2,\pi/2]$이므로 $\cos2\theta\ge0$이고, $\theta$가 $-\pi/4$에서 $0$을 거쳐 $\pi/4$로 움직이는 동안 $r$은 $0$에서 $1$까지 커졌다가 다시 $0$으로 돌아온다. 즉 $\theta=0$ 방향의 잎 하나는 극영역</p>
+        <div class="math-display">$$D=\{(r,\theta)\mid -\pi/4\le\theta\le\pi/4,\ 0\le r\le\cos2\theta\}$$</div>
+        <p>로 기술된다. 이중적분으로 넓이를 구하면</p>
+        <div class="math-display">$$A=\iint_D 1\,dA=\int_{-\pi/4}^{\pi/4}\!\!\int_0^{\cos2\theta} r\,dr\,d\theta=\int_{-\pi/4}^{\pi/4}\tfrac12\cos^2(2\theta)\,d\theta.$$</div>
+        <p>피적분함수 $\cos^2(2\theta)$는 $\theta$의 짝함수이므로 구간을 반으로 줄여 $A=\displaystyle\int_0^{\pi/4}\cos^2(2\theta)\,d\theta$로 써도 된다. 배각공식 $\cos^2(2\theta)=\tfrac12(1+\cos4\theta)$를 쓰면</p>
+        <div class="math-display">$$A=\int_0^{\pi/4}\tfrac12\left(1+\cos4\theta\right)d\theta=\tfrac12\left[\theta+\tfrac14\sin4\theta\right]_0^{\pi/4}=\tfrac12\left(\frac{\pi}{4}+\tfrac14\sin\pi\right)=\tfrac12\cdot\frac{\pi}{4}=\frac{\pi}{8}.$$</div>
+        <p>따라서 한 잎의 넓이는 $A=\dfrac{\pi}{8}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Set up a double integral for one loop of the four-leaved rose $r=\cos 2\theta$ and use it to compute the area that loop encloses.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The curve $r=\cos2\theta$ reaches its maximum $r=1$ at $\theta=0$ and first vanishes at $\theta=\pm\pi/4$. On $-\pi/4\le\theta\le\pi/4$ we have $2\theta\in[-\pi/2,\pi/2]$, so $\cos2\theta\ge0$, and as $\theta$ sweeps from $-\pi/4$ through $0$ to $\pi/4$, $r$ grows from $0$ to $1$ and back to $0$. So the loop pointing along $\theta=0$ is the polar region</p>
+        <div class="math-display">$$D=\{(r,\theta)\mid -\pi/4\le\theta\le\pi/4,\ 0\le r\le\cos2\theta\}.$$</div>
+        <p>The area as a double integral is</p>
+        <div class="math-display">$$A=\iint_D 1\,dA=\int_{-\pi/4}^{\pi/4}\!\!\int_0^{\cos2\theta} r\,dr\,d\theta=\int_{-\pi/4}^{\pi/4}\tfrac12\cos^2(2\theta)\,d\theta.$$</div>
+        <p>The integrand $\cos^2(2\theta)$ is even in $\theta$, so this equals $A=\displaystyle\int_0^{\pi/4}\cos^2(2\theta)\,d\theta$ over the half interval. Using the double-angle identity $\cos^2(2\theta)=\tfrac12(1+\cos4\theta)$,</p>
+        <div class="math-display">$$A=\int_0^{\pi/4}\tfrac12\left(1+\cos4\theta\right)d\theta=\tfrac12\left[\theta+\tfrac14\sin4\theta\right]_0^{\pi/4}=\tfrac12\left(\frac{\pi}{4}+\tfrac14\sin\pi\right)=\tfrac12\cdot\frac{\pi}{4}=\frac{\pi}{8}.$$</div>
+        <p>Hence the area of one petal is $A=\dfrac{\pi}{8}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex15-3-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">원기둥 안쪽 포물면 아래 입체의 부피 <em>Volume inside a Cylinder and under a Paraboloid</em><span class="src-ref">Example 5 · p.1104</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>위로는 포물면 $z=x^2+y^2$, 아래로는 $xy$-평면, 옆으로는 원기둥면 $x^2+y^2=2x$로 둘러싸인 입체의 부피를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 원기둥면 $x^2+y^2=2x$는 $(x-1)^2+y^2=1$로 고쳐 쓰면 중심 $(1,0)$, 반지름 $1$인 원임을 알 수 있다. $x^2+y^2=r^2$, $x=r\cos\theta$를 대입하면 $r^2=2r\cos\theta$, 즉 $r=2\cos\theta$이다. $r\ge0$이려면 $\cos\theta\ge0$, 곧 $-\pi/2\le\theta\le\pi/2$이어야 하며, 이 범위에서 원판의 내부는</p>
+        <div class="math-display">$$D=\{(r,\theta)\mid -\pi/2\le\theta\le\pi/2,\ 0\le r\le2\cos\theta\}$$</div>
+        <p>로 기술된다. 포물면의 높이는 $z=x^2+y^2=r^2$이므로 구하는 부피는</p>
+        <div class="math-display">$$V=\iint_D r^2\,dA=\int_{-\pi/2}^{\pi/2}\!\!\int_0^{2\cos\theta} r^2\cdot r\,dr\,d\theta=\int_{-\pi/2}^{\pi/2}\!\!\int_0^{2\cos\theta} r^3\,dr\,d\theta.$$</div>
+        <p>안쪽 적분은 $\displaystyle\int_0^{2\cos\theta} r^3\,dr=\left[\frac{r^4}{4}\right]_0^{2\cos\theta}=4\cos^4\theta$이다. 피적분함수 $\cos^4\theta$가 $\theta$의 짝함수이므로</p>
+        <div class="math-display">$$V=\int_{-\pi/2}^{\pi/2}4\cos^4\theta\,d\theta=8\int_0^{\pi/2}\cos^4\theta\,d\theta.$$</div>
+        <p>배각공식을 두 번 적용하면 $\cos^4\theta=\left(\dfrac{1+\cos2\theta}{2}\right)^2=\dfrac38+\dfrac12\cos2\theta+\dfrac18\cos4\theta$이므로 $\displaystyle\int_0^{\pi/2}\cos^4\theta\,d\theta=\left[\frac38\theta+\frac14\sin2\theta+\frac1{32}\sin4\theta\right]_0^{\pi/2}=\frac{3\pi}{16}$이고, 따라서</p>
+        <div class="math-display">$$V=8\cdot\frac{3\pi}{16}=\frac{3\pi}{2}.$$</div>
+        <p>따라서 구하는 부피는 $V=\dfrac{3\pi}{2}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A solid is bounded above by the paraboloid $z=x^2+y^2$, below by the $xy$-plane, and laterally by the cylinder $x^2+y^2=2x$. Determine its volume.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Rewriting the cylinder $x^2+y^2=2x$ as $(x-1)^2+y^2=1$ shows it is the circle of radius $1$ centered at $(1,0)$. Substituting $x^2+y^2=r^2$, $x=r\cos\theta$ gives $r^2=2r\cos\theta$, i.e. $r=2\cos\theta$. Since $r\ge0$ requires $\cos\theta\ge0$, i.e. $-\pi/2\le\theta\le\pi/2$, the interior of the disk is</p>
+        <div class="math-display">$$D=\{(r,\theta)\mid -\pi/2\le\theta\le\pi/2,\ 0\le r\le2\cos\theta\}.$$</div>
+        <p>The height of the paraboloid is $z=x^2+y^2=r^2$, so the volume is</p>
+        <div class="math-display">$$V=\iint_D r^2\,dA=\int_{-\pi/2}^{\pi/2}\!\!\int_0^{2\cos\theta} r^2\cdot r\,dr\,d\theta=\int_{-\pi/2}^{\pi/2}\!\!\int_0^{2\cos\theta} r^3\,dr\,d\theta.$$</div>
+        <p>The inner integral is $\displaystyle\int_0^{2\cos\theta} r^3\,dr=\left[\frac{r^4}{4}\right]_0^{2\cos\theta}=4\cos^4\theta$. Since $\cos^4\theta$ is even in $\theta$,</p>
+        <div class="math-display">$$V=\int_{-\pi/2}^{\pi/2}4\cos^4\theta\,d\theta=8\int_0^{\pi/2}\cos^4\theta\,d\theta.$$</div>
+        <p>Applying the double-angle identity twice, $\cos^4\theta=\left(\dfrac{1+\cos2\theta}{2}\right)^2=\dfrac38+\dfrac12\cos2\theta+\dfrac18\cos4\theta$, so $\displaystyle\int_0^{\pi/2}\cos^4\theta\,d\theta=\left[\frac38\theta+\frac14\sin2\theta+\frac1{32}\sin4\theta\right]_0^{\pi/2}=\frac{3\pi}{16}$, and thus</p>
+        <div class="math-display">$$V=8\cdot\frac{3\pi}{16}=\frac{3\pi}{2}.$$</div>
+        <p>Hence the volume is $V=\dfrac{3\pi}{2}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c15-3-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch09.html">단원 09</a></p>
+        <ul>
+          <li>극좌표 변환과 일반 극영역에서의 반복적분 — <a href="../calc2/ch09.html#ex05">ex05</a>, <a href="../calc2/ch09.html#yu05-3">yu05-3</a> (완전 대응: 공식 (3)과 같은 내용)</li>
+          <li>극좌표 넓이 공식 — <a href="../calc2/ch09.html#yu05-1">yu05-1</a> (완전 대응)</li>
+          <li>극좌표로 부피 구하기 — <a href="../calc2/ch09.html#yu05-2">yu05-2</a> (완전 대응: 예제 3·5와 같은 유형)</li>
+          <li>극좌표를 이용한 평균값 계산 — <a href="../calc2/ch09.html#yu05-4">yu05-4</a>, <a href="../calc2/ch09.html#pr08">pr08</a> (인접: 평균값은 §15.1, 적분은 극좌표)</li>
+          <li>가우스 적분 등 극좌표의 심화 응용 — <a href="../calc2/ch09.html#pr06">pr06</a>, <a href="../calc2/ch09.html#pr09">pr09</a>, <a href="../calc2/ch09.html#pr10">pr10</a> (교안 확장: 교재 §15.3 본문에는 없음)</li>
+          <li>임용 기출 문항 — <a href="../calc2/ch09.html#pr14">pr14</a>, <a href="../calc2/ch09.html#pr16">pr16</a>, <a href="../calc2/ch09.html#pr17">pr17</a>, <a href="../calc2/ch09.html#pr18">pr18</a>, <a href="../calc2/ch09.html#pr19">pr19</a></li>
+          <li>극좌표 직사각형이라는 용어와 공식 (2), 넓이소 $\Delta A_i=r_i^*\Delta r\,\Delta\theta$의 유도 — 대응 없음 (교안은 일반 극영역만 다룸)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§15.3, 2차)</strong></p>
+        <p>제출 문항: 11, 15, 30, 39, 41 &nbsp;/&nbsp; 학습 참고: 10, 12, 13, 16, 20, 21, 27, 28, 32, 34, 35, 36, 41, 42, 49</p>
+        <ul>
+          <li>30번: 교재의 &ldquo;above the ring&rdquo;은 $xy$-평면에 놓인 ring 위쪽으로 읽는다.</li>
+          <li>35번: 교재의 &ldquo;below the sphere&rdquo;는 &ldquo;inside the sphere&rdquo;로 정정해 푼다.</li>
+          <li>29&ndash;31번의 &ldquo;disk&rdquo;와 &ldquo;ring&rdquo;은 모두 $xy$-평면의 disk·ring을 뜻한다.</li>
+        </ul>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s15-2.html">§15.2 일반 영역 위의 이중적분</a> &nbsp;/&nbsp; 다음: <a href="s15-4.html">§15.4 이중적분의 응용</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch09.html">Unit 09</a></p>
+        <ul>
+          <li>Conversion to polar coordinates and iterated integrals over general polar regions — <a href="../calc2/ch09.html#ex05">ex05</a>, <a href="../calc2/ch09.html#yu05-3">yu05-3</a> (full match with Formula (3))</li>
+          <li>Area formula in polar coordinates — <a href="../calc2/ch09.html#yu05-1">yu05-1</a> (full match)</li>
+          <li>Volumes computed in polar coordinates — <a href="../calc2/ch09.html#yu05-2">yu05-2</a> (full match; same type as Examples 3 and 5)</li>
+          <li>Average values computed in polar coordinates — <a href="../calc2/ch09.html#yu05-4">yu05-4</a>, <a href="../calc2/ch09.html#pr08">pr08</a> (adjacent: the average value itself belongs to Section 15.1)</li>
+          <li>Gaussian integrals and other advanced uses of polar coordinates — <a href="../calc2/ch09.html#pr06">pr06</a>, <a href="../calc2/ch09.html#pr09">pr09</a>, <a href="../calc2/ch09.html#pr10">pr10</a> (extra material, absent from Section 15.3)</li>
+          <li>Past teacher-certification exam problems — <a href="../calc2/ch09.html#pr14">pr14</a>, <a href="../calc2/ch09.html#pr16">pr16</a>, <a href="../calc2/ch09.html#pr17">pr17</a>, <a href="../calc2/ch09.html#pr18">pr18</a>, <a href="../calc2/ch09.html#pr19">pr19</a></li>
+          <li>The term polar rectangle, Formula (2), and the derivation $\Delta A_i=r_i^*\,\Delta r\,\Delta\theta$ — no match (the lecture notes treat general polar regions only)</li>
+        </ul>
+        <p><strong>(b) Assignment (§15.3, second set)</strong></p>
+        <p>Problems to submit: 11, 15, 30, 39, 41 &nbsp;/&nbsp; Recommended practice: 10, 12, 13, 16, 20, 21, 27, 28, 32, 34, 35, 36, 41, 42, 49</p>
+        <ul>
+          <li>No. 30: read the textbook's &ldquo;above the ring&rdquo; as above the ring lying in the $xy$-plane.</li>
+          <li>No. 35: correct the textbook's &ldquo;below the sphere&rdquo; to &ldquo;inside the sphere&rdquo;.</li>
+          <li>Nos. 29&ndash;31: the words &ldquo;disk&rdquo; and &ldquo;ring&rdquo; refer to a disk and a ring in the $xy$-plane.</li>
+        </ul>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s15-2.html">§15.2 Double Integrals over General Regions</a> &nbsp;/&nbsp; Next: <a href="s15-4.html">§15.4 Applications of Double Integrals</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

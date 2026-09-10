@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§15.7 원기둥좌표에서의 삼중적분 (Triple Integrals in Cylindrical Coordinates) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §15.7 원기둥좌표에서의 삼중적분 — 원기둥좌표 (r, θ, z)의 정의와 변환식 (1)(2), 좌표면 r=c·θ=c·z=c, 극좌표 정사영을 갖는 제1형 입체(type 1)의 식 (3), 삼중적분 공식 (4)와 부피소 dV = r dz dr dθ를 한국어·영어 대조로 정리하고 예제 5개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 15.7, 원기둥좌표에서의 삼중적분, triple integral in cylindrical coordinates, 원기둥좌표, cylindrical coordinates, 부피소, volume element, r dz dr dtheta, 제1형 입체, type 1 solid, 정사영, 좌표면, 원뿔 z=r, 포물면, 질량, 반복적분 변환, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s15-7.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§15.7 원기둥좌표에서의 삼중적분 (Triple Integrals in Cylindrical Coordinates) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="원기둥좌표 (r, θ, z)의 정의와 변환식, 좌표면, 극좌표 정사영을 갖는 제1형 입체에서의 삼중적분 공식 (4)와 부피소 dV = r dz dr dθ까지 §15.7 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s15-7.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§15.7 원기둥좌표에서의 삼중적분 (Triple Integrals in Cylindrical Coordinates) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §15.7 원기둥좌표에서의 삼중적분 — 원기둥좌표의 정의와 두 변환식, 좌표면 r=c·θ=c·z=c, 극좌표로 기술되는 정사영을 갖는 제1형 입체(type 1)의 식 (3), 삼중적분 공식 (4)와 부피소 dV = r dz dr dθ를 한국어·영어 대조로 정리하고 본문 예제 5개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s15-7.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s15-7.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s15-1.html">15.1</a>
+      <a href="s15-2.html">15.2</a>
+      <a href="s15-3.html">15.3</a>
+      <a href="s15-4.html">15.4</a>
+      <a href="s15-5.html">15.5</a>
+      <a href="s15-6.html">15.6</a>
+      <a href="s15-7.html" class="active">15.7</a>
+      <a href="s15-8.html">15.8</a>
+      <a href="s15-9.html">15.9</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §15.7 · 7주차</p>
+  <h1>§15.7 원기둥좌표에서의 삼중적분<span>Triple Integrals in Cylindrical Coordinates</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c15-7-1"><span class="toc-num">NOTE</span> 평면 극좌표의 복습 <em>Review of Polar Coordinates</em></a></li>
+    <li><a href="#c15-7-2"><span class="toc-num">DEF 2</span> 원기둥좌표 <em>Cylindrical Coordinates</em></a></li>
+    <li><a href="#c15-7-3"><span class="toc-num">REM 3</span> 좌표면과 사용처 <em>Coordinate Surfaces and When to Use Them</em></a></li>
+    <li><a href="#c15-7-4"><span class="toc-num">NOTE</span> 극좌표 정사영을 갖는 제1형 입체 <em>Type 1 Region with a Polar Projection</em></a></li>
+    <li><a href="#c15-7-5"><span class="toc-num">THM 5</span> 원기둥좌표에서의 삼중적분 <em>Triple Integration in Cylindrical Coordinates</em></a></li>
+    <li><a href="#c15-7-6"><span class="toc-num">REM 6</span> 부피소와 변환 시점 <em>The Volume Element, and When to Convert</em></a></li>
+    <li><a href="#ex15-7-1"><span class="toc-num">EXAM 1</span> 두 좌표계 사이의 변환 <em>Converting between Cylindrical and Rectangular Coordinates</em></a></li>
+    <li><a href="#ex15-7-2"><span class="toc-num">EXAM 2</span> 곡면 z = r의 정체 <em>Identifying the Surface z = r</em></a></li>
+    <li><a href="#ex15-7-3"><span class="toc-num">EXAM 3</span> 포물면 아래 입체 위의 삼중적분 <em>A Triple Integral over a Solid under a Paraboloid</em></a></li>
+    <li><a href="#ex15-7-4"><span class="toc-num">EXAM 4</span> 원기둥 안쪽 입체의 질량 <em>Mass of a Solid inside a Cylinder</em></a></li>
+    <li><a href="#ex15-7-5"><span class="toc-num">EXAM 5</span> 직교 반복적분을 원기둥좌표로 <em>Converting an Iterated Integral to Cylindrical Coordinates</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 · Review of polar coordinates (Figure 1) -->
+<div class="card note-card" id="c15-7-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">평면 극좌표의 복습 <em>Review of Polar Coordinates</em><span class="src-ref">Figure 1 · p.1133</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면에서는 많은 곡선·영역이 직교좌표보다 극좌표로 훨씬 간편하게 기술되므로, 극좌표는 이미 §10.3에서 도입되었다. 직교좌표 $(x,y)$와 극좌표 $(r,\theta)$를 갖는 점 $P$에 대해 두 표시법은 다음 관계로 이어진다.</p>
+        <div class="math-display">$$x=r\cos\theta,\qquad y=r\sin\theta,$$</div>
+        <div class="math-display">$$r^2=x^2+y^2,\qquad \tan\theta=\frac{y}{x}.$$</div>
+        <p>공간에도 이와 유사한 좌표계가 있는데, 이를 <strong>원기둥좌표</strong>라 한다. 원기둥좌표는 자주 마주치는 여러 곡면·입체를 마찬가지로 경제적으로 기술하며, 이 절의 나머지 부분에서 보듯 삼중적분 중에는 원기둥좌표로 옮겨 쓸 때 계산이 훨씬 쉬워지는 것들이 많다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Plane geometry uses polar coordinates because many curves and regions are described far more comfortably that way; they were introduced in Section 10.3. For a point $P$ with rectangular coordinates $(x,y)$ and polar coordinates $(r,\theta)$, the two descriptions are tied together by</p>
+        <div class="math-display">$$x=r\cos\theta,\qquad y=r\sin\theta,$$</div>
+        <div class="math-display">$$r^2=x^2+y^2,\qquad \tan\theta=\frac{y}{x}.$$</div>
+        <p>Three-dimensional space carries an analogous system, called <strong>cylindrical coordinates</strong>, which describes a number of frequently met surfaces and solids just as economically. As the rest of the section shows, several triple integrals become much easier to evaluate once they are written in it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Definition of cylindrical coordinates, Eqs. (1)(2) (Figure 2) -->
+<div class="card def-card" id="c15-7-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">원기둥좌표 <em>Cylindrical Coordinates</em><span class="src-ref">Eqs. (1)(2) · Figure 2 · p.1134</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>원기둥좌표.</strong> 원기둥좌표계에서 공간의 점 $P$는 순서쌍 $(r,\theta,z)$로 나타낸다. 앞의 두 성분 $r,\theta$는 $P$가 $xy$-평면에 내린 정사영의 극좌표이고, 세 번째 성분 $z$는 그 평면에서 $P$까지 재는 부호 있는 거리이다.</p>
+          <p><strong>식 (1)</strong> &mdash; 원기둥좌표에서 직교좌표로:</p>
+          <div class="math-display">$$x=r\cos\theta,\qquad y=r\sin\theta,\qquad z=z.\tag{1}$$</div>
+          <p><strong>식 (2)</strong> &mdash; 직교좌표에서 원기둥좌표로:</p>
+          <div class="math-display">$$r^2=x^2+y^2,\qquad \tan\theta=\frac{y}{x},\qquad z=z.\tag{2}$$</div>
+        </div>
+        <p>$z$에는 부호가 있어서 $xy$-평면 아래에 있는 점은 $z\lt 0$이다. $\theta$는 식 (2)만으로 하나로 정해지지 않는데, 여기에 $2\pi$의 배수를 더해도 마찬가지로 성립하는 값이 되며, 정사영 $(x,y)$가 놓인 사분면에 따라 $\tan\theta=y/x$의 두 해 가운데 어느 쪽을 택할지가 결정된다. 평면 극좌표에서와 꼭 같이, 한 점의 원기둥좌표 표시는 무한히 많다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 260" role="img" aria-label="점 P의 원기둥좌표 — xy-평면 정사영까지의 거리 r, 각 θ, 높이 z" style="max-width:360px;width:100%;height:auto">
+            <line x1="110" y1="190" x2="110" y2="30" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="110,20 106,33 114,33" fill="var(--grey800)"/>
+            <line x1="110" y1="175" x2="336" y2="175" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="345,175 333,171 333,179" fill="var(--grey800)"/>
+            <line x1="110" y1="175" x2="50" y2="222" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="42,229 54,224 50,232" fill="var(--grey800)"/>
+            <text x="96" y="26" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="344" y="192" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="36" y="243" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="93" y="168" font-size="11" fill="var(--grey500)">O</text>
+            <path d="M 78.6,199.7 Q 113,209 145.4,193.7" fill="none" stroke="var(--orange)" stroke-width="1.3"/>
+            <text x="103" y="196" font-size="11.5" font-style="italic" fill="var(--orange)">θ</text>
+            <line x1="110" y1="175" x2="161" y2="202" stroke="var(--g700)" stroke-width="1.7"/>
+            <text x="126" y="200" font-size="11.5" font-style="italic" fill="var(--g700)">r</text>
+            <line x1="161" y1="202" x2="161" y2="115" stroke="var(--g700)" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text x="167" y="162" font-size="11.5" font-style="italic" fill="var(--g700)">z</text>
+            <line x1="110" y1="88" x2="161" y2="115" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="110" cy="175" r="2.6" fill="var(--grey700)"/>
+            <circle cx="161" cy="202" r="3" fill="var(--g700)"/>
+            <circle cx="161" cy="115" r="4" fill="var(--g800)"/>
+            <text x="170" y="110" font-size="11.5" font-style="italic" fill="var(--g800)">P(r, θ, z)</text>
+            <text x="170" y="218" font-size="10.5" font-style="italic" fill="var(--grey700)">(r, θ, 0)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Cylindrical coordinates.</strong> In the cylindrical coordinate system a point $P$ of space is recorded as an ordered triple $(r,\theta,z)$. Its first two entries locate, in polar form, the shadow that $P$ casts on the $xy$-plane, while the third entry $z$ measures the directed distance from that plane up to $P$.</p>
+          <p><strong>Equations (1)</strong> &mdash; from cylindrical to rectangular:</p>
+          <div class="math-display">$$x=r\cos\theta,\qquad y=r\sin\theta,\qquad z=z.\tag{1}$$</div>
+          <p><strong>Equations (2)</strong> &mdash; from rectangular to cylindrical:</p>
+          <div class="math-display">$$r^2=x^2+y^2,\qquad \tan\theta=\frac{y}{x},\qquad z=z.\tag{2}$$</div>
+        </div>
+        <p>Note that $z$ carries a sign: points below the $xy$-plane have $z\lt 0$. The angle $\theta$ is not pinned down by (2) alone &mdash; adding any multiple of $2\pi$ gives another admissible value, and the quadrant in which the projection $(x,y)$ lies decides which solution of $\tan\theta=y/x$ to keep. Exactly as in the plane, a point therefore has infinitely many cylindrical addresses.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 360 260" role="img" aria-label="Cylindrical coordinates of a point P: distance r and angle theta of its projection on the xy-plane, and height z" style="max-width:360px;width:100%;height:auto">
+            <line x1="110" y1="190" x2="110" y2="30" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="110,20 106,33 114,33" fill="var(--grey800)"/>
+            <line x1="110" y1="175" x2="336" y2="175" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="345,175 333,171 333,179" fill="var(--grey800)"/>
+            <line x1="110" y1="175" x2="50" y2="222" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="42,229 54,224 50,232" fill="var(--grey800)"/>
+            <text x="96" y="26" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <text x="344" y="192" font-size="12" font-style="italic" fill="var(--grey800)">y</text>
+            <text x="36" y="243" font-size="12" font-style="italic" fill="var(--grey800)">x</text>
+            <text x="93" y="168" font-size="11" fill="var(--grey500)">O</text>
+            <path d="M 78.6,199.7 Q 113,209 145.4,193.7" fill="none" stroke="var(--orange)" stroke-width="1.3"/>
+            <text x="103" y="196" font-size="11.5" font-style="italic" fill="var(--orange)">θ</text>
+            <line x1="110" y1="175" x2="161" y2="202" stroke="var(--g700)" stroke-width="1.7"/>
+            <text x="126" y="200" font-size="11.5" font-style="italic" fill="var(--g700)">r</text>
+            <line x1="161" y1="202" x2="161" y2="115" stroke="var(--g700)" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text x="167" y="162" font-size="11.5" font-style="italic" fill="var(--g700)">z</text>
+            <line x1="110" y1="88" x2="161" y2="115" stroke="var(--grey300)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="110" cy="175" r="2.6" fill="var(--grey700)"/>
+            <circle cx="161" cy="202" r="3" fill="var(--g700)"/>
+            <circle cx="161" cy="115" r="4" fill="var(--g800)"/>
+            <text x="170" y="110" font-size="11.5" font-style="italic" fill="var(--g800)">P(r, θ, z)</text>
+            <text x="170" y="218" font-size="10.5" font-style="italic" fill="var(--grey700)">(r, θ, 0)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : Coordinate surfaces r=c, theta=c, z=c and when the system pays off (Figures 4-6) -->
+<div class="card rem-card" id="c15-7-3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">좌표면과 사용처 <em>Coordinate Surfaces and When to Use Them</em><span class="src-ref">Figures 4&ndash;6 · p.1134&ndash;1135</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>세 좌표 중 하나를 상수로 고정하면 곡면이 얻어지고, 세 경우 모두 그림으로 쉽게 그릴 수 있다.</p>
+        <p><strong>(a)</strong> $r=c$는 $z$축을 축으로 하는 반지름 $c$인 원기둥이다. 직교좌표로는 같은 곡면을 나타내는 데 $x^2+y^2=c^2$이 필요한 반면 여기서는 $r=c$ 하나로 끝나는데, 원기둥이 이토록 간단한 식을 갖는다는 점이 바로 이 좌표계 이름의 유래이다.</p>
+        <p><strong>(b)</strong> $\theta=c$는 원점을 지나는 수직평면, 즉 $z$축을 포함하는 평면이다.</p>
+        <p><strong>(c)</strong> $z=c$는 $xy$-평면과 평행한 수평평면이다.</p>
+        <p>따라서 이 좌표계는 한 직선에 대한 대칭을 갖는 문제에 자연스럽게 들어맞는다. 그 대칭축을 $z$축으로 잡으면, 그 축을 중심으로 세워진 곡면들은 $\theta$에 전혀 의존하지 않게 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Freezing one coordinate at a constant value produces a surface, and all three are easy to picture.</p>
+        <p><strong>(a)</strong> $r=c$ is the circular cylinder of radius $c$ with the $z$-axis as its axis; in rectangular coordinates the same surface needs the equation $x^2+y^2=c^2$, whereas here $r=c$ suffices. A cylinder having so simple an equation is exactly what gives these coordinates their name.</p>
+        <p><strong>(b)</strong> $\theta=c$ is a vertical plane through the origin, that is, a plane containing the $z$-axis.</p>
+        <p><strong>(c)</strong> $z=c$ is a horizontal plane, parallel to the $xy$-plane.</p>
+        <p>Consequently the system is the natural one for a problem possessing symmetry about a line: choose the $z$-axis to be that axis of symmetry, and the surfaces built around it lose their dependence on $\theta$ altogether.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Type 1 solid with polar projection, Eq. (3) (Figure 8) -->
+<div class="card note-card" id="c15-7-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">극좌표 정사영을 갖는 제1형 입체 <em>Type 1 Region with a Polar Projection</em><span class="src-ref">Eq. (3) · Figure 8 · p.1135</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$f$가 제1형 입체(type 1) $E$ 위에서 연속이고, $E$의 $xy$-평면 정사영 $D$가 마침 극좌표로 편리하게 기술된다고 하자.</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid (x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\},$$</div>
+        <div class="math-display">$$D=\{(r,\theta)\mid \alpha\le\theta\le\beta,\ h_1(\theta)\le r\le h_2(\theta)\}.$$</div>
+        <p>식 15.6.6에 의해 삼중적분은 이미, 먼저 안쪽에서 수직선분을 따라 $z$에 관해 훑고 그 결과를 정사영 $D$ 위에서 이중적분하는 꼴로 줄어든다.</p>
+        <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\iint_D\left[\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,dz\right]dA.\tag{3}$$</div>
+        <p>대괄호 안의 식은 $(x,y)$만의 함수이므로, 식 (3)의 바깥쪽은 극좌표로 기술된 영역 위의 평범한 이중적분이다 &mdash; 바로 §15.3이 다루는 상황이다. 이 두 사실을 결합하는 것이 다음 카드의 내용 전부이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Take $f$ continuous on a type 1 solid $E$ whose projection $D$ onto the $xy$-plane happens to be convenient in polar form:</p>
+        <div class="math-display">$$E=\{(x,y,z)\mid (x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\},$$</div>
+        <div class="math-display">$$D=\{(r,\theta)\mid \alpha\le\theta\le\beta,\ h_1(\theta)\le r\le h_2(\theta)\}.$$</div>
+        <p>Equation 15.6.6 already reduces the triple integral to an inner sweep in $z$ along a vertical segment, followed by a double integral over the shadow $D$:</p>
+        <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\iint_D\left[\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,dz\right]dA.\tag{3}$$</div>
+        <p>What sits inside the brackets is a function of $(x,y)$ alone, so the outer object in (3) is an ordinary double integral over a region described in polar coordinates &mdash; precisely the situation Section 15.3 is built for. Combining the two facts is the whole content of the next card.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : Formula (4) -->
+<div class="card thm-card" id="c15-7-5">
+  <div class="card-head">
+    <span class="thm-num">THM 5</span>
+    <span class="thm-title">원기둥좌표에서의 삼중적분 <em>Triple Integration in Cylindrical Coordinates</em><span class="src-ref">Formula (4) · p.1135</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (4) &mdash; 원기둥좌표에서의 삼중적분.</strong> $f$, $E$, $D$를 앞 카드와 같다고 하자. 즉 $E$는 제1형 입체이고, $D$는 극좌표로 $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$로 주어진다. 그러면</p>
+          <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)}\!\!\int_{u_1(r\cos\theta,\,r\sin\theta)}^{u_2(r\cos\theta,\,r\sin\theta)} f(r\cos\theta,\,r\sin\theta,\,z)\ r\,dz\,dr\,d\theta.\tag{4}$$</div>
+        </div>
+        <p>안쪽에서부터 읽으면 세 번의 적분은 다음과 같다. 먼저 두 경계 곡면 사이에서 $z$에 관해 수직으로 훑는데, 이때 경계 곡면의 높이는 이제 점 $(r\cos\theta,\,r\sin\theta)$에서 계산된다. 그다음은 정사영 $D$ 위에서 이루어지는, §15.3의 식 15.3.3에 해당하는 두 번의 극좌표 적분으로, 이 과정에서 인자 $r$이 곱해진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 각 $(x,y)\in D$에 대하여 $\displaystyle g(x,y)=\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,dz$로 두자. 식 (3)에 의해 $\displaystyle\iiint_E f(x,y,z)\,dV=\iint_D g(x,y)\,dA$이다. $D$는 정확히 $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$로 기술되는 §15.3의 일반 극영역이므로, 식 15.3.3을 $g$에 적용하면</p>
+        <div class="math-display">$$\iint_D g(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)} g(r\cos\theta,\,r\sin\theta)\ r\,dr\,d\theta$$</div>
+        <p>를 얻는다. 이제 $g$의 정의를 점 $(r\cos\theta,\,r\sin\theta)$에서 다시 펼치면</p>
+        <div class="math-display">$$g(r\cos\theta,\,r\sin\theta)=\int_{u_1(r\cos\theta,\,r\sin\theta)}^{u_2(r\cos\theta,\,r\sin\theta)} f(r\cos\theta,\,r\sin\theta,\,z)\,dz$$</div>
+        <p>이므로, 앞의 두 식을 이어 붙이면 곧 식 (4)이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Formula (4) &mdash; Triple integration in cylindrical coordinates.</strong> Let $f$, $E$ and $D$ be as in the previous card, with $E$ a type 1 solid and $D$ given in polar coordinates by $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$. Then</p>
+          <div class="math-display">$$\iiint_E f(x,y,z)\,dV=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)}\!\!\int_{u_1(r\cos\theta,\,r\sin\theta)}^{u_2(r\cos\theta,\,r\sin\theta)} f(r\cos\theta,\,r\sin\theta,\,z)\ r\,dz\,dr\,d\theta.\tag{4}$$</div>
+        </div>
+        <p>Read from the inside out, the three integrations are: a vertical sweep in $z$ between the two boundary surfaces, whose heights are now evaluated at the point $(r\cos\theta,r\sin\theta)$; then the two polar integrations of Formula 15.3.3 over the shadow $D$, which supply the factor $r$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> For each $(x,y)\in D$ set $\displaystyle g(x,y)=\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,dz$. By Formula (3), $\displaystyle\iiint_E f(x,y,z)\,dV=\iint_D g(x,y)\,dA$. Since $D$ is exactly the general polar region of Section 15.3, $\alpha\le\theta\le\beta$, $h_1(\theta)\le r\le h_2(\theta)$, applying Formula 15.3.3 to $g$ gives</p>
+        <div class="math-display">$$\iint_D g(x,y)\,dA=\int_{\alpha}^{\beta}\!\!\int_{h_1(\theta)}^{h_2(\theta)} g(r\cos\theta,\,r\sin\theta)\ r\,dr\,d\theta.$$</div>
+        <p>Unwinding the definition of $g$ at the point $(r\cos\theta,\,r\sin\theta)$ gives</p>
+        <div class="math-display">$$g(r\cos\theta,\,r\sin\theta)=\int_{u_1(r\cos\theta,\,r\sin\theta)}^{u_2(r\cos\theta,\,r\sin\theta)} f(r\cos\theta,\,r\sin\theta,\,z)\,dz,$$</div>
+        <p>and chaining the two displayed equations together yields Formula (4).</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Volume element dV = r dz dr dtheta, when to convert (Figure 9) -->
+<div class="card rem-card" id="c15-7-6">
+  <div class="card-head">
+    <span class="rem-num">REM 6</span>
+    <span class="rem-title">부피소와 변환 시점 <em>The Volume Element, and When to Convert</em><span class="src-ref">Figure 9 · p.1136</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (4)는 삼중적분을 직교좌표에서 원기둥좌표로 바꾸는 절차를 간단히 요약한 것이다.</p>
+        <p><strong>(a)</strong> 피적분함수에서 $x=r\cos\theta$, $y=r\sin\theta$로 놓고, $z$는 그대로 둔다.</p>
+        <p><strong>(b)</strong> $z$, $r$, $\theta$에 알맞은 적분 한계를 정한다.</p>
+        <p><strong>(c)</strong> 부피소를 다음으로 바꾼다.</p>
+        <div class="math-display">$$dV=r\,dz\,dr\,d\theta.$$</div>
+        <p>여기서 곱해지는 $r$은 아래 그림의 미소상자로 기억할 수 있다. 그 세 변은 반지름 방향으로 $dr$, 호를 따라 $r\,d\theta$, 수직으로 $dz$를 재며, 이 세 길이를 곱하면 바로 이 부피소가 나온다. $E$가 원기둥좌표로 쉽게 기술되거나, 무엇보다 피적분함수 $f$에 $x^2+y^2$이 들어 있어 이 좌표에서 간단히 $r^2$이 될 때 이 변환은 해볼 만하다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="30 55 175 185" role="img" aria-label="원기둥좌표의 부피소 — 변이 dr, r dθ, dz인 미소상자" style="max-width:320px;width:100%;height:auto">
+            <line x1="60" y1="175" x2="60" y2="82" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="60,72 56,85 64,85" fill="var(--grey800)"/>
+            <text x="47" y="80" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <line x1="60" y1="165" x2="123" y2="210" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="60" y1="165" x2="171" y2="197" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="165" r="2.4" fill="var(--grey700)"/>
+            <path d="M 77.7,177.7 Q 88,177.5 91.3,174.1" fill="none" stroke="var(--orange)" stroke-width="1.3"/>
+            <line x1="86" y1="190" x2="84" y2="181" stroke="var(--orange)" stroke-width="0.8"/>
+            <text x="76" y="199" font-size="11" font-style="italic" fill="var(--orange)">dθ</text>
+            <polygon points="103,196 116,205 159,194 137,187" fill="var(--g50)" fill-opacity="0.6" stroke="var(--g600)" stroke-width="1.1"/>
+            <line x1="137" y1="187" x2="137" y2="134" stroke="var(--g600)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <polygon points="116,205 159,194 159,141 116,152" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <polygon points="103,196 116,205 116,152 103,143" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <polygon points="103,143 116,152 159,141 137,134" fill="var(--g50)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <line x1="95" y1="213" x2="106" y2="203" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="78" y="220" font-size="11" font-style="italic" fill="var(--grey800)">dr</text>
+            <line x1="136" y1="216" x2="139" y2="200" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="124" y="228" font-size="11" font-style="italic" fill="var(--grey800)">r dθ</text>
+            <line x1="90" y1="160" x2="101" y2="166" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="74" y="158" font-size="11" font-style="italic" fill="var(--grey800)">dz</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Formula (4) amounts to a short recipe for converting a triple integral out of rectangular coordinates.</p>
+        <p><strong>(a)</strong> Substitute $x=r\cos\theta$ and $y=r\sin\theta$ in the integrand, leaving $z$ untouched.</p>
+        <p><strong>(b)</strong> Install limits appropriate to $z$, to $r$ and to $\theta$.</p>
+        <p><strong>(c)</strong> Replace the volume element by</p>
+        <div class="math-display">$$dV=r\,dz\,dr\,d\theta.$$</div>
+        <p>The extra $r$ is remembered from the infinitesimal cell pictured below: its three edges measure $dr$ in the radial direction, $r\,d\theta$ along the arc, and $dz$ vertically, and multiplying the three lengths gives the displayed element. It is worth converting when $E$ has an easy description in cylindrical coordinates, and above all when the expression $x^2+y^2$ appears in $f$, since it becomes simply $r^2$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="30 55 175 185" role="img" aria-label="The volume element in cylindrical coordinates: an infinitesimal box with edges dr, r dtheta and dz" style="max-width:320px;width:100%;height:auto">
+            <line x1="60" y1="175" x2="60" y2="82" stroke="var(--grey800)" stroke-width="1.2"/>
+            <polygon points="60,72 56,85 64,85" fill="var(--grey800)"/>
+            <text x="47" y="80" font-size="12" font-style="italic" fill="var(--grey800)">z</text>
+            <line x1="60" y1="165" x2="123" y2="210" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="60" y1="165" x2="171" y2="197" stroke="var(--grey400)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="165" r="2.4" fill="var(--grey700)"/>
+            <path d="M 77.7,177.7 Q 88,177.5 91.3,174.1" fill="none" stroke="var(--orange)" stroke-width="1.3"/>
+            <line x1="86" y1="190" x2="84" y2="181" stroke="var(--orange)" stroke-width="0.8"/>
+            <text x="76" y="199" font-size="11" font-style="italic" fill="var(--orange)">dθ</text>
+            <polygon points="103,196 116,205 159,194 137,187" fill="var(--g50)" fill-opacity="0.6" stroke="var(--g600)" stroke-width="1.1"/>
+            <line x1="137" y1="187" x2="137" y2="134" stroke="var(--g600)" stroke-width="0.9" stroke-dasharray="4 3"/>
+            <polygon points="116,205 159,194 159,141 116,152" fill="var(--g100)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <polygon points="103,196 116,205 116,152 103,143" fill="var(--g200)" fill-opacity="0.9" stroke="var(--g700)" stroke-width="1.2"/>
+            <polygon points="103,143 116,152 159,141 137,134" fill="var(--g50)" fill-opacity="0.95" stroke="var(--g700)" stroke-width="1.2"/>
+            <line x1="95" y1="213" x2="106" y2="203" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="78" y="220" font-size="11" font-style="italic" fill="var(--grey800)">dr</text>
+            <line x1="136" y1="216" x2="139" y2="200" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="124" y="228" font-size="11" font-style="italic" fill="var(--grey800)">r dθ</text>
+            <line x1="90" y1="160" x2="101" y2="166" stroke="var(--grey500)" stroke-width="0.8"/>
+            <text x="74" y="158" font-size="11" font-style="italic" fill="var(--grey800)">dz</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex15-7-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">두 좌표계 사이의 변환 <em>Converting between Cylindrical and Rectangular Coordinates</em><span class="src-ref">Example 1 · p.1134</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a)</strong> 원기둥좌표가 $\left(2,\tfrac{2\pi}{3},1\right)$인 점의 위치를 그림에 나타내고, 그 직교좌표를 구하라.</p>
+        <p><strong>(b)</strong> 직교좌표가 $(3,-3,-7)$인 점에 대하여 원기둥좌표를 한 벌 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> <strong>(a)</strong> 각 $\tfrac{2\pi}3$은 제2사분면에 속하므로, 점의 $xy$-평면 정사영은 원점을 중심으로 반지름 $2$인 원 위에서 양의 $x$축으로부터 반시계 방향으로 $120^\circ$ 돌아간 자리에 있고, 점 자신은 그 정사영에서 수직으로 $1$만큼 올라간 위치이다. 식 (1)에 $r=2$, $\theta=\tfrac{2\pi}3$, $z=1$을 대입하면</p>
+        <div class="math-display">$$x=2\cos\frac{2\pi}3=-1,\qquad y=2\sin\frac{2\pi}3=\sqrt3,\qquad z=1$$</div>
+        <p>이므로 직교좌표는 $(-1,\sqrt3,1)$이다.</p>
+        <p><strong>(b)</strong> 식 (2)에 $x=3$, $y=-3$을 대입하면 $r^2=9+9=18$이므로 $r=3\sqrt2$이고, $\tan\theta=y/x=-1$이다. $(x,y)=(3,-3)$은 $x\gt0$, $y\lt0$인 제4사분면에 있으므로 $\theta=-\tfrac{\pi}4$를 택하면 된다($\tfrac{7\pi}4$ 등 $2\pi$의 배수만큼 다른 값도 마찬가지로 옳다). $z$는 바뀌지 않으므로 $z=-7$이다.</p>
+        <p>따라서 한 벌의 원기둥좌표는 $\left(3\sqrt2,\,-\tfrac{\pi}4,\,-7\right)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> Mark the location of the point whose cylindrical coordinates are $\left(2,\tfrac{2\pi}{3},1\right)$, and determine its rectangular coordinates.</p>
+        <p><strong>(b)</strong> A point is given in rectangular coordinates as $(3,-3,-7)$. Produce a set of cylindrical coordinates for it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> <strong>(a)</strong> Since the angle $\tfrac{2\pi}3$ lies in the second quadrant, the point's shadow on the $xy$-plane sits on the circle of radius $2$ about the origin, $120^\circ$ counterclockwise from the positive $x$-axis, and the point itself stands $1$ unit above that shadow. Substituting $r=2$, $\theta=\tfrac{2\pi}3$, $z=1$ into Equations (1) gives</p>
+        <div class="math-display">$$x=2\cos\frac{2\pi}3=-1,\qquad y=2\sin\frac{2\pi}3=\sqrt3,\qquad z=1,$$</div>
+        <p>so the rectangular coordinates are $(-1,\sqrt3,1)$.</p>
+        <p><strong>(b)</strong> Substituting $x=3$, $y=-3$ into Equations (2) gives $r^2=9+9=18$, so $r=3\sqrt2$, and $\tan\theta=y/x=-1$. Since $(x,y)=(3,-3)$ has $x\gt0$, $y\lt0$, it lies in the fourth quadrant, so $\theta=-\tfrac{\pi}4$ is a valid choice (any value differing by a multiple of $2\pi$, such as $\tfrac{7\pi}4$, works equally well). The value $z$ is unchanged, so $z=-7$.</p>
+        <p>Hence one set of cylindrical coordinates is $\left(3\sqrt2,\,-\tfrac{\pi}4,\,-7\right)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex15-7-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">곡면 z = r의 정체 <em>Identifying the Surface z = r</em><span class="src-ref">Example 2 · p.1135</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원기둥좌표에서 방정식 $z=r$로 주어지는 곡면이 어떤 곡면인지 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 방정식에 $\theta$가 전혀 나타나지 않으므로, 한 점이 곡면 위에 있으면 그 점을 $z$축을 축으로 임의의 각만큼 회전시킨 점도 다시 곡면 위에 있다 &mdash; 즉 곡면은 $z$축에 대한 회전면이다. 높이 $z=k$($k\gt0$)에서의 수평 자취는 $r=k$인 원, 즉 반지름 $k$인 원이므로, 높이가 커질수록 단면인 원의 반지름이 정확히 같은 비율로 커진다. 이는 원점을 꼭짓점으로 하고 $rz$-평면에서 기울기 $1$인 직선 $z=r$을 모선으로 갖는 원뿔의 특징이다. 식 (2)로 직교좌표로 옮기면 $r=\sqrt{x^2+y^2}$이므로 $z=\sqrt{x^2+y^2}$, 즉 $z^2=x^2+y^2$이고 $z\ge0$이다.</p>
+        <p>따라서 이 곡면은 원점을 꼭짓점으로 하고 $z$축을 축으로 하는 원뿔 $z^2=x^2+y^2$ 가운데 위쪽 절반($z\ge0$)이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A surface is given in cylindrical coordinates by the equation $z=r$. Describe it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The equation contains no $\theta$ at all, so whenever a point lies on the surface, so does the point obtained by rotating it through any angle about the $z$-axis &mdash; it is a surface of revolution about the $z$-axis. The horizontal trace at height $z=k$ ($k\gt0$) is the circle $r=k$, of radius $k$, so the radius of the cross-sectional circle grows at exactly the same rate as the height. That is the hallmark of a cone with vertex at the origin, whose generating line $z=r$ has slope $1$ in the $rz$-plane. Passing to rectangular coordinates via Equations (2), $r=\sqrt{x^2+y^2}$, so $z=\sqrt{x^2+y^2}$, i.e. $z^2=x^2+y^2$ with $z\ge0$.</p>
+        <p>Hence the surface is the upper half ($z\ge0$) of the cone $z^2=x^2+y^2$ with vertex at the origin and axis the $z$-axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex15-7-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">포물면 아래 입체 위의 삼중적분 <em>A Triple Integral over a Solid under a Paraboloid</em><span class="src-ref">Example 3 · p.1136</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>입체 $E$가 포물면 $z=4-x^2-y^2$ 아래이면서 $xy$-평면 위에 놓여 있다고 하자. 삼중적분 $\displaystyle\iiint_E x^2\,dV$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 포물면이 $xy$-평면과 만나는 자리는 $4-x^2-y^2=0$, 즉 $x^2+y^2=4$이므로 $E$의 정사영은 반지름 $2$인 원판이고, $E$는 원기둥좌표로</p>
+        <div class="math-display">$$E=\{(r,\theta,z)\mid 0\le\theta\le2\pi,\ 0\le r\le2,\ 0\le z\le4-r^2\}$$</div>
+        <p>로 쓸 수 있다. $x^2=r^2\cos^2\theta$이고 $dV=r\,dz\,dr\,d\theta$이므로</p>
+        <div class="math-display">$$\iiint_E x^2\,dV=\int_0^{2\pi}\!\!\int_0^2\!\!\int_0^{4-r^2} r^2\cos^2\theta\cdot r\,dz\,dr\,d\theta=\int_0^{2\pi}\cos^2\theta\,d\theta\int_0^2 r^3(4-r^2)\,dr,$$</div>
+        <p>여기서 안쪽 $z$-적분이 구간 길이 $4-r^2$을 그대로 곱해 주므로 두 변수가 분리된다. 반각공식으로 $\displaystyle\int_0^{2\pi}\cos^2\theta\,d\theta=\pi$이고, $\displaystyle\int_0^2\left(4r^3-r^5\right)dr=\left[r^4-\frac{r^6}6\right]_0^2=16-\frac{64}6=\frac{16}3$이므로</p>
+        <div class="math-display">$$\iiint_E x^2\,dV=\pi\cdot\frac{16}3=\frac{16\pi}3.$$</div>
+        <p>따라서 구하는 값은 $\dfrac{16\pi}3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $E$ be the solid bounded above by the paraboloid $z=4-x^2-y^2$ and below by the $xy$-plane. Evaluate the triple integral $\displaystyle\iiint_E x^2\,dV$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The paraboloid meets the $xy$-plane where $4-x^2-y^2=0$, i.e. $x^2+y^2=4$, so $E$ projects onto the disk of radius $2$, and in cylindrical coordinates</p>
+        <div class="math-display">$$E=\{(r,\theta,z)\mid 0\le\theta\le2\pi,\ 0\le r\le2,\ 0\le z\le4-r^2\}.$$</div>
+        <p>Since $x^2=r^2\cos^2\theta$ and $dV=r\,dz\,dr\,d\theta$,</p>
+        <div class="math-display">$$\iiint_E x^2\,dV=\int_0^{2\pi}\!\!\int_0^2\!\!\int_0^{4-r^2} r^2\cos^2\theta\cdot r\,dz\,dr\,d\theta=\int_0^{2\pi}\cos^2\theta\,d\theta\int_0^2 r^3(4-r^2)\,dr,$$</div>
+        <p>the two variables separating because the inner $z$-integral simply multiplies by the interval length $4-r^2$. By the half-angle formula $\displaystyle\int_0^{2\pi}\cos^2\theta\,d\theta=\pi$, and $\displaystyle\int_0^2\left(4r^3-r^5\right)dr=\left[r^4-\frac{r^6}6\right]_0^2=16-\frac{64}6=\frac{16}3$, so</p>
+        <div class="math-display">$$\iiint_E x^2\,dV=\pi\cdot\frac{16}3=\frac{16\pi}3.$$</div>
+        <p>Hence the value of the integral is $\dfrac{16\pi}3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex15-7-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">원기둥 안쪽 입체의 질량 <em>Mass of a Solid inside a Cylinder</em><span class="src-ref">Example 4 · p.1137</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>입체 $E$는 원기둥 $x^2+y^2=1$의 안쪽에서 $xz$-평면의 $y\ge 0$ 쪽에 놓이며, 평면 $z=4$의 아래이면서 포물면 $z=1-x^2-y^2$의 위에 있다. 각 점에서의 밀도가 그 점에서 원기둥의 축까지의 거리에 비례할 때, $E$의 질량을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 원기둥의 축은 $z$축이고 $xz$-평면의 $y\ge0$ 쪽은 $0\le\theta\le\pi$에 해당하므로, $E$는 원기둥좌표로</p>
+        <div class="math-display">$$E=\{(r,\theta,z)\mid 0\le\theta\le\pi,\ 0\le r\le1,\ 1-r^2\le z\le4\}$$</div>
+        <p>로 쓸 수 있다. 점 $(x,y,z)$에서 $z$축까지의 거리는 $\sqrt{x^2+y^2}=r$이므로 밀도는 어떤 비례상수 $K$에 대해 $\rho=Kr$이고, $dV=r\,dz\,dr\,d\theta$이므로 질량은</p>
+        <div class="math-display">$$m=\int_0^{\pi}\!\!\int_0^1\!\!\int_{1-r^2}^{4} Kr\cdot r\,dz\,dr\,d\theta=\int_0^{\pi}d\theta\int_0^1 Kr^2\bigl(4-(1-r^2)\bigr)\,dr.$$</div>
+        <p>안쪽 $z$-적분은 구간 길이 $4-(1-r^2)=3+r^2$을 그대로 곱해 주므로, $\theta$-적분은 단순히 $\pi$를 곱하는 것으로 남는다. $\displaystyle\int_0^1\left(3Kr^2+Kr^4\right)dr=K\left[r^3+\frac{r^5}5\right]_0^1=K\left(1+\frac15\right)=\frac{6K}5$이므로</p>
+        <div class="math-display">$$m=\pi\cdot\frac{6K}5=\frac{6\pi K}5.$$</div>
+        <p>따라서 $E$의 질량은 $m=\dfrac{6\pi K}5$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A solid $E$ occupies the region inside the cylinder $x^2+y^2=1$ on the side $y\ge 0$ of the $xz$-plane, bounded above by the plane $z=4$ and below by the paraboloid $z=1-x^2-y^2$. At each point the density is proportional to how far that point stands from the axis of the cylinder. Determine the mass of $E$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The axis of the cylinder is the $z$-axis, and the side $y\ge0$ of the $xz$-plane corresponds to $0\le\theta\le\pi$, so in cylindrical coordinates</p>
+        <div class="math-display">$$E=\{(r,\theta,z)\mid 0\le\theta\le\pi,\ 0\le r\le1,\ 1-r^2\le z\le4\}.$$</div>
+        <p>The distance from a point $(x,y,z)$ to the $z$-axis is $\sqrt{x^2+y^2}=r$, so the density is $\rho=Kr$ for some constant of proportionality $K$, and since $dV=r\,dz\,dr\,d\theta$ the mass is</p>
+        <div class="math-display">$$m=\int_0^{\pi}\!\!\int_0^1\!\!\int_{1-r^2}^{4} Kr\cdot r\,dz\,dr\,d\theta=\int_0^{\pi}d\theta\int_0^1 Kr^2\bigl(4-(1-r^2)\bigr)\,dr.$$</div>
+        <p>The inner $z$-integral simply multiplies by the interval length $4-(1-r^2)=3+r^2$, so the $\theta$-integral is left to contribute a factor of $\pi$. Since $\displaystyle\int_0^1\left(3Kr^2+Kr^4\right)dr=K\left[r^3+\frac{r^5}5\right]_0^1=K\left(1+\frac15\right)=\frac{6K}5$,</p>
+        <div class="math-display">$$m=\pi\cdot\frac{6K}5=\frac{6\pi K}5.$$</div>
+        <p>Hence the mass of $E$ is $m=\dfrac{6\pi K}5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex15-7-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">직교 반복적분을 원기둥좌표로 <em>Converting an Iterated Integral to Cylindrical Coordinates</em><span class="src-ref">Example 5 · p.1137</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>반복적분</p>
+        <div class="math-display">$$\int_{-2}^{2}\!\!\int_{-\sqrt{4-x^2}}^{\sqrt{4-x^2}}\!\!\int_{\sqrt{x^2+y^2}}^{2}\left(x^2+y^2\right)dz\,dy\,dx$$</div>
+        <p>를 원기둥좌표로 고쳐 쓴 뒤 그 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 바깥 두 적분의 한계 $-2\le x\le2$, $-\sqrt{4-x^2}\le y\le\sqrt{4-x^2}$는 함께 원판 $x^2+y^2\le4$를 기술하므로 $0\le\theta\le2\pi$, $0\le r\le2$이다. 안쪽 $z$-한계의 아래끝 $\sqrt{x^2+y^2}$는 원뿔 $z=r$이고 위끝 $2$는 수평평면이므로 $r\le z\le2$이며, 피적분함수는 $x^2+y^2=r^2$이다. $dV=r\,dz\,dr\,d\theta$이므로 원기둥좌표로는</p>
+        <div class="math-display">$$\int_0^{2\pi}\!\!\int_0^2\!\!\int_r^2 r^2\cdot r\,dz\,dr\,d\theta$$</div>
+        <p>가 된다. 안쪽 $z$-적분은 구간 길이 $2-r$을 곱해 주므로</p>
+        <div class="math-display">$$\int_0^{2\pi}\!\!\int_0^2\!\!\int_r^2 r^3\,dz\,dr\,d\theta=\int_0^{2\pi}d\theta\int_0^2 r^3(2-r)\,dr=2\pi\int_0^2\left(2r^3-r^4\right)dr.$$</div>
+        <p>$\displaystyle\int_0^2\left(2r^3-r^4\right)dr=\left[\frac{r^4}2-\frac{r^5}5\right]_0^2=8-\frac{32}5=\frac85$이므로</p>
+        <div class="math-display">$$2\pi\cdot\frac85=\frac{16\pi}5.$$</div>
+        <p>따라서 주어진 반복적분의 값은 $\dfrac{16\pi}5$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Rewrite the iterated integral</p>
+        <div class="math-display">$$\int_{-2}^{2}\!\!\int_{-\sqrt{4-x^2}}^{\sqrt{4-x^2}}\!\!\int_{\sqrt{x^2+y^2}}^{2}\left(x^2+y^2\right)dz\,dy\,dx$$</div>
+        <p>in cylindrical coordinates, and then evaluate it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> The outer limits $-2\le x\le2$, $-\sqrt{4-x^2}\le y\le\sqrt{4-x^2}$ together describe the disk $x^2+y^2\le4$, so $0\le\theta\le2\pi$, $0\le r\le2$. The lower inner limit $\sqrt{x^2+y^2}$ is the cone $z=r$ and the upper limit $2$ is a horizontal plane, so $r\le z\le2$, and the integrand is $x^2+y^2=r^2$. Since $dV=r\,dz\,dr\,d\theta$, in cylindrical coordinates the integral becomes</p>
+        <div class="math-display">$$\int_0^{2\pi}\!\!\int_0^2\!\!\int_r^2 r^2\cdot r\,dz\,dr\,d\theta.$$</div>
+        <p>The inner $z$-integral multiplies by the interval length $2-r$, so</p>
+        <div class="math-display">$$\int_0^{2\pi}\!\!\int_0^2\!\!\int_r^2 r^3\,dz\,dr\,d\theta=\int_0^{2\pi}d\theta\int_0^2 r^3(2-r)\,dr=2\pi\int_0^2\left(2r^3-r^4\right)dr.$$</div>
+        <p>Since $\displaystyle\int_0^2\left(2r^3-r^4\right)dr=\left[\frac{r^4}2-\frac{r^5}5\right]_0^2=8-\frac{32}5=\frac85$,</p>
+        <div class="math-display">$$2\pi\cdot\frac85=\frac{16\pi}5.$$</div>
+        <p>Hence the value of the iterated integral is $\dfrac{16\pi}5$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c15-7-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch10.html">단원 10</a></p>
+        <ul>
+          <li>원기둥좌표 삼중적분 계산 — <a href="../calc2/ch10.html#ex02">ex02</a>, <a href="../calc2/ch10.html#yu02-1">yu02-1</a>, <a href="../calc2/ch10.html#yu02-2">yu02-2</a>, <a href="../calc2/ch10.html#pr05">pr05</a> (부분 대응: 공식 (4)를 쓰는 계산 유형만 겹침. 교안은 $r\,dz\,dr\,d\theta$를 풀이 안에서 쓸 뿐 공식으로 제시하지 않음)</li>
+          <li>좌표 정의 $(r,\theta,z)$·변환식 (1)(2)·좌표면과 곡면 식별($r=c$, $\theta=c$, $z=c$, $z=r$) — 대응 없음 (교안 U10에 원기둥좌표 기초 카드가 없음)</li>
+          <li>원기둥좌표의 응용(예제 4의 질량, 연습 27(b)·29의 도심·질량중심) — 대응 없음</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§15.7, 2차)</strong></p>
+        <p>제출 문항: 15, 17, 22, 27, 31 &nbsp;/&nbsp; 학습 참고: 1&ndash;2, 3&ndash;4, 5&ndash;6, 7&ndash;8, 9&ndash;10, 11&ndash;12, 13, 15&ndash;16, 17&ndash;18, 19&ndash;30, 31&ndash;32</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s15-6.html">§15.6 삼중적분</a> &nbsp;/&nbsp; 다음: <a href="s15-8.html">§15.8 구면좌표에서의 삼중적분</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch10.html">Unit 10</a></p>
+        <ul>
+          <li>Triple integrals computed in cylindrical coordinates — <a href="../calc2/ch10.html#ex02">ex02</a>, <a href="../calc2/ch10.html#yu02-1">yu02-1</a>, <a href="../calc2/ch10.html#yu02-2">yu02-2</a>, <a href="../calc2/ch10.html#pr05">pr05</a> (partial: only the computational type of Formula (4) overlaps; the lecture notes use $r\,dz\,dr\,d\theta$ inside solutions without stating it as a formula)</li>
+          <li>The coordinates $(r,\theta,z)$ themselves, Equations (1)(2), and the coordinate surfaces $r=c$, $\theta=c$, $z=c$, $z=r$ — no match (Unit 10 has no introductory card on cylindrical coordinates)</li>
+          <li>Applications in cylindrical coordinates (the mass of Example 4; centroids and centers of mass in Exercises 27(b) and 29) — no match</li>
+        </ul>
+        <p><strong>(b) Assignment (§15.7, second set)</strong></p>
+        <p>Problems to submit: 15, 17, 22, 27, 31 &nbsp;/&nbsp; Recommended practice: 1&ndash;2, 3&ndash;4, 5&ndash;6, 7&ndash;8, 9&ndash;10, 11&ndash;12, 13, 15&ndash;16, 17&ndash;18, 19&ndash;30, 31&ndash;32</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s15-6.html">§15.6 Triple Integrals</a> &nbsp;/&nbsp; Next: <a href="s15-8.html">§15.8 Triple Integrals in Spherical Coordinates</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

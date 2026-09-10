@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§16.6 매개곡면과 그 넓이 (Parametric Surfaces and Their Areas) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §16.6 매개곡면과 그 넓이 — 두 매개변수 벡터함수 r(u, v)로 주어지는 매개곡면의 정의(식 1·2), 격자곡선, 회전면의 매개변수방정식(식 3), 접벡터 r_u·r_v(식 4·5)와 접평면, 매끄러운 곡면, 넓이 정의 6과 리만합 유도, 그래프꼴 곡면의 넓이 공식(식 9), 회전면 넓이 공식과의 일관성을 한국어·영어 대조로 정리하고 예제 11개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 16.6, 매개곡면, parametric surface, 격자곡선, grid curves, 매개변수방정식, 회전면, surface of revolution, 접벡터, tangent vector, 접평면, tangent plane, 매끄러운 곡면, smooth surface, 곡면 넓이, surface area, 리만합, 구면 매개화, 원기둥 매개화, 원뿔 매개화, 포물면 넓이, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s16-6.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§16.6 매개곡면과 그 넓이 (Parametric Surfaces and Their Areas) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="두 매개변수 벡터함수로 곡면을 기술하는 법, 격자곡선과 회전면 매개화, 접벡터와 접평면, 넓이 공식 A(S) = ∬|r_u × r_v| dA와 그래프·회전면으로의 환원까지 §16.6 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s16-6.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§16.6 매개곡면과 그 넓이 (Parametric Surfaces and Their Areas) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §16.6 매개곡면과 그 넓이 — 매개곡면과 매개변수방정식의 정의, 격자곡선, 회전면의 매개화, 접벡터와 접평면, 매끄러운 곡면, 곡면 넓이의 정의와 리만합 유도, 그래프꼴 넓이 공식, 1변수 회전면 넓이 공식과의 일관성을 한국어·영어 대조로 정리하고 본문 예제 11개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s16-6.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s16-6.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s16-1.html">16.1</a>
+      <a href="s16-2.html">16.2</a>
+      <a href="s16-3.html">16.3</a>
+      <a href="s16-4.html">16.4</a>
+      <a href="s16-5.html">16.5</a>
+      <a href="s16-6.html" class="active">16.6</a>
+      <a href="s16-7.html">16.7</a>
+      <a href="s16-8.html">16.8</a>
+      <a href="s16-9.html">16.9</a>
+      <a href="s16-10.html">16.10</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §16.6 · 11주차</p>
+  <h1>§16.6 매개곡면과 그 넓이<span>Parametric Surfaces and Their Areas</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c16-6-1"><span class="toc-num">NOTE</span> 매개곡면으로 가는 길 <em>Why Parametric Surfaces</em></a></li>
+    <li><a href="#c16-6-2"><span class="toc-num">DEF 2</span> 매개곡면과 매개변수방정식 <em>Parametric Surface</em></a></li>
+    <li><a href="#c16-6-3"><span class="toc-num">DEF 3</span> 격자곡선 <em>Grid Curves</em></a></li>
+    <li><a href="#c16-6-4"><span class="toc-num">REM 4</span> 격자곡선은 위도선·경도선 <em>Grid Curves as Latitude and Longitude</em></a></li>
+    <li><a href="#c16-6-5"><span class="toc-num">NOTE</span> 그래프는 언제나 매개곡면 <em>Every Graph Is a Parametric Surface</em></a></li>
+    <li><a href="#c16-6-6"><span class="toc-num">REM 6</span> 매개화는 유일하지 않다 <em>Parametrizations Are Not Unique</em></a></li>
+    <li><a href="#c16-6-7"><span class="toc-num">THM 7</span> 회전면의 매개변수방정식 <em>Parametrizing a Surface of Revolution</em></a></li>
+    <li><a href="#c16-6-8"><span class="toc-num">THM 8</span> 격자곡선의 접벡터 <em>Tangent Vectors to the Grid Curves</em></a></li>
+    <li><a href="#c16-6-9"><span class="toc-num">DEF 9</span> 매끄러운 곡면과 접평면 <em>Smooth Surface and Tangent Plane</em></a></li>
+    <li><a href="#c16-6-10"><span class="toc-num">NOTE</span> 넓이 정의의 착상: 패치와 평행사변형 <em>Motivating the Area Definition</em></a></li>
+    <li><a href="#c16-6-11"><span class="toc-num">DEF 11</span> 매개곡면의 넓이 <em>Surface Area of a Parametric Surface</em></a></li>
+    <li><a href="#c16-6-12"><span class="toc-num">THM 12</span> 그래프의 법선벡터와 그 크기 <em>Normal Vector for a Graph</em></a></li>
+    <li><a href="#c16-6-13"><span class="toc-num">THM 13</span> 그래프꼴 곡면의 넓이 <em>Area of a Graph</em></a></li>
+    <li><a href="#c16-6-14"><span class="toc-num">THM 14</span> 회전면 넓이 공식과의 일관성 <em>Consistency with the One-Variable Formula</em></a></li>
+    <li><a href="#ex16-6-1"><span class="toc-num">EXAM 1</span> 벡터방정식으로 주어진 곡면 알아보기 <em>Identifying a Surface from Its Vector Equation</em></a></li>
+    <li><a href="#ex16-6-2"><span class="toc-num">EXAM 2</span> 나선 모양 관 곡면과 격자곡선 <em>A Spiral Tube and Its Grid Curves</em></a></li>
+    <li><a href="#ex16-6-3"><span class="toc-num">EXAM 3</span> 평면의 벡터방정식 <em>A Vector Equation for a Plane</em></a></li>
+    <li><a href="#ex16-6-4"><span class="toc-num">EXAM 4</span> 구면의 매개변수 표현 <em>Parametrizing a Sphere</em></a></li>
+    <li><a href="#ex16-6-5"><span class="toc-num">EXAM 5</span> 원기둥의 매개변수 표현 <em>Parametrizing a Cylinder</em></a></li>
+    <li><a href="#ex16-6-6"><span class="toc-num">EXAM 6</span> 타원포물면의 매개화 <em>Parametrizing an Elliptic Paraboloid</em></a></li>
+    <li><a href="#ex16-6-7"><span class="toc-num">EXAM 7</span> 원뿔면의 두 가지 매개화 <em>Two Parametrizations of a Cone</em></a></li>
+    <li><a href="#ex16-6-8"><span class="toc-num">EXAM 8</span> 사인곡선을 돌려 만든 회전면 <em>Revolving a Sine Curve</em></a></li>
+    <li><a href="#ex16-6-9"><span class="toc-num">EXAM 9</span> 매개곡면의 접평면 구하기 <em>A Tangent Plane to a Parametric Surface</em></a></li>
+    <li><a href="#ex16-6-10"><span class="toc-num">EXAM 10</span> 구면의 겉넓이 <em>The Surface Area of a Sphere</em></a></li>
+    <li><a href="#ex16-6-11"><span class="toc-num">EXAM 11</span> 평면 아래에 놓인 포물면의 넓이 <em>Area of a Paraboloid Below a Plane</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : 절 도입 -->
+<div class="card note-card" id="c16-6-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">매개곡면으로 가는 길 <em>Why Parametric Surfaces</em><span class="src-ref">절 도입 · p.1208</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>지금까지 다룬 곡면은 주면, 이차곡면, $z=f(x,y)$ 꼴의 그래프, 삼변수함수의 등위면 정도로 그 목록이 짧았다. 공간곡선을 기술할 때 썼던 발상을 빌려 오면 훨씬 폭넓은 곡면을 다룰 수 있다.</p>
+        <p>공간곡선은 한 개의 매개변수 $t$를 갖는 벡터함수 $\mathbf r(t)$로 기술되었다. 매개변수를 하나 더 늘려 $\mathbf r(u,v)$ 꼴의 두 변수 벡터함수를 쓰면 곡선 대신 곡면이 얻어진다. 이 절은 이러한 기술 방법을 세우고 그런 곡면의 접평면과 넓이를 구한 뒤, 일반적인 넓이 공식을 그래프 $z=f(x,y)$와 회전면이라는 두 친숙한 경우에 적용해 본다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Up to this point the surfaces available to us have been a short list: cylinders, quadric surfaces, graphs of the form $z=f(x,y)$, and level surfaces of functions of three variables. A far wider supply becomes available once we borrow the idea used for space curves.</p>
+        <p>A space curve was described by a vector function $\mathbf r(t)$ of a <em>single</em> parameter. Allowing <em>two</em> parameters, so that the vector function reads $\mathbf r(u,v)$, produces a surface instead of a curve. This section sets up that description, finds the tangent plane and the area of such a surface, and then specializes the general area formula to two familiar cases: graphs $z=f(x,y)$ and surfaces of revolution.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Equations (1), (2) -->
+<div class="card def-card" id="c16-6-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2</span>
+    <span class="def-title">매개곡면과 매개변수방정식 <em>Parametric Surface</em><span class="src-ref">Equations (1), (2) · p.1208</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (1), (2) &mdash; 매개곡면과 매개변수방정식.</strong> $D$를 $uv$-평면의 한 영역이라 하고,</p>
+          <div class="math-display">$$\mathbf r(u,v)=x(u,v)\,\mathbf i+y(u,v)\,\mathbf j+z(u,v)\,\mathbf k \tag{1}$$</div>
+          <p>를 $D$ 위에서 정의된 벡터함수라 하자. 어떤 $(u,v)\in D$에 대하여</p>
+          <div class="math-display">$$x=x(u,v),\qquad y=y(u,v),\qquad z=z(u,v) \tag{2}$$</div>
+          <p>를 만족하는 $\mathbb R^{3}$의 점 $(x,y,z)$ 전체를 <strong>매개곡면</strong> $S$라 하고, 세 스칼라방정식 (2)를 $S$의 <strong>매개변수방정식</strong>이라 한다.</p>
+        </div>
+        <p>정의 뒤에 놓인 그림은 이렇다. 원점에서 위치벡터 $\mathbf r(u,v)$를 그리고 그 끝점을 지켜본다. 매개변수 쌍 $(u,v)$가 정의역 $D$를 훑고 지나가면 그 끝점은 $S$를 그려낸다. 따라서 정의역 $D$는 곡면의 평평한 지도 구실을 하고, $(u,v)$는 $S$ 위의 한 쌍의 좌표 역할을 맡는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equations (1), (2) &mdash; Parametric Surface.</strong> Let $D$ be a region of the $uv$-plane and let</p>
+          <div class="math-display">$$\mathbf r(u,v)=x(u,v)\,\mathbf i+y(u,v)\,\mathbf j+z(u,v)\,\mathbf k \tag{1}$$</div>
+          <p>be a vector-valued function defined on $D$. The collection of all points $(x,y,z)$ of $\mathbb R^{3}$ whose coordinates satisfy</p>
+          <div class="math-display">$$x=x(u,v),\qquad y=y(u,v),\qquad z=z(u,v) \tag{2}$$</div>
+          <p>for some $(u,v)\in D$ is called a <strong>parametric surface</strong> $S$, and the three scalar equations (2) are <strong>parametric equations</strong> of $S$.</p>
+        </div>
+        <p>The picture behind the definition: draw the position vector $\mathbf r(u,v)$ from the origin, and watch its tip. As the parameter pair $(u,v)$ sweeps across the domain $D$, that tip sweeps out $S$. The domain $D$ therefore acts as a flat chart of the surface, with $(u,v)$ serving as a pair of coordinates on $S$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : grid curves (Figures 1 and 4 combined) -->
+<div class="card def-card" id="c16-6-3">
+  <div class="card-head">
+    <span class="def-num">DEF 3</span>
+    <span class="def-title">격자곡선 <em>Grid Curves</em><span class="src-ref">Figures 1, 4 · p.1209&ndash;1210</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>한 매개변수를 고정하고 다른 하나만 움직이면 $S$ 위에 놓인 곡선이 얻어진다. 이렇게 얻어지는 곡선족은 두 가지다.</p>
+        <div class="formal-box">
+          <p>$u=u_0$을 고정하면 $v\mapsto\mathbf r(u_0,v)$는 한 변수 $v$의 벡터함수가 되어 $S$ 위에 곡선 $C_1$을 그린다. 대신 $v=v_0$을 고정하면 $u\mapsto\mathbf r(u,v_0)$가 $S$ 위에 또 다른 곡선 $C_2$를 그린다. 이렇게 얻어지는 곡선을 매개화의 <strong>격자곡선</strong>이라 한다.</p>
+        </div>
+        <p>대응 $(u,v)\mapsto\mathbf r(u,v)$ 아래에서 격자곡선은 정확히 매개변수영역의 수직선·수평선의 상이다. 즉 직선 $u=u_0$은 $C_1$로, 직선 $v=v_0$은 $C_2$로 옮겨진다. 그래프 소프트웨어가 곡면을 그릴 때는 바로 이 두 곡선족을 충분히 많이 그리므로, 매개곡면의 그림이 마치 그물처럼 짜인 모습으로 나타나는 것이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 440 200" role="img" aria-label="uv-평면의 정의역 D 위의 수직선과 수평선이 벡터함수 r에 의해 곡면 S 위의 격자곡선 C1, C2로 옮겨지는 도식" style="max-width:360px;width:100%;height:auto">
+            <line x1="25" y1="170" x2="180" y2="170" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="25" y1="180" x2="25" y2="48" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="184,170 175,173 175,167" fill="var(--grey400)"/>
+            <polygon points="25,44 22,53 28,53" fill="var(--grey400)"/>
+            <text x="176" y="184" font-size="11" font-style="italic" fill="var(--grey600)">u</text>
+            <text x="12" y="52" font-size="11" font-style="italic" fill="var(--grey600)">v</text>
+            <rect x="40" y="60" width="110" height="90" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="84" y1="150" x2="84" y2="60" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="40" y1="105" x2="150" y2="105" stroke="var(--g700)" stroke-width="1.4"/>
+            <circle cx="84" cy="105" r="2.6" fill="var(--grey900)"/>
+            <text x="50" y="76" font-size="11" font-style="italic" fill="var(--g800)">D</text>
+            <text x="88" y="56" font-size="9.5" font-style="italic" fill="var(--g700)">u = u&#8320;</text>
+            <text x="154" y="102" font-size="9.5" font-style="italic" fill="var(--g700)">v = v&#8320;</text>
+            <text x="60" y="122" font-size="9.5" font-style="italic" fill="var(--grey700)">(u&#8320;, v&#8320;)</text>
+            <line x1="192" y1="105" x2="238" y2="105" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="244,105 235,108 235,102" fill="var(--grey600)"/>
+            <text x="212" y="98" font-size="11" font-style="italic" fill="var(--grey700)">r</text>
+            <path d="M260,165 C290,120 370,120 400,165 L420,85 C390,40 310,40 280,85 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <path d="M270,125 C300,84 380,84 410,125" fill="none" stroke="var(--g700)" stroke-width="1.5"/>
+            <line x1="316" y1="137" x2="336" y2="57" stroke="var(--g700)" stroke-width="1.5"/>
+            <circle cx="326" cy="96" r="2.6" fill="var(--grey900)"/>
+            <text x="340" y="52" font-size="9.5" font-style="italic" fill="var(--g800)">C&#8321;</text>
+            <text x="412" y="136" font-size="9.5" font-style="italic" fill="var(--g800)">C&#8322;</text>
+            <text x="330" y="112" font-size="9.5" font-style="italic" fill="var(--grey700)">r(u&#8320;, v&#8320;)</text>
+            <text x="352" y="170" font-size="11" font-style="italic" fill="var(--g800)">S</text>
+            <text x="220" y="194" text-anchor="middle" font-size="10" fill="var(--grey600)">정의역 D의 수직선·수평선이 곡면 위의 격자곡선이 된다</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Freezing one parameter and letting the other run produces a curve lying on $S$. Two families arise this way.</p>
+        <div class="formal-box">
+          <p>Hold $u=u_0$ fixed. Then $v\mapsto\mathbf r(u_0,v)$ is a vector function of the single variable $v$, and it traces a curve $C_1$ on $S$. Hold $v=v_0$ fixed instead, and $u\mapsto\mathbf r(u,v_0)$ traces a second curve $C_2$ on $S$. Curves obtained in either way are the <strong>grid curves</strong> of the parametrization.</p>
+        </div>
+        <p>Under the correspondence $(u,v)\mapsto\mathbf r(u,v)$ the grid curves are exactly the images of the vertical and horizontal lines of the parameter domain: the line $u=u_0$ is carried to $C_1$, the line $v=v_0$ to $C_2$. Plotting software draws a surface by drawing enough of these two families, which is why the picture of a parametric surface looks like a woven mesh.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 440 200" role="img" aria-label="Vertical and horizontal lines in the parameter domain D of the uv-plane carried by r to the grid curves C1 and C2 on the surface S" style="max-width:360px;width:100%;height:auto">
+            <line x1="25" y1="170" x2="180" y2="170" stroke="var(--grey400)" stroke-width="1"/>
+            <line x1="25" y1="180" x2="25" y2="48" stroke="var(--grey400)" stroke-width="1"/>
+            <polygon points="184,170 175,173 175,167" fill="var(--grey400)"/>
+            <polygon points="25,44 22,53 28,53" fill="var(--grey400)"/>
+            <text x="176" y="184" font-size="11" font-style="italic" fill="var(--grey600)">u</text>
+            <text x="12" y="52" font-size="11" font-style="italic" fill="var(--grey600)">v</text>
+            <rect x="40" y="60" width="110" height="90" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="84" y1="150" x2="84" y2="60" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="40" y1="105" x2="150" y2="105" stroke="var(--g700)" stroke-width="1.4"/>
+            <circle cx="84" cy="105" r="2.6" fill="var(--grey900)"/>
+            <text x="50" y="76" font-size="11" font-style="italic" fill="var(--g800)">D</text>
+            <text x="88" y="56" font-size="9.5" font-style="italic" fill="var(--g700)">u = u&#8320;</text>
+            <text x="154" y="102" font-size="9.5" font-style="italic" fill="var(--g700)">v = v&#8320;</text>
+            <text x="60" y="122" font-size="9.5" font-style="italic" fill="var(--grey700)">(u&#8320;, v&#8320;)</text>
+            <line x1="192" y1="105" x2="238" y2="105" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="244,105 235,108 235,102" fill="var(--grey600)"/>
+            <text x="212" y="98" font-size="11" font-style="italic" fill="var(--grey700)">r</text>
+            <path d="M260,165 C290,120 370,120 400,165 L420,85 C390,40 310,40 280,85 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <path d="M270,125 C300,84 380,84 410,125" fill="none" stroke="var(--g700)" stroke-width="1.5"/>
+            <line x1="316" y1="137" x2="336" y2="57" stroke="var(--g700)" stroke-width="1.5"/>
+            <circle cx="326" cy="96" r="2.6" fill="var(--grey900)"/>
+            <text x="340" y="52" font-size="9.5" font-style="italic" fill="var(--g800)">C&#8321;</text>
+            <text x="412" y="136" font-size="9.5" font-style="italic" fill="var(--g800)">C&#8322;</text>
+            <text x="330" y="112" font-size="9.5" font-style="italic" fill="var(--grey700)">r(u&#8320;, v&#8320;)</text>
+            <text x="352" y="170" font-size="11" font-style="italic" fill="var(--g800)">S</text>
+            <text x="220" y="194" text-anchor="middle" font-size="10" fill="var(--grey600)">lines of D become grid curves on S</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : NOTE - grid curves as latitude and longitude -->
+<div class="card rem-card" id="c16-6-4">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">격자곡선은 위도선·경도선 <em>Grid Curves as Latitude and Longitude</em><span class="src-ref">NOTE &amp; margin note · p.1211</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>두 구면각으로 매개화한 구면에서는 두 격자곡선족이 익숙한 지리 용어로 불린다. $\phi$를 일정하게 유지하면 위도가 일정한 원(적도를 포함한다)이 얻어지고, $\theta$를 일정하게 유지하면 자오선, 곧 두 극을 잇는 경도가 일정한 반원이 얻어진다. 일반적인 매개곡면에서 $(u,v)$ 한 쌍을 정하는 것은 지구본 위에서 위도와 경도를 정하는 것과 같은 종류의 일이다.</p>
+        <p>여백 노트는 실용적인 점을 하나 짚는다. $x^{2}+y^{2}+z^{2}=1$을 $z$에 대해 풀어 두 반구를 따로 그리면, 작도 프로그램은 $x,y$에 관한 직사각형 격자 위에서 작업할 수밖에 없어 곡면이 수직으로 서는 적도 근처에서 눈에 띄는 틈이 생긴다. 반면 같은 구면을 예제 4의 매개화로 그리면 격자가 곡면 전체에 고르게 퍼져 매끄러운 그림이 얻어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>On the sphere parametrized by the two spherical angles, the two families of grid curves have familiar geographic names. Keeping $\phi$ constant yields a circle of constant latitude (the equator among them); keeping $\theta$ constant yields a meridian, that is, the semicircle of constant longitude running from one pole to the other. Prescribing a pair $(u,v)$ on a general parametric surface is the same kind of act as prescribing a latitude and a longitude on the globe.</p>
+        <p>A margin remark makes the practical point. Solving $x^{2}+y^{2}+z^{2}=1$ for $z$ and graphing the two hemispheres separately forces the plotter to work over a rectangular grid in $x$ and $y$; the result shows a visible gap near the equator, where the surface turns vertical. Graphing the same sphere from the parametrization of Example 4 spreads the grid evenly over the surface and produces a smooth picture instead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : graphs are parametric surfaces -->
+<div class="card note-card" id="c16-6-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">그래프는 언제나 매개곡면 <em>Every Graph Is a Parametric Surface</em><span class="src-ref">p.1212</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>그래프 $z=f(x,y)$로 나타난 곡면은 교묘한 변수 치환이 전혀 필요 없다 &mdash; 두 좌표 $x,y$ 자체가 이미 매개변수 구실을 하기 때문이다. 다음과 같이 두면</p>
+        <div class="math-display">$$x=x,\qquad y=y,\qquad z=f(x,y)$$</div>
+        <p>그래프는 벡터방정식</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+f(x,y)\,\mathbf k$$</div>
+        <p>을 갖는 매개곡면으로 바뀐다. 이렇게 그래프는 매개곡면의 한 특수한 경우를 이루며, 매개곡면 일반에 대해 증명된 사실은 무엇이든 그래프에도 그대로 적용된다. 다만 역은 성립하지 않는다 &mdash; 이를테면 구면은 $x,y$의 한 함수의 그래프로 나타낼 수 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A surface presented as a graph $z=f(x,y)$ never needs a clever change of variables: the two coordinates $x$ and $y$ already serve as parameters. Setting</p>
+        <div class="math-display">$$x=x,\qquad y=y,\qquad z=f(x,y)$$</div>
+        <p>turns the graph into a parametric surface with vector equation</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+f(x,y)\,\mathbf k .$$</div>
+        <p>So graphs form a special case of parametric surfaces, and any statement proved for parametric surfaces in general applies to them. The reverse inclusion fails: a sphere, for instance, is not the graph of a single function of $x$ and $y$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : parametrizations are not unique -->
+<div class="card rem-card" id="c16-6-6">
+  <div class="card-head">
+    <span class="rem-num">REM 6</span>
+    <span class="rem-title">매개화는 유일하지 않다 <em>Parametrizations Are Not Unique</em><span class="src-ref">p.1212&ndash;1213</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>한 곡면은 여러 매개화를 허용하며, 그 가운데 어느 것도 표준이라 할 만한 것은 없다. 어느 쪽을 택할지는 당면한 문제가 결정한다. 예제 7의 원뿔은 자기 자신의 $x,y$로 매개화할 수도 있고 극좌표량 $r,\theta$로 매개화할 수도 있는데, 후자를 택하면 뒤이은 적분이 훨씬 짧아진다.</p>
+        <p>매개변수의 선택은 곡면의 <em>일부</em>를 얼마나 쉽게 잘라낼 수 있는지에도 영향을 준다 &mdash; 정의역 $D$를 제한하면 곡면도 그만큼 제한되기 때문이다. 원뿔 $z=2\sqrt{x^{2}+y^{2}}$의 경우 극좌표 매개화를 쓰면 $z\le 1$인 부분이 매개변수평면의 원판 $0\le r\le\tfrac12$로 대응되는데, 이 서술에는 제곱근이 전혀 나타나지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>One surface admits many parametrizations, and none of them is canonical. Which one to prefer is decided by the problem at hand: the cone of Example 7 can be parametrized by its own $x$ and $y$, or by polar quantities $r$ and $\theta$, and the second choice makes the later integrals shorter.</p>
+        <p>The choice of parameters also changes how easily a <em>piece</em> of the surface can be cut out, since restricting the domain $D$ restricts the surface. For the cone $z=2\sqrt{x^{2}+y^{2}}$ the polar parametrization sends the piece with $z\le 1$ to the disk $0\le r\le\tfrac12$ of the parameter plane, a description with no square roots in it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : Equations (3) - surface of revolution -->
+<div class="card thm-card" id="c16-6-7">
+  <div class="card-head">
+    <span class="thm-num">THM 7</span>
+    <span class="thm-title">회전면의 매개변수방정식 <em>Parametrizing a Surface of Revolution</em><span class="src-ref">Equations (3) · p.1213</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (3) &mdash; 회전면의 매개변수방정식.</strong> $f$가 $[a,b]$에서 연속이고 그 위에서 $f(x)\ge 0$이라 하고, 곡선 $y=f(x)$, $a\le x\le b$를 $x$축 둘레로 회전시켜 쓸리는 곡면을 $S$라 하자. 가로좌표 $x$와 회전각 $\theta$를 매개변수로 택하면, $S$는 매개변수방정식</p>
+          <div class="math-display">$$x=x,\qquad y=f(x)\cos\theta,\qquad z=f(x)\sin\theta \tag{3}$$</div>
+          <p>을 가지며, 매개변수영역은 $a\le x\le b$, $0\le\theta\le 2\pi$이다.</p>
+        </div>
+        <p>공식이 이런 꼴을 갖는 이유는 이렇다. 가로좌표 $x$ 위에 놓인 $S$의 점은 그 가로좌표에서 $x$축에 수직인 평면 안에 그려진 반지름 $f(x)$인 원 위에 있고, $(f(x)\cos\theta,\ f(x)\sin\theta)$는 바로 그 원에서 각 $\theta$에 있는 점의 좌표다. 같은 곡선을 $y$축이나 $z$축 둘레로 회전시키는 경우도 좌표의 역할을 똑같은 방식으로 뒤바꾸어 다룰 수 있다(연습문제 30).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equations (3) &mdash; Surface of Revolution.</strong> Let $f$ be continuous on $[a,b]$ with $f(x)\ge 0$ there, and let $S$ be the surface swept out when the curve $y=f(x)$, $a\le x\le b$, is revolved about the $x$-axis. Taking as parameters the abscissa $x$ and the angle of rotation $\theta$, the surface $S$ has parametric equations</p>
+          <div class="math-display">$$x=x,\qquad y=f(x)\cos\theta,\qquad z=f(x)\sin\theta \tag{3}$$</div>
+          <p>with parameter domain $a\le x\le b$, $0\le\theta\le 2\pi$.</p>
+        </div>
+        <p>Why the formulas look like this: a point of $S$ over the abscissa $x$ lies on the circle of radius $f(x)$ traced in the plane perpendicular to the $x$-axis at that abscissa, and $(f(x)\cos\theta,\ f(x)\sin\theta)$ are the coordinates of the point of that circle at angle $\theta$. Revolving the same curve about the $y$-axis or the $z$-axis is handled by permuting the roles of the coordinates in exactly the same way (Exercise 30).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Equations (4), (5) - tangent vectors -->
+<div class="card thm-card" id="c16-6-8">
+  <div class="card-head">
+    <span class="thm-num">THM 8</span>
+    <span class="thm-title">격자곡선의 접벡터 <em>Tangent Vectors to the Grid Curves</em><span class="src-ref">Equations (4), (5) · p.1214</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S$ 위의 한 점 $P_0$를 위치벡터 $\mathbf r(u_0,v_0)$로 고정하고, 그 점을 지나는 두 격자곡선을 살펴보자. 각각은 한 변수의 벡터함수이므로, 성분별로 미분하면 접벡터를 얻는다.</p>
+        <div class="formal-box">
+          <p>$u=u_0$이 고정된 격자곡선 $C_1$은 $P_0$에서 접벡터</p>
+          <div class="math-display">$$\mathbf r_v=\frac{\partial x}{\partial v}(u_0,v_0)\,\mathbf i+\frac{\partial y}{\partial v}(u_0,v_0)\,\mathbf j+\frac{\partial z}{\partial v}(u_0,v_0)\,\mathbf k \tag{4}$$</div>
+          <p>을 가지며, $v=v_0$이 고정된 격자곡선 $C_2$는 $P_0$에서 접벡터</p>
+          <div class="math-display">$$\mathbf r_u=\frac{\partial x}{\partial u}(u_0,v_0)\,\mathbf i+\frac{\partial y}{\partial u}(u_0,v_0)\,\mathbf j+\frac{\partial z}{\partial u}(u_0,v_0)\,\mathbf k \tag{5}$$</div>
+          <p>을 가진다.</p>
+        </div>
+        <p>어느 글자가 어느 곡선에 대응하는지 눈여겨보자 &mdash; $C_1$을 따라 움직이면 $v$만 변하므로 그 속도벡터는 $v$에 관한 도함수 $\mathbf r_v$이고, $C_2$를 따라 움직이면 $u$만 변하므로 그 속도벡터는 $\mathbf r_u$이다. 두 벡터 모두 $P_0$에 대응하는 매개변수 쌍 $(u_0,v_0)$에서 계산된 값이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Fix a point $P_0$ on $S$ with position vector $\mathbf r(u_0,v_0)$, and look at the two grid curves through it. Each is a vector function of one variable, so each has a tangent vector obtained by differentiating componentwise.</p>
+        <div class="formal-box">
+          <p>The grid curve $C_1$, on which $u=u_0$ stays fixed, has at $P_0$ the tangent vector</p>
+          <div class="math-display">$$\mathbf r_v=\frac{\partial x}{\partial v}(u_0,v_0)\,\mathbf i+\frac{\partial y}{\partial v}(u_0,v_0)\,\mathbf j+\frac{\partial z}{\partial v}(u_0,v_0)\,\mathbf k \tag{4}$$</div>
+          <p>and the grid curve $C_2$, on which $v=v_0$ stays fixed, has at $P_0$ the tangent vector</p>
+          <div class="math-display">$$\mathbf r_u=\frac{\partial x}{\partial u}(u_0,v_0)\,\mathbf i+\frac{\partial y}{\partial u}(u_0,v_0)\,\mathbf j+\frac{\partial z}{\partial u}(u_0,v_0)\,\mathbf k .\tag{5}$$</div>
+        </div>
+        <p>Note which letter goes with which curve: moving along $C_1$ changes $v$ only, so its velocity vector is the $v$-derivative $\mathbf r_v$; moving along $C_2$ changes $u$ only, so its velocity vector is $\mathbf r_u$. Both are evaluated at the parameter pair $(u_0,v_0)$ belonging to $P_0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : smooth surface, tangent plane (Figure 14) -->
+<div class="card def-card" id="c16-6-9">
+  <div class="card-head">
+    <span class="def-num">DEF 9</span>
+    <span class="def-title">매끄러운 곡면과 접평면 <em>Smooth Surface and Tangent Plane</em><span class="src-ref">Figure 14 · p.1214</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>$D$ 위에서 $\mathbf r(u,v)$로 주어진 매개곡면 $S$는, 외적 $\mathbf r_u\times\mathbf r_v$가 $D$ 위에서 결코 영벡터가 되지 않을 때 <strong>매끄럽다</strong>고 한다. 매끄러운 곡면의 한 점 $P_0$에서, $S$의 <strong>접평면</strong>이란 $P_0$를 지나면서 두 접벡터 $\mathbf r_u,\mathbf r_v$를 모두 포함하는 평면이며, $\mathbf r_u\times\mathbf r_v$가 그 법선벡터다.</p>
+        </div>
+        <p>기하적으로 매끄럽다는 것은 곡면에 모서리나 꺾인 점이 없다는 뜻이다 &mdash; 모든 점에서 두 접벡터가 서로 독립인 채로 남아 있어야 실제로 평면 하나를 펼칠 수 있기 때문이다. $\mathbf r_u\times\mathbf r_v=\mathbf 0$인 곳에서는 두 접벡터가 서로 평행해지거나 한쪽이 영벡터가 되어 접평면이 정해지지 않는데, 원뿔의 꼭짓점이 그 대표적인 예다(극좌표 매개화에서 그곳의 $\mathbf r_\theta$가 $\mathbf 0$이 된다).</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 230 210" role="img" aria-label="곡면 위의 점 P0에서 두 격자곡선의 접벡터 r_u, r_v와 이 두 벡터가 생성하는 접평면" style="max-width:360px;width:100%;height:auto">
+            <path d="M10,175 C46,120 144,120 180,175 L210,105 C174,50 76,50 40,105 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <polygon points="53.6,133 161.6,133 197.6,50.5 89.6,50.5" fill="var(--g600)" fill-opacity="0.10" stroke="var(--grey600)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <path d="M25,140 C61,85 159,85 195,140" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="95" y1="135" x2="125" y2="65" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="110" y1="100" x2="161" y2="100" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="170,100 160.5,103.4 160.5,96.6" fill="var(--g800)"/>
+            <line x1="110" y1="100" x2="130.6" y2="52.8" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="134,45 133.6,55.1 127,52.2" fill="var(--g800)"/>
+            <circle cx="110" cy="100" r="2.8" fill="var(--grey900)"/>
+            <text x="98" y="114" font-size="10" font-style="italic" fill="var(--grey800)">P&#8320;</text>
+            <text x="172" y="97" font-size="10" font-style="italic" fill="var(--g800)">r<tspan font-size="7.5" dy="2.5">u</tspan></text>
+            <text x="136" y="44" font-size="10" font-style="italic" fill="var(--g800)">r<tspan font-size="7.5" dy="2.5">v</tspan></text>
+            <text x="192" y="146" font-size="9.5" font-style="italic" fill="var(--g700)">C&#8322;</text>
+            <text x="97" y="74" font-size="9.5" font-style="italic" fill="var(--g700)">C&#8321;</text>
+            <text x="28" y="160" font-size="11" font-style="italic" fill="var(--g800)">S</text>
+            <text x="115" y="200" text-anchor="middle" font-size="10" fill="var(--grey600)">두 접벡터가 P&#8320;에서 접평면을 결정한다</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>A parametric surface $S$ given by $\mathbf r(u,v)$ on $D$ is called <strong>smooth</strong> when the cross product $\mathbf r_u\times\mathbf r_v$ is never the zero vector on $D$. At a point $P_0$ of a smooth surface, the <strong>tangent plane</strong> to $S$ is the plane through $P_0$ containing the two tangent vectors $\mathbf r_u$ and $\mathbf r_v$, and $\mathbf r_u\times\mathbf r_v$ is a normal vector for it.</p>
+        </div>
+        <p>Geometrically, smoothness says the surface carries no corner or kink: the two tangent vectors stay independent at every point, so they really do span a plane. Where $\mathbf r_u\times\mathbf r_v=\mathbf 0$ the two tangent vectors are parallel or one of them vanishes, and the tangent plane fails to be determined &mdash; the vertex of a cone is the standard instance (in the polar parametrization $\mathbf r_\theta=\mathbf 0$ there).</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 230 210" role="img" aria-label="At a point P0 of a surface, the tangent vectors r_u and r_v to the two grid curves span the tangent plane" style="max-width:360px;width:100%;height:auto">
+            <path d="M10,175 C46,120 144,120 180,175 L210,105 C174,50 76,50 40,105 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <polygon points="53.6,133 161.6,133 197.6,50.5 89.6,50.5" fill="var(--g600)" fill-opacity="0.10" stroke="var(--grey600)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <path d="M25,140 C61,85 159,85 195,140" fill="none" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="95" y1="135" x2="125" y2="65" stroke="var(--g700)" stroke-width="1.4"/>
+            <line x1="110" y1="100" x2="161" y2="100" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="170,100 160.5,103.4 160.5,96.6" fill="var(--g800)"/>
+            <line x1="110" y1="100" x2="130.6" y2="52.8" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="134,45 133.6,55.1 127,52.2" fill="var(--g800)"/>
+            <circle cx="110" cy="100" r="2.8" fill="var(--grey900)"/>
+            <text x="98" y="114" font-size="10" font-style="italic" fill="var(--grey800)">P&#8320;</text>
+            <text x="172" y="97" font-size="10" font-style="italic" fill="var(--g800)">r<tspan font-size="7.5" dy="2.5">u</tspan></text>
+            <text x="136" y="44" font-size="10" font-style="italic" fill="var(--g800)">r<tspan font-size="7.5" dy="2.5">v</tspan></text>
+            <text x="192" y="146" font-size="9.5" font-style="italic" fill="var(--g700)">C&#8322;</text>
+            <text x="97" y="74" font-size="9.5" font-style="italic" fill="var(--g700)">C&#8321;</text>
+            <text x="28" y="160" font-size="11" font-style="italic" fill="var(--g800)">S</text>
+            <text x="115" y="200" text-anchor="middle" font-size="10" fill="var(--grey600)">the two tangent vectors span the tangent plane at P&#8320;</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : motivating the area definition (Figures 16, 17) -->
+<div class="card note-card" id="c16-6-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">넓이 정의의 착상: 패치와 평행사변형 <em>Motivating the Area Definition</em><span class="src-ref">Figures 16, 17 · p.1215</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>매개변수영역이 직사각형 $D$라 하고, 이를 가로 $\Delta u$, 세로 $\Delta v$인 소사각형 $R_{ij}$들로 나누자. 이 소사각형들의 상은 곡면을 <strong>패치</strong> $S_{ij}$들로 나누고, $S$ 전체의 넓이는 이 패치들의 넓이의 합이다.</p>
+        <p>$R_{ij}$의 왼쪽 아래 꼭짓점의 상 $P_{ij}$를 꼭짓점으로 갖는 패치 $S_{ij}$를 택하고, 그 점에서 계산한 두 접벡터를 $\mathbf r_u^{*},\mathbf r_v^{*}$라 쓰자. $P_{ij}$에서 뻗어나가는 패치의 두 변은 격자곡선이고, 그 위에서는 편도함수가 대응하는 차분몫에 가까우므로 이 두 변은 벡터 $\Delta u\,\mathbf r_u^{*}$와 $\Delta v\,\mathbf r_v^{*}$로 근사된다. 구부러진 패치를 이 두 벡터가 이루는 평행사변형으로 바꿔치기하는 것이 이 방법의 핵심이며, 그 평행사변형의 넓이는 $|\mathbf r_u^{*}\times\mathbf r_v^{*}|\,\Delta u\,\Delta v$이다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 440 200" role="img" aria-label="정의역의 소사각형 R_ij가 곡면 위의 패치로 옮겨지고, 그 패치를 두 벡터가 이루는 평행사변형으로 근사하는 도식" style="max-width:360px;width:100%;height:auto">
+            <rect x="30" y="60" width="140" height="100" fill="none" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="70" y1="60" x2="70" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="110" y1="60" x2="110" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="150" y1="60" x2="150" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="30" y1="125" x2="170" y2="125" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="30" y1="95" x2="170" y2="95" stroke="var(--grey300)" stroke-width="1"/>
+            <rect x="70" y="95" width="40" height="30" fill="var(--g100)" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="36" y="74" font-size="11" font-style="italic" fill="var(--g800)">D</text>
+            <text x="113" y="91" font-size="9.5" font-style="italic" fill="var(--g800)">R<tspan font-size="7" dy="2.5">ij</tspan></text>
+            <text x="84" y="139" font-size="9.5" fill="var(--grey700)">&#916;u</text>
+            <text x="50" y="114" font-size="9.5" fill="var(--grey700)">&#916;v</text>
+            <line x1="188" y1="110" x2="234" y2="110" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="240,110 231,113 231,107" fill="var(--grey600)"/>
+            <text x="208" y="103" font-size="11" font-style="italic" fill="var(--grey700)">r</text>
+            <path d="M280,150 C305,142 335,139 355,135 C373,113 382,94 385,75 C357,84 331,88 310,90 C301,111 291,131 280,150 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <polygon points="280,150 355,135 385,75 310,90" fill="none" stroke="var(--grey600)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <line x1="280" y1="150" x2="346.2" y2="136.8" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="355,135 346.9,140.1 345.5,133.5" fill="var(--g800)"/>
+            <line x1="280" y1="150" x2="305.98" y2="98.05" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="310,90 309.0,99.6 302.9,96.5" fill="var(--g800)"/>
+            <circle cx="280" cy="150" r="2.8" fill="var(--grey900)"/>
+            <text x="352" y="148" font-size="9.5" font-style="italic" fill="var(--g800)">&#916;u r<tspan font-size="7" dy="2.5">u</tspan><tspan font-size="8" dy="-4.5">*</tspan></text>
+            <text x="244" y="80" font-size="9.5" font-style="italic" fill="var(--g800)">&#916;v r<tspan font-size="7" dy="2.5">v</tspan><tspan font-size="8" dy="-4.5">*</tspan></text>
+            <text x="322" y="118" font-size="9.5" font-style="italic" fill="var(--g700)">S<tspan font-size="7" dy="2.5">ij</tspan></text>
+            <text x="228" y="166" font-size="9.5" font-style="italic" fill="var(--grey700)">r(u<tspan font-size="7" dy="2.5">i</tspan><tspan dy="-2.5">, v</tspan><tspan font-size="7" dy="2.5">j</tspan><tspan dy="-2.5">)</tspan></text>
+            <text x="220" y="192" text-anchor="middle" font-size="10" fill="var(--grey600)">소사각형의 상은 두 벡터가 이루는 평행사변형으로 근사된다</text>
+          </svg>
+        </div>
+        <p>모든 소사각형에 대해 평행사변형의 넓이를 더하면</p>
+        <div class="math-display">$$\sum_{i}\sum_{j}\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v ,$$</div>
+        <p>가 되는데, 이는 이중적분 $\iint_D|\mathbf r_u\times\mathbf r_v|\,du\,dv$의 리만합이다. 따라서 이 적분이 $S$의 넓이를 정의하는 자연스러운 후보가 되며, 아래에서 이를 그대로 정의로 채택한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 소사각형 $R_{ij}=[u_i,u_i+\Delta u]\times[v_j,v_j+\Delta v]$의 왼쪽 아래 꼭짓점을 $(u_i,v_j)$라 하고, $\mathbf r_u^{*}=\mathbf r_u(u_i,v_j)$, $\mathbf r_v^{*}=\mathbf r_v(u_i,v_j)$로 쓰자. $\mathbf r$의 각 성분이 미분가능하다고 가정하면, $u$에 관한 편도함수의 정의로부터</p>
+        <div class="math-display">$$\mathbf r(u_i+\Delta u,\,v_j)-\mathbf r(u_i,v_j)=\Delta u\,\mathbf r_u^{*}+\mathbf E_1(\Delta u)$$</div>
+        <p>이 성립하고, 그 오차항은</p>
+        <div class="math-display">$$\frac{\left|\mathbf E_1(\Delta u)\right|}{\Delta u}\to0\quad(\Delta u\to0)$$</div>
+        <p>을 만족한다 &mdash; 즉 패치 $S_{ij}$의 한 변을 이루는 격자곡선호 $u\mapsto\mathbf r(u,v_j)$의 변위는 $\Delta u\,\mathbf r_u^{*}$로 근사되고, 오차 $\mathbf E_1$은 $\Delta u$보다 빨리 $\mathbf 0$으로 간다. 같은 논증을 $v$ 방향에 적용하면</p>
+        <div class="math-display">$$\mathbf r(u_i,\,v_j+\Delta v)-\mathbf r(u_i,v_j)=\Delta v\,\mathbf r_v^{*}+\mathbf E_2(\Delta v)$$</div>
+        <p>와</p>
+        <div class="math-display">$$\frac{\left|\mathbf E_2(\Delta v)\right|}{\Delta v}\to0\quad(\Delta v\to0)$$</div>
+        <p>을 얻는다. 따라서 오차항을 무시하면 패치 $S_{ij}$는 $P_{ij}=\mathbf r(u_i,v_j)$에서 뻗어 나가는 두 벡터 $\Delta u\,\mathbf r_u^{*}$, $\Delta v\,\mathbf r_v^{*}$가 이루는 평행사변형으로 근사되고, 두 벡터의 외적의 길이가 곧 그 평행사변형의 넓이이므로 패치의 넓이는</p>
+        <div class="math-display">$$\Delta S_{ij}\approx\left|\Delta u\,\mathbf r_u^{*}\times\Delta v\,\mathbf r_v^{*}\right|=\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v$$</div>
+        <p>로 근사된다(외적의 쌍선형성으로 스칼라 $\Delta u,\Delta v$가 절댓값 밖으로 나온다). 이 근사를 $D$의 모든 소사각형에 대해 더하면</p>
+        <div class="math-display">$$A(S)\approx\sum_i\sum_j\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v$$</div>
+        <p>를 얻는데, 우변은 함수 $(u,v)\mapsto|\mathbf r_u\times\mathbf r_v|$를 각 소사각형의 왼쪽 아래 꼭짓점에서 표본화한 리만 합이다. $\mathbf r_u\times\mathbf r_v$가 $D$ 위에서 연속이라 하면, 분할을 $\Delta u,\Delta v\to0$으로 잘게 할수록 위 근사의 오차는 $0$으로 가고 리만 합은 §15.1의 이중적분의 정의에 의해 $\iint_D|\mathbf r_u\times\mathbf r_v|\,dA$로 수렴한다. 그러므로 이 극한값을 넓이 $A(S)$의 정의로 채택하는 것이 자연스러우며, 이것이 바로 다음 카드의 정의 6이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose the parameter domain is a rectangle $D$, and cut it into subrectangles $R_{ij}$ of dimensions $\Delta u$ by $\Delta v$. The images of these subrectangles cut the surface into <strong>patches</strong> $S_{ij}$, and the total area of $S$ is the sum of the areas of the patches.</p>
+        <p>Take the patch $S_{ij}$ whose corner $P_{ij}$ is the image of the lower left corner of $R_{ij}$, and write $\mathbf r_u^{*}$, $\mathbf r_v^{*}$ for the two tangent vectors evaluated there. The two edges of the patch leaving $P_{ij}$ are grid curves, and along them a partial derivative is close to the corresponding difference quotient, so those edges are approximated by the vectors $\Delta u\,\mathbf r_u^{*}$ and $\Delta v\,\mathbf r_v^{*}$. Replacing the curved patch by the parallelogram these two vectors determine is the whole idea; the parallelogram has area $|\mathbf r_u^{*}\times\mathbf r_v^{*}|\,\Delta u\,\Delta v$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 440 200" role="img" aria-label="A subrectangle R_ij of the parameter domain is carried to a patch of the surface, which is approximated by the parallelogram spanned by two tangent vectors" style="max-width:360px;width:100%;height:auto">
+            <rect x="30" y="60" width="140" height="100" fill="none" stroke="var(--g600)" stroke-width="1.3"/>
+            <line x1="70" y1="60" x2="70" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="110" y1="60" x2="110" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="150" y1="60" x2="150" y2="160" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="30" y1="125" x2="170" y2="125" stroke="var(--grey300)" stroke-width="1"/>
+            <line x1="30" y1="95" x2="170" y2="95" stroke="var(--grey300)" stroke-width="1"/>
+            <rect x="70" y="95" width="40" height="30" fill="var(--g100)" stroke="var(--g700)" stroke-width="1.4"/>
+            <text x="36" y="74" font-size="11" font-style="italic" fill="var(--g800)">D</text>
+            <text x="113" y="91" font-size="9.5" font-style="italic" fill="var(--g800)">R<tspan font-size="7" dy="2.5">ij</tspan></text>
+            <text x="84" y="139" font-size="9.5" fill="var(--grey700)">&#916;u</text>
+            <text x="50" y="114" font-size="9.5" fill="var(--grey700)">&#916;v</text>
+            <line x1="188" y1="110" x2="234" y2="110" stroke="var(--grey600)" stroke-width="1.4"/>
+            <polygon points="240,110 231,113 231,107" fill="var(--grey600)"/>
+            <text x="208" y="103" font-size="11" font-style="italic" fill="var(--grey700)">r</text>
+            <path d="M280,150 C305,142 335,139 355,135 C373,113 382,94 385,75 C357,84 331,88 310,90 C301,111 291,131 280,150 Z" fill="var(--g50)" stroke="var(--g600)" stroke-width="1.3"/>
+            <polygon points="280,150 355,135 385,75 310,90" fill="none" stroke="var(--grey600)" stroke-width="1.1" stroke-dasharray="5 3"/>
+            <line x1="280" y1="150" x2="346.2" y2="136.8" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="355,135 346.9,140.1 345.5,133.5" fill="var(--g800)"/>
+            <line x1="280" y1="150" x2="305.98" y2="98.05" stroke="var(--g800)" stroke-width="1.8"/>
+            <polygon points="310,90 309.0,99.6 302.9,96.5" fill="var(--g800)"/>
+            <circle cx="280" cy="150" r="2.8" fill="var(--grey900)"/>
+            <text x="352" y="148" font-size="9.5" font-style="italic" fill="var(--g800)">&#916;u r<tspan font-size="7" dy="2.5">u</tspan><tspan font-size="8" dy="-4.5">*</tspan></text>
+            <text x="244" y="80" font-size="9.5" font-style="italic" fill="var(--g800)">&#916;v r<tspan font-size="7" dy="2.5">v</tspan><tspan font-size="8" dy="-4.5">*</tspan></text>
+            <text x="322" y="118" font-size="9.5" font-style="italic" fill="var(--g700)">S<tspan font-size="7" dy="2.5">ij</tspan></text>
+            <text x="228" y="166" font-size="9.5" font-style="italic" fill="var(--grey700)">r(u<tspan font-size="7" dy="2.5">i</tspan><tspan dy="-2.5">, v</tspan><tspan font-size="7" dy="2.5">j</tspan><tspan dy="-2.5">)</tspan></text>
+            <text x="220" y="192" text-anchor="middle" font-size="10" fill="var(--grey600)">the image of a subrectangle is approximated by a parallelogram</text>
+          </svg>
+        </div>
+        <p>Adding the parallelogram areas over all subrectangles produces</p>
+        <div class="math-display">$$\sum_{i}\sum_{j}\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v ,$$</div>
+        <p>which is a Riemann sum for the double integral $\iint_D|\mathbf r_u\times\mathbf r_v|\,du\,dv$. That integral is therefore the natural candidate for the area of $S$, and it is taken as the definition below.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $(u_i,v_j)$ be the lower left corner of the subrectangle $R_{ij}=[u_i,u_i+\Delta u]\times[v_j,v_j+\Delta v]$, and write $\mathbf r_u^{*}=\mathbf r_u(u_i,v_j)$, $\mathbf r_v^{*}=\mathbf r_v(u_i,v_j)$. If every component of $\mathbf r$ is differentiable, the definition of the partial derivative with respect to $u$ gives</p>
+        <div class="math-display">$$\mathbf r(u_i+\Delta u,\,v_j)-\mathbf r(u_i,v_j)=\Delta u\,\mathbf r_u^{*}+\mathbf E_1(\Delta u),$$</div>
+        <p>where the error term satisfies</p>
+        <div class="math-display">$$\frac{\left|\mathbf E_1(\Delta u)\right|}{\Delta u}\to0\quad(\Delta u\to0);$$</div>
+        <p>that is, the displacement along the grid-curve edge $u\mapsto\mathbf r(u,v_j)$ of the patch $S_{ij}$ is approximated by $\Delta u\,\mathbf r_u^{*}$, with an error $\mathbf E_1$ that vanishes faster than $\Delta u$ itself. The same argument in the $v$-direction gives</p>
+        <div class="math-display">$$\mathbf r(u_i,\,v_j+\Delta v)-\mathbf r(u_i,v_j)=\Delta v\,\mathbf r_v^{*}+\mathbf E_2(\Delta v),$$</div>
+        <p>together with</p>
+        <div class="math-display">$$\frac{\left|\mathbf E_2(\Delta v)\right|}{\Delta v}\to0\quad(\Delta v\to0).$$</div>
+        <p>Dropping the error terms, the patch $S_{ij}$ is therefore approximated by the parallelogram spanned by the two vectors $\Delta u\,\mathbf r_u^{*}$ and $\Delta v\,\mathbf r_v^{*}$ issuing from $P_{ij}=\mathbf r(u_i,v_j)$, and the length of their cross product is the area of that parallelogram, so</p>
+        <div class="math-display">$$\Delta S_{ij}\approx\left|\Delta u\,\mathbf r_u^{*}\times\Delta v\,\mathbf r_v^{*}\right|=\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v$$</div>
+        <p>(the scalars $\Delta u,\Delta v$ pull out of the cross product by bilinearity, then out of the absolute value). Summing this approximation over every subrectangle of $D$ gives</p>
+        <div class="math-display">$$A(S)\approx\sum_i\sum_j\left|\mathbf r_u^{*}\times\mathbf r_v^{*}\right|\Delta u\,\Delta v,$$</div>
+        <p>and the right side is a Riemann sum for the function $(u,v)\mapsto|\mathbf r_u\times\mathbf r_v|$, sampled at the lower left corner of each subrectangle. If $\mathbf r_u\times\mathbf r_v$ is continuous on $D$, then as the partition is refined ($\Delta u,\Delta v\to0$) the error in the approximation above tends to $0$, and by the definition of the double integral from Section 15.1 the Riemann sum converges to $\iint_D|\mathbf r_u\times\mathbf r_v|\,dA$. It is therefore natural to take this limiting value as the definition of the area $A(S)$ &mdash; which is exactly Definition 6 of the next card.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 : Definition 6 - surface area -->
+<div class="card def-card" id="c16-6-11">
+  <div class="card-head">
+    <span class="def-num">DEF 11</span>
+    <span class="def-title">매개곡면의 넓이 <em>Surface Area of a Parametric Surface</em><span class="src-ref">Definition 6 · p.1215</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>정의 6.</strong> $S$를 매개변수영역 $(u,v)\in D$에서 $\mathbf r(u,v)$로 주어지는 매끄러운 매개곡면이라 하고, $(u,v)$가 $D$를 훑는 동안 $S$가 꼭 한 번만 덮인다고 하자. 그러면 $S$의 <strong>곡면 넓이</strong>는</p>
+          <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_u\times\mathbf r_v\right|dA \tag{6}$$</div>
+          <p>이며, 여기서</p>
+          <div class="math-display">$$\mathbf r_u=\frac{\partial x}{\partial u}\,\mathbf i+\frac{\partial y}{\partial u}\,\mathbf j+\frac{\partial z}{\partial u}\,\mathbf k ,$$</div>
+          <div class="math-display">$$\mathbf r_v=\frac{\partial x}{\partial v}\,\mathbf i+\frac{\partial y}{\partial v}\,\mathbf j+\frac{\partial z}{\partial v}\,\mathbf k .$$</div>
+        </div>
+        <p>여기서 두 가지 가정이 각기 중요한 역할을 한다. 매끄러움은 $|\mathbf r_u\times\mathbf r_v|$가 $0$에서 떨어져 있게 해 앞 카드의 평행사변형 근사가 무너지지 않게 하고, $S$가 꼭 한 번만 훑인다는 조건은 적분이 곡면의 어느 부분을 두 번 세지 않도록 막아 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Definition 6.</strong> Let $S$ be a smooth parametric surface given by $\mathbf r(u,v)$ for $(u,v)\in D$, and suppose $S$ is covered exactly once as $(u,v)$ ranges over $D$. Then the <strong>surface area</strong> of $S$ is</p>
+          <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_u\times\mathbf r_v\right|dA \tag{6}$$</div>
+          <p>where</p>
+          <div class="math-display">$$\mathbf r_u=\frac{\partial x}{\partial u}\,\mathbf i+\frac{\partial y}{\partial u}\,\mathbf j+\frac{\partial z}{\partial u}\,\mathbf k ,$$</div>
+          <div class="math-display">$$\mathbf r_v=\frac{\partial x}{\partial v}\,\mathbf i+\frac{\partial y}{\partial v}\,\mathbf j+\frac{\partial z}{\partial v}\,\mathbf k .$$</div>
+        </div>
+        <p>Two hypotheses carry weight here. Smoothness keeps $|\mathbf r_u\times\mathbf r_v|$ away from zero, so the parallelogram approximation of the previous card does not degenerate; and the requirement that $S$ be traced only once keeps the integral from counting a portion of the surface twice.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 : Equations (7), (8) - normal vector for a graph -->
+<div class="card thm-card" id="c16-6-12">
+  <div class="card-head">
+    <span class="thm-num">THM 12</span>
+    <span class="thm-title">그래프의 법선벡터와 그 크기 <em>Normal Vector for a Graph</em><span class="src-ref">Equations (7), (8) · p.1216</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (7), (8) &mdash; 그래프의 법선벡터와 그 크기.</strong> $S$가 연속인 편도함수를 갖는 $f$의 그래프 $z=f(x,y)$이고 $x,y$ 자신을 매개변수로 삼는다고 하자. 그러면 $\mathbf r_x=\mathbf i+\dfrac{\partial f}{\partial x}\,\mathbf k$이고 $\mathbf r_y=\mathbf j+\dfrac{\partial f}{\partial y}\,\mathbf k$이므로</p>
+          <div class="math-display">$$\mathbf r_x\times\mathbf r_y=-\frac{\partial f}{\partial x}\,\mathbf i-\frac{\partial f}{\partial y}\,\mathbf j+\mathbf k \tag{7}$$</div>
+          <p>이고, 따라서</p>
+          <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{\left(\frac{\partial f}{\partial x}\right)^{2}+\left(\frac{\partial f}{\partial y}\right)^{2}+1}=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}} .\tag{8}$$</div>
+        </div>
+        <p>법선벡터의 셋째 성분은 언제나 $1$이어서 결코 $0$이 되지 않으므로, 미분가능한 함수의 그래프는 위 정의의 의미에서 자동으로 매끄러운 곡면이 된다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 그래프를 카드 5의 방식대로 $\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+f(x,y)\,\mathbf k$로 매개화하면, $y$를 상수로 고정하고 $x$에 관해 성분별로 미분해</p>
+        <div class="math-display">$$\mathbf r_x=1\cdot\mathbf i+0\cdot\mathbf j+\frac{\partial f}{\partial x}\,\mathbf k=\mathbf i+\frac{\partial f}{\partial x}\,\mathbf k$$</div>
+        <p>를 얻고, 같은 방식으로 $x$를 고정하고 $y$에 관해 미분하면</p>
+        <div class="math-display">$$\mathbf r_y=0\cdot\mathbf i+1\cdot\mathbf j+\frac{\partial f}{\partial y}\,\mathbf k=\mathbf j+\frac{\partial f}{\partial y}\,\mathbf k$$</div>
+        <p>를 얻는다. 두 벡터의 외적을 행렬식으로 전개하면</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_y=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[2pt]1&0&\partial f/\partial x\\[2pt]0&1&\partial f/\partial y\end{vmatrix}=\left(0\cdot\frac{\partial f}{\partial y}-\frac{\partial f}{\partial x}\cdot1\right)\mathbf i-\left(1\cdot\frac{\partial f}{\partial y}-\frac{\partial f}{\partial x}\cdot0\right)\mathbf j+(1\cdot1-0\cdot0)\,\mathbf k,$$</div>
+        <p>즉 $\mathbf r_x\times\mathbf r_y=-\dfrac{\partial f}{\partial x}\,\mathbf i-\dfrac{\partial f}{\partial y}\,\mathbf j+\mathbf k$이며, 이것이 식 (7)이다. 이 벡터의 길이는 세 성분의 제곱합의 제곱근이므로</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{\left(-\frac{\partial f}{\partial x}\right)^{2}+\left(-\frac{\partial f}{\partial y}\right)^{2}+1^{2}}=\sqrt{\left(\frac{\partial f}{\partial x}\right)^{2}+\left(\frac{\partial f}{\partial y}\right)^{2}+1},$$</div>
+        <p>이며, $z=f(x,y)$이므로 $\partial f/\partial x=\partial z/\partial x$, $\partial f/\partial y=\partial z/\partial y$로 바꾸어 쓰면 식 (8)의 둘째 등호</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}$$</div>
+        <p>가 얻어진다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equations (7), (8) &mdash; Normal Vector for a Graph.</strong> Let $S$ be the graph $z=f(x,y)$ of a function $f$ with continuous partial derivatives, parametrized by $x$ and $y$ themselves. Then $\mathbf r_x=\mathbf i+\dfrac{\partial f}{\partial x}\,\mathbf k$ and $\mathbf r_y=\mathbf j+\dfrac{\partial f}{\partial y}\,\mathbf k$, so</p>
+          <div class="math-display">$$\mathbf r_x\times\mathbf r_y=-\frac{\partial f}{\partial x}\,\mathbf i-\frac{\partial f}{\partial y}\,\mathbf j+\mathbf k \tag{7}$$</div>
+          <p>and consequently</p>
+          <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{\left(\frac{\partial f}{\partial x}\right)^{2}+\left(\frac{\partial f}{\partial y}\right)^{2}+1}=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}} .\tag{8}$$</div>
+        </div>
+        <p>The third component of the normal vector is $1$, never zero, so the graph of a differentiable function is automatically a smooth surface in the sense of the definition above.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Parametrize the graph as in Card 5, $\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+f(x,y)\,\mathbf k$. Holding $y$ fixed and differentiating componentwise with respect to $x$ gives</p>
+        <div class="math-display">$$\mathbf r_x=1\cdot\mathbf i+0\cdot\mathbf j+\frac{\partial f}{\partial x}\,\mathbf k=\mathbf i+\frac{\partial f}{\partial x}\,\mathbf k,$$</div>
+        <p>and holding $x$ fixed and differentiating with respect to $y$ gives</p>
+        <div class="math-display">$$\mathbf r_y=0\cdot\mathbf i+1\cdot\mathbf j+\frac{\partial f}{\partial y}\,\mathbf k=\mathbf j+\frac{\partial f}{\partial y}\,\mathbf k.$$</div>
+        <p>Expanding the cross product as a determinant,</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_y=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[2pt]1&0&\partial f/\partial x\\[2pt]0&1&\partial f/\partial y\end{vmatrix}=\left(0\cdot\frac{\partial f}{\partial y}-\frac{\partial f}{\partial x}\cdot1\right)\mathbf i-\left(1\cdot\frac{\partial f}{\partial y}-\frac{\partial f}{\partial x}\cdot0\right)\mathbf j+(1\cdot1-0\cdot0)\,\mathbf k,$$</div>
+        <p>so $\mathbf r_x\times\mathbf r_y=-\dfrac{\partial f}{\partial x}\,\mathbf i-\dfrac{\partial f}{\partial y}\,\mathbf j+\mathbf k$, which is Equation (7). The length of this vector is the square root of the sum of the squares of its components,</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{\left(-\frac{\partial f}{\partial x}\right)^{2}+\left(-\frac{\partial f}{\partial y}\right)^{2}+1^{2}}=\sqrt{\left(\frac{\partial f}{\partial x}\right)^{2}+\left(\frac{\partial f}{\partial y}\right)^{2}+1},$$</div>
+        <p>and since $z=f(x,y)$ we may write $\partial f/\partial x=\partial z/\partial x$ and $\partial f/\partial y=\partial z/\partial y$, giving the second equality of Equation (8),</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 : Equation (9) - area of a graph -->
+<div class="card thm-card" id="c16-6-13">
+  <div class="card-head">
+    <span class="thm-num">THM 13</span>
+    <span class="thm-title">그래프꼴 곡면의 넓이 <em>Area of a Graph</em><span class="src-ref">Equation (9) · p.1217</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p><strong>식 (9) &mdash; 그래프꼴 곡면의 넓이.</strong> $S$가 $xy$-평면의 영역 $D$ 위에서 $z=f(x,y)$의 그래프이고 $f$가 $D$에서 연속인 편도함수를 갖는다면</p>
+          <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}\,dA .\tag{9}$$</div>
+        </div>
+        <p>여백 노트는 이 식이 §8.1의 호의 길이 공식과 한 집안임을 짚는다. 평면곡선 $y=g(x)$의 길이는 $L=\int_a^b\sqrt{1+(dy/dx)^{2}}\,dx$인데, 식 (9)는 그와 똑같은 모양을 한 차원 올린 것으로, 근호 안에 둘째 편도함수의 제곱이 하나 더 붙고 홑적분 대신 이중적분이 놓인 형태다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $S$를 $x,y$ 자신을 매개변수로 하는 매개곡면으로 보면, 정의 6이 주는 넓이는</p>
+        <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_x\times\mathbf r_y\right|dA$$</div>
+        <p>이다(카드 11에서 $u,v$를 $x,y$로 바꾸어 쓴 것일 뿐, 매개변수의 이름은 아무 역할도 하지 않는다). 이 피적분함수 $|\mathbf r_x\times\mathbf r_y|$는 바로 앞 카드의 식 (8)에서 이미 구해 두었다.</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}} .$$</div>
+        <p>이를 그대로 대입하면</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}\,dA$$</div>
+        <p>가 되어 식 (9)를 얻는다. 즉 식 (9)는 새로운 계산이 아니라, 그래프라는 특수한 매개화 아래서 정의 6의 피적분함수를 명시적으로 적은 것에 지나지 않는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Equation (9) &mdash; Area of a Graph.</strong> If $S$ is the graph of $z=f(x,y)$ over a region $D$ of the $xy$-plane and $f$ has continuous partial derivatives on $D$, then</p>
+          <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}\,dA .\tag{9}$$</div>
+        </div>
+        <p>A margin note points out the family resemblance to the arc length formula of Section 8.1. For a plane curve $y=g(x)$ the length is $L=\int_a^b\sqrt{1+(dy/dx)^{2}}\,dx$; formula (9) is the same shape one dimension up, with one square added under the radical for the second partial derivative and a double integral in place of the single one.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Viewing $S$ as the parametric surface whose own parameters are $x$ and $y$, Definition 6 gives its area as</p>
+        <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_x\times\mathbf r_y\right|dA$$</div>
+        <p>(this is just Card 11 with $u,v$ renamed $x,y$; the name of a parameter plays no role in the formula). The integrand $|\mathbf r_x\times\mathbf r_y|$ was already computed in the previous card, Equation (8):</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_y\right|=\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}} .$$</div>
+        <p>Substituting this in place gives</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^{2}+\left(\frac{\partial z}{\partial y}\right)^{2}}\,dA,$$</div>
+        <p>which is Equation (9). So Equation (9) is not a new computation at all; it is simply Definition 6's integrand written out explicitly for the special parametrization furnished by a graph.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 : consistency with the one-variable formula 8.2.4 -->
+<div class="card thm-card" id="c16-6-14">
+  <div class="card-head">
+    <span class="thm-num">THM 14</span>
+    <span class="thm-title">회전면 넓이 공식과의 일관성 <em>Consistency with the One-Variable Formula</em><span class="src-ref">절 마무리 · p.1217&ndash;1218</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+          <p>정의 6은 1변수 미적분학의 회전면 넓이 공식과 모순되지 않는다. 이를 (3)으로 매개화된 회전면에 적용해 보자. $f$가 $[a,b]$에서 양이고 연속미분가능하다고 하면</p>
+          <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_\theta\right|=f(x)\sqrt{1+[f'(x)]^{2}} ,$$</div>
+          <p>이고, 매개변수 직사각형 위에서 적분하면</p>
+          <div class="math-display">$$A(S)=2\pi\int_a^b f(x)\sqrt{1+[f'(x)]^{2}}\,dx ,$$</div>
+          <p>가 다시 얻어지는데, 이는 공식 8.2.4와 같다.</p>
+        </div>
+        <p>이렇게 두 매개변수 정의는 올바르게 특수화된다 &mdash; 회전면의 넓이는 정의 6의 이중적분으로 재어도, 8장에서 배운 홑적분으로 재어도 같은 값이 나온다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $f$가 $[a,b]$에서 양의 값을 갖고 연속미분가능하다고 하자. 식 (3)의 매개화 $\mathbf r(x,\theta)=x\,\mathbf i+f(x)\cos\theta\,\mathbf j+f(x)\sin\theta\,\mathbf k$를 각 매개변수로 미분하면</p>
+        <div class="math-display">$$\mathbf r_x=\mathbf i+f'(x)\cos\theta\,\mathbf j+f'(x)\sin\theta\,\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_\theta=-f(x)\sin\theta\,\mathbf j+f(x)\cos\theta\,\mathbf k$$</div>
+        <p>를 얻는다. 외적을 행렬식으로 전개하면</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_\theta=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[2pt]1&f'(x)\cos\theta&f'(x)\sin\theta\\[2pt]0&-f(x)\sin\theta&f(x)\cos\theta\end{vmatrix}$$</div>
+        <p>이다. 각 성분을 풀어 쓰면 $\mathbf i$ 성분은 $f'(x)\cos\theta\cdot f(x)\cos\theta-f'(x)\sin\theta\cdot\bigl(-f(x)\sin\theta\bigr)=f(x)f'(x)\bigl(\cos^2\theta+\sin^2\theta\bigr)=f(x)f'(x)$이고, $\mathbf j$ 성분은 $-\bigl(1\cdot f(x)\cos\theta-f'(x)\sin\theta\cdot0\bigr)=-f(x)\cos\theta$이며, $\mathbf k$ 성분은 $1\cdot\bigl(-f(x)\sin\theta\bigr)-f'(x)\cos\theta\cdot0=-f(x)\sin\theta$이므로</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_\theta=f(x)f'(x)\,\mathbf i-f(x)\cos\theta\,\mathbf j-f(x)\sin\theta\,\mathbf k$$</div>
+        <p>를 얻는다. 그 길이는</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_\theta\right|=\sqrt{f(x)^2[f'(x)]^2+f(x)^2\cos^2\theta+f(x)^2\sin^2\theta}=\sqrt{f(x)^2\bigl(1+[f'(x)]^2\bigr)}=f(x)\sqrt{1+[f'(x)]^2}$$</div>
+        <p>가 된다(마지막 등호는 $f(x)>0$이므로 $\sqrt{f(x)^2}=f(x)$이기 때문). 매개변수영역이 직사각형 $a\le x\le b$, $0\le\theta\le2\pi$이므로, 정의 6을 그대로 적용하면</p>
+        <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_x\times\mathbf r_\theta\right|dA=\int_0^{2\pi}\!\!\int_a^b f(x)\sqrt{1+[f'(x)]^2}\,dx\,d\theta .$$</div>
+        <p>피적분함수가 $\theta$에 무관하므로 $\theta$에 관한 적분은 단지 인자 $2\pi$를 내어 주고,</p>
+        <div class="math-display">$$A(S)=2\pi\int_a^b f(x)\sqrt{1+[f'(x)]^2}\,dx$$</div>
+        <p>를 얻는데, 이는 정확히 §8.2의 공식 8.2.4이다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p>Definition 6 does not contradict the surface-area formula of one-variable calculus. Apply it to the surface of revolution parametrized by (3), with $f$ positive and continuously differentiable on $[a,b]$. Then</p>
+          <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_\theta\right|=f(x)\sqrt{1+[f'(x)]^{2}} ,$$</div>
+          <p>and integrating over the parameter rectangle recovers</p>
+          <div class="math-display">$$A(S)=2\pi\int_a^b f(x)\sqrt{1+[f'(x)]^{2}}\,dx ,$$</div>
+          <p>which is Formula 8.2.4.</p>
+        </div>
+        <p>So the two-parameter definition specializes correctly: a surface of revolution has the same area whether it is measured by the double integral of Definition 6 or by the single integral learned in Chapter 8.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Let $f$ be positive and continuously differentiable on $[a,b]$. Differentiating the parametrization of (3), $\mathbf r(x,\theta)=x\,\mathbf i+f(x)\cos\theta\,\mathbf j+f(x)\sin\theta\,\mathbf k$, with respect to each parameter gives</p>
+        <div class="math-display">$$\mathbf r_x=\mathbf i+f'(x)\cos\theta\,\mathbf j+f'(x)\sin\theta\,\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_\theta=-f(x)\sin\theta\,\mathbf j+f(x)\cos\theta\,\mathbf k .$$</div>
+        <p>Expanding the cross product as a determinant,</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_\theta=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\[2pt]1&f'(x)\cos\theta&f'(x)\sin\theta\\[2pt]0&-f(x)\sin\theta&f(x)\cos\theta\end{vmatrix} .$$</div>
+        <p>Writing out each component: the $\mathbf i$-component is $f'(x)\cos\theta\cdot f(x)\cos\theta-f'(x)\sin\theta\cdot\bigl(-f(x)\sin\theta\bigr)=f(x)f'(x)\bigl(\cos^2\theta+\sin^2\theta\bigr)=f(x)f'(x)$; the $\mathbf j$-component is $-\bigl(1\cdot f(x)\cos\theta-f'(x)\sin\theta\cdot0\bigr)=-f(x)\cos\theta$; and the $\mathbf k$-component is $1\cdot\bigl(-f(x)\sin\theta\bigr)-f'(x)\cos\theta\cdot0=-f(x)\sin\theta$. Hence</p>
+        <div class="math-display">$$\mathbf r_x\times\mathbf r_\theta=f(x)f'(x)\,\mathbf i-f(x)\cos\theta\,\mathbf j-f(x)\sin\theta\,\mathbf k,$$</div>
+        <p>whose length is</p>
+        <div class="math-display">$$\left|\mathbf r_x\times\mathbf r_\theta\right|=\sqrt{f(x)^2[f'(x)]^2+f(x)^2\cos^2\theta+f(x)^2\sin^2\theta}=\sqrt{f(x)^2\bigl(1+[f'(x)]^2\bigr)}=f(x)\sqrt{1+[f'(x)]^2}$$</div>
+        <p>(the last equality uses $f(x)>0$, so $\sqrt{f(x)^2}=f(x)$). The parameter domain is the rectangle $a\le x\le b$, $0\le\theta\le2\pi$, so Definition 6 gives directly</p>
+        <div class="math-display">$$A(S)=\iint_D\left|\mathbf r_x\times\mathbf r_\theta\right|dA=\int_0^{2\pi}\!\!\int_a^b f(x)\sqrt{1+[f'(x)]^2}\,dx\,d\theta .$$</div>
+        <p>The integrand does not involve $\theta$, so the $\theta$-integral contributes only a factor of $2\pi$, and</p>
+        <div class="math-display">$$A(S)=2\pi\int_a^b f(x)\sqrt{1+[f'(x)]^2}\,dx,$$</div>
+        <p>which is precisely Formula 8.2.4 of Section 8.2.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex16-6-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">벡터방정식으로 주어진 곡면 알아보기 <em>Identifying a Surface from Its Vector Equation</em><span class="src-ref">Example 1 · p.1209</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>벡터함수 $\mathbf r(u,v)=2\cos u\,\mathbf i+v\,\mathbf j+2\sin u\,\mathbf k$가 그리는 곡면이 어떤 곡면인지 밝히고, 그 모양을 그려라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 성분을 따로 읽으면 $x=2\cos u$, $y=v$, $z=2\sin u$이다. $y$는 매개변수 $v$가 그대로 옮겨진 것이어서 아무 제약도 받지 않고, $x,z$는 $u$에만 의존한다. $u$가 무엇이든</p>
+        <div class="math-display">$$x^2+z^2=4\cos^2u+4\sin^2u=4$$</div>
+        <p>가 항등적으로 성립하므로, $S$의 모든 점은 $x^2+z^2=4$를 만족한다. 역으로 $x^2+z^2=4$인 임의의 점은 $x=2\cos u_0$, $z=2\sin u_0$을 만족하는 $u_0$을 가지므로(단위원 위의 각), $v=y$로 두면 그 점은 $\mathbf r(u_0,y)$의 값이 되어 실제로 $S$ 위에 있다. 즉 $S$는 방정식 $x^2+z^2=4$를 만족하는 점 전체와 정확히 일치한다.</p>
+        <p>$y$-좌표가 자유롭게 움직이는 동안 $x,z$는 언제나 반지름 $2$인 원 위에 머무르므로, $S$는 $y$축을 축으로 하고 반지름이 $2$인 원기둥면이다. 매개변수 $u$는 그 원 위를 도는 각, $v$는 축 방향의 변위 구실을 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Determine which surface is traced out by the vector function $\mathbf r(u,v)=2\cos u\,\mathbf i+v\,\mathbf j+2\sin u\,\mathbf k$, and draw it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Reading off components, $x=2\cos u$, $y=v$, $z=2\sin u$. Here $y$ is just the parameter $v$ carried over unchanged, so it is unconstrained, while $x,z$ depend on $u$ alone. Whatever $u$ is,</p>
+        <div class="math-display">$$x^2+z^2=4\cos^2u+4\sin^2u=4$$</div>
+        <p>holds identically, so every point of $S$ satisfies $x^2+z^2=4$. Conversely, any point with $x^2+z^2=4$ has some angle $u_0$ with $x=2\cos u_0$, $z=2\sin u_0$ (a point on the unit circle scaled by $2$), and taking $v=y$ realizes that point as $\mathbf r(u_0,y)$, so it does lie on $S$. Thus $S$ coincides exactly with the set of points satisfying $x^2+z^2=4$.</p>
+        <p>Since $x,z$ stay on a circle of radius $2$ no matter what value the free coordinate $y$ takes, $S$ is a circular cylinder of radius $2$ whose axis is the $y$-axis. The parameter $u$ plays the role of the angle around that circle, and $v$ the role of displacement along the axis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex16-6-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">나선 모양 관 곡면과 격자곡선 <em>A Spiral Tube and Its Grid Curves</em><span class="src-ref">Example 2 · p.1210</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>매개곡면</p>
+        <div class="math-display">$$\mathbf r(u,v)=\langle\,(2+\sin v)\cos u,\ (2+\sin v)\sin u,\ u+\cos v\,\rangle$$</div>
+        <p>를 $0\le u\le 4\pi$, $0\le v\le 2\pi$의 범위에서 컴퓨터로 그리고, 나타난 격자곡선 가운데 어느 쪽이 $u$가 일정한 곡선이고 어느 쪽이 $v$가 일정한 곡선인지 가려내어라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 두 격자곡선족을 따로따로 조사한다.</p>
+        <p><strong>$v=v_0$ 고정.</strong> 그러면 $x=(2+\sin v_0)\cos u$, $y=(2+\sin v_0)\sin u$이므로 $\rho:=2+\sin v_0$을 상수로 두면</p>
+        <div class="math-display">$$x^2+y^2=\rho^2\cos^2u+\rho^2\sin^2u=\rho^2$$</div>
+        <p>이 항등적으로 성립한다 &mdash; $u$가 움직여도 $x,y$는 언제나 반지름 $\rho$인 원 위에 있다. 동시에 $z=u+\cos v_0$은 $u$가 커짐에 따라 그 원 위를 도는 각도에 정비례해 함께 증가한다. $u$가 $0$부터 $4\pi$까지 움직이는 동안 원을 두 바퀴 돌면서 고도가 꾸준히 오르므로, 이 곡선은 반지름 $\rho$인 나선(coil)이다. 이것이 $v$가 일정한 격자곡선이다.</p>
+        <p><strong>$u=u_0$ 고정.</strong> 그러면 $x=(2+\sin v)\cos u_0$, $y=(2+\sin v)\sin u_0$인데, $\cos u_0,\sin u_0$이 상수이므로 $(x,y)$는 언제나 원점을 지나고 방향 $(\cos u_0,\sin u_0)$을 갖는 고정된 연직 반평면 위에 놓인다. 그 반평면 안에서 좌표를 $X=2+\sin v$($z$축에서 잰 수평 거리), $Z=u_0+\cos v$로 두면</p>
+        <div class="math-display">$$(X-2)^2+(Z-u_0)^2=\sin^2v+\cos^2v=1$$</div>
+        <p>이 되어, $v$가 한 바퀴 도는 동안 이 곡선은 그 반평면 안에서 중심 $(2,u_0)$, 반지름 $1$인 원을 그린다. 이것이 $u$가 일정한 격자곡선이며, 고정된 연직평면 안에 놓이는 닫힌 원으로 보인다.</p>
+        <p>정리하면, $v$가 일정한 격자곡선은 관을 감아 도는 나선이고, $u$가 일정한 격자곡선은 그 나선관을 가로로 자른 원 모양의 단면이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Plot the parametric surface</p>
+        <div class="math-display">$$\mathbf r(u,v)=\langle\,(2+\sin v)\cos u,\ (2+\sin v)\sin u,\ u+\cos v\,\rangle$$</div>
+        <p>over the parameter rectangle $0\le u\le 4\pi$, $0\le v\le 2\pi$, then decide which of the grid curves in the plot are the ones along which $u$ stays constant and which are the ones along which $v$ stays constant.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Examine the two families of grid curves separately.</p>
+        <p><strong>Fix $v=v_0$.</strong> Then $x=(2+\sin v_0)\cos u$ and $y=(2+\sin v_0)\sin u$, so writing $\rho:=2+\sin v_0$ for the constant,</p>
+        <div class="math-display">$$x^2+y^2=\rho^2\cos^2u+\rho^2\sin^2u=\rho^2$$</div>
+        <p>holds identically &mdash; as $u$ varies, $x,y$ always lie on the circle of radius $\rho$. Meanwhile $z=u+\cos v_0$ increases in direct proportion to $u$, the angle swept around that circle. As $u$ runs from $0$ to $4\pi$ the curve winds twice around the circle while its height climbs steadily, so this curve is a coil (a spiral) of radius $\rho$. This is the grid curve with $v$ held constant.</p>
+        <p><strong>Fix $u=u_0$.</strong> Then $x=(2+\sin v)\cos u_0$, $y=(2+\sin v)\sin u_0$, and since $\cos u_0,\sin u_0$ are constants, the point $(x,y)$ always lies in the fixed vertical half-plane through the origin in direction $(\cos u_0,\sin u_0)$. Inside that half-plane, set $X=2+\sin v$ (horizontal distance from the axis) and $Z=u_0+\cos v$; then</p>
+        <div class="math-display">$$(X-2)^2+(Z-u_0)^2=\sin^2v+\cos^2v=1,$$</div>
+        <p>so as $v$ runs through one full period, the curve traces a circle of radius $1$ centered at $(2,u_0)$ inside that half-plane. This is the grid curve with $u$ held constant, and it appears as a closed circle lying in a fixed vertical plane.</p>
+        <p>In summary, the grid curves with $v$ constant are the spirals winding along the tube, while the grid curves with $u$ constant are the circular cross-sections cutting straight across that spiral tube.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex16-6-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">평면의 벡터방정식 <em>A Vector Equation for a Plane</em><span class="src-ref">Example 3 · p.1210</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>점 $P_0$의 위치벡터를 $\mathbf r_0$라 하고, $\mathbf a$와 $\mathbf b$를 서로 평행하지 않은 두 벡터라 하자. $P_0$를 지나고 $\mathbf a,\mathbf b$가 놓이는 평면을 나타내는 벡터함수를 구하고, 그 성분 형태의 매개변수방정식도 함께 써라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $P_0$를 지나 $\mathbf a,\mathbf b$가 놓이는 평면 위의 임의의 점을 $P$라 하자. $\mathbf a,\mathbf b$가 서로 평행하지 않으므로 둘은 그 평면을 생성하는 한 쌍의 기저를 이루고, 따라서 $\overrightarrow{P_0P}$는 어떤 스칼라 $u,v$에 대해</p>
+        <div class="math-display">$$\overrightarrow{P_0P}=u\,\mathbf a+v\,\mathbf b$$</div>
+        <p>로 유일하게 나타난다. $P$의 위치벡터는 $\mathbf r=\mathbf r_0+\overrightarrow{P_0P}$이므로</p>
+        <div class="math-display">$$\mathbf r(u,v)=\mathbf r_0+u\,\mathbf a+v\,\mathbf b,\qquad u,v\in\mathbb R$$</div>
+        <p>를 얻는다. 역으로 임의의 $u,v\in\mathbb R$에 대해 이 식이 주는 점은 $\overrightarrow{P_0P}=u\mathbf a+v\mathbf b$가 $\mathbf a,\mathbf b$의 일차결합이므로 그 평면 위에 있다. 따라서 이 벡터함수는 평면 전체를 (매개변수 제한 없이) 정확히 훑는다.</p>
+        <p>$\mathbf r_0=\langle x_0,y_0,z_0\rangle$, $\mathbf a=\langle a_1,a_2,a_3\rangle$, $\mathbf b=\langle b_1,b_2,b_3\rangle$로 성분을 쓰면, 성분별 매개변수방정식은</p>
+        <div class="math-display">$$x=x_0+ua_1+vb_1,\qquad y=y_0+ua_2+vb_2,\qquad z=z_0+ua_3+vb_3$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $P_0$ be the point with position vector $\mathbf r_0$, and let $\mathbf a$ and $\mathbf b$ be two vectors that are not parallel to each other. Give a vector function tracing the plane through $P_0$ in which $\mathbf a$ and $\mathbf b$ lie, and write its parametric equations in component form as well.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $P$ be an arbitrary point of the plane through $P_0$ that contains $\mathbf a,\mathbf b$. Since $\mathbf a,\mathbf b$ are not parallel, together they form a basis spanning that plane, so $\overrightarrow{P_0P}$ is written uniquely as</p>
+        <div class="math-display">$$\overrightarrow{P_0P}=u\,\mathbf a+v\,\mathbf b$$</div>
+        <p>for some scalars $u,v$. The position vector of $P$ is $\mathbf r=\mathbf r_0+\overrightarrow{P_0P}$, so</p>
+        <div class="math-display">$$\mathbf r(u,v)=\mathbf r_0+u\,\mathbf a+v\,\mathbf b,\qquad u,v\in\mathbb R.$$</div>
+        <p>Conversely, for any $u,v\in\mathbb R$ the point this formula gives lies in the plane, because $\overrightarrow{P_0P}=u\mathbf a+v\mathbf b$ is a linear combination of $\mathbf a,\mathbf b$. So this vector function sweeps out exactly the whole plane, with no restriction on the parameters.</p>
+        <p>Writing $\mathbf r_0=\langle x_0,y_0,z_0\rangle$, $\mathbf a=\langle a_1,a_2,a_3\rangle$, $\mathbf b=\langle b_1,b_2,b_3\rangle$ in components, the parametric equations read</p>
+        <div class="math-display">$$x=x_0+ua_1+vb_1,\qquad y=y_0+ua_2+vb_2,\qquad z=z_0+ua_3+vb_3.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex16-6-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">구면의 매개변수 표현 <em>Parametrizing a Sphere</em><span class="src-ref">Example 4 · p.1211</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>중심이 원점이고 반지름이 $a$인 구면 $x^{2}+y^{2}+z^{2}=a^{2}$을 매개변수로 나타내고, 그 매개변수 영역 $D$가 무엇인지 밝혀라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 구면좌표 $(\rho,\theta,\phi)$를 떠올리면, 구면 위의 점은 원점으로부터의 거리가 언제나 $\rho=a$로 고정된 점이다. 나머지 두 자유도인 방위각 $\theta$(양의 $x$축에서 잰 각)와 극각 $\phi$(양의 $z$축에서 잰 각)를 매개변수로 삼으면, 구면좌표와 직교좌표의 변환식에 $\rho=a$를 대입해</p>
+        <div class="math-display">$$x=a\sin\phi\cos\theta,\qquad y=a\sin\phi\sin\theta,\qquad z=a\cos\phi$$</div>
+        <p>를 얻는다. 벡터함수로 쓰면</p>
+        <div class="math-display">$$\mathbf r(\phi,\theta)=a\sin\phi\cos\theta\,\mathbf i+a\sin\phi\sin\theta\,\mathbf j+a\cos\phi\,\mathbf k$$</div>
+        <p>이다. 실제로 이 성분을 대입하면</p>
+        <div class="math-display">$$x^2+y^2+z^2=a^2\sin^2\phi\cos^2\theta+a^2\sin^2\phi\sin^2\theta+a^2\cos^2\phi=a^2\sin^2\phi+a^2\cos^2\phi=a^2$$</div>
+        <p>가 항등적으로 성립해 이 매개화가 실제로 구면 위에 놓임을 확인할 수 있다. 구면 전체를 중복 없이(북극·남극과 경도 $0$의 자오선은 예외로 하고) 덮으려면 $\phi$는 $0$부터 $\pi$까지, $\theta$는 $0$부터 $2\pi$까지 움직이면 충분하므로, 매개변수영역은</p>
+        <div class="math-display">$$D=\{(\phi,\theta)\mid 0\le\phi\le\pi,\ 0\le\theta\le2\pi\}$$</div>
+        <p>이다. $\phi$가 일정한 격자곡선은 위도가 일정한 원(위도원, 적도를 포함한다)이고, $\theta$가 일정한 격자곡선은 두 극을 잇는 자오선, 곧 경도가 일정한 반원이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Set up a parametric representation of the sphere $x^{2}+y^{2}+z^{2}=a^{2}$, centered at the origin with radius $a$, and state what its parameter domain $D$ is.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Recall spherical coordinates $(\rho,\theta,\phi)$: a point of the sphere is exactly one whose distance from the origin is fixed at $\rho=a$. Taking the remaining two degrees of freedom &mdash; the azimuthal angle $\theta$ (measured from the positive $x$-axis) and the polar angle $\phi$ (measured from the positive $z$-axis) &mdash; as parameters, and substituting $\rho=a$ into the conversion formulas between spherical and rectangular coordinates, gives</p>
+        <div class="math-display">$$x=a\sin\phi\cos\theta,\qquad y=a\sin\phi\sin\theta,\qquad z=a\cos\phi.$$</div>
+        <p>As a vector function,</p>
+        <div class="math-display">$$\mathbf r(\phi,\theta)=a\sin\phi\cos\theta\,\mathbf i+a\sin\phi\sin\theta\,\mathbf j+a\cos\phi\,\mathbf k.$$</div>
+        <p>Substituting these components confirms that the parametrization does lie on the sphere:</p>
+        <div class="math-display">$$x^2+y^2+z^2=a^2\sin^2\phi\cos^2\theta+a^2\sin^2\phi\sin^2\theta+a^2\cos^2\phi=a^2\sin^2\phi+a^2\cos^2\phi=a^2,$$</div>
+        <p>an identity. To cover the whole sphere without duplication (aside from the two poles and the meridian at longitude $0$), it suffices to let $\phi$ range over $[0,\pi]$ and $\theta$ over $[0,2\pi]$, so the parameter domain is</p>
+        <div class="math-display">$$D=\{(\phi,\theta)\mid 0\le\phi\le\pi,\ 0\le\theta\le2\pi\}.$$</div>
+        <p>The grid curves with $\phi$ constant are circles of constant latitude (the equator among them), and those with $\theta$ constant are meridians &mdash; semicircles of constant longitude joining the north and south poles.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex16-6-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">원기둥의 매개변수 표현 <em>Parametrizing a Cylinder</em><span class="src-ref">Example 5 · p.1211</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원기둥면 $x^{2}+y^{2}=4$ 가운데 $0\le z\le 1$인 부분을 매개변수로 나타내고, 그 매개변수 영역 $D$를 밝혀라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x^2+y^2=4$인 점은 원기둥좌표에서 반지름이 언제나 $2$로 고정된 점이므로, 평면 극좌표 $x=2\cos\theta$, $y=2\sin\theta$가 그 원을 훑는다. 원기둥의 나머지 자유도인 높이는 $z$ 자신이 그대로 매개변수 구실을 하므로,</p>
+        <div class="math-display">$$x=2\cos\theta,\qquad y=2\sin\theta,\qquad z=z$$</div>
+        <p>즉</p>
+        <div class="math-display">$$\mathbf r(\theta,z)=2\cos\theta\,\mathbf i+2\sin\theta\,\mathbf j+z\,\mathbf k$$</div>
+        <p>를 얻는다. 실제로 $x^2+y^2=4\cos^2\theta+4\sin^2\theta=4$가 $\theta$에 무관하게 항등적으로 성립하므로 이 매개화는 원기둥면 위에 놓인다. 원기둥 전체를 한 번씩 덮으려면 $\theta$가 $0$부터 $2\pi$까지 돌아야 하고, 조건 $0\le z\le1$은 곧바로 $z$의 범위를 정하므로 매개변수영역은</p>
+        <div class="math-display">$$D=\{(\theta,z)\mid 0\le\theta\le2\pi,\ 0\le z\le1\}$$</div>
+        <p>이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Represent parametrically the portion of the cylindrical surface $x^{2}+y^{2}=4$ that satisfies $0\le z\le 1$, and describe its parameter domain $D$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Points with $x^2+y^2=4$ are exactly the points whose distance from the $z$-axis is fixed at $2$, so plane polar coordinates $x=2\cos\theta$, $y=2\sin\theta$ sweep out that circle. The remaining degree of freedom of the cylinder is height, and $z$ itself already serves as that parameter, so</p>
+        <div class="math-display">$$x=2\cos\theta,\qquad y=2\sin\theta,\qquad z=z,$$</div>
+        <p>that is,</p>
+        <div class="math-display">$$\mathbf r(\theta,z)=2\cos\theta\,\mathbf i+2\sin\theta\,\mathbf j+z\,\mathbf k.$$</div>
+        <p>Indeed $x^2+y^2=4\cos^2\theta+4\sin^2\theta=4$ holds identically regardless of $\theta$, so this parametrization does lie on the cylindrical surface. Covering the full cylinder once requires $\theta$ to range over $[0,2\pi]$, and the condition $0\le z\le1$ directly fixes the range of $z$, so the parameter domain is</p>
+        <div class="math-display">$$D=\{(\theta,z)\mid 0\le\theta\le2\pi,\ 0\le z\le1\}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex16-6-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">타원포물면의 매개화 <em>Parametrizing an Elliptic Paraboloid</em><span class="src-ref">Example 6 · p.1212</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>타원포물면 $z=x^{2}+2y^{2}$을 상으로 갖는 벡터함수를 하나 써라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 이 곡면은 이미 $z$가 $x,y$의 함수로 풀려 있는 그래프 꼴이므로, 카드 5(그래프는 언제나 매개곡면)의 처방을 그대로 쓰면 된다 &mdash; $x,y$ 자신을 매개변수로 잡고 $z$에 함수식을 대입하면 그만이다.</p>
+        <div class="math-display">$$x=x,\qquad y=y,\qquad z=x^2+2y^2,$$</div>
+        <p>즉</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+(x^2+2y^2)\,\mathbf k .$$</div>
+        <p>이렇게 두면 셋째 성분이 자동으로 $z=x^2+2y^2$를 만족하므로, $(x,y)$가 $xy$-평면 전체(즉 $D=\mathbb R^2$)를 훑을 때 이 벡터함수의 상은 정확히 주어진 타원포물면과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Write down a vector function whose image is the elliptic paraboloid $z=x^{2}+2y^{2}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> This surface is already presented as a graph, with $z$ solved for as a function of $x,y$, so the recipe of Card 5 (every graph is a parametric surface) applies directly: take $x,y$ themselves as parameters and substitute the formula for $z$.</p>
+        <div class="math-display">$$x=x,\qquad y=y,\qquad z=x^2+2y^2,$$</div>
+        <p>that is,</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+(x^2+2y^2)\,\mathbf k .$$</div>
+        <p>With this choice the third component automatically satisfies $z=x^2+2y^2$, so as $(x,y)$ ranges over the whole $xy$-plane (that is, $D=\mathbb R^2$), the image of this vector function coincides exactly with the given elliptic paraboloid.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex16-6-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">원뿔면의 두 가지 매개화 <em>Two Parametrizations of a Cone</em><span class="src-ref">Example 7 · p.1212&ndash;1213</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>원뿔면 $z^{2}=4x^{2}+4y^{2}$의 위쪽 절반은 곡면 $z=2\sqrt{x^{2}+y^{2}}$과 같다. 이 곡면의 매개변수 표현을 서로 다른 두 가지 방법으로 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> <strong>매개화 1 — 자신의 $x,y$를 쓴다.</strong> $z=2\sqrt{x^2+y^2}$는 그래프이므로 카드 5의 처방대로 $x,y$ 자신을 매개변수로 삼으면</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+2\sqrt{x^2+y^2}\,\mathbf k,\qquad (x,y)\in\mathbb R^2 .$$</div>
+        <p>이는 언제나 통하지만, 셋째 성분에 제곱근이 그대로 남아 있어 이 곡면 위에서 적분을 해야 할 때 다루기 번거롭다.</p>
+        <p><strong>매개화 2 — 극좌표를 쓴다.</strong> $x^2+y^2=r^2$이므로 극좌표 $x=r\cos\theta$, $y=r\sin\theta$($r\ge0$)를 쓰면 $\sqrt{x^2+y^2}=r$이 되어 제곱근이 사라진다.</p>
+        <div class="math-display">$$\mathbf r(r,\theta)=r\cos\theta\,\mathbf i+r\sin\theta\,\mathbf j+2r\,\mathbf k,\qquad r\ge0,\ 0\le\theta\le2\pi .$$</div>
+        <p>실제로 $z^2=4r^2=4(x^2+y^2)$이 성립하므로 곡면 방정식이 그대로 만족된다. 이렇게 원뿔면 자체의 대칭을 이용한 매개변수를 고르면, 카드 6(매개화는 유일하지 않다)에서 말한 대로 뒤이은 계산이 훨씬 짧아진다 &mdash; 예컨대 부분 $z\le1$을 잘라내려면 매개화 2에서는 그저 정의역을 $0\le r\le\tfrac12$로 바꾸면 그만이지만, 매개화 1에서는 조건 $2\sqrt{x^2+y^2}\le1$을 먼저 풀어 원판 $x^2+y^2\le\tfrac14$로 고쳐 적어야 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The upper half of the cone $z^{2}=4x^{2}+4y^{2}$ is the same set as the surface $z=2\sqrt{x^{2}+y^{2}}$. Produce two different parametric representations of it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> <strong>Parametrization 1 &mdash; use $x,y$ themselves.</strong> Since $z=2\sqrt{x^2+y^2}$ is a graph, Card 5's recipe takes $x,y$ themselves as parameters:</p>
+        <div class="math-display">$$\mathbf r(x,y)=x\,\mathbf i+y\,\mathbf j+2\sqrt{x^2+y^2}\,\mathbf k,\qquad (x,y)\in\mathbb R^2 .$$</div>
+        <p>This always works, but the square root left sitting in the third component is awkward once an integral over this surface is required.</p>
+        <p><strong>Parametrization 2 &mdash; use polar coordinates.</strong> Since $x^2+y^2=r^2$, polar coordinates $x=r\cos\theta$, $y=r\sin\theta$ ($r\ge0$) turn $\sqrt{x^2+y^2}$ into simply $r$, so the square root disappears:</p>
+        <div class="math-display">$$\mathbf r(r,\theta)=r\cos\theta\,\mathbf i+r\sin\theta\,\mathbf j+2r\,\mathbf k,\qquad r\ge0,\ 0\le\theta\le2\pi .$$</div>
+        <p>Indeed $z^2=4r^2=4(x^2+y^2)$ holds, so the surface equation is satisfied. Choosing parameters adapted to the cone's own symmetry this way makes later computations much shorter, as Card 6 (parametrizations are not unique) points out: to cut out the piece with $z\le1$, Parametrization 2 needs only a change of parameter domain to $0\le r\le\tfrac12$, while Parametrization 1 must first solve the square-root condition $2\sqrt{x^2+y^2}\le1$ to reach the disk $x^2+y^2\le\tfrac14$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex16-6-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">사인곡선을 돌려 만든 회전면 <em>Revolving a Sine Curve</em><span class="src-ref">Example 8 · p.1213</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡선 $y=\sin x$, $0\le x\le 2\pi$를 $x$축 둘레로 한 바퀴 돌린다. 이때 쓸리며 생기는 회전면의 매개변수방정식을 구하고, 그 방정식을 이용해 곡면의 모양을 그려라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $f(x)=\sin x$로 두고 식 (3)을 그대로 적용하면, $x$축 둘레로 돈 회전면의 매개변수방정식은</p>
+        <div class="math-display">$$x=x,\qquad y=\sin x\cos\theta,\qquad z=\sin x\sin\theta,\qquad 0\le x\le2\pi,\ 0\le\theta\le2\pi$$</div>
+        <p>이다. 실제로 $y^2+z^2=\sin^2x\cos^2\theta+\sin^2x\sin^2\theta=\sin^2x$가 $\theta$에 무관하게 성립하므로, 가로좌표 $x$ 위 단면은 언제나 반지름 $|\sin x|$인 원이며 이는 $x$축 둘레 회전면의 정의와 맞아떨어진다.</p>
+        <p>다만 식 (3)의 가정 $f\ge0$은 $0\le x\le\pi$에서만 성립하고, $\pi\lt x\lt2\pi$에서는 $\sin x\lt 0$이다. 그래도 매개화 자체는 문제없이 작동한다 &mdash; 반지름이 음수 $\sin x$라도 $\theta$가 $0$부터 $2\pi$까지 완전히 돌면 $(\sin x\cos\theta,\sin x\sin\theta)$는 $\theta$를 $\pi$만큼 밀어 준 것과 같은 원을 여전히 완전히 훑기 때문이다(음의 반지름은 위상만 반대로 바꿀 뿐 궤적은 그대로다). 그 결과 $x=\pi$에서 반지름이 $0$으로 줄었다가 다시 벌어지는 두 개의 나팔(방추) 모양이 이어져, 두 개의 대칭인 방추형 곡면이 $x=\pi$에서 한 점(꼭짓점)으로 맞닿은 그림이 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Spin the curve $y=\sin x$, $0\le x\le 2\pi$, once around the $x$-axis. Obtain parametric equations for the surface of revolution this sweeps out, and use them to draw it.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Set $f(x)=\sin x$ and apply Equations (3) directly. The parametric equations of the surface of revolution about the $x$-axis are</p>
+        <div class="math-display">$$x=x,\qquad y=\sin x\cos\theta,\qquad z=\sin x\sin\theta,\qquad 0\le x\le2\pi,\ 0\le\theta\le2\pi.$$</div>
+        <p>Indeed $y^2+z^2=\sin^2x\cos^2\theta+\sin^2x\sin^2\theta=\sin^2x$ holds regardless of $\theta$, so the cross-section over the abscissa $x$ is always a circle of radius $|\sin x|$, matching what it means to revolve about the $x$-axis.</p>
+        <p>The hypothesis $f\ge0$ of Equations (3) holds only for $0\le x\le\pi$, however; on $\pi\lt x\lt2\pi$, $\sin x\lt 0$. The parametrization still works without trouble even so: with a negative radius $\sin x$, letting $\theta$ run through a full period $0$ to $2\pi$ still sweeps out exactly the same circle as it would with the angle shifted by $\pi$ (a negative radius merely reverses the phase, not the locus traced). The result is a radius that shrinks to $0$ at $x=\pi$ and then opens back out, producing two symmetric spindle-shaped lobes that meet at a single point (a vertex) at $x=\pi$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 9 -->
+<div class="card exam-card" id="ex16-6-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 9</span>
+    <span class="exam-title">매개곡면의 접평면 구하기 <em>A Tangent Plane to a Parametric Surface</em><span class="src-ref">Example 9 · p.1214</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>곡면 $S$가 매개변수방정식 $x=u^{2}$, $y=v^{2}$, $z=u+2v$로 주어져 있다. $S$ 위의 점 $(1,1,3)$에서 $S$에 접하는 평면의 방정식을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 먼저 점 $(1,1,3)$에 대응하는 매개변수 쌍 $(u,v)$를 찾는다. $u^2=1$이므로 $u=\pm1$, $v^2=1$이므로 $v=\pm1$인데, 나머지 조건 $u+2v=3$을 함께 만족하는 조합은 $u=1,v=1$뿐이다(다른 세 조합은 각각 $-1,\,1,\,-3$을 주어 모두 어긋난다). 그러므로 이 점에 대응하는 매개변수는 $(u_0,v_0)=(1,1)$이다.</p>
+        <p>벡터방정식은 $\mathbf r(u,v)=u^2\,\mathbf i+v^2\,\mathbf j+(u+2v)\,\mathbf k$이므로, 접벡터는</p>
+        <div class="math-display">$$\mathbf r_u=2u\,\mathbf i+\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_v=2v\,\mathbf j+2\,\mathbf k$$</div>
+        <p>이다. 카드 9에 따라 $\mathbf r_u\times\mathbf r_v$가 접평면의 법선이므로 외적을 구한다.</p>
+        <div class="math-display">$$\mathbf r_u\times\mathbf r_v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\2u&0&1\\0&2v&2\end{vmatrix}=(0\cdot2-1\cdot2v)\,\mathbf i-(2u\cdot2-1\cdot0)\,\mathbf j+(2u\cdot2v-0\cdot0)\,\mathbf k=-2v\,\mathbf i-4u\,\mathbf j+4uv\,\mathbf k .$$</div>
+        <p>$(u,v)=(1,1)$을 대입하면 법선벡터는</p>
+        <div class="math-display">$$\mathbf n=-2\,\mathbf i-4\,\mathbf j+4\,\mathbf k$$</div>
+        <p>이다. 법선벡터 $\langle a,b,c\rangle$와 점 $(x_0,y_0,z_0)$을 지나는 평면의 방정식 $a(x-x_0)+b(y-y_0)+c(z-z_0)=0$에 대입하면</p>
+        <div class="math-display">$$-2(x-1)-4(y-1)+4(z-3)=0 .$$</div>
+        <p>전개하면 $-2x-4y+4z-6=0$이고, 양변을 $-2$로 나누면</p>
+        <div class="math-display">$$x+2y-2z+3=0 .$$</div>
+        <p>따라서 구하는 접평면의 방정식은 $x+2y-2z+3=0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A surface $S$ carries the parametric equations $x=u^{2}$, $y=v^{2}$, $z=u+2v$. Determine an equation of the plane tangent to $S$ at the point $(1,1,3)$ of $S$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> First find the parameter pair $(u,v)$ corresponding to $(1,1,3)$. Since $u^2=1$, $u=\pm1$, and since $v^2=1$, $v=\pm1$; imposing the remaining condition $u+2v=3$ singles out $u=1,v=1$ (the other three combinations give $-1,1,-3$ respectively, none of which match). So the parameters for this point are $(u_0,v_0)=(1,1)$.</p>
+        <p>The vector equation is $\mathbf r(u,v)=u^2\,\mathbf i+v^2\,\mathbf j+(u+2v)\,\mathbf k$, so the tangent vectors are</p>
+        <div class="math-display">$$\mathbf r_u=2u\,\mathbf i+\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_v=2v\,\mathbf j+2\,\mathbf k .$$</div>
+        <p>By Card 9, $\mathbf r_u\times\mathbf r_v$ is normal to the tangent plane, so compute the cross product:</p>
+        <div class="math-display">$$\mathbf r_u\times\mathbf r_v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\2u&0&1\\0&2v&2\end{vmatrix}=(0\cdot2-1\cdot2v)\,\mathbf i-(2u\cdot2-1\cdot0)\,\mathbf j+(2u\cdot2v-0\cdot0)\,\mathbf k=-2v\,\mathbf i-4u\,\mathbf j+4uv\,\mathbf k .$$</div>
+        <p>Substituting $(u,v)=(1,1)$ gives the normal vector</p>
+        <div class="math-display">$$\mathbf n=-2\,\mathbf i-4\,\mathbf j+4\,\mathbf k .$$</div>
+        <p>With normal vector $\langle a,b,c\rangle$ and the plane through $(x_0,y_0,z_0)$ given by $a(x-x_0)+b(y-y_0)+c(z-z_0)=0$, substitution gives</p>
+        <div class="math-display">$$-2(x-1)-4(y-1)+4(z-3)=0 .$$</div>
+        <p>Expanding gives $-2x-4y+4z-6=0$, and dividing both sides by $-2$,</p>
+        <div class="math-display">$$x+2y-2z+3=0 .$$</div>
+        <p>Hence the tangent plane has equation $x+2y-2z+3=0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 10 -->
+<div class="card exam-card" id="ex16-6-10">
+  <div class="card-head">
+    <span class="exam-num">EXAM 10</span>
+    <span class="exam-title">구면의 겉넓이 <em>The Surface Area of a Sphere</em><span class="src-ref">Example 10 · p.1216</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의 6에서 출발하여, 반지름이 $a$인 구면의 넓이를 계산하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 예제 4의 매개화 $\mathbf r(\phi,\theta)=a\sin\phi\cos\theta\,\mathbf i+a\sin\phi\sin\theta\,\mathbf j+a\cos\phi\,\mathbf k$, $D=[0,\pi]\times[0,2\pi]$에서 출발한다. 접벡터는</p>
+        <div class="math-display">$$\mathbf r_\phi=a\cos\phi\cos\theta\,\mathbf i+a\cos\phi\sin\theta\,\mathbf j-a\sin\phi\,\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_\theta=-a\sin\phi\sin\theta\,\mathbf i+a\sin\phi\cos\theta\,\mathbf j$$</div>
+        <p>이고, 외적은</p>
+        <div class="math-display">$$\mathbf r_\phi\times\mathbf r_\theta=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\a\cos\phi\cos\theta&a\cos\phi\sin\theta&-a\sin\phi\\-a\sin\phi\sin\theta&a\sin\phi\cos\theta&0\end{vmatrix}=a^2\sin^2\phi\cos\theta\,\mathbf i+a^2\sin^2\phi\sin\theta\,\mathbf j+a^2\sin\phi\cos\phi\,\mathbf k$$</div>
+        <p>이다. 그 길이의 제곱은</p>
+        <div class="math-display">$$\left|\mathbf r_\phi\times\mathbf r_\theta\right|^2=a^4\sin^4\phi\cos^2\theta+a^4\sin^4\phi\sin^2\theta+a^4\sin^2\phi\cos^2\phi=a^4\sin^4\phi+a^4\sin^2\phi\cos^2\phi=a^4\sin^2\phi$$</div>
+        <p>이므로(둘째 등호에서 $\cos^2\theta+\sin^2\theta=1$, 셋째 등호에서 $\sin^2\phi$를 묶고 $\sin^2\phi+\cos^2\phi=1$을 썼다), $0\le\phi\le\pi$에서 $\sin\phi\ge0$임을 고려하면</p>
+        <div class="math-display">$$\left|\mathbf r_\phi\times\mathbf r_\theta\right|=a^2\sin\phi .$$</div>
+        <p>정의 6을 적용하면</p>
+        <div class="math-display">$$A(S)=\iint_D a^2\sin\phi\,dA=\int_0^{2\pi}\!\!\int_0^\pi a^2\sin\phi\,d\phi\,d\theta .$$</div>
+        <p>피적분함수가 $\theta$에 무관하므로 바깥 적분은 인자 $2\pi$를 내어 주고, 안쪽 적분은</p>
+        <div class="math-display">$$\int_0^\pi\sin\phi\,d\phi=\Bigl[-\cos\phi\Bigr]_0^\pi=-(-1)-(-1)=2$$</div>
+        <p>이므로</p>
+        <div class="math-display">$$A(S)=2\pi\cdot a^2\cdot2=4\pi a^2 .$$</div>
+        <p>따라서 반지름 $a$인 구면의 넓이는 $4\pi a^2$이며, 이는 익히 알려진 공식과 일치한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Starting from Definition 6, calculate the area of a sphere whose radius is $a$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Start from the parametrization of Example 4, $\mathbf r(\phi,\theta)=a\sin\phi\cos\theta\,\mathbf i+a\sin\phi\sin\theta\,\mathbf j+a\cos\phi\,\mathbf k$, $D=[0,\pi]\times[0,2\pi]$. The tangent vectors are</p>
+        <div class="math-display">$$\mathbf r_\phi=a\cos\phi\cos\theta\,\mathbf i+a\cos\phi\sin\theta\,\mathbf j-a\sin\phi\,\mathbf k ,$$</div>
+        <div class="math-display">$$\mathbf r_\theta=-a\sin\phi\sin\theta\,\mathbf i+a\sin\phi\cos\theta\,\mathbf j ,$$</div>
+        <p>and their cross product is</p>
+        <div class="math-display">$$\mathbf r_\phi\times\mathbf r_\theta=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\a\cos\phi\cos\theta&a\cos\phi\sin\theta&-a\sin\phi\\-a\sin\phi\sin\theta&a\sin\phi\cos\theta&0\end{vmatrix}=a^2\sin^2\phi\cos\theta\,\mathbf i+a^2\sin^2\phi\sin\theta\,\mathbf j+a^2\sin\phi\cos\phi\,\mathbf k .$$</div>
+        <p>The square of its length is</p>
+        <div class="math-display">$$\left|\mathbf r_\phi\times\mathbf r_\theta\right|^2=a^4\sin^4\phi\cos^2\theta+a^4\sin^4\phi\sin^2\theta+a^4\sin^2\phi\cos^2\phi=a^4\sin^4\phi+a^4\sin^2\phi\cos^2\phi=a^4\sin^2\phi$$</div>
+        <p>(the second equality uses $\cos^2\theta+\sin^2\theta=1$; the third factors out $\sin^2\phi$ and uses $\sin^2\phi+\cos^2\phi=1$), so, since $\sin\phi\ge0$ on $0\le\phi\le\pi$,</p>
+        <div class="math-display">$$\left|\mathbf r_\phi\times\mathbf r_\theta\right|=a^2\sin\phi .$$</div>
+        <p>Applying Definition 6,</p>
+        <div class="math-display">$$A(S)=\iint_D a^2\sin\phi\,dA=\int_0^{2\pi}\!\!\int_0^\pi a^2\sin\phi\,d\phi\,d\theta .$$</div>
+        <p>The integrand does not involve $\theta$, so the outer integral contributes a factor of $2\pi$, and the inner integral is</p>
+        <div class="math-display">$$\int_0^\pi\sin\phi\,d\phi=\Bigl[-\cos\phi\Bigr]_0^\pi=-(-1)-(-1)=2,$$</div>
+        <p>so</p>
+        <div class="math-display">$$A(S)=2\pi\cdot a^2\cdot2=4\pi a^2 .$$</div>
+        <p>Hence a sphere of radius $a$ has area $4\pi a^2$, agreeing with the familiar formula.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 11 -->
+<div class="card exam-card" id="ex16-6-11">
+  <div class="card-head">
+    <span class="exam-num">EXAM 11</span>
+    <span class="exam-title">평면 아래에 놓인 포물면의 넓이 <em>Area of a Paraboloid Below a Plane</em><span class="src-ref">Example 11 · p.1217</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>평면 $z=9$가 포물면 $z=x^{2}+y^{2}$을 자른다. 이 평면보다 아래쪽에 놓이는 포물면 조각의 넓이를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $z=x^2+y^2$는 그래프이므로 식 (9)를 곧장 쓸 수 있다. $\partial z/\partial x=2x$, $\partial z/\partial y=2y$이므로 피적분함수는</p>
+        <div class="math-display">$$\sqrt{1+(2x)^2+(2y)^2}=\sqrt{1+4(x^2+y^2)}$$</div>
+        <p>이다. 정의역 $D$부터 정한다 &mdash; 평면 $z=9$와 포물면의 교선은 $x^2+y^2=9$, $z=9$이므로, 평면 아래에 놓인 포물면 조각은 정사영이 정확히 원판 $D=\{(x,y)\mid x^2+y^2\le9\}$(반지름 $3$)인 부분이다. 따라서</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+4(x^2+y^2)}\,dA .$$</div>
+        <p>피적분함수가 $x^2+y^2$에만 의존하고 $D$가 원판이므로 극좌표 $x=r\cos\theta,\ y=r\sin\theta,\ dA=r\,dr\,d\theta$로 바꾸면</p>
+        <div class="math-display">$$A(S)=\int_0^{2\pi}\!\!\int_0^3\sqrt{1+4r^2}\;r\,dr\,d\theta .$$</div>
+        <p>피적분함수가 $\theta$에 무관하므로 바깥 적분은 인자 $2\pi$를 낸다. 안쪽 적분은 $w=1+4r^2$로 치환하면 $dw=8r\,dr$이고 $r=0,3$에서 각각 $w=1,37$이므로</p>
+        <div class="math-display">$$\int_0^3\sqrt{1+4r^2}\;r\,dr=\frac18\int_1^{37}\sqrt{w}\,dw=\frac18\cdot\frac23\Bigl[w^{3/2}\Bigr]_1^{37}=\frac{1}{12}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>여기에 $2\pi$를 곱하면</p>
+        <div class="math-display">$$A(S)=2\pi\cdot\frac{1}{12}\bigl(37\sqrt{37}-1\bigr)=\frac{\pi}{6}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>따라서 구하는 넓이는 $A(S)=\dfrac{\pi}{6}\bigl(37\sqrt{37}-1\bigr)\approx117.319$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The plane $z=9$ cuts the paraboloid $z=x^{2}+y^{2}$. Find the area of the piece of the paraboloid that lies underneath that plane.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $z=x^2+y^2$ is a graph, Equation (9) applies directly. With $\partial z/\partial x=2x$ and $\partial z/\partial y=2y$, the integrand is</p>
+        <div class="math-display">$$\sqrt{1+(2x)^2+(2y)^2}=\sqrt{1+4(x^2+y^2)} .$$</div>
+        <p>First pin down $D$: the plane $z=9$ meets the paraboloid along $x^2+y^2=9$, $z=9$, so the piece of the paraboloid below the plane is exactly the part whose projection is the disk $D=\{(x,y)\mid x^2+y^2\le9\}$ (radius $3$). Hence</p>
+        <div class="math-display">$$A(S)=\iint_D\sqrt{1+4(x^2+y^2)}\,dA .$$</div>
+        <p>Since the integrand depends only on $x^2+y^2$ and $D$ is a disk, switching to polar coordinates $x=r\cos\theta,\ y=r\sin\theta,\ dA=r\,dr\,d\theta$ gives</p>
+        <div class="math-display">$$A(S)=\int_0^{2\pi}\!\!\int_0^3\sqrt{1+4r^2}\;r\,dr\,d\theta .$$</div>
+        <p>The integrand does not involve $\theta$, so the outer integral contributes a factor of $2\pi$. For the inner integral, substitute $w=1+4r^2$, so $dw=8r\,dr$, and $r=0,3$ correspond to $w=1,37$:</p>
+        <div class="math-display">$$\int_0^3\sqrt{1+4r^2}\;r\,dr=\frac18\int_1^{37}\sqrt{w}\,dw=\frac18\cdot\frac23\Bigl[w^{3/2}\Bigr]_1^{37}=\frac{1}{12}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>Multiplying by $2\pi$,</p>
+        <div class="math-display">$$A(S)=2\pi\cdot\frac{1}{12}\bigl(37\sqrt{37}-1\bigr)=\frac{\pi}{6}\bigl(37\sqrt{37}-1\bigr).$$</div>
+        <p>Hence the required area is $A(S)=\dfrac{\pi}{6}\bigl(37\sqrt{37}-1\bigr)\approx117.319$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<div class="card note-card" id="c16-6-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> &mdash; 미적분학 2 <a href="../calc2/ch13.html">단원 13</a></p>
+        <ul>
+          <li>구체적인 곡면의 매개화 (원뿔·구면·원기둥·평면·이차곡면) &mdash; <a href="../calc2/ch13.html#ex01">ex01</a>, <a href="../calc2/ch13.html#yu01-1">yu01-1</a>, <a href="../calc2/ch13.html#yu01-2">yu01-2</a>, <a href="../calc2/ch13.html#yu01-4">yu01-4</a> (완전 대응: 예제 3&middot;4&middot;5&middot;6&middot;7과 같은 유형)</li>
+          <li>회전면의 매개화 (식 3) &mdash; <a href="../calc2/ch13.html#yu01-3">yu01-3</a> (완전 대응: 예제 8과 같은 유형)</li>
+          <li>접벡터와 접평면 &mdash; <a href="../calc2/ch13.html#pr01">pr01</a>, <a href="../calc2/ch13.html#pr04">pr04</a>, <a href="../calc2/ch13.html#pr05">pr05</a> (부분 대응: 문제만 있고 식 (4)&middot;(5)나 매끄러운 곡면의 개념 진술은 없음)</li>
+          <li>곡면 넓이 (정의 6) &mdash; <a href="../calc2/ch13.html#ex02">ex02</a>, <a href="../calc2/ch13.html#yu02-1">yu02-1</a>, <a href="../calc2/ch13.html#yu02-2">yu02-2</a>, <a href="../calc2/ch13.html#yu02-3">yu02-3</a> (부분 대응: 계산 문제만 있고 정의와 리만합 유도는 없음)</li>
+          <li>그래프꼴 곡면의 넓이 공식 (식 9) &mdash; <a href="../calc2/ch13.html#ex02">ex02</a> (완전 대응: 예제 11과 같은 유형)</li>
+          <li>매개곡면의 정의(식 1&middot;2), 격자곡선, 매끄러운 곡면의 정의, 매개화의 비유일성 &mdash; 대응 없음</li>
+        </ul>
+        <p><strong>표기 주의</strong> &mdash; 강의 노트는 면적소를 그리스 문자 시그마를 쓴 기호로 적고(이 페이지는 Stewart를 따라 $dS$로 쓴다), 음함수로 주어진 곡면의 넓이 공식도 함께 다룬다.</p>
+        <p><strong>(b) 공통과제 (§16.6, 4차)</strong></p>
+        <p>제출 문항: 23, 36, 47, 50, 60-(a), 62 &nbsp;/&nbsp; 학습 참고: 13~18, 19~26, 29, 30, 33~36, 39~50, 59-(a), 60-(a), 61~63</p>
+        <p><strong>(c) 이웃 절</strong> &mdash; 이전: <a href="s16-5.html">§16.5 회전과 발산</a> &nbsp;/&nbsp; 다음: <a href="s16-7.html">§16.7 면적분</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> &mdash; Calculus II, <a href="../calc2/ch13.html">Unit 13</a></p>
+        <ul>
+          <li>Parametrizing specific surfaces (cone, sphere, cylinder, plane, quadric surfaces) &mdash; <a href="../calc2/ch13.html#ex01">ex01</a>, <a href="../calc2/ch13.html#yu01-1">yu01-1</a>, <a href="../calc2/ch13.html#yu01-2">yu01-2</a>, <a href="../calc2/ch13.html#yu01-4">yu01-4</a> (full match; same type as Examples 3, 4, 5, 6, 7)</li>
+          <li>Parametrizing a surface of revolution, Equations (3) &mdash; <a href="../calc2/ch13.html#yu01-3">yu01-3</a> (full match; same type as Example 8)</li>
+          <li>Tangent vectors and the tangent plane &mdash; <a href="../calc2/ch13.html#pr01">pr01</a>, <a href="../calc2/ch13.html#pr04">pr04</a>, <a href="../calc2/ch13.html#pr05">pr05</a> (partial; exercises only, with no statement of (4), (5) or of smoothness)</li>
+          <li>Surface area, Definition 6 &mdash; <a href="../calc2/ch13.html#ex02">ex02</a>, <a href="../calc2/ch13.html#yu02-1">yu02-1</a>, <a href="../calc2/ch13.html#yu02-2">yu02-2</a>, <a href="../calc2/ch13.html#yu02-3">yu02-3</a> (partial; computations only, with neither the definition nor the Riemann-sum derivation)</li>
+          <li>Area of a graph, Equation (9) &mdash; <a href="../calc2/ch13.html#ex02">ex02</a> (full match; same type as Example 11)</li>
+          <li>The definition of a parametric surface, Equations (1), (2), grid curves, the definition of a smooth surface, and the non-uniqueness of parametrizations &mdash; no match</li>
+        </ul>
+        <p><strong>A warning about notation</strong> &mdash; the lecture notes denote the element of area by a symbol built on the Greek letter sigma (this page follows Stewart and writes $dS$), and they also cover the area formula for a surface given implicitly.</p>
+        <p><strong>(b) Assignment (§16.6, fourth set)</strong></p>
+        <p>Problems to submit: 23, 36, 47, 50, 60-(a), 62 &nbsp;/&nbsp; Recommended practice: 13&ndash;18, 19&ndash;26, 29, 30, 33&ndash;36, 39&ndash;50, 59-(a), 60-(a), 61&ndash;63</p>
+        <p><strong>(c) Neighboring sections</strong> &mdash; Previous: <a href="s16-5.html">§16.5 Curl and Divergence</a> &nbsp;/&nbsp; Next: <a href="s16-7.html">§16.7 Surface Integrals</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

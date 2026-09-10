@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14.5 연쇄법칙 (The Chain Rule) | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus ET 9판 §14.5 연쇄법칙 — 경우 1·경우 2·일반형 연쇄법칙의 정리와 증명, 독립변수·중간변수·종속변수의 구분, 수형도로 외우는 규칙, 음함수 미분 공식 (5)·(6)과 음함수 정리를 한국어·영어 대조로 정리하고 예제 9개를 자체 풀이했습니다.">
+<meta name="keywords" content="Stewart, Calculus Early Transcendentals, 9판, 미적분학 2, 14.5, 연쇄법칙, Chain Rule, 경우 1, Case 1, 경우 2, Case 2, 일반형, General Version, 중간변수, intermediate variable, 독립변수, 종속변수, 수형도, tree diagram, 음함수 미분법, implicit differentiation, 음함수 정리, Implicit Function Theorem, 이상기체, ideal gas, 이계 편도함수, second-order partial derivative, 예제 풀이">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/s14-5.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="§14.5 연쇄법칙 (The Chain Rule) — Stewart 미적분학 교재 노트">
+<meta property="og:description" content="경우 1·경우 2·일반형 연쇄법칙과 그 증명, 수형도로 외우는 규칙, 음함수 미분 공식과 음함수 정리까지 §14.5 전체를 한·영 대조로 정리한 교재 노트.">
+<meta property="og:url" content="https://univmathsurvive.com/stewart/s14-5.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="대학수학생존">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "§14.5 연쇄법칙 (The Chain Rule) — Stewart 미적분학 교재 노트",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "Stewart Calculus ET 9판 §14.5 연쇄법칙 — 경우 1·경우 2·일반형 연쇄법칙의 진술과 증명, 중간변수와 수형도, 음함수 미분 공식 (5)·(6)과 음함수 정리를 한국어·영어 대조로 정리하고 본문 예제 9개를 재서술·풀이한 교재 노트.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/stewart/s14-5.html",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": "https://univmathsurvive.com/stewart/s14-5.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="index.html">Stewart</a>
+      <a href="../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <span class="nav-sep">·</span>
+      <a href="s14-1.html">14.1</a>
+      <a href="s14-2.html">14.2</a>
+      <a href="s14-3.html">14.3</a>
+      <a href="s14-4.html">14.4</a>
+      <a href="s14-5.html" class="active">14.5</a>
+      <a href="s14-6.html">14.6</a>
+      <a href="s14-7.html">14.7</a>
+      <a href="s14-8.html">14.8</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Stewart Calculus ET 9e — §14.5 · 2주차</p>
+  <h1>§14.5 연쇄법칙<span>The Chain Rule</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c14-5-1"><span class="toc-num">NOTE</span> 연쇄법칙의 확장 <em>Extending the Chain Rule</em></a></li>
+    <li><a href="#c14-5-2"><span class="toc-num">THM 2</span> 연쇄법칙 (경우 1) <em>The Chain Rule, Case 1</em></a></li>
+    <li><a href="#c14-5-3"><span class="toc-num">REM 3</span> 전미분과의 형태적 유사 <em>Resemblance to the Differential</em></a></li>
+    <li><a href="#c14-5-4"><span class="toc-num">THM 4</span> 연쇄법칙 (경우 2) <em>The Chain Rule, Case 2</em></a></li>
+    <li><a href="#c14-5-5"><span class="toc-num">REM 5</span> 독립·중간·종속 변수와 수형도 <em>Intermediate Variables and Tree Diagrams</em></a></li>
+    <li><a href="#c14-5-6"><span class="toc-num">THM 6</span> 연쇄법칙 (일반형) <em>The Chain Rule, General Version</em></a></li>
+    <li><a href="#c14-5-7"><span class="toc-num">NOTE</span> 음함수 미분법 — 두 변수 <em>Implicit Differentiation for F(x, y) = 0</em></a></li>
+    <li><a href="#c14-5-8"><span class="toc-num">REM 8</span> 음함수 정리 <em>The Implicit Function Theorem</em></a></li>
+    <li><a href="#c14-5-9"><span class="toc-num">THM 9</span> 음함수 미분법 — 세 변수 <em>Implicit Differentiation for F(x, y, z) = 0</em></a></li>
+    <li><a href="#c14-5-10"><span class="toc-num">REM 10</span> 음함수 정리 (세 변수) <em>The Implicit Function Theorem in Three Variables</em></a></li>
+    <li><a href="#ex14-5-1"><span class="toc-num">EXAM 1</span> 매개곡선 위에서의 변화율 <em>Rate of Change along a Parametrized Curve</em></a></li>
+    <li><a href="#ex14-5-2"><span class="toc-num">EXAM 2</span> 이상기체의 압력 변화율 <em>Rate of Change of Pressure for an Ideal Gas</em></a></li>
+    <li><a href="#ex14-5-3"><span class="toc-num">EXAM 3</span> 두 독립변수에 대한 편도함수 <em>Partial Derivatives with Two Independent Variables</em></a></li>
+    <li><a href="#ex14-5-4"><span class="toc-num">EXAM 4</span> 일반형 연쇄법칙 쓰기 <em>Writing Out the General Chain Rule</em></a></li>
+    <li><a href="#ex14-5-5"><span class="toc-num">EXAM 5</span> 중간변수 셋·독립변수 셋 <em>Three Intermediate and Three Independent Variables</em></a></li>
+    <li><a href="#ex14-5-6"><span class="toc-num">EXAM 6</span> 연쇄법칙으로 항등식 보이기 <em>Proving an Identity with the Chain Rule</em></a></li>
+    <li><a href="#ex14-5-7"><span class="toc-num">EXAM 7</span> 이계 편도함수의 연쇄법칙 <em>The Chain Rule for a Second Derivative</em></a></li>
+    <li><a href="#ex14-5-8"><span class="toc-num">EXAM 8</span> 음함수로 정의된 곡선의 도함수 <em>An Implicit Derivative</em></a></li>
+    <li><a href="#ex14-5-9"><span class="toc-num">EXAM 9</span> 음함수로 정의된 곡면의 편도함수 <em>Partial Derivatives of an Implicitly Defined Surface</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="section-title"><h2>개념 해석 · Concepts</h2></div>
+
+<!-- Card 1 : section opening -->
+<div class="card note-card" id="c14-5-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">연쇄법칙의 확장 <em>Extending the Chain Rule</em><span class="src-ref">Section opening · p.1023</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1변수 연쇄법칙은 합성함수를 미분하는 규칙이다. $y=f(x)$와 $x=g(t)$가 모두 미분가능하면 $y$는 간접적으로 $t$의 미분가능한 함수가 되고</p>
+        <div class="math-display">$$\frac{dy}{dt}=\frac{dy}{dx}\,\frac{dx}{dt}.$$</div>
+        <p>이 절에서는 이 규칙을 여러 변수의 함수로 확장한다. 걸림돌은 다변수 합성함수가 여러 방식으로 조립될 수 있다는 점이다 — 바깥 함수의 중간변수가 둘일 수도, $n$개일 수도 있고, 그 중간변수들이 독립변수 하나에 의존할 수도, 여러 개에 의존할 수도 있다. 조립 방식마다 규칙의 모습이 달라지므로, 이 절은 경우 1, 경우 2, 그리고 이 둘을 특수한 경우로 포함하는 일반형까지 세 가지 버전을 제시한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For one variable the Chain Rule differentiates a composite function: if $y=f(x)$ and $x=g(t)$ are both differentiable, then $y$ is indirectly a differentiable function of $t$ and</p>
+        <div class="math-display">$$\frac{dy}{dt}=\frac{dy}{dx}\,\frac{dx}{dt}.$$</div>
+        <p>This section carries that rule over to functions of more than one variable. The complication is that a composite function of several variables can be assembled in different ways — the outer function may have two intermediate variables or $n$ of them, and those may depend on one independent variable or on several. Each assembly produces its own version of the rule, so the section states three: Case 1, Case 2, and a general version that contains both as special cases.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 : Theorem 1, Chain Rule Case 1 -->
+<div class="card thm-card" id="c14-5-2">
+  <div class="card-head">
+    <span class="thm-num">THM 2</span>
+    <span class="thm-title">연쇄법칙 (경우 1) <em>The Chain Rule, Case 1</em><span class="src-ref">Theorem 1 · p.1023</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>경우 1은 $z=f(x,y)$의 두 인수가 그 자체로 한 변수 $t$의 함수인 경우를 다룬다. 즉 $z=f(g(t),h(t))$는 $t$ 하나에만 의존한다. 여기서 $f$의 미분가능성은 정의 14.4.7의 의미이며, 특히 $f_x,f_y$가 연속이면 (정리 14.4.8에 의해) 이 조건은 자동으로 성립한다.</p>
+        <div class="formal-box">
+          <p><strong>정리 (연쇄법칙, 경우 1).</strong> $z=f(x,y)$가 $x,y$에 대해 미분가능한 함수이고, $x=g(t)$와 $y=h(t)$가 $t$에 대해 미분가능한 함수라 하자. 그러면 $z$는 $t$에 대해 미분가능한 함수이고</p>
+          <div class="math-display">$$\frac{dz}{dt}=\frac{\partial f}{\partial x}\,\frac{dx}{dt}+\frac{\partial f}{\partial y}\,\frac{dy}{dt}.$$</div>
+        </div>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 230" role="img" aria-label="경우 1의 수형도: z에서 x와 y로, 다시 t로 가지가 뻗은 도식" style="max-width:360px;width:100%;height:auto">
+            <line x1="151" y1="42" x2="89" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="169" y1="42" x2="231" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="80" y1="134" x2="80" y2="186" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="240" y1="134" x2="240" y2="186" stroke="var(--g600)" stroke-width="1.6"/>
+            <circle cx="160" cy="32" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="80" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="240" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="80" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="240" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="160" y="37" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="80" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="240" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="80" y="205" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="240" y="205" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="116" y="76" font-size="11" text-anchor="end" fill="var(--grey600)">&#8706;z/&#8706;x</text>
+            <text x="204" y="76" font-size="11" text-anchor="start" fill="var(--grey600)">&#8706;z/&#8706;y</text>
+            <text x="72" y="164" font-size="11" text-anchor="end" fill="var(--grey600)">dx/dt</text>
+            <text x="248" y="164" font-size="11" text-anchor="start" fill="var(--grey600)">dy/dt</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> 정의 14.4.7에 따르면 $f$가 $(x,y)$에서 미분가능하다는 것은 그 점에서의 증분이</p>
+        <div class="math-display">$$\Delta z=f_x\,\Delta x+f_y\,\Delta y+\varepsilon_1\,\Delta x+\varepsilon_2\,\Delta y$$</div>
+        <p>로 쓰이고, $(\Delta x,\Delta y)\to(0,0)$일 때 $\varepsilon_1\to0$, $\varepsilon_2\to0$이 됨을 뜻한다. ($\varepsilon_1,\varepsilon_2$가 $(0,0)$에서 정의되지 않는 경우에는 그 점에서의 값을 $0$으로 정해 둔다. $\Delta t\neq0$이어도 $\Delta x=\Delta y=0$일 수 있으므로 이 약속이 필요하다.) $t$에 임의의 증분 $\Delta t\neq0$을 주고 $\Delta x=g(t+\Delta t)-g(t)$, $\Delta y=h(t+\Delta t)-h(t)$, $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$로 두면 위 식이 그대로 성립하고, 양변을 $\Delta t$로 나누면</p>
+        <div class="math-display">$$\frac{\Delta z}{\Delta t}=f_x\,\frac{\Delta x}{\Delta t}+f_y\,\frac{\Delta y}{\Delta t}+\varepsilon_1\,\frac{\Delta x}{\Delta t}+\varepsilon_2\,\frac{\Delta y}{\Delta t}$$</div>
+        <p>를 얻는다. $g,h$가 $t$에서 미분가능하므로 그 점에서 연속이고, 따라서 $\Delta t\to0$이면 $\Delta x\to0$, $\Delta y\to0$이 되어 $\varepsilon_1\to0$, $\varepsilon_2\to0$이다. 또한 $\Delta x/\Delta t\to dx/dt$, $\Delta y/\Delta t\to dy/dt$는 유한한 극한이므로 $\varepsilon_1\,\Delta x/\Delta t\to0\cdot dx/dt=0$이고 같은 이유로 $\varepsilon_2\,\Delta y/\Delta t\to0$이다. $\Delta t\to0$에서 좌변 $\Delta z/\Delta t$의 극한이 존재하므로 $z$는 $t$의 미분가능한 함수이고, 위 식의 극한을 취하면</p>
+        <div class="math-display">$$\frac{dz}{dt}=f_x\,\frac{dx}{dt}+f_y\,\frac{dy}{dt}$$</div>
+        <p>를 얻는다.</p>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The first version treats a function $z=f(x,y)$ whose two arguments are themselves functions of a single variable $t$, so that $z=f(g(t),h(t))$ depends on $t$ alone. Differentiability of $f$ is understood in the sense of Definition 14.4.7, which holds in particular whenever $f_x$ and $f_y$ are continuous (Theorem 14.4.8).</p>
+        <div class="formal-box">
+          <p><strong>Theorem (Chain Rule, Case 1).</strong> Let $z=f(x,y)$ be a differentiable function of $x$ and $y$, and let $x=g(t)$ and $y=h(t)$ be differentiable functions of $t$. Then $z$ is a differentiable function of $t$, and</p>
+          <div class="math-display">$$\frac{dz}{dt}=\frac{\partial f}{\partial x}\,\frac{dx}{dt}+\frac{\partial f}{\partial y}\,\frac{dy}{dt}.$$</div>
+        </div>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 320 230" role="img" aria-label="Tree diagram for Case 1: branches from z to x and y, then from each to t" style="max-width:360px;width:100%;height:auto">
+            <line x1="151" y1="42" x2="89" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="169" y1="42" x2="231" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="80" y1="134" x2="80" y2="186" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="240" y1="134" x2="240" y2="186" stroke="var(--g600)" stroke-width="1.6"/>
+            <circle cx="160" cy="32" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="80" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="240" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="80" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="240" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="160" y="37" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="80" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="240" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="80" y="205" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="240" y="205" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="116" y="76" font-size="11" text-anchor="end" fill="var(--grey600)">&#8706;z/&#8706;x</text>
+            <text x="204" y="76" font-size="11" text-anchor="start" fill="var(--grey600)">&#8706;z/&#8706;y</text>
+            <text x="72" y="164" font-size="11" text-anchor="end" fill="var(--grey600)">dx/dt</text>
+            <text x="248" y="164" font-size="11" text-anchor="start" fill="var(--grey600)">dy/dt</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> By Definition 14.4.7, differentiability of $f$ at $(x,y)$ means the increment there can be written</p>
+        <div class="math-display">$$\Delta z=f_x\,\Delta x+f_y\,\Delta y+\varepsilon_1\,\Delta x+\varepsilon_2\,\Delta y,$$</div>
+        <p>with $\varepsilon_1\to0$ and $\varepsilon_2\to0$ as $(\Delta x,\Delta y)\to(0,0)$. (Where $\varepsilon_1$ and $\varepsilon_2$ are undefined at $(0,0)$, give them the value $0$ there; this is needed because $\Delta t\neq0$ may still leave $\Delta x=\Delta y=0$.) Give $t$ an increment $\Delta t\neq0$ and set $\Delta x=g(t+\Delta t)-g(t)$, $\Delta y=h(t+\Delta t)-h(t)$, $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$; the identity above still holds, and dividing through by $\Delta t$ gives</p>
+        <div class="math-display">$$\frac{\Delta z}{\Delta t}=f_x\,\frac{\Delta x}{\Delta t}+f_y\,\frac{\Delta y}{\Delta t}+\varepsilon_1\,\frac{\Delta x}{\Delta t}+\varepsilon_2\,\frac{\Delta y}{\Delta t}.$$</div>
+        <p>Since $g$ and $h$ are differentiable at $t$, they are continuous there, so $\Delta t\to0$ forces $\Delta x\to0$ and $\Delta y\to0$, hence $\varepsilon_1\to0$ and $\varepsilon_2\to0$. Also $\Delta x/\Delta t\to dx/dt$ and $\Delta y/\Delta t\to dy/dt$ are finite limits, so $\varepsilon_1\,\Delta x/\Delta t\to0\cdot dx/dt=0$ and likewise $\varepsilon_2\,\Delta y/\Delta t\to0$. The limit of the left side as $\Delta t\to0$ therefore exists, so $z$ is a differentiable function of $t$, and passing to the limit in the displayed equation yields</p>
+        <div class="math-display">$$\frac{dz}{dt}=f_x\,\frac{dx}{dt}+f_y\,\frac{dy}{dt}.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 : margin note, resemblance to the differential -->
+<div class="card rem-card" id="c14-5-3">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">전미분과의 형태적 유사 <em>Resemblance to the Differential</em><span class="src-ref">Margin note · p.1024</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\partial f/\partial x$ 대신 $\partial z/\partial x$로 표기를 바꾸면 경우 1은 다음과 같은 꼴이 된다.</p>
+        <div class="math-display">$$\frac{dz}{dt}=\frac{\partial z}{\partial x}\,\frac{dx}{dt}+\frac{\partial z}{\partial y}\,\frac{dy}{dt},$$</div>
+        <p>이는 전미분</p>
+        <div class="math-display">$$dz=\frac{\partial z}{\partial x}\,dx+\frac{\partial z}{\partial y}\,dy$$</div>
+        <p>의 각 항을 $dt$로 나눈 것과 같은 모양이다. 이 유사성은 공식을 외우는 데 쓸모 있는 기억법이지만 어디까지나 형식적인 유사일 뿐이다. 연쇄법칙은 합성함수의 도함수에 관한 명제이지, 미분 기호의 비를 다루는 계산이 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Writing $\partial z/\partial x$ in place of $\partial f/\partial x$ puts Case 1 in the form</p>
+        <div class="math-display">$$\frac{dz}{dt}=\frac{\partial z}{\partial x}\,\frac{dx}{dt}+\frac{\partial z}{\partial y}\,\frac{dy}{dt},$$</div>
+        <p>which is the differential</p>
+        <div class="math-display">$$dz=\frac{\partial z}{\partial x}\,dx+\frac{\partial z}{\partial y}\,dy$$</div>
+        <p>with every term divided by $dt$. The resemblance is a useful mnemonic, but it is only formal: the Chain Rule is a statement about derivatives of a composite function, not a manipulation of ratios of differentials.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 : Theorem 2, Chain Rule Case 2 -->
+<div class="card thm-card" id="c14-5-4">
+  <div class="card-head">
+    <span class="thm-num">THM 4</span>
+    <span class="thm-title">연쇄법칙 (경우 2) <em>The Chain Rule, Case 2</em><span class="src-ref">Theorem 2 · p.1025</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이번에는 $z=f(x,y)$의 두 인수가 두 변수에 의존하는 경우, 즉 $x=g(s,t)$, $y=h(s,t)$인 경우를 생각하자. 이때 $z$는 간접적으로 $s,t$의 함수가 되고, $\partial z/\partial s$와 $\partial z/\partial t$를 모두 구하고 싶다. 새로운 증명은 필요 없다. $\partial z/\partial t$를 구할 때는 $s$를 상수로 고정하므로 $t$에 대한 보통의 도함수만 남아 경우 1을 그대로 쓸 수 있고, $s$와 $t$의 역할을 바꾸면 나머지 공식도 같은 방식으로 나온다.</p>
+        <div class="formal-box">
+          <p><strong>정리 (연쇄법칙, 경우 2).</strong> $z=f(x,y)$가 $x,y$에 대해 미분가능한 함수이고, $x=g(s,t)$와 $y=h(s,t)$가 $s,t$에 대해 미분가능한 함수라 하자. 그러면</p>
+          <div class="math-display">$$\frac{\partial z}{\partial s}=\frac{\partial z}{\partial x}\,\frac{\partial x}{\partial s}+\frac{\partial z}{\partial y}\,\frac{\partial y}{\partial s},$$</div>
+          <div class="math-display">$$\frac{\partial z}{\partial t}=\frac{\partial z}{\partial x}\,\frac{\partial x}{\partial t}+\frac{\partial z}{\partial y}\,\frac{\partial y}{\partial t}.$$</div>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Next let the two arguments of $z=f(x,y)$ depend on two variables, $x=g(s,t)$ and $y=h(s,t)$. Then $z$ is indirectly a function of $s$ and $t$, and both $\partial z/\partial s$ and $\partial z/\partial t$ are wanted. No new proof is needed: computing $\partial z/\partial t$ means holding $s$ fixed, which leaves an ordinary derivative in $t$ to which Case 1 applies; the same argument with the roles of $s$ and $t$ exchanged gives the other formula.</p>
+        <div class="formal-box">
+          <p><strong>Theorem (Chain Rule, Case 2).</strong> Let $z=f(x,y)$ be a differentiable function of $x$ and $y$, and let $x=g(s,t)$ and $y=h(s,t)$ be differentiable functions of $s$ and $t$. Then</p>
+          <div class="math-display">$$\frac{\partial z}{\partial s}=\frac{\partial z}{\partial x}\,\frac{\partial x}{\partial s}+\frac{\partial z}{\partial y}\,\frac{\partial y}{\partial s},$$</div>
+          <div class="math-display">$$\frac{\partial z}{\partial t}=\frac{\partial z}{\partial x}\,\frac{\partial x}{\partial t}+\frac{\partial z}{\partial y}\,\frac{\partial y}{\partial t}.$$</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 : intermediate variables and tree diagrams (Figure 2) -->
+<div class="card rem-card" id="c14-5-5">
+  <div class="card-head">
+    <span class="rem-num">REM 5</span>
+    <span class="rem-title">독립·중간·종속 변수와 수형도 <em>Intermediate Variables and Tree Diagrams</em><span class="src-ref">Figure 2 · p.1025&ndash;1026</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>경우 2에는 세 종류의 변수가 등장한다. $s,t$는 <strong>독립변수</strong>, $x,y$는 <strong>중간변수</strong>, $z$는 <strong>종속변수</strong>이다. 정리 2는 중간변수 하나마다 항을 하나씩 내놓으며, 그 각 항은 1변수 연쇄법칙과 같은 모양을 하고 있다.</p>
+        <p>아래의 <strong>수형도</strong>는 이 구조를 그림으로 나타낸 것이다. 종속변수 $z$에서 중간변수 $x,y$로 가지가 뻗고, 다시 그로부터 독립변수 $s,t$로 가지가 뻗으며, 각 가지 위에는 위쪽 변수를 아래쪽 변수로 편미분한 도함수를 적는다. 이 그림만 보고도 규칙을 다음과 같이 읽어낼 수 있다.</p>
+        <div class="formal-box">
+          <p>$z$를 어떤 한 독립변수로 미분한 도함수를 구하려면, $z$에서 그 변수까지 내려가는 각 경로를 따라 편도함수들을 곱하고, 그렇게 얻은 값을 모든 경로에 걸쳐 더한다.</p>
+        </div>
+        <p>$z$에서 $s$로 가는 두 경로를 따라가면 $\partial z/\partial s$의 공식이, $z$에서 $t$로 가는 두 경로를 따라가면 $\partial z/\partial t$의 공식이 그대로 재현된다.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="경우 2의 수형도: z에서 x, y로, 다시 각각 s와 t로 가지가 뻗고 각 가지에 편도함수를 적은 도식" style="max-width:360px;width:100%;height:auto">
+            <line x1="160" y1="40" x2="95" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="180" y1="40" x2="245" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="78" y1="132" x2="42" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="92" y1="132" x2="128" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="248" y1="132" x2="212" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="262" y1="132" x2="298" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <circle cx="170" cy="30" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="85" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="255" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="35" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="135" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="205" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="305" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="170" y="35" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="85" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="255" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="35" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">s</text>
+            <text x="135" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="205" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">s</text>
+            <text x="305" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="118" y="72" font-size="11" text-anchor="end" fill="var(--grey600)">&#8706;z/&#8706;x</text>
+            <text x="222" y="72" font-size="11" text-anchor="start" fill="var(--grey600)">&#8706;z/&#8706;y</text>
+            <text x="52" y="163" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;x/&#8706;s</text>
+            <text x="118" y="163" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x/&#8706;t</text>
+            <text x="222" y="163" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;y/&#8706;s</text>
+            <text x="288" y="163" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;y/&#8706;t</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Case 2 involves three kinds of variable. Here $s$ and $t$ are the <strong>independent variables</strong>, $x$ and $y$ are the <strong>intermediate variables</strong>, and $z$ is the <strong>dependent variable</strong>. Theorem 2 contributes one term for each intermediate variable, and each such term looks like the one-variable Chain Rule.</p>
+        <p>The <strong>tree diagram</strong> below records this structure. Branches run from the dependent variable $z$ to the intermediate variables $x$ and $y$, and from those to the independent variables $s$ and $t$; on each branch one writes the partial derivative of the upper variable with respect to the lower one. The rule is then read off the picture:</p>
+        <div class="formal-box">
+          <p>To find the derivative of $z$ with respect to one independent variable, multiply the partial derivatives along each path from $z$ down to that variable, then add the products over all such paths.</p>
+        </div>
+        <p>Following the two paths from $z$ to $s$ reproduces the formula for $\partial z/\partial s$, and the two paths from $z$ to $t$ reproduce the formula for $\partial z/\partial t$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="Tree diagram for Case 2: branches from z to x and y, then to s and t, each branch labeled by a partial derivative" style="max-width:360px;width:100%;height:auto">
+            <line x1="160" y1="40" x2="95" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="180" y1="40" x2="245" y2="110" stroke="var(--g600)" stroke-width="1.6"/>
+            <line x1="78" y1="132" x2="42" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="92" y1="132" x2="128" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="248" y1="132" x2="212" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <line x1="262" y1="132" x2="298" y2="193" stroke="var(--g600)" stroke-width="1.4"/>
+            <circle cx="170" cy="30" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="85" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="255" cy="120" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="35" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="135" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="205" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <circle cx="305" cy="205" r="13" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="170" y="35" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="85" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="255" y="125" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="35" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">s</text>
+            <text x="135" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="205" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">s</text>
+            <text x="305" y="210" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="118" y="72" font-size="11" text-anchor="end" fill="var(--grey600)">&#8706;z/&#8706;x</text>
+            <text x="222" y="72" font-size="11" text-anchor="start" fill="var(--grey600)">&#8706;z/&#8706;y</text>
+            <text x="52" y="163" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;x/&#8706;s</text>
+            <text x="118" y="163" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x/&#8706;t</text>
+            <text x="222" y="163" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;y/&#8706;s</text>
+            <text x="288" y="163" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;y/&#8706;t</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 : Theorem 3, general version -->
+<div class="card thm-card" id="c14-5-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6</span>
+    <span class="thm-title">연쇄법칙 (일반형) <em>The Chain Rule, General Version</em><span class="src-ref">Theorem 3 · p.1026</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>경우 1과 경우 2는 하나의 규칙이 $(n,m)=(2,1)$과 $(n,m)=(2,2)$인 특수한 경우일 뿐이다. 이 규칙에서는 종속변수 $u$가 $n$개의 중간변수로 이루어지고, 그 중간변수들이 다시 $m$개의 독립변수에 의존한다.</p>
+        <div class="formal-box">
+          <p><strong>정리 (연쇄법칙, 일반형).</strong> $u$가 $n$개의 변수 $x_1,x_2,\dots,x_n$에 대해 미분가능한 함수이고, 각 $x_j$가 $m$개의 변수 $t_1,t_2,\dots,t_m$에 대해 미분가능한 함수라 하자. 그러면 $u$는 $t_1,t_2,\dots,t_m$의 함수이고, 각 $i=1,2,\dots,m$에 대해</p>
+          <div class="math-display">$$\frac{\partial u}{\partial t_i}=\frac{\partial u}{\partial x_1}\,\frac{\partial x_1}{\partial t_i}+\frac{\partial u}{\partial x_2}\,\frac{\partial x_2}{\partial t_i}+\cdots+\frac{\partial u}{\partial x_n}\,\frac{\partial x_n}{\partial t_i}.$$</div>
+        </div>
+        <p>이 합에는 정확히 $n$개의 항이 있으며, 이는 중간변수 하나당 하나씩 — 다시 말해 수형도에서 $u$부터 $t_i$까지 이어지는 경로 하나당 하나씩에 해당한다.</p>
+        <p><em>증명: 경우 1의 증명과 같은 방식이다.</em></p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="일반형 연쇄법칙의 수형도: u에서 n개의 중간변수로, 다시 독립변수 t_i로 가지가 뻗은 도식" style="max-width:360px;width:100%;height:auto">
+            <line x1="159" y1="37" x2="66" y2="109" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="165" y1="41" x2="140" y2="105" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="181" y1="37" x2="274" y2="109" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="66" y1="126" x2="159" y2="192" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="141" y1="131" x2="164" y2="187" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="274" y1="126" x2="181" y2="192" stroke="var(--g600)" stroke-width="1.5"/>
+            <circle cx="170" cy="28" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="55" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="135" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="285" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="170" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="170" y="33" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">u</text>
+            <text x="55" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="135" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="285" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">n</tspan></text>
+            <text x="210" y="124" font-size="14" text-anchor="middle" fill="var(--grey500)">&#8943;</text>
+            <text x="170" y="205" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t<tspan font-size="9" dy="3">i</tspan></text>
+            <text x="108" y="68" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">1</tspan></text>
+            <text x="158" y="80" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">2</tspan></text>
+            <text x="229" y="68" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">n</tspan></text>
+            <text x="104" y="158" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">1</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+            <text x="161" y="164" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">2</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+            <text x="236" y="158" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">n</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Cases 1 and 2 are the instances $(n,m)=(2,1)$ and $(n,m)=(2,2)$ of one rule, in which a dependent variable $u$ is built from $n$ intermediate variables that in turn depend on $m$ independent variables.</p>
+        <div class="formal-box">
+          <p><strong>Theorem (Chain Rule, General Version).</strong> Let $u$ be a differentiable function of the $n$ variables $x_1,x_2,\dots,x_n$, and let each $x_j$ be a differentiable function of the $m$ variables $t_1,t_2,\dots,t_m$. Then $u$ is a function of $t_1,t_2,\dots,t_m$ and, for every $i=1,2,\dots,m$,</p>
+          <div class="math-display">$$\frac{\partial u}{\partial t_i}=\frac{\partial u}{\partial x_1}\,\frac{\partial x_1}{\partial t_i}+\frac{\partial u}{\partial x_2}\,\frac{\partial x_2}{\partial t_i}+\cdots+\frac{\partial u}{\partial x_n}\,\frac{\partial x_n}{\partial t_i}.$$</div>
+        </div>
+        <p>The sum has exactly $n$ terms, one per intermediate variable — equivalently, one per path from $u$ to $t_i$ in the tree diagram.</p>
+        <p><em>Proof: the argument is the same as for Case 1.</em></p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 340 235" role="img" aria-label="Tree diagram for the general Chain Rule: u branches to n intermediate variables, each branching to the independent variable t_i" style="max-width:360px;width:100%;height:auto">
+            <line x1="159" y1="37" x2="66" y2="109" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="165" y1="41" x2="140" y2="105" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="181" y1="37" x2="274" y2="109" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="66" y1="126" x2="159" y2="192" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="141" y1="131" x2="164" y2="187" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="274" y1="126" x2="181" y2="192" stroke="var(--g600)" stroke-width="1.5"/>
+            <circle cx="170" cy="28" r="14" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="55" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="135" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="285" cy="118" r="15" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="170" cy="200" r="14" fill="#fff" stroke="var(--grey400)" stroke-width="1.3"/>
+            <text x="170" y="33" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">u</text>
+            <text x="55" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">1</tspan></text>
+            <text x="135" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">2</tspan></text>
+            <text x="285" y="123" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x<tspan font-size="9" dy="3">n</tspan></text>
+            <text x="210" y="124" font-size="14" text-anchor="middle" fill="var(--grey500)">&#8943;</text>
+            <text x="170" y="205" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey800)">t<tspan font-size="9" dy="3">i</tspan></text>
+            <text x="108" y="68" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">1</tspan></text>
+            <text x="158" y="80" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">2</tspan></text>
+            <text x="229" y="68" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;x<tspan font-size="8" dy="3">n</tspan></text>
+            <text x="104" y="158" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">1</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+            <text x="161" y="164" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">2</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+            <text x="236" y="158" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;x<tspan font-size="8" dy="3">n</tspan><tspan font-size="10.5" dy="-3">/&#8706;t</tspan><tspan font-size="8" dy="3">i</tspan></text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 : implicit differentiation, two variables, Equation (5) -->
+<div class="card note-card" id="c14-5-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">음함수 미분법 — 두 변수 <em>Implicit Differentiation for F(x, y) = 0</em><span class="src-ref">Equation (5) · p.1028</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>연쇄법칙은 §2.6과 §14.3에서 다룬 음함수 미분법의 근거를 설명해 준다. 방정식 $F(x,y)=0$이 $y$를 미분가능한 함수 $y=f(x)$로 결정한다고, 즉 $f$의 정의역에 속한 모든 $x$에 대해 $F(x,f(x))=0$이라고 하자. $F$가 미분가능하면 양변을 $x$에 대해 미분하되, $x$와 $y$를 모두 $x$의 함수로 보고 경우 1을 적용한다.</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\,\frac{dx}{dx}+\frac{\partial F}{\partial y}\,\frac{dy}{dx}=0.$$</div>
+        <p>$dx/dx=1$이므로 $\partial F/\partial y\neq0$일 때 $dy/dx$에 대해 풀면 본문 식 (5)가 나온다.</p>
+        <div class="formal-box">
+          <div class="math-display">$$\frac{dy}{dx}=-\frac{\partial F/\partial x}{\partial F/\partial y}=-\frac{F_x}{F_y}.\tag{5}$$</div>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The Chain Rule explains the implicit differentiation introduced in §2.6 and §14.3. Suppose an equation $F(x,y)=0$ determines $y$ as a differentiable function $y=f(x)$, meaning $F(x,f(x))=0$ for every $x$ in the domain of $f$. If $F$ is differentiable, differentiate both sides with respect to $x$ using Case 1, treating both $x$ and $y$ as functions of $x$:</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\,\frac{dx}{dx}+\frac{\partial F}{\partial y}\,\frac{dy}{dx}=0.$$</div>
+        <p>Since $dx/dx=1$, solving for $dy/dx$ — which requires $\partial F/\partial y\neq0$ — gives the formula labelled (5) in the text:</p>
+        <div class="formal-box">
+          <div class="math-display">$$\frac{dy}{dx}=-\frac{\partial F/\partial x}{\partial F/\partial y}=-\frac{F_x}{F_y}.\tag{5}$$</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 : Implicit Function Theorem, two variables -->
+<div class="card rem-card" id="c14-5-8">
+  <div class="card-head">
+    <span class="rem-num">REM 8</span>
+    <span class="rem-title">음함수 정리 <em>The Implicit Function Theorem</em><span class="src-ref">p.1028</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>식 (5)는 $F(x,y)=0$이 실제로 $y$를 $x$의 함수로 정의한다는 가정 아래 유도한 것이다. 고급 미적분학에서 증명하는 <strong>음함수 정리</strong>는 이 가정이 언제 정당한지를 알려준다.</p>
+        <div class="formal-box">
+          <p><strong>음함수 정리.</strong> $F$가 $(a,b)$를 포함하는 원판에서 정의되어 있고, $F(a,b)=0$, $F_y(a,b)\neq0$이며, $F_x$와 $F_y$가 그 원판에서 연속이라 하자. 그러면 $(a,b)$ 근방에서 방정식 $F(x,y)=0$은 $y$를 $x$의 함수로 정의하며, 그 함수의 도함수는 식 (5)로 주어진다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Formula (5) was derived under the assumption that $F(x,y)=0$ really does define $y$ as a function of $x$. The Implicit Function Theorem, proved in advanced calculus, says when that assumption is legitimate.</p>
+        <div class="formal-box">
+          <p><strong>Implicit Function Theorem.</strong> Suppose $F$ is defined on a disk containing $(a,b)$, that $F(a,b)=0$ and $F_y(a,b)\neq0$, and that $F_x$ and $F_y$ are continuous on the disk. Then near $(a,b)$ the equation $F(x,y)=0$ defines $y$ as a function of $x$, and the derivative of that function is given by (5).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 : implicit differentiation, three variables, Equations (6) -->
+<div class="card thm-card" id="c14-5-9">
+  <div class="card-head">
+    <span class="thm-num">THM 9</span>
+    <span class="thm-title">음함수 미분법 — 세 변수 <em>Implicit Differentiation for F(x, y, z) = 0</em><span class="src-ref">Equations (6) · p.1029</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이번에는 방정식 $F(x,y,z)=0$이 $z$를 음함수로 $z=f(x,y)$로 결정한다고, 즉 $f$의 정의역 전체에서 $F(x,y,f(x,y))=0$이라고 하자. $F$와 $f$가 미분가능할 때 이 항등식을 $x$에 대해 연쇄법칙으로 미분하면</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\,\frac{\partial x}{\partial x}+\frac{\partial F}{\partial y}\,\frac{\partial y}{\partial x}+\frac{\partial F}{\partial z}\,\frac{\partial z}{\partial x}=0.$$</div>
+        <p>여기서 $x,y$는 독립변수이므로 $\partial x/\partial x=1$, $\partial y/\partial x=0$이 되어 두 항만 남는다. $\partial F/\partial z\neq0$일 때 $\partial z/\partial x$에 대해 풀고, $y$에 대해서도 같은 계산을 되풀이하면 식 (6)의 두 공식을 얻는다.</p>
+        <div class="formal-box">
+          <div class="math-display">$$\frac{\partial z}{\partial x}=-\frac{\partial F/\partial x}{\partial F/\partial z}=-\frac{F_x}{F_z},\tag{6}$$</div>
+          <div class="math-display">$$\frac{\partial z}{\partial y}=-\frac{\partial F/\partial y}{\partial F/\partial z}=-\frac{F_y}{F_z}.$$</div>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Now let an equation $F(x,y,z)=0$ determine $z$ implicitly as a function $z=f(x,y)$, so that $F(x,y,f(x,y))=0$ throughout the domain of $f$. With $F$ and $f$ differentiable, apply the Chain Rule to differentiate that identity with respect to $x$:</p>
+        <div class="math-display">$$\frac{\partial F}{\partial x}\,\frac{\partial x}{\partial x}+\frac{\partial F}{\partial y}\,\frac{\partial y}{\partial x}+\frac{\partial F}{\partial z}\,\frac{\partial z}{\partial x}=0.$$</div>
+        <p>Because $x$ and $y$ are the independent variables here, $\partial x/\partial x=1$ and $\partial y/\partial x=0$, so only two terms survive; solving for $\partial z/\partial x$ when $\partial F/\partial z\neq0$, and repeating the computation in $y$, gives the pair of formulas labelled (6):</p>
+        <div class="formal-box">
+          <div class="math-display">$$\frac{\partial z}{\partial x}=-\frac{\partial F/\partial x}{\partial F/\partial z}=-\frac{F_x}{F_z},\tag{6}$$</div>
+          <div class="math-display">$$\frac{\partial z}{\partial y}=-\frac{\partial F/\partial y}{\partial F/\partial z}=-\frac{F_y}{F_z}.$$</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 : Implicit Function Theorem, three variables -->
+<div class="card rem-card" id="c14-5-10">
+  <div class="card-head">
+    <span class="rem-num">REM 10</span>
+    <span class="rem-title">음함수 정리 (세 변수) <em>The Implicit Function Theorem in Three Variables</em><span class="src-ref">p.1029</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>같은 정리를 세 변수로 확장한 판본이 식 (6)의 배경에 있는 가정을 정당화해 준다.</p>
+        <div class="formal-box">
+          <p><strong>음함수 정리 (세 변수).</strong> $F$가 $(a,b,c)$를 포함하는 구 내부에서 정의되어 있고, $F(a,b,c)=0$, $F_z(a,b,c)\neq0$이며, $F_x,F_y,F_z$가 그 구 내부에서 연속이라 하자. 그러면 $(a,b,c)$ 근방에서 방정식 $F(x,y,z)=0$은 $z$를 $x,y$에 대해 미분가능한 함수로 정의하며, 그 편도함수는 식 (6)으로 주어진다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A three-variable version of the same theorem licenses the assumption behind (6).</p>
+        <div class="formal-box">
+          <p><strong>Implicit Function Theorem (three variables).</strong> Suppose $F$ is defined inside a sphere containing $(a,b,c)$, that $F(a,b,c)=0$ and $F_z(a,b,c)\neq0$, and that $F_x$, $F_y$ and $F_z$ are continuous inside the sphere. Then near $(a,b,c)$ the equation $F(x,y,z)=0$ defines $z$ as a differentiable function of $x$ and $y$, whose partial derivatives are given by (6).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>예제 답안 · Worked Examples</h2></div>
+
+<!-- Example 1 -->
+<div class="card exam-card" id="ex14-5-1">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">매개곡선 위에서의 변화율 <em>Rate of Change along a Parametrized Curve</em><span class="src-ref">Example 1 · p.1024</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=x^2y+3xy^4$ 이고 $x=\sin 2t$, $y=\cos t$ 일 때, $t=0$ 에서의 $dz/dt$ 의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x,y$가 모두 한 변수 $t$의 함수이므로 경우 1이 적용된다. $z_x=2xy+3y^4$, $z_y=x^2+12xy^3$이고, $dx/dt=2\cos 2t$, $dy/dt=-\sin t$이므로</p>
+        <div class="math-display">$$\frac{dz}{dt}=(2xy+3y^4)(2\cos 2t)+(x^2+12xy^3)(-\sin t).$$</div>
+        <p>$t=0$일 때 $x=\sin 0=0$, $y=\cos 0=1$이다. 이 값을 대입하면 첫째 괄호는 $2(0)(1)+3(1)^4=3$, 둘째 괄호는 $0^2+12(0)(1)^3=0$이 되므로</p>
+        <div class="math-display">$$\left.\frac{dz}{dt}\right|_{t=0}=3\,(2\cos 0)+0\,(-\sin 0)=3\cdot 2+0=6.$$</div>
+        <p>따라서 $dz/dt|_{t=0}=6$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $z=x^2y+3xy^4$, where $x=\sin 2t$ and $y=\cos t$. Evaluate $dz/dt$ at $t=0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $x$ and $y$ are both functions of the single variable $t$, Case 1 applies. Here $z_x=2xy+3y^4$, $z_y=x^2+12xy^3$, while $dx/dt=2\cos 2t$ and $dy/dt=-\sin t$, so</p>
+        <div class="math-display">$$\frac{dz}{dt}=(2xy+3y^4)(2\cos 2t)+(x^2+12xy^3)(-\sin t).$$</div>
+        <p>At $t=0$, $x=\sin 0=0$ and $y=\cos 0=1$. Substituting, the first bracket becomes $2(0)(1)+3(1)^4=3$ and the second becomes $0^2+12(0)(1)^3=0$, so</p>
+        <div class="math-display">$$\left.\frac{dz}{dt}\right|_{t=0}=3\,(2\cos 0)+0\,(-\sin 0)=3\cdot 2+0=6.$$</div>
+        <p>Hence $dz/dt|_{t=0}=6$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 2 -->
+<div class="card exam-card" id="ex14-5-2">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">이상기체의 압력 변화율 <em>Rate of Change of Pressure for an Ideal Gas</em><span class="src-ref">Example 2 · p.1024&ndash;1025</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>1몰의 이상기체에서 압력 $P$ (킬로파스칼), 부피 $V$ (리터), 온도 $T$ (켈빈) 사이에는 관계식 $PV=8.31T$ 가 성립한다. 온도가 $300$ K이고 초당 $0.1$ K의 비율로 오르며, 같은 순간 부피가 $100$ L이고 초당 $0.2$ L의 비율로 늘어나고 있을 때, 압력이 변하는 비율을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $PV=8.31T$에서 $P=8.31T/V$이고, $T,V$가 모두 시간 $t$의 함수이므로 경우 1을 적용하면</p>
+        <div class="math-display">$$\frac{dP}{dt}=\frac{\partial P}{\partial T}\,\frac{dT}{dt}+\frac{\partial P}{\partial V}\,\frac{dV}{dt}=\frac{8.31}{V}\,\frac{dT}{dt}-\frac{8.31\,T}{V^2}\,\frac{dV}{dt}.$$</div>
+        <p>주어진 순간에 $T=300$, $dT/dt=0.1$, $V=100$, $dV/dt=0.2$이므로 대입하면</p>
+        <div class="math-display">$$\frac{dP}{dt}=\frac{8.31}{100}(0.1)-\frac{8.31(300)}{100^2}(0.2)=0.00831-0.04986=-0.04155.$$</div>
+        <p>값이 음수이므로 그 순간 압력은 초당 $0.04155$ kPa, 곧 약 $0.042$ kPa의 비율로 감소하고 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For one mole of an ideal gas the pressure $P$ (in kilopascals), the volume $V$ (in liters) and the temperature $T$ (in kelvins) are related by $PV=8.31T$. Find the rate at which the pressure is changing at the instant when the temperature is $300$ K and rising at $0.1$ K/s while the volume is $100$ L and increasing at $0.2$ L/s.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> From $PV=8.31T$, $P=8.31T/V$, and since both $T$ and $V$ are functions of time $t$, Case 1 gives</p>
+        <div class="math-display">$$\frac{dP}{dt}=\frac{\partial P}{\partial T}\,\frac{dT}{dt}+\frac{\partial P}{\partial V}\,\frac{dV}{dt}=\frac{8.31}{V}\,\frac{dT}{dt}-\frac{8.31\,T}{V^2}\,\frac{dV}{dt}.$$</div>
+        <p>At the instant in question $T=300$, $dT/dt=0.1$, $V=100$, $dV/dt=0.2$, so</p>
+        <div class="math-display">$$\frac{dP}{dt}=\frac{8.31}{100}(0.1)-\frac{8.31(300)}{100^2}(0.2)=0.00831-0.04986=-0.04155.$$</div>
+        <p>The value is negative, so at that instant the pressure is falling at $0.04155$ kPa/s, about $0.042$ kPa/s.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 3 -->
+<div class="card exam-card" id="ex14-5-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">두 독립변수에 대한 편도함수 <em>Partial Derivatives with Two Independent Variables</em><span class="src-ref">Example 3 · p.1025</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=e^{x}\sin y$ 이고 $x=st^2$, $y=s^2t$ 일 때, 두 편도함수 $\partial z/\partial s$ 와 $\partial z/\partial t$ 를 $s,t$ 만의 식으로 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $x,y$가 모두 $s,t$의 함수이므로 경우 2를 적용한다. $z_x=e^x\sin y$, $z_y=e^x\cos y$이고, $x=st^2$에서 $x_s=t^2$, $x_t=2st$, $y=s^2t$에서 $y_s=2st$, $y_t=s^2$이므로</p>
+        <div class="math-display">$$\frac{\partial z}{\partial s}=z_x\,x_s+z_y\,y_s=t^2e^{x}\sin y+2st\,e^{x}\cos y,$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial t}=z_x\,x_t+z_y\,y_t=2st\,e^{x}\sin y+s^2e^{x}\cos y.$$</div>
+        <p>$x=st^2$, $y=s^2t$를 대입하여 $s,t$만의 식으로 정리하면</p>
+        <div class="math-display">$$\frac{\partial z}{\partial s}=t^2e^{st^2}\sin(s^2t)+2st\,e^{st^2}\cos(s^2t),$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial t}=2st\,e^{st^2}\sin(s^2t)+s^2e^{st^2}\cos(s^2t).$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $z=e^{x}\sin y$, where $x=st^2$ and $y=s^2t$. Find $\partial z/\partial s$ and $\partial z/\partial t$, expressed in terms of $s$ and $t$ alone.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Since $x$ and $y$ are both functions of $s$ and $t$, Case 2 applies. Here $z_x=e^x\sin y$, $z_y=e^x\cos y$, and from $x=st^2$, $x_s=t^2$, $x_t=2st$, while from $y=s^2t$, $y_s=2st$, $y_t=s^2$, so</p>
+        <div class="math-display">$$\frac{\partial z}{\partial s}=z_x\,x_s+z_y\,y_s=t^2e^{x}\sin y+2st\,e^{x}\cos y,$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial t}=z_x\,x_t+z_y\,y_t=2st\,e^{x}\sin y+s^2e^{x}\cos y.$$</div>
+        <p>Substituting $x=st^2$ and $y=s^2t$ to express the result in terms of $s$ and $t$ alone gives</p>
+        <div class="math-display">$$\frac{\partial z}{\partial s}=t^2e^{st^2}\sin(s^2t)+2st\,e^{st^2}\cos(s^2t),$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial t}=2st\,e^{st^2}\sin(s^2t)+s^2e^{st^2}\cos(s^2t).$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 4 -->
+<div class="card exam-card" id="ex14-5-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">일반형 연쇄법칙 쓰기 <em>Writing Out the General Chain Rule</em><span class="src-ref">Example 4 · p.1026</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$w=f(x,y,z,t)$ 이고 네 변수 $x,y,z,t$ 가 각각 $u$ 와 $v$ 의 함수 $x=x(u,v)$, $y=y(u,v)$, $z=z(u,v)$, $t=t(u,v)$ 일 때, 이 경우에 해당하는 연쇄법칙을 모두 써 내라. (모든 함수는 미분가능하다고 가정한다.)</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 380 236" role="img" aria-label="예제 4의 수형도: w에서 네 중간변수 x, y, z, t로 가지가 뻗고, 그 각각에서 다시 독립변수 u와 v로 가지가 뻗어 w에서 u로 가는 경로 넷, v로 가는 경로 넷을 이룬다" style="max-width:380px;width:100%;height:auto">
+            <line x1="44.7" y1="124.6" x2="27.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="51.3" y1="124.6" x2="68.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="139.7" y1="124.6" x2="122.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="146.3" y1="124.6" x2="163.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="234.7" y1="124.6" x2="217.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="241.3" y1="124.6" x2="258.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="329.7" y1="124.6" x2="312.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="336.3" y1="124.6" x2="353.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="178.9" y1="32.7" x2="59.1" y2="105.3" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="183.8" y1="37.4" x2="149.2" y2="100.6" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="196.3" y1="37.4" x2="231.7" y2="100.6" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="201.1" y1="32.7" x2="321.9" y2="105.3" stroke="var(--g600)" stroke-width="1.5"/>
+            <circle cx="190" cy="26" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="48" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="143" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="238" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="333" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="25" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="71" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="120" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="166" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="215" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="261" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="310" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="356" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <text x="190" y="31" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">w</text>
+            <text x="48" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="143" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="238" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="333" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">t</text>
+            <text x="25" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="71" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="120" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="166" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="215" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="261" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="310" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="356" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="121" y="64" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;w/&#8706;x</text>
+            <text x="157" y="76" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;w/&#8706;y</text>
+            <text x="223" y="76" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;w/&#8706;z</text>
+            <text x="259" y="64" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;w/&#8706;t</text>
+            <text x="25" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;x/&#8706;u</text>
+            <text x="71" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;x/&#8706;v</text>
+            <text x="120" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;y/&#8706;u</text>
+            <text x="166" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;y/&#8706;v</text>
+            <text x="215" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;z/&#8706;u</text>
+            <text x="261" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;z/&#8706;v</text>
+            <text x="310" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;t/&#8706;u</text>
+            <text x="356" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;t/&#8706;v</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 이 상황은 일반형 연쇄법칙에서 중간변수가 $n=4$개($x,y,z,t$), 독립변수가 $m=2$개($u,v$)인 경우이다. 종속변수 $w$에서 각 중간변수로 가지가 뻗고, 그 네 중간변수 각각에서 다시 $u$와 $v$로 가지가 뻗는 위 그림의 수형도를 보면, $w$에서 $u$로 가는 경로가 넷, $w$에서 $v$로 가는 경로도 넷임을 알 수 있다. 정리 3에 따라 각 경로의 편도함수 곱을 모두 더하면</p>
+        <div class="math-display">$$\frac{\partial w}{\partial u}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial u}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial u}+\frac{\partial w}{\partial t}\frac{\partial t}{\partial u},$$</div>
+        <div class="math-display">$$\frac{\partial w}{\partial v}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial v}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial v}+\frac{\partial w}{\partial t}\frac{\partial t}{\partial v}$$</div>
+        <p>를 얻는다. 각 식에는 중간변수의 개수와 같은 네 항이 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $w=f(x,y,z,t)$, where each of the four variables is a function of $u$ and $v$: $x=x(u,v)$, $y=y(u,v)$, $z=z(u,v)$ and $t=t(u,v)$. Assuming all the functions are differentiable, write out the Chain Rule for this case.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 380 236" role="img" aria-label="Tree diagram for Example 4: w branches to the four intermediate variables x, y, z and t, and each of those branches to the independent variables u and v, giving four paths from w to u and four from w to v" style="max-width:380px;width:100%;height:auto">
+            <line x1="44.7" y1="124.6" x2="27.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="51.3" y1="124.6" x2="68.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="139.7" y1="124.6" x2="122.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="146.3" y1="124.6" x2="163.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="234.7" y1="124.6" x2="217.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="241.3" y1="124.6" x2="258.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="329.7" y1="124.6" x2="312.8" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="336.3" y1="124.6" x2="353.2" y2="189.4" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="178.9" y1="32.7" x2="59.1" y2="105.3" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="183.8" y1="37.4" x2="149.2" y2="100.6" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="196.3" y1="37.4" x2="231.7" y2="100.6" stroke="var(--g600)" stroke-width="1.5"/>
+            <line x1="201.1" y1="32.7" x2="321.9" y2="105.3" stroke="var(--g600)" stroke-width="1.5"/>
+            <circle cx="190" cy="26" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="48" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="143" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="238" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="333" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="25" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="71" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="120" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="166" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="215" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="261" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="310" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="356" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <text x="190" y="31" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">w</text>
+            <text x="48" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="143" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="238" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="333" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">t</text>
+            <text x="25" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="71" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="120" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="166" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="215" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="261" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="310" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">u</text>
+            <text x="356" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">v</text>
+            <text x="121" y="64" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;w/&#8706;x</text>
+            <text x="157" y="76" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;w/&#8706;y</text>
+            <text x="223" y="76" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;w/&#8706;z</text>
+            <text x="259" y="64" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;w/&#8706;t</text>
+            <text x="25" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;x/&#8706;u</text>
+            <text x="71" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;x/&#8706;v</text>
+            <text x="120" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;y/&#8706;u</text>
+            <text x="166" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;y/&#8706;v</text>
+            <text x="215" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;z/&#8706;u</text>
+            <text x="261" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;z/&#8706;v</text>
+            <text x="310" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;t/&#8706;u</text>
+            <text x="356" y="226" font-size="10.5" text-anchor="middle" fill="var(--grey600)">&#8706;t/&#8706;v</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> This is the general Chain Rule with $n=4$ intermediate variables ($x,y,z,t$) and $m=2$ independent variables ($u,v$). The tree above, with branches from the dependent variable $w$ to each intermediate variable and from each of those four to $u$ and to $v$, shows there are four paths from $w$ to $u$ and four from $w$ to $v$. Theorem 3 sums the product of partial derivatives along each path:</p>
+        <div class="math-display">$$\frac{\partial w}{\partial u}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial u}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial u}+\frac{\partial w}{\partial t}\frac{\partial t}{\partial u},$$</div>
+        <div class="math-display">$$\frac{\partial w}{\partial v}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial v}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial v}+\frac{\partial w}{\partial t}\frac{\partial t}{\partial v}.$$</div>
+        <p>Each equation has four terms, one per intermediate variable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 5 -->
+<div class="card exam-card" id="ex14-5-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">중간변수 셋·독립변수 셋 <em>Three Intermediate and Three Independent Variables</em><span class="src-ref">Example 5 · p.1026</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$u=x^4y+y^2z^3$ 이고 $x=rse^{t}$, $y=rs^2e^{-t}$, $z=r^2s\sin t$ 일 때, $r=2$, $s=1$, $t=0$ 에서의 $\partial u/\partial s$ 의 값을 구하라.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 420 240" role="img" aria-label="예제 5의 수형도: u에서 x, y, z로, 다시 각각 r, s, t로 가지가 뻗고 s로 가는 세 경로를 강조한 도식" style="max-width:420px;width:100%;height:auto">
+            <line x1="64" y1="123" x2="25" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="76" y1="123" x2="115" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="204" y1="123" x2="165" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="216" y1="123" x2="255" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="344" y1="123" x2="305" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="356" y1="123" x2="395" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="199" y1="33" x2="81" y2="105" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="210" y1="39" x2="210" y2="99" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="221" y1="33" x2="339" y2="105" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="70" y1="125" x2="70" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="210" y1="125" x2="210" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="350" y1="125" x2="350" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <circle cx="210" cy="26" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="70" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="210" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="350" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="20" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="70" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="120" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="160" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="210" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="260" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="300" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="350" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="400" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <text x="210" y="31" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">u</text>
+            <text x="70" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="210" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="350" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="20" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="70" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="120" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="160" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="210" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="260" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="300" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="350" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="400" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="130" y="70" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;u/&#8706;x</text>
+            <text x="218" y="72" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;y</text>
+            <text x="290" y="70" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;z</text>
+            <text x="70" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;x/&#8706;s</text>
+            <text x="210" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;y/&#8706;s</text>
+            <text x="350" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;z/&#8706;s</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> 중간변수가 $x,y,z$ 셋, 독립변수가 $r,s,t$ 셋인 경우이다. 위 수형도에서 색으로 강조한 것처럼 $u$에서 $s$로 가는 경로는 $u\to x\to s$, $u\to y\to s$, $u\to z\to s$의 셋이고, 일반형 연쇄법칙은 그 세 경로 각각의 편도함수 곱을 더한다.</p>
+        <div class="math-display">$$\frac{\partial u}{\partial s}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial s}+\frac{\partial u}{\partial z}\frac{\partial z}{\partial s}.$$</div>
+        <p>필요한 도함수는 $\partial u/\partial x=4x^3y$, $\partial u/\partial y=x^4+2yz^3$, $\partial u/\partial z=3y^2z^2$이고, $\partial x/\partial s=re^{t}$, $\partial y/\partial s=2rse^{-t}$, $\partial z/\partial s=r^2\sin t$이다.</p>
+        <p>$r=2,\,s=1,\,t=0$에서는 $x=2,\,y=2,\,z=0$이므로 $\partial u/\partial x=4(2)^3(2)=64$, $\partial u/\partial y=2^4+2(2)(0)^3=16$, $\partial u/\partial z=3(2)^2(0)^2=0$이고, $\partial x/\partial s=2e^{0}=2$, $\partial y/\partial s=2(2)(1)e^{0}=4$, $\partial z/\partial s=2^2\sin 0=0$이다.</p>
+        <p>세 경로의 값을 곱하여 더하면</p>
+        <div class="math-display">$$\left.\frac{\partial u}{\partial s}\right|_{(2,1,0)}=64(2)+16(4)+0(0)=128+64+0=192.$$</div>
+        <p>따라서 $\partial u/\partial s=192$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $u=x^4y+y^2z^3$, where $x=rse^{t}$, $y=rs^2e^{-t}$ and $z=r^2s\sin t$. Find the value of $\partial u/\partial s$ when $r=2$, $s=1$ and $t=0$.</p>
+        <div class="fig" style="text-align:center; margin:12px auto;">
+          <svg viewBox="0 0 420 240" role="img" aria-label="Tree diagram for Example 5: u branches to x, y, z and each of those to r, s, t, with the three paths to s highlighted" style="max-width:420px;width:100%;height:auto">
+            <line x1="64" y1="123" x2="25" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="76" y1="123" x2="115" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="204" y1="123" x2="165" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="216" y1="123" x2="255" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="344" y1="123" x2="305" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="356" y1="123" x2="395" y2="190" stroke="var(--grey400)" stroke-width="1.3"/>
+            <line x1="199" y1="33" x2="81" y2="105" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="210" y1="39" x2="210" y2="99" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="221" y1="33" x2="339" y2="105" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="70" y1="125" x2="70" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="210" y1="125" x2="210" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <line x1="350" y1="125" x2="350" y2="189" stroke="var(--orange)" stroke-width="1.8"/>
+            <circle cx="210" cy="26" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="70" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="210" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="350" cy="112" r="13" fill="var(--g50)" stroke="var(--g700)" stroke-width="1.3"/>
+            <circle cx="20" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="70" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="120" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="160" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="210" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="260" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="300" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <circle cx="350" cy="200" r="11" fill="var(--orange-bg)" stroke="var(--orange)" stroke-width="1.3"/>
+            <circle cx="400" cy="200" r="11" fill="#fff" stroke="var(--grey400)" stroke-width="1.2"/>
+            <text x="210" y="31" font-size="14" font-style="italic" text-anchor="middle" fill="var(--grey900)">u</text>
+            <text x="70" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">x</text>
+            <text x="210" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">y</text>
+            <text x="350" y="117" font-size="13" font-style="italic" text-anchor="middle" fill="var(--grey900)">z</text>
+            <text x="20" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="70" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="120" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="160" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="210" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="260" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="300" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">r</text>
+            <text x="350" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--orange)">s</text>
+            <text x="400" y="205" font-size="12" font-style="italic" text-anchor="middle" fill="var(--grey800)">t</text>
+            <text x="130" y="70" font-size="10.5" text-anchor="end" fill="var(--grey600)">&#8706;u/&#8706;x</text>
+            <text x="218" y="72" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;y</text>
+            <text x="290" y="70" font-size="10.5" text-anchor="start" fill="var(--grey600)">&#8706;u/&#8706;z</text>
+            <text x="70" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;x/&#8706;s</text>
+            <text x="210" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;y/&#8706;s</text>
+            <text x="350" y="226" font-size="10.5" text-anchor="middle" fill="var(--orange)">&#8706;z/&#8706;s</text>
+          </svg>
+        </div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> There are three intermediate variables $x,y,z$ and three independent variables $r,s,t$. As the highlighted branches in the tree diagram above show, the paths from $u$ to $s$ are $u\to x\to s$, $u\to y\to s$ and $u\to z\to s$, and the general Chain Rule adds the product of partial derivatives along each of the three.</p>
+        <div class="math-display">$$\frac{\partial u}{\partial s}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial s}+\frac{\partial u}{\partial z}\frac{\partial z}{\partial s}.$$</div>
+        <p>The derivatives needed are $\partial u/\partial x=4x^3y$, $\partial u/\partial y=x^4+2yz^3$, $\partial u/\partial z=3y^2z^2$, together with $\partial x/\partial s=re^{t}$, $\partial y/\partial s=2rse^{-t}$, $\partial z/\partial s=r^2\sin t$.</p>
+        <p>At $r=2,\,s=1,\,t=0$ we have $x=2,\,y=2,\,z=0$, so $\partial u/\partial x=4(2)^3(2)=64$, $\partial u/\partial y=2^4+2(2)(0)^3=16$, $\partial u/\partial z=3(2)^2(0)^2=0$, while $\partial x/\partial s=2e^{0}=2$, $\partial y/\partial s=2(2)(1)e^{0}=4$, $\partial z/\partial s=2^2\sin 0=0$.</p>
+        <p>Multiplying and adding along the three paths,</p>
+        <div class="math-display">$$\left.\frac{\partial u}{\partial s}\right|_{(2,1,0)}=64(2)+16(4)+0(0)=128+64+0=192.$$</div>
+        <p>Hence $\partial u/\partial s=192$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 6 -->
+<div class="card exam-card" id="ex14-5-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">연쇄법칙으로 항등식 보이기 <em>Proving an Identity with the Chain Rule</em><span class="src-ref">Example 6 · p.1027</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>미분가능한 함수 $f$ 에 대하여 $g(s,t)=f(s^2-t^2,\;t^2-s^2)$ 로 정의하자. 이때 $g$ 가 다음 등식을 만족함을 보여라.</p>
+        <div class="math-display">$$t\,\frac{\partial g}{\partial s}+s\,\frac{\partial g}{\partial t}=0.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명.</strong> $x=s^2-t^2$, $y=t^2-s^2$로 두면 $g(s,t)=f(x,y)$이고 $x,y$는 모두 $s,t$의 함수이므로 경우 2가 적용된다. $x_s=2s$, $y_s=-2s$, $x_t=-2t$, $y_t=2t$이므로</p>
+        <div class="math-display">$$g_s=f_x\,x_s+f_y\,y_s=2s\,f_x-2s\,f_y=2s(f_x-f_y),$$</div>
+        <div class="math-display">$$g_t=f_x\,x_t+f_y\,y_t=-2t\,f_x+2t\,f_y=-2t(f_x-f_y).$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$t\,g_s+s\,g_t=t\cdot2s(f_x-f_y)+s\cdot\big({-2t}\big)(f_x-f_y)=2st(f_x-f_y)-2st(f_x-f_y)=0.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $f$ be differentiable and put $g(s,t)=f(s^2-t^2,\;t^2-s^2)$. Show that $g$ satisfies the equation</p>
+        <div class="math-display">$$t\,\frac{\partial g}{\partial s}+s\,\frac{\partial g}{\partial t}=0.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof.</strong> Write $x=s^2-t^2$ and $y=t^2-s^2$, so $g(s,t)=f(x,y)$ with $x,y$ both functions of $s,t$, and Case 2 applies. Since $x_s=2s$, $y_s=-2s$, $x_t=-2t$, $y_t=2t$,</p>
+        <div class="math-display">$$g_s=f_x\,x_s+f_y\,y_s=2s\,f_x-2s\,f_y=2s(f_x-f_y),$$</div>
+        <div class="math-display">$$g_t=f_x\,x_t+f_y\,y_t=-2t\,f_x+2t\,f_y=-2t(f_x-f_y).$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$t\,g_s+s\,g_t=t\cdot2s(f_x-f_y)+s\cdot\big({-2t}\big)(f_x-f_y)=2st(f_x-f_y)-2st(f_x-f_y)=0.$$</div>
+        <div class="qed">$\square$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 7 -->
+<div class="card exam-card" id="ex14-5-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">이계 편도함수의 연쇄법칙 <em>The Chain Rule for a Second Derivative</em><span class="src-ref">Example 7 · p.1027</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$z=f(x,y)$ 의 이계 편도함수가 모두 연속이라 하고 $x=r^2+s^2$, $y=2rs$ 라 하자. 다음을 $z$ 의 편도함수들로 나타내라.</p>
+        <p><strong>(a)</strong> $\dfrac{\partial z}{\partial r}$</p>
+        <p><strong>(b)</strong> $\dfrac{\partial^2 z}{\partial r^2}$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $x,y$가 모두 $r,s$의 함수이므로 경우 2가 적용된다. $x_r=2r$, $y_r=2s$이므로</p>
+        <div class="math-display">$$\frac{\partial z}{\partial r}=z_x\,x_r+z_y\,y_r=2r\,\frac{\partial z}{\partial x}+2s\,\frac{\partial z}{\partial y}.$$</div>
+        <p><strong>(b)</strong> 위 식을 다시 $r$에 대해 미분한다. $z_x,z_y$는 여전히 $x,y$의 함수이므로 이들도 경우 2로 $r$에 대해 미분해야 한다. 곱미분법과 연쇄법칙을 함께 쓰면</p>
+        <div class="math-display">$$\frac{\partial^2z}{\partial r^2}=2\frac{\partial z}{\partial x}+2r\frac{\partial}{\partial r}\left(\frac{\partial z}{\partial x}\right)+2s\frac{\partial}{\partial r}\left(\frac{\partial z}{\partial y}\right).$$</div>
+        <p>여기서 $\partial z/\partial x$를 하나의 새 함수로 보고 경우 2를 적용하면 $\dfrac{\partial}{\partial r}\Big(\dfrac{\partial z}{\partial x}\Big)=\dfrac{\partial^2z}{\partial x^2}(2r)+\dfrac{\partial^2z}{\partial y\partial x}(2s)$이고, 같은 방식으로 $\dfrac{\partial}{\partial r}\Big(\dfrac{\partial z}{\partial y}\Big)=\dfrac{\partial^2z}{\partial x\partial y}(2r)+\dfrac{\partial^2z}{\partial y^2}(2s)$이다. $z$의 이계 편도함수가 모두 연속이므로 클레로 정리에 의해 $\dfrac{\partial^2z}{\partial y\partial x}=\dfrac{\partial^2z}{\partial x\partial y}$이고, 이를 대입해 정리하면</p>
+        <div class="math-display">$$\frac{\partial^2z}{\partial r^2}=2\frac{\partial z}{\partial x}+4r^2\frac{\partial^2z}{\partial x^2}+8rs\frac{\partial^2z}{\partial x\partial y}+4s^2\frac{\partial^2z}{\partial y^2}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose $z=f(x,y)$ has continuous second-order partial derivatives, and let $x=r^2+s^2$ and $y=2rs$. Find expressions, in terms of the partial derivatives of $z$, for</p>
+        <p><strong>(a)</strong> $\dfrac{\partial z}{\partial r}$</p>
+        <p><strong>(b)</strong> $\dfrac{\partial^2 z}{\partial r^2}$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $x$ and $y$ are both functions of $r$ and $s$, Case 2 applies. With $x_r=2r$ and $y_r=2s$,</p>
+        <div class="math-display">$$\frac{\partial z}{\partial r}=z_x\,x_r+z_y\,y_r=2r\,\frac{\partial z}{\partial x}+2s\,\frac{\partial z}{\partial y}.$$</div>
+        <p><strong>(b)</strong> Differentiate the last expression in $r$ once more. Since $z_x$ and $z_y$ are themselves functions of $x$ and $y$, they too must be differentiated in $r$ via Case 2. Combining the product rule with the Chain Rule,</p>
+        <div class="math-display">$$\frac{\partial^2z}{\partial r^2}=2\frac{\partial z}{\partial x}+2r\frac{\partial}{\partial r}\left(\frac{\partial z}{\partial x}\right)+2s\frac{\partial}{\partial r}\left(\frac{\partial z}{\partial y}\right).$$</div>
+        <p>Treating $\partial z/\partial x$ as a new function and applying Case 2 gives $\dfrac{\partial}{\partial r}\Big(\dfrac{\partial z}{\partial x}\Big)=\dfrac{\partial^2z}{\partial x^2}(2r)+\dfrac{\partial^2z}{\partial y\partial x}(2s)$, and likewise $\dfrac{\partial}{\partial r}\Big(\dfrac{\partial z}{\partial y}\Big)=\dfrac{\partial^2z}{\partial x\partial y}(2r)+\dfrac{\partial^2z}{\partial y^2}(2s)$. Because the second-order partials of $z$ are continuous, Clairaut's Theorem gives $\dfrac{\partial^2z}{\partial y\partial x}=\dfrac{\partial^2z}{\partial x\partial y}$, and substituting this and simplifying leaves</p>
+        <div class="math-display">$$\frac{\partial^2z}{\partial r^2}=2\frac{\partial z}{\partial x}+4r^2\frac{\partial^2z}{\partial x^2}+8rs\frac{\partial^2z}{\partial x\partial y}+4s^2\frac{\partial^2z}{\partial y^2}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 8 -->
+<div class="card exam-card" id="ex14-5-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">음함수로 정의된 곡선의 도함수 <em>An Implicit Derivative</em><span class="src-ref">Example 8 · p.1028</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>방정식 $x^3+y^3=6xy$ 가 $y$ 를 $x$ 의 함수로 정의한다고 할 때, 공식 (5)를 이용하여 $y'$ 을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F(x,y)=x^3+y^3-6xy$로 두면 주어진 방정식은 $F(x,y)=0$이다. $F_x=3x^2-6y$, $F_y=3y^2-6x$이고, 공식 (5)는 $F_y\neq0$인 점, 곧 $y^2\neq2x$인 점에서 쓸 수 있다. 그런 점에서</p>
+        <div class="math-display">$$y'=\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{3x^2-6y}{3y^2-6x}=-\frac{x^2-2y}{y^2-2x}.$$</div>
+        <p>따라서 $y'=-\dfrac{x^2-2y}{y^2-2x}$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The equation $x^3+y^3=6xy$ defines $y$ implicitly as a function of $x$. Use formula (5) to find $y'$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F(x,y)=x^3+y^3-6xy$, so the given equation reads $F(x,y)=0$. Here $F_x=3x^2-6y$ and $F_y=3y^2-6x$, and formula (5) is available at any point where $F_y\neq0$, that is, where $y^2\neq2x$. At such a point</p>
+        <div class="math-display">$$y'=\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{3x^2-6y}{3y^2-6x}=-\frac{x^2-2y}{y^2-2x}.$$</div>
+        <p>Hence $y'=-\dfrac{x^2-2y}{y^2-2x}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example 9 -->
+<div class="card exam-card" id="ex14-5-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 9</span>
+    <span class="exam-title">음함수로 정의된 곡면의 편도함수 <em>Partial Derivatives of an Implicitly Defined Surface</em><span class="src-ref">Example 9 · p.1029</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>방정식 $x^3+y^3+z^3+6xyz+4=0$ 이 $z$ 를 $x,y$ 의 함수로 정의한다고 할 때, 공식 (6)을 이용하여 $\partial z/\partial x$ 와 $\partial z/\partial y$ 를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>풀이.</strong> $F(x,y,z)=x^3+y^3+z^3+6xyz+4$로 두면 주어진 방정식은 $F(x,y,z)=0$이다. 편도함수는 $F_x=3x^2+6yz$, $F_y=3y^2+6xz$, $F_z=3z^2+6xy$이고, 공식 (6)은 $F_z\neq0$인 점, 곧 $z^2+2xy\neq0$인 점에서 쓸 수 있다. 그런 점에서</p>
+        <div class="math-display">$$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac{3x^2+6yz}{3z^2+6xy}=-\frac{x^2+2yz}{z^2+2xy},$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac{3y^2+6xz}{3z^2+6xy}=-\frac{y^2+2xz}{z^2+2xy}.$$</div>
+        <p>같은 곡면을 <a href="s14-3.html#ex14-3-5">§14.3 예제 5</a>에서는 양변을 직접 편미분해 풀었다. 결과가 일치하며, 공식 (6)은 그 계산을 한 번에 정리한 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The equation $x^3+y^3+z^3+6xyz+4=0$ defines $z$ implicitly as a function of $x$ and $y$. Use formulas (6) to find $\partial z/\partial x$ and $\partial z/\partial y$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Solution.</strong> Let $F(x,y,z)=x^3+y^3+z^3+6xyz+4$, so the given equation reads $F(x,y,z)=0$. Its partial derivatives are $F_x=3x^2+6yz$, $F_y=3y^2+6xz$, $F_z=3z^2+6xy$, and formulas (6) are available wherever $F_z\neq0$, that is, wherever $z^2+2xy\neq0$. At such a point</p>
+        <div class="math-display">$$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac{3x^2+6yz}{3z^2+6xy}=-\frac{x^2+2yz}{z^2+2xy},$$</div>
+        <div class="math-display">$$\frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac{3y^2+6xz}{3z^2+6xy}=-\frac{y^2+2xz}{z^2+2xy}.$$</div>
+        <p>The same surface was handled in <a href="s14-3.html#ex14-3-5">§14.3, Example 5</a> by differentiating the equation directly; the answers agree, and formulas (6) simply package that computation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연결 · Links</h2></div>
+
+<!-- Links card -->
+<div class="card note-card" id="c14-5-links">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+    <span class="note-title">강의 노트 대응 · 과제 · 이웃 절 <em>Lecture Notes, Assignment, Neighboring Sections</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a) 강의 노트 대응</strong> — 미적분학 2 <a href="../calc2/ch06.html">단원 06</a></p>
+        <ul>
+          <li>연쇄법칙 경우 1·경우 2·일반형 — <a href="../calc2/ch06.html#ex03">ex03</a>, <a href="../calc2/ch06.html#yu03-1">yu03-1</a>, <a href="../calc2/ch06.html#yu03-2">yu03-2</a>, <a href="../calc2/ch06.html#yu03-3">yu03-3</a> (부분 대응: 계산 예제만 있고 정리·증명은 서술되지 않음)</li>
+          <li>수형도와 중간변수 용어 — 대응 없음 (강의 노트에는 그림이 없다)</li>
+          <li>음함수 미분 공식 (5)·(6) — <a href="../calc2/ch06.html#ex04">ex04</a>, <a href="../calc2/ch06.html#yu04">yu04</a> (부분 대응: 매번 양변을 직접 미분할 뿐 공식으로 정리하지 않음)</li>
+          <li>이계 편도함수의 연쇄법칙 (예제 7) — <a href="../calc2/ch06.html#pr07">pr07</a> (부분 대응: 일계까지만)</li>
+          <li>관련 변화율 응용 (예제 2 계열) — <a href="../calc2/ch06.html#yu03-4">yu03-4</a> (부분 대응: 옴의 법칙 한 문항)</li>
+          <li>극좌표 항등식 (연습문제 49) — <a href="../calc2/ch06.html#pr07">pr07</a> (완전 대응)</li>
+          <li>동차함수 (연습문제 56&ndash;58) — <a href="../calc2/ch06.html#pr09">pr09</a> (완전 대응)</li>
+        </ul>
+        <p><strong>(b) 공통과제 (§14.5)</strong></p>
+        <p>제출 문항: 12, 19, 27, 38, 49 &nbsp;/&nbsp; 학습 참고: 3&ndash;8, 11&ndash;16, 17&ndash;20, 25&ndash;30, 31&ndash;34, 35&ndash;38, 49&ndash;50, 51&ndash;55</p>
+        <p><strong>(c) 이웃 절</strong> — 이전: <a href="s14-4.html">§14.4 접평면과 선형근사</a> &nbsp;/&nbsp; 다음: <a href="s14-6.html">§14.6 방향도함수와 기울기 벡터</a></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a) Corresponding lecture notes</strong> — Calculus II, <a href="../calc2/ch06.html">Unit 06</a></p>
+        <ul>
+          <li>Chain Rule, Cases 1 and 2 and the general version — <a href="../calc2/ch06.html#ex03">ex03</a>, <a href="../calc2/ch06.html#yu03-1">yu03-1</a>, <a href="../calc2/ch06.html#yu03-2">yu03-2</a>, <a href="../calc2/ch06.html#yu03-3">yu03-3</a> (partial: worked computations only, with no statement or proof of the theorems)</li>
+          <li>Tree diagrams and the term "intermediate variable" — no match (the lecture notes carry no figures)</li>
+          <li>Implicit differentiation formulas (5) and (6) — <a href="../calc2/ch06.html#ex04">ex04</a>, <a href="../calc2/ch06.html#yu04">yu04</a> (partial: both sides are differentiated directly each time, never packaged as a formula)</li>
+          <li>Chain Rule for a second derivative (Example 7) — <a href="../calc2/ch06.html#pr07">pr07</a> (partial: first order only)</li>
+          <li>Related rates applications (the Example 2 type) — <a href="../calc2/ch06.html#yu03-4">yu03-4</a> (partial: a single problem on Ohm's law)</li>
+          <li>Polar-coordinate identity (Exercise 49) — <a href="../calc2/ch06.html#pr07">pr07</a> (full match)</li>
+          <li>Homogeneous functions (Exercises 56&ndash;58) — <a href="../calc2/ch06.html#pr09">pr09</a> (full match)</li>
+        </ul>
+        <p><strong>(b) Assignment (§14.5)</strong></p>
+        <p>Problems to submit: 12, 19, 27, 38, 49 &nbsp;/&nbsp; Recommended practice: 3&ndash;8, 11&ndash;16, 17&ndash;20, 25&ndash;30, 31&ndash;34, 35&ndash;38, 49&ndash;50, 51&ndash;55</p>
+        <p><strong>(c) Neighboring sections</strong> — Previous: <a href="s14-4.html">§14.4 Tangent Planes and Linear Approximations</a> &nbsp;/&nbsp; Next: <a href="s14-6.html">§14.6 Directional Derivatives and the Gradient Vector</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="index.html">Stewart 홈</a>
+    <a href="../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="../about.html">소개</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../disclaimer.html">면책조항</a>
+  </div>
+  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>, 9th ed. (Cengage) 의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다. &copy; 2025&ndash;2026 DDALKKAK.</p>
+</footer>
+
+<script src="common.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
