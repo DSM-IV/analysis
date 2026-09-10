@@ -184,3 +184,21 @@ L3 Example 5/7: [T]_B=(1 1 0;0 2 2;0 0 3), T(f)=f+(x+1)f' on P2(R): T(1)=1, T(x)
 L3 Example B: [T_theta] = (cos -sin; sin cos): det(.. - tI) = t^2 - 2cos(theta) t + 1, discriminant 4cos^2(theta)-4 < 0 for 0<theta<pi -> no real eigenvalues
 L3 Theorem 5.3: deg det(A-tI)=n, leading coeff (-1)^n (Leibniz: only identity permutation gives degree n; others degree <= n-2)
 ```
+
+=== Lecture 4·5 (9/10·9/15, §5.2) 추가분 — python Fraction 검산 (scratchpad/gt_L4L5.py 재생성 가능) ===
+```
+L4 Example 1: A=(1 1;1 1): det(A-tI) = t^2-2t = t(t-2); eigenvalues 0, 2; E_0 = span(-1,1), E_2 = span(1,1); diagonalizable
+L4 Example (p5 하, 번호 없음): A=(1 2 3;2 3 1;12 1 1): det(A-tI) = -t^3+5t^2+34t-80 = -(t^3-5t^2-34t+80) = -(t-8)(t-2)(t+5); eigenvalues -5, 2, 8 (각 중복도 1)
+  — 슬라이드 전개식 -(t^3-5t^2+34t-80)은 부호 오류(ERRATA 21); 인수분해·고유값은 옳음
+L4 p7 (2): (t^2+1)(t-2) = t^3-2t^2+t-2 ✓
+L4 Example 2: A=(3 1 0;0 3 4;0 0 4): det = -(t-3)^2(t-4); λ=3: mult 2, dim E_3 = 1 (basis (1,0,0)); λ=4: mult 1, dim 1 (basis (4,4,1)); not diagonalizable
+L4 Example 3: [D]_β=(0 1 0;0 0 2;0 0 0): det = -t^3; λ=0 mult 3, dim E_0 = 1 (상수다항식); not diagonalizable
+L4 Example 4: [T]_β=(4 0 1;2 3 2;1 0 4): det = -(t-5)(t-3)^2; λ=5: mult 1, E_5 = span(1,2,1); λ=3: mult 2, E_3 = span{(0,1,0),(-1,0,1)}
+  A(1,2,1)=(5,10,5), A(0,1,0)=(0,3,0), A(-1,0,1)=(-3,0,3); diagonalizable
+L5 Example 5: A=(3 1 0;0 3 0;0 0 4): det = -(t-4)(t-3)^2; λ=4: rank(A-4I)=2, 3-2=1=mult; λ=3: rank(A-3I)=2, 3-2=1≠2 → not diagonalizable
+L5 Example 6: T(f)=f(1)+f'(0)x+(f'(0)+f''(0))x^2: T(1)=1, T(x)=1+x+x^2, T(x^2)=1+2x^2; B=[T]_α=(1 1 1;0 1 0;0 1 2); det = -(t-1)^2(t-2)
+  λ=1: rank(B-I)=1, 3-1=2=mult, E_1 = span{(1,0,0),(0,-1,1)}; λ=2: rank(B-2I)=2, E_2 = span(1,0,1)
+  B(1,0,0)=(1,0,0), B(0,-1,1)=(0,-1,1), B(1,0,1)=(2,0,2); β={1, -x+x^2, 1+x^2}, [T]_β=diag(1,1,2); diagonalizable
+L5 Example 7: A=(0 -2;1 3): det = t^2-3t+2 = (t-1)(t-2); u=(2,-1) (λ=1), v=(1,-1) (λ=2); Q=(2 1;-1 -1), Q^{-1}=(1 1;-1 -2), QQ^{-1}=I ✓
+  A^n = (2-2^n, 2-2^{n+1}; -1+2^n, -1+2^{n+1}) — n=1..6 직접 곱과 일치
+```

@@ -5,6 +5,8 @@
 - `Lecture 1 - Preliminaries (9월 1일 화요일).pdf` — 24장 슬라이드 (영문)
 - `Lecture 2 - Section 5.1  (9월 3일 목요일).pdf` — 14장 슬라이드 (영문)
 - `Lecture 3 - Section 5.1 (9월 8일 화요일).pdf` — 17장 슬라이드 (영문, 9/8)
+- `Lecture 4 - Section 5.2 (9월 10일 목요일).pdf` — 16장 슬라이드 (영문, 9/10)
+- `Lecture 5 - Section 5.2 (9월 15일 화요일).pdf` — 16장 슬라이드 (영문, 9/15 강의분 — 9/10에 선게시; 원본 파일명 끝의 " (1)" 제거하고 복사)
 - `5.1 Linear Algebra Solution.pdf` — §5.1 추천 연습문제(Friedberg) 풀이 9쪽 (문항: 1(a)–(k), 3(b)(d), 4(e)(g)(j), 11, 14, 15(a), 16(a), 17)
 - `5.2 Linear Algebra Solution.pdf` — §5.2 추천 연습문제 풀이 6쪽 (문항: 1(a)–(h), 2(a)(d)(e), 3(a)(d)(e)(f), 7, 8, 9(a), 10, 11, 12, 18, 19)
 
@@ -27,14 +29,14 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-09-08 현재)
+## 전체 구조 (2026-09-10 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
 | ch01 | 예비 사항: 선형대수학 I 복습 | Lecture 1 (24장) | 29 (EX 1) | 4 | — |
 | ch02 | 5.1 고유값과 고유벡터 | Lecture 2 (14장) + Lecture 3 (17장) + §5.1 풀이 | 33 | 3 | 8 |
-| ch03 | 5.2 대각화가능성 | §5.2 풀이 (강의 예정) | 0 | 1 | 11 |
-| 계 | | | **62** | **8** | **19** (+ ch01 EX 1 = 풀이 대상 **21**, THM 2.25 자체 증명 포함) |
+| ch03 | 5.2 대각화가능성 | Lecture 4 (16장) + Lecture 5 (16장) + §5.2 풀이 | 26 | 1 | 11 |
+| 계 | | | **88** | **8** | **19** (+ ch01 EX 1 = 풀이 대상 **22**, THM 2.25·THM 3.21 자체 증명 포함) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -58,6 +60,15 @@
 18. L3 p11 Remark Step 3: "$v$ is an eigenvalue corresponding to $\lambda$ … $\phi_{\mathcal{B}}(v)$ is an eigenvalue corresponding to $\lambda$" — 두 곳 모두 eigenvector 여야 한다 — en verbatim, ko는 고유벡터로 번역.
 19. L3 p6 Theorem 5.3: 슬라이드에 "Proof : (1)" 만 있고 본문이 공란(수업 중 구두 증명) → 원문 증명 전사 불가. c2-25 에 `PROOF-KO`/`PROOF-EN` 마커만 두고 우리 증명을 나중에 작성한다(풀이 대상 21건에 포함).
 20. L3 p4 Remark: 마지막 행렬식 줄에서 가운데 두 개의 "det"만 이탤릭으로 인쇄됨(`det Q × det(...) × det Q⁻¹`) — 전사에서는 모두 `\det`으로 통일.
+21. **L4 p5 Example(번호 없음) 전개식 부호 오류(기준값 확정)**: 인쇄 $-(t^3-5t^2+34t-80)$ → 옳은 전개는 $-(t^3-5t^2-34t+80)$. 인수분해 $-(t-8)(t-2)(t+5)$와 고유값 $-5,2,8$은 옳다. en verbatim + Note, ko는 바른 식.
+22. **L4 p14 Example 4 (3)**: 결론 줄 "$E_{\lambda_1} = \{c(0,1,0)+d(-1,0,1)\}$"의 첨자는 $E_{\lambda_2}$ 여야 함($\lambda_2=3$, 차원 2). en verbatim + Note, ko는 $E_{\lambda_2}$. (L5 p3 재수록에도 동일)
+23. **L4 p15 Remark**: Example 4 항목의 결론 "In this case, T fails to be diagonalizable."는 "T is diagonalizable" 이어야 함(Example 4는 대각화가능 — 각 고유공간 차원 = 중복도). en verbatim + Note, ko는 바른 뜻. (L5 p4 재수록에도 동일; L5 p4 마지막 줄만 "This is indeed true, as we now show.")
+24. L5 p8 Theorem 5.9: "a linear operator on an n-dimensional vector space V whose characteristic polynomial of T splits" — 어법 verbatim, ko는 "특성다항식이 분해되는 선형연산자".
+25. L5 p12 Example 5: $M_{3\times 3}(R)$의 $R$이 일반 이탤릭으로 인쇄(L4 p14·L5 p14의 집합기호 안 $\in R^3$도 동일) — 수식편집기 글꼴 문제로 판단해 모두 `\mathbb{R}`로 정규화(검증 단계 결정).
+26. L5 p10 "◎ Test for diagonalization": 슬라이드에 증명 없음 → c3-21에 자체 증명(정리 5.9 + $\dim E_\lambda = n - \operatorname{rank}(T-\lambda I)$). ◎ 기호는 옮기지 않음.
+27. L5 p5 Lemma 진술 끝이 "then $v_1 = v_2 = \cdots = O_V$"로 $= v_k$가 빠짐 — p6 상단의 온전한 재수록판("$\cdots = v_k = O_V$")을 c3-18에 전사. L4 p7 (2) "Thus the property that a polynomial $f(t)\in P(F)$ depends heavily on the field $F$."는 "splits" 누락 비문 — en verbatim, ko는 바른 뜻. L4 p11 Theorem 5.7 증명은 상계만 다룸(하계 $1 \le \dim E_\lambda$는 고유벡터 존재로 자명) — verbatim.
+28. L5 p11 Step 4 마지막 도식 "$Bu_i = \lambda u_i = [\lambda v_i]_\alpha$ … $T(v_i) = \lambda v_i$": $\lambda$에 첨자가 없음 — $u_i$마다 고유값이 다를 수 있으므로 $\lambda_i$가 정확. en·ko 모두 원문대로.
+29. L4 p14 Example 4: (2)는 $E_{\lambda_1} = N(T-\lambda_1 I)$(연산자), (3)은 $E_{\lambda_2} = N([T]_\beta - \lambda_2 I)$(행렬)로 표기 혼용 — 값에 영향 없음, verbatim.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -159,11 +170,43 @@ L3 p1 제목·Studying Contents, L3 p3(L2 p14 재수록)은 카드 없음.
 | e2-17 | EX 5.1-17 | #17 (a)–(d) 전치 연산자 T(A)=Aᵗ | 풀이 | ±1; 대칭/반대칭; n=2 기저 4개; 일반 n: E_ii, E_ij+E_ji, E_ij−E_ji |
 
 ### ch03.html — 5.2 대각화가능성 / §5.2 Diagonalizability
-강의(9/10·9/15) 미진행. note 1 + 연습문제 11. 강의 슬라이드가 오면 note03-1 앞에 카드 c3-1… 추가.
+Lecture 4, 16장 + Lecture 5, 16장. 카드 26 (RECALL 1, THM 7(LEM 1·COR 1 포함), DEF 2, REM 7, EXAM 9) + note 1 + 연습문제 11.
+섹션 구분: `§5.2 Diagonalizability · 대각화가능성`(L4 p2–16 + L5 p5–16) → `연습문제 · Exercises (Friedberg §5.2)`. L4 p1·L5 p1 제목, L5 p2–4(L4 p13–15 재수록: Example 4 + Remark; 마지막 줄만 "as we now show"), L4 p4·L5 p6 하단 Theorem 5.5 박스, L5 p5 상·p7 상 Theorem 5.8 재진술, L5 p9 상 Theorem 5.9 재진술은 카드 없음. note03-1(강의 예정 안내)은 삭제.
+
+| id | 유형·배지 | 슬라이드 | 내용 | src-ref |
+|---|---|---|---|---|
+| c3-1 | RECALL 3.1 | L4 p2 | 대각화가능 행렬의 정의 복습 + "Want to find :" (i) 판정법 (ii) 고유벡터 기저를 찾는 방법 | — |
+| c3-2 | THM 3.2 | L4 p3 | 서로 다른 고유값에 대응하는 고유벡터들은 일차독립 + Proof(k에 대한 귀납법) 토글 | Theorem 5.5 |
+| c3-3 | COR 3.3 | L4 p4 | 서로 다른 고유값이 n개면 T는 대각화가능 + Proof 토글 | — |
+| c3-4 | EXAM 3.4 | L4 p5 상 | $A=\begin{pmatrix}1&1\\1&1\end{pmatrix}$, $\det(A-tI_2)=t(t-2)$, 고유값 $0,2$ → 대각화가능 | Example 1 |
+| c3-5 | EXAM 3.5 | L4 p5 하 | $A=\begin{pmatrix}1&2&3\\2&3&1\\12&1&1\end{pmatrix}$, $-(t-8)(t-2)(t+5)$, 고유값 $-5,2,8$ → 대각화가능 | — |
+| c3-6 | REM 3.6 | L4 p6 | 대각화가능 ⇒ 서로 다른 고유값 n개? Answer : No. 반례 $A=I_n$, $\det(A-tI_n)=(1-t)^n$ | — |
+| c3-7 | DEF 3.7 | L4 p7 상 | $f(t)\in P(F)$가 $F$ 위에서 분해된다(splits over $F$)의 정의 | — |
+| c3-8 | REM 3.8 | L4 p7 하 | (1) $t^2-1$은 ℝ 위에서 분해 (2) $t^3-2t^2+t-2$는 ℝ에서 분해 안 됨·ℂ에서 분해 (3) $f(t):=\det(T-t\,\mathrm{Id}_V)$가 $F$ 위에서 분해될 때 "splits"라 함 | — |
+| c3-9 | THM 3.9 | L4 p8 | T가 대각화가능이면 특성다항식이 분해된다 + Proof 토글(대각행렬 $D=[T]_\beta$) | Theorem 5.6 |
+| c3-10 | REM 3.10 | L4 p9 | 사상 $\mathcal{L}(V)\to P_n(F)$, (1)–(4)와 세 조건(n개의 서로 다른 영점 / 대각화가능 / 분해)의 YES⇓ ⇑NO 도식 | — |
+| c3-11 | DEF 3.11 | L4 p10 상 | (1) (대수적) 중복도 (2) 고유공간 $E_\lambda:=\{x\in V\mid T(x)=\lambda x\}$ + 행렬의 고유공간은 $L_A$의 것으로 정의 | — |
+| c3-12 | REM 3.12 | L4 p10 하 | (1) $E_\lambda=N(T-\lambda I_V)$는 부분공간 (2) $O_V$와 모든 고유벡터로 구성 (3) $\dim E_\lambda$ = 일차독립인 고유벡터의 최대 개수 | — |
+| c3-13 | THM 3.13 | L4 p11 | $1\le\dim E_\lambda\le m$ + Proof 토글(블록행렬 $\begin{pmatrix}\lambda I_p&B\\O&C\end{pmatrix}$, $f(t)=(\lambda-t)^p g(t)$) | Theorem 5.7 |
+| c3-14 | EXAM 3.14 | L4 p12 상 | $A=\begin{pmatrix}3&1&0\\0&3&4\\0&0&4\end{pmatrix}$, $f(t)=-(t-3)^2(t-4)$, 중복도 2와 1 | Example 2 |
+| c3-15 | EXAM 3.15 | L4 p12 하 | $T:P_2(\mathbb{R})\to P_2(\mathbb{R})$, $f(t)\mapsto f'(t)$, $[T]_\beta$, $-t^3$, $E_0$ = 상수다항식 공간 → 대각화 불가 | Example 3 |
+| c3-16 | EXAM 3.16 | L4 p13–15 상 | Example 4 (1)–(4): $[T]_\beta=\begin{pmatrix}4&0&1\\2&3&2\\1&0&4\end{pmatrix}$, $-(t-5)(t-3)^2$, $E_{\lambda_1}$ 기저 $(1,2,1)$, $E_{\lambda_2}$ 기저 $(0,1,0),(-1,0,1)$, 고유벡터 기저 → 대각화가능 | Example 4 |
+| c3-17 | REM 3.17 | L4 p15 하 | Example 3·Example 4에서의 (i)(ii) 비교와 Theorem 5.8 예고 | — |
+| note03-2 | NOTE | L5 p5 중 | "To prove Theorem 5.8, we need the following lemma." 한 문장 (목차 제외) | — |
+| c3-18 | LEM 3.18 | L5 p5 하 – p6 | Lemma: $v_i \in E_{\lambda_i}$이고 $v_1+\cdots+v_k = O_V$이면 모두 $O_V$ + 증명(p6, Theorem 5.5 이용한 귀류법) | — |
+| c3-19 | THM 3.19 | L5 p7 (진술 재수록: L4 p16 · L5 p5 상 · L5 p7 상) | Theorem 5.8: 서로 다른 고유공간의 유한 일차독립 부분집합들의 합집합은 일차독립 + 증명(이중합) | Theorem 5.8 |
+| c3-20 | THM 3.20 | L5 p8 – p9 | Theorem 5.9 (1)(2) + 증명 ((⇒) p8, (⇐)·(2) p9) | Theorem 5.9 |
+| c3-21 | THM 3.21 | L5 p10 상 | Test for diagonalization: (i) 특성다항식이 분해된다, (ii) 중복도 $= n - \operatorname{rank}(T-\lambda I)$ — 슬라이드에 증명 없음, 마커만 | — |
+| c3-22 | REM 3.22 | L5 p10 중 | Remark 1: 고유공간 순서기저들의 합집합 $\beta$, $[T]_\beta$는 대각행렬 | Remark 1 |
+| c3-23 | REM 3.23 | L5 p10 하 – p11 | Step 1. – Step 4. 대각화 절차(Step 4의 좌표사상 $[\ ]_\alpha : V \to F^n$과 ⇒ 두 줄 포함) | — |
+| c3-24 | EXAM 3.24 | L5 p12 | Example 5: $A = \begin{pmatrix}3&1&0\\0&3&0\\0&0&4\end{pmatrix}$ (1)–(3), 대각화가능하지 않음 | Example 5 |
+| c3-25 | EXAM 3.25 | L5 p13 – p15 | Example 6 (1)–(6): $T(f(x)) = f(1)+f'(0)x+(f'(0)+f''(0))x^2$, $B=[T]_\alpha$, $E_{\lambda_1}$·$E_{\lambda_2}$·$\gamma$·$\beta$·$[T]_\beta$ | Example 6 |
+| c3-26 | EXAM 3.26 | L5 p16 | Example 7: $A = \begin{pmatrix}0&-2\\1&3\end{pmatrix}$ (1)–(4), $A^n$ 닫힌 식 | Example 7 |
+
+연습문제 (Friedberg §5.2 추천문제; 진술은 재서술, 풀이는 자체 작성):
 
 | id | 배지 | 문항 | 유형 | 기준값(공개 풀이) |
 |---|---|---|---|---|
-| note03-1 | NOTE | 갱신 안내(강의 예정, 연습문제 선공개) | | |
 | e3-1 | EX 5.2-1 | #1 (a)–(h) 참·거짓 | 풀이 | F F F T T F T T |
 | e3-2 | EX 5.2-2 | #2 (a),(d),(e) 행렬의 대각화가능성 판정, Q·D | 풀이 | (a) 불가; (d) λ=3,3,−1 가능; (e) 분해 안 됨(ℝ) 불가 |
 | e3-3 | EX 5.2-3 | #3 (a),(d),(e),(f) 연산자의 대각화가능성 | 풀이 | (a) 불가(λ=0만, dim E₀=1); (d) 0,1,2 가능; (e) 1∓i 가능(ℂ); (f) 1,1,1,−1 가능 |

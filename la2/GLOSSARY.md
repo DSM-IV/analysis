@@ -105,8 +105,8 @@
 | 파일 | 한국어 제목 | English | 상태 |
 |---|---|---|---|
 | ch01 | 예비 사항: 선형대수학 I 복습 | Preliminaries: Review of Linear Algebra I | Lecture 1 (9/1) |
-| ch02 | 5.1 고유값과 고유벡터 | §5.1 Eigenvalues and Eigenvectors | Lecture 2 (9/3) + 9/8 예정 |
-| ch03 | 5.2 대각화가능성 | §5.2 Diagonalizability | 강의 9/10·9/15 예정 (연습문제 풀이 선공개) |
+| ch02 | 5.1 고유값과 고유벡터 | §5.1 Eigenvalues and Eigenvectors | Lecture 2 (9/3) + Lecture 3 (9/8) |
+| ch03 | 5.2 대각화가능성 | §5.2 Diagonalizability | Lecture 4 (9/10) + Lecture 5 (9/15) |
 | ch04 | 5.4 불변부분공간과 케일리-해밀턴 정리 | §5.4 Invariant Subspaces and the Cayley–Hamilton Theorem | 예정 |
 | ch05 | 6.1 내적과 노름 | §6.1 Inner Products and Norms | 예정 |
 | ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 The Gram–Schmidt Process and Orthogonal Complements | 예정 |
