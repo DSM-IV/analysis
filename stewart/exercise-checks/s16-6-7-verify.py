@@ -70,6 +70,6 @@ for sec,count in[('16-6',64),('16-7',49)]:
  d=json.loads((root/f'exercise-content/s{sec}.json').read_text());assert [e['number']for e in d['exercises']]==list(range(1,count+1));assert d['scope']['numbers']==list(range(1,count+1))
  for e in d['exercises']:
   for key in['statement','hint','steps','answer','check']:assert set(e[key])=={'ko','en'}
-report={'source':'Stewart Calculus Early Transcendentals,9e,English','pdfPages':[1255,1256,1257,1267,1268,1269],'counts':{'16.6':64,'16.7':49},'checks':checks,'visualQA':['16.6.12 SVG in Chrome','16.6.32 two views in Chrome','16.6.37 tangent plane overlay in Chrome','16.7.36 cylinder and vector field in Chrome'],'notes':['Source image corrected inherited 16.6.8 z=-v,16.6.11 sin(4v),16.6.12 non-sphere identity.','16.7.8 clearly distinguishes the geometric integral from the double-cover parameter integral.']}
+report={'source':'Stewart Calculus,9e,English','pdfPages':[1255,1256,1257,1267,1268,1269],'counts':{'16.6':64,'16.7':49},'checks':checks,'visualQA':['16.6.12 SVG in Chrome','16.6.32 two views in Chrome','16.6.37 tangent plane overlay in Chrome','16.7.36 cylinder and vector field in Chrome'],'notes':['Source image corrected inherited 16.6.8 z=-v,16.6.11 sin(4v),16.6.12 non-sphere identity.','16.7.8 clearly distinguishes the geometric integral from the double-cover parameter integral.']}
 (root/'exercise-checks/s16-6-7-results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+chr(10))
 print(f'{len(checks)} symbolic/numerical checks passed; 113 exercises structurally complete.')

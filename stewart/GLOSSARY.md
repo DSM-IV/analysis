@@ -1,6 +1,6 @@
 # Stewart 교재 섹션 용어집·표기 규약 (stewart/GLOSSARY.md)
 
-대상: Stewart, *Calculus: Early Transcendentals* 9e, §12.6·14·15·16. 이 섹션은 **Stewart 표기를 그대로** 따른다(강의 교안 calc2/의 Thomas 표기와 다름). `calc2/GLOSSARY.md`의 공통 용어(벡터·미분·적분 기본어)는 상속하되, 아래 표가 우선한다.
+대상: Stewart, *Calculus* 9e, §12.6·14·15·16. 이 섹션은 **Stewart 표기를 그대로** 따른다(강의 교안 calc2/의 Thomas 표기와 다름). `calc2/GLOSSARY.md`의 공통 용어(벡터·미분·적분 기본어)는 상속하되, 아래 표가 우선한다.
 
 ## 1. 문체·구조 규칙
 - **언어 방향**: ko = 해석(주 언어, 재서술), en = 재서술 요약. **원문 영어 산문을 그대로 옮기지 않는다.** 정의·정리의 수학적 진술(수식·조건)은 정확히 옮기고, 설명 문단은 요지만 쓴다.

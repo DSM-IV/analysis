@@ -28,10 +28,11 @@ OUTPUT_DIR = HERE / "exercises"
 ID_RE = re.compile(r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$")
 HTML_TAG_RE = re.compile(r"<\s*/?\s*[A-Za-z][^>]*>")
 PLACEHOLDER_RE = re.compile(r"\[(?:TBD|TODO|번역 예정|해석 예정)\]", re.I)
-MATH_RE = re.compile(r"\\\\\((.*?)\\\\\)|\\\\\[(.*?)\\\\\]", re.S)
+MATH_RE = re.compile(r"(?<!\\)\\\((.*?)\\\)|(?<!\\)\\\[(.*?)\\\]", re.S)
 KINDS = {
     "exercise": {"ko": "연습문제", "en": "Exercises", "card": "EXERCISE"},
     "review": {"ko": "복습문제", "en": "Review Exercises", "card": "REVIEW"},
+    "problems-plus": {"ko": "심화문제", "en": "Problems Plus", "card": "PROBLEMS PLUS"},
 }
 
 
@@ -80,7 +81,7 @@ def require_pair(value: Any, where: str) -> dict[str, str]:
 def require_matching_math(pair: dict[str, str], where: str) -> None:
     """Require the problem and final-answer formulas to match across languages."""
     def formulas(text: str) -> list[str]:
-        return [re.sub(r"\s+", "", inline or display) for inline, display in MATH_RE.findall(text)]
+        return [re.sub(r"\s+", "", re.sub(r"\\text\{[^{}]*\}", "", inline or display)) for inline, display in MATH_RE.findall(text)]
     if formulas(pair["ko"]) != formulas(pair["en"]):
         fail(where, "Korean and English MathJax expressions must match in order")
 
@@ -157,9 +158,9 @@ def validate_document(raw: Any, path: Path) -> dict[str, Any]:
         fail(f"{where}.section", "must look like 14.3")
     if not isinstance(raw["exercises"], list) or not raw["exercises"]:
         fail(f"{where}.exercises", "must be a non-empty list")
-    kind = raw.get("kind", "exercise")
+    kind = raw.get("kind", raw.get("scope", {}).get("kind", "exercise"))
     if kind not in KINDS:
-        fail(f"{where}.kind", "must be exercise or review")
+        fail(f"{where}.kind", "must be exercise, review, or problems-plus")
 
     exercises: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
@@ -237,8 +238,8 @@ def validate_document(raw: Any, path: Path) -> dict[str, Any]:
         scope = raw["scope"]
         if not isinstance(scope, dict) or set(scope) != {"kind", "numbers", "total", "note"}:
             fail(f"{where}.scope", "must contain exactly kind, numbers, total, and note")
-        if scope["kind"] != "exercise":
-            fail(f"{where}.scope.kind", "must be exercise")
+        if scope["kind"] != kind:
+            fail(f"{where}.scope.kind", "must match the document kind")
         if not isinstance(scope["numbers"], list) or any(not isinstance(number, int) for number in scope["numbers"]):
             fail(f"{where}.scope.numbers", "must be a list of integer problem numbers")
         exercise_numbers = [int(exercise["number"]) for exercise in exercises if exercise["number"].isdigit()]
@@ -247,7 +248,7 @@ def validate_document(raw: Any, path: Path) -> dict[str, Any]:
         if scope["total"] != len(exercises):
             fail(f"{where}.scope.total", "must match the number of published exercises")
         normalized_document["scope"] = {
-            "kind": "exercise",
+            "kind": kind,
             "numbers": scope["numbers"],
             "total": scope["total"],
             "note": require_pair(scope["note"], f"{where}.scope.note"),
@@ -288,7 +289,7 @@ def validate_manifest(raw: Any, path: Path) -> list[dict[str, Any]]:
         seen_sections.add(section)
         kind = item.get("kind", "exercise")
         if kind not in KINDS:
-            fail(f"{item_where}.kind", "must be exercise or review")
+            fail(f"{item_where}.kind", "must be exercise, review, or problems-plus")
         title = require_pair(item["title"], f"{item_where}.title") if "title" in item else {"ko": KINDS[kind]["ko"], "en": KINDS[kind]["en"]}
         total = item.get("total")
         if total is not None and (not isinstance(total, int) or total < 0):
@@ -333,7 +334,7 @@ def read_manifest() -> list[dict[str, Any]] | None:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as error:
         raise ContentError(f"{path.relative_to(HERE)}: invalid JSON: {error}") from error
-    return validate_manifest(raw, path)
+    return [entry for entry in validate_manifest(raw, path) if entry["kind"] == "exercise"]
 
 
 def apply_manifest(documents: list[dict[str, Any]], manifest: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
@@ -386,7 +387,7 @@ def published_problem_count(numbers: list[str]) -> int:
 
 
 def per_exercise_source(exercise: dict[str, Any], document: dict[str, Any]) -> str:
-    item_label = "Review" if document["kind"] == "review" else "Exercise"
+    item_label = {"exercise": "Exercise", "review": "Review", "problems-plus": "Problems Plus"}[document["kind"]]
     source = exercise.get("source")
     if source:
         return f"{item_label} {esc(exercise['number'])} · p. {source['printedPage']} · PDF p. {source['pdfPage']}"
@@ -395,7 +396,7 @@ def per_exercise_source(exercise: dict[str, Any], document: dict[str, Any]) -> s
 
 
 def subparts_markup(exercise: dict[str, Any]) -> str:
-    if not exercise["subparts"]:
+    if not exercise["subparts"] or all(re.fullmatch(r"[a-zA-Z0-9().-]+", part) for part in exercise["subparts"]):
         return ""
     return "<ul>" + "".join(f"<li>{esc(part)}</li>" for part in exercise["subparts"]) + "</ul>"
 
@@ -460,10 +461,15 @@ def exercise_card(exercise: dict[str, Any], document: dict[str, Any]) -> str:
 </article>'''
 
 
+def source_label(entry: dict[str, Any]) -> str:
+    return "§" + entry["section"] if entry["kind"] == "exercise" else entry["section"].split(".")[0] + "장"
+
+
 def section_page(document: dict[str, Any]) -> str:
     section = document["section"]
     source = document["source"]
     labels = KINDS[document["kind"]]
+    reference = source_label(document)
     display = document["display"]
     title = display["title"]
     total = display["total"]
@@ -474,7 +480,15 @@ def section_page(document: dict[str, Any]) -> str:
         f'      <li><a href="#{esc(exercise["id"])}"><span class="toc-num">{esc(labels["card"][:3])} {esc(exercise["number"])}</span>{esc(exercise["topic"]["ko"])} <em>{esc(exercise["topic"]["en"])}</em></a></li>'
         for exercise in document["exercises"]
     )
-    nav = f'      <a href="../s{section.replace(".", "-")}.html" class="active">{esc(section)}</a>'
+    course = 1 if int(section.split(".")[0]) <= 13 else 2
+    course_href = f"../../calc{course}/index.html"
+    course_label = f"미적분학 {course}"
+    exercise_index = "../../calc1/stewart.html" if course == 1 else "index.html"
+    note_name = f's{section.replace(".", "-")}.html'
+    note_href = "../" + note_name if (HERE / note_name).exists() else course_href
+    note_ko = f"§{section} 개념 페이지" if (HERE / note_name).exists() else "관련 개념 목록"
+    note_en = f"§{section} concept page" if (HERE / note_name).exists() else "concept index"
+    nav = f'      <a href="{note_href}" class="active">{esc(reference)}</a>'
     scope_note = ""
     if "scope" in document:
         scope_note = f'''\n  <div class="card note-card">
@@ -488,8 +502,8 @@ def section_page(document: dict[str, Any]) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§{esc(section)} {esc(labels["ko"])}와 해설 | Stewart 미적분학 교재 노트</title>
-<meta name="description" content="Stewart Calculus: Early Transcendentals {esc(source["edition"])} §{esc(section)}의 검증된 {esc(labels["ko"])} 해설입니다.">
+<title>{esc(reference)} {esc(labels["ko"])}와 해설 | Stewart 미적분학 교재 노트</title>
+<meta name="description" content="Stewart Calculus {esc(source["edition"])} {esc(reference)}의 검증된 {esc(labels["ko"])} 해설입니다.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://univmathsurvive.com/stewart/exercises/s{section.replace('.', '-')}.html">
 <script>
@@ -512,7 +526,7 @@ MathJax = {{
     <a class="logo" href="../../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
     <div class="nav-links">
       <a href="../index.html">Stewart</a>
-      <a href="../../calc2/index.html">미적분학 2 (강의)</a>
+      <a href="{course_href}">{course_label}</a>
       <span class="nav-sep">·</span>
 {nav}
     </div>
@@ -520,8 +534,8 @@ MathJax = {{
 </nav>
 
 <header>
-  <p class="subtitle">{esc(title["ko"])} · {esc(title["en"])} · §{esc(section)}</p>
-  <h1>§{esc(section)} {esc(labels["ko"])}와 해설<span>{esc(labels["en"])} and Solutions</span></h1>
+  <p class="subtitle">{esc(title["ko"])} · {esc(title["en"])} · {esc(reference)}</p>
+  <h1>{esc(reference)} {esc(labels["ko"])}와 해설<span>{esc(labels["en"])} and Solutions</span></h1>
   <p class="header-desc">교재 문제를 학습 목적으로 요약하고, 수학 검증을 마친 자체 해설을 한국어와 영어로 제공합니다.</p>
   <div class="lang-badge"><span class="ko">한국어</span><span class="en">English</span></div>
 </header>
@@ -544,8 +558,8 @@ MathJax = {{
 
   <div class="card note-card">
     <div class="card-body">
-      <div class="ko-panel"><span class="panel-label ko-label">연결</span><div class="formal"><p><a href="../s{section.replace('.', '-')}.html">§{esc(section)} 개념 페이지</a>에서 정의와 예제를 확인할 수 있습니다. <a href="index.html">연습문제 목록</a>으로 돌아갑니다.</p></div></div>
-      <div class="en-panel" lang="en"><span class="panel-label en-label">Links</span><div class="en-formal"><p>Review definitions and examples on the <a href="../s{section.replace('.', '-')}.html">§{esc(section)} concept page</a>, or return to the <a href="index.html">exercise index</a>.</p></div></div>
+      <div class="ko-panel"><span class="panel-label ko-label">연결</span><div class="formal"><p><a href="{note_href}">{esc(note_ko)}</a>에서 정의와 예제를 확인할 수 있습니다. <a href="{exercise_index}">연습문제 목록</a>으로 돌아갑니다.</p></div></div>
+      <div class="en-panel" lang="en"><span class="panel-label en-label">Links</span><div class="en-formal"><p>Review definitions and examples on the <a href="{note_href}">{esc(note_en)}</a>, or return to the <a href="{exercise_index}">exercise index</a>.</p></div></div>
     </div>
   </div>
 
@@ -560,11 +574,11 @@ MathJax = {{
   <div>
     <a href="../../index.html">홈</a>
     <a href="../index.html">Stewart 홈</a>
-    <a href="../../calc2/index.html">미적분학 2 (강의)</a>
+    <a href="{course_href}">{course_label}</a>
     <a href="../../about.html">소개</a>
     <a href="../../privacy.html">개인정보처리방침</a>
   </div>
-  <p class="footer-copy">Stewart, <em>Calculus: Early Transcendentals</em>의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다.</p>
+  <p class="footer-copy">Stewart, <em>Calculus</em>의 내용을 학습 목적으로 재서술·해석한 개인 노트입니다. 원문 텍스트·그림은 수록하지 않습니다.</p>
 </footer>
 
 <script src="../common.js"></script>
@@ -583,10 +597,11 @@ def progress_label(entry: dict[str, Any]) -> str:
 
 def index_page(entries: list[dict[str, Any]], documents: list[dict[str, Any]]) -> str:
     published_sections = {document["section"] for document in documents}
+    total_published = sum(len(document["exercises"]) for document in documents)
     rows = "\n".join(
         f'''    <article class="chapter-card" id="exercise-card-s{entry["section"].replace('.', '-')}">
       <div class="card-top">
-        <span class="ch-num">§{esc(entry["section"])}</span>
+        <span class="ch-num">{esc(source_label(entry))}</span>
         <h3>{esc(entry["title"]["ko"])} {esc(KINDS[entry["kind"]]["ko"])}</h3>
         <p class="ch-en-title">{esc(entry["title"]["en"])} · {esc(KINDS[entry["kind"]]["en"])}</p>
         <p class="ch-count">{progress_label(entry)} · Math verified</p>
@@ -601,7 +616,7 @@ def index_page(entries: list[dict[str, Any]], documents: list[dict[str, Any]]) -
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stewart 연습문제와 해설 | 대학수학생존</title>
-<meta name="description" content="Stewart Calculus: Early Transcendentals의 검증된 연습문제 해설 목록입니다.">
+<meta name="description" content="Stewart Calculus의 검증된 연습문제 해설 목록입니다.">
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="exercise.css">
@@ -609,8 +624,8 @@ def index_page(entries: list[dict[str, Any]], documents: list[dict[str, Any]]) -
 <body>
 <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
 <nav class="site-nav" aria-label="사이트 탐색"><div class="nav-inner"><a class="logo" href="../../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a><div class="nav-links"><a href="../index.html">Stewart</a><a href="index.html" class="active">연습문제</a></div></div></nav>
-<header><p class="subtitle">Stewart · Calculus: Early Transcendentals</p><h1>연습문제와 해설<span>Exercises and Solutions</span></h1><p class="header-desc">문제 요약, 힌트, 단계별 해설, 최종 답과 검산을 함께 제공합니다. 전체 문항 수는 인벤토리가 확정된 절에만 표시합니다.</p></header>
-<main id="main-content"><div class="section-title"><h2>절별 진행 · Section progress</h2></div><div class="chapter-grid">
+<header><p class="subtitle">Stewart · Calculus</p><h1>연습문제와 해설<span>Exercises and Solutions</span></h1><p class="header-desc">문제 요약, 힌트, 단계별 해설, 최종 답과 검산을 함께 제공합니다.</p><p class="header-desc">{len(documents)}개 문제 모음 · {total_published:,}문항 · 한국어·English</p></header>
+<main id="main-content"><div class="section-title"><h2>절별 문제 · Browse exercises</h2></div><div class="chapter-grid">
 {rows}
 </div></main>
 <footer class="site-footer"><div><a href="../../index.html">홈</a><a href="../index.html">Stewart 홈</a><a href="../../about.html">소개</a></div><p class="footer-copy">학습 목적으로 재서술·해석한 개인 노트입니다.</p></footer>
@@ -641,10 +656,14 @@ def validate_output(page: str, expected_ids: list[str], name: str) -> None:
 def read_documents(section: str | None) -> list[dict[str, Any]]:
     if not CONTENT_DIR.exists():
         raise ContentError(f"{CONTENT_DIR.relative_to(HERE)} does not exist")
-    paths = sorted(CONTENT_DIR.glob("s*.json"))
+    manifest = read_manifest()
+    if manifest is None:
+        raise ContentError("an approved exercise manifest is required before publishing content")
+    approved_names = {f"s{entry['section'].replace('.', '-')}.json" for entry in manifest}
+    paths = sorted(path for path in CONTENT_DIR.glob("s*.json") if path.name in approved_names)
     if section:
         requested = CONTENT_DIR / f"s{section.replace('.', '-')}.json"
-        paths = [requested] if requested.exists() else []
+        paths = [requested] if requested.exists() and requested.name in approved_names else []
     if not paths:
         raise ContentError("no verified exercise content files were found")
     documents = []
@@ -653,11 +672,17 @@ def read_documents(section: str | None) -> list[dict[str, Any]]:
             raw = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError as error:
             raise ContentError(f"{path.relative_to(HERE)}: invalid JSON: {error}") from error
+        # Review and Problems Plus may remain as archived source material.
+        # They must never re-enter the published exercise catalog.
+        if isinstance(raw, dict) and raw.get("kind", raw.get("scope", {}).get("kind", "exercise")) != "exercise":
+            continue
         document = validate_document(raw, path)
         expected_name = f"s{document['section'].replace('.', '-')}.json"
         if path.name != expected_name:
             fail(str(path.relative_to(HERE)), f"filename must be {expected_name}")
         documents.append(document)
+    if not documents:
+        raise ContentError("no verified ordinary exercise content was found")
     return documents
 
 
@@ -667,8 +692,11 @@ def main() -> int:
     parser.add_argument("--section", help="build or check one section, for example 14.3")
     args = parser.parse_args()
     try:
-        all_documents = read_documents(None)
-        entries = apply_manifest(all_documents, read_manifest())
+        all_documents = read_documents(args.section)
+        manifest = read_manifest()
+        if args.section and manifest is not None:
+            manifest = [entry for entry in manifest if entry["section"] == args.section]
+        entries = apply_manifest(all_documents, manifest)
         documents = all_documents
         if args.section:
             documents = [document for document in all_documents if document["section"] == args.section]
@@ -682,6 +710,7 @@ def main() -> int:
             rendered[output] = page
         if not args.section:
             rendered[OUTPUT_DIR / "index.html"] = index_page(entries, all_documents)
+        rendered = {path: "\n".join(line.rstrip() for line in page.splitlines()) + "\n" for path, page in rendered.items()}
         if args.check:
             stale = [str(path.relative_to(HERE)) for path, page in rendered.items() if not path.exists() or path.read_text(encoding="utf-8") != page]
             if stale:

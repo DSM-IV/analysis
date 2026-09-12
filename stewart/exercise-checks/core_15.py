@@ -38,7 +38,7 @@ class Doc:
                     assert len(re.findall(r'(?<!\\)\\\(',txt))==len(re.findall(r'(?<!\\)\\\)',txt)),(e['number'],'inline')
                     assert len(re.findall(r'(?<!\\)\\\[',txt))==len(re.findall(r'(?<!\\)\\\]',txt)),(e['number'],'display')
         name='s'+self.section.replace('.','-')
-        payload={'section':self.section,'source':{'title':'Calculus: Early Transcendentals','edition':9,'language':'en','printedPages':self.pages,'pdfPages':[p+37 for p in self.pages]},'scope':{'kind':'exercise','numbers':list(range(1,total+1)),'total':total,'note':pair('이 절의 모든 일반 연습문제.','All general exercises in this section.')},'exercises':self.items}
+        payload={'section':self.section,'source':{'title':'Calculus','edition':9,'language':'en','printedPages':self.pages,'pdfPages':[p+37 for p in self.pages]},'scope':{'kind':'exercise','numbers':list(range(1,total+1)),'total':total,'note':pair('이 절의 모든 일반 연습문제.','All general exercises in this section.')},'exercises':self.items}
         (ROOT/f'exercise-content/{name}.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n')
         (ROOT/f'exercise-checks/{name}-report.json').write_text(json.dumps({'section':self.section,'sourceVisualPages':[p+37 for p in self.pages],'uncertainties':[],'checks':self.checks},ensure_ascii=False,indent=2)+'\n')
         print('Saved',self.section,total,'exercises')

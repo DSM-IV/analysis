@@ -270,7 +270,7 @@ def save():
                 assert not any(ord(c)<32 and c!='\n' for c in text),(e['number'],'control character')
                 assert text.count(r'\(')==text.count(r'\)'),(e['number'],'inline delimiters')
                 assert text.count(r'\[')==text.count(r'\]'),(e['number'],'display delimiters')
-    payload={'section':'15.6','source':{'title':'Calculus: Early Transcendentals','edition':9,'language':'en','printedPages':[1130,1131,1132],'pdfPages':[1167,1168,1169]},'scope':{'kind':'exercise','numbers':[e['number'] for e in items],'total':len(items),'note':pair('§15.6 일반 연습문제.','General exercises for §15.6.')},'exercises':items}
+    payload={'section':'15.6','source':{'title':'Calculus','edition':9,'language':'en','printedPages':[1130,1131,1132],'pdfPages':[1167,1168,1169]},'scope':{'kind':'exercise','numbers':[e['number'] for e in items],'total':len(items),'note':pair('§15.6 일반 연습문제.','General exercises for §15.6.')},'exercises':items}
     (ROOT/'exercise-content/s15-6.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n')
     (ROOT/'exercise-checks/s15-6-report.json').write_text(json.dumps({'sourceVisualCheck':[1167,1168,1169],'checks':checks},ensure_ascii=False,indent=2)+'\n')
     print('Saved',len(items),'exercises')

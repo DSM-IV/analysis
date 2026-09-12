@@ -135,7 +135,7 @@ add(16, '합성 다항식의 연쇄법칙', 'Chain rule for a composite polynomi
 
 payload = {
     'section': '14.3',
-    'source': {'title': 'Calculus: Early Transcendentals', 'author': 'James Stewart et al.',
+    'source': {'title': 'Calculus', 'author': 'James Stewart et al.',
                'edition': 9, 'language': 'en', 'printedPages': [1008], 'pdfPages': [1045]},
     'scope': {'kind': 'exercise', 'numbers': list(range(9, 17)), 'total': 8,
               'note': {'ko': '기본 계산 시범 8문항. §14.3 전체 연습문제의 완료를 뜻하지 않습니다.',

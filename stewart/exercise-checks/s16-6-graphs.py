@@ -23,7 +23,7 @@ def svgplot(items,n):
   for fam,pts in lines:
    ps=' '.join(f'{xy(p)[0]:.2f},{xy(p)[1]:.2f}'for p in pts);out.append(f'<polyline points="{ps}" fill="none" stroke="{["#0284c7","#9333ea"][fam]}" stroke-width="1" opacity=".75"/>')
   out.append(f'<text x="{idx*w+22}" y="357" font-family="sans-serif" font-size="13" fill="#0284c7">First parameter constant</text><text x="{idx*w+22}" y="377" font-family="sans-serif" font-size="13" fill="#9333ea">Second parameter constant</text>')
- 
+
  for idx in range(len(items)):
   ang=.75 if not(n==32 and idx==1) else 2.3
   ox=idx*440+380;oy=355

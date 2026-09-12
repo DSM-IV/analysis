@@ -1,6 +1,6 @@
 # Stewart 교재 섹션(`stewart/`) 구축 계획 — 본문 해석 + 예제 답안 (2026-09-08 수립)
 
-강의(calc2/, Thomas 교안)와 **분리된** 교재 전용 섹션. 대상: Stewart, *Calculus: Early Transcendentals* 9판, MATH162 2026-2 강의 범위 절.
+강의(calc2/, Thomas 교안)와 **분리된** 교재 전용 섹션. 대상: Stewart, *Calculus* 9판, MATH162 2026-2 강의 범위 절.
 
 ## 1. 목표와 원칙
 

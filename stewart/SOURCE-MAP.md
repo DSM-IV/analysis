@@ -1,4 +1,4 @@
-# stewart/ 소스 맵 (Stewart, Calculus: Early Transcendentals 9e)
+# stewart/ 소스 맵 (Stewart, Calculus 9e)
 
 원본: `~/Desktop/26-2/미적분학2/스튜어트 9판.pdf` (1429쪽, 리포에 커밋하지 않음). **PDF 쪽 = 인쇄 쪽 + 37.**
 절별 상세 인벤토리(카드 목록 A·예제 기준값 B·그림 C·ERRATA D·요약 E·과제 번호 F)는 `inventory/inv-<절>.md`, 기준값 재계산 스크립트는 `inventory/anchor-<절>.py`.
