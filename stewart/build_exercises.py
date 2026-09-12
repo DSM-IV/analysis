@@ -154,7 +154,7 @@ def validate_document(raw: Any, path: Path) -> dict[str, Any]:
         if key not in raw:
             fail(where, f"is missing {key}")
     section = require_string(raw["section"], f"{where}.section")
-    if not re.fullmatch(r"\d+\.\d+", section):
+    if not re.fullmatch(r"\d+\.\d+\*?", section):
         fail(f"{where}.section", "must look like 14.3")
     if not isinstance(raw["exercises"], list) or not raw["exercises"]:
         fail(f"{where}.exercises", "must be a non-empty list")
@@ -282,7 +282,7 @@ def validate_manifest(raw: Any, path: Path) -> list[dict[str, Any]]:
         if extra:
             fail(item_where, "has unsupported fields: " + ", ".join(sorted(extra)))
         section = require_string(item["section"], f"{item_where}.section")
-        if not re.fullmatch(r"\d+\.\d+", section):
+        if not re.fullmatch(r"\d+\.\d+\*?", section):
             fail(f"{item_where}.section", "must look like 15.6")
         if section in seen_sections:
             fail(f"{item_where}.section", "duplicates another section")
@@ -484,7 +484,7 @@ def section_page(document: dict[str, Any]) -> str:
     course_href = f"../../calc{course}/index.html"
     course_label = f"미적분학 {course}"
     exercise_index = "../../calc1/stewart.html" if course == 1 else "index.html"
-    note_name = f's{section.replace(".", "-")}.html'
+    note_name = f's{section.replace(".", "-").replace("*", "-alt")}.html'
     note_href = "../" + note_name if (HERE / note_name).exists() else course_href
     note_ko = f"§{section} 개념 페이지" if (HERE / note_name).exists() else "관련 개념 목록"
     note_en = f"§{section} concept page" if (HERE / note_name).exists() else "concept index"
@@ -505,7 +505,7 @@ def section_page(document: dict[str, Any]) -> str:
 <title>{esc(reference)} {esc(labels["ko"])}와 해설 | Stewart 미적분학 교재 노트</title>
 <meta name="description" content="Stewart Calculus {esc(source["edition"])} {esc(reference)}의 검증된 {esc(labels["ko"])} 해설입니다.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://univmathsurvive.com/stewart/exercises/s{section.replace('.', '-')}.html">
+<link rel="canonical" href="https://univmathsurvive.com/stewart/exercises/s{section.replace('.', '-').replace("*", "-alt")}.html">
 <script>
 MathJax = {{
   tex: {{inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']], packages: {{'[+]': ['ams']}}}},
@@ -599,14 +599,14 @@ def index_page(entries: list[dict[str, Any]], documents: list[dict[str, Any]]) -
     published_sections = {document["section"] for document in documents}
     total_published = sum(len(document["exercises"]) for document in documents)
     rows = "\n".join(
-        f'''    <article class="chapter-card" id="exercise-card-s{entry["section"].replace('.', '-')}">
+        f'''    <article class="chapter-card" id="exercise-card-s{entry["section"].replace('.', '-').replace("*", "-alt")}">
       <div class="card-top">
         <span class="ch-num">{esc(source_label(entry))}</span>
         <h3>{esc(entry["title"]["ko"])} {esc(KINDS[entry["kind"]]["ko"])}</h3>
         <p class="ch-en-title">{esc(entry["title"]["en"])} · {esc(KINDS[entry["kind"]]["en"])}</p>
         <p class="ch-count">{progress_label(entry)} · Math verified</p>
       </div>
-      <div class="card-actions">{f'<a href="s{entry["section"].replace(".", "-")}.html">문제와 해설 보기</a>' if entry["section"] in published_sections else '<span style="color:var(--ink-faint);text-align:center;padding:10px;font-size:14px;font-weight:700">검증된 문항 준비 중</span>'}</div>
+      <div class="card-actions">{f'<a href="s{entry["section"].replace(".", "-").replace("*", "-alt")}.html">문제와 해설 보기</a>' if entry["section"] in published_sections else '<span style="color:var(--ink-faint);text-align:center;padding:10px;font-size:14px;font-weight:700">검증된 문항 준비 중</span>'}</div>
     </article>'''
         for entry in entries
     )
@@ -659,10 +659,10 @@ def read_documents(section: str | None) -> list[dict[str, Any]]:
     manifest = read_manifest()
     if manifest is None:
         raise ContentError("an approved exercise manifest is required before publishing content")
-    approved_names = {f"s{entry['section'].replace('.', '-')}.json" for entry in manifest}
+    approved_names = {f"s{entry['section'].replace('.', '-').replace("*", "-alt")}.json" for entry in manifest}
     paths = sorted(path for path in CONTENT_DIR.glob("s*.json") if path.name in approved_names)
     if section:
-        requested = CONTENT_DIR / f"s{section.replace('.', '-')}.json"
+        requested = CONTENT_DIR / f"s{section.replace('.', '-').replace("*", "-alt")}.json"
         paths = [requested] if requested.exists() and requested.name in approved_names else []
     if not paths:
         raise ContentError("no verified exercise content files were found")
@@ -677,7 +677,7 @@ def read_documents(section: str | None) -> list[dict[str, Any]]:
         if isinstance(raw, dict) and raw.get("kind", raw.get("scope", {}).get("kind", "exercise")) != "exercise":
             continue
         document = validate_document(raw, path)
-        expected_name = f"s{document['section'].replace('.', '-')}.json"
+        expected_name = f"s{document['section'].replace('.', '-').replace("*", "-alt")}.json"
         if path.name != expected_name:
             fail(str(path.relative_to(HERE)), f"filename must be {expected_name}")
         documents.append(document)
@@ -704,7 +704,7 @@ def main() -> int:
                 raise ContentError(f"no verified content was found for section {args.section}")
         rendered: dict[Path, str] = {}
         for document in documents:
-            output = OUTPUT_DIR / f"s{document['section'].replace('.', '-')}.html"
+            output = OUTPUT_DIR / f"s{document['section'].replace('.', '-').replace("*", "-alt")}.html"
             page = section_page(document)
             validate_output(page, [exercise["id"] for exercise in document["exercises"]], str(output.relative_to(HERE)))
             rendered[output] = page

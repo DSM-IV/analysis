@@ -9,7 +9,7 @@ cards=[]
 for r in rows:
  if not r['completedNumbers']:continue
  s=r['section']; title=r.get('title',{'ko':'연습문제','en':'Exercises'})
- cards.append(f'''<article class="chapter-card"><div class="card-top"><span class="ch-num">§{html.escape(s)}</span><h3>{html.escape(title['ko'])}</h3><p class="ch-en-title">{html.escape(title['en'])}</p><p class="ch-count">{len(r['completedNumbers'])}문항 · 한국어·English</p></div><div class="card-actions"><a href="../stewart/exercises/s{s.replace('.','-')}.html">문제와 해설</a></div></article>''')
+ cards.append(f'''<article class="chapter-card"><div class="card-top"><span class="ch-num">§{html.escape(s)}</span><h3>{html.escape(title['ko'])}</h3><p class="ch-en-title">{html.escape(title['en'])}</p><p class="ch-count">{len(r['completedNumbers'])}문항 · 한국어·English</p></div><div class="card-actions"><a href="../stewart/exercises/s{s.replace('.','-').replace("*", "-alt")}.html">문제와 해설</a></div></article>''')
 page='''<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>미적분학 1 · Stewart Exercises와 해설</title><link rel="stylesheet" href="style.css"><link rel="canonical" href="https://univmathsurvive.com/calc1/stewart.html"></head><body>
 <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>

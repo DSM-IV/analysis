@@ -33,7 +33,7 @@ def check_text(value):
             assert all(not re.search("[가-힣]", text) for text in english), english
         for item in value.values(): check_text(item)
 for row in manifest:
-    path=ROOT/'exercise-content'/('s'+row['section'].replace('.','-')+'.json')
+    path=ROOT/'exercise-content'/('s'+row['section'].replace('.','-').replace("*", "-alt")+'.json')
     if not path.exists() and args.allow_partial: continue
     document=json.loads(path.read_text())
     assert document.get('kind',document.get('scope',{}).get('kind','exercise'))=='exercise',path
@@ -57,7 +57,8 @@ class Page(HTMLParser):
         for key in ('href','src'):
             if key in a:self.links.append(a[key])
 parsers={}
-pages=[ROOT/'exercises/index.html']+[ROOT/'exercises'/('s'+row['section'].replace('.','-')+'.html') for row in manifest if row['completedNumbers']]
+pages=[ROOT/'exercises/index.html']+[ROOT/'exercises'/('s'+row['section'].replace('.','-').replace("*", "-alt")+'.html') for row in manifest if row['completedNumbers']]
+pages += [ROOT.parent/"calc1/index.html", ROOT.parent/"calc1/stewart.html"]
 for p in pages:
     parser=Page();parser.feed(p.read_text());parsers[p.resolve()]=parser
     assert len(parser.ids)==len(set(parser.ids)),f'duplicate IDs: {p}'
@@ -72,9 +73,9 @@ for p,parser in parsers.items():
 for p in assets:
     if p.suffix.lower()=='.svg': ET.parse(p)
 for row in manifest:
-    s=row['section'].replace('.','-')
+    s=row['section'].replace('.','-').replace("*", "-alt")
     if (ROOT/f's{s}.html').exists():
         assert f'exercises/s{s}.html' in (ROOT/f's{s}.html').read_text(),s
     elif row['completedNumbers']:
         assert f's{s}.html' in (ROOT/'exercises/index.html').read_text(),s
-print(f'PASS: {count} requested exercises, {len(parsers)} generated pages, local links, anchors, SVG XML and entry links')
+print(f'PASS: {count} requested exercises, {len(parsers)} site pages, local links, anchors, SVG XML and entry links')

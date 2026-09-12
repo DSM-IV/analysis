@@ -12,13 +12,13 @@ if manifest_path.exists():
   if row.get('kind','exercise')=='exercise' and row['section'] not in counts:
    assert isinstance(row.get('total'),int) and row['total']>0,row
    counts[row['section']]=row['total']
-titles={}
+titles={row["section"]:row["title"] for row in json.loads(manifest_path.read_text())["sections"] if "title" in row} if manifest_path.exists() else {}
 for node in ast.parse((R/'build_index.py').read_text()).body:
  if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SECTIONS'for t in node.targets):
   for row in ast.literal_eval(node.value):titles[row[1]]={'ko':row[2],'en':row[3]}
 rows=[]
-for sec,total in sorted(counts.items(),key=lambda v:tuple(map(int,v[0].split('.')))):
- p=C/f's{sec.replace(".","-")}.json';doc=json.loads(p.read_text())if p.exists()else{};nums=[e['number']for e in doc.get('exercises',[])]
+for sec,total in sorted(counts.items(),key=lambda v:tuple(int(x.rstrip('*')) for x in v[0].split('.'))+('*' in v[0],)):
+ p=C/f's{sec.replace(".","-").replace("*", "-alt")}.json';doc=json.loads(p.read_text())if p.exists()else{};nums=[e['number']for e in doc.get('exercises',[])]
  kind='exercise'
  if doc and doc.get('kind',doc.get('scope',{}).get('kind','exercise'))!='exercise':
   raise ValueError(f'{sec}: expected ordinary exercise content')
