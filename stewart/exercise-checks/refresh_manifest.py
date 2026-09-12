@@ -2,8 +2,8 @@
 from pathlib import Path
 import ast,json
 R=Path(__file__).resolve().parents[1];C=R/'exercise-content'
-counts={'12.6':55,'14.1':81,'14.2':59,'14.3':101,'14.4':54,'14.5':60,'14.6':77,'14.7':62,'14.8':63,'15.1':58,'15.2':82,'15.3':51,'15.4':35,'15.5':26,'15.6':55,'15.7':33,'15.8':51,'15.9':31,'16.1':40,'16.2':54,'16.3':42,'16.4':35,'16.5':38,'16.6':64,'16.7':49,'16.8':24,'16.9':34}
-assert len(counts)==27 and sum(counts.values())==1414
+counts={'12.6':55,'14.1':81,'14.2':59,'14.3':101,'14.4':54,'14.5':60,'14.6':77,'14.7':62,'14.8':63,'15.1':58,'15.2':82,'15.3':51,'15.4':35,'15.5':26,'15.6':59,'15.7':33,'15.8':51,'15.9':31,'16.1':40,'16.2':54,'16.3':42,'16.4':35,'16.5':41,'16.6':64,'16.7':49,'16.8':24,'16.9':34}
+assert len(counts)==27 and sum(counts.values())==1421
 # Newly authored raw files are not approval. Preserve only additional ordinary
 # sections explicitly approved in the existing manifest by the coordinator.
 manifest_path=C/'manifest.json'

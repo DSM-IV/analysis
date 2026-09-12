@@ -9,7 +9,7 @@ args.add_argument('--allow-partial',action='store_true')
 args=args.parse_args()
 ROOT=Path(__file__).resolve().parents[1]
 manifest=json.loads((ROOT/'exercise-content/manifest.json').read_text())['sections']
-BASELINE_COUNTS={'12.6': 55, '14.1': 81, '14.2': 59, '14.3': 101, '14.4': 54, '14.5': 60, '14.6': 77, '14.7': 62, '14.8': 63, '15.1': 58, '15.2': 82, '15.3': 51, '15.4': 35, '15.5': 26, '15.6': 55, '15.7': 33, '15.8': 51, '15.9': 31, '16.1': 40, '16.2': 54, '16.3': 42, '16.4': 35, '16.5': 38, '16.6': 64, '16.7': 49, '16.8': 24, '16.9': 34}
+BASELINE_COUNTS={'12.6': 55, '14.1': 81, '14.2': 59, '14.3': 101, '14.4': 54, '14.5': 60, '14.6': 77, '14.7': 62, '14.8': 63, '15.1': 58, '15.2': 82, '15.3': 51, '15.4': 35, '15.5': 26, '15.6': 59, '15.7': 33, '15.8': 51, '15.9': 31, '16.1': 40, '16.2': 54, '16.3': 42, '16.4': 35, '16.5': 41, '16.6': 64, '16.7': 49, '16.8': 24, '16.9': 34}
 by_section={row['section']:row for row in manifest}
 assert len(by_section)==len(manifest), 'duplicate manifest sections'
 for section,total in BASELINE_COUNTS.items():

@@ -14,7 +14,7 @@ for row in ledger:
 for row in rows.values():row.setdefault('approved',0)
 sort=lambda r:tuple(int(x.rstrip('*'))for x in r['section'].split('.'))+('*'in r['section'],)
 rows=sorted(rows.values(),key=sort);total=sum(r['total']for r in rows);published=sum(r['approved']for r in rows)
-assert len(rows)==119 and total==7134,(len(rows),total)
+assert len(rows)==119 and total==7170,(len(rows),total)
 report={'targetSections':len(rows),'targetExercises':total,'approvedExercises':published,'remainingExercises':total-published,'scope':'General Exercises1–16, including6.2*–6.4* alternative sections; excludes Review,Problems Plus,projects.','sections':rows}
 (R/'exercise-checks/full-exercise-coverage.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(f'Full source scope: {published}/{total} approved for publication; {total-published} remain in {len(rows)} total sections')
