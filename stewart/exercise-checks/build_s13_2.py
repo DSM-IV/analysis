@@ -4,7 +4,7 @@ from pathlib import Path
 import sympy as s,json,math
 b=Book('13.2',[940,941,942]);t=s.symbols('t',real=True);M=s.Matrix;R=s.Rational;checks=[]
 def tex(x):return s.latex(s.simplify(x))
-def v(a):return r'\langle'+','.join(tex(x)for x in a)+r'\rangle'
+def v(a):return r'\langle '+','.join(tex(x)for x in a)+r'\rangle'
 def m(x):return r'\('+x+r'\)'
 def eq(label,a,c=0):
  q=a-c;assert all(s.simplify(x)==0 for x in q)if isinstance(q,s.MatrixBase)else s.simplify(q)==0,(label,a,c)
@@ -60,11 +60,11 @@ proofrows=[(45,r'(u+v)^{\prime}=u^{\prime}+v^{\prime}',['각 좌표 i에 실수�
 for n,formula,ks,es in proofrows:add(n,'미분 공식을 증명하라: '+m(formula),'Prove the differentiation rule '+m(formula)+'.',ks,es,m(formula))
 u=M([s.sin(t),s.cos(t),t]);vv=M([t,s.cos(t),s.sin(t)])
 for n in[49,50]:
- result=s.simplify(u.diff(t).dot(vv)+u.dot(vv.diff(t)))if n==49 else s.simplify(u.diff(t).cross(vv)+u.cross(vv.diff(t)));direct=s.diff(u.dot(vv),t)if n==49 else u.cross(vv).diff(t);eq(f'{n} direct versus product rule',result,direct);op=r'\cdot'if n==49 else r'\times';answer=tex(result)if n==49 else v(result)
+ result=s.simplify(u.diff(t).dot(vv)+u.dot(vv.diff(t)))if n==49 else s.simplify(u.diff(t).cross(vv)+u.cross(vv.diff(t)));direct=s.diff(u.dot(vv),t)if n==49 else u.cross(vv).diff(t);eq(f'{n} direct versus product rule',result,direct);op=r'\cdot 'if n==49 else r'\times ';answer=tex(result)if n==49 else v(result)
  add(n,m('u(t)='+v(u)+r',\quad v(t)='+v(vv))+'에서 '+m(r'\frac d{dt}(u'+op+'v)')+'를 곱 미분법으로 구하라.','Use the product rule to find '+m(r'\frac d{dt}(u'+op+'v)')+' for '+m('u(t)='+v(u)+r',\quad v(t)='+v(vv))+'.',[m(r'u^{\prime}='+v(u.diff(t))+r',\quad v^{\prime}='+v(vv.diff(t))),m(r'\frac d{dt}(u'+op+r'v)=u^{\prime}'+op+'v+u'+op+r'v^{\prime}')],[m(r'u^{\prime}='+v(u.diff(t))+r',\quad v^{\prime}='+v(vv.diff(t))),m(r'\frac d{dt}(u'+op+r'v)=u^{\prime}'+op+'v+u'+op+r'v^{\prime}')],m(answer))
 u2=M([1,2,-1]);du2=M([3,0,4]);v2=M([2,4,8]);dv2=M([1,4,12])
 for n in[51,52]:
- result=du2.dot(v2)+u2.dot(dv2)if n==51 else du2.cross(v2)+u2.cross(dv2);op=r'\cdot'if n==51 else r'\times'
+ result=du2.dot(v2)+u2.dot(dv2)if n==51 else du2.cross(v2)+u2.cross(dv2);op=r'\cdot 'if n==51 else r'\times '
  add(n,'u(2)=(1,2,−1),u′(2)=(3,0,4),v(t)=(t,t²,t³)일 때 '+m(r'\frac d{dt}(u'+op+r'v)\big|_{t=2}')+'를 구하라.','Given u(2)=(1,2,−1),u′(2)=(3,0,4),v(t)=(t,t²,t³), find '+m(r'\frac d{dt}(u'+op+r'v)\big|_{t=2}')+'.',[m('v(2)='+v(v2)+r',\quad v^{\prime}(2)='+v(dv2)),m(r'u^{\prime}(2)'+op+'v(2)+u(2)'+op+r'v^{\prime}(2)')],[m('v(2)='+v(v2)+r',\quad v^{\prime}(2)='+v(dv2)),m(r'u^{\prime}(2)'+op+'v(2)+u(2)'+op+r'v^{\prime}(2)')],m(tex(result)if n==51 else v(result)))
 add(53,'상수벡터a,b와 상수ω에 대해 r(t)=a cosωt+b sinωt이면 r×r′=ωa×b임을 보여라.','For constant vectors a,b and scalar ω, let r(t)=a cosωt+b sinωt. Prove r×r′=ωa×b.',[m(r'r^{\prime}=-\omega a\sin\omega t+\omega b\cos\omega t'),m(r'r\times r^{\prime}=\omega\cos^2\omega t(a\times b)-\omega\sin^2\omega t(b\times a)'),m(r'b\times a=-a\times b')],[m(r'r^{\prime}=-\omega a\sin\omega t+\omega b\cos\omega t'),m(r'r\times r^{\prime}=\omega\cos^2\omega t(a\times b)-\omega\sin^2\omega t(b\times a)'),m(r'b\times a=-a\times b')],m(r'r\times r^{\prime}=\omega(a\times b)'))
 add(54,'r(t)=a cosωt+b sinωt가 r″+ω²r=0을 만족함을 보여라.','Show that r(t)=a cosωt+b sinωt satisfies r″+ω²r=0.',[m(r'r^{\prime\prime}=-\omega^2a\cos\omega t-\omega^2b\sin\omega t=-\omega^2r')],[m(r'r^{\prime\prime}=-\omega^2a\cos\omega t-\omega^2b\sin\omega t=-\omega^2r')],m(r'r^{\prime\prime}+\omega^2r=0'))

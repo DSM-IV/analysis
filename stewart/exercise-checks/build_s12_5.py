@@ -6,7 +6,7 @@ b=Book('12.5',[910,911,912]);checks=[]
 x,y,z,t,u=S.symbols('x y z t u',real=True);X=S.Matrix([x,y,z]);M=S.Matrix
 R=S.Rational
 def tex(q):return S.latex(S.simplify(q))
-def v(q):return r'\langle'+','.join(tex(a) for a in q)+r'\rangle'
+def v(q):return r'\langle '+','.join(tex(a) for a in q)+r'\rangle'
 def m(q):return r'\('+q+r'\)'
 def line(p,d):return 'r='+v(p)+'+t'+v(d)
 def par(p,d):return r',\quad '.join(a+'='+tex(q)for a,q in zip(['x','y','z'],p+t*d))

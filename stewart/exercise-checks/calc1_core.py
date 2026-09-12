@@ -36,3 +36,14 @@ def plot(name,panels):
    x,y,*other=dot;opened=other and other[0]=='open';out.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="4" fill="{"white" if opened else "#1d4ed8"}" stroke="#1d4ed8" stroke-width="1.7"/>')
   out.append('</g>')
  out.append('</g></svg>');(ROOT/'exercise-content/assets'/name).write_text('\n'.join(out))
+
+def normalize_prose_inequalities(doc):
+    """Keep literal comparison signs from being mistaken for HTML tags."""
+    def rec(value):
+        if isinstance(value,str):
+            chunks=re.split(r'(\\\(.*?\\\)|\\\[.*?\\\])',value,flags=re.S)
+            return ''.join(z if i%2 else z.replace('<',r'\(\lt\)') for i,z in enumerate(chunks))
+        if isinstance(value,list):return [rec(z)for z in value]
+        if isinstance(value,dict):return {k:rec(v)for k,v in value.items()}
+        return value
+    doc.items=rec(doc.items)

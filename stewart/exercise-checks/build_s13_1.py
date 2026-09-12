@@ -5,7 +5,7 @@ import sympy as s,json,math
 b=Book('13.1',[933,934,935,936]);t=s.symbols('t',real=True);checks=[]
 def m(x):return r'\('+x+r'\)'
 def tex(x):return s.latex(s.simplify(x))
-def v(a):return r'\langle'+','.join(tex(x)for x in a)+r'\rangle'
+def v(a):return r'\langle '+','.join(tex(x)for x in a)+r'\rangle'
 def add(n,k,e,ks,es,ans,ae=None,parts=[]):
  b.add(n,933 if n<=4 else 934 if n<=40 else 935 if n<=60 else 936,('벡터함수와 공간곡선','Vector functions and space curves'),(k,e),list(zip(ks,es)),(ans,ans if ae is None else ae),parts,check=('각 성분의 조건·극한 또는 소거한 관계식에 대입하여 확인했다.','Checked the coordinate conditions, limits, or substitutions in the eliminated relations.'));b.E[n]['conceptHref']='../../calc1/index.html'
 def eq(label,a,c=0):assert s.simplify(a-c)==0,(label,a,c);checks.append(label)

@@ -4,7 +4,7 @@ import sympy as s,math,json
 from pathlib import Path
 b=Book('12.4',[899,900,901]);checks=[]
 def m(x):return r'\('+x+r'\)'
-def v(a):return r'\langle'+','.join(s.latex(s.simplify(x))for x in a)+r'\rangle'
+def v(a):return r'\langle '+','.join(s.latex(s.simplify(x))for x in a)+r'\rangle'
 def add(n,k,e,ks,es,a,ae=None,parts=[],ck='원래 조건에 대입하여 확인했다.',ce='The result was checked against the original conditions.'):
  b.add(n,899 if n<=10 else 900 if n<=39 else 901,('외적과 공간기하','Cross products and spatial geometry'),(k,e),list(zip(ks,es)),(a,a if ae is None else ae),parts,check=(ck,ce));b.E[n]['conceptHref']='../../calc1/index.html'
 def eq(label,a,c):

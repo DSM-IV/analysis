@@ -3,7 +3,7 @@ from early_helpers import Book
 import sympy as S,math
 b=Book('12.3',[890,891,892]);proofs=[]
 def m(x):return r'\('+x+r'\)'
-def v(a):return r'\langle'+','.join(S.latex(S.sympify(x))for x in a)+r'\rangle'
+def v(a):return r'\langle '+','.join(S.latex(S.sympify(x))for x in a)+r'\rangle'
 def add(n,st,se,ks,es,an,ae=None,parts=[],ck='원래 조건과 계산 결과를 대조했다.',ce='The result was checked against the original conditions.'):
  b.add(n,890 if n<=7 else 891 if n<=44 else 892,('내적·각도·정사영','Dot products, angles and projections'),(st,se),list(zip(ks,es)),(an,an if ae is None else ae),parts,check=(ck,ce));b.E[n]['conceptHref']='../../calc1/index.html'
 def exact(n,a,c,task='dot'):

@@ -20,7 +20,7 @@ assert all(row.get('kind','exercise')=='exercise' for row in manifest), 'non-Exe
 assets=set()
 def check_text(value):
     if isinstance(value, str):
-        assert not re.search(r"(?<!\\)\\(?:theta|phi|rho|alpha|beta|gamma)[a-z]+",value),value
+        assert not re.search(r"(?<!\\)\\(?:theta|phi|rho|alpha|beta|gamma|langle|rangle|quad|qquad|cdot(?![sp]\b)|times)[a-z]+",value),value
         assert not re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f]",value), value
         for opening,closing in [("(",")"),("[","]")]:
             pattern=r"(?<!\\)\\"
