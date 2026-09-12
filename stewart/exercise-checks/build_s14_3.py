@@ -1,0 +1,146 @@
+"""Author the original bilingual explanations for the source-checked pilot."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+items = []
+
+def add(n, topic_ko, topic_en, formula, variables, hint_ko, hint_en, ko, en, answer, check_ko, check_en):
+    items.append({
+        'id': f'stewart9-exercise-14.3-{n}', 'number': n, 'subparts': [],
+        'source': {'printedPage': 1008, 'pdfPage': 1045},
+        'topic': {'ko': topic_ko, 'en': topic_en},
+        'statement': {
+            'ko': rf'함수 \({formula}\)의 \({variables}\) 각각에 대한 1계 편도함수를 계산하라.',
+            'en': rf'For \({formula}\), compute the first partial derivative with respect to each of \({variables}\).'},
+        'hint': {'ko': hint_ko, 'en': hint_en},
+        'steps': {'ko': ko, 'en': en},
+        'answer': {'ko': answer, 'en': answer},
+        'check': {'ko': check_ko, 'en': check_en},
+        'conceptHref': '../s14-3.html#c14-3-5',
+        'status': 'math-verified',
+    })
+
+add(9, '다항식: 고정한 변수는 계수', 'Polynomial: the fixed variable is a coefficient',
+    r'f(x,y)=x^4+5xy^3', 'x,y',
+    '미분하지 않는 변수는 상수로 둔다. 두 항 모두 선택한 변수를 포함하는지 확인한다.',
+    'Hold the other variable constant and check which terms contain the differentiation variable.',
+    [r'\(x\)에 대해 미분할 때 \(y\)는 고정된다. 따라서 \(x^4\)의 미분은 \(4x^3\), \(5xy^3\)의 미분은 \(5y^3\)이다.',
+     r'그러므로 \(f_x=4x^3+5y^3\)이다.',
+     r'\(y\)에 대해 미분하면 \(x^4\)는 상수이고 \(5x\)는 계수이다. 따라서 \(f_y=0+5x\cdot3y^2=15xy^2\).'],
+    [r'For the \(x\)-derivative, fix \(y\). The two terms differentiate to \(4x^3\) and \(5y^3\).',
+     r'Thus \(f_x=4x^3+5y^3\).',
+     r'For the \(y\)-derivative, \(x^4\) is constant and \(5x\) is a coefficient. Hence \(f_y=0+5x\cdot3y^2=15xy^2\).'],
+    r'\[f_x=4x^3+5y^3,\qquad f_y=15xy^2.\]',
+    r'차분몫을 전개하면 \(x\) 방향은 \(4x^3+6x^2h+4xh^2+h^3+5y^3\), \(y\) 방향은 \(5x(3y^2+3yh+h^2)\)이다. \(h\to0\)에서 두 답을 얻는다. 모든 실수 \(x,y\)에서 성립한다.',
+    r'The expanded difference quotients are \(4x^3+6x^2h+4xh^2+h^3+5y^3\) in the \(x\)-direction and \(5x(3y^2+3yh+h^2)\) in the \(y\)-direction. Their limits give the answers for every real \(x,y\).')
+
+add(10, '다항식: 상수항과 부호', 'Polynomial: constant terms and signs',
+    r'f(x,y)=x^2y-3y^4', 'x,y',
+    r'\(x\)로 미분할 때 \(-3y^4\)의 미분은 0이다.',
+    r'The term \(-3y^4\) has zero derivative with respect to \(x\).',
+    [r'\(y\)를 고정하면 \(x^2y\)는 계수가 \(y\)인 이차식이다. 따라서 \(\partial(x^2y)/\partial x=2xy\).',
+     r'\(-3y^4\)는 \(x\)와 무관하므로 \(f_x=2xy\).',
+     r'\(x\)를 고정하고 \(y\)로 미분하면 \(x^2y\)에서 \(x^2\), \(-3y^4\)에서 \(-12y^3\)이 나온다. 따라서 \(f_y=x^2-12y^3\).'],
+    [r'With \(y\) fixed, \(x^2y\) is a quadratic with coefficient \(y\), so \(\partial(x^2y)/\partial x=2xy\).',
+     r'The remaining term is independent of \(x\), giving \(f_x=2xy\).',
+     r'With \(x\) fixed, the derivatives of \(x^2y\) and \(-3y^4\) are \(x^2\) and \(-12y^3\). Thus \(f_y=x^2-12y^3\).'],
+    r'\[f_x=2xy,\qquad f_y=x^2-12y^3.\]',
+    r'정의의 차분몫은 각각 \(y(2x+h)\), \(x^2-3(4y^3+6y^2h+4yh^2+h^3)\)이다. 극한이 답과 일치하며 정의역은 \(\mathbb R^2\)이다.',
+    r'The difference quotients are \(y(2x+h)\) and \(x^2-3(4y^3+6y^2h+4yh^2+h^3)\). Taking their limits verifies both formulas on \(\mathbb R^2\).')
+
+add(11, '변수가 분리된 곱', 'A product with separated variables',
+    r'g(x,y)=x^3\sin y', 'x,y',
+    '각 편미분에서 두 인수 중 하나만 변한다.',
+    'Only one of the two factors varies in each partial derivative.',
+    [r'\(x\)로 미분할 때 \(\sin y\)는 상수이므로 \(g_x=(3x^2)\sin y\).',
+     r'\(y\)로 미분할 때 \(x^3\)는 상수이므로 \(g_y=x^3\cos y\).',
+     r'두 함수가 서로 다른 변수에만 의존하므로 각 편미분에서 곱의 두 항을 모두 남길 필요가 없다. 고정된 인수의 미분은 0이다.'],
+    [r'For differentiation with respect to \(x\), \(\sin y\) is constant, giving \(g_x=3x^2\sin y\).',
+     r'For differentiation with respect to \(y\), \(x^3\) is constant, giving \(g_y=x^3\cos y\).',
+     r'Each factor depends on a different variable. In the product rule, the derivative of the fixed factor is zero.'],
+    r'\[g_x=3x^2\sin y,\qquad g_y=x^3\cos y.\]',
+    r'차분몫은 \((3x^2+3xh+h^2)\sin y\)와 \(x^3[\sin(y+h)-\sin y]/h\)이다. 다항식의 극한과 사인함수의 미분 정의로 결과를 확인한다. 모든 실수 입력에서 성립한다.',
+    r'The difference quotients are \((3x^2+3xh+h^2)\sin y\) and \(x^3[\sin(y+h)-\sin y]/h\). The polynomial limit and the defining derivative of sine verify the results for all real inputs.')
+
+add(12, '지수함수와 연쇄법칙', 'Exponential and chain rule',
+    r'g(x,t)=e^{xt}', 'x,t',
+    r'지수 \(xt\)의 편미분은 각각 \(t\), \(x\)이다.',
+    r'The partial derivatives of the exponent \(xt\) are \(t\) and \(x\).',
+    [r'바깥함수는 \(e^u\), 안쪽함수는 \(u=xt\)로 둔다. 바깥함수의 미분은 \(e^u\)이다.',
+     r'\(t\)를 고정하면 \(u_x=t\)이므로 연쇄법칙에 의해 \(g_x=e^{xt}t\).',
+     r'\(x\)를 고정하면 \(u_t=x\)이므로 \(g_t=e^{xt}x\). 변수 이름이 \(t\)여도 편미분 규칙은 같다.'],
+    [r'Write the outer function as \(e^u\) and the inner function as \(u=xt\). The outer derivative is \(e^u\).',
+     r'Fixing \(t\) gives \(u_x=t\), so the chain rule yields \(g_x=te^{xt}\).',
+     r'Fixing \(x\) gives \(u_t=x\), hence \(g_t=xe^{xt}\). The name \(t\) does not change the partial-derivative rule.'],
+    r'\[g_x=te^{xt},\qquad g_t=xe^{xt}.\]',
+    r'차분몫은 \(e^{xt}(e^{th}-1)/h\)와 \(e^{xt}(e^{xh}-1)/h\)이다. \(\lim_{h\to0}(e^{ah}-1)/h=a\)로 검산한다. \(a=0\)일 때도 몫은 0이며 모든 실수 \(x,t\)에서 성립한다.',
+    r'The difference quotients are \(e^{xt}(e^{th}-1)/h\) and \(e^{xt}(e^{xh}-1)/h\). Apply \(\lim_{h\to0}(e^{ah}-1)/h=a\); for \(a=0\) the quotient is zero. Both results hold for all real \(x,t\).')
+
+add(13, '로그함수의 정의역과 연쇄법칙', 'Logarithm: domain and chain rule',
+    r'z=\ln(x+t^2)', 'x,t',
+    r'실수 로그의 조건 \(x+t^2>0\)을 먼저 확인하고 안쪽함수를 미분한다.',
+    r'First impose the real-logarithm condition \(x+t^2>0\), then differentiate the inner function.',
+    [r'정의역은 \(x+t^2>0\)인 열린 영역이다. 이 영역에서는 \(u=x+t^2\)가 양수이므로 \(d(\ln u)/du=1/u\)를 쓸 수 있다.',
+     r'\(t\)를 고정하면 \(u_x=1\)이므로 \(z_x=1/(x+t^2)\).',
+     r'\(x\)를 고정하면 \(u_t=2t\)이므로 \(z_t=2t/(x+t^2)\). 경계 \(x+t^2=0\)에는 원래 함수가 정의되지 않는다.'],
+    [r'The domain is the open region \(x+t^2>0\). There \(u=x+t^2\) is positive, so \(d(\ln u)/du=1/u\) applies.',
+     r'With \(t\) fixed, \(u_x=1\), giving \(z_x=1/(x+t^2)\).',
+     r'With \(x\) fixed, \(u_t=2t\), giving \(z_t=2t/(x+t^2)\). The original function is undefined on the boundary \(x+t^2=0\).'],
+    r'\[z_x=\frac{1}{x+t^2},\qquad z_t=\frac{2t}{x+t^2}\quad(x+t^2>0).\]',
+    r'\(A=x+t^2>0\)라 쓰면 차분몫은 \(\ln(1+h/A)/h\)와 \(\ln(1+(2th+h^2)/A)/h\)이다. \(\ln(1+s)/s\to1\)로 두 극한을 얻는다. \(t=0\)일 때 두 번째 극한도 0이다.',
+    r'Let \(A=x+t^2>0\). The difference quotients are \(\ln(1+h/A)/h\) and \(\ln(1+(2th+h^2)/A)/h\). Using \(\ln(1+s)/s\to1\) verifies both limits, including the zero second limit when \(t=0\).')
+
+add(14, '음의 거듭제곱과 정의역', 'Negative powers and domain',
+    r'w=\frac{u}{v^2}', 'u,v',
+    r'\(w=uv^{-2}\)로 쓰고 \(v\ne0\) 조건을 유지한다.',
+    r'Write \(w=uv^{-2}\) and retain the condition \(v\ne0\).',
+    [r'분모가 0이면 함수가 정의되지 않으므로 \(v\ne0\)에서 계산한다.',
+     r'\(u\)로 미분할 때 \(v^{-2}\)가 상수이다. 따라서 \(w_u=v^{-2}\).',
+     r'\(v\)로 미분할 때 \(u\)가 상수이다. 거듭제곱 법칙으로 \(w_v=u(-2)v^{-3}=-2u/v^3\).'],
+    [r'The function is defined only where \(v\ne0\), which is the domain for this calculation.',
+     r'For the \(u\)-derivative, \(v^{-2}\) is constant, so \(w_u=v^{-2}\).',
+     r'For the \(v\)-derivative, \(u\) is constant. The power rule gives \(w_v=-2uv^{-3}=-2u/v^3\).'],
+    r'\[w_u=\frac{1}{v^2},\qquad w_v=-\frac{2u}{v^3}\quad(v\ne0).\]',
+    r'\(u\) 방향 차분몫은 정확히 \(1/v^2\)이다. \(v\) 방향 차분몫은 통분하면 \(-u(2v+h)/(v^2(v+h)^2)\)가 되어 \(-2u/v^3\)으로 수렴한다.',
+    r'The \(u\)-difference quotient is exactly \(1/v^2\). Combining fractions in the \(v\)-difference quotient gives \(-u(2v+h)/(v^2(v+h)^2)\), whose limit is \(-2u/v^3\).')
+
+add(15, '곱의 법칙과 연쇄법칙', 'Product rule and chain rule',
+    r'f(x,y)=ye^{xy}', 'x,y',
+    r'\(x\) 편미분에서는 앞의 \(y\)가 상수지만, \(y\) 편미분에서는 두 인수가 모두 변한다.',
+    r'The leading \(y\) is constant for the \(x\)-derivative; both factors vary for the \(y\)-derivative.',
+    [r'\(y\)를 고정하면 \(\partial e^{xy}/\partial x=ye^{xy}\)이다. 앞의 계수 \(y\)까지 곱해 \(f_x=y^2e^{xy}\).',
+     r'\(y\)로 미분할 때는 곱의 법칙을 적용한다: \(f_y=(\partial y/\partial y)e^{xy}+y(\partial e^{xy}/\partial y)\).',
+     r'연쇄법칙으로 \(\partial e^{xy}/\partial y=xe^{xy}\)이므로 \(f_y=e^{xy}+xye^{xy}=(1+xy)e^{xy}\).'],
+    [r'Fixing \(y\) gives \(\partial e^{xy}/\partial x=ye^{xy}\). Multiply by the leading coefficient \(y\) to obtain \(f_x=y^2e^{xy}\).',
+     r'For the \(y\)-derivative use the product rule: \(f_y=(\partial y/\partial y)e^{xy}+y(\partial e^{xy}/\partial y)\).',
+     r'The chain rule gives \(\partial e^{xy}/\partial y=xe^{xy}\), hence \(f_y=e^{xy}+xye^{xy}=(1+xy)e^{xy}\).'],
+    r'\[f_x=y^2e^{xy},\qquad f_y=(1+xy)e^{xy}.\]',
+    r'\(y\) 방향 차분몫을 \(e^{xy}[y(e^{xh}-1)/h+e^{xh}]\)로 쓰면 극한이 \((xy+1)e^{xy}\)이다. \(y=0\)에서는 자취가 \(f(x,0)=0\)이므로 \(f_x=0\), 반면 \(f_y(x,0)=1\)임도 확인한다. 정의역은 \(\mathbb R^2\)이다.',
+    r'Rewrite the \(y\)-difference quotient as \(e^{xy}[y(e^{xh}-1)/h+e^{xh}]\); its limit is \((xy+1)e^{xy}\). Along \(y=0\), the trace \(f(x,0)=0\) gives \(f_x=0\), while \(f_y(x,0)=1\). The domain is \(\mathbb R^2\).')
+
+add(16, '합성 다항식의 연쇄법칙', 'Chain rule for a composite polynomial',
+    r'g(x,y)=(x^2+xy)^3', 'x,y',
+    r'안쪽함수 \(u=x^2+xy\)를 먼저 두 변수로 각각 미분한다.',
+    r'First differentiate the inner function \(u=x^2+xy\) with respect to each variable.',
+    [r'\(g=u^3\), \(u=x^2+xy\)로 둔다. 바깥 미분은 \(3u^2\)이므로 안쪽 미분을 곱해야 한다.',
+     r'\(y\)를 고정하면 \(u_x=2x+y\)이다. 따라서 \(g_x=3(x^2+xy)^2(2x+y)\).',
+     r'\(x\)를 고정하면 \(u_y=x\)이다. 따라서 \(g_y=3x(x^2+xy)^2\).'],
+    [r'Let \(g=u^3\), with \(u=x^2+xy\). The outer derivative is \(3u^2\), which must be multiplied by the inner derivative.',
+     r'Fixing \(y\) gives \(u_x=2x+y\), so \(g_x=3(x^2+xy)^2(2x+y)\).',
+     r'Fixing \(x\) gives \(u_y=x\), so \(g_y=3x(x^2+xy)^2\).'],
+    r'\[g_x=3(x^2+xy)^2(2x+y),\qquad g_y=3x(x^2+xy)^2.\]',
+    r'独立 검산으로 원래 식을 \(x^6+3x^5y+3x^4y^2+x^3y^3\)로 전개한다. 항별 미분은 \(6x^5+15x^4y+12x^3y^2+3x^2y^3\), \(3x^5+6x^4y+3x^3y^2\)이며 각각 위 답의 전개와 일치한다. 모든 실수 입력에서 성립한다.'.replace('独立', '독립'),
+    r'Independently expand the original function as \(x^6+3x^5y+3x^4y^2+x^3y^3\). Termwise differentiation gives \(6x^5+15x^4y+12x^3y^2+3x^2y^3\) and \(3x^5+6x^4y+3x^3y^2\), matching the expansions of the two answers for all real inputs.')
+
+payload = {
+    'section': '14.3',
+    'source': {'title': 'Calculus: Early Transcendentals', 'author': 'James Stewart et al.',
+               'edition': 9, 'language': 'en', 'printedPages': [1008], 'pdfPages': [1045]},
+    'scope': {'kind': 'exercise', 'numbers': list(range(9, 17)), 'total': 8,
+              'note': {'ko': '기본 계산 시범 8문항. §14.3 전체 연습문제의 완료를 뜻하지 않습니다.',
+                       'en': 'Eight introductory calculation exercises; this is not the complete exercise set for §14.3.'}},
+    'exercises': items,
+}
+(ROOT / 'exercise-content' / 's14-3.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
+print(f'Wrote {len(items)} exercises.')
