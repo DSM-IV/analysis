@@ -8,7 +8,7 @@ def plots(b,n,panels,caption=None):
   out.append(f'<defs><clipPath id="p{j}"><rect x="65" y="{yoff+65}" width="450" height="260"/></clipPath></defs><text x="280" y="{yoff+25}" text-anchor="middle" font-family="sans-serif" font-size="15">{html.escape(title)}</text>')
   for i in range(5):
    xx=l+(h-l)*i/4; yy=bot+(top-bot)*i/4;X,Y=xy(xx,yy)
-   out.append(f'<path d="M{X},{yoff+65}V{yoff+325}M65,{Y}H515" stroke="#dbe2ea"/><text x="{X}" y="{yoff+344}" text-anchor="middle" font-family="sans-serif" font-size="11">{xx:.3g}</text><text x="58" y="{Y+4}" text-anchor="end" font-family="sans-serif" font-size="11">{yy:.3g}</text>')
+   out.append(f'<path d="M{X},{yoff+65}V{yoff+325}M65,{Y}H515" stroke="#dbe2ea"/><text x="{X}" y="{yoff+344}" text-anchor="middle" font-family="sans-serif" font-size="11">{xx:.3g}</text><text x="58" y="{Y+4}" text-anchor="end" font-family="sans-serif" font-size="11">{format(yy, ".6g" if top-bot<.2 else ".3g")}</text>')
   X,Y=xy(0,0)
   if l<=0<=h:out.append(f'<path d="M{X},{yoff+65}V{yoff+325}" stroke="#475569"/>')
   if bot<=0<=top:out.append(f'<path d="M65,{Y}H515" stroke="#475569"/>')
