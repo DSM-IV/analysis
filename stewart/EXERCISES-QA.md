@@ -121,3 +121,12 @@ python3 stewart/exercise-checks/check_site.py
 
 
 2026-09-13 경계 재감사: 다음 절 제목 또는 프로젝트 위에 계속되는 일반 Exercises를 재확인했다. §12.2는52, §13.1은62, §13.3은78, §15.6은59, §16.5는41문항이다. §10.2의85번을 포함한 전체 목표는7,170문항으로 정정한다. §12.2 49–52, §15.6 56–59, §16.5 39–41은 `complete_boundary_exercises.py`로 보완했다. 해당 절의 예전 저작 스크립트 재실행 후에는 이 보완 스크립트를 실행해야 한다.
+
+## 2026-09-22: remaining ordinary Exercises completed
+
+- Added §2.8 (53), §2.9 (50), §4.5 (85): 188 bilingual exercises, 24 original SVGs. The local ledger now covers all 119 sections / 7,170 exercises; Calculus I has 93 sections / 5,804 exercises.
+- Visually checked source PDF pages 226–229, 233–235, 392–393. Related-rate ladder questions use Example 2's 10-ft ladder and 4-ft/s base speed.
+- Symbolically checked linearizations, differentials, substitution factors, and antiderivatives. Definite substitution exercises also passed independent numerical quadrature. `remaining-sections-qa.py` passed 66 additional derivative, inverse-volume-rate and quadrature checks, comparing against saved answer text.
+- Special cases retained: §2.8.38 half volume vs half depth; §2.8.48 wheel ground-level assumption; §2.8.51 either sign; §2.9.9 disconnected accuracy interval; §2.9.10 all tangent branches; §4.5.46 either sign of parameter; §4.5.57 initial vs net lung volume; §4.5.84 non-injective substitution.
+- Browser inspection found and fixed malformed spacing commands (e.g. backslash followed by a digit or variable). Regression checks cover these malformed commands. Final MathJax checks: §2.8 490 containers, §2.9 472, §4.5 976; zero merror or red undefined-command nodes. At the 1710-pixel desktop viewport the three pages had no document-level horizontal overflow. Representative diagrams and a solution toggle were visually checked; mobile layout was not checked in this pass.
+- `build_exercises.py --check`, `calc1/build_stewart.py --check`, `check_site.py`, `front_coverage.py --require-complete`, and `git diff --check` passed. Changes remain local; no commit or deployment was performed in this pass.
