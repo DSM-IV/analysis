@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Exact checks for new worked-example derivations (requires SymPy)."""
+import sympy as s
+x,y,z,h,k,e,r,t,u,v=s.symbols('x y z h k e r t u v', real=True)
+pi=s.pi
+checks=[]
+def check(name,actual,expected):
+    difference=s.simplify(actual-expected)
+    assert difference.is_zero_matrix if isinstance(difference,s.MatrixBase) else difference==0,(name,difference)
+    checks.append(name)
+
+def curl(F):
+    P,Q,R=F
+    return s.Matrix([s.diff(R,y)-s.diff(Q,z),s.diff(P,z)-s.diff(R,x),s.diff(Q,x)-s.diff(P,y)])
+
+check('14.3 partial derivative along x',s.diff(x**3+x*x-2,x).subs(x,2),16)
+check('14.3 partial derivative along y',s.diff(8+4*y**3-2*y*y,y).subs(y,1),8)
+check('14.4 tangent-plane remainder',2*(1+h)**2+(1+k)**2-(3+4*h+2*k),2*h*h+k*k)
+check('14.4 differential remainder',s.Rational('0.05')**2+3*s.Rational('0.05')*(-s.Rational('0.04'))-s.Rational('0.04')**2,-s.Rational('0.0051'))
+check('14.4 exact cone error',pi*((10+e)**2*(25+e)-2500)/3,200*pi*e+15*pi*e**2+pi*e**3/3)
+check('14.4 exact box error',(75+e)*(60+e)*(40+e)-180000,9900*e+175*e**2+e**3)
+check('14.4 numerical box error',((75+e)*(60+e)*(40+e)-180000).subs(e,s.Rational(1,5)),s.Rational('1987.008'))
+check('14.7 sum-of-squares global minimum',(x*x-y*y)**2+2*(x*y-1)**2,x**4+y**4-4*x*y+2)
+check('14.7 distance squared',s.Matrix([s.Rational(5,6),s.Rational(5,3),s.Rational(5,6)]).dot(s.Matrix([s.Rational(5,6),s.Rational(5,3),s.Rational(5,6)])),s.Rational(25,6))
+check('15.1 exact box subtraction',64-2*s.integrate(x*x,(x,0,2))-4*s.integrate(y*y,(y,0,2)),48)
+check('15.2 volume endpoint',s.Rational(56,3)-s.Rational(32,5)-s.Rational(128,21),s.Rational(216,35))
+F=-y**6/48+y**4/2+y**3/3-2*y*y
+check('15.2 upper primitive',F.subs(y,4),32)
+check('15.2 lower primitive',F.subs(y,-2),-4)
+check('15.3 paraboloid disks',s.integrate(pi*(1-z),(z,0,1)),pi/2)
+check('15.3 shifted-circle volume',s.integrate(s.integrate((1+2*r*s.cos(t)+r*r)*r,(r,0,1)),(t,0,2*pi)),3*pi/2)
+check('15.4 total charge',s.integrate(s.integrate(x*y,(y,1-x,1)),(x,0,1)),s.Rational(5,24))
+check('15.4 triangular mass',s.integrate(s.integrate(1+3*x+y,(y,0,2-2*x)),(x,0,1)),s.Rational(8,3))
+check('15.4 triangular x moment',s.integrate(s.integrate(x*(1+3*x+y),(y,0,2-2*x)),(x,0,1)),1)
+check('15.4 triangular y moment',s.integrate(s.integrate(y*(1+3*x+y),(y,0,2-2*x)),(x,0,1)),s.Rational(11,6))
+check('15.4 sum-of-exponentials CDF',s.integrate(s.exp(-x/10)/10*(1-s.exp(-(t-x)/5)),(x,0,t)),(1-s.exp(-t/10))**2)
+check('15.5 general paraboloid area',s.integrate(2*pi*r*s.sqrt(1+4*r*r),(r,0,s.sqrt(h))),pi*((1+4*h)**s.Rational(3,2)-1)/6)
+check('15.6 column volume',s.integrate(s.integrate(12*x*y,(y,0,x)),(x,0,1)),s.Rational(3,2))
+check('15.6 average-height numerator',s.integrate(s.integrate(72*x*x*y*y,(y,0,x)),(x,0,1)),4)
+check('15.6 reordered cylindrical integral',2*pi*s.integrate(y**s.Rational(3,2)/3,(y,0,4)),128*pi/15)
+check('15.6 reordered volume',s.integrate(y*(1-s.sqrt(y)),(y,0,1)),s.Rational(1,10))
+check('15.6 tetrahedron sections',s.integrate((1-x)**2,(x,0,1)),s.Rational(1,3))
+check('15.7 symmetry sum',2*pi*s.integrate(r**3*(4-r*r),(r,0,2)),32*pi/3)
+check('15.7 variable-density solid volume',pi*s.integrate(r*(3+r*r),(r,0,1)),7*pi/4)
+check('15.7 reversed cone integral',pi*s.integrate(z**4,(z,0,2))/2,16*pi/5)
+check('15.8 shell integral',4*pi*s.integrate(r*r*s.exp(r**3),(r,0,1)),4*pi*(s.E-1)/3)
+check('15.9 inverse-map area',s.integrate(s.integrate(4*(u*u+v*v),(u,0,1)),(v,0,1)),s.Rational(8,3))
+check('15.9 original-coordinate integral',s.integrate(y*(2-y*y/2),(y,0,2)),2)
+check('16.2 wire height numerator',s.integrate(s.sin(t)*(1-s.sin(t)),(t,0,pi)),(4-pi)/2)
+check('16.3 square circulation',s.integrate(x,(x,0,1))+s.integrate(-1,(y,0,1))+s.integrate(x-1,(x,1,0))+s.integrate(-2,(y,1,0)),2)
+check('16.5 field curl',curl([x*z,x*y*z,-y*y]),s.Matrix([-y*(x+2),x,y*z]))
+check('16.5 potential gradient',s.Matrix([s.diff(x*y*y*z**3,q) for q in (x,y,z)]),s.Matrix([y*y*z**3,2*x*y*z**3,3*x*y*y*z*z]))
+R=s.Matrix([r*s.cos(t),r*s.sin(t),2*r])
+check('16.6 cone cross product',R.diff(r).cross(R.diff(t)),s.Matrix([-2*r*s.cos(t),-2*r*s.sin(t),r]))
+R=s.Matrix([x,s.sin(x)*s.cos(t),s.sin(x)*s.sin(t)])
+N=R.diff(x).cross(R.diff(t))
+check('16.6 revolution squared area factor',N.dot(N),s.sin(x)**2*(1+s.cos(x)**2))
+R=s.Matrix([r*s.cos(t),r*s.sin(t),r*r])
+check('16.6 paraboloid cross product',R.diff(r).cross(R.diff(t)),s.Matrix([-2*r*r*s.cos(t),-2*r*r*s.sin(t),r]))
+check('16.7 scalar surface integral',s.integrate(y*s.sqrt(2+4*y*y),(y,0,2)),13*s.sqrt(2)/3)
+check('16.8 replacement-disk curl',curl([x*z,y*z,x*y]),s.Matrix([x-y,x-y,0]))
+check('16.9 reversed-order flux',3*s.integrate((1+u)**2*s.sqrt(u),(u,0,1)),s.Rational(184,35))
+print(f'PASS: {len(checks)} exact symbolic checks for supplementary derivations')
