@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>퀴즈 1 요약: 벡터공간 (Quiz 1 Review: Vector Spaces) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1(MATH221) 퀴즈 1 대비 요약 — 벡터공간 공리, 소거법칙, 부분공간 판정법, 일차결합과 생성, 일차종속·일차독립, 기저와 교체정리까지 영어 답안용 진술·증명 템플릿·연습문제와 함께 정리했습니다.">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/quiz1.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="퀴즈 1 요약: 벡터공간 — 선형대수학 1">
+<meta property="og:description" content="벡터공간·부분공간·생성·일차독립·기저 — 영어 답안용 진술과 증명 템플릿, 연습문제 모범답안.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/quiz1.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- 이 페이지만 MathJax 4: 좁은 화면에서 긴 인라인 수식 자동 줄바꿈 -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="quiz1.html" class="active">퀴즈1 요약</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Quiz 1 Review</p>
+  <h1>퀴즈 1 요약: 벡터공간<span>Unit 1 Vector Spaces, §1.1–§1.4 (Lectures 1–8)</span></h1>
+  <p class="header-desc">강의노트의 정의·정리를 <strong>영어 답안에 그대로 쓸 수 있는 문장</strong>으로 정리하고, 한국어로 핵심만 덧붙였습니다. 증명과 모범답안은 접혀 있으니 먼저 스스로 써 보고 펼쳐 확인하세요.</p>
+</header>
+
+<main id="main-content">
+
+<div class="qs-alert">
+  <h2>시험 정보 · 꼭 확인</h2>
+  <ul>
+    <li><strong>일시:</strong> 강의계획서상 퀴즈 1은 5주차 목요일, 즉 <strong>10월 1일(목) 수업 시간(3:00–4:15pm)</strong>입니다. 정확한 시간·범위는 LMS 공지로 확인하세요.</li>
+    <li><strong>범위(추정):</strong> Unit 1 전체 진도 = Lecture 1–8 (§1.1 ℝⁿ → §1.4 Cor 1.55). 강의계획서상 1–4주차가 §1 Vector Spaces입니다.</li>
+    <li><strong>답안은 영어로만.</strong> 퀴즈·시험 답안을 다른 언어로 쓰면 <strong>0점</strong>입니다(Syllabus, Course Policies).</li>
+    <li>정리 번호(Prop 1.28 등)는 <strong>외울 필요 없습니다</strong>(Lecture 3 Note). "증명보다 <strong>진술을 어떻게 쓰는지</strong>가 더 중요하다"(Lecture 4).</li>
+  </ul>
+</div>
+
+<nav class="toc" aria-label="목차">
+  <h3>목차 · Contents</h3>
+  <ol>
+    <li><a href="#top12"><span class="toc-num">TOP</span> 한눈에 보는 핵심 12 <em>Must-Know 12</em></a></li>
+    <li><a href="#s11"><span class="toc-num">§1.1</span> ℝⁿ과 벡터공간 공리 <em>ℝⁿ and the Axioms (VS 1)–(VS 8)</em></a></li>
+    <li><a href="#s12"><span class="toc-num">§1.2</span> 벡터공간과 부분공간 <em>Vector Spaces and Subspaces</em></a></li>
+    <li><a href="#s13"><span class="toc-num">§1.3</span> 일차결합, 생성, 일차독립 <em>Linear Combinations, Span, Linear Independence</em></a></li>
+    <li><a href="#s14"><span class="toc-num">§1.4</span> 기저 <em>Basis</em></a></li>
+    <li><a href="#pitfalls"><span class="toc-num">!</span> 자주 틀리는 포인트·노트 오타 <em>Pitfalls &amp; Typos in the Notes</em></a></li>
+    <li><a href="#phrases"><span class="toc-num">EN</span> 영어 답안 문장 틀 <em>Phrases for Written Answers</em></a></li>
+    <li><a href="#practice"><span class="toc-num">EX</span> 예상 문제와 모범답안 <em>Practice Problems with Model Answers</em></a></li>
+  </ol>
+</nav>
+
+<!-- ════════════════════════════ TOP 12 ════════════════════════════ -->
+<div class="section-title" id="top12"><h2>한눈에 보는 핵심 12 · Must-Know 12</h2></div>
+
+<div class="qs-block">
+<ol class="qs-top">
+  <li><strong>Vector space</strong> = 집합 $V$ + 덧셈 $+:V\times V\to V$ + 스칼라곱 $\cdot:\mathbb{R}\times V\to V$, 공리 (VS 1)–(VS 8)을 만족.</li>
+  <li><strong>Cancellation Law</strong> $x+z=y+z\Rightarrow x=y$ → 영벡터와 덧셈 역원은 <strong>유일</strong>, $0\cdot v=0_V$, $a\cdot 0_V=0_V$, $(-a)v=-(av)=a(-v)$.</li>
+  <li><strong>Subspace Criterion</strong>: $W\subseteq V$가 부분공간 $\iff$ (1) $0_V\in W$ (2) 덧셈에 닫힘 (3) 스칼라곱에 닫힘.</li>
+  <li>$W_1\cap W_2$는 항상 부분공간, $W_1\cup W_2$는 일반적으로 <strong>아니다</strong>(x축 ∪ y축).</li>
+  <li>$\operatorname{span}(S)$ = $S$의 (유한) 일차결합 전체 = $S$를 포함하는 <strong>가장 작은 부분공간</strong>. $\operatorname{span}(\varnothing)=\{0\}$.</li>
+  <li><strong>l.d.</strong>: 자명하지 않은(계수가 전부 0은 아닌) 일차결합이 $0$. <strong>l.i.</strong>: $\sum a_iv_i=0\Rightarrow a_i=0\ \forall i$. $\varnothing$은 l.i.</li>
+  <li>리스트에 <strong>같은 벡터가 두 번</strong> 있거나 <strong>영벡터</strong>가 있으면 l.d.; $v_2=cv_1$이면 l.d.</li>
+  <li>$S_1\subseteq S_2$: $S_1$ l.d. $\Rightarrow$ $S_2$ l.d. / $S_2$ l.i. $\Rightarrow$ $S_1$ l.i.</li>
+  <li>$S$ l.d. $\iff$ 빼도 span이 그대로인 벡터 $v\in S$가 <strong>존재</strong> (그리고 $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)\iff v\in\operatorname{span}(S\setminus\{v\})$).</li>
+  <li>$S$ l.i.이고 $v\notin\operatorname{span}(S)$ $\Rightarrow$ $S\cup\{v\}$ l.i.</li>
+  <li><strong>Basis</strong> = l.i. + spanning $\iff$ 모든 $w$가 <strong>유일한</strong> 일차결합으로 표현됨.</li>
+  <li>유한 생성집합은 기저를 포함하고, <strong>Replacement Thm</strong>에 의해 유한 기저들의 원소 수는 모두 같다.</li>
+</ol>
+</div>
+
+<!-- ════════════════════════════ §1.1 ════════════════════════════ -->
+<div class="section-title" id="s11"><h2>§1.1 ℝⁿ and the Axioms · ℝⁿ과 벡터공간 공리</h2></div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag def">DEF 1.3 · 1.4</span> ℝⁿ과 두 연산 <span class="en">ℝⁿ, addition, scalar multiplication</span></h3>
+  <div class="qs-en" lang="en">
+    <p>$\mathbb{R}^n := \{(x_1,\dots,x_n) : x_i\in\mathbb{R}\ \text{for every } i=1,\dots,n\}$; the $k$-th coordinate of $(x_1,\dots,x_n)$ is $x_k$.</p>
+    <p>$(x_1,\dots,x_n)+(y_1,\dots,y_n) := (x_1+y_1,\dots,x_n+y_n)$, &nbsp; $c\,(x_1,\dots,x_n) := (cx_1,\dots,cx_n)$, &nbsp; $v-w := v+(-1)w$.</p>
+    <p>Cartesian product: $X\times Y := \{(x,y): x\in X,\ y\in Y\}$, so $+:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}^n$ and $\cdot:\mathbb{R}\times\mathbb{R}^n\to\mathbb{R}^n$ are functions.</p>
+  </div>
+  <p class="qs-ko">이 수업은 ℝⁿ을 <strong>열벡터</strong>의 공간으로 본다(Notation 1.7): $\begin{bmatrix}x_1\\ \vdots\\ x_n\end{bmatrix}:=(x_1,\dots,x_n)$, 즉 $\mathbb{R}^n=M_{n\times 1}(\mathbb{R})$. 쉼표 있는 $n$-튜플 = 열벡터 ≠ 쉼표 없는 행벡터 $[a_1\ \cdots\ a_n]\in M_{1\times n}(\mathbb{R})$.</p>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.6 · DEF 1.9</span> 벡터공간 공리 — 영어로 쓸 수 있어야 함 <span class="en">Axioms of a vector space</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>Def.</strong> A <em>vector space</em> $V$ (over $\mathbb{R}$) is a set with addition $+:V\times V\to V$ and scalar multiplication $\cdot:\mathbb{R}\times V\to V$ satisfying:</p>
+    <p><strong>(VS 1)</strong> $\forall v,w\in V$, $v+w=w+v$.</p>
+    <p><strong>(VS 2)</strong> $\forall u,v,w\in V$, $(u+v)+w=u+(v+w)$.</p>
+    <p><strong>(VS 3)</strong> There exists $0_V\in V$ such that $\forall v\in V$, $v+0_V=v=0_V+v$. &nbsp;(zero vector)</p>
+    <p><strong>(VS 4)</strong> $\forall v\in V$, $\exists w\in V$ s.t. $v+w=0_V$. &nbsp;(additive inverse of $v$)</p>
+    <p><strong>(VS 5)</strong> $\forall v\in V$, $1\cdot v=v$.</p>
+    <p><strong>(VS 6)</strong> $\forall a,b\in\mathbb{R}$ and $\forall v\in V$, $(ab)\cdot v=a\cdot(b\cdot v)$.</p>
+    <p><strong>(VS 7)</strong> $\forall c\in\mathbb{R}$ and $\forall v,w\in V$, $c(v+w)=cv+cw$.</p>
+    <p><strong>(VS 8)</strong> $\forall a,b\in\mathbb{R}$ and $\forall v\in V$, $(a+b)v=av+bv$.</p>
+    <p>Elements of $V$ are called <em>vectors</em>.</p>
+  </div>
+  <p class="qs-ko">외우는 법: <strong>덧셈 4개</strong>(교환·결합·영벡터·역원) + <strong>스칼라곱 4개</strong>($1v=v$, 곱의 결합, 분배 두 개). 번호는 안 외워도 되지만 <strong>내용은 영어로 정확히</strong> 쓸 수 있어야 한다. Prop 1.6: ℝⁿ은 이 8개를 만족한다(좌표별 연산이므로 $n=1$, 즉 실수의 성질로 환원).</p>
+  <details class="qs-proof"><summary>공리 하나를 증명하는 법 (예: ℝⁿ의 (VS 7))</summary><div lang="en">
+    <p>Let $c\in\mathbb{R}$ and $v=(v_1,\dots,v_n)$, $w=(w_1,\dots,w_n)\in\mathbb{R}^n$. Then</p>
+    <p>$c(v+w)=c(v_1+w_1,\dots,v_n+w_n)=(cv_1+cw_1,\dots,cv_n+cw_n)=(cv_1,\dots,cv_n)+(cw_1,\dots,cw_n)=cv+cw,$</p>
+    <p>where the middle equality uses the distributive law in $\mathbb{R}$ coordinate by coordinate. $\square$</p>
+  </div></details>
+</div>
+
+<!-- ════════════════════════════ §1.2 ════════════════════════════ -->
+<div class="section-title" id="s12"><h2>§1.2 Vector Spaces and Subspaces · 벡터공간과 부분공간</h2></div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag exam">EXAM 1.8–1.14</span> 기본 예와 반례 <span class="en">Standard examples</span></h3>
+  <div class="qs-table-wrap"><table class="qs-table">
+    <tr><th>벡터공간</th><th>연산</th><th>영벡터</th></tr>
+    <tr><td>$\mathbb{R}^n=M_{n\times1}(\mathbb{R})$</td><td>좌표별</td><td>$(0,\dots,0)$</td></tr>
+    <tr><td>$\mathcal{F}(X,\mathbb{R})$ = $X\to\mathbb{R}$ 함수 전체</td><td>$(f+g)(x)=f(x)+g(x)$, $(cf)(x)=cf(x)$</td><td>영함수 $x\mapsto 0$</td></tr>
+    <tr><td>$\mathbb{R}^\infty:=\mathcal{F}(\mathbb{Z}_{>0},\mathbb{R})$ (실수열)</td><td>항별</td><td>영수열</td></tr>
+    <tr><td>$M_{m\times n}(\mathbb{R})$, $M_n(\mathbb{R}):=M_{n\times n}(\mathbb{R})$</td><td>$(A+B)_{ij}=A_{ij}+B_{ij}$, $(cA)_{ij}=cA_{ij}$</td><td>영행렬</td></tr>
+    <tr><td>$\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $C(\mathbb{R},\mathbb{R})$</td><td>$\mathcal{F}(\mathbb{R},\mathbb{R})$의 부분공간</td><td>영다항식(영함수)</td></tr>
+  </table></div>
+  <p class="qs-ko"><strong>반례 (Ex 1.14):</strong> ℝ²에 덧셈을 $(a,b)+'(c,d):=(a+c,0)$로 바꾸면 (VS 3)이 깨진다.</p>
+  <div class="qs-en" lang="en"><p>For $v=(1,1)$: $\forall (c,d)\in\mathbb{R}^2$, $(1,1)+'(c,d)=(1+c,0)\neq(1,1)$, so there is no zero vector $0_{\mathbb{R}^2}$ for $(1,1)$. Hence $(\mathbb{R}^2,+',\cdot)$ is not a vector space.</p></div>
+  <details class="qs-proof"><summary>함수공간 공리 증명 틀 (Ex 1.8, (VS 1))</summary><div lang="en">
+    <p>For every $f,g\in\mathcal{F}(X,\mathbb{R})$ and every $x\in X$, $(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)$ (VS 1 in $\mathbb{R}$), so $f+g=g+f$. $\square$</p>
+    <p lang="ko" style="color:var(--grey600)">두 함수가 같다 = 모든 입력에서 값이 같다. 다른 공리도 같은 방식: 함숫값(실수)에서 성립하는 성질로 환원.</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">LEM 1.15 · COR 1.16 · PROP 1.17</span> 벡터공간의 기본 성질 <span class="en">Properties of a vector space</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>Cancellation Law.</strong> Let $x,y,z\in V$. If $x+z=y+z$, then $x=y$.</p>
+    <p><strong>Uniqueness.</strong> (1) $V$ has a unique zero vector. (2) Every $v\in V$ has a unique additive inverse, denoted $-v$.</p>
+    <p><strong>Prop.</strong> $\forall v\in V$, $\forall a\in\mathbb{R}$: (1) $0\cdot v=0_V$; (2) $(-a)\cdot v=-(av)=a(-v)$, in particular $-v=(-1)\cdot v$; (3) $a\cdot 0_V=0_V$.</p>
+  </div>
+  <details class="qs-proof"><summary>증명: Cancellation Law (강의노트 증명)</summary><div lang="en">
+    <p>Let $w$ be an additive inverse of $z$ (VS 4). Then $x+z=y+z \Rightarrow (x+z)+w=(y+z)+w \overset{\text{VS 2}}{\Rightarrow} x+(z+w)=y+(z+w) \overset{\text{VS 4}}{\Rightarrow} x+0_V=y+0_V \overset{\text{VS 3}}{\Rightarrow} x=y.$ $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>증명: 영벡터·역원의 유일성</summary><div lang="en">
+    <p>(1) Suppose $0_V$ and $0'_V$ both satisfy (VS 3). Since $0'_V$ is a zero vector, $0_V+0'_V=0_V$; since $0_V$ is a zero vector, $0_V+0'_V=0'_V$. Hence $0_V=0'_V$.</p>
+    <p>(2) Suppose $w_1,w_2$ are additive inverses of $v$. Then $v+w_1=0_V=v+w_2$, so by (VS 1) $w_1+v=w_2+v$, and the Cancellation Law gives $w_1=w_2$. $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>증명: $0\cdot v=0_V$, $a\cdot0_V=0_V$, $(-a)v=-(av)$</summary><div lang="en">
+    <p>(1) $0v+0v=(0+0)v=0v=0v+0_V$ by (VS 8) and (VS 3); by the Cancellation Law (after (VS 1)), $0v=0_V$.</p>
+    <p>(3) $a\cdot0_V+0_V=a\cdot0_V=a(0_V+0_V)=a\cdot0_V+a\cdot0_V$ by (VS 3), (VS 3), (VS 7); cancelling $a\cdot 0_V$ gives $0_V=a\cdot0_V$. (This is the lecture's proof.)</p>
+    <p>(2) $av+(-a)v=(a+(-a))v=0v=0_V$ by (VS 8) and (1), so $(-a)v$ is an additive inverse of $av$; by uniqueness, $(-a)v=-(av)$. Also $av+a(-v)=a(v+(-v))=a\cdot0_V=0_V$ by (VS 7) and (3), so $a(-v)=-(av)$. Taking $a=1$ and using (VS 5): $(-1)v=-v$. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag def">DEF 1.18 · THM 1.20</span> 부분공간과 판정법 — 가장 자주 쓰는 정리 <span class="en">Subspace &amp; Subspace Criterion</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>Def.</strong> Let $V$ be a vector space. $W\subseteq V$ is a <em>subspace</em> of $V$ if $W$ with the induced $+$ and $\cdot$ from $V$ is a vector space.</p>
+    <p><strong>Subspace Criterion.</strong> Let $V$ be a vector space and $W\subseteq V$. Then $W$ is a subspace of $V$ if and only if</p>
+    <p><strong>(1)</strong> $0_V\in W$; &nbsp;<strong>(2)</strong> $x+y\in W$ for all $x,y\in W$; &nbsp;<strong>(3)</strong> $cx\in W$ for all $c\in\mathbb{R}$ and all $x\in W$.</p>
+  </div>
+  <p class="qs-ko">$V$와 $\{0\}$(자명한 부분공간)은 항상 부분공간. 부분공간의 영벡터는 $0_W=0_V$, $W$ 안의 역원도 $-x=(-1)x$로 $V$의 것과 같다(Rmk 1.21). <strong>아닌 걸 보일 때는 반례 하나</strong>면 충분 — 먼저 $0\in W$인지부터 확인.</p>
+  <details class="qs-proof"><summary>모범 증명 틀: Ex 1.22 $W=\{(a_1,\dots,a_n)\in\mathbb{R}^n:\sum a_i=0\}$은 부분공간</summary><div lang="en">
+    <p>We check the three conditions of the Subspace Criterion.</p>
+    <p>(1) $0_{\mathbb{R}^n}=(0,\dots,0)$ satisfies $\sum_{i=1}^n 0=0$, so $0_{\mathbb{R}^n}\in W$.</p>
+    <p>(2) Let $(a_1,\dots,a_n),(b_1,\dots,b_n)\in W$, so $\sum a_i=0=\sum b_i$. Then $\sum(a_i+b_i)=\sum a_i+\sum b_i=0+0=0$, hence $(a_1,\dots,a_n)+(b_1,\dots,b_n)=(a_1+b_1,\dots,a_n+b_n)\in W$.</p>
+    <p>(3) Let $c\in\mathbb{R}$ and $(a_1,\dots,a_n)\in W$. Then $\sum ca_i=c\sum a_i=c\cdot0=0$, so $c(a_1,\dots,a_n)=(ca_1,\dots,ca_n)\in W$.</p>
+    <p>Therefore $W$ is a subspace of $\mathbb{R}^n$. $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>반례 틀: Ex 1.23 $W=\{(a,b): a=0 \text{ or } b=0\}$은 부분공간이 아님</summary><div lang="en">
+    <p>$(1,0),(0,1)\in W$, but $(1,0)+(0,1)=(1,1)\notin W$ by definition of $W$. This violates condition (2) of the Subspace Criterion, so $W$ is not a subspace of $\mathbb{R}^2$.</p>
+    <p lang="ko" style="color:var(--grey600)">다른 전형적 반례: 직선 $y=x-1$은 $(0,0)\notin W$로 (1) 위반 · 제1사분면 $\{(a,b):a,b\ge0\}$은 $(1,1)\in W$이지만 $(-1)(1,1)\notin W$로 (3) 위반.</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag exam">EXAM 1.24–1.26</span> 다항식·연속함수 부분공간 <span class="en">Polynomials and continuous functions</span></h3>
+  <div class="qs-en" lang="en">
+    <p>$\mathbb{R}[x]=\left\{\sum_{i=0}^d a_ix^i : d\in\mathbb{Z}_{\geq0},\ a_i\in\mathbb{R}\right\}\subseteq\mathcal{F}(\mathbb{R},\mathbb{R})$ is a subspace.</p>
+    <p>For $f=\sum_{i=0}^d a_ix^i\neq0$, $\deg(f):=\max\{i\in\mathbb{Z}_{\geq0}: a_i\neq0\}$, and $\deg(0):=-\infty$.</p>
+    <p>$\mathbb{R}[x]_{\leq n}:=\left\{\sum_{i=0}^n a_ix^i : a_i\in\mathbb{R}\right\}\subsetneq\mathbb{R}[x]$ (polynomials of degree $\leq n$, including $0$) is a subspace. $C(\mathbb{R},\mathbb{R})$ (continuous functions) is a subspace of $\mathcal{F}(\mathbb{R},\mathbb{R})$.</p>
+  </div>
+  <details class="qs-proof"><summary>증명: $\mathbb{R}[x]$는 부분공간 (강의노트 증명 — 차수 맞추기 트릭)</summary><div lang="en">
+    <p>(1) $0_{\mathcal{F}(\mathbb{R},\mathbb{R})}$ (the function $c\mapsto0$) equals $0=0\cdot x^0\in\mathbb{R}[x]$.</p>
+    <p>(2) Given $\sum_{i=0}^{d_1}a_ix^i$, $\sum_{i=0}^{d_2}b_ix^i\in\mathbb{R}[x]$, let $d:=\max(d_1,d_2)$, $a_j:=0$ for $d_1\lt j\leq d$ and $b_j:=0$ for $d_2\lt j\leq d$. Then $\sum_{i=0}^{d_1}a_ix^i+\sum_{i=0}^{d_2}b_ix^i=\sum_{i=0}^{d}(a_i+b_i)x^i\in\mathbb{R}[x]$.</p>
+    <p>(3) $c\cdot\sum_{i=0}^d a_ix^i=\sum_{i=0}^d(ca_i)x^i\in\mathbb{R}[x]$. $\square$</p>
+  </div></details>
+  <p class="qs-ko"><span class="qs-tag warn">오타 주의</span> Ex 1.25 힌트의 "$\deg(fg)=\deg(f)\deg(g)$"는 틀림 → 올바르게는 $\deg(fg)=\deg(f)+\deg(g)$. 부분공간 증명에는 $\deg(f+g)\leq\max(\deg f,\deg g)$, $\deg(cf)\leq\deg f$만 있으면 된다.</p>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.28 · REM 1.29</span> 교집합은 부분공간, 합집합은 아님 <span class="en">Intersections of subspaces</span></h3>
+  <div class="qs-en" lang="en">
+    <p>Let $W_1,W_2\subseteq V$ be subspaces. Then $W_1\cap W_2$ is also a subspace of $V$. More generally, $W_1\cap\cdots\cap W_m$ is a subspace, and for any collection $\mathcal{C}\subseteq\mathcal{P}(V)$ of subspaces, $\bigcap_{W\in\mathcal{C}}W:=\{x\in V: x\in W\ \forall W\in\mathcal{C}\}$ is a subspace.</p>
+  </div>
+  <details class="qs-proof"><summary>증명 (강의노트)</summary><div lang="en">
+    <p>It suffices to check the Subspace Criterion on $W_1\cap W_2$.</p>
+    <p>(1) $W_1,W_2$ are subspaces $\Rightarrow$ $0_V\in W_1$ and $0_V\in W_2$ by the Subspace Criterion $\Rightarrow$ $0_V\in W_1\cap W_2$.</p>
+    <p>(2) For $x,y\in W_1\cap W_2$: since $W_1\cap W_2\subseteq W_i$, we have $x,y\in W_i$ for $i=1,2$. The Subspace Criterion on $W_1,W_2$ gives $x+y\in W_1$ and $x+y\in W_2$, so $x+y\in W_1\cap W_2$.</p>
+    <p>(3) For $c\in\mathbb{R}$ and $x\in W_1\cap W_2$: $x\in W_i$ for $i=1,2$, so $cx\in W_1$ and $cx\in W_2$, hence $cx\in W_1\cap W_2$. $\square$</p>
+  </div></details>
+  <p class="qs-ko">ℝ³에서 $xy$-평면 ∩ $xz$-평면 = $x$축(부분공간). 반면 $W_1\cup W_2$는 Ex 1.23처럼 부분공간이 아닐 수 있다.</p>
+</div>
+
+<!-- ════════════════════════════ §1.3 ════════════════════════════ -->
+<div class="section-title" id="s13"><h2>§1.3 Linear Combinations, Span, Linear Independence · 일차결합, 생성, 일차독립</h2></div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag def">DEF 1.30 · 1.31 · 1.34</span> 일차결합과 생성 <span class="en">Linear combination, span, spanning set</span></h3>
+  <div class="qs-en" lang="en">
+    <p>(1) $v\in V$ is a <em>linear combination</em> of $w_1,\dots,w_k\in V$ if $\exists a_1,\dots,a_k\in\mathbb{R}$ s.t. $v=\sum_{i=1}^k a_iw_i$ ($a_i$: coefficients).</p>
+    <p>(2) $v$ is a l.c. of $S$ ($\varnothing\neq S\subseteq V$) if $\exists$ a finite subset $\varnothing\neq T=\{w_1,\dots,w_k\}\subseteq S$ s.t. $v$ is a l.c. of $w_1,\dots,w_k$.</p>
+    <p>(3) $v$ is a l.c. of $\varnothing$ if $v=0$.</p>
+    <p>$\operatorname{span}(w_1,\dots,w_k):=\left\{\sum_{i=1}^k a_iw_i : a_i\in\mathbb{R}\ \forall i\right\}$, &nbsp; $\operatorname{span}(S):=\{v\in V: v \text{ is a l.c. of } S\}$.</p>
+    <p>A <em>spanning set</em> of a subspace $W$ is $S\subseteq W$ with $W=\operatorname{span}(S)$; we say $S$ <em>spans</em> (generates) $W$.</p>
+  </div>
+  <p class="qs-ko">일차결합은 언제나 <strong>유한개</strong>의 합. 정의 (3) 때문에 $\operatorname{span}(\varnothing)=\{0\}$. $(w_1,\dots,w_k)$는 순서·중복을 허용하는 <strong>리스트</strong>($\in V^k$)로 보지만 span은 집합 $\{w_1,\dots,w_k\}$의 span과 같다.</p>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag exam">EXAM 1.32</span> 계산 틀: "span에 속하나?" "전체를 생성하나?" <span class="en">How to compute with spans</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>(c)</strong> Is $2+3x+x^2\in\operatorname{span}(1,1+x,(1+x)^2)\subseteq\mathbb{R}[x]_{\leq2}$? Solve for $a,b,c$:</p>
+    <p>$2+3x+x^2=a\cdot1+b(1+x)+c(1+x)^2=(a+b+c)+(b+2c)x+cx^2.$ Compare coefficients: $a+b+c=2$, $b+2c=3$, $c=1$ $\Rightarrow$ $c=1$, $b=1$, $a=0$.</p>
+    <p>Thus $2+3x+x^2=0\cdot1+(1+x)+(1+x)^2$ is a l.c. of $1,1+x,(1+x)^2$. So YES.</p>
+    <p><strong>(a)</strong> $\operatorname{span}\left(\begin{bmatrix}1\\1\end{bmatrix},\begin{bmatrix}1\\-1\end{bmatrix}\right)=\mathbb{R}^2$. WTS: $\forall\begin{bmatrix}x\\y\end{bmatrix}\in\mathbb{R}^2$, $\exists a,b$ with $a+b=x$, $a-b=y$. Elimination gives $a=\frac{x+y}{2}$, $b=\frac{x-y}{2}$. $\square$</p>
+    <p><strong>(b)</strong> $\operatorname{span}(e_1,e_2)=\left\{\begin{bmatrix}a\\b\\0\end{bmatrix}: a,b\in\mathbb{R}\right\}\not\ni\begin{bmatrix}0\\0\\1\end{bmatrix}$, so $\operatorname{span}(e_1,e_2)\subsetneq\mathbb{R}^3$.</p>
+  </div>
+  <p class="qs-ko">요령: 미지 계수로 일차결합을 세우고 → 성분(계수) 비교 → 연립일차방정식. 해가 있으면 속함, 모순이면 안 속함. "전체를 생성"하려면 <strong>임의의</strong> 벡터에 대해 해가 있음을 보인다.</p>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.33</span> span(S)는 S를 포함하는 가장 작은 부분공간 <span class="en">span(S) is the smallest subspace containing S</span></h3>
+  <div class="qs-en" lang="en">
+    <p>Let $V$ be a vector space. For every $S\subseteq V$, $\operatorname{span}(S)$ is the smallest subspace of $V$ containing $S$; i.e., $\operatorname{span}(S)$ is a subspace, $S\subseteq\operatorname{span}(S)$, and if $W\subseteq V$ is a subspace with $S\subseteq W$, then $\operatorname{span}(S)\subseteq W$. Consequently $\operatorname{span}(S)=\bigcap_{W\subseteq V \text{ subsp},\ S\subseteq W}W$.</p>
+  </div>
+  <details class="qs-proof"><summary>증명 (노트는 FIS Thm 1.5 참조 — 직접 쓰면 이렇게)</summary><div lang="en">
+    <p>If $S=\varnothing$, then $\operatorname{span}(S)=\{0\}$, which is a subspace contained in every subspace. Assume $S\neq\varnothing$.</p>
+    <p><em>Subspace:</em> pick $w\in S$; $0=0\cdot w$ is a l.c. of $S$, so $0\in\operatorname{span}(S)$. If $u=\sum_{i=1}^k a_iw_i$ and $v=\sum_{j=1}^l b_jw'_j$ with $w_i,w'_j\in S$, then $u+v$ is a l.c. of the finite set $\{w_1,\dots,w_k,w'_1,\dots,w'_l\}\subseteq S$, and $cu=\sum(ca_i)w_i$; both lie in $\operatorname{span}(S)$.</p>
+    <p><em>Contains $S$:</em> $w=1\cdot w$ for $w\in S$.</p>
+    <p><em>Smallest:</em> if $W$ is a subspace with $S\subseteq W$, each $a_iw_i\in W$ by condition (3) and their finite sum is in $W$ by condition (2) (induction on $k$), so $\operatorname{span}(S)\subseteq W$. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag def">DEF 1.35 · 1.37</span> 일차종속·일차독립 <span class="en">Linear dependence and independence</span></h3>
+  <div class="qs-en" lang="en">
+    <p>(1) $v_1,\dots,v_n\in V$ are <em>linearly dependent</em> (l.d.) if $\exists(a_1,\dots,a_n)\in\mathbb{R}^n\setminus\{0\}$ s.t. $\sum_{i=1}^n a_iv_i=0$.</p>
+    <p>(2) A subset $S\subseteq V$ is l.d. if $\exists T=\{v_1,\dots,v_k\}\subseteq S$ with $T\neq\varnothing$ such that $v_1,\dots,v_k$ are l.d. as in (1).</p>
+    <p>(1′) $v_1,\dots,v_n$ are <em>linearly independent</em> (l.i.) if they are not l.d., i.e. $\sum_{i=1}^n a_iv_i=0\Rightarrow a_i=0\ \forall i$.</p>
+    <p>(2′) $S\subseteq V$ is l.i. if it is not l.d. (every finite subset of $S$ is l.i.). By definition, $\varnothing$ is l.i.</p>
+  </div>
+  <p class="qs-ko">$\mathbb{R}^n\setminus\{0\}$ = "계수가 <strong>모두 0은 아님</strong>"(어떤 $a_j\neq0$). "모두 0이 아님"이 아니다. 서로 다른 $v_i$들로 된 집합 $\{v_1,\dots,v_n\}$이 l.d. $\iff$ 리스트 $v_1,\dots,v_n$이 l.d.</p>
+  <div class="qs-en" lang="en">
+    <p><strong>Ex 1.36.</strong> (1) If $v_i=v_j$ for some $i\neq j$, then $v_1,\dots,v_n$ are l.d.: $0=1\cdot v_i-1\cdot v_j$. (2) If $v_i=0$ for some $i$, they are l.d.: $0=1\cdot v_i$. (3) $\begin{bmatrix}1\\1\end{bmatrix},\begin{bmatrix}2\\2\end{bmatrix}$ are l.d.: $0=2\begin{bmatrix}1\\1\end{bmatrix}-1\cdot\begin{bmatrix}2\\2\end{bmatrix}$. (4) $e_1,e_2,\begin{bmatrix}1\\1\end{bmatrix}$ are l.d. ($0=1e_1+1e_2-1\begin{bmatrix}1\\1\end{bmatrix}$), but $e_1,e_2$ are l.i.</p>
+    <p><strong>Ex 1.38.</strong> $e_1,\dots,e_n\in\mathbb{R}^n$ ($(e_i)_{j1}=\delta_{ij}$) are l.i.; $1,x,\dots,x^n\in\mathbb{R}[x]_{\leq n}$ are l.i.; $\sin x,\cos x\in\mathcal{F}(\mathbb{R},\mathbb{R})$ are l.i.</p>
+  </div>
+  <details class="qs-proof"><summary>l.i. 증명 틀: $e_1,\dots,e_n$ (강의노트)</summary><div lang="en">
+    <p>Suppose $0=\sum_{i=1}^n a_ie_i$. Then $0=\begin{bmatrix}a_1\\0\\\vdots\\0\end{bmatrix}+\cdots+\begin{bmatrix}0\\\vdots\\0\\a_n\end{bmatrix}=\begin{bmatrix}a_1\\\vdots\\a_n\end{bmatrix}$, so $a_1=\cdots=a_n=0$. Hence $e_1,\dots,e_n$ are l.i. $\square$</p>
+    <p lang="ko" style="color:var(--grey600)">항상 "Suppose $\sum a_iv_i=0$."으로 시작해서 "모든 $a_i=0$"으로 끝낸다.</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.39 – LEM 1.44</span> 일차종속과 "중복(redundant)" 벡터 <span class="en">Dependence vs. redundancy</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>Prop 1.39.</strong> If $S_1\subseteq S_2\subseteq V$ and $S_1$ is l.d., then $S_2$ is l.d. &nbsp; <strong>Cor 1.40.</strong> If $S_2$ is l.i., then $S_1$ is l.i. (contrapositive)</p>
+    <p><strong>Lem 1.41.</strong> Let $S\subseteq V$, $v\in S$. If $v\in\operatorname{span}(S\setminus\{v\})$, then $S$ is l.d.</p>
+    <p><strong>Prop 1.42.</strong> Let $v\in S$. Then $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)\iff v\in\operatorname{span}(S\setminus\{v\})$.</p>
+    <p><strong>Prop 1.43.</strong> $S$ is l.d. iff $\exists v\in S$ s.t. $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)$. (Such $v$ is a "redundant" vector: removing it does not change the span.)</p>
+    <p><strong>Lem 1.44.</strong> Let $S\subseteq V$ be l.i. and $v\in V$. If $v\notin\operatorname{span}(S)$, then $S\cup\{v\}$ is l.i.</p>
+  </div>
+  <details class="qs-proof"><summary>증명: Prop 1.39 / Lem 1.41</summary><div lang="en">
+    <p><strong>1.39.</strong> $S_1$ l.d. $\Rightarrow$ $\exists T=\{v_1,\dots,v_k\}\subseteq S_1$ ($T\neq\varnothing$) with $v_1,\dots,v_k$ l.d. Since $T\subseteq S_1\subseteq S_2$, $S_2$ is l.d. via $T$ by definition. $\square$</p>
+    <p><strong>1.41.</strong> $v\in\operatorname{span}(S\setminus\{v\})$, so $\exists T=\{w_1,\dots,w_k\}\subseteq S\setminus\{v\}$ with $v=\sum_{i=1}^k a_iw_i$ for some $a_i\in\mathbb{R}$. Then $a_1w_1+\cdots+a_kw_k+(-1)v=0$ with the coefficient $-1\neq0$, so $w_1,\dots,w_k,v$ are l.d. Hence $S$ is l.d. because $\{w_1,\dots,w_k,v\}\subseteq S$. $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>증명: Prop 1.42 (강의노트)</summary><div lang="en">
+    <p>($\Rightarrow$) $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)\supseteq S\ni v$.</p>
+    <p>($\Leftarrow$) $v\in S$ and $v\in\operatorname{span}(S\setminus\{v\})$ $\Rightarrow$ $S=(S\setminus\{v\})\cup\{v\}\subseteq\operatorname{span}(S\setminus\{v\})$, which is a subspace, so Prop 1.33 gives $\operatorname{span}(S)\subseteq\operatorname{span}(S\setminus\{v\})$. Also $S\setminus\{v\}\subseteq S\subseteq\operatorname{span}(S)$, so by Prop 1.33 $\operatorname{span}(S\setminus\{v\})\subseteq\operatorname{span}(S)$. Thus $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)$. $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>증명: Prop 1.43 (⇒는 노트에 없음 — 직접 쓰면 이렇게)</summary><div lang="en">
+    <p>($\Leftarrow$) If $\operatorname{span}(S\setminus\{v\})=\operatorname{span}(S)$, then $v\in S\subseteq\operatorname{span}(S)=\operatorname{span}(S\setminus\{v\})$, so $S$ is l.d. by Lem 1.41.</p>
+    <p>($\Rightarrow$) $S$ l.d. $\Rightarrow$ there are distinct $v_1,\dots,v_k\in S$ and $(a_1,\dots,a_k)\neq0$ with $\sum a_iv_i=0$. Pick $j$ with $a_j\neq0$; then $v_j=\sum_{i\neq j}\left(-\frac{a_i}{a_j}\right)v_i\in\operatorname{span}(S\setminus\{v_j\})$ (if $k=1$ this says $v_j=0\in\operatorname{span}(\cdot)$). By Prop 1.42, $\operatorname{span}(S\setminus\{v_j\})=\operatorname{span}(S)$. $\square$</p>
+  </div></details>
+  <details class="qs-proof"><summary>증명: Lem 1.44 ($S$ 유한일 때, 귀류법 — 강의노트)</summary><div lang="en">
+    <p>Let $S=\{w_1,\dots,w_n\}$. Since $v\notin\operatorname{span}(S)$, $v\notin S$, so $S\cup\{v\}=\{w_1,\dots,w_n,v\}$. Assume by contradiction that $w_1,\dots,w_n,v$ are l.d. Then $\exists(a_1,\dots,a_n,b)\in\mathbb{R}^{n+1}\setminus\{0\}$ s.t. $(\ast)\ \sum_{i=1}^n a_iw_i+bv=0$.</p>
+    <p>If $b=0$, then $(\ast)$ gives $\sum a_iw_i=0$ with $(a_1,\dots,a_n)\in\mathbb{R}^n\setminus\{0\}$, so $S$ is l.d. — contradiction to $S$ l.i.</p>
+    <p>Thus $b\neq0$, and $(\ast)$ gives $v=\sum_{i=1}^n\left(-\frac{a_i}{b}\right)w_i\in\operatorname{span}(S)$ — contradiction to $v\notin\operatorname{span}(S)$. Hence $S\cup\{v\}$ is l.i. $\square$</p>
+  </div></details>
+</div>
+
+<!-- ════════════════════════════ §1.4 ════════════════════════════ -->
+<div class="section-title" id="s14"><h2>§1.4 Basis · 기저</h2></div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag def">DEF 1.45 · EXAM 1.46–1.47</span> 기저와 기본 예 <span class="en">Basis</span></h3>
+  <div class="qs-en" lang="en">
+    <p>A <em>basis</em> $\beta=(v_1,\dots,v_n)\in V^n$ of $V$ is a l.i. list that also spans $V$. (A basis $\beta\subseteq V$ is a l.i. subset that spans $V$; the two definitions agree for $(v_1,\dots,v_n)$ and $\{v_1,\dots,v_n\}$.)</p>
+    <p>(1) $\varnothing$ is a basis of $\{0\}$. (2) The standard basis of $\mathbb{R}^n$ is $(e_1,\dots,e_n)$. (3) The standard basis of $\mathbb{R}[x]_{\leq n}$ is $(1,x,\dots,x^n)$. (4) $(1,x+1,(x+1)^2)$ is a basis of $\mathbb{R}[x]_{\leq2}$. $\{x^n:n\in\mathbb{Z}_{\geq0}\}$ is a basis of $\mathbb{R}[x]$ (infinite).</p>
+  </div>
+  <p class="qs-ko">기저는 <strong>유일하지 않다</strong>((3)과 (4)). $v_1,\dots,v_n$이 l.i.이면 그 자체로 $\operatorname{span}(v_1,\dots,v_n)$의 기저. 기저 = 공간을 생성하는 <strong>최소</strong> 부분집합(하나라도 빼면 span이 줄어듦, Prop 1.43).</p>
+  <details class="qs-proof"><summary>증명: 표준기저 $(e_1,\dots,e_n)$은 ℝⁿ의 기저 (강의노트)</summary><div lang="en">
+    <p>$\beta$ is l.i. by Ex 1.38(1). Also $\operatorname{span}(\beta)=\{a_1e_1+\cdots+a_ne_n: a_i\in\mathbb{R}\}=\left\{\begin{bmatrix}a_1\\\vdots\\a_n\end{bmatrix}: a_i\in\mathbb{R}\right\}=\mathbb{R}^n$, so $\beta$ spans $\mathbb{R}^n$. Therefore $\beta$ is a basis of $\mathbb{R}^n$. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.48</span> 기저 ⟺ 표현의 유일성 <span class="en">Basis iff unique representation</span></h3>
+  <div class="qs-en" lang="en">
+    <p>$v_1,\dots,v_n\in V$ is a basis iff for every $w\in V$ there exists a unique l.c. $w=a_1v_1+\cdots+a_nv_n$.</p>
+  </div>
+  <details class="qs-proof"><summary>증명 (강의노트)</summary><div lang="en">
+    <p>($\Rightarrow$) Assume $v_1,\dots,v_n$ is a basis. Then $w\in V=\operatorname{span}(v_1,\dots,v_n)$, so $\exists(a_1,\dots,a_n)\in\mathbb{R}^n$ with $w=\sum a_iv_i$. If also $w=\sum b_iv_i$, then $0=\sum a_iv_i-\sum b_iv_i=\sum(a_i-b_i)v_i$. Since $v_1,\dots,v_n$ are l.i., $a_i-b_i=0$, i.e. $a_i=b_i$ for all $i$. Thus the l.c. is unique.</p>
+    <p>($\Leftarrow$) Every $w\in V$ is a l.c. of $v_1,\dots,v_n$, so $v_1,\dots,v_n$ span $V$. Also $0=0\cdot v_1+\cdots+0\cdot v_n$, and this l.c. is unique by assumption, so $\sum a_iv_i=0$ forces all $a_i=0$: $v_1,\dots,v_n$ are l.i. Hence they form a basis. $\square$</p>
+  </div></details>
+  <p class="qs-ko">이 유일한 계수가 좌표 $[w]_\beta=\begin{bmatrix}a_1\\\vdots\\a_n\end{bmatrix}\in\mathbb{R}^n$ (Unit 2에서 사용).</p>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">PROP 1.49 · EXAM 1.51</span> 유한 생성집합에서 기저 뽑기 <span class="en">Extracting a basis from a finite spanning set</span></h3>
+  <div class="qs-en" lang="en">
+    <p>If $V=\operatorname{span}(S)$ with $S$ finite, then $\exists\beta\subseteq S$ which is a basis for $V$ (so $V$ has a finite basis).</p>
+  </div>
+  <p class="qs-ko"><strong>아이디어:</strong> $S$가 l.d.이면 Prop 1.43으로 span을 바꾸지 않는 중복 벡터를 하나 뺀다 → 반복 → $S$가 유한이므로 언젠가 l.i.가 된다(끝까지 가면 $\varnothing$, 이것도 l.i.). 노트는 이를 귀류법으로 썼다.</p>
+  <div class="qs-en" lang="en">
+    <p><strong>Ex 1.51.</strong> $S=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},\begin{bmatrix}0\\1\\0\end{bmatrix},\begin{bmatrix}3\\2\\1\end{bmatrix},\begin{bmatrix}1\\0\\-1\end{bmatrix}\right\}\subseteq\mathbb{R}^3$.</p>
+    <p>Notice $\begin{bmatrix}1\\0\\-1\end{bmatrix}=4\begin{bmatrix}1\\0\\0\end{bmatrix}+2\begin{bmatrix}0\\1\\0\end{bmatrix}-\begin{bmatrix}3\\2\\1\end{bmatrix}$. Let $T:=S\setminus\left\{\begin{bmatrix}1\\0\\-1\end{bmatrix}\right\}$; then $\begin{bmatrix}1\\0\\-1\end{bmatrix}\in\operatorname{span}(T)$, so $\operatorname{span}(T)=\operatorname{span}(S)$ by Prop 1.42.</p>
+    <p>$\{e_1,e_2\}$ is l.i. (subset of the std basis, Cor 1.40), and $\begin{bmatrix}3\\2\\1\end{bmatrix}\notin\operatorname{span}(e_1,e_2)=\left\{\begin{bmatrix}a\\b\\0\end{bmatrix}\right\}$, so $T$ is l.i. by Lem 1.44. Thus $\beta:=T$ is a basis of $\operatorname{span}(S)$.</p>
+    <p>Since $e_3=\begin{bmatrix}3\\2\\1\end{bmatrix}-3e_1-2e_2\in\operatorname{span}(\beta)$, $\mathbb{R}^3=\operatorname{span}(e_1,e_2,e_3)\subseteq\operatorname{span}(\beta)\subseteq\mathbb{R}^3$, so $\operatorname{span}(S)=\mathbb{R}^3$ and $\beta$ is a basis of $\mathbb{R}^3$.</p>
+  </div>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag thm">THM 1.53 · COR 1.55</span> 교체정리와 기저의 크기 <span class="en">Replacement Theorem</span></h3>
+  <div class="qs-en" lang="en">
+    <p><strong>Replacement Thm.</strong> Let $V=\operatorname{span}(G)$ with $\#G=n\lt\infty$, and let $B\subseteq V$ be l.i. with $\#B=m\lt\infty$. Then $m\leq n$ and $\exists H\subseteq G$ s.t. $\#H=n-m$ and $B\cup H$ spans $V$.</p>
+    <p><strong>Cor 1.55.</strong> Let $V=\operatorname{span}(\beta)$ with $\beta$ a finite basis. Then every basis $\tilde\beta$ for $V$ is finite, and $\#\tilde\beta=\#\beta$.</p>
+  </div>
+  <details class="qs-proof"><summary>증명: Cor 1.55 (강의노트) + Exercise 1.54</summary><div lang="en">
+    <p><strong>Exercise 1.54</strong> (if $V=\operatorname{span}(G)$ with $\#G\lt\infty$, every l.i. $B\subseteq V$ is finite): if $B$ were infinite, choose a finite subset $B'\subseteq B$ with $\#B'=\#G+1$. $B'$ is l.i. by Cor 1.40, so the Replacement Thm gives $\#B'\leq\#G$ — contradiction.</p>
+    <p><strong>Cor 1.55.</strong> $\tilde\beta$ is a basis of $V=\operatorname{span}(\beta)$, so $\tilde\beta$ is l.i. (finite by Exercise 1.54) $\Rightarrow$ $\#\tilde\beta\leq\#\beta$ by the Replacement Thm. Switching the roles of $\beta$ and $\tilde\beta$ gives $\#\beta\leq\#\tilde\beta$. Hence $\#\beta=\#\tilde\beta$. $\square$</p>
+  </div></details>
+  <p class="qs-ko">교체정리의 증명은 수학과 전용(비전공 분반은 진술·사용법만). 모든 벡터공간이 기저를 가진다는 사실도 수학과 전용(FIS §1.7*). 이 결과가 다음 시간 <strong>차원(dimension)</strong>의 정의로 이어진다.</p>
+</div>
+
+<!-- ════════════════════════════ PITFALLS ════════════════════════════ -->
+<div class="section-title" id="pitfalls"><h2>자주 틀리는 포인트 · Pitfalls &amp; Typos in the Notes</h2></div>
+
+<div class="qs-block">
+  <ul class="qs-list">
+    <li><strong>공집합:</strong> $\operatorname{span}(\varnothing)=\{0\}$, $\varnothing$은 l.i., $\varnothing$은 $\{0\}$의 기저. $\{0\}$ 자체는 l.d.($1\cdot0=0$).</li>
+    <li><strong>l.d.의 조건</strong>은 계수 벡터가 $0$이 아님(= 적어도 하나의 $a_j\neq0$). "모든 계수가 0이 아님"으로 쓰면 틀린다.</li>
+    <li><strong>l.i. 증명 방향:</strong> "Suppose $\sum a_iv_i=0$" → … → "Hence $a_1=\cdots=a_n=0$". 거꾸로 "$a_i=0$이면 합이 0"은 아무것도 보이지 않는다(항상 참).</li>
+    <li><strong>부분공간 판정</strong>은 항상 세 조건 모두. 특히 $0_V\in W$를 빠뜨리지 말 것(공집합은 (2)(3)을 공허하게 만족하지만 부분공간이 아님).</li>
+    <li><strong>스칼라 0 vs 영벡터:</strong> $0\cdot v=0_V$ (왼쪽 $0\in\mathbb{R}$, 오른쪽 $0_V\in V$). 혼동 없으면 $0_V$를 $0$으로 쓴다.</li>
+    <li><strong>리스트 vs 집합:</strong> 리스트 $(v,v)$는 l.d., 집합 $\{v,v\}=\{v\}$는 $v\neq0$이면 l.i.</li>
+    <li>다항식은 이 수업에서 <strong>함수</strong>($\mathbb{R}[x]\subseteq\mathcal{F}(\mathbb{R},\mathbb{R})$). 다항식이 같음 ⟺ 계수가 같음(계수 비교) — 강의도 이걸로 계산한다.</li>
+    <li><span class="qs-tag warn">노트 오타</span> Ex 1.25 힌트 $\deg(fg)=\deg(f)\deg(g)$ → 올바르게는 $\deg(f)+\deg(g)$.</li>
+    <li><span class="qs-tag warn">노트 오타</span> Unit 1.3 노트의 Motivation $W=\{(a,-a,b)\}$ → 강의(Lecture 5)의 $W=\{(a,a,b): a,b\in\mathbb{R}\}$가 맞다($a(1,1,0)+b(0,0,1)$).</li>
+    <li><span class="qs-tag warn">노트 오타</span> Def 1.2 "$\mathbb{R}^3:=\{(a,b,c): a,b,c\in\mathbb{R}^3\}$" → $a,b,c\in\mathbb{R}$. Def 1.4(2) "$\forall(x_1,\dots,x_n)\in\mathbb{R}$" → $\in\mathbb{R}^n$. Unit 1.2 노트 "$a+c=b+c\Rightarrow a=c$" → $a=b$.</li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════ PHRASES ════════════════════════════ -->
+<div class="section-title" id="phrases"><h2>영어 답안 문장 틀 · Phrases for Written Answers</h2></div>
+
+<div class="qs-block">
+  <div class="qs-phr" lang="en">
+    <div><span class="k">부분공간 증명 시작</span><br>We check the three conditions of the Subspace Criterion.</div>
+    <div><span class="k">원소를 잡을 때</span><br>Let $x,y\in W$ and $c\in\mathbb{R}$ be arbitrary.</div>
+    <div><span class="k">정의를 풀 때</span><br>By definition of $W$, we have …</div>
+    <div><span class="k">결론</span><br>Therefore $W$ is a subspace of $V$.</div>
+    <div><span class="k">l.i. 증명 시작</span><br>Suppose $a_1v_1+\cdots+a_nv_n=0$ for some $a_1,\dots,a_n\in\mathbb{R}$.</div>
+    <div><span class="k">l.i. 결론</span><br>Hence $a_1=\cdots=a_n=0$, so $v_1,\dots,v_n$ are linearly independent.</div>
+    <div><span class="k">l.d. 보이기</span><br>$v_1,\dots,v_n$ are linearly dependent because $2v_1-v_2=0$ is a nontrivial linear combination.</div>
+    <div><span class="k">반례</span><br>$W$ is not a subspace: $(1,0),(0,1)\in W$ but $(1,0)+(0,1)=(1,1)\notin W$.</div>
+    <div><span class="k">귀류법</span><br>Assume, for contradiction, that … This contradicts …</div>
+    <div><span class="k">보일 것</span><br>We want to show (WTS) that … / It suffices to show that …</div>
+    <div><span class="k">계수 비교</span><br>Comparing coefficients, we get $a+b+c=2$, $b+2c=3$, $c=1$.</div>
+    <div><span class="k">정리 인용</span><br>By the Cancellation Law / by the Subspace Criterion / by the Replacement Theorem, …</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ PRACTICE ════════════════════════════ -->
+<div class="section-title" id="practice"><h2>예상 문제와 모범답안 · Practice Problems with Model Answers</h2></div>
+
+<p class="qs-ko">노트에서 "Exercise" 또는 "Pf: Exercise"로 남긴 것 위주입니다. 먼저 영어로 답을 써 본 뒤 펼쳐 보세요.</p>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P1</span> Exercise 1.27(a) 우함수 <span class="en">Even functions form a subspace</span></h3>
+  <div class="qs-en" lang="en"><p>Prove that $E:=\{f\in\mathcal{F}(\mathbb{R},\mathbb{R}): f(x)=f(-x)\ \forall x\in\mathbb{R}\}$ is a subspace of $\mathcal{F}(\mathbb{R},\mathbb{R})$.</p></div>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>We check the Subspace Criterion. (1) The zero function $0$ satisfies $0(x)=0=0(-x)$ for all $x$, so $0\in E$. (2) Let $f,g\in E$. For all $x$, $(f+g)(-x)=f(-x)+g(-x)=f(x)+g(x)=(f+g)(x)$, so $f+g\in E$. (3) Let $c\in\mathbb{R}$, $f\in E$. For all $x$, $(cf)(-x)=cf(-x)=cf(x)=(cf)(x)$, so $cf\in E$. Hence $E$ is a subspace. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P2</span> Exercise 1.27(b) 한 점에서 0인 다항식 <span class="en">Polynomials vanishing at a</span></h3>
+  <div class="qs-en" lang="en"><p>Fix $a\in\mathbb{R}$, $n\in\mathbb{Z}_{\geq0}$. Prove that $W:=\{f\in\mathbb{R}[x]_{\leq n}: f(a)=0\}$ is a subspace of $\mathbb{R}[x]_{\leq n}$.</p></div>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>(1) The zero polynomial $0\in\mathbb{R}[x]_{\leq n}$ and $0(a)=0$, so $0\in W$. (2) Let $f,g\in W$. Then $f+g\in\mathbb{R}[x]_{\leq n}$ (it is a subspace) and $(f+g)(a)=f(a)+g(a)=0+0=0$, so $f+g\in W$. (3) Let $c\in\mathbb{R}$, $f\in W$. Then $cf\in\mathbb{R}[x]_{\leq n}$ and $(cf)(a)=c\,f(a)=c\cdot0=0$, so $cf\in W$. Hence $W$ is a subspace. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P3</span> Exercise 1.27(c) 대칭행렬 <span class="en">Symmetric matrices</span></h3>
+  <div class="qs-en" lang="en"><p>Prove that $\{A\in M_n(\mathbb{R}): A_{ij}=A_{ji}\ \forall 1\leq i,j\leq n\}$ is a subspace of $M_n(\mathbb{R})$.</p></div>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>Call the set $S$. (1) The zero matrix $O$ has $O_{ij}=0=O_{ji}$, so $O\in S$. (2) For $A,B\in S$: $(A+B)_{ij}=A_{ij}+B_{ij}=A_{ji}+B_{ji}=(A+B)_{ji}$, so $A+B\in S$. (3) For $c\in\mathbb{R}$, $A\in S$: $(cA)_{ij}=cA_{ij}=cA_{ji}=(cA)_{ji}$, so $cA\in S$. Hence $S$ is a subspace. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P4</span> Ex 1.25 $\mathbb{R}[x]_{\leq n}$은 부분공간 <span class="en">Polynomials of degree at most n</span></h3>
+  <div class="qs-en" lang="en"><p>Prove that $\mathbb{R}[x]_{\leq n}$ is a subspace of $\mathbb{R}[x]$.</p></div>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>(1) $0=\sum_{i=0}^n0\cdot x^i\in\mathbb{R}[x]_{\leq n}$. (2) $\sum_{i=0}^n a_ix^i+\sum_{i=0}^n b_ix^i=\sum_{i=0}^n(a_i+b_i)x^i\in\mathbb{R}[x]_{\leq n}$. (3) $c\sum_{i=0}^n a_ix^i=\sum_{i=0}^n(ca_i)x^i\in\mathbb{R}[x]_{\leq n}$. By the Subspace Criterion, $\mathbb{R}[x]_{\leq n}$ is a subspace of $\mathbb{R}[x]$. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P5</span> Lecture 5 Exercise <span class="en">W = {(a, a, b)} is a subspace of ℝ³</span></h3>
+  <div class="qs-en" lang="en"><p>Check that $W=\left\{\begin{bmatrix}a\\a\\b\end{bmatrix}: a,b\in\mathbb{R}\right\}$ is a subspace of $\mathbb{R}^3$.</p></div>
+  <details class="qs-proof"><summary>모범답안 (두 가지)</summary><div lang="en">
+    <p><em>Direct.</em> (1) $a=b=0$ gives $0\in W$. (2) $\begin{bmatrix}a\\a\\b\end{bmatrix}+\begin{bmatrix}a'\\a'\\b'\end{bmatrix}=\begin{bmatrix}a+a'\\a+a'\\b+b'\end{bmatrix}\in W$. (3) $c\begin{bmatrix}a\\a\\b\end{bmatrix}=\begin{bmatrix}ca\\ca\\cb\end{bmatrix}\in W$. $\square$</p>
+    <p><em>Via span.</em> $W=\left\{a\begin{bmatrix}1\\1\\0\end{bmatrix}+b\begin{bmatrix}0\\0\\1\end{bmatrix}\right\}=\operatorname{span}\left(\begin{bmatrix}1\\1\\0\end{bmatrix},\begin{bmatrix}0\\0\\1\end{bmatrix}\right)$, which is a subspace by Prop 1.33. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P6</span> Lecture 6 Exercise <span class="en">If v₂ = cv₁, then v₁, v₂ are l.d.</span></h3>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>$c\cdot v_1+(-1)\cdot v_2=cv_1-cv_1=0$, and $(c,-1)\in\mathbb{R}^2\setminus\{0\}$ since $-1\neq0$. Hence $v_1,v_2$ are linearly dependent. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P7</span> Ex 1.38(2)(3) <span class="en">1, x, …, xⁿ are l.i.; sin x, cos x are l.i.</span></h3>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p><em>$1,x,\dots,x^n$.</em> Suppose $f(x):=a_0+a_1x+\cdots+a_nx^n=0$ for all $x\in\mathbb{R}$. Then $f(0)=a_0=0$. Differentiating $k$ times, $f^{(k)}(x)=0$ for all $x$, and $f^{(k)}(0)=k!\,a_k$, so $a_k=0$ for $k=1,\dots,n$. Hence $1,x,\dots,x^n$ are l.i. $\square$ <span lang="ko" style="color:var(--grey600)">(계수 비교로 "the zero polynomial has all coefficients 0"이라고 써도 된다.)</span></p>
+    <p><em>$\sin x,\cos x$.</em> Suppose $a\sin x+b\cos x=0$ for all $x\in\mathbb{R}$. At $x=0$: $b=0$. At $x=\pi/2$: $a=0$. Hence $\sin x,\cos x$ are l.i. $\square$</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P8</span> Ex 1.46(4) <span class="en">(1, x+1, (x+1)²) is a basis of ℝ[x]≤2</span></h3>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>Let $a+bx+cx^2\in\mathbb{R}[x]_{\leq2}$ and solve $a+bx+cx^2=\alpha\cdot1+\beta(x+1)+\gamma(x+1)^2=(\alpha+\beta+\gamma)+(\beta+2\gamma)x+\gamma x^2$. Comparing coefficients: $\gamma=c$, $\beta+2\gamma=b$, $\alpha+\beta+\gamma=a$, which has the unique solution $\gamma=c$, $\beta=b-2c$, $\alpha=a-b+c$.</p>
+    <p>So every element of $\mathbb{R}[x]_{\leq2}$ is a unique l.c. of $1,x+1,(x+1)^2$; by Prop 1.48 they form a basis. (Equivalently: existence ⇒ spanning; taking $a=b=c=0$ gives only $\alpha=\beta=\gamma=0$ ⇒ l.i.) $\square$</p>
+    <p lang="ko" style="color:var(--grey600)">검산: $(a-b+c)+(b-2c)(x+1)+c(x+1)^2=a+bx+cx^2$ ✓. (3)의 $(1,x,\dots,x^n)$도 P7 + "모든 다항식이 $\sum a_ix^i$ 꼴"로 같은 방식.</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P9</span> 계산 연습 <span class="en">Span membership &amp; independence in ℝ³</span></h3>
+  <div class="qs-en" lang="en">
+    <p>(a) Is $(1,2,3)\in\operatorname{span}((1,0,1),(0,1,1))$? Is $(1,2,4)$?</p>
+    <p>(b) Are $(1,1,0),(0,1,1),(1,0,1)$ linearly independent? Are $(1,0,1),(0,1,1),(1,1,2)$?</p>
+  </div>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p>(a) $a(1,0,1)+b(0,1,1)=(a,b,a+b)$. For $(1,2,3)$: $a=1$, $b=2$, $a+b=3$ ✓, so YES: $(1,2,3)=(1,0,1)+2(0,1,1)$. For $(1,2,4)$: $a=1$, $b=2$ forces $a+b=3\neq4$, so NO.</p>
+    <p>(b) Suppose $a(1,1,0)+b(0,1,1)+c(1,0,1)=(a+c,a+b,b+c)=0$. Then $c=-a$, $b=-a$, and $b+c=-2a=0$, so $a=b=c=0$: l.i. For the second list, $(1,0,1)+(0,1,1)-(1,1,2)=0$ is a nontrivial l.c., so they are l.d.</p>
+  </div></details>
+</div>
+
+<div class="qs-block">
+  <h3><span class="qs-tag ex">P10</span> 짧은 증명 모음 <span class="en">Cor 1.40, Rmk 1.29(1)</span></h3>
+  <details class="qs-proof"><summary>모범답안</summary><div lang="en">
+    <p><strong>Cor 1.40.</strong> Suppose $S_1\subseteq S_2$ and $S_2$ is l.i. If $S_1$ were l.d., then $S_2$ would be l.d. by Prop 1.39, a contradiction. Hence $S_1$ is l.i. $\square$</p>
+    <p><strong>Rmk 1.29(1).</strong> Induction on $m$. $m=1$ is clear and $m=2$ is Prop 1.28. If $W_1\cap\cdots\cap W_{m-1}$ is a subspace, then $W_1\cap\cdots\cap W_m=(W_1\cap\cdots\cap W_{m-1})\cap W_m$ is an intersection of two subspaces, hence a subspace by Prop 1.28. $\square$</p>
+  </div></details>
+</div>
+
+<p class="qs-ko" style="margin-top:28px">단원별 원문 전사와 한국어 대조는 <a href="index.html">선형대수학 1 홈</a>의 각 단원 페이지에 있습니다. 출처: MATH221 Linear Algebra I (Fall 2026, Changho Han) Lecture 1–8 및 Unit 1.1–1.3 노트.</p>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="quiz1.html">퀴즈1 요약</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>
