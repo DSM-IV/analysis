@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.1 내적과 노름 (§6.1 Inner Products and Norms) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제5단원 6.1 내적과 노름 — 내적의 정의, 표준내적과 점곱, 기저에 대한 내적의 행렬, 수반행렬(켤레전치), 프로베니우스 내적, 내적공간, 노름, 코시-슈바르츠 부등식과 삼각부등식, 직교·정규직교 집합을 Friedberg §6.1 추천 연습문제와 함께 한국어·영어 대조로 정리했습니다. Inner product, standard inner product, dot product, conjugate transpose, Frobenius inner product, inner product space, norm, Cauchy–Schwarz inequality, triangle inequality, orthogonal and orthonormal sets.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 내적, inner product, 내적공간, inner product space, 표준내적, standard inner product, 점곱, dot product, 수반행렬, 켤레전치, conjugate transpose, adjoint, 프로베니우스 내적, Frobenius inner product, 노름, norm, 단위벡터, unit vector, 코시-슈바르츠 부등식, Cauchy-Schwarz inequality, 삼각부등식, triangle inequality, 직교, orthogonal, 정규직교, orthonormal, 정규화, normalizing, 크로네커 델타, Kronecker delta, Friedberg, 프리드버그, Friedberg 6.1, 연습문제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch05.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.1 내적과 노름 (§6.1 Inner Products and Norms) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="내적의 정의와 예, 수반행렬(켤레전치), 프로베니우스 내적, 노름, 코시-슈바르츠 부등식·삼각부등식, 직교·정규직교 집합 — Friedberg §6.1 추천 연습문제 9문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch05.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "6.1 내적과 노름 (§6.1 Inner Products and Norms) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 6.1 내적과 노름. 내적과 내적공간, 표준내적, 수반행렬(켤레전치), 프로베니우스 내적, 노름, 코시-슈바르츠 부등식과 삼각부등식, 직교·정규직교 집합을 다루는 Friedberg §6.1 추천 연습문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch05.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch05.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la1/index.html">선형대수학1</a>
+      <a href="index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html" class="active">05</a>
+      <a href="ch06.html">06</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 05</p>
+  <h1>6.1 내적과 노름<span>§6.1 Inner Products and Norms</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c5-1"><span class="toc-num">REM 1</span> <span class="toc-ko">$\mathbb{R}^3$에서의 길이, 거리, 각</span> <em>Length, Distance, and Angle in $\mathbb{R}^3$</em></a></li>
+    <li><a href="#c5-2"><span class="toc-num">REM 2</span> <span class="toc-ko">$\mathbb{R}^n$에서의 길이와 각</span> <em>Length and Angle in $\mathbb{R}^n$</em></a></li>
+    <li><a href="#c5-3"><span class="toc-num">NOTE</span> <span class="toc-ko">기본 가정: $F = \mathbb{R}$ 또는 $\mathbb{C}$</span> <em>Standing Assumption: $F = \mathbb{R}$ or $\mathbb{C}$</em></a></li>
+    <li><a href="#c5-4"><span class="toc-num">DEF</span> 내적 <em>Inner Product</em></a></li>
+    <li><a href="#c5-5"><span class="toc-num">REM</span> 첫째 성분에 대한 선형성 <em>Linearity in the First Component</em></a></li>
+    <li><a href="#c5-6"><span class="toc-num">EXAM 1</span> <span class="toc-ko">$F^n$ 위의 내적</span> <em>An Inner Product on $F^n$</em></a></li>
+    <li><a href="#c5-7"><span class="toc-num">DEF</span> 표준내적과 점곱 <em>The Standard Inner Product and the Dot Product</em></a></li>
+    <li><a href="#c5-8"><span class="toc-num">REM</span> 기저에 대한 내적의 행렬 <em>The Matrix of an Inner Product Relative to a Basis</em></a></li>
+    <li><a href="#c5-9"><span class="toc-num">EXAM 1</span> <span class="toc-ko">$F^n$ 위의 내적 (재방문)</span> <em>An Inner Product on $F^n$ (Revisited)</em></a></li>
+    <li><a href="#c5-10"><span class="toc-num">EXAM 2</span> 내적의 스칼라배 <em>Scalar Multiples of an Inner Product</em></a></li>
+    <li><a href="#c5-11"><span class="toc-num">EXAM 3</span> <span class="toc-ko">$C([0,1])$ 위의 적분 내적</span> <em>An Integral Inner Product on $C([0,1])$</em></a></li>
+    <li><a href="#c5-12"><span class="toc-num">EXAM</span> 내적의 켤레는 내적이 아니다 <em>The Conjugate of an Inner Product Is Not an Inner Product</em></a></li>
+    <li><a href="#c5-13"><span class="toc-num">DEF</span> 켤레전치행렬 <em>Conjugate Transpose</em></a></li>
+    <li><a href="#c5-14"><span class="toc-num">EXAM 4</span> 켤레전치행렬의 계산 <em>Computing a Conjugate Transpose</em></a></li>
+    <li><a href="#c5-15"><span class="toc-num">REM</span> <span class="toc-ko">$y^*x$로서의 표준내적</span> <em>The Standard Inner Product as $y^*x$</em></a></li>
+    <li><a href="#c5-16"><span class="toc-num">EXAM 5</span> <span class="toc-ko">$M_{n \times n}(F)$ 위의 프로베니우스 내적</span> <em>The Frobenius Inner Product on $M_{n \times n}(F)$</em></a></li>
+    <li><a href="#c5-17"><span class="toc-num">DEF</span> 내적공간 <em>Inner Product Spaces</em></a></li>
+    <li><a href="#c5-18"><span class="toc-num">EXAM</span> <span class="toc-ko">$C([-1,1])$ 위의 두 적분식</span> <em>Two Integral Pairings on $C([-1,1])$</em></a></li>
+    <li><a href="#c5-19"><span class="toc-num">THM 6.1</span> 내적의 기본 성질 <em>Basic Properties of Inner Products</em></a></li>
+    <li><a href="#c5-20"><span class="toc-num">DEF</span> 노름 (길이) <em>Norm (Length)</em></a></li>
+    <li><a href="#c5-21"><span class="toc-num">EXAM 6</span> 표준 노름은 유클리드 길이이다 <em>The Standard Norm Is the Euclidean Length</em></a></li>
+    <li><a href="#c5-22"><span class="toc-num">THM 6.2</span> 노름의 성질: 코시-슈바르츠 부등식과 삼각부등식 <em>Properties of the Norm: Cauchy–Schwarz and Triangle Inequalities</em></a></li>
+    <li><a href="#c5-23"><span class="toc-num">EXAM 7</span> <span class="toc-ko">$\mathbb{R}^n$에서의 코시-슈바르츠 부등식과 삼각부등식</span> <em>Cauchy–Schwarz and Triangle Inequalities in $\mathbb{R}^n$</em></a></li>
+    <li><a href="#c5-24"><span class="toc-num">RECALL</span> <span class="toc-ko">$\mathbb{R}^2$, $\mathbb{R}^3$에서의 각과 수직</span> <em>Angle and Perpendicularity in $\mathbb{R}^2$ and $\mathbb{R}^3$</em></a></li>
+    <li><a href="#c5-25"><span class="toc-num">DEF</span> 직교집합과 정규직교집합 <em>Orthogonal and Orthonormal Sets</em></a></li>
+    <li><a href="#c5-26"><span class="toc-num">REM</span> 크로네커 델타, 스칼라배, 정규화 <em>The Kronecker Delta, Scaling, and Normalizing</em></a></li>
+    <li><a href="#c5-27"><span class="toc-num">EXAM 8</span> <span class="toc-ko">$F^3$에서 직교집합의 정규화</span> <em>Normalizing an Orthogonal Set in $F^3$</em></a></li>
+    <li><a href="#c5-28"><span class="toc-num">EXAM 9</span> <span class="toc-ko">정규직교집합 $\{e^{int}\}$</span> <em>The Orthonormal Set $\{e^{int}\}$</em></a></li>
+    <li><a href="#e5-1"><span class="toc-num">EX 6.1-1</span> 참·거짓 판정 <em>True or False</em></a></li>
+    <li><a href="#e5-5"><span class="toc-num">EX 6.1-5</span> <span class="toc-ko">행렬로 주어진 $\mathbb{C}^2$ 위의 내적</span> <em>An Inner Product on $\mathbb{C}^2$ Given by a Matrix</em></a></li>
+    <li><a href="#e5-8"><span class="toc-num">EX 6.1-8</span> 내적이 되지 못하는 함수 <em>Functions That Fail to Be Inner Products</em></a></li>
+    <li><a href="#e5-9"><span class="toc-num">EX 6.1-9</span> 기저와의 내적 <em>Inner Products Against a Basis</em></a></li>
+    <li><a href="#e5-10"><span class="toc-num">EX 6.1-10</span> 피타고라스 정리 <em>The Pythagorean Theorem</em></a></li>
+    <li><a href="#e5-11"><span class="toc-num">EX 6.1-11</span> 평행사변형 법칙 <em>The Parallelogram Law</em></a></li>
+    <li><a href="#e5-13"><span class="toc-num">EX 6.1-13</span> 두 내적의 합 <em>The Sum of Two Inner Products</em></a></li>
+    <li><a href="#e5-15"><span class="toc-num">EX 6.1-15</span> 코시-슈바르츠 부등식과 삼각부등식에서의 등호 <em>Equality in the Cauchy–Schwarz and Triangle Inequalities</em></a></li>
+    <li><a href="#e5-20"><span class="toc-num">EX 6.1-20</span> 극화 항등식 <em>The Polar Identities</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c5-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 강의 슬라이드의 번호를 그대로 따른다: 번호가 붙은 항목은 TYPE {원문 번호}
+     (Theorem 6.1 → THM 6.1, Remark 1 → REM 1, Example 1 → EXAM 1), 번호 없는
+     항목(Definition :, Remark :, Recall, Note :, 번호 없는 Example)은 유형 배지만
+     (DEF / THM / REM / RECALL / NOTE / EXAM / COR / LEM). 자체 순번은 id에만 쓴다.
+     span.src-ref 는 연습문제(Friedberg §6.1 #n)에만 쓴다. 본문에서 번호 없는
+     카드를 인용할 때는 그 카드 id를 가리키는 a 링크에 「제목」을 적어 인용한다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Note     → card rem-card  · REM n / RECALL n / NOTE
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "번역 예정" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     (연습문제만 그 뒤에 span.src-ref 로 Friedberg 출처를 적는다.)
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e5-15), 배지는 EX 6.1-15,
+     출처는 span.src-ref 에 Friedberg §6.1 #15 (a), (b) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note05-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 β는 \beta, 켤레는 \overline, 켤레전치는 A^*,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 실체 참조로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 실체 참조로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>Chapter 6. Inner Product Spaces · 제6장 내적공간</h2></div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.2 ═══════════ -->
+
+<!-- S6.1 p2 Remark 1 -->
+<div class="card rem-card" id="c5-1">
+  <div class="card-head">
+    <span class="rem-num">REM 1</span>
+    <span class="rem-title">$\mathbb{R}^3$에서의 길이, 거리, 각 <em>Length, Distance, and Angle in $\mathbb{R}^3$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = \mathbb{R}^3$이라 하자.</p>
+        <p><strong>(1)</strong> 벡터 $u = (a,b,c)$에 대하여 $u$의 길이 $\|u\|$를 다음과 같이 정의할 수 있다.</p>
+        <div class="math-display">$$\|u\| = \sqrt{a^2 + b^2 + c^2}.$$</div>
+        <p><strong>(2)</strong> $V = \mathbb{R}^3$의 두 원소 $u = (a,b,c)$, $v = (d,e,f)$에 대하여</p>
+        <p>$u$와 $v$ 사이의 거리 $d(u,v)$를 다음과 같이 정의한다.</p>
+        <div class="math-display">$$d(u,v) = \sqrt{(a-d)^2 + (b-e)^2 + (c-f)^2}.$$</div>
+        <p>$\theta$를 $u$와 $v$ 사이의 각이라 하면 다음이 성립한다.</p>
+        <div class="math-display">$$d(u,v)^2 = \|u\|^2 + \|v\|^2 - 2\|u\|\,\|v\|\cos\theta.$$</div>
+        <p>이로부터 $\cos\theta = \dfrac{ad + be + cf}{\|u\| \times \|v\|}$를 얻는다.</p>
+        <p>$\langle u,v\rangle := ad + be + cf$로 놓으면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{gathered} \cos\theta = \frac{\langle u,v\rangle}{\|u\| \times \|v\|} \\[2pt] \text{따라서 } \langle u,v\rangle = \|u\|\,\|v\|\cos\theta. \end{gathered}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = \mathbb{R}^3$.</p>
+        <p><strong>(1)</strong> For a vector $u = (a,b,c)$, we can define the length of $u$, denoted by $\|u\|$, by</p>
+        <div class="math-display">$$\|u\| = \sqrt{a^2 + b^2 + c^2}.$$</div>
+        <p><strong>(2)</strong> For two members $u = (a,b,c)$ and $v = (d,e,f)$ in $V = \mathbb{R}^3$,</p>
+        <p>we define the distance between $u$ and $v$, denoted by $d(u,v)$, by</p>
+        <div class="math-display">$$d(u,v) = \sqrt{(a-d)^2 + (b-e)^2 + (c-f)^2}.$$</div>
+        <p>Let $\theta$ be the angle between $u$ and $v$. Then</p>
+        <div class="math-display">$$d(u,v)^2 = \|u\|^2 + \|v\|^2 - 2\|u\|\,\|v\|\cos\theta.$$</div>
+        <p>This gives us $\cos\theta = \dfrac{ad + be + cf}{\|u\| \times \|v\|}$.</p>
+        <p>For $\langle u,v\rangle := ad + be + cf$, it holds that</p>
+        <div class="math-display">$$\begin{gathered} \cos\theta = \frac{\langle u,v\rangle}{\|u\| \times \|v\|} \\[2pt] \text{and hence } \langle u,v\rangle = \|u\|\,\|v\|\cos\theta. \end{gathered}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.3 ═══════════ -->
+
+<!-- S6.1 p3 Remark 2 -->
+<div class="card rem-card" id="c5-2">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">$\mathbb{R}^n$에서의 길이와 각 <em>Length and Angle in $\mathbb{R}^n$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = \mathbb{R}^n$이라 하자.</p>
+        <p><strong>(1)</strong> 두 벡터 $u = (a_1,\ldots,a_n)$, $v = (b_1,\ldots,b_n)$에 대하여 $\theta$를 $u$와 $v$ 사이의 각이라 하자.</p>
+        <div class="math-display">$$\|u\| = u\text{의 길이} = \sqrt{a_1^2 + \cdots + a_n^2}$$</div>
+        <div class="math-display">$$\|u - v\|^2 = \|u\|^2 + \|v\|^2 - 2\|u\|\,\|v\|\cos\theta$$</div>
+        <div class="math-display">$$\cos\theta = \frac{a_1b_1 + \cdots + a_nb_n}{\|u\| \times \|v\|}$$</div>
+        <p><strong>(2)</strong> $\langle u,v\rangle := a_1b_1 + \cdots + a_nb_n$으로 정의한다. 따라서 $\langle u,u\rangle = \|u\|^2$이고 $\langle v,v\rangle = \|v\|^2$이다. 또한 다음이 성립한다.</p>
+        <div class="math-display">$$\cos\theta = \frac{\langle u,v\rangle}{\|u\| \times \|v\|}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = \mathbb{R}^n$.</p>
+        <p><strong>(1)</strong> For two vectors $u = (a_1,\ldots,a_n)$ and $v = (b_1,\ldots,b_n)$, let $\theta$ be the angle between $u$ and $v$.</p>
+        <div class="math-display">$$\|u\| = \text{the length of } u = \sqrt{a_1^2 + \cdots + a_n^2}$$</div>
+        <div class="math-display">$$\|u - v\|^2 = \|u\|^2 + \|v\|^2 - 2\|u\|\,\|v\|\cos\theta$$</div>
+        <div class="math-display">$$\cos\theta = \frac{a_1b_1 + \cdots + a_nb_n}{\|u\| \times \|v\|}$$</div>
+        <p><strong>(2)</strong> Define $\langle u,v\rangle := a_1b_1 + \cdots + a_nb_n$. Thus $\langle u,u\rangle = \|u\|^2$ and $\langle v,v\rangle = \|v\|^2$. Also,</p>
+        <div class="math-display">$$\cos\theta = \frac{\langle u,v\rangle}{\|u\| \times \|v\|}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.4 ═══════════ -->
+
+<!-- S6.1 p4 서술 단락 -->
+<div class="card note-card" id="note05-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 장의 주된 목적은</p>
+        <p>이른바 내적공간 구조라는 훨씬 풍부한 구조를 통하여</p>
+        <p>벡터공간에 거리 또는 길이와 각의 개념을 도입하는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The main purpose of this chapter is</p>
+        <p>to introduce the idea of distance or length and angle into vector spaces</p>
+        <p>via a much richer structure, the so-called inner product space structure.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p4 Note -->
+<div class="card rem-card" id="c5-3">
+  <div class="card-head">
+    <span class="rem-num">NOTE</span>
+    <span class="rem-title">기본 가정: $F = \mathbb{R}$ 또는 $\mathbb{C}$ <em>Standing Assumption: $F = \mathbb{R}$ or $\mathbb{C}$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 장 전체에서 체 $F$는 $\mathbb{R}$ 또는 $\mathbb{C}$라고 가정한다.</p>
+        <p>또한 $z \in F$에 대하여 $\overline{z}$는 $z$의 켤레복소수를 나타낸다.</p>
+        <p>즉 $z = x + iy \ (x, y \in \mathbb{R})$이면 $\overline{z} = x - iy$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Throughout this chapter, we assume that a field $F$ is either $\mathbb{R}$ or $\mathbb{C}$.</p>
+        <p>Also, for any $z \in F$, we denote by $\overline{z}$ the complex conjugation of $z$.</p>
+        <p>That is, if $z = x + iy \ (x, y \in \mathbb{R})$ then $\overline{z} = x - iy$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>§6.1 Inner Products and Norms · 내적과 노름</h2></div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.5 ═══════════ -->
+
+<!-- S6.1 p5 서술 단락 -->
+<div class="card note-card" id="note05-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절에서는 $\mathbb{R}$ 또는 $\mathbb{C}$ 위의 벡터공간에 내적을 정의한다.</p>
+        <p>이를 통하여</p>
+        <p>$\mathbb{R}^2$와 $\mathbb{R}^3$에서의 각, 길이, 수직과 같은 많은 기하학적 개념을 확장할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In this section, we will define an inner product on a vector space over $\mathbb{R}$ or $\mathbb{C}$.</p>
+        <p>This will enable us to extend</p>
+        <p>many geometric notions such as angle, length, and perpendicularity in $\mathbb{R}^2$ and $\mathbb{R}^3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p5 Definition (inner product) — 박스(교재 이미지)는 p 4줄로 -->
+<div class="card def-card" id="c5-4">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">내적 <em>Inner Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 체 $F$ 위의 벡터공간이라 하자. $V$ 위의 <strong>내적</strong>(inner product)이란 다음 함수</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$$</div>
+        <p>로서 다음 조건을 만족하는 것이다.</p>
+        <p><strong>(a)</strong> $\langle x + z, y\rangle = \langle x, y\rangle + \langle z, y\rangle$.</p>
+        <p><strong>(b)</strong> $\langle cx, y\rangle = c\,\langle x, y\rangle$.</p>
+        <p><strong>(c)</strong> $\overline{\langle x, y\rangle} = \langle y, x\rangle$. 여기서 윗줄은 켤레복소수를 뜻한다.</p>
+        <p><strong>(d)</strong> $x \neq 0$이면 $\langle x, x\rangle > 0$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a vector space over a field $F$. An <strong>inner product</strong> on $V$ is a function</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$$</div>
+        <p>which satisfies the following conditions:</p>
+        <p><strong>(a)</strong> $\langle x + z, y\rangle = \langle x, y\rangle + \langle z, y\rangle$.</p>
+        <p><strong>(b)</strong> $\langle cx, y\rangle = c\,\langle x, y\rangle$.</p>
+        <p><strong>(c)</strong> $\overline{\langle x, y\rangle} = \langle y, x\rangle$, where the bar denotes complex conjugation.</p>
+        <p><strong>(d)</strong> $\langle x, x\rangle > 0$ if $x \neq 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p5 Remark -->
+<div class="card rem-card" id="c5-5">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">첫째 성분에 대한 선형성 <em>Linearity in the First Component</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> 조건 (a), (b)는 내적이 첫째 성분에 대하여 선형임을 뜻한다. 더 일반적으로 다음이 성립한다.</p>
+        <div class="math-display">$$\left\langle \sum_{i=1}^n a_iv_i, y \right\rangle = \sum_{i=1}^n a_i\langle v_i, y\rangle.$$</div>
+        <p><strong>(2)</strong> $F = \mathbb{R}$이면 조건 (c)는 $\langle x, y\rangle = \langle y, x\rangle$로 간단해진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Conditions (a) and (b) says that the inner product is linear in the first component. More generally, it holds that</p>
+        <div class="math-display">$$\left\langle \sum_{i=1}^n a_iv_i, y \right\rangle = \sum_{i=1}^n a_i\langle v_i, y\rangle.$$</div>
+        <p><strong>(2)</strong> If $F = \mathbb{R}$, then condition (c) reduces to $\langle x, y\rangle = \langle y, x\rangle$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.6 ═══════════ -->
+
+<!-- S6.1 p6 Example 1 -->
+<div class="card exam-card" id="c5-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">$F^n$ 위의 내적 <em>An Inner Product on $F^n$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = F^n$이라 하자 (여기서 $F$는 $\mathbb{R}$ 또는 $\mathbb{C}$).</p>
+        <p>$V$의 원소 $x = (a_1, a_2, \ldots, a_n)$, $y = (b_1, b_2, \ldots, b_n)$에 대하여 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i}.$$</div>
+        <p>그러면 $V$ 위의 $\langle \,\cdot\,, \cdot\, \rangle$는 내적이다.</p>
+        <p>예를 들어 조건 (a)는 $z = (c_1, c_2, \ldots, c_n)$일 때 다음과 같이 보일 수 있다.</p>
+        <div class="math-display">$$\begin{aligned} \langle x + z, y\rangle &amp;= \sum_{i=1} (a_i + c_i)\overline{b_i} \\[2pt] &amp;= \sum_{i=1} a_i\overline{b_i} + \sum_{i=1} c_i\overline{b_i} \\[2pt] &amp;= \langle x, y\rangle + \langle z, y\rangle. \end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = F^n$ (where $F$ is either $\mathbb{R}$ or $\mathbb{C}$).</p>
+        <p>For $x = (a_1, a_2, \ldots, a_n)$ and $y = (b_1, b_2, \ldots, b_n)$ in $V$, define</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i}.$$</div>
+        <p>Then $\langle \,\cdot\,, \cdot\, \rangle$ on $V$ is an inner product.</p>
+        <p>For example, condition (a) can be shown as follows, where $z = (c_1, c_2, \ldots, c_n)$:</p>
+        <div class="math-display">$$\begin{aligned} \langle x + z, y\rangle &amp;= \sum_{i=1} (a_i + c_i)\overline{b_i} \\[2pt] &amp;= \sum_{i=1} a_i\overline{b_i} + \sum_{i=1} c_i\overline{b_i} \\[2pt] &amp;= \langle x, y\rangle + \langle z, y\rangle. \end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p6 Terminologies -->
+<div class="card def-card" id="c5-7">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">표준내적과 점곱 <em>The Standard Inner Product and the Dot Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> 예 1의 내적을 $V = F^n$ 위의 <strong>표준내적</strong>(standard inner product)이라 한다.</p>
+        <p><strong>(2)</strong> $F = \mathbb{R}$이라 하자. 그러면 켤레는 필요하지 않다.</p>
+        <p>이 경우 이 표준내적을 보통 <strong>점곱</strong>(dot product)이라 한다.</p>
+        <p>또한 $x$와 $y$의 내적을 $\langle x, y\rangle$ 대신 $x \cdot y$로 나타낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> The inner product in Example 1 is called <strong>the standard inner product</strong> on $V = F^n$.</p>
+        <p><strong>(2)</strong> Suppose that $F = \mathbb{R}$. Then the conjugations are not needed.</p>
+        <p>In this case, this standard inner product is usually called <strong>the dot product</strong>.</p>
+        <p>Also, the inner product of $x$ and $y$ is denoted by $x \cdot y$ instead of $\langle x, y\rangle$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.7 ═══════════ -->
+
+<!-- S6.1 p7 Remark (matrix of an inner product) — ERRATA: (1) 마지막 식 켤레 누락, (3) 논증은 F=C에서 보완 필요 → en Note -->
+<div class="card rem-card" id="c5-8">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">기저에 대한 내적의 행렬 <em>The Matrix of an Inner Product Relative to a Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$를 $n$차원 벡터공간 $V$ 위의 내적이라 하자.</p>
+        <p><strong>(1)</strong> $\beta = \{v_1, v_2, \ldots, v_n\}$을 $V$의 기저라 하자.</p>
+        <p>그러면 $v = a_1v_1 + \cdots + a_nv_n$, $w = b_1v_1 + \cdots + b_nv_n$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle v, w\rangle &amp;= \sum_{1 \le i,j \le n} a_i \times \langle v_i, v_j\rangle \times \overline{b_j} \\[2pt] &amp;= \sum_{i=1}^n a_i \times \left( \sum_{j=1}^n \langle v_i, v_j\rangle \times \overline{b_j} \right) \\[2pt] &amp;= (a_1, a_2, \ldots, a_n) \\[2pt] &amp;\qquad \begin{pmatrix} \langle v_1, v_1\rangle &amp; \langle v_1, v_2\rangle &amp; \cdots &amp; \langle v_1, v_n\rangle \\ \langle v_2, v_1\rangle &amp; \langle v_2, v_2\rangle &amp; \cdots &amp; \langle v_2, v_n\rangle \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \langle v_n, v_1\rangle &amp; \langle v_n, v_2\rangle &amp; \cdots &amp; \langle v_n, v_n\rangle \end{pmatrix} \begin{pmatrix} \overline{b_1} \\ \overline{b_2} \\ \vdots \\ \overline{b_n} \end{pmatrix}. \end{aligned}$$</div>
+        <p>따라서 $A_{ij} = \langle v_i, v_j\rangle$를 만족하는 $A \in M_{n \times n}(F)$에 대하여 $\langle v, w\rangle = [v]_\beta^t\, A\, \overline{[w]_\beta}$이다.</p>
+        <p><strong>(2)</strong> 모든 $1 \le i, j \le n$에 대하여 $A_{ij} = \langle v_i, v_j\rangle = \overline{\langle v_j, v_i\rangle} = \overline{A_{ji}}$이다.</p>
+        <p>특히 $F = \mathbb{R}$이면 모든 $1 \le i, j \le n$에 대하여 $A_{ij} = A_{ji}$이므로 $A$는 대칭행렬이다.</p>
+        <p><strong>(3)</strong> $A$는 가역행렬이다.</p>
+        <p>실제로 $A[v]_\beta = O$라 하자. $[u]_\beta = \overline{[v]_\beta}$인 $u \in V$를 택하면 $\langle u, u\rangle = [u]_\beta^t\, A\, \overline{[u]_\beta} = \overline{[v]_\beta}^{\,t} A\, [v]_\beta = 0$이므로 $u = 0_V$이고, 따라서 $v = 0_V$이다. 그러므로 $A$는 가역이다.</p>
+        <p><em>역주.</em> 슬라이드 원문 (1)의 마지막 식에는 켤레가 빠져 있어 $\overline{[w]_\beta}$를 넣어 바로잡았고(<a href="#c5-10">예 2</a>의 형태와 같다), (3)의 논증은 $F = \mathbb{C}$일 때 $A[v]_\beta = O$만으로는 $\langle v, v\rangle = 0$이 나오지 않으므로 $[u]_\beta = \overline{[v]_\beta}$인 $u$를 이용하는 논증으로 바꾸어 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$ be an inner product on an $n$-dimensional vector space $V$.</p>
+        <p><strong>(1)</strong> Let $\beta = \{v_1, v_2, \ldots, v_n\}$ be a basis for $V$.</p>
+        <p>Then for $v = a_1v_1 + \cdots + a_nv_n$ and $w = b_1v_1 + \cdots + b_nv_n$, we have</p>
+        <div class="math-display">$$\begin{aligned} \langle v, w\rangle &amp;= \sum_{1 \le i,j \le n} a_i \times \langle v_i, v_j\rangle \times \overline{b_j} \\[2pt] &amp;= \sum_{i=1}^n a_i \times \left( \sum_{j=1}^n \langle v_i, v_j\rangle \times \overline{b_j} \right) \\[2pt] &amp;= (a_1, a_2, \ldots, a_n) \\[2pt] &amp;\qquad \begin{pmatrix} \langle v_1, v_1\rangle &amp; \langle v_1, v_2\rangle &amp; \cdots &amp; \langle v_1, v_n\rangle \\ \langle v_2, v_1\rangle &amp; \langle v_2, v_2\rangle &amp; \cdots &amp; \langle v_2, v_n\rangle \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \langle v_n, v_1\rangle &amp; \langle v_n, v_2\rangle &amp; \cdots &amp; \langle v_n, v_n\rangle \end{pmatrix} \begin{pmatrix} \overline{b_1} \\ \overline{b_2} \\ \vdots \\ \overline{b_n} \end{pmatrix}. \end{aligned}$$</div>
+        <p>Thus for $A \in M_{n \times n}(F)$ such that $A_{ij} = \langle v_i, v_j\rangle$, then we have $\langle v, w\rangle = [v]_\beta^t\, A\, [w]_\beta$.</p>
+        <p><strong>(2)</strong> $A_{ij} = \langle v_i, v_j\rangle = \overline{\langle v_j, v_i\rangle} = \overline{A_{ji}}$ for all $1 \le i, j \le n$.</p>
+        <p>In particular, if $F = \mathbb{R}$ then $A$ is symmetric since $A_{ij} = A_{ji}$ for all $1 \le i, j \le n$.</p>
+        <p><strong>(3)</strong> $A$ must be an invertible matrix.</p>
+        <p>Indeed, if $A[v]_\beta = O$ then we have $\langle v, v\rangle = [v]_\beta^t\, A\, [v]_\beta = 0$ and hence $v = 0_V$.</p>
+        <p><em>Note.</em> Two points need correction. First, the formula at the end of (1) is transcribed exactly as printed on the slide, but the computation just above it ends with the column of conjugates $\overline{b_1}, \ldots, \overline{b_n}$, so it should read $\langle v, w\rangle = [v]_\beta^t\, A\, \overline{[w]_\beta}$ (this is the form used in <a href="#c5-10">Example 2</a> below). Second, the argument in (3) works as written when $F = \mathbb{R}$, but when $F = \mathbb{C}$ the corrected formula gives $\langle v, v\rangle = [v]_\beta^t\, A\, \overline{[v]_\beta}$, which does not vanish merely because $A[v]_\beta = O$. A correct argument: if $A[v]_\beta = O$, let $u \in V$ be the vector with $[u]_\beta = \overline{[v]_\beta}$; then $\langle u, u\rangle = [u]_\beta^t\, A\, \overline{[u]_\beta} = \overline{[v]_\beta}^{\,t} A\, [v]_\beta = 0$, so $u = 0_V$ and hence $v = 0_V$. Thus $A$ is invertible in either case.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.8 ═══════════ -->
+
+<!-- S6.1 p8 Example 1. (Revisit) -->
+<div class="card exam-card" id="c5-9">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">$F^n$ 위의 내적 (재방문) <em>An Inner Product on $F^n$ (Revisited)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = F^n$이라 하자 (여기서 $F$는 $\mathbb{R}$ 또는 $\mathbb{C}$).</p>
+        <p>$V$의 원소 $x = (a_1, a_2, \ldots, a_n)$, $y = (b_1, b_2, \ldots, b_n)$에 대하여 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i}.$$</div>
+        <p>$V$의 표준기저 $\beta = \{e_1, e_2, \ldots, e_n\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\langle e_i, e_j\rangle = \delta_{ij} = \begin{cases} 1 &amp; i = j\text{일 때,} \\ 0 &amp; i \neq j\text{일 때.} \end{cases}$$</div>
+        <p>따라서 앞의 주의에서의 행렬 $A$는 항등행렬 $I_n$이다.</p>
+        <p>즉 $x = (a_1, a_2, \ldots, a_n)$, $y = (b_1, b_2, \ldots, b_n)$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = (a_1, a_2, \ldots, a_n)\, I_n \begin{pmatrix} \overline{b_1} \\ \overline{b_2} \\ \vdots \\ \overline{b_n} \end{pmatrix}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = F^n$ (where $F$ is either $\mathbb{R}$ or $\mathbb{C}$).</p>
+        <p>For $x = (a_1, a_2, \ldots, a_n)$ and $y = (b_1, b_2, \ldots, b_n)$ in $V$, define</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i}.$$</div>
+        <p>For the standard basis $\beta = \{e_1, e_2, \ldots, e_n\}$ of $V$, we have</p>
+        <div class="math-display">$$\langle e_i, e_j\rangle = \delta_{ij} = \begin{cases} 1 &amp; \text{if } i = j, \text{ and} \\ 0 &amp; \text{if } i \neq j. \end{cases}$$</div>
+        <p>Therefore the matrix $A$ in the previous remark is the identity matrix $I_n$.</p>
+        <p>That is, if $x = (a_1, a_2, \ldots, a_n)$ and $y = (b_1, b_2, \ldots, b_n)$, then</p>
+        <div class="math-display">$$\langle x, y\rangle = (a_1, a_2, \ldots, a_n)\, I_n \begin{pmatrix} \overline{b_1} \\ \overline{b_2} \\ \vdots \\ \overline{b_n} \end{pmatrix}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.9 ═══════════ -->
+
+<!-- S6.1 p9 Example 2 -->
+<div class="card exam-card" id="c5-10">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">내적의 스칼라배 <em>Scalar Multiples of an Inner Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$를 체 $F$ 위의 벡터공간 $V$ 위의 내적이라 하자.</p>
+        <p><strong>(1)</strong> 임의의 $r > 0$에 대하여, 다음과 같이 정의한 함수</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to F, \quad \langle x, y\rangle' = r\langle x, y\rangle$$</div>
+        <p>는 $V$ 위의 또 다른 내적이다.</p>
+        <p>$V$가 $n$차원이고 $\beta = \{v_1, v_2, \ldots, v_n\}$이 $V$의 기저라 하자.</p>
+        <p>또한 $A_{ij} = \langle v_i, v_j\rangle$인 $A \in M_{n \times n}(F)$를 택하자.</p>
+        <p>그러면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle' &amp;= r\langle x, y\rangle = r \times [x]_\beta^t\, A\, \overline{[y]}_\beta \\[2pt] &amp;= [x]_\beta^t\, (rA)\, \overline{[y]}_\beta. \end{aligned}$$</div>
+        <p>따라서 $\langle \,\cdot\,, \cdot\, \rangle'$과 $\beta$에 대응하는 행렬은 $rA$이다.</p>
+        <p><strong>(2)</strong> $r \le 0$이면, 같은 식으로 정의한 함수</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to F, \quad \langle x, y\rangle' = r\langle x, y\rangle$$</div>
+        <p>는 조건 $(d)$가 성립하지 않으므로 $V$ 위의 내적이 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$ be an inner product on a vector space $V$ over $F$.</p>
+        <p><strong>(1)</strong> For any $r > 0$, the function</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to F \ \text{ defined by } \ \langle x, y\rangle' = r\langle x, y\rangle$$</div>
+        <p>is another inner product on $V$.</p>
+        <p>Suppose that $V$ is of dimension $n$, and let $\beta = \{v_1, v_2, \ldots, v_n\}$ be a basis for $V$.</p>
+        <p>Also, let $A \in M_{n \times n}(F)$ such that $A_{ij} = \langle v_i, v_j\rangle$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle' &amp;= r\langle x, y\rangle = r \times [x]_\beta^t\, A\, \overline{[y]}_\beta \\[2pt] &amp;= [x]_\beta^t\, (rA)\, \overline{[y]}_\beta. \end{aligned}$$</div>
+        <p>Thus the matrix corresponding to $\langle \,\cdot\,, \cdot\, \rangle'$ and $\beta$ is $rA$.</p>
+        <p><strong>(2)</strong> If $r \le 0$, then the function</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to F \ \text{ defined by } \ \langle x, y\rangle' = r\langle x, y\rangle$$</div>
+        <p>fails to be an inner product on $V$, since condition $(d)$ would not hold.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.10 ═══════════ -->
+
+<!-- S6.1 p10 Example 3 — ERRATA: (a) 둘째 줄 두 번째 적분 ∫_0^2 f_1 → ∫_0^1 f_2 → en Note -->
+<div class="card exam-card" id="c5-11">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">$C([0,1])$ 위의 적분 내적 <em>An Integral Inner Product on $C([0,1])$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음과 같이 두자.</p>
+        <div class="math-display">$$V = C([0,1]) := \{\, f : [0,1] \to \mathbb{R} \mid f\text{는 연속} \,\}$$</div>
+        <p>즉 $V$는 $[0,1]$ 위의 실숫값 연속함수 전체가 이루는 벡터공간이다.</p>
+        <p>$f, g \in V$에 대하여 $\langle f, g\rangle := \displaystyle\int_0^1 f(t)g(t)\,dt$로 정의한다.</p>
+        <p>그러면 $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to \mathbb{R}$은 $V$ 위의 내적이다.</p>
+        <p>$(\because)$ <strong>(a)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle f_1 + f_2, g\rangle &amp;= \int_0^1 \big(f_1(t) + f_2(t)\big)g(t)\,dt \\[2pt] &amp;= \int_0^1 f_1(t)g(t)\,dt + \int_0^1 f_2(t)g(t)\,dt \\[2pt] &amp;= \langle f_1, g\rangle + \langle f_2, g\rangle. \end{aligned}$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle cf, g\rangle &amp;= \int_0^1 \big(cf(t)\big)g(t)\,dt \\[2pt] &amp;= c\int_0^1 f(t)g(t)\,dt = c\langle f, g\rangle \end{aligned}$$</div>
+        <p><strong>(c)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle g, f\rangle &amp;= \int_0^1 g(t)f(t)\,dt = \int_0^1 f(t)g(t)\,dt \\[2pt] &amp;= \langle f, g\rangle = \overline{\langle f, g\rangle} \end{aligned}$$</div>
+        <p><strong>(d)</strong> $\langle f, f\rangle = \displaystyle\int_0^1 f(t)^2\,dt \ge 0$이고, $\langle f, f\rangle = 0$일 필요충분조건은 $f = 0$이다.</p>
+        <p><em>역주.</em> 슬라이드 원문 (a)의 둘째 줄 둘째 적분은 $\int_0^2 f_1(t)g(t)\,dt$로 잘못 적혀 있어 $\int_0^1 f_2(t)g(t)\,dt$($= \langle f_2, g\rangle$)로 바로잡아 옮겼다. 또한 $V$는 실숫값 함수의 공간이므로 &ldquo;$V \times V \to F$&rdquo;의 $F$를 $\mathbb{R}$로 적었다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$V = C([0,1]) := \{\, f : [0,1] \to \mathbb{R} \mid f \text{ is continuous} \,\}$$</div>
+        <p>be the vector space of real-valued continuous functions on $[0,1]$.</p>
+        <p>For $f, g \in V$, define $\langle f, g\rangle := \displaystyle\int_0^1 f(t)g(t)\,dt$.</p>
+        <p>Then $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$ is an inner product on $V$.</p>
+        <p>$(\because)$ <strong>(a)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle f_1 + f_2, g\rangle &amp;= \int_0^1 \big(f_1(t) + f_2(t)\big)g(t)\,dt \\[2pt] &amp;= \int_0^1 f_1(t)g(t)\,dt + \int_0^2 f_1(t)g(t)\,dt \\[2pt] &amp;= \langle f_1, g\rangle + \langle f_2, g\rangle. \end{aligned}$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle cf, g\rangle &amp;= \int_0^1 \big(cf(t)\big)g(t)\,dt \\[2pt] &amp;= c\int_0^1 f(t)g(t)\,dt = c\langle f, g\rangle \end{aligned}$$</div>
+        <p><strong>(c)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle g, f\rangle &amp;= \int_0^1 g(t)f(t)\,dt = \int_0^1 f(t)g(t)\,dt \\[2pt] &amp;= \langle f, g\rangle = \overline{\langle f, g\rangle} \end{aligned}$$</div>
+        <p><strong>(d)</strong> $\langle f, f\rangle = \displaystyle\int_0^1 f(t)^2\,dt \ge 0$, and $\langle f, f\rangle = 0$ if and only if $f = 0$.</p>
+        <p><em>Note.</em> In (a), the second integral on the second line is transcribed exactly as printed on the slide, $\int_0^2 f_1(t)g(t)\,dt$, but it should be $\int_0^1 f_2(t)g(t)\,dt$, which is $\langle f_2, g\rangle$. Also, since $V$ consists of real-valued functions, the field $F$ in &ldquo;$V \times V \to F$&rdquo; is $\mathbb{R}$ here.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.11 ═══════════ -->
+
+<!-- S6.1 p11 Example (번호 없음) -->
+<div class="card exam-card" id="c5-12">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">내적의 켤레는 내적이 아니다 <em>The Conjugate of an Inner Product Is Not an Inner Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\langle \,\cdot\,, \cdot\, \rangle : V \times V \to \mathbb{C}$를 $\mathbb{C}$ 위의 벡터공간 $V$ 위의 내적이라 하자.</p>
+        <p>다음 사상이 $V$ 위의 내적인지 판정해 보자.</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to \mathbb{C}, \quad \langle x, y\rangle' = \overline{\langle x, y\rangle}$$</div>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle v_1 + v_2, w\rangle' &amp;= \overline{\langle v_1 + v_2, w\rangle} = \overline{\langle v_1, w\rangle + \langle v_2, w\rangle} \\[2pt] &amp;= \overline{\langle v_1, w\rangle} + \overline{\langle v_2, w\rangle} = \langle v_1, w\rangle' + \langle v_2, w\rangle' \end{aligned}$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle cv, w\rangle' &amp;= \overline{\langle cv, w\rangle} = \overline{c\langle v, w\rangle} \\[2pt] &amp;= \overline{c}\,\overline{\langle v, w\rangle} = \overline{c}\langle v, w\rangle' \end{aligned}$$</div>
+        <p><strong>(c)</strong> $\langle w, v\rangle' = \overline{\langle w, v\rangle} = \langle v, w\rangle = \overline{\langle v, w\rangle'}$</p>
+        <p><strong>(d)</strong> $v \neq 0_V$이면 $\langle v, v\rangle' = \overline{\langle v, v\rangle} = \langle v, v\rangle > 0$이다.</p>
+        <p>결과적으로 $\langle \,\cdot\,, \cdot\, \rangle'$은 (a), (c), (d)를 만족하지만 (b)를 만족하지 않으므로</p>
+        <p>$V$ 위의 내적이 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to \mathbb{C}$ be an inner product on a vector space $V$ over $\mathbb{C}$.</p>
+        <p>Then determine whether the following map defines an inner product on $V$:</p>
+        <div class="math-display">$$\langle \,\cdot\,, \cdot\, \rangle' : V \times V \to \mathbb{C} \ \text{ defined by } \ \langle x, y\rangle' = \overline{\langle x, y\rangle}$$</div>
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle v_1 + v_2, w\rangle' &amp;= \overline{\langle v_1 + v_2, w\rangle} = \overline{\langle v_1, w\rangle + \langle v_2, w\rangle} \\[2pt] &amp;= \overline{\langle v_1, w\rangle} + \overline{\langle v_2, w\rangle} = \langle v_1, w\rangle' + \langle v_2, w\rangle' \end{aligned}$$</div>
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \langle cv, w\rangle' &amp;= \overline{\langle cv, w\rangle} = \overline{c\langle v, w\rangle} \\[2pt] &amp;= \overline{c}\,\overline{\langle v, w\rangle} = \overline{c}\langle v, w\rangle' \end{aligned}$$</div>
+        <p><strong>(c)</strong> $\langle w, v\rangle' = \overline{\langle w, v\rangle} = \langle v, w\rangle = \overline{\langle v, w\rangle'}$</p>
+        <p><strong>(d)</strong> $\langle v, v\rangle' = \overline{\langle v, v\rangle} = \langle v, v\rangle > 0$ whenever $v \neq 0_V$.</p>
+        <p>In consequence, $\langle \,\cdot\,, \cdot\, \rangle'$ is not an inner product on $V$</p>
+        <p>since it satisfies (a), (c) and (d) but fails to satisfy (b).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.12 ═══════════ -->
+
+<!-- S6.1 p12 Definition (conjugate transpose) -->
+<div class="card def-card" id="c5-13">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">켤레전치행렬 <em>Conjugate Transpose</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{m \times n}(F)$에 대하여 $A$의 <strong>켤레전치행렬</strong>(conjugate transpose, 또는 <strong>수반행렬</strong>(adjoint))을</p>
+        <p>모든 $i, j$에 대하여 $(A^*)_{ij} = \overline{A_{ji}}$를 만족하는 $n \times m$ 행렬 $A^*$로 정의한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $A \in M_{m \times n}(F)$, we define the <strong>conjugate transpose</strong> (or <strong>adjoint</strong>) of $A$ to be</p>
+        <p>the $n \times m$ matrix $A^*$ such that $(A^*)_{ij} = \overline{A_{ji}}$ for all $i, j$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p12 Example 4 -->
+<div class="card exam-card" id="c5-14">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">켤레전치행렬의 계산 <em>Computing a Conjugate Transpose</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="math-display">$$\begin{gathered} A = \begin{pmatrix} i &amp; 1+2i \\ 2 &amp; 3+4i \\ 3i &amp; 2 \end{pmatrix}\text{일 때,} \\[4pt] A^* = \begin{pmatrix} -i &amp; 2 &amp; -3i \\ 1-2i &amp; 3-4i &amp; 2 \end{pmatrix}\text{이다.} \end{gathered}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="math-display">$$\begin{gathered} \text{For } A = \begin{pmatrix} i &amp; 1+2i \\ 2 &amp; 3+4i \\ 3i &amp; 2 \end{pmatrix}, \\[4pt] \text{we have } A^* = \begin{pmatrix} -i &amp; 2 &amp; -3i \\ 1-2i &amp; 3-4i &amp; 2 \end{pmatrix}. \end{gathered}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p12 Remark -->
+<div class="card rem-card" id="c5-15">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">$y^*x$로서의 표준내적 <em>The Standard Inner Product as $y^*x$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = F^n$이라 하자 (여기서 $F$는 $\mathbb{R}$ 또는 $\mathbb{C}$).</p>
+        <div class="math-display">$$x = \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} \text{와 } y = \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} \text{가 } V\text{의 원소일 때,}$$</div>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i} \ \text{는 } \ y^*x \ \text{와 같다.}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = F^n$ (where $F$ is either $\mathbb{R}$ or $\mathbb{C}$).</p>
+        <div class="math-display">$$\text{For } x = \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} \text{ and } y = \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} \text{ in } V,$$</div>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^n a_i\,\overline{b_i} \ \text{ is equal to } \ y^*x$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.13 – p.14 ═══════════ -->
+
+<!-- S6.1 p13–p14 Example 5 (p14 는 Example 5. (Continued)) — ERRATA: p14 ⟨E_ij,E_kl⟩ 사슬에서 tr 누락 → en Note -->
+<div class="card exam-card" id="c5-16">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">$M_{n \times n}(F)$ 위의 프로베니우스 내적 <em>The Frobenius Inner Product on $M_{n \times n}(F)$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = M_{n \times n}(F)$라 하고 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\langle A, B\rangle = \operatorname{tr}(B^*A) \quad (A, B \in V).$$</div>
+        <p>따라서 $A = [u_1\ u_2\ \cdots\ u_n]$, $B = [v_1\ v_2\ \cdots\ v_n]$이면</p>
+        <div class="math-display">$$\begin{gathered} B^*A = \begin{bmatrix} v_1^* \\ \vdots \\ v_n^* \end{bmatrix} [u_1\ \cdots\ u_n] \ \text{이고 따라서} \\[4pt] \operatorname{tr}(B^*A) = \sum_{i=1}^n (B^*A)_{ii} = \sum_{i=1}^n v_i^*u_i. \end{gathered}$$</div>
+        <p>그러면 $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$는 $V$ 위의 내적이다.</p>
+        <p>예를 들어 $A, B, C \in V$라 하면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle A + B, C\rangle &amp;= \operatorname{tr}(C^*(A + B)) = \operatorname{tr}(C^*A + C^*B) \\[2pt] &amp;= \operatorname{tr}(C^*A) + \operatorname{tr}(C^*B) = \langle A, C\rangle + \langle B, C\rangle. \end{aligned}$$</div>
+        <p>또한 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle A, A\rangle &amp;= \operatorname{tr}(A^*A) = \sum_{i=1}^n (A^*A)_{ii} \\[2pt] &amp;= \sum_{i=1}^n \sum_{k=1}^n (A^*)_{ik}A_{ki} \\[2pt] &amp;= \sum_{i=1}^n \sum_{k=1}^n \overline{A_{ki}}A_{ki} = \sum_{i=1}^n \sum_{k=1}^n |A_{ki}|^2. \end{aligned}$$</div>
+        <p>이를 <strong>프로베니우스 내적</strong>(Frobenius inner product)이라 한다.</p>
+        <p><em>(계속)</em> $V = M_{n \times n}(F)$라 하고 다음과 같이 정의한다.</p>
+        <div class="math-display">$$\langle A, B\rangle = \operatorname{tr}(B^*A) \quad (A, B \in V).$$</div>
+        <p>$V = M_{n \times n}(F)$의 표준기저 $\beta = \{\, E_{ij} \mid 1 \le i, j \le n \,\}$를 생각하자.</p>
+        <p>그러면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle E_{ij}, E_{k\ell}\rangle &amp;= \operatorname{tr}(E_{k\ell}^*E_{ij}) = \operatorname{tr}(E_{\ell k}E_{ij}) = \delta_{ik} \times \delta_{j\ell} \\[2pt] &amp;= \begin{cases} 1 &amp; (i,j) = (k,\ell)\text{일 때,} \\ 0 &amp; (i,j) \neq (k,\ell)\text{일 때.} \end{cases} \end{aligned}$$</div>
+        <p>따라서 다음을 얻는다.</p>
+        <div class="math-display">$$\langle A, B\rangle = [A]_\beta^t\, I_{n^2}\, \overline{[B]}_\beta.$$</div>
+        <p>즉 $V = M_{n \times n}(F)$를 표준적인 방식으로 $F^{n^2}$과 동일시하면</p>
+        <p>$V$ 위의 내적 $\langle A, B\rangle = \operatorname{tr}(B^*A)$는</p>
+        <p>$F^{n^2}$ 위의 표준내적과</p>
+        <p>일치한다.</p>
+        <p><em>역주.</em> 슬라이드 원문 (계속) 부분의 사슬 $\langle E_{ij}, E_{k\ell}\rangle = E_{k\ell}^*E_{ij} = E_{\ell k}E_{ij} = \delta_{ik} \times \delta_{j\ell}$에는 대각합이 빠져 있어, 정의에 따라 $\operatorname{tr}$을 넣어 바로잡아 옮겼다(영문 패널은 원문 그대로). $E_{\ell k}E_{ij} = \delta_{ki}E_{\ell j}$이므로 그 대각합이 $\delta_{ik}\,\delta_{j\ell}$이며, 행렬 $E_{k\ell}^*E_{ij}$와 $E_{\ell k}E_{ij}$ 자체는 스칼라가 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = M_{n \times n}(F)$, and define</p>
+        <div class="math-display">$$\langle A, B\rangle = \operatorname{tr}(B^*A) \ \text{ for } A, B \in V.$$</div>
+        <p>Thus, if $A = [u_1\ u_2\ \cdots\ u_n]$ and $B = [v_1\ v_2\ \cdots\ v_n]$, then</p>
+        <div class="math-display">$$\begin{gathered} B^*A = \begin{bmatrix} v_1^* \\ \vdots \\ v_n^* \end{bmatrix} [u_1\ \cdots\ u_n] \ \text{ and hence} \\[4pt] \operatorname{tr}(B^*A) = \sum_{i=1}^n (B^*A)_{ii} = \sum_{i=1}^n v_i^*u_i. \end{gathered}$$</div>
+        <p>Then $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$ is an inner product on $V$.</p>
+        <p>For example, let $A, B, C \in V$. Then</p>
+        <div class="math-display">$$\begin{aligned} \langle A + B, C\rangle &amp;= \operatorname{tr}(C^*(A + B)) = \operatorname{tr}(C^*A + C^*B) \\[2pt] &amp;= \operatorname{tr}(C^*A) + \operatorname{tr}(C^*B) = \langle A, C\rangle + \langle B, C\rangle. \end{aligned}$$</div>
+        <p>Also,</p>
+        <div class="math-display">$$\begin{aligned} \langle A, A\rangle &amp;= \operatorname{tr}(A^*A) = \sum_{i=1}^n (A^*A)_{ii} \\[2pt] &amp;= \sum_{i=1}^n \sum_{k=1}^n (A^*)_{ik}A_{ki} \\[2pt] &amp;= \sum_{i=1}^n \sum_{k=1}^n \overline{A_{ki}}A_{ki} = \sum_{i=1}^n \sum_{k=1}^n |A_{ki}|^2. \end{aligned}$$</div>
+        <p>This is called the <strong>Frobenius inner product</strong>.</p>
+        <p><em>(Continued)</em> Let $V = M_{n \times n}(F)$, and define</p>
+        <div class="math-display">$$\langle A, B\rangle = \operatorname{tr}(B^*A) \ \text{ for } A, B \in V.$$</div>
+        <p>Consider the standard basis $\beta = \{\, E_{ij} \mid 1 \le i, j \le n \,\}$ for $V = M_{n \times n}(F)$.</p>
+        <p>Then it holds that</p>
+        <div class="math-display">$$\begin{aligned} \langle E_{ij}, E_{k\ell}\rangle &amp;= E_{k\ell}^*E_{ij} = E_{\ell k}E_{ij} = \delta_{ik} \times \delta_{j\ell} \\[2pt] &amp;= \begin{cases} 1 &amp; \text{if } (i,j) = (k,\ell), \text{ and} \\ 0 &amp; \text{if } (i,j) \neq (k,\ell). \end{cases} \end{aligned}$$</div>
+        <p>Therefore, we have</p>
+        <div class="math-display">$$\langle A, B\rangle = [A]_\beta^t\, I_{n^2}\, \overline{[B]}_\beta.$$</div>
+        <p>That is, if we regard $V = M_{n \times n}(F)$ as $F^{n^2}$ in a standard way, then</p>
+        <p>the inner product $\langle A, B\rangle = \operatorname{tr}(B^*A)$ on $V$</p>
+        <p>coincides with</p>
+        <p>the standard inner product on $F^{n^2}$.</p>
+        <p><em>Note.</em> In the continued part, the chain $\langle E_{ij}, E_{k\ell}\rangle = E_{k\ell}^*E_{ij} = E_{\ell k}E_{ij} = \delta_{ik} \times \delta_{j\ell}$ is transcribed exactly as printed on the slide, but the trace is missing: by definition $\langle E_{ij}, E_{k\ell}\rangle = \operatorname{tr}(E_{k\ell}^*E_{ij}) = \operatorname{tr}(E_{\ell k}E_{ij})$, and since $E_{\ell k}E_{ij} = \delta_{ki}E_{\ell j}$, this trace equals $\delta_{ik}\,\delta_{j\ell}$. The matrices $E_{k\ell}^*E_{ij}$ and $E_{\ell k}E_{ij}$ themselves are not scalars.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.15 ═══════════ -->
+
+<!-- S6.1 p15 Some Terminologies and Remark -->
+<div class="card def-card" id="c5-17">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">내적공간 <em>Inner Product Spaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> 체 $F$ 위의 벡터공간 $V$에 특정한 내적 $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$가 주어진 것을 <strong>내적공간</strong>(inner product space)이라 한다.</p>
+        <p><strong>(2)</strong> $F = \mathbb{C}$일 때 $V$를 <strong>복소 내적공간</strong>이라 한다.</p>
+        <p>$F = \mathbb{R}$일 때 $V$를 <strong>실 내적공간</strong>이라 한다.</p>
+        <p><strong>(3)</strong> $V$를 내적 $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$에 의한 내적공간이라 하자.</p>
+        <p>$W$가 $V$의 부분공간이면, 벡터 $x, y \in W$에 같은 함수 $\langle x, y\rangle$를 제한한 것으로 $W$도 내적공간이 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> A vector space $V$ over $F$ with a specific inner product $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$ is called an <strong>inner product space</strong>.</p>
+        <p><strong>(2)</strong> When $F = \mathbb{C}$, we call $V$ a <strong>complex inner product space</strong>.</p>
+        <p>When $F = \mathbb{R}$, we call $V$ a <strong>real inner product space</strong>.</p>
+        <p><strong>(3)</strong> Let $V$ be an inner product space by $\langle \,\cdot\,, \cdot\, \rangle : V \times V \to F$.</p>
+        <p>If $W$ is a subspace of $V$, the same function $\langle x, y\rangle$ restricted to the vectors $x, y \in W$ makes $W$ to be an inner product space.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p15 Example (번호 없음) — ERRATA(수학적 오류): C([-1,1]) 위에서 ⟨·,·⟩₁ 은 내적이 아님 → en Note -->
+<div class="card exam-card" id="c5-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">$C([-1,1])$ 위의 두 적분식 <em>Two Integral Pairings on $C([-1,1])$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = C([-1,1])$ 위에서 다음 두 함수를 생각하자.</p>
+        <div class="math-display">$$\begin{gathered} \langle f, g\rangle_1 := \int_0^1 f(t)g(t)\,dt \\[2pt] \text{그리고 } \ \langle f, g\rangle_2 := \int_{-1}^1 f(t)g(t)\,dt \end{gathered}$$</div>
+        <p>이 가운데 $\langle \,\cdot\,, \cdot\, \rangle_2$는 $V$ 위의 내적이지만, $\langle \,\cdot\,, \cdot\, \rangle_1$은 $V$ 위의 내적이 아니다(아래 역주 참조).</p>
+        <p>예를 들어 $f(x) = x$, $g(x) = x^2$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\langle f, g\rangle_1 = \frac{1}{4} \ \text{이고 } \ \langle f, g\rangle_2 = 0.$$</div>
+        <p>따라서 위의 두 식은 $V$ 위에서 서로 다른 함수이다(다만 둘 중 내적은 $\langle \,\cdot\,, \cdot\, \rangle_2$뿐이다).</p>
+        <p><em>역주.</em> 슬라이드 원문은 위 두 식이 $V = C([-1,1])$ 위의 서로 다른 두 내적을 정의한다고 하지만, 이는 수학적으로 옳지 않아 본문에서는 바로잡아 옮겼다(영문 패널은 원문 그대로). $V = C([-1,1])$에서 $\langle f, g\rangle_1 = \int_0^1 f(t)g(t)\,dt$는 내적이 아니다. 조건 (d)가 성립하지 않기 때문이다. 예컨대 $f(t) = \max(-t, 0)$은 $[-1,1]$ 위의 0이 아닌 연속함수이지만 $[0,1]$에서 0이므로 $\langle f, f\rangle_1 = \int_0^1 0\,dt = 0$이다(같은 식은 $C([0,1])$ 위에서는 내적이다. <a href="#c5-11">예 3</a> 참조). 반면 $\langle f, g\rangle_2$는 $C([-1,1])$ 위의 내적이며, $f(x) = x$, $g(x) = x^2$에 대한 계산값 $\langle f, g\rangle_1 = \tfrac{1}{4}$, $\langle f, g\rangle_2 = 0$은 옳다. (원문에 없는, 역자가 덧붙이는 예) $C([-1,1])$ 위의 서로 다른 두 내적이 필요하면 $\langle f, g\rangle_2$와 $2\langle f, g\rangle_2$(<a href="#c5-10">예 2</a> (1)에서 $r = 2$)를 들 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>On $V = C([-1,1])$, the two functions</p>
+        <div class="math-display">$$\begin{gathered} \langle f, g\rangle_1 := \int_0^1 f(t)g(t)\,dt \\[2pt] \text{and } \ \langle f, g\rangle_2 := \int_{-1}^1 f(t)g(t)\,dt \end{gathered}$$</div>
+        <p>define two distinct inner products.</p>
+        <p>For instance, if $f(x) = x$ and $g(x) = x^2$ then</p>
+        <div class="math-display">$$\langle f, g\rangle_1 = \frac{1}{4} \ \text{ and } \ \langle f, g\rangle_2 = 0.$$</div>
+        <p>The above two inner products define two distinct inner products on $V$.</p>
+        <p><em>Note.</em> This example contains a genuine mathematical error. On $V = C([-1,1])$ the formula $\langle f, g\rangle_1 = \int_0^1 f(t)g(t)\,dt$ is <em>not</em> an inner product, because condition (d) fails: for instance, $f(t) = \max(-t, 0)$ is a nonzero continuous function on $[-1,1]$ that vanishes on $[0,1]$, so $\langle f, f\rangle_1 = \int_0^1 0\,dt = 0$. (The same formula is an inner product on $C([0,1])$; see <a href="#c5-11">Example 3</a>.) The formula $\langle f, g\rangle_2 = \int_{-1}^1 f(t)g(t)\,dt$ is an inner product on $C([-1,1])$, and the computed values $\langle f, g\rangle_1 = \tfrac{1}{4}$ and $\langle f, g\rangle_2 = 0$ for $f(x) = x$, $g(x) = x^2$ are correct. (Our own example, not on the slide.) Two genuinely distinct inner products on $C([-1,1])$ are, for example, $\langle f, g\rangle_2$ and $2\langle f, g\rangle_2$ (<a href="#c5-10">Example 2</a> (1) with $r = 2$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.16 ═══════════ -->
+
+<!-- S6.1 p16 Theorem 6.1 + Proof -->
+<div class="card thm-card" id="c5-19">
+  <div class="card-head">
+    <span class="thm-num">THM 6.1</span>
+    <span class="thm-title">내적의 기본 성질 <em>Basic Properties of Inner Products</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간이라 하자.</p>
+        <p>그러면 $x, y, z \in V$와 $c \in F$에 대하여 다음 명제가 성립한다.</p>
+        <p>$(a)$ $\langle x, y + z\rangle = \langle x, y\rangle + \langle x, z\rangle$.</p>
+        <p>$(b)$ $\langle x, cy\rangle = \overline{c}\,\langle x, y\rangle$.</p>
+        <p>$(c)$ $\langle x, O_V\rangle = \langle O_V, x\rangle = 0$.</p>
+        <p>$(d)$ $\langle x, x\rangle = 0$일 필요충분조건은 $x = O_V$이다.</p>
+        <p>$(e)$ 모든 $x \in V$에 대하여 $\langle x, y\rangle = \langle x, z\rangle$이면 $y = z$이다.</p>
+        <p><em>역주.</em> 슬라이드 원문의 $(d)$ 증명 첫 문장은 &ldquo;내적의 정의에 의해 $\langle x, x\rangle > 0$&rdquo;이라고 되어 있으나, 정의의 조건 (d)는 $x \neq O_V$일 때에만 $\langle x, x\rangle > 0$을 준다. 이를 바로잡아 증명에 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(a)$ 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y + z\rangle &amp;= \overline{\langle y + z, x\rangle} = \overline{\langle y, x\rangle + \langle z, x\rangle} \\[2pt] &amp;= \overline{\langle y, x\rangle} + \overline{\langle z, x\rangle} = \langle x, y\rangle + \langle x, z\rangle. \end{aligned}$$</div>
+        <p>$(b)$, $(c)$ : 자명하다.</p>
+        <p>$(d)$ 내적의 정의에 의해 $x \neq O_V$이면 $\langle x, x\rangle > 0$이다. 따라서 $\langle x, x\rangle = 0$이면 $x = O_V$이다.</p>
+        <p>반대로 $x = O_V$이면 $(c)$에 의해 $\langle x, x\rangle = 0$이다.</p>
+        <p>$(e)$ 모든 $x \in V$에 대하여 $\langle x, y\rangle = \langle x, z\rangle$라 하자. 그러면 $\langle x, y - z\rangle = 0$이고, 특히 $x = y - z$로 놓으면 $\langle y - z, y - z\rangle = 0$이다.</p>
+        <p>그러면 $(d)$에 의해 $y - z = O_V$이고 따라서 $y = z$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space.</p>
+        <p>Then for $x, y, z \in V$ and $c \in F$, the following statements are true.</p>
+        <p>$(a)$ $\langle x, y + z\rangle = \langle x, y\rangle + \langle x, z\rangle$.</p>
+        <p>$(b)$ $\langle x, cy\rangle = \overline{c}\,\langle x, y\rangle$.</p>
+        <p>$(c)$ $\langle x, O_V\rangle = \langle O_V, x\rangle = 0$.</p>
+        <p>$(d)$ $\langle x, x\rangle = 0$ if and only if $x = O_V$.</p>
+        <p>$(e)$ If $\langle x, y\rangle = \langle x, z\rangle$ for all $x \in V$, then $y = z$.</p>
+        <p><em>Note.</em> In the proof of $(d)$ below, the first sentence is transcribed exactly as printed on the slide, but condition (d) of the definition only gives $\langle x, x\rangle > 0$ for $x \neq O_V$; this is what yields &ldquo;$\langle x, x\rangle = 0 \Rightarrow x = O_V$&rdquo;.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(a)$ We have</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y + z\rangle &amp;= \overline{\langle y + z, x\rangle} = \overline{\langle y, x\rangle + \langle z, x\rangle} \\[2pt] &amp;= \overline{\langle y, x\rangle} + \overline{\langle z, x\rangle} = \langle x, y\rangle + \langle x, z\rangle. \end{aligned}$$</div>
+        <p>$(b)$, $(c)$ : Obvious.</p>
+        <p>$(d)$ $\langle x, x\rangle > 0$ by the definition of inner product space.</p>
+        <p>On the other hand, $\langle x, x\rangle = 0$ if $x = O_V$.</p>
+        <p>$(e)$ If $\langle x, y\rangle = \langle x, z\rangle$ and so $\langle x, y - z\rangle = 0$ for all $x \in V$, then $\langle y - z, y - z\rangle = 0$.</p>
+        <p>Then $y - z = O_V$ and hence $y = z$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.17 ═══════════ -->
+
+<!-- S6.1 p17 Definition (norm) -->
+<div class="card def-card" id="c5-20">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">노름 (길이) <em>Norm (Length)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간이라 하자. $x \in V$에 대하여</p>
+        <p>$x$의 <strong>노름</strong>(norm) 또는 <strong>길이</strong>를 $\|x\| = \sqrt{\langle x, x\rangle}$로 정의한다.</p>
+        <p><em>역주.</em> 슬라이드 원문의 &ldquo;the norm of length&rdquo;는 &ldquo;the norm or length&rdquo;(노름 또는 길이)의 오타로 보아 그 뜻대로 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space. For $x \in V$,</p>
+        <p>we define <strong>the norm of length</strong> of $x$ by $\|x\| = \sqrt{\langle x, x\rangle}$.</p>
+        <p><em>Note.</em> &ldquo;the norm of length&rdquo; is transcribed exactly as printed on the slide; it is a typo for &ldquo;the norm or length&rdquo;.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p17 Example 6 -->
+<div class="card exam-card" id="c5-21">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">표준 노름은 유클리드 길이이다 <em>The Standard Norm Is the Euclidean Length</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = F^n$이 표준내적을 갖는다고 하자.</p>
+        <p>$x = (a_1, a_2, \ldots, a_n)$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \|x\| &amp;= \|(a_1, a_2, \ldots, a_n)\| \\[2pt] &amp;= \sqrt{a_1^*a_1 + a_2^*a_2 + \cdots + a_n^*a_n}. \end{aligned}$$</div>
+        <p>따라서</p>
+        <p>표준내적에 대한 노름은 길이에 대한 유클리드식 정의와 같다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = F^n$ be with the standard inner product.</p>
+        <p>If $x = (a_1, a_2, \ldots, a_n)$, then</p>
+        <div class="math-display">$$\begin{aligned} \|x\| &amp;= \|(a_1, a_2, \ldots, a_n)\| \\[2pt] &amp;= \sqrt{a_1^*a_1 + a_2^*a_2 + \cdots + a_n^*a_n}. \end{aligned}$$</div>
+        <p>Thus</p>
+        <p>the norm about the standard inner product is the Euclidean definition of length.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p17 서술 단락 -->
+<div class="card note-card" id="note05-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음으로, $\mathbb{R}^3$에서 잘 알려진 유클리드 길이의 성질들이 일반적인 경우에도 성립함을 살펴본다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Next, we will see that the well-known properties of Euclidean length in $\mathbb{R}^3$ hold in general.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p17–p19 Theorem 6.2 + Proof (p18 (a)(b)(c), p19 (d)) -->
+<div class="card thm-card" id="c5-22">
+  <div class="card-head">
+    <span class="thm-num">THM 6.2</span>
+    <span class="thm-title">노름의 성질: 코시-슈바르츠 부등식과 삼각부등식 <em>Properties of the Norm: Cauchy–Schwarz and Triangle Inequalities</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 $F$ 위의 내적공간이라 하자.</p>
+        <p>그러면 모든 $x, y \in V$와 $c \in F$에 대하여 다음 명제가 성립한다.</p>
+        <p><strong>(a)</strong> $\|cx\| = |c| \cdot \|x\|$.</p>
+        <p><strong>(b)</strong> $\|x\| \ge 0$이고, $\|x\| = 0$일 필요충분조건은 $x = O_V$이다.</p>
+        <p><strong>(c)</strong> (코시-슈바르츠 부등식) $|\langle x, y\rangle| \le \|x\| \cdot \|y\|$.</p>
+        <p><strong>(d)</strong> (삼각부등식) $\|x + y\| \le \|x\| + \|y\|$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong>, <strong>(b)</strong> 자명하다.</p>
+        <p><strong>(c)</strong> $y = O_V$이면 결과는 자명하게 참이다.</p>
+        <p>$y \neq O_V$라 하자. 그러면 $\langle y, y\rangle \neq 0$이다.</p>
+        <p>임의의 $c \in F$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} 0 \le \|x - cy\|^2 &amp;= \langle x - cy, x - cy\rangle \\[2pt] &amp;= \langle x, x - cy\rangle - c\langle y, x - cy\rangle \\[2pt] &amp;= \langle x, x\rangle - \overline{c}\langle x, y\rangle - c\langle y, x\rangle + c\overline{c}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \overline{c}\langle x, y\rangle - c\overline{\langle x, y\rangle} + c\overline{c}\langle y, y\rangle \end{aligned}$$</div>
+        <p>$c = \dfrac{\langle x, y\rangle}{\langle y, y\rangle}$로 놓으면 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} &amp;\langle x, x\rangle - \overline{c}\langle x, y\rangle - c\overline{\langle x, y\rangle} + c\overline{c}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \frac{\overline{\langle x, y\rangle}}{\langle y, y\rangle}\langle x, y\rangle - \frac{\langle x, y\rangle}{\langle y, y\rangle}\overline{\langle x, y\rangle} \\[2pt] &amp;\qquad + \frac{\langle x, y\rangle}{\langle y, y\rangle}\,\frac{\overline{\langle x, y\rangle}}{\langle y, y\rangle}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \frac{|\langle x, y\rangle|^2}{\langle y, y\rangle} \ \ge \ 0. \end{aligned}$$</div>
+        <p>결과적으로 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{gathered} |\langle x, y\rangle|^2 \le \langle x, x\rangle\langle y, y\rangle \\[2pt] \text{따라서 } \ |\langle x, y\rangle|^2 \le \|x\|^2 \cdot \|y\|^2. \end{gathered}$$</div>
+        <p>이로써 부등식 $|\langle x, y\rangle| \le \|x\| \cdot \|y\|$의 증명이 끝난다.</p>
+        <p><strong>(d)</strong> 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \|x + y\|^2 &amp;= \langle x + y, x + y\rangle \\[2pt] &amp;= \langle x, x\rangle + \langle y, x\rangle + \langle x, y\rangle + \langle y, y\rangle \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + \left(\langle x, y\rangle + \overline{\langle x, y\rangle}\right) \\[2pt] &amp;\qquad \langle x, y\rangle = \alpha + i\beta\text{로 놓는다.} \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + 2\alpha \\[2pt] &amp;\le \|x\|^2 + \|y\|^2 + 2\sqrt{\alpha^2 + \beta^2} \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + 2|\langle x, y\rangle| \\[2pt] &amp;\le \|x\|^2 + \|y\|^2 + 2\,\|x\| \cdot \|y\| = (\|x\| + \|y\|)^2. \end{aligned}$$</div>
+        <p>이로써 원하는 부등식 $\|x + y\| \le \|x\| + \|y\|$가 증명된다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space of $F$.</p>
+        <p>Then for all $x, y \in V$ and $c \in F$, the following statements are true.</p>
+        <p><strong>(a)</strong> $\|cx\| = |c| \cdot \|x\|$.</p>
+        <p><strong>(b)</strong> $\|x\| \ge 0$, and $\|x\| = 0$ if and only if $x = O_V$.</p>
+        <p><strong>(c)</strong> (Cauchy-Schwarz Inequality) $|\langle x, y\rangle| \le \|x\| \cdot \|y\|$.</p>
+        <p><strong>(d)</strong> (Triangle Inequality) $\|x + y\| \le \|x\| + \|y\|$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong>, <strong>(b)</strong> Obvious.</p>
+        <p><strong>(c)</strong> The result is obviously true if $y = O_V$.</p>
+        <p>Suppose that $y \neq O_V$ and hence $\langle y, y\rangle \neq 0$.</p>
+        <p>For any $c \in F$, we have</p>
+        <div class="math-display">$$\begin{aligned} 0 \le \|x - cy\|^2 &amp;= \langle x - cy, x - cy\rangle \\[2pt] &amp;= \langle x, x - cy\rangle - c\langle y, x - cy\rangle \\[2pt] &amp;= \langle x, x\rangle - \overline{c}\langle x, y\rangle - c\langle y, x\rangle + c\overline{c}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \overline{c}\langle x, y\rangle - c\overline{\langle x, y\rangle} + c\overline{c}\langle y, y\rangle \end{aligned}$$</div>
+        <p>For $c = \dfrac{\langle x, y\rangle}{\langle y, y\rangle}$, we get</p>
+        <div class="math-display">$$\begin{aligned} &amp;\langle x, x\rangle - \overline{c}\langle x, y\rangle - c\overline{\langle x, y\rangle} + c\overline{c}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \frac{\overline{\langle x, y\rangle}}{\langle y, y\rangle}\langle x, y\rangle - \frac{\langle x, y\rangle}{\langle y, y\rangle}\overline{\langle x, y\rangle} \\[2pt] &amp;\qquad + \frac{\langle x, y\rangle}{\langle y, y\rangle}\,\frac{\overline{\langle x, y\rangle}}{\langle y, y\rangle}\langle y, y\rangle \\[2pt] &amp;= \langle x, x\rangle - \frac{|\langle x, y\rangle|^2}{\langle y, y\rangle} \ \ge \ 0. \end{aligned}$$</div>
+        <p>In consequence, it holds that</p>
+        <div class="math-display">$$\begin{gathered} |\langle x, y\rangle|^2 \le \langle x, x\rangle\langle y, y\rangle \\[2pt] \text{and hence } \ |\langle x, y\rangle|^2 \le \|x\|^2 \cdot \|y\|^2. \end{gathered}$$</div>
+        <p>This completes the proof of the inequality $|\langle x, y\rangle| \le \|x\| \cdot \|y\|$.</p>
+        <p><strong>(d)</strong> We have</p>
+        <div class="math-display">$$\begin{aligned} \|x + y\|^2 &amp;= \langle x + y, x + y\rangle \\[2pt] &amp;= \langle x, x\rangle + \langle y, x\rangle + \langle x, y\rangle + \langle y, y\rangle \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + \left(\langle x, y\rangle + \overline{\langle x, y\rangle}\right) \\[2pt] &amp;\qquad \text{Write } \langle x, y\rangle = \alpha + i\beta. \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + 2\alpha \\[2pt] &amp;\le \|x\|^2 + \|y\|^2 + 2\sqrt{\alpha^2 + \beta^2} \\[2pt] &amp;= \|x\|^2 + \|y\|^2 + 2|\langle x, y\rangle| \\[2pt] &amp;\le \|x\|^2 + \|y\|^2 + 2\,\|x\| \cdot \|y\| = (\|x\| + \|y\|)^2. \end{aligned}$$</div>
+        <p>This proves the desired inequality $\|x + y\| \le \|x\| + \|y\|$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.19 ═══════════ -->
+
+<!-- S6.1 p19 Example 7 -->
+<div class="card exam-card" id="c5-23">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">$\mathbb{R}^n$에서의 코시-슈바르츠 부등식과 삼각부등식 <em>Cauchy–Schwarz and Triangle Inequalities in $\mathbb{R}^n$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = \mathbb{R}^n$이 표준내적을 갖는 내적공간이라 하자.</p>
+        <p>$x = (a_1, a_2, \ldots, a_n)$, $y = (b_1, b_2, \ldots, b_n)$이면</p>
+        <p>코시-슈바르츠 부등식과 삼각부등식은 다음과 같이 다시 쓸 수 있다.</p>
+        <div class="math-display">$$\begin{gathered} \left| \sum_{i=1}^n a_i\overline{b_i} \right| \le \left[ \sum_{i=1}^n |a_i|^2 \right]^{1/2} \left[ \sum_{i=1}^n |b_i|^2 \right]^{1/2} \\[4pt] \text{그리고} \\[4pt] \left[ \sum_{i=1}^n |a_i + b_i|^2 \right]^{1/2} \le \left[ \sum_{i=1}^n |a_i|^2 \right]^{1/2} + \left[ \sum_{i=1}^n |b_i|^2 \right]^{1/2} \end{gathered}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V = \mathbb{R}^n$ be the standard inner product space.</p>
+        <p>Then $x = (a_1, a_2, \ldots, a_n)$ and $y = (b_1, b_2, \ldots, b_n)$, then</p>
+        <p>Cauchy-Schwarz Inequality and Triangle Inequality can be rewritten as follows:</p>
+        <div class="math-display">$$\begin{gathered} \left| \sum_{i=1}^n a_i\overline{b_i} \right| \le \left[ \sum_{i=1}^n |a_i|^2 \right]^{1/2} \left[ \sum_{i=1}^n |b_i|^2 \right]^{1/2} \\[4pt] \text{and} \\[4pt] \left[ \sum_{i=1}^n |a_i + b_i|^2 \right]^{1/2} \le \left[ \sum_{i=1}^n |a_i|^2 \right]^{1/2} + \left[ \sum_{i=1}^n |b_i|^2 \right]^{1/2} \end{gathered}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.20 ═══════════ -->
+
+<!-- S6.1 p20 Recall -->
+<div class="card rem-card" id="c5-24">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">$\mathbb{R}^2$, $\mathbb{R}^3$에서의 각과 수직 <em>Angle and Perpendicularity in $\mathbb{R}^2$ and $\mathbb{R}^3$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^2$ 또는 $\mathbb{R}^3$의 $x$, $y$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = \|x\| \cdot \|y\| \cos\theta$$</div>
+        <p>여기서 $\theta$ $(0 \le \theta \le \pi)$는 $x$와 $y$ 사이의 각이다.</p>
+        <p>특히 $x$와 $y$가 영벡터가 아니면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle = 0 \ &amp;\text{일 필요충분조건은 } \theta = \frac{\pi}{2} \text{이고,} \\[2pt] &amp;\text{이는 } x \text{와 } y \text{가 수직인 것과 같다.} \end{aligned}$$</div>
+        <p>다음 정의에서는</p>
+        <p>수직이라는 개념을 임의의 내적공간으로 일반화한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $x$ and $y$ in $\mathbb{R}^2$ or $\mathbb{R}^3$, we have</p>
+        <div class="math-display">$$\langle x, y\rangle = \|x\| \cdot \|y\| \cos\theta$$</div>
+        <p>where $\theta$ $(0 \le \theta \le \pi)$ denotes the angle between $x$ and $y$.</p>
+        <p>In particular, if $x$ and $y$ are nonzero then</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle = 0 \ &amp;\text{if and only if } \theta = \frac{\pi}{2} \\[2pt] &amp;\text{if and only if } x \text{ and } y \text{ are perpendicular.} \end{aligned}$$</div>
+        <p>In the next definition,</p>
+        <p>we generalize the notion of perpendicularity to arbitrary inner product space.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p20 Definition (orthogonal, orthonormal) -->
+<div class="card def-card" id="c5-25">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">직교집합과 정규직교집합 <em>Orthogonal and Orthonormal Sets</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간이라 하고, $x$, $y$를 $V$의 원소라 하자.</p>
+        <p><strong>(1)</strong> $\langle x, y\rangle = 0$이면 $x$와 $y$는 <strong>직교</strong>(orthogonal, 수직)한다고 한다.</p>
+        <p>더 일반적으로,</p>
+        <p>$V$의 부분집합 $S$에서 서로 다른 임의의 두 벡터가 직교하면 $S$를 <strong>직교집합</strong>이라 한다.</p>
+        <p><strong>(2)</strong> $\|x\| = 1$이면 $x$를 <strong>단위벡터</strong>라 한다.</p>
+        <p>$V$의 부분집합 $S$가</p>
+        <p>직교집합이면서 단위벡터로만 이루어져 있으면 <strong>정규직교집합</strong>이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space, and let $x$ and $y$ be members of $V$.</p>
+        <p><strong>(1)</strong> We say that $x$ and $y$ are <strong>orthogonal (perpendicular)</strong> if $\langle x, y\rangle = 0$.</p>
+        <p>More generally,</p>
+        <p>a subset $S$ of $V$ is said to be <strong>orthogonal</strong> if any two distinct vectors in $S$ are orthogonal.</p>
+        <p><strong>(2)</strong> We say that $x$ is a <strong>unit vector</strong> if $\|x\| = 1$.</p>
+        <p>A subset $S$ of $V$ is said to be <strong>orthonormal</strong> if</p>
+        <p>it is orthogonal and consists entirely of unit vectors.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.21 ═══════════ -->
+
+<!-- S6.1 p21 Remark — (3) 영이 아닌 벡터 가정 누락 → en Note (계획표 외 추가) -->
+<div class="card rem-card" id="c5-26">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">크로네커 델타, 스칼라배, 정규화 <em>The Kronecker Delta, Scaling, and Normalizing</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S = \{v_1, v_2, \ldots\}$를 $V$의 부분집합이라 하자.</p>
+        <p><strong>(1)</strong> $\delta_{ij}$를 크로네커 델타라 하자. 그러면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{gathered} S \text{가 정규직교집합일 필요충분조건은} \\[2pt] \text{모든 } i, j \text{에 대하여 } \langle v_i, v_j\rangle = \delta_{ij} \text{인 것이다.} \end{gathered}$$</div>
+        <p><strong>(2)</strong> $c_1, c_2, \ldots$를 0이 아닌 스칼라라 하자. 그러면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{gathered} S = \{v_1, v_2, \ldots\} \text{가 직교집합일 필요충분조건은} \\[2pt] S' = \{c_1v_1, c_2v_2, \ldots\} \text{도 직교집합인 것이다.} \end{gathered}$$</div>
+        <p><strong>(3)</strong> $S = \{v_1, v_2, \ldots\}$가 0이 아닌 벡터로 이루어진 직교집합이면, 집합 $\overline{S} = \left\{ \dfrac{1}{\|v_1\|}v_1, \dfrac{1}{\|v_2\|}v_2, \ldots \right\}$는 정규직교집합이다.</p>
+        <p>0이 아닌 벡터에 그 길이의 역수를 곱하는 이 과정을</p>
+        <p><strong>정규화</strong>(normalizing)라 한다.</p>
+        <p><em>역주.</em> 슬라이드 원문의 (3)은 모든 $v_i$가 0이 아니라는 가정을 암묵적으로 사용한다. 직교집합은 영벡터를 포함할 수 있고, 그 경우 $\frac{1}{\|v_i\|}$가 정의되지 않는다. 그래서 가정을 &ldquo;0이 아닌 벡터로 이루어진 직교집합&rdquo;으로 바로잡아 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S = \{v_1, v_2, \ldots\}$ be a subset of $V$.</p>
+        <p><strong>(1)</strong> Let $\delta_{ij}$ denote the Kronecker delta. Then</p>
+        <div class="math-display">$$\begin{gathered} S \text{ is orthonormal} \\[2pt] \text{if and only if } \langle v_i, v_j\rangle = \delta_{ij} \text{ for all } i, j. \end{gathered}$$</div>
+        <p><strong>(2)</strong> Let $c_1, c_2, \ldots$ be nonzero scalars. Then</p>
+        <div class="math-display">$$\begin{gathered} S = \{v_1, v_2, \ldots\} \text{ is orthogonal} \\[2pt] \text{if and only if } S' = \{c_1v_1, c_2v_2, \ldots\} \text{ is orthogonal.} \end{gathered}$$</div>
+        <p><strong>(3)</strong> If $S = \{v_1, v_2, \ldots\}$ is orthogonal, then the set $\overline{S} = \left\{ \dfrac{1}{\|v_1\|}v_1, \dfrac{1}{\|v_2\|}v_2, \ldots \right\}$ is orthonormal.</p>
+        <p>This process of multiplying a nonzero vector by the reciprocal of its length</p>
+        <p>is called <strong>normalizing</strong>.</p>
+        <p><em>Note.</em> Statement (3) is transcribed exactly as printed on the slide, but it tacitly assumes that every $v_i$ is nonzero: an orthogonal set may contain the zero vector, and then $\frac{1}{\|v_i\|}$ is undefined. The hypothesis should read &ldquo;If $S = \{v_1, v_2, \ldots\}$ is an orthogonal set of nonzero vectors&rdquo;.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p21 Example 8 -->
+<div class="card exam-card" id="c5-27">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">$F^3$에서 직교집합의 정규화 <em>Normalizing an Orthogonal Set in $F^3$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$F^3$의 부분집합 $S = \{\, u = (1,1,0),\ v = (1,-1,1),\ w = (-1,1,2) \,\}$는 직교집합이다.</p>
+        <p>또한 $\|u\| = \sqrt{2}$, $\|v\| = \sqrt{3}$, $\|w\| = \sqrt{6}$이므로 $S$는 정규직교집합이 아니다.</p>
+        <p>정규화 과정을 거치면 다음 정규직교집합을 얻는다.</p>
+        <div class="math-display">$$\overline{S} = \left\{ \frac{1}{\sqrt{2}}(1,1,0), \frac{1}{\sqrt{3}}(1,-1,1), \frac{1}{\sqrt{6}}(-1,1,2) \right\}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The subset $S = \{\, u = (1,1,0),\ v = (1,-1,1),\ w = (-1,1,2) \,\}$ of $F^3$ is orthogonal.</p>
+        <p>Also $\|u\| = \sqrt{2}$, $\|v\| = \sqrt{3}$ and $\|w\| = \sqrt{6}$, and hence $S$ is not orthonormal.</p>
+        <p>By normalizing process, we obtain the following orthonormal set:</p>
+        <div class="math-display">$$\overline{S} = \left\{ \frac{1}{\sqrt{2}}(1,1,0), \frac{1}{\sqrt{3}}(1,-1,1), \frac{1}{\sqrt{6}}(-1,1,2) \right\}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.1 notes · Slide p.22 ═══════════ -->
+
+<!-- S6.1 p22 서술 단락 (H 와 그 내적) -->
+<div class="card note-card" id="note05-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f\text{는 연속} \,\}$를</p>
+        <p>구간 $[0, 2\pi]$ 위의 연속인 복소수값 함수 전체의 집합이라 하자.</p>
+        <p>이는 $\mathbb{C}$ 위의 벡터공간이다. 또한 모든 $f \in H$는 다음과 같이 쓸 수 있다.</p>
+        <div class="math-display">$$\begin{gathered} f = f_1 + if_2 \\[2pt] \text{여기서 } f_1, f_2 : [0, 2\pi] \to \mathbb{R} \text{는 실숫값 함수이다.} \end{gathered}$$</div>
+        <p>$f, g \in H$에 대하여 $\langle f, g\rangle := \dfrac{1}{2\pi}\displaystyle\int_0^{2\pi} f(t)\overline{g(t)}\,dt$로 정의한다.</p>
+        <p>즉 $f = f_1 + if_2$, $g = g_1 + ig_2$이면 $f(t)\overline{g(t)} = (f_1g_1 + f_2g_2) + i(-f_1g_2 + f_2g_1)$이므로 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt &amp;:= \frac{1}{2\pi}\int_0^{2\pi} (f_1g_1 + f_2g_2)\,dt \\[2pt] &amp;\qquad + \frac{i}{2\pi}\int_0^{2\pi} (-f_1g_2 + f_2g_1)\,dt. \end{aligned}$$</div>
+        <p>그러면 $\langle \,\cdot\,, \cdot\, \rangle : H \times H \to \mathbb{C}$는 $H$ 위의 내적이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f \text{ is continuous} \,\}$ be</p>
+        <p>the set of all continuous complex-valued functions on the interval $[0, 2\pi]$.</p>
+        <p>This is a vector space over $\mathbb{C}$. Also every $f \in H$ can be written as</p>
+        <div class="math-display">$$\begin{gathered} f = f_1 + if_2 \\[2pt] \text{where } f_1, f_2 : [0, 2\pi] \to \mathbb{R} \text{ are real-valued functions.} \end{gathered}$$</div>
+        <p>For $f, g \in H$, define $\langle f, g\rangle := \dfrac{1}{2\pi}\displaystyle\int_0^{2\pi} f(t)\overline{g(t)}\,dt$.</p>
+        <p>That is, if $f = f_1 + if_2$ and $g = g_1 + ig_2$ then $f(t)\overline{g(t)} = (f_1g_1 + f_2g_2) + i(-f_1g_2 + f_2g_1)$ and so</p>
+        <div class="math-display">$$\begin{aligned} \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt &amp;:= \frac{1}{2\pi}\int_0^{2\pi} (f_1g_1 + f_2g_2)\,dt \\[2pt] &amp;\qquad + \frac{i}{2\pi}\int_0^{2\pi} (-f_1g_2 + f_2g_1)\,dt. \end{aligned}$$</div>
+        <p>Then $\langle \,\cdot\,, \cdot\, \rangle : H \times H \to \mathbb{C}$ is an inner product on $H$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.1 p22 Example 9 — ERRATA: (1) 원시함수 계수·지수 오류, 끝줄 δ_ij → δ_nm → en Note -->
+<div class="card exam-card" id="c5-28">
+  <div class="card-head">
+    <span class="exam-num">EXAM 9</span>
+    <span class="exam-title">정규직교집합 $\{e^{int}\}$ <em>The Orthonormal Set $\{e^{int}\}$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$라 하자.</p>
+        <p><strong>(1)</strong> $n \neq m$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} \langle f_n, f_m\rangle &amp;= \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)t}\,dt \\[2pt] &amp;= \left[ \frac{1}{2\pi i(n-m)}\,e^{i(n-m)t} \right]_0^{2\pi} = 0. \end{aligned}$$</div>
+        <p><strong>(2)</strong> $n = m$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\langle f_n, f_n\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 \cdot dt = \frac{2\pi}{2\pi} = 1.$$</div>
+        <p>결과적으로 $\langle f_n, f_m\rangle = \delta_{nm}$이고 따라서 $S$는 정규직교집합이다.</p>
+        <p><em>역주.</em> 슬라이드 원문 (1)의 괄호 안 원시함수는 틀리게 적혀 있어, $\frac{1}{2\pi}e^{i(n-m)t}$의 원시함수 $\frac{1}{2\pi i(n-m)}e^{i(n-m)t}$로 바로잡아 옮겼다. 값 $0$은 $e^{2\pi i(n-m)} = 1$이므로 그대로 옳다. 또한 마지막 줄의 $\delta_{ij}$는 $\delta_{nm}$으로 바로잡아 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$.</p>
+        <p><strong>(1)</strong> If $n \neq m$, then</p>
+        <div class="math-display">$$\begin{aligned} \langle f_n, f_m\rangle &amp;= \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)t}\,dt \\[2pt] &amp;= \left[ \frac{1}{2\pi(m-n)}\,e^{i(m-n)t} \right]_0^{2\pi} = 0. \end{aligned}$$</div>
+        <p><strong>(2)</strong> If $n = m$, then</p>
+        <div class="math-display">$$\langle f_n, f_n\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 \cdot dt = \frac{2\pi}{2\pi} = 1.$$</div>
+        <p>In consequence, $\langle f_n, f_m\rangle = \delta_{ij}$ and hence $S$ is orthonormal.</p>
+        <p><em>Note.</em> In (1), the bracketed antiderivative is transcribed exactly as printed on the slide, but it is wrong: an antiderivative of $\frac{1}{2\pi}e^{i(n-m)t}$ is $\frac{1}{2\pi i(n-m)}e^{i(n-m)t}$, so the bracket should read $\left[\frac{1}{2\pi i(n-m)}e^{i(n-m)t}\right]_0^{2\pi}$. The value $0$ is still correct, because $e^{2\pi i(n-m)} = 1$. Also, in the last line $\delta_{ij}$ should be $\delta_{nm}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="section-title"><h2>연습문제 · Exercises (Friedberg §6.1)</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="e5-1">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-1</span>
+    <span class="ex-title">참·거짓 판정 <em>True or False</em><span class="src-ref">Friedberg §6.1 #1 (a)–(h)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 각 명제의 참·거짓을 판정하고 근거를 밝혀라.</p>
+        <p><strong>(a)</strong> 내적은 벡터의 각 순서쌍에 스칼라를 대응시키는 함수이다.</p>
+        <p><strong>(b)</strong> 내적공간의 스칼라체는 반드시 실수체 또는 복소수체이다.</p>
+        <p><strong>(c)</strong> 내적은 두 인수 각각에 대하여 선형이다.</p>
+        <p><strong>(d)</strong> 벡터공간 $\mathbb{R}^n$은 정확히 하나의 내적만 가진다.</p>
+        <p><strong>(e)</strong> 삼각부등식은 유한차원 내적공간에서만 성립한다.</p>
+        <p><strong>(f)</strong> 행렬이 켤레전치행렬을 가질 수 있는 것은 정사각행렬일 때뿐이다.</p>
+        <p><strong>(g)</strong> 내적공간의 벡터 $x$, $y$, $z$가 $\langle x, y\rangle = \langle x, z\rangle$를 만족하면 $y = z$이다.</p>
+        <p><strong>(h)</strong> 내적공간의 벡터 $y$가 그 공간의 모든 벡터 $x$에 대하여 $\langle x, y\rangle = 0$을 만족하면 $y = 0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 참. 내적의 정의에서 $\langle\cdot,\cdot\rangle$는 $V\times V$, 곧 벡터의 순서쌍 전체의 집합에서 $F$로 가는 함수이다.</p>
+        <p><strong>(b)</strong> 참. 이 강의와 교재의 정의는 $F=\mathbb{R}$ 또는 $F=\mathbb{C}$를 전제로 한다. 정의 (c)의 켤레복소수와 (d)의 부등호 $\langle x,x\rangle &gt; 0$이 의미를 가지려면 이 전제가 필요하다. (다른 체로의 확장은 정의 밖의 일반화이다.)</p>
+        <p><strong>(c)</strong> 거짓. 첫째 성분에 대해서는 $\langle cx,y\rangle=c\langle x,y\rangle$이지만, 둘째 성분에 대해서는 <a href="#c5-19">정리 6.1</a>(b)에 의해 $\langle x,cy\rangle=\bar c\,\langle x,y\rangle$이다. 반례로 $\mathbb{C}^1$의 표준내적 $\langle a,b\rangle=a\bar b$를 보자. $x=y=1$, $c=i$이면</p>
+        <div class="math-display">$$\langle 1,\, i\cdot 1\rangle = 1\cdot\bar i=-i,\qquad i\,\langle 1,1\rangle = i\cdot 1=i$$</div>
+        <p>이고 $-i\neq i$이므로 둘째 성분에 대해서는 선형이 아니다. (실내적공간에서는 $\bar c=c$이므로 두 성분에 대해 모두 선형이지만, 일반적으로는 거짓이다.)</p>
+        <p><strong>(d)</strong> 거짓. $\mathbb{R}^n$의 표준내적(점곱) $x\cdot y$ 외에 $\langle x,y\rangle'=2\,(x\cdot y)$도 내적이다(<a href="#c5-10">예 2</a>에서 $r=2&gt;0$인 경우). 예를 들어 $\langle e_1,e_1\rangle'=2\neq 1=e_1\cdot e_1$이므로 두 내적은 서로 다르다.</p>
+        <p><strong>(e)</strong> 거짓. <a href="#c5-22">정리 6.2</a>는 내적공간의 차원에 대한 가정 없이 증명된다(삼각부등식은 <a href="#c5-22">정리 6.2</a>(d)). 따라서 무한차원 내적공간에서도 성립한다. 예를 들어 $C([0,1])$은 <a href="#c5-11">예 3</a>의 내적 $\langle f,g\rangle=\int_0^1 f(t)g(t)\,dt$에 대해 무한차원 내적공간이며, 여기서도 삼각부등식이 성립한다.</p>
+        <p><strong>(f)</strong> 거짓. 임의의 $m\times n$ 행렬 $A$에 대해 $(A^*)_{ij}=\overline{A_{ji}}$로 수반행렬 $A^*$가 정의된다(<a href="#c5-14">예 4</a>의 $A$는 $3\times 2$ 행렬이다). 정사각행렬일 필요가 없다.</p>
+        <p><strong>(g)</strong> 거짓. $\mathbb{R}^2$의 표준내적에서 $x=(1,0)$, $y=(0,1)$, $z=(0,2)$로 두면</p>
+        <div class="math-display">$$\langle x,y\rangle = 1\cdot 0+0\cdot 1=0,\qquad \langle x,z\rangle = 1\cdot 0+0\cdot 2=0$$</div>
+        <p>이므로 $\langle x,y\rangle=\langle x,z\rangle$이지만 $y\neq z$이다.</p>
+        <p><strong>(h)</strong> 참. 모든 $x$에 대해 $\langle x,y\rangle=0$이므로 특히 $x=y$로 두면 $\langle y,y\rangle=0$이다. 정의 (d)에 의해 $y\neq 0$이면 $\langle y,y\rangle &gt; 0$이므로 $y=0$이다.</p>
+        <p>정리하면 (a)~(h)의 답은 순서대로 참, 참, 거짓, 거짓, 거짓, 거짓, 거짓, 참이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether each of the following statements is true or false, and justify your answer.</p>
+        <p><strong>(a)</strong> An inner product is a function that assigns a scalar to each ordered pair of vectors.</p>
+        <p><strong>(b)</strong> The field of scalars of an inner product space is necessarily either the real numbers or the complex numbers.</p>
+        <p><strong>(c)</strong> An inner product is linear in each of its two arguments.</p>
+        <p><strong>(d)</strong> The vector space $\mathbb{R}^n$ admits exactly one inner product.</p>
+        <p><strong>(e)</strong> The triangle inequality is valid only in inner product spaces of finite dimension.</p>
+        <p><strong>(f)</strong> A matrix can have a conjugate transpose only if it is square.</p>
+        <p><strong>(g)</strong> If $x$, $y$, $z$ are vectors in an inner product space with $\langle x, y\rangle = \langle x, z\rangle$, then $y = z$.</p>
+        <p><strong>(h)</strong> If $y$ is a vector in an inner product space such that $\langle x, y\rangle = 0$ for every vector $x$ of the space, then $y = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> True. By the definition, $\langle\cdot,\cdot\rangle$ is a function from $V\times V$, that is, from the set of ordered pairs of vectors, to $F$.</p>
+        <p><strong>(b)</strong> True. The definition in this course and in the textbook assumes $F=\mathbb{R}$ or $F=\mathbb{C}$. This assumption is needed for the complex conjugate in (c) and the inequality $\langle x,x\rangle &gt; 0$ in (d) to make sense. (Extending to other fields would be a generalization beyond the definition.)</p>
+        <p><strong>(c)</strong> False. In the first slot $\langle cx,y\rangle=c\langle x,y\rangle$, but in the second slot <a href="#c5-19">Theorem 6.1</a>(b) gives $\langle x,cy\rangle=\bar c\,\langle x,y\rangle$. As a counterexample, take the standard inner product $\langle a,b\rangle=a\bar b$ on $\mathbb{C}^1$. With $x=y=1$ and $c=i$,</p>
+        <div class="math-display">$$\langle 1,\, i\cdot 1\rangle = 1\cdot\bar i=-i,\qquad i\,\langle 1,1\rangle = i\cdot 1=i$$</div>
+        <p>and $-i\neq i$, so the inner product is not linear in the second slot. (Over $\mathbb{R}$ we have $\bar c=c$ and it is linear in both slots, but the statement is false in general.)</p>
+        <p><strong>(d)</strong> False. Besides the standard inner product (dot product) $x\cdot y$ on $\mathbb{R}^n$, the function $\langle x,y\rangle'=2\,(x\cdot y)$ is also an inner product (<a href="#c5-10">Example 2</a> with $r=2&gt;0$). For instance $\langle e_1,e_1\rangle'=2\neq 1=e_1\cdot e_1$, so the two inner products differ.</p>
+        <p><strong>(e)</strong> False. <a href="#c5-22">Theorem 6.2</a> is proved with no assumption on the dimension of the inner product space (the triangle inequality is <a href="#c5-22">Theorem 6.2</a>(d)), so it holds in infinite-dimensional spaces too. For example, $C([0,1])$ with the inner product $\langle f,g\rangle=\int_0^1 f(t)g(t)\,dt$ of <a href="#c5-11">Example 3</a> is an infinite-dimensional inner product space in which the triangle inequality holds.</p>
+        <p><strong>(f)</strong> False. For any $m\times n$ matrix $A$ the conjugate transpose $A^*$ is defined by $(A^*)_{ij}=\overline{A_{ji}}$ (the matrix $A$ in <a href="#c5-14">Example 4</a> is $3\times 2$). It need not be square.</p>
+        <p><strong>(g)</strong> False. In $\mathbb{R}^2$ with the standard inner product, let $x=(1,0)$, $y=(0,1)$, $z=(0,2)$. Then</p>
+        <div class="math-display">$$\langle x,y\rangle = 1\cdot 0+0\cdot 1=0,\qquad \langle x,z\rangle = 1\cdot 0+0\cdot 2=0,$$</div>
+        <p>so $\langle x,y\rangle=\langle x,z\rangle$ but $y\neq z$.</p>
+        <p><strong>(h)</strong> True. Since $\langle x,y\rangle=0$ for all $x$, taking $x=y$ gives $\langle y,y\rangle=0$. By property (d), $y\neq 0$ would give $\langle y,y\rangle &gt; 0$, so $y=0$.</p>
+        <p>In summary, the answers to (a)–(h) are, in order: True, True, False, False, False, False, False, True.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 5 -->
+<div class="card ex-card" id="e5-5">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-5</span>
+    <span class="ex-title">행렬로 주어진 $\mathbb{C}^2$ 위의 내적 <em>An Inner Product on $\mathbb{C}^2$ Given by a Matrix</em><span class="src-ref">Friedberg §6.1 #5</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음과 같이 두자.</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; i \\ -i &amp; 2 \end{pmatrix}.$$</div>
+        <p>행벡터 $x, y \in \mathbb{C}^2$에 대하여 $\langle x, y\rangle = xAy^*$로 놓는다. 이 식이 $\mathbb{C}^2$ 위의 내적을 정의함을 증명하고, $x = (1 - i, 2 + 3i)$, $y = (2 + i, 3 - 2i)$일 때 $\langle x, y\rangle$의 값을 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(내적임의 확인)</strong> $x,y,z\in\mathbb{C}^2$는 행벡터이고 $\langle x,y\rangle=xAy^*$는 $1\times 1$ 행렬, 곧 복소수이다. 먼저 $A^*=\overline{A}^{\,t}=\begin{pmatrix}1 &amp; i\\ -i &amp; 2\end{pmatrix}=A$이므로 $A$는 에르미트 행렬이다.</p>
+        <p>(a) 행렬곱의 분배법칙에 의해 $\langle x+z,y\rangle=(x+z)Ay^*=xAy^*+zAy^*=\langle x,y\rangle+\langle z,y\rangle$이다.</p>
+        <p>(b) $c\in\mathbb{C}$에 대해 $\langle cx,y\rangle=(cx)Ay^*=c\,(xAy^*)=c\langle x,y\rangle$이다.</p>
+        <p>(c) $1\times 1$ 행렬은 전치해도 같으므로 그 켤레는 켤레전치와 같다. $(MN)^*=N^*M^*$를 쓰면</p>
+        <div class="math-display">$$\overline{\langle x,y\rangle}=\left(xAy^*\right)^*=(y^*)^*A^*x^*=yAx^*=\langle y,x\rangle.$$</div>
+        <p>(d) $x=(x_1,x_2)$라 하면 $xA=(x_1-ix_2,\; ix_1+2x_2)$이므로</p>
+        <div class="math-display">$$\begin{aligned}\langle x,x\rangle &amp;= xAx^* = (x_1-ix_2)\bar x_1+(ix_1+2x_2)\bar x_2\\ &amp;= |x_1|^2+i\,x_1\bar x_2-i\,x_2\bar x_1+2|x_2|^2.\end{aligned}$$</div>
+        <p>한편 $|x_1-ix_2|^2=|x_1|^2+|x_2|^2+i\,x_1\bar x_2-i\,\bar x_1x_2$이므로</p>
+        <div class="math-display">$$\langle x,x\rangle=|x_1-ix_2|^2+|x_2|^2\ \ge 0.$$</div>
+        <p>이것이 $0$이면 $x_2=0$이고 $x_1-ix_2=0$이므로 $x_1=0$, 곧 $x=0$이다. 따라서 $x\neq 0$이면 $\langle x,x\rangle &gt; 0$이다. 이로써 $\langle x,y\rangle=xAy^*$는 $\mathbb{C}^2$의 내적이다.</p>
+        <p><strong>(값의 계산)</strong> $x=(1-i,\,2+3i)$, $y=(2+i,\,3-2i)$이다. $y^*=\begin{pmatrix}2-i\\ 3+2i\end{pmatrix}$이므로</p>
+        <div class="math-display">$$\begin{aligned}Ay^*&amp;=\begin{pmatrix}1 &amp; i\\ -i &amp; 2\end{pmatrix}\begin{pmatrix}2-i\\ 3+2i\end{pmatrix}=\begin{pmatrix}(2-i)+i(3+2i)\\ -i(2-i)+2(3+2i)\end{pmatrix}\\ &amp;=\begin{pmatrix}2-i+3i-2\\ -2i-1+6+4i\end{pmatrix}=\begin{pmatrix}2i\\ 5+2i\end{pmatrix}.\end{aligned}$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{aligned}\langle x,y\rangle &amp;= (1-i)(2i)+(2+3i)(5+2i)\\ &amp;= (2i+2)+(10+4i+15i-6)\\ &amp;= (2+2i)+(4+19i)=6+21i.\end{aligned}$$</div>
+        <p>답은 $\langle x,y\rangle=6+21i$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; i \\ -i &amp; 2 \end{pmatrix}.$$</div>
+        <p>For row vectors $x, y \in \mathbb{C}^2$, set $\langle x, y\rangle = xAy^*$. Prove that this formula defines an inner product on $\mathbb{C}^2$, and evaluate $\langle x, y\rangle$ for $x = (1 - i, 2 + 3i)$ and $y = (2 + i, 3 - 2i)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(Checking that it is an inner product)</strong> Here $x,y,z\in\mathbb{C}^2$ are row vectors and $\langle x,y\rangle=xAy^*$ is a $1\times 1$ matrix, that is, a complex number. First, $A^*=\overline{A}^{\,t}=\begin{pmatrix}1 &amp; i\\ -i &amp; 2\end{pmatrix}=A$, so $A$ is Hermitian.</p>
+        <p>(a) By the distributive law for matrix products, $\langle x+z,y\rangle=(x+z)Ay^*=xAy^*+zAy^*=\langle x,y\rangle+\langle z,y\rangle$.</p>
+        <p>(b) For $c\in\mathbb{C}$, $\langle cx,y\rangle=(cx)Ay^*=c\,(xAy^*)=c\langle x,y\rangle$.</p>
+        <p>(c) A $1\times 1$ matrix equals its transpose, so its conjugate equals its conjugate transpose. Using $(MN)^*=N^*M^*$,</p>
+        <div class="math-display">$$\overline{\langle x,y\rangle}=\left(xAy^*\right)^*=(y^*)^*A^*x^*=yAx^*=\langle y,x\rangle.$$</div>
+        <p>(d) Let $x=(x_1,x_2)$. Then $xA=(x_1-ix_2,\; ix_1+2x_2)$, so</p>
+        <div class="math-display">$$\begin{aligned}\langle x,x\rangle &amp;= xAx^* = (x_1-ix_2)\bar x_1+(ix_1+2x_2)\bar x_2\\ &amp;= |x_1|^2+i\,x_1\bar x_2-i\,x_2\bar x_1+2|x_2|^2.\end{aligned}$$</div>
+        <p>Since $|x_1-ix_2|^2=|x_1|^2+|x_2|^2+i\,x_1\bar x_2-i\,\bar x_1x_2$, we get</p>
+        <div class="math-display">$$\langle x,x\rangle=|x_1-ix_2|^2+|x_2|^2\ \ge 0.$$</div>
+        <p>If this is $0$, then $x_2=0$ and $x_1-ix_2=0$, so $x_1=0$, that is, $x=0$. Hence $\langle x,x\rangle &gt; 0$ for $x\neq 0$. Therefore $\langle x,y\rangle=xAy^*$ is an inner product on $\mathbb{C}^2$.</p>
+        <p><strong>(Computing the value)</strong> Let $x=(1-i,\,2+3i)$ and $y=(2+i,\,3-2i)$. Then $y^*=\begin{pmatrix}2-i\\ 3+2i\end{pmatrix}$, so</p>
+        <div class="math-display">$$\begin{aligned}Ay^*&amp;=\begin{pmatrix}1 &amp; i\\ -i &amp; 2\end{pmatrix}\begin{pmatrix}2-i\\ 3+2i\end{pmatrix}=\begin{pmatrix}(2-i)+i(3+2i)\\ -i(2-i)+2(3+2i)\end{pmatrix}\\ &amp;=\begin{pmatrix}2-i+3i-2\\ -2i-1+6+4i\end{pmatrix}=\begin{pmatrix}2i\\ 5+2i\end{pmatrix}.\end{aligned}$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$\begin{aligned}\langle x,y\rangle &amp;= (1-i)(2i)+(2+3i)(5+2i)\\ &amp;= (2i+2)+(10+4i+15i-6)\\ &amp;= (2+2i)+(4+19i)=6+21i.\end{aligned}$$</div>
+        <p>The answer is $\langle x,y\rangle=6+21i$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 8 -->
+<div class="card ex-card" id="e5-8">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-8</span>
+    <span class="ex-title">내적이 되지 못하는 함수 <em>Functions That Fail to Be Inner Products</em><span class="src-ref">Friedberg §6.1 #8 (a)–(c)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 각각에 대하여, 주어진 식이 지정된 벡터공간 위의 내적을 정의하지 못하는 이유를 설명하라.</p>
+        <p><strong>(a)</strong> $\mathbb{R}^2$ 위의 $\langle (a, b), (c, d)\rangle = ac - bd$.</p>
+        <p><strong>(b)</strong> $M_{2 \times 2}(\mathbb{R})$ 위의 $\langle A, B\rangle = \operatorname{tr}(A + B)$.</p>
+        <p><strong>(c)</strong> $P(\mathbb{R})$ 위의 $\langle f(x), g(x)\rangle = \displaystyle\int_0^1 f'(t)g(t)\,dt$. 여기서 $f'$는 $f$의 도함수이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>세 경우 모두 내적의 조건 (d), 곧 "$x\neq 0$이면 $\langle x,x\rangle &gt; 0$"이 깨짐을 보인다.</p>
+        <p><strong>(a)</strong> $\langle (a,b),(c,d)\rangle=ac-bd$라 하자. $x=(1,1)\neq (0,0)$이면 $\langle x,x\rangle=1\cdot 1-1\cdot 1=0$이다. 영벡터가 아닌데 $\langle x,x\rangle=0$이므로 (d)에 위배된다. ($x=(0,1)$이면 $\langle x,x\rangle=-1 &lt; 0$이기도 하다.)</p>
+        <p><strong>(b)</strong> $\langle A,B\rangle=\operatorname{tr}(A+B)$라 하자. $A=\begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}\neq O$이면</p>
+        <div class="math-display">$$\langle A,A\rangle=\operatorname{tr}(2A)=\operatorname{tr}\begin{pmatrix}2 &amp; 0\\ 0 &amp; -2\end{pmatrix}=0$$</div>
+        <p>이므로 (d)에 위배된다. (참고로 (a)도 깨진다. $I$를 $2\times 2$ 단위행렬이라 하면 $\langle I+I,I\rangle=\operatorname{tr}(3I)=6$이지만 $\langle I,I\rangle=\operatorname{tr}(2I)=4$이므로 $\langle I,I\rangle+\langle I,I\rangle=4+4=8$이다.)</p>
+        <p><strong>(c)</strong> $\langle f,g\rangle=\int_0^1 f'(t)g(t)\,dt$라 하자. 상수함수 $f(x)=1$은 영다항식이 아니지만 $f'=0$이므로 $\langle f,f\rangle=\int_0^1 0\cdot 1\,dt=0$이다. 따라서 (d)에 위배된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each of the following, explain why the given formula does not define an inner product on the indicated vector space.</p>
+        <p><strong>(a)</strong> $\langle (a, b), (c, d)\rangle = ac - bd$ on $\mathbb{R}^2$.</p>
+        <p><strong>(b)</strong> $\langle A, B\rangle = \operatorname{tr}(A + B)$ on $M_{2 \times 2}(\mathbb{R})$.</p>
+        <p><strong>(c)</strong> $\langle f(x), g(x)\rangle = \displaystyle\int_0^1 f'(t)g(t)\,dt$ on $P(\mathbb{R})$, where $f'$ denotes the derivative of $f$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>In each case we show that property (d), "$\langle x,x\rangle &gt; 0$ for $x\neq 0$", fails.</p>
+        <p><strong>(a)</strong> Let $\langle (a,b),(c,d)\rangle=ac-bd$. For $x=(1,1)\neq (0,0)$ we get $\langle x,x\rangle=1\cdot 1-1\cdot 1=0$. A nonzero vector with $\langle x,x\rangle=0$ violates (d). (Also, $x=(0,1)$ gives $\langle x,x\rangle=-1 &lt; 0$.)</p>
+        <p><strong>(b)</strong> Let $\langle A,B\rangle=\operatorname{tr}(A+B)$. For $A=\begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}\neq O$,</p>
+        <div class="math-display">$$\langle A,A\rangle=\operatorname{tr}(2A)=\operatorname{tr}\begin{pmatrix}2 &amp; 0\\ 0 &amp; -2\end{pmatrix}=0,$$</div>
+        <p>which violates (d). (Property (a) also fails: with $I$ the $2\times 2$ identity matrix, $\langle I+I,I\rangle=\operatorname{tr}(3I)=6$ but $\langle I,I\rangle=\operatorname{tr}(2I)=4$, so $\langle I,I\rangle+\langle I,I\rangle=4+4=8$.)</p>
+        <p><strong>(c)</strong> Let $\langle f,g\rangle=\int_0^1 f'(t)g(t)\,dt$. The constant polynomial $f(x)=1$ is not the zero polynomial, but $f'=0$, so $\langle f,f\rangle=\int_0^1 0\cdot 1\,dt=0$. This violates (d).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 9 -->
+<div class="card ex-card" id="e5-9">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-9</span>
+    <span class="ex-title">기저와의 내적 <em>Inner Products Against a Basis</em><span class="src-ref">Friedberg §6.1 #9 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\beta$를 유한차원 내적공간 $V$의 기저라 하고, $x, y \in V$라 하자.</p>
+        <p><strong>(a)</strong> $\beta$의 모든 $z$에 대하여 $\langle x, z\rangle = 0$이면 $x = 0$임을 보여라.</p>
+        <p><strong>(b)</strong> $\beta$의 모든 $z$에 대하여 $\langle x, z\rangle = \langle y, z\rangle$이면 $x = y$임을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $\beta=\{z_1,\ldots,z_n\}$이라 하자. $\beta$는 기저이므로 어떤 스칼라 $c_1,\ldots,c_n$에 대해 $x=\sum_{i=1}^n c_iz_i$이다. <a href="#c5-19">정리 6.1</a>(a)(b), 곧 $\langle x,y+z\rangle=\langle x,y\rangle+\langle x,z\rangle$와 $\langle x,cy\rangle=\bar c\,\langle x,y\rangle$에 의해</p>
+        <div class="math-display">$$\langle x,x\rangle=\Big\langle x,\sum_{i=1}^n c_iz_i\Big\rangle=\sum_{i=1}^n \bar c_i\,\langle x,z_i\rangle=\sum_{i=1}^n \bar c_i\cdot 0=0.$$</div>
+        <p>내적의 정의 (d)(또는 <a href="#c5-19">정리 6.1</a>(d), $\langle x,x\rangle=0\Leftrightarrow x=0$)에 의해 $x=0$이다.</p>
+        <p><strong>(b)</strong> 모든 $z\in\beta$에 대해 $\langle x,z\rangle=\langle y,z\rangle$라 하자. 첫째 성분에 대한 선형성에 의해 $\langle x-y,z\rangle=\langle x,z\rangle-\langle y,z\rangle=0$이 모든 $z\in\beta$에 대해 성립한다. (a)를 $x-y$에 적용하면 $x-y=0$, 곧 $x=y$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\beta$ be a basis of a finite-dimensional inner product space $V$, and let $x, y \in V$.</p>
+        <p><strong>(a)</strong> Show that if $\langle x, z\rangle = 0$ for every $z \in \beta$, then $x = 0$.</p>
+        <p><strong>(b)</strong> Show that if $\langle x, z\rangle = \langle y, z\rangle$ for every $z \in \beta$, then $x = y$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Let $\beta=\{z_1,\ldots,z_n\}$. Since $\beta$ is a basis, there are scalars $c_1,\ldots,c_n$ with $x=\sum_{i=1}^n c_iz_i$. By <a href="#c5-19">Theorem 6.1</a>(a)(b), namely $\langle x,y+z\rangle=\langle x,y\rangle+\langle x,z\rangle$ and $\langle x,cy\rangle=\bar c\,\langle x,y\rangle$,</p>
+        <div class="math-display">$$\langle x,x\rangle=\Big\langle x,\sum_{i=1}^n c_iz_i\Big\rangle=\sum_{i=1}^n \bar c_i\,\langle x,z_i\rangle=\sum_{i=1}^n \bar c_i\cdot 0=0.$$</div>
+        <p>By property (d) of an inner product (or <a href="#c5-19">Theorem 6.1</a>(d), $\langle x,x\rangle=0\Leftrightarrow x=0$), $x=0$.</p>
+        <p><strong>(b)</strong> Suppose $\langle x,z\rangle=\langle y,z\rangle$ for all $z\in\beta$. By linearity in the first slot, $\langle x-y,z\rangle=\langle x,z\rangle-\langle y,z\rangle=0$ for all $z\in\beta$. Applying (a) to $x-y$ gives $x-y=0$, that is, $x=y$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 10 -->
+<div class="card ex-card" id="e5-10">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-10</span>
+    <span class="ex-title">피타고라스 정리 <em>The Pythagorean Theorem</em><span class="src-ref">Friedberg §6.1 #10</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$x$, $y$를 내적공간 $V$의 직교하는 벡터라 하자. 다음을 보여라.</p>
+        <div class="math-display">$$\|x + y\|^2 = \|x\|^2 + \|y\|^2,$$</div>
+        <p>또한 이 등식을 이용하여 $\mathbb{R}^2$에서의 피타고라스 정리를 유도하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$x\perp y$이므로 $\langle x,y\rangle=0$이고, $\langle y,x\rangle=\overline{\langle x,y\rangle}=0$이다. 따라서</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|^2 &amp;= \langle x+y,\,x+y\rangle\\ &amp;= \langle x,x\rangle+\langle x,y\rangle+\langle y,x\rangle+\langle y,y\rangle\\ &amp;= \|x\|^2+0+0+\|y\|^2=\|x\|^2+\|y\|^2.\end{aligned}$$</div>
+        <p><strong>$\mathbb{R}^2$의 피타고라스 정리.</strong> $\mathbb{R}^2$에 표준내적(점곱)을 주고, $B$에서 직각인 직각삼각형 $ABC$를 생각하자. $x=B-A$, $y=C-B$라 하면 $x$와 $y$는 각각 변 $AB$, $BC$를 나타내는 벡터이고, $\angle B=90^\circ$이므로 $\langle x,y\rangle=\|x\|\|y\|\cos 90^\circ=0$, 곧 $x\perp y$이다. 한편 $x+y=C-A$이다. 위의 결과를 적용하면</p>
+        <div class="math-display">$$\begin{aligned}\overline{AC}^{\,2}&amp;=\|C-A\|^2=\|x+y\|^2\\ &amp;=\|x\|^2+\|y\|^2=\overline{AB}^{\,2}+\overline{BC}^{\,2}.\end{aligned}$$</div>
+        <p>이것이 피타고라스 정리이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $x$ and $y$ be orthogonal vectors in an inner product space $V$. Show that</p>
+        <div class="math-display">$$\|x + y\|^2 = \|x\|^2 + \|y\|^2,$$</div>
+        <p>and use this identity to derive the Pythagorean theorem in $\mathbb{R}^2$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $x\perp y$, we have $\langle x,y\rangle=0$ and $\langle y,x\rangle=\overline{\langle x,y\rangle}=0$. Therefore</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|^2 &amp;= \langle x+y,\,x+y\rangle\\ &amp;= \langle x,x\rangle+\langle x,y\rangle+\langle y,x\rangle+\langle y,y\rangle\\ &amp;= \|x\|^2+0+0+\|y\|^2=\|x\|^2+\|y\|^2.\end{aligned}$$</div>
+        <p><strong>The Pythagorean theorem in $\mathbb{R}^2$.</strong> Give $\mathbb{R}^2$ the standard inner product (dot product) and consider a right triangle $ABC$ with the right angle at $B$. Let $x=B-A$ and $y=C-B$; these are the vectors along the sides $AB$ and $BC$. Since $\angle B=90^\circ$, $\langle x,y\rangle=\|x\|\|y\|\cos 90^\circ=0$, that is, $x\perp y$. Also $x+y=C-A$. Applying the result above,</p>
+        <div class="math-display">$$\begin{aligned}\overline{AC}^{\,2}&amp;=\|C-A\|^2=\|x+y\|^2\\ &amp;=\|x\|^2+\|y\|^2=\overline{AB}^{\,2}+\overline{BC}^{\,2}.\end{aligned}$$</div>
+        <p>This is the Pythagorean theorem.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 11 -->
+<div class="card ex-card" id="e5-11">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-11</span>
+    <span class="ex-title">평행사변형 법칙 <em>The Parallelogram Law</em><span class="src-ref">Friedberg §6.1 #11</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간이라 하자. 다음 평행사변형 법칙을 증명하라.</p>
+        <div class="math-display">$$\begin{gathered}\|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 \\ (\text{모든 } x, y \in V \text{에 대하여}).\end{gathered}$$</div>
+        <p>이 등식이 $\mathbb{R}^2$의 평행사변형에 대하여 기하학적으로 무엇을 뜻하는지 설명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\langle y,x\rangle=\overline{\langle x,y\rangle}$를 쓰면 두 노름의 제곱은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|^2 &amp;= \langle x,x\rangle+\langle x,y\rangle+\langle y,x\rangle+\langle y,y\rangle,\\ \|x-y\|^2 &amp;= \langle x,x\rangle-\langle x,y\rangle-\langle y,x\rangle+\langle y,y\rangle.\end{aligned}$$</div>
+        <p>두 식을 더하면 교차항 $\pm\langle x,y\rangle$, $\pm\langle y,x\rangle$가 서로 상쇄되어</p>
+        <div class="math-display">$$\|x+y\|^2+\|x-y\|^2=2\langle x,x\rangle+2\langle y,y\rangle=2\|x\|^2+2\|y\|^2$$</div>
+        <p>이다. 이것이 평행사변형 법칙이다.</p>
+        <p><strong>$\mathbb{R}^2$의 평행사변형에 대한 의미.</strong> $\mathbb{R}^2$에서 꼭짓점이 $0$, $x$, $x+y$, $y$인 평행사변형을 생각하자. 네 변의 길이는 $\|x\|,\|y\|,\|x\|,\|y\|$이므로 네 변의 길이의 제곱의 합은 $2\|x\|^2+2\|y\|^2$이다. 두 대각선은 $x+y$와 $x-y$($x$에서 $y$까지의 선분의 길이는 $\|x-y\|$)이므로 두 대각선의 길이의 제곱의 합은 $\|x+y\|^2+\|x-y\|^2$이다. 따라서 평행사변형 법칙은 "평행사변형의 두 대각선의 길이의 제곱의 합은 네 변의 길이의 제곱의 합과 같다"는 것을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space. Establish the parallelogram law</p>
+        <div class="math-display">$$\|x + y\|^2 + \|x - y\|^2 = 2\|x\|^2 + 2\|y\|^2 \quad \text{for all } x, y \in V.$$</div>
+        <p>What does this identity say geometrically about parallelograms in $\mathbb{R}^2$?</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>Using $\langle y,x\rangle=\overline{\langle x,y\rangle}$, the two squared norms are</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|^2 &amp;= \langle x,x\rangle+\langle x,y\rangle+\langle y,x\rangle+\langle y,y\rangle,\\ \|x-y\|^2 &amp;= \langle x,x\rangle-\langle x,y\rangle-\langle y,x\rangle+\langle y,y\rangle.\end{aligned}$$</div>
+        <p>Adding the two lines, the cross terms $\pm\langle x,y\rangle$ and $\pm\langle y,x\rangle$ cancel, leaving</p>
+        <div class="math-display">$$\|x+y\|^2+\|x-y\|^2=2\langle x,x\rangle+2\langle y,y\rangle=2\|x\|^2+2\|y\|^2.$$</div>
+        <p>This is the parallelogram law.</p>
+        <p><strong>Meaning for parallelograms in $\mathbb{R}^2$.</strong> Consider the parallelogram in $\mathbb{R}^2$ with vertices $0$, $x$, $x+y$, $y$. Its four sides have lengths $\|x\|,\|y\|,\|x\|,\|y\|$, so the sum of the squares of the side lengths is $2\|x\|^2+2\|y\|^2$. Its two diagonals are $x+y$ and $x-y$ (the segment from $y$ to $x$ has length $\|x-y\|$), so the sum of the squares of the diagonal lengths is $\|x+y\|^2+\|x-y\|^2$. Hence the parallelogram law says: the sum of the squares of the lengths of the two diagonals of a parallelogram equals the sum of the squares of the lengths of its four sides.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 13 -->
+<div class="card ex-card" id="e5-13">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-13</span>
+    <span class="ex-title">두 내적의 합 <em>The Sum of Two Inner Products</em><span class="src-ref">Friedberg §6.1 #13</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\langle \,\cdot\,, \cdot\, \rangle_1$, $\langle \,\cdot\,, \cdot\, \rangle_2$를 같은 벡터공간 $V$ 위의 두 내적이라 하자. 다음 식이</p>
+        <div class="math-display">$$\langle x, y\rangle = \langle x, y\rangle_1 + \langle x, y\rangle_2 \qquad (x, y \in V)$$</div>
+        <p>역시 $V$ 위의 내적을 정의함을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\langle x,y\rangle=\langle x,y\rangle_1+\langle x,y\rangle_2$가 내적의 네 조건을 만족함을 보인다. 각 $\langle\cdot,\cdot\rangle_j$ ($j=1,2$)가 내적이라는 가정을 쓴다.</p>
+        <p>(a) 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}\langle x+z,y\rangle&amp;=\langle x+z,y\rangle_1+\langle x+z,y\rangle_2\\ &amp;=\big(\langle x,y\rangle_1+\langle z,y\rangle_1\big)+\big(\langle x,y\rangle_2+\langle z,y\rangle_2\big)\\ &amp;=\langle x,y\rangle+\langle z,y\rangle.\end{aligned}$$</div>
+        <p>(b) $c\in F$에 대해 $\langle cx,y\rangle=c\langle x,y\rangle_1+c\langle x,y\rangle_2=c\,\langle x,y\rangle$이다.</p>
+        <p>(c) 합의 켤레는 켤레의 합이므로 $\overline{\langle x,y\rangle}=\overline{\langle x,y\rangle_1}+\overline{\langle x,y\rangle_2}=\langle y,x\rangle_1+\langle y,x\rangle_2=\langle y,x\rangle$이다.</p>
+        <p>(d) $x\neq 0$이면 $\langle x,x\rangle_1&gt; 0$이고 $\langle x,x\rangle_2&gt; 0$이므로 $\langle x,x\rangle=\langle x,x\rangle_1+\langle x,x\rangle_2&gt; 0$이다.</p>
+        <p>따라서 $\langle\cdot,\cdot\rangle_1+\langle\cdot,\cdot\rangle_2$는 $V$ 위의 내적이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\langle \,\cdot\,, \cdot\, \rangle_1$ and $\langle \,\cdot\,, \cdot\, \rangle_2$ be two inner products on the same vector space $V$. Show that the formula</p>
+        <div class="math-display">$$\langle x, y\rangle = \langle x, y\rangle_1 + \langle x, y\rangle_2 \qquad (x, y \in V)$$</div>
+        <p>also defines an inner product on $V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We show that $\langle x,y\rangle=\langle x,y\rangle_1+\langle x,y\rangle_2$ satisfies the four conditions of an inner product, using that each $\langle\cdot,\cdot\rangle_j$ ($j=1,2$) is an inner product.</p>
+        <p>(a) We have</p>
+        <div class="math-display">$$\begin{aligned}\langle x+z,y\rangle&amp;=\langle x+z,y\rangle_1+\langle x+z,y\rangle_2\\ &amp;=\big(\langle x,y\rangle_1+\langle z,y\rangle_1\big)+\big(\langle x,y\rangle_2+\langle z,y\rangle_2\big)\\ &amp;=\langle x,y\rangle+\langle z,y\rangle.\end{aligned}$$</div>
+        <p>(b) For $c\in F$, $\langle cx,y\rangle=c\langle x,y\rangle_1+c\langle x,y\rangle_2=c\,\langle x,y\rangle$.</p>
+        <p>(c) The conjugate of a sum is the sum of the conjugates, so $\overline{\langle x,y\rangle}=\overline{\langle x,y\rangle_1}+\overline{\langle x,y\rangle_2}=\langle y,x\rangle_1+\langle y,x\rangle_2=\langle y,x\rangle$.</p>
+        <p>(d) If $x\neq 0$, then $\langle x,x\rangle_1&gt; 0$ and $\langle x,x\rangle_2&gt; 0$, so $\langle x,x\rangle=\langle x,x\rangle_1+\langle x,x\rangle_2&gt; 0$.</p>
+        <p>Hence $\langle\cdot,\cdot\rangle_1+\langle\cdot,\cdot\rangle_2$ is an inner product on $V$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 15 -->
+<div class="card ex-card" id="e5-15">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-15</span>
+    <span class="ex-title">코시-슈바르츠 부등식과 삼각부등식에서의 등호 <em>Equality in the Cauchy–Schwarz and Triangle Inequalities</em><span class="src-ref">Friedberg §6.1 #15 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간이라 하고 $x, y \in V$라 하자.</p>
+        <p><strong>(a)</strong> $|\langle x, y\rangle| = \|x\| \cdot \|y\|$가 성립할 필요충분조건은 두 벡터 $x$, $y$ 중 하나가 다른 하나의 스칼라배인 것임을 증명하라.</p>
+        <p><em>힌트.</em> 등식이 성립하고 $y \neq 0$이라 하자. 다음과 같이 놓는다.</p>
+        <div class="math-display">$$a = \frac{\langle x, y\rangle}{\|y\|^2} \quad \text{그리고} \quad z = x - ay.$$</div>
+        <p>$y$와 $z$가 직교하고 $|a| = \dfrac{\|x\|}{\|y\|}$임을 확인하라. 그런 다음 <a href="#e5-10">연습문제 10</a>의 등식(직교하는 벡터 $u$, $v$에 대하여 $\|u + v\|^2 = \|u\|^2 + \|v\|^2$)을 $\|x\|^2 = \|ay + z\|^2$에 적용하여 $\|z\| = 0$임을 결론지어라.</p>
+        <p><strong>(b)</strong> $\|x + y\| = \|x\| + \|y\|$가 성립할 필요충분조건에 대한 유사한 특징짓기를 찾아 증명하고, 이를 $n$개의 벡터로, 즉 등식 $\|x_1 + \cdots + x_n\| = \|x_1\| + \cdots + \|x_n\|$로 확장하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> ($\Leftarrow$) $x=ay$ ($a\in F$)이면 <a href="#c5-22">정리 6.2</a>(a)에 의해 $\|x\|=|a|\|y\|$이고 $\langle x,y\rangle=a\|y\|^2$이므로 $|\langle x,y\rangle|=|a|\|y\|^2=\|x\|\|y\|$이다. $y=ax$이면 $\langle x,y\rangle=\bar a\|x\|^2$이므로 $|\langle x,y\rangle|=|a|\|x\|^2=\|x\|\cdot|a|\|x\|=\|x\|\|y\|$이다.</p>
+        <p>($\Rightarrow$) $|\langle x,y\rangle|=\|x\|\|y\|$라 하자. $y=0$이면 $y=0\cdot x$이므로 $y$는 $x$의 스칼라배이다. 이제 $y\neq 0$이라 하고</p>
+        <div class="math-display">$$a=\frac{\langle x,y\rangle}{\|y\|^2},\qquad z=x-ay$$</div>
+        <p>로 둔다. 그러면 $\langle z,y\rangle=\langle x,y\rangle-a\langle y,y\rangle=\langle x,y\rangle-\langle x,y\rangle=0$이므로 $z\perp y$이고, 따라서 $\langle ay,z\rangle=a\,\overline{\langle z,y\rangle}=0$, 곧 $ay\perp z$이다. 또한 $|a|=\dfrac{|\langle x,y\rangle|}{\|y\|^2}=\dfrac{\|x\|\|y\|}{\|y\|^2}=\dfrac{\|x\|}{\|y\|}$이다. $x=ay+z$에 <a href="#e5-10">연습문제 10</a>의 결과(직교하는 두 벡터에 대해 $\|u+v\|^2=\|u\|^2+\|v\|^2$)를 적용하면</p>
+        <div class="math-display">$$\|x\|^2=\|ay\|^2+\|z\|^2=|a|^2\|y\|^2+\|z\|^2=\|x\|^2+\|z\|^2$$</div>
+        <p>이므로 $\|z\|=0$, 곧 $z=0$이고 $x=ay$이다. 따라서 $y=0$이면 $y=0\cdot x$, $y\neq 0$이면 $x=ay$이므로 한 벡터는 다른 벡터의 스칼라배이다.</p>
+        <p><strong>(b)</strong> 결과를 먼저 진술한다. 삼각부등식의 등호는 "스칼라배"가 아니라 <strong>음이 아닌 실수배</strong>일 때에 성립한다. (예를 들어 $x=-y\neq 0$이면 $x$는 $y$의 스칼라배이지만 $\|x+y\|=0\neq 2\|y\|$이다.)</p>
+        <p><strong>두 벡터.</strong> $\|x+y\|=\|x\|+\|y\|$ $\iff$ $x=cy$ 또는 $y=cx$인 실수 $c\ge 0$이 존재한다.</p>
+        <p>($\Leftarrow$) $x=cy$ ($c\ge 0$)이면 $c+1&gt;0$이므로 <a href="#c5-22">정리 6.2</a>(a)에 의해</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|&amp;=\|(c+1)y\|=(c+1)\|y\|\\ &amp;=c\|y\|+\|y\|=\|x\|+\|y\|\end{aligned}$$</div>
+        <p>이다. $y=cx$이면 대칭이다.</p>
+        <p>($\Rightarrow$) 양변을 제곱하면 $\|x+y\|^2=\|x\|^2+2\operatorname{Re}\langle x,y\rangle+\|y\|^2$이고 $(\|x\|+\|y\|)^2=\|x\|^2+2\|x\|\|y\|+\|y\|^2$이므로 $\operatorname{Re}\langle x,y\rangle=\|x\|\|y\|$이다. 그런데 코시-슈바르츠 부등식(<a href="#c5-22">정리 6.2</a>(c))에 의해</p>
+        <div class="math-display">$$\|x\|\|y\|=\operatorname{Re}\langle x,y\rangle\le|\langle x,y\rangle|\le\|x\|\|y\|$$</div>
+        <p>이므로 모두 등호이다. 즉 $\operatorname{Re}\langle x,y\rangle=|\langle x,y\rangle|$에서 $\langle x,y\rangle$는 음이 아닌 실수이고, $\langle x,y\rangle=\|x\|\|y\|$이다. 특히 $|\langle x,y\rangle|=\|x\|\|y\|$이다. $y=0$이면 $y=0\cdot x$이므로 끝이다. $y\neq 0$이면 (a)의 증명에 의해 $x=ay$ ($a=\langle x,y\rangle/\|y\|^2$)이고, $a$는 음이 아닌 실수 $\langle x,y\rangle$를 양수 $\|y\|^2$으로 나눈 값이므로 $a\ge 0$인 실수이다. 따라서 $x=ay$이다.</p>
+        <p><strong>$n$개의 벡터.</strong> $x_1,\ldots,x_n\in V$에 대해 다음은 동치이다.</p>
+        <div class="math-display">$$\begin{gathered}\|x_1+\cdots+x_n\|=\|x_1\|+\cdots+\|x_n\|\\ \iff\\ \text{모든 }x_i=0\text{이거나,}\\ \text{단위벡터 }u\text{가 있어 모든 }i\text{에 대해 }x_i=\|x_i\|\,u.\end{gathered}$$</div>
+        <p>즉 영이 아닌 $x_i$들은 모두 하나의 단위벡터의 양의 실수배, 곧 서로의 양의 실수배이다.</p>
+        <p>($\Leftarrow$) 모두 $0$이면 자명하다. $x_i=\|x_i\|u$이면 $x_1+\cdots+x_n=(\sum\|x_i\|)\,u$이고 $\sum\|x_i\|\ge 0$이므로 노름은 $\sum\|x_i\|\cdot\|u\|=\sum\|x_i\|$이다.</p>
+        <p>($\Rightarrow$) $n$에 대한 귀납법. $n=1$이면 $x_1=0$이거나 $u=x_1/\|x_1\|$로 두면 된다. $n\ge 2$이고 $n-1$개에 대해 성립한다고 하자. $s=x_1+\cdots+x_{n-1}$이라 하면 삼각부등식(을 반복 적용한 것)에 의해</p>
+        <div class="math-display">$$\begin{aligned}\sum_{i=1}^n\|x_i\|&amp;=\|s+x_n\|\le\|s\|+\|x_n\|\\ &amp;\le\sum_{i=1}^{n-1}\|x_i\|+\|x_n\|=\sum_{i=1}^{n}\|x_i\|\end{aligned}$$</div>
+        <p>이므로 양 끝이 같아 모든 부등호가 등호이다. 따라서 $\|s\|=\sum_{i\lt n}\|x_i\|$이고 $\|s+x_n\|=\|s\|+\|x_n\|$이다.</p>
+        <p>첫 등식과 귀납가정에 의해 $x_1,\ldots,x_{n-1}$이 모두 $0$이거나 어떤 단위벡터 $u'$에 대해 $x_i=\|x_i\|u'$ ($i\lt n$)이다. 모두 $0$인 경우는 $x_n=0$이면 모든 $x_i=0$이고, $x_n\neq0$이면 $u=x_n/\|x_n\|$로 두어 모든 $i$에 대해 $x_i=\|x_i\|u$이다. 나머지 경우 $s=(\sum_{i\lt n}\|x_i\|)\,u'=\|s\|u'\neq 0$이다. 두 벡터의 경우를 $s$와 $x_n$에 적용하면 $x_n=0$이거나 $x_n=cs$ ($c\ge 0$) 또는 $s=cx_n$ ($c\ge 0$)이다. $x_n=0$이면 $u=u'$로 충분하다. $s=cx_n$이면 $s\neq 0$이므로 $c&gt;0$이고 $x_n=c^{-1}s$ ($c^{-1}&gt;0$)이므로 어느 경우든 $x_n=c's$ ($c'\ge 0$)로 쓸 수 있다. 그러면 $x_n=c'\|s\|u'$이고 $c'\|s\|\ge 0$이므로 $\|x_n\|=c'\|s\|$, 곧 $x_n=\|x_n\|u'$이다. 따라서 $u=u'$에 대해 모든 $i$에 대해 $x_i=\|x_i\|u$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space and let $x, y \in V$.</p>
+        <p><strong>(a)</strong> Prove that $|\langle x, y\rangle| = \|x\| \cdot \|y\|$ holds if and only if one of the two vectors $x$, $y$ is a scalar multiple of the other.</p>
+        <p><em>Hint.</em> Suppose that the equality holds and that $y \neq 0$. Put</p>
+        <div class="math-display">$$a = \frac{\langle x, y\rangle}{\|y\|^2} \quad \text{and} \quad z = x - ay.$$</div>
+        <p>Check that $y$ and $z$ are orthogonal and that $|a| = \dfrac{\|x\|}{\|y\|}$. Then apply the identity of <a href="#e5-10">Exercise 10</a> (for orthogonal vectors $u$, $v$ one has $\|u + v\|^2 = \|u\|^2 + \|v\|^2$) to $\|x\|^2 = \|ay + z\|^2$, and conclude that $\|z\| = 0$.</p>
+        <p><strong>(b)</strong> Find and prove an analogous characterization of when $\|x + y\| = \|x\| + \|y\|$ holds, and then extend it to $n$ vectors, that is, to the equality $\|x_1 + \cdots + x_n\| = \|x_1\| + \cdots + \|x_n\|$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> ($\Leftarrow$) If $x=ay$ ($a\in F$), then $\|x\|=|a|\|y\|$ by <a href="#c5-22">Theorem 6.2</a>(a) and $\langle x,y\rangle=a\|y\|^2$, so $|\langle x,y\rangle|=|a|\|y\|^2=\|x\|\|y\|$. If $y=ax$, then $\langle x,y\rangle=\bar a\|x\|^2$, so $|\langle x,y\rangle|=|a|\|x\|^2=\|x\|\cdot|a|\|x\|=\|x\|\|y\|$.</p>
+        <p>($\Rightarrow$) Suppose $|\langle x,y\rangle|=\|x\|\|y\|$. If $y=0$, then $y=0\cdot x$ is a multiple of $x$. Now let $y\neq 0$ and put</p>
+        <div class="math-display">$$a=\frac{\langle x,y\rangle}{\|y\|^2},\qquad z=x-ay.$$</div>
+        <p>Then $\langle z,y\rangle=\langle x,y\rangle-a\langle y,y\rangle=\langle x,y\rangle-\langle x,y\rangle=0$, so $z\perp y$, and hence $\langle ay,z\rangle=a\,\overline{\langle z,y\rangle}=0$, that is, $ay\perp z$. Also $|a|=\dfrac{|\langle x,y\rangle|}{\|y\|^2}=\dfrac{\|x\|\|y\|}{\|y\|^2}=\dfrac{\|x\|}{\|y\|}$. Applying the result of <a href="#e5-10">Exercise 10</a> (for orthogonal $u,v$: $\|u+v\|^2=\|u\|^2+\|v\|^2$) to $x=ay+z$ gives</p>
+        <div class="math-display">$$\|x\|^2=\|ay\|^2+\|z\|^2=|a|^2\|y\|^2+\|z\|^2=\|x\|^2+\|z\|^2,$$</div>
+        <p>so $\|z\|=0$, that is, $z=0$ and $x=ay$. Thus if $y=0$ then $y=0\cdot x$, and if $y\neq 0$ then $x=ay$; in either case one vector is a multiple of the other.</p>
+        <p><strong>(b)</strong> We first state the result. Equality in the triangle inequality holds exactly when one vector is a <strong>nonnegative real multiple</strong> of the other, not merely a scalar multiple. (For instance, if $x=-y\neq 0$, then $x$ is a scalar multiple of $y$ but $\|x+y\|=0\neq 2\|y\|$.)</p>
+        <p><strong>Two vectors.</strong> $\|x+y\|=\|x\|+\|y\|$ $\iff$ $x=cy$ or $y=cx$ for some real $c\ge 0$.</p>
+        <p>($\Leftarrow$) If $x=cy$ with $c\ge 0$, then $c+1&gt;0$, so by <a href="#c5-22">Theorem 6.2</a>(a)</p>
+        <div class="math-display">$$\begin{aligned}\|x+y\|&amp;=\|(c+1)y\|=(c+1)\|y\|\\ &amp;=c\|y\|+\|y\|=\|x\|+\|y\|.\end{aligned}$$</div>
+        <p>The case $y=cx$ is symmetric.</p>
+        <p>($\Rightarrow$) Squaring, $\|x+y\|^2=\|x\|^2+2\operatorname{Re}\langle x,y\rangle+\|y\|^2$ and $(\|x\|+\|y\|)^2=\|x\|^2+2\|x\|\|y\|+\|y\|^2$, so $\operatorname{Re}\langle x,y\rangle=\|x\|\|y\|$. By the Cauchy–Schwarz inequality (<a href="#c5-22">Theorem 6.2</a>(c)),</p>
+        <div class="math-display">$$\|x\|\|y\|=\operatorname{Re}\langle x,y\rangle\le|\langle x,y\rangle|\le\|x\|\|y\|,$$</div>
+        <p>so all are equalities. From $\operatorname{Re}\langle x,y\rangle=|\langle x,y\rangle|$ the number $\langle x,y\rangle$ is a nonnegative real, namely $\langle x,y\rangle=\|x\|\|y\|$; in particular $|\langle x,y\rangle|=\|x\|\|y\|$. If $y=0$, then $y=0\cdot x$ and we are done. If $y\neq 0$, the proof of (a) gives $x=ay$ with $a=\langle x,y\rangle/\|y\|^2$, which is a nonnegative real number divided by the positive number $\|y\|^2$, so $a\ge 0$ is real. Thus $x=ay$.</p>
+        <p><strong>$n$ vectors.</strong> For $x_1,\ldots,x_n\in V$ the following are equivalent:</p>
+        <div class="math-display">$$\begin{gathered}\|x_1+\cdots+x_n\|=\|x_1\|+\cdots+\|x_n\|\\ \iff\\ \text{all }x_i=0,\ \text{or}\\ \text{there is a unit vector }u\text{ with }x_i=\|x_i\|\,u\text{ for all }i.\end{gathered}$$</div>
+        <p>That is, the nonzero $x_i$ are all positive real multiples of one unit vector, hence positive real multiples of each other.</p>
+        <p>($\Leftarrow$) The case where all $x_i=0$ is trivial. If $x_i=\|x_i\|u$, then $x_1+\cdots+x_n=(\sum\|x_i\|)\,u$ with $\sum\|x_i\|\ge 0$, so its norm is $\sum\|x_i\|\cdot\|u\|=\sum\|x_i\|$.</p>
+        <p>($\Rightarrow$) Induction on $n$. For $n=1$, either $x_1=0$ or take $u=x_1/\|x_1\|$. Let $n\ge 2$ and assume the claim for $n-1$ vectors. Put $s=x_1+\cdots+x_{n-1}$. By the triangle inequality (applied repeatedly),</p>
+        <div class="math-display">$$\begin{aligned}\sum_{i=1}^n\|x_i\|&amp;=\|s+x_n\|\le\|s\|+\|x_n\|\\ &amp;\le\sum_{i=1}^{n-1}\|x_i\|+\|x_n\|=\sum_{i=1}^{n}\|x_i\|,\end{aligned}$$</div>
+        <p>so the two ends coincide and every inequality is an equality. Hence $\|s\|=\sum_{i\lt n}\|x_i\|$ and $\|s+x_n\|=\|s\|+\|x_n\|$.</p>
+        <p>By the first equality and the induction hypothesis, either $x_1,\ldots,x_{n-1}$ are all $0$, or there is a unit vector $u'$ with $x_i=\|x_i\|u'$ for $i\lt n$. If they are all $0$: when $x_n=0$ all $x_i=0$, and when $x_n\neq 0$ take $u=x_n/\|x_n\|$, so $x_i=\|x_i\|u$ for all $i$. Otherwise $s=(\sum_{i\lt n}\|x_i\|)\,u'=\|s\|u'\neq 0$. Applying the two-vector case to $s$ and $x_n$: either $x_n=0$, or $x_n=cs$ with $c\ge 0$, or $s=cx_n$ with $c\ge 0$. If $x_n=0$, take $u=u'$. If $s=cx_n$, then $s\neq 0$ forces $c&gt;0$ and $x_n=c^{-1}s$ with $c^{-1}&gt;0$; so in either case $x_n=c's$ with $c'\ge 0$. Then $x_n=c'\|s\|u'$ with $c'\|s\|\ge 0$, so $\|x_n\|=c'\|s\|$ and $x_n=\|x_n\|u'$. Thus with $u=u'$ we have $x_i=\|x_i\|u$ for all $i$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 20 -->
+<div class="card ex-card" id="e5-20">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-20</span>
+    <span class="ex-title">극화 항등식 <em>The Polar Identities</em><span class="src-ref">Friedberg §6.1 #20 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 $F$ 위의 내적공간이라 하자. 모든 $x, y \in V$에 대하여 성립하는 다음 극화 항등식을 증명하라.</p>
+        <p><strong>(a)</strong> $F = \mathbb{R}$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = \frac{1}{4}\|x + y\|^2 - \frac{1}{4}\|x - y\|^2.$$</div>
+        <p><strong>(b)</strong> $F = \mathbb{C}$이면 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = \frac{1}{4}\sum_{k=1}^4 i^k\|x + i^ky\|^2, \quad \text{단, } i^2 = -1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $F=\mathbb{R}$이면 $\langle y,x\rangle=\langle x,y\rangle$이므로</p>
+        <div class="math-display">$$\|x\pm y\|^2=\langle x\pm y,\,x\pm y\rangle=\|x\|^2\pm 2\langle x,y\rangle+\|y\|^2.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{aligned}\tfrac14\|x+y\|^2-\tfrac14\|x-y\|^2&amp;=\tfrac14\big(\|x\|^2+2\langle x,y\rangle+\|y\|^2\big)\\ &amp;\qquad-\tfrac14\big(\|x\|^2-2\langle x,y\rangle+\|y\|^2\big)\\ &amp;=\tfrac14\cdot 4\langle x,y\rangle=\langle x,y\rangle.\end{aligned}$$</div>
+        <p><strong>(b)</strong> $F=\mathbb{C}$이고 $k=1,2,3,4$라 하자. $\langle x,i^ky\rangle=\overline{i^k}\langle x,y\rangle$ (<a href="#c5-19">정리 6.1</a>(b)), $\langle i^ky,x\rangle=i^k\langle y,x\rangle$ (내적의 정의 (b), 곧 첫째 성분에 대한 선형성)이고, $|i^k|=1$이므로 $\langle i^ky,i^ky\rangle=i^k\,\overline{i^k}\,\langle y,y\rangle=\|y\|^2$이다. 따라서</p>
+        <div class="math-display">$$\|x+i^ky\|^2=\|x\|^2+\overline{i^k}\,\langle x,y\rangle+i^k\langle y,x\rangle+\|y\|^2.$$</div>
+        <p>양변에 $i^k$를 곱하고 $i^k\,\overline{i^k}=|i^k|^2=1$, $i^k\cdot i^k=i^{2k}=(-1)^k$를 쓰면</p>
+        <div class="math-display">$$i^k\|x+i^ky\|^2=i^k\big(\|x\|^2+\|y\|^2\big)+\langle x,y\rangle+(-1)^k\langle y,x\rangle.$$</div>
+        <p>$k=1,\ldots,4$에 대해 더한다. $\sum_{k=1}^4 i^k=i-1-i+1=0$, $\sum_{k=1}^4 1=4$, $\sum_{k=1}^4(-1)^k=-1+1-1+1=0$이므로</p>
+        <div class="math-display">$$\begin{aligned}\sum_{k=1}^4 i^k\|x+i^ky\|^2&amp;=0\cdot\big(\|x\|^2+\|y\|^2\big)+4\langle x,y\rangle+0\cdot\langle y,x\rangle\\ &amp;=4\langle x,y\rangle.\end{aligned}$$</div>
+        <p>양변을 $4$로 나누면 $\langle x,y\rangle=\tfrac14\sum_{k=1}^4 i^k\|x+i^ky\|^2$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space over $F$. Prove the following polar identities, valid for all $x, y \in V$.</p>
+        <p><strong>(a)</strong> If $F = \mathbb{R}$, then</p>
+        <div class="math-display">$$\langle x, y\rangle = \frac{1}{4}\|x + y\|^2 - \frac{1}{4}\|x - y\|^2.$$</div>
+        <p><strong>(b)</strong> If $F = \mathbb{C}$, then</p>
+        <div class="math-display">$$\langle x, y\rangle = \frac{1}{4}\sum_{k=1}^4 i^k\|x + i^ky\|^2, \quad \text{where } i^2 = -1.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> If $F=\mathbb{R}$, then $\langle y,x\rangle=\langle x,y\rangle$, so</p>
+        <div class="math-display">$$\|x\pm y\|^2=\langle x\pm y,\,x\pm y\rangle=\|x\|^2\pm 2\langle x,y\rangle+\|y\|^2.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$\begin{aligned}\tfrac14\|x+y\|^2-\tfrac14\|x-y\|^2&amp;=\tfrac14\big(\|x\|^2+2\langle x,y\rangle+\|y\|^2\big)\\ &amp;\qquad-\tfrac14\big(\|x\|^2-2\langle x,y\rangle+\|y\|^2\big)\\ &amp;=\tfrac14\cdot 4\langle x,y\rangle=\langle x,y\rangle.\end{aligned}$$</div>
+        <p><strong>(b)</strong> Let $F=\mathbb{C}$ and $k=1,2,3,4$. Since $\langle x,i^ky\rangle=\overline{i^k}\langle x,y\rangle$ (<a href="#c5-19">Theorem 6.1</a>(b)), $\langle i^ky,x\rangle=i^k\langle y,x\rangle$ (property (b) of the definition, i.e. linearity in the first slot), and, since $|i^k|=1$, $\langle i^ky,i^ky\rangle=i^k\,\overline{i^k}\,\langle y,y\rangle=\|y\|^2$. Hence</p>
+        <div class="math-display">$$\|x+i^ky\|^2=\|x\|^2+\overline{i^k}\,\langle x,y\rangle+i^k\langle y,x\rangle+\|y\|^2.$$</div>
+        <p>Multiply by $i^k$, using $i^k\,\overline{i^k}=|i^k|^2=1$ and $i^k\cdot i^k=i^{2k}=(-1)^k$:</p>
+        <div class="math-display">$$i^k\|x+i^ky\|^2=i^k\big(\|x\|^2+\|y\|^2\big)+\langle x,y\rangle+(-1)^k\langle y,x\rangle.$$</div>
+        <p>Sum over $k=1,\ldots,4$. Since $\sum_{k=1}^4 i^k=i-1-i+1=0$, $\sum_{k=1}^4 1=4$, and $\sum_{k=1}^4(-1)^k=-1+1-1+1=0$,</p>
+        <div class="math-display">$$\begin{aligned}\sum_{k=1}^4 i^k\|x+i^ky\|^2&amp;=0\cdot\big(\|x\|^2+\|y\|^2\big)+4\langle x,y\rangle+0\cdot\langle y,x\rangle\\ &amp;=4\langle x,y\rangle.\end{aligned}$$</div>
+        <p>Dividing by $4$ gives $\langle x,y\rangle=\tfrac14\sum_{k=1}^4 i^k\|x+i^ky\|^2$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la1/index.html">선형대수학1</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

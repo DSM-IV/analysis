@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.4 불변부분공간과 케일리-해밀턴 정리 (§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제4단원 5.4 불변부분공간과 케일리-해밀턴 정리 — T-불변 부분공간, T-순환 부분공간, 제한사상의 특성다항식, 블록 상삼각행렬의 행렬식, 케일리-해밀턴 정리와 이를 이용한 행렬의 거듭제곱 계산을 Friedberg §5.4 추천 연습문제와 함께 한국어·영어 대조로 정리했습니다. Invariant subspaces, T-cyclic subspaces, the restriction of an operator, the characteristic polynomial of a restriction, the Cayley–Hamilton theorem, powers of a matrix.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 불변 부분공간, invariant subspace, T-불변 부분공간, T-invariant subspace, 순환 부분공간, cyclic subspace, T-순환 부분공간, T-cyclic subspace, 제한, restriction, 특성다항식, characteristic polynomial, 케일리-해밀턴 정리, Cayley-Hamilton theorem, 블록행렬, block matrix, 행렬식, determinant, 동반행렬, companion matrix, 행렬의 거듭제곱, powers of a matrix, 대각화, diagonalization, Friedberg, 프리드버그, Friedberg 5.4, 연습문제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch04.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.4 불변부분공간과 케일리-해밀턴 정리 (§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="T-불변 부분공간과 T-순환 부분공간, 제한사상의 특성다항식, 케일리-해밀턴 정리와 행렬의 거듭제곱 — Friedberg §5.4 추천 연습문제 7문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch04.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "5.4 불변부분공간과 케일리-해밀턴 정리 (§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 5.4 불변부분공간과 케일리-해밀턴 정리. T-불변 부분공간, T-순환 부분공간, 제한사상의 특성다항식, 케일리-해밀턴 정리를 다루는 Friedberg §5.4 추천 연습문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch04.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch04.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la1/index.html">선형대수학1</a>
+      <a href="index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html" class="active">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 04</p>
+  <h1>5.4 불변부분공간과 케일리-해밀턴 정리<span>§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c4-1"><span class="toc-num">REM</span> 고유벡터가 생성하는 부분공간의 불변성 <em>An Eigenvector Spans a Subspace Mapped into Itself</em></a></li>
+    <li><a href="#c4-2"><span class="toc-num">DEF</span> <span class="toc-ko">$T$-불변 부분공간</span> <em>$T$-Invariant Subspace</em></a></li>
+    <li><a href="#c4-3"><span class="toc-num">EXAM 1</span> <span class="toc-ko">$T$-불변 부분공간의 기본 예</span> <em>Basic Examples of $T$-Invariant Subspaces</em></a></li>
+    <li><a href="#c4-4"><span class="toc-num">EXAM 2</span> <span class="toc-ko">$\mathbb{R}^3$ 위의 연산자의 불변 부분공간</span> <em>Invariant Subspaces of an Operator on $\mathbb{R}^3$</em></a></li>
+    <li><a href="#c4-5"><span class="toc-num">DEF</span> <span class="toc-ko">벡터가 생성하는 $T$-순환 부분공간</span> <em>The $T$-Cyclic Subspace Generated by a Vector</em></a></li>
+    <li><a href="#c4-6"><span class="toc-num">EXAM 3</span> <span class="toc-ko">$x$축과 같은 순환 부분공간</span> <em>A Cyclic Subspace Equal to the $x$-Axis</em></a></li>
+    <li><a href="#c4-7"><span class="toc-num">REM</span> <span class="toc-ko">$xy$-평면과 같은 순환 부분공간</span> <em>A Cyclic Subspace Equal to the $xy$-Plane</em></a></li>
+    <li><a href="#c4-8"><span class="toc-num">EXAM 4</span> 미분연산자의 순환 부분공간 <em>Cyclic Subspaces of the Differentiation Operator</em></a></li>
+    <li><a href="#c4-9"><span class="toc-num">THM 5.23</span> 케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem</em></a></li>
+    <li><a href="#c4-10"><span class="toc-num">REM</span> 행렬로 정의된 연산자에 대한 케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem for the Operator Defined by a Matrix</em></a></li>
+    <li><a href="#c4-11"><span class="toc-num">EXAM A</span> 2×2 행렬에 대한 케일리-해밀턴 정리의 확인 <em>Checking the Cayley–Hamilton Theorem for a 2×2 Matrix</em></a></li>
+    <li><a href="#c4-12"><span class="toc-num">THM 5.21</span> <span class="toc-ko">$T_W$의 특성다항식은 $T$의 특성다항식을 나눈다</span> <em>The Characteristic Polynomial of $T_W$ Divides That of $T$</em></a></li>
+    <li><a href="#c4-13"><span class="toc-num">LEM</span> 블록 상삼각행렬의 행렬식 <em>The Determinant of a Block Upper Triangular Matrix</em></a></li>
+    <li><a href="#c4-14"><span class="toc-num">EXAM</span> <span class="toc-ko">$P_n(\mathbb{R})$ 위의 두 연산자와 순환 부분공간으로의 제한</span> <em>Two Operators on $P_n(\mathbb{R})$ and Their Restrictions to Cyclic Subspaces</em></a></li>
+    <li><a href="#c4-15"><span class="toc-num">EXAM 5</span> <span class="toc-ko">$\mathbb{R}^4$ 위의 연산자의 불변 부분공간</span> <em>An Invariant Subspace of an Operator on $\mathbb{R}^4$</em></a></li>
+    <li><a href="#c4-16"><span class="toc-num">REM</span> <span class="toc-ko">$T_W$를 이용한 $T$의 특성다항식 연구</span> <em>Using $T_W$ to Study the Characteristic Polynomial of $T$</em></a></li>
+    <li><a href="#c4-17"><span class="toc-num">THM 5.22</span> 순환 부분공간으로의 제한의 특성다항식 <em>The Characteristic Polynomial of the Restriction to a Cyclic Subspace</em></a></li>
+    <li><a href="#c4-18"><span class="toc-num">THM 5.23</span> 케일리-해밀턴 정리의 증명 <em>Proof of the Cayley–Hamilton Theorem</em></a></li>
+    <li><a href="#c4-19"><span class="toc-num">COR</span> 행렬에 대한 케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem for Matrices</em></a></li>
+    <li><a href="#c4-20"><span class="toc-num">EXAM 7</span> <span class="toc-ko">케일리-해밀턴 정리를 이용한 $A^{2024}$의 계산</span> <em>Computing $A^{2024}$ by the Cayley–Hamilton Theorem</em></a></li>
+    <li><a href="#c4-21"><span class="toc-num">EXAM 8</span> <span class="toc-ko">케일리-해밀턴 정리와 대각화를 이용한 $A^{10}$의 계산</span> <em>Computing $A^{10}$ by the Cayley–Hamilton Theorem and by Diagonalization</em></a></li>
+    <li><a href="#e4-1"><span class="toc-num">EX 5.4-1</span> 참·거짓 판정 <em>True or False</em></a></li>
+    <li><a href="#e4-2"><span class="toc-num">EX 5.4-2</span> <span class="toc-ko">부분공간의 $T$-불변성 판정</span> <em>Testing Subspaces for $T$-Invariance</em></a></li>
+    <li><a href="#e4-6"><span class="toc-num">EX 5.4-6</span> <span class="toc-ko">$T$-순환 부분공간의 순서기저</span> <em>Ordered Bases for $T$-Cyclic Subspaces</em></a></li>
+    <li><a href="#e4-9"><span class="toc-num">EX 5.4-9</span> <span class="toc-ko">두 가지 방법으로 구하는 $T_W$의 특성다항식</span> <em>The Characteristic Polynomial of $T_W$ in Two Ways</em></a></li>
+    <li><a href="#e4-10"><span class="toc-num">EX 5.4-10</span> <span class="toc-ko">$T_W$의 특성다항식은 $T$의 특성다항식을 나눈다</span> <em>The Characteristic Polynomial of $T_W$ Divides That of $T$</em></a></li>
+    <li><a href="#e4-17"><span class="toc-num">EX 5.4-17</span> 행렬의 거듭제곱들이 생성하는 부분공간의 차원 <em>The Dimension of the Span of the Powers of a Matrix</em></a></li>
+    <li><a href="#e4-18"><span class="toc-num">EX 5.4-18</span> 특성다항식을 이용한 가역성과 역행렬 <em>Invertibility and the Inverse via the Characteristic Polynomial</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c4-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 강의 슬라이드의 번호를 그대로 따른다: 번호가 붙은 항목은 TYPE {원문 번호}
+     (Theorem 5.21 → THM 5.21, Definition 2 → DEF 2, Example 1 → EXAM 1), 번호 없는
+     항목(Definition :, Remark :, Recall, Question, 번호 없는 Example)은 유형 배지만
+     (DEF / THM / REM / RECALL / Q / EXAM / COR / LEM). 자체 순번은 id에만 쓴다.
+     span.src-ref 는 연습문제(Friedberg §5.4 #n)에만 쓴다. 본문에서 번호 없는
+     카드를 인용할 때는 제목 링크(a 태그로 #c4-13 을 가리키는 주의 「…」)로 쓴다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "번역 예정" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     (연습문제만 그 뒤에 span.src-ref 로 Friedberg 출처를 적는다.)
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e4-17), 배지는 EX 5.4-17,
+     출처는 span.src-ref 에 Friedberg §5.4 #2 (c), (e) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note04-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 칼리그래피 B는 \mathcal{B}, 풀이 PDF의 β는 \beta,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 &amp; 로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem · 불변부분공간과 케일리-해밀턴 정리</h2></div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.2 ═══════════ -->
+
+<!-- L6-7 p2 Remark -->
+<div class="card rem-card" id="c4-1">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">고유벡터가 생성하는 부분공간의 불변성 <em>An Eigenvector Spans a Subspace Mapped into Itself</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$의 선형변환이라 하자.</p>
+        <p>$\lambda$가 $T$의 고유값이고 $v \in V$가 $\lambda$에 대응하는 $T$의 고유벡터이면</p>
+        <div class="math-display">$$T(cv) = cT(v) = c\lambda v \in \langle v \rangle \ \text{ 모든 } cv \in \langle v \rangle \text{에 대하여.}$$</div>
+        <p>즉 $T$는 부분공간 $\langle v \rangle$를 자기 자신 안으로 보낸다.</p>
+        <p>마찬가지로 $E_\lambda$가 $\lambda$에 대응하는 $T$의 고유공간이면 $T$는 $E_\lambda$를 자기 자신 안으로 보낸다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of an $n$-dimensional vector space $V$.</p>
+        <p>If $\lambda$ is an eigenvalue of $T$ and $v \in V$ is an eigenvector of $T$ corresponding to $\lambda$, then</p>
+        <div class="math-display">$$T(cv) = cT(v) = c\lambda v \in \langle v \rangle \ \text{ for all } cv \in \langle v \rangle.$$</div>
+        <p>That is, $T$ maps the subspace $\langle v \rangle$ into itself.</p>
+        <p>Similarly, if $E_\lambda$ is the eigenspace $T$ corresponding to $\lambda$ then $T$ maps $E_\lambda$ into itself.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p2 Definition (T-invariant subspace) -->
+<div class="card def-card" id="c4-2">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">$T$-불변 부분공간 <em>$T$-Invariant Subspace</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 벡터공간 $V$의 선형변환이라 하자.</p>
+        <p>$V$의 부분공간 $W$가 $T(W) \subseteq W$를 만족하면 $W$를 <strong>$V$의 $T$-불변 부분공간</strong>이라 한다.</p>
+        <p>이는 $W$의 모든 $v$에 대하여 $T(v) \in W$인 것과 동치이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of a vector space $V$.</p>
+        <p>A subspace $W$ of $V$ is called a <strong>$T$-invariant subspace of $V$</strong> if $T(W) \subseteq W$,</p>
+        <p>or equivalently, if $T(v) \in W$ for all $v \in W$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p2 Example 1 -->
+<div class="card exam-card" id="c4-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">$T$-불변 부분공간의 기본 예 <em>Basic Examples of $T$-Invariant Subspaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$가 위와 같다고 하자. 그러면 $V$의 다음 부분공간들은 $T$-불변이다.</p>
+        <p>- $\{O_V\}$와 $V$</p>
+        <p>- $R(T) = \{\, T(v) \mid v \in V \,\}$와 $N(T) = \{\, v \in V \mid T(v) = O_V \,\}$</p>
+        <p>- $T$의 임의의 고유값 $\lambda$에 대한 $E_\lambda$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be as above. Then the following subspaces of $V$ are $T$-invariant:</p>
+        <p>- $\{O_V\}$ and $V$</p>
+        <p>- $R(T) = \{\, T(v) \mid v \in V \,\}$ and $N(T) = \{\, v \in V \mid T(v) = O_V \,\}$</p>
+        <p>- $E_\lambda$, for any eigenvalue $\lambda$ of $T$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.3 ═══════════ -->
+
+<!-- L6-7 p3 Example 2 -->
+<div class="card exam-card" id="c4-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">$\mathbb{R}^3$ 위의 연산자의 불변 부분공간 <em>Invariant Subspaces of an Operator on $\mathbb{R}^3$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^3 \to \mathbb{R}^3$를 다음과 같이 정의되는 선형변환이라 하자.</p>
+        <div class="math-display">$$T(a,b,c) = (a+b, b+c, 0).$$</div>
+        <p><strong>(1)</strong> $xy$-평면 $\{\, (x,y,0) \mid x,y \in \mathbb{R} \,\}$은 $V$의 $T$-불변 부분공간이다.</p>
+        <p>실제로 $R(T)$는 $xy$-평면과 같다.</p>
+        <p><strong>(2)</strong> $x$축 $\{\, (x,0,0) \mid x \in \mathbb{R} \,\}$은 $V$의 $T$-불변 부분공간이다.</p>
+        <p>다음이 성립하므로</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 \end{pmatrix},$$</div>
+        <p>다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} \det([T]_\beta - tI_3) &amp;= \det\begin{pmatrix} 1-t &amp; 1 &amp; 0 \\ 0 &amp; 1-t &amp; 1 \\ 0 &amp; 0 &amp; -t \end{pmatrix} \\[2pt] &amp;= -t(1-t)^2 = -t(t-1)^2. \end{aligned}$$</div>
+        <p>$(t = 1)$</p>
+        <p>만약</p>
+        <div class="math-display">$$\begin{aligned} ([T]_\beta - I)\begin{bmatrix} x \\ y \\ z \end{bmatrix} &amp;= \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix} \\[2pt] &amp;= \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}, \end{aligned}$$</div>
+        <p>이면 $y = z = 0$이고 따라서</p>
+        <div class="math-display">$$\begin{bmatrix} x \\ y \\ z \end{bmatrix} = x\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}.$$</div>
+        <p>그러므로 $x$축은 고유값 $t = 1$에 대응하는 $T$의 고유공간이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^3 \to \mathbb{R}^3$ be the linear transformation defined by</p>
+        <div class="math-display">$$T(a,b,c) = (a+b, b+c, 0).$$</div>
+        <p><strong>(1)</strong> The $xy$-plane $\{\, (x,y,0) \mid x,y \in \mathbb{R} \,\}$ is a $T$-invariant subspace of $V$.</p>
+        <p>Indeed, $R(T)$ is equal to the $xy$-plane.</p>
+        <p><strong>(2)</strong> The $x$-axis $\{\, (x,0,0) \mid x \in \mathbb{R} \,\}$ is a $T$-invariant subspace of $V$.</p>
+        <p>Since</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 \end{pmatrix},$$</div>
+        <p>we get</p>
+        <div class="math-display">$$\begin{aligned} \det([T]_\beta - tI_3) &amp;= \det\begin{pmatrix} 1-t &amp; 1 &amp; 0 \\ 0 &amp; 1-t &amp; 1 \\ 0 &amp; 0 &amp; -t \end{pmatrix} \\[2pt] &amp;= -t(1-t)^2 = -t(t-1)^2. \end{aligned}$$</div>
+        <p>$(t = 1)$</p>
+        <p>If</p>
+        <div class="math-display">$$\begin{aligned} ([T]_\beta - I)\begin{bmatrix} x \\ y \\ z \end{bmatrix} &amp;= \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix} \\[2pt] &amp;= \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}, \end{aligned}$$</div>
+        <p>then $y = z = 0$ and hence</p>
+        <div class="math-display">$$\begin{bmatrix} x \\ y \\ z \end{bmatrix} = x\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}.$$</div>
+        <p>Thus the $x$-axis is the eigenspace of $T$ corresponding to the eigenvalue $t = 1$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.4 ═══════════ -->
+
+<!-- L6-7 p4 Definition and Remark (T-cyclic subspace) — (1)의 ℓ ≥ 1 은 ℓ ≥ 0 이어야 함 → en 말미 Note -->
+<div class="card def-card" id="c4-5">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">벡터가 생성하는 $T$-순환 부분공간 <em>The $T$-Cyclic Subspace Generated by a Vector</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 벡터공간 $V$의 선형변환이라 하자.</p>
+        <p><strong>(1)</strong> 영벡터가 아닌 $x \in V$에 대하여 부분공간</p>
+        <div class="math-display">$$\begin{aligned} W &amp;:= \operatorname{span}(\{x, T(x), T^2(x), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{\, T^{\ell}(x) \mid \ell \ge 0 \,\}) \end{aligned}$$</div>
+        <p>을 <strong>$x$가 생성하는 $V$의 $T$-순환 부분공간</strong>이라 한다.</p>
+        <p><strong>(2)</strong> $W$는 $x$를 포함하는 $V$의 가장 작은 $T$-불변 부분공간이다.</p>
+        <p>즉 $W$는 $V$의 $T$-불변 부분공간이며,</p>
+        <p>$x$를 포함하는 $V$의 임의의 $T$-불변 부분공간은 반드시 $W$도 포함한다.</p>
+        <p><strong>(3)</strong> $T^{\ell+1}(v) \in \operatorname{span}(\{v, T(v), \ldots, T^{\ell}(v)\})$라 하자.</p>
+        <p>그러면 $W = \operatorname{span}(\{v, T(v), \ldots, T^{\ell}(v)\})$이다.</p>
+        <p><em>역주.</em> 슬라이드 원문 (1)의 조건 $\ell \ge 1$을 $\ell \ge 0$으로 바로잡아 옮겼다(영문 패널은 원문 그대로). 첫 번째 표현 $\{x, T(x), T^2(x), \ldots\}$가 $x = T^0(x)$를 포함하며, 아래 <a href="#c4-17">정리 5.22</a>도 같은 생성 집합을 $\ell \ge 0$으로 쓰기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation of a vector space $V$.</p>
+        <p><strong>(1)</strong> For a nonzero vector $x \in V$, the subspace</p>
+        <div class="math-display">$$\begin{aligned} W &amp;:= \operatorname{span}(\{x, T(x), T^2(x), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{\, T^{\ell}(x) \mid \ell \ge 1 \,\}) \end{aligned}$$</div>
+        <p>is called <strong>the $T$-cyclic subspace of $V$ generated by $x$</strong>.</p>
+        <p><strong>(2)</strong> $W$ is the smallest $T$-invariant subspace of $V$ containing $x$.</p>
+        <p>That is, $W$ is a $T$-invariant subspace of $V$ such that</p>
+        <p>any $T$-invariant subspace of $V$ containing $x$ must also contain $W$.</p>
+        <p><strong>(3)</strong> Suppose that $T^{\ell+1}(v) \in \operatorname{span}(\{v, T(v), \ldots, T^{\ell}(v)\})$.</p>
+        <p>Then $W = \operatorname{span}(\{v, T(v), \ldots, T^{\ell}(v)\})$.</p>
+        <p><em>Note.</em> The condition $\ell \ge 1$ in (1) is transcribed exactly as printed on the slide, but it should read $\ell \ge 0$: the first description $\{x, T(x), T^2(x), \ldots\}$ contains $x = T^0(x)$ itself, and the statement of <a href="#c4-17">Theorem 5.22</a> below writes the same span with $\ell \ge 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.5 ═══════════ -->
+
+<!-- L6-7 p5 Example 3 -->
+<div class="card exam-card" id="c4-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">$x$축과 같은 순환 부분공간 <em>A Cyclic Subspace Equal to the $x$-Axis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예 2에서 $v = (1,0,0)$이면 $T(v) = (1,0,0)$이고 $T^2(v) = (1,0,0)$이다.</p>
+        <p>따라서 $v$가 생성하는 $\mathbb{R}^3$의 $T$-순환 부분공간은 $\operatorname{span}(v)$와 같다.</p>
+        <p>이로써 $x$축이 $\mathbb{R}^3$의 $T$-불변 부분공간임이 증명된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Example 2, if $v = (1,0,0)$ then $T(v) = (1,0,0)$ and $T^2(v) = (1,0,0)$.</p>
+        <p>Thus the $T$-cyclic subspace of $\mathbb{R}^3$ generated by $v$ is equal to $\operatorname{span}(v)$.</p>
+        <p>This proves that the $x$-axis is a $T$-invariant subspace of $\mathbb{R}^3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p5 Remark -->
+<div class="card rem-card" id="c4-7">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">$xy$-평면과 같은 순환 부분공간 <em>A Cyclic Subspace Equal to the $xy$-Plane</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예 2에서 $v = (1,1,0)$이면 $T(v) = (2,1,0)$이고 $T^2(v) = (3,1,0)$이다.</p>
+        <p>특히 $T^2(v) = 2T(v) - v \in \operatorname{span}(v, T(v))$이다.</p>
+        <p>따라서 $v$가 생성하는 $\mathbb{R}^3$의 $T$-순환 부분공간은 $\operatorname{span}(v, T(v))$와 같다.</p>
+        <p>또한 $\operatorname{span}(v, T(v))$가 $xy$-평면임을 쉽게 알 수 있다.</p>
+        <p>이로써 $xy$-평면이 $\mathbb{R}^3$의 $T$-불변 부분공간임을 다시 증명한 셈이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Example 2, if $v = (1,1,0)$ then $T(v) = (2,1,0)$ and $T^2(v) = (3,1,0)$.</p>
+        <p>In particular, $T^2(v) = 2T(v) - v \in \operatorname{span}(v, T(v))$.</p>
+        <p>Thus the $T$-cyclic subspace of $\mathbb{R}^3$ generated by $v$ is equal to $\operatorname{span}(v, T(v))$.</p>
+        <p>Also, one can easily see that $\operatorname{span}(v, T(v))$ is the $xy$-plane.</p>
+        <p>This reproves that the $xy$-plane is a $T$-invariant subspace of $\mathbb{R}^3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.6 ═══════════ -->
+
+<!-- L6-7 p6 Example 4 — (3)은 증명을 요구하나 슬라이드에 증명 없음 → 풀이 마커 -->
+<div class="card exam-card" id="c4-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">미분연산자의 순환 부분공간 <em>Cyclic Subspaces of the Differentiation Operator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : P(\mathbb{R}) \to P(\mathbb{R})$를 $T(f(x)) = f'(x)$로 정의되는 선형연산자라 하자.</p>
+        <p><strong>(1)</strong> 모든 양의 정수 $n$에 대하여 $W_n$을 $x^n$이 생성하는 $P(\mathbb{R})$의 $T$-순환 부분공간이라 하자.</p>
+        <p>그러면 $W_n = \operatorname{span}(x^n, x^{n-1}, \ldots, x, 1) = P_n(\mathbb{R})$이다.</p>
+        <p><strong>(2)</strong> $W$를 $x^3 - 3x$가 생성하는 $P(\mathbb{R})$의 $T$-순환 부분공간이라 하자.</p>
+        <p>그러면 $W = \operatorname{span}(x^3 - 3x, 3x^2 - 3, 6x, 6) = P_3(\mathbb{R})$이다.</p>
+        <p><strong>(3)</strong> $W$를 차수가 $n \ge 1$인 다항식이 생성하는 $P(\mathbb{R})$의 $T$-순환 부분공간이라 하자.</p>
+        <p>그러면 $W = P_n(\mathbb{R})$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(3)</strong> $T(f) = f'$이므로 $T^k(g) = g^{(k)}$이다. $g$의 차수가 $n$이므로 $g(x) = c_n x^n + \cdots + c_0$ ($c_n \neq 0$)로 쓸 수 있다.</p>
+        <p>먼저 $W \subseteq P_n(\mathbb{R})$임을 보인다. $g \in P_n(\mathbb{R})$이고 미분하면 차수가 낮아지므로 모든 $k \ge 0$에 대해 $g^{(k)} \in P_n(\mathbb{R})$이다. $P_n(\mathbb{R})$은 부분공간이므로 $g, g', g'', \ldots$의 일차결합인 $W$의 원소는 모두 $P_n(\mathbb{R})$에 속한다.</p>
+        <p>다음으로 $0 \le j \le n$에 대해 $g^{(j)}$의 차수는 정확히 $n - j$이다. 실제로 $g^{(j)}$의 최고차항은 $c_n \cdot n(n-1)\cdots(n-j+1)\, x^{n-j}$이고, 이 계수는 $\mathbb{R}$에서 $0$이 아니다. 따라서 $g, g', \ldots, g^{(n)}$의 차수는 각각 $n, n-1, \ldots, 1, 0$이며 모두 다르고, 어느 것도 영다항식이 아니다.</p>
+        <p>이 $n+1$개의 다항식이 일차독립임을 보인다. $\sum_{j=0}^{n} a_j g^{(j)} = 0$이고 $a_j$가 모두 $0$은 아니라고 가정하자. $a_{j_0} \neq 0$인 가장 작은 $j_0$를 택하면, $j \gt j_0$인 항의 차수는 $n - j \lt n - j_0$이므로 합의 $x^{n-j_0}$의 계수는 $a_{j_0} \cdot c_n\, n(n-1)\cdots(n-j_0+1) \neq 0$이다. 그러면 합은 영다항식이 될 수 없어 모순이다. 따라서 $\{g, g', \ldots, g^{(n)}\}$은 일차독립이다.</p>
+        <p>$\dim P_n(\mathbb{R}) = n+1$이므로, $P_n(\mathbb{R})$ 안의 일차독립인 $n+1$개의 벡터 $g, g', \ldots, g^{(n)}$은 $P_n(\mathbb{R})$의 기저이다. 특히 $\operatorname{span}\{g, g', \ldots, g^{(n)}\} = P_n(\mathbb{R})$이다.</p>
+        <p>마지막으로 $k \gt n$이면 $g^{(k)} = 0$ ($g$의 차수가 $n$이므로)이다. 그러므로 $W = \operatorname{span}\{g, g', g'', \ldots\} = \operatorname{span}\{g, g', \ldots, g^{(n)}\}$이고, 위에서 이것은 $P_n(\mathbb{R})$과 같다. 즉 $W = P_n(\mathbb{R})$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : P(\mathbb{R}) \to P(\mathbb{R})$ be the linear operator defined by $T(f(x)) = f'(x)$.</p>
+        <p><strong>(1)</strong> For every positive integer $n$, let $W_n$ be the $T$-cyclic subspace of $P(\mathbb{R})$ generated by $x^n$.</p>
+        <p>Then $W_n = \operatorname{span}(x^n, x^{n-1}, \ldots, x, 1) = P_n(\mathbb{R})$.</p>
+        <p><strong>(2)</strong> Let $W$ be the $T$-cyclic subspace of $P(\mathbb{R})$ generated by $x^3 - 3x$.</p>
+        <p>Then $W = \operatorname{span}(x^3 - 3x, 3x^2 - 3, 6x, 6) = P_3(\mathbb{R})$.</p>
+        <p><strong>(3)</strong> Let $W$ be the $T$-cyclic subspace of $P(\mathbb{R})$ generated by a polynomial of degree $n \ge 1$.</p>
+        <p>Then prove that $W = P_n(\mathbb{R})$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(3)</strong> Since $T(f) = f'$, we have $T^k(g) = g^{(k)}$. As $g$ has degree $n$, write $g(x) = c_n x^n + \cdots + c_0$ with $c_n \neq 0$.</p>
+        <p>First, $W \subseteq P_n(\mathbb{R})$: since $g \in P_n(\mathbb{R})$ and differentiation lowers the degree, $g^{(k)} \in P_n(\mathbb{R})$ for every $k \ge 0$. As $P_n(\mathbb{R})$ is a subspace, every linear combination of $g, g', g'', \ldots$, that is, every element of $W$, lies in $P_n(\mathbb{R})$.</p>
+        <p>Next, for $0 \le j \le n$ the degree of $g^{(j)}$ is exactly $n - j$: the leading term of $g^{(j)}$ is $c_n \cdot n(n-1)\cdots(n-j+1)\, x^{n-j}$, whose coefficient is nonzero in $\mathbb{R}$. Hence $g, g', \ldots, g^{(n)}$ have the degrees $n, n-1, \ldots, 1, 0$, which are all different, and none of them is the zero polynomial.</p>
+        <p>We show that these $n+1$ polynomials are linearly independent. Suppose $\sum_{j=0}^{n} a_j g^{(j)} = 0$ with not all $a_j$ equal to $0$. Let $j_0$ be the smallest index with $a_{j_0} \neq 0$. For $j \gt j_0$ the term $g^{(j)}$ has degree $n - j \lt n - j_0$, so the coefficient of $x^{n-j_0}$ in the sum is $a_{j_0} \cdot c_n\, n(n-1)\cdots(n-j_0+1) \neq 0$. Then the sum cannot be the zero polynomial, a contradiction. Hence $\{g, g', \ldots, g^{(n)}\}$ is linearly independent.</p>
+        <p>Since $\dim P_n(\mathbb{R}) = n+1$, the $n+1$ linearly independent vectors $g, g', \ldots, g^{(n)}$ in $P_n(\mathbb{R})$ form a basis of $P_n(\mathbb{R})$. In particular $\operatorname{span}\{g, g', \ldots, g^{(n)}\} = P_n(\mathbb{R})$.</p>
+        <p>Finally, for $k \gt n$ we have $g^{(k)} = 0$ because $\deg g = n$. Therefore $W = \operatorname{span}\{g, g', g'', \ldots\} = \operatorname{span}\{g, g', \ldots, g^{(n)}\}$, which equals $P_n(\mathbb{R})$ by the above. That is, $W = P_n(\mathbb{R})$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.7 ═══════════ -->
+
+<!-- L6-7 p7 편집자 안내 (T-순환 부분공간 → 케일리-해밀턴 정리로 넘어가는 한 줄) -->
+<div class="card note-card" id="note04-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절에서는 $V$의 $T$-순환 부분공간을 이용하여 케일리-해밀턴 정리를 증명한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>We apply the $T$-cyclic subspaces of $V$ in this section to establish the Cayley-Hamilton theorem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p7 Theorem 5.23 (Cayley-Hamilton) — 진술만; 증명은 p20 (c4-18) -->
+<div class="card thm-card" id="c4-9">
+  <div class="card-head">
+    <span class="thm-num">THM 5.23</span>
+    <span class="thm-title">케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$차원 벡터공간 $V$의 선형연산자 $T$에 대하여 $f(t) = b_0 + b_1t + \cdots + b_nt^n$을 $T$의 특성다항식이라 하자. 그러면 $T$는 다음의 의미에서 $f(t)$를 만족한다.</p>
+        <div class="math-display">$$\begin{gathered} f(T) := b_0\mathrm{Id}_V + b_1T + b_2T^2 + \cdots + b_nT^n \\[2pt] \text{는 영사상이다.} \end{gathered}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a linear operator $T$ on an $n$-dimensional vector space $V$, let $f(t) = b_0 + b_1t + \cdots + b_nt^n$ be its characteristic polynomial. Then $T$ satisfies $f(t)$ in the sense that</p>
+        <div class="math-display">$$\begin{gathered} f(T) := b_0\mathrm{Id}_V + b_1T + b_2T^2 + \cdots + b_nT^n \\[2pt] \text{is the zero map.} \end{gathered}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p7 Remark (행렬판) -->
+<div class="card rem-card" id="c4-10">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">행렬로 정의된 연산자에 대한 케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem for the Operator Defined by a Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : F^n \to F^n$이 $A \in M_{n \times n}(F)$로 정의된다고 하자.</p>
+        <p>그러면 케일리-해밀턴 정리는 다음을 말한다.</p>
+        <div class="math-display">$$\begin{gathered} f(A) := b_0I_n + b_1A + b_2A^2 + \cdots + b_nA^n \\[2pt] \text{는 } n \times n \text{ 영행렬이다.} \end{gathered}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose that $T : F^n \to F^n$ is defined by $A \in M_{n \times n}(F)$.</p>
+        <p>Then the Cayley-Hamilton Theorem says that</p>
+        <div class="math-display">$$\begin{gathered} f(A) := b_0I_n + b_1A + b_2A^2 + \cdots + b_nA^n \\[2pt] \text{is the } n \times n \text{ zero matrix.} \end{gathered}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- L6-7 p7 Example A -->
+<div class="card exam-card" id="c4-11">
+  <div class="card-head">
+    <span class="exam-num">EXAM A</span>
+    <span class="exam-title">2×2 행렬에 대한 케일리-해밀턴 정리의 확인 <em>Checking the Cayley–Hamilton Theorem for a 2×2 Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음과 같이 두면</p>
+        <div class="math-display">$$A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix},$$</div>
+        <p>다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det\begin{pmatrix} a-t &amp; b \\ c &amp; d-t \end{pmatrix} \\[2pt] &amp;= t^2 - (a+d)t + (ad-bc). \end{aligned}$$</div>
+        <p>그러면 손으로 직접 계산하여 다음을 확인할 수 있다.</p>
+        <div class="math-display">$$\begin{aligned} f(A) &amp;= A^2 - (a+d)A + (ad-bc)I_2 \\[2pt] &amp;= \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}. \end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For</p>
+        <div class="math-display">$$A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix},$$</div>
+        <p>we have</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det\begin{pmatrix} a-t &amp; b \\ c &amp; d-t \end{pmatrix} \\[2pt] &amp;= t^2 - (a+d)t + (ad-bc). \end{aligned}$$</div>
+        <p>Then one can check, by hand, that</p>
+        <div class="math-display">$$\begin{aligned} f(A) &amp;= A^2 - (a+d)A + (ad-bc)I_2 \\[2pt] &amp;= \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}. \end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.8 ═══════════ -->
+
+<!-- L6-7 p8 편집자 안내 (불변 부분공간 위의 제한 T_W 도입 → Theorem 5.21) -->
+<div class="card note-card" id="note04-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 벡터공간 $V$의 선형연산자라 하자.</p>
+        <p>$T$-불변 부분공간이 존재하면, 정의역이 그 부분공간인 새로운 선형연산자를 정의할 수 있다.</p>
+        <p>더 정확히, $W$가 $V$의 $T$-불변 부분공간이면 $T$의 $W$로의 제한 $T_W$는 $W$ 위의 선형연산자이다.</p>
+        <p>다음 정리는 두 연산자 $T : V \to V$와 $T_W : W \to W$가 어떻게 연결되는지 보여 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator of a vector space $V$.</p>
+        <p>The existence of a $T$-invariant subspace provides the opportunity to define a new linear operator whose domain is this subspace.</p>
+        <p>More precisely, if $W$ is a $T$-invariant subspace of $V$, then the restriction $T_W$ of $T$ to $W$ is a linear operator on $W$.</p>
+        <p>The following theorem illustrates how the two operators $T : V \to V$ and $T_W : W \to W$ are linked.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.8–9 ═══════════ -->
+
+<!-- L6-7 p8–9 Theorem 5.21 (진술은 p8 하단, p9에서 재진술 + 증명) -->
+<div class="card thm-card" id="c4-12">
+  <div class="card-head">
+    <span class="thm-num">THM 5.21</span>
+    <span class="thm-title">$T_W$의 특성다항식은 $T$의 특성다항식을 나눈다 <em>The Characteristic Polynomial of $T_W$ Divides That of $T$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 $n$차원 벡터공간 $V$의 선형연산자라 하자.</p>
+        <p>$W$가 $V$의 $T$-불변 부분공간이면</p>
+        <p>$T_W : W \to W$의 특성다항식은 $T : V \to V$의 특성다항식을 나눈다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\gamma = \{w_1, \ldots, w_k\}$를 $W$의 순서기저라 하자.</p>
+        <p>$\gamma$를 확장하여 $V$의 순서기저 $\beta = \{w_1, \ldots, w_k, v_{k+1}, \ldots, v_n\}$을 만들 수 있다.</p>
+        <p>$A := [T]_\beta$, $B_1 := [T_W]_\gamma$라 하면 다음이 성립한다.</p>
+        <div class="math-display">$$A = \begin{pmatrix} B_1 &amp; B_2 \\ O &amp; B_3 \end{pmatrix}.$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned} &amp;T\text{의 특성다항식} \\[2pt] &amp;\quad = \det(A - tI_n) = \det\begin{pmatrix} B_1 - tI_k &amp; B_2 \\ O &amp; B_3 - tI_{n-k} \end{pmatrix} \\[2pt] &amp;\quad = \det(B_1 - tI_k) \times \det(B_3 - tI_{n-k}). \end{aligned}$$</div>
+        <p>$\det(B_1 - tI_k)$가 $T_W : W \to W$의 특성다항식이므로 증명이 끝난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator of an $n$-dimensional vector space $V$.</p>
+        <p>If $W$ is a $T$-invariant subspace of $V$, then</p>
+        <p>the characteristic polynomial of $T_W : W \to W$ divides the characteristic polynomial of $T : V \to V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\gamma = \{w_1, \ldots, w_k\}$ be an ordered basis for $W$.</p>
+        <p>We can extend $\gamma$ to an ordered basis $\beta = \{w_1, \ldots, w_k, v_{k+1}, \ldots, v_n\}$ for $V$.</p>
+        <p>If $A := [T]_\beta$ and $B_1 := [T_W]_\gamma$, then we have</p>
+        <div class="math-display">$$A = \begin{pmatrix} B_1 &amp; B_2 \\ O &amp; B_3 \end{pmatrix}.$$</div>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned} &amp;\text{the characteristic polynomial of } T \\[2pt] &amp;\quad = \det(A - tI_n) = \det\begin{pmatrix} B_1 - tI_k &amp; B_2 \\ O &amp; B_3 - tI_{n-k} \end{pmatrix} \\[2pt] &amp;\quad = \det(B_1 - tI_k) \times \det(B_3 - tI_{n-k}). \end{aligned}$$</div>
+        <p>This completes the proof since</p>
+        <p>$\det(B_1 - tI_k)$ is the characteristic polynomial of $T_W : W \to W$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.10 ═══════════ -->
+
+<!-- L6-7 p10 Lemma (블록 상삼각행렬의 행렬식) — 증명의 k = 1 줄 기호 오류 → en 말미 Note -->
+<div class="card thm-card" id="c4-13">
+  <div class="card-head">
+    <span class="thm-num">LEM</span>
+    <span class="thm-title">블록 상삼각행렬의 행렬식 <em>The Determinant of a Block Upper Triangular Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$B$와 $D$를 각각 $k \times k$ 행렬, $(n-k) \times (n-k)$ 행렬이라 하자.</p>
+        <p>만약</p>
+        <div class="math-display">$$A = \begin{pmatrix} B &amp; C \\ O &amp; D \end{pmatrix},$$</div>
+        <p>이면 $\det(A) = \det(B) \times \det(D)$이다.</p>
+        <p><em>역주.</em> 슬라이드 원문 증명의 $k = 1$ 줄은 $\det(A) = \det(B_1) \times \det(B_2)$로 인쇄되어 있으나, 첨자가 붙은 블록 $B_1, B_2$는 정리 5.21의 표기이므로 이 보조정리의 표기에 맞게 $\det(A) = \det(B) \times \det(D)$로 바로잡아 옮겼다(영문 패널은 원문 그대로). $k = 1$이면 $B$는 $1 \times 1$ 행렬 $(a_{11})$이므로 첫째 열을 따라 전개하면 곧바로 얻어진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$k \ge 1$에 대한 귀납법을 사용한다.</p>
+        <p>$k = 1$이면 $\det(A) = \det(B) \times \det(D)$임이 자명하다.</p>
+        <p>$k \ge 2$라 하자. 그러면</p>
+        <div class="math-display">$$\det(A) = \sum_{i=1}^{k} (-1)^{i+1} a_{i1} \det(A_{i1}).$$</div>
+        <p>또한 귀납가정에 의해 다음이 성립한다.</p>
+        <div class="math-display">$$\det(A_{i1}) = \det(B_{i1})\det(D) \ \text{ 모든 } 1 \le i \le k \text{에 대하여.}$$</div>
+        <p>따라서 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} \det(A) &amp;= \left( \sum_{i=1}^{k} (-1)^{i+1} a_{i1} \det(B_{i1}) \right) \times \det(D) \\[2pt] &amp;= \det(B) \times \det(D). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $B$ and $D$ be respectively $k \times k$ and $(n-k) \times (n-k)$ matrix.</p>
+        <p>If</p>
+        <div class="math-display">$$A = \begin{pmatrix} B &amp; C \\ O &amp; D \end{pmatrix},$$</div>
+        <p>then $\det(A) = \det(B) \times \det(D)$.</p>
+        <p><em>Note.</em> In the proof, the line for $k = 1$ is transcribed exactly as printed on the slide, $\det(A) = \det(B_1) \times \det(B_2)$; the subscripted blocks $B_1, B_2$ belong to the notation of Theorem 5.21, not to this lemma. In the lemma's notation the line should read $\det(A) = \det(B) \times \det(D)$ (for $k = 1$, $B$ is the $1 \times 1$ matrix $(a_{11})$ and expanding along the first column gives this at once).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We use induction on $k \ge 1$.</p>
+        <p>If $k = 1$, then it is obvious that $\det(A) = \det(B_1) \times \det(B_2)$.</p>
+        <p>Suppose that $k \ge 2$. Then</p>
+        <div class="math-display">$$\det(A) = \sum_{i=1}^{k} (-1)^{i+1} a_{i1} \det(A_{i1}).$$</div>
+        <p>Also, by induction hypothesis, we have</p>
+        <div class="math-display">$$\det(A_{i1}) = \det(B_{i1})\det(D) \ \text{ for all } 1 \le i \le k.$$</div>
+        <p>Therefore, it follows that</p>
+        <div class="math-display">$$\begin{aligned} \det(A) &amp;= \left( \sum_{i=1}^{k} (-1)^{i+1} a_{i1} \det(B_{i1}) \right) \times \det(D) \\[2pt] &amp;= \det(B) \times \det(D). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.11–13 ═══════════ -->
+
+<!-- L6-7 p11–13 Example (번호 없음; p12·p13 은 Example (Continued)) — 특성다항식 차수·T_2 표기·span 첫 항 오류 → en 말미 Note -->
+<div class="card exam-card" id="c4-14">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">$P_n(\mathbb{R})$ 위의 두 연산자와 순환 부분공간으로의 제한 <em>Two Operators on $P_n(\mathbb{R})$ and Their Restrictions to Cyclic Subspaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = P_n(\mathbb{R})$과 $\beta = \{1, x, x^2, \ldots, x^n\}$에 대하여 다음 선형변환들을 생각하자.</p>
+        <div class="math-display">$$T_1 : V \to V \ , \quad f(x) \mapsto f'(x),$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$T_2 : V \to V \ , \quad f(x) \mapsto xf'(x).$$</div>
+        <p><strong>(1)</strong></p>
+        <div class="math-display">$$[T_1]_\beta = \begin{pmatrix} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; n \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \end{pmatrix}$$</div>
+        <p>따라서 $T_1$의 특성다항식은 $(-1)^{n+1} t^{n+1}$과 같다.</p>
+        <p><strong>(2)</strong></p>
+        <div class="math-display">$$[T_2]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; n \end{pmatrix}$$</div>
+        <p>따라서 $T_2$의 특성다항식은 $(-1)^{n+1} t(t-1)(t-2) \cdots (t-n)$과 같다.</p>
+        <p><em>(계속)</em></p>
+        <div class="math-display">$$\begin{gathered} T_1 : V \to V \ , \quad f(x) \mapsto f'(x), \ \text{그리고} \\[2pt] T_2 : V \to V \ , \quad f(x) \mapsto xf'(x) \end{gathered}$$</div>
+        <p>$f(x) = x^2 + x + 1$이라 하자.</p>
+        <p><strong>(3)</strong> $f(x)$가 생성하는 $V$의 $T_1$-순환 부분공간은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{f(x), T_1(f(x)), T_1^2(f(x)), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{x^2 + x + 1, 2x + 1, 2, 0, \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{1, x, x^2\}) = P_2(\mathbb{R}). \end{aligned}$$</div>
+        <p>$P_2(\mathbb{R})$의 표준기저 $\gamma = \{1, x, x^2\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$[T_1|_W]_\gamma = \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>따라서</p>
+        <p>$T_1|_W$의 특성다항식은 $-t^3$과 같다.</p>
+        <p><em>(계속)</em></p>
+        <div class="math-display">$$\begin{gathered} T_1 : V \to V \ , \quad f(x) \mapsto f'(x), \ \text{그리고} \\[2pt] T_2 : V \to V \ , \quad f(x) \mapsto xf'(x) \end{gathered}$$</div>
+        <p>$f(x) = x^2 + x + 1$이라 하자.</p>
+        <p><strong>(4)</strong> $f(x)$가 생성하는 $V$의 $T_2$-순환 부분공간은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{f(x), T_2(f(x)), T_2^2(f(x)), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{x^2 + x + 1, 2x^2 + x, 4x^2 + x, \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{1, x, x^2\}) = P_2(\mathbb{R}). \end{aligned}$$</div>
+        <p>$P_2(\mathbb{R})$의 표준기저 $\gamma = \{1, x, x^2\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$[T_2|_W]_\gamma = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}$$</div>
+        <p>따라서</p>
+        <p>$T_2|_W$의 특성다항식은 $-t(t-1)(t-2)$와 같다.</p>
+        <p><em>역주.</em> 슬라이드 원문의 세 가지 오류를 바로잡아 옮겼다(영문 패널은 원문 그대로). (i) $\dim V = \dim P_n(\mathbb{R}) = n+1$이므로 (1), (2)의 행렬은 $(n+1) \times (n+1)$ 행렬이며, 따라서 (1)에서 $T_1$의 특성다항식은 $(-1)^n t^n$이 아니라 $(-1)^{n+1} t^{n+1}$이다. (ii) (2)의 마지막 문장은 $T_1$이 아니라 $T_2$에 관한 것이며, $T_2$의 특성다항식은 $(-1)^{n+1} t(t-1)(t-2) \cdots (t-n)$이다. (iii) (3), (4)의 두 번째 $\operatorname{span}$에서 첫 벡터는 $x^2 + 2x + 1$이 아니라 $f(x) = x^2 + x + 1$ 자신이다. 나머지 벡터 $T_1(f(x)) = 2x + 1$, $T_1^2(f(x)) = 2$, $T_2(f(x)) = 2x^2 + x$, $T_2^2(f(x)) = 4x^2 + x$와 결론 $W = P_2(\mathbb{R})$은 옳다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $V = P_n(\mathbb{R})$ and $\beta = \{1, x, x^2, \ldots, x^n\}$, consider the linear transformations</p>
+        <div class="math-display">$$T_1 : V \to V \ , \quad f(x) \mapsto f'(x),$$</div>
+        <p>and</p>
+        <div class="math-display">$$T_2 : V \to V \ , \quad f(x) \mapsto xf'(x).$$</div>
+        <p><strong>(1)</strong></p>
+        <div class="math-display">$$[T_1]_\beta = \begin{pmatrix} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; n \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \end{pmatrix}$$</div>
+        <p>Hence the characteristic polynomial of $T_1$ is equal to $(-1)^n t^n$.</p>
+        <p><strong>(2)</strong></p>
+        <div class="math-display">$$[T_2]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; n \end{pmatrix}$$</div>
+        <p>Hence the characteristic polynomial of $T_1$ is equal to $(-1)^n t(t-1)(t-2) \cdots (t-n)$.</p>
+        <p><em>(Continued)</em></p>
+        <div class="math-display">$$\begin{gathered} T_1 : V \to V \ , \quad f(x) \mapsto f'(x), \ \text{ and} \\[2pt] T_2 : V \to V \ , \quad f(x) \mapsto xf'(x) \end{gathered}$$</div>
+        <p>Let $f(x) = x^2 + x + 1$.</p>
+        <p><strong>(3)</strong> The $T_1$-cyclic subspace of $V$ generated by $f(x)$ is</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{f(x), T_1(f(x)), T_1^2(f(x)), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{x^2 + 2x + 1, 2x + 1, 2, 0, \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{1, x, x^2\}) = P_2(\mathbb{R}). \end{aligned}$$</div>
+        <p>For the standard basis $\gamma = \{1, x, x^2\}$ of $P_2(\mathbb{R})$, we have</p>
+        <div class="math-display">$$[T_1|_W]_\gamma = \begin{pmatrix} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>and so</p>
+        <p>the characteristic polynomial of $T_1|_W$ is equal to $-t^3$.</p>
+        <p><em>(Continued)</em></p>
+        <div class="math-display">$$\begin{gathered} T_1 : V \to V \ , \quad f(x) \mapsto f'(x), \ \text{ and} \\[2pt] T_2 : V \to V \ , \quad f(x) \mapsto xf'(x) \end{gathered}$$</div>
+        <p>Let $f(x) = x^2 + x + 1$.</p>
+        <p><strong>(4)</strong> The $T_2$-cyclic subspace of $V$ generated by $f(x)$ is</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{f(x), T_2(f(x)), T_2^2(f(x)), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{x^2 + 2x + 1, 2x^2 + x, 4x^2 + x, \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{1, x, x^2\}) = P_2(\mathbb{R}). \end{aligned}$$</div>
+        <p>For the standard basis $\gamma = \{1, x, x^2\}$ of $P_2(\mathbb{R})$, we have</p>
+        <div class="math-display">$$[T_2|_W]_\gamma = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}$$</div>
+        <p>and so</p>
+        <p>the characteristic polynomial of $T_2|_W$ is equal to $-t(t-1)(t-2)$.</p>
+        <p><em>Note.</em> Three slips are transcribed exactly as printed on the slides. (i) Since $\dim V = \dim P_n(\mathbb{R}) = n+1$, the matrices in (1) and (2) are $(n+1) \times (n+1)$, so the characteristic polynomial of $T_1$ in (1) is $(-1)^{n+1} t^{n+1}$, not $(-1)^n t^n$. (ii) The last sentence of (2) concerns $T_2$, not $T_1$, and its characteristic polynomial is $(-1)^{n+1} t(t-1)(t-2) \cdots (t-n)$. (iii) In (3) and (4) the first vector in the second span should be $f(x) = x^2 + x + 1$ itself, not $x^2 + 2x + 1$; the remaining vectors $T_1(f(x)) = 2x + 1$, $T_1^2(f(x)) = 2$, $T_2(f(x)) = 2x^2 + x$, $T_2^2(f(x)) = 4x^2 + x$ and the conclusions $W = P_2(\mathbb{R})$ are correct.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.14–15 ═══════════ -->
+
+<!-- L6-7 p14–15 Example 5 (p15 상단은 Example 5. (Continued)) — T²(v) 값 오류 → en 말미 Note; 줄 끝 ♣ 기호는 생략 -->
+<div class="card exam-card" id="c4-15">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">$\mathbb{R}^4$ 위의 연산자의 불변 부분공간 <em>An Invariant Subspace of an Operator on $\mathbb{R}^4$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 다음과 같이 정의되는 $\mathbb{R}^4$의 선형연산자라 하자.</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b+2c-d, b+d, 2c-d, c+d).$$</div>
+        <p><strong>(1)</strong> $W = \{\, (t,s,0,0) \mid t,s \in \mathbb{R} \,\}$가 $\mathbb{R}^4$의 $T$-불변 부분공간임을 증명하라.</p>
+        <p>$(\because)$ 모든 $w \in W$에 대하여 $T(w) \in W$임을 직접 보일 수 있다.</p>
+        <p>다른 증명으로, $v = (0,1,0,0)$을 택하자.</p>
+        <p>그러면 $T(v) = (1,1,0,0)$이고 $T^2(v) = (2,1,0,0) = 2T(v) - v$이다.</p>
+        <p>$T^2(v) \in \operatorname{span}(v, T(v))$이므로</p>
+        <p>$v$가 생성하는 $\mathbb{R}^4$의 $T$-순환 부분공간은 $\operatorname{span}(v, T(v))$와 같다.</p>
+        <p>$\operatorname{span}(v, T(v))$가 $W$와 같음은 쉽게 보일 수 있다.</p>
+        <p><strong>(2)</strong> $\gamma = \{e_1, e_2\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$B_1 := [T_W]_\gamma = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>그러면 정리 5.21에 의해</p>
+        <div class="math-display">$$\begin{aligned} \det(B_1 - tI) &amp;= \det\begin{pmatrix} 1-t &amp; 1 \\ 0 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= t^2 - 2t + 1 = (t-1)^2 \end{aligned}$$</div>
+        <p>은 $T$의 특성다항식을 나눈다.</p>
+        <p><em>(계속)</em> $\beta = \{e_1, e_2, e_3, e_4\}$라 하자. 그러면</p>
+        <div class="math-display">$$A = [T]_\beta = \begin{pmatrix} 1 &amp; 1 &amp; 2 &amp; -1 \\ 0 &amp; 1 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 2 &amp; -1 \\ 0 &amp; 0 &amp; 1 &amp; 1 \end{pmatrix}$$</div>
+        <p>이고 따라서 $T$의 특성다항식은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det(A - tI_4) \\[2pt] &amp;= \det\begin{pmatrix} 1-t &amp; 1 &amp; 2 &amp; -1 \\ 0 &amp; 1-t &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 2-t &amp; -1 \\ 0 &amp; 0 &amp; 1 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= \det\begin{pmatrix} 1-t &amp; 1 \\ 0 &amp; 1-t \end{pmatrix} \cdot \det\begin{pmatrix} 2-t &amp; -1 \\ 1 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= (t-1)^2 \times (t^2 - 3t + 3). \end{aligned}$$</div>
+        <p><em>역주.</em> 슬라이드 원문은 (1)에서 $T^2(v) = (2,2,0,0) = 2T(v)$라 적었으나 이는 틀린 값이므로 바로잡아 옮겼다(영문 패널은 원문 그대로). 바른 값은 $T^2(v) = T(1,1,0,0) = (2,1,0,0) = 2T(v) - v$이다. 결론 $T^2(v) \in \operatorname{span}(v, T(v))$과 그로부터 이어지는 모든 논의는 그대로 성립한다. 또한 원문의 $T(w) \subset W$는 $T(w) \in W$로 옮겼다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be the linear operator on $\mathbb{R}^4$ defined by</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b+2c-d, b+d, 2c-d, c+d).$$</div>
+        <p><strong>(1)</strong> Prove that $W = \{\, (t,s,0,0) \mid t,s \in \mathbb{R} \,\}$ is a $T$-invariant subspace of $\mathbb{R}^4$.</p>
+        <p>$(\because)$ One can directly show that $T(w) \subset W$ for all $w \in W$.</p>
+        <p>For another proof, choose $v = (0,1,0,0)$.</p>
+        <p>Then we have $T(v) = (1,1,0,0)$ and $T^2(v) = (2,2,0,0) = 2T(v)$.</p>
+        <p>Since $T^2(v) \in \operatorname{span}(v, T(v))$, it follows that</p>
+        <p>the $T$-cyclic subspaces of $\mathbb{R}^4$ generated by $v$ is equal to $\operatorname{span}(v, T(v))$.</p>
+        <p>It can be easily shown that $\operatorname{span}(v, T(v))$ is equal to $W$.</p>
+        <p><strong>(2)</strong> For $\gamma = \{e_1, e_2\}$, we have</p>
+        <div class="math-display">$$B_1 := [T_W]_\gamma = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>Then Theorem 5.21 says that</p>
+        <div class="math-display">$$\begin{aligned} \det(B_1 - tI) &amp;= \det\begin{pmatrix} 1-t &amp; 1 \\ 0 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= t^2 - 2t + 1 = (t-1)^2 \end{aligned}$$</div>
+        <p>divides the characteristic polynomial of $T$.</p>
+        <p><em>(Continued)</em> Let $\beta = \{e_1, e_2, e_3, e_4\}$. Then</p>
+        <div class="math-display">$$A = [T]_\beta = \begin{pmatrix} 1 &amp; 1 &amp; 2 &amp; -1 \\ 0 &amp; 1 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 2 &amp; -1 \\ 0 &amp; 0 &amp; 1 &amp; 1 \end{pmatrix}$$</div>
+        <p>and hence the characteristic polynomial of $T$ is equal to</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det(A - tI_4) \\[2pt] &amp;= \det\begin{pmatrix} 1-t &amp; 1 &amp; 2 &amp; -1 \\ 0 &amp; 1-t &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 2-t &amp; -1 \\ 0 &amp; 0 &amp; 1 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= \det\begin{pmatrix} 1-t &amp; 1 \\ 0 &amp; 1-t \end{pmatrix} \cdot \det\begin{pmatrix} 2-t &amp; -1 \\ 1 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= (t-1)^2 \times (t^2 - 3t + 3). \end{aligned}$$</div>
+        <p><em>Note.</em> The value of $T^2(v)$ in (1) is transcribed exactly as printed on the slide, but it is wrong: $T^2(v) = T(1,1,0,0) = (2,1,0,0) = 2T(v) - v$, not $(2,2,0,0) = 2T(v)$. The conclusion $T^2(v) \in \operatorname{span}(v, T(v))$, and everything that follows from it, still holds. Also, &ldquo;$T(w) \subset W$&rdquo; in the line marked $(\because)$ should read $T(w) \in W$, since $T(w)$ is a vector.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.15–16 ═══════════ -->
+
+<!-- L6-7 p15–16 Remark (Theorem 5.21 → Theorem 5.22 로 넘어가는 안내) -->
+<div class="card rem-card" id="c4-16">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">$T_W$를 이용한 $T$의 특성다항식 연구 <em>Using $T_W$ to Study the Characteristic Polynomial of $T$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정리 5.21에 비추어, $T_W$의 특성다항식을 이용하여 $T$ 자신의 특성다항식에 관한 정보를 얻을 수 있다.</p>
+        <p>이와 관련하여 다음 정리는 선형연산자 $T$의 순환 부분공간으로의 제한의 특성다항식을 계산하는 방법을 설명한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In view of Theorem 5.21, we may use the characteristic polynomial of $T_W$ to gain information about the characteristic polynomial of $T$ itself.</p>
+        <p>In this regard, the next theorem explains how to compute the characteristic polynomial of the restriction of a linear operator $T$ to a cyclic subspace.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.16–20 ═══════════ -->
+
+<!-- L6-7 p16–20 Theorem 5.22 (진술 p16; Proof of (1) p17–18, Proof of (2) p18, Proof of (2) - Continued : Claim (★) p19–20 상단) — 증명 안 j/k 혼용은 원문 그대로 -->
+<div class="card thm-card" id="c4-17">
+  <div class="card-head">
+    <span class="thm-num">THM 5.22</span>
+    <span class="thm-title">순환 부분공간으로의 제한의 특성다항식 <em>The Characteristic Polynomial of the Restriction to a Cyclic Subspace</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 유한차원 벡터공간 $V$의 선형연산자라 하자.</p>
+        <p>영벡터가 아닌 $v \in V$에 대하여</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{v, T(v), T^2(v), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{\, T^{\ell}(v) \mid \ell \ge 0 \,\}) \end{aligned}$$</div>
+        <p>를 $v$가 생성하는 $V$의 $T$-순환 부분공간이라 하자. $\dim W$가 $k$이면 다음이 성립한다.</p>
+        <p><strong>(1)</strong> $\{v, T(v), \ldots, T^{k-1}(v)\}$는 $W$의 기저이다.</p>
+        <p><strong>(2)</strong> 어떤 $a_0, a_1, \ldots, a_{k-1} \in F$에 대하여 $a_0v + a_1T(v) + \cdots + a_{k-1}T^{k-1}(v) + T^k(v) = O_V$이면</p>
+        <p>$T_W$의 특성다항식은 $f(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$이다.</p>
+        <p><em>역주.</em> (2)의 증명 첫머리에서 슬라이드 원문은 관계식을 $a_0v + a_1T(v) + \cdots + a_{j-1}T^{k-1}(v) + T^k(v) = O_V$로 적어 $j$와 $k$를 섞어 썼다(영문 패널은 원문 그대로). (1)의 증명에서 $j = k$임이 밝혀졌으므로 이 계수는 $a_{k-1}$이며, 번역에서는 진술 (2)와 같이 $a_{k-1}$로 옮겼다. 증명에 남아 있는 나머지 $j$도 모두 $k$로 읽으면 된다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(1)의 증명.</strong></p>
+        <p>$j$를 다음을 만족하는 가장 큰 양의 정수라 하자.</p>
+        <div class="math-display">$$\begin{gathered} \beta := \{v, T(v), \ldots, T^{j-1}(v)\} \\[2pt] \text{이 일차독립이다.} \end{gathered}$$</div>
+        <p>$v \neq O_V$이고 $\dim V$가 유한하므로 그러한 $j$가 존재한다.</p>
+        <p>그러면 $\{v, T(v), \ldots, T^{j-1}(v), T^j(v)\}$는 일차종속이므로 어떤 $(a_0, a_1, \ldots, a_j) \in F^{j+1} - \{(0, \ldots, 0)\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$a_0v + a_1T(v) + \cdots + a_{j-1}T^{j-1}(v) + a_jT^j(v) = O_V.$$</div>
+        <p>$a_j \neq 0$임에 유의하자. 그렇지 않으면 $a_0, \ldots, a_{j-1}$이 모두 0이 되기 때문이다.</p>
+        <p>따라서 $a_j = 1$이라 가정해도 되며, 그러면</p>
+        <div class="math-display">$$a_0v + a_1T(v) + \cdots + a_{j-1}T^{j-1}(v) + T^j(v) = O_V.$$</div>
+        <p>그러면 $T^j(v) = -a_0v - a_1T(v) - \cdots - a_{j-1}T^{j-1}(v)$는 $\operatorname{span}(\beta)$에 포함된다.</p>
+        <p>따라서 $W = \operatorname{span}(\beta)$이고, 그러므로 $\dim W = k = |\beta| = j$이다.</p>
+        <p>이로써 $j = k$이고, 따라서 $\{v, T(v), \ldots, T^{k-1}(v)\}$는 $W$의 기저이다.</p>
+        <p><strong>(2)의 증명.</strong></p>
+        <p>지금부터 $\beta = \{v, T(v), \ldots, T^{j-1}(v)\}$를 $W$의 순서기저로 간주한다.</p>
+        <p>위와 같이 $a_0, a_1, \ldots, a_{k-1} \in F$를 잡아 $a_0v + a_1T(v) + \cdots + a_{k-1}T^{k-1}(v) + T^k(v) = O_V$라 하자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned} [T_W]_\beta &amp;= \big[\, [T_W(v)]_\beta \ [T_W(T(v))]_\beta \cdots \\[2pt] &amp;\qquad [T_W(T^{j-2}(v))]_\beta \ [T_W(T^{j-1}(v))]_\beta \,\big] \\[2pt] &amp;= \big[\, [T(v)]_\beta \ [T^2(v)]_\beta \cdots [T^{j-1}(v)]_\beta \ [T^j(v)]_\beta \,\big] \\[2pt] &amp;= \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; 0 &amp; -a_1 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -a_{k-1} \end{pmatrix}. \end{aligned}$$</div>
+        <p>따라서 $[T_W]_\beta$의 특성다항식은 다음과 같다.</p>
+        <div class="math-display">$$f(t) = \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_1 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix}.$$</div>
+        <p><strong>(2)의 증명 &ndash; 계속.</strong></p>
+        <p><strong>주장 (★)</strong> : $f(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$.</p>
+        <p>주장 (★)을 증명하기 위해 $k$에 대한 귀납법을 사용한다.</p>
+        <p>- $k = 1$이면 $f(t) = \det(-t - a_0) = (-1)^1(t + a_0)$이다.</p>
+        <p>- $k = 2$이면 $f(t) = \det\begin{pmatrix} -t &amp; -a_0 \\ 1 &amp; -t-a_1 \end{pmatrix} = t^2 + a_1t + a_0$이다.</p>
+        <p>이제 $k \ge 3$이고 $\ell \le k-1$인 모든 $\ell$에 대하여 주장 (★)이 성립한다고 가정하자(귀납가정). 그러면</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_1 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix} \\[4pt] &amp;= (-t) \times \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_1 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_2 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_3 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix} \\[4pt] &amp;\qquad + (-1)^{1+k}(-a_0)\det\begin{pmatrix} 1 &amp; -t &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 \end{pmatrix} \\[4pt] &amp;= (-t)(-1)^{k-1}(a_1 + a_2t + \cdots \\[2pt] &amp;\qquad + a_{k-1}t^{k-2} + t^{k-1}) \\[2pt] &amp;\qquad + (-1)^k \times a_0 \\[2pt] &amp;= (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator on a finite dimensional vector space $V$.</p>
+        <p>For a nonzero vector $v \in V$, let</p>
+        <div class="math-display">$$\begin{aligned} W &amp;= \operatorname{span}(\{v, T(v), T^2(v), \ldots\}) \\[2pt] &amp;= \operatorname{span}(\{\, T^{\ell}(v) \mid \ell \ge 0 \,\}) \end{aligned}$$</div>
+        <p>denote the $T$-cyclic subspace of $V$ generated by $v$. If $\dim W$ is $k$, then</p>
+        <p><strong>(1)</strong> $\{v, T(v), \ldots, T^{k-1}(v)\}$ is a basis for $W$.</p>
+        <p><strong>(2)</strong> If $a_0v + a_1T(v) + \cdots + a_{k-1}T^{k-1}(v) + T^k(v) = O_V$ for some $a_0, a_1, \ldots, a_{k-1} \in F$, then</p>
+        <p>the characteristic polynomial of $T_W$ is $f(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$.</p>
+        <p><em>Note.</em> At the start of the proof of (2) the slide writes the relation as $a_0v + a_1T(v) + \cdots + a_{j-1}T^{k-1}(v) + T^k(v) = O_V$, mixing $j$ and $k$; this is transcribed exactly as printed. Since the proof of (1) shows $j = k$, the coefficient is $a_{k-1}$, as in statement (2), and every remaining $j$ in the proof may be read as $k$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof of (1).</strong></p>
+        <p>Let $j$ be the largest positive integer such that</p>
+        <div class="math-display">$$\begin{gathered} \beta := \{v, T(v), \ldots, T^{j-1}(v)\} \\[2pt] \text{is linearly independent.} \end{gathered}$$</div>
+        <p>Such a $j$ must exist since $v \neq O_V$ and $\dim V$ is finite.</p>
+        <p>Then $\{v, T(v), \ldots, T^{j-1}(v), T^j(v)\}$ is linearly dependent and so</p>
+        <div class="math-display">$$\begin{gathered} a_0v + a_1T(v) + \cdots + a_{j-1}T^{j-1}(v) + a_jT^j(v) = O_V \\[2pt] \text{for some } (a_0, a_1, \ldots, a_j) \in F^{j+1} - \{(0, \ldots, 0)\}. \end{gathered}$$</div>
+        <p>Note that $a_j \neq 0$ since otherwise $a_0, \ldots, a_{j-1}$ are all zeros.</p>
+        <p>Thus we may assume that $a_j = 1$ and so</p>
+        <div class="math-display">$$a_0v + a_1T(v) + \cdots + a_{j-1}T^{j-1}(v) + T^j(v) = O_V.$$</div>
+        <p>Then $T^j(v) = -a_0v - a_1T(v) - \cdots - a_{j-1}T^{j-1}(v)$ is contained in $\operatorname{span}(\beta)$.</p>
+        <p>Thus $W = \operatorname{span}(\beta)$ and hence $\dim W = k = |\beta| = j$.</p>
+        <p>This proves that $j = k$ and so $\{v, T(v), \ldots, T^{k-1}(v)\}$ is a basis for $W$.</p>
+        <p><strong>Proof of (2).</strong></p>
+        <p>From now on, we view $\beta = \{v, T(v), \ldots, T^{j-1}(v)\}$ as an ordered basis for $W$.</p>
+        <p>Let $a_0, a_1, \ldots, a_{k-1} \in F$ be as above so that $a_0v + a_1T(v) + \cdots + a_{j-1}T^{k-1}(v) + T^k(v) = O_V$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned} [T_W]_\beta &amp;= \big[\, [T_W(v)]_\beta \ [T_W(T(v))]_\beta \cdots \\[2pt] &amp;\qquad [T_W(T^{j-2}(v))]_\beta \ [T_W(T^{j-1}(v))]_\beta \,\big] \\[2pt] &amp;= \big[\, [T(v)]_\beta \ [T^2(v)]_\beta \cdots [T^{j-1}(v)]_\beta \ [T^j(v)]_\beta \,\big] \\[2pt] &amp;= \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; 0 &amp; -a_1 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -a_{k-1} \end{pmatrix}. \end{aligned}$$</div>
+        <p>Thus the characteristic polynomial of $[T_W]_\beta$ is</p>
+        <div class="math-display">$$f(t) = \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_1 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix}.$$</div>
+        <p><strong>Proof of (2) &ndash; Continued.</strong></p>
+        <p><strong>Claim (★)</strong> : $f(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$.</p>
+        <p>To prove Claim (★), we use induction on $k$.</p>
+        <p>- If $k = 1$, then $f(t) = \det(-t - a_0) = (-1)^1(t + a_0)$.</p>
+        <p>- If $k = 2$, then $f(t) = \det\begin{pmatrix} -t &amp; -a_0 \\ 1 &amp; -t-a_1 \end{pmatrix} = t^2 + a_1t + a_0$.</p>
+        <p>Now, suppose that $k \ge 3$ and Claim (★) holds for any $\ell \le k-1$. Then</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_0 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_1 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix} \\[4pt] &amp;= (-t) \times \det\begin{pmatrix} -t &amp; 0 &amp; \cdots &amp; 0 &amp; -a_1 \\ 1 &amp; -t &amp; \cdots &amp; 0 &amp; -a_2 \\ 0 &amp; 1 &amp; \cdots &amp; 0 &amp; -a_3 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -t-a_{k-1} \end{pmatrix} \\[4pt] &amp;\qquad + (-1)^{1+k}(-a_0)\det\begin{pmatrix} 1 &amp; -t &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 \end{pmatrix} \\[4pt] &amp;= (-t)(-1)^{k-1}(a_1 + a_2t + \cdots \\[2pt] &amp;\qquad + a_{k-1}t^{k-2} + t^{k-1}) \\[2pt] &amp;\qquad + (-1)^k \times a_0 \\[2pt] &amp;= (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k). \end{aligned}$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.20 ═══════════ -->
+
+<!-- L6-7 p20 Theorem 5.23 (Cayley-Hamilton) 재진술 + 증명 -->
+<div class="card thm-card" id="c4-18">
+  <div class="card-head">
+    <span class="thm-num">THM 5.23</span>
+    <span class="thm-title">케일리-해밀턴 정리의 증명 <em>Proof of the Cayley–Hamilton Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$n$차원 벡터공간 $V$의 선형연산자 $T$에 대하여 $f(t) = b_0 + b_1t + \cdots + b_nt^n$을 $T$의 특성다항식이라 하자. 그러면 $T$는 다음의 의미에서 $f(t)$를 만족한다.</p>
+        <div class="math-display">$$\begin{gathered} f(T) := b_0\mathrm{Id}_V + b_1T + b_2T^2 + \cdots + b_nT^n \\[2pt] \text{는 영사상이다.} \end{gathered}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>모든 $v \in V$에 대하여 $f(T)(v) = O_V$임을 보이면 된다.</p>
+        <p>$v = O_V$이면 자명하다. 따라서 $v \neq O_V$라고 가정한다.</p>
+        <p>$W$를 $v$가 생성하는 $T$-순환 부분공간이라 하고 $\dim W = k$라 하자.</p>
+        <p>$g(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$를 $T_W$의 특성다항식이라 하자.</p>
+        <p>그러면 정리 5.22에 의해 $g(T)(v) = O_V$이다.</p>
+        <p>또한 정리 5.21에 의해 어떤 다항식 $q(t)$에 대하여 $f(t) = q(t) \times g(t)$이다.</p>
+        <p>따라서 $f(T) = q(T)g(T)$이고, 그러므로</p>
+        <div class="math-display">$$f(T)(v) = q(T)(g(T)(v)) = q(T)(O_V) = O_V.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a linear operator $T$ on an $n$-dimensional vector space $V$, let $f(t) = b_0 + b_1t + \cdots + b_nt^n$ be its characteristic polynomial. Then $T$ satisfies $f(t)$ in the sense that</p>
+        <div class="math-display">$$\begin{gathered} f(T) := b_0\mathrm{Id}_V + b_1T + b_2T^2 + \cdots + b_nT^n \\[2pt] \text{is the zero map.} \end{gathered}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We need to show that $f(T)(v) = O_V$ for all $v \in V$.</p>
+        <p>This is obvious if $v = O_V$. So, we assume that $v \neq O_V$.</p>
+        <p>Let $W$ be the $T$-cyclic subspace generated by $v$, and suppose that $\dim W = k$.</p>
+        <p>Let $g(t) = (-1)^k(a_0 + a_1t + \cdots + a_{k-1}t^{k-1} + t^k)$ be the characteristic polynomial of $T_W$.</p>
+        <p>Then Theorem 5.22 says that $g(T)(v) = O_V$.</p>
+        <p>Also, by Theorem 5.21, we have $f(t) = q(t) \times g(t)$ for some polynomial $q(t)$.</p>
+        <p>Thus $f(T) = q(T)g(T)$ and hence</p>
+        <div class="math-display">$$f(T)(v) = q(T)(g(T)(v)) = q(T)(O_V) = O_V.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.21 ═══════════ -->
+
+<!-- L6-7 p21 Corollary (Cayley-Hamilton Theorem for Matrices) -->
+<div class="card thm-card" id="c4-19">
+  <div class="card-head">
+    <span class="thm-num">COR</span>
+    <span class="thm-title">행렬에 대한 케일리-해밀턴 정리 <em>The Cayley–Hamilton Theorem for Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n \times n}(F)$에 대하여 $f(t)$를 $A$의 특성다항식이라 하자.</p>
+        <p>그러면 $f(A) = O_{n \times n}$이다. 여기서 $O_{n \times n}$은 $n \times n$ 영행렬을 뜻한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For $A \in M_{n \times n}(F)$, let $f(t)$ be the characteristic polynomial of $A$.</p>
+        <p>Then $f(A) = O_{n \times n}$ where $O_{n \times n}$ denotes the $n \times n$ zero matrix.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.21–22 ═══════════ -->
+
+<!-- L6-7 p21–22 Example 7 -->
+<div class="card exam-card" id="c4-20">
+  <div class="card-head">
+    <span class="exam-num">EXAM 7</span>
+    <span class="exam-title">케일리-해밀턴 정리를 이용한 $A^{2024}$의 계산 <em>Computing $A^{2024}$ by the Cayley–Hamilton Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$가 $T(a,b) = (a - 2b, -2a + b)$로 주어졌다고 하자.</p>
+        <p>$\beta = \{e_1, e_2\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$A := [T]_\beta = \begin{pmatrix} 1 &amp; -2 \\ -2 &amp; 1 \end{pmatrix}.$$</div>
+        <p>따라서 $T$의 특성다항식은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} \det(A - tI) &amp;= \det\begin{pmatrix} 1-t &amp; -2 \\ -2 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= t^2 - 2t - 3. \end{aligned}$$</div>
+        <p>따라서 케일리-해밀턴 정리에 의해 $A^2 - 2A - 3I = O$이다.</p>
+        <p>이제 $A^{2024}$를 구하자.</p>
+        <p>- $t^{2024} = (t^2 - 2t - 3)q(t) + at + b$ $= (t-3)(t+1)q(t) + at + b$ :</p>
+        <p>$t = -1$을 대입하면 $-a + b = 1$이다. 또한 $t = 3$을 대입하면 $3a + b = 3^{2024}$이다.</p>
+        <p>따라서</p>
+        <div class="math-display">$$a = \frac{3^{2024} - 1}{4} \ \text{이고} \ b = \frac{3^{2024} + 3}{4}$$</div>
+        <p>- $A^{2024} = aA + bI$</p>
+        <div class="math-display">$$\begin{aligned} &amp;= \frac{3^{2024} - 1}{4}\begin{pmatrix} 1 &amp; -2 \\ -2 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad + \frac{3^{2024} + 3}{4}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} \dfrac{3^{2024} + 1}{2} &amp; \dfrac{-3^{2024} + 1}{2} \\[8pt] \dfrac{-3^{2024} + 1}{2} &amp; \dfrac{3^{2024} + 1}{2} \end{pmatrix}. \end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be such that $T(a,b) = (a - 2b, -2a + b)$.</p>
+        <p>For $\beta = \{e_1, e_2\}$, we have</p>
+        <div class="math-display">$$A := [T]_\beta = \begin{pmatrix} 1 &amp; -2 \\ -2 &amp; 1 \end{pmatrix}.$$</div>
+        <p>Thus the characteristic polynomial of $T$ is</p>
+        <div class="math-display">$$\begin{aligned} \det(A - tI) &amp;= \det\begin{pmatrix} 1-t &amp; -2 \\ -2 &amp; 1-t \end{pmatrix} \\[2pt] &amp;= t^2 - 2t - 3. \end{aligned}$$</div>
+        <p>Thus, by Cayley-Hamilton, we have $A^2 - 2A - 3I = O$.</p>
+        <p>Now, find $A^{2024}$.</p>
+        <p>- $t^{2024} = (t^2 - 2t - 3)q(t) + at + b$ $= (t-3)(t+1)q(t) + at + b$ :</p>
+        <p>If $t = -1$, then $-a + b = 1$. Also if $t = 3$, then $3a + b = 3^{2024}$.</p>
+        <p>Thus</p>
+        <div class="math-display">$$a = \frac{3^{2024} - 1}{4} \ \text{ and } \ b = \frac{3^{2024} + 3}{4}$$</div>
+        <p>- $A^{2024} = aA + bI$</p>
+        <div class="math-display">$$\begin{aligned} &amp;= \frac{3^{2024} - 1}{4}\begin{pmatrix} 1 &amp; -2 \\ -2 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad + \frac{3^{2024} + 3}{4}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} \dfrac{3^{2024} + 1}{2} &amp; \dfrac{-3^{2024} + 1}{2} \\[8pt] \dfrac{-3^{2024} + 1}{2} &amp; \dfrac{3^{2024} + 1}{2} \end{pmatrix}. \end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6–7 · Slide p.22–26 ═══════════ -->
+
+<!-- L6-7 p22–26 Example 8 (p23 하단부터 Example 8. (Continued); p24–26 은 한국어 소제목 「A의 Diagonalization을 이용하는 방법」) — Q^{-1} (1,3) 성분·A^9 (1,3) 성분 오류 → en 말미 Note -->
+<div class="card exam-card" id="c4-21">
+  <div class="card-head">
+    <span class="exam-num">EXAM 8</span>
+    <span class="exam-title">케일리-해밀턴 정리와 대각화를 이용한 $A^{10}$의 계산 <em>Computing $A^{10}$ by the Cayley–Hamilton Theorem and by Diagonalization</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$가 $T(f(x)) = f(0)x^2 + f'(1)x + f''(-1)$로 주어졌다고 하자.</p>
+        <p>$\beta = \{1, x, x^2\}$에 대하여 $A = [T]_\beta$라 하자. 이때 $A^{10}$을 구하라.</p>
+        <p><strong>(1)</strong> $T(1) = x^2$, $T(x) = x$, $T(x^2) = 2x + 2$</p>
+        <p>따라서 다음이 성립한다.</p>
+        <div class="math-display">$$A = [T]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>그러므로 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} \det(A - tI) &amp;= \det\begin{pmatrix} -t &amp; 0 &amp; 2 \\ 0 &amp; 1-t &amp; 2 \\ 1 &amp; 0 &amp; -t \end{pmatrix} \\[4pt] &amp;= -t(t^2 - t) + 2(t-1) \\[4pt] &amp;= -(t^3 - t^2 - 2t + 2). \end{aligned}$$</div>
+        <p><strong>(2)</strong> 케일리-해밀턴 정리에 의해 $A^3 - A^2 - 2A + 2I_3 = O_{3 \times 3}$이다.</p>
+        <p>따라서 $A^3 = A^2 + 2A - 2I_3$이다. 그러면</p>
+        <div class="math-display">$$\begin{gathered} A^4 = A^3 + 2A^2 - 2A = 3A^2 - 2I_3 \ \text{이고} \\[4pt] A^5 = 3A^3 - 2A = 3A^2 + 4A - 6I_3. \end{gathered}$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned} A^{10} &amp;= 9A^4 + 16A^2 + 36I_3 + 24A^3 - 36A^2 - 48A \\[4pt] &amp;= 9(3A^2 - 2I_3) + 16A^2 + 36I_3 \\[4pt] &amp;\qquad + 24(A^2 + 2A - 2I_3) - 36A^2 - 48A \\[4pt] &amp;= 31A^2 - 30I_3. \end{aligned}$$</div>
+        <p><em>(계속)</em></p>
+        <p><strong>(3)</strong> $A$가 다음과 같으므로</p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>다음이 성립하고</p>
+        <div class="math-display">$$\begin{aligned} A^2 &amp;= \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}, \end{aligned}$$</div>
+        <p>따라서 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} A^{10} &amp;= 31A^2 - 30I_3 \\[4pt] &amp;= 31\begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 2 \end{pmatrix} - 30\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 32 &amp; 0 &amp; 0 \\ 62 &amp; 1 &amp; 62 \\ 0 &amp; 0 &amp; 32 \end{pmatrix}. \end{aligned}$$</div>
+        <p><strong>[$A$의 대각화를 이용하는 방법]</strong></p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det(A - tI) = \det\begin{pmatrix} -t &amp; 0 &amp; 2 \\ 0 &amp; 1-t &amp; 2 \\ 1 &amp; 0 &amp; -t \end{pmatrix} \\[4pt] &amp;= t^2(1-t) - 2(1-t) = (1-t)(t^2 - 2) \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = 1 \ : \ &amp;\begin{pmatrix} -1 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; -1 \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A - I) \\[4pt] &amp;\qquad = \left\{ y\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \ \middle|\ y \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = \sqrt{2} \ : \ &amp;\begin{pmatrix} -\sqrt{2} &amp; 0 &amp; 2 \\ 0 &amp; 1-\sqrt{2} &amp; 2 \\ 1 &amp; 0 &amp; -\sqrt{2} \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A - \sqrt{2}I) \\[4pt] &amp;\qquad = \left\{ z\begin{pmatrix} \sqrt{2} \\ 2+2\sqrt{2} \\ 1 \end{pmatrix} \ \middle|\ z \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = -\sqrt{2} \ : \ &amp;\begin{pmatrix} \sqrt{2} &amp; 0 &amp; 2 \\ 0 &amp; 1+\sqrt{2} &amp; 2 \\ 1 &amp; 0 &amp; \sqrt{2} \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A + \sqrt{2}I) \\[4pt] &amp;\qquad = \left\{ z\begin{pmatrix} -\sqrt{2} \\ 2-2\sqrt{2} \\ 1 \end{pmatrix} \ \middle|\ z \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} &amp;\Rightarrow \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; -\sqrt{2} \end{pmatrix} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} &amp;\Rightarrow \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; -\sqrt{2} \end{pmatrix} \\[4pt] &amp;\qquad \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}^{-1} \end{aligned}$$</div>
+        <p>다음이 성립하므로</p>
+        <div class="math-display">$$\begin{aligned} &amp;\begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}^{-1} \\[4pt] &amp;\quad = \begin{pmatrix} -2 &amp; 1 &amp; -2 \\ \dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \\ -\dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \end{pmatrix}, \end{aligned}$$</div>
+        <p>다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} &amp;\begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^n \\[4pt] &amp;\quad = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2^n} &amp; 0 \\ 0 &amp; 0 &amp; (-1)^n\sqrt{2^n} \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} -2 &amp; 1 &amp; -2 \\ \dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \\ -\dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \end{pmatrix} \\[4pt] &amp;\quad = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} -2 &amp; 1 &amp; -2 \\ \sqrt{2^{n-3}} &amp; 0 &amp; \sqrt{2^{n-2}} \\ (-1)^{n+1}\sqrt{2^{n-3}} &amp; 0 &amp; (-1)^n\sqrt{2^{n-2}} \end{pmatrix} \end{aligned}$$</div>
+        <div class="math-display">$$= \begin{pmatrix} \delta_n\sqrt{2^{n-2}} &amp; 0 &amp; \delta_{n+1}\sqrt{2^{n-1}} \\ \begin{gathered} -2 + \delta_{n+1}\sqrt{2^{n-1}} \\ {}+ \delta_n\sqrt{2^n} \end{gathered} &amp; 1 &amp; \begin{gathered} -2 + \delta_{n+1}\sqrt{2^{n+1}} \\ {}+ \delta_n\sqrt{2^n} \end{gathered} \\ \delta_{n+1}\sqrt{2^{n-3}} &amp; 0 &amp; \delta_n\sqrt{2^{n-2}} \end{pmatrix}$$</div>
+        <p>여기서 $\delta_k := 1 + (-1)^k$이다.</p>
+        <p>예를 들어</p>
+        <div class="math-display">$$\begin{gathered} \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^9 = \begin{pmatrix} 0 &amp; 0 &amp; 32 \\ 30 &amp; 1 &amp; 62 \\ 16 &amp; 0 &amp; 0 \end{pmatrix} \ \text{이고} \\[4pt] \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^{10} = \begin{pmatrix} 32 &amp; 0 &amp; 0 \\ 62 &amp; 1 &amp; 62 \\ 0 &amp; 0 &amp; 32 \end{pmatrix}. \end{gathered}$$</div>
+        <p><em>역주.</em> 슬라이드 원문의 두 가지 오류를 바로잡아 옮겼다(영문 패널은 원문 그대로). (i) “다음이 성립하므로” 뒤의 역행렬과, $A^n$의 공식에서 마지막 인자로 다시 쓰인 같은 행렬은 원문에서 $(1,3)$ 성분이 $2$로 인쇄되어 있으나, $Q = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}$에 대하여 $Q^{-1}$의 $(1,3)$ 성분은 $-2$이다($-2$이면 $QQ^{-1} = I_3$를 직접 확인할 수 있다). 두 곳 모두 $-2$로 옮겼으며, 마지막 두 인자를 곱해 놓은 다음 줄은 원문에서도 이미 올바른 값 $-2$를 쓰고 있다. (ii) “예를 들어” 줄에서 $A^9$의 $(1,3)$ 성분은 $16$이 아니라 $32$이다. 닫힌 공식에 의해 $\delta_{10}\sqrt{2^{8}} = 2 \cdot 16 = 32$이므로 $A^9 = \begin{pmatrix} 0 &amp; 0 &amp; 32 \\ 30 &amp; 1 &amp; 62 \\ 16 &amp; 0 &amp; 0 \end{pmatrix}$이고, 실제로 $A \cdot A^9$는 (3)에서 구한 $A^{10}$과 같다. $A^n$의 닫힌 공식과 $A^{10}$의 값은 옳다. 한편 둘째 방법의 소제목은 슬라이드에 한국어로 인쇄되어 있었다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : P_2(\mathbb{R}) \to P_2(\mathbb{R})$ be such that $T(f(x)) = f(0)x^2 + f'(1)x + f''(-1)$.</p>
+        <p>For $\beta = \{1, x, x^2\}$, let $A = [T]_\beta$. Then find $A^{10}$.</p>
+        <p><strong>(1)</strong> $T(1) = x^2$, $T(x) = x$, $T(x^2) = 2x + 2$</p>
+        <p>Thus</p>
+        <div class="math-display">$$A = [T]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>and hence</p>
+        <div class="math-display">$$\begin{aligned} \det(A - tI) &amp;= \det\begin{pmatrix} -t &amp; 0 &amp; 2 \\ 0 &amp; 1-t &amp; 2 \\ 1 &amp; 0 &amp; -t \end{pmatrix} \\[4pt] &amp;= -t(t^2 - t) + 2(t-1) \\[4pt] &amp;= -(t^3 - t^2 - 2t + 2). \end{aligned}$$</div>
+        <p><strong>(2)</strong> By Cayley-Hamilton Theorem, we have $A^3 - A^2 - 2A + 2I_3 = O_{3 \times 3}$.</p>
+        <p>Thus $A^3 = A^2 + 2A - 2I_3$. Then</p>
+        <div class="math-display">$$\begin{gathered} A^4 = A^3 + 2A^2 - 2A = 3A^2 - 2I_3 \ \text{ and} \\[4pt] A^5 = 3A^3 - 2A = 3A^2 + 4A - 6I_3. \end{gathered}$$</div>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned} A^{10} &amp;= 9A^4 + 16A^2 + 36I_3 + 24A^3 - 36A^2 - 48A \\[4pt] &amp;= 9(3A^2 - 2I_3) + 16A^2 + 36I_3 \\[4pt] &amp;\qquad + 24(A^2 + 2A - 2I_3) - 36A^2 - 48A \\[4pt] &amp;= 31A^2 - 30I_3. \end{aligned}$$</div>
+        <p><em>(Continued)</em></p>
+        <p><strong>(3)</strong> Since</p>
+        <div class="math-display">$$A = \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$</div>
+        <p>and so</p>
+        <div class="math-display">$$\begin{aligned} A^2 &amp;= \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}, \end{aligned}$$</div>
+        <p>it follows that</p>
+        <div class="math-display">$$\begin{aligned} A^{10} &amp;= 31A^2 - 30I_3 \\[4pt] &amp;= 31\begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 2 \end{pmatrix} - 30\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 32 &amp; 0 &amp; 0 \\ 62 &amp; 1 &amp; 62 \\ 0 &amp; 0 &amp; 32 \end{pmatrix}. \end{aligned}$$</div>
+        <p><strong>[Method using the diagonalization of $A$]</strong></p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det(A - tI) = \det\begin{pmatrix} -t &amp; 0 &amp; 2 \\ 0 &amp; 1-t &amp; 2 \\ 1 &amp; 0 &amp; -t \end{pmatrix} \\[4pt] &amp;= t^2(1-t) - 2(1-t) = (1-t)(t^2 - 2) \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = 1 \ : \ &amp;\begin{pmatrix} -1 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; -1 \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A - I) \\[4pt] &amp;\qquad = \left\{ y\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \ \middle|\ y \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = \sqrt{2} \ : \ &amp;\begin{pmatrix} -\sqrt{2} &amp; 0 &amp; 2 \\ 0 &amp; 1-\sqrt{2} &amp; 2 \\ 1 &amp; 0 &amp; -\sqrt{2} \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A - \sqrt{2}I) \\[4pt] &amp;\qquad = \left\{ z\begin{pmatrix} \sqrt{2} \\ 2+2\sqrt{2} \\ 1 \end{pmatrix} \ \middle|\ z \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} t = -\sqrt{2} \ : \ &amp;\begin{pmatrix} \sqrt{2} &amp; 0 &amp; 2 \\ 0 &amp; 1+\sqrt{2} &amp; 2 \\ 1 &amp; 0 &amp; \sqrt{2} \end{pmatrix}\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \\[4pt] &amp;\Rightarrow N(A + \sqrt{2}I) \\[4pt] &amp;\qquad = \left\{ z\begin{pmatrix} -\sqrt{2} \\ 2-2\sqrt{2} \\ 1 \end{pmatrix} \ \middle|\ z \in \mathbb{R} \right\} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} &amp;\Rightarrow \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; -\sqrt{2} \end{pmatrix} \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} &amp;\Rightarrow \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; -\sqrt{2} \end{pmatrix} \\[4pt] &amp;\qquad \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}^{-1} \end{aligned}$$</div>
+        <p>Since</p>
+        <div class="math-display">$$\begin{aligned} &amp;\begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}^{-1} \\[4pt] &amp;\quad = \begin{pmatrix} -2 &amp; 1 &amp; 2 \\ \dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \\ -\dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \end{pmatrix}, \end{aligned}$$</div>
+        <p>we have</p>
+        <div class="math-display">$$\begin{aligned} &amp;\begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^n \\[4pt] &amp;\quad = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \sqrt{2^n} &amp; 0 \\ 0 &amp; 0 &amp; (-1)^n\sqrt{2^n} \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} -2 &amp; 1 &amp; 2 \\ \dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \\ -\dfrac{\sqrt{2}}{4} &amp; 0 &amp; \dfrac{1}{2} \end{pmatrix} \\[4pt] &amp;\quad = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix} \\[4pt] &amp;\qquad\quad \begin{pmatrix} -2 &amp; 1 &amp; -2 \\ \sqrt{2^{n-3}} &amp; 0 &amp; \sqrt{2^{n-2}} \\ (-1)^{n+1}\sqrt{2^{n-3}} &amp; 0 &amp; (-1)^n\sqrt{2^{n-2}} \end{pmatrix} \end{aligned}$$</div>
+        <div class="math-display">$$= \begin{pmatrix} \delta_n\sqrt{2^{n-2}} &amp; 0 &amp; \delta_{n+1}\sqrt{2^{n-1}} \\ \begin{gathered} -2 + \delta_{n+1}\sqrt{2^{n-1}} \\ {}+ \delta_n\sqrt{2^n} \end{gathered} &amp; 1 &amp; \begin{gathered} -2 + \delta_{n+1}\sqrt{2^{n+1}} \\ {}+ \delta_n\sqrt{2^n} \end{gathered} \\ \delta_{n+1}\sqrt{2^{n-3}} &amp; 0 &amp; \delta_n\sqrt{2^{n-2}} \end{pmatrix}$$</div>
+        <p>where $\delta_k := 1 + (-1)^k$.</p>
+        <p>For example,</p>
+        <div class="math-display">$$\begin{gathered} \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^9 = \begin{pmatrix} 0 &amp; 0 &amp; 16 \\ 30 &amp; 1 &amp; 62 \\ 16 &amp; 0 &amp; 0 \end{pmatrix} \ \text{ and} \\[4pt] \begin{pmatrix} 0 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}^{10} = \begin{pmatrix} 32 &amp; 0 &amp; 0 \\ 62 &amp; 1 &amp; 62 \\ 0 &amp; 0 &amp; 32 \end{pmatrix}. \end{gathered}$$</div>
+        <p><em>Note.</em> (i) On the slide the heading of the second method, rendered here as &ldquo;[Method using the diagonalization of $A$]&rdquo;, is printed in Korean. (ii) The inverse matrix after &ldquo;Since&rdquo;, and the same matrix written again as the last factor in the formula for $A^n$, are transcribed exactly as printed, but the $(1,3)$ entry of $Q^{-1}$ should be $-2$, not $2$ (with $-2$ one checks $QQ^{-1} = I_3$ directly, where $Q = \begin{pmatrix} 0 &amp; \sqrt{2} &amp; -\sqrt{2} \\ 1 &amp; 2+2\sqrt{2} &amp; 2-2\sqrt{2} \\ 0 &amp; 1 &amp; 1 \end{pmatrix}$); the next line, where the last two factors have been multiplied out, already uses the correct value $-2$. (iii) In the &ldquo;For example&rdquo; line the $(1,3)$ entry of $A^9$ should be $32$, not $16$: the closed formula gives $\delta_{10}\sqrt{2^{8}} = 2 \cdot 16 = 32$, so $A^9 = \begin{pmatrix} 0 &amp; 0 &amp; 32 \\ 30 &amp; 1 &amp; 62 \\ 16 &amp; 0 &amp; 0 \end{pmatrix}$, and indeed $A \cdot A^9$ then equals the matrix $A^{10}$ found in (3). The closed formula for $A^n$ and the value of $A^{10}$ are correct.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>연습문제 · Exercises (Friedberg §5.4)</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="e4-1">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-1</span>
+    <span class="ex-title">참·거짓 판정 <em>True or False</em><span class="src-ref">Friedberg §5.4 #1 (a)–(g)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 각 명제의 참·거짓을 판정하고 그 이유를 설명하라.</p>
+        <p><strong>(a)</strong> 어떤 선형연산자 $T$는 $T$-불변 부분공간을 전혀 가지지 않는다.</p>
+        <p><strong>(b)</strong> $T$를 유한차원 벡터공간 $V$의 선형연산자라 하고, $W$를 $V$의 $T$-불변 부분공간이라 하자. 그러면 제한 $T_W$의 특성다항식은 $T$의 특성다항식의 약수이다.</p>
+        <p><strong>(c)</strong> $T$를 유한차원 벡터공간 $V$의 선형연산자라 하고, $v, w \in V$라 하자. $W$를 $v$가 생성하는 $T$-순환 부분공간, $W'$을 $w$가 생성하는 $T$-순환 부분공간이라 하자. $W = W'$이면 반드시 $v = w$이다.</p>
+        <p><strong>(d)</strong> $T$를 유한차원 벡터공간 $V$의 선형연산자라 하자. 모든 $v \in V$에 대하여 $v$가 생성하는 $T$-순환 부분공간은 $T(v)$가 생성하는 $T$-순환 부분공간과 같다.</p>
+        <p><strong>(e)</strong> $T$가 $n$차원 벡터공간의 선형연산자이면, $g(T) = T_0$ (영사상)를 만족하는 $n$차 다항식 $g(t)$가 존재한다.</p>
+        <p><strong>(f)</strong> 최고차항의 계수가 $(-1)^n$인 모든 $n$차 다항식은 어떤 선형연산자의 특성다항식으로 나타난다.</p>
+        <p><strong>(g)</strong> $T$를 유한차원 벡터공간 $V$의 선형연산자라 하고, $V$가 각각 $T$-불변인 $k$개의 부분공간의 직합이라 하자. 그러면 $[T]_\beta$가 $k$개 행렬의 직합이 되는 $V$의 순서기저 $\beta$가 존재한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 거짓. $\{0\}$과 $V$ 자신은 모든 선형연산자 $T$에 대해 $T$-불변 부분공간이다($T(0) = 0$이고 $T(V) \subseteq V$). 따라서 $T$-불변 부분공간이 하나도 없는 연산자는 존재하지 않는다.</p>
+        <p><strong>(b)</strong> 참. $V$가 유한차원이고 $W$가 $T$-불변이면, <a href="#c4-12">정리 5.21</a>에 의해 $T_W$의 특성다항식은 $T$의 특성다항식을 나눈다.</p>
+        <p><strong>(c)</strong> 거짓. $V = \mathbb{R}^2$, $T(a, b) = (b, a)$, $v = (1, 0)$, $w = (0, 1)$이라 하자. $T(v) = (0, 1) = w$이고 $T(w) = (1, 0) = v$이다. 그러므로 $v$가 생성하는 $T$-순환 부분공간은 $v, T(v) = w$를 포함하여 $\mathbb{R}^2$이고, $w$가 생성하는 것도 $w, T(w) = v$를 포함하여 $\mathbb{R}^2$이다. 두 순환 부분공간은 같지만 $v \neq w$이다.</p>
+        <p><strong>(d)</strong> 거짓. $V = \mathbb{R}^2$, $T(a, b) = (0, a)$, $v = (1, 0)$이라 하자. $T(v) = (0, 1)$이고 $T^2(v) = T(0, 1) = (0, 0)$이므로 $k \ge 2$이면 $T^k(v) = 0$이다. 따라서 $v$가 생성하는 $T$-순환 부분공간은 $\operatorname{span}\{(1, 0), (0, 1)\} = \mathbb{R}^2$이다. 한편 $T(v) = (0, 1)$은 영벡터가 아니고 $T(0, 1) = 0$이므로, $T(v)$가 생성하는 $T$-순환 부분공간은 $\operatorname{span}\{(0, 1)\}$, 즉 $y$축이다. 두 공간은 다르다. ($v$와 $T(v)$가 모두 영벡터가 아니므로 두 순환 부분공간 모두 <a href="#c4-5">정의와 주의</a> (1)의 정의에 그대로 들어맞는다.)</p>
+        <p><strong>(e)</strong> 참. $V$가 $n$차원이고 $f(t)$가 $T$의 특성다항식이면 $f$의 차수는 $n$이다. 케일리-해밀턴 정리(<a href="#c4-9">정리 5.23</a>)에 의해 $f(T) = T_0$이므로 $g = f$가 조건을 만족한다.</p>
+        <p><strong>(f)</strong> 참. $n \ge 1$이고 $f(t) = (-1)^n (a_0 + a_1 t + \cdots + a_{n-1} t^{n-1} + t^n)$이라 하자. $n \times n$ 행렬 $A$를 $j = 1, \ldots, n-1$에 대해 $j$번째 열이 $e_{j+1}$, $n$번째 열이 $(-a_0, -a_1, \ldots, -a_{n-1})^t$인 행렬로 정의한다(동반행렬). 연산자 $L_A$에 대해 $L_A(e_j) = e_{j+1}$ ($j \lt n$)이므로 $z = e_1$이면 $L_A^{j}(z) = e_{j+1}$ ($0 \le j \le n-1$)이고, $z$가 생성하는 $L_A$-순환 부분공간 $W$는 $e_1, \ldots, e_n$을 포함하여 $F^n$ 전체이다. 따라서 $\dim W = n$이고 제한 $(L_A)_W$는 $L_A$ 자신이다. 또 $L_A(e_n) = -a_0 e_1 - \cdots - a_{n-1} e_n$, 즉 $a_0 z + a_1 L_A(z) + \cdots + a_{n-1} L_A^{n-1}(z) + L_A^n(z) = 0$이다. 따라서 <a href="#c4-17">정리 5.22</a> (2)에 의해 $L_A$의 특성다항식은 $(-1)^n (a_0 + a_1 t + \cdots + a_{n-1} t^{n-1} + t^n) = f(t)$이다. (이는 <a href="#c4-17">정리 5.22</a>의 증명에서 주장 (★)로 계산한 동반행렬의 행렬식과 같은 내용이다.) 따라서 $f$는 $L_A$의 특성다항식이다.</p>
+        <p><strong>(g)</strong> 참. 각 $W_i$가 $T$-불변이라 하고, $\beta_i$를 $W_i$의 순서기저, $\beta$를 $\beta_1, \ldots, \beta_k$를 차례로 이어 붙인 것이라 하자. $V = W_1 \oplus \cdots \oplus W_k$이므로 $\beta$는 $V$의 순서기저이다. $\beta_i$의 벡터 $v$에 대해 $T(v) \in W_i$이므로 $T(v)$는 $\beta_i$의 벡터들만의 일차결합이고, 따라서 $[T]_\beta$에서 $v$에 대응하는 열은 $\beta_i$에 대응하는 행 이외에서 모두 $0$이다. 그러므로 $[T]_\beta = \operatorname{diag}\big([T_{W_1}]_{\beta_1}, \ldots, [T_{W_k}]_{\beta_k}\big)$ 꼴의 블록대각행렬, 즉 $k$개 행렬의 직합이다.</p>
+        <p>답: (a) 거짓, (b) 참, (c) 거짓, (d) 거짓, (e) 참, (f) 참, (g) 참이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether each statement below is true or false, and justify your answer.</p>
+        <p><strong>(a)</strong> Some linear operator $T$ admits no $T$-invariant subspace at all.</p>
+        <p><strong>(b)</strong> Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $W$ be a subspace of $V$ that is $T$-invariant. Then the characteristic polynomial of the restriction $T_W$ is a divisor of the characteristic polynomial of $T$.</p>
+        <p><strong>(c)</strong> Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $v, w \in V$. Write $W$ for the $T$-cyclic subspace generated by $v$ and $W'$ for the $T$-cyclic subspace generated by $w$. If $W = W'$, then necessarily $v = w$.</p>
+        <p><strong>(d)</strong> Let $T$ be a linear operator on a finite-dimensional vector space $V$. For every $v \in V$, the $T$-cyclic subspace generated by $v$ coincides with the $T$-cyclic subspace generated by $T(v)$.</p>
+        <p><strong>(e)</strong> If $T$ is a linear operator on a vector space of dimension $n$, then some polynomial $g(t)$ of degree $n$ satisfies $g(T) = T_0$, the zero operator.</p>
+        <p><strong>(f)</strong> Every polynomial of degree $n$ whose leading coefficient is $(-1)^n$ arises as the characteristic polynomial of some linear operator.</p>
+        <p><strong>(g)</strong> Let $T$ be a linear operator on a finite-dimensional vector space $V$, and suppose that $V$ is the direct sum of $k$ subspaces, each of which is $T$-invariant. Then $V$ has an ordered basis $\beta$ for which $[T]_\beta$ is a direct sum of $k$ matrices.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> False. For every linear operator $T$, the subspaces $\{0\}$ and $V$ are $T$-invariant (since $T(0) = 0$ and $T(V) \subseteq V$). So there is no operator without a $T$-invariant subspace.</p>
+        <p><strong>(b)</strong> True. If $V$ is finite-dimensional and $W$ is $T$-invariant, then by <a href="#c4-12">Theorem 5.21</a> the characteristic polynomial of $T_W$ divides the characteristic polynomial of $T$.</p>
+        <p><strong>(c)</strong> False. Let $V = \mathbb{R}^2$, $T(a, b) = (b, a)$, $v = (1, 0)$, $w = (0, 1)$. Then $T(v) = (0, 1) = w$ and $T(w) = (1, 0) = v$. So the $T$-cyclic subspace generated by $v$ contains $v$ and $T(v) = w$, hence is all of $\mathbb{R}^2$; likewise the one generated by $w$ contains $w$ and $T(w) = v$, hence is $\mathbb{R}^2$. The two cyclic subspaces are equal but $v \neq w$.</p>
+        <p><strong>(d)</strong> False. Let $V = \mathbb{R}^2$, $T(a, b) = (0, a)$, $v = (1, 0)$. Then $T(v) = (0, 1)$ and $T^2(v) = T(0, 1) = (0, 0)$, so $T^k(v) = 0$ for $k \ge 2$. Hence the $T$-cyclic subspace generated by $v$ is $\operatorname{span}\{(1, 0), (0, 1)\} = \mathbb{R}^2$. On the other hand, $T(v) = (0, 1)$ is nonzero and $T(0, 1) = 0$, so the $T$-cyclic subspace generated by $T(v)$ is $\operatorname{span}\{(0, 1)\}$, the $y$-axis. The two subspaces differ. (Both $v$ and $T(v)$ are nonzero, so both cyclic subspaces fall directly under the definition in <a href="#c4-5">Definition and Remark</a> (1).)</p>
+        <p><strong>(e)</strong> True. If $V$ is $n$-dimensional and $f(t)$ is the characteristic polynomial of $T$, then $\deg f = n$. By the Cayley–Hamilton theorem (<a href="#c4-9">Theorem 5.23</a>), $f(T) = T_0$, so $g = f$ works.</p>
+        <p><strong>(f)</strong> True. Let $n \ge 1$ and $f(t) = (-1)^n (a_0 + a_1 t + \cdots + a_{n-1} t^{n-1} + t^n)$. Define the $n \times n$ matrix $A$ (the companion matrix) whose $j$th column is $e_{j+1}$ for $j = 1, \ldots, n-1$ and whose $n$th column is $(-a_0, -a_1, \ldots, -a_{n-1})^t$. Then $L_A(e_j) = e_{j+1}$ for $j \lt n$, so with $z = e_1$ we get $L_A^{j}(z) = e_{j+1}$ for $0 \le j \le n-1$; the $L_A$-cyclic subspace $W$ generated by $z$ contains $e_1, \ldots, e_n$, so it is all of $F^n$. Hence $\dim W = n$ and the restriction $(L_A)_W$ is $L_A$ itself. Moreover $L_A(e_n) = -a_0 e_1 - \cdots - a_{n-1} e_n$, i.e. $a_0 z + a_1 L_A(z) + \cdots + a_{n-1} L_A^{n-1}(z) + L_A^n(z) = 0$. By <a href="#c4-17">Theorem 5.22</a> (2) the characteristic polynomial of $L_A$ is $(-1)^n (a_0 + a_1 t + \cdots + a_{n-1} t^{n-1} + t^n) = f(t)$. (This is the same companion-matrix determinant computed in Claim (★) of the proof of <a href="#c4-17">Theorem 5.22</a>.) Hence $f$ is the characteristic polynomial of $L_A$.</p>
+        <p><strong>(g)</strong> True. Suppose each $W_i$ is $T$-invariant, let $\beta_i$ be an ordered basis of $W_i$, and let $\beta$ be $\beta_1, \ldots, \beta_k$ concatenated. Since $V = W_1 \oplus \cdots \oplus W_k$, $\beta$ is an ordered basis of $V$. For a vector $v$ in $\beta_i$ we have $T(v) \in W_i$, so $T(v)$ is a linear combination of the vectors of $\beta_i$ alone; hence the column of $[T]_\beta$ belonging to $v$ is zero outside the rows belonging to $\beta_i$. Therefore $[T]_\beta = \operatorname{diag}\big([T_{W_1}]_{\beta_1}, \ldots, [T_{W_k}]_{\beta_k}\big)$ is a block diagonal matrix, i.e. the direct sum of $k$ matrices.</p>
+        <p>Answers: (a) False, (b) True, (c) False, (d) False, (e) True, (f) True, (g) True.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="e4-2">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-2</span>
+    <span class="ex-title">부분공간의 $T$-불변성 판정 <em>Testing Subspaces for $T$-Invariance</em><span class="src-ref">Friedberg §5.4 #2 (c), (e)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 각 경우에서 $T$는 벡터공간 $V$의 선형연산자이고 $W$는 $V$의 부분공간이다. $W$가 $T$-불변인지 판정하라.</p>
+        <p><strong>(c)</strong> $V = \mathbb{R}^3$이고</p>
+        <div class="math-display">$$\begin{gathered} T(a,b,c) = (a+b+c,\ a+b+c,\ a+b+c), \\[2pt] W = \{(t,t,t) : t \in \mathbb{R}\}. \end{gathered}$$</div>
+        <p><strong>(e)</strong> $V = M_{2 \times 2}(\mathbb{R})$이고</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}A, \qquad W = \{A \in V : A^t = A\}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(c)</strong> $T$-불변이다. $W$의 임의의 원소 $(t, t, t)$에 대해 $T(t, t, t) = (t+t+t,\, t+t+t,\, t+t+t) = (3t, 3t, 3t)$이고, 이는 $W$의 원소이다. 따라서 $T(W) \subseteq W$이다.</p>
+        <p><strong>(e)</strong> $T$-불변이 아니다. $B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}$는 대칭이므로 $B \in W$이다. 그런데</p>
+        <div class="math-display">$$T(B) = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix} = \begin{pmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{pmatrix}$$</div>
+        <p>$T(B)$의 전치는 $\begin{pmatrix} 0 &amp; 1 \\ 2 &amp; 0 \end{pmatrix} \neq T(B)$이므로 $T(B)$는 대칭이 아니다. 즉 $T(B) \notin W$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In each case below, $T$ is a linear operator on the vector space $V$ and $W$ is a subspace of $V$. Decide whether $W$ is $T$-invariant.</p>
+        <p><strong>(c)</strong> $V = \mathbb{R}^3$, with</p>
+        <div class="math-display">$$\begin{gathered} T(a,b,c) = (a+b+c,\ a+b+c,\ a+b+c), \\[2pt] W = \{(t,t,t) : t \in \mathbb{R}\}. \end{gathered}$$</div>
+        <p><strong>(e)</strong> $V = M_{2 \times 2}(\mathbb{R})$, with</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}A, \qquad W = \{A \in V : A^t = A\}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(c)</strong> $W$ is $T$-invariant. For an arbitrary element $(t, t, t)$ of $W$, $T(t, t, t) = (t+t+t,\, t+t+t,\, t+t+t) = (3t, 3t, 3t)$, which lies in $W$. Hence $T(W) \subseteq W$.</p>
+        <p><strong>(e)</strong> $W$ is not $T$-invariant. $B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}$ is symmetric, so $B \in W$. But</p>
+        <div class="math-display">$$T(B) = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix} = \begin{pmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+        <p>The transpose of $T(B)$ is $\begin{pmatrix} 0 &amp; 1 \\ 2 &amp; 0 \end{pmatrix} \neq T(B)$, so $T(B)$ is not symmetric. That is, $T(B) \notin W$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 6 -->
+<div class="card ex-card" id="e4-6">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-6</span>
+    <span class="ex-title">$T$-순환 부분공간의 순서기저 <em>Ordered Bases for $T$-Cyclic Subspaces</em><span class="src-ref">Friedberg §5.4 #6 (a), (d)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 각 경우에서 $T$는 벡터공간 $V$의 선형연산자이고 $z \in V$이다. $z$가 생성하는 $V$의 $T$-순환 부분공간의 순서기저를 구하라.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$이고</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$이고</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $T(a, b, c, d) = (a+b,\, b-c,\, a+c,\, a+d)$, $z = e_1 = (1, 0, 0, 0)$이다. 먼저 거듭제곱을 계산한다.</p>
+        <div class="math-display">$$\begin{aligned} T(z) &amp;= (1+0,\, 0-0,\, 1+0,\, 1+0) = (1, 0, 1, 1),\\ T^2(z) &amp;= T(1,0,1,1) = (1+0,\, 0-1,\, 1+1,\, 1+1) \\ &amp;= (1, -1, 2, 2),\\ T^3(z) &amp;= T(1,-1,2,2) = (1-1,\, -1-2,\, 1+2,\, 1+2) \\ &amp;= (0, -3, 3, 3). \end{aligned}$$</div>
+        <p>$z, T(z), T^2(z)$는 일차독립이다. 실제로 $x z + y T(z) + w T^2(z) = 0$이라 하면 둘째 성분에서 $-w = 0$, 셋째 성분에서 $y + 2w = 0$이므로 $w = 0$, $y = 0$이고, 첫째 성분에서 $x = 0$이다. 한편</p>
+        <div class="math-display">$$\begin{aligned} -3T(z) + 3T^2(z) &amp;= (-3, 0, -3, -3) + (3, -3, 6, 6) \\ &amp;= (0, -3, 3, 3) = T^3(z) \end{aligned}$$</div>
+        <p>이므로 $T^3(z) \in \operatorname{span}\{z, T(z), T^2(z)\}$이다. 따라서 <a href="#c4-5">정의와 주의</a> (3)에 의해 $W = \operatorname{span}\{z, T(z), T^2(z)\}$이고, 이 세 벡터가 일차독립이므로 $\dim W = 3$이며 순서기저는 다음과 같다.</p>
+        <div class="math-display">$$\{(1,0,0,0),\ (1,0,1,1),\ (1,-1,2,2)\}.$$</div>
+        <p><strong>(d)</strong> $T(A) = MA$, $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$, $z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$이다. 계산하면</p>
+        <div class="math-display">$$\begin{aligned} T(z) &amp;= \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}, \\[4pt] T^2(z) &amp;= \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix} = \begin{pmatrix} 3 &amp; 3 \\ 6 &amp; 6 \end{pmatrix} = 3T(z). \end{aligned}$$</div>
+        <p>$T^2(z) \in \operatorname{span}\{z, T(z)\}$이므로 <a href="#c4-5">정의와 주의</a> (3)에 의해 $W = \operatorname{span}\{z, T(z)\}$이다. $z$의 대각성분은 $0$이고 $T(z)$의 대각성분은 $1, 2$이므로 $T(z)$는 $z$의 상수배가 아니고, $z \neq 0$이므로 $z, T(z)$는 일차독립이다. 따라서 $\dim W = 2$이고 순서기저는 다음과 같다.</p>
+        <div class="math-display">$$\left\{\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix},\ \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\right\}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In each case below, $T$ is a linear operator on the vector space $V$ and $z \in V$. Find an ordered basis for the $T$-cyclic subspace of $V$ generated by $z$.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$, and</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$, with</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Here $T(a, b, c, d) = (a+b,\, b-c,\, a+c,\, a+d)$ and $z = e_1 = (1, 0, 0, 0)$. First compute the iterates.</p>
+        <div class="math-display">$$\begin{aligned} T(z) &amp;= (1+0,\, 0-0,\, 1+0,\, 1+0) = (1, 0, 1, 1),\\ T^2(z) &amp;= T(1,0,1,1) = (1+0,\, 0-1,\, 1+1,\, 1+1) \\ &amp;= (1, -1, 2, 2),\\ T^3(z) &amp;= T(1,-1,2,2) = (1-1,\, -1-2,\, 1+2,\, 1+2) \\ &amp;= (0, -3, 3, 3). \end{aligned}$$</div>
+        <p>The vectors $z, T(z), T^2(z)$ are linearly independent: if $x z + y T(z) + w T^2(z) = 0$, the second coordinate gives $-w = 0$, the third gives $y + 2w = 0$, so $w = 0$ and $y = 0$, and the first coordinate gives $x = 0$. Also</p>
+        <div class="math-display">$$\begin{aligned} -3T(z) + 3T^2(z) &amp;= (-3, 0, -3, -3) + (3, -3, 6, 6) \\ &amp;= (0, -3, 3, 3) = T^3(z), \end{aligned}$$</div>
+        <p>so $T^3(z) \in \operatorname{span}\{z, T(z), T^2(z)\}$. By <a href="#c4-5">Definition and Remark</a> (3), $W = \operatorname{span}\{z, T(z), T^2(z)\}$, and since these three vectors are linearly independent, $\dim W = 3$ and an ordered basis is</p>
+        <div class="math-display">$$\{(1,0,0,0),\ (1,0,1,1),\ (1,-1,2,2)\}.$$</div>
+        <p><strong>(d)</strong> Here $T(A) = MA$ with $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$ and $z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$. We compute</p>
+        <div class="math-display">$$\begin{aligned} T(z) &amp;= \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}, \\[4pt] T^2(z) &amp;= \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix} = \begin{pmatrix} 3 &amp; 3 \\ 6 &amp; 6 \end{pmatrix} = 3T(z). \end{aligned}$$</div>
+        <p>Since $T^2(z) \in \operatorname{span}\{z, T(z)\}$, <a href="#c4-5">Definition and Remark</a> (3) gives $W = \operatorname{span}\{z, T(z)\}$. The diagonal entries of $z$ are $0$ and those of $T(z)$ are $1, 2$, so $T(z)$ is not a multiple of $z$; as $z \neq 0$, the vectors $z, T(z)$ are linearly independent. Hence $\dim W = 2$ and an ordered basis is</p>
+        <div class="math-display">$$\left\{\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix},\ \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\right\}.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 9 -->
+<div class="card ex-card" id="e4-9">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-9</span>
+    <span class="ex-title">두 가지 방법으로 구하는 $T_W$의 특성다항식 <em>The Characteristic Polynomial of $T_W$ in Two Ways</em><span class="src-ref">Friedberg §5.4 #9 (a), (d)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 각 경우에서 $T$는 $V$의 선형연산자이고, $W$는 $z$가 생성하는 $V$의 $T$-순환 부분공간이다(<a href="#e4-6">EX 5.4-6</a> (a), (d)와 같은 연산자와 벡터). $T_W$의 특성다항식을 두 가지 방법으로 구하라. 먼저 <a href="#c4-17">정리 5.22</a>를 이용하고, 그다음 $W$의 순서기저 $\beta$에 대하여 행렬식 $\det([T_W]_\beta - tI)$로 직접 구하라.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$이고</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$이고</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $T(a,b,c,d) = (a+b,\, b-c,\, a+c,\, a+d)$, $z = e_1$, $W$는 $z$가 생성하는 $T$-순환 부분공간이다. <a href="#e4-6">EX 5.4-6</a>에서 $\dim W = 3$이고 $T^3(z) = 3T^2(z) - 3T(z)$이다.</p>
+        <p><em>방법 1 (정리 5.22).</em> $T^3(z) - 3T^2(z) + 3T(z) + 0 \cdot z = 0$이므로 $a_0 = 0$, $a_1 = 3$, $a_2 = -3$이다. $\dim W = 3$이므로 <a href="#c4-17">정리 5.22</a> (2)에 의해 $T_W$의 특성다항식은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} (-1)^3(a_0 + a_1 t + a_2 t^2 + t^3) &amp;= -(3t - 3t^2 + t^3) \\ &amp;= -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p><em>방법 2 (행렬식).</em> 순서기저 $\beta = \{z, T(z), T^2(z)\}$에 대해 $T_W(z) = T(z)$, $T_W(T(z)) = T^2(z)$, $T_W(T^2(z)) = T^3(z) = 0 \cdot z - 3T(z) + 3T^2(z)$이므로</p>
+        <div class="math-display">$$\begin{gathered} [T_W]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; -3 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}, \\[4pt] \det([T_W]_\beta - tI) = \begin{vmatrix} -t &amp; 0 &amp; 0 \\ 1 &amp; -t &amp; -3 \\ 0 &amp; 1 &amp; 3-t \end{vmatrix}. \end{gathered}$$</div>
+        <p>첫 행으로 전개하면 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{aligned} -t\big[(-t)(3-t) - (-3)(1)\big] &amp;= -t(t^2 - 3t + 3) \\ &amp;= -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p>두 방법의 결과가 일치한다.</p>
+        <p><strong>(d)</strong> $V = M_{2\times 2}(\mathbb{R})$, $T(A) = MA$, $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$, $z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$이다. <a href="#e4-6">EX 5.4-6</a>에서 $\dim W = 2$, $T^2(z) = 3T(z)$이다.</p>
+        <p><em>방법 1.</em> $T^2(z) - 3T(z) + 0 \cdot z = 0$이므로 $a_0 = 0$, $a_1 = -3$이다. $\dim W = 2$이므로 <a href="#c4-17">정리 5.22</a> (2)에 의해 $T_W$의 특성다항식은 $(-1)^2(a_0 + a_1 t + t^2) = t^2 - 3t$이다.</p>
+        <p><em>방법 2.</em> 순서기저 $\beta = \{z, T(z)\}$에 대해 $T_W(z) = 0\cdot z + 1 \cdot T(z)$, $T_W(T(z)) = 0 \cdot z + 3 T(z)$이므로</p>
+        <div class="math-display">$$\begin{gathered} [T_W]_\beta = \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 3 \end{pmatrix}, \\[4pt] \det([T_W]_\beta - tI) = \begin{vmatrix} -t &amp; 0 \\ 1 &amp; 3-t \end{vmatrix} = -t(3-t) = t^2 - 3t. \end{gathered}$$</div>
+        <p>두 방법의 결과가 일치한다.</p>
+        <p>답: (a) $-t^3 + 3t^2 - 3t$, (d) $t^2 - 3t$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In each case below, $T$ is a linear operator on $V$ and $W$ denotes the $T$-cyclic subspace of $V$ generated by $z$ (the same operators and vectors as in <a href="#e4-6">EX 5.4-6</a> (a), (d)). Compute the characteristic polynomial of $T_W$ in two different ways: first by means of <a href="#c4-17">Theorem 5.22</a>, and then directly, as the determinant $\det([T_W]_\beta - tI)$ for an ordered basis $\beta$ of $W$.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$, and</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$, with</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Here $V = \mathbb{R}^4$, $T(a,b,c,d) = (a+b,\, b-c,\, a+c,\, a+d)$, $z = e_1$, and $W$ is the $T$-cyclic subspace generated by $z$. From <a href="#e4-6">EX 5.4-6</a>, $\dim W = 3$ and $T^3(z) = 3T^2(z) - 3T(z)$.</p>
+        <p><em>Method 1 (Theorem 5.22).</em> Since $T^3(z) - 3T^2(z) + 3T(z) + 0 \cdot z = 0$, we have $a_0 = 0$, $a_1 = 3$, $a_2 = -3$. As $\dim W = 3$, <a href="#c4-17">Theorem 5.22</a> (2) shows that the characteristic polynomial of $T_W$ is</p>
+        <div class="math-display">$$\begin{aligned} (-1)^3(a_0 + a_1 t + a_2 t^2 + t^3) &amp;= -(3t - 3t^2 + t^3) \\ &amp;= -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p><em>Method 2 (determinant).</em> For the ordered basis $\beta = \{z, T(z), T^2(z)\}$, we have $T_W(z) = T(z)$, $T_W(T(z)) = T^2(z)$, and $T_W(T^2(z)) = T^3(z) = 0 \cdot z - 3T(z) + 3T^2(z)$, so</p>
+        <div class="math-display">$$\begin{gathered} [T_W]_\beta = \begin{pmatrix} 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; -3 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}, \\[4pt] \det([T_W]_\beta - tI) = \begin{vmatrix} -t &amp; 0 &amp; 0 \\ 1 &amp; -t &amp; -3 \\ 0 &amp; 1 &amp; 3-t \end{vmatrix}. \end{gathered}$$</div>
+        <p>Expanding along the first row gives</p>
+        <div class="math-display">$$\begin{aligned} -t\big[(-t)(3-t) - (-3)(1)\big] &amp;= -t(t^2 - 3t + 3) \\ &amp;= -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p>The two methods agree.</p>
+        <p><strong>(d)</strong> Here $V = M_{2\times 2}(\mathbb{R})$, $T(A) = MA$ with $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$, and $z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$. From <a href="#e4-6">EX 5.4-6</a>, $\dim W = 2$ and $T^2(z) = 3T(z)$.</p>
+        <p><em>Method 1.</em> Since $T^2(z) - 3T(z) + 0 \cdot z = 0$, we have $a_0 = 0$, $a_1 = -3$. As $\dim W = 2$, <a href="#c4-17">Theorem 5.22</a> (2) shows that the characteristic polynomial of $T_W$ is $(-1)^2(a_0 + a_1 t + t^2) = t^2 - 3t$.</p>
+        <p><em>Method 2.</em> For the ordered basis $\beta = \{z, T(z)\}$, $T_W(z) = 0\cdot z + 1 \cdot T(z)$ and $T_W(T(z)) = 0 \cdot z + 3 T(z)$, so</p>
+        <div class="math-display">$$\begin{gathered} [T_W]_\beta = \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 3 \end{pmatrix}, \\[4pt] \det([T_W]_\beta - tI) = \begin{vmatrix} -t &amp; 0 \\ 1 &amp; 3-t \end{vmatrix} = -t(3-t) = t^2 - 3t. \end{gathered}$$</div>
+        <p>The two methods agree.</p>
+        <p>Answers: (a) $-t^3 + 3t^2 - 3t$, (d) $t^2 - 3t$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 10 -->
+<div class="card ex-card" id="e4-10">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-10</span>
+    <span class="ex-title">$T_W$의 특성다항식은 $T$의 특성다항식을 나눈다 <em>The Characteristic Polynomial of $T_W$ Divides That of $T$</em><span class="src-ref">Friedberg §5.4 #10 (a), (d)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 $V$ 위의 각 선형연산자 $T$(<a href="#e4-6">EX 5.4-6</a> (a), (d)와 같은 자료)에 대하여 $T$의 특성다항식 $f(t)$를 구하라. 그런 다음, $z$가 생성하는 $V$의 $T$-순환 부분공간 $W$에 대하여 <a href="#e4-9">EX 5.4-9</a>에서 구한 $T_W$의 특성다항식이 $f(t)$의 약수임을 확인하라.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$이고</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$이고</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 표준기저에 대한 $T(a,b,c,d) = (a+b,\, b-c,\, a+c,\, a+d)$의 행렬표현은</p>
+        <div class="math-display">$$[T] = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 1 &amp; 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>$[T] - tI$를 넷째 열로 전개하면 다음과 같다(넷째 열에서 $0$이 아닌 성분은 $(4,4)$ 위치의 $1-t$뿐이다).</p>
+        <div class="math-display">$$f(t) = (1-t)\begin{vmatrix} 1-t &amp; 1 &amp; 0 \\ 0 &amp; 1-t &amp; -1 \\ 1 &amp; 0 &amp; 1-t \end{vmatrix}.$$</div>
+        <p>이 $3\times 3$ 행렬식을 첫 행으로 전개하면 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} &amp;(1-t)\big[(1-t)^2 - 0\big] - 1\cdot\big[0\cdot(1-t) - (-1)(1)\big] \\ &amp;\quad = (1-t)^3 - 1 = -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$f(t) = (1-t)(-t^3 + 3t^2 - 3t) = t^4 - 4t^3 + 6t^2 - 3t.$$</div>
+        <p><a href="#e4-9">EX 5.4-9</a>에서 $T_W$의 특성다항식은 $-t^3 + 3t^2 - 3t$였고, $f(t) = (1-t)\cdot(-t^3 + 3t^2 - 3t)$이므로 $T_W$의 특성다항식은 $f(t)$를 나눈다(몫은 $1-t$). 이는 <a href="#c4-12">정리 5.21</a>과 일치한다.</p>
+        <p><strong>(d)</strong> $V = M_{2\times 2}(\mathbb{R})$의 기저 $\{E_{11}, E_{12}, E_{21}, E_{22}\}$에 대해 $T(A) = MA$, $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$이다. $T(E_{11}) = \begin{pmatrix} 1 &amp; 0 \\ 2 &amp; 0 \end{pmatrix} = E_{11} + 2E_{21}$, $T(E_{12}) = E_{12} + 2E_{22}$, $T(E_{21}) = \begin{pmatrix} 1 &amp; 0 \\ 2 &amp; 0 \end{pmatrix} = E_{11} + 2E_{21}$, $T(E_{22}) = E_{12} + 2E_{22}$이므로</p>
+        <div class="math-display">$$[T] = \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 1 \\ 2 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 2 &amp; 0 &amp; 2 \end{pmatrix}.$$</div>
+        <p>기저의 순서를 $\{E_{11}, E_{21}, E_{12}, E_{22}\}$로 바꾸면 행렬표현은 $\begin{pmatrix} M &amp; O \\ O &amp; M \end{pmatrix}$ 꼴이 된다(대각블록 두 개가 모두 $\begin{pmatrix}1&amp;1\\2&amp;2\end{pmatrix}$이다). 순서를 바꾸는 것은 순열행렬에 의한 닮음이므로 특성다항식이 변하지 않는다. 블록 상삼각행렬의 행렬식(<a href="#c4-13">보조정리</a>)과 $\det(M - tI) = (1-t)(2-t) - 2 = t^2 - 3t$에 의해</p>
+        <div class="math-display">$$f(t) = (t^2 - 3t)^2 = t^2(t-3)^2.$$</div>
+        <p><a href="#e4-9">EX 5.4-9</a>에서 $T_W$의 특성다항식은 $t^2 - 3t$였고, $f(t) = (t^2 - 3t)\cdot(t^2 - 3t)$이므로 $T_W$의 특성다항식은 $f(t)$를 나눈다(몫은 $t^2 - 3t$).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For each linear operator $T$ on $V$ below (the same data as in <a href="#e4-6">EX 5.4-6</a> (a), (d)), find the characteristic polynomial $f(t)$ of $T$. Then check that the characteristic polynomial of $T_W$ obtained in <a href="#e4-9">EX 5.4-9</a>, where $W$ is the $T$-cyclic subspace of $V$ generated by $z$, is a divisor of $f(t)$.</p>
+        <p><strong>(a)</strong> $V = \mathbb{R}^4$, $z = e_1$, and</p>
+        <div class="math-display">$$T(a,b,c,d) = (a+b,\ b-c,\ a+c,\ a+d).$$</div>
+        <p><strong>(d)</strong> $V = M_{2 \times 2}(\mathbb{R})$, with</p>
+        <div class="math-display">$$T(A) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}A, \qquad z = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> The matrix of $T(a,b,c,d) = (a+b,\, b-c,\, a+c,\, a+d)$ in the standard basis is</p>
+        <div class="math-display">$$[T] = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 1 &amp; 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}.$$</div>
+        <p>Expanding along the fourth column (the only nonzero entry in the fourth column of $[T] - tI$ is $1-t$, in position $(4,4)$) gives</p>
+        <div class="math-display">$$f(t) = (1-t)\begin{vmatrix} 1-t &amp; 1 &amp; 0 \\ 0 &amp; 1-t &amp; -1 \\ 1 &amp; 0 &amp; 1-t \end{vmatrix}.$$</div>
+        <p>Expanding this $3\times 3$ determinant along the first row gives</p>
+        <div class="math-display">$$\begin{aligned} &amp;(1-t)\big[(1-t)^2 - 0\big] - 1\cdot\big[0\cdot(1-t) - (-1)(1)\big] \\ &amp;\quad = (1-t)^3 - 1 = -t^3 + 3t^2 - 3t. \end{aligned}$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$f(t) = (1-t)(-t^3 + 3t^2 - 3t) = t^4 - 4t^3 + 6t^2 - 3t.$$</div>
+        <p>In <a href="#e4-9">EX 5.4-9</a> the characteristic polynomial of $T_W$ was $-t^3 + 3t^2 - 3t$, and $f(t) = (1-t)\cdot(-t^3 + 3t^2 - 3t)$, so the characteristic polynomial of $T_W$ divides $f(t)$ (with quotient $1-t$), in agreement with <a href="#c4-12">Theorem 5.21</a>.</p>
+        <p><strong>(d)</strong> In the basis $\{E_{11}, E_{12}, E_{21}, E_{22}\}$ of $V = M_{2\times 2}(\mathbb{R})$ we have $T(A) = MA$ with $M = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}$. Then $T(E_{11}) = \begin{pmatrix} 1 &amp; 0 \\ 2 &amp; 0 \end{pmatrix} = E_{11} + 2E_{21}$, $T(E_{12}) = E_{12} + 2E_{22}$, $T(E_{21}) = \begin{pmatrix} 1 &amp; 0 \\ 2 &amp; 0 \end{pmatrix} = E_{11} + 2E_{21}$, $T(E_{22}) = E_{12} + 2E_{22}$, so</p>
+        <div class="math-display">$$[T] = \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 1 \\ 2 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 2 &amp; 0 &amp; 2 \end{pmatrix}.$$</div>
+        <p>Reordering the basis as $\{E_{11}, E_{21}, E_{12}, E_{22}\}$ changes $[T]$ to $\begin{pmatrix} M &amp; O \\ O &amp; M \end{pmatrix}$ (two diagonal blocks equal to $\begin{pmatrix}1&amp;1\\2&amp;2\end{pmatrix}$). Reordering the basis is a similarity by a permutation matrix, so the characteristic polynomial is unchanged. By the determinant of a block upper triangular matrix (<a href="#c4-13">Lemma</a>) and $\det(M - tI) = (1-t)(2-t) - 2 = t^2 - 3t$,</p>
+        <div class="math-display">$$f(t) = (t^2 - 3t)^2 = t^2(t-3)^2.$$</div>
+        <p>In <a href="#e4-9">EX 5.4-9</a> the characteristic polynomial of $T_W$ was $t^2 - 3t$, and $f(t) = (t^2 - 3t)\cdot(t^2 - 3t)$, so the characteristic polynomial of $T_W$ divides $f(t)$ (with quotient $t^2 - 3t$).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 17 -->
+<div class="card ex-card" id="e4-17">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-17</span>
+    <span class="ex-title">행렬의 거듭제곱들이 생성하는 부분공간의 차원 <em>The Dimension of the Span of the Powers of a Matrix</em><span class="src-ref">Friedberg §5.4 #17</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n \times n}(F)$라 하자. $A$의 거듭제곱 $I_n, A, A^2, \ldots$이 생성하는 $M_{n \times n}(F)$의 부분공간의 차원이 $n$ 이하임을 보여라. 즉</p>
+        <div class="math-display">$$\dim(\operatorname{span}(\{I_n, A, A^2, \ldots\})) \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A \in M_{n\times n}(F)$의 특성다항식을 $f(t) = (-1)^n t^n + a_{n-1}t^{n-1} + \cdots + a_1 t + a_0$이라 하자. <a href="#c4-19">따름정리(행렬에 대한 케일리-해밀턴 정리)</a>에 의해 $f(A) = O$, 즉</p>
+        <div class="math-display">$$(-1)^n A^n + a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n = O.$$</div>
+        <p>$U = \operatorname{span}\{I_n, A, \ldots, A^{n-1}\}$이라 하자. 위 식을 $A^n$에 대해 풀면 $A^n = (-1)^{n+1}\big(a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n\big) \in U$이다.</p>
+        <p>모든 $k \ge n$에 대해 $A^k \in U$임을 $k$에 대한 귀납법으로 보인다. $k = n$은 위에서 보였다. $A^k \in U$라 가정하면 $A^k = c_0 I_n + c_1 A + \cdots + c_{n-1}A^{n-1}$ ($c_i \in F$)로 쓸 수 있고, 양변에 $A$를 곱하면 $A^{k+1} = c_0 A + c_1 A^2 + \cdots + c_{n-1}A^n$이다. 여기서 $A, \ldots, A^{n-1} \in U$이고 $A^n \in U$이며 $U$는 부분공간이므로 $A^{k+1} \in U$이다.</p>
+        <p>따라서 $I_n, A, \ldots, A^{n-1} \in U$에 더해 모든 $k \ge n$에 대해 $A^k \in U$이므로 $\operatorname{span}\{I_n, A, A^2, \ldots\} \subseteq U$이다. 반대 포함은 자명하므로 $\operatorname{span}\{I_n, A, A^2, \ldots\} = U$이다. $U$는 $n$개의 벡터로 생성되므로 $\dim U \le n$이고, 따라서 $\dim\big(\operatorname{span}\{I_n, A, A^2, \ldots\}\big) \le n$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n \times n}(F)$. Show that the subspace of $M_{n \times n}(F)$ spanned by the powers $I_n, A, A^2, \ldots$ of $A$ has dimension at most $n$; that is,</p>
+        <div class="math-display">$$\dim(\operatorname{span}(\{I_n, A, A^2, \ldots\})) \le n.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let the characteristic polynomial of $A \in M_{n\times n}(F)$ be $f(t) = (-1)^n t^n + a_{n-1}t^{n-1} + \cdots + a_1 t + a_0$. By the <a href="#c4-19">Corollary (Cayley–Hamilton Theorem for Matrices)</a>, $f(A) = O$, that is,</p>
+        <div class="math-display">$$(-1)^n A^n + a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n = O.$$</div>
+        <p>Let $U = \operatorname{span}\{I_n, A, \ldots, A^{n-1}\}$. Solving for $A^n$ gives $A^n = (-1)^{n+1}\big(a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n\big) \in U$.</p>
+        <p>We show by induction on $k$ that $A^k \in U$ for all $k \ge n$. The case $k = n$ was just shown. If $A^k \in U$, write $A^k = c_0 I_n + c_1 A + \cdots + c_{n-1}A^{n-1}$ with $c_i \in F$; multiplying by $A$ gives $A^{k+1} = c_0 A + c_1 A^2 + \cdots + c_{n-1}A^n$. Here $A, \ldots, A^{n-1} \in U$ and $A^n \in U$, and $U$ is a subspace, so $A^{k+1} \in U$.</p>
+        <p>Thus $I_n, A, \ldots, A^{n-1} \in U$ and $A^k \in U$ for all $k \ge n$, so $\operatorname{span}\{I_n, A, A^2, \ldots\} \subseteq U$. The reverse inclusion is obvious, so $\operatorname{span}\{I_n, A, A^2, \ldots\} = U$. Since $U$ is spanned by $n$ vectors, $\dim U \le n$, hence $\dim\big(\operatorname{span}\{I_n, A, A^2, \ldots\}\big) \le n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 18 -->
+<div class="card ex-card" id="e4-18">
+  <div class="card-head">
+    <span class="ex-num">EX 5.4-18</span>
+    <span class="ex-title">특성다항식을 이용한 가역성과 역행렬 <em>Invertibility and the Inverse via the Characteristic Polynomial</em><span class="src-ref">Friedberg §5.4 #18 (a)–(c)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 특성다항식이 다음과 같은 $n \times n$ 행렬이라 하자.</p>
+        <div class="math-display">$$f(t) = (-1)^n t^n + a_{n-1}t^{n-1} + \cdots + a_1t + a_0.$$</div>
+        <p><strong>(a)</strong> $A$가 가역일 필요충분조건이 $a_0 \neq 0$임을 보여라.</p>
+        <p><strong>(b)</strong> $A$가 가역일 때 그 역행렬이 다음과 같음을 보여라.</p>
+        <div class="math-display">$$\begin{aligned} A^{-1} &amp;= (-1/a_0)\big[(-1)^nA^{n-1} \\[2pt] &amp;\qquad + a_{n-1}A^{n-2} + \cdots + a_1I_n\big]. \end{aligned}$$</div>
+        <p><strong>(c)</strong> (b)의 공식을 이용하여 다음 행렬 $A$의 역행렬 $A^{-1}$을 구하라.</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $f(t) = \det(A - tI_n)$이므로 $a_0 = f(0) = \det(A)$이다. $A$가 가역일 필요충분조건은 $\det(A) \neq 0$이므로, $A$가 가역일 필요충분조건은 $a_0 \neq 0$이다.</p>
+        <p><strong>(b)</strong> <a href="#c4-19">행렬에 대한 케일리-해밀턴 정리</a>에 의해 $(-1)^n A^n + a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n = O$이다. $a_0 I_n$을 우변으로 넘기고 $A$로 묶으면</p>
+        <div class="math-display">$$A\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big] = -a_0 I_n.$$</div>
+        <p>$A$가 가역이면 (a)에 의해 $a_0 \neq 0$이므로 양변에 $-1/a_0$를 곱하면 $A\cdot B = I_n$, 여기서 $B = \dfrac{-1}{a_0}\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big]$이다. $B$는 $A$의 다항식이므로 $A$와 교환하여 $BA = AB = I_n$이다. 따라서 $A^{-1} = B$, 즉 $A^{-1} = \dfrac{-1}{a_0}\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big]$이다.</p>
+        <p><strong>(c)</strong> $A = \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}$는 상삼각행렬이므로</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= (1-t)(2-t)(-1-t) = (2 - 3t + t^2)(-1-t) \\ &amp;= -t^3 + 2t^2 + t - 2. \end{aligned}$$</div>
+        <p>따라서 $n = 3$, $a_2 = 2$, $a_1 = 1$, $a_0 = -2 \neq 0$이므로 $A$는 가역이고, (b)에 의해</p>
+        <div class="math-display">$$A^{-1} = \frac{-1}{-2}\big[-A^2 + 2A + I_3\big] = \tfrac12\big(-A^2 + 2A + I_3\big).$$</div>
+        <p>$A^2$을 계산하면 행 1은 $(1,\ 2+4,\ 1+6-1) = (1, 6, 6)$, 행 2는 $(0,\ 4,\ 6-3) = (0, 4, 3)$, 행 3은 $(0, 0, 1)$이므로 $A^2 = \begin{pmatrix} 1 &amp; 6 &amp; 6 \\ 0 &amp; 4 &amp; 3 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}$이다. 그러므로</p>
+        <div class="math-display">$$\begin{aligned} -A^2 + 2A + I_3 &amp;= \begin{pmatrix} -1+2+1 &amp; -6+4 &amp; -6+2 \\ 0 &amp; -4+4+1 &amp; -3+6 \\ 0 &amp; 0 &amp; -1-2+1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 2 &amp; -2 &amp; -4 \\ 0 &amp; 1 &amp; 3 \\ 0 &amp; 0 &amp; -2 \end{pmatrix}, \end{aligned}$$</div>
+        <div class="math-display">$$A^{-1} = \begin{pmatrix} 1 &amp; -1 &amp; -2 \\ 0 &amp; \tfrac12 &amp; \tfrac32 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+        <p>검산: $A A^{-1}$의 행 1은 $(1,\ -1+1,\ -2+3-1) = (1, 0, 0)$, 행 2는 $(0,\ 1,\ 3-3) = (0, 1, 0)$, 행 3은 $(0, 0, 1)$이므로 $AA^{-1} = I_3$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be an $n \times n$ matrix whose characteristic polynomial is</p>
+        <div class="math-display">$$f(t) = (-1)^n t^n + a_{n-1}t^{n-1} + \cdots + a_1t + a_0.$$</div>
+        <p><strong>(a)</strong> Show that $A$ is invertible exactly when $a_0 \neq 0$.</p>
+        <p><strong>(b)</strong> Show that, when $A$ is invertible, its inverse is given by</p>
+        <div class="math-display">$$\begin{aligned} A^{-1} &amp;= (-1/a_0)\big[(-1)^nA^{n-1} \\[2pt] &amp;\qquad + a_{n-1}A^{n-2} + \cdots + a_1I_n\big]. \end{aligned}$$</div>
+        <p><strong>(c)</strong> Apply the formula of (b) to find $A^{-1}$ for</p>
+        <div class="math-display">$$A = \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Since $f(t) = \det(A - tI_n)$, we have $a_0 = f(0) = \det(A)$. A matrix is invertible if and only if its determinant is nonzero, so $A$ is invertible if and only if $a_0 \neq 0$.</p>
+        <p><strong>(b)</strong> By the <a href="#c4-19">Cayley–Hamilton theorem for matrices</a>, $(-1)^n A^n + a_{n-1}A^{n-1} + \cdots + a_1 A + a_0 I_n = O$. Moving $a_0 I_n$ to the right side and factoring $A$ out of the rest,</p>
+        <div class="math-display">$$A\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big] = -a_0 I_n.$$</div>
+        <p>If $A$ is invertible, then $a_0 \neq 0$ by (a), so multiplying by $-1/a_0$ gives $AB = I_n$ where $B = \dfrac{-1}{a_0}\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big]$. Since $B$ is a polynomial in $A$, it commutes with $A$, so $BA = AB = I_n$. Therefore $A^{-1} = B$, that is, $A^{-1} = \dfrac{-1}{a_0}\big[(-1)^n A^{n-1} + a_{n-1}A^{n-2} + \cdots + a_1 I_n\big]$.</p>
+        <p><strong>(c)</strong> The matrix $A = \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}$ is upper triangular, so</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= (1-t)(2-t)(-1-t) = (2 - 3t + t^2)(-1-t) \\ &amp;= -t^3 + 2t^2 + t - 2. \end{aligned}$$</div>
+        <p>Thus $n = 3$, $a_2 = 2$, $a_1 = 1$, $a_0 = -2 \neq 0$, so $A$ is invertible, and by (b)</p>
+        <div class="math-display">$$A^{-1} = \frac{-1}{-2}\big[-A^2 + 2A + I_3\big] = \tfrac12\big(-A^2 + 2A + I_3\big).$$</div>
+        <p>Computing $A^2$: row 1 is $(1,\ 2+4,\ 1+6-1) = (1, 6, 6)$, row 2 is $(0,\ 4,\ 6-3) = (0, 4, 3)$, row 3 is $(0, 0, 1)$, so $A^2 = \begin{pmatrix} 1 &amp; 6 &amp; 6 \\ 0 &amp; 4 &amp; 3 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}$. Hence</p>
+        <div class="math-display">$$\begin{aligned} -A^2 + 2A + I_3 &amp;= \begin{pmatrix} -1+2+1 &amp; -6+4 &amp; -6+2 \\ 0 &amp; -4+4+1 &amp; -3+6 \\ 0 &amp; 0 &amp; -1-2+1 \end{pmatrix} \\[4pt] &amp;= \begin{pmatrix} 2 &amp; -2 &amp; -4 \\ 0 &amp; 1 &amp; 3 \\ 0 &amp; 0 &amp; -2 \end{pmatrix}, \end{aligned}$$</div>
+        <div class="math-display">$$A^{-1} = \begin{pmatrix} 1 &amp; -1 &amp; -2 \\ 0 &amp; \tfrac12 &amp; \tfrac32 \\ 0 &amp; 0 &amp; -1 \end{pmatrix}.$$</div>
+        <p>Check: row 1 of $AA^{-1}$ is $(1,\ -1+1,\ -2+3-1) = (1, 0, 0)$, row 2 is $(0,\ 1,\ 3-3) = (0, 1, 0)$, row 3 is $(0, 0, 1)$, so $AA^{-1} = I_3$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la1/index.html">선형대수학1</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

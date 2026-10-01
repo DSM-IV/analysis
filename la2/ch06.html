@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.2 그람-슈미트 과정과 직교여공간 (§6.2 The Gram–Schmidt Process and Orthogonal Complements) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제6단원 6.2 그람-슈미트 과정과 직교여공간 — 그람-슈미트 직교화, 정규직교기저, 푸리에 계수, 직교여공간, W 위로의 사영, 베셀 부등식을 Friedberg §6.2 추천 연습문제와 함께 한국어·영어 대조로 정리했습니다. Gram–Schmidt process, orthonormal basis, Fourier coefficients, orthogonal complement, projection on W along its orthogonal complement, Bessel's inequality.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 그람-슈미트 과정, Gram–Schmidt process, 그람-슈미트 직교화, Gram–Schmidt orthogonalization, 정규직교기저, orthonormal basis, 정규직교집합, orthonormal set, 직교집합, orthogonal set, 푸리에 계수, Fourier coefficients, 직교여공간, orthogonal complement, 사영, projection, 베셀 부등식, Bessel's inequality, 내적공간, inner product space, 표준내적, standard inner product, 프로베니우스 내적, Frobenius inner product, 일차독립, linearly independent, Friedberg, 프리드버그, Friedberg 6.2, 연습문제, exercises">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.2 그람-슈미트 과정과 직교여공간 (§6.2 The Gram–Schmidt Process and Orthogonal Complements) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="그람-슈미트 과정, 정규직교기저와 푸리에 계수, 직교여공간, W 위로의 사영, 베셀 부등식 — Friedberg §6.2 추천 연습문제 6문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch06.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "6.2 그람-슈미트 과정과 직교여공간 (§6.2 The Gram–Schmidt Process and Orthogonal Complements) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 6.2 그람-슈미트 과정과 직교여공간. 그람-슈미트 직교화, 정규직교기저와 푸리에 계수, 직교여공간, W 위로의 사영, 베셀 부등식을 다루는 Friedberg §6.2 추천 연습문제를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch06.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch06.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la1/index.html">선형대수학1</a>
+      <a href="index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html" class="active">06</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 06</p>
+  <h1>6.2 그람-슈미트 과정과 직교여공간<span>§6.2 The Gram–Schmidt Process and Orthogonal Complements</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#e6-1"><span class="toc-num">EX 6.2-1</span> 참·거짓 판정 <em>True or False</em></a></li>
+    <li><a href="#e6-2"><span class="toc-num">EX 6.2-2</span> 그람-슈미트 과정, 정규직교기저, 푸리에 계수 <em>Gram–Schmidt, Orthonormal Bases, and Fourier Coefficients</em></a></li>
+    <li><a href="#e6-4"><span class="toc-num">EX 6.2-4</span> <span class="toc-ko">$\mathbb{C}^3$의 부분집합의 직교여공간</span> <em>The Orthogonal Complement of a Subset of $\mathbb{C}^3$</em></a></li>
+    <li><a href="#e6-9"><span class="toc-num">EX 6.2-9</span> <span class="toc-ko">$\mathbb{C}^3$에서 $W$와 $W^\perp$의 정규직교기저</span> <em>Orthonormal Bases for $W$ and $W^\perp$ in $\mathbb{C}^3$</em></a></li>
+    <li><a href="#e6-10"><span class="toc-num">EX 6.2-10</span> <span class="toc-ko">$W^\perp$를 따르는 $W$ 위로의 사영은 노름을 키우지 않는다</span> <em>The Projection on $W$ along $W^\perp$ Does Not Increase Norms</em></a></li>
+    <li><a href="#e6-16"><span class="toc-num">EX 6.2-16</span> 베셀 부등식 <em>Bessel's Inequality</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c6-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 강의 슬라이드의 번호를 그대로 따른다: 번호가 붙은 항목은 TYPE {원문 번호}
+     (Theorem 1.3 → THM 1.3, Definition 2 → DEF 2, Example 1 → EXAM 1), 번호 없는
+     항목(Definition :, Remark :, Recall, Question, 번호 없는 Example)은 유형 배지만
+     (DEF / THM / REM / RECALL / Q / EXAM / COR / LEM). 자체 순번은 id에만 쓴다.
+     span.src-ref 는 연습문제(Friedberg §6.2 #n)에만 쓴다. 본문에서 번호 없는
+     카드를 인용할 때는 제목 링크(#c6-12 를 가리키는 a 태그, 링크 문구 주의 「…」)로 쓴다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "번역 예정" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     (연습문제만 그 뒤에 span.src-ref 로 Friedberg 출처를 적는다.)
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e6-12), 배지는 EX 6.2-12,
+     출처는 span.src-ref 에 Friedberg §6.2 #12 (a), (b) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note06-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 칼리그래피 B는 \mathcal{B}, 풀이 PDF의 β는 \beta,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 &amp; 로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§6.2 The Gram–Schmidt Process and Orthogonal Complements · 그람-슈미트 과정과 직교여공간</h2></div>
+
+<!-- 편집자 안내 — §6.2 강의 슬라이드 미게시 (2026-10-01 현재 추천 연습문제·풀이 PDF만 게시) -->
+<div class="card note-card" id="note06-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 절의 강의 노트는 아직 게시되지 않았다. 강의 슬라이드가 올라오면 정의·정리·예의 원문과 번역이 이 자리에 추가된다. 아래는 Friedberg §6.2의 추천 연습문제이며, 풀이에 필요한 그람-슈미트 과정·푸리에 계수·직교여공간의 정의와 성질은 각 풀이 안에서 내용을 밝혀 쓴다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The lecture notes for this section have not been posted yet. Once the lecture slides are available, the original text of their definitions, theorems, and examples, together with a translation, will be added here. Below are the recommended exercises from Friedberg §6.2; the definitions and properties of the Gram–Schmidt process, Fourier coefficients, and orthogonal complements that the solutions rely on are stated explicitly within each solution.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="section-title"><h2>연습문제 · Exercises (Friedberg §6.2)</h2></div>
+
+<!-- Exercise 1 -->
+<div class="card ex-card" id="e6-1">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-1</span>
+    <span class="ex-title">참·거짓 판정 <em>True or False</em><span class="src-ref">Friedberg §6.2 #1 (a)–(g)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 각 명제의 참·거짓을 판정하고, 그 이유를 밝혀라.</p>
+        <p><strong>(a)</strong> 임의의 벡터 집합에서 출발하여 그람-슈미트 직교화 과정을 이용하면 정규직교집합을 만들 수 있다.</p>
+        <p><strong>(b)</strong> 영이 아닌 유한차원 내적공간은 모두 정규직교기저를 가진다.</p>
+        <p><strong>(c)</strong> 임의의 집합의 직교여공간은 항상 부분공간이다.</p>
+        <p><strong>(d)</strong> $\{v_1, v_2, \ldots, v_n\}$이 내적공간 $V$의 기저라 하자. 그러면 모든 $x \in V$에 대하여 스칼라 $\langle x, v_i\rangle$는 $x$의 푸리에 계수이다.</p>
+        <p><strong>(e)</strong> 정규직교기저는 반드시 순서기저이다.</p>
+        <p><strong>(f)</strong> 임의의 직교집합은 일차독립이다.</p>
+        <p><strong>(g)</strong> 임의의 정규직교집합은 일차독립이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> 거짓. 그람-슈미트 과정은 <em>일차독립</em>인 집합에 적용하는 과정이다. $S = \{(1,1), (2,2), (3,3)\} \subset \mathbb{R}^2$에 적용하면 $v_1 = (1,1)$이고 $v_2 = (2,2) - \dfrac{\langle (2,2), v_1\rangle}{\|v_1\|^2} v_1 = (2,2) - 2(1,1) = (0,0)$이 되어 정규화할 수 없다. 실제로 $\operatorname{span}(S)$는 1차원이므로 $\operatorname{span}(S)$를 생성하는 정규직교집합의 원소는 많아야 1개이다(정규직교집합은 일차독립이다, (g) 참조). 따라서 $S$로부터 같은 생성공간을 갖는 정규직교집합을 3개의 벡터로 만들 수 없다.</p>
+        <p><strong>(b)</strong> 참. $V \ne \{0\}$이 유한차원이면 $V$는 기저 $\{w_1, \ldots, w_n\}$ ($n \ge 1$)을 갖는다. 이 기저는 일차독립이므로 그람-슈미트 과정 $v_1 = w_1$, $v_k = w_k - \sum_{j&lt;k} \dfrac{\langle w_k, v_j\rangle}{\|v_j\|^2} v_j$로 직교집합 $\{v_1, \ldots, v_n\}$을 얻고 $\operatorname{span}$은 $V$ 그대로이다. 각 $v_k$는 $0$이 아니다. $\operatorname{span}\{v_1, \ldots, v_{k-1}\} = \operatorname{span}\{w_1, \ldots, w_{k-1}\}$이고 $w_k$는 이 공간에 속하지 않으므로, $w_k$는 앞의 $v_j$들의 일차결합이 아니기 때문이다. 따라서 $u_k = v_k / \|v_k\|$로 정규화하면 $V$의 정규직교기저 $\{u_1, \ldots, u_n\}$을 얻는다.</p>
+        <p><strong>(c)</strong> 참. 집합 $S \subset V$에 대해 $S^\perp = \{x \in V : \langle x, y\rangle = 0 \text{ (모든 } y \in S)\}$이다. (i) 모든 $y$에 대해 $\langle 0, y\rangle = 0$이므로 $0 \in S^\perp$이다. (ii) $x_1, x_2 \in S^\perp$이면 $\langle x_1 + x_2, y\rangle = \langle x_1, y\rangle + \langle x_2, y\rangle = 0$이다. (iii) $x \in S^\perp$이고 스칼라 $c$에 대해 $\langle cx, y\rangle = c\langle x, y\rangle = 0$이다. 따라서 $S^\perp$는 $V$의 부분공간이다($S = \emptyset$이면 $S^\perp = V$로 약속한다).</p>
+        <p><strong>(d)</strong> 거짓. 푸리에 계수는 <em>정규직교</em>기저 $\{v_1, \ldots, v_n\}$에 대해 $x$의 $v_i$ 성분 $\langle x, v_i\rangle$를 뜻하며, 그냥 기저이면 성립하지 않는다. 반례: $V = \mathbb{R}^2$ (표준내적), 기저 $v_1 = (1,0)$, $v_2 = (1,1)$, $x = (1,0)$. 그러면 $\langle x, v_1\rangle = 1$, $\langle x, v_2\rangle = 1$이고 $\langle x, v_1\rangle v_1 + \langle x, v_2\rangle v_2 = (1,0) + (1,1) = (2,1) \ne x$이다. 사실 $x = 1\cdot v_1 + 0\cdot v_2$이므로 $x$의 좌표는 $(1, 0)$이고 스칼라 $\langle x, v_i\rangle = (1, 1)$과 다르다.</p>
+        <p><strong>(e)</strong> 참. 정규직교기저는 정의상 정규직교인 <em>순서</em>기저, 즉 정규직교이면서 순서가 주어진 기저이다.</p>
+        <p><strong>(f)</strong> 거짓. 원소가 하나인 집합은 (서로 다른 두 원소가 없으므로) 직교집합이다. 따라서 $\{0\}$은 직교집합이지만 $1 \cdot 0 = 0$이므로 일차종속이다. (영이 아닌 벡터들로 이루어진 직교집합이면 일차독립이다.)</p>
+        <p><strong>(g)</strong> 참. 정규직교집합 $\{v_1, \ldots, v_m\}$에서 $a_1 v_1 + \cdots + a_m v_m = 0$이라 하자. 양변과 $v_j$의 내적을 취하면 $0 = \sum_i a_i \langle v_i, v_j\rangle = a_j \langle v_j, v_j\rangle = a_j \|v_j\|^2 = a_j$이다. 모든 $j$에 대해 $a_j = 0$이므로 일차독립이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Decide whether each of the following statements is true or false, and justify your answer.</p>
+        <p><strong>(a)</strong> Starting from an arbitrary set of vectors, the Gram–Schmidt orthogonalization process can be used to construct an orthonormal set.</p>
+        <p><strong>(b)</strong> Every inner product space that is nonzero and finite-dimensional possesses an orthonormal basis.</p>
+        <p><strong>(c)</strong> The orthogonal complement of an arbitrary set is always a subspace.</p>
+        <p><strong>(d)</strong> Let $\{v_1, v_2, \ldots, v_n\}$ be a basis for an inner product space $V$. Then, for every $x \in V$, the scalars $\langle x, v_i\rangle$ are the Fourier coefficients of $x$.</p>
+        <p><strong>(e)</strong> An orthonormal basis is necessarily an ordered basis.</p>
+        <p><strong>(f)</strong> Any orthogonal set is linearly independent.</p>
+        <p><strong>(g)</strong> Any orthonormal set is linearly independent.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> False. The Gram&ndash;Schmidt process is applied to a <em>linearly independent</em> set. For $S = \{(1,1), (2,2), (3,3)\} \subset \mathbb{R}^2$ we get $v_1 = (1,1)$ and $v_2 = (2,2) - \dfrac{\langle (2,2), v_1\rangle}{\|v_1\|^2} v_1 = (2,2) - 2(1,1) = (0,0)$, which cannot be normalized. In fact $\operatorname{span}(S)$ is $1$-dimensional, so an orthonormal set spanning it has at most one element (an orthonormal set is linearly independent, see (g)). Hence one cannot build from $S$ an orthonormal set of three vectors with the same span.</p>
+        <p><strong>(b)</strong> True. If $V \ne \{0\}$ is finite-dimensional, it has a basis $\{w_1, \ldots, w_n\}$ with $n \ge 1$. This basis is linearly independent, so the Gram&ndash;Schmidt process $v_1 = w_1$, $v_k = w_k - \sum_{j&lt;k} \dfrac{\langle w_k, v_j\rangle}{\|v_j\|^2} v_j$ yields an orthogonal set $\{v_1, \ldots, v_n\}$ with the same span $V$. Each $v_k$ is nonzero: since $\operatorname{span}\{v_1, \ldots, v_{k-1}\} = \operatorname{span}\{w_1, \ldots, w_{k-1}\}$ and $w_k$ does not lie in this span, $w_k$ is not a linear combination of the earlier $v_j$'s. Hence normalizing $u_k = v_k / \|v_k\|$ gives an orthonormal basis $\{u_1, \ldots, u_n\}$ of $V$.</p>
+        <p><strong>(c)</strong> True. For a set $S \subset V$, $S^\perp = \{x \in V : \langle x, y\rangle = 0 \text{ for all } y \in S\}$. (i) $\langle 0, y\rangle = 0$ for every $y$, so $0 \in S^\perp$. (ii) If $x_1, x_2 \in S^\perp$, then $\langle x_1 + x_2, y\rangle = \langle x_1, y\rangle + \langle x_2, y\rangle = 0$. (iii) If $x \in S^\perp$ and $c$ is a scalar, then $\langle cx, y\rangle = c\langle x, y\rangle = 0$. So $S^\perp$ is a subspace of $V$ (with the convention $S^\perp = V$ when $S = \emptyset$).</p>
+        <p><strong>(d)</strong> False. The Fourier coefficients are the numbers $\langle x, v_i\rangle$ for an <em>orthonormal</em> basis $\{v_1, \ldots, v_n\}$; for a mere basis the statement fails. Counterexample: $V = \mathbb{R}^2$ with the standard inner product, the basis $v_1 = (1,0)$, $v_2 = (1,1)$, and $x = (1,0)$. Then $\langle x, v_1\rangle = 1$, $\langle x, v_2\rangle = 1$, and $\langle x, v_1\rangle v_1 + \langle x, v_2\rangle v_2 = (1,0) + (1,1) = (2,1) \ne x$. Indeed $x = 1\cdot v_1 + 0\cdot v_2$ has coordinates $(1, 0)$, which differ from the scalars $\langle x, v_i\rangle = (1, 1)$.</p>
+        <p><strong>(e)</strong> True. By definition, an orthonormal basis is an orthonormal <em>ordered</em> basis, i.e. an ordered basis that is orthonormal.</p>
+        <p><strong>(f)</strong> False. A set with a single vector is orthogonal (there are no two distinct elements to test). So $\{0\}$ is an orthogonal set, but it is linearly dependent since $1 \cdot 0 = 0$. (An orthogonal set of nonzero vectors is linearly independent.)</p>
+        <p><strong>(g)</strong> True. Let $\{v_1, \ldots, v_m\}$ be orthonormal with $a_1 v_1 + \cdots + a_m v_m = 0$. Taking the inner product of both sides with $v_j$ gives $0 = \sum_i a_i \langle v_i, v_j\rangle = a_j \langle v_j, v_j\rangle = a_j \|v_j\|^2 = a_j$. Thus $a_j = 0$ for all $j$, and the set is linearly independent.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 2 -->
+<div class="card ex-card" id="e6-2">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-2</span>
+    <span class="ex-title">그람-슈미트 과정, 정규직교기저, 푸리에 계수 <em>Gram–Schmidt, Orthonormal Bases, and Fourier Coefficients</em><span class="src-ref">Friedberg §6.2 #2 (f), (g), (i)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>아래 각 문항은 내적공간 $V$, $V$의 부분집합 $S$, 그리고 $V$의 벡터 하나(문항에서는 $x$, $A$, $h$로 부르고, 단계 설명에서는 $y$라 한다)를 준다. 다음 단계를 수행하라.</p>
+        <p>$(1)$ $S$의 벡터를 나열된 순서대로 취하여 $S$에 그람-슈미트 과정을 적용해 $\operatorname{span}(S)$의 직교기저를 구하라.</p>
+        <p>$(2)$ 그 기저의 벡터를 정규화하여 $\operatorname{span}(S)$의 정규직교기저 $\beta = \{u_1, \ldots, u_k\}$를 구하라.</p>
+        <p>$(3)$ $\beta$에 대한 $y$의 푸리에 계수, 즉 스칼라 $\langle y, u_1\rangle, \ldots, \langle y, u_k\rangle$를 계산하라.</p>
+        <p>$(4)$ 정규직교기저에 의한 벡터의 전개(Friedberg 정리 6.5)와 비교하여 답을 검산하라. 즉 다음이 성립함을 확인하라.</p>
+        <div class="math-display">$$y = \sum_{j=1}^{k} \langle y, u_j\rangle\, u_j.$$</div>
+        <p><strong>(f)</strong> $V = \mathbb{R}^4$ (표준내적),</p>
+        <div class="math-display">$$\begin{aligned} S &amp;= \{(1, -2, -1, 3),\ (3, 6, 3, -1),\ (1, 4, 2, 8)\}, \\[2pt] x &amp;= (-1, 2, 1, 1). \end{aligned}$$</div>
+        <p><strong>(g)</strong> $V = M_{2\times 2}(\mathbb{R})$, 내적은</p>
+        <div class="math-display">$$\langle X, Y\rangle = \operatorname{tr}(Y^*X) \quad (X, Y \in V),$$</div>
+        <p>이고,</p>
+        <div class="math-display">$$S = \left\{ \begin{pmatrix} 3 &amp; 5 \\ -1 &amp; 1 \end{pmatrix}, \begin{pmatrix} -1 &amp; 9 \\ 5 &amp; -1 \end{pmatrix}, \begin{pmatrix} 7 &amp; -17 \\ 2 &amp; -6 \end{pmatrix} \right\},$$</div>
+        <div class="math-display">$$A = \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix}.$$</div>
+        <p><strong>(i)</strong> $S = \{\sin t, \cos t, 1, t\}$이고 $V = \operatorname{span}(S)$는 $[0, \pi]$ 위의 실숫값 함수들의 공간이며, 내적은</p>
+        <div class="math-display">$$\langle f, g\rangle = \int_0^\pi f(t)g(t)\,dt,$$</div>
+        <p>이고, $h(t) = 2t + 1$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>사용하는 공식.</strong> $S = \{w_1, \ldots, w_n\}$이 일차독립이면 그람-슈미트 과정</p>
+        <div class="math-display">$$v_1 = w_1, \qquad v_k = w_k - \sum_{j=1}^{k-1} \frac{\langle w_k, v_j\rangle}{\|v_j\|^2}\, v_j$$</div>
+        <p>은 $\operatorname{span}(S)$의 직교기저 $\{v_1, \ldots, v_n\}$을 준다. $u_k = v_k/\|v_k\|$는 정규직교기저 $\beta$를 이루고, $x \in \operatorname{span}(S)$이면 $x = \sum_i \langle x, u_i\rangle u_i$이다(양변과 $u_j$의 내적을 취하면 확인된다). 이때 $\langle x, u_i\rangle$를 $\beta$에 대한 $x$의 푸리에 계수라 한다.</p>
+
+        <p><strong>(f)</strong> $V = \mathbb{R}^4$ (표준내적), $w_1 = (1,-2,-1,3)$, $w_2 = (3,6,3,-1)$, $w_3 = (1,4,2,8)$.</p>
+        <p>$v_1 = w_1 = (1,-2,-1,3)$이고 $\|v_1\|^2 = 1+4+1+9 = 15$이다.</p>
+        <p>$\langle w_2, v_1\rangle = 3 - 12 - 3 - 3 = -15$이므로</p>
+        <div class="math-display">$$\begin{aligned} v_2 &amp;= w_2 + \tfrac{15}{15} v_1 = (3,6,3,-1) + (1,-2,-1,3) \\ &amp;= (4,4,2,2), \end{aligned}$$</div>
+        <p>$\|v_2\|^2 = 16+16+4+4 = 40$이다. (편의상 $v_2$ 대신 $(2,2,1,1)$을 쓰면 $\|\cdot\|^2 = 10$이다.)</p>
+        <p>$\langle w_3, v_1\rangle = 1 - 8 - 2 + 24 = 15$, $\langle w_3, v_2\rangle = 4 + 16 + 4 + 16 = 40$이므로</p>
+        <div class="math-display">$$\begin{aligned} v_3 &= w_3 - \tfrac{15}{15} v_1 - \tfrac{40}{40} v_2 \\ &= (1,4,2,8) - (1,-2,-1,3) - (4,4,2,2) \\ &= (-4, 2, 1, 3), \end{aligned}$$</div>
+        <p>$\|v_3\|^2 = 16+4+1+9 = 30$이다. 직교 확인: $\langle v_1, v_3\rangle = -4-4-1+9 = 0$, $\langle v_2, v_3\rangle = -16+8+2+6 = 0$이다.</p>
+        <p>정규화하면 정규직교기저는</p>
+        <div class="math-display">$$\beta = \{u_1, u_2, u_3\}, \qquad \begin{aligned} u_1 &amp;= \tfrac{1}{\sqrt{15}}(1,-2,-1,3), \\ u_2 &amp;= \tfrac{1}{\sqrt{10}}(2,2,1,1), \\ u_3 &amp;= \tfrac{1}{\sqrt{30}}(-4,2,1,3) \end{aligned}$$</div>
+        <p>이다. $x = (-1,2,1,1)$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \langle x, u_1\rangle &= \tfrac{1}{\sqrt{15}}(-1-4-1+3) = -\tfrac{3}{\sqrt{15}}, \\ \langle x, u_2\rangle &= \tfrac{1}{\sqrt{10}}(-2+4+1+1) = \tfrac{4}{\sqrt{10}}, \\ \langle x, u_3\rangle &= \tfrac{1}{\sqrt{30}}(4+4+1+3) = \tfrac{12}{\sqrt{30}} \end{aligned}$$</div>
+        <p>이 푸리에 계수이다. 검산:</p>
+        <div class="math-display">$$\begin{aligned} \sum_i \langle x, u_i\rangle u_i &amp;= -\tfrac{3}{15}(1,-2,-1,3) + \tfrac{4}{10}(2,2,1,1) \\ &amp;\qquad + \tfrac{12}{30}(-4,2,1,3) \\ &amp;= \tfrac15\big[(-1,2,1,-3) + (4,4,2,2) \\ &amp;\qquad + (-8,4,2,6)\big] \\ &= \tfrac15 (-5, 10, 5, 5) = (-1,2,1,1) = x. \end{aligned}$$</div>
+
+        <p><strong>(g)</strong> $V = M_{2\times 2}(\mathbb{R})$, $\langle X, Y\rangle = \operatorname{tr}(Y^*X) = \sum_{i,j} X_{ij}Y_{ij}$ (대응하는 성분끼리 곱해 더한 값)이다. $w_1 = \begin{pmatrix} 3 &amp; 5 \\ -1 &amp; 1 \end{pmatrix}$, $w_2 = \begin{pmatrix} -1 &amp; 9 \\ 5 &amp; -1 \end{pmatrix}$, $w_3 = \begin{pmatrix} 7 &amp; -17 \\ 2 &amp; -6 \end{pmatrix}$.</p>
+        <p>$v_1 = w_1$, $\|v_1\|^2 = 9+25+1+1 = 36$이다. $\langle w_2, v_1\rangle = -3+45-5-1 = 36$이므로</p>
+        <div class="math-display">$$v_2 = w_2 - \tfrac{36}{36} v_1 = \begin{pmatrix} -4 &amp; 4 \\ 6 &amp; -2 \end{pmatrix},$$</div>
+        <p>$\|v_2\|^2 = 16+16+36+4 = 72$이다.</p>
+        <p>$\langle w_3, v_1\rangle = 21-85-2-6 = -72$, $\langle w_3, v_2\rangle = -28-68+12+12 = -72$이므로</p>
+        <div class="math-display">$$\begin{aligned} v_3 &= w_3 - \tfrac{-72}{36} v_1 - \tfrac{-72}{72} v_2 = w_3 + 2v_1 + v_2 \\ &= \begin{pmatrix} 7+6-4 &amp; -17+10+4 \\ 2-2+6 &amp; -6+2-2 \end{pmatrix} = \begin{pmatrix} 9 &amp; -3 \\ 6 &amp; -6 \end{pmatrix}, \end{aligned}$$</div>
+        <p>$\|v_3\|^2 = 81+9+36+36 = 162$이다. 직교 확인: $\langle v_1, v_3\rangle = 27-15-6-6 = 0$, $\langle v_2, v_3\rangle = -36-12+36+12 = 0$이다.</p>
+        <p>$\|v_1\| = 6$, $\|v_2\| = 6\sqrt2$, $\|v_3\| = 9\sqrt2$이므로</p>
+        <div class="math-display">$$\begin{aligned} u_1 &= \begin{pmatrix} \tfrac12 &amp; \tfrac56 \\ -\tfrac16 &amp; \tfrac16 \end{pmatrix}, \\ u_2 &= \begin{pmatrix} -\tfrac{\sqrt2}{3} &amp; \tfrac{\sqrt2}{3} \\ \tfrac{\sqrt2}{2} &amp; -\tfrac{\sqrt2}{6} \end{pmatrix}, \\ u_3 &= \begin{pmatrix} \tfrac{\sqrt2}{2} &amp; -\tfrac{\sqrt2}{6} \\ \tfrac{\sqrt2}{3} &amp; -\tfrac{\sqrt2}{3} \end{pmatrix} \end{aligned}$$</div>
+        <p>이 정규직교기저 $\beta = \{u_1, u_2, u_3\}$이다. $A = \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix}$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \langle A, v_1\rangle &= -3+135+4+8 = 144, \\ \langle A, v_2\rangle &= 4+108-24-16 = 72, \\ \langle A, v_3\rangle &= -9-81-24-48 = -162 \end{aligned}$$</div>
+        <p>이므로 푸리에 계수는 $\langle A, u_i\rangle = \langle A, v_i\rangle / \|v_i\|$, 곧</p>
+        <div class="math-display">$$\tfrac{144}{6} = 24, \qquad \tfrac{72}{6\sqrt2} = 6\sqrt2, \qquad \tfrac{-162}{9\sqrt2} = -9\sqrt2$$</div>
+        <p>이다. 검산:</p>
+        <div class="math-display">$$\begin{aligned} \sum_i \langle A, u_i\rangle u_i &amp;= 24\cdot\tfrac{v_1}{6} + 6\sqrt2\cdot\tfrac{v_2}{6\sqrt2} - 9\sqrt2\cdot\tfrac{v_3}{9\sqrt2} \\ &amp;= 4v_1 + v_2 - v_3 \\ &amp;= \begin{pmatrix} 12-4-9 &amp; 20+4+3 \\ -4+6-6 &amp; 4-2+6 \end{pmatrix} \\ &amp;= \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix} = A. \end{aligned}$$</div>
+
+        <p><strong>(i)</strong> $V = \operatorname{span}(S)$, $\langle f, g\rangle = \int_0^\pi f(t)g(t)\,dt$, $w_1 = \sin t$, $w_2 = \cos t$, $w_3 = 1$, $w_4 = t$, $h(t) = 2t + 1$. 필요한 적분은 다음과 같다($[0,\pi]$ 위에서).</p>
+        <div class="math-display">$$\begin{alignedat}{2} \int_0^\pi \sin^2 t\,dt &amp;= \frac{\pi}{2}, &amp;\qquad \int_0^\pi \cos^2 t\,dt &amp;= \frac{\pi}{2}, \\ \int_0^\pi \sin t\cos t\,dt &amp;= 0, &amp;\qquad \int_0^\pi 1\,dt &amp;= \pi, \\ \int_0^\pi \sin t\,dt &amp;= 2, &amp;\qquad \int_0^\pi \cos t\,dt &amp;= 0, \\ \int_0^\pi t\sin t\,dt &amp;= \pi, &amp;\qquad \int_0^\pi t\cos t\,dt &amp;= -2, \\ \int_0^\pi t\,dt &amp;= \frac{\pi^2}{2}, &amp;\qquad \int_0^\pi t^2\,dt &amp;= \frac{\pi^3}{3}. \end{alignedat}$$</div>
+        <p>($\int_0^\pi t\sin t\,dt = [-t\cos t]_0^\pi + \int_0^\pi \cos t\,dt = \pi$, $\int_0^\pi t\cos t\,dt = [t\sin t]_0^\pi - \int_0^\pi \sin t\,dt = -2$.)</p>
+        <p>$v_1 = \sin t$, $\|v_1\|^2 = \pi/2$. $\langle \cos t, \sin t\rangle = 0$이므로 $v_2 = \cos t$, $\|v_2\|^2 = \pi/2$이다.</p>
+        <p>$\langle 1, v_1\rangle = 2$, $\langle 1, v_2\rangle = 0$이므로</p>
+        <div class="math-display">$$v_3 = 1 - \frac{2}{\pi/2}\sin t = 1 - \frac{4}{\pi}\sin t.$$</div>
+        <p>$v_3 \perp v_1, v_2$이므로 $\|v_3\|^2 = \langle 1, v_3\rangle = \pi - \tfrac4\pi\cdot 2 = \pi - \tfrac8\pi = \tfrac{\pi^2-8}{\pi}$이다.</p>
+        <p>$\langle t, v_1\rangle = \pi$, $\langle t, v_2\rangle = -2$, $\langle t, v_3\rangle = \tfrac{\pi^2}{2} - \tfrac4\pi\cdot\pi = \tfrac{\pi^2-8}{2}$이므로 $\langle t, v_3\rangle/\|v_3\|^2 = \tfrac{\pi}{2}$이고</p>
+        <div class="math-display">$$\begin{aligned} v_4 &= t - \tfrac{\pi}{\pi/2}\sin t - \tfrac{-2}{\pi/2}\cos t - \tfrac{\pi}{2} v_3 \\ &= t - 2\sin t + \tfrac4\pi\cos t - \tfrac\pi2 + 2\sin t \\ &= t + \tfrac4\pi\cos t - \tfrac\pi2. \end{aligned}$$</div>
+        <p>$v_4 \perp v_1, v_2, v_3$이므로</p>
+        <div class="math-display">$$\begin{aligned} \|v_4\|^2 = \langle t, v_4\rangle &amp;= \tfrac{\pi^3}{3} + \tfrac4\pi(-2) - \tfrac\pi2\cdot\tfrac{\pi^2}{2} \\ &amp;= \tfrac{\pi^3}{12} - \tfrac8\pi = \tfrac{\pi^4-96}{12\pi} \end{aligned}$$</div>
+        <p>이다. 정규화하면 ($2\pi v_4 = 8\cos t + 2\pi t - \pi^2$이고 $\|2\pi v_4\|^2 = \tfrac{\pi^5}{3} - 32\pi$)</p>
+        <div class="math-display">$$\begin{aligned} u_1 &= \tfrac{\sqrt2}{\sqrt\pi}\sin t, \quad u_2 = \tfrac{\sqrt2}{\sqrt\pi}\cos t, \\ u_3 &= \tfrac{\pi - 4\sin t}{\sqrt{\pi^3-8\pi}}, \\ u_4 &= \tfrac{8\cos t + 2\pi t - \pi^2}{\sqrt{\pi^5/3 - 32\pi}} \end{aligned}$$</div>
+        <p>이 정규직교기저이다. $\int_0^\pi h = \pi^2+\pi$, $\int h\sin t = 2\pi+2$, $\int h\cos t = -4$, $\int h\,t = \tfrac{2\pi^3}{3} + \tfrac{\pi^2}{2}$를 이용하면 푸리에 계수는 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} \langle h, u_1\rangle &amp;= \frac{\sqrt2\,(2\pi+2)}{\sqrt\pi}, \qquad \langle h, u_2\rangle = -\frac{4\sqrt2}{\sqrt\pi}, \\ \langle h, u_3\rangle &amp;= \frac{\pi(\pi^2+\pi) - 4(2\pi+2)}{\sqrt{\pi^3-8\pi}} \\ &amp;= \frac{\pi^3+\pi^2-8\pi-8}{\sqrt{\pi^3-8\pi}}, \\ \langle h, u_4\rangle &amp;= \frac{8(-4) + 2\pi\left(\tfrac{2\pi^3}{3}+\tfrac{\pi^2}{2}\right) - \pi^2(\pi^2+\pi)}{\sqrt{\pi^5/3-32\pi}} \\ &amp;= \frac{\pi^4/3 - 32}{\sqrt{\pi^5/3-32\pi}} \end{aligned}$$</div>
+        <p>(수치로 약 $6.609,\ -3.192,\ 3.195,\ 0.387$.)</p>
+        <p>검산. $h$를 직교기저 $\{v_1, v_2, v_3, v_4\}$로 전개하는 계수는 $\langle h, v_i\rangle/\|v_i\|^2$이다. $\sin t$의 계수는 $\dfrac{2\pi+2}{\pi/2} = 4 + \dfrac4\pi$, $\cos t$의 계수는 $\dfrac{-4}{\pi/2} = -\dfrac8\pi$이다. 또</p>
+        <div class="math-display">$$\begin{aligned} \langle h, v_3\rangle &amp;= \pi^2+\pi - \tfrac4\pi(2\pi+2) \\ &amp;= \tfrac{(\pi+1)(\pi^2-8)}{\pi} = (\pi+1)\|v_3\|^2, \\ \langle h, v_4\rangle &amp;= \tfrac{2\pi^3}{3}+\tfrac{\pi^2}{2} - \tfrac{16}{\pi} - \tfrac\pi2(\pi^2+\pi) \\ &amp;= \tfrac{\pi^3}{6} - \tfrac{16}{\pi} = 2\|v_4\|^2 \end{aligned}$$</div>
+        <p>이므로 $v_3$, $v_4$의 계수는 각각 $\pi+1$, $2$이다. 따라서</p>
+        <div class="math-display">$$\begin{aligned} &\left(4+\tfrac4\pi\right)\sin t - \tfrac8\pi\cos t + (\pi+1)\left(1 - \tfrac4\pi\sin t\right) \\ &\qquad + 2\left(t + \tfrac4\pi\cos t - \tfrac\pi2\right) = 2t + 1 = h(t) \end{aligned}$$</div>
+        <p>이다($\sin t$ 항: $4 + \tfrac4\pi - 4 - \tfrac4\pi = 0$, $\cos t$ 항: $-\tfrac8\pi + \tfrac8\pi = 0$, 상수항: $\pi+1-\pi = 1$, $t$항: $2$). 따라서 $h = \sum_i \langle h, u_i\rangle u_i$이다. 실제로 $\langle h, u_i\rangle = (\text{계수}_i)\cdot\|v_i\|$이다. 예: $\left(4+\tfrac4\pi\right)\sqrt{\tfrac\pi2} = \tfrac{\sqrt2(2\pi+2)}{\sqrt\pi}$.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Each part below gives an inner product space $V$, a subset $S$ of $V$, and a vector of $V$ (named $x$, $A$, or $h$ in the parts; in the steps we call it $y$). Carry out the following steps.</p>
+        <p>$(1)$ Apply the Gram–Schmidt process to $S$, taking its vectors in the order listed, to produce an orthogonal basis for $\operatorname{span}(S)$.</p>
+        <p>$(2)$ Normalize the vectors of that basis to obtain an orthonormal basis $\beta = \{u_1, \ldots, u_k\}$ for $\operatorname{span}(S)$.</p>
+        <p>$(3)$ Compute the Fourier coefficients of $y$ relative to $\beta$, that is, the scalars $\langle y, u_1\rangle, \ldots, \langle y, u_k\rangle$.</p>
+        <p>$(4)$ Check your answer against the expansion of a vector in an orthonormal basis (Friedberg Theorem 6.5): confirm that</p>
+        <div class="math-display">$$y = \sum_{j=1}^{k} \langle y, u_j\rangle\, u_j.$$</div>
+        <p><strong>(f)</strong> $V = \mathbb{R}^4$ with the standard inner product,</p>
+        <div class="math-display">$$\begin{aligned} S &amp;= \{(1, -2, -1, 3),\ (3, 6, 3, -1),\ (1, 4, 2, 8)\}, \\[2pt] x &amp;= (-1, 2, 1, 1). \end{aligned}$$</div>
+        <p><strong>(g)</strong> $V = M_{2\times 2}(\mathbb{R})$ with the inner product</p>
+        <div class="math-display">$$\langle X, Y\rangle = \operatorname{tr}(Y^*X) \quad (X, Y \in V),$$</div>
+        <p>and</p>
+        <div class="math-display">$$S = \left\{ \begin{pmatrix} 3 &amp; 5 \\ -1 &amp; 1 \end{pmatrix}, \begin{pmatrix} -1 &amp; 9 \\ 5 &amp; -1 \end{pmatrix}, \begin{pmatrix} 7 &amp; -17 \\ 2 &amp; -6 \end{pmatrix} \right\},$$</div>
+        <div class="math-display">$$A = \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix}.$$</div>
+        <p><strong>(i)</strong> $S = \{\sin t, \cos t, 1, t\}$ and $V = \operatorname{span}(S)$, a space of real-valued functions on $[0, \pi]$, with the inner product</p>
+        <div class="math-display">$$\langle f, g\rangle = \int_0^\pi f(t)g(t)\,dt,$$</div>
+        <p>and $h(t) = 2t + 1$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Formulas used.</strong> If $S = \{w_1, \ldots, w_n\}$ is linearly independent, the Gram&ndash;Schmidt process</p>
+        <div class="math-display">$$v_1 = w_1, \qquad v_k = w_k - \sum_{j=1}^{k-1} \frac{\langle w_k, v_j\rangle}{\|v_j\|^2}\, v_j$$</div>
+        <p>gives an orthogonal basis $\{v_1, \ldots, v_n\}$ of $\operatorname{span}(S)$. The vectors $u_k = v_k/\|v_k\|$ form an orthonormal basis $\beta$, and every $x \in \operatorname{span}(S)$ satisfies $x = \sum_i \langle x, u_i\rangle u_i$ (take the inner product of both sides with $u_j$). The numbers $\langle x, u_i\rangle$ are the Fourier coefficients of $x$ relative to $\beta$.</p>
+
+        <p><strong>(f)</strong> $V = \mathbb{R}^4$ (standard inner product), $w_1 = (1,-2,-1,3)$, $w_2 = (3,6,3,-1)$, $w_3 = (1,4,2,8)$.</p>
+        <p>$v_1 = w_1 = (1,-2,-1,3)$ and $\|v_1\|^2 = 1+4+1+9 = 15$.</p>
+        <p>Since $\langle w_2, v_1\rangle = 3 - 12 - 3 - 3 = -15$,</p>
+        <div class="math-display">$$\begin{aligned} v_2 &amp;= w_2 + \tfrac{15}{15} v_1 = (3,6,3,-1) + (1,-2,-1,3) \\ &amp;= (4,4,2,2), \end{aligned}$$</div>
+        <p>and $\|v_2\|^2 = 16+16+4+4 = 40$. (For convenience one may use $(2,2,1,1)$ in place of $v_2$, with $\|\cdot\|^2 = 10$.)</p>
+        <p>Since $\langle w_3, v_1\rangle = 1 - 8 - 2 + 24 = 15$ and $\langle w_3, v_2\rangle = 4 + 16 + 4 + 16 = 40$,</p>
+        <div class="math-display">$$\begin{aligned} v_3 &= w_3 - \tfrac{15}{15} v_1 - \tfrac{40}{40} v_2 \\ &= (1,4,2,8) - (1,-2,-1,3) - (4,4,2,2) \\ &= (-4, 2, 1, 3), \end{aligned}$$</div>
+        <p>and $\|v_3\|^2 = 16+4+1+9 = 30$. Orthogonality check: $\langle v_1, v_3\rangle = -4-4-1+9 = 0$, $\langle v_2, v_3\rangle = -16+8+2+6 = 0$.</p>
+        <p>Normalizing, an orthonormal basis is</p>
+        <div class="math-display">$$\beta = \{u_1, u_2, u_3\}, \qquad \begin{aligned} u_1 &amp;= \tfrac{1}{\sqrt{15}}(1,-2,-1,3), \\ u_2 &amp;= \tfrac{1}{\sqrt{10}}(2,2,1,1), \\ u_3 &amp;= \tfrac{1}{\sqrt{30}}(-4,2,1,3). \end{aligned}$$</div>
+        <p>For $x = (-1,2,1,1)$ we get</p>
+        <div class="math-display">$$\begin{aligned} \langle x, u_1\rangle &= \tfrac{1}{\sqrt{15}}(-1-4-1+3) = -\tfrac{3}{\sqrt{15}}, \\ \langle x, u_2\rangle &= \tfrac{1}{\sqrt{10}}(-2+4+1+1) = \tfrac{4}{\sqrt{10}}, \\ \langle x, u_3\rangle &= \tfrac{1}{\sqrt{30}}(4+4+1+3) = \tfrac{12}{\sqrt{30}}, \end{aligned}$$</div>
+        <p>which are the Fourier coefficients. Check:</p>
+        <div class="math-display">$$\begin{aligned} \sum_i \langle x, u_i\rangle u_i &amp;= -\tfrac{3}{15}(1,-2,-1,3) + \tfrac{4}{10}(2,2,1,1) \\ &amp;\qquad + \tfrac{12}{30}(-4,2,1,3) \\ &amp;= \tfrac15\big[(-1,2,1,-3) + (4,4,2,2) \\ &amp;\qquad + (-8,4,2,6)\big] \\ &= \tfrac15 (-5, 10, 5, 5) = (-1,2,1,1) = x. \end{aligned}$$</div>
+
+        <p><strong>(g)</strong> $V = M_{2\times 2}(\mathbb{R})$ with $\langle X, Y\rangle = \operatorname{tr}(Y^*X) = \sum_{i,j} X_{ij}Y_{ij}$ (multiply corresponding entries and add). Here $w_1 = \begin{pmatrix} 3 &amp; 5 \\ -1 &amp; 1 \end{pmatrix}$, $w_2 = \begin{pmatrix} -1 &amp; 9 \\ 5 &amp; -1 \end{pmatrix}$, $w_3 = \begin{pmatrix} 7 &amp; -17 \\ 2 &amp; -6 \end{pmatrix}$.</p>
+        <p>$v_1 = w_1$ and $\|v_1\|^2 = 9+25+1+1 = 36$. Since $\langle w_2, v_1\rangle = -3+45-5-1 = 36$,</p>
+        <div class="math-display">$$v_2 = w_2 - \tfrac{36}{36} v_1 = \begin{pmatrix} -4 &amp; 4 \\ 6 &amp; -2 \end{pmatrix},$$</div>
+        <p>and $\|v_2\|^2 = 16+16+36+4 = 72$.</p>
+        <p>Since $\langle w_3, v_1\rangle = 21-85-2-6 = -72$ and $\langle w_3, v_2\rangle = -28-68+12+12 = -72$,</p>
+        <div class="math-display">$$\begin{aligned} v_3 &= w_3 - \tfrac{-72}{36} v_1 - \tfrac{-72}{72} v_2 = w_3 + 2v_1 + v_2 \\ &= \begin{pmatrix} 7+6-4 &amp; -17+10+4 \\ 2-2+6 &amp; -6+2-2 \end{pmatrix} = \begin{pmatrix} 9 &amp; -3 \\ 6 &amp; -6 \end{pmatrix}, \end{aligned}$$</div>
+        <p>and $\|v_3\|^2 = 81+9+36+36 = 162$. Orthogonality check: $\langle v_1, v_3\rangle = 27-15-6-6 = 0$, $\langle v_2, v_3\rangle = -36-12+36+12 = 0$.</p>
+        <p>Since $\|v_1\| = 6$, $\|v_2\| = 6\sqrt2$, $\|v_3\| = 9\sqrt2$, the orthonormal basis $\beta = \{u_1, u_2, u_3\}$ is</p>
+        <div class="math-display">$$\begin{aligned} u_1 &= \begin{pmatrix} \tfrac12 &amp; \tfrac56 \\ -\tfrac16 &amp; \tfrac16 \end{pmatrix}, \\ u_2 &= \begin{pmatrix} -\tfrac{\sqrt2}{3} &amp; \tfrac{\sqrt2}{3} \\ \tfrac{\sqrt2}{2} &amp; -\tfrac{\sqrt2}{6} \end{pmatrix}, \\ u_3 &= \begin{pmatrix} \tfrac{\sqrt2}{2} &amp; -\tfrac{\sqrt2}{6} \\ \tfrac{\sqrt2}{3} &amp; -\tfrac{\sqrt2}{3} \end{pmatrix}. \end{aligned}$$</div>
+        <p>For $A = \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix}$,</p>
+        <div class="math-display">$$\begin{aligned} \langle A, v_1\rangle &= -3+135+4+8 = 144, \\ \langle A, v_2\rangle &= 4+108-24-16 = 72, \\ \langle A, v_3\rangle &= -9-81-24-48 = -162, \end{aligned}$$</div>
+        <p>so the Fourier coefficients $\langle A, u_i\rangle = \langle A, v_i\rangle / \|v_i\|$ are</p>
+        <div class="math-display">$$\tfrac{144}{6} = 24, \qquad \tfrac{72}{6\sqrt2} = 6\sqrt2, \qquad \tfrac{-162}{9\sqrt2} = -9\sqrt2.$$</div>
+        <p>Check:</p>
+        <div class="math-display">$$\begin{aligned} \sum_i \langle A, u_i\rangle u_i &amp;= 24\cdot\tfrac{v_1}{6} + 6\sqrt2\cdot\tfrac{v_2}{6\sqrt2} - 9\sqrt2\cdot\tfrac{v_3}{9\sqrt2} \\ &amp;= 4v_1 + v_2 - v_3 \\ &amp;= \begin{pmatrix} 12-4-9 &amp; 20+4+3 \\ -4+6-6 &amp; 4-2+6 \end{pmatrix} \\ &amp;= \begin{pmatrix} -1 &amp; 27 \\ -4 &amp; 8 \end{pmatrix} = A. \end{aligned}$$</div>
+
+        <p><strong>(i)</strong> $V = \operatorname{span}(S)$, $\langle f, g\rangle = \int_0^\pi f(t)g(t)\,dt$, $w_1 = \sin t$, $w_2 = \cos t$, $w_3 = 1$, $w_4 = t$, $h(t) = 2t + 1$. The integrals we need (over $[0,\pi]$) are:</p>
+        <div class="math-display">$$\begin{alignedat}{2} \int_0^\pi \sin^2 t\,dt &amp;= \frac{\pi}{2}, &amp;\qquad \int_0^\pi \cos^2 t\,dt &amp;= \frac{\pi}{2}, \\ \int_0^\pi \sin t\cos t\,dt &amp;= 0, &amp;\qquad \int_0^\pi 1\,dt &amp;= \pi, \\ \int_0^\pi \sin t\,dt &amp;= 2, &amp;\qquad \int_0^\pi \cos t\,dt &amp;= 0, \\ \int_0^\pi t\sin t\,dt &amp;= \pi, &amp;\qquad \int_0^\pi t\cos t\,dt &amp;= -2, \\ \int_0^\pi t\,dt &amp;= \frac{\pi^2}{2}, &amp;\qquad \int_0^\pi t^2\,dt &amp;= \frac{\pi^3}{3}. \end{alignedat}$$</div>
+        <p>(Here $\int_0^\pi t\sin t\,dt = [-t\cos t]_0^\pi + \int_0^\pi \cos t\,dt = \pi$ and $\int_0^\pi t\cos t\,dt = [t\sin t]_0^\pi - \int_0^\pi \sin t\,dt = -2$.)</p>
+        <p>$v_1 = \sin t$ with $\|v_1\|^2 = \pi/2$. Since $\langle \cos t, \sin t\rangle = 0$, $v_2 = \cos t$ with $\|v_2\|^2 = \pi/2$.</p>
+        <p>Since $\langle 1, v_1\rangle = 2$ and $\langle 1, v_2\rangle = 0$,</p>
+        <div class="math-display">$$v_3 = 1 - \frac{2}{\pi/2}\sin t = 1 - \frac{4}{\pi}\sin t.$$</div>
+        <p>As $v_3 \perp v_1, v_2$, we get $\|v_3\|^2 = \langle 1, v_3\rangle = \pi - \tfrac4\pi\cdot 2 = \pi - \tfrac8\pi = \tfrac{\pi^2-8}{\pi}$.</p>
+        <p>Next, $\langle t, v_1\rangle = \pi$, $\langle t, v_2\rangle = -2$, $\langle t, v_3\rangle = \tfrac{\pi^2}{2} - \tfrac4\pi\cdot\pi = \tfrac{\pi^2-8}{2}$, so $\langle t, v_3\rangle/\|v_3\|^2 = \tfrac{\pi}{2}$ and</p>
+        <div class="math-display">$$\begin{aligned} v_4 &= t - \tfrac{\pi}{\pi/2}\sin t - \tfrac{-2}{\pi/2}\cos t - \tfrac{\pi}{2} v_3 \\ &= t - 2\sin t + \tfrac4\pi\cos t - \tfrac\pi2 + 2\sin t \\ &= t + \tfrac4\pi\cos t - \tfrac\pi2. \end{aligned}$$</div>
+        <p>As $v_4 \perp v_1, v_2, v_3$,</p>
+        <div class="math-display">$$\begin{aligned} \|v_4\|^2 = \langle t, v_4\rangle &amp;= \tfrac{\pi^3}{3} + \tfrac4\pi(-2) - \tfrac\pi2\cdot\tfrac{\pi^2}{2} \\ &amp;= \tfrac{\pi^3}{12} - \tfrac8\pi = \tfrac{\pi^4-96}{12\pi}. \end{aligned}$$</div>
+        <p>Normalizing (note $2\pi v_4 = 8\cos t + 2\pi t - \pi^2$ and $\|2\pi v_4\|^2 = \tfrac{\pi^5}{3} - 32\pi$), the orthonormal basis is</p>
+        <div class="math-display">$$\begin{aligned} u_1 &= \tfrac{\sqrt2}{\sqrt\pi}\sin t, \quad u_2 = \tfrac{\sqrt2}{\sqrt\pi}\cos t, \\ u_3 &= \tfrac{\pi - 4\sin t}{\sqrt{\pi^3-8\pi}}, \\ u_4 &= \tfrac{8\cos t + 2\pi t - \pi^2}{\sqrt{\pi^5/3 - 32\pi}}. \end{aligned}$$</div>
+        <p>Using $\int_0^\pi h = \pi^2+\pi$, $\int h\sin t = 2\pi+2$, $\int h\cos t = -4$, $\int h\,t = \tfrac{2\pi^3}{3} + \tfrac{\pi^2}{2}$, the Fourier coefficients are</p>
+        <div class="math-display">$$\begin{aligned} \langle h, u_1\rangle &amp;= \frac{\sqrt2\,(2\pi+2)}{\sqrt\pi}, \qquad \langle h, u_2\rangle = -\frac{4\sqrt2}{\sqrt\pi}, \\ \langle h, u_3\rangle &amp;= \frac{\pi(\pi^2+\pi) - 4(2\pi+2)}{\sqrt{\pi^3-8\pi}} \\ &amp;= \frac{\pi^3+\pi^2-8\pi-8}{\sqrt{\pi^3-8\pi}}, \\ \langle h, u_4\rangle &amp;= \frac{8(-4) + 2\pi\left(\tfrac{2\pi^3}{3}+\tfrac{\pi^2}{2}\right) - \pi^2(\pi^2+\pi)}{\sqrt{\pi^5/3-32\pi}} \\ &amp;= \frac{\pi^4/3 - 32}{\sqrt{\pi^5/3-32\pi}}. \end{aligned}$$</div>
+        <p>(Numerically about $6.609,\ -3.192,\ 3.195,\ 0.387$.)</p>
+        <p>Check. The coefficients of $h$ with respect to the orthogonal basis $\{v_1, v_2, v_3, v_4\}$ are $\langle h, v_i\rangle/\|v_i\|^2$. The coefficient of $\sin t$ is $\dfrac{2\pi+2}{\pi/2} = 4 + \dfrac4\pi$, and that of $\cos t$ is $\dfrac{-4}{\pi/2} = -\dfrac8\pi$. Also</p>
+        <div class="math-display">$$\begin{aligned} \langle h, v_3\rangle &amp;= \pi^2+\pi - \tfrac4\pi(2\pi+2) \\ &amp;= \tfrac{(\pi+1)(\pi^2-8)}{\pi} = (\pi+1)\|v_3\|^2, \\ \langle h, v_4\rangle &amp;= \tfrac{2\pi^3}{3}+\tfrac{\pi^2}{2} - \tfrac{16}{\pi} - \tfrac\pi2(\pi^2+\pi) \\ &amp;= \tfrac{\pi^3}{6} - \tfrac{16}{\pi} = 2\|v_4\|^2, \end{aligned}$$</div>
+        <p>so the coefficients of $v_3$ and $v_4$ are $\pi+1$ and $2$, respectively. Therefore</p>
+        <div class="math-display">$$\begin{aligned} &\left(4+\tfrac4\pi\right)\sin t - \tfrac8\pi\cos t + (\pi+1)\left(1 - \tfrac4\pi\sin t\right) \\ &\qquad + 2\left(t + \tfrac4\pi\cos t - \tfrac\pi2\right) = 2t + 1 = h(t) \end{aligned}$$</div>
+        <p>(the $\sin t$ terms: $4 + \tfrac4\pi - 4 - \tfrac4\pi = 0$; the $\cos t$ terms: $-\tfrac8\pi + \tfrac8\pi = 0$; the constants: $\pi+1-\pi = 1$; the $t$ term: $2$). Hence $h = \sum_i \langle h, u_i\rangle u_i$. Indeed $\langle h, u_i\rangle = (\text{coefficient}_i)\cdot\|v_i\|$; e.g. $\left(4+\tfrac4\pi\right)\sqrt{\tfrac\pi2} = \tfrac{\sqrt2(2\pi+2)}{\sqrt\pi}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 4 -->
+<div class="card ex-card" id="e6-4">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-4</span>
+    <span class="ex-title">$\mathbb{C}^3$의 부분집합의 직교여공간 <em>The Orthogonal Complement of a Subset of $\mathbb{C}^3$</em><span class="src-ref">Friedberg §6.2 #4</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{C}^3$에 표준내적</p>
+        <div class="math-display">$$\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$$</div>
+        <p>($x = (x_1, x_2, x_3)$, $y = (y_1, y_2, y_3)$)을 주고, 부분집합</p>
+        <div class="math-display">$$S = \{(1, 0, i),\ (1, 2, 1)\} \subset \mathbb{C}^3$$</div>
+        <p>을 생각하자. 직교여공간 $S^\perp = \{x \in \mathbb{C}^3 : \langle x, y\rangle = 0 \text{ 모든 } y \in S\text{에 대하여}\}$를 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\mathbb{C}^3$의 표준내적은 $\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$이다. $S^\perp$는 $S$의 모든 벡터와 직교하는 벡터의 집합이므로, $(a,b,c) \in S^\perp$일 필요충분조건은 $S$의 두 벡터 각각과의 내적이 $0$인 것이다.</p>
+        <div class="math-display">$$\begin{aligned} \langle (a,b,c), (1,0,i)\rangle &= a\cdot 1 + b\cdot 0 + c\,\overline{i} = a - ic = 0, \\ \langle (a,b,c), (1,2,1)\rangle &= a + 2b + c = 0. \end{aligned}$$</div>
+        <p>첫 식에서 $a = ic$이다. 이를 둘째 식에 대입하면 $ic + 2b + c = 0$이므로 $b = -\dfrac{1+i}{2}\,c$이다. $c$는 자유롭게 택할 수 있으므로</p>
+        <div class="math-display">$$(a,b,c) = c\left(i,\ -\tfrac{1+i}{2},\ 1\right), \qquad c \in \mathbb{C}$$</div>
+        <p>이다. 따라서</p>
+        <div class="math-display">$$S^\perp = \operatorname{span}\left\{\left(i,\ -\tfrac{1+i}{2},\ 1\right)\right\} = \operatorname{span}\{(2i,\ -1-i,\ 2)\}$$</div>
+        <p>이다.</p>
+        <p>검산: $z = (i, -\tfrac{1+i}{2}, 1)$에 대해 $\langle z, (1,0,i)\rangle = i - i\cdot 1 = 0$이고, $\langle z, (1,2,1)\rangle = i - (1+i) + 1 = 0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Give $\mathbb{C}^3$ the standard inner product</p>
+        <div class="math-display">$$\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$$</div>
+        <p>for $x = (x_1, x_2, x_3)$ and $y = (y_1, y_2, y_3)$, and consider the subset</p>
+        <div class="math-display">$$S = \{(1, 0, i),\ (1, 2, 1)\} \subset \mathbb{C}^3.$$</div>
+        <p>Determine the orthogonal complement $S^\perp = \{x \in \mathbb{C}^3 : \langle x, y\rangle = 0 \text{ for every } y \in S\}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>The standard inner product on $\mathbb{C}^3$ is $\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$. Since $S^\perp$ is the set of vectors orthogonal to every vector of $S$, we have $(a,b,c) \in S^\perp$ if and only if its inner product with each of the two vectors of $S$ is $0$:</p>
+        <div class="math-display">$$\begin{aligned} \langle (a,b,c), (1,0,i)\rangle &= a\cdot 1 + b\cdot 0 + c\,\overline{i} = a - ic = 0, \\ \langle (a,b,c), (1,2,1)\rangle &= a + 2b + c = 0. \end{aligned}$$</div>
+        <p>The first equation gives $a = ic$. Substituting into the second gives $ic + 2b + c = 0$, so $b = -\dfrac{1+i}{2}\,c$. Since $c$ is free,</p>
+        <div class="math-display">$$(a,b,c) = c\left(i,\ -\tfrac{1+i}{2},\ 1\right), \qquad c \in \mathbb{C}.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$S^\perp = \operatorname{span}\left\{\left(i,\ -\tfrac{1+i}{2},\ 1\right)\right\} = \operatorname{span}\{(2i,\ -1-i,\ 2)\}.$$</div>
+        <p>Check: for $z = (i, -\tfrac{1+i}{2}, 1)$ we get $\langle z, (1,0,i)\rangle = i - i\cdot 1 = 0$ and $\langle z, (1,2,1)\rangle = i - (1+i) + 1 = 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 9 -->
+<div class="card ex-card" id="e6-9">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-9</span>
+    <span class="ex-title">$\mathbb{C}^3$에서 $W$와 $W^\perp$의 정규직교기저 <em>Orthonormal Bases for $W$ and $W^\perp$ in $\mathbb{C}^3$</em><span class="src-ref">Friedberg §6.2 #9</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{C}^3$에 표준내적 $\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$를 주고,</p>
+        <div class="math-display">$$W = \operatorname{span}(\{(i, 0, 1)\}) \subset \mathbb{C}^3$$</div>
+        <p>이라 하자. $W$의 정규직교기저와, 그 직교여공간 $W^\perp = \{x \in \mathbb{C}^3 : \langle x, y\rangle = 0 \text{ 모든 } y \in W\text{에 대하여}\}$의 정규직교기저를 각각 구하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="풀이 보기" data-hide="풀이 접기">
+        <span class="arrow">&#9654;</span> 풀이 보기
+      </button>
+      <div class="proof-content">
+        <p>$\mathbb{C}^3$의 표준내적 $\langle x, y\rangle = \sum x_k\overline{y_k}$를 쓴다.</p>
+        <p><strong>$W$의 정규직교기저.</strong> $W = \operatorname{span}\{(i,0,1)\}$는 1차원이고 $\|(i,0,1)\|^2 = |i|^2 + 0 + 1 = 2$이다. 따라서 $\left\{\tfrac{1}{\sqrt2}(i, 0, 1)\right\}$이 $W$의 정규직교기저이다.</p>
+        <p><strong>$W^\perp$의 정규직교기저.</strong> $(a,b,c) \in W^\perp$일 필요충분조건은</p>
+        <div class="math-display">$$\langle (a,b,c), (i,0,1)\rangle = a\overline{i} + c = -ia + c = 0,$$</div>
+        <p>즉 $c = ia$이다. 따라서 $W^\perp = \{(a, b, ia) : a, b \in \mathbb{C}\} = \operatorname{span}\{(1,0,i),\ (0,1,0)\}$이고, 두 벡터는 일차독립이므로 $\dim W^\perp = 2 = 3 - 1$이다. 두 벡터는 서로 직교한다: $\langle (1,0,i), (0,1,0)\rangle = 0$. 또 $\|(1,0,i)\|^2 = 1 + 1 = 2$, $\|(0,1,0)\| = 1$이다. 정규화하면 $W^\perp$의 정규직교기저는</p>
+        <div class="math-display">$$\left\{\tfrac{1}{\sqrt2}(1, 0, i),\ (0, 1, 0)\right\}$$</div>
+        <p>이다.</p>
+        <p>검산: $\langle (1,0,i), (i,0,1)\rangle = 1\cdot\overline{i} + i\cdot 1 = -i + i = 0$이고 $\langle (0,1,0), (i,0,1)\rangle = 0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Equip $\mathbb{C}^3$ with the standard inner product $\langle x, y\rangle = x_1\overline{y_1} + x_2\overline{y_2} + x_3\overline{y_3}$, and let</p>
+        <div class="math-display">$$W = \operatorname{span}(\{(i, 0, 1)\}) \subset \mathbb{C}^3.$$</div>
+        <p>Find an orthonormal basis for $W$ and an orthonormal basis for its orthogonal complement $W^\perp = \{x \in \mathbb{C}^3 : \langle x, y\rangle = 0 \text{ for every } y \in W\}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Solution" data-hide="Hide Solution">
+        <span class="arrow">&#9654;</span> Solution
+      </button>
+      <div class="en-proof-content">
+        <p>We use the standard inner product $\langle x, y\rangle = \sum x_k\overline{y_k}$ on $\mathbb{C}^3$.</p>
+        <p><strong>Orthonormal basis of $W$.</strong> $W = \operatorname{span}\{(i,0,1)\}$ is $1$-dimensional and $\|(i,0,1)\|^2 = |i|^2 + 0 + 1 = 2$. Hence $\left\{\tfrac{1}{\sqrt2}(i, 0, 1)\right\}$ is an orthonormal basis of $W$.</p>
+        <p><strong>Orthonormal basis of $W^\perp$.</strong> We have $(a,b,c) \in W^\perp$ if and only if</p>
+        <div class="math-display">$$\langle (a,b,c), (i,0,1)\rangle = a\overline{i} + c = -ia + c = 0,$$</div>
+        <p>i.e. $c = ia$. So $W^\perp = \{(a, b, ia) : a, b \in \mathbb{C}\} = \operatorname{span}\{(1,0,i),\ (0,1,0)\}$; these two vectors are linearly independent, so $\dim W^\perp = 2 = 3 - 1$. They are orthogonal: $\langle (1,0,i), (0,1,0)\rangle = 0$. Also $\|(1,0,i)\|^2 = 1 + 1 = 2$ and $\|(0,1,0)\| = 1$. Normalizing, an orthonormal basis of $W^\perp$ is</p>
+        <div class="math-display">$$\left\{\tfrac{1}{\sqrt2}(1, 0, i),\ (0, 1, 0)\right\}.$$</div>
+        <p>Check: $\langle (1,0,i), (i,0,1)\rangle = 1\cdot\overline{i} + i\cdot 1 = -i + i = 0$ and $\langle (0,1,0), (i,0,1)\rangle = 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 10 -->
+<div class="card ex-card" id="e6-10">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-10</span>
+    <span class="ex-title">$W^\perp$를 따르는 $W$ 위로의 사영은 노름을 키우지 않는다 <em>The Projection on $W$ along $W^\perp$ Does Not Increase Norms</em><span class="src-ref">Friedberg §6.2 #10</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간, $W$를 $V$의 유한차원 부분공간이라 하고, $W^\perp = \{x \in V : \langle x, y\rangle = 0 \text{ 모든 } y \in W\text{에 대하여}\}$를 그 직교여공간이라 하자.</p>
+        <p>사영의 개념을 상기하자. $V = W_1 \oplus W_2$이면 모든 $x \in V$는 $x_1 \in W_1$, $x_2 \in W_2$에 대하여 $x = x_1 + x_2$의 꼴로 유일하게 표현되며, $T(x) = x_1$로 정의되는 사상 $T : V \to V$를 <strong>$W_2$를 따르는 $W_1$ 위로의 사영</strong>이라 한다.</p>
+        <p>$W^\perp$를 따르는 $W$ 위로의 사영 $T$가 존재하고 $N(T) = W^\perp$임을 보여라. 나아가</p>
+        <div class="math-display">$$\|T(x)\| \le \|x\| \quad \text{모든 } x \in V\text{에 대하여}$$</div>
+        <p>임을 보여라.</p>
+        <p><em>힌트.</em> 모든 $x \in V$는 $u \in W$, $v \in W^\perp$에 대하여 $x = u + v$의 꼴로 유일하게 표현된다는 사실(Friedberg 정리 6.6)과 피타고라스 정리, 즉 $\langle u, v\rangle = 0$이면 $\|u + v\|^2 = \|u\|^2 + \|v\|^2$이라는 사실(<a href="ch05.html#e5-10">Friedberg §6.1 연습문제 10</a>)을 이용하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$W^\perp$를 따르는 $W$ 위로의 사영이란 $V = W \oplus W^\perp$일 때 $x = u + z$ ($u \in W$, $z \in W^\perp$)에 대해 $T(x) = u$로 정의되는 선형연산자 $T$를 뜻한다.</p>
+        <p><strong>1단계: 정규직교기저.</strong> $W$는 유한차원이므로 기저에 그람-슈미트 과정($v_1 = w_1$, $v_k = w_k - \sum_{j&lt;k} \frac{\langle w_k, v_j\rangle}{\|v_j\|^2} v_j$)을 적용하고 정규화하여 $W$의 정규직교기저 $\{u_1, \ldots, u_k\}$를 얻는다($W = \{0\}$이면 $k = 0$이고 빈 합은 $0$으로 본다). 이때 $w \in W$이면 $w = \sum_i \langle w, u_i\rangle u_i$이다.</p>
+        <p><strong>2단계: 분해 $V = W \oplus W^\perp$.</strong> 각 $x \in V$에 대해</p>
+        <div class="math-display">$$T(x) = \sum_{i=1}^k \langle x, u_i\rangle u_i \in W, \qquad z = x - T(x)$$</div>
+        <p>로 둔다. 모든 $j$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \langle z, u_j\rangle &= \langle x, u_j\rangle - \sum_i \langle x, u_i\rangle\langle u_i, u_j\rangle \\ &= \langle x, u_j\rangle - \langle x, u_j\rangle = 0 \end{aligned}$$</div>
+        <p>이므로 $z$는 $u_1, \ldots, u_k$와 직교하고, 따라서 이들의 일차결합인 $W$의 모든 벡터와 직교한다. 즉 $z \in W^\perp$이다. 그러므로 $x = T(x) + z \in W + W^\perp$이고 $V = W + W^\perp$이다. 또한 $w \in W \cap W^\perp$이면 $\langle w, w\rangle = 0$이므로 $w = 0$이다. 따라서 $W \cap W^\perp = \{0\}$이고 $V = W \oplus W^\perp$이다. 직합이므로 $x = u + z$ ($u \in W$, $z \in W^\perp$)의 분해는 유일하며, 위의 분해가 그 유일한 분해이다. 즉 $x = u + z$일 때 $u = T(x)$이다. 따라서 $T$는 $W^\perp$를 따르는 $W$ 위로의 사영이다. $T$가 선형인 것은 정의식이 $x$에 대해 선형이기 때문이다($\langle x + cy, u_i\rangle = \langle x, u_i\rangle + c\langle y, u_i\rangle$).</p>
+        <p><strong>3단계: $N(T) = W^\perp$.</strong> $x \in W^\perp$이면 모든 $i$에 대해 $\langle x, u_i\rangle = 0$이므로 $T(x) = 0$, 즉 $x \in N(T)$이다. 반대로 $T(x) = 0$이면 $x = x - T(x) = z \in W^\perp$이다. 따라서 $N(T) = W^\perp$이다.</p>
+        <p><strong>4단계: $\|T(x)\| \le \|x\|$.</strong> $x = T(x) + z$이고 $T(x) \in W$, $z \in W^\perp$이므로 $\langle T(x), z\rangle = 0$이다. 직교하는 두 벡터에 대한 피타고라스 정리(<a href="ch05.html#e5-10">§6.1 연습문제 10</a>; $\|a + b\|^2 = \|a\|^2 + \langle a, b\rangle + \langle b, a\rangle + \|b\|^2$에서 $\langle a, b\rangle = 0$)에 의해</p>
+        <div class="math-display">$$\|x\|^2 = \|T(x)\|^2 + \|z\|^2 \ge \|T(x)\|^2$$</div>
+        <p>이다. 양변의 제곱근을 취하면 $\|T(x)\| \le \|x\|$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space, let $W$ be a finite-dimensional subspace of $V$, and let $W^\perp = \{x \in V : \langle x, y\rangle = 0 \text{ for every } y \in W\}$ be its orthogonal complement.</p>
+        <p>Recall the notion of a projection: if $V = W_1 \oplus W_2$, so that every $x \in V$ can be written in exactly one way as $x = x_1 + x_2$ with $x_1 \in W_1$ and $x_2 \in W_2$, then the map $T : V \to V$ given by $T(x) = x_1$ is called the <strong>projection on $W_1$ along $W_2$</strong>.</p>
+        <p>Show that a projection $T$ on $W$ along $W^\perp$ exists and that it satisfies $N(T) = W^\perp$. Show furthermore that</p>
+        <div class="math-display">$$\|T(x)\| \le \|x\| \quad \text{for every } x \in V.$$</div>
+        <p><em>Hint.</em> Use the fact that each $x \in V$ can be written uniquely as $x = u + v$ with $u \in W$ and $v \in W^\perp$ (Friedberg Theorem 6.6), together with the Pythagorean theorem: if $\langle u, v\rangle = 0$, then $\|u + v\|^2 = \|u\|^2 + \|v\|^2$ (<a href="ch05.html#e5-10">Friedberg §6.1, Exercise 10</a>).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>A projection on $W$ along $W^\perp$ is the linear operator $T$ defined, when $V = W \oplus W^\perp$, by $T(x) = u$ for $x = u + z$ with $u \in W$, $z \in W^\perp$.</p>
+        <p><strong>Step 1: an orthonormal basis.</strong> Since $W$ is finite-dimensional, applying the Gram&ndash;Schmidt process ($v_1 = w_1$, $v_k = w_k - \sum_{j&lt;k} \frac{\langle w_k, v_j\rangle}{\|v_j\|^2} v_j$) to a basis and normalizing gives an orthonormal basis $\{u_1, \ldots, u_k\}$ of $W$ (if $W = \{0\}$ then $k = 0$ and an empty sum is $0$). For $w \in W$ we then have $w = \sum_i \langle w, u_i\rangle u_i$.</p>
+        <p><strong>Step 2: the decomposition $V = W \oplus W^\perp$.</strong> For $x \in V$ put</p>
+        <div class="math-display">$$T(x) = \sum_{i=1}^k \langle x, u_i\rangle u_i \in W, \qquad z = x - T(x).$$</div>
+        <p>For every $j$,</p>
+        <div class="math-display">$$\begin{aligned} \langle z, u_j\rangle &= \langle x, u_j\rangle - \sum_i \langle x, u_i\rangle\langle u_i, u_j\rangle \\ &= \langle x, u_j\rangle - \langle x, u_j\rangle = 0, \end{aligned}$$</div>
+        <p>so $z$ is orthogonal to $u_1, \ldots, u_k$ and hence to every linear combination of them, i.e. to every vector of $W$. Thus $z \in W^\perp$, so $x = T(x) + z \in W + W^\perp$ and $V = W + W^\perp$. Also, if $w \in W \cap W^\perp$ then $\langle w, w\rangle = 0$, so $w = 0$; hence $W \cap W^\perp = \{0\}$ and $V = W \oplus W^\perp$. Because the sum is direct, the decomposition $x = u + z$ ($u \in W$, $z \in W^\perp$) is unique, and the one above is that decomposition: $u = T(x)$. So $T$ is the projection on $W$ along $W^\perp$. It is linear because its defining formula is linear in $x$ ($\langle x + cy, u_i\rangle = \langle x, u_i\rangle + c\langle y, u_i\rangle$).</p>
+        <p><strong>Step 3: $N(T) = W^\perp$.</strong> If $x \in W^\perp$, then $\langle x, u_i\rangle = 0$ for all $i$, so $T(x) = 0$, i.e. $x \in N(T)$. Conversely, if $T(x) = 0$ then $x = x - T(x) = z \in W^\perp$. Hence $N(T) = W^\perp$.</p>
+        <p><strong>Step 4: $\|T(x)\| \le \|x\|$.</strong> Write $x = T(x) + z$ with $T(x) \in W$ and $z \in W^\perp$, so $\langle T(x), z\rangle = 0$. By the Pythagorean theorem for orthogonal vectors (<a href="ch05.html#e5-10">&sect;6.1 Exercise 10</a>; from $\|a + b\|^2 = \|a\|^2 + \langle a, b\rangle + \langle b, a\rangle + \|b\|^2$ with $\langle a, b\rangle = 0$),</p>
+        <div class="math-display">$$\|x\|^2 = \|T(x)\|^2 + \|z\|^2 \ge \|T(x)\|^2.$$</div>
+        <p>Taking square roots gives $\|T(x)\| \le \|x\|$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 16 -->
+<div class="card ex-card" id="e6-16">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-16</span>
+    <span class="ex-title">베셀 부등식 <em>Bessel's Inequality</em><span class="src-ref">Friedberg §6.2 #16 (a), (b)</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간, $S = \{v_1, v_2, \ldots, v_n\}$을 $V$의 정규직교 부분집합이라 하자. 즉 $i \neq j$이면 $\langle v_i, v_j\rangle = 0$이고 모든 $i$에 대하여 $\|v_i\| = 1$이다.</p>
+        <p><strong>(a)</strong> (<strong>베셀 부등식</strong>) 모든 $x \in V$가 다음을 만족함을 증명하라.</p>
+        <div class="math-display">$$\|x\|^2 \ge \sum_{i=1}^{n} |\langle x, v_i\rangle|^2.$$</div>
+        <p><em>힌트.</em> $W = \operatorname{span}(S)$라 하자. 벡터 $x$는 $u \in W$, $z \in W^\perp$에 대하여 $x = u + z$의 꼴로 유일하게 표현된다. 여기서 $W^\perp = \{y \in V : \langle y, w\rangle = 0 \text{ 모든 } w \in W\text{에 대하여}\}$이며, 또한 $u = \sum_{i=1}^{n} \langle x, v_i\rangle v_i$이다(Friedberg 정리 6.6). 그런 다음 $\langle u, z\rangle = 0$일 때 성립하는 피타고라스 정리 $\|u + z\|^2 = \|u\|^2 + \|z\|^2$(<a href="ch05.html#e5-10">Friedberg §6.1 연습문제 10</a>)을 적용하라.</p>
+        <p><strong>(b)</strong> (a)와 같은 $S$와 $x$에 대하여, 베셀 부등식에서 등호가 성립할 필요충분조건이 $x \in \operatorname{span}(S)$임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $x \in V$에 대해</p>
+        <div class="math-display">$$u = \sum_{i=1}^n \langle x, v_i\rangle v_i, \qquad z = x - u$$</div>
+        <p>로 둔다($u \in W = \operatorname{span}(S)$). $S$는 정규직교이므로 각 $j$에 대해</p>
+        <div class="math-display">$$\begin{aligned} \langle u, v_j\rangle &= \sum_i \langle x, v_i\rangle\langle v_i, v_j\rangle = \langle x, v_j\rangle, \\ \text{따라서} \quad \langle z, v_j\rangle &= 0 \end{aligned}$$</div>
+        <p>이다. 그러므로 $z$는 모든 $v_j$와 직교하고, 따라서 $u = \sum_i \langle x, v_i\rangle v_i$와도 직교한다($\langle u, z\rangle = \sum_i \langle x, v_i\rangle\langle v_i, z\rangle = 0$). $x = u + z$이므로 피타고라스 정리(<a href="ch05.html#e5-10">§6.1 연습문제 10</a>)에 의해</p>
+        <div class="math-display">$$\|x\|^2 = \|u\|^2 + \|z\|^2. \tag{*}$$</div>
+        <p>또한 정규직교성에 의해</p>
+        <div class="math-display">$$\begin{aligned} \|u\|^2 = \langle u, u\rangle &= \sum_{i,j} \langle x, v_i\rangle\overline{\langle x, v_j\rangle}\,\langle v_i, v_j\rangle \\ &= \sum_{i=1}^n |\langle x, v_i\rangle|^2 \end{aligned}$$</div>
+        <p>이다. 이를 $(*)$에 넣으면</p>
+        <div class="math-display">$$\|x\|^2 = \sum_{i=1}^n |\langle x, v_i\rangle|^2 + \|z\|^2 \ge \sum_{i=1}^n |\langle x, v_i\rangle|^2$$</div>
+        <p>이고, 이것이 (a)이다.</p>
+        <p><strong>(b)</strong> 위의 등식에서 베셀 부등식이 등식일 필요충분조건은 $\|z\|^2 = 0$, 곧 $z = 0$, 곧 $x = u$이다. $x = u$이면 $x = \sum_i \langle x, v_i\rangle v_i \in \operatorname{span}(S)$이다. 반대로 $x \in \operatorname{span}(S)$이면 $x = \sum_i a_i v_i$로 쓸 수 있고, $v_j$와의 내적을 취하면 $\langle x, v_j\rangle = a_j$이므로 $x = \sum_i \langle x, v_i\rangle v_i = u$, 즉 $z = 0$이다. 따라서 등식이 성립할 필요충분조건은 $x \in \operatorname{span}(S)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space and let $S = \{v_1, v_2, \ldots, v_n\}$ be an orthonormal subset of $V$; that is, $\langle v_i, v_j\rangle = 0$ whenever $i \neq j$ and $\|v_i\| = 1$ for every $i$.</p>
+        <p><strong>(a)</strong> (<strong>Bessel's inequality</strong>) Prove that every $x \in V$ satisfies</p>
+        <div class="math-display">$$\|x\|^2 \ge \sum_{i=1}^{n} |\langle x, v_i\rangle|^2.$$</div>
+        <p><em>Hint.</em> Put $W = \operatorname{span}(S)$. The vector $x$ can be written uniquely as $x = u + z$ with $u \in W$ and $z \in W^\perp$, where $W^\perp = \{y \in V : \langle y, w\rangle = 0 \text{ for every } w \in W\}$; moreover $u = \sum_{i=1}^{n} \langle x, v_i\rangle v_i$ (Friedberg Theorem 6.6). Then apply the Pythagorean theorem $\|u + z\|^2 = \|u\|^2 + \|z\|^2$, valid when $\langle u, z\rangle = 0$ (<a href="ch05.html#e5-10">Friedberg §6.1, Exercise 10</a>).</p>
+        <p><strong>(b)</strong> With $S$ and $x$ as in (a), prove that equality holds in Bessel's inequality if and only if $x \in \operatorname{span}(S)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> For $x \in V$ put</p>
+        <div class="math-display">$$u = \sum_{i=1}^n \langle x, v_i\rangle v_i, \qquad z = x - u$$</div>
+        <p>(so $u \in W = \operatorname{span}(S)$). Since $S$ is orthonormal, for each $j$</p>
+        <div class="math-display">$$\begin{aligned} \langle u, v_j\rangle &= \sum_i \langle x, v_i\rangle\langle v_i, v_j\rangle = \langle x, v_j\rangle, \\ \text{hence} \quad \langle z, v_j\rangle &= 0. \end{aligned}$$</div>
+        <p>So $z$ is orthogonal to every $v_j$, and therefore also to $u = \sum_i \langle x, v_i\rangle v_i$ (indeed $\langle u, z\rangle = \sum_i \langle x, v_i\rangle\langle v_i, z\rangle = 0$). Since $x = u + z$, the Pythagorean theorem (<a href="ch05.html#e5-10">&sect;6.1 Exercise 10</a>) gives</p>
+        <div class="math-display">$$\|x\|^2 = \|u\|^2 + \|z\|^2. \tag{*}$$</div>
+        <p>By orthonormality,</p>
+        <div class="math-display">$$\begin{aligned} \|u\|^2 = \langle u, u\rangle &= \sum_{i,j} \langle x, v_i\rangle\overline{\langle x, v_j\rangle}\,\langle v_i, v_j\rangle \\ &= \sum_{i=1}^n |\langle x, v_i\rangle|^2. \end{aligned}$$</div>
+        <p>Substituting into $(*)$,</p>
+        <div class="math-display">$$\|x\|^2 = \sum_{i=1}^n |\langle x, v_i\rangle|^2 + \|z\|^2 \ge \sum_{i=1}^n |\langle x, v_i\rangle|^2,$$</div>
+        <p>which proves (a).</p>
+        <p><strong>(b)</strong> By the identity above, Bessel's inequality is an equality if and only if $\|z\|^2 = 0$, i.e. $z = 0$, i.e. $x = u$. If $x = u$, then $x = \sum_i \langle x, v_i\rangle v_i \in \operatorname{span}(S)$. Conversely, if $x \in \operatorname{span}(S)$, write $x = \sum_i a_i v_i$; taking the inner product with $v_j$ gives $\langle x, v_j\rangle = a_j$, so $x = \sum_i \langle x, v_i\rangle v_i = u$, i.e. $z = 0$. Hence equality holds if and only if $x \in \operatorname{span}(S)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la1/index.html">선형대수학1</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

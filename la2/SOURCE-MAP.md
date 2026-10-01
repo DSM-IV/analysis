@@ -9,6 +9,12 @@
 - `Lecture 5 - Section 5.2 (9월 15일 화요일).pdf` — 16장 슬라이드 (영문, 9/15 강의분 — 9/10에 선게시; 원본 파일명 끝의 " (1)" 제거하고 복사)
 - `5.1 Linear Algebra Solution.pdf` — §5.1 추천 연습문제(Friedberg) 풀이 9쪽 (문항: 1(a)–(k), 3(b)(d), 4(e)(g)(j), 11, 14, 15(a), 16(a), 17)
 - `5.2 Linear Algebra Solution.pdf` — §5.2 추천 연습문제 풀이 6쪽 (문항: 1(a)–(h), 2(a)(d)(e), 3(a)(d)(e)(f), 7, 8, 9(a), 10, 11, 12, 18, 19)
+- `Lecture 6,7 - Section 5.4 (9월 22일 화요일, 9월 29일 화요일).pdf` — 26장 슬라이드 (영문, Lecture 6·7 합본, 2026-10-01 반영)
+- `Section 6.1.pdf` — 22장 슬라이드 (영문, 게시판 "Lecture Note (Section 6.1)", 9/30 게시; 강의일 표기 없음)
+- `5.4 Linear Algebra Solution.pdf` — §5.4 추천 연습문제 풀이 6쪽 (문항: 1(a)–(g), 2(c)(e), 6(a)(d), 9(a)(d), 10(a)(d), 17, 18)
+- `6.1 Linear Algebra Solution.pdf` — §6.1 추천 연습문제 풀이 8쪽 (문항: 1(a)–(h), 5, 8(a)–(c), 9(a)(b), 10, 11, 13, 15, 20) — LaTeX 문서
+- `6.2 Linear Algebra Solution.pdf` — §6.2 추천 연습문제 풀이 5쪽 (문항: 1(a)–(g), 2(f)(g)(i), 4, 9, 10, 16(a)(b)) — LaTeX 문서. §6.2 강의 노트는 아직 없음(ch06은 연습문제 선공개)
+- (사용 안 함) Desktop의 `2026 선대2 TF 분반.pdf` — TF 분반 강의실·학생 명단(개인정보) → 리포에 복사하지 않음
 
 **소스가 영문 슬라이드** → en-formal = verbatim 전사, ko-formal = 번역. 컨벤션은 `analysis2/`와 동일(analysis2/ch01.html 규약 주석) + 아래 la2 고유 규칙.
 **슬라이드 PDF는 텍스트 추출이 불가**(한글 워드프로세서 수식이 글리프 없는 문자로 나옴) → 반드시 Read 도구로 페이지를 **시각적으로** 읽어 전사한다.
@@ -29,14 +35,17 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-09-10 현재)
+## 전체 구조 (2026-10-01 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
 | ch01 | 예비 사항: 선형대수학 I 복습 | Lecture 1 (24장) | 29 (EX 1) | 4 | — |
 | ch02 | 5.1 고유값과 고유벡터 | Lecture 2 (14장) + Lecture 3 (17장) + §5.1 풀이 | 33 | 3 | 8 |
 | ch03 | 5.2 대각화가능성 | Lecture 4 (16장) + Lecture 5 (16장) + §5.2 풀이 | 26 | 1 | 11 |
-| 계 | | | **88** | **8** | **19** (+ ch01 EX 1 = 풀이 대상 **22**, THM 2.25·THM 3.21 자체 증명 포함) |
+| ch04 | 5.4 불변부분공간과 케일리-해밀턴 정리 | Lecture 6·7 (26장) + §5.4 풀이 | 21 | 2 | 7 (+ c4-8 자체 증명) |
+| ch05 | 6.1 내적과 노름 | Section 6.1 노트 (22장) + §6.1 풀이 | 28 | 4 | 9 |
+| ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 풀이만 (강의 전) | 0 | 1 | 6 |
+| 계 | | | **137** | **15** | **41** (+ ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **45**) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -69,6 +78,23 @@
 27. L5 p5 Lemma 진술 끝이 "then $v_1 = v_2 = \cdots = O_V$"로 $= v_k$가 빠짐 — p6 상단의 온전한 재수록판("$\cdots = v_k = O_V$")을 c3-18에 전사. L4 p7 (2) "Thus the property that a polynomial $f(t)\in P(F)$ depends heavily on the field $F$."는 "splits" 누락 비문 — en verbatim, ko는 바른 뜻. L4 p11 Theorem 5.7 증명은 상계만 다룸(하계 $1 \le \dim E_\lambda$는 고유벡터 존재로 자명) — verbatim.
 28. L5 p11 Step 4 마지막 도식 "$Bu_i = \lambda u_i = [\lambda v_i]_\alpha$ … $T(v_i) = \lambda v_i$": $\lambda$에 첨자가 없음 — $u_i$마다 고유값이 다를 수 있으므로 $\lambda_i$가 정확. en·ko 모두 원문대로.
 29. L4 p14 Example 4: (2)는 $E_{\lambda_1} = N(T-\lambda_1 I)$(연산자), (3)은 $E_{\lambda_2} = N([T]_\beta - \lambda_2 I)$(행렬)로 표기 혼용 — 값에 영향 없음, verbatim.
+30. L6-7 p4 Definition and Remark (1): $W = \operatorname{span}(\{T^\ell(x) \mid \ell \ge 1\})$ — $x = T^0(x)$를 포함해야 하므로 $\ell \ge 0$ (p16 Theorem 5.22는 $\ell \ge 0$). en verbatim + Note, ko 바른 뜻.
+31. L6-7 p10 Lemma 증명: k=1 줄 "det(A) = det(B₁)×det(B₂)" — 정리 5.21의 기호가 섞임, det(B)×det(D)여야 함. en verbatim + Note.
+32. L6-7 p11 Example (1)(2): $V = P_n(\mathbb{R})$는 $n+1$차원이므로 특성다항식은 $(-1)^{n+1}t^{n+1}$, $(-1)^{n+1}t(t-1)\cdots(t-n)$ (슬라이드 $(-1)^n$); (2)의 "characteristic polynomial of T₁"은 T₂. p12–13 (3)(4): span 목록 첫 항 "x²+2x+1"은 $f(x) = x^2+x+1$ (나머지 항은 옳음). en verbatim + Note, ko 바른 값.
+33. L6-7 p14 Example 5 (1): $T^2(v) = T(1,1,0,0) = (2,1,0,0) = 2T(v) - v$ — 슬라이드 "(2,2,0,0) = 2T(v)"는 계산 오류(결론 $T^2(v) \in \operatorname{span}(v, T(v))$는 성립). en verbatim + Note.
+34. L6-7 p25 Example 8: $Q^{-1}$의 (1,3) 성분은 $-2$ (슬라이드 $2$; 다음 줄 $D^nQ^{-1}$ 계산에는 $-2$로 바르게 쓰임). p26 "For example" $A^9$의 (1,3) 성분은 $32$ (슬라이드 $16$; δ 닫힌 식에 n=9를 넣어도 32). en verbatim + Note.
+35. L6-7 p24 소제목 "[A의 Diagonalization을 이용하는 방법]"은 슬라이드에 한국어로 인쇄 — en 패널에는 "[Method using the diagonalization of A]"로 옮기고 Note.
+36. §6.1 p7 Remark (1): $\langle v,w\rangle = [v]_\beta^t A\,\overline{[w]_\beta}$ (켤레 누락; p9는 켤레 표기). (3)의 가역성 논증은 $F=\mathbb{R}$에서만 그대로 — $F=\mathbb{C}$이면 $[u]_\beta = \overline{[v]_\beta}$인 $u$로 고쳐 씀. en verbatim + Note.
+37. §6.1 p10 Example 3 (a): 둘째 적분 "$\int_0^2 f_1(t)g(t)dt$" → "$\int_0^1 f_2(t)g(t)dt$". en verbatim + Note.
+38. §6.1 p14 Example 5 (Continued): "$\langle E_{ij},E_{k\ell}\rangle = E^*_{k\ell}E_{ij} = E_{\ell k}E_{ij}$" — 대각합 tr 누락. en verbatim + Note.
+39. **§6.1 p15 Example (수학적 오류)**: $C([-1,1])$ 위에서 $\langle f,g\rangle_1 = \int_0^1 f g\,dt$는 내적이 아니다((d) 위배 — $f(t)=\max(-t,0)$이면 $\langle f,f\rangle_1=0$). $\langle\cdot,\cdot\rangle_2$와 값 1/4, 0은 옳다. en verbatim + Note, ko 역주.
+40. §6.1 p22 Example 9 (1): 원시함수 "$\left[\frac{1}{2\pi(m-n)}e^{i(m-n)t}\right]$"는 $\left[\frac{1}{2\pi i(n-m)}e^{i(n-m)t}\right]_0^{2\pi}$ (값 0은 옳음); 끝줄 $\delta_{ij}$는 $\delta_{nm}$. en verbatim + Note.
+41. **§6.1 풀이 PDF #15(b) 오류**: "x = cy이면 ‖x+y‖ = ‖x‖+‖y‖"는 거짓(x = −y). 바른 결과는 "한 벡터가 다른 벡터의 **음이 아닌 실수배**". 우리 풀이는 바른 진술을 증명. 같은 PDF #5는 ⟨x,y⟩ 값을 계산하지 않음(바른 값 6+21i), #13 (4) "If x > 0"은 x ≠ 0의 오타, #10 마지막 줄 제곱 누락.
+42. L6-7 p14 Example 5 (1): "(∵) One can directly show that T(w) ⊂ W" — ∈의 오기. en verbatim + Note, ko는 ∈.
+43. L6-7 p18 Theorem 5.22 Proof of (2): "a_{j−1}T^{k−1}(v)" 등 j/k 혼용 — (1)에서 j=k이므로 표기 문제. en verbatim + Note, ko는 k로 통일 + 역주.
+44. §6.1 p16 Theorem 6.1 증명 (d): "⟨x,x⟩ > 0 by the definition" — x ≠ O_V 조건 누락. p21 Remark (3): 정규화는 영벡터가 아닌 벡터들의 직교집합에서만 가능(직교집합은 0을 포함할 수 있음). en verbatim + Note, ko 바른 뜻 + 역주.
+45. §6.1 p17 Definition: "the norm of length of x" — "norm or length"의 오기. en verbatim + Note, ko "노름(길이)".
+46. **§5.4 풀이 PDF #1(d) 반례**: T(a,b)=(0,b), v=(1,0)은 T(v)=0이 생성하는 순환 부분공간을 쓰는데, 강의 정의(c4-5)는 영이 아닌 벡터만 생성원으로 허용 → 우리 풀이는 T(a,b)=(0,a), v=(1,0) (v가 생성: ℝ², T(v)=(0,1)이 생성: y축)으로 교체.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -218,3 +244,110 @@ Lecture 4, 16장 + Lecture 5, 16장. 카드 26 (RECALL 1, THM 7(LEM 1·COR 1 포
 | e3-12 | EX 5.2-12 | #12 (a) E_λ(T)=E_{λ⁻¹}(T⁻¹) (b) T 대각화가능 ⇒ T⁻¹ 대각화가능 | 증명 | |
 | e3-18 | EX 5.2-18 | #18 (a) 동시 대각화가능 연산자는 교환 (b) 행렬 | 증명 | 정의(#17)를 진술에 포함 |
 | e3-19 | EX 5.2-19 | #19 T 대각화가능 ⇒ T, Tᵐ 동시 대각화가능 | 증명 | |
+
+### ch04.html — 5.4 불변부분공간과 케일리-해밀턴 정리 / §5.4 Invariant Subspaces and the Cayley–Hamilton Theorem
+Lecture 6·7 합본, 26장 (p1 제목 제외). 카드 21 (DEF 2, THM 6(LEM 1·COR 1 포함), REM 4, EXAM 9) + note 2 + 연습문제 7. 자체 증명: c4-8 Example 4 (3).
+섹션: `§5.4 Invariant Subspaces and the Cayley–Hamilton Theorem · 불변부분공간과 케일리-해밀턴 정리` → `연습문제 · Exercises (Friedberg §5.4)`. Theorem 5.23은 p7(진술, c4-9)과 p20(재진술+증명, c4-18) 두 카드. Theorem 5.21은 p8 진술·p9 재진술+증명을 카드 하나(c4-12)로.
+
+| id | 배지 | 슬라이드 | 한국어 제목 / English title (— Note = 원문 오류 주석) | src-ref |
+|---|---|---|---|---|
+| c4-1 | REM | p2 상 | 고유벡터가 생성하는 부분공간의 불변성 / An Eigenvector Spans a Subspace Mapped into Itself |  |
+| c4-2 | DEF | p2 중 | $T$-불변 부분공간 / $T$-Invariant Subspace |  |
+| c4-3 | EXAM 1 | p2 하 | $T$-불변 부분공간의 기본 예 / Basic Examples of $T$-Invariant Subspaces |  |
+| c4-4 | EXAM 2 | p3 | $\mathbb{R}^3$ 위의 연산자의 불변 부분공간 / Invariant Subspaces of an Operator on $\mathbb{R}^3$ |  |
+| c4-5 | DEF | p4 | 벡터가 생성하는 $T$-순환 부분공간 / The $T$-Cyclic Subspace Generated by a Vector — Note |  |
+| c4-6 | EXAM 3 | p5 상 | $x$축과 같은 순환 부분공간 / A Cyclic Subspace Equal to the $x$-Axis |  |
+| c4-7 | REM | p5 하 | $xy$-평면과 같은 순환 부분공간 / A Cyclic Subspace Equal to the $xy$-Plane |  |
+| c4-8 | EXAM 4 | p6 | 미분연산자의 순환 부분공간 / Cyclic Subspaces of the Differentiation Operator |  |
+| note04-1 | NOTE | p7 상 | (서술 단락) /  |  |
+| c4-9 | THM 5.23 | p7 중 | 케일리-해밀턴 정리 / The Cayley–Hamilton Theorem |  |
+| c4-10 | REM | p7 중하 | 행렬로 정의된 연산자에 대한 케일리-해밀턴 정리 / The Cayley–Hamilton Theorem for the Operator Defined by a Matrix |  |
+| c4-11 | EXAM A | p7 하 | 2×2 행렬에 대한 케일리-해밀턴 정리의 확인 / Checking the Cayley–Hamilton Theorem for a 2×2 Matrix |  |
+| note04-2 | NOTE | p8 상 | (서술 단락) /  |  |
+| c4-12 | THM 5.21 | p8 하 + p9 | $T_W$의 특성다항식은 $T$의 특성다항식을 나눈다 / The Characteristic Polynomial of $T_W$ Divides That of $T$ |  |
+| c4-13 | LEM | p10 | 블록 상삼각행렬의 행렬식 / The Determinant of a Block Upper Triangular Matrix — Note |  |
+| c4-14 | EXAM | p11–p13 | $P_n(\mathbb{R})$ 위의 두 연산자와 순환 부분공간으로의 제한 / Two Operators on $P_n(\mathbb{R})$ and Their Restrictions to Cyclic Subspaces — Note |  |
+| c4-15 | EXAM 5 | p14 – p15 상 | $\mathbb{R}^4$ 위의 연산자의 불변 부분공간 / An Invariant Subspace of an Operator on $\mathbb{R}^4$ — Note |  |
+| c4-16 | REM | p15 하 – p16 상 | $T_W$를 이용한 $T$의 특성다항식 연구 / Using $T_W$ to Study the Characteristic Polynomial of $T$ |  |
+| c4-17 | THM 5.22 | p16 – p20 상 | 순환 부분공간으로의 제한의 특성다항식 / The Characteristic Polynomial of the Restriction to a Cyclic Subspace — Note |  |
+| c4-18 | THM 5.23 | p20 | 케일리-해밀턴 정리의 증명 / Proof of the Cayley–Hamilton Theorem |  |
+| c4-19 | COR | p21 상 | 행렬에 대한 케일리-해밀턴 정리 / The Cayley–Hamilton Theorem for Matrices |  |
+| c4-20 | EXAM 7 | p21 – p22 상 | 케일리-해밀턴 정리를 이용한 $A^{2024}$의 계산 / Computing $A^{2024}$ by the Cayley–Hamilton Theorem |  |
+| c4-21 | EXAM 8 | p22 – p26 | 케일리-해밀턴 정리와 대각화를 이용한 $A^{10}$의 계산 / Computing $A^{10}$ by the Cayley–Hamilton Theorem and by Diagonalization — Note |  |
+
+연습문제 (Friedberg §5.4 추천문제; 진술은 재서술, 풀이는 자체 작성):
+
+| id | 배지 | 문항 | 유형 | 기준값 |
+|---|---|---|---|---|
+| e4-1 | EX 5.4-1 | Friedberg §5.4 #1 (a)–(g) — 참·거짓 판정 | 풀이 | F T F F T T T |
+| e4-2 | EX 5.4-2 | Friedberg §5.4 #2 (c), (e) — 부분공간의 $T$-불변성 판정 | 풀이 | (c) 예 (e) 아니오 |
+| e4-6 | EX 5.4-6 | Friedberg §5.4 #6 (a), (d) — $T$-순환 부분공간의 순서기저 | 풀이 | (a) {z,Tz,T²z} (d) {z,Tz} |
+| e4-9 | EX 5.4-9 | Friedberg §5.4 #9 (a), (d) — 두 가지 방법으로 구하는 $T_W$의 특성다항식 | 풀이 | (a) −t³+3t²−3t (d) t²−3t |
+| e4-10 | EX 5.4-10 | Friedberg §5.4 #10 (a), (d) — $T_W$의 특성다항식은 $T$의 특성다항식을 나눈다 | 풀이 | (a) t(t−1)(t²−3t+3) (d) t²(t−3)² |
+| e4-17 | EX 5.4-17 | Friedberg §5.4 #17 — 행렬의 거듭제곱들이 생성하는 부분공간의 차원 | 증명 |  |
+| e4-18 | EX 5.4-18 | Friedberg §5.4 #18 (a)–(c) — 특성다항식을 이용한 가역성과 역행렬 | 풀이 | (c) A⁻¹=(1 −1 −2;0 ½ 3/2;0 0 −1) |
+
+### ch05.html — 6.1 내적과 노름 / §6.1 Inner Products and Norms
+Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, REM 8(NOTE 1·RECALL 1 포함), EXAM 12) + note 4 + 연습문제 9.
+섹션: `Chapter 6. Inner Product Spaces · 제6장 내적공간`(p2–4) → `§6.1 Inner Products and Norms · 내적과 노름`(p5–22) → `연습문제 · Exercises (Friedberg §6.1)`.
+
+| id | 배지 | 슬라이드 | 한국어 제목 / English title (— Note = 원문 오류 주석) | src-ref |
+|---|---|---|---|---|
+| c5-1 | REM 1 | p2 | $\mathbb{R}^3$에서의 길이, 거리, 각 / Length, Distance, and Angle in $\mathbb{R}^3$ |  |
+| c5-2 | REM 2 | p3 | $\mathbb{R}^n$에서의 길이와 각 / Length and Angle in $\mathbb{R}^n$ |  |
+| note05-1 | NOTE | p4 상 | (서술 단락) /  |  |
+| c5-3 | NOTE | p4 하 | 기본 가정: $F = \mathbb{R}$ 또는 $\mathbb{C}$ / Standing Assumption: $F = \mathbb{R}$ or $\mathbb{C}$ |  |
+| note05-2 | NOTE | p5 상 | (서술 단락) /  |  |
+| c5-4 | DEF | p5 중 | 내적 / Inner Product |  |
+| c5-5 | REM | p5 하 | 첫째 성분에 대한 선형성 / Linearity in the First Component |  |
+| c5-6 | EXAM 1 | p6 상 | $F^n$ 위의 내적 / An Inner Product on $F^n$ |  |
+| c5-7 | DEF | p6 하 | 표준내적과 점곱 / The Standard Inner Product and the Dot Product |  |
+| c5-8 | REM | p7 | 기저에 대한 내적의 행렬 / The Matrix of an Inner Product Relative to a Basis — Note |  |
+| c5-9 | EXAM 1 | p8 | $F^n$ 위의 내적 (재방문) / An Inner Product on $F^n$ (Revisited) |  |
+| c5-10 | EXAM 2 | p9 | 내적의 스칼라배 / Scalar Multiples of an Inner Product |  |
+| c5-11 | EXAM 3 | p10 | $C([0,1])$ 위의 적분 내적 / An Integral Inner Product on $C([0,1])$ — Note |  |
+| c5-12 | EXAM | p11 | 내적의 켤레는 내적이 아니다 / The Conjugate of an Inner Product Is Not an Inner Product |  |
+| c5-13 | DEF | p12 상 | 켤레전치행렬 / Conjugate Transpose |  |
+| c5-14 | EXAM 4 | p12 중 | 켤레전치행렬의 계산 / Computing a Conjugate Transpose |  |
+| c5-15 | REM | p12 하 | $y^*x$로서의 표준내적 / The Standard Inner Product as $y^*x$ |  |
+| c5-16 | EXAM 5 | p13 – p14 | $M_{n \times n}(F)$ 위의 프로베니우스 내적 / The Frobenius Inner Product on $M_{n \times n}(F)$ — Note |  |
+| c5-17 | DEF | p15 상 | 내적공간 / Inner Product Spaces |  |
+| c5-18 | EXAM | p15 하 | $C([-1,1])$ 위의 두 적분식 / Two Integral Pairings on $C([-1,1])$ — Note |  |
+| c5-19 | THM 6.1 | p16 | 내적의 기본 성질 / Basic Properties of Inner Products — Note |  |
+| c5-20 | DEF | p17 상 | 노름 (길이) / Norm (Length) — Note |  |
+| c5-21 | EXAM 6 | p17 중 | 표준 노름은 유클리드 길이이다 / The Standard Norm Is the Euclidean Length |  |
+| note05-3 | NOTE | p17 중하 | (서술 단락) /  |  |
+| c5-22 | THM 6.2 | p17 하 – p19 상 | 노름의 성질: 코시-슈바르츠 부등식과 삼각부등식 / Properties of the Norm: Cauchy–Schwarz and Triangle Inequalities |  |
+| c5-23 | EXAM 7 | p19 하 | $\mathbb{R}^n$에서의 코시-슈바르츠 부등식과 삼각부등식 / Cauchy–Schwarz and Triangle Inequalities in $\mathbb{R}^n$ |  |
+| c5-24 | RECALL | p20 상 | $\mathbb{R}^2$, $\mathbb{R}^3$에서의 각과 수직 / Angle and Perpendicularity in $\mathbb{R}^2$ and $\mathbb{R}^3$ |  |
+| c5-25 | DEF | p20 하 | 직교집합과 정규직교집합 / Orthogonal and Orthonormal Sets |  |
+| c5-26 | REM | p21 상 | 크로네커 델타, 스칼라배, 정규화 / The Kronecker Delta, Scaling, and Normalizing — Note |  |
+| c5-27 | EXAM 8 | p21 하 | $F^3$에서 직교집합의 정규화 / Normalizing an Orthogonal Set in $F^3$ |  |
+| note05-4 | NOTE | p22 상 | (서술 단락) /  |  |
+| c5-28 | EXAM 9 | p22 하 | 정규직교집합 $\{e^{int}\}$ / The Orthonormal Set $\{e^{int}\}$ — Note |  |
+
+연습문제 (Friedberg §6.1 추천문제):
+
+| id | 배지 | 문항 | 유형 | 기준값 |
+|---|---|---|---|---|
+| e5-1 | EX 6.1-1 | Friedberg §6.1 #1 (a)–(h) — 참·거짓 판정 | 풀이 | T T F F F F F T |
+| e5-5 | EX 6.1-5 | Friedberg §6.1 #5 — 행렬로 주어진 $\mathbb{C}^2$ 위의 내적 | 풀이 | ⟨x,y⟩=6+21i |
+| e5-8 | EX 6.1-8 | Friedberg §6.1 #8 (a)–(c) — 내적이 되지 못하는 함수 | 풀이 |  |
+| e5-9 | EX 6.1-9 | Friedberg §6.1 #9 (a), (b) — 기저와의 내적 | 증명 |  |
+| e5-10 | EX 6.1-10 | Friedberg §6.1 #10 — 피타고라스 정리 | 증명 |  |
+| e5-11 | EX 6.1-11 | Friedberg §6.1 #11 — 평행사변형 법칙 | 풀이 |  |
+| e5-13 | EX 6.1-13 | Friedberg §6.1 #13 — 두 내적의 합 | 증명 |  |
+| e5-15 | EX 6.1-15 | Friedberg §6.1 #15 (a), (b) — 코시-슈바르츠 부등식과 삼각부등식에서의 등호 | 증명 | (b) 음이 아닌 실수배 — 게시 풀이 오류(ERRATA 41) |
+| e5-20 | EX 6.1-20 | Friedberg §6.1 #20 (a), (b) — 극화 항등식 | 증명 |  |
+
+### ch06.html — 6.2 그람-슈미트 과정과 직교여공간 / §6.2 The Gram–Schmidt Process and Orthogonal Complements
+**강의 노트 없음 — 연습문제 선공개 (2026-10-01).** note06-1(편집자 안내: 강의 예정, 풀이에 쓰는 정의·공식은 각 풀이 안에서 밝힘) + 연습문제 6. 강의 슬라이드가 올라오면 note06-1을 삭제하고 연습문제 섹션 앞에 c6-n 카드를 넣는다.
+
+| id | 배지 | 문항 | 유형 | 기준값 |
+|---|---|---|---|---|
+| e6-1 | EX 6.2-1 | Friedberg §6.2 #1 (a)–(g) — 참·거짓 판정 | 풀이 | F T T F T F T |
+| e6-2 | EX 6.2-2 | Friedberg §6.2 #2 (f), (g), (i) — 그람-슈미트 과정, 정규직교기저, 푸리에 계수 | 풀이 | GROUND-TRUTH §6.2 (게시 풀이와 일치) |
+| e6-4 | EX 6.2-4 | Friedberg §6.2 #4 — ℂ³의 부분집합의 직교여공간 | 풀이 | S^⊥ = span{(i, −(1+i)/2, 1)} |
+| e6-9 | EX 6.2-9 | Friedberg §6.2 #9 — W와 W^⊥의 정규직교기저 | 풀이 | {(i,0,1)/√2}; {(1,0,i)/√2, (0,1,0)} |
+| e6-10 | EX 6.2-10 | Friedberg §6.2 #10 — W^⊥를 따르는 W 위로의 사영과 ‖T(x)‖≤‖x‖ | 증명 | |
+| e6-16 | EX 6.2-16 | Friedberg §6.2 #16 (a), (b) — 베셀 부등식과 등호 조건 | 증명 | |
