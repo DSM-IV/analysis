@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.3 일차결합, 생성, 일차독립 (§1.3 Linear Combinations, Span, and Linear Independence) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1 (MATH221) 3단원 — 일차결합(linear combination)과 생성(span), 생성은 S를 포함하는 가장 작은 부분공간이라는 명제, 생성집합(spanning set), 일차종속(linearly dependent)과 일차독립(linearly independent)의 정의와 예, 표준벡터 e_i의 일차독립성, 중복 벡터(redundant vector)와 생성의 관계를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 고려대학교, 일차결합, linear combination, 생성, span, 생성집합, spanning set, 일차종속, linearly dependent, 일차독립, linearly independent, 크로네커 델타, Kronecker delta, 표준벡터, 부분공간, subspace, 벡터공간, vector space, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/ch03.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.3 일차결합, 생성, 일차독립 (§1.3 Linear Combinations, Span, and Linear Independence) — 선형대수학 1 한·영 대조">
+<meta property="og:description" content="일차결합과 생성, 가장 작은 부분공간으로서의 생성, 생성집합, 일차종속과 일차독립, 중복 벡터와 생성의 관계를 한국어·영어 대조로 정리한 선형대수학 1 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/ch03.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1.3 일차결합, 생성, 일차독립 (§1.3 Linear Combinations, Span, and Linear Independence) — 선형대수학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 1 (MATH221) 3단원 — 일차결합과 생성, 생성은 S를 포함하는 가장 작은 부분공간, 생성집합, 일차종속과 일차독립, 중복 벡터와 생성의 관계를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la1/ch03.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la1/ch03.html"
+}
+</script>
+<script>
+MathJax = {
+  loader: { load: ['ui/lazy'] },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- la1은 MathJax 4: 좁은 화면에서 긴 인라인·디스플레이 수식 자동 줄바꿈 (ui/lazy: 화면에 들어온 수식만 조판 — v4 전체 조판은 v3보다 ~7배 느림) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html" class="active">03</a>
+      <a href="ch04.html">04</a>
+      <a href="quiz1.html">퀴즈1 요약</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Unit 03</p>
+  <h1>1.3 일차결합, 생성, 일차독립<span>§1.3 Linear Combinations, Span, and Linear Independence</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c3-1"><span class="toc-num">EX</span> W가 부분공간임을 확인하기 <em>Check That W Is a Subspace</em></a></li>
+    <li><a href="#c3-2"><span class="toc-num">DEF 1.30</span> 일차결합 <em>Linear Combination</em></a></li>
+    <li><a href="#c3-3"><span class="toc-num">DEF 1.31</span> 생성(span) <em>Span</em></a></li>
+    <li><a href="#c3-4"><span class="toc-num">RECALL</span> V^k의 원소로서의 벡터 리스트 <em>A List of Vectors as an Element of V^k</em></a></li>
+    <li><a href="#c3-5"><span class="toc-num">EXAM 1.32</span> (1,1)과 (1,−1)은 ℝ²를 생성한다 <em>(1,1) and (1,−1) Span ℝ²</em></a></li>
+    <li><a href="#c3-6"><span class="toc-num">EXAM 1.32 (cont.)</span> xy-평면과 다항식 포함 여부 판정 <em>The xy-Plane and a Polynomial Membership Test</em></a></li>
+    <li><a href="#c3-7"><span class="toc-num">Q</span> 생성공간은 항상 부분공간인가? <em>Is a Span Always a Subspace?</em></a></li>
+    <li><a href="#c3-8"><span class="toc-num">PROP 1.33</span> 생성공간은 S를 포함하는 가장 작은 부분공간이다 <em>Span Is the Smallest Subspace Containing S</em></a></li>
+    <li><a href="#c3-9"><span class="toc-num">REM</span> 리스트의 생성공간, 그리고 교집합으로서의 생성공간 <em>Span of a List, and Span as an Intersection</em></a></li>
+    <li><a href="#c3-10"><span class="toc-num">DEF 1.34</span> 생성집합 <em>Spanning Set</em></a></li>
+    <li><a href="#c3-11"><span class="toc-num">Q</span> 집합이 중복되는 때는 언제인가? <em>When Is a Set Redundant?</em></a></li>
+    <li><a href="#c3-12"><span class="toc-num">DEF 1.35</span> 일차종속 <em>Linear Dependence</em></a></li>
+    <li><a href="#c3-13"><span class="toc-num">NOTE</span> 유한집합과 그 원소들의 리스트 <em>A Finite Set vs. Its List of Elements</em></a></li>
+    <li><a href="#c3-14"><span class="toc-num">EXAM 1.36</span> 기본적인 일차종속 리스트 <em>Basic Linearly Dependent Lists</em></a></li>
+    <li><a href="#c3-15"><span class="toc-num">EX</span> 스칼라배이면 일차종속인 쌍 <em>A Scalar Multiple Gives a Dependent Pair</em></a></li>
+    <li><a href="#c3-16"><span class="toc-num">EXAM 1.36 (cont.)</span> 중복된 벡터 제거하기 <em>Dropping the Redundant Vector</em></a></li>
+    <li><a href="#c3-17"><span class="toc-num">DEF 1.37</span> 일차독립 <em>Linear Independence</em></a></li>
+    <li><a href="#c3-18"><span class="toc-num">EXAM 1.38</span> 표준 열벡터는 일차독립이다 <em>The Standard Column Vectors Are Linearly Independent</em></a></li>
+    <li><a href="#c3-19"><span class="toc-num">EXAM 1.38 (cont.)</span> 단항식, 그리고 sin x와 cos x <em>Monomials, and sin x and cos x</em></a></li>
+    <li><a href="#c3-20"><span class="toc-num">RECALL</span> 일차독립의 다른 표현 <em>Reformulating Linear Independence</em></a></li>
+    <li><a href="#c3-21"><span class="toc-num">PROP 1.39</span> 일차종속 집합의 상위집합은 일차종속이다 <em>Supersets of Dependent Sets Are Dependent</em></a></li>
+    <li><a href="#c3-22"><span class="toc-num">COR 1.40</span> 일차독립 집합의 부분집합은 일차독립이다 <em>Subsets of Independent Sets Are Independent</em></a></li>
+    <li><a href="#c3-23"><span class="toc-num">LEM 1.41</span> 나머지의 생성공간에 속하는 벡터가 있으면 S는 일차종속이다 <em>A Vector in the Span of the Rest Makes S Dependent</em></a></li>
+    <li><a href="#c3-24"><span class="toc-num">PROP 1.42</span> 벡터를 제거해도 생성공간이 유지되는 경우 <em>When Removing a Vector Keeps the Span</em></a></li>
+    <li><a href="#c3-25"><span class="toc-num">PROP 1.43</span> 일차종속이면 중복된 벡터가 존재한다 <em>Dependence Means Some Vector Is Redundant</em></a></li>
+    <li><a href="#c3-26"><span class="toc-num">REM</span> 중복된 벡터 <em>Redundant Vectors</em></a></li>
+    <li><a href="#c3-27"><span class="toc-num">LEM 1.44</span> 생성공간 밖의 벡터를 추가해도 일차독립이 유지된다 <em>Adjoining a Vector Outside the Span Keeps Independence</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 1 (MATH221) 카드 작성 규약 (ch01–ch04 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 노트(손글씨 태블릿 노트)의 환경 하나 = 카드 하나. id는 단원 안의 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c3-10"), 노트 등장 순서대로 배치한다.
+     배지는 노트의 라벨과 전역 번호(1.1, 1.2, … )를 그대로 따른다:
+     Def 1.30 → DEF 1.30, Prop 1.33 → PROP 1.33, Lem 1.41 → LEM 1.41,
+     Cor 1.40 → COR 1.40, Ex 1.32 → EXAM 1.32, Exercise 1.27 → EX 1.27.
+     번호 없는 항목은 유형 배지만 (DEF / REM / NOTE / Q / RECALL / CLAIM / EXAM / EX).
+     한 환경 사이에 다른 카드나 증명이 끼어 순서를 지키기 위해 나눌 때는
+     뒤쪽 카드에 (cont.) 를 붙인다 (예: EXAM 1.36 (cont.)). 자체 순번은 id에만 쓴다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Def / Notation                 → card def-card  · DEF n / NOTATION n
+       Thm / Prop / Lem / Cor / Claim → card thm-card  · THM n / PROP n / LEM n / COR n / CLAIM
+       Rmk / Note / Recall / Q        → card rem-card  · REM n / NOTE n / RECALL / Q
+       Ex (Example)                   → card exam-card · EXAM n
+       Exercise                       → card ex-card   · EX n / EX
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num 만 둔다.
+  3) 지난 시간 요약(Last Time)과 오늘 일정(Today)은 카드로 만들지 않는다. 다만 요약에
+     새 내용이 덧붙은 경우 그 새 내용만 RECALL 카드 하나로 옮긴다. 강의·쪽 경계는
+     Lecture N · p.M 형태의 HTML 주석으로 표시한다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     노트에는 표제가 거의 없으므로 간결한 영문 편집 제목을 새로 붙인다.
+     제목 안에는 수식 구분자를 쓰지 않고 평문으로 적는다.
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 손글씨 본문 verbatim 전사. 강의자의 약어(v.s., subsp, l.c., l.i.,
+                   l.d., s.t., iff, WTS, Pf, b/c, w/, vec, col, coeffs, fin, def …)를
+                   그대로 두고, 약어 위에 작게 적힌 순수 풀이(gloss)는 옮기지 않는다.
+                   수학적 내용이 있는 색 글씨 곁주석은 괄호에 넣어 제자리에 둔다.
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     노트의 색, 밑줄, 동그라미는 옮기지 않는다. 손그림은 그림 설명 한 줄
+     (p.fig-note 안의 em, 대괄호로 시작하는 Figure 설명)로 바꾼다.
+  6) 노트에 증명(Pf: … □)이 적힌 명제는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+     en 쪽은 증명을 verbatim 전사하고, 소단계 끝의 빗금 상자는 span.part-end(▨)로,
+     마지막 □ 는 div.qed 로 옮긴다. ko 쪽 proof-content는 번역 전까지 `[번역 예정]` 한 줄.
+  7) 노트에 증명이 적혀 있지 않은 진술(Pf: Exercise, Pf: See FIS Thm …, Pf: Unit 1.3
+     Notes, 번호 없는 Exercise 등)은 진술과 Pf 줄을 그대로 en-formal에 옮기고,
+     ko-panel 안 div.formal 뒤에 PROOF-KO 마커, en-panel 안 div.en-formal 뒤에
+     PROOF-EN 마커를 각각 HTML 주석으로 둔다(나중에 우리 증명을 쓸 자리).
+     일부만 증명된 카드는 적힌 부분을 토글에 넣고 마커도 함께 둔다.
+  8) 번호 없는 서술 단락(Motivation, 실험, 연결 문장)은 버리지 않는다. 연속된 서술
+     덩어리마다 div.card.note-card 를 만들고 id는 note{단원 2자리}-{순번}
+     (예: note03-2), 배지는 NOTE, 본문은 동일한 2단 구조로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 열벡터는 bmatrix, 실수 집합은 \mathbb{R},
+     다항식 공간은 \mathbb{R}[x]_{\leq n}, 함수 공간은 \mathcal{F}(\mathbb{R},\mathbb{R}).
+     모순 표시 ※ 는 평문 문자로 둔다. 소스의 항목 라벨 (1)/(2), (a)/(b) 는
+     ol 대신 p 태그 앞에 strong 으로 그대로 적는다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 실체 참조로 쓴다.
+ 10) 소스의 오탈자는 en 쪽에 그대로 두고(고치지 않음) 오류 후보 목록에 따로 기록한다.
+ 11) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§1.3 Linear Combinations, Span, and Linear Independence · 1.3 일차결합, 생성, 일차독립</h2></div>
+
+<!-- ═══════════ Lecture 5 · p.6 ═══════════ -->
+
+<div class="card note-card" id="note03-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> 부분공간을 더 많이 만들고 싶다.</p>
+        <p>벡터공간 $V$와 $w_1, \dots, w_m \in V$가 주어졌을 때, $w_1, \dots, w_m$을 포함하는 부분공간 $W$를 어떻게 만들 수 있는가? (이것을 $W$의 뼈대라고 생각하라.)</p>
+        <p class="fig-note"><em>[그림: 축 $x, y, z$를 가진 $\mathbb{R}^3$. $w_1 = (1,1,0) = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}$은 $xy$-평면 위에 있고, $w_2 = (0,0,1) = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$은 $z$축 방향을 가리키며, 두 벡터를 지나는 평면이 그려져 있다. 아래 $W$에 대한 두 번째 추측에서 이 평면으로 화살표가 향한다]</em></p>
+        <p>이 경우 "시각적으로" 다음과 같이 추측할 수 있다.</p>
+        <div class="math-display">$$W = \mathbb{R}^3 \quad \text{또는} \quad W = \left\{ \begin{bmatrix} a \\ a \\ b \end{bmatrix} : a, b \in \mathbb{R} \right\}$$</div>
+        <p>($\begin{bmatrix} a \\ a \\ b \end{bmatrix} = a \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> We want to construct more subsps.</p>
+        <p>Given v.s. $V$ and $w_1, \dots, w_m \in V$, how to make a subsp $W$ that contains $w_1, \dots, w_m$? (imagine this as a skeleton of $W$)</p>
+        <p class="fig-note"><em>[Figure: $\mathbb{R}^3$ with axes $x, y, z$; $w_1 = (1,1,0) = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}$ lies in the $xy$-plane, $w_2 = (0,0,1) = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$ points along the $z$-axis, and the plane through both is drawn; an arrow from the second guess for $W$ below points to this plane]</em></p>
+        <p>In this case, "visually," guess that</p>
+        <div class="math-display">$$W = \mathbb{R}^3 \quad \text{or} \quad W = \left\{ \begin{bmatrix} a \\ a \\ b \end{bmatrix} : a, b \in \mathbb{R} \right\}$$</div>
+        <p>($\begin{bmatrix} a \\ a \\ b \end{bmatrix} = a \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card ex-card" id="c3-1">
+  <div class="card-head">
+    <span class="ex-num">EX</span>
+    <span class="ex-title">W가 부분공간임을 확인하기 <em>Check That W Is a Subspace</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>연습:</strong> $W$가 부분공간임을 확인하라.</p>
+        <p>($W = \left\{ \begin{bmatrix} a \\ a \\ b \end{bmatrix} : a, b \in \mathbb{R} \right\}$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>부분공간 판정법(정리 1.20)의 세 조건을 확인한다.</p>
+        <p><strong>(1)</strong> $a = b = 0$이면 $\begin{bmatrix} a \\ a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$이므로 $0 \in W$이다.</p>
+        <p><strong>(2)</strong> $u = \begin{bmatrix} a \\ a \\ b \end{bmatrix}$, $u' = \begin{bmatrix} a' \\ a' \\ b' \end{bmatrix} \in W$이면</p>
+        <div class="math-display">$$u + u' = \begin{bmatrix} a + a' \\ a + a' \\ b + b' \end{bmatrix} \in W$$</div>
+        <p>이다. 처음 두 성분이 같기 때문이다.</p>
+        <p><strong>(3)</strong> $c \in \mathbb{R}$이고 $u = \begin{bmatrix} a \\ a \\ b \end{bmatrix} \in W$이면 $cu = \begin{bmatrix} ca \\ ca \\ cb \end{bmatrix} \in W$이다.</p>
+        <p>따라서 $W$는 $\mathbb{R}^3$의 부분공간이다.</p>
+        <p><em>참고.</em> $W = \operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right)$이므로 명제 1.33으로도 알 수 있지만, 여기서는 판정법으로 직접 확인하였다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Exercise:</strong> Check $W$ is a subsp</p>
+        <p>($W = \left\{ \begin{bmatrix} a \\ a \\ b \end{bmatrix} : a, b \in \mathbb{R} \right\}$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We check the three conditions of the Subspace Criterion (Thm 1.20).</p>
+        <p><strong>(1)</strong> For $a = b = 0$, $\begin{bmatrix} a \\ a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$, so $0 \in W$.</p>
+        <p><strong>(2)</strong> If $u = \begin{bmatrix} a \\ a \\ b \end{bmatrix}$, $u' = \begin{bmatrix} a' \\ a' \\ b' \end{bmatrix} \in W$, then</p>
+        <div class="math-display">$$u + u' = \begin{bmatrix} a + a' \\ a + a' \\ b + b' \end{bmatrix} \in W,$$</div>
+        <p>since the first two entries agree.</p>
+        <p><strong>(3)</strong> If $c \in \mathbb{R}$ and $u = \begin{bmatrix} a \\ a \\ b \end{bmatrix} \in W$, then $cu = \begin{bmatrix} ca \\ ca \\ cb \end{bmatrix} \in W$.</p>
+        <p>Hence $W$ is a subsp of $\mathbb{R}^3$.</p>
+        <p><em>Remark.</em> Since $W = \operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right)$, this also follows from Prop 1.33, but here we verified it directly with the criterion.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c3-2">
+  <div class="card-head">
+    <span class="def-num">DEF 1.30</span>
+    <span class="def-title">일차결합 <em>Linear Combination</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1)</strong> $v \in V$가 $w_1, \dots, w_k \in V$의 일차결합이라는 것은 $v = \sum_{i=1}^{k} a_i w_i$를 만족하는 $a_1, \dots, a_k \in \mathbb{R}$이 존재한다는 것이다. ($a_i$: 일차결합의 계수)</p>
+        <p><strong>(2)</strong> $v \in V$가 $S$의 일차결합이라는 것은 ($\emptyset \neq S \subseteq V$일 때) $v$가 $w_1, \dots, w_k$의 일차결합이 되는 유한 부분집합 $\emptyset \neq T = \{w_1, \dots, w_k\} \subseteq S$가 존재한다는 것이다.</p>
+        <p><strong>(3)</strong> $v \in V$가 $\emptyset \subseteq V$의 일차결합이라는 것은 $v = 0$이라는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(1)</strong> $v \in V$ is a linear combination of $w_1, \dots, w_k \in V$ if $\exists\, a_1, \dots, a_k \in \mathbb{R}$ s.t. $v = \sum_{i=1}^{k} a_i w_i$. ($a_i$: coeff of l.c.)</p>
+        <!-- ═══════════ Lecture 5 · p.7 ═══════════ -->
+        <p><strong>(2)</strong> $v \in V$ is a l.c. of $S$ (where $\emptyset \neq S \subseteq V$) if $\exists$ finite subset $\emptyset \neq T = \{w_1, \dots, w_k\} \subseteq S$ s.t. $v$ is a l.c. of $w_1, \dots, w_k$.</p>
+        <p><strong>(3)</strong> $v \in V$ is a l.c. of $\emptyset \subseteq V$ if $v = 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c3-3">
+  <div class="card-head">
+    <span class="def-num">DEF 1.31</span>
+    <span class="def-title">생성(span) <em>Span</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1)</strong> $w_1, \dots, w_k \in V$의 생성공간(span)은 다음 부분집합이다.</p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}(w_1, \dots, w_k) &amp;:= \{ v \in V : v \text{는 } w_1, \dots, w_k \text{의 일차결합} \} \\ &amp;= \left\{ \sum_{i=1}^{k} a_i w_i : a_i \in \mathbb{R} \ \ \forall\, 1 \leq i \leq k \right\} \subseteq V \end{aligned}$$</div>
+        <p><strong>(2)</strong> $V$의 부분집합 $S$의 생성공간은 다음 부분집합이다.</p>
+        <div class="math-display">$$\operatorname{span}(S) := \{ v \in V : v \text{는 } S \text{의 일차결합} \} \subseteq V.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s</p>
+        <p><strong>(1)</strong> The span of $w_1, \dots, w_k \in V$ is a subset</p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}(w_1, \dots, w_k) &amp;:= \{ v \in V : v \text{ is a l.c. of } w_1, \dots, w_k \} \\ &amp;= \left\{ \sum_{i=1}^{k} a_i w_i : a_i \in \mathbb{R} \ \ \forall\, 1 \leq i \leq k \right\} \subseteq V \end{aligned}$$</div>
+        <p><strong>(2)</strong> The span of subset $S$ of $V$ is a subset</p>
+        <div class="math-display">$$\operatorname{span}(S) := \{ v \in V : v \text{ is a l.c. of } S \} \subseteq V.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6 · p.1 ═══════════ -->
+
+<div class="card rem-card" id="c3-4">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">V^k의 원소로서의 벡터 리스트 <em>A List of Vectors as an Element of V^k</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>(정의 1.31 (1)) $w_1, \dots, w_k \in V$는 리스트로 볼 수 있다.</p>
+        <div class="math-display">$$(w_1, \dots, w_k) \in V^k := \{ (v_1, \dots, v_k) : v_i \in V \ \ \forall i \}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>(Def 1.31 (1)) $w_1, \dots, w_k \in V$: can treat this as a list</p>
+        <div class="math-display">$$(w_1, \dots, w_k) \in V^k := \{ (v_1, \dots, v_k) : v_i \in V \ \ \forall i \}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6 · p.2 ═══════════ -->
+
+<div class="card exam-card" id="c3-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.32</span>
+    <span class="exam-title">(1,1)과 (1,−1)은 ℝ²를 생성한다 <em>(1,1) and (1,−1) Span ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(a)</strong> $\operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right) = \mathbb{R}^2$.</p>
+        <p class="fig-note"><em>[그림: 원점에서 $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$과 $\begin{bmatrix} 1 \\ -1 \end{bmatrix}$을 그린 $\mathbb{R}^2$. 이 두 벡터의 상수배를 변으로 하는 점선 평행사변형의 대각선으로 세 번째 벡터가 그려져 있다]</em></p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$W := \operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right) \subseteq \mathbb{R}^2$이라 하자(정의에 의해).</p>
+        <p>보이고자 하는 것: 모든 $\begin{bmatrix} x \\ y \end{bmatrix} \in \mathbb{R}^2$에 대해 $\begin{bmatrix} x \\ y \end{bmatrix} \in W$.</p>
+        <div class="math-display">$$W = \left\{ \underbrace{a \begin{bmatrix} 1 \\ 1 \end{bmatrix} + b \begin{bmatrix} 1 \\ -1 \end{bmatrix}}_{\begin{bmatrix} a+b \\ a-b \end{bmatrix}} : a, b \in \mathbb{R} \right\},$$</div>
+        <p>이므로 다음을 만족하는 $a$, $b$를 구해야 한다.</p>
+        <div class="math-display">$$\begin{bmatrix} a+b \\ a-b \end{bmatrix} = \begin{bmatrix} x \\ y \end{bmatrix} \iff \left. \begin{aligned} a + b &amp;= x \quad (1) \\ a - b &amp;= y \quad (2) \end{aligned} \right\} \ \text{(연립일차방정식)}$$</div>
+        <p>소거법을 써 보자.</p>
+        <p>$(1) + (2)$: $2a = x + y \Rightarrow a = \dfrac{x+y}{2}$</p>
+        <p>(대입) $(1)$: $\dfrac{x+y}{2} + b = x \Rightarrow b = \dfrac{x}{1} - \dfrac{x+y}{2} = \dfrac{x-y}{2}$ &nbsp;($\dfrac{x}{1} = \dfrac{2x}{2}$)</p>
+        <p>($a = \frac{x+y}{2}$, $b = \frac{x-y}{2}$는 (1)과 (2)의 해이다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(a)</strong> $\operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right) = \mathbb{R}^2$.</p>
+        <p class="fig-note"><em>[Figure: $\mathbb{R}^2$ with $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 1 \\ -1 \end{bmatrix}$ drawn from the origin, and a third vector drawn as the diagonal of a dashed parallelogram whose sides are multiples of these two]</em></p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf: Let $W := \operatorname{span}\left( \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right) \subseteq \mathbb{R}^2$ by def.</p>
+        <p>WTS: $\forall \begin{bmatrix} x \\ y \end{bmatrix} \in \mathbb{R}^2$, $\begin{bmatrix} x \\ y \end{bmatrix} \in W$.</p>
+        <div class="math-display">$$W = \left\{ \underbrace{a \begin{bmatrix} 1 \\ 1 \end{bmatrix} + b \begin{bmatrix} 1 \\ -1 \end{bmatrix}}_{\begin{bmatrix} a+b \\ a-b \end{bmatrix}} : a, b \in \mathbb{R} \right\},$$</div>
+        <p>so need to solve $a$ &amp; $b$ for</p>
+        <div class="math-display">$$\begin{bmatrix} a+b \\ a-b \end{bmatrix} = \begin{bmatrix} x \\ y \end{bmatrix} \iff \left. \begin{aligned} a + b &amp;= x \quad (1) \\ a - b &amp;= y \quad (2) \end{aligned} \right\} \ \text{(system of linear equations)}$$</div>
+        <p>Let's try the method of elimination:</p>
+        <p>$(1) + (2)$: $2a = x + y \Rightarrow a = \dfrac{x+y}{2}$</p>
+        <p>(substitution) $(1)$: $\dfrac{x+y}{2} + b = x \Rightarrow b = \dfrac{x}{1} - \dfrac{x+y}{2} = \dfrac{x-y}{2}$ &nbsp;($\dfrac{x}{1} = \dfrac{2x}{2}$)</p>
+        <p>($a = \frac{x+y}{2}$, $b = \frac{x-y}{2}$: solution to (1) &amp; (2))</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c3-6">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.32 (cont.)</span>
+    <span class="exam-title">xy-평면과 다항식 포함 여부 판정 <em>The xy-Plane and a Polynomial Membership Test</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) &amp;= \left\{ a \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\} \\ &amp;= \underbrace{\left\{ \begin{bmatrix} a \\ b \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\}}_{xy\text{-평면}} \not\ni \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \end{aligned}$$</div>
+        <div class="math-display">$$\Rightarrow \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) \subsetneq \mathbb{R}^3$$</div>
+        <p><strong>(c)</strong> $2 + 3x + x^2 \in \operatorname{span}(1, 1+x, (1+x)^2) \subseteq \mathbb{R}[x]_{\leq 2}$인가?</p>
+        <p>풀이: 다음을 만족하는 $a, b, c$를 구한다.</p>
+        <div class="math-display">$$\begin{aligned} 2 + 3x + x^2 &amp;= a \cdot 1 + b(1+x) + c(1+x)^2 \qquad \left( (1+x)^2 = 1^2 + 2 \cdot 1 \cdot x + x^2 \right) \\ &amp;= a + b + bx + c + 2cx + cx^2 \\ &amp;= (a+b+c) + (b+2c)x + cx^2 \end{aligned}$$</div>
+        <p>계수를 비교하면 $\Downarrow$</p>
+        <div class="math-display">$$\left. \begin{aligned} (1) &amp;\quad a + b + c = 2 \\ (2) &amp;\quad \phantom{a + {}} b + 2c = 3 \\ (3) &amp;\quad \phantom{a + b + {}} c = 1 \end{aligned} \right\} \begin{aligned} &amp;\Rightarrow (2): b + 2 \cdot 1 = 3 \\ &amp;\Rightarrow b = 1 \\ &amp;\Rightarrow (1): a + 1 + 1 = 2 \Rightarrow a = 0 \end{aligned}$$</div>
+        <p>따라서 $2 + 3x + x^2 = 0 \cdot 1 + (1+x) + (1+x)^2$은 $1, 1+x, (1+x)^2$의 일차결합이다. 그러므로 <strong>그렇다</strong>!</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) &amp;= \left\{ a \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\} \\ &amp;= \underbrace{\left\{ \begin{bmatrix} a \\ b \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\}}_{xy\text{-plane}} \not\ni \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \end{aligned}$$</div>
+        <!-- ═══════════ Lecture 6 · p.3 ═══════════ -->
+        <div class="math-display">$$\Rightarrow \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) \subsetneq \mathbb{R}^3$$</div>
+        <p><strong>(c)</strong> $2 + 3x + x^2 \in \operatorname{span}(1, 1+x, (1+x)^2) \subseteq \mathbb{R}[x]_{\leq 2}$?</p>
+        <p>Sol: Solve $a, b, c$ for</p>
+        <div class="math-display">$$\begin{aligned} 2 + 3x + x^2 &amp;= a \cdot 1 + b(1+x) + c(1+x)^2 \qquad \left( (1+x)^2 = 1^2 + 2 \cdot 1 \cdot x + x^2 \right) \\ &amp;= a + b + bx + c + 2cx + cx^2 \\ &amp;= (a+b+c) + (b+2c)x + cx^2 \end{aligned}$$</div>
+        <p>compare coeffs $\Downarrow$</p>
+        <div class="math-display">$$\left. \begin{aligned} (1) &amp;\quad a + b + c = 2 \\ (2) &amp;\quad \phantom{a + {}} b + 2c = 3 \\ (3) &amp;\quad \phantom{a + b + {}} c = 1 \end{aligned} \right\} \begin{aligned} &amp;\Rightarrow (2): b + 2 \cdot 1 = 3 \\ &amp;\Rightarrow b = 1 \\ &amp;\Rightarrow (1): a + 1 + 1 = 2 \Rightarrow a = 0 \end{aligned}$$</div>
+        <p>Thus, $2 + 3x + x^2 = 0 \cdot 1 + (1+x) + (1+x)^2$ is a l.c. of $1, 1+x, (1+x)^2$. So <strong>YES</strong>!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c3-7">
+  <div class="card-head">
+    <span class="rem-num">Q</span>
+    <span class="rem-title">생성공간은 항상 부분공간인가? <em>Is a Span Always a Subspace?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예 1.32 (a)(b)에서 생성공간이 부분공간임을 볼 수 있다.</p>
+        <p>$\operatorname{span}(S) \subseteq V$는 항상 부분공간인가?</p>
+        <p>$\Downarrow$ <strong>그렇다</strong></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Ex 1.32(a)(b), note that spans are subsps.</p>
+        <p>Is $\operatorname{span}(S) \subseteq V$ always a subsp?</p>
+        <p>$\Downarrow$ <strong>Yes</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-8">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.33</span>
+    <span class="thm-title">생성공간은 S를 포함하는 가장 작은 부분공간이다 <em>Span Is the Smallest Subspace Containing S</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다. 그러면 모든 $S \subseteq V$에 대해 $\operatorname{span}(S)$는 $S$를 포함하는 $V$의 가장 작은 부분공간이다. (다시 말해, $W \subseteq V$가 부분공간이고 $S \subseteq W$이면, $\operatorname{span}(S) \subseteq V$는 부분공간이고 $\operatorname{span}(S) \subseteq W$이다.)</p>
+        <p>증명: FIS 정리 1.5 참조 (부분공간 판정법을 사용한다).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\operatorname{span}(S)$는 $S$의 원소들의 (유한) 일차결합 전체의 집합이며, $\operatorname{span}(\emptyset) = \{0\}$이다.</p>
+        <p><strong>(i) $\operatorname{span}(S)$는 부분공간이다.</strong> $S = \emptyset$이면 $\operatorname{span}(S) = \{0\}$이고, $0 \in \{0\}$, $0 + 0 = 0$, $c \cdot 0 = 0$이므로 부분공간이다. 이제 $S \neq \emptyset$이라 하자.</p>
+        <p>(1) $s \in S$를 하나 잡으면 $0 = 0 \cdot s \in \operatorname{span}(S)$이다.</p>
+        <p>(2) $u, u' \in \operatorname{span}(S)$라 하자. 서로 다른 $s_1, \dots, s_k \in S$와 서로 다른 $t_1, \dots, t_l \in S$가 있어서 $u = \sum_{i=1}^k a_i s_i$, $u' = \sum_{j=1}^l b_j t_j$이다. 두 유한집합의 합집합을 $\{r_1, \dots, r_m\} = \{s_1, \dots, s_k\} \cup \{t_1, \dots, t_l\}$ ($r_i$는 서로 다름)이라 하자. $u$를 $r_1, \dots, r_m$의 일차결합으로 쓰되, $s_i$ 중 어느 것도 아닌 $r_p$의 계수는 $0$으로 둔다. 그러면 $u = \sum_{p=1}^m \alpha_p r_p$이다. 마찬가지로 $u' = \sum_{p=1}^m \beta_p r_p$이다. 벡터공간의 공리(분배법칙, 덧셈의 교환·결합법칙)에 의해</p>
+        <div class="math-display">$$u + u' = \sum_{p=1}^m (\alpha_p + \beta_p) r_p \in \operatorname{span}(S).$$</div>
+        <p>(3) $c \in \mathbb{R}$이면 $cu = \sum_{i=1}^k (ca_i) s_i \in \operatorname{span}(S)$이다.</p>
+        <p>부분공간 판정법(정리 1.20)에 의해 $\operatorname{span}(S)$는 $V$의 부분공간이다.</p>
+        <p><strong>(ii) $S \subseteq \operatorname{span}(S)$.</strong> $s \in S$이면 $s = 1 \cdot s$는 $S$의 원소의 일차결합이다.</p>
+        <p><strong>(iii) 최소성.</strong> $W$가 부분공간이고 $S \subseteq W$라 하자. 먼저 다음을 보인다: 임의의 $w_1, \dots, w_k \in W$와 $a_1, \dots, a_k \in \mathbb{R}$에 대해 $\sum_{i=1}^k a_i w_i \in W$이다. $k$에 대한 귀납법을 쓴다. $k = 0$이면 빈 합은 $0 \in W$ (조건 (1))이다. $k - 1$까지 성립한다고 하면, $\sum_{i=1}^{k-1} a_i w_i \in W$이고 조건 (3)에 의해 $a_k w_k \in W$이므로, 조건 (2)에 의해 $\sum_{i=1}^{k} a_i w_i = \sum_{i=1}^{k-1} a_i w_i + a_k w_k \in W$이다.</p>
+        <p>이제 $u \in \operatorname{span}(S)$이면 $u = \sum a_i s_i$ ($s_i \in S \subseteq W$)이므로 위 사실에 의해 $u \in W$이다. ($S = \emptyset$이면 $u = 0$, 즉 $k = 0$인 빈 합이므로 조건 (1)에 의해 $u \in W$이다.) 즉 $\operatorname{span}(S) \subseteq W$이다.</p>
+        <p>(i), (ii), (iii)에 의해 $\operatorname{span}(S)$는 $S$를 포함하는 가장 작은 부분공간이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s. Then $\forall S \subseteq V$, $\operatorname{span}(S)$ is the smallest subsp of $V$ containing $S$. (In other words, if $W \subseteq V$ subsp and $S \subseteq W$, then $\operatorname{span}(S) \subseteq V$ <!-- ═══════════ Lecture 6 · p.4 ═══════════ --> subsp and $\operatorname{span}(S) \subseteq W$)</p>
+        <p>Pf: See FIS Thm 1.5 (uses Subsp Crit).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$\operatorname{span}(S)$ is the set of all (finite) l.c.s of elements of $S$, and $\operatorname{span}(\emptyset) = \{0\}$.</p>
+        <p><strong>(i) $\operatorname{span}(S)$ is a subsp.</strong> If $S = \emptyset$, then $\operatorname{span}(S) = \{0\}$ is a subsp since $0 \in \{0\}$, $0 + 0 = 0$, $c \cdot 0 = 0$. Now let $S \neq \emptyset$.</p>
+        <p>(1) Pick any $s \in S$; then $0 = 0 \cdot s \in \operatorname{span}(S)$.</p>
+        <p>(2) Let $u, u' \in \operatorname{span}(S)$. There are distinct $s_1, \dots, s_k \in S$ and distinct $t_1, \dots, t_l \in S$ with $u = \sum_{i=1}^k a_i s_i$, $u' = \sum_{j=1}^l b_j t_j$. Let $\{r_1, \dots, r_m\} = \{s_1, \dots, s_k\} \cup \{t_1, \dots, t_l\}$ be the union (the $r_p$ distinct). Write $u$ as a l.c. of $r_1, \dots, r_m$, giving coefficient $0$ to every $r_p$ that is none of the $s_i$; so $u = \sum_{p=1}^m \alpha_p r_p$. Likewise $u' = \sum_{p=1}^m \beta_p r_p$. By the v.s. axioms (distributivity, commutativity and associativity of $+$),</p>
+        <div class="math-display">$$u + u' = \sum_{p=1}^m (\alpha_p + \beta_p) r_p \in \operatorname{span}(S).$$</div>
+        <p>(3) For $c \in \mathbb{R}$, $cu = \sum_{i=1}^k (ca_i) s_i \in \operatorname{span}(S)$.</p>
+        <p>By the Subspace Criterion (Thm 1.20), $\operatorname{span}(S)$ is a subsp of $V$.</p>
+        <p><strong>(ii) $S \subseteq \operatorname{span}(S)$.</strong> For $s \in S$, $s = 1 \cdot s$ is a l.c. of elements of $S$.</p>
+        <p><strong>(iii) Minimality.</strong> Let $W$ be a subsp with $S \subseteq W$. First we show: for any $w_1, \dots, w_k \in W$ and $a_1, \dots, a_k \in \mathbb{R}$, $\sum_{i=1}^k a_i w_i \in W$. Induct on $k$. For $k = 0$ the empty sum is $0 \in W$ (condition (1)). If it holds for $k - 1$, then $\sum_{i=1}^{k-1} a_i w_i \in W$ and $a_k w_k \in W$ by condition (3), so $\sum_{i=1}^{k} a_i w_i = \sum_{i=1}^{k-1} a_i w_i + a_k w_k \in W$ by condition (2).</p>
+        <p>Now if $u \in \operatorname{span}(S)$, then $u = \sum a_i s_i$ with $s_i \in S \subseteq W$, so $u \in W$ by the above. (If $S = \emptyset$, then $u = 0$, the empty sum with $k = 0$, so $u \in W$ by condition (1).) Thus $\operatorname{span}(S) \subseteq W$.</p>
+        <p>By (i), (ii), (iii), $\operatorname{span}(S)$ is the smallest subsp containing $S$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c3-9">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">리스트의 생성공간, 그리고 교집합으로서의 생성공간 <em>Span of a List, and Span as an Intersection</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1)</strong> $v_1, \dots, v_n \in V$이면</p>
+        <div class="math-display">$$\operatorname{span}(v_1, \dots, v_n) \overset{\text{정의}}{=} \operatorname{span}\bigl( \underbrace{\{ v_i : 1 \leq i \leq n \}}_{= \{ v_1, \dots, v_n \} \ (\text{모든 } i \neq j \text{에 대해 } v_i \neq v_j \text{일 때})} \bigr) \subseteq V \ \text{부분공간} \ \ (\text{명제 1.33에 의해})$$</div>
+        <p>(그렇지 않으면 중복된 것을 제거한다.)</p>
+        <p><strong>(2)</strong> $S \subseteq V$라 하자. 그러면 명제 1.33과 주의 1.29(2)로부터</p>
+        <div class="math-display">$$\Rightarrow \operatorname{span}(S) = \bigcap_{\substack{W \subseteq V \text{ 부분공간} \\ S \subseteq W}} W.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(1)</strong> If $v_1, \dots, v_n \in V$, then</p>
+        <div class="math-display">$$\operatorname{span}(v_1, \dots, v_n) \overset{\text{by def}}{=} \operatorname{span}\bigl( \underbrace{\{ v_i : 1 \leq i \leq n \}}_{= \{ v_1, \dots, v_n \} \text{ if } v_i \neq v_j \ \forall i \neq j} \bigr) \subseteq V \ \text{subsp} \ \ (\text{by Prop 1.33})$$</div>
+        <p>(otherwise, remove repetitions)</p>
+        <p><strong>(2)</strong> $S \subseteq V$. Then Prop 1.33 and Rmk 1.29(2)</p>
+        <div class="math-display">$$\Rightarrow \operatorname{span}(S) = \bigcap_{\substack{W \subseteq V \text{ subsp} \\ S \subseteq W}} W.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c3-10">
+  <div class="card-head">
+    <span class="def-num">DEF 1.34</span>
+    <span class="def-title">생성집합 <em>Spanning Set</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $W \subseteq V$는 부분공간이다. $W$의 생성집합이란 $W = \operatorname{span}(S)$를 만족하는 부분집합 $S \subseteq W$이다. 이때 $S$가 $W$를 생성한다고 말한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $W \subseteq V$ subsp. A spanning set of $W$ is a subset $S \subseteq W$ s.t. $W = \operatorname{span}(S)$. In this case, we say $S$ spans (or generates) $W$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>Linear (In)dependence · 일차종속과 일차독립</h2></div>
+
+<div class="card note-card" id="note03-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \in \mathbb{R}^2$를 생각하자.</p>
+        <p class="fig-note"><em>[그림: 원점에서 $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$, $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$, $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$을 그린 $\mathbb{R}^2$. 벡터 $\begin{bmatrix} a \\ b \end{bmatrix}$와 그 성분 $a$, $b$를 축 위에 표시하는 점선이 그려져 있다]</em></p>
+        <div class="math-display">$$\begin{bmatrix} a \\ b \end{bmatrix} = \underbrace{\underbrace{a \begin{bmatrix} 1 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 1 \end{bmatrix}}_{\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \text{의 일차결합}} + 0 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix}}_{\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \text{의 일차결합}}$$</div>
+        <div class="math-display">$$\text{따라서 } \ \mathbb{R}^2 \supseteq \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right) \supseteq \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) = \mathbb{R}^2$$</div>
+        <p>$\Rightarrow$ $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$에 $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$을 추가해도 부분공간이 커지지 않는다 (즉 "중복"이다!).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> Consider $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \in \mathbb{R}^2$.</p>
+        <!-- ═══════════ Lecture 6 · p.5 ═══════════ -->
+        <p class="fig-note"><em>[Figure: $\mathbb{R}^2$ with $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$, $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ drawn from the origin, and a vector $\begin{bmatrix} a \\ b \end{bmatrix}$ with dashed lines marking its components $a$ and $b$ on the axes]</em></p>
+        <div class="math-display">$$\begin{bmatrix} a \\ b \end{bmatrix} = \underbrace{\underbrace{a \begin{bmatrix} 1 \\ 0 \end{bmatrix} + b \begin{bmatrix} 0 \\ 1 \end{bmatrix}}_{\text{l.c. of } \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}} + 0 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix}}_{\text{l.c. of } \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}}$$</div>
+        <div class="math-display">$$\text{So } \ \mathbb{R}^2 \supseteq \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right) \supseteq \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) = \mathbb{R}^2$$</div>
+        <p>$\Rightarrow$ adding $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ to $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ does not grow subsp (so "redundant"!)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c3-11">
+  <div class="card-head">
+    <span class="rem-num">Q</span>
+    <span class="rem-title">집합이 중복되는 때는 언제인가? <em>When Is a Set Redundant?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>질문:</strong> $S \subseteq V$가 "중복"인지 어떻게 판별하는가?</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Q:</strong> How to tell when $S \subseteq V$ is "redundant"?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note03-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실험을 해 보자.</p>
+        <div class="math-display">$$\left. \begin{aligned} \begin{bmatrix} 1 \\ 1 \end{bmatrix} &amp;= 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 1 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} + 0 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad (1) \\ \begin{bmatrix} 1 \\ 1 \end{bmatrix} &amp;= 0 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 0 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} + 1 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad (2) \end{aligned} \right\} \ \begin{bmatrix} 1 \\ 1 \end{bmatrix} \text{을 } \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \text{의 일차결합으로 표현}$$</div>
+        <div class="math-display">$$\overset{(1)-(2)}{\Longrightarrow} \ 0 = \begin{bmatrix} 1 \\ 1 \end{bmatrix} - \begin{bmatrix} 1 \\ 1 \end{bmatrix} = 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 1 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} - 1 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
+        <p>$0 =$ $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}$의 일차결합 (계수가 0이 아닌 것이 있음)</p>
+        <p>$0$을 $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$의 (계수가 0이 아닌) 일차결합으로 나타내는 것은 불가능하다. 왜냐하면</p>
+        <div class="math-display">$$0 = a \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + b \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} \Rightarrow 0 = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow a = b = 0.$$</div>
+        <p>$\Downarrow$ 이 실험을 기준으로 삼자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let's experiment:</p>
+        <div class="math-display">$$\left. \begin{aligned} \begin{bmatrix} 1 \\ 1 \end{bmatrix} &amp;= 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 1 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} + 0 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad (1) \\ \begin{bmatrix} 1 \\ 1 \end{bmatrix} &amp;= 0 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 0 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} + 1 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} \quad (2) \end{aligned} \right\} \ \begin{bmatrix} 1 \\ 1 \end{bmatrix} \text{ as l.c. of } \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$\overset{(1)-(2)}{\Longrightarrow} \ 0 = \begin{bmatrix} 1 \\ 1 \end{bmatrix} - \begin{bmatrix} 1 \\ 1 \end{bmatrix} = 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 1 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} - 1 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
+        <p>$0 =$ l.c. of $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ w/ nonzero coeffs</p>
+        <p>Impossible for $0$ as a l.c. of $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ b/c</p>
+        <div class="math-display">$$0 = a \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} + b \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} \Rightarrow 0 = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow a = b = 0.$$</div>
+        <p>$\Downarrow$ benchmark this experiment</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 6 · p.6 ═══════════ -->
+
+<div class="card def-card" id="c3-12">
+  <div class="card-head">
+    <span class="def-num">DEF 1.35</span>
+    <span class="def-title">일차종속 <em>Linear Dependence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1)</strong> $v_1, \dots, v_n \in V$가 일차종속이라는 것은 다음이 성립한다는 것이다.</p>
+        <div class="math-display">$$\exists\, (a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\} \ \text{ 이 있어서 } \ \sum_{i=1}^{n} a_i v_i = 0.$$</div>
+        <p>($(a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\}$은 $a_j \neq 0$인 $j$가 존재한다는 뜻이다. $X \setminus Y := \{ x \in X : x \notin Y \}$.)</p>
+        <p>($a_1 = \cdots = a_n = 0$이면 $\sum_{i=1}^{n} a_i v_i = 0$은 항상 성립하므로 이 경우는 제외한다.)</p>
+        <p><strong>(2)</strong> 부분집합 $S \subseteq V$가 일차종속이라는 것은 $T \neq \emptyset$ (따라서 $k \geq 1$)이고 (서로 다른) $v_1, \dots, v_k$가 (1)의 의미에서 일차종속인 $T = \{ v_1, \dots, v_k \} \subseteq S$가 존재한다는 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(1)</strong> $v_1, \dots, v_n \in V$ is linearly dependent if</p>
+        <div class="math-display">$$\exists\, (a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\} \ \text{ s.t. } \ \sum_{i=1}^{n} a_i v_i = 0.$$</div>
+        <p>($(a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\}$ means $\exists j$ s.t. $a_j \neq 0$; $X \setminus Y := \{ x \in X : x \notin Y \}$)</p>
+        <p>($\sum_{i=1}^{n} a_i v_i = 0$ holds when $a_1 = \cdots = a_n = 0$, so we are skipping that case)</p>
+        <p><strong>(2)</strong> Subset $S \subseteq V$ is l.d. if $\exists\, T = \{ v_1, \dots, v_k \} \subseteq S$ s.t. $T \neq \emptyset$ (so $k \geq 1$) and $v_1, \dots, v_k$ is l.d. as in (1).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c3-13">
+  <div class="card-head">
+    <span class="rem-num">NOTE</span>
+    <span class="rem-title">유한집합과 그 원소들의 리스트 <em>A Finite Set vs. Its List of Elements</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>생성공간의 경우와 마찬가지로, (서로 다른) $v_1, \dots, v_n$으로 이루어진 $S = \{ v_1, \dots, v_n \} \subseteq V$에 대하여 $S$가 일차종속일 필요충분조건은 $v_1, \dots, v_n$이 일차종속인 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Similar to span, if $S = \{ v_1, \dots, v_n \} \subseteq V$, then $S$ l.d. if and only if $v_1, \dots, v_n$ l.d.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c3-14">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.36</span>
+    <span class="exam-title">기본적인 일차종속 리스트 <em>Basic Linearly Dependent Lists</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $v_1, \dots, v_n \in V$이다.</p>
+        <p><strong>(1)</strong> $v_i = v_j$인 $i \neq j$가 존재하면 $v_1, \dots, v_n$은 일차종속이다.</p>
+        <div class="math-display">$$\left( \text{왜냐하면 } \ 0 = 1 \cdot v_i - 1 \cdot v_j = \sum_{\ell=1}^{n} a_\ell v_\ell \ \text{, 여기서 } \ a_\ell = \begin{cases} 0 &amp; \ell \neq i, j \text{일 때} \\ 1 &amp; \ell = i \text{일 때} \\ -1 &amp; \ell = j \text{일 때} \end{cases} \right)$$</div>
+        <p><strong>(2)</strong> $v_i = 0$인 $i$가 존재하면 $v_1, \dots, v_n$은 일차종속이다. 왜냐하면 $0 = 1 \cdot v_i$는 계수가 0이 아닌 것을 갖는 $v_1, \dots, v_n$의 일차결합이기 때문이다.</p>
+        <p><strong>(3)</strong> $\mathbb{R}^2$</p>
+        <p class="fig-note"><em>[그림: 원점에서 같은 직선을 따라 $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$과 $\begin{bmatrix} 2 \\ 2 \end{bmatrix}$를 그린 $\mathbb{R}^2$]</em></p>
+        <p>그러면 $0 = 2 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} - 1 \cdot \begin{bmatrix} 2 \\ 2 \end{bmatrix}$이므로 $\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 2 \end{bmatrix}$는 일차종속이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $v_1, \dots, v_n \in V$.</p>
+        <p><strong>(1)</strong> $\exists\, i \neq j$ s.t. $v_i = v_j \Rightarrow v_1, \dots, v_n$ l.d.</p>
+        <div class="math-display">$$\left( \text{b/c } \ 0 = 1 \cdot v_i - 1 \cdot v_j = \sum_{\ell=1}^{n} a_\ell v_\ell \ \text{ where } \ a_\ell = \begin{cases} 0 &amp; \text{if } \ell \neq i, j \\ 1 &amp; \text{if } \ell = i \\ -1 &amp; \text{if } \ell = j \end{cases} \right)$$</div>
+        <p><strong>(2)</strong> $\exists\, i$ s.t. $v_i = 0$, then $v_1, \dots, v_n$ is l.d., b/c <!-- ═══════════ Lecture 6 · p.7 ═══════════ --> $0 = 1 \cdot v_i$ a l.c. of $v_1, \dots, v_n$ w/ a nonzero coeff.</p>
+        <p><strong>(3)</strong> $\mathbb{R}^2$</p>
+        <p class="fig-note"><em>[Figure: $\mathbb{R}^2$ with $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 2 \\ 2 \end{bmatrix}$ drawn from the origin along the same line]</em></p>
+        <p>Then $\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 2 \end{bmatrix}$ is l.d. b/c $0 = 2 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} - 1 \cdot \begin{bmatrix} 2 \\ 2 \end{bmatrix}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card ex-card" id="c3-15">
+  <div class="card-head">
+    <span class="ex-num">EX</span>
+    <span class="ex-title">스칼라배이면 일차종속인 쌍 <em>A Scalar Multiple Gives a Dependent Pair</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\Downarrow$ 일반화</p>
+        <p><strong>연습:</strong> 어떤 $c \in \mathbb{R}$에 대해 $v_2 = cv_1$이면 $v_1, v_2$는 일차종속임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$v_2 = cv_1$이면</p>
+        <div class="math-display">$$c \cdot v_1 + (-1) \cdot v_2 = cv_1 - cv_1 = 0$$</div>
+        <p>이고, 계수 $(c, -1) \neq (0, 0)$ ($-1 \neq 0$)이므로 $v_1, v_2$는 일차종속이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\Downarrow$ generalization</p>
+        <p><strong>Exercise:</strong> If $v_2 = cv_1$ for some $c \in \mathbb{R}$, then $v_1, v_2$ is l.d.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>If $v_2 = cv_1$, then</p>
+        <div class="math-display">$$c \cdot v_1 + (-1) \cdot v_2 = cv_1 - cv_1 = 0,$$</div>
+        <p>and the coefficients $(c, -1) \neq (0, 0)$ (as $-1 \neq 0$), so $v_1, v_2$ is l.d.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c3-16">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.36 (cont.)</span>
+    <span class="exam-title">중복된 벡터 제거하기 <em>Dropping the Redundant Vector</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(4)</strong> 동기에서 $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}$은 일차종속이지만 $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$은 일차종속이 아니다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(4)</strong> From Motivation, $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ l.d. but $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ is not l.d.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c3-17">
+  <div class="card-head">
+    <span class="def-num">DEF 1.37</span>
+    <span class="def-title">일차독립 <em>Linear Independence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1)</strong> $v_1, \dots, v_n \in V$가 일차종속이 아니면 일차독립이라고 한다.</p>
+        <p><strong>(2)</strong> $S \subseteq V$가 일차종속이 아니면 일차독립이라고 한다.</p>
+        <p>(정의에 의해 $\emptyset$은 일차종속이 아니다. $\Rightarrow \emptyset$은 일차독립이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(1)</strong> $v_1, \dots, v_n \in V$ is linearly independent if it's not l.d.</p>
+        <p><strong>(2)</strong> $S \subseteq V$ is l.i. if not l.d.</p>
+        <p>(By def, $\emptyset$ is not l.d. $\Rightarrow \emptyset$ is l.i.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c3-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.38</span>
+    <span class="exam-title">표준 열벡터는 일차독립이다 <em>The Standard Column Vectors Are Linearly Independent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $\mathbb{R}^n$에서 각 $1 \leq i \leq n$에 대해, $e_i \in \mathbb{R}^n$을 다음을 만족하는 열벡터라 하자.</p>
+        <div class="math-display">$$(e_i)_{j1} = \underbrace{\begin{cases} 1 &amp; j = i \text{일 때} \\ 0 &amp; j \neq i \text{일 때} \end{cases}}_{=:\ \delta_{ij} \ \text{(크로네커 델타)}}$$</div>
+        <p>(예: $e_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$, $e_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$, $e_n = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}$)</p>
+        <p><strong>주장:</strong> $e_1, \dots, e_n$은 일차독립이다. ($\mathbb{R}^2$의 $\underbrace{\begin{bmatrix} 1 \\ 0 \end{bmatrix}}_{= e_1}, \underbrace{\begin{bmatrix} 0 \\ 1 \end{bmatrix}}_{= e_2}$의 일반화이다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <div class="math-display">$$0 = \sum_{i=1}^{n} a_i e_i = \sum_{i=1}^{n} a_i \begin{bmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{bmatrix} \quad (i\text{번째 성분(행)은 } 1 \text{이고 나머지는 } 0)$$</div>
+        <div class="math-display">$$= \begin{bmatrix} a_1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ a_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \cdots + \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ a_n \end{bmatrix} = \begin{bmatrix} a_1 \\ a_2 \\ a_3 \\ \vdots \\ a_n \end{bmatrix}$$</div>
+        <p>$\Rightarrow a_1 = \cdots = a_n = 0 \Rightarrow e_1, \dots, e_n$은 일차독립이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> In $\mathbb{R}^n$, $\forall\, 1 \leq i \leq n$, let $e_i \in \mathbb{R}^n$ be a col vec s.t.</p>
+        <div class="math-display">$$(e_i)_{j1} = \underbrace{\begin{cases} 1 &amp; \text{if } j = i \\ 0 &amp; \text{if } j \neq i \end{cases}}_{=:\ \delta_{ij} \ \text{(Kronecker delta)}}$$</div>
+        <p>(e.g. $e_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$, $e_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$, $e_n = \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}$)</p>
+        <!-- ═══════════ Lecture 6 · p.8 ═══════════ -->
+        <p><strong>Claim:</strong> $e_1, \dots, e_n$ is l.i. (gen'lizes $\underbrace{\begin{bmatrix} 1 \\ 0 \end{bmatrix}}_{= e_1}, \underbrace{\begin{bmatrix} 0 \\ 1 \end{bmatrix}}_{= e_2}$ in $\mathbb{R}^2$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf:</p>
+        <div class="math-display">$$0 = \sum_{i=1}^{n} a_i e_i = \sum_{i=1}^{n} a_i \begin{bmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{bmatrix} \quad (i\text{th entry/row is } 1, \text{ rest is } 0)$$</div>
+        <div class="math-display">$$= \begin{bmatrix} a_1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ a_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \cdots + \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ a_n \end{bmatrix} = \begin{bmatrix} a_1 \\ a_2 \\ a_3 \\ \vdots \\ a_n \end{bmatrix}$$</div>
+        <p>$\Rightarrow a_1 = \cdots = a_n = 0 \Rightarrow e_1, \dots, e_n$ l.i.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c3-19">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.38 (cont.)</span>
+    <span class="exam-title">단항식, 그리고 sin x와 cos x <em>Monomials, and sin x and cos x</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(2)</strong> $1, x, x^2, \dots, x^n \in \mathbb{R}[x]_{\leq n}$은 일차독립이다.</p>
+        <p>증명: 연습 문제.</p>
+        <p><strong>(3)</strong> MATH161: $\sin x, \cos x \in \mathcal{F}(\mathbb{R}, \mathbb{R})$은 일차독립이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(2)</strong> $a_0 + a_1 x + \cdots + a_n x^n = 0$이 (함수로서) 모든 $x \in \mathbb{R}$에 대해 성립한다고 하고 $f(x) = \sum_{j=0}^n a_j x^j$라 하자. $f$는 영함수이므로 모든 도함수도 영함수이고, 특히 $f^{(k)}(0) = 0$ ($0 \leq k \leq n$)이다. 한편 $j \lt k$이면 $(x^j)^{(k)} = 0$이고, $j \geq k$이면 $(x^j)^{(k)} = j(j-1)\cdots(j-k+1)\,x^{j-k}$이므로 $x = 0$에서 $j = k$일 때만 $0$이 아니며 그 값은 $k!$이다. 따라서</p>
+        <div class="math-display">$$0 = f^{(k)}(0) = k!\, a_k \quad \Rightarrow \quad a_k = 0 \quad (k = 0, 1, \dots, n).$$</div>
+        <p>그러므로 $1, x, \dots, x^n$은 일차독립이다.</p>
+        <p><strong>(3)</strong> $a \sin x + b \cos x = 0$이 모든 $x \in \mathbb{R}$에 대해 성립한다고 하자. $x = 0$을 대입하면 $a \cdot 0 + b \cdot 1 = 0$이므로 $b = 0$이다. $x = \pi/2$를 대입하면 $a \cdot 1 + b \cdot 0 = 0$이므로 $a = 0$이다. 따라서 $\sin x, \cos x$는 일차독립이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(2)</strong> $1, x, x^2, \dots, x^n \in \mathbb{R}[x]_{\leq n}$ is l.i.</p>
+        <p>Pf: Exercise.</p>
+        <p><strong>(3)</strong> MATH161: $\sin x, \cos x \in \mathcal{F}(\mathbb{R}, \mathbb{R})$ is l.i.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(2)</strong> Suppose $a_0 + a_1 x + \cdots + a_n x^n = 0$ as a function, i.e. for all $x \in \mathbb{R}$, and let $f(x) = \sum_{j=0}^n a_j x^j$. Since $f$ is the zero function, so are all its derivatives; in particular $f^{(k)}(0) = 0$ for $0 \leq k \leq n$. On the other hand, $(x^j)^{(k)} = 0$ if $j \lt k$, and $(x^j)^{(k)} = j(j-1)\cdots(j-k+1)\,x^{j-k}$ if $j \geq k$; at $x = 0$ only $j = k$ survives, with value $k!$. Hence</p>
+        <div class="math-display">$$0 = f^{(k)}(0) = k!\, a_k \quad \Rightarrow \quad a_k = 0 \quad (k = 0, 1, \dots, n).$$</div>
+        <p>So $1, x, \dots, x^n$ is l.i.</p>
+        <p><strong>(3)</strong> Suppose $a \sin x + b \cos x = 0$ for all $x \in \mathbb{R}$. Plugging in $x = 0$ gives $a \cdot 0 + b \cdot 1 = 0$, so $b = 0$. Plugging in $x = \pi/2$ gives $a \cdot 1 + b \cdot 0 = 0$, so $a = 0$. Hence $\sin x, \cos x$ is l.i.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 7 · p.1 ═══════════ -->
+
+<div class="card rem-card" id="c3-20">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">일차독립의 다른 표현 <em>Reformulating Linear Independence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(1′)</strong> $v_1, \dots, v_n \in V$는 일차종속이 아니면 일차독립이다.</p>
+        <div class="math-display">$$\left( \text{즉, } \ \sum_{i=1}^{n} a_i v_i = 0 \Rightarrow a_i = 0 \ \ \forall i \right)$$</div>
+        <p><strong>(2′)</strong> $S \subseteq V$는 일차종속이 아니면 일차독립이다. ($\emptyset$은 일차독립이다.)</p>
+        <p>($S$의 모든 유한 부분집합이 일차독립이라는 뜻이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(1′)</strong> $v_1, \dots, v_n \in V$ is l.i. if not l.d.</p>
+        <div class="math-display">$$\left( \text{i.e., } \ \sum_{i=1}^{n} a_i v_i = 0 \Rightarrow a_i = 0 \ \ \forall i \right)$$</div>
+        <p><strong>(2′)</strong> $S \subseteq V$ is l.i. if not l.d. ($\emptyset$ is l.i.)</p>
+        <p>(means every fin subset of $S$ is l.i.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-21">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.39</span>
+    <span class="thm-title">일차종속 집합의 상위집합은 일차종속이다 <em>Supersets of Dependent Sets Are Dependent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $S_1 \subseteq S_2 \subseteq V$이다. $S_1$이 일차종속이면 $S_2$도 일차종속이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$S_1$이 일차종속이므로 $v_1, \dots, v_k$가 일차종속인 $T = \{ v_1, \dots, v_k \} \subseteq S_1$이 존재한다.</p>
+        <p>$T \subseteq S_1 \subseteq S_2$이므로 ($\Rightarrow T \subseteq S_2 \Rightarrow$) 정의에 의해 $S_2$는 $T$를 통해 일차종속이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $S_1 \subseteq S_2 \subseteq V$. $S_1$ l.d. $\Rightarrow S_2$ l.d.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf: $S_1$ l.d. $\Rightarrow \exists\, T = \{ v_1, \dots, v_k \} \subseteq S_1$ s.t. $v_1, \dots, v_k$ l.d.</p>
+        <p>Since $T \subseteq S_1 \subseteq S_2$, ($\Rightarrow T \subseteq S_2 \Rightarrow$) $S_2$ l.d. via $T$ by def.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 7 · p.2 ═══════════ -->
+
+<div class="card thm-card" id="c3-22">
+  <div class="card-head">
+    <span class="thm-num">COR 1.40</span>
+    <span class="thm-title">일차독립 집합의 부분집합은 일차독립이다 <em>Subsets of Independent Sets Are Independent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\Downarrow$ 대우</p>
+        <p>$V$는 벡터공간이고 $S_1 \subseteq S_2 \subseteq V$이다. $S_2$가 일차독립이면 $S_1$도 일차독립이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>명제 1.39의 대우이다. $S_1$이 일차종속이라 하자. 그러면 정의에 의해 일차종속인 유한부분집합 $T \subseteq S_1$이 존재한다. $T \subseteq S_1 \subseteq S_2$이므로 $S_2$도 $T$에 의해 일차종속이다. 즉 $S_1$이 일차종속이면 $S_2$도 일차종속이므로, 대우로 $S_2$가 일차독립이면 $S_1$도 일차독립이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\Downarrow$ Contrapositive</p>
+        <p>$V$ v.s., $S_1 \subseteq S_2 \subseteq V$. $S_2$ l.i. $\Rightarrow S_1$ l.i.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>This is the contrapositive of Prop 1.39. Suppose $S_1$ is l.d. Then by def there is a l.d. finite subset $T \subseteq S_1$. Since $T \subseteq S_1 \subseteq S_2$, $S_2$ is l.d. via the same $T$. So $S_1$ l.d. $\Rightarrow$ $S_2$ l.d.; taking the contrapositive, $S_2$ l.i. $\Rightarrow$ $S_1$ l.i.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note03-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>"중복"과 일차종속을 비교해 보자.</p>
+        <div class="math-display">$$\left( \text{예: } \ \operatorname{span}\overset{\text{일차독립}}{\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right)} = \operatorname{span}\overset{\text{일차종속}}{\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right)} \right)$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let's compare "redundancy" with l.d.</p>
+        <div class="math-display">$$\left( \text{e.g. } \ \operatorname{span}\overset{\text{l.i.}}{\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right)} = \operatorname{span}\overset{\text{l.d.}}{\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right)} \right)$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-23">
+  <div class="card-head">
+    <span class="thm-num">LEM 1.41</span>
+    <span class="thm-title">나머지의 생성공간에 속하는 벡터가 있으면 S는 일차종속이다 <em>A Vector in the Span of the Rest Makes S Dependent</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $S \subseteq V$, $v \in S$이다. $v \in \operatorname{span}(S \setminus \{v\})$이면 $S$는 일차종속이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$v \in \operatorname{span}(S \setminus \{v\})$ ($S \setminus \{v\} = \{ w \in S : w \neq v \}$)이면, 어떤 계수 $a_1, \dots, a_k \in \mathbb{R}$에 대해 $v = \sum_{i=1}^{k} a_i w_i$인 $T = \{ w_1, \dots, w_k \} \subseteq S \setminus \{v\}$가 존재한다.</p>
+        <p>그러면 $a_1 w_1 + \cdots + a_k w_k + (-1) v = 0$ ($-1 \neq 0$)이므로 $w_1, \dots, w_k, v$는 일차종속이다.</p>
+        <p>$\{ w_1, \dots, w_k, v \} \subseteq S$이므로 $S$는 일차종속이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 위 증명은 $S \setminus \{v\} = \emptyset$인 경우를 따로 다루지 않는다. 이 경우 $\operatorname{span}(\emptyset) = \{0\}$이므로 $v \in \operatorname{span}(S \setminus \{v\})$는 $v = 0$을 뜻한다(이때 $S = \{v\} = \{0\}$). 리스트 $0$은 예 1.36(2)에 의해 일차종속이므로($1 \cdot 0 = 0$), $T = \{0\} \subseteq S$에 정의 1.35(2)를 적용하면 $S$는 일차종속이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $S \subseteq V$, $v \in S$. $v \in \operatorname{span}(S \setminus \{v\}) \Rightarrow S$ l.d.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf: $v \in \operatorname{span}(S \setminus \{v\})$ ($S \setminus \{v\} = \{ w \in S : w \neq v \}$) then $\exists\, T = \{ w_1, \dots, w_k \} \subseteq S \setminus \{v\}$ s.t. $v = \sum_{i=1}^{k} a_i w_i$ for some coeffs $a_1, \dots, a_k \in \mathbb{R}$.</p>
+        <p>Then $a_1 w_1 + \cdots + a_k w_k + (-1) v = 0$ ($-1 \neq 0$) $\Rightarrow w_1, \dots, w_k, v$ l.d.</p>
+        <p>$\Rightarrow S$ l.d. b/c $\{ w_1, \dots, w_k, v \} \subseteq S$.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The proof above does not treat the case $S \setminus \{v\} = \emptyset$ separately. Then $\operatorname{span}(\emptyset) = \{0\}$, so $v \in \operatorname{span}(S \setminus \{v\})$ means $v = 0$ (so $S = \{v\} = \{0\}$). The list $0$ is l.d. by Ex 1.36(2) (as $1 \cdot 0 = 0$), so $S$ is l.d. by Def 1.35(2) with $T = \{0\} \subseteq S$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-24">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.42</span>
+    <span class="thm-title">벡터를 제거해도 생성공간이 유지되는 경우 <em>When Removing a Vector Keeps the Span</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $S \subseteq V$, $v \in S$이다. 그러면</p>
+        <div class="math-display">$$\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S) \iff v \in \operatorname{span}(S \setminus \{v\}).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(⇒):</strong> $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S) \supseteq S \ni v$. <span class="part-end">▨</span></p>
+        <p><strong>(⇐):</strong> $v \in S$이고 $v \in \operatorname{span}(S \setminus \{v\})$이다.</p>
+        <p>$\Rightarrow S = (S \setminus \{v\}) \cup \{v\} \subseteq \operatorname{span}(S \setminus \{v\})$ (부분공간). 따라서 명제 1.33에 의해</p>
+        <p>$\Rightarrow \operatorname{span}(S) \subseteq \operatorname{span}(S \setminus \{v\})$.</p>
+        <p>또한 명제 1.33에 의해 $S \setminus \{v\} \subseteq S \subseteq \operatorname{span}(S)$이므로</p>
+        <p>$\Rightarrow \operatorname{span}(S \setminus \{v\}) \subseteq \operatorname{span}(S)$ (명제 1.33에 의해).</p>
+        <p>따라서 $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $S \subseteq V$, $v \in S$. Then</p>
+        <div class="math-display">$$\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S) \iff v \in \operatorname{span}(S \setminus \{v\}).$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf: <strong>(⇒):</strong> $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S) \supseteq S \ni v$. <span class="part-end">▨</span></p>
+        <p><strong>(⇐):</strong> $v \in S$ and $v \in \operatorname{span}(S \setminus \{v\})$</p>
+        <p>$\Rightarrow S = (S \setminus \{v\}) \cup \{v\} \subseteq \operatorname{span}(S \setminus \{v\})$ (subsp). So Prop 1.33</p>
+        <p>$\Rightarrow \operatorname{span}(S) \subseteq \operatorname{span}(S \setminus \{v\})$.</p>
+        <p>Also, $S \setminus \{v\} \subseteq S \subseteq \operatorname{span}(S)$ by Prop 1.33</p>
+        <!-- ═══════════ Lecture 7 · p.3 ═══════════ -->
+        <p>$\Rightarrow \operatorname{span}(S \setminus \{v\}) \subseteq \operatorname{span}(S)$ by Prop 1.33.</p>
+        <p>Thus, $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-25">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.43</span>
+    <span class="thm-title">일차종속이면 중복된 벡터가 존재한다 <em>Dependence Means Some Vector Is Redundant</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $S \subseteq V$이다. $S$가 일차종속일 필요충분조건은 $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$인 $v \in S$가 존재하는 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(⇐):</strong> 보조정리 1.41. <span class="part-end">▨</span></p>
+        <p><strong>(⇒):</strong> 1.3 단원 노트(Unit 1.3 Notes) 참조.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 강의노트는 (⇐)만 증명하고 (⇒)는 1.3 단원 노트를 참조한다. 먼저 (⇐)의 인용을 보충하고, 이어서 (⇒)를 증명한다.</p>
+        <p><strong>(⇐):</strong> $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$이면 명제 1.42 (⇒)에 의해 $v \in \operatorname{span}(S \setminus \{v\})$이므로, 보조정리 1.41에 의해 $S$는 일차종속이다.</p>
+        <p><strong>(⇒):</strong> $S$가 일차종속이라 하자. 정의 1.35(2)에 의해 서로 다른 $v_1, \dots, v_k \in S$ (유한집합 $T$의 원소를 중복 없이 나열한 것)와 $(a_1, \dots, a_k) \neq 0$이 존재하여 $\sum_{i=1}^k a_i v_i = 0$이다. $(a_1, \dots, a_k) \neq 0$이므로 $k \geq 1$이고 $a_j \neq 0$인 $j$를 택할 수 있다. 그러면</p>
+        <div class="math-display">$$v_j = \sum_{i \neq j} \left( -\frac{a_i}{a_j} \right) v_i.$$</div>
+        <p>$v_i$ ($i \neq j$)는 $S \setminus \{v_j\}$의 원소이므로 $v_j \in \operatorname{span}(S \setminus \{v_j\})$이다. ($k = 1$이면 우변은 빈 합이므로 $v_j = 0 \in \operatorname{span}(S \setminus \{v_j\})$이다.) 명제 1.42에 의해 $\operatorname{span}(S \setminus \{v_j\}) = \operatorname{span}(S)$이므로, $v = v_j$가 구하는 원소이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $S \subseteq V$. $S$ l.d. iff $\exists\, v \in S$ s.t. $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf: <strong>(⇐):</strong> Lem 1.41. <span class="part-end">▨</span></p>
+        <p><strong>(⇒):</strong> Unit 1.3 Notes.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The notes prove only (⇐) and refer to the Unit 1.3 Notes for (⇒). We first fill in the citation for (⇐), then prove (⇒).</p>
+        <p><strong>(⇐):</strong> If $\operatorname{span}(S \setminus \{v\}) = \operatorname{span}(S)$, then $v \in \operatorname{span}(S \setminus \{v\})$ by Prop 1.42 (⇒), so $S$ is l.d. by Lem 1.41.</p>
+        <p><strong>(⇒):</strong> Let $S$ be l.d. By Def 1.35(2) there are distinct $v_1, \dots, v_k \in S$ (the elements of the finite set $T$, listed without repetition) and $(a_1, \dots, a_k) \neq 0$ with $\sum_{i=1}^k a_i v_i = 0$. Since $(a_1, \dots, a_k) \neq 0$, we have $k \geq 1$ and can pick $j$ with $a_j \neq 0$. Then</p>
+        <div class="math-display">$$v_j = \sum_{i \neq j} \left( -\frac{a_i}{a_j} \right) v_i.$$</div>
+        <p>Each $v_i$ ($i \neq j$) lies in $S \setminus \{v_j\}$, so $v_j \in \operatorname{span}(S \setminus \{v_j\})$. (If $k = 1$, the right side is an empty sum, so $v_j = 0 \in \operatorname{span}(S \setminus \{v_j\})$.) By Prop 1.42, $\operatorname{span}(S \setminus \{v_j\}) = \operatorname{span}(S)$, so $v = v_j$ works.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c3-26">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">중복된 벡터 <em>Redundant Vectors</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>명제 1.43의 그러한 $v \in S$는 $S$를 일차종속 부분집합으로 만드는 $S$의 "중복된" 벡터이며, $S$에서 $v$를 제거해도 생성공간은 변하지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Such $v \in S$ from Prop 1.43 is a "redundant" vec of $S$ to turn $S$ into l.d. subset, and removing $v$ from $S$ does not change span.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note03-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>보조정리 1.41의 일차독립 버전:</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>L.i. analog of Lem 1.41:</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c3-27">
+  <div class="card-head">
+    <span class="thm-num">LEM 1.44</span>
+    <span class="thm-title">생성공간 밖의 벡터를 추가해도 일차독립이 유지된다 <em>Adjoining a Vector Outside the Span Keeps Independence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이고 $S \subseteq V$는 일차독립이며 $v \in V$이다. $v \notin \operatorname{span}(S)$이면 $S \cup \{v\}$는 일차독립이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$S = \{ w_1, \dots, w_n \}$이 유한집합인 경우의 증명:</p>
+        <p>$v \notin \operatorname{span}(S) \Rightarrow v \notin S = \{ w_1, \dots, w_n \} \Rightarrow S \cup \{v\} = \{ w_1, \dots, w_n, v \}$</p>
+        <p>$w_1, \dots, w_n, v$가 일차종속이라고 가정하고 모순을 이끌어낸다.</p>
+        <div class="math-display">$$\text{그러면 } \ \exists\, (a_1, \dots, a_n, b) \in \mathbb{R}^{n+1} \setminus \{0\} \ \text{ 이 있어서 } \ \sum_{i=1}^{n} a_i w_i + bv = 0. \quad (*)$$</div>
+        <p>$b = 0$이면 $(*)$에서 $\sum_{i=1}^{n} a_i w_i = 0$이고 $(a_1, \dots, a_n, 0) \in \mathbb{R}^{n+1} \setminus \{0\}$이다 (즉 $(a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\}$).</p>
+        <p>$\Rightarrow S = \{ w_1, \dots, w_n \}$이 일차종속이므로 $S$가 일차독립이라는 가정에 모순이다.</p>
+        <p>따라서 $b \neq 0$이고, $(*) \Rightarrow bv = -\sum_{i=1}^{n} a_i w_i = \sum_{i=1}^{n} -a_i w_i$</p>
+        <div class="math-display">$$\overset{b \neq 0}{\Longrightarrow} v = \sum_{i=1}^{n} \left( -\frac{a_i}{b} \right) w_i \in \operatorname{span}(S), \ \text{※ } v \notin \operatorname{span}(S) \text{에 모순}.$$</div>
+        <p>따라서 $S \cup \{v\} = \{ w_1, \dots, w_n, v \}$는 일차독립이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 강의노트는 $S$가 유한집합인 경우만 증명한다. 임의의 $S$ ($S = \emptyset$ 또는 무한집합 포함)에 대한 증명은 다음과 같다.</p>
+        <p>명제 1.33에 의해 $S \subseteq \operatorname{span}(S)$이고 $v \notin \operatorname{span}(S)$이므로 $v \notin S$이다. $S \cup \{v\}$가 일차독립임을 보이려면 정의에 의해 $S \cup \{v\}$의 모든 유한부분집합 $T$가 일차독립임을 보이면 충분하다.</p>
+        <p><strong>경우 1: $v \notin T$.</strong> 그러면 $T \subseteq S$이고 $S$가 일차독립이므로 따름정리 1.40에 의해 $T$는 일차독립이다.</p>
+        <p><strong>경우 2: $v \in T$.</strong> $T' = T \setminus \{v\}$라 하면 $T' \subseteq S$는 유한집합이고 $T = T' \cup \{v\}$이다. 따름정리 1.40에 의해 $T'$는 일차독립이다. 또한 $T' \subseteq S \subseteq \operatorname{span}(S)$이고 $\operatorname{span}(S)$는 부분공간이므로 명제 1.33에 의해 $\operatorname{span}(T') \subseteq \operatorname{span}(S)$이고, 따라서 $v \notin \operatorname{span}(T')$이다.</p>
+        <p>$T' = \emptyset$이면 $T = \{v\}$이다. $0 \in \operatorname{span}(S)$이고 $v \notin \operatorname{span}(S)$이므로 $v \neq 0$이고, $av = 0$이면 $a = 0$이어야 한다($a \neq 0$이면 $v = a^{-1}(av) = 0$). 따라서 $\{v\}$는 일차독립이다.</p>
+        <p>$T' \neq \emptyset$이면 $T'$는 유한이고 일차독립이며 $v \notin \operatorname{span}(T')$이므로, 위에 증명한 유한집합의 경우(강의노트의 증명에서 $S$를 $T'$로 바꾼 것)에 의해 $T = T' \cup \{v\}$는 일차독립이다.</p>
+        <p>모든 유한부분집합이 일차독립이므로 $S \cup \{v\}$는 일차독립이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s., $S \subseteq V$ l.i., $v \in V$. If $v \notin \operatorname{span}(S)$, then $S \cup \{v\}$ l.i.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Pf when $S = \{ w_1, \dots, w_n \}$ fin:</p>
+        <p>$v \notin \operatorname{span}(S) \Rightarrow v \notin S = \{ w_1, \dots, w_n \} \Rightarrow S \cup \{v\} = \{ w_1, \dots, w_n, v \}$</p>
+        <p>Assume by contradiction that $w_1, \dots, w_n, v$ is l.d.</p>
+        <div class="math-display">$$\text{Then } \ \exists\, (a_1, \dots, a_n, b) \in \mathbb{R}^{n+1} \setminus \{0\} \ \text{ s.t. } \ \sum_{i=1}^{n} a_i w_i + bv = 0. \quad (*)$$</div>
+        <!-- ═══════════ Lecture 7 · p.4 ═══════════ -->
+        <p>If $b = 0$, then $(*)$: $\sum_{i=1}^{n} a_i w_i = 0$ &amp; $(a_1, \dots, a_n, 0) \in \mathbb{R}^{n+1} \setminus \{0\}$ ($(a_1, \dots, a_n) \in \mathbb{R}^n \setminus \{0\}$)</p>
+        <p>$\Rightarrow S = \{ w_1, \dots, w_n \}$ l.d., contradiction to $S$ l.i.</p>
+        <p>Thus, $b \neq 0$, so $(*) \Rightarrow bv = -\sum_{i=1}^{n} a_i w_i = \sum_{i=1}^{n} -a_i w_i$</p>
+        <div class="math-display">$$\overset{b \neq 0}{\Longrightarrow} v = \sum_{i=1}^{n} \left( -\frac{a_i}{b} \right) w_i \in \operatorname{span}(S), \ \text{※ to } v \notin \operatorname{span}(S).$$</div>
+        <p>Henceforth, $S \cup \{v\} = \{ w_1, \dots, w_n, v \}$ l.i.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The notes prove only the case where $S$ is finite. Here is a proof for arbitrary $S$ (including $S = \emptyset$ and infinite $S$).</p>
+        <p>Since $S \subseteq \operatorname{span}(S)$ by Prop 1.33 and $v \notin \operatorname{span}(S)$, $v \notin S$. By def, to show $S \cup \{v\}$ l.i. it suffices to show that every finite subset $T \subseteq S \cup \{v\}$ is l.i.</p>
+        <p><strong>Case 1: $v \notin T$.</strong> Then $T \subseteq S$ and $S$ is l.i., so $T$ is l.i. by Cor 1.40.</p>
+        <p><strong>Case 2: $v \in T$.</strong> Let $T' = T \setminus \{v\}$; then $T' \subseteq S$ is finite and $T = T' \cup \{v\}$. By Cor 1.40, $T'$ is l.i. Also $T' \subseteq S \subseteq \operatorname{span}(S)$ with $\operatorname{span}(S)$ a subsp, so $\operatorname{span}(T') \subseteq \operatorname{span}(S)$ by Prop 1.33; hence $v \notin \operatorname{span}(T')$.</p>
+        <p>If $T' = \emptyset$, then $T = \{v\}$. As $0 \in \operatorname{span}(S)$ and $v \notin \operatorname{span}(S)$, $v \neq 0$, and $av = 0$ forces $a = 0$ (if $a \neq 0$, then $v = a^{-1}(av) = 0$). So $\{v\}$ is l.i.</p>
+        <p>If $T' \neq \emptyset$, then $T'$ is finite, l.i., and $v \notin \operatorname{span}(T')$, so the finite case proved above (the notes' proof with $S$ replaced by $T'$) shows $T = T' \cup \{v\}$ is l.i.</p>
+        <p>Since every finite subset is l.i., $S \cup \{v\}$ is l.i.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- END CARDS -->
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="quiz1.html">퀴즈1 요약</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

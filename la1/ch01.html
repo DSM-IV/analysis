@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.1 벡터공간으로서의 ℝⁿ (§1.1 ℝⁿ as a Vector Space) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1(MATH221) 1단원 — 강의 소개와 함께, 실수 집합 ℝ에서 출발해 ℝ²·ℝ³와 n-튜플 공간 ℝⁿ을 정의하고, 좌표별 덧셈(addition)과 스칼라 곱셈(scalar multiplication), 데카르트 곱(Cartesian product), 벡터공간 공리 (VS 1)–(VS 8), 영벡터(zero vector), 열벡터(column vector) 표기를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 벡터공간, vector space, 실수, real numbers, ℝⁿ, 순서쌍, pair, n-튜플, n-tuple, 좌표, coordinate, 좌표별 덧셈, coordinate-wise addition, 스칼라 곱셈, scalar multiplication, 데카르트 곱, Cartesian product, 함수, function, 벡터공간 공리, vector space axioms, 영벡터, zero vector, 열벡터, column vector">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/ch01.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.1 벡터공간으로서의 ℝⁿ (§1.1 ℝⁿ as a Vector Space) — 선형대수학 1 한·영 대조">
+<meta property="og:description" content="강의 소개에서 시작해 ℝ²·ℝ³와 ℝⁿ의 정의, 좌표별 덧셈과 스칼라 곱셈, 데카르트 곱, 벡터공간 공리 (VS 1)–(VS 8), 영벡터와 열벡터 표기까지 — 선형대수학 I 첫 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/ch01.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1.1 벡터공간으로서의 ℝⁿ (§1.1 ℝⁿ as a Vector Space) — 선형대수학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 1(MATH221) 1단원 — 강의 소개, ℝ²·ℝ³와 ℝⁿ의 정의, 좌표별 덧셈과 스칼라 곱셈, 데카르트 곱, 벡터공간 공리 (VS 1)–(VS 8), 영벡터, 열벡터 표기를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la1/ch01.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la1/ch01.html"
+}
+</script>
+<script>
+MathJax = {
+  loader: { load: ['ui/lazy'] },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- la1은 MathJax 4: 좁은 화면에서 긴 인라인·디스플레이 수식 자동 줄바꿈 (ui/lazy: 화면에 들어온 수식만 조판 — v4 전체 조판은 v3보다 ~7배 느림) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html" class="active">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="quiz1.html">퀴즈1 요약</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Unit 01</p>
+  <h1>1.1 벡터공간으로서의 ℝⁿ<span>§1.1 ℝⁿ as a Vector Space</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c1-1"><span class="toc-num">DEF 1.1</span> 집합 ℝ² <em>The Set ℝ²</em></a></li>
+    <li><a href="#c1-2"><span class="toc-num">NOTE</span> 순서쌍으로서의 ℝ² <em>ℝ² as Pairs of Real Numbers</em></a></li>
+    <li><a href="#c1-3"><span class="toc-num">DEF</span> ℝ²의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝ²</em></a></li>
+    <li><a href="#c1-4"><span class="toc-num">NOTE</span> ℝ²의 뺄셈 <em>Subtraction on ℝ²</em></a></li>
+    <li><a href="#c1-5"><span class="toc-num">REM</span> ℝ²의 점으로서의 변위 <em>Displacement as a Point of ℝ²</em></a></li>
+    <li><a href="#c1-6"><span class="toc-num">DEF 1.2</span> 집합 ℝ³ <em>The Set ℝ³</em></a></li>
+    <li><a href="#c1-7"><span class="toc-num">DEF</span> ℝ³의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝ³</em></a></li>
+    <li><a href="#c1-8"><span class="toc-num">REM</span> 수학자의 지침 <em>Mathematician's Guiding Principle</em></a></li>
+    <li><a href="#c1-9"><span class="toc-num">DEF 1.3</span> ℝⁿ과 그 좌표 <em>ℝⁿ and Its Coordinates</em></a></li>
+    <li><a href="#c1-10"><span class="toc-num">REM</span> 약속 ℝ⁰ := {0} <em>The Convention ℝ⁰ := {0}</em></a></li>
+    <li><a href="#c1-11"><span class="toc-num">DEF 1.4</span> ℝⁿ의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝⁿ</em></a></li>
+    <li><a href="#c1-12"><span class="toc-num">DEF</span> 데카르트 곱 <em>Cartesian Product</em></a></li>
+    <li><a href="#c1-13"><span class="toc-num">EXAM</span> ℝ² = ℝ × ℝ과 ℝ³ ↔ ℝ² × ℝ <em>ℝ² = ℝ × ℝ and ℝ³ ↔ ℝ² × ℝ</em></a></li>
+    <li><a href="#c1-14"><span class="toc-num">NOTE 1.5</span> 함수로서의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication as Functions</em></a></li>
+    <li><a href="#c1-15"><span class="toc-num">PROP 1.6</span> ℝⁿ은 (VS 1)–(VS 8)을 만족한다 <em>ℝⁿ Satisfies (VS 1)–(VS 8)</em></a></li>
+    <li><a href="#c1-16"><span class="toc-num">REM 1.7</span> 영벡터와 덧셈에 대한 역원 <em>Zero Vector and Additive Inverse</em></a></li>
+    <li><a href="#c1-17"><span class="toc-num">NOTATION 1.7</span> 열벡터 <em>Column Vectors</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 1 (MATH221) 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 노트(손글씨 태블릿 노트)의 환경 하나 = 카드 하나. id는 단원 안의 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c1-10"), 노트 등장 순서대로 배치한다.
+     배지는 강의 노트의 라벨과 번호를 그대로 따른다 (노트는 1.1, 1.2, … 처럼 전역 번호를 쓴다):
+     Def 1.3 → DEF 1.3, Notation 1.7 → NOTATION 1.7, Thm 1.20 → THM 1.20, Prop 1.6 → PROP 1.6,
+     Lem → LEM, Cor → COR, Rmk 1.7 → REM 1.7, Note 1.5 → NOTE 1.5, Ex 1.8 → EXAM 1.8,
+     Exercise 1.27 → EX 1.27. 번호 없는 항목(Def:, Rmk:, Note:, Example:, Exercise:, Q:/A:,
+     Recall:, Claim:, Comment:, Guiding Principle)은 유형 배지만
+     (DEF / REM / NOTE / EXAM / EX / Q / RECALL / CLAIM). 자체 순번은 id에만 쓴다.
+     노트 자체의 번호 중복(예: Rmk 1.7과 Notation 1.7)도 인쇄된 대로 둔다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Def / Notation                      → card def-card  · DEF n / NOTATION n
+       Thm / Prop / Lem / Cor / Claim      → card thm-card  · THM n / PROP n / LEM n / COR n / CLAIM
+       Rmk / Note / Recall / Q·A / Comment → card rem-card  · REM n / NOTE n / RECALL / Q
+       Ex / Example                        → card exam-card · EXAM n
+       Exercise                            → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num 만 둔다.
+  3) 매 강의 첫머리의 Last Time 복습과 Today 안내는 카드로 만들지 않는다
+     (복습에 새 내용이 있을 때만 그 새 내용만 담은 RECALL 카드를 만든다).
+     강의·쪽 경계는 Lecture N · p.M 형식의 HTML 주석으로 표시하고,
+     노트의 주제 표제는 div.section-title 구분선(English · 한국어)으로 옮긴다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     노트에는 표제가 거의 없으므로 간결한 편집 제목을 새로 붙인다
+     (노트가 괄호로 이름을 준 경우 그 이름을 쓴다).
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 손글씨 본문 verbatim 전사. 강의자의 약어(v.s., subsp, l.i., w/, b/c,
+                   s.t., def, Pf, #s 등)와 오탈자까지 그대로 둔다. 약어 위에 작게 적은
+                   색 글씨 풀이(순수 주석)는 옮기지 않고, 수학적 내용이 있는 색 글씨
+                   곁주석은 제자리에 괄호로 남긴다.
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     색 강조, 밑줄, 동그라미는 옮기지 않는다.
+     손그림은 en 쪽에 fig-note 문단 하나([Figure: 그림 설명])로 대체한다 (SVG 없음).
+  6) 노트에 증명(Pf: … □, Pf Idea 포함)이 적힌 명제는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 두고
+     en 쪽은 증명을 verbatim 전사한 뒤 div.qed(□)로 닫는다. 증명 안 소단락 끝의
+     빗금 상자는 span.part-end(▨)로 옮긴다.
+  7) 노트에 증명이 없는 진술(Pf: Exercise, Pf: See FIS …, this needs full-justification 등)은
+     진술과 Pf 줄을 그대로 전사하고, ko-panel 안 div.formal 바로 뒤에 PROOF-KO 마커,
+     en-panel 안 div.en-formal 바로 뒤에 PROOF-EN 마커를 각각 HTML 주석으로 둔다
+     (나중에 직접 증명을 써 넣을 자리). 증명이 일부만 적힌 경우 토글과 마커를 함께 둔다.
+  8) 번호 없는 서술 단락(강의 소개, Motivation, 도입 문장 등)은 버리지 않는다.
+     연속된 서술 덩어리마다 div.card.note-card 를 만들고 id는 note{단원 2자리}-{순번}
+     (예: note01-3), 배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 실수 집합은 \mathbb{R}, 양의 정수 집합은 \mathbb{Z}_{>0},
+     열벡터는 bmatrix로 쓴다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     소스의 항목 라벨이 (1)/(2), (a)/(b), (VS 1)처럼 적힌 경우 ol 대신
+     p 태그 앞에 strong 으로 라벨을 그대로 적어 원문 표기를 보존한다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>Course Introduction · 강의 소개</h2></div>
+
+<!-- ═══════════ Lecture 1 · p.1 ═══════════ -->
+
+<div class="card note-card" id="note01-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>MATH221 선형대수학 1에 오신 것을 환영합니다!</strong></p>
+        <p>담당 교수: Changho Han (한창호)</p>
+        <p>이메일: changho_han@korea.ac.kr</p>
+        <p>면담 시간: 추후 공지</p>
+        <p><strong>성적 구성:</strong> (자세한 내용은 LMS 참조)</p>
+        <p>출석 10% (10 − 결석 횟수, 0이면 F) (0이면 F: 학교 규정)</p>
+        <p>퀴즈 20% (퀴즈 2회)</p>
+        <p>중간고사 35%</p>
+        <p>기말고사 35%</p>
+        <p><strong>수업 중 유의 사항:</strong></p>
+        <p>· 수업은 영어로 진행한다.</p>
+        <p>· 수업 중 언제든지 자유롭게 질문하라(질문을 적극 권장한다). 어리석은 질문은 없으며, 질문은 다른 학생에게도 도움이 된다.</p>
+        <p>· 다만 가능한 한 영어로 질문하도록 노력하라! 한국어 질문은 내가 영어로 옮겨 주겠다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Welcome to MATH221 Linear Algebra I!</strong></p>
+        <p>Instructor: Changho Han (한창호)</p>
+        <p>Email: changho_han@korea.ac.kr</p>
+        <p>Office Hour: TBA</p>
+        <p><strong>Grade Distribution:</strong> (More info in LMS)</p>
+        <p>10% Attendance (10 − #absence, 0 = F) (0 = F: University Policy)</p>
+        <p>20% Quizzes (2 Quizzes)</p>
+        <p>35% Midterm</p>
+        <p>35% Final Exam</p>
+        <p><strong>Expectations in the classroom:</strong></p>
+        <p>· Lectures are in ENGLISH.</p>
+        <p>· Feel FREE to ASK Questions anytime during the class (you are encouraged to do so). NO Questions are Dumb: it helps others.</p>
+        <p>· But do your best to ask in English! I will translate Questions (in Korean) into English.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 1 · p.2 ═══════════ -->
+
+<div class="card note-card" id="note01-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>그렇다면 선형대수학이란 무엇인가?</strong></p>
+        <p>벡터공간($\mathbb{R}, \mathbb{R}^2, \mathbb{R}^3$ 등)과, 일차함수($f(x) = ax$) 및 일차방정식($ax = b$)의 고차원 대응물을 연구하는 학문이다.</p>
+        <p class="fig-note"><em>[그림: $\mathbb{R}^2$에서 원점을 지나는 직선 $y = f(x) = ax$; 그 위의 점 $(\frac{b}{a}, b)$가 표시되어 있고, $x$축 위의 $x = \frac{b}{a}$에 “$ax = b$의 해”라고 적혀 있다]</em></p>
+        <p>여기서 벡터란 벡터공간의 점을 뜻한다.</p>
+        <p>예를 들어, − 과학: 화살표</p>
+        <p>− AI/컴퓨터과학: 픽셀로 이루어진 이미지</p>
+        <p>− 통계: 데이터셋의 한 행 ([0.7, 5.2, 4.9, 10, 8.1])</p>
+        <p class="fig-note"><em>[그림: 화살표와 픽셀 이미지의 작은 스케치]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>So what is Linear Algebra?</strong></p>
+        <p>Study of vector spaces ($\mathbb{R}, \mathbb{R}^2, \mathbb{R}^3$, etc) and higher dimensional analog of linear functions ($f(x) = ax$) &amp; equations ($ax = b$).</p>
+        <p class="fig-note"><em>[Figure: in $\mathbb{R}^2$, the line $y = f(x) = ax$ through the origin; the point $(\frac{b}{a}, b)$ on it is marked, and $x = \frac{b}{a}$ on the $x$-axis is labelled “Solution of $ax = b$”]</em></p>
+        <p>Here, a Vector refers to a point of a vector space.</p>
+        <p>For example, − Science: an arrow</p>
+        <p>− AI/CS: pixelated image</p>
+        <p>− Stats: a row of dataset ([0.7, 5.2, 4.9, 10, 8.1])</p>
+        <p class="fig-note"><em>[Figure: small sketches of an arrow and of a pixelated image]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>왜 선형대수학인가?</strong></p>
+        <p>· 선형대수학은 미적분학과 마찬가지로 현대 수학의 기본 구성 요소이다.</p>
+        <p>· 일차함수 $\sim$ 복잡한 함수</p>
+        <p class="fig-note"><em>[그림: $y = f(x)$의 그래프와 $x = a$에서의 접선 $y = g(x)$; 접선은 $x = a$ 근처에서 좋은 근사이다]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Why Linear Algebra?</strong></p>
+        <p>· Linear Algebra, just like Calculus, is a building block of modern math.</p>
+        <p>· Linear Functions $\sim$ Complicated Functions</p>
+        <!-- ═══════════ Lecture 1 · p.3 ═══════════ -->
+        <p class="fig-note"><em>[Figure: the graph of $y = f(x)$ and its tangent line $y = g(x)$ at $x = a$; the tangent line is a good approximation nearby $x = a$]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-4">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>· <strong>전통적인 응용</strong></p>
+        <p>◇ 라그랑주 보간: $\mathbb{R}^2$의 $n$개의 데이터 점을 지나는 다항함수를 구한다</p>
+        <p class="fig-note"><em>[그림: 평면 위의 여러 데이터 점과 이 점들을 지나는 다항함수의 그래프]</em></p>
+        <p>(다항함수를 하나의 벡터로 해석할 것이다)</p>
+        <p>◇ 이미지 조작: 픽셀 이미지를 벡터로 해석하여, (선형변환을 통해) 이미지를 늘이기/줄이기/기울이기/회전시키기</p>
+        <p>$90^\circ$ 회전 :</p>
+        <p class="fig-note"><em>[그림: $3\times 3$ 픽셀 이미지 $\longmapsto$ 같은 이미지를 반시계 방향으로 $90^\circ$ 회전한 것]</em></p>
+        <p>◇ 연립일차방정식 풀이 (알고리즘적으로): 다음과 같은 문제를 푼다</p>
+        <div class="math-display">$$\begin{aligned} 4x + 3y &amp;= 5 \\ x + y &amp;= 2 \end{aligned} \qquad \Bigg| \qquad \begin{aligned} x + y + z &amp;= 4 \\ x + 2y &amp;= 3 \\ -y + z &amp;= 1 \end{aligned}$$</div>
+        <p>◇ 평행사변형과 평행육면체의 (부호 있는) 부피 (행렬식을 통해)</p>
+        <p class="fig-note"><em>[그림: 색칠된 평행사변형(2차원)과 세 변 벡터로 생성되는 평행육면체(3차원)]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>· <strong>Traditional Applications</strong></p>
+        <p>◇ Lagrange Interpolation: find a polynomial function passing through $n$ data points in $\mathbb{R}^2$</p>
+        <p class="fig-note"><em>[Figure: several data pts in the plane and the graph of polynomial function passing through them]</em></p>
+        <p>(polynomial function: will interpret as a vector)</p>
+        <p>◇ Image Manipulation: by interpreting a pixelated image as a vector, stretch/squeeze/shear/rotate that image (via linear map)</p>
+        <p>Rotation $90^\circ$ :</p>
+        <p class="fig-note"><em>[Figure: a 3×3 pixelated image $\longmapsto$ the same image rotated by $90^\circ$ counterclockwise]</em></p>
+        <p>◇ Solving Systems of Linear Equations (Algorithmically): Solve something like</p>
+        <div class="math-display">$$\begin{aligned} 4x + 3y &amp;= 5 \\ x + y &amp;= 2 \end{aligned} \qquad \Bigg| \qquad \begin{aligned} x + y + z &amp;= 4 \\ x + 2y &amp;= 3 \\ -y + z &amp;= 1 \end{aligned}$$</div>
+        <!-- ═══════════ Lecture 1 · p.4 ═══════════ -->
+        <p>◇ (Signed) Volume of Parallelograms and Parallelepipeds (via determinants)</p>
+        <p class="fig-note"><em>[Figure: a shaded parallelogram (2D) and a parallelepiped spanned by three edge vectors (3D)]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-5">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 강의는 이론과 계산을 겸하며, 다음을 다룬다:</p>
+        <p>· 선형대수학의 기초</p>
+        <p>&nbsp;&nbsp;− 연립일차방정식이 아니라 벡터공간에서 출발한다</p>
+        <p>&nbsp;&nbsp;− 고등 수학으로 이어지는 올바른 토대를 세운다</p>
+        <p>&nbsp;&nbsp;− 반복되는 계산과 패턴을 하나의 틀로 묶는다</p>
+        <p>· 증명 중심의 입문</p>
+        <p>&nbsp;&nbsp;− 명제 X는 왜 참인가? 증명하라!</p>
+        <p>· 강의 구성:</p>
+        <p><strong>(1)</strong> 처음 8주: 이론 구축 중심</p>
+        <p><strong>(2)</strong> 마지막 8주: 계산 응용 (이론도 일부 포함)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>This hybrid theory/computation course is about:</p>
+        <p>· Fundamentals of Linear Algebra</p>
+        <p>&nbsp;&nbsp;− Starts with vector space instead of systems of linear equations</p>
+        <p>&nbsp;&nbsp;− Build a proper foundation to higher math</p>
+        <p>&nbsp;&nbsp;− Combines repetitions/patterns into a single package</p>
+        <p>· Proof-based introduction</p>
+        <p>&nbsp;&nbsp;− Why is statement X true? Prove it!</p>
+        <p>· Course Structure:</p>
+        <p><strong>(1)</strong> First 8 weeks: Heavy Theory-Building</p>
+        <p><strong>(2)</strong> Last 8 weeks: Computational Applications (with some theory)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 1 · p.5 ═══════════ -->
+
+<div class="card note-card" id="note01-6">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>· <strong>단원 노트(Unit Notes):</strong> 주교재는 연습 문제용으로만 사용한다. 이 강의의 내용은 대신 단원 노트로 다룬다. 단원 노트는 LMS에 pdf 파일로 올라온다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>· <strong>Unit Notes:</strong> The main textbook is used only for Practice Problems. For the content of this course, Unit Notes will be used instead. Those will be up in LMS as pdf files.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-7">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>단원 1: 벡터공간</strong></p>
+        <p><strong>목표:</strong> 벡터와 벡터공간을 정의하고, 그 성질을 연구한다 (즉, 토대를 세운다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Unit 1: Vector Spaces</strong></p>
+        <p><strong>Goal:</strong> Define vectors &amp; vector spaces, then study their properties (so build foundations)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>§1.1 ℝⁿ as a Vector Space · 1.1 벡터공간으로서의 ℝⁿ</h2></div>
+
+<div class="card note-card" id="note01-8">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^n$으로 들어가기 전에, 먼저 $\mathbb{R}^2$부터 시작하자.</p>
+        <p>여기서 $\mathbb{R}$은 실수 전체의 집합을 뜻한다</p>
+        <p class="fig-note"><em>[그림: 실수 직선 $\mathbb{R}$ 위에 $0$, $-\frac{4}{3}$, $2.2$, $\pi = 3.14159\ldots$가 표시되어 있다]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Before jumping into $\mathbb{R}^n$, let's start with $\mathbb{R}^2$.</p>
+        <p>Here, $\mathbb{R}$ means the set of all real numbers</p>
+        <p class="fig-note"><em>[Figure: the real number line $\mathbb{R}$ with $0$, $-\frac{4}{3}$, $2.2$ and $\pi = 3.14159\ldots$ marked]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c1-1">
+  <div class="card-head">
+    <span class="def-num">DEF 1.1</span>
+    <span class="def-title">집합 ℝ² <em>The Set ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>정의 1.1:</strong> $\mathbb{R}^2 := \{ (a,b) : a, b \in \mathbb{R} \}$</p>
+        <p>($(a,b)$: 순서쌍) &nbsp; ($a, b \in \mathbb{R}$: $a$와 $b$가 $\mathbb{R}$의 원소라는 뜻)</p>
+        <p>($:=$ : 좌변을 우변으로 정의한다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Def 1.1:</strong> $\mathbb{R}^2 := \{ (a,b) : a, b \in \mathbb{R} \}$</p>
+        <p>($(a,b)$: a pair) &nbsp; ($a, b \in \mathbb{R}$: means $a$ &amp; $b$ are elements of $\mathbb{R}$)</p>
+        <p>($:=$ : Left-hand side is defined by Right-hand side)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-2">
+  <div class="card-head">
+    <span class="rem-num">NOTE</span>
+    <span class="rem-title">순서쌍으로서의 ℝ² <em>ℝ² as Pairs of Real Numbers</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>노트:</strong> 따라서 $\mathbb{R}^2$는 실수의 순서쌍(2-튜플)들의 집합이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Note:</strong> So $\mathbb{R}^2$ is a set of pairs (2-tuples) of real numbers.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 1 · p.6 ═══════════ -->
+
+<div class="card note-card" id="note01-9">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>좌표평면(데카르트 평면)은 $\mathbb{R}^2$를 시각화하는 한 방법이다</p>
+        <p class="fig-note"><em>[그림: $x$축과 $y$축이 있는 좌표평면 $\mathbb{R}^2$; 점 $(-2,2)$와 $(3,1)$이 찍혀 있고, 각 점에서 축 위의 좌표까지 점선이 그어져 있다]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Cartesian plane is a way to visualize $\mathbb{R}^2$</p>
+        <p class="fig-note"><em>[Figure: the Cartesian plane $\mathbb{R}^2$ with $x$- and $y$-axes; the points $(-2,2)$ and $(3,1)$ are plotted with dashed lines to their coordinates on the axes]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 2 · p.1 ═══════════ -->
+<!-- (Last Time recap and Today agenda at the top of p.1 are skipped — they repeat Def 1.1, Note and the Cartesian-plane remark.) -->
+
+<div class="card def-card" id="c1-3">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">ℝ²의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^2$ 위에는 두 가지 연산이 있다:</p>
+        <p><strong>(1)</strong> 좌표별 덧셈: $(a_1, a_2), (b_1, b_2) \in \mathbb{R}^2$이면 $(a_1, a_2) + (b_1, b_2) := (a_1 + b_1, a_2 + b_2) \in \mathbb{R}^2$이다.</p>
+        <p>예를 들어,</p>
+        <div class="math-display">$$\begin{aligned} (2,1) + (1,-2) &amp;= (2+1, 1-2) \\ &amp;= (3,-1) \end{aligned}$$</div>
+        <p class="fig-note"><em>[그림: 원점에서 $(2,1)$과 $(1,-2)$로 향하는 화살표; $(2,1)$과 $(1,-2)$에서 각각 출발한 점선 화살표가 모두 합 $(3,-1)$에 도달한다]</em></p>
+        <p><strong>(2)</strong> 스칼라곱: $c \in \mathbb{R}$, $(x,y) \in \mathbb{R}^2$이면 $c \cdot (x,y) := (cx, cy)$이다.</p>
+        <p>예를 들어,</p>
+        <div class="math-display">$$2 \cdot (1,1) = (2 \cdot 1, 2 \cdot 1) = (2,2)$$</div>
+        <p class="fig-note"><em>[그림: 원점에서 $(1,1)$로 향하는 화살표와, 같은 방향으로 두 배 긴 $(2,2)$로 향하는 화살표]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>There are two operations on $\mathbb{R}^2$:</p>
+        <p><strong>(1)</strong> Coordinate-wise Addition: If $(a_1, a_2), (b_1, b_2) \in \mathbb{R}^2$, then $(a_1, a_2) + (b_1, b_2) := (a_1 + b_1, a_2 + b_2) \in \mathbb{R}^2$</p>
+        <p>For example,</p>
+        <div class="math-display">$$\begin{aligned} (2,1) + (1,-2) &amp;= (2+1, 1-2) \\ &amp;= (3,-1) \end{aligned}$$</div>
+        <p class="fig-note"><em>[Figure: arrows from the origin to $(2,1)$ and to $(1,-2)$; dashed arrows from $(2,1)$ and from $(1,-2)$ both reach the sum $(3,-1)$]</em></p>
+        <p><strong>(2)</strong> Scalar-Multiplication: If $c \in \mathbb{R}$ and $(x,y) \in \mathbb{R}^2$, then $c \cdot (x,y) := (cx, cy)$.</p>
+        <!-- ═══════════ Lecture 2 · p.2 ═══════════ -->
+        <p>For example,</p>
+        <div class="math-display">$$2 \cdot (1,1) = (2 \cdot 1, 2 \cdot 1) = (2,2)$$</div>
+        <p class="fig-note"><em>[Figure: the arrow from the origin to $(1,1)$ and the twice-as-long arrow in the same direction to $(2,2)$]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-4">
+  <div class="card-head">
+    <span class="rem-num">NOTE</span>
+    <span class="rem-title">ℝ²의 뺄셈 <em>Subtraction on ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>노트:</strong> $\mathbb{R}^2$에서의 뺄셈은 다음과 같다</p>
+        <div class="math-display">$$\begin{aligned} (a,b) - (c,d) &amp;:= (a,b) + (-1) \cdot (c,d) = (a,b) + (-c,-d) \\ &amp;= (a-c, b-d) \end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Note:</strong> Subtraction on $\mathbb{R}^2$ is</p>
+        <div class="math-display">$$\begin{aligned} (a,b) - (c,d) &amp;:= (a,b) + (-1) \cdot (c,d) = (a,b) + (-c,-d) \\ &amp;= (a-c, b-d) \end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-5">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">ℝ²의 점으로서의 변위 <em>Displacement as a Point of ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>주의:</strong> 물리학에서 평면 위의 변위(고정된 기준점에 대한 입자의 상대적 위치)는 $\mathbb{R}^2$의 한 점으로 모형화할 수 있다</p>
+        <p class="fig-note"><em>[그림: 기준점의 위치에서 입자의 위치로 그은 화살표]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Rmk:</strong> In Physics, displacement (relative position of a particle from fixed reference point) on a plane can be modelled as a point of $\mathbb{R}^2$</p>
+        <p class="fig-note"><em>[Figure: an arrow drawn from the position of reference point to the position of the particle]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-10">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>마찬가지로 $\mathbb{R}^3$도 $\mathbb{R}^2$와 비슷한 성질을 많이 가진다:</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Similarly, $\mathbb{R}^3$ has many properties similar to $\mathbb{R}^2$:</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c1-6">
+  <div class="card-head">
+    <span class="def-num">DEF 1.2</span>
+    <span class="def-title">집합 ℝ³ <em>The Set ℝ³</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>정의 1.2:</strong> $\mathbb{R}^3 := \{ (a,b,c) : a, b, c \in \mathbb{R} \}$</p>
+        <p>($(a,b,c)$: 실수의 3-튜플)</p>
+        <p class="fig-note"><em>[그림: $xyz$축과 점 $(1,2,3)$, 원점에서 그 점으로 향하는 화살표, 그리고 그 점의 좌표들로 만들어지는 점선 상자]</em></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Def 1.2:</strong> $\mathbb{R}^3 := \{ (a,b,c) : a, b, c \in \mathbb{R}^3 \}$</p>
+        <p>($(a,b,c)$: 3-tuple of real numbers)</p>
+        <p class="fig-note"><em>[Figure: $xyz$-axes with the point $(1,2,3)$, the arrow from the origin to it, and the dashed box spanned by its coordinates]</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c1-7">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">ℝ³의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝ³</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^3$에도 $+$와 $\cdot$가 모두 있다:</p>
+        <div class="math-display">$$\begin{aligned} (a_1, a_2, a_3) + (b_1, b_2, b_3) &amp;:= (a_1 + b_1, a_2 + b_2, a_3 + b_3) \\ c \cdot (a_1, a_2, a_3) &amp;:= (ca_1, ca_2, ca_3) \end{aligned}$$</div>
+        <p>단, $a_1, a_2, a_3, b_1, b_2, b_3, c \in \mathbb{R}$이다.</p>
+        <div class="math-display">$$\left( \text{그리고 } \ \begin{aligned} &amp;(a_1, a_2, a_3) - (b_1, b_2, b_3) \\ &amp;\quad := (a_1, a_2, a_3) + (-1) \cdot (b_1, b_2, b_3) \\ &amp;\quad = (a_1 - b_1, a_2 - b_2, a_3 - b_3) \end{aligned} \right)$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\mathbb{R}^3$ has both $+$ &amp; $\cdot$ :</p>
+        <!-- ═══════════ Lecture 2 · p.3 ═══════════ -->
+        <div class="math-display">$$\begin{aligned} (a_1, a_2, a_3) + (b_1, b_2, b_3) &amp;:= (a_1 + b_1, a_2 + b_2, a_3 + b_3) \\ c \cdot (a_1, a_2, a_3) &amp;:= (ca_1, ca_2, ca_3) \end{aligned}$$</div>
+        <p>whenever $a_1, a_2, a_3, b_1, b_2, b_3, c \in \mathbb{R}$.</p>
+        <div class="math-display">$$\left( \text{and } \ \begin{aligned} &amp;(a_1, a_2, a_3) - (b_1, b_2, b_3) \\ &amp;\quad := (a_1, a_2, a_3) + (-1) \cdot (b_1, b_2, b_3) \\ &amp;\quad = (a_1 - b_1, a_2 - b_2, a_3 - b_3) \end{aligned} \right)$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-8">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">수학자의 지침 <em>Mathematician's Guiding Principle</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>수학자의 지침:</strong> 사람들이 “벡터”라고 말할 때, 그것은 더할 수 있고 스칼라곱을 할 수 있는 “것”을 뜻한다. 마찬가지로 “벡터공간”은 (추가적인 성질을 갖는) “벡터”들의 집합을 뜻한다. 이런 의미에서 $\mathbb{R}^2$와 $\mathbb{R}^3$는 모두 벡터공간이다. (이 용어들은 1.2절에서 정확히 정의한다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Mathematician's Guiding Principle:</strong> when people say a “vector”, they mean “things” that can be added &amp; scalar multiplied. Similarly, “vector space” means a set of “vectors” (with additional properties). In this sense, both $\mathbb{R}^2$ &amp; $\mathbb{R}^3$ are vector spaces. (We will precisely define these words in Section 1.2)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-11">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^2$는 2차원 평면을, $\mathbb{R}^3$는 3차원 공간을 나타낸다. 따라서 더 높은 차원의 공간(예: 시공간)을 나타내려면 $\mathbb{R}^2$와 $\mathbb{R}^3$를 $\mathbb{R}^n$으로 일반화해야 한다:</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\mathbb{R}^2$ represents 2-dimensional plane and $\mathbb{R}^3$ represents 3-dimensional space. So to represent higher-dimensional space (e.g. spacetime), need to generalize $\mathbb{R}^2$ &amp; $\mathbb{R}^3$ into $\mathbb{R}^n$:</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 2 · p.4 ═══════════ -->
+
+<div class="card def-card" id="c1-9">
+  <div class="card-head">
+    <span class="def-num">DEF 1.3</span>
+    <span class="def-title">ℝⁿ과 그 좌표 <em>ℝⁿ and Its Coordinates</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>정의 1.3:</strong> $n \in \mathbb{Z}_{>0} := \{1, 2, 3, \dots\}$ (양의 정수 전체의 집합)을 고정하자. 그러면</p>
+        <div class="math-display">$$\mathbb{R}^n := \{ (x_1, \dots, x_n) : x_i \in \mathbb{R} \text{ (} i = 1, \dots, n \text{ 모두에 대하여)} \}.$$</div>
+        <p>($(x_1, \dots, x_n)$: 실수의 $n$-튜플)</p>
+        <p>$(x_1, \dots, x_n) \in \mathbb{R}^n$이 주어졌을 때, 그 $k$번째 좌표($k \in \{1, \dots, n\}$)는 $x_k$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Def 1.3:</strong> Fix $n \in \mathbb{Z}_{>0} := \{1, 2, 3, \dots\}$ (set of positive integers). Then</p>
+        <div class="math-display">$$\mathbb{R}^n := \{ (x_1, \dots, x_n) : x_i \in \mathbb{R} \text{ for every } i = 1, \dots, n \}.$$</div>
+        <p>($(x_1, \dots, x_n)$: $n$-tuple of real numbers)</p>
+        <p>Given $(x_1, \dots, x_n) \in \mathbb{R}^n$, its $k$th-coordinate ($k \in \{1, \dots, n\}$) is $x_k$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-10">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">약속 ℝ⁰ := {0} <em>The Convention ℝ⁰ := {0}</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>주의:</strong> 어떤 책에서는 $\mathbb{R}^0 := \{0\}$으로 정의하기도 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Rmk:</strong> Some books def $\mathbb{R}^0 := \{0\}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c1-11">
+  <div class="card-head">
+    <span class="def-num">DEF 1.4</span>
+    <span class="def-title">ℝⁿ의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication on ℝⁿ</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>정의 1.4:</strong> $\mathbb{R}^n$에서의 덧셈과 스칼라곱은 다음과 같다:</p>
+        <p><strong>(1)</strong> 임의의 $(x_1, \dots, x_n), (y_1, \dots, y_n) \in \mathbb{R}^n$에 대하여,</p>
+        <div class="math-display">$$(x_1, \dots, x_n) + (y_1, \dots, y_n) := (x_1 + y_1, \dots, x_n + y_n) \in \mathbb{R}^n$$</div>
+        <p><strong>(2)</strong> 임의의 $(x_1, \dots, x_n) \in \mathbb{R}^n$과 임의의 $c \in \mathbb{R}$에 대하여,</p>
+        <div class="math-display">$$c \cdot (x_1, \dots, x_n) = c\,(x_1, \dots, x_n) := (cx_1, \dots, cx_n)$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Def 1.4:</strong> Addition and scalar-multiplication on $\mathbb{R}^n$ is:</p>
+        <p><strong>(1)</strong> $\forall (x_1, \dots, x_n), (y_1, \dots, y_n) \in \mathbb{R}^n$,</p>
+        <div class="math-display">$$(x_1, \dots, x_n) + (y_1, \dots, y_n) := (x_1 + y_1, \dots, x_n + y_n) \in \mathbb{R}^n$$</div>
+        <p><strong>(2)</strong> $\forall (x_1, \dots, x_n) \in \mathbb{R}$ &amp; $\forall c \in \mathbb{R}$,</p>
+        <div class="math-display">$$c \cdot (x_1, \dots, x_n) = c\,(x_1, \dots, x_n) := (cx_1, \dots, cx_n)$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note01-12">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\mathbb{R}^n$의 성질을 뽑아내려면, $+$와 $\cdot$를 집합과 함수(사상이라고도 한다)로 다시 해석해야 한다:</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To extract properties of $\mathbb{R}^n$, we need to re-interpret $+$ &amp; $\cdot$ via sets and functions (also called maps):</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 2 · p.5 ═══════════ -->
+
+<div class="card def-card" id="c1-12">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">데카르트 곱 <em>Cartesian Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>정의:</strong> 두 집합 $X, Y$의 (데카르트) 곱은</p>
+        <div class="math-display">$$X \times Y := \{ (x,y) : x \in X, \ y \in Y \}.$$</div>
+        <p>($f : X \to Y$는 함수, $x \mapsto f(x)$: $x$가 $f(x)$로 대응된다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Def:</strong> (Cartesian) product of two sets $X, Y$ is</p>
+        <div class="math-display">$$X \times Y := \{ (x,y) : x \in X, \ y \in Y \}.$$</div>
+        <p>($f : X \to Y$ function, $x \mapsto f(x)$: $x$ maps to $f(x)$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c1-13">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">ℝ² = ℝ × ℝ과 ℝ³ ↔ ℝ² × ℝ <em>ℝ² = ℝ × ℝ and ℝ³ ↔ ℝ² × ℝ</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>예:</strong> $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$, &nbsp; $\mathbb{R}^3 \ \overset{\text{전단사}}{\underset{\text{일대일대응}}{\longleftrightarrow}} \ \mathbb{R}^2 \times \mathbb{R}$</p>
+        <div class="math-display">$$(a,b,c) \longmapsto ((a,b), c)$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Example:</strong> $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$, &nbsp; $\mathbb{R}^3 \ \overset{\text{1-1 onto}}{\underset{\text{1-1 cor}}{\longleftrightarrow}} \ \mathbb{R}^2 \times \mathbb{R}$</p>
+        <div class="math-display">$$(a,b,c) \longmapsto ((a,b), c)$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-14">
+  <div class="card-head">
+    <span class="rem-num">NOTE 1.5</span>
+    <span class="rem-title">함수로서의 덧셈과 스칼라곱 <em>Addition and Scalar Multiplication as Functions</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>노트 1.5:</strong> 정의 1.4와 앞의 정의로부터</p>
+        <p>$\Rightarrow$ $+$와 $\cdot$도 함수이다:</p>
+        <div class="math-display">$$\begin{aligned} + : \mathbb{R}^n \times \mathbb{R}^n &amp;\longrightarrow \mathbb{R}^n \\ ((x_1, \dots, x_n), (y_1, \dots, y_n)) &amp;\longmapsto (x_1 + y_1, \dots, x_n + y_n) \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} \cdot : \mathbb{R} \times \mathbb{R}^n &amp;\longrightarrow \mathbb{R}^n \\ (c, (x_1, \dots, x_n)) &amp;\longmapsto (cx_1, \dots, cx_n) \end{aligned}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Note 1.5:</strong> Def 1.4 &amp; Prev Def</p>
+        <p>$\Rightarrow$ $+$ &amp; $\cdot$ are functions as well:</p>
+        <div class="math-display">$$\begin{aligned} + : \mathbb{R}^n \times \mathbb{R}^n &amp;\longrightarrow \mathbb{R}^n \\ ((x_1, \dots, x_n), (y_1, \dots, y_n)) &amp;\longmapsto (x_1 + y_1, \dots, x_n + y_n) \end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned} \cdot : \mathbb{R} \times \mathbb{R}^n &amp;\longrightarrow \mathbb{R}^n \\ (c, (x_1, \dots, x_n)) &amp;\longmapsto (cx_1, \dots, cx_n) \end{aligned}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The "Pf Idea of Prop 1.6" is written in the notes after Rmk 1.7 (Lecture 2 p.6 bottom – p.7); it is placed in this card's proof toggle. -->
+<div class="card thm-card" id="c1-15">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.6</span>
+    <span class="thm-title">ℝⁿ은 (VS 1)–(VS 8)을 만족한다 <em>ℝⁿ Satisfies (VS 1)–(VS 8)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\Downarrow$</p>
+        <p><strong>명제 1.6:</strong> $+ : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^n$ (벡터의 덧셈)과 $\cdot : \mathbb{R} \times \mathbb{R}^n \to \mathbb{R}^n$ (스칼라곱; $\mathbb{R}$: 스칼라의 집합)을 갖춘 $\mathbb{R}^n$은 다음을 만족한다:</p>
+        <p><strong>(VS 1)</strong> 임의의 $v, w \in \mathbb{R}^n$에 대하여 $v + w = w + v$</p>
+        <p><strong>(VS 2)</strong> 임의의 $u, v, w \in \mathbb{R}^n$에 대하여 $(u + v) + w = u + (v + w)$</p>
+        <p><strong>(VS 3)</strong> 다음을 만족하는 $0_{\mathbb{R}^n} \in \mathbb{R}^n$ (간단히 $0$이라고도 한다)이 존재한다: 임의의 $v \in \mathbb{R}^n$에 대하여 $v + 0_{\mathbb{R}^n} = v = 0_{\mathbb{R}^n} + v$</p>
+        <p><strong>(VS 4)</strong> 임의의 $v \in \mathbb{R}^n$에 대하여, $v + w = 0_{\mathbb{R}^n}$인 $w \in \mathbb{R}^n$이 존재한다</p>
+        <p><strong>(VS 5)</strong> 임의의 $v \in \mathbb{R}^n$에 대하여 $1 \cdot v = v$</p>
+        <p><strong>(VS 6)</strong> 임의의 $a, b \in \mathbb{R}$와 임의의 $v \in \mathbb{R}^n$에 대하여 $(ab) \cdot v = a \cdot (b \cdot v)$</p>
+        <p><strong>(VS 7)</strong> 임의의 $c \in \mathbb{R}$와 임의의 $v, w \in \mathbb{R}^n$에 대하여 $c(v + w) = cv + cw$</p>
+        <p><strong>(VS 8)</strong> 임의의 $a, b \in \mathbb{R}$와 임의의 $v \in \mathbb{R}^n$에 대하여 $(a + b)v = av + bv$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>명제 1.6의 증명 아이디어:</strong> $\mathbb{R} = \mathbb{R}^1$이 (VS 1) – (VS 8)을 만족하고(한국 고등학교 수학), $+ : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^n$와 $\cdot : \mathbb{R} \times \mathbb{R}^n \to \mathbb{R}^n$가 좌표별로 정의되므로, $n = 1$인 경우가 $n > 1$인 경우를 “함의한다”.</p>
+        <p>(이는 완전한 정당화가 필요하다)</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 강의노트는 증명 아이디어만 적고 완전한 정당화는 남겨 두었다. 여기서는 여덟 공리를 모두 좌표별로 직접 확인한다. $v=(v_1,\dots,v_n)$, $w=(w_1,\dots,w_n)$, $u=(u_1,\dots,u_n)\in\mathbb{R}^n$이고 $a,b,c\in\mathbb{R}$이라 하자. 덧셈과 스칼라곱은 좌표별로 정의된다(정의 1.4): $v+w=(v_1+w_1,\dots,v_n+w_n)$, $cv=(cv_1,\dots,cv_n)$. 각 등식에서 양변의 $i$번째 좌표($1\le i\le n$)를 비교하고, 실수의 대응하는 성질을 사용한다.</p>
+        <p><strong>(VS 1)</strong> $v+w$의 $i$번째 좌표는 $v_i+w_i$이고 $w+v$의 $i$번째 좌표는 $w_i+v_i$이다. 실수의 덧셈의 교환법칙에 의해 $v_i+w_i=w_i+v_i$이므로 $v+w=w+v$이다.</p>
+        <p><strong>(VS 2)</strong> $(u+v)+w$의 $i$번째 좌표는 $(u_i+v_i)+w_i$이고 $u+(v+w)$의 $i$번째 좌표는 $u_i+(v_i+w_i)$이다. 실수의 덧셈의 결합법칙에 의해 두 값은 같으므로 $(u+v)+w=u+(v+w)$이다.</p>
+        <p><strong>(VS 3)</strong> $0_{\mathbb{R}^n}:=(0,\dots,0)\in\mathbb{R}^n$이라 하자. $v+0_{\mathbb{R}^n}$의 $i$번째 좌표는 $v_i+0=v_i$ (실수의 덧셈 항등원)이므로 $v+0_{\mathbb{R}^n}=v$이다. (VS 1)에 의해 $0_{\mathbb{R}^n}+v=v+0_{\mathbb{R}^n}=v$이다. 따라서 $0_{\mathbb{R}^n}$은 (VS 3)의 조건을 만족한다.</p>
+        <p><strong>(VS 4)</strong> $w:=(-v_1,\dots,-v_n)$이라 하자. 각 $-v_i\in\mathbb{R}$이므로 $w\in\mathbb{R}^n$이다. 이는 $(-1)v$와 같다($i$번째 좌표 $(-1)v_i=-v_i$). $v+w$의 $i$번째 좌표는 $v_i+(-v_i)=0$ (실수의 덧셈에 대한 역원)이므로 $v+w=(0,\dots,0)=0_{\mathbb{R}^n}$이다.</p>
+        <p><strong>(VS 5)</strong> $1\cdot v$의 $i$번째 좌표는 $1\cdot v_i=v_i$ (실수의 곱셈 항등원)이므로 $1\cdot v=v$이다.</p>
+        <p><strong>(VS 6)</strong> $(ab)\cdot v$의 $i$번째 좌표는 $(ab)v_i$이고 $a\cdot(b\cdot v)$의 $i$번째 좌표는 $a(bv_i)$이다. 실수의 곱셈의 결합법칙에 의해 $(ab)v_i=a(bv_i)$이므로 $(ab)\cdot v=a\cdot(b\cdot v)$이다.</p>
+        <p><strong>(VS 7)</strong> $c(v+w)$의 $i$번째 좌표는 $c(v_i+w_i)$이고 $cv+cw$의 $i$번째 좌표는 $cv_i+cw_i$이다. 실수의 분배법칙에 의해 $c(v_i+w_i)=cv_i+cw_i$이므로 $c(v+w)=cv+cw$이다.</p>
+        <p><strong>(VS 8)</strong> $(a+b)v$의 $i$번째 좌표는 $(a+b)v_i$이고 $av+bv$의 $i$번째 좌표는 $av_i+bv_i$이다. 실수의 분배법칙에 의해 $(a+b)v_i=av_i+bv_i$이므로 $(a+b)v=av+bv$이다.</p>
+        <p>(각 단계에서 두 $n$-튜플이 같다는 것은 모든 좌표가 같다는 것이며, 이것이 $\mathbb{R}^n$에서의 상등의 정의이다. 위 각 등식은 모든 $i$에 대하여 성립하므로 두 $n$-튜플이 같다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\Downarrow$</p>
+        <p><strong>Prop 1.6:</strong> $\mathbb{R}^n$ with $+ : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^n$ (vector addition) and $\cdot : \mathbb{R} \times \mathbb{R}^n \to \mathbb{R}^n$ (scalar-multi; $\mathbb{R}$: set of scalars) satisfy:</p>
+        <p><strong>(VS 1)</strong> $\forall v, w \in \mathbb{R}^n$, $v + w = w + v$</p>
+        <p><strong>(VS 2)</strong> $\forall u, v, w \in \mathbb{R}^n$, $(u + v) + w = u + (v + w)$</p>
+        <p><strong>(VS 3)</strong> There exists $0_{\mathbb{R}^n} \in \mathbb{R}^n$ (or simply called $0$) such that $\forall v \in \mathbb{R}^n$, $v + 0_{\mathbb{R}^n} = v = 0_{\mathbb{R}^n} + v$</p>
+        <!-- ═══════════ Lecture 2 · p.6 ═══════════ -->
+        <p><strong>(VS 4)</strong> $\forall v \in \mathbb{R}^n$, $\exists w \in \mathbb{R}^n$ s.t. $v + w = 0_{\mathbb{R}^n}$</p>
+        <p><strong>(VS 5)</strong> $\forall v \in \mathbb{R}^n$, $1 \cdot v = v$</p>
+        <p><strong>(VS 6)</strong> $\forall a, b \in \mathbb{R}$ and $\forall v \in \mathbb{R}^n$, $(ab) \cdot v = a \cdot (b \cdot v)$</p>
+        <p><strong>(VS 7)</strong> $\forall c \in \mathbb{R}$ and $\forall v, w \in \mathbb{R}^n$, $c(v + w) = cv + cw$</p>
+        <p><strong>(VS 8)</strong> $\forall a, b \in \mathbb{R}$ and $\forall v \in \mathbb{R}^n$, $(a + b)v = av + bv$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf Idea of Prop 1.6:</strong> Because $\mathbb{R} = \mathbb{R}^1$ satisties (VS 1) – (VS 8) (Korean high school math) and $+ : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^n$ &amp; $\cdot : \mathbb{R} \times \mathbb{R}^n \to \mathbb{R}^n$ is def coordinate-wise, $n = 1$ case “implies” $n > 1$ case.</p>
+        <!-- ═══════════ Lecture 2 · p.7 ═══════════ -->
+        <p>(this needs full-justification)</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The notes only sketch the idea and leave the full justification open. Here we verify all eight axioms directly, coordinate by coordinate. Let $v=(v_1,\dots,v_n)$, $w=(w_1,\dots,w_n)$, $u=(u_1,\dots,u_n)\in\mathbb{R}^n$ and $a,b,c\in\mathbb{R}$. Addition and scalar multiplication are defined coordinate-wise (Def 1.4): $v+w=(v_1+w_1,\dots,v_n+w_n)$, $cv=(cv_1,\dots,cv_n)$. In each identity we compare the $i$-th coordinate ($1\le i\le n$) of both sides, using the corresponding property of real numbers.</p>
+        <p><strong>(VS 1)</strong> The $i$-th coordinate of $v+w$ is $v_i+w_i$, and that of $w+v$ is $w_i+v_i$. By commutativity of addition in $\mathbb{R}$, $v_i+w_i=w_i+v_i$, so $v+w=w+v$.</p>
+        <p><strong>(VS 2)</strong> The $i$-th coordinate of $(u+v)+w$ is $(u_i+v_i)+w_i$, and that of $u+(v+w)$ is $u_i+(v_i+w_i)$. By associativity of addition in $\mathbb{R}$ these are equal, so $(u+v)+w=u+(v+w)$.</p>
+        <p><strong>(VS 3)</strong> Let $0_{\mathbb{R}^n}:=(0,\dots,0)\in\mathbb{R}^n$. The $i$-th coordinate of $v+0_{\mathbb{R}^n}$ is $v_i+0=v_i$ (additive identity of $\mathbb{R}$), so $v+0_{\mathbb{R}^n}=v$. By (VS 1), $0_{\mathbb{R}^n}+v=v+0_{\mathbb{R}^n}=v$. Hence $0_{\mathbb{R}^n}$ satisfies (VS 3).</p>
+        <p><strong>(VS 4)</strong> Let $w:=(-v_1,\dots,-v_n)$; it lies in $\mathbb{R}^n$ because each $-v_i\in\mathbb{R}$. This equals $(-1)v$ (its $i$-th coordinate is $(-1)v_i=-v_i$). The $i$-th coordinate of $v+w$ is $v_i+(-v_i)=0$ (additive inverse in $\mathbb{R}$), so $v+w=(0,\dots,0)=0_{\mathbb{R}^n}$.</p>
+        <p><strong>(VS 5)</strong> The $i$-th coordinate of $1\cdot v$ is $1\cdot v_i=v_i$ (multiplicative identity of $\mathbb{R}$), so $1\cdot v=v$.</p>
+        <p><strong>(VS 6)</strong> The $i$-th coordinate of $(ab)\cdot v$ is $(ab)v_i$, and that of $a\cdot(b\cdot v)$ is $a(bv_i)$. By associativity of multiplication in $\mathbb{R}$, $(ab)v_i=a(bv_i)$, so $(ab)\cdot v=a\cdot(b\cdot v)$.</p>
+        <p><strong>(VS 7)</strong> The $i$-th coordinate of $c(v+w)$ is $c(v_i+w_i)$, and that of $cv+cw$ is $cv_i+cw_i$. By the distributive law in $\mathbb{R}$, $c(v_i+w_i)=cv_i+cw_i$, so $c(v+w)=cv+cw$.</p>
+        <p><strong>(VS 8)</strong> The $i$-th coordinate of $(a+b)v$ is $(a+b)v_i$, and that of $av+bv$ is $av_i+bv_i$. By the distributive law in $\mathbb{R}$, $(a+b)v_i=av_i+bv_i$, so $(a+b)v=av+bv$.</p>
+        <p>(In each step, two $n$-tuples are equal if and only if all their coordinates are equal; this is the definition of equality in $\mathbb{R}^n$. Each identity above holds for every $i$, so the two $n$-tuples are equal.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c1-16">
+  <div class="card-head">
+    <span class="rem-num">REM 1.7</span>
+    <span class="rem-title">영벡터와 덧셈에 대한 역원 <em>Zero Vector and Additive Inverse</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>주의 1.7:</strong></p>
+        <p><strong>(a)</strong> (VS 1) – (VS 8)은 $+$와 $\cdot$가 “제대로” 작동함(우리의 직관과 일치함)을 말해 준다</p>
+        <p><strong>(b)</strong> (VS 3)의 $0_{\mathbb{R}^n} \in \mathbb{R}^n$은 유일하다.</p>
+        <p>$0_{\mathbb{R}^n} = (0, \dots, 0) = 0$ (기호의 남용)을 영벡터라 한다</p>
+        <p><strong>(c)</strong> (VS 4)의 $w \in \mathbb{R}^n$은 바로 $(-1)v$이다. 흔히 $(-1)v$를 $-v$로 쓴다. 따라서 그 $w$는 유일하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Rmk 1.7:</strong></p>
+        <p><strong>(a)</strong> (VS 1) – (VS 8) tell us that $+$ &amp; $\cdot$ behave “properly” (matches w/ our intuition)</p>
+        <p><strong>(b)</strong> $0_{\mathbb{R}^n} \in \mathbb{R}^n$ from (VS 3) is unique.</p>
+        <p>$0_{\mathbb{R}^n} = (0, \dots, 0) = 0$ (abuse of notation) is called a zero vector</p>
+        <p><strong>(c)</strong> From (VS 4), the $w \in \mathbb{R}^n$ is just $(-1)v$. We often write $-v$ as $(-1)v$. So that $w$ is unique.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 3 · p.2 ═══════════ -->
+<!-- (Lecture 3 p.1 Last Time recap and the p.2 Today agenda are skipped.) -->
+
+<div class="card def-card" id="c1-17">
+  <div class="card-head">
+    <span class="def-num">NOTATION 1.7</span>
+    <span class="def-title">열벡터 <em>Column Vectors</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>표기 1.7:</strong> 이 강의에서는 $\mathbb{R}^n$을 “열벡터”들의 “벡터공간”으로 보아야 한다. (수학자의 관점)</p>
+        <div class="math-display">$$\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} := (x_1, \dots, x_n)$$</div>
+        <p>($\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$: $n$개의 행과 하나의 열로 이루어지며, 모든 $i$에 대하여 $x_i \in \mathbb{R}$이다; ($\mathbb{R}$ 위의) 크기 $n$의 열벡터) &nbsp; ($(x_1, \dots, x_n)$: 실수의 $n$-튜플)</p>
+        <p>$\Downarrow$</p>
+        <div class="math-display">$$\mathbb{R}^n = \left\{ \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} : x_i \in \mathbb{R} \ \ \forall i \right\} = \{ (x_1, \dots, x_n) : x_i \in \mathbb{R} \ \ \forall i \}$$</div>
+        <p>그리고 (정의 1.4에 의해)</p>
+        <div class="math-display">$$\begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} + \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} = \begin{bmatrix} a_1 + b_1 \\ \vdots \\ a_n + b_n \end{bmatrix} \quad \forall \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}, \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} \in \mathbb{R}^n,$$</div>
+        <div class="math-display">$$c \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = \begin{bmatrix} ca_1 \\ \vdots \\ ca_n \end{bmatrix} \quad \forall \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} \in \mathbb{R}^n \ \&amp; \ \forall c \in \mathbb{R}$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Notation 1.7:</strong> In this course, we need to view $\mathbb{R}^n$ as a “vector space” of “column vectors”. (mathematician's viewpoint)</p>
+        <div class="math-display">$$\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} := (x_1, \dots, x_n)$$</div>
+        <p>($\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$: $n$ rows, single column, each $x_i \in \mathbb{R}$ $\forall i$; column vector of size $n$ (over $\mathbb{R}$)) &nbsp; ($(x_1, \dots, x_n)$: $n$-tuple of $\mathbb{R}$ #s)</p>
+        <p>$\Downarrow$</p>
+        <div class="math-display">$$\mathbb{R}^n = \left\{ \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} : x_i \in \mathbb{R} \ \ \forall i \right\} = \{ (x_1, \dots, x_n) : x_i \in \mathbb{R} \ \ \forall i \}$$</div>
+        <p>and (Def 1.4)</p>
+        <div class="math-display">$$\begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} + \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} = \begin{bmatrix} a_1 + b_1 \\ \vdots \\ a_n + b_n \end{bmatrix} \quad \forall \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}, \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} \in \mathbb{R}^n,$$</div>
+        <div class="math-display">$$c \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = \begin{bmatrix} ca_1 \\ \vdots \\ ca_n \end{bmatrix} \quad \forall \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} \in \mathbb{R}^n \ \&amp; \ \forall c \in \mathbb{R}$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- END CARDS -->
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="quiz1.html">퀴즈1 요약</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

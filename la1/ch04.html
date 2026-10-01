@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.4 기저와 차원 (§1.4 Basis and Dimension) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1 (MATH221) 4단원 기저와 차원 — 기저(basis)의 정의(리스트와 부분집합), 영공간의 기저와 ℝⁿ의 표준기저(standard basis), 다항식 공간의 기저, 일차결합(linear combination)의 유일성에 의한 기저 판정, 좌표(coordinates), 유한 생성집합 안에서 기저 찾기, 교체정리(Replacement Theorem)와 기저 원소 개수의 일치를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 기저, basis, 표준기저, standard basis, 차원, dimension, 일차독립, linearly independent, 일차종속, linearly dependent, 생성, span, 생성집합, spanning set, 일차결합, linear combination, 좌표, coordinates, 다항식 공간, polynomial space, 교체정리, Replacement Theorem, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/ch04.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.4 기저와 차원 (§1.4 Basis and Dimension) — 선형대수학 1 한·영 대조">
+<meta property="og:description" content="기저의 정의와 표준기저, 일차결합의 유일성에 의한 기저 판정, 유한 생성집합 안에서 기저 찾기, 교체정리와 기저 원소 개수의 일치까지 — 선형대수학 1 기저와 차원 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/ch04.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1.4 기저와 차원 (§1.4 Basis and Dimension) — 선형대수학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 1 기저와 차원 — 기저의 정의, 표준기저와 다항식 공간의 기저, 일차결합의 유일성에 의한 기저 판정, 좌표, 유한 생성집합 안의 기저, 교체정리와 기저 원소 개수의 일치를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la1/ch04.html",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "mainEntityOfPage": "https://univmathsurvive.com/la1/ch04.html"
+}
+</script>
+<script>
+MathJax = {
+  loader: { load: ['ui/lazy'] },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- la1은 MathJax 4: 좁은 화면에서 긴 인라인·디스플레이 수식 자동 줄바꿈 (ui/lazy: 화면에 들어온 수식만 조판 — v4 전체 조판은 v3보다 ~7배 느림) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html" class="active">04</a>
+      <a href="quiz1.html">퀴즈1 요약</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Unit 04</p>
+  <h1>1.4 기저와 차원<span>§1.4 Basis and Dimension</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c4-1"><span class="toc-num">Q</span> 이러한 S는 어떻게 찾는가? <em>How to Find Such S?</em></a></li>
+    <li><a href="#c4-2"><span class="toc-num">DEF 1.45</span> 기저 <em>Basis</em></a></li>
+    <li><a href="#c4-3"><span class="toc-num">EXAM 1.46</span> {0}의 기저와 ℝⁿ의 표준기저 <em>Basis of {0} and the Standard Basis of ℝⁿ</em></a></li>
+    <li><a href="#c4-4"><span class="toc-num">EXAM 1.46 (3)(4)</span> 다항식 공간의 기저 <em>Bases of Polynomial Spaces</em></a></li>
+    <li><a href="#c4-5"><span class="toc-num">REM</span> 기저는 유일하지 않다 <em>A Basis Is Not Unique</em></a></li>
+    <li><a href="#c4-6"><span class="toc-num">REM</span> 일차독립인 벡터들은 그 생성공간의 기저를 이룬다 <em>Independent Vectors Form a Basis of Their Span</em></a></li>
+    <li><a href="#c4-7"><span class="toc-num">EXAM 1.47</span> 단항식들은 ℝ[x]의 기저를 이룬다 <em>The Monomials Form a Basis of ℝ[x]</em></a></li>
+    <li><a href="#c4-8"><span class="toc-num">PROP 1.48</span> 기저와 일차결합의 유일성 <em>Basis iff Unique Linear Combination</em></a></li>
+    <li><a href="#c4-9"><span class="toc-num">REM</span> 기저에 대한 좌표 <em>Coordinates Relative to a Basis</em></a></li>
+    <li><a href="#c4-10"><span class="toc-num">Q</span> span(S)는 기저를 갖는가? <em>Does span(S) Have a Basis?</em></a></li>
+    <li><a href="#c4-11"><span class="toc-num">PROP 1.49</span> 유한 생성집합은 기저를 포함한다 <em>A Finite Spanning Set Contains a Basis</em></a></li>
+    <li><a href="#c4-12"><span class="toc-num">REM 1.50</span> 유한 생성집합을 기저로 줄이기 <em>Shrinking a Finite Spanning Set to a Basis</em></a></li>
+    <li><a href="#c4-13"><span class="toc-num">EXAM 1.51</span> ℝ³의 생성집합에서 기저 추출하기 <em>Extracting a Basis from a Spanning Set in ℝ³</em></a></li>
+    <li><a href="#c4-14"><span class="toc-num">REM</span> 모든 벡터공간은 기저를 갖는다 <em>Every Vector Space Has a Basis</em></a></li>
+    <li><a href="#c4-15"><span class="toc-num">REM 1.52</span> 모든 기저는 같은 크기를 갖는가? <em>Do All Bases Have the Same Size?</em></a></li>
+    <li><a href="#c4-16"><span class="toc-num">THM 1.53</span> 교체정리 <em>Replacement Theorem</em></a></li>
+    <li><a href="#c4-17"><span class="toc-num">EX 1.54</span> 유한 생성 공간의 일차독립 집합은 유한집합이다 <em>Independent Sets in a Finitely Spanned Space Are Finite</em></a></li>
+    <li><a href="#c4-18"><span class="toc-num">COR 1.55</span> 모든 기저는 같은 크기를 갖는다 <em>All Bases Have the Same Size</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 1 (MATH221) 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 노트(손글씨 태블릿 노트)의 환경 하나 = 카드 하나. id는 단원 안의 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c4-10"), 노트 등장 순서대로 배치한다.
+     배지는 강의 노트의 전역 번호(1.1, 1.2, … 1.55)를 그대로 따른다:
+     Def 1.45 → DEF 1.45, Notation → NOTATION, Thm 1.53 → THM 1.53, Prop 1.48 → PROP 1.48,
+     Lem → LEM, Cor 1.55 → COR 1.55, Rmk 1.50 → REM 1.50, Note → NOTE,
+     Ex 1.46 (= Example) → EXAM 1.46, Exercise 1.54 → EX 1.54.
+     번호 없는 항목은 유형 배지만 둔다 (DEF / REM / NOTE / Q / RECALL / CLAIM / EXAM / EX).
+     Comment 와 Guiding Principle 은 REM, Q … A 또는 Q … ⇓ Yes! 는 Q.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Def / Notation                      → card def-card  · DEF n / NOTATION n
+       Thm / Prop / Lem / Cor / Claim      → card thm-card  · THM n / PROP n / LEM n / COR n / CLAIM
+       Rmk / Note / Recall / Q / Comment   → card rem-card  · REM n / NOTE n / RECALL / Q / REM
+       Ex (Example)                        → card exam-card · EXAM n
+       Exercise                            → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num 만 둔다.
+  3) 각 강의 첫머리의 Last Time 복습과 Today 안내는 카드로 만들지 않는다
+     (복습에 새 내용이 있을 때만 그 내용만 담은 RECALL 카드 하나).
+     강의·쪽 경계는 Lecture N · p.M 형식의 주석 구분선으로 표시한다.
+     노트의 주제 표제(Properties of bases 등)는 div.section-title 로 옮긴다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     노트에 표제가 없으면 간결한 편집 제목을 붙이고, 노트가 괄호 안에 준 이름
+     (Replacement Thm 등)이 있으면 그 이름을 쓴다.
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 손글씨 본문의 verbatim 전사. 강의자의 약어(v.s., subsp, l.c., l.i., l.d.,
+                   fin, std, coeffs, coords, elts, w/, b/c, s.t., iff, Pf 등)와 오탈자까지 그대로 둔다.
+                   약어 위에 작게 적힌 색 글씨 풀이는 옮기지 않고, 수학적 내용이 있는
+                   색 글씨 곁말은 괄호에 넣어 제자리에 둔다.
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     노트의 색, 밑줄, 동그라미는 옮기지 않는다. 손그림은 fig-note 한 줄 설명으로 대신한다.
+  6) 노트에 증명(Pf: … □)이 적힌 명제·예제는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 두고
+     en 쪽은 원문 증명을 verbatim 전사한 뒤 div.qed(□)로 닫는다.
+     증명 안에서 소단계 끝에 그린 빗금 상자는 span.part-end(▨)로 옮긴다.
+  7) 증명이 노트에 없는 진술(Pf: Exercise, Pf: Unit 1.4 notes, Pf: Math-Major Only,
+     Exercise 1.54 등)은 진술과 Pf 줄만 en-formal 에 옮기고, 나중에 증명을 쓸 자리에
+     숨은 마커만 남긴다. ko-panel 안 div.formal 뒤에 PROOF-KO 마커, en-panel 안
+     div.en-formal 뒤에 PROOF-EN 마커를 각각 HTML 주석으로 둔다.
+  8) Motivation 같은 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원 2자리}-{순번} (예: note04-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 열벡터는 bmatrix, span 은 operatorname 으로 쓴다.
+     ⊊ 는 subsetneq, ∄ 는 nexists, ∃! 는 exists!, #S 는 백슬래시를 붙인 #S,
+     모순 표시 ※ 는 문자 그대로 둔다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     소스의 항목 라벨이 (1)/(2) 또는 (a)/(b)처럼 적힌 경우 ol 대신
+     p 태그 앞에 strong 으로 라벨을 그대로 적어 원문 표기를 보존한다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§1.4 Basis and Dimension · 기저와 차원</h2></div>
+
+<!-- ═══════════ Lecture 7 · p.4 ═══════════ -->
+
+<div class="card note-card" id="note04-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> $V$는 벡터공간이고 $W \subseteq V$는 부분공간이라 하자. 그러면</p>
+        <div class="math-display">$$W = \operatorname{span}(W) = \operatorname{span}(\underbrace{W \setminus \{0\}}_{\text{일차종속 } (W \neq \{0\}\text{일 때})}).$$</div>
+        <p>$\operatorname{span}(S) = W$를 만족하는 일차독립인 $S \subseteq W$를 찾을 수 있다면 좋을 것이다. 그러면 모든 $v \in S$에 대하여</p>
+        <div class="math-display">$$\operatorname{span}(S \setminus \{v\}) \subsetneq \operatorname{span}(S) = W \quad \text{(명제 1.43에 의해)}$$</div>
+        <p>$\Rightarrow S$는 $W$를 생성하는 $W$의 극소 부분집합이다.</p>
+        <p>($S$: $W$의 일차독립인 생성집합 (특별한 경우로 $W = V$))</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> $V$ v.s., $W \subseteq V$ subsp. Then</p>
+        <div class="math-display">$$W = \operatorname{span}(W) = \operatorname{span}(\underbrace{W \setminus \{0\}}_{\text{l.d. unless } W = \{0\}}).$$</div>
+        <p>It would be nize if we can find $S \subseteq W$ l.i. s.t. $\operatorname{span}(S) = W$. Then $\forall v \in S$,</p>
+        <div class="math-display">$$\operatorname{span}(S \setminus \{v\}) \subsetneq \operatorname{span}(S) = W \quad \text{by Prop 1.43}$$</div>
+        <p>$\Rightarrow S$ is a minimal subset of $W$ that spans $W$.</p>
+        <p>($S$: both l.i. &amp; spanning set of $W$ ($= V$ as special case))</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c4-1">
+  <div class="card-head">
+    <span class="rem-num">Q</span>
+    <span class="rem-title">이러한 S는 어떻게 찾는가? <em>How to Find Such S?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>질문:</strong> 이러한 $S$는 어떻게 찾는가?</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Q:</strong> How to find such $S$?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 7 · p.5 ═══════════ -->
+
+<div class="card def-card" id="c4-2">
+  <div class="card-head">
+    <span class="def-num">DEF 1.45</span>
+    <span class="def-title">기저 <em>Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이다.</p>
+        <p><strong>(a)</strong> $V$의 기저(basis) $\beta = (v_1, \dots, v_n) \in V^n$는 $V$를 생성하는 일차독립인 리스트이다.</p>
+        <p><strong>(b)</strong> $V$의 기저(basis) $\beta \subseteq V$는 $V$를 생성하는 일차독립인 부분집합이다.</p>
+        <p>(두 정의는 순서 있는 $(v_1, \dots, v_n)$와 순서 없는 $\{v_1, \dots, v_n\}$에 대하여 서로 일치한다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s.</p>
+        <p><strong>(a)</strong> A basis $\beta = (v_1, \dots, v_n) \in V^n$ of $V$ is a l.i. list that also spans $V$.</p>
+        <p><strong>(b)</strong> A basis $\beta \subseteq V$ of $V$ is a l.i. subset that also spans $V$.</p>
+        <p>(two defs agree for $(v_1, \dots, v_n)$ ordered &amp; $\{v_1, \dots, v_n\}$ unordered)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c4-3">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.46</span>
+    <span class="exam-title">{0}의 기저와 ℝⁿ의 표준기저 <em>Basis of {0} and the Standard Basis of ℝⁿ</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $\varnothing$은 $\{0\}$의 기저이다.</p>
+        <p><strong>(2)</strong> $\mathbb{R}^n$의 표준기저는 $\beta := (e_1, \dots, e_n)$이다. 여기서 $e_1, \dots, e_n$은 예 1.38(1)의 벡터이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\beta$는 예 1.38(1)에 의해 일차독립이다. 또한</p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}(\beta) &amp;= \left\{ a_1 \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + a_2 \begin{bmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \cdots + a_n \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix} : a_i \in \mathbb{R} \ \forall i \right\} \\ &amp;= \left\{ \begin{bmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{bmatrix} : a_i \in \mathbb{R} \ \forall i \right\} = \mathbb{R}^n \Rightarrow \beta \text{는 } \mathbb{R}^n \text{을 생성한다} \end{aligned}$$</div>
+        <p>따라서 $\beta$는 $\mathbb{R}^n$의 기저이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> $\varnothing$ is a basis of $\{0\}$.</p>
+        <p><strong>(2)</strong> The standard basis of $\mathbb{R}^n$ is $\beta := (e_1, \dots, e_n)$ where $e_1, \dots, e_n$ are from Ex 1.38(1).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> $\beta$ l.i. b/c of Ex 1.38(1). Also,</p>
+        <div class="math-display">$$\begin{aligned} \operatorname{span}(\beta) &amp;= \left\{ a_1 \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + a_2 \begin{bmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \cdots + a_n \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix} : a_i \in \mathbb{R} \ \forall i \right\} \\ &amp;= \left\{ \begin{bmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{bmatrix} : a_i \in \mathbb{R} \ \forall i \right\} = \mathbb{R}^n \Rightarrow \beta \text{ spans } \mathbb{R}^n \end{aligned}$$</div>
+        <p>Therefore, $\beta$ is a basis of $\mathbb{R}^n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 7 · p.5–6 ═══════════ -->
+
+<div class="card exam-card" id="c4-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.46 (3)(4)</span>
+    <span class="exam-title">다항식 공간의 기저 <em>Bases of Polynomial Spaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(3)</strong> $\mathbb{R}[x]_{\leq n}$의 표준기저는 $\beta := (1, x, \dots, x^n)$이다.</p>
+        <p><strong>증명:</strong> 연습 문제.</p>
+        <p><strong>(4)</strong> $(1, x+1, (x+1)^2)$은 $\mathbb{R}[x]_{\leq 2}$의 기저이다.</p>
+        <p><strong>증명:</strong> 연습 문제.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(3)</strong> 정의에 의해</p>
+        <div class="math-display">$$\mathbb{R}[x]_{\leq n} = \left\{ \sum_{i=0}^{n} a_ix^i : a_i \in \mathbb{R} \right\} = \operatorname{span}(1, x, \dots, x^n)$$</div>
+        <p>이므로 (정의 1.31(1)) $\beta$는 $\mathbb{R}[x]_{\leq n}$을 생성한다.</p>
+        <p>다음으로 일차독립임을 보이자. (이는 예 1.38(2)의 내용으로, 강의노트에서는 연습으로 남겨져 있다. 이 카드만으로 읽을 수 있도록 단원 03에서 쓴 증명을 여기에 다시 적는다.) $a_0, \dots, a_n \in \mathbb{R}$에 대하여 $f := a_0 + a_1x + \cdots + a_nx^n = 0$이라 하자. 다항식은 함수 $\mathbb{R} \to \mathbb{R}$이므로, 이는 모든 실수 $t$에 대하여 $f(t) = 0$이라는 뜻이다. 즉 $f$는 상수함수 $0$이므로, 모든 $k \geq 0$에 대하여 $k$계 도함수 $f^{(k)}$도 상수함수 $0$이다.</p>
+        <p>한편 $0 \leq k \leq n$에 대하여 $f$를 항별로 $k$번 미분하면 ($i \lt k$인 항 $a_ix^i$는 사라지므로)</p>
+        <div class="math-display">$$f^{(k)}(x) = \sum_{i=k}^{n} \frac{i!}{(i-k)!}\, a_i\, x^{i-k}$$</div>
+        <p>이다. $x = 0$을 대입하면 $i \gt k$인 항은 모두 $0$이 되고 $i = k$인 항만 남으므로</p>
+        <div class="math-display">$$0 = f^{(k)}(0) = k!\, a_k$$</div>
+        <p>이다. $k! \neq 0$이므로 $a_k = 0$이다. 이것이 모든 $0 \leq k \leq n$에 대하여 성립하므로 $a_0 = a_1 = \cdots = a_n = 0$이고, 따라서 $1, x, \dots, x^n$은 일차독립이다. 그러므로 $\beta$는 $\mathbb{R}[x]_{\leq n}$의 기저이다.</p>
+        <p><strong>(4)</strong> $\gamma := (1, x+1, (x+1)^2)$이라 하자. $(x+1)^2 = 1 + 2x + x^2$이므로 $\gamma$의 세 다항식은 모두 $\mathbb{R}[x]_{\leq 2}$에 속한다. $p, q, r \in \mathbb{R}$에 대하여 전개하면</p>
+        <div class="math-display">$$p \cdot 1 + q(x+1) + r(x+1)^2 = (p+q+r) + (q+2r)x + rx^2 \quad (\dagger)$$</div>
+        <p>이다.</p>
+        <p><em>생성.</em> $a, b, c \in \mathbb{R}$에 대하여 $f = a + bx + cx^2 \in \mathbb{R}[x]_{\leq 2}$라 하자. $p := a - b + c$, $q := b - 2c$, $r := c$로 두면 $p + q + r = a$, $q + 2r = b$이므로 $(\dagger)$에 의해</p>
+        <div class="math-display">$$a + bx + cx^2 = (a-b+c) \cdot 1 + (b-2c)(x+1) + c(x+1)^2$$</div>
+        <p>이다. 따라서 $\mathbb{R}[x]_{\leq 2} \subseteq \operatorname{span}(\gamma)$이다. 반대로 $\gamma$의 원소들은 부분공간 $\mathbb{R}[x]_{\leq 2}$에 속하므로 명제 1.33에 의해 $\operatorname{span}(\gamma) \subseteq \mathbb{R}[x]_{\leq 2}$이다. 그러므로 $\gamma$는 $\mathbb{R}[x]_{\leq 2}$를 생성한다.</p>
+        <p><em>일차독립.</em> $p \cdot 1 + q(x+1) + r(x+1)^2 = 0$이라 하자. $(\dagger)$에 의해 $(p+q+r) \cdot 1 + (q+2r)x + rx^2 = 0$이다. (3)에 의해 ($n = 2$인 경우) $1, x, x^2$은 일차독립이므로</p>
+        <div class="math-display">$$p + q + r = 0, \quad q + 2r = 0, \quad r = 0$$</div>
+        <p>이다. 따라서 $r = 0$이고, $q = -2r = 0$이며, $p = -q - r = 0$이다. 즉 $\gamma$는 일차독립이다. 그러므로 $\gamma$는 $\mathbb{R}[x]_{\leq 2}$의 기저이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(3)</strong> The std basis of $\mathbb{R}[x]_{\leq n}$ is $\beta := (1, x, \dots, x^n)$.</p>
+        <p><strong>Pf:</strong> Exercise.</p>
+        <p><strong>(4)</strong> $(1, x+1, (x+1)^2)$ is a basis of $\mathbb{R}[x]_{\leq 2}$.</p>
+        <p><strong>Pf:</strong> Exercise</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(3)</strong> By definition,</p>
+        <div class="math-display">$$\mathbb{R}[x]_{\leq n} = \left\{ \sum_{i=0}^{n} a_ix^i : a_i \in \mathbb{R} \right\} = \operatorname{span}(1, x, \dots, x^n)$$</div>
+        <p>(Def 1.31(1)), so $\beta$ spans $\mathbb{R}[x]_{\leq n}$.</p>
+        <p>Next, we show linear independence. (This is Example 1.38(2), left as an exercise in the notes; the proof given in Unit 03 is repeated here so that this card is self-contained.) Let $a_0, \dots, a_n \in \mathbb{R}$ with $f := a_0 + a_1x + \cdots + a_nx^n = 0$. Polynomials are functions $\mathbb{R} \to \mathbb{R}$, so this means $f(t) = 0$ for every real number $t$. Thus $f$ is the constant function $0$, and so is its $k$-th derivative $f^{(k)}$ for every $k \geq 0$.</p>
+        <p>On the other hand, for $0 \leq k \leq n$, differentiating $f$ term by term $k$ times (the terms $a_ix^i$ with $i \lt k$ disappear) gives</p>
+        <div class="math-display">$$f^{(k)}(x) = \sum_{i=k}^{n} \frac{i!}{(i-k)!}\, a_i\, x^{i-k}.$$</div>
+        <p>Plugging in $x = 0$, every term with $i \gt k$ becomes $0$ and only the term with $i = k$ survives, so</p>
+        <div class="math-display">$$0 = f^{(k)}(0) = k!\, a_k.$$</div>
+        <p>Since $k! \neq 0$, we get $a_k = 0$. This holds for every $0 \leq k \leq n$, so $a_0 = a_1 = \cdots = a_n = 0$, and hence $1, x, \dots, x^n$ is linearly independent. Therefore $\beta$ is a basis of $\mathbb{R}[x]_{\leq n}$.</p>
+        <p><strong>(4)</strong> Let $\gamma := (1, x+1, (x+1)^2)$. Since $(x+1)^2 = 1 + 2x + x^2$, all three polynomials in $\gamma$ lie in $\mathbb{R}[x]_{\leq 2}$. For $p, q, r \in \mathbb{R}$, expanding gives</p>
+        <div class="math-display">$$p \cdot 1 + q(x+1) + r(x+1)^2 = (p+q+r) + (q+2r)x + rx^2. \quad (\dagger)$$</div>
+        <p><em>Spanning.</em> Let $f = a + bx + cx^2 \in \mathbb{R}[x]_{\leq 2}$ with $a, b, c \in \mathbb{R}$. Put $p := a - b + c$, $q := b - 2c$, $r := c$. Then $p + q + r = a$ and $q + 2r = b$, so by $(\dagger)$</p>
+        <div class="math-display">$$a + bx + cx^2 = (a-b+c) \cdot 1 + (b-2c)(x+1) + c(x+1)^2.$$</div>
+        <p>Hence $\mathbb{R}[x]_{\leq 2} \subseteq \operatorname{span}(\gamma)$. Conversely, the entries of $\gamma$ lie in the subspace $\mathbb{R}[x]_{\leq 2}$, so $\operatorname{span}(\gamma) \subseteq \mathbb{R}[x]_{\leq 2}$ by Prop 1.33. Thus $\gamma$ spans $\mathbb{R}[x]_{\leq 2}$.</p>
+        <p><em>Linear independence.</em> Suppose $p \cdot 1 + q(x+1) + r(x+1)^2 = 0$. By $(\dagger)$, $(p+q+r) \cdot 1 + (q+2r)x + rx^2 = 0$. Since $1, x, x^2$ is linearly independent by (3) (the case $n = 2$),</p>
+        <div class="math-display">$$p + q + r = 0, \quad q + 2r = 0, \quad r = 0.$$</div>
+        <p>So $r = 0$, then $q = -2r = 0$, and then $p = -q - r = 0$. That is, $\gamma$ is linearly independent. Therefore $\gamma$ is a basis of $\mathbb{R}[x]_{\leq 2}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 7 · p.6 ═══════════ -->
+
+<div class="card rem-card" id="c4-5">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">기저는 유일하지 않다 <em>A Basis Is Not Unique</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>참고:</strong> 일반적으로 기저는 유일하지 않다! 예 1.46 (3)(4)에서 $(1, x, x^2)$과 $(1, (x+1), (x+1)^2)$ 모두 $\mathbb{R}[x]_{\leq 2}$의 기저들이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Comment:</strong> Basis is not unique in gen'l! In Ex 1.46 (3)(4), both $(1, x, x^2)$ &amp; $(1, (x+1), (x+1)^2)$ are bases (plural of basis) of $\mathbb{R}[x]_{\leq 2}$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 8 · p.1 ═══════════ -->
+<!-- "Last Time:" recap (Def 1.45 (a)(b) and the std basis e_1, …, e_n of ℝⁿ) and the "Today:" agenda
+     ("Continue §1.4 Basis and Dimension (Properties of basis)") are skipped: they repeat earlier cards. -->
+
+<div class="card rem-card" id="c4-6">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">일차독립인 벡터들은 그 생성공간의 기저를 이룬다 <em>Independent Vectors Form a Basis of Their Span</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정의에 의해, $V$가 벡터공간이고 $v_1, \dots, v_n \in V$가 일차독립이면 $v_1, \dots, v_n$은 $\operatorname{span}(v_1, \dots, v_n)$의 기저이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By def, if $V$ v.s., $v_1, \dots, v_n \in V$ l.i., then $v_1, \dots, v_n$ is a basis of $\operatorname{span}(v_1, \dots, v_n)$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c4-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.47</span>
+    <span class="exam-title">단항식들은 ℝ[x]의 기저를 이룬다 <em>The Monomials Form a Basis of ℝ[x]</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\{x^n : n \in \mathbb{Z}_{\geq 0}\}$ (무한집합 $\{1, x, x^2, x^3, \dots\}$)은 $\mathbb{R}[x]$의 기저이다.</p>
+        <p><strong>증명:</strong> 단원 1.4 노트 참조 (수학과 전용).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$S := \{x^n : n \in \mathbb{Z}_{\geq 0}\}$이라 하자. 각 $x^n$은 다항식이므로 $S \subseteq \mathbb{R}[x]$이다.</p>
+        <p><em>생성.</em> $f \in \mathbb{R}[x]$라 하자. 정의에 의해 어떤 $d \in \mathbb{Z}_{\geq 0}$와 $a_0, \dots, a_d \in \mathbb{R}$에 대하여 $f = \sum_{i=0}^{d} a_ix^i$이다. 즉 $f$는 $1, x, \dots, x^d$의 일차결합이고, $T := \{1, x, \dots, x^d\}$는 $S$의 공집합이 아닌 유한 부분집합이다. 따라서 정의 1.30(2)에 의해 $f$는 $S$의 일차결합이고, $f \in \operatorname{span}(S)$이다. 그러므로 $\mathbb{R}[x] \subseteq \operatorname{span}(S)$이다. 반대로 $S \subseteq \mathbb{R}[x]$이고 $\mathbb{R}[x]$는 ($\mathcal{F}(\mathbb{R}, \mathbb{R})$의) 부분공간이므로 명제 1.33에 의해 $\operatorname{span}(S) \subseteq \mathbb{R}[x]$이다. 따라서 $\operatorname{span}(S) = \mathbb{R}[x]$, 즉 $S$는 $\mathbb{R}[x]$를 생성한다.</p>
+        <p><em>일차독립.</em> $S$는 무한집합이다. 정의 1.35(2)와 정의 1.37(2)에 의해, $S$가 일차독립이라는 것은 $S$의 공집합이 아닌 모든 유한 부분집합 $T$에 대하여 $T$의 원소들이 일차독립이라는 뜻이다. 그러한 $T$를 하나 잡으면, 지수를 작은 것부터 늘어놓아</p>
+        <div class="math-display">$$T = \{x^{n_1}, x^{n_2}, \dots, x^{n_k}\} \qquad (k \geq 1,\ 0 \leq n_1 \lt n_2 \lt \cdots \lt n_k)$$</div>
+        <p>로 쓸 수 있다. $N := n_k$라 하고, $a_1, \dots, a_k \in \mathbb{R}$에 대하여</p>
+        <div class="math-display">$$a_1x^{n_1} + a_2x^{n_2} + \cdots + a_kx^{n_k} = 0$$</div>
+        <p>이라 하자. 좌변은 $\sum_{i=0}^{N} b_ix^i$ 꼴의 다항식이다. 여기서 각 $j$에 대하여 $b_{n_j} = a_j$이고, $i \notin \{n_1, \dots, n_k\}$이면 $b_i = 0$이다. 예 1.46(3)에서 $1, x, \dots, x^N$이 일차독립임을 보였으므로 $b_0 = b_1 = \cdots = b_N = 0$이고, 특히 모든 $j$에 대하여 $a_j = b_{n_j} = 0$이다. 따라서 $x^{n_1}, \dots, x^{n_k}$는 일차독립이다.</p>
+        <p>즉 $S$의 공집합이 아닌 유한 부분집합 중 일차종속인 것은 없으므로, 정의 1.35(2)에 의해 $S$는 일차종속이 아니고, 정의 1.37(2)에 의해 $S$는 일차독립이다. 그러므로 $S$는 $\mathbb{R}[x]$의 기저이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\{x^n : n \in \mathbb{Z}_{\geq 0}\}$ (infinite-set $\{1, x, x^2, x^3, \dots\}$) is a basis of $\mathbb{R}[x]$.</p>
+        <p><strong>Pf:</strong> Unit 1.4 notes (only for Math-Major).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $S := \{x^n : n \in \mathbb{Z}_{\geq 0}\}$. Each $x^n$ is a polynomial, so $S \subseteq \mathbb{R}[x]$.</p>
+        <p><em>Spanning.</em> Let $f \in \mathbb{R}[x]$. By definition, $f = \sum_{i=0}^{d} a_ix^i$ for some $d \in \mathbb{Z}_{\geq 0}$ and $a_0, \dots, a_d \in \mathbb{R}$. That is, $f$ is a linear combination of $1, x, \dots, x^d$, and $T := \{1, x, \dots, x^d\}$ is a nonempty finite subset of $S$. So $f$ is a linear combination of $S$ by Def 1.30(2), and $f \in \operatorname{span}(S)$. Hence $\mathbb{R}[x] \subseteq \operatorname{span}(S)$. Conversely, $S \subseteq \mathbb{R}[x]$ and $\mathbb{R}[x]$ is a subspace (of $\mathcal{F}(\mathbb{R}, \mathbb{R})$), so $\operatorname{span}(S) \subseteq \mathbb{R}[x]$ by Prop 1.33. Thus $\operatorname{span}(S) = \mathbb{R}[x]$, i.e., $S$ spans $\mathbb{R}[x]$.</p>
+        <p><em>Linear independence.</em> $S$ is an infinite set. By Def 1.35(2) and Def 1.37(2), $S$ is linearly independent exactly when, for every nonempty finite subset $T$ of $S$, the elements of $T$ are linearly independent. Take such a $T$ and list its exponents in increasing order:</p>
+        <div class="math-display">$$T = \{x^{n_1}, x^{n_2}, \dots, x^{n_k}\} \qquad (k \geq 1,\ 0 \leq n_1 \lt n_2 \lt \cdots \lt n_k).$$</div>
+        <p>Let $N := n_k$, and suppose $a_1, \dots, a_k \in \mathbb{R}$ satisfy</p>
+        <div class="math-display">$$a_1x^{n_1} + a_2x^{n_2} + \cdots + a_kx^{n_k} = 0.$$</div>
+        <p>The left-hand side is a polynomial of the form $\sum_{i=0}^{N} b_ix^i$, where $b_{n_j} = a_j$ for each $j$ and $b_i = 0$ for $i \notin \{n_1, \dots, n_k\}$. By Example 1.46(3), $1, x, \dots, x^N$ is linearly independent, so $b_0 = b_1 = \cdots = b_N = 0$; in particular $a_j = b_{n_j} = 0$ for every $j$. Hence $x^{n_1}, \dots, x^{n_k}$ is linearly independent.</p>
+        <p>So no nonempty finite subset of $S$ is linearly dependent. By Def 1.35(2), $S$ is not linearly dependent, so $S$ is linearly independent by Def 1.37(2). Therefore $S$ is a basis of $\mathbb{R}[x]$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 8 · p.2 ═══════════ -->
+
+<div class="section-title"><h2>Properties of bases · 기저의 성질</h2></div>
+
+<div class="card thm-card" id="c4-8">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.48</span>
+    <span class="thm-title">기저와 일차결합의 유일성 <em>Basis iff Unique Linear Combination</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$는 벡터공간이라 하자. 그러면 $v_1, \dots, v_n \in V$가 기저일 필요충분조건은 모든 $w \in V$에 대하여 $w = a_1v_1 + \cdots + a_nv_n$인 일차결합이 유일하게 존재하는 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>($\Rightarrow$):</strong> $v_1, \dots, v_n$이 $V$의 기저라 가정하자. 그러면 $w \in V = \operatorname{span}(v_1, \dots, v_n)$이므로 $w = \sum_{i=1}^n a_iv_i$인 $(a_1, \dots, a_n) \in \mathbb{R}^n$가 존재한다. 또 $w = \sum_{i=1}^n b_iv_i$인 $(b_1, \dots, b_n) \in \mathbb{R}^n$가 존재한다면 $\sum_{i=1}^n a_iv_i = \sum_{i=1}^n b_iv_i$이고,</p>
+        <div class="math-display">$$\Rightarrow 0 = \sum_{i=1}^n a_iv_i - \sum_{i=1}^n b_iv_i = \sum_{i=1}^n (a_i - b_i)v_i.$$</div>
+        <p>$v_1, \dots, v_n$이 일차독립이므로</p>
+        <div class="math-display">$$0 = \sum_{i=1}^n (a_i - b_i)v_i \Rightarrow a_i - b_i = 0 \ \forall i \Rightarrow a_i = b_i \ \forall i.$$</div>
+        <p>따라서 $w$의 일차결합 $a_1v_1 + \cdots + a_nv_n$은 유일하다. <span class="part-end">▨</span></p>
+        <p><strong>($\Leftarrow$):</strong> 모든 $w \in V$가 $v_1, \dots, v_n$의 일차결합이므로 모든 $w \in V$에 대하여 $w \in \operatorname{span}(v_1, \dots, v_n)$이다. 따라서 $v_1, \dots, v_n$은 $V$를 생성한다. 또한 $0 \in V$는 일차결합 $0 = 0 \cdot v_1 + \cdots + 0 \cdot v_n$으로 표현되며, 가정에 의해 이 표현은 유일하므로 $\Rightarrow$ 정의에 의해 $v_1, \dots, v_n$은 일차독립이다. 그러므로 $v_1, \dots, v_n$이 일차독립이고 $V$를 생성하므로 $\Rightarrow v_1, \dots, v_n$은 기저이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V$ v.s. Then $v_1, \dots, v_n \in V$ is a basis iff $\forall w \in V$, $\exists!$ l.c. $w = a_1v_1 + \cdots + a_nv_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> <strong>($\Rightarrow$):</strong> Assume that $v_1, \dots, v_n$ is a basis for $V$. Then $w \in V = \operatorname{span}(v_1, \dots, v_n)$, so $\exists (a_1, \dots, a_n) \in \mathbb{R}^n$ s.t. $w = \sum_{i=1}^n a_iv_i$. If $\exists (b_1, \dots, b_n) \in \mathbb{R}^n$ s.t. $w = \sum_{i=1}^n b_iv_i$, then $\sum_{i=1}^n a_iv_i = \sum_{i=1}^n b_iv_i$</p>
+        <div class="math-display">$$\Rightarrow 0 = \sum_{i=1}^n a_iv_i - \sum_{i=1}^n b_iv_i = \sum_{i=1}^n (a_i - b_i)v_i.$$</div>
+        <p>B/c $v_1, \dots, v_n$ l.i.,</p>
+        <div class="math-display">$$0 = \sum_{i=1}^n (a_i - b_i)v_i \Rightarrow a_i - b_i = 0 \ \forall i \Rightarrow a_i = b_i \ \forall i.$$</div>
+        <p>Thus, $w$ has a unique l.c. $a_1v_1 + \cdots + a_nv_n$. <span class="part-end">▨</span></p>
+        <p><strong>($\Leftarrow$):</strong> Since every $w \in V$ is a l.c. of $v_1, \dots, v_n$, $w \in \operatorname{span}(v_1, \dots, v_n)$ $\forall w \in V$. Thus, $v_1, \dots, v_n$ spans $V$. Also, $0 \in V$ has a l.c. $0 = 0 \cdot v_1 + \cdots + 0 \cdot v_n$, which is unique by assumption $\Rightarrow v_1, \dots, v_n$ l.i. by def. Hence, $v_1, \dots, v_n$ l.i. &amp; spans $V$ $\Rightarrow v_1, \dots, v_n$ is a basis.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 8 · p.3 ═══════════ -->
+
+<div class="card rem-card" id="c4-9">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">기저에 대한 좌표 <em>Coordinates Relative to a Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단원 2에서, $\beta = (v_1, \dots, v_n)$이 $V$의 기저이면 $w = a_1v_1 + \cdots + a_nv_n$의 계수 $a_1, \dots, a_n$을 $\beta$에 대한 $w$의 좌표라 하며,</p>
+        <div class="math-display">$$[w]_\beta := \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} \in \mathbb{R}^n.$$</div>
+        <p>(따라서 $w \in V$를 $[w]_\beta \in \mathbb{R}^n$과 연결한다)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Unit 2, if $\beta = (v_1, \dots, v_n)$ is a basis of $V$, then coeffs $a_1, \dots, a_n$ of $w = a_1v_1 + \cdots + a_nv_n$ are the coords of $w$ relative to $\beta$:</p>
+        <div class="math-display">$$[w]_\beta := \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} \in \mathbb{R}^n.$$</div>
+        <p>(so relates $w \in V$ to $[w]_\beta \in \mathbb{R}^n$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c4-10">
+  <div class="card-head">
+    <span class="rem-num">Q</span>
+    <span class="rem-title">span(S)는 기저를 갖는가? <em>Does span(S) Have a Basis?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>많은 경우 $S$가 유한집합일 때 $\mathbb{R}^n$, $\mathbb{R}[x]$, $M_{m\times n}(\mathbb{R})$의 부분공간 $\operatorname{span}(S)$에 관심을 갖는다.</p>
+        <p><strong>질문:</strong> $\operatorname{span}(S)$는 기저를 갖는가?</p>
+        <p>$\Downarrow$ <strong>그렇다!</strong></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In many cases, we are interested in subsp $\operatorname{span}(S)$ of $\mathbb{R}^n$, $\mathbb{R}[x]$, $M_{m\times n}(\mathbb{R})$ where $S$ fin.</p>
+        <p><strong>Q:</strong> Does $\operatorname{span}(S)$ have a basis?</p>
+        <p>$\Downarrow$ <strong>Yes!</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c4-11">
+  <div class="card-head">
+    <span class="thm-num">PROP 1.49</span>
+    <span class="thm-title">유한 생성집합은 기저를 포함한다 <em>A Finite Spanning Set Contains a Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = \operatorname{span}(S)$ (따라서 $V$는 벡터공간이고 $S \subseteq V$)이며 $S$는 유한집합이라 하자. 그러면 $V$의 기저인 $\beta \subseteq S$가 존재한다 (따라서 $V$는 유한 기저를 갖는다).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$S$가 일차독립이면 정의에 의해 $S$는 기저이다. 그러므로 $S$가 일차종속이라 하자. 그러면 정의에 의해 $S \neq \varnothing$이고, $S$가 유한집합이므로 $\#S :=$ ($S$의 원소의 개수)는 $\lt \infty$이다.</p>
+        <p>귀류법(※)으로 $V$의 기저인 $\beta \subseteq S$가 존재하지 않는다고 가정하자. 그러면 $\operatorname{span}(T) = \operatorname{span}(S) = V$를 만족하는 모든 $T \subseteq S$에 대하여 $T$는 일차종속이다 $(*)$ (그렇지 않으면 $T$가 $V$의 기저가 된다). $S_1 := S$는 일차종속이므로 명제 1.43에 의해 $S_2 := S_1 \setminus \{v_1\}$이 $V$를 생성하는 $v_1 \in S$가 존재하고, $(*)$에 의해 $S_2$는 일차종속이다. 마찬가지로 $S_3 := S_2 \setminus \{v_2\}$가 일차종속이면서 $V$를 생성하는 $v_2 \in S_2$가 존재한다. 이 과정을 계속하면 (즉 $i$번째 단계에서 $S_i$가 일차종속이고 $V$를 생성하므로, $S_{i+1} := S_i \setminus \{v_i\}$가 일차종속이면서 $V$를 생성하는 $v_i \in S_i$가 존재한다), $S = S_1 = \{v_1, v_2, \dots\}$를 얻는다. 그런데 $S$는 유한집합이므로 $S = \{v_1, \dots, v_m\}$이다. 여기서 $m := \#S$이다. 그러면 구성에 의해 모든 $1 \leq i \leq m$에 대하여 $S_i = \{v_i, v_{i+1}, \dots, v_m\}$은 일차종속이고,</p>
+        <div class="math-display">$$S_{m+1} = S_m \setminus \{v_m\} = \{v_m\} \setminus \{v_m\} = \varnothing \ \text{ 일차독립},$$</div>
+        <p>이는 모든 $j \in \mathbb{Z}_{>0}$에 대하여 $S_j$가 일차종속이라는 것과 모순(※)이다. 그러므로 $V$의 기저인 $\beta \subseteq S$가 존재한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V = \operatorname{span}(S)$ (so $V$ v.s., $S \subseteq V$) w/ $S$ fin. Then $\exists \beta \subseteq S$ basis for $V$ (so $V$ has a fin basis).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> If $S$ l.i., then $S$ is a basis by def. So assume $S$ l.d. Then $S \neq \varnothing$ by def, and $S$ fin $\Rightarrow$ def $\#S :=$ number of elts of $S$, which is $\lt \infty$.</p>
+        <p>Assume by ※ that $\nexists$ basis $\beta \subseteq S$ for $V$. Then $\forall T \subseteq S$ s.t. $\operatorname{span}(T) = \operatorname{span}(S) = V$, $T$ is l.d. $(*)$ (or $T$ is a basis for $V$). $S_1 := S$ l.d. so Prop 1.43 $\Rightarrow \exists v_1 \in S$ s.t. $S_2 := S_1 \setminus \{v_1\}$ spans $V$ &amp; l.d. by $(*)$. Similarly, $\exists v_2 \in S_2$ s.t. $S_3 := S_2 \setminus \{v_2\}$ l.d. &amp; spans $V$. Continuing this pattern (i.e., at $i^{\text{th}}$ step, $S_i$ l.d. and
+        <!-- ═══════════ Lecture 8 · p.4 ═══════════ -->
+        spans $V$, so $\exists v_i \in S_i$ s.t. $S_{i+1} := S_i \setminus \{v_i\}$ l.d. and spans $V$), we get $S = S_1 = \{v_1, v_2, \dots\}$. But $S$ fin, so $S = \{v_1, \dots, v_m\}$ where $m := \#S$. Then by construction $S_i = \{v_i, v_{i+1}, \dots, v_m\}$ l.d. $\forall 1 \leq i \leq m$, and</p>
+        <div class="math-display">$$S_{m+1} = S_m \setminus \{v_m\} = \{v_m\} \setminus \{v_m\} = \varnothing \ \text{ l.i.},$$</div>
+        <p>※ to $S_j$ l.d. $\forall j \in \mathbb{Z}_{>0}$. Hence, $\exists \beta \subseteq S$ basis for $V$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c4-12">
+  <div class="card-head">
+    <span class="rem-num">REM 1.50</span>
+    <span class="rem-title">유한 생성집합을 기저로 줄이기 <em>Shrinking a Finite Spanning Set to a Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>명제 1.49의 증명은 다음을 말해 준다. $V = \operatorname{span}(S)$이고 $n = \#S \lt \infty$이며 $S$가 일차종속이면, 다음을 만족하는 부분집합들이 존재한다.</p>
+        <div class="math-display">$$S = S_1 = \{v_1, \dots, v_n\} \supsetneq S_2 = \{v_2, \dots, v_n\} \supsetneq \cdots \supsetneq S_\ell = \{v_\ell, \dots, v_n\}$$</div>
+        <p>여기서 $\ell \leq n+1$ ($\ell = n+1$이면 $S_\ell = \varnothing$)이고, 모든 $i \leq \ell$에 대하여 $V = \operatorname{span}(S_i)$이며, 모든 $j \lt \ell$에 대하여 $S_j$는 일차종속이고, $S_\ell$은 일차독립이다. 따라서 $S_\ell$은 $V$의 기저이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Pf of Prop 1.49 says that if $V = \operatorname{span}(S)$, $n = \#S \lt \infty$, &amp; $S$ l.d., then $\exists$ subsets</p>
+        <div class="math-display">$$S = S_1 = \{v_1, \dots, v_n\} \supsetneq S_2 = \{v_2, \dots, v_n\} \supsetneq \cdots \supsetneq S_\ell = \{v_\ell, \dots, v_n\}$$</div>
+        <p>where $\ell \leq n+1$ (if $\ell = n+1$, then $S_\ell = \varnothing$), $V = \operatorname{span}(S_i)$ $\forall i \leq \ell$, $S_j$ l.d. $\forall j \lt \ell$, and $S_\ell$ l.i. Thus, $S_\ell$ is a basis for $V$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c4-13">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1.51</span>
+    <span class="exam-title">ℝ³의 생성집합에서 기저 추출하기 <em>Extracting a Basis from a Spanning Set in ℝ³</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>주의 1.50을 이용하여, 다음이 주어졌을 때</p>
+        <div class="math-display">$$S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \right\} \subseteq \mathbb{R}^3,$$</div>
+        <p>$\operatorname{span}(S) \subseteq \mathbb{R}^3$의 기저 $\beta \subseteq S$를 찾고 $\operatorname{span}(S)$를 구해 보자.</p>
+        <p>다음에 주목하자.</p>
+        <div class="math-display">$$\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \overset{(*)}{=} 4\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 2\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} - \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$\Rightarrow T := S \setminus \left\{ \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \right\} = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} \right\} \text{라 하면}$$</div>
+        <div class="math-display">$$\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \in \operatorname{span}(T) \text{ ((*)에 의해) } \overset{\text{명제 1.42}}{\Longrightarrow} \operatorname{span}(T) \overset{(\bigstar)}{=} \operatorname{span}(S).$$</div>
+        <p>$\mathbb{R}^3$의 표준기저 $\left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$는 일차독립임에 유의하자.</p>
+        <p>$\Rightarrow \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right\}$는 따름정리 1.40에 의해 일차독립이다. 또한</p>
+        <div class="math-display">$$\operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) = \left\{ \begin{bmatrix} a \\ b \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\} \not\ni \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix},$$</div>
+        <p>이므로 보조정리 1.44에 의해 $T = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right\} \cup \left\{ \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} \right\}$는 일차독립이다. 따라서 $\beta := T$는 다음의 기저이다.</p>
+        <div class="math-display">$$\operatorname{span}(S) \subseteq \mathbb{R}^3 = \operatorname{span}\left( \overbrace{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}}^{\in\ \operatorname{span}(\beta) = \operatorname{span}(S) \text{ ((}\bigstar\text{)에 의해)}}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right).$$</div>
+        <p>왜냐하면</p>
+        <div class="math-display">$$\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} - 3\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} - 2\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \in \operatorname{span}(\beta)$$</div>
+        <div class="math-display">$$\mathbb{R}^3 = \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right) \subseteq \operatorname{span}(\beta) \subseteq \mathbb{R}^3$$</div>
+        <div class="math-display">$$\Rightarrow \mathbb{R}^3 = \operatorname{span}(\beta) \Rightarrow \beta \text{는 } \mathbb{R}^3 \text{의 기저이다}.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Using Rmk 1.50, given</p>
+        <div class="math-display">$$S = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \right\} \subseteq \mathbb{R}^3,$$</div>
+        <p>let's find a basis $\beta \subseteq S$ of $\operatorname{span}(S) \subseteq \mathbb{R}^3$ then compute $\operatorname{span}(S)$.</p>
+        <p>Notice that</p>
+        <div class="math-display">$$\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \overset{(*)}{=} 4\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 2\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} - \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix}$$</div>
+        <!-- ═══════════ Lecture 8 · p.5 ═══════════ -->
+        <div class="math-display">$$\Rightarrow \text{let } T := S \setminus \left\{ \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \right\} = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} \right\} \text{ then}$$</div>
+        <div class="math-display">$$\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \in \operatorname{span}(T) \text{ by } (*) \overset{\text{Prop 1.42}}{\Longrightarrow} \operatorname{span}(T) \overset{(\bigstar)}{=} \operatorname{span}(S).$$</div>
+        <p>Note that std basis $\left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$ of $\mathbb{R}^3$ is l.i.</p>
+        <p>$\Rightarrow \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right\}$ l.i. by Cor 1.40. Since</p>
+        <div class="math-display">$$\operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right) = \left\{ \begin{bmatrix} a \\ b \\ 0 \end{bmatrix} : a, b \in \mathbb{R} \right\} \not\ni \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix},$$</div>
+        <p>Lem 1.44 $\Rightarrow T = \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right\} \cup \left\{ \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} \right\}$ l.i. Thus, $\beta := T$ is a basis of</p>
+        <div class="math-display">$$\operatorname{span}(S) \subseteq \mathbb{R}^3 = \operatorname{span}\left( \overbrace{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}}^{\in\ \operatorname{span}(\beta) = \operatorname{span}(S) \text{ by } (\bigstar)}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right).$$</div>
+        <p>B/c</p>
+        <div class="math-display">$$\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \\ 1 \end{bmatrix} - 3\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} - 2\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \in \operatorname{span}(\beta),$$</div>
+        <div class="math-display">$$\mathbb{R}^3 = \operatorname{span}\left( \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right) \subseteq \operatorname{span}(\beta) \subseteq \mathbb{R}^3$$</div>
+        <div class="math-display">$$\Rightarrow \mathbb{R}^3 = \operatorname{span}(\beta) \Rightarrow \beta \text{ basis of } \mathbb{R}^3.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c4-14">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">모든 벡터공간은 기저를 갖는다 <em>Every Vector Space Has a Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>사실 모든 벡터공간은 기저를 갖는다! 어려운 경우는 $V = \operatorname{span}(S)$인 유한집합 $S$가 존재하지 않는 경우인데, 그 증명이 FIS의 선택 단원 §1.7*에 의존하기 때문이다. (수학과 전용!)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In fact, every v.sp has a basis! Hard case is when $\nexists S$ fin w/ $V = \operatorname{span}(S)$, as Pf relies on Optional §1.7* of FIS. (Math Major Only!)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 8 · p.6 ═══════════ -->
+
+<div class="card rem-card" id="c4-15">
+  <div class="card-head">
+    <span class="rem-num">REM 1.52</span>
+    <span class="rem-title">모든 기저는 같은 크기를 갖는가? <em>Do All Bases Have the Same Size?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>예 1.51에서 $\beta$와 $\mathbb{R}^3$의 표준기저는 각각 원소가 3개이다. 이것이 모든 벡터공간 $V$에 대하여 성립하는 일반적인 규칙일까?</p>
+        <p>$\Downarrow$ <strong>두 가지 결과에 의해 그렇다!</strong></p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>In Ex 1.51, both $\beta$ &amp; std basis of $\mathbb{R}^3$ have 3 elts each. Is this a common pattern $\forall$ v.sp $V$?</p>
+        <p>$\Downarrow$ <strong>Yes by two Results!</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c4-16">
+  <div class="card-head">
+    <span class="thm-num">THM 1.53</span>
+    <span class="thm-title">교체정리 <em>Replacement Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V =\operatorname{span}(G)$, $\#G = n \lt \infty$이고, $B \subseteq V$는 $\#B = m \lt \infty$인 일차독립 집합이라 하자. 그러면 $m \leq n$이고, $\#H = n - m$이며 $B \cup H$가 $V$를 생성하는 $H \subseteq G$가 존재한다.</p>
+        <p><strong>증명:</strong> 수학과 전용 (FIS §1.6).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>아이디어: $B$의 벡터를 하나씩 넣을 때마다 $G$의 벡터를 하나씩 빼도, 여전히 $V$를 생성하도록 할 수 있다.</p>
+        <p>증명 전체에서 $V$와 $G$는 고정되어 있고 $V = \operatorname{span}(G)$, $\#G = n$이다. $m = 0, 1, 2, \dots$에 대한 귀납법으로 다음 명제 $P(m)$을 증명한다.</p>
+        <p>$P(m)$: $\#B = m$인 일차독립인 모든 $B \subseteq V$에 대하여 $m \leq n$이고, $\#H = n - m$이며 $B \cup H$가 $V$를 생성하는 $H \subseteq G$가 존재한다.</p>
+        <p><strong>기본 단계 ($m = 0$).</strong> $\#B = 0$이면 $B = \varnothing$이다. 당연히 $0 \leq n$이다. $H := G$로 두면 $H \subseteq G$, $\#H = n = n - 0$이고, $B \cup H = G$는 $V$를 생성한다. 따라서 $P(0)$이 성립한다.</p>
+        <p><strong>귀납 단계.</strong> $m \geq 0$이고 $P(m)$이 성립한다고 가정하자 (귀납 가정). $P(m+1)$을 증명한다. $B \subseteq V$가 $\#B = m + 1$인 일차독립 집합이라 하고, 서로 다른 벡터들로 $B = \{v_1, \dots, v_m, v_{m+1}\}$이라 쓰자.</p>
+        <p><em>1단계 (귀납 가정 적용).</em> $B' := \{v_1, \dots, v_m\}$이라 하자 ($m = 0$이면 $B' = \varnothing$). $B' \subseteq B$이므로 따름정리 1.40에 의해 $B'$은 일차독립이고, $\#B' = m$이다. 따라서 귀납 가정에 의해 $m \leq n$이고, $\#H' = n - m$이며 $\operatorname{span}(B' \cup H') = V$인 $H' \subseteq G$가 존재한다. 서로 다른 벡터들로 $H' = \{u_1, \dots, u_{n-m}\}$이라 쓰자.</p>
+        <p><em>2단계 ($v_{m+1}$을 일차결합으로 쓰기).</em> $v_{m+1} \in V = \operatorname{span}(B' \cup H')$이고 $B' \cup H'$은 유한집합이므로, 다음을 만족하는 $a_1, \dots, a_m, b_1, \dots, b_{n-m} \in \mathbb{R}$이 존재한다.</p>
+        <div class="math-display">$$v_{m+1} = a_1v_1 + \cdots + a_mv_m + b_1u_1 + \cdots + b_{n-m}u_{n-m} \quad (*)$$</div>
+        <p>($B' \cup H'$의 벡터 중 쓰이지 않는 것은 계수를 $0$으로 둔다. $B'$과 $H'$에 동시에 속하는 벡터가 두 번 나타나도 상관없다. $B' \cup H' = \varnothing$이면 우변은 빈 합, 즉 $0$이다.)</p>
+        <p><em>3단계 (어떤 $b_j$는 $0$이 아니다).</em> 귀류법으로, $n - m = 0$이거나 (즉 $u_j$가 하나도 없거나) $b_1 = \cdots = b_{n-m} = 0$이라 가정하자. 그러면 $(*)$는 $v_{m+1} = a_1v_1 + \cdots + a_mv_m$이 되므로</p>
+        <div class="math-display">$$(-a_1)v_1 + \cdots + (-a_m)v_m + 1 \cdot v_{m+1} = 0$$</div>
+        <p>이다. $v_{m+1}$의 계수가 $1 \neq 0$이므로 $v_1, \dots, v_{m+1}$은 일차종속이고, 즉 $B$는 일차종속이다. 이는 $B$가 일차독립이라는 가정에 모순이다(※). 따라서 $n - m \geq 1$, 즉 $m + 1 \leq n$이고, 어떤 $b_j$는 $0$이 아니다. $u_j$들의 번호를 다시 붙여 $b_1 \neq 0$이라 하자.</p>
+        <p><em>4단계 ($u_1$에 대하여 풀기).</em> $(*)$로부터</p>
+        <div class="math-display">$$b_1u_1 = v_{m+1} - \sum_{i=1}^{m} a_iv_i - \sum_{j=2}^{n-m} b_ju_j$$</div>
+        <p>이고, 양변을 $b_1 \neq 0$으로 나누면</p>
+        <div class="math-display">$$u_1 = \frac{1}{b_1}v_{m+1} - \sum_{i=1}^{m} \frac{a_i}{b_1}v_i - \sum_{j=2}^{n-m} \frac{b_j}{b_1}u_j$$</div>
+        <p>이다. $H := H' \setminus \{u_1\} = \{u_2, \dots, u_{n-m}\}$이라 하자. 그러면 $H \subseteq G$이고 $\#H = (n - m) - 1 = n - (m+1)$이다. 위 식의 우변은 $B \cup H$에 속하는 벡터들의 일차결합이므로 $u_1 \in \operatorname{span}(B \cup H)$이다.</p>
+        <p><em>5단계 ($B \cup H$는 $V$를 생성한다).</em> 명제 1.33에 의해 $\operatorname{span}(B \cup H)$는 $B \cup H$를 포함하는 $V$의 부분공간이다. 따라서 $v_1, \dots, v_m \in B$와 $u_2, \dots, u_{n-m} \in H$는 $\operatorname{span}(B \cup H)$에 속하고, 4단계에 의해 $u_1$도 그렇다. 즉 $B' \cup H' \subseteq \operatorname{span}(B \cup H)$이다. $\operatorname{span}(B' \cup H')$은 $B' \cup H'$을 포함하는 가장 작은 부분공간이므로 (명제 1.33)</p>
+        <div class="math-display">$$V = \operatorname{span}(B' \cup H') \subseteq \operatorname{span}(B \cup H) \subseteq V$$</div>
+        <p>이다. 그러므로 $\operatorname{span}(B \cup H) = V$이다.</p>
+        <p>3–5단계에 의해 $m + 1 \leq n$이고, $\#H = n - (m+1)$이며 $B \cup H$가 $V$를 생성하는 $H \subseteq G$가 존재한다. 즉 $P(m+1)$이 성립한다. 귀납법에 의해 모든 $m \geq 0$에 대하여 $P(m)$이 성립하며, 이것이 바로 정리의 내용이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V =\operatorname{span}(G)$, $\#G = n \lt \infty$, $B \subseteq V$ l.i. w/ $\#B = m \lt \infty$. Then $m \leq n$ and $\exists H \subseteq G$ s.t. $\#H = n - m$ and $B \cup H$ spans $V$.</p>
+        <p><strong>Pf:</strong> Math-Major Only (in §1.6 of FIS)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Idea: each time we put one vector of $B$ in, we can take one vector of $G$ out, and the result still spans $V$.</p>
+        <p>Throughout, $V$ and $G$ are fixed with $V = \operatorname{span}(G)$ and $\#G = n$. We prove the following statement $P(m)$ by induction on $m = 0, 1, 2, \dots$.</p>
+        <p>$P(m)$: for every linearly independent $B \subseteq V$ with $\#B = m$, we have $m \leq n$, and there is $H \subseteq G$ with $\#H = n - m$ such that $B \cup H$ spans $V$.</p>
+        <p><strong>Base case ($m = 0$).</strong> If $\#B = 0$, then $B = \varnothing$. Clearly $0 \leq n$. Take $H := G$. Then $H \subseteq G$, $\#H = n = n - 0$, and $B \cup H = G$ spans $V$. So $P(0)$ holds.</p>
+        <p><strong>Inductive step.</strong> Let $m \geq 0$ and assume that $P(m)$ holds (induction hypothesis). We prove $P(m+1)$. Let $B \subseteq V$ be linearly independent with $\#B = m + 1$, and write $B = \{v_1, \dots, v_m, v_{m+1}\}$ with distinct vectors.</p>
+        <p><em>Step 1 (apply the induction hypothesis).</em> Let $B' := \{v_1, \dots, v_m\}$ (so $B' = \varnothing$ if $m = 0$). Since $B' \subseteq B$, $B'$ is linearly independent by Cor 1.40, and $\#B' = m$. So by the induction hypothesis, $m \leq n$ and there is $H' \subseteq G$ with $\#H' = n - m$ such that $\operatorname{span}(B' \cup H') = V$. Write $H' = \{u_1, \dots, u_{n-m}\}$ with distinct vectors.</p>
+        <p><em>Step 2 (write $v_{m+1}$ as a linear combination).</em> Since $v_{m+1} \in V = \operatorname{span}(B' \cup H')$ and $B' \cup H'$ is finite, there are $a_1, \dots, a_m, b_1, \dots, b_{n-m} \in \mathbb{R}$ such that</p>
+        <div class="math-display">$$v_{m+1} = a_1v_1 + \cdots + a_mv_m + b_1u_1 + \cdots + b_{n-m}u_{n-m}. \quad (*)$$</div>
+        <p>(Vectors of $B' \cup H'$ that are not used get coefficient $0$. A vector lying in both $B'$ and $H'$ may appear twice; this does no harm. If $B' \cup H' = \varnothing$, the right-hand side is the empty sum, i.e., $0$.)</p>
+        <p><em>Step 3 (some $b_j$ is nonzero).</em> Suppose, for contradiction, that $n - m = 0$ (so there are no $u_j$ at all) or $b_1 = \cdots = b_{n-m} = 0$. Then $(*)$ becomes $v_{m+1} = a_1v_1 + \cdots + a_mv_m$, so</p>
+        <div class="math-display">$$(-a_1)v_1 + \cdots + (-a_m)v_m + 1 \cdot v_{m+1} = 0.$$</div>
+        <p>The coefficient of $v_{m+1}$ is $1 \neq 0$, so $v_1, \dots, v_{m+1}$ is linearly dependent, i.e., $B$ is linearly dependent. This contradicts the linear independence of $B$ (※). Hence $n - m \geq 1$, i.e., $m + 1 \leq n$, and some $b_j$ is nonzero. Renumbering the $u_j$, we may assume $b_1 \neq 0$.</p>
+        <p><em>Step 4 (solve for $u_1$).</em> From $(*)$,</p>
+        <div class="math-display">$$b_1u_1 = v_{m+1} - \sum_{i=1}^{m} a_iv_i - \sum_{j=2}^{n-m} b_ju_j,$$</div>
+        <p>and dividing both sides by $b_1 \neq 0$,</p>
+        <div class="math-display">$$u_1 = \frac{1}{b_1}v_{m+1} - \sum_{i=1}^{m} \frac{a_i}{b_1}v_i - \sum_{j=2}^{n-m} \frac{b_j}{b_1}u_j.$$</div>
+        <p>Let $H := H' \setminus \{u_1\} = \{u_2, \dots, u_{n-m}\}$. Then $H \subseteq G$ and $\#H = (n - m) - 1 = n - (m+1)$. The right-hand side above is a linear combination of vectors in $B \cup H$, so $u_1 \in \operatorname{span}(B \cup H)$.</p>
+        <p><em>Step 5 ($B \cup H$ spans $V$).</em> By Prop 1.33, $\operatorname{span}(B \cup H)$ is a subspace of $V$ containing $B \cup H$. So $v_1, \dots, v_m \in B$ and $u_2, \dots, u_{n-m} \in H$ lie in $\operatorname{span}(B \cup H)$, and so does $u_1$ by Step 4. That is, $B' \cup H' \subseteq \operatorname{span}(B \cup H)$. Since $\operatorname{span}(B' \cup H')$ is the smallest subspace containing $B' \cup H'$ (Prop 1.33),</p>
+        <div class="math-display">$$V = \operatorname{span}(B' \cup H') \subseteq \operatorname{span}(B \cup H) \subseteq V.$$</div>
+        <p>Hence $\operatorname{span}(B \cup H) = V$.</p>
+        <p>By Steps 3–5, $m + 1 \leq n$, and there is $H \subseteq G$ with $\#H = n - (m+1)$ such that $B \cup H$ spans $V$. So $P(m+1)$ holds. By induction, $P(m)$ holds for every $m \geq 0$, which is exactly the theorem.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card ex-card" id="c4-17">
+  <div class="card-head">
+    <span class="ex-num">EX 1.54</span>
+    <span class="ex-title">유한 생성 공간의 일차독립 집합은 유한집합이다 <em>Independent Sets in a Finitely Spanned Space Are Finite</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>교체정리를 이용하여 다음을 증명하라. $V = \operatorname{span}(G)$이고 $\#G \lt \infty$이면, 일차독립인 모든 $B \subseteq V$ ($\#B \lt \infty$라는 가정 없이)에 대하여 $\#B \lt \infty$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$n := \#G \lt \infty$라 하고, $B \subseteq V$가 일차독립이라 하자. 귀류법으로 $B$가 무한집합이라 가정하자. 그러면 $B$에서 서로 다른 벡터 $w_1, \dots, w_{n+1}$을 고를 수 있다 ($B$의 원소는 아무리 골라도 바닥나지 않으므로 하나씩 차례로 고르면 된다). $B_0 := \{w_1, \dots, w_{n+1}\}$이라 하자.</p>
+        <p>$B_0 \subseteq B$이고 $B$는 일차독립이므로 따름정리 1.40에 의해 $B_0$은 일차독립이다. 또한 $\#B_0 = n + 1 \lt \infty$이다. 따라서 $G$와 $B_0$에 교체정리(정리 1.53)를 적용하면</p>
+        <div class="math-display">$$n + 1 = \#B_0 \leq \#G = n$$</div>
+        <p>이 되어 모순이다(※). 그러므로 $B$는 유한집합, 즉 $\#B \lt \infty$이다. (이제 $B$ 자신에 교체정리를 다시 적용하면 $\#B \leq \#G$까지 얻는다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Use Replacement Thm to prove that if $V = \operatorname{span}(G)$ w/ $\#G \lt \infty$, then $\forall B \subseteq V$ l.i. (w/o $\#B \lt \infty$ assumption), then $\#B \lt \infty$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $n := \#G \lt \infty$ and let $B \subseteq V$ be linearly independent. Suppose, for contradiction, that $B$ is infinite. Then we can choose $n + 1$ distinct vectors $w_1, \dots, w_{n+1}$ in $B$ (pick them one at a time; $B$ never runs out of elements). Let $B_0 := \{w_1, \dots, w_{n+1}\}$.</p>
+        <p>Since $B_0 \subseteq B$ and $B$ is linearly independent, $B_0$ is linearly independent by Cor 1.40. Also $\#B_0 = n + 1 \lt \infty$. So applying the Replacement Theorem (Thm 1.53) to $G$ and $B_0$ gives</p>
+        <div class="math-display">$$n + 1 = \#B_0 \leq \#G = n,$$</div>
+        <p>a contradiction (※). Hence $B$ is finite, i.e., $\#B \lt \infty$. (Now applying the Replacement Theorem to $B$ itself even gives $\#B \leq \#G$.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c4-18">
+  <div class="card-head">
+    <span class="thm-num">COR 1.55</span>
+    <span class="thm-title">모든 기저는 같은 크기를 갖는다 <em>All Bases Have the Same Size</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V = \operatorname{span}(\beta)$이고 $\beta$는 유한 기저라 하자. 그러면 $V$의 모든 기저 $\tilde{\beta}$는 유한집합이고 $\#\tilde{\beta} = \#\beta$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\tilde{\beta}$는 $V = \operatorname{span}(\beta)$의 기저이다. 그러면 $\tilde{\beta}$가 일차독립이므로 교체정리에 의해 $\#\tilde{\beta} \leq \#\beta$이다. $\beta$와 $\tilde{\beta}$의 역할을 바꾸면 $\#\beta \leq \#\tilde{\beta}$이므로 $\#\beta = \#\tilde{\beta}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 강의노트의 증명은 $B = \tilde{\beta}$로 두고 교체정리를 적용하지만, 교체정리는 $\#B \lt \infty$를 가정하므로 먼저 $\tilde{\beta}$가 유한집합임을 보여야 한다 (이는 진술의 "$\tilde{\beta}$는 유한집합" 부분이기도 하다). 빠진 단계는 다음과 같다.</p>
+        <p>$\tilde{\beta}$는 $V$의 기저이므로 일차독립이다. 또한 $V = \operatorname{span}(\beta)$이고 $\#\beta \lt \infty$이다. 따라서 연습 1.54($G = \beta$, $B = \tilde{\beta}$)에 의해 $\tilde{\beta}$는 유한집합, 즉 $\#\tilde{\beta} \lt \infty$이다.</p>
+        <p>이제 강의노트의 논증이 그대로 적용된다. $G = \beta$, $B = \tilde{\beta}$로 교체정리를 적용하면 $\#\tilde{\beta} \leq \#\beta$이다. 또 $\tilde{\beta}$는 $V$를 생성하는 유한집합이고 $\beta$는 일차독립이므로, $G = \tilde{\beta}$, $B = \beta$로 교체정리를 적용하면 $\#\beta \leq \#\tilde{\beta}$이다. 그러므로 $\#\tilde{\beta} = \#\beta$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V = \operatorname{span}(\beta)$ w/ $\beta$ fin basis. Then every basis $\tilde{\beta}$ for $V$ is fin, and $\#\tilde{\beta} = \#\beta$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> $\tilde{\beta}$ is a basis of $V = \operatorname{span}(\beta)$. Then $\tilde{\beta}$ l.i. $\Rightarrow \#\tilde{\beta} \leq \#\beta$ by Replacement Thm. Switch roles of $\beta$ &amp; $\tilde{\beta}$ $\Rightarrow \#\beta \leq \#\tilde{\beta} \Rightarrow \#\beta = \#\tilde{\beta}$.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The proof in the notes applies the Replacement Theorem with $B = \tilde{\beta}$, but the theorem assumes $\#B \lt \infty$, so we must first show that $\tilde{\beta}$ is finite (this is also the "$\tilde{\beta}$ is fin" part of the statement). Here is the missing step.</p>
+        <p>Since $\tilde{\beta}$ is a basis of $V$, it is linearly independent. Also $V = \operatorname{span}(\beta)$ with $\#\beta \lt \infty$. So by Exercise 1.54 (with $G = \beta$ and $B = \tilde{\beta}$), $\tilde{\beta}$ is finite, i.e., $\#\tilde{\beta} \lt \infty$.</p>
+        <p>Now the argument in the notes applies. The Replacement Theorem with $G = \beta$, $B = \tilde{\beta}$ gives $\#\tilde{\beta} \leq \#\beta$. Moreover, $\tilde{\beta}$ is a finite set spanning $V$ and $\beta$ is linearly independent, so the Replacement Theorem with $G = \tilde{\beta}$, $B = \beta$ gives $\#\beta \leq \#\tilde{\beta}$. Hence $\#\tilde{\beta} = \#\beta$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note04-99">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>Lecture 8은 여기까지이다. §1.4는 다음 강의에서 이어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Lecture 8 ends here; §1.4 continues in the next lecture.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="quiz1.html">퀴즈1 요약</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
