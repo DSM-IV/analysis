@@ -1,6 +1,6 @@
 # 선형대수학 1 용어집 (Linear Algebra I Glossary — MATH221, Fall 2026)
 
-소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–8) — 영문.
+소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9) — 영문.
 교재는 Friedberg–Insel–Spence 5th ed.(연습문제용)이지만 **내용·번호·기호는 강의노트를 따른다**(ℝ 위 벡터공간, $\mathcal{F}(X,\mathbb{R})$, $\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $M_{m\times n}(\mathbb{R})$).
 `la/GLOSSARY.md`(Friedberg 한국어판 관행)를 상속한다. 번역·풀이 작성 시 이 표의 용어만 쓴다.
 
@@ -62,6 +62,9 @@
 | coordinates relative to $\beta$, $[w]_\beta$ | $\beta$에 대한 좌표 $[w]_\beta$ |
 | Math-Major Only | 수학과 전용 |
 | infinite set | 무한집합 |
+| finite-dimensional (f.d.) / infinite-dimensional | 유한차원 / 무한차원 |
+| Basis Extension Theorem (BET) | 기저 확장정리 |
+| well-defined | 잘 정의된 |
 | Lagrange interpolation | 라그랑주 보간 |
 | parallelogram / parallelepiped / (signed) volume | 평행사변형 / 평행육면체 / (부호 있는) 부피 |
 | tangent line / approximation | 접선 / 근사 |

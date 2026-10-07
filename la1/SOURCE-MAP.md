@@ -5,24 +5,24 @@
   성적: 출석 10 / 퀴즈 20 (5·13주차 목요일) / 중간 35 (8주차 화) / 기말 35 (16주차 화). **답안은 영어로만(다른 언어 0점).**
   진도: 1–4주 §1 Vector Spaces → 5–7주 §2(1) 선형변환 → 8주 중간 → 9–10주 §2(2) 행렬표현 → 11–13주 §3 기본행연산·연립방정식 → 14–15주 §4 행렬식.
 - `Course Intro.pdf` (5쪽) = Lecture 1 pp.1–5 와 동일 내용.
-- `Lecture N on 221 F26.pdf` (N=1..8) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨.
-  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6쪽.
+- `Lecture N on 221 F26.pdf` (N=1..9) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨. 9는 10/7에 추가 반영.
+  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6 · L9 6쪽.
 - `Unit 1.x of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽; 강의노트와 같은 손글씨).
   강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음.
 
-**번호 체계:** 강의노트가 전역 번호(Def 1.1 … Cor 1.55)를 쓴다 → 카드 배지 = 노트의 라벨·번호 그대로 (`DEF 1.9`, `THM 1.20`, `PROP 1.28`, `LEM 1.15`, `COR 1.16`, `REM 1.10`, `NOTE 1.5`, `NOTATION 1.7`, `EXAM 1.8`(Ex = Example), `EX 1.27`(Exercise)). 번호 없는 항목은 유형 배지만(DEF/REM/NOTE/Q/RECALL/CLAIM/EXAM/EX). 카드 id는 자체 순번 `c{단원}-{순번}`, 서술 단락은 note-card `note{단원2자리}-{순번}`(목차 제외).
+**번호 체계:** 강의노트가 전역 번호(Def 1.1 … Ex 1.61)를 쓴다 → 카드 배지 = 노트의 라벨·번호 그대로 (`DEF 1.9`, `THM 1.20`, `PROP 1.28`, `LEM 1.15`, `COR 1.16`, `REM 1.10`, `NOTE 1.5`, `NOTATION 1.7`, `EXAM 1.8`(Ex = Example), `EX 1.27`(Exercise)). 번호 없는 항목은 유형 배지만(DEF/REM/NOTE/Q/RECALL/CLAIM/EXAM/EX). 카드 id는 자체 순번 `c{단원}-{순번}`, 서술 단락은 note-card `note{단원2자리}-{순번}`(목차 제외).
 **규칙 요약:** 각 강의 첫머리 "Last Time" 복습은 카드로 만들지 않음(새 내용이 있을 때만 RECALL 카드). 손그림은 `p.fig-note` 한 줄 설명. 증명 중간 끝 표시 ▨ = `span.part-end`. 노트에 증명이 없는 진술("Pf: Exercise", "See FIS", "Unit notes", "Math-Major Only", "Pf Idea")은 자체 증명(마커 → 증명 토글; 노트 증명이 이미 있으면 "보충 증명" 토글). en = verbatim(오타 포함), ko = 바른 뜻.
 **퀴즈 요약:** `la1/quiz1.html` — Quiz 1(5주차 목, 2026-10-01) 대비 요약. 이 페이지만 MathJax 4.1.3(인라인 자동 줄바꿈).
-**진행 상태 (2026-10-01):** 4단원 빌드·번역·자체 증명(마커 0)·Opus 검증 4/4 완료. 인벤토리의 "markers? yes" 표기는 빌드 시점 기록 — 현재는 모두 증명 토글/보충 증명으로 채워짐. la1 전 페이지 MathJax 4.1.3.
-**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99` "Lecture 8 ends here" 노트를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 다음 단원은 §1.5(차원 계속) 또는 §2 선형변환 — 새 파일 ch05.
+**진행 상태 (2026-10-07):** Lecture 9까지 반영. ch04에 Def 1.56–Ex 1.61, Ex 1.51 재방문 및 질문 추가(환경 27, 한·영 증명 토글 각각 17). 구조·수식·토글 검증 완료. 기존 10/1 기록: 4단원 빌드·번역·자체 증명(마커 0)·Opus 검증 4/4 완료. 인벤토리의 "markers? yes" 표기는 빌드 시점 기록 — 현재는 모두 증명 토글/보충 증명으로 채워짐. la1 전 페이지 MathJax 4.1.3.
+**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99`의 강의 범위 안내를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 새 단원 파일은 원본에서 새 절이 시작되는지 확인한 뒤 생성한다. Lecture 9는 전부 §1.4의 후속 내용이다.
 
-## 전체 구조 (2026-10-01)
+## 전체 구조 (2026-10-07)
 | 단원 | 제목 | 소스 |
 |---|---|---|
 | ch01 | 1.1 벡터공간으로서의 ℝⁿ | Lecture 1 (강의 소개 포함) · Lecture 2 · Lecture 3 p.2 |
 | ch02 | 1.2 벡터공간과 부분공간 | Lecture 3 pp.2–8 · Lecture 4 · Lecture 5 pp.1–6 |
 | ch03 | 1.3 일차결합, 생성, 일차독립 | Lecture 5 pp.6–7 · Lecture 6 · Lecture 7 pp.1–4 |
-| ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 (진행 중) |
+| ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 · Lecture 9 |
 
 ## ERRATA (원문 오타·결함 — en verbatim 유지, ko는 바른 뜻 / 필요 시 증명에서 역주)
 1. L2 p2 Def 1.2: "ℝ³ := {(a,b,c) : a,b,c ∈ ℝ³}" → ∈ ℝ.
@@ -309,7 +309,7 @@ Lecture 8 p.1 "Last Time" recap + "Today" agenda skipped (no new content; record
 | c4-16 | THM 1.53 | L8 p.6 | Replacement Thm: m ≤ n and ∃ H ⊆ G, #H = n−m, B ∪ H spans V; "Pf: Math-Major Only (in §1.6 of FIS)" | yes |
 | c4-17 | EX 1.54 | L8 p.6 | Use Replacement Thm: V = span(G), #G < ∞ ⇒ every l.i. B ⊆ V has #B < ∞ | yes |
 | c4-18 | COR 1.55 | L8 p.6 | β fin basis ⇒ every basis β̃ fin and #β̃ = #β; proof in toggle | – |
-| note04-99 | NOTE | — | "Lecture 8 ends here; §1.4 continues in the next lecture." (placeholder for unit in progress) | – |
+| note04-99 | NOTE | — | Lecture 9까지 반영, 마지막 내용 Ex 1.61 안내 | – |
 
 Totals: 18 TOC cards (def 1, thm 4 [PROP 1.48, PROP 1.49, THM 1.53, COR 1.55], rem 8 [incl. 2 Q], exam 4, ex 1) + 2 note-cards.
 Proof toggles: 4 (c4-3, c4-8, c4-11, c4-18). Marker pairs: 4.
@@ -343,3 +343,28 @@ Proof toggles: 4 (c4-3, c4-8, c4-11, c4-18). Marker pairs: 4.
 | c4-7 | EXAM 1.47 | {xⁿ : n ∈ ℤ_{≥0}} is l.i. (every finite subset) and spans ℝ[x] |
 | c4-16 | THM 1.53 | Replacement Theorem (m ≤ n and ∃ H ⊆ G with #H = n − m, B ∪ H spans V) — FIS §1.6 |
 | c4-17 | EX 1.54 | If V = span(G), #G < ∞, then every l.i. B ⊆ V is finite (use Thm 1.53 on finite subsets of B) |
+
+
+### Lecture 9 추가 반영 (2026-10-07) — la1/ch04.html
+
+Source: `Lecture 9 on 221 F26.pdf`, 6 pages. p.1 Last Time / Today는 중복 복습이므로 제외. 새 내용은 모두 §1.4에 이어 붙였다. 기존 Lecture 1–8의 인벤토리와 중복 여부 확인. Quiz 1 요약은 당시 범위 Lecture 1–8을 유지한다.
+
+| id | 배지 | 쪽 | 내용 | 증명 |
+|---|---|---|---|---|
+| note04-3 | NOTE | 1 | Cor 1.55 leads to def of dimension | — |
+| c4-19 | DEF 1.56 | 1 | 유한차원, 차원 정의와 기저 선택 독립성 | — |
+| c4-20 | DEF 1.57 | 1 | 무한차원 | — |
+| c4-21 | EXAM 1.58 (1)–(4) | 2 | 영공간, ℝⁿ, 차수 제한 다항식, ℝ[x]의 차원 | (4) 원문 증명 |
+| c4-22 | EXAM 1.58 (5) | 2 | 행렬공간의 차원 mn, 표준 행렬 E_ij | Exercise를 자체 증명으로 보완 |
+| c4-23 | COR 1.59 | 2–4 | 차원에 의한 기저 판정, 기저 확장정리 | 원문 + 보충 |
+| c4-24 | EXAM 1.51 | 4 | 차원을 이용한 Ex 1.51 재방문 | 본문 논증 |
+| c4-25 | Q | 4 | 부분공간의 기저와 차원에 관한 질문 | — |
+| c4-26 | THM 1.60 | 4–5 | dim W ≤ dim V, 차원이 같으면 W=V | 원문 + 보충 |
+| c4-27 | EXAM 1.61 | 5–6 | 좌표합 0인 공간, 기저 e_i−e_(i+1), 차원 n−1 | 원문 + 보충 |
+
+검토·보완 사항:
+- Cor 1.59(2) 원문 증명에서 생략한 역방향을 보충 증명에 추가했다.
+- Cor 1.59(3)의 교체정리 적용 전에 γ의 유한성(Exercise 1.54)이 필요하므로 보충했다.
+- Thm 1.60(1)의 “By Prop 1.49 & a Rmk”는 일반 기저 존재에 관한 앞선 주의를 참조한다. 유한 생성집합을 아직 모르는 W에 Prop 1.49만 직접 적용할 수 없으므로, 최대 dim V번의 벡터 추가로 유한 기저를 얻는 보충 증명을 제공했다.
+- Ex 1.61의 나열식은 작은 n에서 항이 겹쳐 보일 수 있다. a₀=aₙ=0을 쓴 통일된 전개와 n=1의 빈 기저를 보충 증명으로 처리했다. W가 진부분공간인 이유(e₁∉W)도 명시했다.
+- 원문의 색상은 생략하고 수학적 곁말은 괄호로 보존. Cor 1.59의 벤 다이어그램은 fig-note로 설명.
