@@ -35,7 +35,7 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-10-01 현재)
+## 전체 구조 (2026-10-08 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
@@ -44,8 +44,8 @@
 | ch03 | 5.2 대각화가능성 | Lecture 4 (16장) + Lecture 5 (16장) + §5.2 풀이 | 26 | 1 | 11 |
 | ch04 | 5.4 불변부분공간과 케일리-해밀턴 정리 | Lecture 6·7 (26장) + §5.4 풀이 | 21 | 2 | 7 (+ c4-8 자체 증명) |
 | ch05 | 6.1 내적과 노름 | Section 6.1 노트 (22장) + §6.1 풀이 | 28 | 4 | 9 |
-| ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 풀이만 (강의 전) | 0 | 1 | 6 |
-| 계 | | | **137** | **15** | **41** (+ ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **45**) |
+| ch06 | 6.2 그람-슈미트 과정과 직교여공간 | Section 6.2 노트 (28장) + §6.2 풀이 | 33 (슬라이드 수록 EX #6·#13·#23 포함) | 3 | 6 |
+| 계 | | | **170** | **17** | **41** (+ ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **45**) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -95,6 +95,12 @@
 44. §6.1 p16 Theorem 6.1 증명 (d): "⟨x,x⟩ > 0 by the definition" — x ≠ O_V 조건 누락. p21 Remark (3): 정규화는 영벡터가 아닌 벡터들의 직교집합에서만 가능(직교집합은 0을 포함할 수 있음). en verbatim + Note, ko 바른 뜻 + 역주.
 45. §6.1 p17 Definition: "the norm of length of x" — "norm or length"의 오기. en verbatim + Note, ko "노름(길이)".
 46. **§5.4 풀이 PDF #1(d) 반례**: T(a,b)=(0,b), v=(1,0)은 T(v)=0이 생성하는 순환 부분공간을 쓰는데, 강의 정의(c4-5)는 영이 아닌 벡터만 생성원으로 허용 → 우리 풀이는 T(a,b)=(0,a), v=(1,0) (v가 생성: ℝ², T(v)=(0,1)이 생성: y축)으로 교체.
+47. §6.2 p8 Theorem 6.4 증명 기본 경우: 계수가 $\langle w_1, w_2\rangle/\|w_1\|^2$로 인쇄 — 진술의 공식은 $\langle w_2, v_1\rangle/\|v_1\|^2$ ($\mathbb{C}$ 위에서는 켤레 차이). 같은 증명 p9 $\langle v_i, v_n\rangle$ 계산에서 합이 소거된 뒤 남는 첨자 $j$는 $i$여야 함. en verbatim + Note, ko는 바른 식 + 역주. (c6-10)
+48. §6.2 p23 Theorem 6.7 증명 (1): "$\langle v_i, y\rangle = a_i$"는 $F = \mathbb{C}$에서 $\overline{a_i}$. 결론 $a_i = 0$은 불변. en verbatim + Note, ko 바른 식 + 역주. (c6-28)
+49. §6.2 p24 Example: $u_3 = v_3/\|v_3\|$에서 부호 인자 $a/\lvert a\rvert$ 누락($a \lt 0$이면 $-1$). 정규직교기저로는 어느 부호든 유효. en verbatim + Note, ko 역주. (c6-29)
+50. §6.2 p26 Exercise #13 (b): "Thus $x \in (S^\perp)^\perp$"는 $v$의 오기. en verbatim + Note, ko는 $v$ + 역주. (c6-31)
+51. §6.2 p16 Problem: 거리를 묻고 $Q$만 구하고 끝남(거리 미계산). 보충 Note: $\|P-Q\| = 23/\sqrt{30}$ ($= \lvert 2-10-15\rvert/\sqrt{30}$). (c6-21) — 오류는 아니고 보충.
+    기타(수정 없이 verbatim): p12·p14 "n-dimnsional" 오타 2곳, p17 "Let {v₁,…,v_k} is an orthonormal basis" 문법, p5 Corollary 2 증명 끝 ■ 없음(□로 닫음), p21 Example 10 끝 ◆ 기호는 옮기지 않음, p10·p11 노름 기호 깨짐("| | v₃ | |")은 $\|v_3\|$로 정규화, 슬라이드의 $0_V$는 사이트 표기 $O_V$로 정규화, p18은 Theorem 6.6 진술 재인쇄·p28은 (c) 재인쇄 → 한 번만 전사.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -341,7 +347,48 @@ Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, RE
 | e5-20 | EX 6.1-20 | Friedberg §6.1 #20 (a), (b) — 극화 항등식 | 증명 |  |
 
 ### ch06.html — 6.2 그람-슈미트 과정과 직교여공간 / §6.2 The Gram–Schmidt Process and Orthogonal Complements
-**강의 노트 없음 — 연습문제 선공개 (2026-10-01).** note06-1(편집자 안내: 강의 예정, 풀이에 쓰는 정의·공식은 각 풀이 안에서 밝힘) + 연습문제 6. 강의 슬라이드가 올라오면 note06-1을 삭제하고 연습문제 섹션 앞에 c6-n 카드를 넣는다.
+**소스: Section 6.2.pdf (28장, 2026-10-08 게시; 강의일 표기 없음) + §6.2 풀이 PDF.** 2026-10-08 Codex(gpt-6-astra)가 A단계 전사·B단계 번역을 수행하고 Fable이 감독·검증. 카드 33(c6-1~c6-33) + note 3(note06-1~3: p4·p7·p12 서술 단락; p15 "◎ The Orthogonal Complement"는 문장 없는 소제목이라 카드 없음) + 연습문제 6(e6-*). 슬라이드에 풀이와 함께 수록된 Friedberg #6·#13·#23은 **강의 흐름 안의 ex-card(c6-30~32, 배지 EX 6.2-n, src-ref에 슬라이드 쪽 표기, 풀이 토글 = 슬라이드 Solution verbatim, qed 없음)**로 두었다. "Problem :" 환경(p16·p20)은 exam-card에 배지 `PROB`. 그림 2개(p7 그람-슈미트 삼각형, p16 사영)는 인라인 SVG로 양 패널에 복제. p17 "Some Useful Observations"는 정리 6.6 진술과 증명 사이에 있으나 별도 rem-card(c6-23)로 정리 뒤에 둠. ERRATA 47–51.
+
+| id | 유형·배지 | 슬라이드 | 내용 | src-ref |
+|---|---|---|---|---|
+| c6-1 | RECALL | p2 | 내적과 정규직교집합 / Inner Products and Orthonormal Sets |  |
+| c6-2 | DEF | p2 | 정규직교기저 / Orthonormal Basis |  |
+| c6-3 | EXAM 2 | p3 | $\mathbb{R}^2$의 정규직교기저 / An Orthonormal Basis for $\mathbb{R}^2$ |  |
+| c6-4 | REM | p3 | 기저에 대한 내적 / Inner Products Relative to a Basis |  |
+| note06-1 | NOTE | p4 상 | 다음 정리와 그 따름정리들은 정규직교집합과 정규직교기저의 중요성을 보여 준다. |  |
+| c6-5 | THM 6.3 | p4 | 직교집합을 이용한 벡터의 표현 / Representing a Vector in Terms of an Orthogonal Set — Proof toggle |  |
+| c6-6 | COR 1 | p5 상 | 정규직교집합에 대한 전개 / Expansion in an Orthonormal Set |  |
+| c6-7 | COR 2 | p5 하 | 직교집합의 일차독립성 / Linear Independence of an Orthogonal Set — Proof toggle |  |
+| c6-8 | EXAM 3 | p6 | 정규화와 정규직교 전개 / Normalization and an Orthonormal Expansion |  |
+| note06-2 | NOTE | p7 상 | 그람-슈미트 과정 |  |
+| c6-9 | EXAM | p7 | 2차원에서의 그람-슈미트 과정 / Gram–Schmidt in Two Dimensions — SVG |  |
+| c6-10 | THM 6.4 | p8–9 | 그람-슈미트 과정 / The Gram–Schmidt Process — Proof toggle — Note/역주 |  |
+| c6-11 | REM | p9 하 | 그람-슈미트 과정의 명칭 / Naming the Gram–Schmidt Process |  |
+| c6-12 | EXAM 4 | p10 | 4차원에서의 그람-슈미트 과정 / Gram–Schmidt in Four Dimensions |  |
+| c6-13 | EXAM 5 | p11 | 다항식의 그람-슈미트 과정 / Gram–Schmidt for Polynomials |  |
+| note06-3 | NOTE | p12 상 | 푸리에 계수 |  |
+| c6-14 | THM 6.5 | p12 | 정규직교기저와 벡터의 전개 / Orthonormal Bases and Vector Expansions — Proof toggle |  |
+| c6-15 | EXAM 6 | p13 | 이차다항식의 푸리에 계수 / Fourier Coefficients of a Quadratic Polynomial |  |
+| c6-16 | COR | p14 상 | 정규직교기저에 대한 행렬의 성분 / Matrix Entries in an Orthonormal Basis — Proof toggle |  |
+| c6-17 | DEF | p14 하 | 푸리에 계수 / Fourier Coefficients |  |
+| c6-18 | DEF | p15 | 직교여공간 / Orthogonal Complement |  |
+| c6-19 | REM | p15 | 직교여공간의 기본 성질 / Basic Properties of Orthogonal Complements |  |
+| c6-20 | EXAM 9 | p15 하 | 좌표벡터의 직교여공간 / The Orthogonal Complement of a Coordinate Vector |  |
+| c6-21 | PROB | p16 | 점과 평면 사이의 거리 / Distance from a Point to a Plane — Note/역주 — SVG |  |
+| c6-22 | THM 6.6 | p17–18 | 직교분해 / Orthogonal Decomposition — Proof toggle |  |
+| c6-23 | REM | p17 중 | 유용한 성질 / Some Useful Observations |  |
+| c6-24 | COR | p19 | 부분공간에서 가장 가까운 벡터 / The Closest Vector in a Subspace — Proof toggle |  |
+| c6-25 | DEF | p19 하 | 직교사영 / Orthogonal Projection |  |
+| c6-26 | PROB | p20 | 점과 평면 사이의 거리 다시 구하기 / Distance from a Point to a Plane, Revisited |  |
+| c6-27 | EXAM 10 | p21 | 삼차다항식의 이차다항식 공간 위로의 직교사영 / Projecting a Cubic Polynomial onto Quadratics |  |
+| c6-28 | THM 6.7 | p22–23 | 정규직교집합의 확장과 직교여공간의 차원 / Extending Orthonormal Sets and Complementary Dimensions — Proof toggle — Note/역주 |  |
+| c6-29 | EXAM | p24 | 단위벡터를 정규직교기저로 확장하기 / Completing a Unit Vector to an Orthonormal Basis — Note/역주 |  |
+| c6-30 | EX 6.2-6 | p25 | 부분공간 밖의 벡터를 판별하기 / Detecting a Vector outside a Subspace — Solution toggle(슬라이드 풀이) | Friedberg §6.2 #6 · 강의 슬라이드 p.25 |
+| c6-31 | EX 6.2-13 | p26 | 포함관계와 이중 직교여공간 / Inclusions and Double Orthogonal Complements — Solution toggle(슬라이드 풀이) — Note/역주 | Friedberg §6.2 #13 · 강의 슬라이드 p.26 |
+| c6-32 | EX 6.2-23 | p27–28 | 무한차원에서의 반례 / An Infinite-Dimensional Counterexample — Solution toggle(슬라이드 풀이) | Friedberg §6.2 #23 · 강의 슬라이드 p.27 |
+| c6-33 | REM | p28 하 | 유한차원 가정이 필요한 이유 / Why Finite Dimensionality Is Essential |  |
+
+연습문제 (Friedberg §6.2 추천문제):
 
 | id | 배지 | 문항 | 유형 | 기준값 |
 |---|---|---|---|---|
