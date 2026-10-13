@@ -623,7 +623,7 @@ def index_page(entries: list[dict[str, Any]], documents: list[dict[str, Any]]) -
 </head>
 <body>
 <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
-<nav class="site-nav" aria-label="사이트 탐색"><div class="nav-inner"><a class="logo" href="../../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a><div class="nav-links"><a href="../index.html">Stewart</a><a href="index.html" class="active">연습문제</a></div></div></nav>
+<nav class="site-nav" aria-label="사이트 탐색"><div class="nav-inner"><a class="logo" href="../../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a><div class="nav-links"><a href="../index.html">Stewart</a><a href="index.html" class="active">연습문제</a><a href="../exams/index.html">기출</a></div></div></nav>
 <header><p class="subtitle">Stewart · Calculus</p><h1>연습문제와 해설<span>Exercises and Solutions</span></h1><p class="header-desc">문제 요약, 힌트, 단계별 해설, 최종 답과 검산을 함께 제공합니다.</p><p class="header-desc">{len(documents)}개 문제 모음 · {total_published:,}문항 · 한국어·English</p></header>
 <main id="main-content"><div class="section-title"><h2>절별 문제 · Browse exercises</h2></div><div class="chapter-grid">
 {rows}
