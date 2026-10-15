@@ -20,7 +20,7 @@
 <link rel="canonical" href="https://univmathsurvive.com/la2/ch06.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.2 그람-슈미트 과정과 직교여공간 (§6.2 The Gram–Schmidt Process and Orthogonal Complements) — 선형대수학 2 한·영 대조">
-<meta property="og:description" content="그람-슈미트 과정, 정규직교기저와 푸리에 계수, 직교여공간, W 위로의 사영, 베셀 부등식 — Friedberg §6.2 추천 연습문제 6문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:description" content="그람-슈미트 과정, 정규직교기저와 푸리에 계수, 직교여공간, W 위로의 사영, 베셀 부등식 — Friedberg §6.2 추천 연습문제 6문항과 TF2 추가문제 3문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
 <meta property="og:url" content="https://univmathsurvive.com/la2/ch06.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="선형대수학 2 학습 가이드">
@@ -37,7 +37,7 @@
   "inLanguage": ["ko", "en"],
   "url": "https://univmathsurvive.com/la2/ch06.html",
   "datePublished": "2026-10-01",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-15",
   "mainEntityOfPage": "https://univmathsurvive.com/la2/ch06.html"
 }
 </script>
@@ -147,8 +147,11 @@ MathJax = {
     <li><a href="#e6-1"><span class="toc-num">EX 6.2-1</span> 참·거짓 판정 <em>True or False</em></a></li>
     <li><a href="#e6-2"><span class="toc-num">EX 6.2-2</span> 그람-슈미트 과정, 정규직교기저, 푸리에 계수 <em>Gram–Schmidt, Orthonormal Bases, and Fourier Coefficients</em></a></li>
     <li><a href="#e6-4"><span class="toc-num">EX 6.2-4</span> <span class="toc-ko">$\mathbb{C}^3$의 부분집합의 직교여공간</span> <em>The Orthogonal Complement of a Subset of $\mathbb{C}^3$</em></a></li>
+    <li><a href="#e6-7"><span class="toc-num">EX 6.2-7</span> 기저 벡터만으로 판정하는 직교여공간 <em>Testing Membership in $W^\perp$ on a Basis</em></a></li>
     <li><a href="#e6-9"><span class="toc-num">EX 6.2-9</span> <span class="toc-ko">$\mathbb{C}^3$에서 $W$와 $W^\perp$의 정규직교기저</span> <em>Orthonormal Bases for $W$ and $W^\perp$ in $\mathbb{C}^3$</em></a></li>
     <li><a href="#e6-10"><span class="toc-num">EX 6.2-10</span> <span class="toc-ko">$W^\perp$를 따르는 $W$ 위로의 사영은 노름을 키우지 않는다</span> <em>The Projection on $W$ along $W^\perp$ Does Not Increase Norms</em></a></li>
+    <li><a href="#e6-11"><span class="toc-num">EX 6.2-11</span> <span class="toc-ko">$AA^* = I$와 정규직교인 행</span> <em>$AA^* = I$ and Orthonormal Rows</em></a></li>
+    <li><a href="#e6-15"><span class="toc-num">EX 6.2-15</span> 파르스발 항등식 <em>Parseval's Identity</em></a></li>
     <li><a href="#e6-16"><span class="toc-num">EX 6.2-16</span> 베셀 부등식 <em>Bessel's Inequality</em></a></li>
   </ol>
 </nav>
@@ -2089,6 +2092,52 @@ MathJax = {
   </div>
 </div>
 
+<!-- Exercise 7 (TF2) -->
+<div class="card ex-card" id="e6-7">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-7</span>
+    <span class="ex-title">기저 벡터만으로 판정하는 직교여공간 <em>Testing Membership in $W^\perp$ on a Basis</em><span class="src-ref">Friedberg §6.2 #7 · TF2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간, $W$를 $V$의 부분공간, $\beta$를 $W$의 기저라 하자. $z \in V$에 대하여, $z \in W^\perp$일 필요충분조건은 모든 $v \in \beta$에 대해 $\langle z, v\rangle = 0$인 것임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><a href="#c6-18">직교여공간의 정의</a>에 의해 $z \in W^\perp$는 "모든 $y \in W$에 대해 $\langle z, y\rangle = 0$"과 같은 뜻이다.</p>
+        <p>($\Rightarrow$) $\beta \subseteq W$이므로 특히 모든 $v \in \beta$에 대해 $\langle z, v\rangle = 0$이다.</p>
+        <p>($\Leftarrow$) $y \in W$를 임의로 잡자. $\beta$는 $W$를 생성하므로, $\beta$가 무한집합이더라도 $y$는 $\beta$의 유한 개 원소의 일차결합 $y = a_1 v_1 + \cdots + a_k v_k$ ($v_i \in \beta$, $a_i \in F$)로 쓸 수 있다. <a href="ch05.html#c5-19">정리 6.1</a> (a), (b)에 의해</p>
+        <div class="math-display">$$\langle z, y\rangle = \sum_{i=1}^{k} \overline{a_i}\,\langle z, v_i\rangle = 0$$</div>
+        <p>이다. $y \in W$는 임의였으므로 $z \in W^\perp$이다.</p>
+        <div class="qed">□</div>
+        <p><em>참고.</em> 증명에는 $\beta$가 $W$를 생성한다는 사실만 쓰였다(일차독립성은 필요 없다). 그래서 $W^\perp$를 구할 때는 $W$를 생성하는 벡터 각각과의 내적만 $0$으로 놓고 연립방정식을 풀면 된다. <a href="#e6-9">연습문제 9</a>에서 $W = \operatorname{span}(\{(i, 0, 1)\})$의 직교여공간을 조건 $\langle (a, b, c), (i, 0, 1)\rangle = 0$ 하나로 구한 근거가 바로 이것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space, let $W$ be a subspace of $V$, and let $\beta$ be a basis for $W$. For $z \in V$, show that $z \in W^\perp$ if and only if $\langle z, v\rangle = 0$ for all $v \in \beta$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By the <a href="#c6-18">definition of the orthogonal complement</a>, $z \in W^\perp$ means that $\langle z, y\rangle = 0$ for every $y \in W$.</p>
+        <p>($\Rightarrow$) Since $\beta \subseteq W$, in particular $\langle z, v\rangle = 0$ for every $v \in \beta$.</p>
+        <p>($\Leftarrow$) Let $y \in W$ be arbitrary. Since $\beta$ spans $W$, even if $\beta$ is infinite we can write $y$ as a linear combination of finitely many elements of $\beta$: $y = a_1 v_1 + \cdots + a_k v_k$ with $v_i \in \beta$ and $a_i \in F$. By <a href="ch05.html#c5-19">Theorem 6.1</a> (a), (b),</p>
+        <div class="math-display">$$\langle z, y\rangle = \sum_{i=1}^{k} \overline{a_i}\,\langle z, v_i\rangle = 0.$$</div>
+        <p>Since $y \in W$ was arbitrary, $z \in W^\perp$.</p>
+        <div class="qed">□</div>
+        <p><em>Remark.</em> The proof uses only the fact that $\beta$ spans $W$ (linear independence is not needed). This is why, to find $W^\perp$, it suffices to set the inner product with each vector of a spanning set of $W$ equal to $0$ and solve the resulting system. It is exactly what justifies computing the orthogonal complement of $W = \operatorname{span}(\{(i, 0, 1)\})$ in <a href="#e6-9">Exercise 9</a> from the single condition $\langle (a, b, c), (i, 0, 1)\rangle = 0$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Exercise 9 -->
 <div class="card ex-card" id="e6-9">
   <div class="card-head">
@@ -2200,6 +2249,100 @@ MathJax = {
         <div class="math-display">$$\|x\|^2 = \|T(x)\|^2 + \|z\|^2 \ge \|T(x)\|^2.$$</div>
         <p>Taking square roots gives $\|T(x)\| \le \|x\|$.</p>
         <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 11 (TF2) -->
+<div class="card ex-card" id="e6-11">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-11</span>
+    <span class="ex-title">$AA^* = I$와 정규직교인 행 <em>$AA^* = I$ and Orthonormal Rows</em><span class="src-ref">Friedberg §6.2 #11 · TF2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 복소수 성분을 갖는 $n \times n$ 행렬이라 하자. $AA^* = I$일 필요충분조건은 $A$의 행들이 ($\mathbb{C}^n$의 표준내적에 관한) $\mathbb{C}^n$의 정규직교기저를 이루는 것임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$A$의 $i$번째 행을 $r_i = (A_{i1}, A_{i2}, \ldots, A_{in}) \in \mathbb{C}^n$이라 하자. <a href="ch05.html#c5-13">켤레전치행렬의 정의</a>에서 $(A^*)_{kj} = \overline{A_{jk}}$이므로, 모든 $i, j$에 대하여</p>
+        <div class="math-display">$$\begin{aligned} (AA^*)_{ij} &amp;= \sum_{k=1}^{n} A_{ik}\,(A^*)_{kj} \\ &amp;= \sum_{k=1}^{n} A_{ik}\,\overline{A_{jk}} = \langle r_i, r_j\rangle \end{aligned}$$</div>
+        <p>이다(우변은 <a href="ch05.html#c5-7">표준내적</a>). 따라서</p>
+        <div class="math-display">$$\begin{gathered} AA^* = I \iff \langle r_i, r_j\rangle = \delta_{ij} \\ (1 \le i, j \le n). \end{gathered} \tag{**}$$</div>
+        <p>($\Leftarrow$) 행 $r_1, \ldots, r_n$이 정규직교기저를 이루면, $\mathbb{C}^n$의 기저는 $n$개의 원소로 이루어지므로 $r_1, \ldots, r_n$은 서로 다르다. 따라서 각 $r_i$는 단위벡터이고 $i \neq j$이면 $\langle r_i, r_j\rangle = 0$이므로 $(**)$의 오른쪽이 성립한다. 따라서 $AA^* = I$이다.</p>
+        <p>($\Rightarrow$) $AA^* = I$이면 $(**)$에 의해 각 $r_i$는 단위벡터이고, $i \neq j$이면 $r_i$와 $r_j$는 직교한다. 특히 $i \neq j$이면 $\langle r_i, r_j\rangle = 0 \neq 1 = \langle r_i, r_i\rangle$이므로 $r_i \neq r_j$이다. 따라서 $\{r_1, \ldots, r_n\}$은 서로 다른 $n$개의 벡터로 이루어진 정규직교집합이다. 단위벡터는 영벡터가 아니므로 <a href="#c6-7">정리 6.3의 따름정리 2</a>에 의해 이 집합은 일차독립이고, $n$차원 공간 $\mathbb{C}^n$에서 일차독립인 $n$개의 벡터는 기저를 이룬다. 따라서 $A$의 행들은 $\mathbb{C}^n$의 정규직교기저를 이룬다.</p>
+        <div class="qed">□</div>
+        <p><em>참고.</em> $A$가 정사각행렬이므로 $AA^* = I$와 $A^*A = I$는 동치이다(정사각행렬의 한쪽 역행렬은 양쪽 역행렬이다). $A$의 $j$번째 열을 $c_j$라 하면 $(A^*A)_{ij} = \sum_k \overline{A_{ki}}\,A_{kj} = \langle c_j, c_i\rangle$이므로, 이 조건은 $A$의 열들이 $\mathbb{C}^n$의 정규직교기저를 이루는 것과도 동치이다. 이러한 행렬을 유니타리 행렬이라 하며 §6.5에서 다룬다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be an $n \times n$ matrix whose entries are complex numbers. Show that $AA^* = I$ if and only if the rows of $A$ form an orthonormal basis for $\mathbb{C}^n$ (with respect to the standard inner product on $\mathbb{C}^n$).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $r_i = (A_{i1}, A_{i2}, \ldots, A_{in}) \in \mathbb{C}^n$ be the $i$-th row of $A$. By the <a href="ch05.html#c5-13">definition of the conjugate transpose</a>, $(A^*)_{kj} = \overline{A_{jk}}$, so for all $i, j$</p>
+        <div class="math-display">$$\begin{aligned} (AA^*)_{ij} &amp;= \sum_{k=1}^{n} A_{ik}\,(A^*)_{kj} \\ &amp;= \sum_{k=1}^{n} A_{ik}\,\overline{A_{jk}} = \langle r_i, r_j\rangle, \end{aligned}$$</div>
+        <p>where the right-hand side is the <a href="ch05.html#c5-7">standard inner product</a>. Therefore</p>
+        <div class="math-display">$$\begin{gathered} AA^* = I \iff \langle r_i, r_j\rangle = \delta_{ij} \\ (1 \le i, j \le n). \end{gathered} \tag{**}$$</div>
+        <p>($\Leftarrow$) If the rows $r_1, \ldots, r_n$ form an orthonormal basis, then, since a basis for $\mathbb{C}^n$ has exactly $n$ elements, the rows are distinct; hence each $r_i$ is a unit vector and $\langle r_i, r_j\rangle = 0$ for $i \neq j$, so the right side of $(**)$ holds. Hence $AA^* = I$.</p>
+        <p>($\Rightarrow$) If $AA^* = I$, then by $(**)$ each $r_i$ is a unit vector and $r_i$, $r_j$ are orthogonal for $i \neq j$. In particular, for $i \neq j$ we have $\langle r_i, r_j\rangle = 0 \neq 1 = \langle r_i, r_i\rangle$, so $r_i \neq r_j$. Thus $\{r_1, \ldots, r_n\}$ is an orthonormal set of $n$ distinct vectors. Unit vectors are nonzero, so by <a href="#c6-7">Corollary 2 of Theorem 6.3</a> this set is linearly independent, and $n$ linearly independent vectors in the $n$-dimensional space $\mathbb{C}^n$ form a basis. Hence the rows of $A$ form an orthonormal basis for $\mathbb{C}^n$.</p>
+        <div class="qed">□</div>
+        <p><em>Remark.</em> Since $A$ is square, $AA^* = I$ is equivalent to $A^*A = I$ (a one-sided inverse of a square matrix is a two-sided inverse). Writing $c_j$ for the $j$-th column of $A$, we have $(A^*A)_{ij} = \sum_k \overline{A_{ki}}\,A_{kj} = \langle c_j, c_i\rangle$, so the condition is also equivalent to the columns of $A$ forming an orthonormal basis for $\mathbb{C}^n$. Such matrices are called unitary and are studied in §6.5.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 15 (TF2) -->
+<div class="card ex-card" id="e6-15">
+  <div class="card-head">
+    <span class="ex-num">EX 6.2-15</span>
+    <span class="ex-title">파르스발 항등식 <em>Parseval's Identity</em><span class="src-ref">Friedberg §6.2 #15 (a) · TF2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 $F$ 위의 유한차원 내적공간이라 하자.</p>
+        <p><strong>(a)</strong> (<strong>파르스발 항등식</strong>) $\{v_1, v_2, \ldots, v_n\}$이 $V$의 정규직교기저이면, 모든 $x, y \in V$에 대하여 다음이 성립함을 증명하라.</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^{n} \langle x, v_i\rangle\,\overline{\langle y, v_i\rangle}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> <a href="#c6-6">정리 6.3의 따름정리 1</a>(또는 <a href="#c6-14">정리 6.5</a> (2))에 의해 $y = \sum_{i=1}^{n} \langle y, v_i\rangle v_i$이다. <a href="ch05.html#c5-19">정리 6.1</a> (a), (b)(둘째 성분에 대한 켤레선형성)에 의해</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle &amp;= \Big\langle x,\ \sum_{i=1}^{n} \langle y, v_i\rangle\, v_i \Big\rangle \\ &amp;= \sum_{i=1}^{n} \overline{\langle y, v_i\rangle}\,\langle x, v_i\rangle \end{aligned}$$</div>
+        <p>이고, 이것이 구하는 식이다.</p>
+        <div class="qed">□</div>
+        <p><em>참고.</em> (1) $y = x$로 두면 $\|x\|^2 = \sum_{i=1}^{n} |\langle x, v_i\rangle|^2$를 얻는다. 이는 <a href="#e6-16">베셀 부등식</a>의 등호 경우이다. $S = \{v_1, \ldots, v_n\}$이 기저이므로 $x \in \operatorname{span}(S)$가 항상 성립하기 때문이다. (2) $\beta = \{v_1, \ldots, v_n\}$이라 하면 같은 전개식에 의해 $[x]_\beta = (\langle x, v_1\rangle, \ldots, \langle x, v_n\rangle)^t$이다. 따라서 파르스발 항등식은 $V$의 내적 $\langle x, y\rangle$가 좌표벡터 $[x]_\beta$, $[y]_\beta$의 $F^n$ 표준내적과 같다는 뜻이다(교재의 (b)이며, TF2에는 (a)만 실렸다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite-dimensional inner product space over $F$.</p>
+        <p><strong>(a)</strong> (<strong>Parseval's identity</strong>) Let $\{v_1, v_2, \ldots, v_n\}$ be an orthonormal basis for $V$. Show that every $x, y \in V$ satisfy</p>
+        <div class="math-display">$$\langle x, y\rangle = \sum_{i=1}^{n} \langle x, v_i\rangle\,\overline{\langle y, v_i\rangle}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> By <a href="#c6-6">Corollary 1 of Theorem 6.3</a> (cf. <a href="#c6-14">Theorem 6.5</a> (2)), $y = \sum_{i=1}^{n} \langle y, v_i\rangle v_i$. By <a href="ch05.html#c5-19">Theorem 6.1</a> (a), (b) (conjugate linearity in the second component),</p>
+        <div class="math-display">$$\begin{aligned} \langle x, y\rangle &amp;= \Big\langle x,\ \sum_{i=1}^{n} \langle y, v_i\rangle\, v_i \Big\rangle \\ &amp;= \sum_{i=1}^{n} \overline{\langle y, v_i\rangle}\,\langle x, v_i\rangle, \end{aligned}$$</div>
+        <p>which is the desired identity.</p>
+        <div class="qed">□</div>
+        <p><em>Remark.</em> (1) Taking $y = x$ gives $\|x\|^2 = \sum_{i=1}^{n} |\langle x, v_i\rangle|^2$. This is the equality case of <a href="#e6-16">Bessel's inequality</a>, since $S = \{v_1, \ldots, v_n\}$ is a basis and so $x \in \operatorname{span}(S)$ always holds. (2) With $\beta = \{v_1, \ldots, v_n\}$, the same expansion gives $[x]_\beta = (\langle x, v_1\rangle, \ldots, \langle x, v_n\rangle)^t$. So Parseval's identity says that the inner product $\langle x, y\rangle$ on $V$ equals the standard inner product on $F^n$ of the coordinate vectors $[x]_\beta$ and $[y]_\beta$ (this is part (b) in the textbook; TF2 includes only part (a)).</p>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@
 <link rel="canonical" href="https://univmathsurvive.com/la2/ch05.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.1 내적과 노름 (§6.1 Inner Products and Norms) — 선형대수학 2 한·영 대조">
-<meta property="og:description" content="내적의 정의와 예, 수반행렬(켤레전치), 프로베니우스 내적, 노름, 코시-슈바르츠 부등식·삼각부등식, 직교·정규직교 집합 — Friedberg §6.1 추천 연습문제 9문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:description" content="내적의 정의와 예, 수반행렬(켤레전치), 프로베니우스 내적, 노름, 코시-슈바르츠 부등식·삼각부등식, 직교·정규직교 집합 — Friedberg §6.1 추천 연습문제 9문항과 TF2 추가문제 2문항을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
 <meta property="og:url" content="https://univmathsurvive.com/la2/ch05.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="선형대수학 2 학습 가이드">
@@ -37,7 +37,7 @@
   "inLanguage": ["ko", "en"],
   "url": "https://univmathsurvive.com/la2/ch05.html",
   "datePublished": "2026-10-01",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-15",
   "mainEntityOfPage": "https://univmathsurvive.com/la2/ch05.html"
 }
 </script>
@@ -147,6 +147,8 @@ MathJax = {
     <li><a href="#e5-11"><span class="toc-num">EX 6.1-11</span> 평행사변형 법칙 <em>The Parallelogram Law</em></a></li>
     <li><a href="#e5-13"><span class="toc-num">EX 6.1-13</span> 두 내적의 합 <em>The Sum of Two Inner Products</em></a></li>
     <li><a href="#e5-15"><span class="toc-num">EX 6.1-15</span> 코시-슈바르츠 부등식과 삼각부등식에서의 등호 <em>Equality in the Cauchy–Schwarz and Triangle Inequalities</em></a></li>
+    <li><a href="#e5-17"><span class="toc-num">EX 6.1-17</span> 노름을 보존하는 연산자는 단사이다 <em>A Norm-Preserving Operator Is One-to-One</em></a></li>
+    <li><a href="#e5-18"><span class="toc-num">EX 6.1-18</span> 선형변환으로 옮겨 온 내적 <em>An Inner Product Pulled Back by a Linear Transformation</em></a></li>
     <li><a href="#e5-20"><span class="toc-num">EX 6.1-20</span> 극화 항등식 <em>The Polar Identities</em></a></li>
   </ol>
 </nav>
@@ -1850,6 +1852,104 @@ MathJax = {
         <p>so the two ends coincide and every inequality is an equality. Hence $\|s\|=\sum_{i\lt n}\|x_i\|$ and $\|s+x_n\|=\|s\|+\|x_n\|$.</p>
         <p>By the first equality and the induction hypothesis, either $x_1,\ldots,x_{n-1}$ are all $0$, or there is a unit vector $u'$ with $x_i=\|x_i\|u'$ for $i\lt n$. If they are all $0$: when $x_n=0$ all $x_i=0$, and when $x_n\neq 0$ take $u=x_n/\|x_n\|$, so $x_i=\|x_i\|u$ for all $i$. Otherwise $s=(\sum_{i\lt n}\|x_i\|)\,u'=\|s\|u'\neq 0$. Applying the two-vector case to $s$ and $x_n$: either $x_n=0$, or $x_n=cs$ with $c\ge 0$, or $s=cx_n$ with $c\ge 0$. If $x_n=0$, take $u=u'$. If $s=cx_n$, then $s\neq 0$ forces $c&gt;0$ and $x_n=c^{-1}s$ with $c^{-1}&gt;0$; so in either case $x_n=c's$ with $c'\ge 0$. Then $x_n=c'\|s\|u'$ with $c'\|s\|\ge 0$, so $\|x_n\|=c'\|s\|$ and $x_n=\|x_n\|u'$. Thus with $u=u'$ we have $x_i=\|x_i\|u$ for all $i$.</p>
         <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 17 (TF2) -->
+<div class="card ex-card" id="e5-17">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-17</span>
+    <span class="ex-title">노름을 보존하는 연산자는 단사이다 <em>A Norm-Preserving Operator Is One-to-One</em><span class="src-ref">Friedberg §6.1 #17 · TF2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간, $T$를 $V$ 위의 선형연산자라 하고, 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$가 성립한다고 하자. $T$가 단사임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$x, y \in V$가 $T(x) = T(y)$를 만족한다고 하자. $T$가 선형이므로 $T(x - y) = T(x) - T(y) = 0$이고, 가정에 의해</p>
+        <div class="math-display">$$\|x - y\| = \|T(x - y)\| = \|0\| = 0$$</div>
+        <p>이다. <a href="#c5-22">정리 6.2</a> (b)에 의해 $x - y = 0$, 즉 $x = y$이다. 따라서 $T$는 단사이다.</p>
+        <div class="qed">□</div>
+        <p><em>참고.</em> $V$가 유한차원이면 단사인 선형연산자는 <a href="ch01.html#c1-21">차원 정리</a>에 의해 전사이기도 하므로 $T$는 가역이다. 무한차원에서는 전사가 아닐 수 있다. 예를 들어 유한 개의 항을 제외하면 모두 $0$인 실수열 $(a_1, a_2, \ldots)$ 전체의 공간에 내적 $\langle (a_i), (b_i)\rangle = \sum_i a_i b_i$(유한합)를 주고 $T(a_1, a_2, \ldots) = (0, a_1, a_2, \ldots)$로 두면 $\|T(x)\| = \|x\|$이지만, 첫째 항이 $1$인 $(1, 0, 0, \ldots)$은 $T$의 상에 속하지 않는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space and let $T$ be a linear operator on $V$ such that $\|T(x)\| = \|x\|$ for every $x \in V$. Show that $T$ is one-to-one.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose $x, y \in V$ satisfy $T(x) = T(y)$. Since $T$ is linear, $T(x - y) = T(x) - T(y) = 0$, and by hypothesis</p>
+        <div class="math-display">$$\|x - y\| = \|T(x - y)\| = \|0\| = 0.$$</div>
+        <p>By <a href="#c5-22">Theorem 6.2</a> (b), $x - y = 0$, that is, $x = y$. Hence $T$ is one-to-one.</p>
+        <div class="qed">□</div>
+        <p><em>Remark.</em> If $V$ is finite-dimensional, a one-to-one linear operator is also onto by the <a href="ch01.html#c1-21">dimension theorem</a>, so $T$ is invertible. In infinite dimensions $T$ need not be onto. For example, on the space of real sequences $(a_1, a_2, \ldots)$ with only finitely many nonzero terms, equipped with the inner product $\langle (a_i), (b_i)\rangle = \sum_i a_i b_i$ (a finite sum), the map $T(a_1, a_2, \ldots) = (0, a_1, a_2, \ldots)$ satisfies $\|T(x)\| = \|x\|$, yet $(1, 0, 0, \ldots)$, whose first term is $1$, is not in the range of $T$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Exercise 18 (TF2) -->
+<div class="card ex-card" id="e5-18">
+  <div class="card-head">
+    <span class="ex-num">EX 6.1-18</span>
+    <span class="ex-title">선형변환으로 옮겨 온 내적 <em>An Inner Product Pulled Back by a Linear Transformation</em><span class="src-ref">Friedberg §6.1 #18 · TF2</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$F = \mathbb{R}$ 또는 $F = \mathbb{C}$라 하고, $V$를 $F$ 위의 벡터공간, $W$를 내적 $\langle \,\cdot\,, \cdot\, \rangle$을 갖는 $F$ 위의 내적공간이라 하자. 선형변환 $T : V \to W$에 대하여 $V \times V$ 위의 함수를</p>
+        <div class="math-display">$$\langle x, y\rangle' = \langle T(x), T(y)\rangle \qquad (x, y \in V)$$</div>
+        <p>로 정의한다. $\langle \,\cdot\,, \cdot\, \rangle'$이 $V$ 위의 내적일 필요충분조건은 $T$가 단사인 것임을 증명하라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><a href="#c5-4">내적의 정의</a>의 네 조건 (a)–(d)를 $\langle \,\cdot\,, \cdot\, \rangle'$에 대하여 확인한다. $x, y, z \in V$, $c \in F$라 하자.</p>
+        <p><strong>조건 (a)–(c)는 $T$와 상관없이 항상 성립한다.</strong> $T$의 선형성과 $W$의 내적의 성질에 의해</p>
+        <div class="math-display">$$\begin{aligned} \langle x + z, y\rangle' &amp;= \langle T(x) + T(z), T(y)\rangle \\ &amp;= \langle x, y\rangle' + \langle z, y\rangle', \\[4pt] \langle cx, y\rangle' &amp;= \langle cT(x), T(y)\rangle = c\,\langle x, y\rangle', \\[4pt] \overline{\langle x, y\rangle'} &amp;= \overline{\langle T(x), T(y)\rangle} \\ &amp;= \langle T(y), T(x)\rangle = \langle y, x\rangle' \end{aligned}$$</div>
+        <p>이다. 따라서 $\langle \,\cdot\,, \cdot\, \rangle'$이 내적일 필요충분조건은 조건 (d), 곧 "$x \neq 0$이면 $\langle x, x\rangle' > 0$"이 성립하는 것이다. 여기서 $\langle x, x\rangle' = \langle T(x), T(x)\rangle = \|T(x)\|^2$임에 주목한다.</p>
+        <p>($\Leftarrow$) $T$가 단사라 하자. $x \neq 0$이면 $T(x) \neq T(0) = 0$이므로 <a href="#c5-22">정리 6.2</a> (b)에 의해 $\langle x, x\rangle' = \|T(x)\|^2 > 0$이다. 따라서 (d)가 성립하고 $\langle \,\cdot\,, \cdot\, \rangle'$은 내적이다.</p>
+        <p>($\Rightarrow$) $\langle \,\cdot\,, \cdot\, \rangle'$이 내적이라 하고 $T(x) = T(y)$라 하자. 그러면 $T(x - y) = 0$이므로</p>
+        <div class="math-display">$$\langle x - y, x - y\rangle' = \langle 0, 0\rangle = 0$$</div>
+        <p>이고, 조건 (d)에 의해 $x - y = 0$이다(그렇지 않으면 이 값이 양수여야 한다). 즉 $x = y$이므로 $T$는 단사이다.</p>
+        <div class="qed">□</div>
+        <p><em>참고.</em> $T$가 단사가 아니면 깨지는 것은 조건 (d)뿐이다. 예를 들어 $T : \mathbb{R}^2 \to \mathbb{R}$, $T(a, b) = a$이고 $\mathbb{R}$에 표준내적 $\langle s, t\rangle = st$를 주면 $\langle (a_1, b_1), (a_2, b_2)\rangle' = a_1 a_2$이고, $(0, 1) \neq 0$인데 $\langle (0, 1), (0, 1)\rangle' = 0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $F = \mathbb{R}$ or $F = \mathbb{C}$, let $V$ be a vector space over $F$, and let $W$ be an inner product space over $F$ with inner product $\langle \,\cdot\,, \cdot\, \rangle$. For a linear transformation $T : V \to W$, define a function on $V \times V$ by</p>
+        <div class="math-display">$$\langle x, y\rangle' = \langle T(x), T(y)\rangle \qquad (x, y \in V).$$</div>
+        <p>Show that $\langle \,\cdot\,, \cdot\, \rangle'$ is an inner product on $V$ exactly when $T$ is one-to-one.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We check the four conditions (a)–(d) of the <a href="#c5-4">definition of an inner product</a> for $\langle \,\cdot\,, \cdot\, \rangle'$. Let $x, y, z \in V$ and $c \in F$.</p>
+        <p><strong>Conditions (a)–(c) hold regardless of $T$.</strong> By the linearity of $T$ and the properties of the inner product on $W$,</p>
+        <div class="math-display">$$\begin{aligned} \langle x + z, y\rangle' &amp;= \langle T(x) + T(z), T(y)\rangle \\ &amp;= \langle x, y\rangle' + \langle z, y\rangle', \\[4pt] \langle cx, y\rangle' &amp;= \langle cT(x), T(y)\rangle = c\,\langle x, y\rangle', \\[4pt] \overline{\langle x, y\rangle'} &amp;= \overline{\langle T(x), T(y)\rangle} \\ &amp;= \langle T(y), T(x)\rangle = \langle y, x\rangle'. \end{aligned}$$</div>
+        <p>Hence $\langle \,\cdot\,, \cdot\, \rangle'$ is an inner product if and only if condition (d) holds, namely "$\langle x, x\rangle' > 0$ whenever $x \neq 0$". Note that $\langle x, x\rangle' = \langle T(x), T(x)\rangle = \|T(x)\|^2$.</p>
+        <p>($\Leftarrow$) Suppose $T$ is one-to-one. If $x \neq 0$, then $T(x) \neq T(0) = 0$, so $\langle x, x\rangle' = \|T(x)\|^2 > 0$ by <a href="#c5-22">Theorem 6.2</a> (b). Thus (d) holds and $\langle \,\cdot\,, \cdot\, \rangle'$ is an inner product.</p>
+        <p>($\Rightarrow$) Suppose $\langle \,\cdot\,, \cdot\, \rangle'$ is an inner product and $T(x) = T(y)$. Then $T(x - y) = 0$, so</p>
+        <div class="math-display">$$\langle x - y, x - y\rangle' = \langle 0, 0\rangle = 0,$$</div>
+        <p>and condition (d) forces $x - y = 0$ (otherwise this value would be positive). So $x = y$, and $T$ is one-to-one.</p>
+        <div class="qed">□</div>
+        <p><em>Remark.</em> When $T$ fails to be one-to-one, condition (d) is the only one that breaks. For instance, if $T : \mathbb{R}^2 \to \mathbb{R}$ is $T(a, b) = a$ and $\mathbb{R}$ carries the standard inner product $\langle s, t\rangle = st$, then $\langle (a_1, b_1), (a_2, b_2)\rangle' = a_1 a_2$, and $(0, 1) \neq 0$ but $\langle (0, 1), (0, 1)\rangle' = 0$.</p>
       </div>
     </div>
   </div>
