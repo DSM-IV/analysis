@@ -5,17 +5,20 @@
   성적: 출석 10 / 퀴즈 20 (5·13주차 목요일) / 중간 35 (8주차 화) / 기말 35 (16주차 화). **답안은 영어로만(다른 언어 0점).**
   진도: 1–4주 §1 Vector Spaces → 5–7주 §2(1) 선형변환 → 8주 중간 → 9–10주 §2(2) 행렬표현 → 11–13주 §3 기본행연산·연립방정식 → 14–15주 §4 행렬식.
 - `Course Intro.pdf` (5쪽) = Lecture 1 pp.1–5 와 동일 내용.
-- `Lecture N on 221 F26.pdf` (N=1..9, 12) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨. 9는 10/7, 12는 10/15에 추가(반영 10/19). **Lecture 10–11 파일은 없음** — L12 Last Time이 L9 복습이고 번호가 Ex 1.61 → Def 1.62로 이어지므로 빠진 내용 없음.
-  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6 · L9 6 · L12 7쪽(p7은 위쪽만).
+- `Lecture N on 221 F26.pdf` (N=1..9, 12, 13) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨. 9는 10/7, 12는 10/15에 추가(반영 10/19). **13은 10/19 Desktop `26-2/선형대수학2/` 폴더에 잘못 올라와 있었음**(파일명의 221 = MATH221; 내용도 §2.1 연속) → `la1/src/`로 복사, 10/19 반영. **Lecture 10–11 파일은 없음** — L12 Last Time이 L9 복습이고 번호가 Ex 1.61 → Def 1.62로 이어지므로 빠진 내용 없음.
+  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6 · L9 6 · L12 7쪽(p7은 위쪽만) · L13 8쪽(p8은 위쪽만).
+- `Midterm MAT221 F24.pdf`(8쪽, 4문항 42점, 2024-10-24 목) · `Midterm MATH221 F25.pdf`(10쪽, 5문항 54점, 2025-10-20 월) — LaTeX 시험지(텍스트 추출 가능, 행렬은 깨짐). `Midterm Solutions … F24/F25.pdf` — 같은 시험지 위 손글씨 공식 해설(F24 pp.2–5, F25 pp.2–6; 나머지는 빈 추가 답안지). 10/19 Desktop `선형대수학1/`에 추가 → `la1/midterm.html`.
 - `Unit 1.x / 2.1 of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽, 2.1 4쪽(p4 빈 쪽); 강의노트와 같은 손글씨).
   강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음. Unit 2.1은 L12 pp.4–7과 같고 Ex 2.3(1)의 "Pf:" 뒤가 비어 있음(L12는 "Pf: Next Class!").
 
 **번호 체계:** 강의노트가 전역 번호(Def 1.1 … Ex 1.61)를 쓴다 → 카드 배지 = 노트의 라벨·번호 그대로 (`DEF 1.9`, `THM 1.20`, `PROP 1.28`, `LEM 1.15`, `COR 1.16`, `REM 1.10`, `NOTE 1.5`, `NOTATION 1.7`, `EXAM 1.8`(Ex = Example), `EX 1.27`(Exercise)). 번호 없는 항목은 유형 배지만(DEF/REM/NOTE/Q/RECALL/CLAIM/EXAM/EX). 카드 id는 자체 순번 `c{단원}-{순번}`, 서술 단락은 note-card `note{단원2자리}-{순번}`(목차 제외).
 **규칙 요약:** 각 강의 첫머리 "Last Time" 복습은 카드로 만들지 않음(새 내용이 있을 때만 RECALL 카드). 손그림은 `p.fig-note` 한 줄 설명. 증명 중간 끝 표시 ▨ = `span.part-end`. 노트에 증명이 없는 진술("Pf: Exercise", "See FIS", "Unit notes", "Math-Major Only", "Pf Idea")은 자체 증명(마커 → 증명 토글; 노트 증명이 이미 있으면 "보충 증명" 토글). en = verbatim(오타 포함), ko = 바른 뜻.
 **퀴즈 복습·기출:** `la1/quiz1.html` — Lecture 1–9 개념 복습·연습 13세트와 Fall 2025 Quiz 1·2 기출 4문항(소문항별 5블록). 영어 답안·한국어 해설, 원본 PDF 링크. MathJax 4.1.3.
-**진행 상태 (2026-10-19):** Lecture 12까지 반영. pp.1–4 → ch04 끝 c4-28–31(Def 1.62–Ex 1.65, 라그랑주 보간; ch04 환경 31, 한·영 토글 각 23), pp.4–7 → 새 ch05(Unit 2 도입·§2.1 시작; 환경 4, 토글 각 3). 2026-10-15 1차 작업(pickerel 워크트리, 미커밋)이 워크트리와 함께 소실되어 10/19 원본에서 다시 작업함.
+**중간고사 기출:** `la1/midterm.html` — Fall 2025·2024 중간고사 9문항(소문항별 11블록), quiz1과 같은 qs-block 형식. 영어 모범답안·한국어 해설·원본 해설 정정. 아래 "중간고사 기출 반영" 절 참조.
+**진행 상태 (2026-10-19, 오후):** Lecture 13까지 반영 — ch05에 Ex 2.3(1) 원문 증명(L13 pp.1–2)과 Ex 2.3(2)–Thm 2.12(L13 pp.2–8) 추가: ch05 환경 19, note 5, 한·영 토글 각 17. Thm 2.12(계수-퇴화차수 정리) 증명은 노트에서 WTS 직전까지 → 보충 증명으로 완성. 중간고사 기출 페이지 신설.
+**이전 상태 (2026-10-19, 오전):** Lecture 12까지 반영. pp.1–4 → ch04 끝 c4-28–31(Def 1.62–Ex 1.65, 라그랑주 보간; ch04 환경 31, 한·영 토글 각 23), pp.4–7 → 새 ch05(Unit 2 도입·§2.1 시작; 환경 4, 토글 각 3). 2026-10-15 1차 작업(pickerel 워크트리, 미커밋)이 워크트리와 함께 소실되어 10/19 원본에서 다시 작업함.
 **이전 상태 (2026-10-07):** Lecture 9까지 반영. ch04에 Def 1.56–Ex 1.61, Ex 1.51 재방문 및 질문 추가(환경 27, 한·영 증명 토글 각각 17). 구조·수식·토글 검증 완료. 기존 10/1 기록: 4단원 빌드·번역·자체 증명(마커 0)·Opus 검증 4/4 완료. 인벤토리의 "markers? yes" 표기는 빌드 시점 기록 — 현재는 모두 증명 토글/보충 증명으로 채워짐. la1 전 페이지 MathJax 4.1.3.
-**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99`의 강의 범위 안내를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 새 단원 파일은 원본에서 새 절이 시작되는지 확인한 뒤 생성한다. Lecture 9는 전부 §1.4의 후속 내용이다. Lecture 12는 p.4 중간에서 Unit 2로 넘어가므로 ch04(§1.4 응용)와 ch05(Unit 2 도입·§2.1)로 나눴다. 다음 강의는 ch05 끝(`note05-99` 앞)에 이어 붙이고, Ex 2.3(1)의 원문 증명이 오면 en "Pf: Next Class!"와 자체 증명 토글을 원문 전사로 바꾼다.
+**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99`의 강의 범위 안내를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 새 단원 파일은 원본에서 새 절이 시작되는지 확인한 뒤 생성한다. Lecture 9는 전부 §1.4의 후속 내용이다. Lecture 12는 p.4 중간에서 Unit 2로 넘어가므로 ch04(§1.4 응용)와 ch05(Unit 2 도입·§2.1)로 나눴다. 다음 강의는 ch05 끝(`note05-99` 앞)에 이어 붙인다. Ex 2.3(1)의 원문 증명은 L13에서 와서 전사로 교체했다(옛 자체 증명의 그림 설명은 보충 증명으로 유지). **Thm 2.12 증명의 WTS 원문이 다음 강의에서 오면** c5-19 Proof 토글의 "Pf of WTS in next class!" 뒤에 원문 전사를 이어 붙이고 qed를 달며, 보충 증명은 (i)·(iv)와 원문에서 빠진 단계만 남긴다.
 
 ## 전체 구조 (2026-10-19)
 | 단원 | 제목 | 소스 |
@@ -24,7 +27,9 @@
 | ch02 | 1.2 벡터공간과 부분공간 | Lecture 3 pp.2–8 · Lecture 4 · Lecture 5 pp.1–6 |
 | ch03 | 1.3 일차결합, 생성, 일차독립 | Lecture 5 pp.6–7 · Lecture 6 · Lecture 7 pp.1–4 |
 | ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 · Lecture 9 · Lecture 12 pp.1–4 |
-| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | Lecture 12 pp.4–7 (Unit 2 도입 포함) |
+| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | Lecture 12 pp.4–7 (Unit 2 도입 포함) · Lecture 13 |
+| quiz1 | 퀴즈 복습과 기출 연습 | Lecture 1–9 · Fall 2025 Quiz 1·2 |
+| midterm | 중간고사 기출 | Fall 2025·2024 Midterm + 공식 해설 |
 
 ## ERRATA (원문 오타·결함 — en verbatim 유지, ko는 바른 뜻 / 필요 시 증명에서 역주)
 1. L2 p2 Def 1.2: "ℝ³ := {(a,b,c) : a,b,c ∈ ℝ³}" → ∈ ℝ.
@@ -47,6 +52,10 @@
 18. L4 p2 Prop 1.17(3) 증명: 공통항 a·0_V가 왼쪽에 있는데 소거법칙(Lem 1.15)은 오른쪽 공통항을 지움 → (VS 1) 선행 필요. ch02 보충 증명에서 보완.
 19. L12 p3 Cor 1.64 유일성 증명: "basis by Prop 1.62" → Prop 1.63 (1.62는 정의). ch04 보충 증명에 명시.
 20. L12 p2 Prop 1.63 진술: t_0,…,t_n이 "distinct"라는 가정 생략(Def 1.62에서 상속). 증명의 Cor 1.59(2) 적용에는 f_i들이 서로 다르다는 점(★에서 따라 나옴)도 필요 → ch04 보충 증명.
+21. L13 p5 Ex 2.7: "Recall from Ex 2.3(3)" → Ex 2.3(2) (ax+by+cz 사상은 2.3(2), 2.3(3)은 미분). ko는 2.3(2)로, c5-13 보충 증명에 명시.
+22. L13 p7 Observation: "w/ V f.d., is how are …"의 군더더기 "is", 괄호 "(Ex 2.10: guess is …"가 닫히지 않음 — en verbatim, ko는 바른 문장.
+23. L13 p7 Thm 2.12: 진술에 V 유한차원 가정이 없는데 증명은 "when V f.d."만 다룸(p8). 무한차원이면 ker(T)·im(T) 중 하나가 무한차원 → c5-19 보충 증명 (iv).
+24. L13 p2 Ex 2.3(3): D : ℝ[x]≤n → ℝ[x]≤n−1은 n = 0이면 공역이 ℝ[x]≤−1 = {0}(deg 0 = −∞ 약속) — 오류는 아니고 c5-6 보충 증명에 명시.
 
 ## 챕터별 인벤토리 (빌드 시점 기록)
 
@@ -429,3 +438,77 @@ Totals: ch04 31 TOC cards · note 4 · ko/en 토글 각 23. ch05 4 TOC cards · 
 오타: Quiz 2 Solutions p.2의 1(a) 마지막 첨가행렬 오른쪽 아래 −2는 −3의 오기. 최종 상자 답과 곱 검산에 맞추어 풀이를 수정했다. PDF 텍스트 추출의 β/γ 오인식은 문제지·손글씨 시각 확인으로 교정했다.
 
 Lecture 9 보충: dimension-review 개념 블록, P11(차원으로 기저 판정), P12(ℝ⁴ 좌표합 0), P13(M₂×₃ 표준기저) 추가. P11–P13은 편집 연습문제이며 기출과 별도 표시한다.
+
+### Lecture 13 반영 (2026-10-19) — la1/ch05.html
+
+Source: `Lecture 13 on 221 F26.pdf`, 8 pages (p.8은 위쪽만). p.1 Last Time(Def 2.1·𝓛(V,W)·Rmk 2.2 복습)과 Today("Continue §2.1 Linear Maps: ker, im, isom (Exs)")는 새 내용이 없어 제외. Unit 노트(2.x)는 아직 없음. 이번에는 메인 루프가 직접 전사·번역·자체 증명.
+
+| id | 배지 | 쪽 | 내용 | 증명 |
+|---|---|---|---|---|
+| c5-4 | EXAM 2.3 (1) | L12 6–7 · L13 1–2 | (갱신) en "Pf: Next Class!" 삭제, Proof 토글 = L13 원문(WTS·(1) ▨·(2) □), 옛 자체 증명의 그림 설명은 보충 증명 | 원문 + 보충(그림의 뜻) |
+| c5-5 | EXAM 2.3 (2) | 2 | T(x,y,z) = ax+by+cz는 선형; "Pf: Exercise (Similar to Ex 2.3(1))" | 자체 증명(스칼라를 d로) |
+| c5-6 | EXAM 2.3 (3) | 2 | 미분 D : ℝ[x]≤n → ℝ[x]≤n−1, "b/c (f+g)′ = f′+g′ …", "Take this granted (Calc I)" 계수 공식 | 보충(계수 공식으로 잘 정의됨·선형, n = 0) |
+| c5-7 | EXAM 2.3 (4) | 2–3 | 항등사상 I_V = 𝟙_V, 선형연산자 | 원문 |
+| c5-8 | EXAM 2.3 (5) | 3 | 영사상 T_0, 기호의 남용 0 ∈ 𝓛(V,W); "Pf: Exercise: Similar to Ex 2.3(4)" | 자체 증명 |
+| c5-9 | EX | 3 | T(∑a_i v_i) = ∑a_i T(v_i), "Hint: use Induction on n" | 자체 증명(귀납법) |
+| c5-10 | REM 2.4 | 3–4 | 𝓛(V,W)는 +, ·로 벡터공간; "Pf: Exercise (Similar to Ex 1.8 …) □ (also need … T+U & cT are lin maps)" | 자체 증명(1단계 닫힘, 2단계 VS 1–8) |
+| (section) | — | 4 | "Kernel and Image · 핵과 상" | — |
+| note05-4 | NOTE | 4 | Motivation: 근 f⁻¹(0)과 치역 f(ℝ) → 선형사상에서도 | — |
+| c5-11 | DEF 2.5 | 4 | ker(T) (null space, FIS) = T⁻¹(0) ⊆ V, im(T) (range, FIS) = T(V) ⊆ W | — |
+| c5-12 | PROP 2.6 | 4–5 | ker(T) ≤ V, im(T) ≤ W | 원문(▨/□) |
+| c5-13 | EXAM 2.7 | 5 | ker(ax+by+cz)는 부분공간, "Later: plane (dim 2) iff (a,b,c) ≠ 0", 그림(a=0,b=1,c=1) | 보충(Later 주장: R-N 및 직접 기저) |
+| c5-14 | PROP 2.8 | 6 | T 1-1(injective) ⟺ ker(T) = {0} | 원문(▨/□) |
+| c5-15 | PROP 2.9 | 6 | V = span{v_1,…,v_n} ⇒ im(T) = span(T(v_1),…,T(v_n)) | 원문(▨/□) |
+| c5-16 | EXAM 2.10 | 7 | T(x,y) = (x+y, x+y): im = span((1,1)), ker = span((1,−1)); "T ∈ 𝓛(ℝ²) (Exercise)" | 자체 증명(선형성) + 계산 세부 |
+| c5-17 | Q | 7 | Observation: dim V, dim ker, dim im의 관계? ⇓ Yes! | — |
+| c5-18 | DEF 2.11 | 7 | nullity(T) := dim ker(T), rank(T) (rk) := dim im(T) | — |
+| c5-19 | THM 2.12 | 7–8 | Rank-Nullity Thm (Dim Thm in FIS): dim V = nullity + rank; "Pf of R-N when V f.d." … "Pf of WTS in next class!" | 원문(미완, qed 없음) + 보충((i) 근거 (ii) WTS (iii) 결론 (iv) 무한차원) |
+| note05-99 | NOTE | — | Lecture 13까지 반영, WTS는 다음 강의, 동형사상 미착수 | — |
+
+Totals: ch05 19 TOC cards · note 5 · ko/en 토글 각 17 · qed 32.
+
+#### Transcription choices
+- p.1–2의 Ex 2.3(1) 증명에서 파란 "WTS"는 굵은 라벨, 소단계 끝 빗금 상자는 ▨(part-end).
+- p.2의 초록 "Take this granted"와 파란 Calc I 공식은 en "Take this granted (Calc I):" + display로, 주황 "u = m−1"은 등호 위 overset.
+- 주황 곁말(fcn, lin, transf, hom, id, op, ker, im(g), sp, rk, inj, R-N Thm)은 순수 풀이라 버렸다. 단 "1-1" 위의 "injective"는 증명이 "inj"로 쓰므로 괄호로 남겼고, rank 위의 "rk"는 증명이 rk(T)를 쓰므로 "(rk)"로 남겼다.
+- 갈색 "(FIS)"(null space, range 위)는 "(FIS)"로 제자리에. 파란 "(= T⁻¹(0) preimg of 0)", "(= T(V))"는 괄호식으로 유지.
+- 등호 위 근거(Rmk 2.2, T lin, def, T lin + Exercise)는 overset/substack. 동그라미 친 등호·밑줄·색 박스(Thm 2.12의 빨간 상자)는 미반영.
+- p.8 im(T) 계산에서 빨간 사선으로 지운 T(v_1),…,T(v_k)(위에 0)는 underbrace "= 0", 초록 중괄호 "n−k elts"는 underbrace 첨자.
+- p.5 Ex 2.7의 점선 상자 그림(P = ker(T), a=0, b=1, c=1인 평면)은 fig-note.
+- 𝟙_V는 `\mathbb{1}_V`(MathJax 4 기본 글꼴에 있음 — 브라우저 확인).
+- c5-8: 노트의 "(Pf: Exercise: Similar to Ex 2.3(4))"는 화살표로 "is a lin map"에 걸려 있어 그 문장 뒤로 옮겼다(Abuse of notation 앞).
+- 흐름 화살표 ⇓(Ex 2.10 → Observation, Def 2.11 → Thm 2.12)는 Observation 카드의 "⇓ Yes!"만 남겼다.
+
+#### 검증 (2026-10-19)
+- Opus 적대적 검증 1회(L13 원본 8쪽 대조): MUST-FIX 0. SHOULD-FIX 3 반영(c5-17 ko 괄호, c5-4 보충을 극좌표 논증으로 일반화, c5-6 n = 0 설명), NIT 6 반영(c5-16 선형성 첫 단계·핵 기저의 일차독립, c5-13 두 벡터가 ker에 속함, c5-10 괄호·문자 S→F, note05-4 "상", note05-99 링크 → note04-4, c5-8 Pf 위치).
+- headless Chrome(lazy 해제, 증명 펼침): ch05 수식 838개 MathJax 오류 0, 500px·1400px 넘침 0, 𝟙(NCM-DS 글리프) 정상.
+- midterm.html: Opus 검증 1회 — 문제 원문 11개 일치, 정답·증명·정정 3건 모두 확인, MUST-FIX 0; SHOULD-FIX 2·NIT 4 반영. 수식 525개 오류 0, 넘침 0.
+
+
+### 중간고사 기출 반영 (2026-10-19) — la1/midterm.html
+
+`la1/src/`에 Fall 2024·2025 중간고사 문제지와 Solutions PDF 4개 추가. 문제는 LaTeX 시험지에서 원문 그대로(행렬은 PDF 이미지로 확인), 풀이는 손글씨 공식 해설과 시각 대조. 형식은 `quiz1.html`의 qs-block(영어 원문 `qs-en` + 한국어 번역 `qs-ko` + `details.qs-proof` 영어 모범답안·한국어 해설). 빌드는 Opus 에이전트, 정답은 메인 루프가 독립 검산.
+
+| 앵커 | 출처 | 내용 · 정답 |
+|---|---|---|
+| mt25-1a | F25 p.2 / Sol p.2 | [[2,1,3],[0,−2,1]](3(1,1,1)−(2,−1,4)) = (3, −9), 6점 |
+| mt25-1b | F25 p.2 / Sol p.2 | (2B+C)(2,3) = [[3,1],[−1,3],[4,2]](2,3) = (9, 7, 14), 6점 |
+| mt25-2 | F25 p.3 / Sol p.3 | v₃ = (0,6,t): 일차종속 ⟺ t = 5 (v₁+2v₂−v₃ = 0), 12점; 풀이 1(동차 연립)·풀이 2(v₃ ∈ span) |
+| mt25-3 | F25 p.4 / Sol p.4 | ker T 기저 {(1,1,−1,0), (0,0,0,1)}, 12점 |
+| mt25-4 | F25 p.5 / Sol p.5 | {u,v,w,s} l.i. ⇒ {u+s,v+s,w+s} l.i., 9점; 직접 증명(원본은 귀류법) |
+| mt25-5 | F25 p.6 / Sol p.6 | T(x³…x⁶)=0 ⇒ im T ≠ M₂(ℝ), 9점; 풀이 1(nullity ≥ 4, R-N) · 풀이 2(im = span(T(1),T(x),T(x²))) |
+| mt24-1 | F24 p.2 / Sol p.2 | 짝함수 전체는 𝓕(ℝ,ℝ)의 부분공간, 10점 |
+| mt24-2 | F24 p.3 / Sol p.3 | (1,1,1),(1,2,3),(1,5,8)은 𝔽³의 기저(예), 10점; 풀이 1(LEM 1.44) · 풀이 2(정의, 원본 계산 정정) |
+| mt24-3 | F24 p.4 / Sol p.4 | ker T 기저 {(1,0,−4,1), (0,1,2,0)}, 10점 |
+| mt24-4a | F24 p.5 / Sol p.5 | [x²+x+1]_β = (7,5,1), 6점 |
+| mt24-4b | F24 p.5 / Sol p.5 | [T]_β = [[2,−2,0],[0,1,−4],[0,0,0]], 6점 |
+
+공식 해설 정정(페이지 `#pitfalls`에 표시):
+- F24 Sol p.3 #2 Sol 2: c = −a−b = −(7/3)a, (3) → −(65/3)a = 0 은 오산. 바르게는 c = (1/3)a, (3) → −(1/3)a = 0. 결론(a=b=c=0, 기저)은 같음.
+- F25 Sol p.4 #3: "x, w ∈ ℝ²" → x, w ∈ ℝ.
+- F25 Sol p.1 표지 날짜 "Tuesday, June 17th"는 양식 잔재(문제지: Monday, October 20th).
+- F25 Sol p.3 #2 Sol 2의 "From class (§1.5)" = 2026 노트 Lem 1.44 + Lem 1.41(또는 Prop 1.43), 노트 §1.3. "§1.5"는 FIS 교재 절 번호(Thm 1.7)로 보임.
+- F25 Sol p.5 #4: (a,b,c) ∈ ℝ³∖{0} — 시험 관례상 𝔽 (무해).
+- 두 벡터의 일차독립을 "둘 다 0이 아니고 스칼라배가 아님"으로 보이는 공식 해설 방식(F25 #2·#3, F24 #2·#3)은 벡터 2개일 때만 유효 — 해설에 주의로 표시.
+
+범위 표시: 2024 #4(b) 행렬표현은 2026 강의계획서상 9–10주차(중간 이후)로 표시. 과거 시험 날짜를 올해 일정으로 쓰지 않음. 2026 중간고사는 강의계획서상 8주차 화요일(잠정).

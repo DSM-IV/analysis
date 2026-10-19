@@ -1,6 +1,6 @@
 # 선형대수학 1 용어집 (Linear Algebra I Glossary — MATH221, Fall 2026)
 
-소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12) — 영문.
+소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12, 13) — 영문. 중간고사 기출(Fall 2024·2025)은 $\mathbb{F}=\mathbb{R}$ 또는 $\mathbb{C}$ 표기.
 교재는 Friedberg–Insel–Spence 5th ed.(연습문제용)이지만 **내용·번호·기호는 강의노트를 따른다**(ℝ 위 벡터공간, $\mathcal{F}(X,\mathbb{R})$, $\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $M_{m\times n}(\mathbb{R})$).
 `la/GLOSSARY.md`(Friedberg 한국어판 관행)를 상속한다. 번역·풀이 작성 시 이 표의 용어만 쓴다.
 
@@ -92,3 +92,20 @@
 | ch03 | 1.3 일차결합, 생성, 일차독립 | §1.3 Linear Combinations, Span, and Linear Independence |
 | ch04 | 1.4 기저와 차원 | §1.4 Basis and Dimension |
 | ch05 | 2.1 선형사상: 핵, 상, 동형사상 | §2.1 Linear Maps: Kernel, Image, and Isomorphism |
+| identity map $I_V = \mathbb{1}_V$ | 항등사상 |
+| zero map $T_0$ (written $0 \in \mathcal{L}(V,W)$) | 영사상 |
+| linear operator ($T \in \mathcal{L}(V)$) | 선형연산자 |
+| differentiation $D$ | 미분 |
+| Take this granted | (이 사실은) 그대로 받아들인다 |
+| induction on $n$ | $n$에 대한 귀납법 |
+| kernel $\ker(T)$ / null space (FIS) | 핵 / 영공간(FIS의 용어) |
+| image $\operatorname{im}(T)$ / range (FIS) | 상 / 치역(FIS의 용어) |
+| roots $f^{-1}(0)$ | 근 |
+| 1-1 (injective) / onto (surjective) | 단사(일대일) / 전사 |
+| Observation | 관찰 |
+| nullity $\operatorname{nullity}(T)$ | 퇴화차수(nullity) |
+| rank $\operatorname{rank}(T)$, $\operatorname{rk}(T)$ | 계수(rank) |
+| Rank-Nullity Theorem (R-N) / Dimension Theorem (FIS) | 계수-퇴화차수 정리 / 차원정리(FIS) |
+| plane / line (through the origin) | (원점을 지나는) 평면 / 직선 |
+| coordinate vector $[v]_\beta$ / matrix representation $[T]_\beta$ | 좌표벡터 / 행렬표현 |
+| matrix–vector multiplication | 행렬-벡터 곱 |
