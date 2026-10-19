@@ -36,7 +36,7 @@ const KEEP_PROOF_RATIO = 0.3; // 짧은 증명 블록도 마찬가지
 const SUBJECTS = {
   analysis2: { ko: '해석학2', en: 'Analysis II', out: '해석학2.pdf' },
   la1: { ko: '선형대수학 1', en: 'Linear Algebra I', out: '선형대수1.pdf',
-         appendix: [{ file: 'quiz1.html', bilingual: true }] },
+         appendix: [{ file: 'quiz1.html', bilingual: true }, { file: 'midterm.html', bilingual: true }] },
   la2: { ko: '선형대수학 2', en: 'Linear Algebra II', out: '선형대수2.pdf',
          appendix: [{ file: 'midterm.html' }] },
   settheory: { ko: '집합론', en: 'Set Theory', out: '집합론.pdf' },
