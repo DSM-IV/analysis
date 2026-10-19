@@ -13,14 +13,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선형대수학 1 학습 가이드 | Linear Algebra I Bilingual Study Guide</title>
-<meta name="description" content="선형대수학 1(MATH221, Linear Algebra I) 손글씨 강의노트를 한국어·영어 대조로 정리한 학습 가이드. 벡터공간, 부분공간, 일차결합과 생성, 일차독립, 기저와 차원 — 퀴즈 대비 요약 포함. 학기 진행에 따라 갱신됩니다.">
-<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 벡터공간, vector space, 부분공간, subspace, 부분공간 판정법, subspace criterion, 일차결합, linear combination, 생성, span, 일차독립, linear independence, 일차종속, linear dependence, 기저, basis, 교체정리, replacement theorem, 차원, dimension, 소거법칙, cancellation law">
+<meta name="description" content="선형대수학 1(MATH221, Linear Algebra I) 손글씨 강의노트를 한국어·영어 대조로 정리한 학습 가이드. 벡터공간, 부분공간, 일차결합과 생성, 일차독립, 기저와 차원, 라그랑주 보간, 선형사상 — 퀴즈 대비 요약 포함. 학기 진행에 따라 갱신됩니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 벡터공간, vector space, 부분공간, subspace, 부분공간 판정법, subspace criterion, 일차결합, linear combination, 생성, span, 일차독립, linear independence, 일차종속, linear dependence, 기저, basis, 교체정리, replacement theorem, 차원, dimension, 소거법칙, cancellation law, 라그랑주 보간, Lagrange interpolation, 선형변환, linear transformation, 선형사상, linear map">
 <meta name="author" content="DDALKKAK">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://univmathsurvive.com/la1/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="선형대수학 1 한·영 대조 학습 가이드">
-<meta property="og:description" content="벡터공간, 부분공간, 일차결합과 생성, 일차독립, 기저와 차원 — MATH221 손글씨 강의노트를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:description" content="벡터공간, 부분공간, 일차결합과 생성, 일차독립, 기저와 차원, 선형사상 — MATH221 손글씨 강의노트를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
 <meta property="og:url" content="https://univmathsurvive.com/la1/">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="선형대수학 1 학습 가이드">
@@ -34,11 +34,11 @@
   "headline": "Linear Algebra I — Bilingual Study Guide",
   "author": { "@type": "Organization", "name": "DDALKKAK" },
   "publisher": { "@type": "Organization", "name": "DDALKKAK" },
-  "description": "선형대수학 1(Linear Algebra I, MATH221) 강의노트 — 벡터공간, 부분공간, 생성, 일차독립, 기저를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "description": "선형대수학 1(Linear Algebra I, MATH221) 강의노트 — 벡터공간, 부분공간, 생성, 일차독립, 기저, 선형사상을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
   "inLanguage": ["ko", "en"],
   "url": "https://univmathsurvive.com/la1/",
   "datePublished": "2026-10-01",
-  "dateModified": "2026-10-07"
+  "dateModified": "2026-10-19"
 }
 </script>
 <script>
@@ -77,6 +77,7 @@ MathJax = {
       <a href="ch02.html">02</a>
       <a href="ch03.html">03</a>
       <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
       <a href="quiz1.html">퀴즈 복습·기출</a>
     </div>
   </div>
@@ -85,7 +86,7 @@ MathJax = {
 <header>
   <p class="subtitle">Linear Algebra I · MATH221 · Fall 2026</p>
   <h1>선형대수학 1 학습 가이드<span>Linear Algebra I &mdash; Bilingual Study Guide</span></h1>
-  <p class="header-desc">벡터공간에서 출발해 부분공간, 생성, 일차독립, 기저와 차원으로. 비전공 분반(Changho Han) 손글씨 강의노트를 영문 원문과 한국어 번역의 대조 형식으로 정리했습니다. 프리드버그(Friedberg&ndash;Insel&ndash;Spence, <em>Linear Algebra</em>, 5th ed.)는 연습문제용 교재이고, 내용과 번호는 강의노트를 따릅니다. 학기 진행에 따라 계속 갱신됩니다.</p>
+  <p class="header-desc">벡터공간에서 출발해 부분공간, 생성, 일차독립, 기저와 차원을 거쳐 선형사상으로. 비전공 분반(Changho Han) 손글씨 강의노트를 영문 원문과 한국어 번역의 대조 형식으로 정리했습니다. 프리드버그(Friedberg&ndash;Insel&ndash;Spence, <em>Linear Algebra</em>, 5th ed.)는 연습문제용 교재이고, 내용과 번호는 강의노트를 따릅니다. 학기 진행에 따라 계속 갱신됩니다.</p>
   <div class="lang-badge">
     <span class="ko">한국어</span>
     <span class="en">English</span>
@@ -170,11 +171,24 @@ MathJax = {
         <span class="ch-num">UNIT 04</span>
         <h3>1.4 기저와 차원</h3>
         <p class="ch-en-title">&sect;1.4 Basis and Dimension</p>
-        <p class="ch-desc">기저의 정의와 표준기저, 기저 ⟺ 표현의 유일성(Prop 1.48), 유한 생성집합에서 기저 뽑기(Prop 1.49), 교체정리와 차원, 기저 확장정리(Cor 1.59), 부분공간의 차원(Thm 1.60), 좌표의 합이 0인 공간(Ex 1.61)</p>
-        <p class="ch-count" style="font-size:.72rem; color:var(--ink-faint); margin-top:.7rem;">환경 27 · 증명 토글 17 · Lecture 7–9</p>
+        <p class="ch-desc">기저의 정의와 표준기저, 기저 ⟺ 표현의 유일성(Prop 1.48), 유한 생성집합에서 기저 뽑기(Prop 1.49), 교체정리와 차원, 기저 확장정리(Cor 1.59), 부분공간의 차원(Thm 1.60), 좌표의 합이 0인 공간(Ex 1.61), 라그랑주 보간 공식(Cor 1.64)</p>
+        <p class="ch-count" style="font-size:.72rem; color:var(--ink-faint); margin-top:.7rem;">환경 31 · 증명 토글 23 · Lecture 7–9, 12</p>
       </div>
       <div class="card-actions">
         <a href="ch04.html">원문 &amp; 번역</a>
+      </div>
+    </article>
+    <!-- Unit 05 -->
+    <article class="chapter-card">
+      <div class="card-top">
+        <span class="ch-num">UNIT 05</span>
+        <h3>2.1 선형사상: 핵, 상, 동형사상</h3>
+        <p class="ch-en-title">&sect;2.1 Linear Maps: Kernel, Image, and Isomorphism</p>
+        <p class="ch-desc">2단원 선형변환의 동기(회전·층밀림), 함수의 상과 역상, 선형변환(선형사상)의 정의와 𝓛(V,W), T(0)=0·T(−v)=−T(v)(Rmk 2.2), ℝ²에서 π/2 회전(Ex 2.3) &mdash; 진행 중</p>
+        <p class="ch-count" style="font-size:.72rem; color:var(--ink-faint); margin-top:.7rem;">환경 4 · 증명 토글 3 · Lecture 12</p>
+      </div>
+      <div class="card-actions">
+        <a href="ch05.html">원문 &amp; 번역</a>
       </div>
     </article>
 
@@ -195,6 +209,7 @@ MathJax = {
     <a href="ch02.html">02</a>
     <a href="ch03.html">03</a>
     <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
     <a href="quiz1.html">퀴즈 복습·기출</a>
     <a href="../about.html">소개 About</a>
     <a href="../privacy.html">개인정보처리방침 Privacy</a>

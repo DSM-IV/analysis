@@ -1,6 +1,6 @@
 # 선형대수학 1 용어집 (Linear Algebra I Glossary — MATH221, Fall 2026)
 
-소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9) — 영문.
+소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12) — 영문.
 교재는 Friedberg–Insel–Spence 5th ed.(연습문제용)이지만 **내용·번호·기호는 강의노트를 따른다**(ℝ 위 벡터공간, $\mathcal{F}(X,\mathbb{R})$, $\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $M_{m\times n}(\mathbb{R})$).
 `la/GLOSSARY.md`(Friedberg 한국어판 관행)를 상속한다. 번역·풀이 작성 시 이 표의 용어만 쓴다.
 
@@ -70,6 +70,19 @@
 | tangent line / approximation | 접선 / 근사 |
 | attendance / quiz / midterm / final exam | 출석 / 퀴즈 / 중간고사 / 기말고사 |
 | Unit Notes | 단원 노트(Unit Notes) |
+| data points | 자료점 |
+| Lagrange polynomials (associated with $t_0,\dots,t_n$) | ($t_0,\dots,t_n$에 대응하는) 라그랑주 다항식 |
+| Lagrange Interpolation Formula (LIF) | 라그랑주 보간 공식 |
+| distinct | 서로 다른 |
+| linear transformation / linear map / homomorphism | 선형변환 / 선형사상 / 준동형사상 |
+| $\mathcal{L}(V,W)$ (set of linear maps) | $V$에서 $W$로 가는 선형사상 전체의 집합 $\mathcal{L}(V,W)$ |
+| range / image $\operatorname{im}(f)$ | 치역 / 상 |
+| preimage $f^{-1}(Z)$ | 역상 |
+| kernel (ker) / isomorphism (isom) | 핵 / 동형사상 |
+| rotation by $\frac{\pi}{2}$ CCW | 반시계 방향으로 $\frac{\pi}{2}$만큼의 회전 |
+| shear | 층밀림 |
+| fix origin / send a line to a line | 원점을 고정하다 / 직선을 직선으로 보내다 |
+| Set Theory Warm-Up | 집합론 준비 |
 
 ## 단원명 (파일 ↔ 제목)
 | 파일 | 한국어 제목 | English |
@@ -78,3 +91,4 @@
 | ch02 | 1.2 벡터공간과 부분공간 | §1.2 Vector Spaces and Subspaces |
 | ch03 | 1.3 일차결합, 생성, 일차독립 | §1.3 Linear Combinations, Span, and Linear Independence |
 | ch04 | 1.4 기저와 차원 | §1.4 Basis and Dimension |
+| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | §2.1 Linear Maps: Kernel, Image, and Isomorphism |

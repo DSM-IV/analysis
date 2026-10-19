@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.1 선형사상: 핵, 상, 동형사상 (§2.1 Linear Maps: Kernel, Image, and Isomorphism) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1 (MATH221) 5단원 선형사상 — 2단원 선형변환의 동기(회전·층밀림), 함수의 정의역·공역·치역(상)과 역상(preimage), 선형변환(linear transformation)·선형사상(linear map)의 정의와 𝓛(V,W), 선형사상은 영벡터와 역원을 보존한다는 성질, ℝ²에서 π/2 회전을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 선형변환, linear transformation, 선형사상, linear map, 준동형사상, homomorphism, 상, image, 치역, range, 역상, preimage, 정의역, domain, 공역, codomain, 회전, rotation, 층밀림, shear, 핵, kernel, 동형사상, isomorphism, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/ch05.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.1 선형사상: 핵, 상, 동형사상 (§2.1 Linear Maps: Kernel, Image, and Isomorphism) — 선형대수학 1 한·영 대조">
+<meta property="og:description" content="함수의 상과 역상, 선형변환(선형사상)의 정의와 𝓛(V,W), 선형사상이 영벡터와 역원을 보존한다는 성질, ℝ²에서 π/2 회전까지 — 선형대수학 1 선형사상 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/ch05.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2.1 선형사상: 핵, 상, 동형사상 (§2.1 Linear Maps: Kernel, Image, and Isomorphism) — 선형대수학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 1 선형사상 — 2단원 선형변환의 동기, 함수의 상과 역상, 선형변환(선형사상)의 정의와 𝓛(V,W), 영벡터와 역원의 보존, ℝ²에서 π/2 회전을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la1/ch05.html",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "mainEntityOfPage": "https://univmathsurvive.com/la1/ch05.html"
+}
+</script>
+<script>
+MathJax = {
+  loader: { load: ['ui/lazy'] },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- la1은 MathJax 4: 좁은 화면에서 긴 인라인·디스플레이 수식 자동 줄바꿈 (ui/lazy: 화면에 들어온 수식만 조판 — v4 전체 조판은 v3보다 ~7배 느림) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html" class="active">05</a>
+      <a href="quiz1.html">퀴즈 복습·기출</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Unit 05</p>
+  <h1>2.1 선형사상: 핵, 상, 동형사상<span>§2.1 Linear Maps: Kernel, Image, and Isomorphism</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c5-1"><span class="toc-num">DEF</span> 집합론 준비: 상과 역상 <em>Set Theory Warm-Up: Image and Preimage</em></a></li>
+    <li><a href="#c5-2"><span class="toc-num">DEF 2.1</span> 선형변환(선형사상) <em>Linear Transformation (Linear Map)</em></a></li>
+    <li><a href="#c5-3"><span class="toc-num">REM 2.2</span> 선형사상은 영벡터와 역원을 보존한다 <em>Linear Maps Preserve Zero and Additive Inverses</em></a></li>
+    <li><a href="#c5-4"><span class="toc-num">EXAM 2.3 (1)</span> ℝ²에서 π/2 회전 <em>Rotation by π/2 in ℝ²</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 1 (MATH221) 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 노트(손글씨 태블릿 노트)의 환경 하나 = 카드 하나. id는 단원 안의 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c4-10"), 노트 등장 순서대로 배치한다.
+     배지는 강의 노트의 전역 번호(1.1, 1.2, … 1.55)를 그대로 따른다:
+     Def 1.45 → DEF 1.45, Notation → NOTATION, Thm 1.53 → THM 1.53, Prop 1.48 → PROP 1.48,
+     Lem → LEM, Cor 1.55 → COR 1.55, Rmk 1.50 → REM 1.50, Note → NOTE,
+     Ex 1.46 (= Example) → EXAM 1.46, Exercise 1.54 → EX 1.54.
+     번호 없는 항목은 유형 배지만 둔다 (DEF / REM / NOTE / Q / RECALL / CLAIM / EXAM / EX).
+     Comment 와 Guiding Principle 은 REM, Q … A 또는 Q … ⇓ Yes! 는 Q.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Def / Notation                      → card def-card  · DEF n / NOTATION n
+       Thm / Prop / Lem / Cor / Claim      → card thm-card  · THM n / PROP n / LEM n / COR n / CLAIM
+       Rmk / Note / Recall / Q / Comment   → card rem-card  · REM n / NOTE n / RECALL / Q / REM
+       Ex (Example)                        → card exam-card · EXAM n
+       Exercise                            → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num 만 둔다.
+  3) 각 강의 첫머리의 Last Time 복습과 Today 안내는 카드로 만들지 않는다
+     (복습에 새 내용이 있을 때만 그 내용만 담은 RECALL 카드 하나).
+     강의·쪽 경계는 Lecture N · p.M 형식의 주석 구분선으로 표시한다.
+     노트의 주제 표제(Properties of bases 등)는 div.section-title 로 옮긴다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     노트에 표제가 없으면 간결한 편집 제목을 붙이고, 노트가 괄호 안에 준 이름
+     (Replacement Thm 등)이 있으면 그 이름을 쓴다.
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 손글씨 본문의 verbatim 전사. 강의자의 약어(v.s., subsp, l.c., l.i., l.d.,
+                   fin, std, coeffs, coords, elts, w/, b/c, s.t., iff, Pf 등)와 오탈자까지 그대로 둔다.
+                   약어 위에 작게 적힌 색 글씨 풀이는 옮기지 않고, 수학적 내용이 있는
+                   색 글씨 곁말은 괄호에 넣어 제자리에 둔다.
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     노트의 색, 밑줄, 동그라미는 옮기지 않는다. 손그림은 fig-note 한 줄 설명으로 대신한다.
+  6) 노트에 증명(Pf: … □)이 적힌 명제·예제는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 두고
+     en 쪽은 원문 증명을 verbatim 전사한 뒤 div.qed(□)로 닫는다.
+     증명 안에서 소단계 끝에 그린 빗금 상자는 span.part-end(▨)로 옮긴다.
+  7) 증명이 노트에 없는 진술(Pf: Exercise, Pf: Unit 1.4 notes, Pf: Math-Major Only,
+     Exercise 1.54 등)은 진술과 Pf 줄만 en-formal 에 옮기고, 나중에 증명을 쓸 자리에
+     숨은 마커만 남긴다. ko-panel 안 div.formal 뒤에 PROOF-KO 마커, en-panel 안
+     div.en-formal 뒤에 PROOF-EN 마커를 각각 HTML 주석으로 둔다.
+  8) Motivation 같은 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원 2자리}-{순번} (예: note04-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 열벡터는 bmatrix, span 은 operatorname 으로 쓴다.
+     ⊊ 는 subsetneq, ∄ 는 nexists, ∃! 는 exists!, #S 는 백슬래시를 붙인 #S,
+     모순 표시 ※ 는 문자 그대로 둔다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     소스의 항목 라벨이 (1)/(2) 또는 (a)/(b)처럼 적힌 경우 ol 대신
+     p 태그 앞에 strong 으로 라벨을 그대로 적어 원문 표기를 보존한다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<!-- Lecture 12 · p.1–4 (Last Time, Today, §1.4 Application)은 ch04에 반영. 이 단원은 Lecture 12 p.4의 "Unit 2: Linear Transformations" 표제부터 시작한다. -->
+<!-- 같은 내용의 단원 노트: Unit 2.1 of Linear Algebra I (non-math major) Notes at KU.pdf (4쪽, p.4 빈 쪽; Ex 2.3(1)의 "Pf:" 뒤가 비어 있음). 전사 원본은 Lecture 12. -->
+<div class="section-title"><h2>Unit 2: Linear Transformations · 2단원: 선형변환</h2></div>
+
+<!-- ═══════════ Lecture 12 · p.4 ═══════════ -->
+
+<div class="card note-card" id="note05-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>이 단원은 벡터공간 사이의 "특별한" 함수에 관한 것이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>This unit is about "special" fcns btwn v.s.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note05-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> 지금까지는 벡터공간의 성질을 공부했다. 벡터공간 사이의 함수(사상)는 어떨까? 포토샵의 몇 가지 연산을 살펴보자.</p>
+        <p class="fig-note">[그림: 좌표평면의 격자 위에 주황색 벡터가 빨간 가로 성분과 파란 세로 성분을 이어 붙인 합으로 그려져 있다. "$\frac{\pi}{2}$만큼 회전 ↺"을 거치면 격자, 벡터, 두 성분이 모두 원점을 중심으로 반시계 방향으로 $90^\circ$ 돌아간다.]</p>
+        <!-- ═══════════ Lecture 12 · p.5 ═══════════ -->
+        <p class="fig-note">[그림: 같은 격자와 벡터에 "층밀림"(작은 정사각형 ↦ 평행사변형)을 적용하면, 세로 격자선은 기울어진 평행선이 되고 가로 격자선과 가로 성분은 그대로이며, 벡터는 그대로인 가로 성분과 기울어진 세로 성분의 합이 된다.]</p>
+        <p>이 연산들은 원점을 고정하고, 모든 직선을 직선으로, 모든 평행사변형을 평행사변형으로 보낸다. <span class="fig-note">[그림: 주황색 벡터가 빨간 가로 성분과 파란 세로 성분이 이루는 평행사변형의 대각선]</span>을 이용하면, 우리가 원하는 것은 덧셈과 스칼라곱을 보존하는 함수이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> So far, we studied properties of v.s. What about fcns/maps btwn v.sps? Look at some photoshop operations:</p>
+        <p class="fig-note">[Figure: on a grid in the plane, an orange vector drawn as the sum of a red horizontal and a blue vertical component (head to tail); after "rotation by $\frac{\pi}{2}$ ↺" the grid, the vector and both components are all turned $90^\circ$ counterclockwise about the origin]</p>
+        <!-- ═══════════ Lecture 12 · p.5 ═══════════ -->
+        <p class="fig-note">[Figure: the same grid and vector under "shear" (a small square ↦ a parallelogram): the vertical grid lines become slanted parallel lines, the horizontal grid lines and the horizontal component stay put, and the vector becomes the sum of the unchanged horizontal component and a slanted vertical component]</p>
+        <p>They fix origin, send any line to a line, and send any parallelogram to a parallelogram. Using <span class="fig-note">[Figure: the orange vector as the diagonal of the parallelogram formed by its red horizontal and blue vertical parts]</span>, we want fcns that preserve addition &amp; scalar-mult.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c5-1">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">집합론 준비: 상과 역상 <em>Set Theory Warm-Up: Image and Preimage</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>집합론 준비:</strong> <strong>함수(사상)</strong> $f : \underset{\text{정의역}}{X} \to \underset{\text{공역}}{Y}$가 주어졌을 때</p>
+        <div class="math-display">$$\operatorname{im}(f) = \overset{\text{(FIS)}}{\operatorname{range}}(f) = f(X) = \{f(x) \in Y : x \in X\} \subseteq Y$$</div>
+        <p>를 $f$의 <strong>치역(range)</strong> 또는 <strong>상(image)</strong>이라 한다(range는 FIS 교재의 용어). $Z \subseteq Y$가 주어졌을 때</p>
+        <div class="math-display">$$f^{-1}(Z) := \{x \in X : f(x) \in Z\}$$</div>
+        <p>를 $X$에서의 $Z \subseteq Y$의 <strong>역상(preimage)</strong>이라 한다.</p>
+        <p>($f$가 단사이고 전사이면 $f^{-1} : Y \to X$가 존재하고, 이때 $f^{-1}(Z)$는 $f^{-1}$에 의한 $Z \subseteq Y$의 상이다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>괄호 안의 주장을 확인한다. $f$가 단사이고 전사이면 $g := f^{-1} : Y \to X$가 존재하고 $g(f(x)) = x$ ($\forall x \in X$), $f(g(y)) = y$ ($\forall y \in Y$)이다. 역상을 $A := \{x \in X : f(x) \in Z\}$, $g$에 의한 상을 $B := g(Z) = \{g(z) : z \in Z\}$라 하자.</p>
+        <p>$x \in A$이면 $z := f(x) \in Z$이고 $x = g(f(x)) = g(z) \in B$이다. 거꾸로 $x = g(z)$ ($z \in Z$)이면 $f(x) = f(g(z)) = z \in Z$이므로 $x \in A$이다. 따라서 $A = B$이다. 즉 기호 $f^{-1}(Z)$를 "역상"으로 읽든 "$f^{-1}$에 의한 상"으로 읽든 같은 집합이다. ($f$가 전단사가 아니어도 역상 $f^{-1}(Z)$는 항상 정의된다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Set Theory Warm-Up:</strong> given a <strong>fcn/map</strong> $f : \underset{\text{domain}}{X} \to \underset{\text{codomain}}{Y}$,</p>
+        <div class="math-display">$$\operatorname{im}(f) = \overset{\text{(FIS)}}{\operatorname{range}}(f) = f(X) = \{f(x) \in Y : x \in X\} \subseteq Y$$</div>
+        <p>is called <strong>range/image</strong> of $f$. Given $Z \subseteq Y$,</p>
+        <div class="math-display">$$f^{-1}(Z) := \{x \in X : f(x) \in Z\}$$</div>
+        <p>is the <strong>preimage</strong> of $Z \subseteq Y$ in $X$.</p>
+        <p>(when $f$ is 1-1 &amp; onto, $f^{-1} : Y \to X$ exists, and $f^{-1}(Z)$ is the img of $Z \subseteq Y$ via $f^{-1}$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We check the parenthetical claim. If $f$ is 1-1 and onto, then $g := f^{-1} : Y \to X$ exists with $g(f(x)) = x$ ($\forall x \in X$) and $f(g(y)) = y$ ($\forall y \in Y$). Write $A := \{x \in X : f(x) \in Z\}$ for the preimage and $B := g(Z) = \{g(z) : z \in Z\}$ for the image under $g$.</p>
+        <p>If $x \in A$, then $z := f(x) \in Z$ and $x = g(f(x)) = g(z) \in B$. Conversely, if $x = g(z)$ with $z \in Z$, then $f(x) = f(g(z)) = z \in Z$, so $x \in A$. Hence $A = B$: the symbol $f^{-1}(Z)$ denotes the same set whether read as a preimage or as an image under $f^{-1}$. (The preimage $f^{-1}(Z)$ is defined even when $f$ is not bijective.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title"><h2>§2.1 Linear Maps: ker, im, and isom · 2.1 선형사상: 핵, 상, 동형사상</h2></div>
+
+<div class="card note-card" id="note05-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>동기에서처럼, $+$와 $\cdot$을 보존하는 벡터공간 사이의 함수를 생각하자.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>As in Motivation, let's consider fcns btwn vector spaces that preserve $+$ &amp; $\cdot$:</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 12 · p.6 ═══════════ -->
+
+<div class="card def-card" id="c5-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2.1</span>
+    <span class="def-title">선형변환(선형사상) <em>Linear Transformation (Linear Map)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V, W$는 벡터공간이다. 사상 $T : V \to W$가 모든 $v_1, v_2 \in V$에 대하여 다음을 만족하면 $T$를 <strong>선형변환</strong>(linear transformation) (또는 <strong>선형사상</strong>(linear map)/<strong>준동형사상</strong>(homomorphism))이라 한다.</p>
+        <p><strong>(1)</strong> $T(v_1 +_V v_2) = T(v_1) +_W T(v_2)$ &nbsp;($T(v_1 + v_2) = T(v_1) + T(v_2)$)</p>
+        <p><strong>(2)</strong> 모든 $c \in \mathbb{R}$에 대하여 $T(c \cdot_V v_1) = c \cdot_W T(v_1)$. &nbsp;($T(cv_1) = cT(v_1)$)</p>
+        <p>$V \to W$인 선형사상 전체의 집합을 $\mathcal{L}(V, W)$라 한다. ($V = W$일 때는 $\mathcal{L}(V) := \mathcal{L}(V, V)$라 쓴다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$V, W$ v.s. A map $T : V \to W$ is a <strong>linear transformation</strong> (or <strong>lin map</strong>/<strong>homomorphism</strong>) if $\forall v_1, v_2 \in V$,</p>
+        <p><strong>(1)</strong> $T(v_1 +_V v_2) = T(v_1) +_W T(v_2)$ &nbsp;($T(v_1 + v_2) = T(v_1) + T(v_2)$)</p>
+        <p><strong>(2)</strong> $T(c \cdot_V v_1) = c \cdot_W T(v_1)$ $\forall c \in \mathbb{R}$. &nbsp;($T(cv_1) = cT(v_1)$)</p>
+        <p>The set of lin maps $V \to W$ is called $\mathcal{L}(V, W)$. (When $V = W$, we say $\mathcal{L}(V) := \mathcal{L}(V, V)$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c5-3">
+  <div class="card-head">
+    <span class="rem-num">REM 2.2</span>
+    <span class="rem-title">선형사상은 영벡터와 역원을 보존한다 <em>Linear Maps Preserve Zero and Additive Inverses</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T \in \mathcal{L}(V, W)$라 하자. 그러면</p>
+        <p><strong>(1)</strong> $T(0_V) = 0_W$ &nbsp;($T(0) = 0$)</p>
+        <p><strong>(2)</strong> 모든 $v \in V$에 대하여 $T(-v) = -T(v)$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(1):</strong> 임의의 $v \in V$를 고정하자. 그러면</p>
+        <div class="math-display">$$T(0_V) \overset{\text{명제 1.17(1)}}{=} T(0 \cdot_V v) \overset{\text{정의 2.1}}{=} 0 \cdot_W T(v) \overset{\text{명제 1.17(1)}}{=} 0_W.$$</div>
+        <p><span class="part-end">▨</span></p>
+        <p><strong>(2):</strong> 모든 $v \in V$에 대하여</p>
+        <div class="math-display">$$T(-v) \overset{\text{명제 1.17(2)}}{=} T((-1) \cdot_V v) \overset{\text{정의 2.1}}{=} (-1) \cdot_W T(v) \overset{\text{명제 1.17(2)}}{=} -T(v).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$T \in \mathcal{L}(V, W)$. Then</p>
+        <p><strong>(1)</strong> $T(0_V) = 0_W$ &nbsp;($T(0) = 0$)</p>
+        <p><strong>(2)</strong> $T(-v) = -T(v)$ $\forall v \in V$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(1):</strong> Fix any $v \in V$. Then</p>
+        <div class="math-display">$$T(0_V) \overset{\text{Prop 1.17(1)}}{=} T(0 \cdot_V v) \overset{\text{Def 2.1}}{=} 0 \cdot_W T(v) \overset{\text{Prop 1.17(1)}}{=} 0_W.$$</div>
+        <p><span class="part-end">▨</span></p>
+        <p><strong>(2):</strong> $\forall v \in V$,</p>
+        <div class="math-display">$$T(-v) \overset{\text{Prop 1.17(2)}}{=} T((-1) \cdot_V v) \overset{\text{Def 2.1}}{=} (-1) \cdot_W T(v) \overset{\text{Prop 1.17(2)}}{=} -T(v).$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 12 · p.6–7 ═══════════ -->
+
+<div class="card exam-card" id="c5-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.3 (1)</span>
+    <span class="exam-title">ℝ²에서 π/2 회전 <em>Rotation by π/2 in ℝ²</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $\mathbb{R}^2$에서 반시계 방향으로 $\frac{\pi}{2}$만큼의 회전은 다음과 같이 정의된다.</p>
+        <div class="math-display">$$\begin{aligned} R : \mathbb{R}^2 &amp;\longrightarrow \mathbb{R}^2 \\ \begin{bmatrix} x \\ y \end{bmatrix} &amp;\longmapsto \begin{bmatrix} -y \\ x \end{bmatrix} \end{aligned}$$</div>
+        <p class="fig-note">[그림: 원점을 지나는 기울기 $\frac{y}{x}$인 빨간 직선 위의 점 $(x, y)$와, 기울기 $-\frac{x}{y}$인 파란 직선 위의 상 $(-y, x)$. 두 직선은 원점에서 직각으로 만나고, 가로·세로 길이 $x$, $y$가 각각 표시되어 있다.]</p>
+        <p>이것은 선형사상이다.</p>
+        <p>증명: 다음 수업에서!</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>강의노트의 증명은 다음 수업으로 미뤄졌으므로 자체 증명을 둔다.</em></p>
+        <p>$v_1 = \begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$, $v_2 = \begin{bmatrix} x_2 \\ y_2 \end{bmatrix} \in \mathbb{R}^2$, $c \in \mathbb{R}$이라 하자. $\mathbb{R}^2$의 덧셈과 스칼라곱은 좌표별로 정의되므로</p>
+        <div class="math-display">$$R(v_1 + v_2) = R\left(\begin{bmatrix} x_1 + x_2 \\ y_1 + y_2 \end{bmatrix}\right) = \begin{bmatrix} -(y_1 + y_2) \\ x_1 + x_2 \end{bmatrix} = \begin{bmatrix} -y_1 \\ x_1 \end{bmatrix} + \begin{bmatrix} -y_2 \\ x_2 \end{bmatrix} = R(v_1) + R(v_2),$$</div>
+        <div class="math-display">$$R(c v_1) = R\left(\begin{bmatrix} c x_1 \\ c y_1 \end{bmatrix}\right) = \begin{bmatrix} -c y_1 \\ c x_1 \end{bmatrix} = c \begin{bmatrix} -y_1 \\ x_1 \end{bmatrix} = c\, R(v_1).$$</div>
+        <p>따라서 $R$은 정의 2.1의 (1), (2)를 만족하므로 $R \in \mathcal{L}(\mathbb{R}^2)$이다.</p>
+        <p>(그림의 뜻) $(x, y)$와 $(-y, x)$는 원점으로부터의 거리가 $\sqrt{x^2 + y^2}$로 같고, $x, y \neq 0$이면 두 직선의 기울기의 곱이 $\frac{y}{x} \cdot \left(-\frac{x}{y}\right) = -1$이므로 서로 수직이다. 또 $R(e_1) = e_2$, $R(e_2) = -e_1$이므로 회전 방향은 반시계 방향이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Rotation by $\frac{\pi}{2}$ CCW in $\mathbb{R}^2$ is def by</p>
+        <div class="math-display">$$\begin{aligned} R : \mathbb{R}^2 &amp;\longrightarrow \mathbb{R}^2 \\ \begin{bmatrix} x \\ y \end{bmatrix} &amp;\longmapsto \begin{bmatrix} -y \\ x \end{bmatrix} \end{aligned}$$</div>
+        <p class="fig-note">[Figure: the point $(x, y)$ on a red line through the origin of slope $\frac{y}{x}$, and its image $(-y, x)$ on a blue line of slope $-\frac{x}{y}$; the two lines meet at a right angle at the origin, with the horizontal and vertical lengths $x$, $y$ marked]</p>
+        <p>This is a lin map.</p>
+        <p>Pf: Next Class!</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>The proof in the notes is deferred to the next class, so we give our own.</em></p>
+        <p>Let $v_1 = \begin{bmatrix} x_1 \\ y_1 \end{bmatrix}$, $v_2 = \begin{bmatrix} x_2 \\ y_2 \end{bmatrix} \in \mathbb{R}^2$ and $c \in \mathbb{R}$. Since addition and scalar multiplication on $\mathbb{R}^2$ are coordinate-wise,</p>
+        <div class="math-display">$$R(v_1 + v_2) = R\left(\begin{bmatrix} x_1 + x_2 \\ y_1 + y_2 \end{bmatrix}\right) = \begin{bmatrix} -(y_1 + y_2) \\ x_1 + x_2 \end{bmatrix} = \begin{bmatrix} -y_1 \\ x_1 \end{bmatrix} + \begin{bmatrix} -y_2 \\ x_2 \end{bmatrix} = R(v_1) + R(v_2),$$</div>
+        <div class="math-display">$$R(c v_1) = R\left(\begin{bmatrix} c x_1 \\ c y_1 \end{bmatrix}\right) = \begin{bmatrix} -c y_1 \\ c x_1 \end{bmatrix} = c \begin{bmatrix} -y_1 \\ x_1 \end{bmatrix} = c\, R(v_1).$$</div>
+        <p>So $R$ satisfies (1) and (2) of Def 2.1, i.e., $R \in \mathcal{L}(\mathbb{R}^2)$.</p>
+        <p>(Meaning of the figure) $(x, y)$ and $(-y, x)$ have the same distance $\sqrt{x^2 + y^2}$ from the origin, and for $x, y \neq 0$ the slopes multiply to $\frac{y}{x} \cdot \left(-\frac{x}{y}\right) = -1$, so the two lines are perpendicular. Also $R(e_1) = e_2$ and $R(e_2) = -e_1$, so the rotation is counterclockwise.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note05-99">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>Lecture 12까지 반영했다. 마지막 내용은 예시 2.3(1)이고, 강의노트의 증명은 다음 강의에서 다룬다. Lecture 12 앞부분(라그랑주 보간)은 <a href="ch04.html#c4-28">4단원</a>에 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Updated through Lecture 12, ending with Example 2.3(1); its proof in the notes comes next class. The first part of Lecture 12 (Lagrange interpolation) is in <a href="ch04.html#c4-28">Unit 04</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="quiz1.html">퀴즈 복습·기출</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

@@ -5,24 +5,26 @@
   성적: 출석 10 / 퀴즈 20 (5·13주차 목요일) / 중간 35 (8주차 화) / 기말 35 (16주차 화). **답안은 영어로만(다른 언어 0점).**
   진도: 1–4주 §1 Vector Spaces → 5–7주 §2(1) 선형변환 → 8주 중간 → 9–10주 §2(2) 행렬표현 → 11–13주 §3 기본행연산·연립방정식 → 14–15주 §4 행렬식.
 - `Course Intro.pdf` (5쪽) = Lecture 1 pp.1–5 와 동일 내용.
-- `Lecture N on 221 F26.pdf` (N=1..9) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨. 9는 10/7에 추가 반영.
-  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6 · L9 6쪽.
-- `Unit 1.x of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽; 강의노트와 같은 손글씨).
-  강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음.
+- `Lecture N on 221 F26.pdf` (N=1..9, 12) — **손글씨 태블릿 노트**(텍스트 추출 불가 → Read 도구로 시각 전사). 1–5는 9/17, 6–8은 10/1에 Desktop에 추가됨. 9는 10/7, 12는 10/15에 추가(반영 10/19). **Lecture 10–11 파일은 없음** — L12 Last Time이 L9 복습이고 번호가 Ex 1.61 → Def 1.62로 이어지므로 빠진 내용 없음.
+  분량: L1 6 · L2 8(p8 빈 쪽) · L3 8 · L4 6 · L5 7 · L6 8 · L7 6 · L8 6 · L9 6 · L12 7쪽(p7은 위쪽만).
+- `Unit 1.x / 2.1 of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽, 2.1 4쪽(p4 빈 쪽); 강의노트와 같은 손글씨).
+  강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음. Unit 2.1은 L12 pp.4–7과 같고 Ex 2.3(1)의 "Pf:" 뒤가 비어 있음(L12는 "Pf: Next Class!").
 
 **번호 체계:** 강의노트가 전역 번호(Def 1.1 … Ex 1.61)를 쓴다 → 카드 배지 = 노트의 라벨·번호 그대로 (`DEF 1.9`, `THM 1.20`, `PROP 1.28`, `LEM 1.15`, `COR 1.16`, `REM 1.10`, `NOTE 1.5`, `NOTATION 1.7`, `EXAM 1.8`(Ex = Example), `EX 1.27`(Exercise)). 번호 없는 항목은 유형 배지만(DEF/REM/NOTE/Q/RECALL/CLAIM/EXAM/EX). 카드 id는 자체 순번 `c{단원}-{순번}`, 서술 단락은 note-card `note{단원2자리}-{순번}`(목차 제외).
 **규칙 요약:** 각 강의 첫머리 "Last Time" 복습은 카드로 만들지 않음(새 내용이 있을 때만 RECALL 카드). 손그림은 `p.fig-note` 한 줄 설명. 증명 중간 끝 표시 ▨ = `span.part-end`. 노트에 증명이 없는 진술("Pf: Exercise", "See FIS", "Unit notes", "Math-Major Only", "Pf Idea")은 자체 증명(마커 → 증명 토글; 노트 증명이 이미 있으면 "보충 증명" 토글). en = verbatim(오타 포함), ko = 바른 뜻.
 **퀴즈 복습·기출:** `la1/quiz1.html` — Lecture 1–9 개념 복습·연습 13세트와 Fall 2025 Quiz 1·2 기출 4문항(소문항별 5블록). 영어 답안·한국어 해설, 원본 PDF 링크. MathJax 4.1.3.
-**진행 상태 (2026-10-07):** Lecture 9까지 반영. ch04에 Def 1.56–Ex 1.61, Ex 1.51 재방문 및 질문 추가(환경 27, 한·영 증명 토글 각각 17). 구조·수식·토글 검증 완료. 기존 10/1 기록: 4단원 빌드·번역·자체 증명(마커 0)·Opus 검증 4/4 완료. 인벤토리의 "markers? yes" 표기는 빌드 시점 기록 — 현재는 모두 증명 토글/보충 증명으로 채워짐. la1 전 페이지 MathJax 4.1.3.
-**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99`의 강의 범위 안내를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 새 단원 파일은 원본에서 새 절이 시작되는지 확인한 뒤 생성한다. Lecture 9는 전부 §1.4의 후속 내용이다.
+**진행 상태 (2026-10-19):** Lecture 12까지 반영. pp.1–4 → ch04 끝 c4-28–31(Def 1.62–Ex 1.65, 라그랑주 보간; ch04 환경 31, 한·영 토글 각 23), pp.4–7 → 새 ch05(Unit 2 도입·§2.1 시작; 환경 4, 토글 각 3). 2026-10-15 1차 작업(pickerel 워크트리, 미커밋)이 워크트리와 함께 소실되어 10/19 원본에서 다시 작업함.
+**이전 상태 (2026-10-07):** Lecture 9까지 반영. ch04에 Def 1.56–Ex 1.61, Ex 1.51 재방문 및 질문 추가(환경 27, 한·영 증명 토글 각각 17). 구조·수식·토글 검증 완료. 기존 10/1 기록: 4단원 빌드·번역·자체 증명(마커 0)·Opus 검증 4/4 완료. 인벤토리의 "markers? yes" 표기는 빌드 시점 기록 — 현재는 모두 증명 토글/보충 증명으로 채워짐. la1 전 페이지 MathJax 4.1.3.
+**갱신 절차:** 새 Lecture PDF → `la1/src/` 복사 → 해당 단원 파일 끝(마지막 note 앞)에 카드 append(ch04는 `note04-99`의 강의 범위 안내를 갱신) → 번역 → 자체 증명 → 검증 → 이 인벤토리·la1/index 카드 수·홈 칩 갱신. 새 단원 파일은 원본에서 새 절이 시작되는지 확인한 뒤 생성한다. Lecture 9는 전부 §1.4의 후속 내용이다. Lecture 12는 p.4 중간에서 Unit 2로 넘어가므로 ch04(§1.4 응용)와 ch05(Unit 2 도입·§2.1)로 나눴다. 다음 강의는 ch05 끝(`note05-99` 앞)에 이어 붙이고, Ex 2.3(1)의 원문 증명이 오면 en "Pf: Next Class!"와 자체 증명 토글을 원문 전사로 바꾼다.
 
-## 전체 구조 (2026-10-07)
+## 전체 구조 (2026-10-19)
 | 단원 | 제목 | 소스 |
 |---|---|---|
 | ch01 | 1.1 벡터공간으로서의 ℝⁿ | Lecture 1 (강의 소개 포함) · Lecture 2 · Lecture 3 p.2 |
 | ch02 | 1.2 벡터공간과 부분공간 | Lecture 3 pp.2–8 · Lecture 4 · Lecture 5 pp.1–6 |
 | ch03 | 1.3 일차결합, 생성, 일차독립 | Lecture 5 pp.6–7 · Lecture 6 · Lecture 7 pp.1–4 |
-| ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 · Lecture 9 |
+| ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 · Lecture 9 · Lecture 12 pp.1–4 |
+| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | Lecture 12 pp.4–7 (Unit 2 도입 포함) |
 
 ## ERRATA (원문 오타·결함 — en verbatim 유지, ko는 바른 뜻 / 필요 시 증명에서 역주)
 1. L2 p2 Def 1.2: "ℝ³ := {(a,b,c) : a,b,c ∈ ℝ³}" → ∈ ℝ.
@@ -43,6 +45,8 @@
 16. L2 p6 Pf Idea of Prop 1.6 (Unit 1.1 노트 p7도 동일): "satisties" → satisfies (철자; en verbatim).
 17. L4 p2 Prop 1.17(2) 괄호: "(so a = −1 ⇒(VS5) −v = (−1)·v)" — 바로 대입되는 것은 a = 1(즉 −a = −1). ko는 "−a = −1, 즉 a = 1"로 (확신 중간).
 18. L4 p2 Prop 1.17(3) 증명: 공통항 a·0_V가 왼쪽에 있는데 소거법칙(Lem 1.15)은 오른쪽 공통항을 지움 → (VS 1) 선행 필요. ch02 보충 증명에서 보완.
+19. L12 p3 Cor 1.64 유일성 증명: "basis by Prop 1.62" → Prop 1.63 (1.62는 정의). ch04 보충 증명에 명시.
+20. L12 p2 Prop 1.63 진술: t_0,…,t_n이 "distinct"라는 가정 생략(Def 1.62에서 상속). 증명의 Cor 1.59(2) 적용에는 f_i들이 서로 다르다는 점(★에서 따라 나옴)도 필요 → ch04 보충 증명.
 
 ## 챕터별 인벤토리 (빌드 시점 기록)
 
@@ -369,6 +373,44 @@ Source: `Lecture 9 on 221 F26.pdf`, 6 pages. p.1 Last Time / Today는 중복 복
 - Ex 1.61의 나열식은 작은 n에서 항이 겹쳐 보일 수 있다. a₀=aₙ=0을 쓴 통일된 전개와 n=1의 빈 기저를 보충 증명으로 처리했다. W가 진부분공간인 이유(e₁∉W)도 명시했다.
 - 원문의 색상은 생략하고 수학적 곁말은 괄호로 보존. Cor 1.59의 벤 다이어그램은 fig-note로 설명.
 
+
+### Lecture 12 반영 (2026-10-19) — la1/ch04.html · la1/ch05.html
+
+Source: `Lecture 12 on 221 F26.pdf`, 7 pages (p.7은 위쪽만). p.1 Last Time(차원 정의·BET·Thm 1.60 복습)과 Today 안내는 새 내용이 없어 제외. 판독 보조로 `Unit 2.1 … Notes at KU.pdf`(L12 pp.4–7과 동일)를 대조했다.
+
+| id | 배지 | 쪽 | 내용 | 증명 |
+|---|---|---|---|---|
+| (section) | — | 1 | ch04 section-title "Application: Lagrange Interpolation Formula · 응용: 라그랑주 보간 공식" | — |
+| note04-4 | NOTE | 1–2 | Motivation(서로 다른 t_i의 자료점을 지나는 다항식) + 그림 + Strategy(ℝ[x]≤n의 적당한 기저의 일차결합) | — |
+| c4-28 | DEF 1.62 | 2 | 라그랑주 다항식 f_i = ∏_{j≠i}(x−t_j)/(t_i−t_j), n차, 관찰 f_i(t_j) =(★) δ_ij | 자체 증명(잘 정의됨·차수·★) |
+| c4-29 | PROP 1.63 | 2 | 라그랑주 다항식은 ℝ[x]≤n의 기저 | 원문 + 보충(대입의 근거, 서로 다름·원소 수) |
+| c4-30 | COR 1.64 | 3 | 라그랑주 보간 공식(LIF): ∃! p ∈ ℝ[x]≤n, p(t_i) = y_i | 원문(존재 ▨ / 유일 □) + 보충(Prop 1.62→1.63, 계산 전개, 차수) |
+| c4-31 | EXAM 1.65 | 3–4 | (1,8),(2,5),(3,−4)를 지나는 다항식 = −3x²+6x+5 | 원문 Sol 본문 + 보충(검산, 차수 제한 없는 경우) |
+| note04-99 | NOTE | — | Lecture 12 pp.1–4까지, 나머지는 ch05 안내 | — |
+| (section) | — | 4 | ch05 section-title "Unit 2: Linear Transformations · 2단원: 선형변환" | — |
+| note05-1 | NOTE | 4 | This unit is about "special" fcns btwn v.s. | — |
+| note05-2 | NOTE | 4–5 | Motivation: 포토샵 연산(π/2 회전·층밀림 그림), 원점·직선·평행사변형 보존 → 덧셈·스칼라곱 보존 | — |
+| c5-1 | DEF | 5 | Set Theory Warm-Up: 정의역·공역, im = range(FIS) = f(X), 역상 f⁻¹(Z), 전단사일 때 역함수에 의한 상과 일치 | 자체 증명(괄호 안 주장) |
+| (section) | — | 5 | "§2.1 Linear Maps: ker, im, and isom · 2.1 선형사상: 핵, 상, 동형사상" | — |
+| note05-3 | NOTE | 5 | As in Motivation, + & · 를 보존하는 함수 | — |
+| c5-2 | DEF 2.1 | 6 | 선형변환(lin map/homomorphism), (1)(2), 𝓛(V,W), 𝓛(V) | — |
+| c5-3 | REM 2.2 | 6 | T(0_V) = 0_W, T(−v) = −T(v) | 원문(▨/□) |
+| c5-4 | EXAM 2.3 (1) | 6–7 | R:(x,y)↦(−y,x) 반시계 π/2 회전은 선형사상; "Pf: Next Class!" | 자체 증명(+그림의 뜻) |
+| note05-99 | NOTE | — | Lecture 12까지 반영, Ex 2.3(1) 원문 증명은 다음 강의 | — |
+
+Totals: ch04 31 TOC cards · note 4 · ko/en 토글 각 23. ch05 4 TOC cards · note 4 · 토글 각 3.
+
+#### Arithmetic check (Ex 1.65)
+- f_0 = (x−2)(x−3)/((1−2)(1−3)) = ½(x²−5x+6), f_1 = (x−1)(x−3)/((2−1)(2−3)) = −(x²−4x+3), f_2 = (x−1)(x−2)/((3−1)(3−2)) = ½(x²−3x+2) ✓
+- 8f_0+5f_1−4f_2 = (4−5−2)x² + (−20+20+6)x + (24−15−4) = −3x²+6x+5 ✓; p(1)=8, p(2)=5, p(3)=−4 ✓
+
+#### Transcription choices
+- 보라색 (★)(오각별)는 `(\bigstar)`, 파란 "x = t_j"는 `\overset{x=t_j}{\Longrightarrow}`, 파란 "∈ ℝ[x]≤n"은 "deg n poly"의 underbrace 첨자로.
+- Set Theory Warm-Up의 빨강 "domain"/보라 "codomain"은 X, Y 아래 underset, 갈색 "(FIS)"는 range 위 overset, 빨간 괄호 설명(전단사일 때)은 괄호 문단으로 보존.
+- Def 2.1·Rmk 2.2의 주황 괄호식(T(v_1+v_2) = T(v_1)+T(v_2) 등)은 괄호로 제자리에, 파란 근거 표기(Prop 1.17(1), Def 2.1)는 등호 위 overset.
+- 버린 순수 곁말: dimension, f.d., BET(p.1 Last Time), assoc, WTS, eqn, LIF, lin/transf/hom/fcn, im, preimg. 동그라미("lin map")·밑줄·색은 미반영.
+- 그림 5개(자료점 곡선, 회전, 층밀림, 평행사변형 소품, Ex 2.3(1) 기울기 그림)는 fig-note 설명줄.
+- Lecture 12 1차 작업(2026-10-15, pickerel 워크트리)은 커밋 전에 워크트리와 함께 사라졌다. 이 표는 10/19 원본에서 새로 작업한 결과다.
 
 ### 과거 퀴즈 반영 (2026-10-07)
 
