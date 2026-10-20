@@ -44,7 +44,7 @@ const SUBJECTS = {
   // 단독 인쇄본: 예상문제 페이지만. 문제를 먼저 싣고 풀이는 뒤 단원에 모은다(문항마다 풀이 쪽번호 표시).
   'la2-practice': { dir: 'la2', ko: '선형대수학 2 중간고사 예상문제', en: 'Linear Algebra II — Midterm Practice', out: '선형대수2-예상문제.pdf',
          units: [{ file: 'practice.html', titleKo: '문제', titleEn: 'Problems' }], solutionsAtEnd: true,
-         desc: '2025 기출 형식 · 참·거짓 15문항 · 서술형 12문항<br>문제 다음에 풀이를 모아 실음',
+         desc: '2025 기출 형식 · 참·거짓 60문항 · 서술형 12문항<br>문제 다음에 풀이를 모아 실음',
          note: '한국어만 실었습니다. 풀이는 뒤쪽 「풀이」 단원에 모았고, 각 문항 끝에 해당 풀이의 쪽번호를 적어 두었습니다.' },
 };
 
