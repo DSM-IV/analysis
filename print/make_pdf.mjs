@@ -4,6 +4,7 @@
 //   cd print && npm install            # puppeteer-core (설치된 Google Chrome 사용)
 //   node print/make_pdf.mjs            # 4과목 전부
 //   node print/make_pdf.mjs la2 la1    # 일부만
+//   node print/make_pdf.mjs la2-practice   # 선형대수2 예상문제만 (문제 → 풀이 순)
 //
 // 각 과목의 chNN.html(+부록)을 한 문서로 합쳐 한국어 패널만 남기고 증명·풀이를 펼친 뒤
 // MathJax 조판이 끝나면 A4 PDF로 저장한다. 목차 쪽번호는 2패스(pdftotext로 단원 마커 탐지)로 채운다.
@@ -38,8 +39,13 @@ const SUBJECTS = {
   la1: { ko: '선형대수학 1', en: 'Linear Algebra I', out: '선형대수1.pdf',
          appendix: [{ file: 'quiz1.html', bilingual: true }, { file: 'midterm.html', bilingual: true }] },
   la2: { ko: '선형대수학 2', en: 'Linear Algebra II', out: '선형대수2.pdf',
-         appendix: [{ file: 'midterm.html' }] },
+         appendix: [{ file: 'midterm.html' }, { file: 'practice.html' }] },
   settheory: { ko: '집합론', en: 'Set Theory', out: '집합론.pdf' },
+  // 단독 인쇄본: 예상문제 페이지만. 문제를 먼저 싣고 풀이는 뒤 단원에 모은다(문항마다 풀이 쪽번호 표시).
+  'la2-practice': { dir: 'la2', ko: '선형대수학 2 중간고사 예상문제', en: 'Linear Algebra II — Midterm Practice', out: '선형대수2-예상문제.pdf',
+         units: [{ file: 'practice.html', titleKo: '문제', titleEn: 'Problems' }], solutionsAtEnd: true,
+         desc: '2025 기출 형식 · 참·거짓 15문항 · 서술형 12문항<br>문제 다음에 풀이를 모아 실음',
+         note: '한국어만 실었습니다. 풀이는 뒤쪽 「풀이」 단원에 모았고, 각 문항 끝에 해당 풀이의 쪽번호를 적어 두었습니다.' },
 };
 
 // ── 원본 페이지 읽기 ──────────────────────────────────────────────
@@ -68,18 +74,27 @@ function readUnit(subject, file, { appendix = false, bilingual = false } = {}) {
 
 function loadSubject(subject) {
   const conf = SUBJECTS[subject];
-  const chapters = fs.readdirSync(path.join(ROOT, subject))
-    .filter(f => /^ch\d\d\.html$/.test(f)).sort()
-    .map(f => readUnit(subject, f));
-  const appendix = (conf.appendix || []).map(a => readUnit(subject, a.file, { appendix: true, bilingual: !!a.bilingual }));
+  const dir = conf.dir || subject;
+  const chapters = conf.units
+    ? conf.units.map(({ file, ...over }) => ({ ...readUnit(dir, file), ...over }))
+    : fs.readdirSync(path.join(ROOT, dir))
+      .filter(f => /^ch\d\d\.html$/.test(f)).sort()
+      .map(f => readUnit(dir, f));
+  const appendix = (conf.appendix || []).map(a => readUnit(dir, a.file, { appendix: true, bilingual: !!a.bilingual }));
   const units = [...chapters, ...appendix];
+  if (conf.solutionsAtEnd) {
+    // 빈 「풀이」 단원: prepDom이 앞 단원의 풀이를 여기로 옮긴다
+    const src = units[0];
+    units.push({ ...src, key: `${src.key}sol`, file: '', h1: '풀이<span>Solutions</span>', titleKo: '풀이', titleEn: 'Solutions',
+                 body: '', cards: 0, koProofs: 0, solutionsFrom: src.key });
+  }
   const warnings = [];
   const first = units[0];
   for (const u of units) {
     if (u.mjConfig !== first.mjConfig || u.mjSrc !== first.mjSrc) warnings.push(`${u.file}: MathJax 설정이 ${first.file}와 다름 (${first.file} 기준으로 조판)`);
   }
   if (!first.mjConfig || !first.mjSrc) throw new Error(`${subject}/${first.file}: MathJax 설정을 찾지 못함`);
-  return { conf, units, warnings };
+  return { conf, dir, units, warnings };
 }
 
 function gitInfo(subject) {
@@ -96,7 +111,7 @@ function today() {
 }
 
 // ── 합본 HTML ─────────────────────────────────────────────────────
-function buildHtml(subject, { conf, units }) {
+function buildHtml(dir, { conf, units }) {
   const first = units[0];
   const nChapters = units.filter(u => !u.appendix).length;
   const appendixNames = units.filter(u => u.appendix).map(u => u.titleKo);
@@ -113,15 +128,16 @@ function buildHtml(subject, { conf, units }) {
 
   const sections = units.map(u => {
     const cls = ['print-chapter', u.appendix && 'print-appendix', u.bilingual && 'print-bilingual'].filter(Boolean).join(' ');
-    return `<section class="${cls}" id="${u.key}">
+    const sol = u.solutionsFrom ? ` data-solutions-from="${u.solutionsFrom}"` : '';
+    return `<section class="${cls}" id="${u.key}"${sol}>
 <span class="pdf-mark">zzpdfmark${u.key}zz</span>
 <div class="print-ch-head"><p class="subtitle">${u.subtitle}</p><h1>${u.h1}</h1></div>
 ${u.body}
 </section>`;
   }).join('\n');
 
-  const desc = [`강의 단원 ${nChapters}개`, ...appendixNames.map(n => `부록 · ${n}`)].join('<br>');
-  const bilingualNote = units.some(u => u.bilingual)
+  const desc = conf.desc ?? [`강의 단원 ${nChapters}개`, ...appendixNames.map(n => `부록 · ${n}`)].join('<br>');
+  const bilingualNote = conf.note ? `<p class="print-toc-note">${conf.note}</p>` : units.some(u => u.bilingual)
     ? `<p class="print-toc-note">한국어 번역만 싣고 증명·풀이는 모두 펼쳐 두었습니다. 단, ${units.filter(u => u.bilingual).map(u => u.titleKo).join(', ')}은 영어 답안 문장이 학습 대상이라 원래대로 영어를 함께 실었습니다.</p>`
     : `<p class="print-toc-note">한국어 번역만 싣고 증명·풀이는 모두 펼쳐 두었습니다.</p>`;
 
@@ -138,7 +154,7 @@ ${first.mjConfig}
 </script>
 <script id="MathJax-script" async src="${first.mjSrc}"></script>
 <link rel="stylesheet" href="${PRETENDARD}">
-<link rel="stylesheet" href="${pathToFileURL(path.join(ROOT, subject, 'style.css')).href}">
+<link rel="stylesheet" href="${pathToFileURL(path.join(ROOT, dir, 'style.css')).href}">
 <link rel="stylesheet" href="${pathToFileURL(path.join(HERE, 'print.css')).href}">
 </head>
 <body>
@@ -149,7 +165,7 @@ ${first.mjConfig}
   <div class="cover-en">${conf.en}</div>
   <div class="cover-rule"></div>
   <p class="cover-desc">${desc}</p>
-  <p class="cover-meta">${today()} 생성 · ${gitInfo(subject)}</p>
+  <p class="cover-meta">${today()} 생성 · ${gitInfo(dir)}</p>
 </div>
 <div class="print-toc-page">
   <h1>목차</h1>
@@ -167,9 +183,43 @@ ${sections}
 
 // ── 브라우저 안에서 실행: 화면용 요소 정리 (조판 전) ────────────────────
 function prepDom({ site, subject }) {
-  const stats = { ads: 0, enPanels: 0, toggles: 0, details: 0, brokenLinks: [] };
+  const stats = { ads: 0, enPanels: 0, toggles: 0, details: 0, solutions: 0, brokenLinks: [] };
   const sections = [...document.querySelectorAll('section.print-chapter')];
   const keys = new Set(sections.map(s => s.id));
+
+  // 「풀이」 단원: 원래 단원의 카드마다 한국어 풀이(토글+내용)를 옮겨 오고, 문항 끝에 풀이 쪽번호 자리를 남긴다.
+  // 절 제목은 풀이가 있는 첫 카드 앞에 복제한다. 쪽번호는 카드 마커로 2패스에서 채운다.
+  for (const solSec of sections.filter(s => s.dataset.solutionsFrom)) {
+    const src = document.getElementById(solSec.dataset.solutionsFrom);
+    let pendingTitle = null;
+    for (const card of [...src.children]) {
+      if (card.classList.contains('section-title')) { pendingTitle = card; continue; }
+      const proof = card.classList.contains('card') && card.querySelector('.ko-panel .proof-content');
+      if (!proof) continue;
+      if (pendingTitle) { solSec.appendChild(pendingTitle.cloneNode(true)); pendingTitle = null; }
+      const mark = `sol${card.id.replace(/\W/g, '')}`;
+      const sol = document.createElement('div');
+      sol.className = `${card.className} sol-card`;
+      sol.id = `sol-${card.id}`;
+      sol.innerHTML = `<span class="pdf-mark">zzpdfmark${mark}zz</span>`;
+      sol.appendChild(card.querySelector('.card-head').cloneNode(true));
+      const body = document.createElement('div');
+      body.className = 'card-body';
+      body.innerHTML = '<div class="ko-panel"></div>';
+      const btn = proof.previousElementSibling;
+      if (btn && btn.matches('button.proof-toggle')) body.firstChild.appendChild(btn);
+      body.firstChild.appendChild(proof);
+      sol.appendChild(body);
+      solSec.appendChild(sol);
+      // 풀이 안의 #링크는 문제 단원의 카드를 가리키게 한다
+      proof.querySelectorAll('a[href^="#"]').forEach(a => a.setAttribute('href', `${src.id}.html${a.getAttribute('href')}`));
+      const link = document.createElement('p');
+      link.className = 'print-sol-link';
+      link.innerHTML = `<a href="${solSec.id}.html#sol-${card.id}">풀이 → <span class="sol-page" data-ch="${mark}"></span>쪽</a>`;
+      card.querySelector('.ko-panel').appendChild(link);
+      stats.solutions++;
+    }
+  }
 
   for (const sec of sections) {
     const ch = sec.id;
@@ -281,7 +331,7 @@ function fitAndCheck({ contentH, keepRatio, keepProofRatio }) {
     if (p.getBoundingClientRect().height < contentH * keepProofRatio) p.style.breakInside = 'avoid';
   });
 
-  out.cards = main.querySelectorAll('.card').length;
+  out.cards = main.querySelectorAll('.card:not(.sol-card)').length;
   out.koProofs = main.querySelectorAll('.proof-content').length;
   return out;
 }
@@ -320,10 +370,10 @@ function findChapterPages(pdfBuf, keys) {
 async function makeSubject(browser, subject) {
   const t0 = Date.now();
   const data = loadSubject(subject);
-  const { conf, units, warnings } = data;
+  const { conf, dir, units, warnings } = data;
   fs.mkdirSync(BUILD_DIR, { recursive: true });
   const htmlPath = path.join(BUILD_DIR, `${subject}.html`);
-  fs.writeFileSync(htmlPath, buildHtml(subject, data));
+  fs.writeFileSync(htmlPath, buildHtml(dir, data));
 
   const page = await browser.newPage();
   page.on('pageerror', e => warnings.push(`pageerror: ${e.message}`));
@@ -334,20 +384,23 @@ async function makeSubject(browser, subject) {
   // 조건식이 Promise를 돌려주면 puppeteer가 그 값을 기다리므로 boolean으로 바꿔 둔다
   await page.waitForFunction(() => !!(window.MathJax && MathJax.startup && MathJax.startup.promise), { timeout: 120000 });
 
-  const prep = await page.evaluate(prepDom, { site: SITE, subject });
+  const prep = await page.evaluate(prepDom, { site: SITE, subject: dir });
   await page.evaluate(async () => { await MathJax.startup.promise; await MathJax.typesetPromise(); });
   await page.waitForNetworkIdle({ idleTime: 1000, timeout: 120000 }).catch(() => warnings.push('네트워크 유휴 대기 시간 초과'));
   await page.evaluate(() => document.fonts.ready);
   const check = await page.evaluate(fitAndCheck, { contentH: CONTENT_H, keepRatio: KEEP_RATIO, keepProofRatio: KEEP_PROOF_RATIO });
 
-  // 1차: 단원 시작 쪽 찾기 → 목차 채우고 마커 제거 → 2차
+  // 1차: 단원 시작 쪽(과 풀이 카드 쪽) 찾기 → 목차·풀이 쪽번호 채우고 마커 제거 → 2차
   const keys = units.map(u => u.key);
+  const solKeys = await page.evaluate(() => [...document.querySelectorAll('.sol-page')].map(el => el.dataset.ch));
   const pass1 = await page.pdf(pdfOptions(conf));
-  const { found, pageCount: pages1 } = findChapterPages(pass1, keys);
+  const { found, pageCount: pages1 } = findChapterPages(pass1, [...keys, ...solKeys]);
   const missing = keys.filter(k => !found[k]);
   if (missing.length) warnings.push(`쪽번호를 못 찾은 단원: ${missing.join(', ')}`);
+  const missingSol = solKeys.filter(k => !found[k]);
+  if (missingSol.length) warnings.push(`쪽번호를 못 찾은 풀이: ${missingSol.join(', ')}`);
   await page.evaluate(found => {
-    document.querySelectorAll('.t-page').forEach(el => { el.textContent = found[el.dataset.ch] ?? ''; });
+    document.querySelectorAll('.t-page, .sol-page').forEach(el => { el.textContent = found[el.dataset.ch] ?? ''; });
     document.querySelectorAll('.pdf-mark').forEach(el => el.remove());
   }, found);
   const pdf = await page.pdf(pdfOptions(conf));
@@ -367,7 +420,8 @@ async function makeSubject(browser, subject) {
 
   console.log(`\n■ ${conf.ko} → ${path.relative(ROOT, outPath)}  (${pages2}쪽, ${((Date.now() - t0) / 1000).toFixed(0)}초)`);
   console.log(`  단원 시작 쪽: ${keys.map(k => `${k}=${found[k] ?? '?'}`).join(' ')}`);
-  console.log(`  카드 ${check.cards}/${srcCards} · 증명/풀이 ${check.koProofs}/${srcProofs} · 토글 ${prep.toggles} · 영어 패널 제거 ${prep.enPanels} · details ${prep.details} · 광고 ${prep.ads}`);
+  console.log(`  카드 ${check.cards}/${srcCards} · 증명/풀이 ${check.koProofs}/${srcProofs} · 토글 ${prep.toggles} · 영어 패널 제거 ${prep.enPanels} · details ${prep.details} · 광고 ${prep.ads}${prep.solutions ? ` · 뒤로 모은 풀이 ${prep.solutions}` : ''}`);
+  if (solKeys.length) console.log(`  풀이 쪽: ${solKeys.map(k => `${k.replace(/^sol/, '')}=${found[k] ?? '?'}`).join(' ')}`);
   console.log(`  수식 오류 ${check.merror.length} · 미조판 TeX ${check.rawTex.length} · 축소(display ${check.scaledDisplay}, inline ${check.scaledInline}) · 여전히 넘침 ${check.stillWide.length} · keep ${check.keep} · 책갈피 ${hasOutline ? '있음' : '없음'}`);
   const list = (label, arr) => { if (arr.length) console.log(`  ${label}:\n    ${arr.slice(0, 15).join('\n    ')}${arr.length > 15 ? `\n    … 외 ${arr.length - 15}건` : ''}`); };
   list('수식 오류', check.merror);
