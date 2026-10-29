@@ -16,6 +16,7 @@
 - `6.2 Linear Algebra Solution.pdf` — §6.2 추천 연습문제 풀이 5쪽 (문항: 1(a)–(g), 2(f)(g)(i), 4, 9, 10, 16(a)(b)) — LaTeX 문서. §6.2 강의 노트는 아직 없음(ch06은 연습문제 선공개)
 - `2025 가을 Midterm Exam (Linear Algebra 2).pdf` — **2025년 가을 중간고사 기출**(2025-10-20 시행, 4쪽·5문항·300점, 영문, 공식 해설 없음; Desktop 2026-10-13 08:58 게시) → `la2/midterm.html`
 - `선형대수2_TF2.pdf` — **TF 분반 추가문제 2차**(LaTeX 1쪽, Desktop 2026-10-14 02:04 게시; 풀이 없음): Friedberg §5.4 #13·#21, §6.1 #17·#18, §6.2 #7·#11·#15(a) — 7문항 모두 기존 추천문제와 겹치지 않음 → 각 단원 연습문제 섹션에 번호 순으로 끼워 넣음(e4-13·e4-21 / e5-17·e5-18 / e6-7·e6-11·e6-15), src-ref 끝에 ` · TF2` 표기. 풀이는 자체 작성(2026-10-15)
+- `Section 6.3.pdf` — 38장 슬라이드 (영문, Desktop 원본 파일명 `Section 6.3-1.pdf`, 2026-10-29 15:28 게시; 강의일 표기 없음) → `la2/ch07.html` 신설
 - (사용 안 함) Desktop의 `2026 선대2 TF 분반.pdf` — TF 분반 강의실·학생 명단(개인정보) → 리포에 복사하지 않음
 
 **소스가 영문 슬라이드** → en-formal = verbatim 전사, ko-formal = 번역. 컨벤션은 `analysis2/`와 동일(analysis2/ch01.html 규약 주석) + 아래 la2 고유 규칙.
@@ -37,7 +38,7 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-10-15 현재)
+## 전체 구조 (2026-10-29 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
@@ -47,8 +48,9 @@
 | ch04 | 5.4 불변부분공간과 케일리-해밀턴 정리 | Lecture 6·7 (26장) + §5.4 풀이 + TF2 | 21 | 2 | 9 (추천 7 + TF2 2; + c4-8 자체 증명) |
 | ch05 | 6.1 내적과 노름 | Section 6.1 노트 (22장) + §6.1 풀이 + TF2 | 28 | 4 | 11 (추천 9 + TF2 2) |
 | ch06 | 6.2 그람-슈미트 과정과 직교여공간 | Section 6.2 노트 (28장) + §6.2 풀이 + TF2 | 33 (슬라이드 수록 EX #6·#13·#23 포함) | 3 | 9 (추천 6 + TF2 3) |
+| ch07 | 6.3 선형연산자의 수반 | Section 6.3 노트 (38장) | 34 (슬라이드 수록 EX §6.2 #23·§6.3 #24 포함) | 3 | — |
 | midterm | 2025 중간고사 기출 | 2025 Midterm Exam (4쪽) | — | 1 (notemt-1 시험 안내·채점 전략·대응표) | 5 (mt25-1~5, 자체 풀이) |
-| 계 | | | **170** | **17** | **48** (추천 41 + TF2 7; + ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **52**) |
+| 계 | | | **204** | **20** | **48** (추천 41 + TF2 7; + ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **52**) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -106,6 +108,15 @@
 52. **2025 중간고사 5(1)**: "$0$ and $\mu$ are eigenvalue of $A$" — $0$이 고유값이려면 $n \ge 2$ 필요($n=1$이면 $A=(uv)\ne0$, 유일한 고유값 $\mu$). 문법("eigenvalue" 단수)은 verbatim. en Note + ko 역주. (mt25-5)
 53. **2025 중간고사 1(5)**: $\langle A,B\rangle=\operatorname{tr}(AB)$는 $n=1$이면 $\mathbb{R}$의 표준내적(참) — 의도된 답은 거짓($n\ge2$, $A=E_{12}-E_{21}$에서 $\operatorname{tr}(A^2)=-2$). en Note + ko 역주. (mt25-1)
     기타(수정 없이 verbatim): p12·p14 "n-dimnsional" 오타 2곳, p17 "Let {v₁,…,v_k} is an orthonormal basis" 문법, p5 Corollary 2 증명 끝 ■ 없음(□로 닫음), p21 Example 10 끝 ◆ 기호는 옮기지 않음, p10·p11 노름 기호 깨짐("| | v₃ | |")은 $\|v_3\|$로 정규화, 슬라이드의 $0_V$는 사이트 표기 $O_V$로 정규화, p18은 Theorem 6.6 진술 재인쇄·p28은 (c) 재인쇄 → 한 번만 전사.
+
+54. **§6.3 p12 정리 6.9 선형성 증명**: $\overline{\langle T(v_i), c_1y_1+c_2y_2\rangle} = \overline{c_1}\langle T(v_i),y_1\rangle + \overline{c_2}\langle T(v_i),y_2\rangle$ — 가운데 식 전체의 켤레 누락(300 dpi 확인). 바른 식 $\overline{\overline{c_1}\langle T(v_i),y_1\rangle + \overline{c_2}\langle T(v_i),y_2\rangle}$, 최종 결과는 옳다. en verbatim + Note, ko 바른 식 + 역주. (c7-5)
+55. **§6.3 p31 Remark 1**: 평균 $t = (t_1+\cdots+t_m)/n$ — 자료가 $m$개이므로 분모 $m$. en verbatim + Note, ko 바른 식 + 역주. (c7-28)
+56. **§6.3 p33 이차 근사 오차**: $Ax_0-y$의 넷째 성분 $-0.05$ → $+0.05$ ($t=4$: $4+1.8+1.25=7.05$). $E=0.05$는 불변(잔차 합 0 = 열 $(1,1,1,1)$과 직교). en verbatim + Note, ko 바른 값 + 역주. (c7-29)
+57. §6.3 p38 Example 3: "Step 3."이 두 번 — 마지막은 Step 4. en verbatim + Note, ko 4단계 + 역주. (c7-34)
+58. §6.3 p34 Problem: "more than two solutions (and so infinitely many solutions)" → "more than one solution"(두 해가 있으면 이미 무한히 많다). en verbatim + Note, ko 바른 뜻 + 역주. (c7-30)
+59. **§6.3 p36 Lemma B 증명**: 연습문제 #12(선형연산자 $T:V\to V$)를 $m\times n$ 행렬 $A$($L_A:F^n\to F^m$, $m\ne n$ 가능)에 적용 — 보조정리 1($\langle Ax,y\rangle_m=\langle x,A^*y\rangle_n$)과 $F^m$의 표준기저로 같은 논증이 성립; 마지막 단계는 유한차원 $(W^\perp)^\perp=W$(§6.2 #13(c)) 사용. en Note + ko 역주(본문은 원문대로). (c7-32)
+    보충(오류 아님): c7-10 Exercise #24는 슬라이드가 (c)만 풂 → (a)·(b) 짧은 증명을 Note/역주로 보충; c7-23 Corollary($\operatorname{rank}A=n \Rightarrow A^*A$ 가역)는 증명 없음 → 보조정리 2로 한 줄 보충; c7-9(§6.2 #23 재수록)는 ch06 c6-32 풀이로 링크.
+    기타(수정 없이 verbatim): p37 "Furthermore, solution $v$ of $Ax=b$"("for any" 누락), p28 Step 3 "$E=\|Ax_0-y\|$"(p25 정의는 제곱 — 최소화는 동치), p27 "$\langle Ax, A^{**}x\rangle$" 첨자 $m$ 누락·"rank$(A* A)$" 별표 글꼴, Remark 번호가 p31에서 다시 1부터(배지 REM 1 두 개: c7-4·c7-28), 정리 6.11 진술에 유한차원 가정 없음(Remark 5가 보완). p19–21은 정리 6.11 진술 3회 인쇄·p37은 정리 6.13 재인쇄 → 한 번만 전사. "(♣) Problem"의 ♣·소제목의 ◎는 옮기지 않음. 사소한 논리 공백(Note 없음, 검증에서 확인): p26 보조정리 1 증명이 $n\times n$ 행렬용 정리 6.11 따름정리를 $y^*A$에 인용, p29 "invertible by Lemma 2"는 p27 따름정리, p35 "In particular, $s$ is the only solution in $N(A)^\perp$"는 증명 생략($v-s \in N(A)\cap N(A)^\perp=\{0\}$), p37 (2)는 $(AA^*)u=b$의 해 존재를 보이지 않음($s\in R(A^*)$이면 $s=A^*u$), p15 (ii)의 영벡터는 숫자 $0_V$로 인쇄 → $O_V$로 정규화.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -410,6 +421,49 @@ Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, RE
 | e6-11 | EX 6.2-11 | Friedberg §6.2 #11 · TF2 — AA* = I ⇔ 행이 ℂⁿ의 정규직교기저 | 증명 | (AA*)ᵢⱼ = ⟨rᵢ, rⱼ⟩; 열에 대해서도 동치(유니타리) |
 | e6-15 | EX 6.2-15 | Friedberg §6.2 #15 (a) · TF2 — 파르스발 항등식 | 증명 | (b)는 TF2에 없음 — 참고에서 좌표벡터 해석만 언급 |
 | e6-16 | EX 6.2-16 | Friedberg §6.2 #16 (a), (b) — 베셀 부등식과 등호 조건 | 증명 | |
+
+### ch07.html — 6.3 선형연산자의 수반 / §6.3 The Adjoint of a Linear Operator
+**소스: Section 6.3.pdf (38장, 2026-10-29 게시; 강의일 표기 없음).** 2026-10-29 신설. Opus 빌더 2개(p2–23 / p24–38)가 조각 파일에 en 전사, Sonnet 번역가 2개가 ko 번역, Opus(메인 루프)가 계획·기준값·검토. 카드 34(c7-1~c7-34) + note 3(note07-1 p2–4 도입 — 정리 A·B(§6.4 예고, 증명 없음)는 카드로 만들지 않고 노트 안에 둠 / note07-2 p5 하 / note07-3 p6). 슬라이드에 실린 Friedberg §6.2 #23(재수록, 진술만 → ch06 c6-32 풀이 링크)·§6.3 #24(슬라이드 Solution은 (c)만 → (a)(b) Note/역주 보충)는 강의 흐름 안의 ex-card(c7-9·c7-10). "Problem :"·"Problem Introduction :"·"Next Problem :"은 exam-card 배지 `PROB`, "Notation :"은 def-card 배지 `NOTATION`. 정리 6.9의 Remark 2(p10 중간)는 증명 뒤 별도 카드(c7-6), 정리 6.13 진술(p34)은 보조정리 A·B 뒤 p37 위치에 증명과 함께 한 번만(c7-33). Remark 번호가 p31에서 1로 다시 시작해 REM 1 배지가 둘(c7-4·c7-28). 그림 1개(p24 최소제곱 산점도)는 인라인 SVG로 양 패널에 복제. 표 2개(c7-3 정리 6.8/예 1 대조, c7-29 근사 비교). 이 단원 추천 연습문제(e7-*)는 아직 없음 — 풀이 PDF가 오면 연습문제 섹션 신설. ERRATA 54–59.
+
+| id | 유형·배지 | 슬라이드 | 내용 | src-ref |
+|---|---|---|---|---|
+| note07-1 | NOTE | p2–4 | 6.3절 도입 (정리 A·B 예고 포함) |  |
+| c7-1 | RECALL | p5 상 | 켤레전치행렬 / The Conjugate Transpose of a Matrix |  |
+| note07-2 | NOTE | p5 하 | 이 절의 목표 |  |
+| note07-3 | NOTE | p6 | 내적공간 위의 선형함수 |  |
+| c7-2 | THM 6.8 | p7 | 선형함수의 내적 표현 / Representing a Linear Function by an Inner Product — Proof toggle |  |
+| c7-3 | EXAM 1 | p8 | 정리 6.8의 벡터 $y$ 구하기 / Finding the Vector $y$ of Theorem 6.8 — 표(정리 6.8 / 예 1 대조) |  |
+| c7-4 | REM 1 | p9 | 수반연산자 만들기 / Constructing the Adjoint |  |
+| c7-5 | THM 6.9 | p10–12 | 수반연산자의 존재성과 유일성 / Existence and Uniqueness of the Adjoint — Proof toggle (존재성 p10 · 유일성 p11 · 선형성 p12) — Note/역주 |  |
+| c7-6 | REM 2 | p10 중 | 연산자의 수반 / The Adjoint of an Operator |  |
+| c7-7 | REM 3 | p13 | 내적 안에서 연산자 옮기기 / Moving an Operator across the Inner Product |  |
+| c7-8 | REM 4 | p14 | 무한차원 내적공간의 수반연산자 / Adjoints on Infinite-Dimensional Spaces |  |
+| c7-9 | EX 6.2-23 | p15 상 | 무한차원에서의 반례 (다시 보기) / An Infinite-Dimensional Counterexample (Revisited) — 진술만, Note(풀이는 ch06 c6-32) | Friedberg §6.2 #23 · 강의 슬라이드 p.15 |
+| c7-10 | EX 6.3-24 | p15 하–16 | 수반연산자가 없는 연산자 / An Operator with No Adjoint — Solution toggle(슬라이드 풀이) — Note/역주((a)(b) 보충) | Friedberg §6.3 #24 · 강의 슬라이드 p.15–16 |
+| c7-11 | THM 6.10 | p17 상 | 정규직교기저에 대한 수반연산자의 행렬 / The Matrix of the Adjoint in an Orthonormal Basis — Proof toggle |  |
+| c7-12 | COR | p17 하 | $L_A$의 수반연산자 / The Adjoint of $L_A$ — Proof toggle |  |
+| c7-13 | EXAM 2 | p18 | $\mathbb{C}^2$ 위의 수반연산자 계산 / Computing an Adjoint on $\mathbb{C}^2$ |  |
+| c7-14 | THM 6.11 | p19–21 | 수반연산자의 성질 / Properties of the Adjoint — Proof toggle (진술은 3장에 반복 인쇄, 1회 전사) |  |
+| c7-15 | REM 5 | p22 | 무한차원에서의 수반연산자 / Adjoints in the Infinite-Dimensional Case |  |
+| c7-16 | COR | p23 | 켤레전치행렬의 성질 / Properties of the Conjugate Transpose — Proof toggle ((3)만) |  |
+| c7-17 | PROB | p24 | 최소제곱 근사 문제의 도입 / Introducing the Least Squares Problem — SVG |  |
+| c7-18 | REM 6 | p25 | 오차제곱합과 최소제곱직선 / The Sum of Squared Errors and the Least Squares Line |  |
+| c7-19 | PROB | p26 상 | 최소제곱 문제 / The Least Squares Problem |  |
+| c7-20 | NOTATION | p26 중 | $F^n$의 표준내적 기호 / The Standard Inner Product on $F^n$ |  |
+| c7-21 | LEM 1 | p26 하 | 내적 안에서 행렬 옮기기 / Moving a Matrix across the Inner Product — Proof toggle |  |
+| c7-22 | LEM 2 | p27 상 | $A^*A$의 계수 / The Rank of $A^*A$ — Proof toggle |  |
+| c7-23 | COR | p27 하 | $A^*A$의 가역성 / Invertibility of $A^*A$ — Note/역주(보충 S2: 증명) |  |
+| c7-24 | PROB | p28 | 최소제곱 문제의 해법 / Solving the Least Squares Problem |  |
+| c7-25 | PROB | p29 상 | 정규방정식의 유도 / Deriving the Normal Equation |  |
+| c7-26 | THM 6.12 | p29 하 | 최소제곱 근사 / Least Squares Approximation |  |
+| c7-27 | EXAM | p30 | 최소제곱직선 구하기 / Finding the Least Squares Line |  |
+| c7-28 | REM 1 | p31 | 자료의 시각을 평균 0으로 옮기기 / Centering the Data Times — Note/역주(E2) |  |
+| c7-29 | EXAM | p32–33 | 최소제곱 이차다항식 / The Least Squares Quadratic — 비교 표 — Note/역주(E3) |  |
+| c7-30 | PROB | p34 상 | 최소해 문제 / The Minimal Solution Problem — Note/역주(E5) |  |
+| c7-31 | LEM A | p35 | $N(A)^\perp$ 위로의 사영과 최소해 / Minimal Solutions via Projection onto $N(A)^\perp$ — Proof toggle |  |
+| c7-32 | LEM B | p36 | $N(A)^\perp = R(A^*)$ / $N(A)^\perp = R(A^*)$ — Proof toggle — Note/역주(E6) |  |
+| c7-33 | THM 6.13 | p34 하 · p37 | 최소해의 존재성과 유일성 / Existence and Uniqueness of the Minimal Solution — Proof toggle (진술은 p34·p37 두 번 인쇄, 한 번만 전사) |  |
+| c7-34 | EXAM 3 | p38 | 최소해 구하기 / Finding a Minimal Solution — Note/역주(E4) |  |
 
 ### midterm.html — 2025 중간고사 기출 (2026-10-13)
 

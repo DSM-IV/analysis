@@ -133,6 +133,27 @@
 | right triangle / diagonal (of a parallelogram) | 직각삼각형 / 대각선 |
 | continuous complex-valued function | 연속인 복소수값 함수 |
 
+### §6.3 추가 (2026-10-29)
+| English | 한국어 |
+|---|---|
+| adjoint (of the operator $T$) $T^*$ / "$T$ star" | ($T$의) 수반연산자 $T^*$ / "$T$ 스타" |
+| conjugate transpose (or adjoint) of a matrix $A^*$ | 켤레전치행렬 (수반행렬) — §6.1과 같이 **켤레전치**를 주 용어로 |
+| linear function / linear transformation from $V$ into $F$ | 선형함수 / $V$에서 $F$로의 선형변환 |
+| transfer (shift) an operator to the other side of an inner product | 연산자를 내적의 반대쪽으로 옮기다 |
+| orthonormal eigenbasis / orthonormal basis of eigenvectors | 정규직교 고유기저 / 고유벡터로 이루어진 정규직교기저 |
+| cross terms | 교차항 |
+| infinite-dimensional / finite dimensionality / well-defined | 무한차원 / 유한차원성 / 잘 정의된 |
+| least squares approximation / least squares line | 최소제곱 근사 / 최소제곱직선 |
+| estimate of fit / best possible fit | 적합도의 척도 / 가장 잘 맞는 근사 |
+| error $E$ / sum of the squares of the vertical distances / squared error | 오차 $E$ / 수직거리의 제곱합 / 오차제곱합 |
+| normal equation | 정규방정식 |
+| experimenter / data (collected) / plotted as points | 실험자 / (수집된) 자료 / 점으로 나타내다 |
+| consistent (system of linear equations) | 해를 갖는 (연립일차방정식) — 첫 등장에 "(consistent)" 병기 |
+| minimal solution / solution of minimal norm | 최소해 / 노름이 최소인 해 |
+| standard ordered basis | 표준순서기저 |
+| Problem / Problem Introduction / Next Problem / Step $n$ | 문제 / 문제 소개 / 다음 문제 / $n$단계 |
+| Notation | 기호 |
+
 ## 슬라이드 라벨 → 카드 제목 어휘
 | 슬라이드 라벨 | 한국어 |
 |---|---|
@@ -152,8 +173,8 @@
 | ch03 | 5.2 대각화가능성 | §5.2 Diagonalizability | Lecture 4 (9/10) + Lecture 5 (9/15) |
 | ch04 | 5.4 불변부분공간과 케일리-해밀턴 정리 | §5.4 Invariant Subspaces and the Cayley–Hamilton Theorem | Lecture 6 (9/22) + Lecture 7 (9/29) |
 | ch05 | 6.1 내적과 노름 | §6.1 Inner Products and Norms | Lecture Note (Section 6.1, 9/30 게시) |
-| ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 The Gram–Schmidt Process and Orthogonal Complements | 연습문제만 선공개 (2026-10-01) |
-| ch07 | 6.3 선형연산자의 수반 | §6.3 The Adjoint of a Linear Operator | 예정 |
+| ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 The Gram–Schmidt Process and Orthogonal Complements | Section 6.2 노트 (10/8 게시) |
+| ch07 | 6.3 선형연산자의 수반 | §6.3 The Adjoint of a Linear Operator | Section 6.3 노트 (38장, 10/29 게시) |
 | ch08 | 6.4 정규연산자와 자기수반연산자 | §6.4 Normal and Self-Adjoint Operators | 예정 |
 | ch09 | 6.5 유니타리 연산자와 직교연산자 | §6.5 Unitary and Orthogonal Operators and Their Matrices | 예정 |
 | ch10 | 6.6 직교사영과 스펙트럼 정리 | §6.6 Orthogonal Projections and the Spectral Theorem | 예정 |
