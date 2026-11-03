@@ -1,6 +1,6 @@
 # 선형대수학 1 용어집 (Linear Algebra I Glossary — MATH221, Fall 2026)
 
-소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12, 13) — 영문. 중간고사 기출(Fall 2024·2025)은 $\mathbb{F}=\mathbb{R}$ 또는 $\mathbb{C}$ 표기.
+소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12, 13)와 단원 노트 Unit 2.2 — 영문. 중간고사 기출(Fall 2024·2025)은 $\mathbb{F}=\mathbb{R}$ 또는 $\mathbb{C}$ 표기.
 교재는 Friedberg–Insel–Spence 5th ed.(연습문제용)이지만 **내용·번호·기호는 강의노트를 따른다**(ℝ 위 벡터공간, $\mathcal{F}(X,\mathbb{R})$, $\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $M_{m\times n}(\mathbb{R})$).
 `la/GLOSSARY.md`(Friedberg 한국어판 관행)를 상속한다. 번역·풀이 작성 시 이 표의 용어만 쓴다.
 
@@ -92,6 +92,7 @@
 | ch03 | 1.3 일차결합, 생성, 일차독립 | §1.3 Linear Combinations, Span, and Linear Independence |
 | ch04 | 1.4 기저와 차원 | §1.4 Basis and Dimension |
 | ch05 | 2.1 선형사상: 핵, 상, 동형사상 | §2.1 Linear Maps: Kernel, Image, and Isomorphism |
+| ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | §2.2 Matrices and Linear Maps of ℝⁿ |
 | identity map $I_V = \mathbb{1}_V$ | 항등사상 |
 | zero map $T_0$ (written $0 \in \mathcal{L}(V,W)$) | 영사상 |
 | linear operator ($T \in \mathcal{L}(V)$) | 선형연산자 |
@@ -109,3 +110,8 @@
 | plane / line (through the origin) | (원점을 지나는) 평면 / 직선 |
 | coordinate vector $[v]_\beta$ / matrix representation $[T]_\beta$ | 좌표벡터 / 행렬표현 |
 | matrix–vector multiplication | 행렬-벡터 곱 |
+| left-multiplication map $L_A$ | 왼쪽 곱 사상 (FIS 한국어판의 좌곱변환) |
+| (is) characterized by | ~으로 결정된다 |
+| concatenating column vectors | 열벡터를 차례로 이어 붙인 것 |
+| the data of $T$ | $T$의 정보 |
+| $j$-th column of $A$ | $A$의 $j$번째 열 |
