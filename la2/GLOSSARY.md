@@ -154,6 +154,23 @@
 | Problem / Problem Introduction / Next Problem / Step $n$ | 문제 / 문제 소개 / 다음 문제 / $n$단계 |
 | Notation | 기호 |
 
+### §6.4 추가 (2026-11-10)
+| English | 한국어 |
+|---|---|
+| normal (operator / matrix) | 정규 (정규연산자 / 정규행렬) |
+| self-adjoint (Hermitian) (operator / matrix) | 자기수반(에르미트) (자기수반연산자 / 자기수반행렬) |
+| Schur's theorem / Schur | 슈어 정리 / 슈어 |
+| Proposition (★) | 명제 (★) |
+| Guiding Problem of This Section | 이 절의 길잡이 문제 |
+| real / complex skew-symmetric, symmetric matrix | 실 반대칭행렬 / 복소대칭행렬, 실대칭행렬 |
+| unit eigenvector | 단위고유벡터 |
+| upper / lower triangular | 상삼각 / 하삼각 |
+| fundamental theorem of algebra | 대수학의 기본정리 |
+| Claim / $(\because)$ | 주장 / $(\because)$ |
+| Proof (Continued) | 증명 (계속) |
+| linear combination / linearly independent | 일차결합 / 일차독립 |
+| orthonormal basis of eigenvectors (of $T$) | ($T$의) 고유벡터로 이루어진 정규직교기저 |
+
 ## 슬라이드 라벨 → 카드 제목 어휘
 | 슬라이드 라벨 | 한국어 |
 |---|---|
@@ -175,6 +192,6 @@
 | ch05 | 6.1 내적과 노름 | §6.1 Inner Products and Norms | Lecture Note (Section 6.1, 9/30 게시) |
 | ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 The Gram–Schmidt Process and Orthogonal Complements | Section 6.2 노트 (10/8 게시) |
 | ch07 | 6.3 선형연산자의 수반 | §6.3 The Adjoint of a Linear Operator | Section 6.3 노트 (38장, 10/29 게시) |
-| ch08 | 6.4 정규연산자와 자기수반연산자 | §6.4 Normal and Self-Adjoint Operators | 예정 |
+| ch08 | 6.4 정규연산자와 자기수반연산자 | §6.4 Normal and Self-Adjoint Operators | Section 6.4 노트 (19장, 11/10 게시) |
 | ch09 | 6.5 유니타리 연산자와 직교연산자 | §6.5 Unitary and Orthogonal Operators and Their Matrices | 예정 |
 | ch10 | 6.6 직교사영과 스펙트럼 정리 | §6.6 Orthogonal Projections and the Spectral Theorem | 예정 |

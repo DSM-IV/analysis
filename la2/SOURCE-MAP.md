@@ -17,6 +17,7 @@
 - `2025 가을 Midterm Exam (Linear Algebra 2).pdf` — **2025년 가을 중간고사 기출**(2025-10-20 시행, 4쪽·5문항·300점, 영문, 공식 해설 없음; Desktop 2026-10-13 08:58 게시) → `la2/midterm.html`
 - `선형대수2_TF2.pdf` — **TF 분반 추가문제 2차**(LaTeX 1쪽, Desktop 2026-10-14 02:04 게시; 풀이 없음): Friedberg §5.4 #13·#21, §6.1 #17·#18, §6.2 #7·#11·#15(a) — 7문항 모두 기존 추천문제와 겹치지 않음 → 각 단원 연습문제 섹션에 번호 순으로 끼워 넣음(e4-13·e4-21 / e5-17·e5-18 / e6-7·e6-11·e6-15), src-ref 끝에 ` · TF2` 표기. 풀이는 자체 작성(2026-10-15)
 - `Section 6.3.pdf` — 38장 슬라이드 (영문, Desktop 원본 파일명 `Section 6.3-1.pdf`, 2026-10-29 15:28 게시; 강의일 표기 없음) → `la2/ch07.html` 신설
+- `Section 6.4.pdf` — 19장 슬라이드 (영문, Desktop 2026-11-10 16:22 게시; 강의일 표기 없음) → `la2/ch08.html` 신설
 - (사용 안 함) Desktop의 `2026 선대2 TF 분반.pdf` — TF 분반 강의실·학생 명단(개인정보) → 리포에 복사하지 않음
 
 **소스가 영문 슬라이드** → en-formal = verbatim 전사, ko-formal = 번역. 컨벤션은 `analysis2/`와 동일(analysis2/ch01.html 규약 주석) + 아래 la2 고유 규칙.
@@ -38,7 +39,7 @@
 9. 색·밑줄 강조는 옮기지 않는다. 슬라이드 내 박스(det(A)≠0 ⇔ invertible, 3×3 전개식)는 `div.math-display`로.
 10. 문자 표기: 슬라이드의 칼리그래피 $\mathcal{B}$는 `\mathcal{B}`, 풀이 PDF의 $\beta$는 `\beta`. Lecture 2가 체를 $\mathbb{F}$(blackboard)로 쓴 슬라이드(8–14)는 `\mathbb{F}`, $F$(이탤릭)로 쓴 슬라이드(2–7)는 `F` — 원문 그대로.
 
-## 전체 구조 (2026-10-29 현재)
+## 전체 구조 (2026-11-10 현재)
 
 | 단원 | 제목 | 소스 | 카드 | note | 연습문제 카드 |
 |---|---|---|---|---|---|
@@ -49,8 +50,9 @@
 | ch05 | 6.1 내적과 노름 | Section 6.1 노트 (22장) + §6.1 풀이 + TF2 | 28 | 4 | 11 (추천 9 + TF2 2) |
 | ch06 | 6.2 그람-슈미트 과정과 직교여공간 | Section 6.2 노트 (28장) + §6.2 풀이 + TF2 | 33 (슬라이드 수록 EX #6·#13·#23 포함) | 3 | 9 (추천 6 + TF2 3) |
 | ch07 | 6.3 선형연산자의 수반 | Section 6.3 노트 (38장) | 34 (슬라이드 수록 EX §6.2 #23·§6.3 #24 포함) | 3 | — |
+| ch08 | 6.4 정규연산자와 자기수반연산자 | Section 6.4 노트 (19장) | 18 | 2 | — |
 | midterm | 2025 중간고사 기출 | 2025 Midterm Exam (4쪽) | — | 1 (notemt-1 시험 안내·채점 전략·대응표) | 5 (mt25-1~5, 자체 풀이) |
-| 계 | | | **204** | **20** | **48** (추천 41 + TF2 7; + ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **52**) |
+| 계 | | | **222** | **22** | **48** (추천 41 + TF2 7; + ch01 EX 1, 자체 증명 THM 2.25·THM 3.21·c4-8 = 풀이 대상 **52**) |
 
 ## ERRATA / 역주 후보 (en verbatim 유지, ko는 바른 뜻·풀이에서 역주)
 
@@ -118,6 +120,15 @@
     보충(오류 아님): c7-10 Exercise #24는 슬라이드가 (c)만 풂 → (a)·(b) 짧은 증명을 Note/역주로 보충; c7-23 Corollary($\operatorname{rank}A=n \Rightarrow A^*A$ 가역)는 증명 없음 → 보조정리 2로 한 줄 보충; c7-9(§6.2 #23 재수록)는 ch06 c6-32 풀이로 링크.
     기타(수정 없이 verbatim): p37 "Furthermore, solution $v$ of $Ax=b$"("for any" 누락), p28 Step 3 "$E=\|Ax_0-y\|$"(p25 정의는 제곱 — 최소화는 동치), p27 "$\langle Ax, A^{**}x\rangle$" 첨자 $m$ 누락·"rank$(A* A)$" 별표 글꼴, Remark 번호가 p31에서 다시 1부터(배지 REM 1 두 개: c7-4·c7-28), 정리 6.11 진술에 유한차원 가정 없음(Remark 5가 보완). p19–21은 정리 6.11 진술 3회 인쇄·p37은 정리 6.13 재인쇄 → 한 번만 전사. "(♣) Problem"의 ♣·소제목의 ◎는 옮기지 않음. 사소한 논리 공백(Note 없음, 검증에서 확인): p26 보조정리 1 증명이 $n\times n$ 행렬용 정리 6.11 따름정리를 $y^*A$에 인용, p29 "invertible by Lemma 2"는 p27 따름정리, p35 "In particular, $s$ is the only solution in $N(A)^\perp$"는 증명 생략($v-s \in N(A)\cap N(A)^\perp=\{0\}$), p37 (2)는 $(AA^*)u=b$의 해 존재를 보이지 않음($s\in R(A^*)$이면 $s=A^*u$), p15 (ii)의 영벡터는 숫자 $0_V$로 인쇄 → $O_V$로 정규화.
 60. **2024 퀴즈 2 1번 공식 풀이**: "By Cayley-Hamilton Theorem, $(1-A)^3 = O$" — 특성다항식 $(1-t)^3$에 $A$를 대입한 것이므로 $(I_3-A)^3=O$. 결론은 영향 없음. en verbatim + Note, ko 바른 식 + 역주. (qz24-1)
+
+61. §6.4 p2 Recall (2): "Theorem 5.9 :" 뒤 진술이 비어 있음(강의 중 판서용 빈칸). en Note·ko 역주로 정리 5.9 진술 보충(ch03 c3-20 링크). — 오류 아님, 보충. (c8-1)
+62. **§6.4 p3 Lemma 증명 첫 줄**: "Suppose that $v$ is an eigenvalue of $T$ with corresponding eigenvalue $\lambda$" → eigenvector. en verbatim + Note(정리 6.11의 $(T-\lambda I)^*=T^*-\overline{\lambda}I$, $v\ne0_V$이므로 $R\ne V$, 차원정리로 $N\ne\{0_V\}$, (2)는 (1)에서 바로) + ko 바른 문장·역주. (c8-2)
+63. **§6.4 p5 슈어 정리 증명 끝줄**: "$[T]_V$ is upper triangular" → $[T]_\beta$. 또 $\beta=\gamma\cup\{z\}$는 $z$를 **마지막**에 두어야 상삼각(첫째에 두면 첫 열 = $[T(z)]_\beta$). 보충: p4 "By the lemma"는 특성다항식이 분해되어 $T$가 고유값을 가지므로 보조정리 (2) 적용, p5 (ii)는 정리 5.21(ch04 c4-12). en verbatim + Note, ko $[T]_\beta$ + 역주. (c8-3)
+64. §6.4 p9 정리 6.16 증명: "Theorme 6.14" 오타, 끝줄 "eigenvector"(복수). $\langle v_k, T^*(v_j)\rangle = \langle v_k, \overline{\lambda_j}v_j\rangle$는 정리 6.15 (c)(정규성)를 인용 없이 사용 — 보충 Note. en verbatim + Note, ko 바른 표기 + 역주. (c8-10)
+65. §6.4 p10 Recall 박스 Example 9 = §6.1 Example 9 재수록 — ERRATA 40과 같은 오식(원시함수 $\frac{1}{2\pi(m-n)}e^{i(m-n)t}$ → $\frac{1}{2\pi i(n-m)}e^{i(n-m)t}$, $\delta_{ij}$ → $\delta_{nm}$). en verbatim + Note, ko는 ch05 c5-28의 바로잡은 번역 재사용 + 역주. (c8-11)
+66. **§6.4 p18 Example 1 (2)**: "Since $\langle v_1, v_2\rangle = 1$" — $v_1=(1,0,0)^t$, $v_2=(2,1,0)^t$이므로 $\langle v_1,v_2\rangle = 2$. 결론(직교 아님)은 불변. en verbatim + Note, ko 바른 값 + 역주. (c8-17)
+    보충(오류 아님, Note/역주): c8-4 정리 6.10 인용; c8-9 정리 6.15 (c)는 (b)의 정규성에 (a) 적용·(d)는 (c) 사용; c8-12 예 3은 무한차원이라 정리 6.16의 유한차원 가정이 필요함을 보임·$U=T^*$는 기저에서 확인 후 반쌍선형으로 확장; note08-2 회전의 특성다항식 판별식 $4\cos^2\theta-4\lt0$; c8-14 보조정리 (a)는 정리 6.15 (c)·(b)는 $\det(A-tI_n)$의 복소 일차인수의 근이 실수, 정리 6.10과 $T_A$의 자기수반성; c8-15 "the lemma" = 보조정리 (b), (ii)⇒(i)의 $A$ 미정의($A:=[T]_\beta$); c8-18 대칭 ⇒ 분해·정규직교 고유기저는 보조정리 (b)·정리 6.17, 정규화 상수 검산.
+    기타(수정 없이 verbatim): p8 정리 6.15 (c) 증명의 "$(T-\lambda I)(x) = 0$"(영벡터를 숫자 0으로), p10 "$\cdots dt := \cdots$"(정의 기호), p14 "Let $\lambda$ be an eigenvalue … , and suppose", p19 "the eigenvectors of $A$ consists of an orthonormal basis"(문법), p12 예 3 (계속)에서 $n, m$을 $\mathbb{Z}$ 첨자와 겹쳐 재사용. p5는 슈어 정리 진술, p15는 보조정리 진술, p16은 정리 6.17 진술을 재인쇄 → 한 번만 전사. p13 박스 = p7 Example 1 재수록(note08-2 안 formal-box). Example 번호가 p18에서 1로 다시 시작(EXAM 1·2 배지가 둘씩).
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -465,6 +476,32 @@ Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, RE
 | c7-32 | LEM B | p36 | $N(A)^\perp = R(A^*)$ / $N(A)^\perp = R(A^*)$ — Proof toggle — Note/역주(E6) |  |
 | c7-33 | THM 6.13 | p34 하 · p37 | 최소해의 존재성과 유일성 / Existence and Uniqueness of the Minimal Solution — Proof toggle (진술은 p34·p37 두 번 인쇄, 한 번만 전사) |  |
 | c7-34 | EXAM 3 | p38 | 최소해 구하기 / Finding a Minimal Solution — Note/역주(E4) |  |
+
+### ch08.html — 6.4 정규연산자와 자기수반연산자 / §6.4 Normal and Self-Adjoint Operators
+**소스: Section 6.4.pdf (19장, 2026-11-10 게시; 강의일 표기 없음).** 2026-11-10 신설. Opus(메인 루프)가 계획·기준값·en 전사, Sonnet 번역가 1개가 ko 번역. 카드 18(c8-1~c8-18) + note 2(note08-1 p6 상단 박스 = 길잡이 문제 재수록 / note08-2 p13 서술 + Example 1 재수록 박스). "Proposition (★) :"은 thm-card 배지 `PROP ★`(신규). 슬라이드의 글 상자는 `div.formal-box`(style.css에 있던 규칙, la2 첫 사용). 보조정리(p14–15)는 정리 6.17 진술(p14)보다 먼저 두고, 정리 6.17은 p16의 진술 재수록·증명과 함께 한 카드(c8-15). 이 단원 추천 연습문제(e8-*)는 아직 없음. ERRATA 61–66.
+
+| id | 유형·배지 | 슬라이드 | 내용 | src-ref |
+|---|---|---|---|---|
+| c8-1 | RECALL | p2 | 대각화가능성과 이 절의 길잡이 문제 / Diagonalizability and the Guiding Problem of This Section — (2) 정리 5.9 빈칸 Note/역주(ERRATA 61) |  |
+| c8-2 | LEM | p3 | $T$의 고유값과 $T^*$의 고유값 / Eigenvalues of $T$ and of $T^*$ — Proof toggle — Note/역주(ERRATA 62) |  |
+| c8-3 | THM 6.14 | p4–5 | 슈어 정리 / Schur's Theorem — Proof toggle (p4 Claim ★ · p5 계속) — Note/역주(ERRATA 63) |  |
+| note08-1 | NOTE | p6 상 | 이 절의 길잡이 문제 (박스 재수록) |  |
+| c8-4 | PROP ★ | p6 중 | 정규직교 고유기저가 있으면 $TT^* = T^*T$ / An Orthonormal Basis of Eigenvectors Forces $TT^* = T^*T$ — Proof toggle |  |
+| c8-5 | DEF | p6 하 | 정규연산자와 정규행렬 / Normal Operators and Normal Matrices |  |
+| c8-6 | REM | p7 상 | 정규성과 정규직교기저에 대한 행렬 / Normality and the Matrix in an Orthonormal Basis |  |
+| c8-7 | EXAM 1 | p7 중 | 회전변환은 정규이다 / A Rotation Is Normal |  |
+| c8-8 | EXAM 2 | p7 하 | 실 반대칭행렬은 정규이다 / Real Skew-Symmetric Matrices Are Normal |  |
+| c8-9 | THM 6.15 | p8 | 정규연산자의 성질 / Properties of Normal Operators — Proof toggle — Note/역주(보충) |  |
+| c8-10 | THM 6.16 | p9 | 복소 내적공간에서의 정규직교 고유기저 / Orthonormal Eigenbases in Complex Inner Product Spaces — Proof toggle — Note/역주(ERRATA 64) |  |
+| c8-11 | RECALL | p10 | 내적공간 $H$와 정규직교집합 $\{e^{int}\}$ / The Inner Product Space $H$ and the Orthonormal Set $\{e^{int}\}$ — §6.1 재수록(ch05 note05-4·c5-28), 박스 Example 9 — Note/역주(ERRATA 65) |  |
+| c8-12 | EXAM 3 | p11–12 | 고유벡터가 없는 정규연산자 / A Normal Operator with No Eigenvectors — Note/역주(보충) |  |
+| note08-2 | NOTE | p13 상 | 정규성만으로는 실 내적공간의 정규직교 고유기저가 보장되지 않음 + Example 1 박스 재수록 — Note/역주(보충) |  |
+| c8-13 | DEF | p13 하 | 자기수반연산자와 자기수반행렬 / Self-Adjoint Operators and Self-Adjoint Matrices |  |
+| c8-14 | LEM | p14 하–15 | 자기수반연산자의 고유값과 특성다항식 / Eigenvalues and the Characteristic Polynomial of a Self-Adjoint Operator — Proof toggle ((a) p14 · (b) p15) — Note/역주(보충) |  |
+| c8-15 | THM 6.17 | p14 상 · p16 | 실 내적공간에서의 정규직교 고유기저 / Orthonormal Eigenbases in Real Inner Product Spaces — Proof toggle (진술 p14·p16 두 번 인쇄, 한 번만 전사) — Note/역주(보충) |  |
+| c8-16 | EXAM 4 | p17 | 실대칭행렬과 복소대칭행렬 / Real Symmetric versus Complex Symmetric Matrices |  |
+| c8-17 | EXAM 1 | p18 | 대칭이 아닌 행렬의 고유벡터 / Eigenvectors of a Non-Symmetric Matrix — Note/역주(ERRATA 66) |  |
+| c8-18 | EXAM 2 | p19 | 대칭행렬의 정규직교 고유기저 / An Orthonormal Basis of Eigenvectors for a Symmetric Matrix — Note/역주(보충) |  |
 
 ### midterm.html — 2025 중간고사 기출 (2026-10-13)
 

@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.4 정규연산자와 자기수반연산자 (§6.4 Normal and Self-Adjoint Operators) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제8단원 6.4 정규연산자와 자기수반연산자 — 수반연산자의 고유값, 슈어 정리, 정규연산자의 정의와 성질, 복소 내적공간에서 정규연산자의 정규직교 고유기저(정리 6.16), 자기수반연산자의 실고유값과 실 내적공간에서 자기수반연산자의 정규직교 고유기저(정리 6.17)를 강의 슬라이드 원문과 한국어 번역 대조로 정리했습니다. Normal operators, self-adjoint (Hermitian) operators, Schur's theorem, orthonormal basis of eigenvectors.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 정규연산자, normal operator, 자기수반연산자, self-adjoint operator, 에르미트, Hermitian, 슈어 정리, Schur theorem, 정규행렬, normal matrix, 실대칭행렬, real symmetric matrix, 반대칭행렬, skew-symmetric matrix, 정규직교 고유기저, orthonormal basis of eigenvectors, 수반연산자, adjoint, 내적공간, inner product space, Friedberg, 프리드버그, Friedberg 6.4">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.4 정규연산자와 자기수반연산자 (§6.4 Normal and Self-Adjoint Operators) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="수반연산자의 고유값, 슈어 정리, 정규연산자와 그 성질, 복소·실 내적공간에서 정규직교 고유기저가 존재할 조건(정리 6.16·6.17), 자기수반연산자 — Friedberg §6.4 강의 슬라이드를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "6.4 정규연산자와 자기수반연산자 (§6.4 Normal and Self-Adjoint Operators) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 6.4 정규연산자와 자기수반연산자. 슈어 정리, 정규연산자의 성질, 정규직교 고유기저의 존재 조건(복소: 정규, 실: 자기수반)을 다루는 Friedberg §6.4 강의 슬라이드를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch08.html",
+  "datePublished": "2026-11-10",
+  "dateModified": "2026-11-10",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la1/index.html">선형대수학1</a>
+      <a href="index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html" class="active">08</a>
+      <a href="midterm.html">기출문제</a>
+      <a href="practice.html">예상문제</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 08</p>
+  <h1>6.4 정규연산자와 자기수반연산자<span>§6.4 Normal and Self-Adjoint Operators</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c8-1"><span class="toc-num">RECALL</span> 대각화가능성과 이 절의 길잡이 문제 <em>Diagonalizability and the Guiding Problem of This Section</em></a></li>
+    <li><a href="#c8-2"><span class="toc-num">LEM</span> <span class="toc-ko">$T$의 고유값과 $T^*$의 고유값</span> <em>Eigenvalues of $T$ and of $T^*$</em></a></li>
+    <li><a href="#c8-3"><span class="toc-num">THM 6.14</span> 슈어 정리 <em>Schur's Theorem</em></a></li>
+    <li><a href="#c8-4"><span class="toc-num">PROP ★</span> <span class="toc-ko">정규직교 고유기저가 있으면 $TT^* = T^*T$</span> <em>An Orthonormal Basis of Eigenvectors Forces $TT^* = T^*T$</em></a></li>
+    <li><a href="#c8-5"><span class="toc-num">DEF</span> 정규연산자와 정규행렬 <em>Normal Operators and Normal Matrices</em></a></li>
+    <li><a href="#c8-6"><span class="toc-num">REM</span> 정규성과 정규직교기저에 대한 행렬 <em>Normality and the Matrix in an Orthonormal Basis</em></a></li>
+    <li><a href="#c8-7"><span class="toc-num">EXAM 1</span> 회전변환은 정규이다 <em>A Rotation Is Normal</em></a></li>
+    <li><a href="#c8-8"><span class="toc-num">EXAM 2</span> 실 반대칭행렬은 정규이다 <em>Real Skew-Symmetric Matrices Are Normal</em></a></li>
+    <li><a href="#c8-9"><span class="toc-num">THM 6.15</span> 정규연산자의 성질 <em>Properties of Normal Operators</em></a></li>
+    <li><a href="#c8-10"><span class="toc-num">THM 6.16</span> 복소 내적공간에서의 정규직교 고유기저 <em>Orthonormal Eigenbases in Complex Inner Product Spaces</em></a></li>
+    <li><a href="#c8-11"><span class="toc-num">RECALL</span> <span class="toc-ko">내적공간 $H$와 정규직교집합 $\{e^{int}\}$</span> <em>The Inner Product Space $H$ and the Orthonormal Set $\{e^{int}\}$</em></a></li>
+    <li><a href="#c8-12"><span class="toc-num">EXAM 3</span> 고유벡터가 없는 정규연산자 <em>A Normal Operator with No Eigenvectors</em></a></li>
+    <li><a href="#c8-13"><span class="toc-num">DEF</span> 자기수반연산자와 자기수반행렬 <em>Self-Adjoint Operators and Self-Adjoint Matrices</em></a></li>
+    <li><a href="#c8-14"><span class="toc-num">LEM</span> 자기수반연산자의 고유값과 특성다항식 <em>Eigenvalues and the Characteristic Polynomial of a Self-Adjoint Operator</em></a></li>
+    <li><a href="#c8-15"><span class="toc-num">THM 6.17</span> 실 내적공간에서의 정규직교 고유기저 <em>Orthonormal Eigenbases in Real Inner Product Spaces</em></a></li>
+    <li><a href="#c8-16"><span class="toc-num">EXAM 4</span> 실대칭행렬과 복소대칭행렬 <em>Real Symmetric versus Complex Symmetric Matrices</em></a></li>
+    <li><a href="#c8-17"><span class="toc-num">EXAM 1</span> 대칭이 아닌 행렬의 고유벡터 <em>Eigenvectors of a Non-Symmetric Matrix</em></a></li>
+    <li><a href="#c8-18"><span class="toc-num">EXAM 2</span> 대칭행렬의 정규직교 고유기저 <em>An Orthonormal Basis of Eigenvectors for a Symmetric Matrix</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c8-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 강의 슬라이드의 번호를 그대로 따른다: 번호가 붙은 항목은 TYPE {원문 번호}
+     (Theorem 1.3 → THM 1.3, Definition 2 → DEF 2, Example 1 → EXAM 1), 번호 없는
+     항목(Definition :, Remark :, Recall, Question, 번호 없는 Example)은 유형 배지만
+     (DEF / THM / REM / RECALL / Q / EXAM / COR / LEM). 자체 순번은 id에만 쓴다.
+     span.src-ref 는 연습문제(Friedberg §6.4 #n)에만 쓴다. 본문에서 번호 없는
+     카드를 인용할 때는 제목 링크(#c8-6 을 가리키는 a 태그, 링크 문구 주의 「…」)로 쓴다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "미번역" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     (연습문제만 그 뒤에 span.src-ref 로 Friedberg 출처를 적는다.)
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e8-2), 배지는 EX 6.4-2,
+     출처는 span.src-ref 에 Friedberg §6.4 #2 (a), (b) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note08-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 칼리그래피 B는 \mathcal{B}, 풀이 PDF의 β는 \beta,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 &amp; 로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  11) ch08 고유: "Proposition (★) :"은 thm-card 배지 PROP ★ (c8-4, 신규). 슬라이드 안의 글 상자
+      (p6 길잡이 문제, p10 Example 9, p13 Example 1 재수록)는 div.formal-box 로 옮긴다.
+      Example 번호가 p18에서 1로 다시 시작해 EXAM 1·EXAM 2 배지가 둘씩 (c8-7·c8-17, c8-8·c8-18).
+      정리 6.17은 p14 진술 + p16 진술 재수록·증명을 보조정리(c8-14) 뒤 한 카드(c8-15)로 둔다.
+      원문 오류·빈칸은 en 패널 끝의 Note 와 ko 패널의 역주로 처리한다 (SOURCE-MAP ERRATA 61–).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§6.4 Normal and Self-Adjoint Operators · 정규연산자와 자기수반연산자</h2></div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.2 ═══════════ -->
+
+<!-- S6.4 p2 Recall (1)–(4) — (2) Theorem 5.9 진술이 슬라이드에 비어 있음 → en Note 보충 (ERRATA 61) -->
+<div class="card rem-card" id="c8-1">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">대각화가능성과 이 절의 길잡이 문제 <em>Diagonalizability and the Guiding Problem of This Section</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 차원이 $n$인 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p><strong>(1) 정의 :</strong> 다음이 성립하면 $T$를 대각화가능하다고 한다.</p>
+        <p>고유벡터로 이루어진 $V$의 기저 $\beta = \{v_1,v_2,\ldots,v_n\}$이 존재한다.</p>
+        <p>이때 $[T]_\beta$는 대각행렬이다.</p>
+        <p><strong>(2) 정리 5.9 :</strong></p>
+        <p><strong>(3) 그람-슈미트 과정 :</strong> $V$는 항상 정규직교기저를 가진다.</p>
+        <p><strong>(4) 이 절의 길잡이 문제 :</strong></p>
+        <p>$V$가 고유벡터로 이루어진 정규직교기저를 갖도록 보장하는 조건을 찾아라.</p>
+        <p><em>역주.</em> 슬라이드에는 정리 5.9의 진술이 비어 있다. 이는 §5.2의 판정법(<a href="ch03.html#c3-20">정리 5.9</a>)이다. $T$의 특성다항식이 분해되고 $\lambda_1,\ldots,\lambda_k$가 $T$의 서로 다른 고유값이면, $T$가 대각화가능할 필요충분조건은 모든 $i$에 대하여 $\lambda_i$의 중복도가 $\dim E_{\lambda_i}$와 같은 것이다. 이 경우 고유공간 $E_{\lambda_1},\ldots,E_{\lambda_k}$의 기저들의 합집합은 $T$의 고유벡터로 이루어진 $V$의 기저가 된다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator on an inner product space $V$ of dimension $n$.</p>
+        <p><strong>(1) Definition :</strong> $T$ is said to be diagonalizable if</p>
+        <p>there is a basis $\beta = \{v_1,v_2,\ldots,v_n\}$ for $V$ consisting of eigenvectors.</p>
+        <p>In this case, $[T]_\beta$ is a diagonal matrix.</p>
+        <p><strong>(2) Theorem 5.9 :</strong></p>
+        <p><strong>(3) Gram-Schmidt Process :</strong> $V$ always admits an orthonormal basis.</p>
+        <p><strong>(4) Guiding Problem of This Section :</strong></p>
+        <p>Find conditions that guarantee that $V$ has an orthonormal basis of eigenvectors.</p>
+        <p><em>Note.</em> The statement of Theorem 5.9 is left blank on the slide. It is the criterion from §5.2 (<a href="ch03.html#c3-20">Theorem 5.9</a>): if the characteristic polynomial of $T$ splits and $\lambda_1,\ldots,\lambda_k$ are the distinct eigenvalues of $T$, then $T$ is diagonalizable if and only if the multiplicity of $\lambda_i$ equals $\dim E_{\lambda_i}$ for every $i$; in that case the union of bases of the eigenspaces $E_{\lambda_1},\ldots,E_{\lambda_k}$ is a basis for $V$ consisting of eigenvectors of $T$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.3 ═══════════ -->
+
+<!-- S6.4 p3 Lemma (1)(2) + Proof — "v is an eigenvalue" → eigenvector (ERRATA 62) -->
+<div class="card thm-card" id="c8-2">
+  <div class="card-head">
+    <span class="thm-num">LEM</span>
+    <span class="thm-title">$T$의 고유값과 $T^*$의 고유값 <em>Eigenvalues of $T$ and of $T^*$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 차원이 $n$인 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p><strong>(1)</strong> $\lambda$가 $T$의 고유값이면 $\overline{\lambda}$는 $T^*$의 고유값이다.</p>
+        <p><strong>(2)</strong> $T$가 고유값을 가지면 $T^*$도 고유값을 가진다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$v$가 고유값 $\lambda$에 대응하는 $T$의 고유벡터라 하자.</p>
+        <p>그러면 임의의 $x \in V$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle 0_V, x\rangle = \langle (T-\lambda I)(v), x\rangle\\[2pt]
+                &amp;= \langle v, (T-\lambda I)^*(x)\rangle.\end{aligned}$$</div>
+        <p>이는 $v$가 $R(T^*-\overline{\lambda}I)^\perp$에 속함을 뜻하며, 따라서 다음을 얻는다.</p>
+        <div class="math-display">$$R(T^*-\overline{\lambda}I) \neq V.$$</div>
+        <p>이로부터 다음이 따른다.</p>
+        <div class="math-display">$$N(T^*-\overline{\lambda}I) \neq \{0_V\}.$$</div>
+        <p>그러므로 다음을 만족하는 영벡터가 아닌 $w \in V$가 존재한다.</p>
+        <div class="math-display">$$(T^*-\overline{\lambda}I)(w) = 0_V \text{ 이고 따라서 } T^*w = \overline{\lambda}w.$$</div>
+        <p>따라서 $\overline{\lambda}$는 $T^*$의 고유값이다.</p>
+        <p><em>역주.</em> 영문 패널 첫 줄의 &ldquo;$v$ is an eigenvalue of $T$&rdquo;는 &ldquo;$v$ is an eigenvector of $T$&rdquo;의 오류이므로(따라서 $v \neq 0_V$), 한국어 본문은 고유벡터로 바로잡아 옮겼다(영문 패널은 원문 그대로). 증명 단계에서 사용한 사실은 다음과 같다. $(T-\lambda I)^* = T^*-\overline{\lambda}I$ (<a href="ch07.html#c7-14">정리 6.11</a>)이다. $R(T^*-\overline{\lambda}I) = V$이면 $v \perp v$이므로 $v = 0_V$가 되어 모순이다. $\dim V = n$이 유한하므로 $N(T^*-\overline{\lambda}I) \neq \{0_V\}$는 차원정리에서 따른다. (2)는 (1)에서 바로 따른다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator on an inner product space $V$ of dimension $n$.</p>
+        <p><strong>(1)</strong> If $\lambda$ is an eigenvalue of $T$, then $\overline{\lambda}$ is an eigenvalue of $T^*$.</p>
+        <p><strong>(2)</strong> If $T$ has an eigenvalue, then so does $T^*$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Suppose that $v$ is an eigenvalue of $T$ with corresponding eigenvalue $\lambda$.</p>
+        <p>Then for any $x \in V$, it holds that</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle 0_V, x\rangle = \langle (T-\lambda I)(v), x\rangle\\[2pt]
+        &amp;= \langle v, (T-\lambda I)^*(x)\rangle.\end{aligned}$$</div>
+        <p>This shows that $v$ is contained in $R(T^*-\overline{\lambda}I)^\perp$ and hence</p>
+        <div class="math-display">$$R(T^*-\overline{\lambda}I) \neq V.$$</div>
+        <p>This implies that</p>
+        <div class="math-display">$$N(T^*-\overline{\lambda}I) \neq \{0_V\}.$$</div>
+        <p>Thus there exists a nonzero vector $w \in V$ such that</p>
+        <div class="math-display">$$(T^*-\overline{\lambda}I)(w) = 0_V \text{ and hence } T^*w = \overline{\lambda}w.$$</div>
+        <p>Therefore $\overline{\lambda}$ is an eigenvalue of $T^*$.</p>
+        <p><em>Note.</em> In the first line, &ldquo;$v$ is an eigenvalue of $T$&rdquo; should read &ldquo;$v$ is an eigenvector of $T$&rdquo; (so $v \neq 0_V$). The steps use: $(T-\lambda I)^* = T^*-\overline{\lambda}I$ (<a href="ch07.html#c7-14">Theorem 6.11</a>); if $R(T^*-\overline{\lambda}I) = V$, then $v \perp v$ and so $v = 0_V$, which is impossible; and $N(T^*-\overline{\lambda}I) \neq \{0_V\}$ follows from the dimension theorem since $\dim V = n$ is finite. Statement (2) is an immediate consequence of (1).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.4 ═══════════ -->
+
+<!-- S6.4 p4–p5 Theorem 6.14 (Schur) + Proof (p4) + Proof (Continued) (p5; 진술은 p5에 재수록) — [T]_V → [T]_β, z는 마지막 (ERRATA 63) -->
+<div class="card thm-card" id="c8-3">
+  <div class="card-head">
+    <span class="thm-num">THM 6.14</span>
+    <span class="thm-title">슈어 정리 <em>Schur's Theorem</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 차원이 $n$인 내적공간 $V$ 위의 선형연산자라 하고, $T$의 특성다항식이 분해된다고 하자.</p>
+        <p>그러면 다음을 만족하는 $V$의 정규직교기저 $\beta$가 존재한다.</p>
+        <p>행렬 $[T]_\beta$는 상삼각행렬이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$n \ge 1$에 대한 귀납법을 사용한다.</p>
+        <p>$n = 1$이면 결과는 자명하다.</p>
+        <p>$n \ge 2$라 하자. <a href="#c8-2">보조정리</a>에 의해 $T^*$가 단위고유벡터 $z$를 가진다고 할 수 있다.</p>
+        <p>$T^*z = \lambda z$라 하고 $W = \operatorname{span}(\{z\})$라 하자.</p>
+        <p><strong>주장 :</strong> $W^\perp$는 $T$-불변이다.</p>
+        <p>$(\because)$ $y \in W^\perp$라 하자. $T(y) \in W^\perp$임을 보이려면 $\langle T(y), z\rangle = 0$임을 보이면 충분하다.</p>
+        <p>실제로 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}\langle T(y), z\rangle &amp;= \langle y, T^*(z)\rangle = \langle y, \lambda z\rangle\\[2pt]
+                &amp;= \overline{\lambda}\langle y, z\rangle = 0.\qquad\bigstar\end{aligned}$$</div>
+        <p><strong>증명 (계속) :</strong> 다음에 주목하자.</p>
+        <p>$(i)$ $\dim W^\perp = n-1$이고,</p>
+        <p>$(ii)$ $T_{W^\perp} : W^\perp \to W^\perp$의 특성다항식은 $T : V \to V$의 특성다항식을 나눈다.</p>
+        <p>$(ii)$에 의해 $T_{W^\perp} : W^\perp \to W^\perp$의 특성다항식은 분해된다.</p>
+        <p>$(i)$과 귀납가정에 의해 다음이 따른다.</p>
+        <p>$[T_{W^\perp}]_\gamma$가 상삼각행렬이 되는 $W^\perp$의 정규직교기저 $\gamma$가 존재한다.</p>
+        <p>$\gamma$ 뒤에 $z$를 마지막으로 붙인 순서기저 $\beta = \gamma \cup \{z\}$는 $[T]_\beta$가 상삼각행렬인 $V$의 정규직교기저이다.</p>
+        <p><em>역주.</em> (1) 보조정리를 적용할 수 있는 것은 $T$가 고유값을 가지기 때문이다. $T$의 특성다항식이 분해되고 차수가 $n \ge 1$이다. <a href="#c8-2">보조정리</a> (2)에 의해 $T^*$는 고유벡터를 가지며, 이를 노름으로 나누면 단위고유벡터 $z$를 얻는다. (2) 사실 $(ii)$는 주장에서 얻은 $T$-불변 부분공간 $W^\perp$에 <a href="ch04.html#c4-12">정리 5.21</a>을 적용한 것이다. (3) 영문 패널 마지막 줄의 $[T]_V$는 $[T]_\beta$의 오류이므로 바로잡아 옮겼다(영문 패널은 원문 그대로). 또한 $\beta$는 $z$를 마지막에 두고 정렬해야 한다. $\gamma = \{y_1,\ldots,y_{n-1}\}$, $\beta = \{y_1,\ldots,y_{n-1},z\}$이면 $j \le n-1$에 대하여 $T(y_j) \in W^\perp = \operatorname{span}(\gamma)$이므로 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}[T_{W^\perp}]_\gamma &amp; \ast\\ 0 &amp; \ast\end{pmatrix},$$</div>
+        <p>이는 상삼각행렬이다. ($z$를 맨 앞에 두면 첫째 열이 $T(z)$의 좌표벡터가 되어 $e_1$의 배수가 아닐 수 있다.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear operator on an inner product space $V$ of dimension $n$. Suppose that the characteristic polynomial of $T$ splits.</p>
+        <p>Then there exists an orthonormal basis $\beta$ for $V$ such that</p>
+        <p>the matrix $[T]_\beta$ is upper triangular.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>We will use induction on $n \ge 1$.</p>
+        <p>If $n = 1$, then the result is immediate.</p>
+        <p>Suppose that $n \ge 2$. By <a href="#c8-2">the lemma</a>, we can assume that $T^*$ has a unit eigenvector $z$.</p>
+        <p>Suppose that $T^*z = \lambda z$ and let $W = \operatorname{span}(\{z\})$.</p>
+        <p><strong>Claim :</strong> $W^\perp$ is $T$-invariant.</p>
+        <p>$(\because)$ Let $y \in W^\perp$. To prove that $T(y) \in W^\perp$, it is enough to show that $\langle T(y), z\rangle = 0$.</p>
+        <p>Indeed, we have</p>
+        <div class="math-display">$$\begin{aligned}\langle T(y), z\rangle &amp;= \langle y, T^*(z)\rangle = \langle y, \lambda z\rangle\\[2pt]
+        &amp;= \overline{\lambda}\langle y, z\rangle = 0.\qquad\bigstar\end{aligned}$$</div>
+        <!-- ═══════════ Section 6.4 notes · Slide p.5 ═══════════ -->
+        <p><strong>Proof (Continued) :</strong> Note that</p>
+        <p>$(i)$ $\dim W^\perp = n-1$, and</p>
+        <p>$(ii)$ the characteristic polynomial of $T_{W^\perp} : W^\perp \to W^\perp$ divides that of $T : V \to V$.</p>
+        <p>By $(ii)$, the characteristic polynomial of $T_{W^\perp} : W^\perp \to W^\perp$ splits.</p>
+        <p>By $(i)$ and induction hypothesis, it follows that</p>
+        <p>there exists an orthonormal basis $\gamma$ of $W^\perp$ such that $[T_{W^\perp}]_\gamma$ is upper triangular.</p>
+        <p>$\beta = \gamma \cup \{z\}$ is an orthonormal basis for $V$ such that $[T]_V$ is upper triangular.</p>
+        <p><em>Note.</em> (1) The lemma applies because $T$ has an eigenvalue: its characteristic polynomial splits and has degree $n \ge 1$. By <a href="#c8-2">Lemma</a> (2), $T^*$ has an eigenvector, and dividing it by its norm gives the unit eigenvector $z$. (2) Fact $(ii)$ is <a href="ch04.html#c4-12">Theorem 5.21</a>, applied to the $T$-invariant subspace $W^\perp$ from the Claim. (3) In the last line, $[T]_V$ should read $[T]_\beta$. Also, $\beta$ must be ordered with $z$ last: if $\gamma = \{y_1,\ldots,y_{n-1}\}$ and $\beta = \{y_1,\ldots,y_{n-1},z\}$, then $T(y_j) \in W^\perp = \operatorname{span}(\gamma)$ for $j \le n-1$, so</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}[T_{W^\perp}]_\gamma &amp; \ast\\ 0 &amp; \ast\end{pmatrix},$$</div>
+        <p>which is upper triangular. (If $z$ were placed first, the first column would be the coordinate vector of $T(z)$, which need not be a multiple of $e_1$.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.6 ═══════════ -->
+
+<!-- S6.4 p6 상단 박스: Guiding Problem 재수록 (서술) -->
+<div class="card note-card" id="note08-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="formal-box">
+                  <p><strong>이 절의 길잡이 문제 :</strong></p>
+                  <p>$V$가 고유벡터로 이루어진 정규직교기저를 갖도록 보장하는 조건을 찾아라.</p>
+                </div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="formal-box">
+          <p><strong>Guiding Problem of This Section :</strong></p>
+          <p>Find conditions that guarantee that $V$ has an orthonormal basis of eigenvectors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.4 p6 Proposition (★) + Proof -->
+<div class="card thm-card" id="c8-4">
+  <div class="card-head">
+    <span class="thm-num">PROP ★</span>
+    <span class="thm-title">정규직교 고유기저가 있으면 $TT^* = T^*T$ <em>An Orthonormal Basis of Eigenvectors Forces $TT^* = T^*T$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$가 고유벡터로 이루어진 정규직교기저를 가진다고 하자. 그러면 $TT^* = T^*T$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$\beta$를 고유벡터로 이루어진 정규직교기저라 하자.</p>
+        <p>그러면 $[T]_\beta$는 대각행렬이고, 따라서 $[T^*]_\beta = [T]_\beta^*$도 대각행렬이다.</p>
+        <p>특히 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}[TT^*]_\beta &amp;= [T]_\beta[T^*]_\beta = [T^*]_\beta[T]_\beta\\[2pt]
+                &amp;= [T^*T]_\beta.\end{aligned}$$</div>
+        <p>그러므로 $TT^* = T^*T$이다.</p>
+        <p><em>역주.</em> $\beta$가 정규직교기저이므로 $[T^*]_\beta = [T]_\beta^*$는 <a href="ch07.html#c7-11">정리 6.10</a>이다. 대각행렬의 켤레전치는 대각행렬이고, 대각행렬끼리는 곱셈이 교환가능하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Suppose that $V$ has an orthonormal basis of eigenvectors. Then $TT^* = T^*T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Let $\beta$ be an orthonormal basis of eigenvectors.</p>
+        <p>Then $[T]_\beta$ is a diagonal matrix, and hence $[T^*]_\beta = [T]_\beta^*$ is also a diagonal matrix.</p>
+        <p>In particular, it follows that</p>
+        <div class="math-display">$$\begin{aligned}[TT^*]_\beta &amp;= [T]_\beta[T^*]_\beta = [T^*]_\beta[T]_\beta\\[2pt]
+        &amp;= [T^*T]_\beta.\end{aligned}$$</div>
+        <p>Therefore it holds that $TT^* = T^*T$.</p>
+        <p><em>Note.</em> Since $\beta$ is orthonormal, $[T^*]_\beta = [T]_\beta^*$ is <a href="ch07.html#c7-11">Theorem 6.10</a>. The conjugate transpose of a diagonal matrix is diagonal, and diagonal matrices commute.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.4 p6 Definitions (1)(2) normal -->
+<div class="card def-card" id="c8-5">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">정규연산자와 정규행렬 <em>Normal Operators and Normal Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $T : V \to V$를 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p>$TT^* = T^*T$이면 $T$를 <strong>정규</strong>(normal)라 한다.</p>
+        <p><strong>(2)</strong> $n \times n$ 실행렬 또는 복소행렬 $A$가 $AA^* = A^*A$를 만족하면 <strong>정규</strong>라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Let $T : V \to V$ be a linear operator on an inner product space $V$.</p>
+        <p>We say that $T$ is <strong>normal</strong> if $TT^* = T^*T$.</p>
+        <p><strong>(2)</strong> An $n \times n$ real or complex matrix $A$ is said to be <strong>normal</strong> if $AA^* = A^*A$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.7 ═══════════ -->
+
+<!-- S6.4 p7 Remark (Theorem 6.10) -->
+<div class="card rem-card" id="c8-6">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">정규성과 정규직교기저에 대한 행렬 <em>Normality and the Matrix in an Orthonormal Basis</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><a href="ch07.html#c7-11">정리 6.10</a>에 의해 다음이 성립한다.</p>
+        <p>$T$가 정규일 필요충분조건은 $[T]_\beta$가 정규인 것이다. 여기서 $\beta$는 정규직교기저이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>By <a href="ch07.html#c7-11">Theorem 6.10</a>, it holds that</p>
+        <p>$T$ is normal if and only if $[T]_\beta$ is normal, where $\beta$ is an orthonormal basis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.4 p7 Example 1 (rotation; p13 박스에 재수록) -->
+<div class="card exam-card" id="c8-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">회전변환은 정규이다 <em>A Rotation Is Normal</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 $\theta$만큼의 회전이라 하자. 단 $0 \lt \theta \lt \pi$이다. 그러면</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+        <p>이다. 여기서 $\beta = \{e_1,e_2\}$는 $\mathbb{R}^2$의 표준기저이다.</p>
+        <p>그러면</p>
+        <div class="math-display">$$[T]_\beta^* = \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+        <p>이므로 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I.$$</div>
+        <p>따라서 $[T]_\beta$는 정규이고, 그러므로 $T$도 정규이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be rotation by $\theta$, where $0 \lt \theta \lt \pi$. Thus</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+        <p>where $\beta = \{e_1,e_2\}$ is the standard basis for $\mathbb{R}^2$.</p>
+        <p>Then,</p>
+        <div class="math-display">$$[T]_\beta^* = \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+        <p>and so it holds that</p>
+        <div class="math-display">$$[T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I.$$</div>
+        <p>Therefore $[T]_\beta$, and hence $T$, is normal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.4 p7 Example 2 (real skew-symmetric) -->
+<div class="card exam-card" id="c8-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">실 반대칭행렬은 정규이다 <em>Real Skew-Symmetric Matrices Are Normal</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(\mathbb{R})$를 <strong>실 반대칭행렬</strong>, 즉 $A^t = -A$인 행렬이라 하자.</p>
+        <p>그러면 $AA^t = A^tA = -A^2$이므로 $A$는 정규이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n\times n}(\mathbb{R})$ be a <strong>real skew-symmetric matrix</strong>; that is, $A^t = -A$.</p>
+        <p>Then $AA^t = A^tA = -A^2$ and so $A$ is normal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.8 ═══════════ -->
+
+<!-- S6.4 p8 Theorem 6.15 (a)–(d) + Proof -->
+<div class="card thm-card" id="c8-9">
+  <div class="card-head">
+    <span class="thm-num">THM 6.15</span>
+    <span class="thm-title">정규연산자의 성질 <em>Properties of Normal Operators</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 내적공간, $T$를 $V$ 위의 정규연산자라 하자.</p>
+        <p>그러면 다음이 성립한다.</p>
+        <p>$(a)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|T^*(x)\|$이다.</p>
+        <p>$(b)$ 모든 $c \in F$에 대하여 $T-cI$는 정규이다.</p>
+        <p>$(c)$ 어떤 $\lambda \in F$와 $x \in V$에 대하여 $Tx = \lambda x$이면 $T^*x = \overline{\lambda}x$이다.</p>
+        <p>특히 $x$가 $T$의 고유벡터이면 $x$는 $T^*$의 고유벡터이다.</p>
+        <p>$(d)$ $\lambda_1$, $\lambda_2$가 서로 다른 스칼라이고 $Tx_1 = \lambda_1x_1$, $Tx_2 = \lambda_2x_2$라 하자.</p>
+        <p>그러면 $\langle x_1, x_2\rangle = 0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(a)$</p>
+        <div class="math-display">$$\begin{aligned}\|T(x)\|^2 &amp;= \langle T(x), T(x)\rangle = \langle x, T^*T(x)\rangle\\[2pt]
+                &amp;= \langle x, TT^*(x)\rangle = \langle T^*(x), T^*(x)\rangle\\[2pt]
+                &amp;= \|T^*(x)\|^2\end{aligned}$$</div>
+        <p>$(b)$</p>
+        <div class="math-display">$$\begin{aligned}&amp;(T-cI)(T-cI)^*\\[2pt]
+                &amp;\quad= (T-cI)(T^*-\overline{c}I)\\[2pt] &amp;\quad= TT^*-cT^*-\overline{c}T+c\overline{c}I\\[2pt]
+                &amp;\quad= T^*T-cT^*-\overline{c}T+c\overline{c}I\\[2pt]
+                &amp;\quad= (T^*-\overline{c}I)(T-cI)\\[2pt] &amp;\quad= (T-cI)^*(T-cI)\end{aligned}$$</div>
+        <p>$(c)$ $Tx = \lambda x$, 즉 $(T-\lambda I)(x) = 0$이라 하자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \|(T-\lambda I)(x)\|^2 = \|(T-\lambda I)^*(x)\|^2\\[2pt]
+                &amp;= \|(T^*-\overline{\lambda}I)(x)\|^2.\end{aligned}$$</div>
+        <p>따라서 $(T^*-\overline{\lambda}I)(x) = 0_V$이고, 그러므로 $T^*x = \overline{\lambda}x$이다.</p>
+        <p>$(d)$</p>
+        <div class="math-display">$$\begin{aligned}\lambda_1\langle x_1, x_2\rangle &amp;= \langle \lambda_1x_1, x_2\rangle = \langle Tx_1, x_2\rangle\\[2pt] &amp;= \langle x_1, T^*x_2\rangle
+                 = \langle x_1, \overline{\lambda_2}x_2\rangle\\[2pt] &amp;= \lambda_2\langle x_1, x_2\rangle\end{aligned}$$</div>
+        <p>$\lambda_1$과 $\lambda_2$가 서로 다르므로 $\langle x_1, x_2\rangle = 0$이다.</p>
+        <p><em>역주.</em> $(c)$에서 가운데 등식은 $(b)$에 의해 정규인 $T-\lambda I$에 $(a)$를 적용한 것이고, 마지막 등식은 $(T-\lambda I)^* = T^*-\overline{\lambda}I$ (<a href="ch07.html#c7-14">정리 6.11</a>)를 쓴 것이다. $(d)$에서 $T^*x_2 = \overline{\lambda_2}x_2$는 $(c)$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be an inner product space, and let $T$ be a normal operator on $V$.</p>
+        <p>Then the following statements are true.</p>
+        <p>$(a)$ $\|T(x)\| = \|T^*(x)\|$ for all $x \in V$.</p>
+        <p>$(b)$ $T-cI$ is normal for every $c \in F$.</p>
+        <p>$(c)$ If $Tx = \lambda x$ for some $\lambda \in F$ and $x \in V$, then $T^*x = \overline{\lambda}x$.</p>
+        <p>In particular, if $x$ is an eigenvector of $T$, then it is an eigenvector of $T^*$.</p>
+        <p>$(d)$ Let $\lambda_1$ and $\lambda_2$ be distinct scalars such that $Tx_1 = \lambda_1x_1$ and $Tx_2 = \lambda_2x_2$.</p>
+        <p>Then $\langle x_1, x_2\rangle = 0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(a)$</p>
+        <div class="math-display">$$\begin{aligned}\|T(x)\|^2 &amp;= \langle T(x), T(x)\rangle = \langle x, T^*T(x)\rangle\\[2pt]
+        &amp;= \langle x, TT^*(x)\rangle = \langle T^*(x), T^*(x)\rangle\\[2pt]
+        &amp;= \|T^*(x)\|^2\end{aligned}$$</div>
+        <p>$(b)$</p>
+        <div class="math-display">$$\begin{aligned}&amp;(T-cI)(T-cI)^*\\[2pt]
+        &amp;\quad= (T-cI)(T^*-\overline{c}I)\\[2pt] &amp;\quad= TT^*-cT^*-\overline{c}T+c\overline{c}I\\[2pt]
+        &amp;\quad= T^*T-cT^*-\overline{c}T+c\overline{c}I\\[2pt]
+        &amp;\quad= (T^*-\overline{c}I)(T-cI)\\[2pt] &amp;\quad= (T-cI)^*(T-cI)\end{aligned}$$</div>
+        <p>$(c)$ Suppose that $Tx = \lambda x$ and hence $(T-\lambda I)(x) = 0$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \|(T-\lambda I)(x)\|^2 = \|(T-\lambda I)^*(x)\|^2\\[2pt]
+        &amp;= \|(T^*-\overline{\lambda}I)(x)\|^2.\end{aligned}$$</div>
+        <p>Hence, it holds that $(T^*-\overline{\lambda}I)(x) = 0_V$ and so $T^*x = \overline{\lambda}x$.</p>
+        <p>$(d)$</p>
+        <div class="math-display">$$\begin{aligned}\lambda_1\langle x_1, x_2\rangle &amp;= \langle \lambda_1x_1, x_2\rangle = \langle Tx_1, x_2\rangle\\[2pt] &amp;= \langle x_1, T^*x_2\rangle
+         = \langle x_1, \overline{\lambda_2}x_2\rangle\\[2pt] &amp;= \lambda_2\langle x_1, x_2\rangle\end{aligned}$$</div>
+        <p>Therefore $\langle x_1, x_2\rangle = 0$ since $\lambda_1$ and $\lambda_2$ are distinct.</p>
+        <p><em>Note.</em> In $(c)$, the middle equality is $(a)$ applied to $T-\lambda I$, which is normal by $(b)$, and the last one uses $(T-\lambda I)^* = T^*-\overline{\lambda}I$ (<a href="ch07.html#c7-14">Theorem 6.11</a>). In $(d)$, the step $T^*x_2 = \overline{\lambda_2}x_2$ is $(c)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.9 ═══════════ -->
+
+<!-- S6.4 p9 Theorem 6.16 (complex) + Proof — "Theorme" 오타, 정리 6.15(c) 사용 미표기 (ERRATA 64) -->
+<div class="card thm-card" id="c8-10">
+  <div class="card-head">
+    <span class="thm-num">THM 6.16</span>
+    <span class="thm-title">복소 내적공간에서의 정규직교 고유기저 <em>Orthonormal Eigenbases in Complex Inner Product Spaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 유한차원 <strong>복소</strong> 내적공간이라 하자.</p>
+        <p>$T : V \to V$를 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 다음 두 조건은 서로 동치이다.</p>
+        <p>$(i)$ $T$는 정규이다.</p>
+        <p>$(ii)$ $T$의 고유벡터로 이루어진 $V$의 정규직교기저가 존재한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>대수학의 기본정리에 의해 $T$의 특성다항식은 분해된다.</p>
+        <p>$(ii) \Rightarrow (i)$ <a href="#c8-4">명제 (★)</a>를 보라.</p>
+        <p>$(i) \Rightarrow (ii)$ <a href="#c8-3">정리 6.14 (슈어 정리)</a>에 의해</p>
+        <p>다음을 만족하는 $V$의 정규직교기저 $\beta = \{v_1,v_2,\ldots,v_n\}$이 존재한다.</p>
+        <p>행렬 $A := [T]_\beta$는 상삼각행렬이다.</p>
+        <p>$A$가 상삼각행렬이므로 $T(v_k) = A_{1k}v_1 + A_{2k}v_2 + \cdots + A_{kk}v_k$임에 주목하자.</p>
+        <p>특히 $v_1$은 $T$의 고유벡터이다.</p>
+        <p>$v_1,\ldots,v_{k-1}$이 $T$의 고유벡터라 하고, $1 \le j \le k-1$에 대하여 $T(v_j) = \lambda_jv_j$라 쓰자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}A_{jk} &amp;= \langle T(v_k), v_j\rangle = \langle v_k, T^*(v_j)\rangle\\[2pt]
+                &amp;= \langle v_k, \overline{\lambda_j}v_j\rangle = \lambda_j\langle v_k, v_j\rangle = 0\end{aligned}$$</div>
+        <p>이 모든 $1 \le j \le k-1$에 대하여 성립한다.</p>
+        <p>따라서 $T(v_k) = A_{kk}v_k$이고, 그러므로 $v_k$는 $T$의 고유벡터이다.</p>
+        <p>결국 $v_1,v_2,\ldots,v_n$은 모두 $T$의 고유벡터이다.</p>
+        <p><em>역주.</em> 영문 패널의 &ldquo;Theorme&rdquo;는 &ldquo;Theorem&rdquo;의 오타이고 마지막 줄의 &ldquo;eigenvector&rdquo;는 복수형이어야 하므로, 한국어에서는 바로잡아 옮겼다(영문 패널은 원문 그대로). 단계 $T^*(v_j) = \overline{\lambda_j}v_j$는 <a href="#c8-9">정리 6.15</a> $(c)$이며 $T$의 정규성을 사용한다. $(i)$가 쓰이는 곳은 오직 여기뿐이다. 첫 등식 $A_{jk} = \langle T(v_k), v_j\rangle$는 $\beta$가 정규직교이므로 성립한다. 이 논증은 $k$에 대한 귀납법이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite dimensional <strong>complex</strong> inner product space.</p>
+        <p>Let $T : V \to V$ be a linear operator on $V$.</p>
+        <p>Then the following two conditions are equivalent:</p>
+        <p>$(i)$ $T$ is normal;</p>
+        <p>$(ii)$ There exists an orthonormal basis for $V$ consisting of eigenvectors of $T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By the fundamental theorem of algebra, the characteristic polynomial of $T$ splits.</p>
+        <p>$(ii) \Rightarrow (i)$ See <a href="#c8-4">Proposition (★)</a>.</p>
+        <p>$(i) \Rightarrow (ii)$ By <a href="#c8-3">Theorme 6.14 (Schur Theorem)</a>,</p>
+        <p>there exists an orthonormal basis $\beta = \{v_1,v_2,\ldots,v_n\}$ for $V$ such that</p>
+        <p>the matrix $A := [T]_\beta$ is upper triangular.</p>
+        <p>Note that $T(v_k) = A_{1k}v_1 + A_{2k}v_2 + \cdots + A_{kk}v_k$ since $A$ is upper triangular.</p>
+        <p>In particular, $v_1$ is an eigenvector of $T$.</p>
+        <p>Suppose that $v_1,\ldots,v_{k-1}$ are eigenvectors of $T$, and write $T(v_j) = \lambda_jv_j$ for $1 \le j \le k-1$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}A_{jk} &amp;= \langle T(v_k), v_j\rangle = \langle v_k, T^*(v_j)\rangle\\[2pt]
+        &amp;= \langle v_k, \overline{\lambda_j}v_j\rangle = \lambda_j\langle v_k, v_j\rangle = 0\end{aligned}$$</div>
+        <p>for all $1 \le j \le k-1$.</p>
+        <p>Thus $T(v_k) = A_{kk}v_k$ and hence $v_k$ is an eigenvector of $T$.</p>
+        <p>It follows that all of $v_1,v_2,\ldots,v_n$ are eigenvector of $T$.</p>
+        <p><em>Note.</em> &ldquo;Theorme&rdquo; is a typo for &ldquo;Theorem&rdquo;, and in the last line &ldquo;eigenvector&rdquo; should read &ldquo;eigenvectors&rdquo;. The step $T^*(v_j) = \overline{\lambda_j}v_j$ is <a href="#c8-9">Theorem 6.15</a> $(c)$, which uses the normality of $T$; this is the only place where $(i)$ enters. The first equality $A_{jk} = \langle T(v_k), v_j\rangle$ holds because $\beta$ is orthonormal. The argument is an induction on $k$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.10 ═══════════ -->
+
+<!-- S6.4 p10 Recall: H 와 그 내적 + 박스 Example 9 (§6.1 재수록, ch05 note05-4·c5-28) — 원시함수·δ_ij (ERRATA 65 = ERRATA 40 재발) -->
+<div class="card rem-card" id="c8-11">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">내적공간 $H$와 정규직교집합 $\{e^{int}\}$ <em>The Inner Product Space $H$ and the Orthonormal Set $\{e^{int}\}$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f\text{는 연속} \,\}$를</p>
+        <p>구간 $[0, 2\pi]$ 위의 연속인 복소수값 함수 전체의 집합이라 하자.</p>
+        <p>이는 $\mathbb{C}$ 위의 벡터공간이다. 또한 모든 $f \in H$는 다음과 같이 쓸 수 있다.</p>
+        <div class="math-display">$$\begin{gathered} f = f_1 + if_2 \\[2pt] \text{여기서 } f_1, f_2 : [0, 2\pi] \to \mathbb{R} \text{는 실숫값 함수이다.} \end{gathered}$$</div>
+        <p>$f, g \in H$에 대하여 $\langle f, g\rangle := \dfrac{1}{2\pi}\displaystyle\int_0^{2\pi} f(t)\overline{g(t)}\,dt$로 정의한다.</p>
+        <p>즉 $f = f_1 + if_2$, $g = g_1 + ig_2$이면</p>
+        <div class="math-display">$$f(t)\overline{g(t)} = (f_1g_1 + f_2g_2) + i(-f_1g_2 + f_2g_1)$$</div>
+        <p>이므로 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned} &amp;\frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt \\[2pt] &amp;\quad:= \frac{1}{2\pi}\int_0^{2\pi} (f_1g_1 + f_2g_2)\,dt \\[2pt] &amp;\qquad + \frac{i}{2\pi}\int_0^{2\pi} (-f_1g_2 + f_2g_1)\,dt. \end{aligned}$$</div>
+        <p>그러면 $\langle \,\cdot\,, \cdot\, \rangle : H \times H \to \mathbb{C}$는 $H$ 위의 내적이다.</p>
+        <div class="formal-box">
+                  <p><strong>예 9. :</strong> $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$라 하자.</p>
+                  <p><strong>(1)</strong> $n \neq m$이면 다음이 성립한다.</p>
+                  <div class="math-display">$$\begin{aligned} \langle f_n, f_m\rangle &amp;= \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)t}\,dt \\[2pt] &amp;= \left[ \frac{1}{2\pi i(n-m)}\,e^{i(n-m)t} \right]_0^{2\pi} \\[2pt] &amp;= 0. \end{aligned}$$</div>
+                  <p><strong>(2)</strong> $n = m$이면 다음이 성립한다.</p>
+                  <div class="math-display">$$\langle f_n, f_n\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 \cdot dt = \frac{2\pi}{2\pi} = 1.$$</div>
+                  <p>결과적으로 $\langle f_n, f_m\rangle = \delta_{nm}$이고 따라서 $S$는 정규직교집합이다.</p>
+                </div>
+        <p><em>역주.</em> 이 슬라이드는 §6.1의 내적공간 $H$와 <a href="ch05.html#c5-28">예 9</a>를 다시 실은 것이며, 같은 오식이 그대로 있다. (1)의 괄호 안 원시함수는 $\frac{1}{2\pi}e^{i(n-m)t}$의 원시함수 $\frac{1}{2\pi i(n-m)}e^{i(n-m)t}$로, 마지막 줄의 $\delta_{ij}$는 $\delta_{nm}$으로 바로잡아 옮겼다. 값 $0$은 $e^{2\pi i(n-m)} = 1$이므로 그대로 옳다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f \text{ is continuous} \,\}$ be</p>
+        <p>the set of all continuous complex-valued functions on the interval $[0, 2\pi]$.</p>
+        <p>This is a vector space over $\mathbb{C}$. Also every $f \in H$ can be written as</p>
+        <div class="math-display">$$\begin{gathered} f = f_1 + if_2 \\[2pt] \text{where } f_1, f_2 : [0, 2\pi] \to \mathbb{R} \\[2pt] \text{are real-valued functions.} \end{gathered}$$</div>
+        <p>For $f, g \in H$, define $\langle f, g\rangle := \dfrac{1}{2\pi}\displaystyle\int_0^{2\pi} f(t)\overline{g(t)}\,dt$.</p>
+        <p>That is, if $f = f_1 + if_2$ and $g = g_1 + ig_2$ then</p>
+        <div class="math-display">$$f(t)\overline{g(t)} = (f_1g_1 + f_2g_2) + i(-f_1g_2 + f_2g_1)$$</div>
+        <p>and so</p>
+        <div class="math-display">$$\begin{aligned} &amp;\frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt \\[2pt] &amp;\quad:= \frac{1}{2\pi}\int_0^{2\pi} (f_1g_1 + f_2g_2)\,dt \\[2pt] &amp;\qquad + \frac{i}{2\pi}\int_0^{2\pi} (-f_1g_2 + f_2g_1)\,dt. \end{aligned}$$</div>
+        <p>Then $\langle \,\cdot\,, \cdot\, \rangle : H \times H \to \mathbb{C}$ is an inner product on $H$.</p>
+        <div class="formal-box">
+          <p><strong>Example 9. :</strong> Let $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$.</p>
+          <p><strong>(1)</strong> If $n \neq m$, then</p>
+          <div class="math-display">$$\begin{aligned} \langle f_n, f_m\rangle &amp;= \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)t}\,dt \\[2pt] &amp;= \left[ \frac{1}{2\pi(m-n)}\,e^{i(m-n)t} \right]_0^{2\pi} = 0. \end{aligned}$$</div>
+          <p><strong>(2)</strong> If $n = m$, then</p>
+          <div class="math-display">$$\langle f_n, f_n\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 \cdot dt = \frac{2\pi}{2\pi} = 1.$$</div>
+          <p>In consequence, $\langle f_n, f_m\rangle = \delta_{ij}$ and hence $S$ is orthonormal.</p>
+        </div>
+        <p><em>Note.</em> This slide repeats the inner product space $H$ and Example 9 of §6.1 (see <a href="ch05.html#c5-28">§6.1 Example 9</a>), with the same misprints: an antiderivative of $\frac{1}{2\pi}e^{i(n-m)t}$ is $\frac{1}{2\pi i(n-m)}e^{i(n-m)t}$, so the bracket in (1) should read $\left[\frac{1}{2\pi i(n-m)}e^{i(n-m)t}\right]_0^{2\pi}$ (the value $0$ is still correct, because $e^{2\pi i(n-m)} = 1$), and $\delta_{ij}$ in the last line should be $\delta_{nm}$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.11 ═══════════ -->
+
+<!-- S6.4 p11–p12 Example 3 + Example 3 (Continued) -->
+<div class="card exam-card" id="c8-12">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">고유벡터가 없는 정규연산자 <em>A Normal Operator with No Eigenvectors</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>내적공간</p>
+        <div class="math-display">$$H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f\text{는 연속} \,\}$$</div>
+        <p>과 그 정규직교집합 $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$를 생각하자.</p>
+        <p>$V = \operatorname{span}(S)$라 하고, $T$와 $U$를 다음과 같이 정의되는 $V$ 위의 선형연산자라 하자.</p>
+        <div class="math-display">$$T(f) = f_1f \text{ 이고 } U(f) = f_{-1}f.$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{gathered}T(f_n) = f_{n+1} \text{ 이고 } U(f_n) = f_{n-1}\\[2pt] \text{(모든 정수 } n\text{에 대하여).}\end{gathered}$$</div>
+        <p>또한 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}\langle T(f_m), f_n\rangle &amp;= \langle f_{m+1}, f_n\rangle = \delta_{m+1,n} = \delta_{m,n-1}\\[2pt]
+                &amp;= \langle f_m, f_{n-1}\rangle = \langle f_m, U(f_n)\rangle.\end{aligned}$$</div>
+        <p>이는 $U = T^*$임을 보여 준다.</p>
+        <p>더 나아가</p>
+        <div class="math-display">$$TT^* = T^*T = I_V \text{ 이고 따라서 } T \text{는 정규이다.}$$</div>
+        <p><strong>예 3. (계속) :</strong> $T$가 고유벡터를 갖지 않음을 보이자.</p>
+        <p>$f$가 $T$의 고유벡터, 즉 어떤 $\lambda$에 대하여 $T(f) = \lambda f$라 가정하자.</p>
+        <p>$S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$에 대하여 $V = \operatorname{span}(S)$이므로 다음과 같이 쓸 수 있다.</p>
+        <div class="math-display">$$\begin{gathered}f = a_nf_n + a_{n+1}f_{n+1} + \cdots + a_mf_m\\[2pt] \text{단, } a_m \neq 0.\end{gathered}$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{array}{rl}T(f) &amp; = a_nf_{n+1} + a_{n+1}f_{n+2}\\ &amp; \quad + \cdots + a_mf_{m+1}\\[2pt]
+                \Vert &amp; \\[2pt]
+                \lambda f &amp; = \lambda a_nf_n + \lambda a_{n+1}f_{n+1}\\ &amp; \quad + \cdots + \lambda a_mf_m.\end{array}$$</div>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}f_{m+1} = {}&amp;\frac{1}{a_m}(\lambda a_nf_n + \lambda a_{n+1}f_{n+1}\\[2pt] &amp;\qquad + \cdots + \lambda a_mf_m)\\[2pt]
+                &amp;- \frac{1}{a_m}(a_nf_{n+1} + a_{n+1}f_{n+2}\\[2pt] &amp;\qquad + \cdots + a_{m-1}f_m)\end{aligned}$$</div>
+        <p>이고, 따라서 $f_{m+1}$은 $f_n, f_{n+1}, \ldots, f_m$의 일차결합이다.</p>
+        <p>그러나 $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$가 일차독립이므로 이는 모순이다.</p>
+        <p><em>역주.</em> 여기서 $V = \operatorname{span}(S)$는 무한차원이다. 따라서 $T$는 고유벡터를 전혀 갖지 않는 복소 내적공간 위의 정규연산자이며, <a href="#c8-10">정리 6.16</a>의 유한차원 가정은 뺄 수 없다. $U = T^*$인 까닭은, 모든 기저벡터 $f = f_m$, $g = f_n$에 대하여 $\langle T(f), g\rangle = \langle f, U(g)\rangle$가 성립하고, 첫째 성분에 대한 선형성과 둘째 성분에 대한 켤레선형성에 의해 모든 $f, g \in V$에 대해서도 성립하기 때문이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider the inner product space</p>
+        <div class="math-display">$$H := \{\, f : [0, 2\pi] \to \mathbb{C} \mid f \text{ is continuous} \,\}$$</div>
+        <p>with the orthonormal set $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$.</p>
+        <p>Let $V = \operatorname{span}(S)$, and let $T$ and $U$ be the linear operators on $V$ defined by</p>
+        <div class="math-display">$$T(f) = f_1f \text{ and } U(f) = f_{-1}f.$$</div>
+        <p>Thus</p>
+        <div class="math-display">$$\begin{gathered}T(f_n) = f_{n+1} \text{ and } U(f_n) = f_{n-1}\\[2pt] \text{for all integers } n.\end{gathered}$$</div>
+        <p>Also, it holds that</p>
+        <div class="math-display">$$\begin{aligned}\langle T(f_m), f_n\rangle &amp;= \langle f_{m+1}, f_n\rangle = \delta_{m+1,n} = \delta_{m,n-1}\\[2pt]
+        &amp;= \langle f_m, f_{n-1}\rangle = \langle f_m, U(f_n)\rangle.\end{aligned}$$</div>
+        <p>This shows that $U = T^*$.</p>
+        <p>Furthermore,</p>
+        <div class="math-display">$$TT^* = T^*T = I_V \text{ and hence } T \text{ is normal.}$$</div>
+        <!-- ═══════════ Section 6.4 notes · Slide p.12 ═══════════ -->
+        <p><strong>Example 3. (Continued) :</strong> We will see that $T$ has no eigenvectors.</p>
+        <p>Suppose that $f$ is an eigenvector of $T$, say, $T(f) = \lambda f$ for some $\lambda$.</p>
+        <p>Since $V = \operatorname{span}(S)$ for $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$, we may write</p>
+        <div class="math-display">$$\begin{gathered}f = a_nf_n + a_{n+1}f_{n+1} + \cdots + a_mf_m\\[2pt] \text{where } a_m \neq 0.\end{gathered}$$</div>
+        <p>Hence</p>
+        <div class="math-display">$$\begin{array}{rl}T(f) &amp; = a_nf_{n+1} + a_{n+1}f_{n+2}\\ &amp; \quad + \cdots + a_mf_{m+1}\\[2pt]
+        \Vert &amp; \\[2pt]
+        \lambda f &amp; = \lambda a_nf_n + \lambda a_{n+1}f_{n+1}\\ &amp; \quad + \cdots + \lambda a_mf_m.\end{array}$$</div>
+        <p>Then,</p>
+        <div class="math-display">$$\begin{aligned}f_{m+1} = {}&amp;\frac{1}{a_m}(\lambda a_nf_n + \lambda a_{n+1}f_{n+1}\\[2pt] &amp;\qquad + \cdots + \lambda a_mf_m)\\[2pt]
+        &amp;- \frac{1}{a_m}(a_nf_{n+1} + a_{n+1}f_{n+2}\\[2pt] &amp;\qquad + \cdots + a_{m-1}f_m)\end{aligned}$$</div>
+        <p>and hence $f_{m+1}$ is a linear combination of $f_n, f_{n+1}, \ldots, f_m$.</p>
+        <p>But this is a contradiction since $S = \left\{\, f_n(t) = e^{int} \mid n \in \mathbb{Z} \,\right\}$ is linearly independent.</p>
+        <p><em>Note.</em> Here $V = \operatorname{span}(S)$ is infinite-dimensional. So $T$ is a normal operator on a complex inner product space with no eigenvectors at all: the finite-dimensionality assumption in <a href="#c8-10">Theorem 6.16</a> cannot be dropped. The identity $U = T^*$ follows because $\langle T(f), g\rangle = \langle f, U(g)\rangle$ holds for all basis vectors $f = f_m$, $g = f_n$, and hence, by linearity in the first argument and conjugate linearity in the second, for all $f, g \in V$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.13 ═══════════ -->
+
+<!-- S6.4 p13 서술 단락 + 박스(Example 1 재수록) -->
+<div class="card note-card" id="note08-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><a href="#c8-7">예 1</a>은 실 내적공간에서는 정규성만으로는</p>
+        <p>고유벡터로 이루어진 정규직교기저의 존재를 보장하기에 충분하지 않음을 보여 준다.</p>
+        <div class="formal-box">
+                  <p><strong>예 1. :</strong> $T : \mathbb{R}^2 \to \mathbb{R}^2$를 $\theta$만큼의 회전이라 하자. 단 $0 \lt \theta \lt \pi$이다. 그러면</p>
+                  <div class="math-display">$$[T]_\beta = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+                  <p>이다. 여기서 $\beta = \{e_1,e_2\}$는 $\mathbb{R}^2$의 표준기저이다.</p>
+                  <p>그러면 $[T]_\beta^* = \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}$이므로 $[T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I$가 성립한다.</p>
+                  <p>따라서 $[T]_\beta$는 정규이고, 그러므로 $T$도 정규이다.</p>
+                </div>
+        <p>실 내적공간에서 그러한 기저의 존재를 보장하려면 정규성을</p>
+        <p>더 강한 조건 $T = T^*$로 바꾸어야 한다.</p>
+        <p><em>역주.</em> 회전 $T$는 $\mathbb{R}^2$에서 고유벡터를 전혀 갖지 않는다. 특성다항식 $t^2 - 2(\cos\theta)t + 1$의 판별식이 $0 \lt \theta \lt \pi$에서 $4\cos^2\theta - 4 \lt 0$이므로 실근이 없기 때문이다. 따라서 $T$는 정규이지만 $\mathbb{R}^2$에는 $T$의 고유벡터로 이루어진 정규직교기저가 없다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><a href="#c8-7">Example 1</a> illustrates that normality is not sufficient to guarantee</p>
+        <p>the existence of an orthonormal basis of eigenvectors for real inner product spaces.</p>
+        <div class="formal-box">
+          <p><strong>Example 1. :</strong> Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be rotation by $\theta$, where $0 \lt \theta \lt \pi$. Thus</p>
+          <div class="math-display">$$[T]_\beta = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$$</div>
+          <p>where $\beta = \{e_1,e_2\}$ is the standard basis for $\mathbb{R}^2$.</p>
+          <p>Then, $[T]_\beta^* = \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}$ and so it holds that $[T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I$.</p>
+          <p>Therefore $[T]_\beta$, and hence $T$, is normal.</p>
+        </div>
+        <p>For real inner product spaces, we must replace normality by</p>
+        <p>the stronger condition that $T = T^*$ in order to guarantee such a basis.</p>
+        <p><em>Note.</em> The rotation $T$ has no eigenvectors at all in $\mathbb{R}^2$: its characteristic polynomial $t^2 - 2(\cos\theta)t + 1$ has discriminant $4\cos^2\theta - 4 \lt 0$ for $0 \lt \theta \lt \pi$, so it has no real roots. Hence $T$ is normal, but $\mathbb{R}^2$ has no orthonormal basis of eigenvectors of $T$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.4 p13 Definitions (1)(2) self-adjoint -->
+<div class="card def-card" id="c8-13">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">자기수반연산자와 자기수반행렬 <em>Self-Adjoint Operators and Self-Adjoint Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p><strong>(1)</strong> $T = T^*$이면 $T$를 <strong>자기수반(에르미트)</strong>(self-adjoint, Hermitian)이라 한다.</p>
+        <p><strong>(2)</strong> $n \times n$ 실행렬 또는 복소행렬 $A$가 $A = A^*$이면 <strong>자기수반(에르미트)</strong>이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on an inner product space $V$.</p>
+        <p><strong>(1)</strong> We say that $T$ is <strong>self-adjoint (Hermitian)</strong> if $T = T^*$.</p>
+        <p><strong>(2)</strong> An $n \times n$ real or complex matrix $A$ is <strong>self-adjoint (Hermitian)</strong> if $A = A^*$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.14 ═══════════ -->
+<!-- S6.4 p14 상단: Theorem 6.17 진술이 처음 나옴 → p16 증명과 함께 보조정리 뒤 한 카드(c8-15)로 -->
+
+<!-- S6.4 p14–p15 Lemma (a)(b) + Proof (a) (p14), Proof (b) (p15; 진술 재수록) -->
+<div class="card thm-card" id="c8-14">
+  <div class="card-head">
+    <span class="thm-num">LEM</span>
+    <span class="thm-title">자기수반연산자의 고유값과 특성다항식 <em>Eigenvalues and the Characteristic Polynomial of a Self-Adjoint Operator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 내적공간 $V$ 위의 자기수반연산자라 하자.</p>
+        <p>그러면</p>
+        <p>$(a)$ $T$의 모든 고유값은 실수이다.</p>
+        <p>$(b)$ $F = \mathbb{R}$이라 하자. 그러면 $T$의 특성다항식은 분해된다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(a)$ $TT^* = T^*T$이므로 $T$가 정규임을 상기하자.</p>
+        <p>$\lambda$를 $T$의 고유값이라 하고, 어떤 $x \neq 0_V$에 대하여 $Tx = \lambda x$라 하자.</p>
+        <p>그러면 $T^*x = \overline{\lambda}x$이고, 따라서 $Tx = \overline{\lambda}x$이다.</p>
+        <p>그러므로 $\lambda = \overline{\lambda}$이고, 따라서 $\lambda$는 실수이다.</p>
+        <p>$(b)$ $n = \dim V$라 하고, $\beta = \{v_1,v_2,\ldots,v_n\}$을 $V$의 정규직교기저라 하자.</p>
+        <p>$T = T^*$이므로 $[T]_\beta = [T^*]_\beta = [T]_\beta^*$이다.</p>
+        <p>따라서 $A := [T]_\beta$는 자기수반이다.</p>
+        <p>선형연산자 $T_A : \mathbb{C}^n \to \mathbb{C}^n$, $x \mapsto T_A(x) = Ax$를 생각하자.</p>
+        <p>$\gamma = \{e_1,e_2,\ldots,e_n\}$이 $\mathbb{C}^n$의 표준(정규직교)기저이면 다음에 주목하자.</p>
+        <div class="math-display">$$[T_A]_\gamma = A \text{ 이고 따라서 } T_A \text{는 자기수반이다.}$$</div>
+        <p>그러므로 $(a)$에 의해 $T_A$의 고유값은 실수이다.</p>
+        <p>대수학의 기본정리에 의해</p>
+        <p>$T_A$의 특성다항식 $\det(A-tI_n)$은 분해된다.</p>
+        <p>$T$의 특성다항식은 $\det(A-tI_n)$과 같으므로</p>
+        <p>이로써 증명이 끝난다.</p>
+        <p><em>역주.</em> $(a)$에서 단계 $T^*x = \overline{\lambda}x$는 <a href="#c8-9">정리 6.15</a> $(c)$이다. 이어서 $x \neq 0_V$에 대하여 $\lambda x = Tx = \overline{\lambda}x$이므로 $\lambda = \overline{\lambda}$를 얻는다. $(b)$의 요점은, $\det(A-tI_n)$이 $\mathbb{C}$ 위에서 일차식 $t-\lambda$들의 곱으로 인수분해되고 그 근 $\lambda$는 $T_A$의 고유값이라는 것이다. 이 근들은 $(a)$에 의해 실수이므로 같은 인수분해가 $\mathbb{R}$ 위에서 이루어진다. 등식 $[T^*]_\beta = [T]_\beta^*$는 <a href="ch07.html#c7-11">정리 6.10</a>이다($\beta$는 정규직교기저). 마찬가지로 $\gamma$가 정규직교기저이므로 $[T_A^*]_\gamma = [T_A]_\gamma^* = A^* = A = [T_A]_\gamma$이고, 따라서 $T_A^* = T_A$이다. 여기서 $F = \mathbb{R}$이므로 $A$의 성분은 실수이고, $A$를 복소행렬로 보아도 $A^* = A$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a self-adjoint operator on a finite dimensional inner product space $V$.</p>
+        <p>Then</p>
+        <p>$(a)$ Every eigenvalue of $T$ is real.</p>
+        <p>$(b)$ Suppose that $F = \mathbb{R}$. Then the characteristic polynomial of $T$ splits.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(a)$ Recall that $T$ is normal since $TT^* = T^*T$.</p>
+        <p>Let $\lambda$ be an eigenvalue of $T$, and suppose that $Tx = \lambda x$ for some $x \neq 0_V$.</p>
+        <p>Then $T^*x = \overline{\lambda}x$ and hence $Tx = \overline{\lambda}x$.</p>
+        <p>Thus we have $\lambda = \overline{\lambda}$, and so $\lambda$ is real.</p>
+        <!-- ═══════════ Section 6.4 notes · Slide p.15 ═══════════ -->
+        <p>$(b)$ Let $n = \dim V$, and let $\beta = \{v_1,v_2,\ldots,v_n\}$ be an orthonormal basis for $V$.</p>
+        <p>Since $T = T^*$, we have $[T]_\beta = [T^*]_\beta = [T]_\beta^*$.</p>
+        <p>Thus $A := [T]_\beta$ is self-adjoint.</p>
+        <p>Consider the linear operator $T_A : \mathbb{C}^n \to \mathbb{C}^n$, $x \mapsto T_A(x) = Ax$.</p>
+        <p>Note that if $\gamma = \{e_1,e_2,\ldots,e_n\}$ is the standard (orthonormal) basis for $\mathbb{C}^n$, then</p>
+        <div class="math-display">$$[T_A]_\gamma = A \text{ and hence } T_A \text{ is self-adjoint.}$$</div>
+        <p>So, by $(a)$, the eigenvalues of $T_A$ are real.</p>
+        <p>By fundamental theorem of algebra,</p>
+        <p>the characteristic polynomial $\det(A-tI_n)$ of $T_A$ splits.</p>
+        <p>This completes the proof</p>
+        <p>since the characteristic polynomial of $T$ is equal to $\det(A-tI_n)$.</p>
+        <p><em>Note.</em> In $(a)$, the step $T^*x = \overline{\lambda}x$ is <a href="#c8-9">Theorem 6.15</a> $(c)$; then $\lambda x = Tx = \overline{\lambda}x$ with $x \neq 0_V$ gives $\lambda = \overline{\lambda}$. In $(b)$, the point is that $\det(A-tI_n)$ factors over $\mathbb{C}$ into linear factors $t-\lambda$ whose roots $\lambda$ are eigenvalues of $T_A$; since these are real by $(a)$, the same factorization takes place over $\mathbb{R}$. The equality $[T^*]_\beta = [T]_\beta^*$ is <a href="ch07.html#c7-11">Theorem 6.10</a> ($\beta$ is orthonormal). Likewise, since $\gamma$ is orthonormal, $[T_A^*]_\gamma = [T_A]_\gamma^* = A^* = A = [T_A]_\gamma$, so $T_A^* = T_A$; here $A$ has real entries ($F = \mathbb{R}$), so $A^* = A$ also holds for $A$ regarded as a complex matrix.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.16 ═══════════ -->
+
+<!-- S6.4 p14 진술 + p16 진술 재수록·Proof — Theorem 6.17 (real) -->
+<div class="card thm-card" id="c8-15">
+  <div class="card-head">
+    <span class="thm-num">THM 6.17</span>
+    <span class="thm-title">실 내적공간에서의 정규직교 고유기저 <em>Orthonormal Eigenbases in Real Inner Product Spaces</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 유한차원 <strong>실</strong> 내적공간이라 하자.</p>
+        <p>$T : V \to V$를 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 다음 두 조건은 서로 동치이다.</p>
+        <p>$(i)$ $T$는 자기수반이다.</p>
+        <p>$(ii)$ $T$의 고유벡터로 이루어진 $V$의 정규직교기저가 존재한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(i) \Rightarrow (ii)$ $T$가 자기수반이라 하자.</p>
+        <p><a href="#c8-14">보조정리</a>에 의해 <a href="#c8-3">슈어 정리</a>를 적용할 수 있고, 따라서</p>
+        <p>행렬 $A := [T]_\beta$가 상삼각행렬이 되는 $V$의 정규직교기저 $\beta$를 얻는다.</p>
+        <p>그런데</p>
+        <div class="math-display">$$A^* = [T]_\beta^* = [T^*]_\beta = [T]_\beta = A.$$</div>
+        <p>따라서 $A$와 $A^*$는 둘 다 상삼각행렬이다.</p>
+        <p>이로부터 $A$가 대각행렬임이 자명하게 따른다.</p>
+        <p>그러므로 $\beta$는 $T$의 고유벡터로 이루어져 있다.</p>
+        <p>$(ii) \Rightarrow (i)$ $\beta$를 $T$의 고유벡터로 이루어진 $V$의 정규직교기저라 하자.</p>
+        <p>그러면 $A := [T]_\beta$는 실대각행렬이고, 따라서 $A = A^*$이다.</p>
+        <p>이는 $T$가 자기수반임을 보여 준다.</p>
+        <p><em>역주.</em> &ldquo;보조정리&rdquo;는 <a href="#c8-14">보조정리</a>의 $(b)$를 가리킨다. $T$의 특성다항식이 분해되므로 슈어 정리를 적용할 수 있다. 등식 $[T]_\beta^* = [T^*]_\beta$는 <a href="ch07.html#c7-11">정리 6.10</a>이다. $A^*$는 상삼각행렬 $A$의 켤레전치이므로 하삼각행렬이고, $A$와 같으므로 상삼각이면서 하삼각이어서 대각행렬이다. $(ii) \Rightarrow (i)$에서도 $A$는 $[T]_\beta$를 뜻한다. 그러면 $[T^*]_\beta = [T]_\beta^* = A^* = A = [T]_\beta$이므로 $T^* = T$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite dimensional <strong>real</strong> inner product space.</p>
+        <p>Let $T : V \to V$ be a linear operator on $V$.</p>
+        <p>Then the following two conditions are equivalent:</p>
+        <p>$(i)$ $T$ is self-adjoint;</p>
+        <p>$(ii)$ There exists an orthonormal basis for $V$ consisting of eigenvectors of $T$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(i) \Rightarrow (ii)$ Suppose that $T$ is self-adjoint.</p>
+        <p>By <a href="#c8-14">the lemma</a>, we may apply <a href="#c8-3">Schur's theorem</a> to obtain</p>
+        <p>an orthonormal basis $\beta$ for $V$ such that the matrix $A := [T]_\beta$ is upper triangular.</p>
+        <p>But</p>
+        <div class="math-display">$$A^* = [T]_\beta^* = [T^*]_\beta = [T]_\beta = A.$$</div>
+        <p>So, $A$ and $A^*$ are both upper triangular.</p>
+        <p>Obviously, this implies that $A$ is a diagonal matrix.</p>
+        <p>Thus $\beta$ must consist of eigenvectors of $T$.</p>
+        <p>$(ii) \Rightarrow (i)$ Let $\beta$ be an orthonormal basis for $V$ consisting of eigenvectors of $T$.</p>
+        <p>Thus $[T]_\beta$ is a real diagonal matrix, and so $A = A^*$.</p>
+        <p>This shows that $T$ is self-adjoint.</p>
+        <p><em>Note.</em> &ldquo;The lemma&rdquo; is part $(b)$ of the <a href="#c8-14">Lemma</a>: the characteristic polynomial of $T$ splits, so Schur's theorem applies. The equality $[T]_\beta^* = [T^*]_\beta$ is <a href="ch07.html#c7-11">Theorem 6.10</a>. Since $A^*$ is the conjugate transpose of the upper triangular matrix $A$, it is lower triangular; being equal to $A$, it is both upper and lower triangular, hence diagonal. In $(ii) \Rightarrow (i)$, $A$ again denotes $[T]_\beta$; then $[T^*]_\beta = [T]_\beta^* = A^* = A = [T]_\beta$, so $T^* = T$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.17 ═══════════ -->
+
+<!-- S6.4 p17 Example 4 (1)(2) -->
+<div class="card exam-card" id="c8-16">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">실대칭행렬과 복소대칭행렬 <em>Real Symmetric versus Complex Symmetric Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $A \in M_{n\times n}(\mathbb{R})$를 실대칭행렬이라 하자.</p>
+        <p>그러면 $A^* = A$이므로 $A$는 자기수반이다.</p>
+        <p>특히 $AA^* = A^2 = A^*A$이므로 $A$는 정규이다.</p>
+        <p><strong>(2)</strong> $A = \begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}$는 복소대칭행렬이다.</p>
+        <p>$A^* = \begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}$이므로 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}AA^* &amp;= \begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}\begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}\\[2pt] &amp;= \begin{pmatrix}2 &amp; 1+i\\ 1-i &amp; 2\end{pmatrix}\end{aligned}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$\begin{aligned}A^*A &amp;= \begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}\begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}\\[2pt] &amp;= \begin{pmatrix}2 &amp; 1-i\\ 1+i &amp; 2\end{pmatrix}.\end{aligned}$$</div>
+        <p>따라서 $AA^* \neq A^*A$이다.</p>
+        <p>이는 복소대칭행렬이 정규일 필요는 없음을 보여 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Let $A \in M_{n\times n}(\mathbb{R})$ be a real symmetric matrix.</p>
+        <p>Then $A^* = A$, and hence $A$ is self-adjoint.</p>
+        <p>In particular, $AA^* = A^2 = A^*A$ and so $A$ is normal.</p>
+        <p><strong>(2)</strong> $A = \begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}$ is a complex symmetric matrix.</p>
+        <p>Since $A^* = \begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}$, we have</p>
+        <div class="math-display">$$\begin{aligned}AA^* &amp;= \begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}\begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}\\[2pt] &amp;= \begin{pmatrix}2 &amp; 1+i\\ 1-i &amp; 2\end{pmatrix}\end{aligned}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\begin{aligned}A^*A &amp;= \begin{pmatrix}-i &amp; -i\\ -i &amp; 1\end{pmatrix}\begin{pmatrix}i &amp; i\\ i &amp; 1\end{pmatrix}\\[2pt] &amp;= \begin{pmatrix}2 &amp; 1-i\\ 1+i &amp; 2\end{pmatrix}.\end{aligned}$$</div>
+        <p>Thus $AA^* \neq A^*A$.</p>
+        <p>This shows that complex symmetric matrices need not be normal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.18 ═══════════ -->
+
+<!-- S6.4 p18 Example 1 (번호 다시 시작) — ⟨v1,v2⟩ = 1 → 2 (ERRATA 66) -->
+<div class="card exam-card" id="c8-17">
+  <div class="card-head">
+    <span class="exam-num">EXAM 1</span>
+    <span class="exam-title">대칭이 아닌 행렬의 고유벡터 <em>Eigenvectors of a Non-Symmetric Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>행렬 $A = \begin{pmatrix}1 &amp; 2 &amp; 3\\ 0 &amp; 2 &amp; 3\\ 0 &amp; 0 &amp; 3\end{pmatrix}$은 대칭행렬이 아니다.</p>
+        <p>따라서</p>
+        <p>서로 다른 두 고유값에 대응하는 $A$의 두 고유벡터가 직교하지 않을 수도 있다.</p>
+        <p><strong>(1)</strong> $A$의 특성다항식은 $-(t-1)(t-2)(t-3)$이다.</p>
+        <p><strong>(2)</strong> $v_1 = \begin{pmatrix}1\\ 0\\ 0\end{pmatrix}$은 $\lambda_1 = 1$에 대응하는 고유벡터이고,</p>
+        <p>$v_2 = \begin{pmatrix}2\\ 1\\ 0\end{pmatrix}$는 $\lambda_2 = 2$에 대응하는 고유벡터이다.</p>
+        <p>$\langle v_1, v_2\rangle = 2$이므로 다음이 따른다.</p>
+        <p>$\lambda_1$, $\lambda_2$에 대응하는 $A$의 두 고유벡터 $v_1$, $v_2$는 직교하지 않는다.</p>
+        <p><em>역주.</em> 영문 패널은 $\langle v_1, v_2\rangle = 1$이라 적었으나 실제로는 $\langle v_1, v_2\rangle = 1\cdot 2 + 0\cdot 1 + 0\cdot 0 = 2$이므로 한국어 본문은 $2$로 바로잡아 옮겼다(영문 패널은 원문 그대로). $v_1$, $v_2$가 직교하지 않는다는 결론은 바뀌지 않는다. (검산: $Av_2 = (4, 2, 0)^t = 2v_2$.) <a href="#c8-9">정리 6.15</a> $(d)$에 의해 이는 $A$가 정규가 아님도 보여 준다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The matrix $A = \begin{pmatrix}1 &amp; 2 &amp; 3\\ 0 &amp; 2 &amp; 3\\ 0 &amp; 0 &amp; 3\end{pmatrix}$ is not a symmetric matrix.</p>
+        <p>Thus it is possible that</p>
+        <p>the two eigenvectors of $A$ corresponding to two distinct eigenvalues are not orthogonal.</p>
+        <p><strong>(1)</strong> The characteristic polynomial of $A$ is $-(t-1)(t-2)(t-3)$.</p>
+        <p><strong>(2)</strong> $v_1 = \begin{pmatrix}1\\ 0\\ 0\end{pmatrix}$ is an eigenvector corresponding to $\lambda_1 = 1$, and</p>
+        <p>$v_2 = \begin{pmatrix}2\\ 1\\ 0\end{pmatrix}$ is an eigenvector corresponding to $\lambda_2 = 2$.</p>
+        <p>Since $\langle v_1, v_2\rangle = 1$, it follows that</p>
+        <p>the two eigenvectors $v_1$ and $v_2$ of $A$ corresponding to $\lambda_1$ and $\lambda_2$ are not orthogonal.</p>
+        <p><em>Note.</em> In fact $\langle v_1, v_2\rangle = 1\cdot 2 + 0\cdot 1 + 0\cdot 0 = 2$, not $1$; the conclusion that $v_1$ and $v_2$ are not orthogonal is unchanged. (Check: $Av_2 = (4, 2, 0)^t = 2v_2$.) By <a href="#c8-9">Theorem 6.15</a> $(d)$, this also shows that $A$ is not normal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.4 notes · Slide p.19 ═══════════ -->
+
+<!-- S6.4 p19 Example 2 (symmetric 3×3) -->
+<div class="card exam-card" id="c8-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">대칭행렬의 정규직교 고유기저 <em>An Orthonormal Basis of Eigenvectors for a Symmetric Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>행렬 $A = \begin{pmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 2 &amp; 0\\ 1 &amp; 0 &amp; 3\end{pmatrix}$은 대칭행렬이다.</p>
+        <p>따라서 $A$의 특성다항식은 분해되고,</p>
+        <p>$A$의 고유벡터들로 $\mathbb{R}^3$의 정규직교기저를 만들 수 있다.</p>
+        <p><strong>(1)</strong> $A$의 특성다항식은 $-(t-2)(t^2-4t+2)$이다.</p>
+        <p>따라서 $A$의 고유값은 $\lambda_1 = 2$, $\lambda_2 = 2-\sqrt{2}$, $\lambda_3 = 2+\sqrt{2}$이다.</p>
+        <p><strong>(2)</strong> $v_1 = \begin{pmatrix}0\\ 1\\ 0\end{pmatrix}$은 $\lambda_1 = 2$에 대응하는 고유벡터이고,</p>
+        <p>$v_2 = \begin{pmatrix}1\\ 0\\ 1-\sqrt{2}\end{pmatrix}$는 $\lambda_2 = 2-\sqrt{2}$에 대응하는 고유벡터이며,</p>
+        <p>$v_3 = \begin{pmatrix}1\\ 0\\ 1+\sqrt{2}\end{pmatrix}$는 $\lambda_3 = 2+\sqrt{2}$에 대응하는 고유벡터이다.</p>
+        <p>따라서 다음 집합은 $\mathbb{R}^3$의 정규직교기저이다.</p>
+        <div class="math-display">$$\left\{v_1, \frac{1}{\sqrt{4-2\sqrt{2}}}v_2, \frac{1}{\sqrt{4+2\sqrt{2}}}v_3\right\}$$</div>
+        <p><em>역주.</em> 처음 두 주장은 실대칭행렬이 자기수반이므로 <a href="#c8-14">보조정리</a> $(b)$와 <a href="#c8-15">정리 6.17</a>에서 나온다. 정규화는 다음과 같이 확인한다. $\|v_2\|^2 = 1 + (1-\sqrt{2})^2 = 4-2\sqrt{2}$, $\|v_3\|^2 = 1 + (1+\sqrt{2})^2 = 4+2\sqrt{2}$이고, <a href="#c8-9">정리 6.15</a> $(d)$가 예측하듯 $\langle v_2, v_3\rangle = 1 + (1-\sqrt{2})(1+\sqrt{2}) = 0$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The matrix $A = \begin{pmatrix}1 &amp; 0 &amp; 1\\ 0 &amp; 2 &amp; 0\\ 1 &amp; 0 &amp; 3\end{pmatrix}$ is a symmetric matrix.</p>
+        <p>Thus the characteristic polynomial of $A$ splits, and</p>
+        <p>the eigenvectors of $A$ consists of an orthonormal basis of $\mathbb{R}^3$.</p>
+        <p><strong>(1)</strong> The characteristic polynomial of $A$ is $-(t-2)(t^2-4t+2)$.</p>
+        <p>Thus the eigenvalues of $A$ are $\lambda_1 = 2$, $\lambda_2 = 2-\sqrt{2}$ and $\lambda_3 = 2+\sqrt{2}$.</p>
+        <p><strong>(2)</strong> $v_1 = \begin{pmatrix}0\\ 1\\ 0\end{pmatrix}$ is an eigenvector corresponding to $\lambda_1 = 2$,</p>
+        <p>$v_2 = \begin{pmatrix}1\\ 0\\ 1-\sqrt{2}\end{pmatrix}$ is an eigenvector corresponding to $\lambda_2 = 2-\sqrt{2}$, and</p>
+        <p>$v_3 = \begin{pmatrix}1\\ 0\\ 1+\sqrt{2}\end{pmatrix}$ is an eigenvector corresponding to $\lambda_3 = 2+\sqrt{2}$.</p>
+        <p>Thus</p>
+        <div class="math-display">$$\left\{v_1, \frac{1}{\sqrt{4-2\sqrt{2}}}v_2, \frac{1}{\sqrt{4+2\sqrt{2}}}v_3\right\}$$</div>
+        <p>is an orthonormal basis for $\mathbb{R}^3$.</p>
+        <p><em>Note.</em> The first two claims come from the <a href="#c8-14">Lemma</a> $(b)$ and <a href="#c8-15">Theorem 6.17</a>, since a real symmetric matrix is self-adjoint. For the normalization: $\|v_2\|^2 = 1 + (1-\sqrt{2})^2 = 4-2\sqrt{2}$, $\|v_3\|^2 = 1 + (1+\sqrt{2})^2 = 4+2\sqrt{2}$, and $\langle v_2, v_3\rangle = 1 + (1-\sqrt{2})(1+\sqrt{2}) = 0$, as <a href="#c8-9">Theorem 6.15</a> $(d)$ predicts.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la1/index.html">선형대수학1</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="midterm.html">기출문제</a>
+    <a href="practice.html">예상문제</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
