@@ -1,6 +1,6 @@
 # 선형대수학 1 용어집 (Linear Algebra I Glossary — MATH221, Fall 2026)
 
-소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12, 13)와 단원 노트 Unit 2.2 — 영문. 중간고사 기출(Fall 2024·2025)은 $\mathbb{F}=\mathbb{R}$ 또는 $\mathbb{C}$ 표기.
+소스: MATH221 Linear Algebra I (2026 Fall, 고려대 Changho Han, 비전공 분반) 손글씨 강의노트(Lecture 1–9, 12, 13, 19)와 단원 노트 Unit 2.2–2.4 — 영문. 중간고사 기출(Fall 2024·2025)은 $\mathbb{F}=\mathbb{R}$ 또는 $\mathbb{C}$ 표기.
 교재는 Friedberg–Insel–Spence 5th ed.(연습문제용)이지만 **내용·번호·기호는 강의노트를 따른다**(ℝ 위 벡터공간, $\mathcal{F}(X,\mathbb{R})$, $\mathbb{R}[x]$, $\mathbb{R}[x]_{\leq n}$, $M_{m\times n}(\mathbb{R})$).
 `la/GLOSSARY.md`(Friedberg 한국어판 관행)를 상속한다. 번역·풀이 작성 시 이 표의 용어만 쓴다.
 
@@ -93,6 +93,8 @@
 | ch04 | 1.4 기저와 차원 | §1.4 Basis and Dimension |
 | ch05 | 2.1 선형사상: 핵, 상, 동형사상 | §2.1 Linear Maps: Kernel, Image, and Isomorphism |
 | ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | §2.2 Matrices and Linear Maps of ℝⁿ |
+| ch07 | 2.3 일반 선형사상의 행렬표현 | §2.3 Matrix Representations of General Linear Maps |
+| ch08 | 2.4 기저변환과 닮음 | §2.4 Change of Basis and Similarity |
 | identity map $I_V = \mathbb{1}_V$ | 항등사상 |
 | zero map $T_0$ (written $0 \in \mathcal{L}(V,W)$) | 영사상 |
 | linear operator ($T \in \mathcal{L}(V)$) | 선형연산자 |
@@ -115,3 +117,16 @@
 | concatenating column vectors | 열벡터를 차례로 이어 붙인 것 |
 | the data of $T$ | $T$의 정보 |
 | $j$-th column of $A$ | $A$의 $j$번째 열 |
+| matrix representation $[T]_\beta^\gamma$ (of $T$ wrt $\beta$ & $\gamma$) / $[T]_\beta := [T]_\beta^\beta$ | ($\beta$와 $\gamma$에 대한 $T$의) 행렬표현 |
+| coordinate (linear) map $\phi_\beta : V \to \mathbb{R}^n$ | 좌표 (선형)사상 |
+| strategy | 전략 |
+| composition / composable | 합성 / 합성할 수 있는 |
+| matrix multiplication / product $AB$ | 행렬곱 / 곱 |
+| identity matrix $I_n$ | 단위행렬 |
+| invertible (matrix) / inverse $A^{-1}$ | 가역(행렬) / 역행렬 |
+| square matrix | 정사각행렬 |
+| vice versa | 그 역도 마찬가지 |
+| horizontal translation | 수평 이동 |
+| Korean HS fact | 한국 고등학교에서 배우는 사실 |
+| change-of-coordinate (c.o.c) matrix / basis-change matrix | 좌표변환 행렬 / 기저변환 행렬 |
+| change of basis / similarity | 기저변환 / 닮음 |

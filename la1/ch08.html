@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) | 선형대수학 1 학습 가이드</title>
+<meta name="description" content="선형대수학 1 (MATH221) 8단원 기저변환과 닮음 — 같은 벡터의 두 기저에 대한 좌표 비교와 좌표변환 행렬(change-of-coordinate matrix) [I_V]^γ_β의 정의를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 기저변환, change of basis, 좌표변환 행렬, change-of-coordinate matrix, 기저변환 행렬, basis-change matrix, 좌표벡터, coordinate vector, 닮음, similarity, 행렬표현, matrix representation, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la1/ch08.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) — 선형대수학 1 한·영 대조">
+<meta property="og:description" content="두 기저에 대한 좌표의 관계와 좌표변환 행렬의 정의 — 선형대수학 1 기저변환과 닮음 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la1/ch08.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 1 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) — 선형대수학 1 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 1 기저변환과 닮음 — 두 기저에 대한 좌표의 관계와 좌표변환 행렬의 정의를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la1/ch08.html",
+  "datePublished": "2026-11-17",
+  "dateModified": "2026-11-17",
+  "mainEntityOfPage": "https://univmathsurvive.com/la1/ch08.html"
+}
+</script>
+<script>
+MathJax = {
+  loader: { load: ['ui/lazy'] },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } }
+};
+</script>
+<!-- la1은 MathJax 4: 좁은 화면에서 긴 인라인·디스플레이 수식 자동 줄바꿈 (ui/lazy: 화면에 들어온 수식만 조판 — v4 전체 조판은 v3보다 ~7배 느림) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="index.html">선형대수학1</a>
+      <a href="../la2/index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html" class="active">08</a>
+      <a href="quiz1.html">퀴즈 복습·기출</a>
+      <a href="midterm.html">중간고사 기출</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra I — Unit 08</p>
+  <h1>2.4 기저변환과 닮음<span>§2.4 Change of Basis and Similarity</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+    <li><a href="#c8-1"><span class="toc-num">Q</span> 두 기저에 대한 좌표의 관계는? <em>How Are Coordinates in Two Bases Related?</em></a></li>
+    <li><a href="#c8-2"><span class="toc-num">DEF 2.53</span> 좌표변환 행렬 <em>Change-of-Coordinate Matrix</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 1 (MATH221) 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 강의 노트(손글씨 태블릿 노트)의 환경 하나 = 카드 하나. id는 단원 안의 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c4-10"), 노트 등장 순서대로 배치한다.
+     배지는 강의 노트의 전역 번호(1.1, 1.2, … 1.55)를 그대로 따른다:
+     Def 1.45 → DEF 1.45, Notation → NOTATION, Thm 1.53 → THM 1.53, Prop 1.48 → PROP 1.48,
+     Lem → LEM, Cor 1.55 → COR 1.55, Rmk 1.50 → REM 1.50, Note → NOTE,
+     Ex 1.46 (= Example) → EXAM 1.46, Exercise 1.54 → EX 1.54.
+     번호 없는 항목은 유형 배지만 둔다 (DEF / REM / NOTE / Q / RECALL / CLAIM / EXAM / EX).
+     Comment 와 Guiding Principle 은 REM, Q … A 또는 Q … ⇓ Yes! 는 Q.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Def / Notation                      → card def-card  · DEF n / NOTATION n
+       Thm / Prop / Lem / Cor / Claim      → card thm-card  · THM n / PROP n / LEM n / COR n / CLAIM
+       Rmk / Note / Recall / Q / Comment   → card rem-card  · REM n / NOTE n / RECALL / Q / REM
+       Ex (Example)                        → card exam-card · EXAM n
+       Exercise                            → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title, note-card는 .note-num 만 둔다.
+  3) 각 강의 첫머리의 Last Time 복습과 Today 안내는 카드로 만들지 않는다
+     (복습에 새 내용이 있을 때만 그 내용만 담은 RECALL 카드 하나).
+     강의·쪽 경계는 Lecture N · p.M 형식의 주석 구분선으로 표시한다.
+     노트의 주제 표제(Properties of bases 등)는 div.section-title 로 옮긴다.
+  4) 카드 제목 span은 `[번역 예정]` 다음에 em 태그로 감싼 영문 제목.
+     노트에 표제가 없으면 간결한 편집 제목을 붙이고, 노트가 괄호 안에 준 이름
+     (Replacement Thm 등)이 있으면 그 이름을 쓴다.
+  5) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 손글씨 본문의 verbatim 전사. 강의자의 약어(v.s., subsp, l.c., l.i., l.d.,
+                   fin, std, coeffs, coords, elts, w/, b/c, s.t., iff, Pf 등)와 오탈자까지 그대로 둔다.
+                   약어 위에 작게 적힌 색 글씨 풀이는 옮기지 않고, 수학적 내용이 있는
+                   색 글씨 곁말은 괄호에 넣어 제자리에 둔다.
+       ko-formal : 번역 단계 전까지 p 태그 하나에 `[번역 예정]` 만 둔다.
+     노트의 색, 밑줄, 동그라미는 옮기지 않는다. 손그림은 fig-note 한 줄 설명으로 대신한다.
+  6) 노트에 증명(Pf: … □)이 적힌 명제·예제는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 두고
+     en 쪽은 원문 증명을 verbatim 전사한 뒤 div.qed(□)로 닫는다.
+     증명 안에서 소단계 끝에 그린 빗금 상자는 span.part-end(▨)로 옮긴다.
+  7) 증명이 노트에 없는 진술(Pf: Exercise, Pf: Unit 1.4 notes, Pf: Math-Major Only,
+     Exercise 1.54 등)은 진술과 Pf 줄만 en-formal 에 옮기고, 나중에 증명을 쓸 자리에
+     숨은 마커만 남긴다. ko-panel 안 div.formal 뒤에 PROOF-KO 마커, en-panel 안
+     div.en-formal 뒤에 PROOF-EN 마커를 각각 HTML 주석으로 둔다.
+  8) Motivation 같은 번호 없는 서술 단락은 버리지 않는다. 연속된 서술 덩어리마다
+     div.card.note-card 를 만들고 id는 note{단원 2자리}-{순번} (예: note04-1),
+     배지는 NOTE, 본문은 동일한 2단 구조(en verbatim / ko `[번역 예정]`)로 둔다.
+     note 카드는 목차(TOC)에 넣지 않는다.
+  9) 수식은 $...$ / $$...$$. 열벡터는 bmatrix, span 은 operatorname 으로 쓴다.
+     ⊊ 는 subsetneq, ∄ 는 nexists, ∃! 는 exists!, #S 는 백슬래시를 붙인 #S,
+     모순 표시 ※ 는 문자 그대로 둔다.
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — \lt 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     소스의 항목 라벨이 (1)/(2) 또는 (a)/(b)처럼 적힌 경우 ol 대신
+     p 태그 앞에 strong 으로 라벨을 그대로 적어 원문 표기를 보존한다.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<!-- 이 단원은 단원 노트 "Unit 2.4 of Linear Algebra I (non-math major) Notes at KU.pdf"(1쪽)를 전사한 것이다.
+     Lecture 19 p.4 끝(§2.4 표제)과 p.5가 같은 내용이다. Lecture 19 p.1 Today: "(2) Start §2.4 Change of Basis & Similarity — Compare [T]^γ_β & [T]^γ'_β'". -->
+
+<div class="section-title"><h2>§2.4 Change of Basis &amp; Similarity · 2.4 기저변환과 닮음</h2></div>
+
+<!-- ═══════════ Unit 2.4 notes · p.1 = Lecture 19 · p.5 ═══════════ -->
+
+<div class="card note-card" id="note08-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> $\beta = (e_1, e_2)$를 $\mathbb{R}^2$의 표준기저, $\gamma = (e_1 + e_2, e_2 - e_1)$을 $\mathbb{R}^2$의 기저, $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix} \in \mathbb{R}^2$라 하자. 그러면 $[v]_\beta = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$이지만</p>
+        <div class="math-display">$$[v]_\gamma = \begin{bmatrix} 1.5 \\ -0.5 \end{bmatrix} \quad \left(\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \frac{3}{2}\begin{bmatrix} 1 \\ 1 \end{bmatrix} - \frac{1}{2}\begin{bmatrix} -1 \\ 1 \end{bmatrix}\right)$$</div>
+        <p>이다.</p>
+        <p class="fig-note">[그림: 좌표평면 $\mathbb{R}^2$에 $e_1$, $e_2$(보라), $e_1 + e_2$와 $e_2 - e_1$(빨강), $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$(초록)이 원점에서 그려져 있고, $v$ 옆에 짧은 파란 점선 화살표가 있다.]</p>
+        <p>문제에 따라 한 기저가 다른 기저보다 더 낫다(예는 나중에).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> $\beta = (e_1, e_2)$ std basis of $\mathbb{R}^2$, $\gamma = (e_1 + e_2, e_2 - e_1)$ basis of $\mathbb{R}^2$, $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix} \in \mathbb{R}^2$. Then $[v]_\beta = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$ but</p>
+        <div class="math-display">$$[v]_\gamma = \begin{bmatrix} 1.5 \\ -0.5 \end{bmatrix} \quad \left(\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \frac{3}{2}\begin{bmatrix} 1 \\ 1 \end{bmatrix} - \frac{1}{2}\begin{bmatrix} -1 \\ 1 \end{bmatrix}\right)$$</div>
+        <p class="fig-note">[Figure: the plane $\mathbb{R}^2$ with $e_1$, $e_2$ (purple), $e_1 + e_2$ and $e_2 - e_1$ (red), and $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$ (green) drawn from the origin; a short dashed blue arrow is drawn next to $v$]</p>
+        <p>Depending on the problem, one basis is better than the other (Ex later).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c8-1">
+  <div class="card-head">
+    <span class="rem-num">Q</span>
+    <span class="rem-title">두 기저에 대한 좌표의 관계는? <em>How Are Coordinates in Two Bases Related?</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[v]_\beta$와 $[v]_\gamma$를 어떻게 연결하는가?</p>
+        <p>(<a href="ch07.html#c7-5">명제 2.39</a> $\Rightarrow [I_{\mathbb{R}^2}]_\beta^\gamma [v]_\beta = [v]_\gamma$)</p>
+        <p>$\Downarrow$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>How to relate $[v]_\beta$ &amp; $[v]_\gamma$?</p>
+        <p>(<a href="ch07.html#c7-5">Prop 2.39</a> $\Rightarrow [I_{\mathbb{R}^2}]_\beta^\gamma [v]_\beta = [v]_\gamma$)</p>
+        <p>$\Downarrow$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c8-2">
+  <div class="card-head">
+    <span class="def-num">DEF 2.53</span>
+    <span class="def-title">좌표변환 행렬 <em>Change-of-Coordinate Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>좌표변환 행렬</strong>(또는 <strong>기저변환 행렬</strong>)이란 $[I_V]_\beta^\gamma$ 꼴의 행렬을 말한다. 여기서 $V$는 유한차원 벡터공간이고 $\beta, \gamma$는 $V$의 기저이다.</p>
+        <p>(<a href="ch07.html#c7-5">명제 2.39</a>에 의해 $[I_V]_\beta^\gamma [x]_\beta = [x]_\gamma$이기 때문이다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A <strong>change-of-coordinate</strong> (or <strong>basis-change</strong>) matrix is of the form $[I_V]_\beta^\gamma$, where $V$ is a f.d. v.s. and $\beta, \gamma$ are bases of $V$.</p>
+        <p>(B/c $[I_V]_\beta^\gamma [x]_\beta = [x]_\gamma$ by <a href="ch07.html#c7-5">Prop 2.39</a>)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note08-99">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>단원 노트 Unit 2.4(1쪽)와 Lecture 19 끝(5쪽)까지 반영했다. 마지막 내용은 정의 2.53이다. Lecture 19의 오늘 할 일에 따르면 §2.4는 같은 선형사상의 두 행렬표현 $[T]_\beta^\gamma$와 $[T]_{\beta'}^{\gamma'}$을 비교하는 내용으로 이어진다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Updated through the Unit 2.4 notes (1 page) and the end of Lecture 19 (p.5), ending with Def 2.53. According to the "Today" plan of Lecture 19, §2.4 goes on to compare two matrix representations $[T]_\beta^\gamma$ and $[T]_{\beta'}^{\gamma'}$ of the same linear map.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="index.html">선형대수학1 홈</a>
+    <a href="../la2/index.html">선형대수학2</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+    <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="quiz1.html">퀴즈 복습·기출</a>
+    <a href="midterm.html">중간고사 기출</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>
