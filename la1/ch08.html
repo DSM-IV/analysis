@@ -13,14 +13,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) | 선형대수학 1 학습 가이드</title>
-<meta name="description" content="선형대수학 1 (MATH221) 8단원 기저변환과 닮음 — 같은 벡터의 두 기저에 대한 좌표 비교와 좌표변환 행렬(change-of-coordinate matrix) [I_V]^γ_β의 정의를 한국어·영어 대조로 정리했습니다.">
-<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 기저변환, change of basis, 좌표변환 행렬, change-of-coordinate matrix, 기저변환 행렬, basis-change matrix, 좌표벡터, coordinate vector, 닮음, similarity, 행렬표현, matrix representation, 프리드버그, Friedberg">
+<meta name="description" content="선형대수학 1 (MATH221) 8단원 기저변환과 닮음 — 좌표변환 행렬(change-of-coordinate matrix) [I_V]^γ_β의 정의와 성질, 이를 이용한 역행렬 계산, 기저변환 공식 [T]^γ′_β′ = [I_W]^γ′_γ [T]^γ_β [I_V]^β_β′와 [T]_γ = Q⁻¹[T]_β Q, 직선에 대한 대칭이동, 닮은 행렬(similar matrices)과 동치관계를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 기저변환, change of basis, 좌표변환 행렬, change-of-coordinate matrix, 기저변환 행렬, basis-change matrix, 기저변환 공식, change of basis formula, 닮은 행렬, similar matrices, 동치관계, equivalence relation, 대칭이동, reflection, 좌표벡터, coordinate vector, 닮음, similarity, 행렬표현, matrix representation, 프리드버그, Friedberg">
 <meta name="author" content="DDALKKAK">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://univmathsurvive.com/la1/ch08.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) — 선형대수학 1 한·영 대조">
-<meta property="og:description" content="두 기저에 대한 좌표의 관계와 좌표변환 행렬의 정의 — 선형대수학 1 기저변환과 닮음 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:description" content="두 기저에 대한 좌표의 관계, 좌표변환 행렬의 성질, 기저변환 공식과 닮은 행렬까지 — 선형대수학 1 기저변환과 닮음 단원을 한국어·영어 대조로 정리한 교육용 학습 가이드.">
 <meta property="og:url" content="https://univmathsurvive.com/la1/ch08.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="선형대수학 1 학습 가이드">
@@ -33,11 +33,11 @@
   "headline": "2.4 기저변환과 닮음 (§2.4 Change of Basis and Similarity) — 선형대수학 1 한·영 대조",
   "author": { "@type": "Organization", "name": "DDALKKAK" },
   "publisher": { "@type": "Organization", "name": "DDALKKAK" },
-  "description": "선형대수학 1 기저변환과 닮음 — 두 기저에 대한 좌표의 관계와 좌표변환 행렬의 정의를 한국어·영어 대조로 정리한 교육용 학습 가이드.",
+  "description": "선형대수학 1 기저변환과 닮음 — 두 기저에 대한 좌표의 관계, 좌표변환 행렬, 기저변환 공식과 닮은 행렬을 한국어·영어 대조로 정리한 교육용 학습 가이드.",
   "inLanguage": ["ko", "en"],
   "url": "https://univmathsurvive.com/la1/ch08.html",
   "datePublished": "2026-11-17",
-  "dateModified": "2026-11-17",
+  "dateModified": "2026-11-21",
   "mainEntityOfPage": "https://univmathsurvive.com/la1/ch08.html"
 }
 </script>
@@ -119,6 +119,13 @@ MathJax = {
   <ol>
     <li><a href="#c8-1"><span class="toc-num">Q</span> 두 기저에 대한 좌표의 관계는? <em>How Are Coordinates in Two Bases Related?</em></a></li>
     <li><a href="#c8-2"><span class="toc-num">DEF 2.53</span> 좌표변환 행렬 <em>Change-of-Coordinate Matrix</em></a></li>
+    <li><a href="#c8-3"><span class="toc-num">PROP 2.54</span> 좌표변환 행렬의 성질 <em>Properties of Change-of-Coordinate Matrices</em></a></li>
+    <li><a href="#c8-4"><span class="toc-num">EXAM 2.55</span> 명제 2.54로 역행렬 구하기 <em>Finding an Inverse via Prop 2.54</em></a></li>
+    <li><a href="#c8-5"><span class="toc-num">THM 2.56</span> 기저변환 공식 <em>The Change-of-Basis Formula</em></a></li>
+    <li><a href="#c8-6"><span class="toc-num">COR 2.57</span> 선형연산자의 기저변환 <em>Change of Basis for a Linear Operator</em></a></li>
+    <li><a href="#c8-7"><span class="toc-num">EXAM 2.58</span> 직선에 대한 대칭이동 <em>Reflection Across a Line</em></a></li>
+    <li><a href="#c8-8"><span class="toc-num">DEF 2.59</span> 닮은 행렬 <em>Similar Matrices</em></a></li>
+    <li><a href="#c8-9"><span class="toc-num">REM 2.60</span> 닮음의 의미와 동치관계 <em>What Similarity Means; an Equivalence Relation</em></a></li>
   </ol>
 </nav>
 
@@ -188,7 +195,9 @@ MathJax = {
 -->
 
 <!-- 이 단원은 단원 노트 "Unit 2.4 of Linear Algebra I (non-math major) Notes at KU.pdf"(1쪽)를 전사한 것이다.
-     Lecture 19 p.4 끝(§2.4 표제)과 p.5가 같은 내용이다. Lecture 19 p.1 Today: "(2) Start §2.4 Change of Basis & Similarity — Compare [T]^γ_β & [T]^γ'_β'". -->
+     Lecture 19 p.4 끝(§2.4 표제)과 p.5가 같은 내용이다. Lecture 19 p.1 Today: "(2) Start §2.4 Change of Basis & Similarity — Compare [T]^γ_β & [T]^γ'_β'".
+     Prop 2.54부터 Rmk 2.60까지는 "Lecture 20 on 221 F26.pdf" pp.1–6을 전사했다(p.1 Last Time·Today는 생략,
+     p.6 아래쪽 "Unit 3. Systems of Lin Eqns"부터는 다음 단원 내용이라 넣지 않음). -->
 
 <div class="section-title"><h2>§2.4 Change of Basis &amp; Similarity · 2.4 기저변환과 닮음</h2></div>
 
@@ -269,6 +278,513 @@ MathJax = {
   </div>
 </div>
 
+<!-- ═══════════ Lecture 20 · p.1 (Last Time · Today 생략) ═══════════ -->
+
+<div class="card thm-card" id="c8-3">
+  <div class="card-head">
+    <span class="thm-num">PROP 2.54</span>
+    <span class="thm-title">좌표변환 행렬의 성질 <em>Properties of Change-of-Coordinate Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\beta = (v_1, \dots, v_n)$과 $\gamma$를 $V$의 기저라 하자.</p>
+        <!-- ═══════════ Lecture 20 · p.2 ═══════════ -->
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$[I_V]_\beta^\gamma = \begin{bmatrix} | &amp; &amp; | \\ [v_1]_\gamma &amp; \cdots &amp; [v_n]_\gamma \\ | &amp; &amp; | \end{bmatrix}$$</div>
+        <p><strong>(b)</strong> $[I_V]_\beta^\gamma$는 가역이고, 그 역행렬은 $[I_V]_\gamma^\beta$이다.</p>
+        <p><strong>(c)</strong> $[I_V]_\beta^\gamma$의 열들은 $\mathbb{R}^n$의 기저를 이룬다. 역으로, 모든 가역행렬은 좌표변환 행렬이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a):</strong> 모든 $i$에 대하여 $I_V(v_i) = v_i$이므로, (a)는 행렬표현의 정의에서 나온다. <span class="part-end">▨</span></p>
+        <p><strong>(b):</strong> $I_V^{-1} = I_V$이므로 <a href="ch07.html#c7-19">명제 2.51</a>에서 나온다. <span class="part-end">▨</span></p>
+        <p><strong>(c):</strong> $\phi_\gamma : V \xrightarrow{\cong} \mathbb{R}^n$이고 $V = \operatorname{span}(\beta)$이므로</p>
+        <div class="math-display">$$\Rightarrow \mathbb{R}^n = \operatorname{span}(\phi_\gamma(v_1), \dots, \phi_\gamma(v_n)) = \operatorname{span}([v_1]_\gamma, \dots, [v_n]_\gamma)$$</div>
+        <p>($[v_1]_\gamma, \dots, [v_n]_\gamma$는 $n$차원 벡터공간의 원소 $n$개)</p>
+        <p>이다. 따라서 첫째 주장이 성립한다. <span class="part-end">▨</span></p>
+        <p>둘째 주장: $Q = \begin{bmatrix} | &amp; &amp; | \\ v_1 &amp; \cdots &amp; v_n \\ | &amp; &amp; | \end{bmatrix} \in M_n(\mathbb{R})$가 가역이면 $\mathbb{R}^n = \operatorname{im}(L_Q) = \operatorname{span}(v_1, \dots, v_n)$이다.</p>
+        <!-- ═══════════ Lecture 20 · p.3 ═══════════ -->
+        <p>$\Rightarrow \beta := (v_1, \dots, v_n)$은 $\mathbb{R}^n$의 기저이다. $\gamma := (e_1, \dots, e_n)$을 $\mathbb{R}^n$의 표준기저라 하자. 그러면 모든 $i$에 대하여 $[v_i]_\gamma = v_i$이므로, (a)에 의해</p>
+        <div class="math-display">$$Q = \begin{bmatrix} | &amp; &amp; | \\ [v_1]_\gamma &amp; \cdots &amp; [v_n]_\gamma \\ | &amp; &amp; | \end{bmatrix} = [I_{\mathbb{R}^n}]_\beta^\gamma$$</div>
+        <p>이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 노트의 증명에서 짧게 넘어간 단계를 채운다. $n = \#\beta = \dim V$이고 $\gamma$도 $V$의 기저이므로 $\#\gamma = n$이다. 따라서 $[I_V]_\beta^\gamma, [I_V]_\gamma^\beta \in M_n(\mathbb{R})$이다.</p>
+        <p><strong>(a)</strong> <a href="ch07.html#c7-2">정의 2.38</a>에 의해 $[I_V]_\beta^\gamma$의 $j$번째 열은 $[I_V(v_j)]_\gamma = [v_j]_\gamma$이다. <span class="part-end">▨</span></p>
+        <p><strong>(b)</strong> $I_V$는 동형사상이고 $I_V^{-1} = I_V$이다. <a href="ch07.html#c7-19">명제 2.51</a>을 $W = V$, $T = I_V$, 정의역의 기저 $\beta$, 공역의 기저 $\gamma$에 적용하면 $[I_V]_\beta^\gamma$는 가역이고</p>
+        <div class="math-display">$$([I_V]_\beta^\gamma)^{-1} = [I_V^{-1}]_\gamma^\beta = [I_V]_\gamma^\beta$$</div>
+        <p>이다. 직접 확인할 수도 있다. <a href="ch07.html#c7-12">정리 2.45</a>와 <a href="ch07.html#c7-11">주의 2.44</a>에 의해 $[I_V]_\gamma^\beta [I_V]_\beta^\gamma = [I_V \circ I_V]_\beta^\beta = [I_V]_\beta = I_n$이고, <a href="ch07.html#c7-17">주의 2.49</a>에 의해 한쪽 곱만으로 충분하다. <span class="part-end">▨</span></p>
+        <p><strong>(c) 첫째 주장.</strong> 좌표사상 $\phi_\gamma$는 동형사상이므로 전사이다. $V = \operatorname{span}(v_1, \dots, v_n)$이므로 <a href="ch05.html#c5-15">명제 2.9</a>에 의해 $\mathbb{R}^n = \operatorname{im}(\phi_\gamma) = \operatorname{span}(\phi_\gamma(v_1), \dots, \phi_\gamma(v_n))$이고, $\phi_\gamma(v_i) = [v_i]_\gamma$이다. $\phi_\gamma$가 단사이고 $v_1, \dots, v_n$이 서로 다르므로 $[v_1]_\gamma, \dots, [v_n]_\gamma$도 서로 다른 $n$개의 벡터이다. $n$차원 공간을 생성하는 $n$개의 벡터는 기저이므로(<a href="ch04.html#c4-23">따름정리 1.59 (1)</a>), 이들은 $\mathbb{R}^n$의 기저이다. (다른 길: (b)에 의해 $[I_V]_\beta^\gamma$가 가역이므로 <a href="ch07.html#c7-16">주의 2.48 (1)</a>에서 바로 나온다.) <span class="part-end">▨</span></p>
+        <p><strong>(c) 둘째 주장.</strong> $Q \in M_n(\mathbb{R})$가 가역이면 <a href="ch07.html#c7-16">주의 2.48 (1)</a>에 의해 $Q$의 열 $v_1, \dots, v_n$은 $\mathbb{R}^n$의 기저를 이룬다. 노트의 등식 $\mathbb{R}^n = \operatorname{im}(L_Q) = \operatorname{span}(v_1, \dots, v_n)$이 바로 이 내용이다. 표준기저 $\gamma$에 대해서는 모든 $x \in \mathbb{R}^n$에 대하여 $[x]_\gamma = x$이다(<a href="ch07.html#c7-4">주의</a>의 증명에서 본 $\phi_\gamma = I_{\mathbb{R}^n}$). 따라서 $[v_i]_\gamma = v_i$이고, (a)를 $V = \mathbb{R}^n$에 적용하면 $Q = [I_{\mathbb{R}^n}]_\beta^\gamma$이다. 즉 $Q$는 $\mathbb{R}^n$의 두 기저 $\beta, \gamma$ 사이의 좌표변환 행렬이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\beta = (v_1, \dots, v_n)$, $\gamma$ bases of $V$.</p>
+        <!-- ═══════════ Lecture 20 · p.2 ═══════════ -->
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$[I_V]_\beta^\gamma = \begin{bmatrix} | &amp; &amp; | \\ [v_1]_\gamma &amp; \cdots &amp; [v_n]_\gamma \\ | &amp; &amp; | \end{bmatrix}$$</div>
+        <p><strong>(b)</strong> $[I_V]_\beta^\gamma$ invertible, w/ inverse $[I_V]_\gamma^\beta$.</p>
+        <p><strong>(c)</strong> Cols of $[I_V]_\beta^\gamma$ form a basis of $\mathbb{R}^n$. Conversely, every invertible matrix is a c.o.c. matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a):</strong> $I_V(v_i) = v_i$ $\forall i$, so (a) follows from the def of matrix rep. <span class="part-end">▨</span></p>
+        <p><strong>(b):</strong> Follows from <a href="ch07.html#c7-19">Prop 2.51</a> b/c $I_V^{-1} = I_V$. <span class="part-end">▨</span></p>
+        <p><strong>(c):</strong> $\phi_\gamma : V \xrightarrow{\cong} \mathbb{R}^n$ and $V = \operatorname{span}(\beta)$</p>
+        <div class="math-display">$$\Rightarrow \mathbb{R}^n = \operatorname{span}(\phi_\gamma(v_1), \dots, \phi_\gamma(v_n)) = \operatorname{span}([v_1]_\gamma, \dots, [v_n]_\gamma)$$</div>
+        <p>($[v_1]_\gamma, \dots, [v_n]_\gamma$: $n$ elts in $n$-dim'l v.s.)</p>
+        <p>so 1st assertion holds. <span class="part-end">▨</span></p>
+        <p>For 2nd assertion, if $Q = \begin{bmatrix} | &amp; &amp; | \\ v_1 &amp; \cdots &amp; v_n \\ | &amp; &amp; | \end{bmatrix} \in M_n(\mathbb{R})$ invertible, then $\mathbb{R}^n = \operatorname{im}(L_Q) = \operatorname{span}(v_1, \dots, v_n)$</p>
+        <!-- ═══════════ Lecture 20 · p.3 ═══════════ -->
+        <p>$\Rightarrow \beta := (v_1, \dots, v_n)$ is a basis of $\mathbb{R}^n$. Let $\gamma := (e_1, \dots, e_n)$ be the std basis of $\mathbb{R}^n$. Then $[v_i]_\gamma = v_i$ $\forall i$, so</p>
+        <div class="math-display">$$Q = \begin{bmatrix} | &amp; &amp; | \\ [v_1]_\gamma &amp; \cdots &amp; [v_n]_\gamma \\ | &amp; &amp; | \end{bmatrix} = [I_{\mathbb{R}^n}]_\beta^\gamma$$</div>
+        <p>by (a).</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We fill in the steps the proof in the notes passes over quickly. Here $n = \#\beta = \dim V$, and $\gamma$ is also a basis of $V$, so $\#\gamma = n$. Hence $[I_V]_\beta^\gamma, [I_V]_\gamma^\beta \in M_n(\mathbb{R})$.</p>
+        <p><strong>(a)</strong> By <a href="ch07.html#c7-2">Def 2.38</a>, the $j$th column of $[I_V]_\beta^\gamma$ is $[I_V(v_j)]_\gamma = [v_j]_\gamma$. <span class="part-end">▨</span></p>
+        <p><strong>(b)</strong> $I_V$ is an isomorphism with $I_V^{-1} = I_V$. Applying <a href="ch07.html#c7-19">Prop 2.51</a> with $W = V$, $T = I_V$, basis $\beta$ of the domain and basis $\gamma$ of the codomain, $[I_V]_\beta^\gamma$ is invertible and</p>
+        <div class="math-display">$$([I_V]_\beta^\gamma)^{-1} = [I_V^{-1}]_\gamma^\beta = [I_V]_\gamma^\beta.$$</div>
+        <p>One can also check it directly: by <a href="ch07.html#c7-12">Thm 2.45</a> and <a href="ch07.html#c7-11">Rmk 2.44</a>, $[I_V]_\gamma^\beta [I_V]_\beta^\gamma = [I_V \circ I_V]_\beta^\beta = [I_V]_\beta = I_n$, and by <a href="ch07.html#c7-17">Rmk 2.49</a> a one-sided product suffices. <span class="part-end">▨</span></p>
+        <p><strong>(c), first assertion.</strong> The coordinate map $\phi_\gamma$ is an isomorphism, hence onto. Since $V = \operatorname{span}(v_1, \dots, v_n)$, <a href="ch05.html#c5-15">Prop 2.9</a> gives $\mathbb{R}^n = \operatorname{im}(\phi_\gamma) = \operatorname{span}(\phi_\gamma(v_1), \dots, \phi_\gamma(v_n))$, and $\phi_\gamma(v_i) = [v_i]_\gamma$. Since $\phi_\gamma$ is one-to-one and $v_1, \dots, v_n$ are distinct, $[v_1]_\gamma, \dots, [v_n]_\gamma$ are $n$ distinct vectors. $n$ vectors spanning an $n$-dimensional space form a basis (<a href="ch04.html#c4-23">Cor 1.59(1)</a>), so they form a basis of $\mathbb{R}^n$. (Another route: by (b), $[I_V]_\beta^\gamma$ is invertible, so this is immediate from <a href="ch07.html#c7-16">Rmk 2.48(1)</a>.) <span class="part-end">▨</span></p>
+        <p><strong>(c), second assertion.</strong> If $Q \in M_n(\mathbb{R})$ is invertible, then by <a href="ch07.html#c7-16">Rmk 2.48(1)</a> its columns $v_1, \dots, v_n$ form a basis of $\mathbb{R}^n$; this is exactly the equality $\mathbb{R}^n = \operatorname{im}(L_Q) = \operatorname{span}(v_1, \dots, v_n)$ in the notes. For the standard basis $\gamma$ we have $[x]_\gamma = x$ for all $x \in \mathbb{R}^n$ ($\phi_\gamma = I_{\mathbb{R}^n}$, as in the proof of the <a href="ch07.html#c7-4">Rmk</a>). So $[v_i]_\gamma = v_i$, and (a) with $V = \mathbb{R}^n$ gives $Q = [I_{\mathbb{R}^n}]_\beta^\gamma$. That is, $Q$ is the change-of-coordinate matrix between the two bases $\beta, \gamma$ of $\mathbb{R}^n$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c8-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.55</span>
+    <span class="exam-title">명제 2.54로 역행렬 구하기 <em>Finding an Inverse via Prop 2.54</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>가역행렬 $A = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}$의 역행렬을 구하라.</p>
+        <p>풀이: <a href="#c8-3">명제 2.54 (c)</a>의 증명에 의해 $A = [I_{\mathbb{R}^2}]_\beta^\gamma$이다. 여기서 $\beta = \left(\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 1 \end{bmatrix}\right)$이고 $\gamma = (e_1, e_2)$는 표준기저이다. 그러면 명제 2.54에 의해</p>
+        <div class="math-display">$$A^{-1} = [I_{\mathbb{R}^2}]_\gamma^\beta = \begin{bmatrix} | &amp; | \\ [e_1]_\beta &amp; [e_2]_\beta \\ | &amp; | \end{bmatrix}$$</div>
+        <p>이다.</p>
+        <div class="math-display">$$[e_1]_\beta = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow \begin{bmatrix} 1 \\ 0 \end{bmatrix} = a\begin{bmatrix} 1 \\ 1 \end{bmatrix} + b\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \begin{bmatrix} a + 2b \\ a + b \end{bmatrix} \begin{matrix} (1) \\ (2) \end{matrix}$$</div>
+        <div class="math-display">$$\Rightarrow (1) - (2): b = 1 - 0 = 1 \Rightarrow (2): a + 1 = 0 \Rightarrow a = -1$$</div>
+        <p>$\Rightarrow [e_1]_\beta = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$이다. 마찬가지로 $[e_2]_\beta = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$이다. (퀴즈·시험에서는 이 계산 과정을 보여야 한다)</p>
+        <div class="math-display">$$\Rightarrow A^{-1} = \boxed{\begin{bmatrix} -1 &amp; 2 \\ 1 &amp; -1 \end{bmatrix}}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 노트가 "마찬가지로"로 넘긴 $[e_2]_\beta$의 계산이다. 곁말대로 퀴즈·시험에서는 이 과정을 적어야 한다.</p>
+        <div class="math-display">$$[e_2]_\beta = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow \begin{bmatrix} 0 \\ 1 \end{bmatrix} = a\begin{bmatrix} 1 \\ 1 \end{bmatrix} + b\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \begin{bmatrix} a + 2b \\ a + b \end{bmatrix} \begin{matrix} (1) \\ (2) \end{matrix}$$</div>
+        <div class="math-display">$$\Rightarrow (1) - (2): b = 0 - 1 = -1 \Rightarrow (2): a - 1 = 1 \Rightarrow a = 2$$</div>
+        <p>따라서 $[e_2]_\beta = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$이다. 검산:</p>
+        <div class="math-display">$$AA^{-1} = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}\begin{bmatrix} -1 &amp; 2 \\ 1 &amp; -1 \end{bmatrix} = \begin{bmatrix} 1 \cdot (-1) + 2 \cdot 1 &amp; 1 \cdot 2 + 2 \cdot (-1) \\ 1 \cdot (-1) + 1 \cdot 1 &amp; 1 \cdot 2 + 1 \cdot (-1) \end{bmatrix} = I_2$$</div>
+        <p>이므로 <a href="ch07.html#c7-17">주의 2.49 (1)</a>에 의해 $A^{-1}$이 맞다.</p>
+        <p>풀이의 각 단계의 근거: $A$가 가역이므로 그 열들의 순서쌍 $\beta$는 $\mathbb{R}^2$의 기저이다(<a href="ch07.html#c7-16">주의 2.48 (1)</a>). $\gamma$가 표준기저이면 $[v]_\gamma = v$이므로, 명제 2.54 (a)에 의해 $[I_{\mathbb{R}^2}]_\beta^\gamma$의 열은 $\beta$의 두 벡터 그대로, 즉 $A$이다. $A^{-1} = [I_{\mathbb{R}^2}]_\gamma^\beta$는 명제 2.54 (b)이고, 이 행렬의 열이 $[e_1]_\beta, [e_2]_\beta$라는 것은 명제 2.54 (a)를 $\beta$와 $\gamma$의 역할을 바꾸어 적용한 것이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Find inverse of invertible matrix $A = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}$.</p>
+        <p>Sol: By Pf of <a href="#c8-3">Prop 2.54(c)</a>, $A = [I_{\mathbb{R}^2}]_\beta^\gamma$ where $\beta = \left(\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 1 \end{bmatrix}\right)$ and $\gamma = (e_1, e_2)$ std basis. Then</p>
+        <div class="math-display">$$A^{-1} = [I_{\mathbb{R}^2}]_\gamma^\beta = \begin{bmatrix} | &amp; | \\ [e_1]_\beta &amp; [e_2]_\beta \\ | &amp; | \end{bmatrix}$$</div>
+        <p>by Prop 2.54.</p>
+        <div class="math-display">$$[e_1]_\beta = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow \begin{bmatrix} 1 \\ 0 \end{bmatrix} = a\begin{bmatrix} 1 \\ 1 \end{bmatrix} + b\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \begin{bmatrix} a + 2b \\ a + b \end{bmatrix} \begin{matrix} (1) \\ (2) \end{matrix}$$</div>
+        <div class="math-display">$$\Rightarrow (1) - (2): b = 1 - 0 = 1 \Rightarrow (2): a + 1 = 0 \Rightarrow a = -1$$</div>
+        <p>$\Rightarrow [e_1]_\beta = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$. Similarly, $[e_2]_\beta = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$ (need to show work for Quizzes/Exams)</p>
+        <div class="math-display">$$\Rightarrow A^{-1} = \boxed{\begin{bmatrix} -1 &amp; 2 \\ 1 &amp; -1 \end{bmatrix}}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> The computation of $[e_2]_\beta$ that the notes skip with "Similarly". As the margin says, on quizzes and exams this work must be shown.</p>
+        <div class="math-display">$$[e_2]_\beta = \begin{bmatrix} a \\ b \end{bmatrix} \Rightarrow \begin{bmatrix} 0 \\ 1 \end{bmatrix} = a\begin{bmatrix} 1 \\ 1 \end{bmatrix} + b\begin{bmatrix} 2 \\ 1 \end{bmatrix} = \begin{bmatrix} a + 2b \\ a + b \end{bmatrix} \begin{matrix} (1) \\ (2) \end{matrix}$$</div>
+        <div class="math-display">$$\Rightarrow (1) - (2): b = 0 - 1 = -1 \Rightarrow (2): a - 1 = 1 \Rightarrow a = 2$$</div>
+        <p>So $[e_2]_\beta = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$. Check:</p>
+        <div class="math-display">$$AA^{-1} = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}\begin{bmatrix} -1 &amp; 2 \\ 1 &amp; -1 \end{bmatrix} = \begin{bmatrix} 1 \cdot (-1) + 2 \cdot 1 &amp; 1 \cdot 2 + 2 \cdot (-1) \\ 1 \cdot (-1) + 1 \cdot 1 &amp; 1 \cdot 2 + 1 \cdot (-1) \end{bmatrix} = I_2,$$</div>
+        <p>so by <a href="ch07.html#c7-17">Rmk 2.49(1)</a> this is indeed $A^{-1}$.</p>
+        <p>Why each step of the solution holds: since $A$ is invertible, the list $\beta$ of its columns is a basis of $\mathbb{R}^2$ (<a href="ch07.html#c7-16">Rmk 2.48(1)</a>). For the standard basis $\gamma$ we have $[v]_\gamma = v$, so by Prop 2.54(a) the columns of $[I_{\mathbb{R}^2}]_\beta^\gamma$ are the two vectors of $\beta$ themselves, i.e., it is $A$. $A^{-1} = [I_{\mathbb{R}^2}]_\gamma^\beta$ is Prop 2.54(b), and the columns of this matrix being $[e_1]_\beta, [e_2]_\beta$ is Prop 2.54(a) with the roles of $\beta$ and $\gamma$ swapped.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 20 · p.4 ═══════════ -->
+
+<div class="card note-card" id="note08-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$[T]_\beta^\gamma$와 $[T]_{\beta'}^{\gamma'}$을 비교하려면 다음을 쓴다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>To compare $[T]_\beta^\gamma$ &amp; $[T]_{\beta'}^{\gamma'}$, use:</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c8-5">
+  <div class="card-head">
+    <span class="thm-num">THM 2.56</span>
+    <span class="thm-title">기저변환 공식 <em>The Change-of-Basis Formula</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T \in \mathcal{L}(V, W)$이고, $\beta, \beta'$을 $V$의 유한 기저, $\gamma, \gamma'$을 $W$의 유한 기저라 하자. 그러면 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_\beta^\gamma [I_V]_{\beta'}^\beta$$</div>
+        <p>($[I_W]_\gamma^{\gamma'}$, $[I_V]_{\beta'}^\beta$는 좌표변환 행렬이다)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$T = I_W \circ T \circ I_V$이므로 <a href="ch07.html#c7-12">정리 2.45</a>를 두 번 적용하면 다음을 얻는다.</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_{\beta'}^\gamma = [I_W]_\gamma^{\gamma'} [T]_\beta^\gamma [I_V]_{\beta'}^\beta$$</div>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> "정리 2.45를 두 번 적용"을 풀어 쓴다. <a href="ch07.html#c7-12">정리 2.45</a>는 $V \xrightarrow{T} W \xrightarrow{U} Z$와 각 공간의 기저 $\alpha, \beta, \gamma$에 대하여 $[UT]_\alpha^\gamma = [U]_\beta^\gamma [T]_\alpha^\beta$라는 것이다(아래첨자는 정의역의 기저, 위첨자는 공역의 기저).</p>
+        <p><strong>첫째 적용:</strong> $T = I_W \circ T$를 $(V, \beta') \xrightarrow{T} (W, \gamma) \xrightarrow{I_W} (W, \gamma')$으로 보면</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W \circ T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_{\beta'}^\gamma$$</div>
+        <p>이다.</p>
+        <p><strong>둘째 적용:</strong> $T = T \circ I_V$를 $(V, \beta') \xrightarrow{I_V} (V, \beta) \xrightarrow{T} (W, \gamma)$으로 보면</p>
+        <div class="math-display">$$[T]_{\beta'}^\gamma = [T \circ I_V]_{\beta'}^\gamma = [T]_\beta^\gamma [I_V]_{\beta'}^\beta$$</div>
+        <p>이다. 둘째 식을 첫째 식에 대입하면 정리의 등식이 나온다.</p>
+        <p>좌표로 읽으면(<a href="ch07.html#c7-5">명제 2.39</a>) $v \in V$에 대하여 오른쪽 행렬부터 차례로 $[v]_{\beta'} \mapsto [v]_\beta \mapsto [T(v)]_\gamma \mapsto [T(v)]_{\gamma'}$으로 좌표를 바꾸는 것이다. 이웃한 행렬의 첨자(앞 행렬의 아래첨자와 뒤 행렬의 위첨자)가 맞물리는지 확인하면 순서를 틀리지 않는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$T \in \mathcal{L}(V, W)$, $\beta, \beta'$ fin bases of $V$, $\gamma, \gamma'$ fin bases of $W$. Then</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_\beta^\gamma [I_V]_{\beta'}^\beta$$</div>
+        <p>($[I_W]_\gamma^{\gamma'}$, $[I_V]_{\beta'}^\beta$ &larr; c.o.c. matrices)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $T = I_W \circ T \circ I_V$, apply <a href="ch07.html#c7-12">Thm 2.45</a> twice to get</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_{\beta'}^\gamma = [I_W]_\gamma^{\gamma'} [T]_\beta^\gamma [I_V]_{\beta'}^\beta.$$</div>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We spell out "apply Thm 2.45 twice". <a href="ch07.html#c7-12">Thm 2.45</a> says that for $V \xrightarrow{T} W \xrightarrow{U} Z$ with bases $\alpha, \beta, \gamma$ of the three spaces, $[UT]_\alpha^\gamma = [U]_\beta^\gamma [T]_\alpha^\beta$ (subscript = basis of the domain, superscript = basis of the codomain).</p>
+        <p><strong>First application:</strong> view $T = I_W \circ T$ as $(V, \beta') \xrightarrow{T} (W, \gamma) \xrightarrow{I_W} (W, \gamma')$. Then</p>
+        <div class="math-display">$$[T]_{\beta'}^{\gamma'} = [I_W \circ T]_{\beta'}^{\gamma'} = [I_W]_\gamma^{\gamma'} [T]_{\beta'}^\gamma.$$</div>
+        <p><strong>Second application:</strong> view $T = T \circ I_V$ as $(V, \beta') \xrightarrow{I_V} (V, \beta) \xrightarrow{T} (W, \gamma)$. Then</p>
+        <div class="math-display">$$[T]_{\beta'}^\gamma = [T \circ I_V]_{\beta'}^\gamma = [T]_\beta^\gamma [I_V]_{\beta'}^\beta.$$</div>
+        <p>Substituting the second equality into the first gives the theorem.</p>
+        <p>In coordinates (<a href="ch07.html#c7-5">Prop 2.39</a>), for $v \in V$ the matrices, read from the right, change coordinates as $[v]_{\beta'} \mapsto [v]_\beta \mapsto [T(v)]_\gamma \mapsto [T(v)]_{\gamma'}$. Checking that neighboring indices match (the subscript of one matrix and the superscript of the next one to its right) keeps the order right.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c8-6">
+  <div class="card-head">
+    <span class="thm-num">COR 2.57</span>
+    <span class="thm-title">선형연산자의 기저변환 <em>Change of Basis for a Linear Operator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T \in \mathcal{L}(V)$이고 $\beta, \gamma$를 $V$의 유한 기저라 하자. 그러면 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_\gamma = [I_V]_\beta^\gamma [T]_\beta [I_V]_\gamma^\beta$$</div>
+        <p>($[I_V]_\beta^\gamma \overset{\text{명제 2.51}}{=} ([I_V]_\gamma^\beta)^{-1} = Q^{-1}$, $\;[I_V]_\gamma^\beta = Q$)</p>
+        <div class="math-display">$$\left([T]_\gamma = Q^{-1}[T]_\beta Q\right)$$</div>
+        <p>(<a href="#c8-5">정리 2.56</a>에서 바로 나온다)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>노트에는 "정리 2.56에서 바로 나온다"는 곁말만 있으므로 대입 과정을 적는다.</p>
+        <p><a href="#c8-5">정리 2.56</a>에서 $W = V$로 두고, 정리의 $(\beta, \beta', \gamma, \gamma')$ 자리에 각각 $(\beta, \gamma, \beta, \gamma)$를 넣으면</p>
+        <div class="math-display">$$[T]_\gamma^\gamma = [I_V]_\beta^\gamma [T]_\beta^\beta [I_V]_\gamma^\beta$$</div>
+        <p>이다. <a href="ch07.html#c7-3">기호</a> $[T]_\beta := [T]_\beta^\beta$에 의해 이것이 따름정리의 등식이다.</p>
+        <p>곁말에 대하여: $Q := [I_V]_\gamma^\beta$라 하면 <a href="#c8-3">명제 2.54 (b)</a>(즉 $I_V$에 적용한 <a href="ch07.html#c7-19">명제 2.51</a>)에 의해 $Q$는 가역이고 $Q^{-1} = [I_V]_\beta^\gamma$이다. 따라서 $[T]_\gamma = Q^{-1}[T]_\beta Q$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$T \in \mathcal{L}(V)$ w/ $\beta, \gamma$ fin bases of $V$. Then</p>
+        <div class="math-display">$$[T]_\gamma = [I_V]_\beta^\gamma [T]_\beta [I_V]_\gamma^\beta$$</div>
+        <p>($[I_V]_\beta^\gamma \overset{\text{Prop 2.51}}{=} ([I_V]_\gamma^\beta)^{-1} = Q^{-1}$, $\;[I_V]_\gamma^\beta = Q$)</p>
+        <div class="math-display">$$\left([T]_\gamma = Q^{-1}[T]_\beta Q\right)$$</div>
+        <p>(follows directly from <a href="#c8-5">Thm 2.56</a>)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>The notes only remark that it "follows directly from Thm 2.56", so we write out the substitution.</p>
+        <p>In <a href="#c8-5">Thm 2.56</a>, take $W = V$ and put $(\beta, \gamma, \beta, \gamma)$ in place of the theorem's $(\beta, \beta', \gamma, \gamma')$. Then</p>
+        <div class="math-display">$$[T]_\gamma^\gamma = [I_V]_\beta^\gamma [T]_\beta^\beta [I_V]_\gamma^\beta,$$</div>
+        <p>which is the corollary by the <a href="ch07.html#c7-3">Notation</a> $[T]_\beta := [T]_\beta^\beta$.</p>
+        <p>About the margin: with $Q := [I_V]_\gamma^\beta$, <a href="#c8-3">Prop 2.54(b)</a> (i.e., <a href="ch07.html#c7-19">Prop 2.51</a> applied to $I_V$) says $Q$ is invertible with $Q^{-1} = [I_V]_\beta^\gamma$. Hence $[T]_\gamma = Q^{-1}[T]_\beta Q$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c8-7">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.58</span>
+    <span class="exam-title">직선에 대한 대칭이동 <em>Reflection Across a Line</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>직선 $y = -\frac{1}{2}x$에 대한 대칭이동에 대응하는 $T \in \mathcal{L}(\mathbb{R}^2)$를 생각하자. 기저</p>
+        <div class="math-display">$$\gamma = (u_1, u_2) = \left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} -2 \\ 1 \end{bmatrix}\right)$$</div>
+        <p>를 생각하자.</p>
+        <p class="fig-note">[그림: 좌표평면에 직선 $y = -\frac{1}{2}x$, 그 직선을 따라가는 $u_2 = \begin{bmatrix} -2 \\ 1 \end{bmatrix}$, 직선에 수직인 $u_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$(직각 표시)이 원점에서 그려져 있고, 직선을 가로지르는 휘어진 양방향 화살표가 대칭이동을 나타낸다.]</p>
+        <!-- ═══════════ Lecture 20 · p.5 ═══════════ -->
+        <p>그러면</p>
+        <div class="math-display">$$[T]_\gamma = \begin{bmatrix} | &amp; | \\ [T(u_1)]_\gamma &amp; [T(u_2)]_\gamma \\ | &amp; | \end{bmatrix} = \begin{bmatrix} | &amp; | \\ [-u_1]_\gamma &amp; [u_2]_\gamma \\ | &amp; | \end{bmatrix} = \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}$$</div>
+        <p>이다. 표준기저 $\beta = (e_1, e_2)$에 대한 $[T]_\beta$를 구하기 위해, <a href="#c8-6">따름정리 2.57</a>을 쓸 수 있도록 $[I_{\mathbb{R}^2}]_\beta^\gamma$와 $[I_{\mathbb{R}^2}]_\gamma^\beta$를 계산하자.</p>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\gamma^\beta = \begin{bmatrix} | &amp; | \\ u_1 &amp; u_2 \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\beta^\gamma = \begin{bmatrix} | &amp; | \\ [e_1]_\gamma &amp; [e_2]_\gamma \\ | &amp; | \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} \quad \leftarrow (\text{연습})$$</div>
+        <div class="math-display">$$\Rightarrow [T]_\beta \overset{\text{따름정리 2.57}}{=} [I_{\mathbb{R}^2}]_\gamma^\beta [T]_\gamma [I_{\mathbb{R}^2}]_\beta^\gamma$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \underbrace{\frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix}}_{\text{복잡하다}}$$</div>
+        <p>$\Rightarrow$ 직선 $y = -\frac{1}{2}x$에 대한 대칭이동의 공식은 다음과 같다.</p>
+        <div class="math-display">$$T\left(\begin{bmatrix} a \\ b \end{bmatrix}\right) = \frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix} \begin{bmatrix} a \\ b \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 3a - 4b \\ -4a - 3b \end{bmatrix}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 노트가 넘긴 계산과 근거를 채운다.</p>
+        <p><strong>(i) $[T]_\gamma$.</strong> $u_2 = \begin{bmatrix} -2 \\ 1 \end{bmatrix}$은 $1 = -\frac{1}{2} \cdot (-2)$이므로 직선 위에 있고, $u_1 \cdot u_2 = 1 \cdot (-2) + 2 \cdot 1 = 0$이므로 $u_1$은 직선에 수직이다. 직선에 대한 대칭이동은 직선 위의 벡터를 그대로 두고 직선에 수직인 벡터의 방향을 뒤집으므로 $T(u_1) = -u_1 = (-1)u_1 + 0u_2$, $T(u_2) = u_2 = 0u_1 + 1u_2$이다. 따라서 $[-u_1]_\gamma = \begin{bmatrix} -1 \\ 0 \end{bmatrix}$, $[u_2]_\gamma = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$이다. <span class="part-end">▨</span></p>
+        <p><strong>(ii) $[I_{\mathbb{R}^2}]_\gamma^\beta$.</strong> <a href="#c8-3">명제 2.54 (a)</a>에 의해 열은 $[u_1]_\beta, [u_2]_\beta$이고, $\beta$가 표준기저이므로 $[u_i]_\beta = u_i$이다. <span class="part-end">▨</span></p>
+        <p><strong>(iii) $[I_{\mathbb{R}^2}]_\beta^\gamma$ (연습).</strong> $[e_1]_\gamma = \begin{bmatrix} a \\ b \end{bmatrix}$이면 $\begin{bmatrix} 1 \\ 0 \end{bmatrix} = a\begin{bmatrix} 1 \\ 2 \end{bmatrix} + b\begin{bmatrix} -2 \\ 1 \end{bmatrix} = \begin{bmatrix} a - 2b \\ 2a + b \end{bmatrix}$이다. 둘째 성분에서 $b = -2a$이고, 첫째 성분에 넣으면 $5a = 1$이므로 $a = \frac{1}{5}$, $b = -\frac{2}{5}$이다. 마찬가지로 $[e_2]_\gamma = \begin{bmatrix} a \\ b \end{bmatrix}$이면 $a - 2b = 0$, $2a + b = 1$이므로 $a = 2b$, $5b = 1$, 즉 $a = \frac{2}{5}$, $b = \frac{1}{5}$이다. 따라서</p>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\beta^\gamma = \begin{bmatrix} \frac{1}{5} &amp; \frac{2}{5} \\ -\frac{2}{5} &amp; \frac{1}{5} \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix}$$</div>
+        <p>이다. 다른 길: <a href="#c8-3">명제 2.54 (b)</a>에 의해 이것은 $[I_{\mathbb{R}^2}]_\gamma^\beta$의 역행렬이고, 실제로 $\begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 5 &amp; 0 \\ 0 &amp; 5 \end{bmatrix} = I_2$이다. <span class="part-end">▨</span></p>
+        <p><strong>(iv) 따름정리 2.57의 적용과 곱.</strong> 노트의 식은 따름정리 2.57에서 $\beta$와 $\gamma$의 역할을 바꾼 것이다. 곱은 다음과 같다.</p>
+        <div class="math-display">$$\begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = \begin{bmatrix} -1 &amp; -2 \\ -2 &amp; 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$\begin{bmatrix} -1 &amp; -2 \\ -2 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} -1 + 4 &amp; -2 - 2 \\ -2 - 2 &amp; -4 + 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix}$$</div>
+        <p><strong>(v) 검산.</strong> 공식에 넣으면 $T(u_1) = \frac{1}{5}\begin{bmatrix} 3 - 8 \\ -4 - 6 \end{bmatrix} = \begin{bmatrix} -1 \\ -2 \end{bmatrix} = -u_1$, $T(u_2) = \frac{1}{5}\begin{bmatrix} -6 - 4 \\ 8 - 3 \end{bmatrix} = \begin{bmatrix} -2 \\ 1 \end{bmatrix} = u_2$이다. 또 $([T]_\beta)^2 = I_2$로, 두 번 대칭이동하면 제자리이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Consider $T \in \mathcal{L}(\mathbb{R}^2)$ cor to reflection along $y = -\frac{1}{2}x$. Consider basis</p>
+        <div class="math-display">$$\gamma = (u_1, u_2) = \left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} -2 \\ 1 \end{bmatrix}\right).$$</div>
+        <p class="fig-note">[Figure: the $xy$-plane with the line $y = -\frac{1}{2}x$, $u_2 = \begin{bmatrix} -2 \\ 1 \end{bmatrix}$ along the line and $u_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$ perpendicular to it (right-angle mark), both drawn from the origin; a curved double-headed arrow across the line indicates the reflection]</p>
+        <!-- ═══════════ Lecture 20 · p.5 ═══════════ -->
+        <p>Then</p>
+        <div class="math-display">$$[T]_\gamma = \begin{bmatrix} | &amp; | \\ [T(u_1)]_\gamma &amp; [T(u_2)]_\gamma \\ | &amp; | \end{bmatrix} = \begin{bmatrix} | &amp; | \\ [-u_1]_\gamma &amp; [u_2]_\gamma \\ | &amp; | \end{bmatrix} = \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.$$</div>
+        <p>To get $[T]_\beta$ for $\beta = (e_1, e_2)$ std basis, let's compute $[I_{\mathbb{R}^2}]_\beta^\gamma$ &amp; $[I_{\mathbb{R}^2}]_\gamma^\beta$ to use <a href="#c8-6">Cor 2.57</a>.</p>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\gamma^\beta = \begin{bmatrix} | &amp; | \\ u_1 &amp; u_2 \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix}.$$</div>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\beta^\gamma = \begin{bmatrix} | &amp; | \\ [e_1]_\gamma &amp; [e_2]_\gamma \\ | &amp; | \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} \quad \leftarrow (\text{Exercise})$$</div>
+        <div class="math-display">$$\Rightarrow [T]_\beta \overset{\text{Cor 2.57}}{=} [I_{\mathbb{R}^2}]_\gamma^\beta [T]_\gamma [I_{\mathbb{R}^2}]_\beta^\gamma$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \underbrace{\frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix}}_{\text{complicated}}$$</div>
+        <p>$\Rightarrow$ formula for reflection along line $y = -\frac{1}{2}x$ is</p>
+        <div class="math-display">$$T\left(\begin{bmatrix} a \\ b \end{bmatrix}\right) = \frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix} \begin{bmatrix} a \\ b \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 3a - 4b \\ -4a - 3b \end{bmatrix}.$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We fill in the computations and reasons the notes skip.</p>
+        <p><strong>(i) $[T]_\gamma$.</strong> $u_2 = \begin{bmatrix} -2 \\ 1 \end{bmatrix}$ lies on the line since $1 = -\frac{1}{2} \cdot (-2)$, and $u_1 \cdot u_2 = 1 \cdot (-2) + 2 \cdot 1 = 0$, so $u_1$ is perpendicular to the line. A reflection across a line fixes vectors on the line and reverses vectors perpendicular to it, so $T(u_1) = -u_1 = (-1)u_1 + 0u_2$ and $T(u_2) = u_2 = 0u_1 + 1u_2$. Hence $[-u_1]_\gamma = \begin{bmatrix} -1 \\ 0 \end{bmatrix}$ and $[u_2]_\gamma = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$. <span class="part-end">▨</span></p>
+        <p><strong>(ii) $[I_{\mathbb{R}^2}]_\gamma^\beta$.</strong> By <a href="#c8-3">Prop 2.54(a)</a> its columns are $[u_1]_\beta, [u_2]_\beta$, and $[u_i]_\beta = u_i$ since $\beta$ is the standard basis. <span class="part-end">▨</span></p>
+        <p><strong>(iii) $[I_{\mathbb{R}^2}]_\beta^\gamma$ (the Exercise).</strong> If $[e_1]_\gamma = \begin{bmatrix} a \\ b \end{bmatrix}$, then $\begin{bmatrix} 1 \\ 0 \end{bmatrix} = a\begin{bmatrix} 1 \\ 2 \end{bmatrix} + b\begin{bmatrix} -2 \\ 1 \end{bmatrix} = \begin{bmatrix} a - 2b \\ 2a + b \end{bmatrix}$. The second entry gives $b = -2a$; substituting into the first gives $5a = 1$, so $a = \frac{1}{5}$, $b = -\frac{2}{5}$. Likewise, if $[e_2]_\gamma = \begin{bmatrix} a \\ b \end{bmatrix}$, then $a - 2b = 0$ and $2a + b = 1$, so $a = 2b$, $5b = 1$, i.e., $a = \frac{2}{5}$, $b = \frac{1}{5}$. Hence</p>
+        <div class="math-display">$$[I_{\mathbb{R}^2}]_\beta^\gamma = \begin{bmatrix} \frac{1}{5} &amp; \frac{2}{5} \\ -\frac{2}{5} &amp; \frac{1}{5} \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix}.$$</div>
+        <p>Another route: by <a href="#c8-3">Prop 2.54(b)</a> this is the inverse of $[I_{\mathbb{R}^2}]_\gamma^\beta$, and indeed $\begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 5 &amp; 0 \\ 0 &amp; 5 \end{bmatrix} = I_2$. <span class="part-end">▨</span></p>
+        <p><strong>(iv) Applying Cor 2.57, and the product.</strong> The formula in the notes is Cor 2.57 with the roles of $\beta$ and $\gamma$ swapped. The product is</p>
+        <div class="math-display">$$\begin{bmatrix} 1 &amp; -2 \\ 2 &amp; 1 \end{bmatrix} \begin{bmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = \begin{bmatrix} -1 &amp; -2 \\ -2 &amp; 1 \end{bmatrix},$$</div>
+        <div class="math-display">$$\begin{bmatrix} -1 &amp; -2 \\ -2 &amp; 1 \end{bmatrix} \cdot \frac{1}{5}\begin{bmatrix} 1 &amp; 2 \\ -2 &amp; 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} -1 + 4 &amp; -2 - 2 \\ -2 - 2 &amp; -4 + 1 \end{bmatrix} = \frac{1}{5}\begin{bmatrix} 3 &amp; -4 \\ -4 &amp; -3 \end{bmatrix}.$$</div>
+        <p><strong>(v) Check.</strong> Plugging into the formula, $T(u_1) = \frac{1}{5}\begin{bmatrix} 3 - 8 \\ -4 - 6 \end{bmatrix} = \begin{bmatrix} -1 \\ -2 \end{bmatrix} = -u_1$ and $T(u_2) = \frac{1}{5}\begin{bmatrix} -6 - 4 \\ 8 - 3 \end{bmatrix} = \begin{bmatrix} -2 \\ 1 \end{bmatrix} = u_2$. Also $([T]_\beta)^2 = I_2$: reflecting twice brings every vector back.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card note-card" id="note08-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><a href="#c8-6">따름정리 2.57</a>은 $[T]_\gamma$와 $[T]_\beta$가 어떻게 연결되는지 말해 준다.</p>
+        <p>$\Downarrow$</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><a href="#c8-6">Cor 2.57</a> says how $[T]_\gamma$ &amp; $[T]_\beta$ are related</p>
+        <p>$\Downarrow$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c8-8">
+  <div class="card-head">
+    <span class="def-num">DEF 2.59</span>
+    <span class="def-title">닮은 행렬 <em>Similar Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A, B \in M_n(\mathbb{R})$에 대하여, 어떤 가역행렬 $Q \in M_n(\mathbb{R})$가 존재하여 $B = Q^{-1}AQ$이면 $A$와 $B$는 <strong>닮았다</strong>고 하고 $A \sim B$로 나타낸다.</p>
+        <p>(따라서 $[T]_\gamma \sim [T]_\beta$)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$A, B \in M_n(\mathbb{R})$ are <strong>similar</strong>, denoted $A \sim B$, if $B = Q^{-1}AQ$ for some invertible $Q \in M_n(\mathbb{R})$.</p>
+        <p>(so $[T]_\gamma \sim [T]_\beta$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 20 · p.6 (아래쪽 "Unit 3. Systems of Lin Eqns"부터는 이 단원에 넣지 않음) ═══════════ -->
+
+<div class="card rem-card" id="c8-9">
+  <div class="card-head">
+    <span class="rem-num">REM 2.60</span>
+    <span class="rem-title">닮음의 의미와 동치관계 <em>What Similarity Means; an Equivalence Relation</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A, B \in M_n(\mathbb{R})$라 하자.</p>
+        <p><strong>(a)</strong> $A \sim B$이면, $A = [T]_\beta$이고 $B = [T]_\gamma$인 $T \in \mathcal{L}(\mathbb{R}^n)$와 $\mathbb{R}^n$의 기저 $\beta, \gamma$가 존재한다.</p>
+        <p><strong>(b)</strong> $\sim$은 <strong>동치관계</strong>이다. 즉 모든 $A \in M_n(\mathbb{R})$에 대하여 $A \sim A$이고, $A \sim B$이고 $B \sim C$이면 $A \sim C$이며, $A \sim B$이면 $B \sim A$이다.</p>
+        <p>(b)의 증명: 연습.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong> $B = Q^{-1}AQ$라 하면 $Q = [I_{\mathbb{R}^n}]_\gamma^\beta$이다. 여기서 $\gamma$는 $\mathbb{R}^n$의 기저이고 $\beta$는 $\mathbb{R}^n$의 표준기저이다(<a href="#c8-3">명제 2.54 (c)</a>의 증명에 의해). 또 $A = [L_A]_\beta$이다.</p>
+        <div class="math-display">$$\Rightarrow B = [I_{\mathbb{R}^n}]_\beta^\gamma [L_A]_\beta [I_{\mathbb{R}^n}]_\gamma^\beta = [L_A]_\gamma$$</div>
+        <p>(<a href="#c8-6">따름정리 2.57</a>에 의해)</p>
+        <div class="qed">□</div>
+        <p><strong>(b)</strong> 노트에는 "증명: 연습"뿐이므로 직접 증명한다. 아래에서 행렬곱의 결합법칙과 단위행렬의 성질 $I_nX = X = XI_n$(<a href="ch06.html#c6-11">명제 2.37 (a), (d)</a>)을 쓴다.</p>
+        <p><strong>반사성:</strong> $I_n I_n = I_n$이므로 $I_n$은 가역이고 $I_n^{-1} = I_n$이다. 따라서 $A = I_n^{-1} A I_n$이므로 $A \sim A$이다. <span class="part-end">▨</span></p>
+        <p><strong>대칭성:</strong> $A \sim B$, 즉 어떤 가역행렬 $Q$에 대하여 $B = Q^{-1}AQ$라 하자. 왼쪽에 $Q$, 오른쪽에 $Q^{-1}$를 곱하면</p>
+        <div class="math-display">$$QBQ^{-1} = (QQ^{-1})A(QQ^{-1}) = I_n A I_n = A$$</div>
+        <p>이다. $P := Q^{-1}$로 두자. $Q^{-1}Q = QQ^{-1} = I_n$이므로 $P$는 가역이고 $P^{-1} = Q$이다(<a href="ch07.html#c7-16">주의 2.48 (2)</a>의 유일성). 따라서 $A = P^{-1}BP$이므로 $B \sim A$이다. <span class="part-end">▨</span></p>
+        <p><strong>추이성:</strong> $A \sim B$이고 $B \sim C$, 즉 어떤 가역행렬 $Q, P$에 대하여 $B = Q^{-1}AQ$, $C = P^{-1}BP$라 하자. 그러면</p>
+        <div class="math-display">$$C = P^{-1}(Q^{-1}AQ)P = (P^{-1}Q^{-1})A(QP) = (QP)^{-1}A(QP)$$</div>
+        <p>이다. 마지막 등호는 <a href="ch07.html#c7-18">주의 2.50</a>이다. $QP$는 가역이고 $(QP)^{-1} = P^{-1}Q^{-1}$이다. 따라서 $A \sim C$이다. <span class="part-end">▨</span></p>
+        <p>특히 <a href="#c8-8">정의 2.59</a>의 곁말 "$[T]_\gamma \sim [T]_\beta$"에 대하여: 따름정리 2.57의 $[T]_\gamma = Q^{-1}[T]_\beta Q$를 정의의 순서대로 읽으면 $[T]_\beta \sim [T]_\gamma$이고, 대칭성에 의해 $[T]_\gamma \sim [T]_\beta$이기도 하다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> (a)의 증명에서 생략된 단계를 채운다.</p>
+        <p><strong>(i) $Q = [I_{\mathbb{R}^n}]_\gamma^\beta$.</strong> $Q$가 가역이므로 <a href="ch07.html#c7-16">주의 2.48 (1)</a>에 의해 $Q$의 열들의 순서쌍 $\gamma$는 $\mathbb{R}^n$의 기저이다. $\beta$가 표준기저이면 모든 $x \in \mathbb{R}^n$에 대하여 $[x]_\beta = x$이므로, <a href="#c8-3">명제 2.54 (a)</a>에 의해 $[I_{\mathbb{R}^n}]_\gamma^\beta$의 열은 $\gamma$의 벡터들, 즉 $Q$의 열들 그대로이다. 명제 2.54 (c)의 증명과 같은 논리이고, 기저의 이름 $\beta, \gamma$만 서로 바뀌었다. <span class="part-end">▨</span></p>
+        <p><strong>(ii) $Q^{-1} = [I_{\mathbb{R}^n}]_\beta^\gamma$.</strong> <a href="#c8-3">명제 2.54 (b)</a>이다. 그래서 $B = Q^{-1}AQ$의 $Q^{-1}$과 $Q$ 자리에 두 좌표변환 행렬이 들어간다. <span class="part-end">▨</span></p>
+        <p><strong>(iii) $A = [L_A]_\beta$.</strong> 표준기저에 대한 왼쪽 곱 사상의 행렬표현(<a href="ch07.html#c7-4">주의</a>, $A = [L_A]_\beta^\beta$)이다. <span class="part-end">▨</span></p>
+        <p><strong>(iv) 결론.</strong> 따름정리 2.57을 $V = \mathbb{R}^n$, $T = L_A$에 적용하면 $[L_A]_\gamma = [I_{\mathbb{R}^n}]_\beta^\gamma [L_A]_\beta [I_{\mathbb{R}^n}]_\gamma^\beta = Q^{-1}AQ = B$이다. 따라서 $T := L_A \in \mathcal{L}(\mathbb{R}^n)$로 두면 $A = [T]_\beta$, $B = [T]_\gamma$이다. 거꾸로, 같은 $T$의 두 행렬표현 $[T]_\beta$와 $[T]_\gamma$는 따름정리 2.57에 의해 언제나 닮았다. 그러므로 두 행렬이 닮았다는 것은 같은 선형연산자를 두 기저로 나타낸 행렬이라는 뜻이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$A, B \in M_n(\mathbb{R})$.</p>
+        <p><strong>(a)</strong> $A \sim B \Rightarrow \exists\, T \in \mathcal{L}(\mathbb{R}^n)$, $\beta, \gamma$ bases of $\mathbb{R}^n$, s.t. $A = [T]_\beta$ &amp; $B = [T]_\gamma$.</p>
+        <p><strong>(b)</strong> $\sim$ is an <strong>equiv rel</strong> (i.e., $A \sim A$ $\forall A \in M_n(\mathbb{R})$, $A \sim B$ &amp; $B \sim C \Rightarrow A \sim C$, $A \sim B \Rightarrow B \sim A$).</p>
+        <p>Pf: Exercise □</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong> Pf: $B = Q^{-1}AQ$, then $Q = [I_{\mathbb{R}^n}]_\gamma^\beta$ where $\gamma$ is a basis of $\mathbb{R}^n$ &amp; $\beta$ std basis of $\mathbb{R}^n$ (by Pf of <a href="#c8-3">Prop 2.54(c)</a>). Also, $A = [L_A]_\beta$</p>
+        <div class="math-display">$$\Rightarrow B = [I_{\mathbb{R}^n}]_\beta^\gamma [L_A]_\beta [I_{\mathbb{R}^n}]_\gamma^\beta = [L_A]_\gamma$$</div>
+        <p>by <a href="#c8-6">Cor 2.57</a>.</p>
+        <div class="qed">□</div>
+        <p><strong>(b)</strong> The notes only say "Pf: Exercise", so we prove it here. We use associativity of matrix multiplication and $I_nX = X = XI_n$ (<a href="ch06.html#c6-11">Prop 2.37(a), (d)</a>).</p>
+        <p><strong>Reflexive:</strong> $I_n I_n = I_n$, so $I_n$ is invertible with $I_n^{-1} = I_n$. Hence $A = I_n^{-1} A I_n$, i.e., $A \sim A$. <span class="part-end">▨</span></p>
+        <p><strong>Symmetric:</strong> suppose $A \sim B$, i.e., $B = Q^{-1}AQ$ for some invertible $Q$. Multiplying by $Q$ on the left and $Q^{-1}$ on the right,</p>
+        <div class="math-display">$$QBQ^{-1} = (QQ^{-1})A(QQ^{-1}) = I_n A I_n = A.$$</div>
+        <p>Let $P := Q^{-1}$. Since $Q^{-1}Q = QQ^{-1} = I_n$, $P$ is invertible with $P^{-1} = Q$ (uniqueness in <a href="ch07.html#c7-16">Rmk 2.48(2)</a>). So $A = P^{-1}BP$, i.e., $B \sim A$. <span class="part-end">▨</span></p>
+        <p><strong>Transitive:</strong> suppose $A \sim B$ and $B \sim C$, i.e., $B = Q^{-1}AQ$ and $C = P^{-1}BP$ for some invertible $Q, P$. Then</p>
+        <div class="math-display">$$C = P^{-1}(Q^{-1}AQ)P = (P^{-1}Q^{-1})A(QP) = (QP)^{-1}A(QP).$$</div>
+        <p>The last equality is <a href="ch07.html#c7-18">Rmk 2.50</a>: $QP$ is invertible with $(QP)^{-1} = P^{-1}Q^{-1}$. Hence $A \sim C$. <span class="part-end">▨</span></p>
+        <p>In particular, about the margin "$[T]_\gamma \sim [T]_\beta$" of <a href="#c8-8">Def 2.59</a>: read in the order of the definition, $[T]_\gamma = Q^{-1}[T]_\beta Q$ from Cor 2.57 says $[T]_\beta \sim [T]_\gamma$, and by symmetry also $[T]_\gamma \sim [T]_\beta$.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We fill in the steps skipped in the proof of (a).</p>
+        <p><strong>(i) $Q = [I_{\mathbb{R}^n}]_\gamma^\beta$.</strong> Since $Q$ is invertible, by <a href="ch07.html#c7-16">Rmk 2.48(1)</a> the list $\gamma$ of its columns is a basis of $\mathbb{R}^n$. With $\beta$ the standard basis, $[x]_\beta = x$ for all $x \in \mathbb{R}^n$, so by <a href="#c8-3">Prop 2.54(a)</a> the columns of $[I_{\mathbb{R}^n}]_\gamma^\beta$ are the vectors of $\gamma$, i.e., exactly the columns of $Q$. This is the argument in the proof of Prop 2.54(c) with the names $\beta, \gamma$ swapped. <span class="part-end">▨</span></p>
+        <p><strong>(ii) $Q^{-1} = [I_{\mathbb{R}^n}]_\beta^\gamma$.</strong> This is <a href="#c8-3">Prop 2.54(b)</a>. So the two change-of-coordinate matrices sit in the places of $Q^{-1}$ and $Q$ in $B = Q^{-1}AQ$. <span class="part-end">▨</span></p>
+        <p><strong>(iii) $A = [L_A]_\beta$.</strong> This is the matrix of a left-multiplication map in the standard bases (<a href="ch07.html#c7-4">Rmk</a>, $A = [L_A]_\beta^\beta$). <span class="part-end">▨</span></p>
+        <p><strong>(iv) Conclusion.</strong> Cor 2.57 with $V = \mathbb{R}^n$ and $T = L_A$ gives $[L_A]_\gamma = [I_{\mathbb{R}^n}]_\beta^\gamma [L_A]_\beta [I_{\mathbb{R}^n}]_\gamma^\beta = Q^{-1}AQ = B$. So with $T := L_A \in \mathcal{L}(\mathbb{R}^n)$ we get $A = [T]_\beta$ and $B = [T]_\gamma$. Conversely, the two matrix representations $[T]_\beta$ and $[T]_\gamma$ of the same $T$ are always similar by Cor 2.57. So two matrices are similar exactly when they represent the same linear operator in two bases.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card note-card" id="note08-99">
   <div class="card-head">
     <span class="note-num">NOTE</span>
@@ -277,13 +793,13 @@ MathJax = {
     <div class="ko-panel">
       <span class="panel-label ko-label">한국어</span>
       <div class="formal">
-        <p>단원 노트 Unit 2.4(1쪽)와 Lecture 19 끝(5쪽)까지 반영했다. 마지막 내용은 정의 2.53이다. Lecture 19의 오늘 할 일에 따르면 §2.4는 같은 선형사상의 두 행렬표현 $[T]_\beta^\gamma$와 $[T]_{\beta'}^{\gamma'}$을 비교하는 내용으로 이어진다.</p>
+        <p>단원 노트 Unit 2.4(1쪽), Lecture 19 끝(5쪽), Lecture 20 pp.1–6까지 반영했다. §2.4는 주의 2.60까지 모두 실렸다. Lecture 20은 이어서 Unit 3 연립일차방정식(§3.1)을 시작하는데, 이 내용은 아직 사이트에 없다.</p>
       </div>
     </div>
     <div class="en-panel" lang="en">
       <span class="panel-label en-label">English</span>
       <div class="en-formal">
-        <p>Updated through the Unit 2.4 notes (1 page) and the end of Lecture 19 (p.5), ending with Def 2.53. According to the "Today" plan of Lecture 19, §2.4 goes on to compare two matrix representations $[T]_\beta^\gamma$ and $[T]_{\beta'}^{\gamma'}$ of the same linear map.</p>
+        <p>Updated through the Unit 2.4 notes (1 page), the end of Lecture 19 (p.5) and Lecture 20 pp.1–6; §2.4 is complete through Rmk 2.60. Lecture 20 then begins Unit 3 (Systems of Linear Equations, §3.1), which is not on the site yet.</p>
       </div>
     </div>
   </div>

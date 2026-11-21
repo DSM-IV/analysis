@@ -11,7 +11,9 @@
 - `Unit 2.2 of Linear Algebra I (non-math major) Notes at KU.pdf` (4쪽, p.4는 위쪽 한 줄 "(c), (d): Next Class!") — 11/3 Desktop에 `…KU-1.pdf`(다운로드 중복 접미사)로 추가 → 접미사 없이 복사. 해당 Lecture PDF가 없어 **이 노트가 ch06의 전사 원본**이다. §2.2 동기·Def 2.28–Prop 2.31.
 - `Unit 2.3 of Linear Algebra I (non-math major) Notes at KU.pdf` (10쪽, p.10은 위쪽만) — 11/17 Desktop에 `…KU-1.pdf`로 추가 → 접미사 없이 복사. §2.3 행렬표현 Def 2.38–Ex 2.52. **ch07의 전사 원본**(pp.1–7 위쪽을 다룬 Lecture PDF는 없음).
 - `Unit 2.4 of Linear Algebra I (non-math major) Notes at KU.pdf` (1쪽) — 11/17 추가. §2.4 동기·Q·Def 2.53. **ch08의 전사 원본.**
-- `Lecture 19 on 221 F26.pdf` (5쪽) — 11/17 추가. p.1 Last Time(Def 2.38·Thm 2.41·Prop 2.39·Thm 2.45 복습, 카드 없음)·Today, p.1 아래–p.4 = Unit 2.3 pp.7–10("Isoms and Invertibility"부터), p.4 끝–p.5 = Unit 2.4. 내용 차이 없음 → 판독 대조용. **Lecture 14–18 파일은 없음.**
+- `Lecture 19 on 221 F26.pdf` (5쪽) — 11/17 추가. p.1 Last Time(Def 2.38·Thm 2.41·Prop 2.39·Thm 2.45 복습, 카드 없음)·Today, p.1 아래–p.4 = Unit 2.3 pp.7–10("Isoms and Invertibility"부터), p.4 끝–p.5 = Unit 2.4. 내용 차이 없음 → 판독 대조용.
+- `Lecture 15/16/17/20/21 on 221 F26.pdf` (8 · 9 · 8 · 7 · 7쪽) — 11/21 Desktop에 추가. **L15** = Thm 2.12 증명의 WTS(pp.1–2)·Cor 2.13–Cor 2.20·≅ 동치관계(§2.1 합성·동형사상). **L16** pp.1–6 위 = Ex 2.21–Thm 2.27·Rmk(§2.1 끝), p.6 "§2.2" 제목부터 p.9 = Unit 2.2 노트 pp.1–4와 동일(대조 결과 차이 없음). **L17** = Prop 2.31 (c)(d) 증명·Lem 2.32–Prop 2.37·Warning(§2.2 끝). **L20** pp.1–6 = Prop 2.54–Rmk 2.60(§2.4 끝), p.6 아래부터 Unit 3 시작. **L21** = Unit 3 §3.1(사이트 미반영). **Lecture 14·18 파일은 없음** — L14는 L13→L15 사이(L15 Last Time이 L13의 R-N까지 복습하므로 빠진 번호 없음), L18은 Unit 2.3 노트 pp.1–7과 같은 내용으로 추정(번호 2.38–2.47이 연속).
+- `Unit 3.1 of Linear Algebra I (non-math major) Notes at KU.pdf` (8쪽, 11/19) — §3.1 연립일차방정식과 가우스 소거(Def 3.1–3.9). 사이트 미반영(다음 단원 ch09 후보).
 - `Unit 1.x / 2.1 of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽, 2.1 4쪽(p4 빈 쪽); 강의노트와 같은 손글씨).
   강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음. Unit 2.1은 L12 pp.4–7과 같고 Ex 2.3(1)의 "Pf:" 뒤가 비어 있음(L12는 "Pf: Next Class!").
 
@@ -19,7 +21,8 @@
 **규칙 요약:** 각 강의 첫머리 "Last Time" 복습은 카드로 만들지 않음(새 내용이 있을 때만 RECALL 카드). 손그림은 `p.fig-note` 한 줄 설명. 증명 중간 끝 표시 ▨ = `span.part-end`. 노트에 증명이 없는 진술("Pf: Exercise", "See FIS", "Unit notes", "Math-Major Only", "Pf Idea")은 자체 증명(마커 → 증명 토글; 노트 증명이 이미 있으면 "보충 증명" 토글). en = verbatim(오타 포함), ko = 바른 뜻.
 **퀴즈 복습·기출:** `la1/quiz1.html` — Lecture 1–9 개념 복습·연습 13세트와 Fall 2025 Quiz 1·2 기출 4문항(소문항별 5블록). 영어 답안·한국어 해설, 원본 PDF 링크. MathJax 4.1.3.
 **중간고사 기출:** `la1/midterm.html` — Fall 2025·2024 중간고사 9문항(소문항별 11블록), quiz1과 같은 qs-block 형식. 영어 모범답안·한국어 해설·원본 해설 정정. 아래 "중간고사 기출 반영" 절 참조.
-**진행 상태 (2026-11-17):** Unit 2.3·2.4 노트와 Lecture 19 반영 — 새 ch07 "2.3 일반 선형사상의 행렬표현"(편집 안내 note07-1, Def 2.38–Ex 2.52; 환경 20 · note 5 · 한·영 토글 각 14), 새 ch08 "2.4 기저변환과 닮음"(동기 note08-1, Q, Def 2.53; 환경 2 · note 2). **빈 구간이 하나 늘었다:** Unit 2.3이 §2.2 뒷부분의 2.32–2.37번 항목(행렬곱, 단위행렬, $L_{AB}=L_A L_B$, 정리 2.33 $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)\cong M_{m\times n}(\mathbb{R})$)과 §2.1 뒷부분의 명제 2.15·주의 2.16·좌표사상 $\phi_\beta$를 인용 → note07-1이 쓰임에서 읽히는 내용을 안내, note06-99에도 2.32–2.37 미수록을 적음. 자료가 오면: 2.13–2.27은 ch05 끝(note05-99 앞), 2.32–2.37은 ch06 끝(note06-99 앞)에 이어 붙이고 note06-1·note07-1의 추정 문단을 카드 링크로 바꾼다. ch08은 Def 2.53에서 멈춤(진행 중) — 다음 강의는 ch08 끝(note08-99 앞)에.
+**진행 상태 (2026-11-21):** Lecture 15·16·17·20 반영 — ch05에 Thm 2.12 증명 원문 완결(L15 pp.1–2; 보충 증명은 (i) 첫 단계·(ii) 무한차원만 남김)과 c5-20 Cor 2.13 – c5-41 Rmk(L15 전체, L16 pp.1–6 위: 합성·동형사상·좌표사상 φ_β·Thm 2.27) → 환경 41 · note 8 · 토글 각 34. ch06에 c6-4 Prop 2.31 (c)(d) 원문 증명(L17)과 c6-5 Lem 2.32 – c6-12 Warning(L17) → 환경 12 · note 4 · 토글 각 9. ch08에 c8-3 Prop 2.54 – c8-9 Rmk 2.60(L20 pp.1–6) → 환경 9 · note 4 · 토글 각 9. note06-1·note07-1의 추정 문단을 실제 카드 링크로 교체, ch07 보충 증명의 "§2.2 뒷부분 미수록" 문구를 Def 2.36·Prop 2.37 링크로 교체. **빈 구간 해소**(2.13–2.27, 2.32–2.37, §2.4 끝). 3개 단원을 병렬 에이전트가 전사·번역, Opus 적대적 검증 1회. Unit 3(§3.1, L20 p.6 아래·L21·Unit 3.1 노트)은 아직 미반영.
+**이전 상태 (2026-11-17):** Unit 2.3·2.4 노트와 Lecture 19 반영 — 새 ch07 "2.3 일반 선형사상의 행렬표현"(편집 안내 note07-1, Def 2.38–Ex 2.52; 환경 20 · note 5 · 한·영 토글 각 14), 새 ch08 "2.4 기저변환과 닮음"(동기 note08-1, Q, Def 2.53; 환경 2 · note 2). **빈 구간이 하나 늘었다:** Unit 2.3이 §2.2 뒷부분의 2.32–2.37번 항목(행렬곱, 단위행렬, $L_{AB}=L_A L_B$, 정리 2.33 $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)\cong M_{m\times n}(\mathbb{R})$)과 §2.1 뒷부분의 명제 2.15·주의 2.16·좌표사상 $\phi_\beta$를 인용 → note07-1이 쓰임에서 읽히는 내용을 안내, note06-99에도 2.32–2.37 미수록을 적음. 자료가 오면: 2.13–2.27은 ch05 끝(note05-99 앞), 2.32–2.37은 ch06 끝(note06-99 앞)에 이어 붙이고 note06-1·note07-1의 추정 문단을 카드 링크로 바꾼다. ch08은 Def 2.53에서 멈춤(진행 중) — 다음 강의는 ch08 끝(note08-99 앞)에.
 **이전 상태 (2026-11-03):** Unit 2.2 노트 반영 — 새 ch06 "2.2 행렬과 ℝⁿ 사이의 선형사상"(편집 안내 note06-1, 동기 note06-2, Def 2.28 · Ex 2.29 · Def 2.30 · Prop 2.31, note06-99; 환경 4 · note 3 · 토글 각 2). **빈 구간:** Unit 2.2 동기가 Thm 2.27을 인용 → Thm 2.12 증명의 WTS 원문부터 2.27번 항목까지(Lecture 14 이후, 중간고사 뒤 강의)의 Lecture PDF·Unit 2.1 개정 노트가 아직 없음. note06-1이 노트의 쓰임에서 읽히는 Thm 2.27의 내용(기저의 상이 선형사상을 유일하게 결정·존재 — FIS Thm 2.6과 따름정리)을 근거와 함께 안내하고, ch05 note05-99에도 빈 구간을 적었다. 자료가 오면 ch05 끝(note05-99 앞)에 2.13–2.27번 항목을 이어 붙이고, note06-1의 추정 문단은 c5 카드 링크로 바꾼다.
 **진행 상태 (2026-10-19, 오후):** Lecture 13까지 반영 — ch05에 Ex 2.3(1) 원문 증명(L13 pp.1–2)과 Ex 2.3(2)–Thm 2.12(L13 pp.2–8) 추가: ch05 환경 19, note 5, 한·영 토글 각 17. Thm 2.12(계수-퇴화차수 정리) 증명은 노트에서 WTS 직전까지 → 보충 증명으로 완성. 중간고사 기출 페이지 신설.
 **이전 상태 (2026-10-19, 오전):** Lecture 12까지 반영. pp.1–4 → ch04 끝 c4-28–31(Def 1.62–Ex 1.65, 라그랑주 보간; ch04 환경 31, 한·영 토글 각 23), pp.4–7 → 새 ch05(Unit 2 도입·§2.1 시작; 환경 4, 토글 각 3). 2026-10-15 1차 작업(pickerel 워크트리, 미커밋)이 워크트리와 함께 소실되어 10/19 원본에서 다시 작업함.
@@ -33,10 +36,10 @@
 | ch02 | 1.2 벡터공간과 부분공간 | Lecture 3 pp.2–8 · Lecture 4 · Lecture 5 pp.1–6 |
 | ch03 | 1.3 일차결합, 생성, 일차독립 | Lecture 5 pp.6–7 · Lecture 6 · Lecture 7 pp.1–4 |
 | ch04 | 1.4 기저와 차원 | Lecture 7 pp.4–6 · Lecture 8 · Lecture 9 · Lecture 12 pp.1–4 |
-| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | Lecture 12 pp.4–7 (Unit 2 도입 포함) · Lecture 13 |
-| ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | Unit 2.2 노트 pp.1–4 (해당 Lecture PDF 없음) |
+| ch05 | 2.1 선형사상: 핵, 상, 동형사상 | Lecture 12 pp.4–7 (Unit 2 도입 포함) · Lecture 13 · Lecture 15 · Lecture 16 pp.1–6 위 |
+| ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | Unit 2.2 노트 pp.1–4 (= Lecture 16 pp.6–9) · Lecture 17 |
 | ch07 | 2.3 일반 선형사상의 행렬표현 | Unit 2.3 노트 pp.1–10 (pp.7–10 = Lecture 19 pp.1–4) |
-| ch08 | 2.4 기저변환과 닮음 | Unit 2.4 노트 p.1 (= Lecture 19 p.5) |
+| ch08 | 2.4 기저변환과 닮음 | Unit 2.4 노트 p.1 (= Lecture 19 p.5) · Lecture 20 pp.1–6 |
 | quiz1 | 퀴즈 복습과 기출 연습 | Lecture 1–9 · Fall 2025 Quiz 1·2 |
 | midterm | 중간고사 기출 | Fall 2025·2024 Midterm + 공식 해설 |
 
@@ -63,14 +66,21 @@
 20. L12 p2 Prop 1.63 진술: t_0,…,t_n이 "distinct"라는 가정 생략(Def 1.62에서 상속). 증명의 Cor 1.59(2) 적용에는 f_i들이 서로 다르다는 점(★에서 따라 나옴)도 필요 → ch04 보충 증명.
 21. L13 p5 Ex 2.7: "Recall from Ex 2.3(3)" → Ex 2.3(2) (ax+by+cz 사상은 2.3(2), 2.3(3)은 미분). ko는 2.3(2)로, c5-13 보충 증명에 명시.
 22. L13 p7 Observation: "w/ V f.d., is how are …"의 군더더기 "is", 괄호 "(Ex 2.10: guess is …"가 닫히지 않음 — en verbatim, ko는 바른 문장.
-23. L13 p7 Thm 2.12: 진술에 V 유한차원 가정이 없는데 증명은 "when V f.d."만 다룸(p8). 무한차원이면 ker(T)·im(T) 중 하나가 무한차원 → c5-19 보충 증명 (iv).
+23. L13 p7 Thm 2.12: 진술에 V 유한차원 가정이 없는데 증명은 "when V f.d."만 다룸(p8). 무한차원이면 ker(T)·im(T) 중 하나가 무한차원 → c5-19 보충 증명 (ii)(11/21 이전 번호 (iv)).
 25. Unit 2.3 p5 Rmk(번호 없음): "vize versa" → vice versa (철자; en verbatim).
 26. Unit 2.3 p7 Rmk 2.48(2) (= L19 p2): "A ∈ M_n(ℝ) invertible iff B ∈ M_n(ℝ) the def is unique" → "A가 가역이면 정의의 B는 유일하다"로 읽음(iff → then, "in" 누락). c7-16 증명 (2)에서 유일성 증명.
 27. (오류 아님) Unit 2.3 p9 Prop 2.51 (⇐) (= L19 p3): 등식 φ_γ⁻¹∘L_{[T]}∘φ_β = T 아래의 근거 표시 "Thm 2.45"는 [φ_β]^{ε_n}_β = I_n, [L_A]^{ε_m}_{ε_n} = A, [φ_γ⁻¹]^γ_{ε_m} = I_m과 Thm 2.41의 단사성을 함께 쓰면 성립한다. 더 직접적인 근거는 Def 2.38 뒤의 L_{[T]^γ_β} = φ_γ∘T∘φ_β⁻¹(또는 Thm 2.41의 U⁻¹) — c7-19 보충 증명 (ii)에 두 경로 모두 적음. (처음에 오류로 봤으나 검증에서 정정)
 28. Unit 2.3 p8–9 Prop 2.51 (⇒): Rmk 2.49 적용 전 [T]^γ_β가 정사각(dim V = dim W)이라는 단계 생략 — c7-19 보충 증명 (i).
 29. Unit 2.3 p10 Ex 2.52 검산 (= L19 p4): (3,1) 성분 "0·1+0·(−1)+1·0" → 0·1+0·0+1·0 (값 0은 같음). en verbatim, ko 수정.
-30. Unit 2.3 p6 Thm 2.45 증명: WTS(L_{[UT]} = L_{[U]}∘L_{[T]})에서 결론으로 가려면 L_{AB} = L_A∘L_B(§2.2 뒷부분, 미수록)와 Prop 2.31(d)가 필요 — 오류는 아니고 c7-12 보충 증명에 명시. 진술 자체에는 V, W, Z와 α, β, γ의 가정이 없고 Motivation에서 상속(ko에 괄호로 명시).
+30. Unit 2.3 p6 Thm 2.45 증명: WTS(L_{[UT]} = L_{[U]}∘L_{[T]})에서 결론으로 가려면 L_{BA} = L_B∘L_A(Def 2.36, c6-9 — L17에서 반영)와 Prop 2.31(d)가 필요 — 오류는 아니고 c7-12 보충 증명에 명시. 진술 자체에는 V, W, Z와 α, β, γ의 가정이 없고 Motivation에서 상속(ko에 괄호로 명시).
 24. L13 p2 Ex 2.3(3): D : ℝ[x]≤n → ℝ[x]≤n−1은 n = 0이면 공역이 ℝ[x]≤−1 = {0}(deg 0 = −∞ 약속) — 오류는 아니고 c5-6 보충 증명에 명시.
+31. L16 p5 Thm 2.27 유일성 증명: "T(Σa_iv_i) = Σa_iw_i = U(Σa_iw_i)" → 마지막은 U(Σa_iv_i). en verbatim, ko 수정 + c5-40 보충 (i).
+32. L16 p3 Thm 2.25 증명 (1): "φ_β(Σ_i(a_i+b_i)v_i =" 닫는 괄호 누락 — en verbatim, c5-36 보충.
+33. L16 p6 Rmk: "which elts T sends elts of a basis of V" 끝에 "to" 누락 — en verbatim, ko는 바른 문장.
+34. L16 p2 Prop 2.22: 진술에 유한차원 가정이 없는데 증명은 "Pf when V, W f.d.: Exercise (use RN)"뿐 — 오류는 아니고 c5-32 자체 증명이 일반 경우(V f.d. ⟺ W f.d.)까지 다룸. ERRATA 23과 같은 유형.
+35. (오류 아님) L20 p5 Def 2.59 여백 "(so [T]_γ ∼ [T]_β)": 정의의 순서(A ∼ B ⟺ B = Q⁻¹AQ)대로면 Cor 2.57은 [T]_β ∼ [T]_γ를 준다 — 대칭성(Rmk 2.60(b))으로 같은 말. c8-9 (b) 증명에 명시.
+36. (오류 아님) L20 p5 Ex 2.58: "Cor 2.57"을 β, γ 역할을 바꿔 적용([T]_β = [I]_γ^β[T]_γ[I]_β^γ). c8-7 보충 증명에 명시.
+37. L20 p6 Rmk 2.60(a) 증명: Q⁻¹ = [I]_β^γ(Prop 2.54(b))와 A = [L_A]_β(c7-4 Rmk)를 인용 없이 사용 — c8-9 보충 증명에서 채움.
 
 ## 챕터별 인벤토리 (빌드 시점 기록)
 
@@ -477,7 +487,7 @@ Source: `Lecture 13 on 221 F26.pdf`, 8 pages (p.8은 위쪽만). p.1 Last Time(D
 | c5-16 | EXAM 2.10 | 7 | T(x,y) = (x+y, x+y): im = span((1,1)), ker = span((1,−1)); "T ∈ 𝓛(ℝ²) (Exercise)" | 자체 증명(선형성) + 계산 세부 |
 | c5-17 | Q | 7 | Observation: dim V, dim ker, dim im의 관계? ⇓ Yes! | — |
 | c5-18 | DEF 2.11 | 7 | nullity(T) := dim ker(T), rank(T) (rk) := dim im(T) | — |
-| c5-19 | THM 2.12 | 7–8 | Rank-Nullity Thm (Dim Thm in FIS): dim V = nullity + rank; "Pf of R-N when V f.d." … "Pf of WTS in next class!" | 원문(미완, qed 없음) + 보충((i) 근거 (ii) WTS (iii) 결론 (iv) 무한차원) |
+| c5-19 | THM 2.12 | 7–8 | Rank-Nullity Thm (Dim Thm in FIS): dim V = nullity + rank; "Pf of R-N when V f.d." … "Pf of WTS in next class!" | 원문(L13 pp.7–8 + L15 pp.1–2 WTS, 11/21 완결) + 보충((i) 첫 단계 근거 (ii) 무한차원) |
 | note05-99 | NOTE | — | Lecture 13까지 반영, WTS는 다음 강의, 동형사상 미착수 | — |
 
 Totals: ch05 19 TOC cards · note 5 · ko/en 토글 각 17 · qed 32.
@@ -593,3 +603,10 @@ ERRATA 후보 없음. 표기만 주의: Def 2.28 "Visually"에서 v의 성분을
 - Thm 2.45 진술은 en에 식만 있음 — ko에 "(동기의 상황에서 …)" 괄호로 가정을 보충.
 - Ex 2.40(b)의 파란 곁말 "(involves solving sys of lin eqns)"는 해당 등호에 (∗)를 붙여 옮김.
 
+### 2026-11-21 추가분 (Lecture 15·16·17·20)
+
+**ch05** (L15 전체, L16 pp.1–6 위): c5-20 COR 2.13 · c5-21 EXAM 2.14 · [section 합성] c5-22 DEF 집합론 준비(합성) · note05-5 동기 · c5-23 Q · c5-24 PROP 2.15 · c5-25 REM 2.16 · [section 동형사상] note05-6 동기(ℝ³ vs ℝ[x]≤2) · c5-26 DEF 2.17 · c5-27 PROP 2.18 · c5-28 DEF 2.19 · c5-29 COR 2.20 · c5-30 REM ≅ 동치관계 · c5-31 EXAM 2.21 · c5-32 PROP 2.22(자체 증명, use RN) · c5-33 Q · c5-34 CONVENTION 2.23 · c5-35 DEF 2.24 φ_β · c5-36 THM 2.25 · c5-37 COR 2.26 · c5-38 NOTE(동형을 무시하면 차원으로 결정) · [section 기저로 선형사상 정하기] note05-7 동기 · c5-39 Q · c5-40 THM 2.27 · c5-41 REM. 자체 증명: c5-22(결합법칙), note05-6, c5-25 (b)(c), c5-31, c5-32. 보충: c5-21, c5-29, c5-36, c5-37, c5-40.
+
+**ch06** (L16 pp.6–9 대조, L17 전체): c6-4 Prop 2.31 (c)(d) 원문 증명 추가(보충은 (a) 전체·$L_{cA}=cL_A$만) · c6-5 LEM 2.32 · c6-6 THM 2.33 · c6-7 REM 2.34 · c6-8 EXAM 2.35 · [section Matrix Multiplication via Composition] note06-3 동기 · c6-9 DEF 2.36 ($A \in M_{m\times n}$, $B \in M_{p\times m}$, $(BA)_{ij} = \sum_k B_{ik}A_{kj}$, $L_{BA} = L_B \circ L_A$) · c6-10 EXAM 행렬곱 계산 · c6-11 PROP 2.37 · c6-12 REM(Warning, $UT \ne TU$). L17 수치 전부 python 검산 — 오류 없음.
+
+**ch08** (L20 pp.1–6): c8-3 PROP 2.54 · c8-4 EXAM 2.55(여백 "need to show work for Quizzes/Exams" 유지) · note08-2 · c8-5 THM 2.56 · c8-6 COR 2.57(자체 증명) · c8-7 EXAM 2.58(그림 fig-note) · note08-3 · c8-8 DEF 2.59 · c8-9 REM 2.60((b) 자체 증명). 수치(Ex 2.55, Ex 2.58) sympy 검산 일치.

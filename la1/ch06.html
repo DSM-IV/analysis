@@ -13,8 +13,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2.2 행렬과 ℝⁿ 사이의 선형사상 (§2.2 Matrices and Linear Maps of ℝⁿ) | 선형대수학 1 학습 가이드</title>
-<meta name="description" content="선형대수학 1 (MATH221) 6단원 행렬과 선형사상 — 𝓛(ℝⁿ,ℝᵐ)와 m×n 행렬의 대응(표준기저의 상을 열로 이어 붙이기), 행렬-벡터 곱(matrix-vector multiplication), 왼쪽 곱 사상(left-multiplication map) L_A와 그 성질을 한국어·영어 대조로 정리했습니다.">
-<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 행렬, matrix, 선형사상, linear map, 선형변환, linear transformation, 행렬-벡터 곱, matrix-vector multiplication, 왼쪽 곱 사상, 좌곱변환, left-multiplication map, 표준기저, standard basis, 열벡터, column vector, 전단사, bijection, 프리드버그, Friedberg">
+<meta name="description" content="선형대수학 1 (MATH221) 6단원 행렬과 선형사상 — 𝓛(ℝⁿ,ℝᵐ)와 m×n 행렬의 대응(표준기저의 상을 열로 이어 붙이기), 행렬-벡터 곱(matrix-vector multiplication), 왼쪽 곱 사상(left-multiplication map) L_A와 그 성질, 𝓛(ℝⁿ,ℝᵐ) ≅ M_{m×n}(ℝ), 합성으로 정의하는 행렬곱(matrix multiplication)과 그 성질을 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학1, Linear Algebra I, MATH221, 행렬, matrix, 선형사상, linear map, 선형변환, linear transformation, 행렬-벡터 곱, matrix-vector multiplication, 왼쪽 곱 사상, 좌곱변환, left-multiplication map, 행렬곱, matrix multiplication, 단위행렬, identity matrix, 동형사상, isomorphism, 표준기저, standard basis, 열벡터, column vector, 전단사, bijection, 프리드버그, Friedberg">
 <meta name="author" content="DDALKKAK">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://univmathsurvive.com/la1/ch06.html">
@@ -37,7 +37,7 @@
   "inLanguage": ["ko", "en"],
   "url": "https://univmathsurvive.com/la1/ch06.html",
   "datePublished": "2026-11-03",
-  "dateModified": "2026-11-17",
+  "dateModified": "2026-11-21",
   "mainEntityOfPage": "https://univmathsurvive.com/la1/ch06.html"
 }
 </script>
@@ -121,6 +121,14 @@ MathJax = {
     <li><a href="#c6-2"><span class="toc-num">EXAM 2.29</span> 행렬-벡터 곱의 계산 <em>Computing a Matrix-Vector Product</em></a></li>
     <li><a href="#c6-3"><span class="toc-num">DEF 2.30</span> 왼쪽 곱 사상 <em>The Left-Multiplication Map</em></a></li>
     <li><a href="#c6-4"><span class="toc-num">PROP 2.31</span> 왼쪽 곱 사상의 성질 <em>Properties of Left-Multiplication Maps</em></a></li>
+    <li><a href="#c6-5"><span class="toc-num">LEM 2.32</span> ℝⁿ에서 ℝᵐ으로의 선형사상은 왼쪽 곱 사상이다 <em>Linear Maps ℝⁿ → ℝᵐ Are Left-Multiplication Maps</em></a></li>
+    <li><a href="#c6-6"><span class="toc-num">THM 2.33</span> 행렬공간과 ℝⁿ 사이의 선형사상 공간의 동형 <em>Matrices and Linear Maps of ℝⁿ Are Isomorphic</em></a></li>
+    <li><a href="#c6-7"><span class="toc-num">REM 2.34</span> 정리 2.33의 결과 <em>Consequences of Thm 2.33</em></a></li>
+    <li><a href="#c6-8"><span class="toc-num">EXAM 2.35</span> ℝⁿ에서 ℝ로의 선형사상과 ℝ³의 평면의 방정식 <em>Linear Maps ℝⁿ → ℝ and Equations of Planes in ℝ³</em></a></li>
+    <li><a href="#c6-9"><span class="toc-num">DEF 2.36</span> 행렬곱 <em>Matrix Multiplication</em></a></li>
+    <li><a href="#c6-10"><span class="toc-num">EXAM</span> 행렬곱의 계산 <em>Computing a Matrix Product</em></a></li>
+    <li><a href="#c6-11"><span class="toc-num">PROP 2.37</span> 행렬곱의 성질 <em>Properties of Matrix Multiplication</em></a></li>
+    <li><a href="#c6-12"><span class="toc-num">REM</span> 경고: 합성과 행렬곱은 교환법칙을 만족하지 않는다 <em>Warning: Composition and Matrix Multiplication Do Not Commute</em></a></li>
   </ol>
 </nav>
 
@@ -189,8 +197,9 @@ MathJax = {
   ═══════════════════════════════════════════════════════════════════════
 -->
 
-<!-- 이 단원은 단원 노트 "Unit 2.2 of Linear Algebra I (non-math major) Notes at KU.pdf"(4쪽, p.4는 위쪽 한 줄)를 전사한 것이다.
-     해당 강의의 Lecture PDF는 아직 없으므로 전사 원본은 Unit 2.2 노트이다. 노트가 인용하는 정리 2.27(§2.1 뒷부분)은 자료가 없어 note06-1에서 안내한다. -->
+<!-- 이 단원은 Lecture 16 pp.6–9(§2.2 표제부터 끝까지)와 Lecture 17 pp.1–8(p.1의 Last Time·Today는 카드로 만들지 않음)을 전사한 것이다.
+     Lecture 16 pp.6–9는 단원 노트 "Unit 2.2 of Linear Algebra I (non-math major) Notes at KU.pdf"(4쪽)와 같은 내용이다(대조 결과 차이 없음).
+     note06-2–c6-4의 쪽 구분 주석은 처음 전사한 Unit 2.2 노트의 쪽 번호를 따른다. 노트가 인용하는 §2.1 항목(정리 2.27 등)은 ch05에 있다 — note06-1 참고. -->
 
 <div class="card note-card" id="note06-1">
   <div class="card-head">
@@ -200,17 +209,13 @@ MathJax = {
     <div class="ko-panel">
       <span class="panel-label ko-label">한국어</span>
       <div class="formal">
-        <p><strong>읽기 전에.</strong> 이 단원은 단원 노트 Unit 2.2(4쪽)를 옮긴 것이다. 노트는 정리 2.27을 인용하는데, 2.13–2.27번 항목이 들어 있을 §2.1 뒷부분(Lecture 13 이후 강의)의 자료는 아직 올라오지 않아 <a href="ch05.html">5단원</a>은 정리 2.12에서 멈춰 있다.</p>
-        <p>노트가 정리 2.27을 쓰는 방식으로 보면, 그 내용은 (표현은 다를 수 있으나) 실질적으로 다음 사실이어야 한다(FIS 정리 2.6과 그 따름정리 참고): $\{v_1, \dots, v_n\}$이 $V$의 기저이고 $w_1, \dots, w_n \in W$이면, $T(v_i) = w_i$ ($i = 1, \dots, n$)인 $T \in \mathcal{L}(V, W)$가 유일하게 존재한다. 특히 $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$은 $T(e_1), \dots, T(e_n)$으로 완전히 결정되고, 또 $\mathbb{R}^m$의 어떤 벡터 $n$개도 $T(e_1), \dots, T(e_n)$으로 나타난다. 동기의 전단사가 바로 이것이다.</p>
-        <p>(근거: 유일성은 <a href="ch05.html#c5-9">선형사상이 일차결합을 보존한다는 사실</a>에서, $V$의 모든 벡터가 $\sum a_i v_i$ 꼴이므로 $T\left(\sum a_i v_i\right) = \sum a_i w_i$로 정해진다는 데서 나온다. 존재성은 $T\left(\sum a_i v_i\right) := \sum a_i w_i$로 정의하면 된다. 일차결합 표현이 유일하므로(<a href="ch04.html#c4-8">명제 1.48</a>) $T$는 잘 정의되고, 계수끼리 더하고 곱하면 선형임을 바로 확인할 수 있다.)</p>
+        <p><strong>읽기 전에.</strong> 이 단원은 Lecture 16의 6–9쪽(단원 노트 Unit 2.2와 같은 내용)과 Lecture 17을 옮긴 것이다. 동기와 명제 2.31이 인용하는 정리는 <a href="ch05.html#c5-40">정리 2.27 (5단원)</a>이다. 그 밖에 이 단원이 인용하는 §2.1의 항목도 5단원에 있다: <a href="ch05.html#c5-24">명제 2.15</a>, <a href="ch05.html#c5-25">주의 2.16</a>, <a href="ch05.html#c5-27">명제 2.18</a>, <a href="ch05.html#c5-32">명제 2.22</a>.</p>
       </div>
     </div>
     <div class="en-panel" lang="en">
       <span class="panel-label en-label">English</span>
       <div class="en-formal">
-        <p><strong>Before reading.</strong> This unit transcribes the Unit 2.2 notes (4 pages). The notes cite Thm 2.27, but the material for the rest of §2.1 (lectures after Lecture 13), where items 2.13–2.27 would be, has not been posted yet, so <a href="ch05.html">Unit 05</a> stops at Thm 2.12.</p>
-        <p>From the way the notes use it, Thm 2.27 must say, in substance, the following (cf. Thm 2.6 and its corollary in FIS): if $\{v_1, \dots, v_n\}$ is a basis of $V$ and $w_1, \dots, w_n \in W$, then there is a unique $T \in \mathcal{L}(V, W)$ with $T(v_i) = w_i$ ($i = 1, \dots, n$). In particular, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ is completely determined by $T(e_1), \dots, T(e_n)$, and every choice of $T(e_1), \dots, T(e_n) \in \mathbb{R}^m$ occurs — this is exactly the bijection used in the Motivation.</p>
-        <p>(Reason: uniqueness follows from <a href="ch05.html#c5-9">linear maps preserve linear combinations</a>, which, since every vector of $V$ is some $\sum a_i v_i$, forces $T\left(\sum a_i v_i\right) = \sum a_i w_i$. For existence, define $T\left(\sum a_i v_i\right) := \sum a_i w_i$; it is well-defined because the expression as a linear combination is unique (<a href="ch04.html#c4-8">Prop 1.48</a>), and adding or scaling coefficients shows directly that it is linear.)</p>
+        <p><strong>Before reading.</strong> This unit transcribes Lecture 16, pp.6–9 (the same content as the Unit 2.2 notes), and Lecture 17. The theorem cited in the Motivation and in Prop 2.31 is <a href="ch05.html#c5-40">Thm 2.27 (Unit 05)</a>. The other §2.1 items cited in this unit are also in Unit 05: <a href="ch05.html#c5-24">Prop 2.15</a>, <a href="ch05.html#c5-25">Rmk 2.16</a>, <a href="ch05.html#c5-27">Prop 2.18</a>, <a href="ch05.html#c5-32">Prop 2.22</a>.</p>
       </div>
     </div>
   </div>
@@ -228,13 +233,13 @@ MathJax = {
     <div class="ko-panel">
       <span class="panel-label ko-label">한국어</span>
       <div class="formal">
-        <p><strong>동기:</strong> 정리 2.27에 의해 $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$은 $T(e_1), \dots, T(e_n) \in \mathbb{R}^m$으로 결정된다. 여기서 $e_1, \dots, e_n \in \mathbb{R}^n$은 $\mathbb{R}^n$의 표준기저이다. 각 $j = 1, \dots, n$에 대하여</p>
+        <p><strong>동기:</strong> <a href="ch05.html#c5-40">정리 2.27</a>에 의해 $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$은 $T(e_1), \dots, T(e_n) \in \mathbb{R}^m$으로 결정된다. 여기서 $e_1, \dots, e_n \in \mathbb{R}^n$은 $\mathbb{R}^n$의 표준기저이다. 각 $j = 1, \dots, n$에 대하여</p>
         <div class="math-display">$$T(e_j) = \begin{bmatrix} a_{1j} \\ \vdots \\ a_{mj} \end{bmatrix} \in \mathbb{R}^m$$</div>
         <p>로 쓸 수 있다. 그러면 $T$의 정보는 다음 모음이다.</p>
         <div class="math-display">$$\begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix} := \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \end{bmatrix} \in M_{m \times n}(\mathbb{R})$$</div>
         <p>(열벡터 $T(e_1), \dots, T(e_n)$을 차례로 이어 붙인 것)</p>
         <p class="fig-note">[그림: 오른쪽 행렬의 각 열에 동그라미가 쳐져 있고 $T(e_1), T(e_2), \dots, T(e_n)$이라고 적혀 있다. 즉 $j$번째 열이 $T(e_j)$이다.]</p>
-        <p>이것은 (정리 2.27에 의해) 다음 전단사를 준다.</p>
+        <p>이것은 (<a href="ch05.html#c5-40">정리 2.27</a>에 의해) 다음 전단사를 준다.</p>
         <div class="math-display">$$\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) \longrightarrow M_{m \times n}(\mathbb{R})$$</div>
         <div class="math-display">$$T \longmapsto \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix}$$</div>
         <div class="math-display">$$\left(\sum a_i e_i \mapsto \sum a_i C_i\right) \mathrel{↤} \begin{bmatrix} C_1 &amp; \cdots &amp; C_n \end{bmatrix}$$</div>
@@ -248,13 +253,13 @@ MathJax = {
     <div class="en-panel" lang="en">
       <span class="panel-label en-label">English</span>
       <div class="en-formal">
-        <p><strong>Motivation:</strong> By Thm 2.27, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ is char by $T(e_1), \dots, T(e_n) \in \mathbb{R}^m$, where $e_1, \dots, e_n \in \mathbb{R}^n$ std basis of $\mathbb{R}^n$. We can write</p>
+        <p><strong>Motivation:</strong> By <a href="ch05.html#c5-40">Thm 2.27</a>, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ is char by $T(e_1), \dots, T(e_n) \in \mathbb{R}^m$, where $e_1, \dots, e_n \in \mathbb{R}^n$ std basis of $\mathbb{R}^n$. We can write</p>
         <div class="math-display">$$T(e_j) = \begin{bmatrix} a_{1j} \\ \vdots \\ a_{mj} \end{bmatrix} \in \mathbb{R}^m \quad \forall j = 1, \dots, n.$$</div>
         <p>Then the data of $T$ is the collection</p>
         <div class="math-display">$$\begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix} := \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \end{bmatrix} \in M_{m \times n}(\mathbb{R})$$</div>
         <p>(concatenating col vecs $T(e_1), \dots, T(e_n)$)</p>
         <p class="fig-note">[Figure: the columns of the right-hand matrix are circled and labelled $T(e_1), T(e_2), \dots, T(e_n)$]</p>
-        <p>This induces bij (by Thm 2.27)</p>
+        <p>This induces bij (by <a href="ch05.html#c5-40">Thm 2.27</a>)</p>
         <div class="math-display">$$\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) \longrightarrow M_{m \times n}(\mathbb{R})$$</div>
         <div class="math-display">$$T \longmapsto \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix}$$</div>
         <div class="math-display">$$\left(\sum a_i e_i \mapsto \sum a_i C_i\right) \mathrel{↤} \begin{bmatrix} C_1 &amp; \cdots &amp; C_n \end{bmatrix}$$</div>
@@ -366,30 +371,43 @@ MathJax = {
       <div class="proof-content">
         <p><strong>증명:</strong> <strong>(a)</strong> (증명 개요만):</p>
         <div class="math-display">$$L_A\left(\sum b_i e_i\right) = \sum b_i L_A(e_i)$$</div>
-        <p>이 등식은 구성에 의해(<a href="#note06-2">§2.2의 동기</a>, 즉 정리 2.27의 결과) 성립하므로 $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$이다. <span class="part-end">▨</span></p>
+        <p>이 등식은 구성에 의해(<a href="#note06-2">§2.2의 동기</a>, 즉 <a href="ch05.html#c5-40">정리 2.27</a>의 결과) 성립하므로 $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$이다. <span class="part-end">▨</span></p>
         <p><strong>(b)</strong> 각 $j = 1, \dots, n$에 대하여, 모든 $i = 1, \dots, m$에서</p>
         <div class="math-display">$$\big(L_A(e_j)\big)_{i1} = \sum_{k=1}^{n} A_{ik} (e_j)_{k1} = \sum_{k=1}^{n} A_{ik} \delta_{jk} = A_{ij}$$</div>
         <p>임에 주목하자. 따라서</p>
         <div class="math-display">$$L_A(e_j) = \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix} = C_j$$</div>
         <p>즉 $A$의 $j$번째 열이다. <span class="part-end">▨</span></p>
-        <!-- ═══════════ Unit 2.2 notes · p.4 ═══════════ -->
+        <!-- ═══════════ Unit 2.2 notes · p.4 (= Lecture 16 p.9) ═══════════ -->
         <p><strong>(c), (d):</strong> 다음 수업에서!</p>
+        <!-- ═══════════ Lecture 17 · p.1 (Last Time·Today 생략; 명제 2.31 (c), (d)의 진술을 다시 적고 증명) ═══════════ -->
+        <p><em>(Lecture 17)</em></p>
+        <p><strong>(c)</strong> 모든 $x = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n = M_{n \times 1}(\mathbb{R})$와 모든 $i = 1, \dots, m$에 대하여</p>
+        <!-- ═══════════ Lecture 17 · p.2 ═══════════ -->
+        <div class="math-display">$$\big(L_{(A+B)}(x)\big)_{i1} = \big((A+B)x\big)_{i1} = \sum_{j=1}^{n} \underbrace{(A+B)_{ij}}_{= A_{ij} + B_{ij}} x_j$$</div>
+        <div class="math-display">$$= \sum_{j=1}^{n} A_{ij}x_j + \sum_{j=1}^{n} B_{ij}x_j$$</div>
+        <div class="math-display">$$= (Ax)_{i1} + (Bx)_{i1} = \big(L_A(x) + L_B(x)\big)_{i1}$$</div>
+        <p>이다. 따라서</p>
+        <div class="math-display">$$L_{(A+B)}(x) = L_A(x) + L_B(x) \quad \forall x \in \mathbb{R}^n$$</div>
+        <div class="math-display">$$\Rightarrow L_{(A+B)} = L_A + L_B$$</div>
+        <p>이다. 마찬가지로 $L_{(cA)} = cL_A$이다(연습). <span class="part-end">▨</span></p>
+        <p><strong>(d)</strong> ($\Leftarrow$): $A = B$이면 행렬-벡터 곱의 정의에 의해 $L_A = L_B$이다. <span class="part-end">▨</span></p>
+        <p>($\Rightarrow$): (b)에 의해, $L_A = L_B$이면 모든 $j$에 대하여</p>
+        <div class="math-display">$$(A\text{의 } j\text{번째 열}) = L_A(e_j) = L_B(e_j) = (B\text{의 } j\text{번째 열})$$</div>
+        <p>이므로 $A = B$이다.</p>
+        <div class="qed">□</div>
       </div>
       <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
         <span class="arrow">&#9654;</span> 보충 증명 보기
       </button>
       <div class="proof-content">
-        <p><em>보충.</em> 노트에는 (a)의 개요만 있고 (c), (d)는 다음 수업으로 미뤄져 있으므로, 정의 2.28에서 바로 증명한다. 아래에서 $(A \cdot v)_{i1}$을 $(Av)_i$로 줄여 쓴다.</p>
+        <p><em>보충.</em> 노트에는 (a)의 증명 개요만 있고 (c)의 $L_{(cA)} = cL_A$는 연습으로 남겨져 있으므로, 이 둘을 정의 2.28에서 바로 증명한다. 아래에서 $(A \cdot v)_{i1}$을 $(Av)_i$로 줄여 쓴다.</p>
         <p><strong>(a)</strong> $u, v \in \mathbb{R}^n$, $a \in \mathbb{R}$이라 하자. 각 $i = 1, \dots, m$에 대하여</p>
         <div class="math-display">$$\big(A(u + v)\big)_i = \sum_{j=1}^{n} A_{ij}(u_j + v_j)$$</div>
         <div class="math-display">$$= \sum_{j=1}^{n} A_{ij}u_j + \sum_{j=1}^{n} A_{ij}v_j = (Au)_i + (Av)_i,$$</div>
         <div class="math-display">$$\big(A(au)\big)_i = \sum_{j=1}^{n} A_{ij}(a u_j) = a \sum_{j=1}^{n} A_{ij}u_j = a\,(Au)_i$$</div>
-        <p>이므로 $L_A(u + v) = L_A(u) + L_A(v)$, $L_A(au) = aL_A(u)$이고, $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$이다. 노트의 개요는 이렇게 읽을 수 있다: 정의 2.28에 의해 $(Ax)_k = \sum_j A_{kj}x_j = \sum_j x_j (C_j)_k$, 즉 $A \cdot x = \sum_j x_j C_j$이므로 $L_A$는 동기에서 $A$에 대응시킨 사상 $\sum a_i e_i \mapsto \sum a_i C_i$와 같고, 이 사상은 정리 2.27에 의해 선형이다. <span class="part-end">▨</span></p>
-        <p><strong>(c)</strong> 임의의 $v \in \mathbb{R}^n$과 $i = 1, \dots, m$에 대하여</p>
-        <div class="math-display">$$\big((A + B)v\big)_i = \sum_{j=1}^{n} (A_{ij} + B_{ij})v_j = (Av)_i + (Bv)_i$$</div>
-        <p>이므로 $L_{A+B}(v) = L_A(v) + L_B(v) = (L_A + L_B)(v)$이다. 마지막 등호는 <a href="ch05.html#c5-10">주의 2.4</a>에서 정한 $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$의 덧셈이다. 마찬가지로 $\big((cA)v\big)_i = \sum_j cA_{ij}v_j = c\,(Av)_i$이므로 $L_{cA}(v) = cL_A(v) = (cL_A)(v)$이다. 두 사상은 모든 $v$에서 값이 같으므로 $L_{A+B} = L_A + L_B$, $L_{cA} = cL_A$이다. <span class="part-end">▨</span></p>
-        <p><strong>(d)</strong> ($\Leftarrow$) $A = B$이면 $L_A$와 $L_B$는 같은 규칙 $v \mapsto A \cdot v$로 정의되므로 같다. ($\Rightarrow$) $L_A = L_B$이면 (b)에 의해 각 $j$에 대하여 ($A$의 $j$번째 열) $= L_A(e_j) = L_B(e_j) =$ ($B$의 $j$번째 열)이다. 모든 열이 같으므로 모든 $(i, j)$-성분이 같고, $A = B$이다.</p>
-        <p>(덧붙임: (c)와 (d)는 $A \mapsto L_A$가 $M_{m \times n}(\mathbb{R})$에서 $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$로 가는 단사 선형사상이라는 뜻이다. 또 (b)는 $L_A$에 동기의 사상 $T \mapsto [T(e_1) \cdots T(e_n)]$을 적용하면 $A$로 돌아온다는 뜻이므로, 그 전단사의 역사상이 바로 $A \mapsto L_A$이다.)</p>
+        <p>이므로 $L_A(u + v) = L_A(u) + L_A(v)$, $L_A(au) = aL_A(u)$이고, $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$이다. 노트의 개요는 이렇게 읽을 수 있다: 정의 2.28에 의해 $(Ax)_k = \sum_j A_{kj}x_j = \sum_j x_j (C_j)_k$, 즉 $A \cdot x = \sum_j x_j C_j$이므로 $L_A$는 동기에서 $A$에 대응시킨 사상 $\sum a_i e_i \mapsto \sum a_i C_i$와 같고, 이 사상은 <a href="ch05.html#c5-40">정리 2.27</a>에 의해 선형이다. <span class="part-end">▨</span></p>
+        <p><strong>(c)의 $L_{(cA)} = cL_A$</strong> 임의의 $v \in \mathbb{R}^n$과 $i = 1, \dots, m$에 대하여 $\big((cA)v\big)_i = \sum_j cA_{ij}v_j = c\,(Av)_i$이므로 $L_{(cA)}(v) = cL_A(v) = (cL_A)(v)$이다. 마지막 등호는 <a href="ch05.html#c5-10">주의 2.4</a>에서 정한 $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$의 스칼라배이다. 두 사상은 모든 $v$에서 값이 같으므로 $L_{(cA)} = cL_A$이다. (노트의 (c) 증명 마지막 줄 "$L_{(A+B)}(x) = L_A(x) + L_B(x)$ $\forall x$ $\Rightarrow$ $L_{(A+B)} = L_A + L_B$"도 같은 이유, 즉 주의 2.4의 덧셈 $(L_A + L_B)(x) := L_A(x) + L_B(x)$에 의한 것이다.)</p>
+        <p>(덧붙임: (c)와 (d)는 $A \mapsto L_A$가 $M_{m \times n}(\mathbb{R})$에서 $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$로 가는 단사 선형사상이라는 뜻이다. 노트는 이것을 <a href="#c6-5">보조정리 2.32</a>와 함께 써서 <a href="#c6-6">정리 2.33</a>을 증명한다.)</p>
         <div class="qed">□</div>
       </div>
     </div>
@@ -409,29 +427,508 @@ MathJax = {
       <div class="en-proof-content">
         <p><strong>Pf:</strong> <strong>(a):</strong> (only the pf sketch):</p>
         <div class="math-display">$$L_A\left(\sum b_i e_i\right) = \sum b_i L_A(e_i)$$</div>
-        <p>by constr (<a href="#note06-2">Motivation of §2.2</a> (conseq of Thm 2.27)) $\Downarrow$ $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. <span class="part-end">▨</span></p>
+        <p>by constr (<a href="#note06-2">Motivation of §2.2</a> (conseq of <a href="ch05.html#c5-40">Thm 2.27</a>)) $\Downarrow$ $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. <span class="part-end">▨</span></p>
         <p><strong>(b):</strong> $\forall j = 1, \dots, n$, notice that $\forall i = 1, \dots, m$</p>
         <div class="math-display">$$\big(L_A(e_j)\big)_{i1} = \sum_{k=1}^{n} A_{ik} (e_j)_{k1} = \sum_{k=1}^{n} A_{ik} \delta_{jk} = A_{ij}$$</div>
         <div class="math-display">$$\Rightarrow L_A(e_j) = \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix} = C_j$$</div>
         <p>the $j^{\text{th}}$-col of $A$. <span class="part-end">▨</span></p>
-        <!-- ═══════════ Unit 2.2 notes · p.4 ═══════════ -->
+        <!-- ═══════════ Unit 2.2 notes · p.4 (= Lecture 16 p.9) ═══════════ -->
         <p><strong>(c), (d):</strong> Next Class!</p>
+        <!-- ═══════════ Lecture 17 · p.1 (Last Time·Today skipped; restates Prop 2.31 (c), (d), then the proof) ═══════════ -->
+        <p><em>(Lecture 17)</em></p>
+        <p><strong>(c):</strong> $\forall x = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n = M_{n \times 1}(\mathbb{R})$ &amp; $\forall i = 1, \dots, m$,</p>
+        <!-- ═══════════ Lecture 17 · p.2 ═══════════ -->
+        <div class="math-display">$$\big(L_{(A+B)}(x)\big)_{i1} = \big((A+B)x\big)_{i1} = \sum_{j=1}^{n} \underbrace{(A+B)_{ij}}_{= A_{ij} + B_{ij}} x_j$$</div>
+        <div class="math-display">$$= \sum_{j=1}^{n} A_{ij}x_j + \sum_{j=1}^{n} B_{ij}x_j$$</div>
+        <div class="math-display">$$= (Ax)_{i1} + (Bx)_{i1} = \big(L_A(x) + L_B(x)\big)_{i1}$$</div>
+        <div class="math-display">$$\Rightarrow L_{(A+B)}(x) = L_A(x) + L_B(x) \quad \forall x \in \mathbb{R}^n$$</div>
+        <div class="math-display">$$\Rightarrow L_{(A+B)} = L_A + L_B.$$</div>
+        <p>Similarly, $L_{(cA)} = cL_A$ (Exercise). <span class="part-end">▨</span></p>
+        <p><strong>(d):</strong> ($\Leftarrow$): $A = B \Rightarrow L_A = L_B$ by def of matrix-vec mult. <span class="part-end">▨</span></p>
+        <p>($\Rightarrow$): By (b), $L_A = L_B$</p>
+        <div class="math-display">$$\Rightarrow \forall j,\ j^{\text{th}} \text{ col of } A = L_A(e_j) = L_B(e_j) = j^{\text{th}} \text{ col of } B$$</div>
+        <div class="math-display">$$\Rightarrow A = B.$$</div>
+        <div class="qed">□</div>
       </div>
       <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
         <span class="arrow">&#9654;</span> Supplementary Proof
       </button>
       <div class="en-proof-content">
-        <p><em>Supplement.</em> The notes give only a sketch of (a) and defer (c), (d) to the next class, so we prove them directly from Def 2.28. Below, $(A \cdot v)_{i1}$ is written $(Av)_i$.</p>
+        <p><em>Supplement.</em> The notes give only a sketch of (a) and leave $L_{(cA)} = cL_A$ in (c) as an exercise, so we prove these two directly from Def 2.28. Below, $(A \cdot v)_{i1}$ is written $(Av)_i$.</p>
         <p><strong>(a)</strong> Let $u, v \in \mathbb{R}^n$ and $a \in \mathbb{R}$. For each $i = 1, \dots, m$,</p>
         <div class="math-display">$$\big(A(u + v)\big)_i = \sum_{j=1}^{n} A_{ij}(u_j + v_j)$$</div>
         <div class="math-display">$$= \sum_{j=1}^{n} A_{ij}u_j + \sum_{j=1}^{n} A_{ij}v_j = (Au)_i + (Av)_i,$$</div>
         <div class="math-display">$$\big(A(au)\big)_i = \sum_{j=1}^{n} A_{ij}(a u_j) = a \sum_{j=1}^{n} A_{ij}u_j = a\,(Au)_i,$$</div>
-        <p>so $L_A(u + v) = L_A(u) + L_A(v)$ and $L_A(au) = aL_A(u)$; hence $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. The sketch in the notes reads as follows: by Def 2.28, $(Ax)_k = \sum_j A_{kj}x_j = \sum_j x_j (C_j)_k$, i.e., $A \cdot x = \sum_j x_j C_j$, so $L_A$ is the map $\sum a_i e_i \mapsto \sum a_i C_i$ attached to $A$ in the Motivation, which is linear by Thm 2.27. <span class="part-end">▨</span></p>
-        <p><strong>(c)</strong> For any $v \in \mathbb{R}^n$ and $i = 1, \dots, m$,</p>
-        <div class="math-display">$$\big((A + B)v\big)_i = \sum_{j=1}^{n} (A_{ij} + B_{ij})v_j = (Av)_i + (Bv)_i,$$</div>
-        <p>so $L_{A+B}(v) = L_A(v) + L_B(v) = (L_A + L_B)(v)$; the last equality is the addition on $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ from <a href="ch05.html#c5-10">Rmk 2.4</a>. Likewise $\big((cA)v\big)_i = \sum_j cA_{ij}v_j = c\,(Av)_i$, so $L_{cA}(v) = cL_A(v) = (cL_A)(v)$. The maps agree at every $v$, so $L_{A+B} = L_A + L_B$ and $L_{cA} = cL_A$. <span class="part-end">▨</span></p>
-        <p><strong>(d)</strong> ($\Leftarrow$) If $A = B$, then $L_A$ and $L_B$ are given by the same rule $v \mapsto A \cdot v$, so they are equal. ($\Rightarrow$) If $L_A = L_B$, then by (b), for each $j$, ($j$th col of $A$) $= L_A(e_j) = L_B(e_j) =$ ($j$th col of $B$). All columns agree, so all $(i, j)$-entries agree and $A = B$.</p>
-        <p>(Remark: (c) and (d) say that $A \mapsto L_A$ is an injective linear map from $M_{m \times n}(\mathbb{R})$ to $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. And (b) says that applying the Motivation's map $T \mapsto [T(e_1) \cdots T(e_n)]$ to $L_A$ gives back $A$, so $A \mapsto L_A$ is exactly the inverse of that bijection.)</p>
+        <p>so $L_A(u + v) = L_A(u) + L_A(v)$ and $L_A(au) = aL_A(u)$; hence $L_A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. The sketch in the notes reads as follows: by Def 2.28, $(Ax)_k = \sum_j A_{kj}x_j = \sum_j x_j (C_j)_k$, i.e., $A \cdot x = \sum_j x_j C_j$, so $L_A$ is the map $\sum a_i e_i \mapsto \sum a_i C_i$ attached to $A$ in the Motivation, which is linear by <a href="ch05.html#c5-40">Thm 2.27</a>. <span class="part-end">▨</span></p>
+        <p><strong>$L_{(cA)} = cL_A$ in (c)</strong> For any $v \in \mathbb{R}^n$ and $i = 1, \dots, m$, $\big((cA)v\big)_i = \sum_j cA_{ij}v_j = c\,(Av)_i$, so $L_{(cA)}(v) = cL_A(v) = (cL_A)(v)$; the last equality is the scalar multiplication on $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ from <a href="ch05.html#c5-10">Rmk 2.4</a>. The maps agree at every $v$, so $L_{(cA)} = cL_A$. (The last line of the notes' proof of (c), "$L_{(A+B)}(x) = L_A(x) + L_B(x)$ $\forall x$ $\Rightarrow$ $L_{(A+B)} = L_A + L_B$", holds for the same reason: the addition $(L_A + L_B)(x) := L_A(x) + L_B(x)$ of Rmk 2.4.)</p>
+        <p>(Remark: (c) and (d) say that $A \mapsto L_A$ is an injective linear map from $M_{m \times n}(\mathbb{R})$ to $\mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$; the notes combine this with <a href="#c6-5">Lem 2.32</a> to prove <a href="#c6-6">Thm 2.33</a>.)</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 17 · p.2 (명제 2.31 증명 끝 → 보조정리 2.32) ═══════════ -->
+
+<div class="card thm-card" id="c6-5">
+  <div class="card-head">
+    <span class="thm-num">LEM 2.32</span>
+    <span class="thm-title">ℝⁿ에서 ℝᵐ으로의 선형사상은 왼쪽 곱 사상이다 <em>Linear Maps ℝⁿ → ℝᵐ Are Left-Multiplication Maps</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>모든 $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$에 대하여 $T = L_A$인 $A \in M_{m \times n}(\mathbb{R})$가 유일하게 존재한다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명:</strong> <strong>유일성:</strong> $T = L_A = L_B$이면 <a href="#c6-4">명제 2.31 (d)</a>에 의해 $A = B$이므로 그러한 $A$는 유일하다. <span class="part-end">▨</span></p>
+        <p><strong>존재성:</strong> $(e_1, \dots, e_n)$을 $\mathbb{R}^n$의 표준기저라 하고,</p>
+        <!-- ═══════════ Lecture 17 · p.3 ═══════════ -->
+        <div class="math-display">$$A := \begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix}$$</div>
+        <p>로 정의하자. 그러면 모든 $\begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = \sum_{i=1}^{n} a_i e_i \in \mathbb{R}^n$에 대하여</p>
+        <div class="math-display">$$L_A\left(\sum a_i e_i\right) = \sum a_i L_A(e_i) \overset{\text{명제 2.31 (b)}}{=} \sum a_i T(e_i) = T\left(\sum a_i e_i\right)$$</div>
+        <p>이므로 $L_A = T$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$\forall T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$, $\exists!\, A \in M_{m \times n}(\mathbb{R})$ s.t. $T = L_A$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> <strong>Uniqueness:</strong> If $T = L_A = L_B$, then $A = B$ by <a href="#c6-4">Prop 2.31(d)</a>, so such $A$ is unique. <span class="part-end">▨</span></p>
+        <p><strong>Existence:</strong> Let $(e_1, \dots, e_n)$ std basis of $\mathbb{R}^n$. Then</p>
+        <!-- ═══════════ Lecture 17 · p.3 ═══════════ -->
+        <p>def $A := \begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix}$. Then $\forall \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = \sum_{i=1}^{n} a_i e_i \in \mathbb{R}^n$,</p>
+        <div class="math-display">$$L_A\left(\sum a_i e_i\right) = \sum a_i L_A(e_i) \overset{\text{Prop 2.31(b)}}{=} \sum a_i T(e_i) = T\left(\sum a_i e_i\right)$$</div>
+        <div class="math-display">$$\Rightarrow L_A = T.$$</div>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c6-6">
+  <div class="card-head">
+    <span class="thm-num">THM 2.33</span>
+    <span class="thm-title">행렬공간과 ℝⁿ 사이의 선형사상 공간의 동형 <em>Matrices and Linear Maps of ℝⁿ Are Isomorphic</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="math-display">$$M_{m \times n}(\mathbb{R}) \cong \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$$</div>
+        <div class="math-display">$$A \longmapsto L_A$$</div>
+        <div class="math-display">$$\begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix} \mathrel{↤} T$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명:</strong> 함수 $L_{(\cdot)} : M_{m \times n}(\mathbb{R}) \to \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$ ($A \mapsto L_A$)을 생각하자. <a href="#c6-4">명제 2.31 (c)</a>에 의해 이것은 선형사상이다. <a href="#c6-5">보조정리 2.32</a>에 의해 $L_{(\cdot)}$은 전단사이므로, $L_{(\cdot)}$은 동형사상이다. <span class="part-end">▨</span></p>
+        <p><a href="ch05.html#c5-27">명제 2.18</a>에 의해 $L_{(\cdot)}^{-1} : \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) \xrightarrow{\cong} M_{m \times n}(\mathbb{R})$도 동형사상임에 주목하자. 또 모든 $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$에 대하여, 보조정리 2.32의 증명에 의해 $L_{(\cdot)}$은</p>
+        <div class="math-display">$$A := \begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix}$$</div>
+        <p>을 $T$로 보낸다. 따라서 $L_{(\cdot)}^{-1}$은 $T$를 $A$로 보낸다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="math-display">$$M_{m \times n}(\mathbb{R}) \cong \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m).$$</div>
+        <div class="math-display">$$A \longmapsto L_A$$</div>
+        <div class="math-display">$$\begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix} \mathrel{↤} T$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> Consider fcn $L_{(\cdot)} : M_{m \times n}(\mathbb{R}) \to \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. It's a lin map by <a href="#c6-4">Prop 2.31(c)</a>. $L_{(\cdot)}$ bij by <a href="#c6-5">Lem 2.32</a>, so $L_{(\cdot)}$ is an isom. <span class="part-end">▨</span></p>
+        <p>Note that $L_{(\cdot)}^{-1} : \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) \xrightarrow{\cong} M_{m \times n}(\mathbb{R})$ by <a href="ch05.html#c5-27">Prop 2.18</a>, and $\forall T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$, $L_{(\cdot)}$ sends</p>
+        <div class="math-display">$$A := \begin{bmatrix} | &amp; &amp; | \\ T(e_1) &amp; \cdots &amp; T(e_n) \\ | &amp; &amp; | \end{bmatrix}$$</div>
+        <p>to $T$ by Pf of Lem 2.32 $\Rightarrow L_{(\cdot)}^{-1}$ sends $T$ to $A$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 17 · p.3 끝에 "Rmk 2.34:" 표제, 본문은 p.4 ═══════════ -->
+
+<div class="card rem-card" id="c6-7">
+  <div class="card-head">
+    <span class="rem-num">REM 2.34</span>
+    <span class="rem-title">정리 2.33의 결과 <em>Consequences of Thm 2.33</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <!-- ═══════════ Lecture 17 · p.4 ═══════════ -->
+        <p><strong>(1)</strong> <a href="#c6-6">정리 2.33</a>과 <a href="ch05.html#c5-32">명제 2.22</a>에 의해 $\dim \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) = \dim M_{m \times n}(\mathbb{R}) = mn$이다. (마지막 등호는 1단원의 결과이다 — <a href="ch04.html#c4-22">예시 1.58 (5)</a>)</p>
+        <p><strong>(2)</strong> §1.2에서 $A + B$를 성분별 덧셈으로 정의했다. 정리 2.33에 의해, 이제 $A + B$가 선형사상 $L_A + L_B$에 대응한다는 것을 안다. ($cA$에 대해서도 같은 이야기가 성립한다.)</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <!-- ═══════════ Lecture 17 · p.4 ═══════════ -->
+        <p><strong>(1)</strong> $\dim \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m) = \dim M_{m \times n}(\mathbb{R}) \underset{\text{Unit 1}}{=} mn$ by <a href="#c6-6">Thm 2.33</a> and <a href="ch05.html#c5-32">Prop 2.22</a></p>
+        <p><strong>(2)</strong> In §1.2, we def $A + B$ as entrywise-addition. By Thm 2.33, now we know that $A + B$ cor to lin map $L_A + L_B$. (similar story for $cA$)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card exam-card" id="c6-8">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2.35</span>
+    <span class="exam-title">ℝⁿ에서 ℝ로의 선형사상과 ℝ³의 평면의 방정식 <em>Linear Maps ℝⁿ → ℝ and Equations of Planes in ℝ³</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> <a href="#c6-6">정리 2.33</a>에 의해</p>
+        <div class="math-display">$$\mathcal{L}(\mathbb{R}^n, \mathbb{R}) \cong M_{1 \times n}(\mathbb{R})$$</div>
+        <div class="math-display">$$T \longmapsto \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix}$$</div>
+        <p>이고</p>
+        <div class="math-display">$$T\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$$</div>
+        <div class="math-display">$$= T(e_1)x_1 + \cdots + T(e_n)x_n$$</div>
+        <p>이다. 따라서 $\ker T \ne \mathbb{R}^n \iff$ $T(e_i) \ne 0$인 $i$가 존재한다.</p>
+        <p><strong>(2)</strong> 평면 $P = \operatorname{span}(v_1, v_2) \subsetneq \mathbb{R}^3$ ($v_1, v_2$는 일차독립)이 주어졌다고 하자. 그러면 <a href="ch04.html#c4-23">기저 확장정리</a>에 의해 $\mathbb{R}^3$의 기저 $(v_1, v_2, v_3)$가 존재한다. <a href="ch05.html#c5-40">정리 2.27</a>을 써서 $T(v_1) = 0 = T(v_2)$, $T(v_3) = 1$인 $T \in \mathcal{L}(\mathbb{R}^3, \mathbb{R})$를 구성하자. 그러면 (1)에 의해 어떤 $(a, b, c) \in \mathbb{R}^3 \setminus \{0\}$에 대하여 $T = L_{\begin{bmatrix} a &amp; b &amp; c \end{bmatrix}}$이고,</p>
+        <div class="math-display">$$\Rightarrow P = \ker(T) = \{(x, y, z) \in \mathbb{R}^3 : ax + by + cz = 0\}$$</div>
+        <p>이다. ($\mathbb{R}^3$의 모든 평면의 방정식)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 노트가 건너뛴 단계를 채운다.</p>
+        <p><strong>(1)의 마지막 동치.</strong> 모든 $i$에 대하여 $T(e_i) = 0$이면 위 식에 의해 모든 $x$에서 $T(x) = 0$이므로 $\ker T = \mathbb{R}^n$이다. 역으로 어떤 $i$에 대하여 $T(e_i) \ne 0$이면 $e_i \notin \ker T$이므로 $\ker T \ne \mathbb{R}^n$이다. <span class="part-end">▨</span></p>
+        <p><strong>(2)에서 $(a, b, c) \ne 0$.</strong> (1)에 의해 $\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} = \begin{bmatrix} T(e_1) &amp; T(e_2) &amp; T(e_3) \end{bmatrix}$이다. 이것이 영행렬이면 (1)의 식에 의해 $T = 0$인데, $T(v_3) = 1$이므로 모순이다. <span class="part-end">▨</span></p>
+        <p><strong>(2)에서 $P = \ker(T)$.</strong> $T(v_1) = T(v_2) = 0$이고 $\ker(T)$는 부분공간이므로(<a href="ch05.html#c5-12">명제 2.6</a>) $P = \operatorname{span}(v_1, v_2) \subseteq \ker(T)$이다. 역으로 $v \in \ker(T)$라 하자. $(v_1, v_2, v_3)$가 $\mathbb{R}^3$의 기저이므로 $v = a_1v_1 + a_2v_2 + a_3v_3$로 쓸 수 있고, $0 = T(v) = a_1 \cdot 0 + a_2 \cdot 0 + a_3 \cdot 1 = a_3$이다. 따라서 $v = a_1v_1 + a_2v_2 \in P$이다. 마지막으로 $T\left(\begin{bmatrix} x \\ y \\ z \end{bmatrix}\right) = \begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = ax + by + cz$이므로 $\ker(T) = \{(x, y, z) : ax + by + cz = 0\}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> By <a href="#c6-6">Thm 2.33</a>,</p>
+        <div class="math-display">$$\mathcal{L}(\mathbb{R}^n, \mathbb{R}) \cong M_{1 \times n}(\mathbb{R})$$</div>
+        <div class="math-display">$$T \longmapsto \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix}$$</div>
+        <p>and</p>
+        <div class="math-display">$$T\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} T(e_1) &amp; \cdots &amp; T(e_n) \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$$</div>
+        <div class="math-display">$$= T(e_1)x_1 + \cdots + T(e_n)x_n.$$</div>
+        <p>So $\ker T \ne \mathbb{R}^n \iff \exists i$ s.t. $T(e_i) \ne 0$</p>
+        <p><strong>(2)</strong> Given a plane $P = \operatorname{span}(v_1, v_2) \subsetneq \mathbb{R}^3$ ($v_1, v_2$ l.i.), then <a href="ch04.html#c4-23">BET</a> $\Rightarrow \exists$ basis $(v_1, v_2, v_3)$ of $\mathbb{R}^3$. Using <a href="ch05.html#c5-40">Thm 2.27</a>, constr $T \in \mathcal{L}(\mathbb{R}^3, \mathbb{R})$ s.t. $T(v_1) = 0 = T(v_2)$ and $T(v_3) = 1$. Then $T = L_{\begin{bmatrix} a &amp; b &amp; c \end{bmatrix}}$ for some $(a, b, c) \in \mathbb{R}^3 \setminus \{0\}$ by (1)</p>
+        <div class="math-display">$$\Rightarrow P = \ker(T) = \{(x, y, z) \in \mathbb{R}^3 : ax + by + cz = 0\}.$$</div>
+        <p>(eqn for every plane in $\mathbb{R}^3$)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We fill in the steps the notes skip.</p>
+        <p><strong>The last equivalence in (1).</strong> If $T(e_i) = 0$ for all $i$, the formula above gives $T(x) = 0$ for every $x$, so $\ker T = \mathbb{R}^n$. Conversely, if $T(e_i) \ne 0$ for some $i$, then $e_i \notin \ker T$, so $\ker T \ne \mathbb{R}^n$. <span class="part-end">▨</span></p>
+        <p><strong>$(a, b, c) \ne 0$ in (2).</strong> By (1), $\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} = \begin{bmatrix} T(e_1) &amp; T(e_2) &amp; T(e_3) \end{bmatrix}$. If this were the zero matrix, the formula in (1) would give $T = 0$, contradicting $T(v_3) = 1$. <span class="part-end">▨</span></p>
+        <p><strong>$P = \ker(T)$ in (2).</strong> Since $T(v_1) = T(v_2) = 0$ and $\ker(T)$ is a subspace (<a href="ch05.html#c5-12">Prop 2.6</a>), $P = \operatorname{span}(v_1, v_2) \subseteq \ker(T)$. Conversely, let $v \in \ker(T)$. As $(v_1, v_2, v_3)$ is a basis of $\mathbb{R}^3$, write $v = a_1v_1 + a_2v_2 + a_3v_3$; then $0 = T(v) = a_1 \cdot 0 + a_2 \cdot 0 + a_3 \cdot 1 = a_3$, so $v = a_1v_1 + a_2v_2 \in P$. Finally, $T\left(\begin{bmatrix} x \\ y \\ z \end{bmatrix}\right) = \begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = ax + by + cz$, so $\ker(T) = \{(x, y, z) : ax + by + cz = 0\}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 17 · p.5 ═══════════ -->
+
+<div class="section-title"><h2>Matrix Multiplication via Composition · 합성으로 정의하는 행렬곱</h2></div>
+
+<div class="card note-card" id="note06-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>동기:</strong> 왼쪽 곱 선형사상들의 합성</p>
+        <div class="math-display">$$\mathbb{R}^n \xrightarrow{L_A} \mathbb{R}^m \xrightarrow{L_B} \mathbb{R}^p$$</div>
+        <p>를 생각하자. 이것은 <a href="ch05.html#c5-24">명제 2.15</a>에 의해 선형이다. 따라서 <a href="#c6-6">정리 2.33</a>에 의해 $L_C = L_B \circ L_A$인 $C \in M_{p \times n}(\mathbb{R})$가 유일하게 존재한다.</p>
+        <p><strong>하고 싶은 것:</strong> $B \cdot A := C$로 정의하기 ($B \cdot A$를 줄여서 $BA$로 쓴다)</p>
+        <p>각 $j = 1, \dots, n$에 대하여, <a href="#c6-4">명제 2.31 (b)</a>에 의해 $C$의 $j$번째 열은 다음과 같다.</p>
+        <div class="math-display">$$L_C(e_j) = (L_B \circ L_A)(e_j) = L_B(Ae_j) = B \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} B_{11}A_{1j} + \cdots + B_{1m}A_{mj} \\ \vdots \\ B_{p1}A_{1j} + \cdots + B_{pm}A_{mj} \end{bmatrix}$$</div>
+        <p class="fig-note">[그림: 이 계산에서 아래의 정의 2.36으로 빨간 이중 화살표가 그려져 있다.]</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Motivation:</strong> Consider composition</p>
+        <div class="math-display">$$\mathbb{R}^n \xrightarrow{L_A} \mathbb{R}^m \xrightarrow{L_B} \mathbb{R}^p$$</div>
+        <p>of left-mult lin maps, which is lin by <a href="ch05.html#c5-24">Prop 2.15</a>. So <a href="#c6-6">Thm 2.33</a> $\Rightarrow \exists!\, C \in M_{p \times n}(\mathbb{R})$ s.t. $L_C = L_B \circ L_A$.</p>
+        <p><strong>Want:</strong> def $B \cdot A := C$ (shorthand for $B \cdot A$ is $BA$)</p>
+        <p>$\forall j = 1, \dots, n$, <a href="#c6-4">Prop 2.31(b)</a> says that $j^{\text{th}}$ col of $C$ is</p>
+        <div class="math-display">$$L_C(e_j) = (L_B \circ L_A)(e_j) = L_B(Ae_j) = B \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} B_{11}A_{1j} + \cdots + B_{1m}A_{mj} \\ \vdots \\ B_{p1}A_{1j} + \cdots + B_{pm}A_{mj} \end{bmatrix}$$</div>
+        <p class="fig-note">[Figure: a red double arrow leads from this computation down to Def 2.36]</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card def-card" id="c6-9">
+  <div class="card-head">
+    <span class="def-num">DEF 2.36</span>
+    <span class="def-title">행렬곱 <em>Matrix Multiplication</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{m \times n}(\mathbb{R})$, $B \in M_{p \times m}(\mathbb{R})$라 하자. ($\mathbb{R}^m$ $=$ $L_A$의 공역 $=$ $L_B$의 정의역)</p>
+        <p>그러면 <strong>행렬곱</strong> $B \cdot A$ ($= BA$) $\in M_{p \times n}(\mathbb{R})$를 다음과 같이 정의한다.</p>
+        <div class="math-display">$$(BA)_{ij} := \sum_{k=1}^{m} B_{ik}A_{kj} \quad \forall i = 1, \dots, p \ \&amp;\ \forall j = 1, \dots, n.$$</div>
+        <p>(그러면 위의 계산에 의해 $L_{BA} = L_B \circ L_A$가 된다.)</p>
+        <p>(이것이 $\mathbb{R}^n = M_{n \times 1}(\mathbb{R})$을 열벡터들의 벡터공간으로 정의한 이유이다.) $\rightarrow$ (이 정의는 행렬-벡터 곱의 일반화이다($n = 1$일 때).)</p>
+        <p class="fig-note">[그림: $M_{m \times n}$과 $M_{p \times m}$의 두 $m$에 동그라미가 쳐져 있고, 위에 보라색으로 "$\mathbb{R}^m$ = $L_A$의 공역 = $L_B$의 정의역"이라고 적혀 있다. $B \cdot A$ 위에는 주황색으로 $BA$라고 적혀 있다.]</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> "위의 계산에 의해 $L_{BA} = L_B \circ L_A$"를 풀어 쓴다. <a href="#note06-3">동기</a>의 $C$는 $L_C = L_B \circ L_A$인 유일한 행렬이다. <a href="#c6-4">명제 2.31 (b)</a>에 의해 $C$의 $j$번째 열은 $L_C(e_j)$이고, 동기의 계산(중간 등호 $Ae_j = L_A(e_j) = \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix}$도 명제 2.31 (b)이다)에 의해 그 $i$번째 성분은</p>
+        <div class="math-display">$$B_{i1}A_{1j} + \cdots + B_{im}A_{mj} = \sum_{k=1}^{m} B_{ik}A_{kj} = (BA)_{ij}$$</div>
+        <p>이다. 모든 $(i, j)$-성분이 같으므로 $C = BA$이고, 따라서 $L_{BA} = L_C = L_B \circ L_A$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$A \in M_{m \times n}(\mathbb{R})$, $B \in M_{p \times m}(\mathbb{R})$. ($\mathbb{R}^m$ $=$ codom of $L_A$ $=$ dom of $L_B$) Then</p>
+        <p><strong>matrix mult</strong> $B \cdot A$ ($BA$) $\in M_{p \times n}(\mathbb{R})$ is def by</p>
+        <div class="math-display">$$(BA)_{ij} := \sum_{k=1}^{m} B_{ik}A_{kj} \quad \forall i = 1, \dots, p \ \&amp;\ \forall j = 1, \dots, n.$$</div>
+        <p>(so that $L_{BA} = L_B \circ L_A$ by above)</p>
+        <p>(this is why we def $\mathbb{R}^n = M_{n \times 1}(\mathbb{R})$ as v.s. of col vecs) $\rightarrow$ (This def is gen'lization of matrix-vec mult (when $n = 1$))</p>
+        <p class="fig-note">[Figure: the two $m$'s in $M_{m \times n}$ and $M_{p \times m}$ are circled, with the purple note "$\mathbb{R}^m$ = codom of $L_A$ = dom of $L_B$" above; "$BA$" is written in orange above $B \cdot A$]</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> Unpacking "$L_{BA} = L_B \circ L_A$ by above": the $C$ of the <a href="#note06-3">Motivation</a> is the unique matrix with $L_C = L_B \circ L_A$. By <a href="#c6-4">Prop 2.31(b)</a>, the $j$th column of $C$ is $L_C(e_j)$, and by the computation in the Motivation (whose middle step $Ae_j = L_A(e_j) = \begin{bmatrix} A_{1j} \\ \vdots \\ A_{mj} \end{bmatrix}$ is also Prop 2.31(b)), its $i$th entry is</p>
+        <div class="math-display">$$B_{i1}A_{1j} + \cdots + B_{im}A_{mj} = \sum_{k=1}^{m} B_{ik}A_{kj} = (BA)_{ij}.$$</div>
+        <p>All $(i, j)$-entries agree, so $C = BA$, and hence $L_{BA} = L_C = L_B \circ L_A$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Lecture 17 · p.6 ═══════════ -->
+
+<div class="card exam-card" id="c6-10">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">행렬곱의 계산 <em>Computing a Matrix Product</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <div class="math-display">$$\begin{bmatrix} 2 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 5 \end{bmatrix} \begin{bmatrix} 1 &amp; -3 \\ 0 &amp; 2 \\ -1 &amp; 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 2 \cdot 1 + 1 \cdot 0 + 0 \cdot (-1) &amp; 2 \cdot (-3) + 1 \cdot 2 + 0 \cdot 1 \\ 1 \cdot 1 + 1 \cdot 0 + 5 \cdot (-1) &amp; 1 \cdot (-3) + 1 \cdot 2 + 5 \cdot 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \boxed{\begin{bmatrix} 2 &amp; -4 \\ -4 &amp; 4 \end{bmatrix}}$$</div>
+        <p class="fig-note">[그림: 두 행렬 위에 크기 $2 \times 3$, $3 \times 2$가 적혀 있고 가운데의 두 $3$에 동그라미가 쳐져 있다(앞 행렬의 열의 개수 $=$ 뒤 행렬의 행의 개수). 앞 행렬의 행을 따라 가로로, 뒤 행렬의 열을 따라 세로로 화살표가 그려져 있다.]</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <div class="math-display">$$\begin{bmatrix} 2 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 5 \end{bmatrix} \begin{bmatrix} 1 &amp; -3 \\ 0 &amp; 2 \\ -1 &amp; 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 2 \cdot 1 + 1 \cdot 0 + 0 \cdot (-1) &amp; 2 \cdot (-3) + 1 \cdot 2 + 0 \cdot 1 \\ 1 \cdot 1 + 1 \cdot 0 + 5 \cdot (-1) &amp; 1 \cdot (-3) + 1 \cdot 2 + 5 \cdot 1 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \boxed{\begin{bmatrix} 2 &amp; -4 \\ -4 &amp; 4 \end{bmatrix}}$$</div>
+        <p class="fig-note">[Figure: the sizes $2 \times 3$ and $3 \times 2$ are written above the two factors with the inner $3$'s circled; arrows run along a row of the first factor and down a column of the second]</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card thm-card" id="c6-11">
+  <div class="card-head">
+    <span class="thm-num">PROP 2.37</span>
+    <span class="thm-title">행렬곱의 성질 <em>Properties of Matrix Multiplication</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A, \hat{A} \in M_{q \times p}(\mathbb{R})$, $B, \hat{B} \in M_{p \times m}(\mathbb{R})$, $C \in M_{m \times n}(\mathbb{R})$, $s \in \mathbb{R}$라 하자. 그러면 다음이 성립한다.</p>
+        <p><strong>(a)</strong> $(AB)C = A(BC)$</p>
+        <p><strong>(b)</strong> $A(B + \hat{B}) = AB + A\hat{B}$, $(A + \hat{A})B = AB + \hat{A}B$</p>
+        <p><strong>(c)</strong> $s(AB) = (sA)B = A(sB)$</p>
+        <p><strong>(d)</strong> 모든 $k \in \mathbb{Z}_{\gt 0}$에 대하여</p>
+        <div class="math-display">$$I_k := \begin{bmatrix} | &amp; &amp; | \\ e_1 &amp; \cdots &amp; e_k \\ | &amp; &amp; | \end{bmatrix} \in M_k(\mathbb{R})$$</div>
+        <p>$\left(= \begin{bmatrix} 1 &amp; &amp; 0 \\ &amp; \ddots &amp; \\ 0 &amp; &amp; 1 \end{bmatrix}\text{, 즉 } (I_k)_{ij} = \delta_{ij}\right)$를 $k \times k$ <strong>단위행렬</strong>이라 하자(따라서 $I_{\mathbb{R}^k} = L_{I_k}$). 그러면 $I_mC = C = CI_n$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명:</strong> <strong>(a)</strong></p>
+        <div class="math-display">$$L_{(AB)C} = L_{AB} \circ L_C = (L_A \circ L_B) \circ L_C$$</div>
+        <div class="math-display">$$\overset{\text{주의 2.16 (a)}}{=} L_A \circ (L_B \circ L_C) = L_A \circ L_{BC} = L_{A(BC)}$$</div>
+        <p>이므로 <a href="#c6-4">명제 2.31 (d)</a>에 의해 $(AB)C = A(BC)$이다. <span class="part-end">▨</span></p>
+        <!-- ═══════════ Lecture 17 · p.7 ═══════════ -->
+        <p><strong>(b)</strong></p>
+        <div class="math-display">$$L_{A(B + \hat{B})} = L_A \circ L_{B + \hat{B}} \overset{\text{명제 2.31 (c)}}{=} L_A \circ (L_B + L_{\hat{B}})$$</div>
+        <div class="math-display">$$\overset{\text{주의 2.16 (c)}}{=} L_A \circ L_B + L_A \circ L_{\hat{B}} = L_{AB} + L_{A\hat{B}}$$</div>
+        <div class="math-display">$$\overset{\text{명제 2.31 (c)}}{=} L_{(AB + A\hat{B})}$$</div>
+        <p>이므로 명제 2.31 (d)에 의해 $A(B + \hat{B}) = AB + A\hat{B}$이다. 마찬가지로 $(A + \hat{A})B = AB + \hat{A}B$이다(연습). <span class="part-end">▨</span></p>
+        <p><strong>(c)</strong> 연습((b)와 비슷하다). <span class="part-end">▨</span></p>
+        <p><strong>(d)</strong></p>
+        <div class="math-display">$$L_{I_mC} = L_{I_m} \circ L_C = I_{\mathbb{R}^m} \circ L_C = L_C = L_C \circ I_{\mathbb{R}^n}$$</div>
+        <div class="math-display">$$= L_C \circ L_{I_n} = L_{CI_n}$$</div>
+        <p>이므로 명제 2.31 (d)에 의해 $I_mC = C = CI_n$이다.</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> 노트가 연습으로 남긴 부분과 건너뛴 단계를 채운다. 아래에서 곱이 정의되는 행렬 $X, Y$에 대하여 $L_{XY} = L_X \circ L_Y$(<a href="#c6-9">정의 2.36</a>)를 쓰고, 합성의 성질은 <a href="ch05.html#c5-25">주의 2.16</a>을 쓴다.</p>
+        <p><strong>(b)의 $(A + \hat{A})B = AB + \hat{A}B$</strong></p>
+        <div class="math-display">$$L_{(A + \hat{A})B} = L_{A + \hat{A}} \circ L_B = (L_A + L_{\hat{A}}) \circ L_B$$</div>
+        <div class="math-display">$$= L_A \circ L_B + L_{\hat{A}} \circ L_B = L_{AB} + L_{\hat{A}B} = L_{(AB + \hat{A}B)}$$</div>
+        <p>둘째 등호와 마지막 등호는 명제 2.31 (c)이고, 셋째 등호는 주의 2.16 (c)의 $(U_1 + U_2)T = U_1T + U_2T$이다. 명제 2.31 (d)에 의해 $(A + \hat{A})B = AB + \hat{A}B$이다. <span class="part-end">▨</span></p>
+        <p><strong>(c)</strong> 명제 2.31 (c)의 $L_{(sX)} = sL_X$를 쓰면</p>
+        <div class="math-display">$$L_{s(AB)} = sL_{AB} = s(L_A \circ L_B),$$</div>
+        <div class="math-display">$$L_{(sA)B} = L_{sA} \circ L_B = (sL_A) \circ L_B,$$</div>
+        <div class="math-display">$$L_{A(sB)} = L_A \circ L_{sB} = L_A \circ (sL_B)$$</div>
+        <p>이다. 주의 2.16 (c)의 $c(UT) = (cU)T = U(cT)$에 의해 세 사상은 같으므로, 명제 2.31 (d)에 의해 $s(AB) = (sA)B = A(sB)$이다. <span class="part-end">▨</span></p>
+        <p><strong>(d)의 괄호 속 사실.</strong> $I_k$의 $j$번째 열은 $e_j$이고 $e_j$의 $i$번째 성분은 $\delta_{ij}$이므로 $(I_k)_{ij} = \delta_{ij}$이다. 따라서 모든 $v \in \mathbb{R}^k$에 대하여 $(I_kv)_{i1} = \sum_{j=1}^{k} \delta_{ij}v_{j1} = v_{i1}$, 즉 $L_{I_k}(v) = v$이므로 $L_{I_k} = I_{\mathbb{R}^k}$이다. 증명의 등식 $I_{\mathbb{R}^m} \circ L_C = L_C = L_C \circ I_{\mathbb{R}^n}$은 주의 2.16 (b)($TI_V = I_WT = T$)이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>$A, \hat{A} \in M_{q \times p}(\mathbb{R})$, $B, \hat{B} \in M_{p \times m}(\mathbb{R})$, $C \in M_{m \times n}(\mathbb{R})$, $s \in \mathbb{R}$. Then</p>
+        <p><strong>(a)</strong> $(AB)C = A(BC)$</p>
+        <p><strong>(b)</strong> $A(B + \hat{B}) = AB + A\hat{B}$, $(A + \hat{A})B = AB + \hat{A}B$</p>
+        <p><strong>(c)</strong> $s(AB) = (sA)B = A(sB)$</p>
+        <p><strong>(d)</strong> Let</p>
+        <div class="math-display">$$I_k := \begin{bmatrix} | &amp; &amp; | \\ e_1 &amp; \cdots &amp; e_k \\ | &amp; &amp; | \end{bmatrix} \in M_k(\mathbb{R})$$</div>
+        <p>$\left(= \begin{bmatrix} 1 &amp; &amp; 0 \\ &amp; \ddots &amp; \\ 0 &amp; &amp; 1 \end{bmatrix} \text{ so } (I_k)_{ij} = \delta_{ij}\right)$ be the $k \times k$ <strong>identity matrix</strong> (so $I_{\mathbb{R}^k} = L_{I_k}$) $\forall k \in \mathbb{Z}_{\gt 0}$.</p>
+        <p>Then $I_mC = C = CI_n$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Pf:</strong> <strong>(a):</strong></p>
+        <div class="math-display">$$L_{(AB)C} = L_{AB} \circ L_C = (L_A \circ L_B) \circ L_C$$</div>
+        <div class="math-display">$$\overset{\text{Rmk 2.16(a)}}{=} L_A \circ (L_B \circ L_C) = L_A \circ L_{BC} = L_{A(BC)}$$</div>
+        <p>$\Rightarrow (AB)C = A(BC)$ by <a href="#c6-4">Prop 2.31(d)</a>. <span class="part-end">▨</span></p>
+        <!-- ═══════════ Lecture 17 · p.7 ═══════════ -->
+        <p><strong>(b):</strong></p>
+        <div class="math-display">$$L_{A(B + \hat{B})} = L_A \circ L_{B + \hat{B}} \overset{\text{Prop 2.31(c)}}{=} L_A \circ (L_B + L_{\hat{B}})$$</div>
+        <div class="math-display">$$\overset{\text{Rmk 2.16(c)}}{=} L_A \circ L_B + L_A \circ L_{\hat{B}} = L_{AB} + L_{A\hat{B}}$$</div>
+        <div class="math-display">$$\overset{\text{Prop 2.31(c)}}{=} L_{(AB + A\hat{B})}$$</div>
+        <p>$\Rightarrow A(B + \hat{B}) = AB + A\hat{B}$ by Prop 2.31(d).</p>
+        <p>Similarly, $(A + \hat{A})B = AB + \hat{A}B$ (Exercise). <span class="part-end">▨</span></p>
+        <p><strong>(c):</strong> Exercise (similar to (b)) <span class="part-end">▨</span></p>
+        <p><strong>(d):</strong></p>
+        <div class="math-display">$$L_{I_mC} = L_{I_m} \circ L_C = I_{\mathbb{R}^m} \circ L_C = L_C = L_C \circ I_{\mathbb{R}^n}$$</div>
+        <div class="math-display">$$= L_C \circ L_{I_n} = L_{CI_n}$$</div>
+        <p>$\Rightarrow I_mC = C = CI_n$ by Prop 2.31(d).</p>
+        <div class="qed">□</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> We fill in the parts left as exercises and the skipped steps. Below, for matrices $X, Y$ whose product is defined, we use $L_{XY} = L_X \circ L_Y$ (<a href="#c6-9">Def 2.36</a>), and for compositions we use <a href="ch05.html#c5-25">Rmk 2.16</a>.</p>
+        <p><strong>$(A + \hat{A})B = AB + \hat{A}B$ in (b)</strong></p>
+        <div class="math-display">$$L_{(A + \hat{A})B} = L_{A + \hat{A}} \circ L_B = (L_A + L_{\hat{A}}) \circ L_B$$</div>
+        <div class="math-display">$$= L_A \circ L_B + L_{\hat{A}} \circ L_B = L_{AB} + L_{\hat{A}B} = L_{(AB + \hat{A}B)}$$</div>
+        <p>The second and last equalities are Prop 2.31(c), and the third is $(U_1 + U_2)T = U_1T + U_2T$ from Rmk 2.16(c). By Prop 2.31(d), $(A + \hat{A})B = AB + \hat{A}B$. <span class="part-end">▨</span></p>
+        <p><strong>(c)</strong> Using $L_{(sX)} = sL_X$ from Prop 2.31(c),</p>
+        <div class="math-display">$$L_{s(AB)} = sL_{AB} = s(L_A \circ L_B),$$</div>
+        <div class="math-display">$$L_{(sA)B} = L_{sA} \circ L_B = (sL_A) \circ L_B,$$</div>
+        <div class="math-display">$$L_{A(sB)} = L_A \circ L_{sB} = L_A \circ (sL_B).$$</div>
+        <p>By $c(UT) = (cU)T = U(cT)$ from Rmk 2.16(c), the three maps are equal, so Prop 2.31(d) gives $s(AB) = (sA)B = A(sB)$. <span class="part-end">▨</span></p>
+        <p><strong>The parenthetical facts in (d).</strong> The $j$th column of $I_k$ is $e_j$, whose $i$th entry is $\delta_{ij}$, so $(I_k)_{ij} = \delta_{ij}$. Hence for every $v \in \mathbb{R}^k$, $(I_kv)_{i1} = \sum_{j=1}^{k} \delta_{ij}v_{j1} = v_{i1}$, i.e., $L_{I_k}(v) = v$, so $L_{I_k} = I_{\mathbb{R}^k}$. The equalities $I_{\mathbb{R}^m} \circ L_C = L_C = L_C \circ I_{\mathbb{R}^n}$ in the proof are Rmk 2.16(b) ($TI_V = I_WT = T$).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card rem-card" id="c6-12">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">경고: 합성과 행렬곱은 교환법칙을 만족하지 않는다 <em>Warning: Composition and Matrix Multiplication Do Not Commute</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>경고:</strong> <a href="ch05.html#c5-25">주의 2.16 (d)</a>에서 보았듯이, 선형사상으로서 일반적으로 $UT \ne TU$이다. 회전 $T : \mathbb{R}^2 \to \mathbb{R}^2$, $\begin{bmatrix} x \\ y \end{bmatrix} \mapsto \begin{bmatrix} -y \\ x \end{bmatrix}$와 층밀림 $U : \mathbb{R}^2 \to \mathbb{R}^2$, $\begin{bmatrix} x \\ y \end{bmatrix} \mapsto \begin{bmatrix} x \\ x + y \end{bmatrix}$은 각각 다음 행렬에 대응한다.</p>
+        <div class="math-display">$$\begin{bmatrix} | &amp; | \\ T(e_1) &amp; T(e_2) \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix},$$</div>
+        <div class="math-display">$$\begin{bmatrix} | &amp; | \\ U(e_1) &amp; U(e_2) \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}$$</div>
+        <p>그러면 $UT$와 $TU$는 각각 다음 행렬에 대응한다.</p>
+        <div class="math-display">$$\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} = \begin{bmatrix} 1 \cdot 0 + 0 \cdot 1 &amp; 1 \cdot (-1) + 0 \cdot 0 \\ 1 \cdot 0 + 1 \cdot 1 &amp; 1 \cdot (-1) + 1 \cdot 0 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; -1 \end{bmatrix}$$</div>
+        <!-- ═══════════ Lecture 17 · p.8 ═══════════ -->
+        <div class="math-display">$$\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} -1 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}$$</div>
+        <p>따라서 수치적으로도 다음을 확인할 수 있다.</p>
+        <div class="math-display">$$\underbrace{\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; -1 \end{bmatrix}}_{UT\text{에 대응}} \ne \underbrace{\begin{bmatrix} -1 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}}_{TU\text{에 대응}}$$</div>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="보충 증명 보기" data-hide="보충 증명 접기">
+        <span class="arrow">&#9654;</span> 보충 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>보충.</em> "대응한다"를 풀어 쓴다. $M_T := \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}$, $M_U := \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}$이라 하면 <a href="#c6-5">보조정리 2.32</a>의 증명에 의해 $T = L_{M_T}$, $U = L_{M_U}$이다. <a href="#c6-9">정의 2.36</a>에 의해</p>
+        <div class="math-display">$$UT = L_{M_U} \circ L_{M_T} = L_{M_UM_T},$$</div>
+        <div class="math-display">$$TU = L_{M_T} \circ L_{M_U} = L_{M_TM_U}$$</div>
+        <p>이고, 두 곱 행렬이 다르므로 <a href="#c6-4">명제 2.31 (d)</a>에 의해 $UT \ne TU$이다. 직접 계산과도 맞는다: $UT\begin{bmatrix} x \\ y \end{bmatrix} = U\begin{bmatrix} -y \\ x \end{bmatrix} = \begin{bmatrix} -y \\ x - y \end{bmatrix}$이고 $TU\begin{bmatrix} x \\ y \end{bmatrix} = T\begin{bmatrix} x \\ x + y \end{bmatrix} = \begin{bmatrix} -x - y \\ x \end{bmatrix}$이며, $e_1, e_2$의 상을 열로 놓으면 위의 두 곱 행렬이 나온다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Warning:</strong> From <a href="ch05.html#c5-25">Rmk 2.16(d)</a>, $UT \ne TU$ as lin maps in gen'l. $T : \mathbb{R}^2 \to \mathbb{R}^2$ rotation, $\begin{bmatrix} x \\ y \end{bmatrix} \mapsto \begin{bmatrix} -y \\ x \end{bmatrix}$, $U : \mathbb{R}^2 \to \mathbb{R}^2$ shear, $\begin{bmatrix} x \\ y \end{bmatrix} \mapsto \begin{bmatrix} x \\ x + y \end{bmatrix}$ cor to matrices</p>
+        <div class="math-display">$$\begin{bmatrix} | &amp; | \\ T(e_1) &amp; T(e_2) \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} \text{ and}$$</div>
+        <div class="math-display">$$\begin{bmatrix} | &amp; | \\ U(e_1) &amp; U(e_2) \\ | &amp; | \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}$$</div>
+        <p>resp. Then $UT$ &amp; $TU$ cor to</p>
+        <div class="math-display">$$\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} = \begin{bmatrix} 1 \cdot 0 + 0 \cdot 1 &amp; 1 \cdot (-1) + 0 \cdot 0 \\ 1 \cdot 0 + 1 \cdot 1 &amp; 1 \cdot (-1) + 1 \cdot 0 \end{bmatrix}$$</div>
+        <div class="math-display">$$= \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; -1 \end{bmatrix}$$</div>
+        <p>and</p>
+        <!-- ═══════════ Lecture 17 · p.8 ═══════════ -->
+        <div class="math-display">$$\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} -1 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}$$</div>
+        <p>resp. So we see that</p>
+        <div class="math-display">$$\underbrace{\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; -1 \end{bmatrix}}_{UT} \overset{\text{cor}}{\ne} \underbrace{\begin{bmatrix} -1 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}}_{TU}$$</div>
+        <p>numerically.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Supplementary Proof" data-hide="Hide Supplementary Proof">
+        <span class="arrow">&#9654;</span> Supplementary Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Supplement.</em> Unpacking "cor to": with $M_T := \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}$ and $M_U := \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}$, the proof of <a href="#c6-5">Lem 2.32</a> gives $T = L_{M_T}$ and $U = L_{M_U}$. By <a href="#c6-9">Def 2.36</a>,</p>
+        <div class="math-display">$$UT = L_{M_U} \circ L_{M_T} = L_{M_UM_T},$$</div>
+        <div class="math-display">$$TU = L_{M_T} \circ L_{M_U} = L_{M_TM_U},$$</div>
+        <p>and since the two products differ, <a href="#c6-4">Prop 2.31(d)</a> gives $UT \ne TU$. This matches the direct computation $UT\begin{bmatrix} x \\ y \end{bmatrix} = U\begin{bmatrix} -y \\ x \end{bmatrix} = \begin{bmatrix} -y \\ x - y \end{bmatrix}$ and $TU\begin{bmatrix} x \\ y \end{bmatrix} = T\begin{bmatrix} x \\ x + y \end{bmatrix} = \begin{bmatrix} -x - y \\ x \end{bmatrix}$: putting the images of $e_1, e_2$ in columns gives the two products above.</p>
         <div class="qed">□</div>
       </div>
     </div>
@@ -446,13 +943,13 @@ MathJax = {
     <div class="ko-panel">
       <span class="panel-label ko-label">한국어</span>
       <div class="formal">
-        <p>단원 노트 Unit 2.2(4쪽)까지 반영했다. 마지막 내용은 명제 2.31이고, (c), (d)의 증명은 노트에서 다음 수업으로 미뤄져 있다(여기서는 보충 증명으로 완성했다). 2.13–2.27번 항목(§2.1 뒷부분)의 강의 자료는 아직 없다. 명제 2.31 뒤의 2.32–2.37번 항목(§2.2 뒷부분 — <a href="ch07.html">7단원</a>이 인용하는 행렬곱과 정리 2.33 포함)도 아직 없다.</p>
+        <p>Lecture 17까지 반영했다. 마지막 내용은 명제 2.37(행렬곱의 성질)과 그 뒤의 경고($UT \ne TU$)이다. §2.3 행렬표현은 <a href="ch07.html">7단원</a>에서 이어진다.</p>
       </div>
     </div>
     <div class="en-panel" lang="en">
       <span class="panel-label en-label">English</span>
       <div class="en-formal">
-        <p>Updated through the Unit 2.2 notes (4 pages), ending with Prop 2.31; the notes defer the proofs of (c) and (d) to the next class (completed here in the supplementary proof). The lecture material for items 2.13–2.27 (the rest of §2.1) has not been posted yet, nor has that for items 2.32–2.37 after Prop 2.31 (the rest of §2.2, including matrix multiplication and Thm 2.33, which <a href="ch07.html">Unit 07</a> cites).</p>
+        <p>Updated through Lecture 17, ending with Prop 2.37 (properties of matrix multiplication) and the Warning after it ($UT \ne TU$). §2.3 (matrix representations) continues in <a href="ch07.html">Unit 07</a>.</p>
       </div>
     </div>
   </div>

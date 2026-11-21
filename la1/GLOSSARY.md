@@ -130,3 +130,12 @@
 | Korean HS fact | 한국 고등학교에서 배우는 사실 |
 | change-of-coordinate (c.o.c) matrix / basis-change matrix | 좌표변환 행렬 / 기저변환 행렬 |
 | change of basis / similarity | 기저변환 / 닮음 |
+| TFAE (the following are equivalent) | 다음은 서로 동치이다 |
+| isomorphic ($V \cong W$) / isomorphism (isom) | 동형이다 / 동형사상 |
+| equivalence (relation) | 동치관계 |
+| ordered basis (a basis as a list) | 순서기저 (리스트로 본 기저) |
+| standard representation / coordinate lin map $\phi_\beta$ | 표준표현 / 좌표 선형사상 |
+| up to isom | 동형을 무시하면 |
+| identity matrix $I_k$ ($(I_k)_{ij} = \delta_{ij}$) | ($k \times k$) 단위행렬 |
+| similar matrices, $A \sim B$ | 닮은 행렬, $A$와 $B$는 닮았다 |
+| reflection along a line | 직선에 대한 대칭이동(반사) |
