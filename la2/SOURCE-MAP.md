@@ -138,7 +138,7 @@
 73. **§6.5 p7 Remarks (2)**: "linear operator Fⁿ" → on Fⁿ.
 74. **§6.5 p10 (v)⇒(i)**: "it is necessary to show"는 "it suffices"의 뜻; 증명이 $A^*A = I$에서 멈춤 → Note가 $AA^* = I$까지 완성.
 75. **§6.5 p11 행렬 보조정리 증명**: "$0_V$" → $0_{F^n}$.
-76. **§6.5 p12 Remark (2)**: "which is not self-adjoint which satisfies" 문장; "$m \ge 2$"(m = 1도 성립).
+76. **§6.5 p12 Remark (2)**: "which is not self-adjoint which satisfies" 문장(보충: "$m \ge 2$"는 참이고 m = 1은 Remark (1)과 같은 구성).
 77. **§6.5 p17**: "$a_1x_1 + \cdots a_nx_n$"에 "+" 누락(250dpi 확인).
 78. **§6.5 p21 Example**: "for all $x \in V$" → $\mathbb{R}^4$.
 79. **§6.5 p23 Corollary 2 (ii)⇒(i)**: "by Theorem 6.17" → 정리 6.16(복소, 유니타리 ⇒ 정규). en은 링크 없이 원문, Note가 6.16을 링크.
@@ -147,7 +147,7 @@
 82. **§6.5 p36 Example 6 Step 2**: "$\lambda_2 = 4$" → 8 (보인 행렬이 $A - 8I$이고 $\det(A - 4I) = 16 \ne 0$).
 83. **§6.5 p39 정리 6.21 증명**: "$A = PBP^t$" → $F = \mathbb{C}$에서는 $PBP^*$.
 84. **§6.5 p40 Recall (2)**: "n-dimensional vector space V over ℝ" → 내적공간.
-85. **§6.5 기타(Note/역주)**: p27 Example 4의 행들이 "orthogonal basis" → 정규직교; p42 (b) 두 관계를 한 줄에; 그 밖의 세부는 아래 인벤토리.
+85. **§6.5 기타(Note/역주)**: p27 Example 4의 행들이 "orthogonal basis"(참이지만 실제로는 정규직교 — 보충); p42 (b) 두 관계를 한 줄에; 그 밖의 세부는 아래 인벤토리.
 86. **§6.5 p41 Exercise 11**: 슬라이드가 교재 연습문제 원문을 그대로 실음 → 규약 6대로 진술은 다시 서술(en·ko), 풀이(p41–43)는 원문 전사.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
@@ -526,7 +526,7 @@ Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, RE
 **예제 변형 연습문제 (2026-11-16, 사용자 "6.4 예제 숫자 바꿔서 연습문제 만들어줘"):** 단원 끝 섹션 "연습문제 · 예제 변형" = note08-3(자작 안내) + v8-1~v8-7(배지 `변형 n`, src-ref `원본 p.N Example n`, 심화 표시는 v8-3·v8-4·v8-7). 원본: v8-1←p7 예 1(A=(3 −4;4 3)), v8-2←p7 예 2(반대칭 (0 3 0;−3 0 4;0 −4 0), 고유값 0·±5i), v8-3←p11–12 예 3(T(f)=f₃f, U(f)=(f₁+f₋₁)f 자기수반·고유벡터 없음), v8-4←p17 예 4(A=(1 i;i 2) 비정규, B=(1 i;i 1) 정규·비자기수반, C=(2 1+i;1−i 3) 자기수반), v8-5←p18 예 1((2 1 1;0 3 1;0 0 4)), v8-6←p19 예 2((2 0 2;0 3 0;2 0 5), 고유값 1·3·6), v8-7←p19 예 2 심화((2 1 1;1 2 1;1 1 2), 중복 고유값 GS). sympy 검산 + Opus 검증 1회(CRITICAL 0, MAJOR 1 = v8-7 특성다항식 계산 생략 → 보충, MINOR 반영). 규약 주석 12번.
 
 ### ch09.html — 6.5 유니타리 연산자와 직교연산자 / §6.5 Unitary and Orthogonal Operators and Their Matrices
-Section 6.5 노트 43장(11/24 게시, HWP 조판 — 텍스트 추출 불가 → 110dpi 시각 전사). p1 표지(카드 없음). 메인 루프가 슬라이드를 읽고 경계(p23 Corollary 2 / p24 Example 2)를 정한 뒤 Opus 빌더 2개 병렬(A: p2–23 → c9-1~17·note09-1, B: p24–43 → c9-18~34·note09-2~3; en 전사와 ko 번역·Note/역주를 함께 작성), assemble.py로 조립. 카드 34(환경 33 + 연습문제 1), 토글 각 15. ERRATA 67–86. 정리 6.18은 진술 c9-6, 행렬판 증명(p8–10 박스)은 c9-7 REM 안, 연산자판 재진술·증명(p15–18)은 c9-12. 연습문제 11(c9-34)은 슬라이드가 교재 문장을 그대로 실어 진술만 다시 서술.
+Section 6.5 노트 43장(11/24 게시, HWP 조판 — 텍스트 추출 불가 → 110dpi 시각 전사). p1 표지(카드 없음). 메인 루프가 슬라이드를 읽고 경계(p23 Corollary 2 / p24 Example 2)를 정한 뒤 Opus 빌더 2개 병렬(A: p2–23 → c9-1~17·note09-1, B: p24–43 → c9-18~34·note09-2~3; en 전사와 ko 번역·Note/역주를 함께 작성), assemble.py로 조립, Opus 적대적 검증 1회(MUST 0, SHOULD 1·NIT 4 반영). 카드 34(환경 33 + 연습문제 1), 토글 각 15. ERRATA 67–86. 정리 6.18은 진술 c9-6, 행렬판 증명(p8–10 박스)은 c9-7 REM 안, 연산자판 재진술·증명(p15–18)은 c9-12. 연습문제 11(c9-34)은 슬라이드가 교재 문장을 그대로 실어 진술만 다시 서술.
 같은 작업에서 기존 단원의 표시 버그 수정: aligned/gathered 바로 뒤의 대괄호 식(예: [TT*]_β)을 MathJax가 선택 인자로 먹어 사라짐(공백이 있어도 마찬가지) → ch02·ch04·ch06·ch08 12곳을 빈 그룹 {} 뒤로 옮김(커밋 a09ac97).
 
 <details><summary>빌더 A 인벤토리</summary>
