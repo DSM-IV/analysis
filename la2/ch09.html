@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N702T3QW76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N702T3QW76');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.5 유니타리 연산자와 직교연산자 (§6.5 Unitary and Orthogonal Operators and Their Matrices) | 선형대수학 2 학습 가이드</title>
+<meta name="description" content="선형대수학 2 제9단원 6.5 유니타리 연산자와 직교연산자 — 길이를 보존하는 선형연산자(유니타리·직교 연산자)의 정의와 예, 동치 조건(정리 6.18: TT*=T*T=I, 내적 보존, 정규직교기저를 정규직교기저로, 길이 보존), 자기수반 행렬과 반대칭 행렬에 관한 보조정리, 유니타리·직교 행렬, 회전과 반사를 한국어·영어 대조로 정리했습니다.">
+<meta name="keywords" content="선형대수학2, Linear Algebra II, 유니타리 연산자, unitary operator, 직교연산자, orthogonal operator, 유니타리 행렬, unitary matrix, 직교행렬, orthogonal matrix, 길이 보존, preserves length, 내적 보존, 정규직교기저, orthonormal basis, 반대칭행렬, anti-symmetric matrix, 회전, rotation, 반사, reflection, 프리드버그, Friedberg">
+<meta name="author" content="DDALKKAK">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://univmathsurvive.com/la2/ch09.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.5 유니타리 연산자와 직교연산자 (§6.5 Unitary and Orthogonal Operators and Their Matrices) — 선형대수학 2 한·영 대조">
+<meta property="og:description" content="길이를 보존하는 선형연산자 — 유니타리·직교 연산자의 정의와 예, 정리 6.18의 동치 조건, 유니타리·직교 행렬, 회전과 반사까지 선형대수학 2 §6.5를 한국어·영어 대조로 정리한 교육용 학습 가이드.">
+<meta property="og:url" content="https://univmathsurvive.com/la2/ch09.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="선형대수학 2 학습 가이드">
+<meta name="google-adsense-account" content="ca-pub-1269032424784987">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1269032424784987" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "6.5 유니타리 연산자와 직교연산자 (§6.5 Unitary and Orthogonal Operators and Their Matrices) — 선형대수학 2 한·영 대조",
+  "author": { "@type": "Organization", "name": "DDALKKAK" },
+  "publisher": { "@type": "Organization", "name": "DDALKKAK" },
+  "description": "선형대수학 2 — 6.5 유니타리 연산자와 직교연산자. 길이 보존 연산자의 동치 조건(정리 6.18), 유니타리·직교 행렬, 회전과 반사를 다루는 Friedberg §6.5 한·영 대조 학습 가이드.",
+  "inLanguage": ["ko", "en"],
+  "url": "https://univmathsurvive.com/la2/ch09.html",
+  "datePublished": "2026-11-24",
+  "dateModified": "2026-11-24",
+  "mainEntityOfPage": "https://univmathsurvive.com/la2/ch09.html"
+}
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['ams']}
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<nav class="site-nav" aria-label="사이트 탐색">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="대학수학생존 홈"><span class="logo-mark" aria-hidden="true">√</span>대학수학생존</a>
+    <div class="nav-links">
+      <a href="../settheory/index.html">집합론</a>
+      <a href="../analysis2/index.html">해석학2</a>
+      <a href="../la1/index.html">선형대수학1</a>
+      <a href="index.html">선형대수학2</a>
+      <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+      <span class="nav-sep">·</span>
+      <a href="ch01.html">01</a>
+      <a href="ch02.html">02</a>
+      <a href="ch03.html">03</a>
+      <a href="ch04.html">04</a>
+      <a href="ch05.html">05</a>
+      <a href="ch06.html">06</a>
+      <a href="ch07.html">07</a>
+      <a href="ch08.html">08</a>
+      <a href="ch09.html" class="active">09</a>
+      <a href="midterm.html">기출문제</a>
+      <a href="practice.html">예상문제</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <p class="subtitle">Linear Algebra II — Unit 09</p>
+  <h1>6.5 유니타리 연산자와 직교연산자<span>§6.5 Unitary and Orthogonal Operators and Their Matrices</span></h1>
+  <div class="lang-badge">
+    <span class="ko">한국어</span>
+    <span class="en">English</span>
+  </div>
+</header>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-toggle-bar">
+  <label>
+    <input type="checkbox" id="toggle-ko" checked onchange="toggleLang()">
+    한국어 표시
+  </label>
+  <span class="sep">|</span>
+  <label>
+    <input type="checkbox" id="toggle-en" checked onchange="toggleLang()">
+    English 표시
+  </label>
+  <span class="sep">|</span>
+  <span style="color:var(--ink-faint); font-size:.7rem;">왼쪽: 한국어 &nbsp;·&nbsp; 오른쪽: English</span>
+</div>
+
+<main id="main-content" role="main">
+
+<!-- TOC -->
+<nav class="toc" aria-label="목차">
+  <h3>환경 목차 · Table of Contents</h3>
+  <ol>
+<li><a href="#c9-1"><span class="toc-num">RECALL 1</span> 선형변환은 벡터공간 구조를 보존한다 <em>Linear Transformations Preserve the Vector Space Structure</em></a></li>
+    <li><a href="#c9-2"><span class="toc-num">RECALL 2</span> 정규연산자와 자기수반연산자 <em>Normal and Self-Adjoint Operators</em></a></li>
+    <li><a href="#c9-3"><span class="toc-num">DEF</span> 유니타리 연산자와 직교연산자 <em>Unitary and Orthogonal Operators</em></a></li>
+    <li><a href="#c9-4"><span class="toc-num">EXAM</span> 회전·반사와 곱셈연산자 <em>Rotations, Reflections, and a Multiplication Operator</em></a></li>
+    <li><a href="#c9-5"><span class="toc-num">EXAM</span> 좌표를 순환시키는 연산자 <em>An Operator That Cyclically Permutes the Coordinates</em></a></li>
+    <li><a href="#c9-6"><span class="toc-num">THM 6.18</span> 길이를 보존하는 연산자의 특성화 <em>Characterizations of Length-Preserving Operators</em></a></li>
+    <li><a href="#c9-7"><span class="toc-num">REM</span> 정리 6.18의 행렬 형태 <em>Theorem 6.18 in Matrix Form</em></a></li>
+    <li><a href="#c9-8"><span class="toc-num">LEM</span> <span class="toc-ko">$\langle x, Bx\rangle = 0$인 자기수반행렬은 영행렬이다</span> <em>A Self-Adjoint Matrix with $\langle x, Bx\rangle = 0$ Is Zero</em></a></li>
+    <li><a href="#c9-9"><span class="toc-num">REM</span> 자기수반 가정이 빠지면: 회전과 반대칭행렬 <em>Without Self-Adjointness: Rotations and Anti-Symmetric Matrices</em></a></li>
+    <li><a href="#c9-10"><span class="toc-num">REM</span> 대칭행렬에 대한 보조정리 <em>The Lemma for Symmetric Matrices</em></a></li>
+    <li><a href="#c9-11"><span class="toc-num">CLAIM</span> 반대칭행렬의 특성화 <em>A Characterization of Anti-Symmetric Matrices</em></a></li>
+    <li><a href="#c9-12"><span class="toc-num">THM 6.18</span> 정리 6.18 (다시 보기)와 증명 <em>Theorem 6.18 (Restated) and Its Proof</em></a></li>
+    <li><a href="#c9-13"><span class="toc-num">LEM</span> <span class="toc-ko">$\langle x, U(x)\rangle = 0$인 자기수반연산자는 영사상이다</span> <em>A Self-Adjoint Operator with $\langle x, U(x)\rangle = 0$ Is Zero</em></a></li>
+    <li><a href="#c9-14"><span class="toc-num">COR 1</span> 자기수반 직교연산자와 절댓값 1인 고유값 <em>Self-Adjoint Orthogonal Operators and Eigenvalues of Absolute Value 1</em></a></li>
+    <li><a href="#c9-15"><span class="toc-num">EXAM</span> <span class="toc-ko">$\mathbb{R}^4$ 위의 자기수반 직교연산자</span> <em>A Self-Adjoint Orthogonal Operator on $\mathbb{R}^4$</em></a></li>
+    <li><a href="#c9-16"><span class="toc-num">EXAM</span> <span class="toc-ko">고유값이 $\pm 1$인 연산자의 표준행렬</span> <em>The Standard Matrix of an Operator with Eigenvalues $\pm 1$</em></a></li>
+    <li><a href="#c9-17"><span class="toc-num">COR 2</span> 유니타리 연산자와 절댓값 1인 고유값 <em>Unitary Operators and Eigenvalues of Absolute Value 1</em></a></li>
+<li><a href="#c9-18"><span class="toc-num">EXAM 2</span> 평면의 회전과 그 수반연산자 <em>A Rotation of the Plane and Its Adjoint</em></a></li>
+    <li><a href="#c9-19"><span class="toc-num">DEF</span> 직선에 대한 반사 <em>Reflection about a Line</em></a></li>
+    <li><a href="#c9-20"><span class="toc-num">EXAM 3</span> 반사는 직교연산자이다 <em>A Reflection Is an Orthogonal Operator</em></a></li>
+    <li><a href="#c9-21"><span class="toc-num">DEF</span> 직교행렬과 유니타리 행렬 <em>Orthogonal Matrices and Unitary Matrices</em></a></li>
+    <li><a href="#c9-22"><span class="toc-num">REM</span> 유니타리 행렬의 행과 연산자의 행렬표현 <em>Rows of a Unitary Matrix and Matrix Representations of Operators</em></a></li>
+    <li><a href="#c9-23"><span class="toc-num">EXAM 4</span> 회전행렬은 직교행렬이다 <em>A Rotation Matrix Is Orthogonal</em></a></li>
+    <li><a href="#c9-24"><span class="toc-num">EXAM 5</span> 반사의 표준행렬 <em>The Standard Matrix of a Reflection</em></a></li>
+    <li><a href="#c9-25"><span class="toc-num">REM 1</span> 복소 정규행렬은 대각행렬과 유니타리 동치이다 <em>A Complex Normal Matrix Is Unitarily Equivalent to a Diagonal Matrix</em></a></li>
+    <li><a href="#c9-26"><span class="toc-num">REM 2</span> 유니타리 동치에서 정규직교 고유기저로 <em>From Unitary Equivalence to an Orthonormal Basis of Eigenvectors</em></a></li>
+    <li><a href="#c9-27"><span class="toc-num">REM 3</span> 복소행렬에 대한 세 성질의 동치 <em>Three Equivalent Properties of a Complex Matrix</em></a></li>
+    <li><a href="#c9-28"><span class="toc-num">THM 6.19</span> 정규행렬과 유니타리 동치 <em>Normal Matrices and Unitary Equivalence</em></a></li>
+    <li><a href="#c9-29"><span class="toc-num">THM 6.20</span> 대칭행렬과 직교 동치 <em>Symmetric Matrices and Orthogonal Equivalence</em></a></li>
+    <li><a href="#c9-30"><span class="toc-num">REM 4</span> 실행렬에 대한 세 성질의 동치 <em>Three Equivalent Properties of a Real Matrix</em></a></li>
+    <li><a href="#c9-31"><span class="toc-num">EXAM 6</span> 대칭행렬의 직교 대각화 <em>Orthogonally Diagonalizing a Symmetric Matrix</em></a></li>
+    <li><a href="#c9-32"><span class="toc-num">THM 6.21</span> 슈어 정리 (행렬 형태) <em>Schur's Theorem (Matrix Form)</em></a></li>
+    <li><a href="#c9-33"><span class="toc-num">RECALL</span> <span class="toc-ko">반대칭성과 $\langle x, Ax\rangle = 0$</span> <em>Anti-Symmetry and $\langle x, Ax\rangle = 0$</em></a></li>
+    <li><a href="#c9-34"><span class="toc-num">EX 6.5-11</span> 복소 내적공간에서 자기수반연산자의 판정 <em>Characterizing Self-Adjoint Operators on a Complex Inner Product Space</em></a></li>
+  </ol>
+</nav>
+
+<!-- Ad: after TOC -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════
+  선형대수학 2 카드 작성 규약 (ch01 이후 공통) · CARD CONVENTIONS
+  ═══════════════════════════════════════════════════════════════════════
+  1) 슬라이드의 번호가 붙은 환경 하나 = 카드 하나. id는 자체 순번으로
+     id="c{단원}-{순번}" (예: id="c8-7"), 슬라이드 등장 순서 그대로 배치한다.
+     배지는 강의 슬라이드의 번호를 그대로 따른다: 번호가 붙은 항목은 TYPE {원문 번호}
+     (Theorem 1.3 → THM 1.3, Definition 2 → DEF 2, Example 1 → EXAM 1), 번호 없는
+     항목(Definition :, Remark :, Recall, Question, 번호 없는 Example)은 유형 배지만
+     (DEF / THM / REM / RECALL / Q / EXAM / COR / LEM). 자체 순번은 id에만 쓴다.
+     span.src-ref 는 연습문제(Friedberg §6.4 #n)에만 쓴다. 본문에서 번호 없는
+     카드를 인용할 때는 제목 링크(#c8-6 을 가리키는 a 태그, 링크 문구 주의 「…」)로 쓴다.
+  2) 환경 유형 → 카드 클래스 · 배지
+       Definition / Notation      → card def-card  · DEF n / NOTATION n
+       Theorem / Lemma / Corollary → card thm-card  · THM n / LEM n / COR n
+       Remark / Recall / Question → card rem-card  · REM n / RECALL n / Q n
+       Example                    → card exam-card · EXAM n
+       Exercise                   → card ex-card   · EX n
+     헤드 마크업: def-card는 .def-num/.def-title, thm-card는 .thm-num/.thm-title,
+     rem-card는 .rem-num/.rem-title, exam-card는 .exam-num/.exam-title,
+     ex-card는 .ex-num/.ex-title.
+  3) 번역 전 자리표시자는 대괄호를 두른 "미번역" 문구를 쓴다.
+     카드 제목 span은 이 자리표시자 다음에 em 태그로 감싼 영문 제목,
+     (연습문제만 그 뒤에 span.src-ref 로 Friedberg 출처를 적는다.)
+  4) 카드 본문은 ko-panel(div.formal) / en-panel(div.en-formal) 2단.
+       en-formal : 슬라이드 원문 verbatim 전사 (어구·수식·항목번호·오탈자까지 그대로).
+       ko-formal : 번역 단계 전까지 p 태그 하나에 자리표시자만 둔다.
+     슬라이드 PDF는 텍스트 추출이 되지 않으므로 반드시 페이지를 눈으로 읽어 전사한다.
+  5) 원문에 Proof가 있는 정리는 진술 뒤에
+     proof-toggle + proof-content(한국어) / proof-toggle + en-proof-content(영어)를 둔다.
+       토글 라벨: data-show="증명 보기" data-hide="증명 접기" (ko)
+                  data-show="Proof"    data-hide="Hide Proof" (en)
+       en 쪽은 원문 증명을 verbatim 전사하고 div.qed(□)로 닫는다.
+       원문의 증명 끝 기호 ■ 는 사이트 규약대로 □ 로 바꾼다.
+       ko 쪽 proof-content는 번역 전까지 자리표시자 한 줄.
+  6) 교재(Friedberg 4e) 추천 연습문제는 각 단원 끝의 연습문제 섹션에 ex-card로 둔다.
+     id는 e{단원}-{교재 문항번호} (예: e8-2), 배지는 EX 6.4-2,
+     출처는 span.src-ref 에 Friedberg §6.4 #2 (a), (b) 형태로 적는다.
+     하위 문항 라벨은 교재의 (a), (b) … 를 그대로 strong 으로 적는다.
+     문제 진술은 교재 문장을 베끼지 않고 우리 말로 다시 서술하되
+     수학적 데이터(행렬·사상·공간·문항 글자)는 정확히 같게 유지한다.
+     이 빌드 단계에서는 어떤 풀이도 쓰지 않는다. 풀이 자리에는 숨은 마커만 남긴다.
+       ko-panel 안 div.formal 바로 뒤, en-panel 안 div.en-formal 바로 뒤에
+       한국어·영어 풀이 자리를 가리키는 HTML 주석 마커를 하나씩 둔다.
+       마커의 정확한 형태는 la/ch01.html 의 pr-card 를 그대로 따른다.
+  7) 번호 없는 서술 단락·편집자 안내는 div.card.note-card 로 담고
+     id는 note{단원 2자리}-{순번} (예: note08-1), 배지는 NOTE,
+     본문은 동일한 2단 구조로 둔다. note 카드는 목차(TOC)에 넣지 않는다.
+  8) 수식은 $...$ / $$...$$. 표기는 원문 그대로 유지한다
+     (슬라이드의 칼리그래피 B는 \mathcal{B}, 풀이 PDF의 β는 \beta,
+      tr(A)는 \operatorname{tr}(A) 로 정규화).
+     수식 안에서 여는 부등호 뒤에 바로 영문자가 오는 표기는 금지(HTML 파싱 위험)
+     — `\lt` 를 쓰거나 공백을 넣는다. 수식 밖의 맨 앰퍼샌드는 &amp; 로 쓴다.
+     행렬은 div.math-display 안에 pmatrix 로 두고 열 구분자는 &amp; 로 적는다.
+  9) 슬라이드의 색 강조·밑줄은 옮기지 않는다. 슬라이드 안의 박스는 div.math-display로.
+ 10) 이 주석 블록 안에는 HTML 주석 기호나 태그를 그대로 적지 말 것
+     (주석이 조기 종료되어 규약 본문이 페이지에 노출된다).
+  11) ch09 고유: 슬라이드의 증명이 "Easy." / "Obvious." / "Okay." 뿐이거나 진술에 증명이 없으면
+      원문은 그대로 두고 증명 토글 안에 en Note · ko 역주로 완전한 논증을 덧붙인다.
+      원문 오류는 en 패널 끝의 Note 와 ko 패널의 역주로 처리한다 (SOURCE-MAP ERRATA 67–).
+  ═══════════════════════════════════════════════════════════════════════
+-->
+
+<div class="section-title"><h2>§6.5 Unitary and Orthogonal Operators and Their Matrices · 유니타리 연산자와 직교연산자</h2></div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.2 ═══════════ -->
+
+<!-- S6.5 p2 Recall 1 — "is call" 오타 -->
+<div class="card rem-card" id="c9-1">
+  <div class="card-head">
+    <span class="rem-num">RECALL 1</span>
+    <span class="rem-title">선형변환은 벡터공간 구조를 보존한다 <em>Linear Transformations Preserve the Vector Space Structure</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to W$를 벡터공간 $V$에서 다른 벡터공간 $W$로의 사상이라 하자.</p>
+        <p>지난 장들에서 우리는 다음과 같은 경우에 관심을 가졌다.</p>
+        <div class="math-display">$$T\text{가 } V\text{의 벡터공간 구조를 보존한다.}$$</div>
+        <p>즉 모든 $x, y \in V$와 $a, b \in F$에 대하여 $T(ax+by) = aT(x)+bT(y)$가 성립하는 경우이다.</p>
+        <p>이 경우 $T : V \to W$를 <strong>선형변환</strong>이라 한다.</p>
+        <p><em>역주.</em> 영문 패널의 &ldquo;is call&rdquo;은 &ldquo;is called&rdquo;의 오타이다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to W$ be a map from a vector space $V$ to another vector space $W$.</p>
+        <p>In past chapters, we were interested in the case where</p>
+        <div class="math-display">$$T \text{ preserves the vector space structure of } V$$</div>
+        <p>in the sense that $T(ax+by) = aT(x)+bT(y)$ for all $x, y \in V$ and $a, b \in F$.</p>
+        <p>In this case, $T : V \to W$ is call <strong>a linear transformation</strong>.</p>
+        <p><em>Note.</em> &ldquo;is call&rdquo; is a typo for &ldquo;is called&rdquo;.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p2 Guiding Problem of Section 6.5 + 정리 6.18 예고 (서술) -->
+<div class="card note-card" id="note09-1">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>6.5절의 길잡이 문제 :</strong> $V$를 $F$ 위의 내적공간이라 하자.</p>
+        <p>이때 다음의 특성화를 찾아라.</p>
+        <p>길이를 보존하는 선형변환 $T : V \to V$.</p>
+        <p>우리는 다음 명제들이 서로 동치임을 증명할 것이다(<a href="#c9-6">정리 6.18</a> 참조).</p>
+        <p>$(i)$ $TT^* = T^*T = I$이다.</p>
+        <p>$(ii)$ 모든 $x, y \in V$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$이다.</p>
+        <p>$(iii)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p><em>역주.</em> <a href="#c9-6">정리 6.18</a>은 $V$가 유한차원이라고 가정한다. 이 가정이 있어야 $(i)$의 수반연산자 $T^*$가 존재한다(<a href="ch07.html#c7-5">정리 6.9</a>). 여기의 세 명제는 정리 6.18의 $(i)$, $(ii)$, $(v)$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>Guiding Problem of Section 6.5 :</strong> Let $V$ be an inner product space over $F$.</p>
+        <p>Then find characterizations of</p>
+        <p>linear transformation $T : V \to V$ that preserves the length.</p>
+        <p>We will prove that the following statements are equivalent (see <a href="#c9-6">Theorem 6.18</a>) :</p>
+        <p>$(i)$ $TT^* = T^*T = I$</p>
+        <p>$(ii)$ $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in V$.</p>
+        <p>$(iii)$ $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        <p><em>Note.</em> <a href="#c9-6">Theorem 6.18</a> assumes that $V$ is finite-dimensional; this guarantees that the adjoint $T^*$ in $(i)$ exists (<a href="ch07.html#c7-5">Theorem 6.9</a>). The three statements here are $(i)$, $(ii)$ and $(v)$ of Theorem 6.18.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.3 ═══════════ -->
+
+<!-- S6.5 p3 Recall 2 — (1) 정규 + 정리 6.16, (2) 자기수반 + 정리 6.17 (§6.4 재수록; 유한차원 가정 생략) -->
+<div class="card rem-card" id="c9-2">
+  <div class="card-head">
+    <span class="rem-num">RECALL 2</span>
+    <span class="rem-title">정규연산자와 자기수반연산자 <em>Normal and Self-Adjoint Operators</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : V \to V$를 내적공간 $V$ 위의 선형변환이라 하자.</p>
+        <p><strong>(1) 정의 :</strong> $TT^* = T^*T$이면 $T$를 <strong>정규</strong>라 한다.</p>
+        <p><strong><a href="ch08.html#c8-10">정리 6.16</a> :</strong> $F = \mathbb{C}$이면 다음 두 조건은 서로 동치이다.</p>
+        <p>$(i)$ $T$는 정규이다.</p>
+        <p>$(ii)$ $T$의 고유벡터로 이루어진 $V$의 정규직교기저가 존재한다.</p>
+        <p><strong>(2) 정의 :</strong> $T = T^*$이면 $T$를 <strong>자기수반(에르미트)</strong>이라 한다.</p>
+        <p><strong><a href="ch08.html#c8-15">정리 6.17</a> :</strong> $F = \mathbb{R}$이면 다음 두 조건은 서로 동치이다.</p>
+        <p>$(i)$ $T$는 자기수반이다.</p>
+        <p>$(ii)$ $T$의 고유벡터로 이루어진 $V$의 정규직교기저가 존재한다.</p>
+        <p><em>역주.</em> §6.4의 <a href="ch08.html#c8-10">정리 6.16</a>과 <a href="ch08.html#c8-15">정리 6.17</a>은 $V$가 유한차원이라고 가정하는데, 이 복습에서는 그 가정이 생략되어 있다. 두 정의는 §6.4의 <a href="ch08.html#c8-5">정규연산자</a>와 <a href="ch08.html#c8-13">자기수반연산자</a>의 정의와 같다. (2)의 &ldquo;Definitions.&rdquo;는 정의 하나만 소개하므로 단수로 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : V \to V$ be a linear transformation on an inner product space $V$.</p>
+        <p><strong>(1) Definition. :</strong> $T$ is said to be <strong>normal</strong> if $TT^* = T^*T$.</p>
+        <p><strong><a href="ch08.html#c8-10">Theorem 6.16.</a> :</strong> If $F = \mathbb{C}$, then the following two conditions are equivalent:</p>
+        <p>$(i)$ $T$ is normal;</p>
+        <p>$(ii)$ There exists an orthonormal basis for $V$ consisting of eigenvectors of $T$.</p>
+        <p><strong>(2) Definitions. :</strong> $T$ is said to be <strong>self-adjoint (Hermitian)</strong> if $T = T^*$.</p>
+        <p><strong><a href="ch08.html#c8-15">Theorem 6.17.</a> :</strong> If $F = \mathbb{R}$, then the following two conditions are equivalent:</p>
+        <p>$(i)$ $T$ is self-adjoint;</p>
+        <p>$(ii)$ There exists an orthonormal basis for $V$ consisting of eigenvectors of $T$.</p>
+        <p><em>Note.</em> As stated in §6.4 (<a href="ch08.html#c8-10">Theorem 6.16</a>, <a href="ch08.html#c8-15">Theorem 6.17</a>), both theorems assume that $V$ is finite-dimensional; this hypothesis is omitted in the recall. The two definitions are those of <a href="ch08.html#c8-5">normal</a> and <a href="ch08.html#c8-13">self-adjoint</a> operators in §6.4; &ldquo;Definitions.&rdquo; in (2) introduces a single definition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.4 ═══════════ -->
+
+<!-- S6.5 p4 Definition (unitary / orthogonal operator) — "over F." 뒤 마침표 -->
+<div class="card def-card" id="c9-3">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">유니타리 연산자와 직교연산자 <em>Unitary and Orthogonal Operators</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 $F$ 위의 유한차원 내적공간 $V$ 위의 선형연산자로서</p>
+        <p>모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$를 만족하는 것이라 하자.</p>
+        <p><strong>(1)</strong> $F = \mathbb{C}$이면 $T$를 <strong>유니타리 연산자</strong>(unitary operator)라 한다.</p>
+        <p><strong>(2)</strong> $F = \mathbb{R}$이면 $T$를 <strong>직교연산자</strong>(orthogonal operator)라 한다.</p>
+        <p><em>역주.</em> 영문 패널에는 &ldquo;over $F$&rdquo; 뒤에 마침표가 잘못 찍혀 &ldquo;such that&rdquo; 이하가 다음 줄로 떨어져 있으나 한 문장이므로 이어서 옮겼다(영문 패널은 원문 그대로). <a href="#c9-6">정리 6.18</a>에 의해 이 조건은 $TT^* = T^*T = I$와 동치이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on a finite dimensional inner product space $V$ over $F$.</p>
+        <p>such that $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        <p><strong>(1)</strong> If $F = \mathbb{C}$, then we call $T$ <strong>a unitary operator</strong>.</p>
+        <p><strong>(2)</strong> If $F = \mathbb{R}$, then we call $T$ <strong>an orthogonal operator</strong>.</p>
+        <p><em>Note.</em> The period after &ldquo;over $F$&rdquo; is a slip: &ldquo;such that $\|T(x)\| = \|x\|$ for all $x \in V$&rdquo; belongs to the same sentence. By <a href="#c9-6">Theorem 6.18</a>, this condition is equivalent to $TT^* = T^*T = I$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p4 Example (1) 회전·반사 (2) H 위의 곱셈연산자 — H는 무한차원(정의는 유한차원), 전사성 보충 -->
+<div class="card exam-card" id="c9-4">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">회전·반사와 곱셈연산자 <em>Rotations, Reflections, and a Multiplication Operator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $\mathbb{R}^2$의 모든 회전과 반사는 길이를 보존한다.</p>
+        <p>따라서 이들은 직교연산자이다.</p>
+        <p><strong>(2)</strong> $h \in H$가 모든 $x \in [0, 2\pi]$에 대하여 $h(x) \times \overline{h(x)} = 1$을 만족한다고 하자.</p>
+        <p>예를 들어 $h(x) = e^{inx} = \cos nx + i\sin nx$는 이 조건을 만족한다.</p>
+        <p>$T : H \to H$, $f \mapsto hf$라 하자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}\|T(f)\|^2 &amp;= \|hf\|^2 = \frac{1}{2\pi}\int_0^{2\pi} h(t)f(t)\overline{h(t)f(t)}\,dt\\[2pt]
+                &amp;= \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{f(t)}\,dt = \|f\|^2.\end{aligned}$$</div>
+        <p>따라서 $T : H \to H$는 유니타리 연산자이다.</p>
+        <p><em>역주.</em> (1) $\theta$만큼의 회전은 $T(a,b) = (a\cos\theta - b\sin\theta,\ a\sin\theta + b\cos\theta)$이고 $\|T(a,b)\|^2 = a^2+b^2$이다. 단위벡터 $u$가 생성하는 원점을 지나는 직선에 대한 반사는 $R(x) = 2\langle x, u\rangle u - x$이고 $\|R(x)\|^2 = 4\langle x,u\rangle^2 - 4\langle x,u\rangle^2 + \|x\|^2 = \|x\|^2$이다. (2) $H$는 $[0, 2\pi]$ 위의 연속인 복소수값 함수 전체에 내적 $\langle f, g\rangle = \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt$를 준 내적공간이다(<a href="ch08.html#c8-11">§6.4의 복습</a>). 가운데 등식은 $h(t)\overline{h(t)} = 1$을 쓴 것이다. 그런데 $H$는 무한차원이므로 유한차원 $V$에 대하여 진술된 <a href="#c9-3">정의</a>가 문자 그대로 적용되지는 않는다. 무한차원에서는 모든 $x$에 대하여 $\|T(x)\| = \|x\|$인 연산자를 보통 <em>등거리사상</em>(isometry)이라 하고, 이것이 전사이기도 할 때 유니타리(또는 직교) 연산자라 한다. 이 $T$는 모든 $f \in H$에 대하여 $T(\overline{h}f) = h\overline{h}f = f$이므로 전사이고, 따라서 이 의미에서 유니타리이다. 실제로 $\langle hf, g\rangle = \langle f, \overline{h}g\rangle$이므로 $T^*$는 $\overline{h}$를 곱하는 연산자이고 $TT^* = T^*T = I$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Any rotation or reflection in $\mathbb{R}^2$ preserves length.</p>
+        <p>Hence it is an orthogonal operator.</p>
+        <p><strong>(2)</strong> Let $h \in H$ satisfy $h(x) \times \overline{h(x)} = 1$ for all $x \in [0, 2\pi]$.</p>
+        <p>For example, $h(x) = e^{inx} = \cos nx + i\sin nx$ satisfies this condition.</p>
+        <p>Let $T : H \to H$, $f \mapsto hf$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}\|T(f)\|^2 &amp;= \|hf\|^2 = \frac{1}{2\pi}\int_0^{2\pi} h(t)f(t)\overline{h(t)f(t)}\,dt\\[2pt]
+        &amp;= \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{f(t)}\,dt = \|f\|^2.\end{aligned}$$</div>
+        <p>So $T : H \to H$ is a unitary operator.</p>
+        <p><em>Note.</em> (1) The rotation by $\theta$ is $T(a,b) = (a\cos\theta - b\sin\theta,\ a\sin\theta + b\cos\theta)$, and $\|T(a,b)\|^2 = a^2+b^2$. The reflection about the line through the origin spanned by a unit vector $u$ is $R(x) = 2\langle x, u\rangle u - x$, and $\|R(x)\|^2 = 4\langle x,u\rangle^2 - 4\langle x,u\rangle^2 + \|x\|^2 = \|x\|^2$. (2) $H$ is the space of continuous complex-valued functions on $[0, 2\pi]$ with $\langle f, g\rangle = \frac{1}{2\pi}\int_0^{2\pi} f(t)\overline{g(t)}\,dt$ (<a href="ch08.html#c8-11">§6.4 Recall</a>); the middle equality uses $h(t)\overline{h(t)} = 1$. Since $H$ is infinite-dimensional, the <a href="#c9-3">Definition</a>, which is stated for finite-dimensional $V$, does not literally apply. In the infinite-dimensional case an operator with $\|T(x)\| = \|x\|$ for all $x$ is usually called an <em>isometry</em>, and it is called unitary (or orthogonal) when it is also onto. This $T$ is onto, since $T(\overline{h}f) = h\overline{h}f = f$ for every $f \in H$, so it is unitary in this sense. In fact $\langle hf, g\rangle = \langle f, \overline{h}g\rangle$, so $T^*$ is multiplication by $\overline{h}$ and $TT^* = T^*T = I$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.5 ═══════════ -->
+
+<!-- S6.5 p5 Example: T(e1)=e2, T(e2)=e3, T(e3)=e1 — (2) "v ... is an eigenvalue" → eigenvector -->
+<div class="card exam-card" id="c9-5">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">좌표를 순환시키는 연산자 <em>An Operator That Cyclically Permutes the Coordinates</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^3 \to \mathbb{R}^3$를 다음을 만족하는 선형연산자라 하자.</p>
+        <div class="math-display">$$T(e_1) = e_2,\ T(e_2) = e_3,\ T(e_3) = e_1.$$</div>
+        <p>따라서 $T(a,b,c) = T(ae_1+be_2+ce_3) = ae_2+be_3+ce_1 = (c,a,b)$이다.</p>
+        <p>$\mathbb{R}^3$의 표준기저 $\beta = \{e_1,e_2,e_3\}$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\end{pmatrix}.$$</div>
+        <p><strong>(1)</strong> 모든 $x = (a,b,c) \in \mathbb{R}^3$에 대하여 $\|x\|^2 = a^2+b^2+c^2 = c^2+a^2+b^2 = \|T(x)\|^2$이다.</p>
+        <p>또한 모든 $x = (a,b,c) \in \mathbb{R}^3$와 $y = (d,e,f) \in \mathbb{R}^3$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, y\rangle = ad+be+cf = cf+ad+be = \langle T(x), T(y)\rangle.$$</div>
+        <p><strong>(2)</strong> $T(e_1+e_2+e_3) = e_2+e_3+e_1$이므로 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{gathered}\lambda = 1\text{은 } T\text{의 고유값이고}\\[2pt] v = e_1+e_2+e_3\text{는 } T\text{의 고유벡터이다.}\end{gathered}$$</div>
+        <p>실제로</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det([T]_\beta - tI_3) = \det\begin{pmatrix}-t &amp; 0 &amp; 1\\ 1 &amp; -t &amp; 0\\ 0 &amp; 1 &amp; -t\end{pmatrix}\\[2pt]
+                &amp;= -t(t^2)+1 = -(t^3-1) = -(t-1)(t^2+t+1).\end{aligned}$$</div>
+        <p><strong>(3)</strong></p>
+        <div class="math-display">$$[T]_\beta[T]_\beta^* = \begin{pmatrix}0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\end{pmatrix}\begin{pmatrix}0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\end{pmatrix} = I_3$$</div>
+        <p>이고, 따라서 $[T]_\beta^*[T]_\beta = I_3$이다.</p>
+        <p><em>역주.</em> 영문 패널 (2)의 &ldquo;$v = e_1+e_2+e_3$ is an eigenvalue of $T$&rdquo;는 &ldquo;is an eigenvector of $T$&rdquo;의 오류이므로 고유벡터로 바로잡아 옮겼다(영문 패널은 원문 그대로). 인수 $t^2+t+1$의 판별식은 $-3 \lt 0$이므로 $T$의 실고유값은 $1$뿐이다. (3)에서 $[T]_\beta$의 성분이 실수이므로 $[T]_\beta^* = [T]_\beta^t$이다. 정사각행렬에서는 $AB = I$이면 $BA = I$이므로(한쪽 역행렬은 양쪽 역행렬) $[T]_\beta^*[T]_\beta = I_3$이 따르며, 직접 곱해 보아도 확인된다. (1)은 $T$가 직교연산자임을 보여 주고, $\beta$가 정규직교기저이므로 $[T^*]_\beta = [T]_\beta^*$(<a href="ch07.html#c7-11">정리 6.10</a>)이어서 (3)은 $TT^* = T^*T = I$를 뜻한다. 이는 <a href="#c9-6">정리 6.18</a>의 $(v)$, $(ii)$, $(i)$에 해당한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^3 \to \mathbb{R}^3$ be the linear operator such that</p>
+        <div class="math-display">$$T(e_1) = e_2,\ T(e_2) = e_3 \text{ and } T(e_3) = e_1.$$</div>
+        <p>Thus $T(a,b,c) = T(ae_1+be_2+ce_3) = ae_2+be_3+ce_1 = (c,a,b)$.</p>
+        <p>For the standard basis $\beta = \{e_1,e_2,e_3\}$ of $\mathbb{R}^3$, we have</p>
+        <div class="math-display">$$[T]_\beta = \begin{pmatrix}0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\end{pmatrix}.$$</div>
+        <p><strong>(1)</strong> For every $x = (a,b,c) \in \mathbb{R}^3$, we have $\|x\|^2 = a^2+b^2+c^2 = c^2+a^2+b^2 = \|T(x)\|^2$.</p>
+        <p>Also, for every $x = (a,b,c) \in \mathbb{R}^3$ and $y = (d,e,f) \in \mathbb{R}^3$, we have</p>
+        <div class="math-display">$$\langle x, y\rangle = ad+be+cf = cf+ad+be = \langle T(x), T(y)\rangle.$$</div>
+        <p><strong>(2)</strong> Since $T(e_1+e_2+e_3) = e_2+e_3+e_1$, it holds that</p>
+        <div class="math-display">$$\begin{gathered}\lambda = 1 \text{ is an eigenvalue of } T \text{ and}\\[2pt] v = e_1+e_2+e_3 \text{ is an eigenvalue of } T.\end{gathered}$$</div>
+        <p>Indeed,</p>
+        <div class="math-display">$$\begin{aligned} f(t) &amp;= \det([T]_\beta - tI_3) = \det\begin{pmatrix}-t &amp; 0 &amp; 1\\ 1 &amp; -t &amp; 0\\ 0 &amp; 1 &amp; -t\end{pmatrix}\\[2pt]
+        &amp;= -t(t^2)+1 = -(t^3-1) = -(t-1)(t^2+t+1).\end{aligned}$$</div>
+        <p><strong>(3)</strong></p>
+        <div class="math-display">$$[T]_\beta[T]_\beta^* = \begin{pmatrix}0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\end{pmatrix}\begin{pmatrix}0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0\end{pmatrix} = I_3$$</div>
+        <p>and hence $[T]_\beta^*[T]_\beta = I_3$.</p>
+        <p><em>Note.</em> In (2), &ldquo;$v = e_1+e_2+e_3$ is an eigenvalue of $T$&rdquo; should read &ldquo;is an eigenvector of $T$&rdquo;. The factor $t^2+t+1$ has discriminant $-3 \lt 0$, so $1$ is the only real eigenvalue of $T$. In (3), $[T]_\beta^* = [T]_\beta^t$ since the entries are real; $[T]_\beta^*[T]_\beta = I_3$ follows because $AB = I$ implies $BA = I$ for square matrices (a one-sided inverse is two-sided), and it can also be checked by multiplying directly. Part (1) shows that $T$ is an orthogonal operator, and since $\beta$ is orthonormal, $[T^*]_\beta = [T]_\beta^*$ (<a href="ch07.html#c7-11">Theorem 6.10</a>), so (3) says $TT^* = T^*T = I$. These are $(v)$, $(ii)$ and $(i)$ of <a href="#c9-6">Theorem 6.18</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.6 ═══════════ -->
+
+<!-- S6.5 p6 Theorem 6.18 (i)–(v) — 진술만. 증명은 행렬형(p7–11, c9-7·c9-8)과 연산자형(p15–19, c9-12·c9-13) 두 번. (iv) "is for" -->
+<div class="card thm-card" id="c9-6">
+  <div class="card-head">
+    <span class="thm-num">THM 6.18</span>
+    <span class="thm-title">길이를 보존하는 연산자의 특성화 <em>Characterizations of Length-Preserving Operators</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 다음 명제들은 서로 동치이다.</p>
+        <p>$(i)$ $TT^* = T^*T = I$이다.</p>
+        <p>$(ii)$ 모든 $x, y \in V$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$이다.</p>
+        <p>$(iii)$ $\beta$가 $V$의 정규직교기저이면 $T(\beta)$는 $V$의 정규직교기저이다.</p>
+        <p>$(iv)$ $T(\beta)$가 $V$의 정규직교기저가 되는 $V$의 정규직교기저 $\beta$가 존재한다.</p>
+        <p>$(v)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p><em>역주.</em> 영문 패널 $(iv)$의 &ldquo;$\beta$ is for $V$&rdquo;에서 &ldquo;is&rdquo;는 군더더기이다(&ldquo;$\beta$ for $V$&rdquo;). 한국어는 바로잡아 옮겼다(영문 패널은 원문 그대로).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 슬라이드는 이 정리를 두 번 증명한다. 먼저 $T = L_A$인 행렬 형태로 다섯 함의를 증명하고(<a href="#c9-7">주의</a>, <a href="#c9-8">보조정리</a>), 이어서 일반 연산자에 대하여 증명 계획 $(i) \Rightarrow (ii) \Rightarrow (iii) \Rightarrow (iv) \Rightarrow (v) \Rightarrow (i)$를 따라 증명한다(<a href="#c9-12">정리 6.18 (다시 보기)</a>, <a href="#c9-13">보조정리</a>).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on a finite dimensional inner product space $V$.</p>
+        <p>Then the following statements are equivalent.</p>
+        <p>$(i)$ $TT^* = T^*T = I$.</p>
+        <p>$(ii)$ $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in V$.</p>
+        <p>$(iii)$ If $\beta$ is an orthonormal basis for $V$, then $T(\beta)$ is an orthonormal basis for $V$.</p>
+        <p>$(iv)$ There exists an orthonormal basis $\beta$ is for $V$ such that $T(\beta)$ is an</p>
+        <p>orthonormal basis for $V$.</p>
+        <p>$(v)$ $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        <p><em>Note.</em> In $(iv)$, &ldquo;$\beta$ is for $V$&rdquo; should read &ldquo;$\beta$ for $V$&rdquo;.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The slides prove this theorem twice: first in matrix form for $T = L_A$, implication by implication (<a href="#c9-7">Remarks</a>, using the <a href="#c9-8">Lemma</a>), and then for an arbitrary operator, following the Proof Plan $(i) \Rightarrow (ii) \Rightarrow (iii) \Rightarrow (iv) \Rightarrow (v) \Rightarrow (i)$ (<a href="#c9-12">Theorem 6.18, restated</a>, using the <a href="#c9-13">Lemma</a>).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.7 ═══════════ -->
+
+<!-- S6.5 p7 Remarks (1)(2) 행렬 형태 + p8–p10 박스 함의 5개와 증명(Easy/Easy/Obvious 보충, (v)⇒(i) 마무리 보충) — "linear operator F^n" (on 누락), "is for" -->
+<div class="card rem-card" id="c9-7">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">정리 6.18의 행렬 형태 <em>Theorem 6.18 in Matrix Form</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $\beta$가 $V$의 정규직교기저이면 $[T^*]_\beta = [T]_\beta^*$이다.</p>
+        <p><strong>(2)</strong> $A \in M_{n\times n}(F)$에 대하여 $T = L_A : F^n \to F^n$을 이에 대응하는 $F^n$ 위의 선형연산자라 하자.</p>
+        <p><a href="#c9-6">정리 6.18</a>은 다음 명제들이 서로 동치라는 것이다.</p>
+        <p>$(i)$ $AA^* = A^*A = I_n$이다.</p>
+        <p>$(ii)$ 모든 $x, y \in F^n$에 대하여 $\langle A(x), A(y)\rangle = \langle x, y\rangle$이다.</p>
+        <p>$(iii)$ $\beta = \{v_1, v_2, \ldots, v_n\}$이 $F^n$의 정규직교기저이면</p>
+        <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$은 $F^n$의 정규직교기저이다.</p>
+        <p>$(iv)$ 다음을 만족하는 $F^n$의 정규직교기저 $\beta = \{v_1, v_2, \ldots, v_n\}$이 존재한다.</p>
+        <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$은 $F^n$의 정규직교기저이다.</p>
+        <p>$(v)$ 모든 $x \in F^n$에 대하여 $\|A(x)\| = \|x\|$이다.</p>
+        <p><em>역주.</em> (1)은 <a href="ch07.html#c7-11">정리 6.10</a>이다. 영문 패널 (2)의 &ldquo;the corresponding linear operator $F^n$&rdquo;은 &ldquo;the corresponding linear operator on $F^n$&rdquo;으로, $(iv)$의 &ldquo;$\beta = \{\ldots\}$ is for $F^n$&rdquo;은 &ldquo;$\beta = \{\ldots\}$ for $F^n$&rdquo;으로 읽어야 하므로 바로잡아 옮겼다(영문 패널은 원문 그대로). 여기서 $F^n$에는 표준내적을 주고, $A(x)$는 $Ax = L_A(x)$를 뜻한다. 이 다섯 명제는 $T = L_A$에 대한 정리 6.18의 $(i)$–$(v)$이다. 실제로 $(L_A)^* = L_{A^*}$(<a href="ch07.html#c7-12">$L_A$의 수반연산자에 대한 따름정리</a>)이고 $L_AL_B = L_{AB}$이므로 $TT^* = L_{AA^*}$, $T^*T = L_{A^*A}$이며, $L_B = I$일 필요충분조건은 $B = I_n$이다. 슬라이드는 이어서 다섯 함의를 행렬에 대하여 직접 증명한다(아래 증명).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <!-- ═══════════ Section 6.5 notes · Slide p.8 ═══════════ -->
+        <div class="formal-box">
+          <p>$(i)$ $AA^* = A^*A = I_n$ $\quad\Longrightarrow\quad$ $(ii)$ 모든 $x, y \in F^n$에 대하여 $\langle A(x), A(y)\rangle = \langle x, y\rangle$.</p>
+        </div>
+        <p><strong>증명 :</strong> 쉽다.</p>
+        <p><em>역주.</em> $x, y \in F^n$이면 <a href="ch07.html#c7-21">§6.3의 보조정리 1</a>에 의해 $\langle A(x), A(y)\rangle = \langle x, A^*A(y)\rangle = \langle x, I_ny\rangle = \langle x, y\rangle$이다.</p>
+        <div class="formal-box">
+          <p>$(ii)$ 모든 $x, y \in F^n$에 대하여 $\langle A(x), A(y)\rangle = \langle x, y\rangle$.</p>
+          <p>$\Longrightarrow$ $(iii)$ $\beta = \{v_1, v_2, \ldots, v_n\}$이 $F^n$의 정규직교기저이면</p>
+          <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$은 $F^n$의 정규직교기저이다.</p>
+        </div>
+        <p><strong>증명 :</strong> 쉽다.</p>
+        <p><em>역주.</em> $(ii)$에 의해 $\langle Av_i, Av_j\rangle = \langle v_i, v_j\rangle = \delta_{ij}$이다. 특히 $i \neq j$이면 내적이 $1$이 아니라 $0$이므로 $Av_i \neq Av_j$이고, 따라서 $T(\beta)$는 $n$개의 벡터로 이루어진 정규직교집합이다. 이 집합은 일차독립이므로(<a href="ch06.html#c6-7">정리 6.3의 따름정리 2</a>) $n$차원 공간 $F^n$의 기저이다.</p>
+        <div class="formal-box">
+          <p>$(iii)$ $\beta = \{v_1, v_2, \ldots, v_n\}$이 $F^n$의 정규직교기저이면</p>
+          <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$은 $F^n$의 정규직교기저이다.</p>
+          <p>$\Longrightarrow$ $(iv)$ $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$이 $F^n$의 정규직교기저가 되는</p>
+          <p>$F^n$의 정규직교기저 $\beta = \{v_1, v_2, \ldots, v_n\}$이 존재한다.</p>
+        </div>
+        <p><strong>증명 :</strong> 자명하다.</p>
+        <p><em>역주.</em> $F^n$은 정규직교기저를 가진다. 예를 들어 표준기저 $\{e_1, \ldots, e_n\}$이 그렇다(<a href="ch06.html#c6-14">정리 6.5</a>도 보라). 이 기저에 $(iii)$을 적용하면 $(iv)$를 얻는다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.9 ═══════════ -->
+        <div class="formal-box">
+          <p>$(iv)$ $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$이 $F^n$의 정규직교기저가 되는</p>
+          <p>$F^n$의 정규직교기저 $\beta = \{v_1, v_2, \ldots, v_n\}$이 존재한다.</p>
+          <p>$\Longrightarrow$ $(v)$ 모든 $x \in F^n$에 대하여 $\|A(x)\| = \|x\|$.</p>
+        </div>
+        <p><strong>증명 :</strong> $x = a_1v_1 + \cdots + a_nv_n$이라 쓰자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\|x\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>이다. $\beta = \{v_1, v_2, \ldots, v_n\}$이 $F^n$의 정규직교기저이기 때문이다.</p>
+        <p>또한 $A(x) = a_1A(v_1) + \cdots + a_nA(v_n)$이다.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\|A(x)\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>이다. $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$이 $F^n$의 정규직교기저이기 때문이다.</p>
+        <p>이로써 다음이 증명된다.</p>
+        <div class="math-display">$$\|A(x)\| = \|x\| \quad (\text{모든 } x \in F^n\text{에 대하여}).$$</div>
+        <p><em>역주.</em> 여기서 $\beta$는 $(iv)$가 주는 기저이고 $x \in F^n$은 임의의 벡터이다. 두 계산은 모두 정규직교집합 $\{w_1, \ldots, w_n\}$에 대한 등식 $\left\|\sum_i a_iw_i\right\|^2 = \sum_{i,j} a_i\overline{a_j}\langle w_i, w_j\rangle = \sum_i a_i\overline{a_i}$이다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.10 ═══════════ -->
+        <div class="formal-box">
+          <p>$(v)$ 모든 $x \in F^n$에 대하여 $\|A(x)\| = \|x\|$ $\quad\Longrightarrow\quad$ $(i)$ $AA^* = A^*A = I_n$.</p>
+        </div>
+        <p><strong>증명 :</strong> $\|A(x)\| = \|x\|$로부터 $\langle A(x), A(x)\rangle = \|A(x)\|^2 = \|x\|^2 = \langle x, x\rangle$를 얻는다.</p>
+        <p>$\langle A(x), A(x)\rangle = \langle x, x\rangle$로부터 다음을 얻는다.</p>
+        <div class="math-display">$$\begin{gathered}\langle x, A^*A(x)\rangle = \langle x, x\rangle \text{ 이고 따라서}\\[2pt] \langle x, (A^*A - I_n)(x)\rangle = 0 \quad (\text{모든 } x \in F^n\text{에 대하여}).\end{gathered}$$</div>
+        <p>이제 $(A^*A - I_n)^* = A^*A - I_n$이므로 $A^*A - I_n$은 자기수반임에 주목하자.</p>
+        <p>따라서 다음을 보이면 충분하다.</p>
+        <div class="math-display">$$\begin{gathered}B \in M_{n\times n}(F)\text{가 자기수반이고 모든 } x \in F^n\text{에 대하여}\\[2pt] \langle x, B(x)\rangle = 0\text{이면 } B = O_{n\times n}\text{이다.}\end{gathered}$$</div>
+        <p>이는 다음 보조정리에서 확인한다.</p>
+        <p><em>역주.</em> 영문 패널의 &ldquo;it is necessary to show&rdquo;는 &ldquo;it suffices to show&rdquo;(보이면 충분하다)의 뜻으로 옮겼다. $\langle A(x), A(x)\rangle = \langle x, A^*A(x)\rangle$는 <a href="ch07.html#c7-21">§6.3의 보조정리 1</a>이고, $(A^*A - I_n)^* = A^*A^{**} - I_n^* = A^*A - I_n$은 <a href="ch07.html#c7-16">켤레전치행렬의 성질</a>이다. <a href="#c9-8">보조정리</a>를 $B = A^*A - I_n$에 적용하면 $A^*A = I_n$을 얻는다. $A$는 정사각행렬이므로 $A^*$는 $A$의 역행렬이고, 따라서 $AA^* = I_n$도 성립한다. 이로써 $(v) \Rightarrow (i)$의 증명이 끝난다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> If $\beta$ is an orthonormal basis for $V$, then $[T^*]_\beta = [T]_\beta^*$.</p>
+        <p><strong>(2)</strong> For $A \in M_{n\times n}(F)$, let $T = L_A : F^n \to F^n$ be the corresponding linear operator $F^n$.</p>
+        <p><a href="#c9-6">Theorem 6.18</a> says that the following statements are equivalent.</p>
+        <p>$(i)$ $AA^* = A^*A = I_n$.</p>
+        <p>$(ii)$ $\langle A(x), A(y)\rangle = \langle x, y\rangle$ for all $x, y \in F^n$.</p>
+        <p>$(iii)$ If $\beta = \{v_1, v_2, \ldots, v_n\}$ is an orthonormal basis for $F^n$, then</p>
+        <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+        <p>$(iv)$ There exists an orthonormal basis $\beta = \{v_1, v_2, \ldots, v_n\}$ is for $F^n$ such that</p>
+        <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+        <p>$(v)$ $\|A(x)\| = \|x\|$ for all $x \in F^n$.</p>
+        <p><em>Note.</em> (1) is <a href="ch07.html#c7-11">Theorem 6.10</a>. In (2), &ldquo;the corresponding linear operator $F^n$&rdquo; should read &ldquo;the corresponding linear operator on $F^n$&rdquo;, and in $(iv)$, &ldquo;$\beta = \{\ldots\}$ is for $F^n$&rdquo; should read &ldquo;$\beta = \{\ldots\}$ for $F^n$&rdquo;. Here $F^n$ carries the standard inner product and $A(x)$ means $Ax = L_A(x)$. These are statements $(i)$–$(v)$ of Theorem 6.18 for $T = L_A$: since $(L_A)^* = L_{A^*}$ (<a href="ch07.html#c7-12">Corollary on the adjoint of $L_A$</a>) and $L_AL_B = L_{AB}$, we have $TT^* = L_{AA^*}$ and $T^*T = L_{A^*A}$, and $L_B = I$ if and only if $B = I_n$. The slides then prove the five implications directly for matrices (see the proof below).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <!-- ═══════════ Section 6.5 notes · Slide p.8 ═══════════ -->
+        <div class="formal-box">
+          <p>$(i)$ $AA^* = A^*A = I_n$. $\quad\Longrightarrow\quad$ $(ii)$ $\langle A(x), A(y)\rangle = \langle x, y\rangle$ for all $x, y \in F^n$.</p>
+        </div>
+        <p><strong>Proof :</strong> Easy.</p>
+        <p><em>Note.</em> For $x, y \in F^n$, <a href="ch07.html#c7-21">Lemma 1 of §6.3</a> gives $\langle A(x), A(y)\rangle = \langle x, A^*A(y)\rangle = \langle x, I_ny\rangle = \langle x, y\rangle$.</p>
+        <div class="formal-box">
+          <p>$(ii)$ $\langle A(x), A(y)\rangle = \langle x, y\rangle$ for all $x, y \in F^n$.</p>
+          <p>$\Longrightarrow$ $(iii)$ If $\beta = \{v_1, v_2, \ldots, v_n\}$ is an orthonormal basis for $F^n$, then</p>
+          <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+        </div>
+        <p><strong>Proof :</strong> Easy.</p>
+        <p><em>Note.</em> By $(ii)$, $\langle Av_i, Av_j\rangle = \langle v_i, v_j\rangle = \delta_{ij}$. In particular $Av_i \neq Av_j$ for $i \neq j$ (their inner product is $0$, not $1$), so $T(\beta)$ is an orthonormal set of $n$ vectors. It is linearly independent (<a href="ch06.html#c6-7">Corollary 2 of Theorem 6.3</a>), hence a basis for the $n$-dimensional space $F^n$.</p>
+        <div class="formal-box">
+          <p>$(iii)$ If $\beta = \{v_1, v_2, \ldots, v_n\}$ is an orthonormal basis for $F^n$, then</p>
+          <p>$T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+          <p>$\Longrightarrow$ $(iv)$ There exists an orthonormal basis $\beta = \{v_1, v_2, \ldots, v_n\}$ is for $F^n$</p>
+          <p>such that $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+        </div>
+        <p><strong>Proof :</strong> Obvious.</p>
+        <p><em>Note.</em> $F^n$ has an orthonormal basis, for example the standard basis $\{e_1, \ldots, e_n\}$ (see also <a href="ch06.html#c6-14">Theorem 6.5</a>). Applying $(iii)$ to it gives $(iv)$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.9 ═══════════ -->
+        <div class="formal-box">
+          <p>$(iv)$ There exists an orthonormal basis $\beta = \{v_1, v_2, \ldots, v_n\}$ is for $F^n$</p>
+          <p>such that $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+          <p>$\Longrightarrow$ $(v)$ $\|A(x)\| = \|x\|$ for all $x \in F^n$.</p>
+        </div>
+        <p><strong>Proof :</strong> Write $x = a_1v_1 + \cdots + a_nv_n$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\|x\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>since $\beta = \{v_1, v_2, \ldots, v_n\}$ is an orthonormal basis for $F^n$.</p>
+        <p>Also, $A(x) = a_1A(v_1) + \cdots + a_nA(v_n)$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\|A(x)\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>since $T(\beta) = \{Av_1, Av_2, \ldots, Av_n\}$ is an orthonormal basis for $F^n$.</p>
+        <p>This shows that</p>
+        <div class="math-display">$$\|A(x)\| = \|x\| \text{ for all } x \in F^n.$$</div>
+        <p><em>Note.</em> Here $\beta$ is the basis given by $(iv)$ and $x \in F^n$ is arbitrary. Both computations are the identity $\left\|\sum_i a_iw_i\right\|^2 = \sum_{i,j} a_i\overline{a_j}\langle w_i, w_j\rangle = \sum_i a_i\overline{a_i}$ for an orthonormal set $\{w_1, \ldots, w_n\}$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.10 ═══════════ -->
+        <div class="formal-box">
+          <p>$(v)$ $\|A(x)\| = \|x\|$ for all $x \in F^n$. $\quad\Longrightarrow\quad$ $(i)$ $AA^* = A^*A = I_n$.</p>
+        </div>
+        <p><strong>Proof :</strong> From $\|A(x)\| = \|x\|$, we have $\langle A(x), A(x)\rangle = \|A(x)\|^2 = \|x\|^2 = \langle x, x\rangle$.</p>
+        <p>From $\langle A(x), A(x)\rangle = \langle x, x\rangle$, we have</p>
+        <div class="math-display">$$\begin{gathered}\langle x, A^*A(x)\rangle = \langle x, x\rangle \text{ and hence}\\[2pt] \langle x, (A^*A - I_n)(x)\rangle = 0 \text{ for all } x \in F^n.\end{gathered}$$</div>
+        <p>Now, observe that $(A^*A - I_n)^* = A^*A - I_n$ and so $A^*A - I_n$ is self-adjoint.</p>
+        <p>Thus, it is necessary to show that</p>
+        <div class="math-display">$$\begin{gathered}\text{if } B \in M_{n\times n}(F) \text{ is self-adjoint and } \langle x, B(x)\rangle = 0\\[2pt] \text{for all } x \in F^n, \text{ then } B = O_{n\times n}.\end{gathered}$$</div>
+        <p>This will be verified in the following lemma.</p>
+        <p><em>Note.</em> &ldquo;It is necessary to show&rdquo; is meant as &ldquo;it suffices to show&rdquo;. The step $\langle A(x), A(x)\rangle = \langle x, A^*A(x)\rangle$ is <a href="ch07.html#c7-21">Lemma 1 of §6.3</a>, and $(A^*A - I_n)^* = A^*A^{**} - I_n^* = A^*A - I_n$ uses the <a href="ch07.html#c7-16">properties of the conjugate transpose</a>. Applying the <a href="#c9-8">Lemma</a> to $B = A^*A - I_n$ gives $A^*A = I_n$. Since $A$ is square, $A^*$ is then the inverse of $A$, so $AA^* = I_n$ as well. This completes $(v) \Rightarrow (i)$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.11 ═══════════ -->
+
+<!-- S6.5 p11 Lemma (행렬형: B 자기수반, <x,Bx>=0 ⇒ B=O) + Proof — 0_V (0_{F^n}), 정규직교 고유기저의 근거 보충 -->
+<div class="card thm-card" id="c9-8">
+  <div class="card-head">
+    <span class="thm-num">LEM</span>
+    <span class="thm-title">$\langle x, Bx\rangle = 0$인 자기수반행렬은 영행렬이다 <em>A Self-Adjoint Matrix with $\langle x, Bx\rangle = 0$ Is Zero</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$B \in M_{n\times n}(F)$가 자기수반이고 모든 $x \in F^n$에 대하여 $\langle x, B(x)\rangle = 0$이면 $B = O_{n\times n}$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$B$가 자기수반이므로</p>
+        <p>$B$의 고유벡터로 이루어진 $F^n$의 정규직교기저 $\beta = \{x_1, x_2, \ldots, x_n\}$이 존재한다.</p>
+        <p>각 $x \in \beta$에 대하여 어떤 $\lambda \in F$가 있어 $Bx = \lambda x$라 쓸 수 있다.</p>
+        <p>따라서</p>
+        <div class="math-display">$$0 = \langle x, Bx\rangle = \langle x, \lambda x\rangle = \overline{\lambda}\langle x, x\rangle = \overline{\lambda}\times\|x\|^2.$$</div>
+        <p>이로써 $\overline{\lambda} = 0$이고 따라서 $\lambda = 0$이다.</p>
+        <p>결과적으로 모든 $x \in \beta$에 대하여 $Bx = 0_{F^n}$이다.</p>
+        <p>모든 $y = a_1x_1 + \cdots + a_nx_n \in F^n$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$By = a_1Bx_1 + \cdots + a_nBx_n = a_10_{F^n} + \cdots + a_n0_{F^n} = 0_{F^n}.$$</div>
+        <p>그러므로 $B = O_{n\times n}$이다.</p>
+        <p><em>역주.</em> 정규직교 고유기저의 존재는 다음과 같이 얻는다. 표준내적을 준 $F^n$에서 $(L_B)^* = L_{B^*} = L_B$(<a href="ch07.html#c7-12">$L_A$의 수반연산자에 대한 따름정리</a>)이므로 $L_B$는 자기수반이다. $F = \mathbb{R}$이면 <a href="ch08.html#c8-15">정리 6.17</a>을 적용한다. $F = \mathbb{C}$이면 $L_BL_B^* = L_B^2 = L_B^*L_B$이므로 $L_B$는 정규이고 <a href="ch08.html#c8-10">정리 6.16</a>을 적용한다. $\|x\| = 1$이므로 $\overline{\lambda} = 0$이 따른다. 영문 패널의 &ldquo;$0_V$&rdquo;는 $V = F^n$의 영벡터 $0_{F^n}$을 뜻하므로 그렇게 옮겼다. 마지막으로 모든 $y$에 대하여 $By = 0$이면 특히 $Be_j$, 즉 $B$의 $j$번째 열이 모두 $0$이므로 $B = O_{n\times n}$이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>If $B \in M_{n\times n}(F)$ is self-adjoint and $\langle x, B(x)\rangle = 0$ for all $x \in F^n$, then $B = O_{n\times n}$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $B$ is self-adjoint,</p>
+        <p>there exists an orthonormal basis $\beta = \{x_1, x_2, \ldots, x_n\}$ for $F^n$</p>
+        <p>consisting of eigenvectors of $B$.</p>
+        <p>For each $x \in \beta$, we can write $Bx = \lambda x$ for some $\lambda \in F$.</p>
+        <p>Thus</p>
+        <div class="math-display">$$0 = \langle x, Bx\rangle = \langle x, \lambda x\rangle = \overline{\lambda}\langle x, x\rangle = \overline{\lambda}\times\|x\|^2.$$</div>
+        <p>This proves that $\overline{\lambda} = 0$ and so $\lambda = 0$.</p>
+        <p>In consequence, $Bx = 0_V$ for all $x \in \beta$.</p>
+        <p>For every $y = a_1x_1 + \cdots + a_nx_n \in F^n$, we have</p>
+        <div class="math-display">$$By = a_1Bx_1 + \cdots + a_nBx_n = a_10_{F^n} + \cdots + a_n0_{F^n} = 0_{F^n}.$$</div>
+        <p>Therefore $B = O_{n\times n}$.</p>
+        <p><em>Note.</em> The orthonormal basis of eigenvectors exists because $L_B$ is self-adjoint on $F^n$ with the standard inner product: $(L_B)^* = L_{B^*} = L_B$ (<a href="ch07.html#c7-12">Corollary on the adjoint of $L_A$</a>). If $F = \mathbb{R}$, apply <a href="ch08.html#c8-15">Theorem 6.17</a>; if $F = \mathbb{C}$, then $L_BL_B^* = L_B^2 = L_B^*L_B$, so $L_B$ is normal and <a href="ch08.html#c8-10">Theorem 6.16</a> applies. Since $\|x\| = 1$, we get $\overline{\lambda} = 0$. Here $0_V$ stands for the zero vector $0_{F^n}$ of $V = F^n$. Finally, $By = 0$ for every $y$ gives in particular $Be_j = 0$, i.e., every column of $B$ is zero, so $B = O_{n\times n}$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.12 ═══════════ -->
+
+<!-- S6.5 p12 Remark (1)(2) + p13 Remark (Continued) (3) — 자기수반 가정 없이 보조정리가 성립하지 않는 예와 반대칭행렬 -->
+<div class="card rem-card" id="c9-9">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">자기수반 가정이 빠지면: 회전과 반대칭행렬 <em>Without Self-Adjointness: Rotations and Anti-Symmetric Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $T : \mathbb{R}^2 \to \mathbb{R}^2$, $(a,b) \mapsto (-b,a)$를 $90^\circ$만큼의 회전이라 하자.</p>
+        <p>그러면 모든 $v \in \mathbb{R}^2$에 대하여 $\langle v, T(v)\rangle = 0$이다.</p>
+        <p>$T$는 영사상이 아니며 자기수반도 아님에 주목하자.</p>
+        <p>실제로 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_{\{e_1,e_2\}} = \begin{pmatrix}0 &amp; -1\\ 1 &amp; 0\end{pmatrix}.$$</div>
+        <p><strong>(2)</strong> 마찬가지로 각 $m \ge 2$에 대하여, 영사상이 아닌 선형연산자</p>
+        <div class="math-display">$$T : \mathbb{R}^{2m} \to \mathbb{R}^{2m}$$</div>
+        <p>로서 자기수반이 아니면서 모든 $v \in \mathbb{R}^{2m}$에 대하여 $\langle v, T(v)\rangle = 0$을 만족하는 것을 찾을 수 있다.</p>
+        <p>예를 들어 $T(a_1, a_2, \cdots, a_{2m-1}, a_{2m}) = (a_2, -a_1, \ldots, a_{2m}, -a_{2m-1})$이라 하자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}&amp;\langle (a_1,a_2,\cdots,a_{2m-1},a_{2m}),\ (a_2,-a_1,\ldots,a_{2m},-a_{2m-1})\rangle\\[2pt]
+                &amp;\quad= (a_1a_2 - a_2a_1) + \cdots + (a_{2m-1}a_{2m} - a_{2m}a_{2m-1}) = 0.\end{aligned}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.13 ═══════════ -->
+        <p><strong>주의 (계속) :</strong></p>
+        <p><strong>(3)</strong> $A \in M_{n\times n}(\mathbb{R})$를 반대칭행렬, 즉 $A^t = -A$인 행렬이라 하자.</p>
+        <p>그러면 임의의 $x \in \mathbb{R}^n$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\langle Ax, x\rangle = x^t(Ax) = (x^tA)x = (A^tx)^tx = -(Ax)^tx.$$</div>
+        <p>또한 $x^t(Ax) = (Ax)^tx$이다.</p>
+        <p>결과적으로 모든 $x \in \mathbb{R}^n$에 대하여 $\langle Ax, x\rangle = 0$이다.</p>
+        <p><em>역주.</em> 이 예들은 <a href="#c9-8">보조정리</a>(그리고 <a href="#c9-13">연산자 형태의 보조정리</a>)에서 &ldquo;자기수반&rdquo; 가정을 뺄 수 없음을 보여 준다. (1) $v = (a,b)$이면 $\langle v, T(v)\rangle = a(-b) + ba = 0$이다. 정규직교기저인 표준기저에 대한 $T$의 행렬이 대칭이 아니므로 $[T^*] = [T]^t \neq [T]$(<a href="ch07.html#c7-11">정리 6.10</a>)이고, 따라서 $T \neq T^*$이다. (2) 같은 구성은 $m = 1$에서도 성립한다(이때 $T(a_1,a_2) = (a_2,-a_1)$은 $-90^\circ$만큼의 회전이다). $T$의 표준행렬은 $\begin{pmatrix}0 &amp; 1\\ -1 &amp; 0\end{pmatrix}$ 블록 $m$개로 이루어진 블록대각행렬이며, 영행렬이 아닌 반대칭행렬이므로 대칭이 아니고, 따라서 $T$는 자기수반이 아니다. 영문 패널의 &ldquo;which is not self-adjoint which satisfies&rdquo;는 &ldquo;which is not self-adjoint and satisfies&rdquo;의 뜻으로 옮겼다. (3) $\mathbb{R}^n$의 표준내적은 $\langle u, w\rangle = w^tu$(<a href="ch07.html#c7-20">표준내적 기호</a>)이므로 $\langle Ax, x\rangle = x^t(Ax)$이다. $1\times 1$ 행렬은 자신의 전치와 같으므로 두 식을 합치면 $x^t(Ax) = -(Ax)^tx = -x^t(Ax)$이고, 따라서 $\langle Ax, x\rangle = 0$이다. (1), (2)의 행렬은 반대칭이므로 (3)의 특수한 경우이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Let $T : \mathbb{R}^2 \to \mathbb{R}^2$, $(a,b) \mapsto (-b,a)$, be the rotation by $90^\circ$.</p>
+        <p>Then $\langle v, T(v)\rangle = 0$ for all $v \in \mathbb{R}^2$.</p>
+        <p>Note that $T$ is nonzero and not self-adjoint.</p>
+        <p>Indeed,</p>
+        <div class="math-display">$$[T]_{\{e_1,e_2\}} = \begin{pmatrix}0 &amp; -1\\ 1 &amp; 0\end{pmatrix}.$$</div>
+        <p><strong>(2)</strong> Similarly, one can find, for each $m \ge 2$, a nonzero linear operator</p>
+        <div class="math-display">$$T : \mathbb{R}^{2m} \to \mathbb{R}^{2m}$$</div>
+        <p>which is not self-adjoint which satisfies $\langle v, T(v)\rangle = 0$ for all $v \in \mathbb{R}^{2m}$.</p>
+        <p>For example, suppose that $T(a_1, a_2, \cdots, a_{2m-1}, a_{2m}) = (a_2, -a_1, \ldots, a_{2m}, -a_{2m-1})$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}&amp;\langle (a_1,a_2,\cdots,a_{2m-1},a_{2m}),\ (a_2,-a_1,\ldots,a_{2m},-a_{2m-1})\rangle\\[2pt]
+        &amp;\quad= (a_1a_2 - a_2a_1) + \cdots + (a_{2m-1}a_{2m} - a_{2m}a_{2m-1}) = 0.\end{aligned}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.13 ═══════════ -->
+        <p><strong>Remark (Continued) :</strong></p>
+        <p><strong>(3)</strong> Let $A \in M_{n\times n}(\mathbb{R})$ be an anti-symmetric matrix. That is, $A^t = -A$.</p>
+        <p>Then, for any $x \in \mathbb{R}^n$, it holds that</p>
+        <div class="math-display">$$\langle Ax, x\rangle = x^t(Ax) = (x^tA)x = (A^tx)^tx = -(Ax)^tx.$$</div>
+        <p>Also, $x^t(Ax) = (Ax)^tx$.</p>
+        <p>In consequence, we have $\langle Ax, x\rangle = 0$ for all $x \in \mathbb{R}^n$.</p>
+        <p><em>Note.</em> These examples show that the hypothesis &ldquo;self-adjoint&rdquo; cannot be dropped from the <a href="#c9-8">Lemma</a> (and from its <a href="#c9-13">operator version</a>). (1) For $v = (a,b)$, $\langle v, T(v)\rangle = a(-b) + ba = 0$. The matrix of $T$ in the orthonormal standard basis is not symmetric, so $[T^*] = [T]^t \neq [T]$ (<a href="ch07.html#c7-11">Theorem 6.10</a>) and $T \neq T^*$. (2) The same construction also works for $m = 1$ (then $T(a_1,a_2) = (a_2,-a_1)$ is the rotation by $-90^\circ$). The standard matrix of $T$ is block diagonal with $m$ blocks $\begin{pmatrix}0 &amp; 1\\ -1 &amp; 0\end{pmatrix}$; it is a nonzero anti-symmetric matrix, hence not symmetric, so $T$ is not self-adjoint. &ldquo;Which is not self-adjoint which satisfies&rdquo; means &ldquo;which is not self-adjoint and satisfies&rdquo;. (3) The standard inner product on $\mathbb{R}^n$ is $\langle u, w\rangle = w^tu$ (<a href="ch07.html#c7-20">Notation</a>), so $\langle Ax, x\rangle = x^t(Ax)$. A $1\times 1$ matrix equals its transpose, so the two displays combine to $x^t(Ax) = -(Ax)^tx = -x^t(Ax)$, whence $\langle Ax, x\rangle = 0$. The matrices in (1) and (2) are anti-symmetric, so they are special cases of (3).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.14 ═══════════ -->
+
+<!-- S6.5 p14 Remark (실대칭행렬에 대한 보조정리) -->
+<div class="card rem-card" id="c9-10">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">대칭행렬에 대한 보조정리 <em>The Lemma for Symmetric Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(\mathbb{R})$를 대칭행렬이라 하자. 그러면 앞의 보조정리는 다음을 말해 준다.</p>
+        <div class="math-display">$$\begin{gathered}\text{모든 } x \in \mathbb{R}^n\text{에 대하여 } \langle x, Ax\rangle = 0\\[2pt] \text{일 필요충분조건은 } A = O_{n\times n}\text{이다.}\end{gathered}$$</div>
+        <p><em>역주.</em> 실대칭행렬은 $A^* = A^t = A$이므로 자기수반이다. 따라서 &ldquo;필요조건&rdquo; 쪽은 $F = \mathbb{R}$일 때의 <a href="#c9-8">보조정리</a>이고, &ldquo;충분조건&rdquo; 쪽은 자명하다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n\times n}(\mathbb{R})$ be a symmetric matrix. Then the previous lemma says that</p>
+        <div class="math-display">$$\langle x, Ax\rangle = 0 \text{ for all } x \in \mathbb{R}^n \text{ if and only if } A = O_{n\times n}.$$</div>
+        <p><em>Note.</em> A real symmetric matrix is self-adjoint ($A^* = A^t = A$), so the &ldquo;only if&rdquo; part is the <a href="#c9-8">Lemma</a> with $F = \mathbb{R}$; the &ldquo;if&rdquo; part is trivial.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p14 Claim (반대칭 ⇔ <x,Ax>=0) + Proof — (i)⇒(ii) "Okay." 보충 -->
+<div class="card thm-card" id="c9-11">
+  <div class="card-head">
+    <span class="thm-num">CLAIM</span>
+    <span class="thm-title">반대칭행렬의 특성화 <em>A Characterization of Anti-Symmetric Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(\mathbb{R})$를 정사각행렬이라 하자. 그러면 다음 두 조건은 서로 동치이다.</p>
+        <p>$(i)$ $A$는 반대칭행렬이다.</p>
+        <p>$(ii)$ 모든 $x \in \mathbb{R}^n$에 대하여 $\langle x, Ax\rangle = 0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(i) \Rightarrow (ii)$ : 바로 확인된다.</p>
+        <p><em>역주.</em> <a href="#c9-9">주의</a> (3)에 의해 $\langle Ax, x\rangle = 0$이고, 실 내적공간에서는 $\langle x, Ax\rangle = \langle Ax, x\rangle$이다.</p>
+        <p>$(ii) \Rightarrow (i)$ : $A = S + T$라 쓰자. 여기서 $S = \dfrac{1}{2}(A+A^t)$, $T = \dfrac{1}{2}(A-A^t)$이다.</p>
+        <p>따라서 $S$는 대칭행렬이고 $T$는 반대칭행렬이다.</p>
+        <p>또한 $0 = \langle x, Ax\rangle = \langle x, (S+T)x\rangle = \langle x, Sx\rangle + \langle x, Tx\rangle = \langle x, Sx\rangle$이다.</p>
+        <p>따라서 모든 $x \in \mathbb{R}^n$에 대하여 $\langle x, Sx\rangle = 0$이다.</p>
+        <p>$S$가 대칭행렬이므로 $S = O_{n\times n}$이 따른다.</p>
+        <p>결과적으로 $A = T$는 반대칭행렬이다.</p>
+        <p><em>역주.</em> $S^t = \frac{1}{2}(A^t + A) = S$이고 $T^t = \frac{1}{2}(A^t - A) = -T$이다. 등식 $\langle x, Tx\rangle = 0$은 반대칭행렬 $T$에 $(i) \Rightarrow (ii)$를 적용한 것이고, $S = O_{n\times n}$은 앞의 <a href="#c9-10">주의</a>(실대칭행렬에 대한 보조정리)이다. 이 증명에서 $T$는 연산자가 아니라 행렬을 나타낸다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n\times n}(\mathbb{R})$ be a square matrix. Then the following two conditions are equivalent:</p>
+        <p>$(i)$ $A$ is anti-symmetric.</p>
+        <p>$(ii)$ $\langle x, Ax\rangle = 0$ for all $x \in \mathbb{R}^n$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(i) \Rightarrow (ii)$ : Okay.</p>
+        <p><em>Note.</em> By <a href="#c9-9">Remark</a> (3), $\langle Ax, x\rangle = 0$, and in a real inner product space $\langle x, Ax\rangle = \langle Ax, x\rangle$.</p>
+        <p>$(ii) \Rightarrow (i)$ : Write $A = S + T$ where $S = \dfrac{1}{2}(A+A^t)$ and $T = \dfrac{1}{2}(A-A^t)$.</p>
+        <p>Thus $S$ is symmetric and $T$ is anti-symmetric.</p>
+        <p>Also $0 = \langle x, Ax\rangle = \langle x, (S+T)x\rangle = \langle x, Sx\rangle + \langle x, Tx\rangle = \langle x, Sx\rangle$.</p>
+        <p>Thus $\langle x, Sx\rangle = 0$ for all $x \in \mathbb{R}^n$.</p>
+        <p>Since $S$ is symmetric, it follows that $S = O_{n\times n}$.</p>
+        <p>In consequence, $A = T$ is anti-symmetric.</p>
+        <p><em>Note.</em> $S^t = \frac{1}{2}(A^t + A) = S$ and $T^t = \frac{1}{2}(A^t - A) = -T$. The equality $\langle x, Tx\rangle = 0$ is $(i) \Rightarrow (ii)$ applied to the anti-symmetric matrix $T$, and $S = O_{n\times n}$ is the preceding <a href="#c9-10">Remark</a> (the Lemma for real symmetric matrices). In this proof $T$ denotes a matrix, not an operator.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.15 ═══════════ -->
+
+<!-- S6.5 p15 Theorem 6.18 재수록 + Proof Plan, p16–p18 연산자형 증명(박스 5개) — (iii)⇒(iv) "Obvious." 보충, p17 "+ ⋯ a_nx_n" (+ 누락), (iv) "is for" -->
+<div class="card thm-card" id="c9-12">
+  <div class="card-head">
+    <span class="thm-num">THM 6.18</span>
+    <span class="thm-title">정리 6.18 (다시 보기)와 증명 <em>Theorem 6.18 (Restated) and Its Proof</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 유한차원 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 다음 명제들은 서로 동치이다.</p>
+        <p>$(i)$ $TT^* = T^*T = I$이다.</p>
+        <p>$(ii)$ 모든 $x, y \in V$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$이다.</p>
+        <p>$(iii)$ $\beta$가 $V$의 정규직교기저이면 $T(\beta)$는 $V$의 정규직교기저이다.</p>
+        <p>$(iv)$ $T(\beta)$가 $V$의 정규직교기저가 되는 $V$의 정규직교기저 $\beta$가 존재한다.</p>
+        <p>$(v)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p><em>역주.</em> <a href="#c9-6">정리 6.18</a>의 진술을 다시 실은 것이다(영문 패널 $(iv)$의 &ldquo;is for&rdquo;도 그대로 반복된다).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>증명 계획 :</strong></p>
+        <div class="math-display">$$\begin{array}{ccccc} (i) &amp; \Rightarrow &amp; (ii) &amp; \Rightarrow &amp; (iii)\\ \Uparrow &amp; &amp; &amp; &amp; \Downarrow\\ (v) &amp; &amp; \Leftarrow &amp; &amp; (iv)\end{array}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.16 ═══════════ -->
+        <div class="formal-box">
+          <p>$(i)$ $TT^* = T^*T = I$ $\quad\Longrightarrow\quad$ $(ii)$ 모든 $x, y \in V$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$.</p>
+        </div>
+        <p>$(\because)$ $x, y \in V$라 하자.</p>
+        <p>그러면 $\langle x, y\rangle = \langle T^*T(x), y\rangle = \langle T(x), T(y)\rangle$이다. $\clubsuit$</p>
+        <p><em>역주.</em> 첫 등식은 $T^*T = I$이다. 둘째 등식은 $z = T(x)$에 대하여 $\langle T^*(z), y\rangle = \overline{\langle y, T^*(z)\rangle} = \overline{\langle T(y), z\rangle} = \langle z, T(y)\rangle$이기 때문이다(즉 $(T^*)^* = T$, <a href="ch07.html#c7-14">정리 6.11</a>).</p>
+        <div class="formal-box">
+          <p>$(ii)$ 모든 $x, y \in V$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$.</p>
+          <p>$\Longrightarrow$ $(iii)$ $\beta$가 $V$의 정규직교기저이면 $T(\beta)$는 $V$의 정규직교기저이다.</p>
+        </div>
+        <p>$(\because)$ $\beta = \{x_1, x_2, \ldots, x_n\}$을 $V$의 정규직교기저라 하자.</p>
+        <p>그러면 $T(\beta) = \{T(x_1), T(x_2), \ldots, T(x_n)\}$이다.</p>
+        <p>이때 $\langle T(x_i), T(x_j)\rangle = \langle x_i, x_j\rangle = \delta_{ij}$이므로 $T(\beta)$는 $V$의 정규직교기저이다.</p>
+        <p><em>역주.</em> $i \neq j$이면 $\langle T(x_i), T(x_j)\rangle = 0 \neq 1$이므로 $T(x_i)$들은 서로 다르고, $T(\beta)$는 $n$개의 벡터로 이루어진 정규직교집합이다. 이 집합은 일차독립이고(<a href="ch06.html#c6-7">정리 6.3의 따름정리 2</a>) $n = \dim V$이므로 $V$의 기저이다.</p>
+        <div class="formal-box">
+          <p>$(iii)$ $\beta$가 $V$의 정규직교기저이면 $T(\beta)$는 $V$의 정규직교기저이다.</p>
+          <p>$\Longrightarrow$ $(iv)$ $T(\beta)$가 $V$의 정규직교기저가 되는 정규직교기저 $\beta$가 존재한다.</p>
+        </div>
+        <p>$(\because)$ 자명하다.</p>
+        <p><em>역주.</em> $V$는 유한차원이므로 정규직교기저를 가진다(그람-슈미트 과정, <a href="ch06.html#c6-14">정리 6.5</a>). 이 기저에 $(iii)$을 적용하면 $(iv)$를 얻는다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.17 ═══════════ -->
+        <div class="formal-box">
+          <p>$(iv)$ $T(\beta)$가 $V$의 정규직교기저가 되는 정규직교기저 $\beta$가 존재한다.</p>
+          <p>$\Longrightarrow$ $(v)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$.</p>
+        </div>
+        <p>$(\because)$ $\beta = \{x_1, x_2, \ldots, x_n\}$이라 하고 $x = a_1x_1 + \cdots + a_nx_n \in V$라 하자.</p>
+        <p>그러면</p>
+        <div class="math-display">$$\begin{aligned}\|x\|^2 &amp;= \langle a_1x_1 + \cdots + a_nx_n,\ a_1x_1 + \cdots + a_nx_n\rangle\\[2pt]
+                &amp;= a_1\overline{a_1} + \cdots + a_n\overline{a_n}\end{aligned}$$</div>
+        <p>이다. $\beta$가 정규직교이기 때문이다.</p>
+        <p>마찬가지로</p>
+        <div class="math-display">$$\|T(x)\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>이다. $T(x) = a_1T(x_1) + \cdots + a_nT(x_n)$이고 $T(\beta)$가 정규직교이기 때문이다.</p>
+        <p>따라서 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p><em>역주.</em> 여기서 $\beta$는 $(iv)$가 주는 기저이다. 영문 패널 첫 표시식의 &ldquo;$a_1x_1 + \cdots a_nx_n$&rdquo;에는 $a_nx_n$ 앞의 &ldquo;$+$&rdquo;가 빠져 있어 바로잡아 옮겼다(영문 패널은 원문 그대로).</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.18 ═══════════ -->
+        <div class="formal-box">
+          <p>$(v)$ 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$ $\quad\Longrightarrow\quad$ $(i)$ $TT^* = T^*T = I$.</p>
+        </div>
+        <p>$(\because)$ 임의의 $x \in V$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}\langle x, x\rangle &amp;= \|x\|^2 = \|T(x)\|^2\\[2pt]
+                &amp;= \langle T(x), T(x)\rangle = \langle x, T^*T(x)\rangle.\end{aligned}$$</div>
+        <p>따라서 모든 $x \in V$에 대하여 $\langle x, (I - T^*T)(x)\rangle = 0$이다.</p>
+        <p>$U = I - T^*T$라 하자.</p>
+        <p>그러면 다음이 성립하므로 $U$는 자기수반이다.</p>
+        <div class="math-display">$$U^* = (I - T^*T)^* = I - (T^*T)^* = I - T^*T = U.$$</div>
+        <p>또한 모든 $x \in V$에 대하여 $\langle x, U(x)\rangle = 0$이다.</p>
+        <p>그러므로 다음 쪽의 보조정리에 의해 $U = I - T^*T = T_0$이다.</p>
+        <p>이로써 원하는 등식 $T^*T = I$가 증명된다.</p>
+        <p>이제 $\beta$를 $V$의 기저라 하자. 그러면 $[T^*T]_\beta = [T^*]_\beta[T]_\beta = I$이다.</p>
+        <p>그러면 $[T]_\beta[T^*]_\beta = I$이고 따라서 $[TT^*]_\beta = I$이다.</p>
+        <p>이로써 $TT^* = I$가 증명된다.</p>
+        <p><em>역주.</em> &ldquo;다음 쪽의 보조정리&rdquo;는 아래의 <a href="#c9-13">보조정리</a>이고, $T_0$은 영사상이다. $(T^*T)^* = T^*T^{**} = T^*T$와 $I^* = I$는 <a href="ch07.html#c7-14">정리 6.11</a>이다. $[T^*]_\beta$는 정사각행렬 $[T]_\beta$의 한쪽 역행렬이므로 양쪽 역행렬이고, 따라서 $[T]_\beta[T^*]_\beta = I$이다. 여기서 $\beta$는 정규직교일 필요가 없는 임의의 (순서)기저이다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be a linear operator on a finite dimensional inner product space $V$.</p>
+        <p>Then the following statements are equivalent.</p>
+        <p>$(i)$ $TT^* = T^*T = I$.</p>
+        <p>$(ii)$ $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in V$.</p>
+        <p>$(iii)$ If $\beta$ is an orthonormal basis for $V$, then $T(\beta)$ is an orthonormal basis for $V$.</p>
+        <p>$(iv)$ There exists an orthonormal basis $\beta$ is for $V$ such that $T(\beta)$ is an</p>
+        <p>orthonormal basis for $V$.</p>
+        <p>$(v)$ $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        <p><em>Note.</em> This restates <a href="#c9-6">Theorem 6.18</a> (including &ldquo;is for&rdquo; in $(iv)$).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>Proof Plan :</strong></p>
+        <div class="math-display">$$\begin{array}{ccccc} (i) &amp; \Rightarrow &amp; (ii) &amp; \Rightarrow &amp; (iii)\\ \Uparrow &amp; &amp; &amp; &amp; \Downarrow\\ (v) &amp; &amp; \Leftarrow &amp; &amp; (iv)\end{array}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.16 ═══════════ -->
+        <div class="formal-box">
+          <p>$(i)$ $TT^* = T^*T = I$. $\quad\Longrightarrow\quad$ $(ii)$ $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in V$.</p>
+        </div>
+        <p>$(\because)$ Let $x, y \in V$.</p>
+        <p>Then $\langle x, y\rangle = \langle T^*T(x), y\rangle = \langle T(x), T(y)\rangle$. $\clubsuit$</p>
+        <p><em>Note.</em> The first equality is $T^*T = I$. The second holds because, for $z = T(x)$, $\langle T^*(z), y\rangle = \overline{\langle y, T^*(z)\rangle} = \overline{\langle T(y), z\rangle} = \langle z, T(y)\rangle$ (that is, $(T^*)^* = T$, <a href="ch07.html#c7-14">Theorem 6.11</a>).</p>
+        <div class="formal-box">
+          <p>$(ii)$ $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in V$. $\Longrightarrow$ $(iii)$ If $\beta$ is an orthonormal basis for $V$,</p>
+          <p>then $T(\beta)$ is an orthonormal basis for $V$.</p>
+        </div>
+        <p>$(\because)$ Let $\beta = \{x_1, x_2, \ldots, x_n\}$ be an orthonormal basis for $V$.</p>
+        <p>So, $T(\beta) = \{T(x_1), T(x_2), \ldots, T(x_n)\}$.</p>
+        <p>Then $\langle T(x_i), T(x_j)\rangle = \langle x_i, x_j\rangle = \delta_{ij}$, and so $T(\beta)$ is an orthonormal basis for $V$.</p>
+        <p><em>Note.</em> For $i \neq j$, $\langle T(x_i), T(x_j)\rangle = 0 \neq 1$, so the $T(x_i)$ are distinct and $T(\beta)$ is an orthonormal set of $n$ vectors. It is linearly independent (<a href="ch06.html#c6-7">Corollary 2 of Theorem 6.3</a>), and $n = \dim V$, so it is a basis for $V$.</p>
+        <div class="formal-box">
+          <p>$(iii)$ If $\beta$ is an orthonormal basis for $V$, then $T(\beta)$ is an orthonormal basis for $V$.</p>
+          <p>$\Longrightarrow$ $(iv)$ There exists an orthonormal basis $\beta$ such that $T(\beta)$ is an orthonormal basis for $V$.</p>
+        </div>
+        <p>$(\because)$ Obvious.</p>
+        <p><em>Note.</em> Since $V$ is finite-dimensional, it has an orthonormal basis (Gram&ndash;Schmidt process, <a href="ch06.html#c6-14">Theorem 6.5</a>). Applying $(iii)$ to it gives $(iv)$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.17 ═══════════ -->
+        <div class="formal-box">
+          <p>$(iv)$ There exists an orthonormal basis $\beta$ such that $T(\beta)$ is an orthonormal basis for $V$.</p>
+          <p>$\Longrightarrow$ $(v)$ $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        </div>
+        <p>$(\because)$ Let $\beta = \{x_1, x_2, \ldots, x_n\}$ and let $x = a_1x_1 + \cdots + a_nx_n \in V$.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}\|x\|^2 &amp;= \langle a_1x_1 + \cdots\, a_nx_n,\ a_1x_1 + \cdots\, a_nx_n\rangle\\[2pt]
+        &amp;= a_1\overline{a_1} + \cdots + a_n\overline{a_n}\end{aligned}$$</div>
+        <p>since $\beta$ is orthonormal.</p>
+        <p>Similarly,</p>
+        <div class="math-display">$$\|T(x)\|^2 = a_1\overline{a_1} + \cdots + a_n\overline{a_n}$$</div>
+        <p>since $T(x) = a_1T(x_1) + \cdots + a_nT(x_n)$ and since $T(\beta)$ is orthonormal.</p>
+        <p>Hence, $\|T(x)\| = \|x\|$ for all $x \in V$.</p>
+        <p><em>Note.</em> Here $\beta$ is the basis given by $(iv)$. In the first display, &ldquo;$a_1x_1 + \cdots a_nx_n$&rdquo; is missing a &ldquo;$+$&rdquo; before $a_nx_n$; it should read $a_1x_1 + \cdots + a_nx_n$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.18 ═══════════ -->
+        <div class="formal-box">
+          <p>$(v)$ $\|T(x)\| = \|x\|$ for all $x \in V$. $\quad\Longrightarrow\quad$ $(i)$ $TT^* = T^*T = I$.</p>
+        </div>
+        <p>$(\because)$ For any $x \in V$, we have</p>
+        <div class="math-display">$$\begin{aligned}\langle x, x\rangle &amp;= \|x\|^2 = \|T(x)\|^2\\[2pt]
+        &amp;= \langle T(x), T(x)\rangle = \langle x, T^*T(x)\rangle.\end{aligned}$$</div>
+        <p>So, $\langle x, (I - T^*T)(x)\rangle = 0$ for all $x \in V$.</p>
+        <p>Let $U = I - T^*T$.</p>
+        <p>Then $U$ is self-adjoint since</p>
+        <div class="math-display">$$U^* = (I - T^*T)^* = I - (T^*T)^* = I - T^*T = U.$$</div>
+        <p>Also $\langle x, U(x)\rangle = 0$ for all $x \in V$.</p>
+        <p>Hence, by the lemma in the next page, we have $U = I - T^*T = T_0$.</p>
+        <p>This proves the desired equality $T^*T = I$.</p>
+        <p>Now, let $\beta$ be a basis for $V$. Thus $[T^*T]_\beta = [T^*]_\beta[T]_\beta = I$.</p>
+        <p>Then $[T]_\beta[T^*]_\beta = I$ and hence $[TT^*]_\beta = I$.</p>
+        <p>This proves that $TT^* = I$.</p>
+        <p><em>Note.</em> &ldquo;The lemma in the next page&rdquo; is the <a href="#c9-13">Lemma</a> below, and $T_0$ is the zero operator. The equalities $(T^*T)^* = T^*T^{**} = T^*T$ and $I^* = I$ are <a href="ch07.html#c7-14">Theorem 6.11</a>. Since $[T^*]_\beta$ is a one-sided inverse of the square matrix $[T]_\beta$, it is a two-sided inverse, so $[T]_\beta[T^*]_\beta = I$. Here $\beta$ may be any (ordered) basis; it need not be orthonormal.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.19 ═══════════ -->
+
+<!-- S6.5 p19 Lemma (연산자형: U 자기수반, <x,U(x)>=0 ⇒ U=T_0) + Proof -->
+<div class="card thm-card" id="c9-13">
+  <div class="card-head">
+    <span class="thm-num">LEM</span>
+    <span class="thm-title">$\langle x, U(x)\rangle = 0$인 자기수반연산자는 영사상이다 <em>A Self-Adjoint Operator with $\langle x, U(x)\rangle = 0$ Is Zero</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 유한차원 내적공간이라 하고,</p>
+        <p>$U : V \to V$를 자기수반연산자라 하자.</p>
+        <p>모든 $x \in V$에 대하여 $\langle x, U(x)\rangle = 0$이면 $U = T_0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$U : V \to V$가 자기수반이므로</p>
+        <p>$U$의 고유벡터로 이루어진 $V$의 정규직교기저 $\beta = \{x_1, x_2, \ldots, x_n\}$이 존재한다.</p>
+        <p>각 $x \in \beta$에 대하여 어떤 $\lambda \in F$가 있어 $U(x) = \lambda x$라 쓸 수 있다.</p>
+        <p>따라서</p>
+        <div class="math-display">$$0 = \langle x, U(x)\rangle = \langle x, \lambda x\rangle = \overline{\lambda}\langle x, x\rangle = \overline{\lambda}\times\|x\|^2.$$</div>
+        <p>이로써 $\overline{\lambda} = 0$이고 따라서 $\lambda = 0$이다.</p>
+        <p>결과적으로 모든 $x \in \beta$에 대하여 $U(x) = 0_V$이다.</p>
+        <p>이제 $\beta = \{x_1, x_2, \ldots, x_n\}$이라 하자.</p>
+        <p>모든 $y = a_1x_1 + \cdots + a_nx_n \in V$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$U(y) = a_1U(x_1) + \cdots + a_nU(x_n) = a_10_V + \cdots + a_n0_V = 0_V.$$</div>
+        <p>그러므로 $U = T_0$이다.</p>
+        <p><em>역주.</em> $T_0$은 영사상이다. 정규직교 고유기저의 존재는 다음과 같다. $F = \mathbb{R}$이면 <a href="ch08.html#c8-15">정리 6.17</a>에서 얻는다. $F = \mathbb{C}$이면 $UU^* = U^2 = U^*U$이므로 $U$는 정규이고, <a href="ch08.html#c8-10">정리 6.16</a>에서 얻는다. $\|x\| = 1$이므로 $\overline{\lambda} = 0$이 따른다. 이 보조정리는 행렬형 <a href="#c9-8">보조정리</a>를 일반 연산자로 옮긴 것이며, <a href="#c9-12">정리 6.18</a>의 $(v) \Rightarrow (i)$에서 쓰인다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite-dimensional inner product space,</p>
+        <p>and let $U : V \to V$ be a self-adjoint operator.</p>
+        <p>If $\langle x, U(x)\rangle = 0$ for all $x \in V$, then $U = T_0$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>Since $U : V \to V$ is self-adjoint,</p>
+        <p>there exists an orthonormal basis $\beta = \{x_1, x_2, \ldots, x_n\}$ for $V$</p>
+        <p>consisting of eigenvectors of $U$.</p>
+        <p>For each $x \in \beta$, we can write $U(x) = \lambda x$ for some $\lambda \in F$.</p>
+        <p>Thus</p>
+        <div class="math-display">$$0 = \langle x, U(x)\rangle = \langle x, \lambda x\rangle = \overline{\lambda}\langle x, x\rangle = \overline{\lambda}\times\|x\|^2.$$</div>
+        <p>This proves that $\overline{\lambda} = 0$ and so $\lambda = 0$.</p>
+        <p>In consequence, $U(x) = 0_V$ for all $x \in \beta$.</p>
+        <p>Now, let $\beta = \{x_1, x_2, \ldots, x_n\}$.</p>
+        <p>For every $y = a_1x_1 + \cdots + a_nx_n \in V$, we have</p>
+        <div class="math-display">$$U(y) = a_1U(x_1) + \cdots + a_nU(x_n) = a_10_V + \cdots + a_n0_V = 0_V.$$</div>
+        <p>Therefore $U = T_0$.</p>
+        <p><em>Note.</em> $T_0$ is the zero operator. The orthonormal basis of eigenvectors comes from <a href="ch08.html#c8-15">Theorem 6.17</a> if $F = \mathbb{R}$; if $F = \mathbb{C}$, then $UU^* = U^2 = U^*U$, so $U$ is normal and <a href="ch08.html#c8-10">Theorem 6.16</a> applies. Since $\|x\| = 1$, we get $\overline{\lambda} = 0$. This lemma is the operator version of the matrix <a href="#c9-8">Lemma</a> and is used in $(v) \Rightarrow (i)$ of <a href="#c9-12">Theorem 6.18</a>.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.20 ═══════════ -->
+
+<!-- S6.5 p20 Corollary 1 (실: 정규직교 고유기저 + |λ|=1 ⇔ 자기수반·직교) + Proof -->
+<div class="card thm-card" id="c9-14">
+  <div class="card-head">
+    <span class="thm-num">COR 1</span>
+    <span class="thm-title">자기수반 직교연산자와 절댓값 1인 고유값 <em>Self-Adjoint Orthogonal Operators and Eigenvalues of Absolute Value 1</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 $\mathbb{R}$ 위의 유한차원 내적공간이라 하고,</p>
+        <p>$T : V \to V$를 선형연산자라 하자.</p>
+        <p>그러면 다음 명제들은 서로 동치이다.</p>
+        <p>$(i)$ $V$는 $T$의 고유벡터로 이루어진 정규직교기저를 가지며,</p>
+        <p>그 고유벡터들에 대응하는 고유값의 절댓값은 $1$이다.</p>
+        <p>$(ii)$ $T$는 자기수반이면서 직교연산자이다.</p>
+        <p>(즉 $T = T^*$이고 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(i) \Rightarrow (ii)$ : $\beta = \{v_1, \ldots, v_n\}$을 다음을 만족하는 $V$의 정규직교기저라 하자.</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \text{ 이고 } |\lambda_i| = 1 \quad (\text{모든 } i\text{에 대하여}).$$</div>
+        <p><a href="ch08.html#c8-15">정리 6.17</a>에 의해 $T$는 자기수반이다.</p>
+        <p>따라서 모든 $i$에 대하여 $(TT^*)(v_i) = T(\lambda_iv_i) = \lambda_i^2v_i = v_i$이다.</p>
+        <p>그러면 $TT^* = I$이고, 따라서 <a href="#c9-6">정리 6.18</a>에 의해 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p>$(ii) \Rightarrow (i)$ : $T$가 자기수반이므로 <a href="ch08.html#c8-15">정리 6.17</a>에 의해</p>
+        <p>$V$는 모든 $i$에 대하여 $T(v_i) = \lambda_iv_i$인 정규직교기저 $\beta = \{v_1, \ldots, v_n\}$을 가진다.</p>
+        <p>$T$가 직교연산자이므로 $\|T(v_i)\| = |\lambda_i| \times \|v_i\|$는 $\|v_i\|$와 같다. 따라서 $|\lambda_i| = 1$이다.</p>
+        <p><em>역주.</em> $(i) \Rightarrow (ii)$에서 $T^* = T$이므로 $T^*(v_i) = T(v_i) = \lambda_iv_i$이다. $V$가 실 내적공간이므로 $\lambda_i$는 실수이고 $|\lambda_i| = 1$이므로 $\lambda_i = \pm 1$, 즉 $\lambda_i^2 = 1$이다. $TT^*$와 $I$는 기저 $\beta$ 위에서 일치하므로 같다. 또 $T^* = T$이므로 $T^*T = TT^* = I$이고, 이는 정리 6.18의 $(i)$이므로 $(v)$가 따른다. $(ii) \Rightarrow (i)$에서는 $\|v_i\| = 1 \neq 0$을 쓴다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite-dimensional inner product space over $\mathbb{R}$,</p>
+        <p>and let $T : V \to V$ be a linear operator.</p>
+        <p>Then the following statements are equivalent.</p>
+        <p>$(i)$ $V$ has an orthonormal basis of eigenvectors of $T$</p>
+        <p>with corresponding eigenvalues of absolute value $1$;</p>
+        <p>$(ii)$ $T$ is both self-adjoint and orthogonal.</p>
+        <p>(i.e., $T = T^*$ and $\|T(x)\| = \|x\|$ for all $x \in V$.)</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(i) \Rightarrow (ii)$ : Let $\beta = \{v_1, \ldots, v_n\}$ be an orthonormal basis for $V$ such that</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \text{ and } |\lambda_i| = 1 \text{ for all } i.$$</div>
+        <p>By <a href="ch08.html#c8-15">Theorem 6.17</a>, $T$ is self-adjoint.</p>
+        <p>Thus $(TT^*)(v_i) = T(\lambda_iv_i) = \lambda_i^2v_i = v_i$ for all $i$.</p>
+        <p>Then $TT^* = I$, and hence $\|T(x)\| = \|x\|$ for all $x \in V$ by <a href="#c9-6">Theorem 6.18</a>.</p>
+        <p>$(ii) \Rightarrow (i)$ : Since $T$ is self-adjoint, by <a href="ch08.html#c8-15">Theorem 6.17</a>,</p>
+        <p>$V$ has an orthonormal basis $\beta = \{v_1, \ldots, v_n\}$ such that $T(v_i) = \lambda_iv_i$ for all $i$.</p>
+        <p>Since $T$ is orthogonal, $\|T(v_i)\| = |\lambda_i| \times \|v_i\|$ is equal to $\|v_i\|$. Thus $|\lambda_i| = 1$.</p>
+        <p><em>Note.</em> In $(i) \Rightarrow (ii)$, $T^*(v_i) = T(v_i) = \lambda_iv_i$ since $T^* = T$. As $V$ is real, $\lambda_i$ is real with $|\lambda_i| = 1$, so $\lambda_i = \pm 1$ and $\lambda_i^2 = 1$. The operators $TT^*$ and $I$ agree on the basis $\beta$, hence are equal; and $T^*T = TT^* = I$ because $T^* = T$. This is $(i)$ of Theorem 6.18, so $(v)$ follows. In $(ii) \Rightarrow (i)$, we use $\|v_i\| = 1 \neq 0$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.21 ═══════════ -->
+
+<!-- S6.5 p21 Example (ℝ⁴, 고유값 1,1,−1,−1) — "for all x ∈ V" (V=ℝ⁴), QQ*=I 근거 보충 -->
+<div class="card exam-card" id="c9-15">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">$\mathbb{R}^4$ 위의 자기수반 직교연산자 <em>A Self-Adjoint Orthogonal Operator on $\mathbb{R}^4$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\gamma = \{v_1, v_2, v_3, v_4\}$를 $\mathbb{R}^4$의 정규직교기저라 하고,</p>
+        <p>$T : \mathbb{R}^4 \to \mathbb{R}^4$를 다음을 만족하는 선형연산자라 하자.</p>
+        <div class="math-display">$$T(v_1) = v_1,\ T(v_2) = v_2,\ T(v_3) = -v_3,\ T(v_4) = -v_4.$$</div>
+        <p>그러면 $T$는 자기수반이면서 직교연산자이다. (즉 $T = T^*$이고 모든 $x \in \mathbb{R}^4$에 대하여 $\|T(x)\| = \|x\|$이다.)</p>
+        <p>또한</p>
+        <div class="math-display">$$[T]_\gamma = \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}$$</div>
+        <p>이다.</p>
+        <p><strong>(1)</strong> $\beta = \{e_1, e_2, e_3, e_4\}$를 $\mathbb{R}^4$의 표준기저라 하자.</p>
+        <p>그러면 $[T]_\beta = Q[T]_\gamma Q^{-1}$이다. 여기서 $Q = [Id_V]_\gamma^\beta = \left[ v_1 \ v_2 \ v_3 \ v_4 \right]$이다.</p>
+        <p>즉 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned}{}[T]_\beta &amp;= \left[ v_1 \ v_2 \ v_3 \ v_4 \right][T]_\gamma\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^{-1}\\[2pt]
+                &amp;= \left[ v_1 \ v_2 \ v_3 \ v_4 \right]\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^{-1}.\end{aligned}$$</div>
+        <p><strong>(2)</strong> $\gamma = \{v_1, v_2, v_3, v_4\}$가 정규직교이므로 $QQ^* = I_4$가 성립한다.</p>
+        <p>따라서 $Q^{-1} = Q^t$이고, 그러므로 다음이 성립한다.</p>
+        <div class="math-display">$$[T]_\beta = \left[ v_1 \ v_2 \ v_3 \ v_4 \right]\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^t.$$</div>
+        <p><em>역주.</em> $\gamma$가 고유값 $\pm 1$에 대응하는 고유벡터로 이루어진 정규직교기저이므로 <a href="#c9-14">따름정리 1</a>에 의해 $T$는 자기수반이면서 직교연산자이다. 영문 패널의 &ldquo;for all $x \in V$&rdquo;에서 $V$는 $\mathbb{R}^4$를 뜻하므로 그렇게 옮겼다. $Q = [Id_V]_\gamma^\beta$는 $\gamma$-좌표를 $\beta$-좌표로 바꾸는 행렬이며 $j$번째 열은 $[v_j]_\beta = v_j$이다. $QQ^* = I_4$의 근거는 다음과 같다. 열들이 정규직교이므로 $(Q^*Q)_{ij} = v_i^tv_j = \langle v_j, v_i\rangle = \delta_{ij}$, 즉 $Q^*Q = I_4$이고, $Q$가 정사각행렬이므로 $QQ^* = I_4$도 성립한다. 성분이 실수이므로 $Q^* = Q^t$이다. 예를 들어 $v_1 = \tfrac{1}{2}(1,1,1,1)$, $v_2 = \tfrac{1}{2}(1,-1,1,-1)$, $v_3 = \tfrac{1}{2}(1,1,-1,-1)$, $v_4 = \tfrac{1}{2}(1,-1,-1,1)$이면 $[T]_\beta = \begin{pmatrix}0 &amp; 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\end{pmatrix}$이고, 이 행렬은 대칭이면서 $[T]_\beta[T]_\beta^t = I_4$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\gamma = \{v_1, v_2, v_3, v_4\}$ be an orthonormal basis for $\mathbb{R}^4$, and</p>
+        <p>let $T : \mathbb{R}^4 \to \mathbb{R}^4$ be the linear operator such that</p>
+        <div class="math-display">$$T(v_1) = v_1,\ T(v_2) = v_2,\ T(v_3) = -v_3 \text{ and } T(v_4) = -v_4.$$</div>
+        <p>Then $T$ is self-adjoint and orthogonal. (i.e., $T = T^*$ and $\|T(x)\| = \|x\|$ for all $x \in V$.)</p>
+        <p>Also,</p>
+        <div class="math-display">$$[T]_\gamma = \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}.$$</div>
+        <p><strong>(1)</strong> Let $\beta = \{e_1, e_2, e_3, e_4\}$ be the standard basis of $\mathbb{R}^4$.</p>
+        <p>Thus $[T]_\beta = Q[T]_\gamma Q^{-1}$ where $Q = [Id_V]_\gamma^\beta = \left[ v_1 \ v_2 \ v_3 \ v_4 \right]$.</p>
+        <p>That is,</p>
+        <div class="math-display">$$\begin{aligned}{}[T]_\beta &amp;= \left[ v_1 \ v_2 \ v_3 \ v_4 \right][T]_\gamma\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^{-1}\\[2pt]
+        &amp;= \left[ v_1 \ v_2 \ v_3 \ v_4 \right]\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^{-1}.\end{aligned}$$</div>
+        <p><strong>(2)</strong> Since $\gamma = \{v_1, v_2, v_3, v_4\}$ is orthonormal, it holds that $QQ^* = I_4$.</p>
+        <p>Thus $Q^{-1} = Q^t$ and hence</p>
+        <div class="math-display">$$[T]_\beta = \left[ v_1 \ v_2 \ v_3 \ v_4 \right]\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -1\end{pmatrix}\left[ v_1 \ v_2 \ v_3 \ v_4 \right]^t.$$</div>
+        <p><em>Note.</em> Since $\gamma$ is an orthonormal basis of eigenvectors with eigenvalues $\pm 1$, $T$ is self-adjoint and orthogonal by <a href="#c9-14">Corollary 1</a>. In &ldquo;for all $x \in V$&rdquo;, $V$ means $\mathbb{R}^4$. $Q = [Id_V]_\gamma^\beta$ changes $\gamma$-coordinates into $\beta$-coordinates; its $j$th column is $[v_j]_\beta = v_j$. Why $QQ^* = I_4$: the columns are orthonormal, so $(Q^*Q)_{ij} = v_i^tv_j = \langle v_j, v_i\rangle = \delta_{ij}$, i.e., $Q^*Q = I_4$; since $Q$ is square, also $QQ^* = I_4$. As the entries are real, $Q^* = Q^t$. For instance, with $v_1 = \tfrac{1}{2}(1,1,1,1)$, $v_2 = \tfrac{1}{2}(1,-1,1,-1)$, $v_3 = \tfrac{1}{2}(1,1,-1,-1)$, $v_4 = \tfrac{1}{2}(1,-1,-1,1)$, one gets $[T]_\beta = \begin{pmatrix}0 &amp; 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\\ 1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\end{pmatrix}$, which is symmetric and satisfies $[T]_\beta[T]_\beta^t = I_4$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.22 ═══════════ -->
+
+<!-- S6.5 p22 Example (ℝⁿ, 고유값 1 (m개), −1 (n−m개)) — A = [T]_γ 구하기 -->
+<div class="card exam-card" id="c9-16">
+  <div class="card-head">
+    <span class="exam-num">EXAM</span>
+    <span class="exam-title">고유값이 $\pm 1$인 연산자의 표준행렬 <em>The Standard Matrix of an Operator with Eigenvalues $\pm 1$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$\beta = \{v_1, v_2, \ldots, v_n\}$을 $\mathbb{R}^n$의 정규직교기저라 하고,</p>
+        <p>$T : \mathbb{R}^n \to \mathbb{R}^n$을 다음을 만족하는 선형연산자라 하자.</p>
+        <div class="math-display">$$T(v_k) = \begin{cases} v_k &amp; (1 \le k \le m),\\ -v_k &amp; (m+1 \le k \le n).\end{cases}$$</div>
+        <p>따라서 $\mathbb{R}^n$은 $T$의 고유벡터로 이루어진 정규직교기저를 가지며,</p>
+        <p>그 고유벡터들에 대응하는 고유값의 절댓값은 $1$이다.</p>
+        <p>$\gamma = \{e_1, \ldots, e_n\}$일 때 행렬 $A := [T]_\gamma$를 구하라.</p>
+        <p>다음에 주목하자.</p>
+        <div class="math-display">$$\begin{aligned}A\left[ v_1 \ v_2 \ \cdots \ v_n \right] &amp;= \left[ v_1 \ \cdots \ v_m \ \ -v_{m+1} \ \cdots \ -v_n \right]\\[2pt]
+                &amp;= \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\end{aligned}$$</div>
+        <p>따라서</p>
+        <div class="math-display">$$A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\left[ v_1 \ v_2 \ \cdots \ v_n \right]^{-1}.$$</div>
+        <p>또한 $\beta$가 정규직교이므로 $\left[ v_1 \ v_2 \ \cdots \ v_n \right]\left[ v_1 \ v_2 \ \cdots \ v_n \right]^t = I_n$임에 주목하자.</p>
+        <p>그러므로</p>
+        <div class="math-display">$$A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\left[ v_1 \ v_2 \ \cdots \ v_n \right]^t.$$</div>
+        <p><em>역주.</em> $Q = \left[ v_1 \ v_2 \ \cdots \ v_n \right]$, $D = \begin{pmatrix} I_m &amp; O\\ O &amp; -I_{n-m}\end{pmatrix}$라 하면 답은 $A = QDQ^t$이다. $A = [T]_\gamma$는 표준행렬이므로($T = L_A$) $Av_k = T(v_k)$이고, 이것이 첫 등식을 열마다 준다(<a href="ch02.html#c2-10">$A = QDQ^{-1}$ 분해</a> 참조). $Q$의 열들은 기저를 이루므로 $Q$는 가역이다. 열들이 정규직교이므로 $Q^tQ = I_n$이고, $Q$가 정사각행렬이므로 $QQ^t = I_n$도 성립한다. 여기서 $0 \le m \le n$이며 $m = 0$ 또는 $m = n$이면 크기가 $0$인 블록은 없는 것으로 본다. <a href="#c9-14">따름정리 1</a>에 의해 $T$는 자기수반이면서 직교연산자이고, 실제로 $A^t = (QDQ^t)^t = QDQ^t = A$이며 $AA^t = QD^2Q^t = I_n$이다. 앞의 <a href="#c9-15">예</a>는 $n = 4$, $m = 2$인 경우이다(단 거기서는 $\beta$와 $\gamma$의 역할이 바뀌어 있다).</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $\beta = \{v_1, v_2, \ldots, v_n\}$ be an orthonormal basis for $\mathbb{R}^n$, and</p>
+        <p>let $T : \mathbb{R}^n \to \mathbb{R}^n$ be the linear operator such that</p>
+        <div class="math-display">$$T(v_k) = \begin{cases} v_k &amp; (1 \le k \le m),\\ -v_k &amp; (m+1 \le k \le n).\end{cases}$$</div>
+        <p>Thus $\mathbb{R}^n$ has an orthonormal basis of eigenvectors of $T$</p>
+        <p>with corresponding eigenvalues of absolute value $1$.</p>
+        <p>Find the matrix $A := [T]_\gamma$ where $\gamma = \{e_1, \ldots, e_n\}$.</p>
+        <p>Note that</p>
+        <div class="math-display">$$\begin{aligned}A\left[ v_1 \ v_2 \ \cdots \ v_n \right] &amp;= \left[ v_1 \ \cdots \ v_m \ \ -v_{m+1} \ \cdots \ -v_n \right]\\[2pt]
+        &amp;= \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\end{aligned}$$</div>
+        <p>and hence</p>
+        <div class="math-display">$$A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\left[ v_1 \ v_2 \ \cdots \ v_n \right]^{-1}.$$</div>
+        <p>Also, note that $\left[ v_1 \ v_2 \ \cdots \ v_n \right]\left[ v_1 \ v_2 \ \cdots \ v_n \right]^t = I_n$ since $\beta$ is orthonormal.</p>
+        <p>Therefore</p>
+        <div class="math-display">$$A = \left[ v_1 \ v_2 \ \cdots \ v_n \right]\begin{pmatrix} I_m &amp; O_{m\times(n-m)}\\ O_{(n-m)\times m} &amp; -I_{n-m}\end{pmatrix}\left[ v_1 \ v_2 \ \cdots \ v_n \right]^t.$$</div>
+        <p><em>Note.</em> With $Q = \left[ v_1 \ v_2 \ \cdots \ v_n \right]$ and $D = \begin{pmatrix} I_m &amp; O\\ O &amp; -I_{n-m}\end{pmatrix}$, the answer is $A = QDQ^t$. Since $A = [T]_\gamma$ is the standard matrix ($T = L_A$), $Av_k = T(v_k)$, which gives the first equality column by column (compare <a href="ch02.html#c2-10">the factorization $A = QDQ^{-1}$</a>). $Q$ is invertible because its columns form a basis. Its columns are orthonormal, so $Q^tQ = I_n$, and since $Q$ is square, also $QQ^t = I_n$. Here $0 \le m \le n$; if $m = 0$ or $m = n$, the blocks of size $0$ are absent. By <a href="#c9-14">Corollary 1</a>, $T$ is self-adjoint and orthogonal; indeed $A^t = (QDQ^t)^t = QDQ^t = A$ and $AA^t = QD^2Q^t = I_n$. The previous <a href="#c9-15">Example</a> is the case $n = 4$, $m = 2$ (with the roles of $\beta$ and $\gamma$ interchanged).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.23 ═══════════ -->
+
+<!-- S6.5 p23 Corollary 2 (복소: 정규직교 고유기저 + |λ|=1 ⇔ 유니타리) + Proof — (ii)⇒(i)의 "Theorem 6.17" → 정리 6.16 -->
+<div class="card thm-card" id="c9-17">
+  <div class="card-head">
+    <span class="thm-num">COR 2</span>
+    <span class="thm-title">유니타리 연산자와 절댓값 1인 고유값 <em>Unitary Operators and Eigenvalues of Absolute Value 1</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$V$를 $\mathbb{C}$ 위의 유한차원 내적공간이라 하고,</p>
+        <p>$T : V \to V$를 선형연산자라 하자.</p>
+        <p>그러면 다음 명제들은 서로 동치이다.</p>
+        <p>$(i)$ $V$는 $T$의 고유벡터로 이루어진 정규직교기저를 가지며,</p>
+        <p>그 고유벡터들에 대응하는 고유값의 절댓값은 $1$이다.</p>
+        <p>$(ii)$ $T$는 유니타리 연산자이다(즉 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(i) \Rightarrow (ii)$ : $\beta = \{v_1, \ldots, v_n\}$을 다음을 만족하는 $V$의 정규직교기저라 하자.</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \text{ 이고 } |\lambda_i| = 1 \quad (\text{모든 } i\text{에 대하여}).$$</div>
+        <p><a href="ch08.html#c8-10">정리 6.16</a>에 의해 $T$는 정규이다.</p>
+        <p>따라서 모든 $i$에 대하여 $(TT^*)(v_i) = T(\overline{\lambda_i}v_i) = \lambda_i\overline{\lambda_i}v_i = v_i$이다.</p>
+        <p>그러면 $TT^* = I$이고, 따라서 <a href="#c9-6">정리 6.18</a>에 의해 모든 $x \in V$에 대하여 $\|T(x)\| = \|x\|$이다.</p>
+        <p>$(ii) \Rightarrow (i)$ : $T$가 유니타리이므로 <a href="ch08.html#c8-10">정리 6.16</a>에 의해</p>
+        <p>$V$는 모든 $i$에 대하여 $T(v_i) = \lambda_iv_i$인 정규직교기저 $\beta = \{v_1, \ldots, v_n\}$을 가진다.</p>
+        <p>$T$가 유니타리이므로 $\|T(v_i)\| = |\lambda_i| \times \|v_i\|$는 $\|v_i\|$와 같다. 따라서 $|\lambda_i| = 1$이다.</p>
+        <p><em>역주.</em> 영문 패널 $(ii) \Rightarrow (i)$의 &ldquo;Theorem 6.17&rdquo;은 &ldquo;Theorem 6.16&rdquo;의 오류이므로 바로잡아 옮겼다(영문 패널은 원문 그대로). $V$는 복소 내적공간이고 $T$는 자기수반일 필요가 없다. $T$가 유니타리이면 정리 6.18 $(v) \Rightarrow (i)$에 의해 $TT^* = T^*T = I$이므로 $T$는 정규이고, 따라서 정리 6.16이 고유벡터로 이루어진 정규직교기저를 준다. $(i) \Rightarrow (ii)$에서 $T^*(v_i) = \overline{\lambda_i}v_i$는 <a href="ch08.html#c8-9">정리 6.15</a> $(c)$이고($T$는 정규), $\lambda_i\overline{\lambda_i} = |\lambda_i|^2 = 1$이다. $TT^*$와 $I$는 기저 $\beta$ 위에서 일치하므로 같고, $T$가 정규이므로 $T^*T = TT^* = I$이다. 이는 정리 6.18의 $(i)$이므로 $(v)$가 따른다. $(ii) \Rightarrow (i)$의 마지막 단계에서는 $\|v_i\| = 1 \neq 0$을 쓴다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $V$ be a finite-dimensional inner product space over $\mathbb{C}$,</p>
+        <p>and let $T : V \to V$ be a linear operator.</p>
+        <p>Then the following statements are equivalent.</p>
+        <p>$(i)$ $V$ has an orthonormal basis of eigenvectors of $T$</p>
+        <p>with corresponding eigenvalues of absolute value $1$;</p>
+        <p>$(ii)$ $T$ is unitary (i.e., $\|T(x)\| = \|x\|$ for all $x \in V$).</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(i) \Rightarrow (ii)$ : Let $\beta = \{v_1, \ldots, v_n\}$ be an orthonormal basis for $V$ such that</p>
+        <div class="math-display">$$T(v_i) = \lambda_iv_i \text{ and } |\lambda_i| = 1 \text{ for all } i.$$</div>
+        <p>By <a href="ch08.html#c8-10">Theorem 6.16</a>, $T$ is normal.</p>
+        <p>Thus $(TT^*)(v_i) = T(\overline{\lambda_i}v_i) = \lambda_i\overline{\lambda_i}v_i = v_i$ for all $i$.</p>
+        <p>Then $TT^* = I$, and hence $\|T(x)\| = \|x\|$ for all $x \in V$ by <a href="#c9-6">Theorem 6.18</a>.</p>
+        <p>$(ii) \Rightarrow (i)$ : Since $T$ is unitary, by Theorem 6.17,</p>
+        <p>$V$ has an orthonormal basis $\beta = \{v_1, \ldots, v_n\}$ such that $T(v_i) = \lambda_iv_i$ for all $i$.</p>
+        <p>Since $T$ is unitary, $\|T(v_i)\| = |\lambda_i| \times \|v_i\|$ is equal to $\|v_i\|$. Thus $|\lambda_i| = 1$.</p>
+        <p><em>Note.</em> In $(ii) \Rightarrow (i)$, &ldquo;Theorem 6.17&rdquo; should read &ldquo;<a href="ch08.html#c8-10">Theorem 6.16</a>&rdquo;: $V$ is complex and $T$ need not be self-adjoint. If $T$ is unitary, then $TT^* = T^*T = I$ by Theorem 6.18 $(v) \Rightarrow (i)$, so $T$ is normal, and Theorem 6.16 gives the orthonormal basis of eigenvectors. In $(i) \Rightarrow (ii)$, the step $T^*(v_i) = \overline{\lambda_i}v_i$ is <a href="ch08.html#c8-9">Theorem 6.15</a> $(c)$ ($T$ is normal), and $\lambda_i\overline{\lambda_i} = |\lambda_i|^2 = 1$. The operators $TT^*$ and $I$ agree on the basis $\beta$, hence are equal, and $T^*T = TT^* = I$ because $T$ is normal; this is $(i)$ of Theorem 6.18, so $(v)$ follows. The last step of $(ii) \Rightarrow (i)$ uses $\|v_i\| = 1 \neq 0$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.24 ═══════════ -->
+
+<!-- S6.5 p24 Example 2 (rotation by θ) (1)–(3) — "For details, see Theorem 6.15"는 보조정리(b)/정리 6.17이어야 함 -->
+<div class="card exam-card" id="c9-18">
+  <div class="card-head">
+    <span class="exam-num">EXAM 2</span>
+    <span class="exam-title">평면의 회전과 그 수반연산자 <em>A Rotation of the Plane and Its Adjoint</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 $\theta$만큼의 회전이라 하자. 단 $0 \lt \theta \lt \pi$이다.</p>
+        <p><strong>(1)</strong> $T$가 길이를 보존한다는 것은 기하학적으로 분명하다.</p>
+        <p>그러나 이러한 변환이 내적을 보존한다는 사실은 그리 자명하지 않다.</p>
+        <p>이 사실은 <a href="#c9-6">정리 6.18</a>의 $(ii)$로부터 얻는다.</p>
+        <p><strong>(2)</strong> 표준순서기저에 대한 $T$의 행렬표현은 다음과 같다.</p>
+        <div class="math-display">$$\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}.$$</div>
+        <p>따라서 $T$는 자기수반이 아니다.</p>
+        <p>이 사실은 $T$가 고유벡터를 갖지 않는다는 기하학적 관찰로부터도 따른다.</p>
+        <p>자세한 내용은 <a href="ch08.html#c8-15">정리 6.17</a>을 보라.</p>
+        <p><strong>(3)</strong> 다음이 성립하므로 $T^*$는 $-\theta$만큼의 회전이다.</p>
+        <div class="math-display">$$\begin{aligned}\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}^* &amp;= \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}\\[2pt]
+                &amp;= \begin{pmatrix}\cos(-\theta) &amp; -\sin(-\theta)\\ \sin(-\theta) &amp; \cos(-\theta)\end{pmatrix}.\end{aligned}$$</div>
+        <p><em>역주.</em> (1) 길이 보존은 계산으로도 확인된다. $x = (a,b)$이면 $T(x) = (a\cos\theta - b\sin\theta,\ a\sin\theta + b\cos\theta)$이므로 $\|T(x)\|^2 = a^2 + b^2 = \|x\|^2$이다. 따라서 <a href="#c9-6">정리 6.18</a> $(v) \Rightarrow (ii)$에 의해 모든 $x, y \in \mathbb{R}^2$에 대하여 $\langle T(x), T(y)\rangle = \langle x, y\rangle$이다. (2) 표준순서기저 $\beta$는 정규직교이므로 <a href="ch07.html#c7-11">정리 6.10</a>에 의해 $[T^*]_\beta = [T]_\beta^* = [T]_\beta^t$이고, $0 \lt \theta \lt \pi$이면 $\sin\theta \neq 0$이므로 $[T]_\beta^t \neq [T]_\beta$, 즉 $T^* \neq T$이다. 고유벡터가 없다는 것도 계산으로 확인된다. 특성다항식 $t^2 - 2t\cos\theta + 1$의 판별식이 $4\cos^2\theta - 4 = -4\sin^2\theta \lt 0$이므로 실수 고유값이 없다. 영문 패널은 이 부분의 근거로 정리 6.15를 들지만, <a href="ch08.html#c8-9">정리 6.15</a>는 정규연산자의 성질로서 고유벡터의 존재를 주지 않는다. 필요한 사실은 &ldquo;영이 아닌 유한차원 실 내적공간 위의 자기수반연산자는 고유벡터를 가진다&rdquo;는 것이며, 이는 <a href="ch08.html#c8-14">보조정리</a> $(b)$와 <a href="ch08.html#c8-15">정리 6.17</a>에서 나온다. 한국어 본문은 정리 6.17로 바로잡아 옮겼다(영문 패널은 원문 그대로). (3) 행렬이 실행렬이므로 켤레전치는 전치이고, $[T^*]_\beta = [T]_\beta^*$이므로 $T^*$의 행렬표현은 $-\theta$만큼의 회전의 행렬표현과 같다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be a rotation by $\theta$, where $0 \lt \theta \lt \pi$.</p>
+        <p><strong>(1)</strong> It is clear geometrically that $T$ preserves length.</p>
+        <p>But the fact that such a transformation preserves the inner product is not so obvious.</p>
+        <p>We obtain this fact from $(ii)$ of <a href="#c9-6">Theorem 6.18</a>.</p>
+        <p><strong>(2)</strong> The matrix representation of $T$ with respect to the standard ordered basis is</p>
+        <div class="math-display">$$\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}.$$</div>
+        <p>Thus $T$ is not self-adjoint.</p>
+        <p>This fact also follows from the geometric observation that $T$ has no eigenvectors.</p>
+        <p>For details, see Theorem 6.15.</p>
+        <p><strong>(3)</strong> $T^*$ is the rotation by $-\theta$ since</p>
+        <div class="math-display">$$\begin{aligned}\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}^* &amp;= \begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}\\[2pt]
+        &amp;= \begin{pmatrix}\cos(-\theta) &amp; -\sin(-\theta)\\ \sin(-\theta) &amp; \cos(-\theta)\end{pmatrix}.\end{aligned}$$</div>
+        <p><em>Note.</em> (1) Length preservation can also be checked directly: if $x = (a,b)$, then $T(x) = (a\cos\theta - b\sin\theta,\ a\sin\theta + b\cos\theta)$, so $\|T(x)\|^2 = a^2 + b^2 = \|x\|^2$. Hence $\langle T(x), T(y)\rangle = \langle x, y\rangle$ for all $x, y \in \mathbb{R}^2$ by <a href="#c9-6">Theorem 6.18</a> $(v) \Rightarrow (ii)$. (2) The standard ordered basis $\beta$ is orthonormal, so $[T^*]_\beta = [T]_\beta^* = [T]_\beta^t$ by <a href="ch07.html#c7-11">Theorem 6.10</a>; since $\sin\theta \neq 0$ for $0 \lt \theta \lt \pi$, $[T]_\beta^t \neq [T]_\beta$, i.e. $T^* \neq T$. That $T$ has no eigenvectors can also be computed: the characteristic polynomial $t^2 - 2t\cos\theta + 1$ has discriminant $4\cos^2\theta - 4 = -4\sin^2\theta \lt 0$, so there is no real eigenvalue. The reference &ldquo;Theorem 6.15&rdquo; does not fit: <a href="ch08.html#c8-9">Theorem 6.15</a> lists properties of normal operators and does not produce eigenvectors. What is needed is that a self-adjoint operator on a nonzero finite-dimensional real inner product space has an eigenvector, which comes from the <a href="ch08.html#c8-14">Lemma</a> $(b)$ and <a href="ch08.html#c8-15">Theorem 6.17</a>. (3) The matrix is real, so its conjugate transpose is its transpose; since $[T^*]_\beta = [T]_\beta^*$, the matrix of $T^*$ is that of the rotation by $-\theta$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.25 ═══════════ -->
+
+<!-- S6.5 p25 Definition (reflection about L) -->
+<div class="card def-card" id="c9-19">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">직선에 대한 반사 <em>Reflection about a Line</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$L$을 $\mathbb{R}^2$의 1차원 부분공간이라 하자.</p>
+        <p>$L$은 원점을 지나는 평면 위의 직선으로 볼 수 있다.</p>
+        <p>$\mathbb{R}^2$ 위의 선형연산자 $T$가 다음을 만족하면 $T$를 <strong>$L$에 대한 $\mathbb{R}^2$의 반사</strong>(reflection on $\mathbb{R}^2$ about $L$)라 한다.</p>
+        <div class="math-display">$$\text{모든 } x \in L \text{에 대하여 } T(x) = x \text{ 이고, 모든 } x \in L^\perp \text{에 대하여 } T(x) = -x.$$</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $L$ be a one-dimensional subspace of $\mathbb{R}^2$.</p>
+        <p>We may view $L$ as a line in the plane through the origin.</p>
+        <p>A linear operator $T$ on $\mathbb{R}^2$ is called <strong>a reflection on $\mathbb{R}^2$ about $L$</strong> if</p>
+        <div class="math-display">$$T(x) = x \text{ for all } x \in L \text{ and } T(x) = -x \text{ for all } x \in L^\perp.$$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p25 Example 3 (reflection is orthogonal, by Corollary 1) -->
+<div class="card exam-card" id="c9-20">
+  <div class="card-head">
+    <span class="exam-num">EXAM 3</span>
+    <span class="exam-title">반사는 직교연산자이다 <em>A Reflection Is an Orthogonal Operator</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T$를 원점을 지나는 직선 $L$에 대한 $\mathbb{R}^2$의 반사라 하자.</p>
+        <p>다음을 만족하는 벡터 $v_1 \in L$과 $v_2 \in L^\perp$를 택하자.</p>
+        <div class="math-display">$$\|v_1\| = \|v_2\| = 1.$$</div>
+        <p>그러면 $T(v_1) = v_1$이고 $T(v_2) = -v_2$이다.</p>
+        <p>따라서 $v_1$과 $v_2$는 각각 고유값 $1$과 $-1$에 대응하는 $T$의 고유벡터이다.</p>
+        <p>또한 $\{v_1, v_2\}$는 $\mathbb{R}^2$의 정규직교기저이다.</p>
+        <p>그러므로 <a href="#c9-14">정리 6.18의 따름정리 1</a>에 의해 $T$는 직교연산자이다.</p>
+        <p><em>역주.</em> $\dim L^\perp = 2 - \dim L = 1$이므로 이러한 $v_1$, $v_2$가 존재한다. 서로 수직인 두 단위벡터는 일차독립이므로 $\{v_1, v_2\}$는 $\mathbb{R}^2$의 정규직교기저이다. 고유값 $\pm 1$의 절댓값이 $1$이므로 <a href="#c9-14">따름정리 1</a>의 $(i)$이 성립하고, 따라서 $T$는 자기수반이면서 직교연산자이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T$ be the reflection of $\mathbb{R}^2$ about a line $L$ through the origin.</p>
+        <p>Select vectors $v_1 \in L$ and $v_2 \in L^\perp$ such that</p>
+        <div class="math-display">$$\|v_1\| = \|v_2\| = 1.$$</div>
+        <p>Then $T(v_1) = v_1$ and $T(v_2) = -v_2$.</p>
+        <p>Thus $v_1$ and $v_2$ are eigenvectors of $T$</p>
+        <p>with corresponding eigenvalues $1$ and $-1$, respectively.</p>
+        <p>Furthermore, $\{v_1, v_2\}$ is an orthonormal basis for $\mathbb{R}^2$.</p>
+        <p>Therefore $T$ is an orthogonal operator by <a href="#c9-14">Corollary 1 to Theorem 6.18</a>.</p>
+        <p><em>Note.</em> Such $v_1$, $v_2$ exist because $\dim L^\perp = 2 - \dim L = 1$. Two perpendicular unit vectors are linearly independent, so $\{v_1, v_2\}$ is an orthonormal basis for $\mathbb{R}^2$. The eigenvalues $\pm 1$ have absolute value $1$, so condition $(i)$ of <a href="#c9-14">Corollary 1</a> holds, and $T$ is both self-adjoint and orthogonal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.26 ═══════════ -->
+
+<!-- S6.5 p26 Definition (orthogonal / unitary matrix) -->
+<div class="card def-card" id="c9-21">
+  <div class="card-head">
+    <span class="def-num">DEF</span>
+    <span class="def-title">직교행렬과 유니타리 행렬 <em>Orthogonal Matrices and Unitary Matrices</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>정사각행렬 $A$가 $A^tA = AA^t = I$를 만족하면 <strong>직교행렬</strong>(orthogonal matrix)이라 하고,</p>
+        <p>$A^*A = AA^* = I$를 만족하면 <strong>유니타리 행렬</strong>(unitary matrix)이라 한다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>A square matrix $A$ is called <strong>an orthogonal matrix</strong> if $A^tA = AA^t = I$, and</p>
+        <p><strong>a unitary matrix</strong> if $A^*A = AA^* = I$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p26 Remark (1)–(3) — (3)은 증명 없음 → 토글에 Note로 보충 -->
+<div class="card rem-card" id="c9-22">
+  <div class="card-head">
+    <span class="rem-num">REM</span>
+    <span class="rem-title">유니타리 행렬의 행과 연산자의 행렬표현 <em>Rows of a Unitary Matrix and Matrix Representations of Operators</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $A$가 실행렬이면 $A^* = A^t$이다.</p>
+        <p>따라서 실 유니타리 행렬은 직교행렬이기도 하다.</p>
+        <p>이 경우 $A$를 유니타리라 하기보다 <strong>직교</strong>라 부른다.</p>
+        <p><strong>(2)</strong> 조건 $AA^* = I$는 다음 명제와 동치이다.</p>
+        <p>$A$의 행들은 $F^n$의 정규직교기저를 이룬다.</p>
+        <p>실제로 다음이 성립한다.</p>
+        <div class="math-display">$$\delta_{ij} = I_{ij} = (AA^*)_{ij} = \sum_{k=1}^{n}A_{ik}(A^*)_{kj} = \sum_{k=1}^{n}A_{ik}\overline{A_{jk}}$$</div>
+        <p>여기서 마지막 항은 $A$의 $i$번째 행과 $j$번째 행의 내적이다.</p>
+        <p><strong>(3)</strong> $T$를 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 $T$가 유니타리(각각 직교)일 필요충분조건은</p>
+        <p>$V$의 어떤 정규직교기저 $\beta$에 대하여 $[T]_\beta$가 유니타리(각각 직교)인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> 슬라이드에는 (2)의 계산만 있고 (3)의 증명은 없으므로 여기에 보충한다.</p>
+        <p>(2) 표준내적 $\langle x, y\rangle = \sum_k x_k\overline{y_k}$에 대하여 $\sum_{k}A_{ik}\overline{A_{jk}}$는 $A$의 $i$번째 행과 $j$번째 행의 내적이다. 따라서 $AA^* = I$는 $A$의 $n$개의 행이 정규직교집합을 이룬다는 것과 같다. 정규직교집합은 일차독립이므로, $F^n$에서 $n$개의 벡터로 이루어진 정규직교집합은 $F^n$의 기저이다. 또한 정사각행렬에서는 $AA^* = I$이면 $A^* = A^{-1}$이므로 $A^*A = I$이고, 그 역도 성립한다. 같은 계산을 $A^*A$에 적용하면, $A^*A = I$는 $A$의 열들이 $F^n$의 정규직교기저를 이룬다는 것과 동치이다.</p>
+        <p>(3) 행렬표현 $[T]_\beta$를 쓰기 위해 $V$는 유한차원이라 하자. $\beta$를 $V$의 정규직교기저라 하면 <a href="ch07.html#c7-11">정리 6.10</a>에 의해 $[T^*]_\beta = [T]_\beta^*$이다. $[TT^*]_\beta = [T]_\beta[T]_\beta^*$, $[T^*T]_\beta = [T]_\beta^*[T]_\beta$, $[I]_\beta = I$이고 사상 $S \mapsto [S]_\beta$는 단사이므로 다음이 성립한다.</p>
+        <div class="math-display">$$TT^* = T^*T = I \iff [T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I.$$</div>
+        <p><a href="#c9-6">정리 6.18</a> $(i) \Leftrightarrow (v)$에 의해 왼쪽은 $T$가 유니타리(각각 직교)라는 것이고, 오른쪽은 $[T]_\beta$가 유니타리 행렬이라는 것이다. $F = \mathbb{R}$이면 $[T]_\beta$는 실행렬이므로 $[T]_\beta^* = [T]_\beta^t$이고, 오른쪽은 $[T]_\beta$가 직교행렬이라는 것이다. 이 동치는 $V$의 모든 정규직교기저 $\beta$에 대하여 성립하므로, 조건이 &ldquo;어떤&rdquo; 정규직교기저에 대해 성립하면 &ldquo;모든&rdquo; 정규직교기저에 대해 성립한다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> If $A$ is a real matrix, then $A^* = A^t$.</p>
+        <p>Thus a real unitary matrix is also orthogonal.</p>
+        <p>In this case, we call $A$ <strong>orthogonal</strong> rather than unitary.</p>
+        <p><strong>(2)</strong> The condition $AA^* = I$ is equivalent to the statement that</p>
+        <p>the rows of $A$ form an orthonormal basis for $F^n$.</p>
+        <p>Indeed,</p>
+        <div class="math-display">$$\delta_{ij} = I_{ij} = (AA^*)_{ij} = \sum_{k=1}^{n}A_{ik}(A^*)_{kj} = \sum_{k=1}^{n}A_{ik}\overline{A_{jk}}$$</div>
+        <p>where the last term represents the inner product of the $i$th and $j$th rows of $A$.</p>
+        <p><strong>(3)</strong> Let $T$ be a linear operator on an inner product space $V$.</p>
+        <p>Then $T$ is unitary (resp. orthogonal) if and only if</p>
+        <p>$[T]_\beta$ is unitary (resp. orthogonal) for some orthonormal basis $\beta$ for $V$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> The slide gives only the computation in (2) and no proof of (3); we supply them here.</p>
+        <p>(2) For the standard inner product $\langle x, y\rangle = \sum_k x_k\overline{y_k}$, the sum $\sum_{k}A_{ik}\overline{A_{jk}}$ is the inner product of the $i$th and $j$th rows of $A$. So $AA^* = I$ says exactly that the $n$ rows of $A$ form an orthonormal set. An orthonormal set is linearly independent, so an orthonormal set of $n$ vectors in $F^n$ is a basis for $F^n$. Moreover, for a square matrix, $AA^* = I$ gives $A^* = A^{-1}$ and hence $A^*A = I$, and conversely. The same computation applied to $A^*A$ shows that $A^*A = I$ if and only if the columns of $A$ form an orthonormal basis for $F^n$.</p>
+        <p>(3) Assume $V$ is finite-dimensional, so that $[T]_\beta$ makes sense. If $\beta$ is an orthonormal basis for $V$, then $[T^*]_\beta = [T]_\beta^*$ by <a href="ch07.html#c7-11">Theorem 6.10</a>. Since $[TT^*]_\beta = [T]_\beta[T]_\beta^*$, $[T^*T]_\beta = [T]_\beta^*[T]_\beta$, $[I]_\beta = I$, and the map $S \mapsto [S]_\beta$ is injective,</p>
+        <div class="math-display">$$TT^* = T^*T = I \iff [T]_\beta[T]_\beta^* = [T]_\beta^*[T]_\beta = I.$$</div>
+        <p>By <a href="#c9-6">Theorem 6.18</a> $(i) \Leftrightarrow (v)$, the left side says that $T$ is unitary (resp. orthogonal), and the right side says that $[T]_\beta$ is a unitary matrix. If $F = \mathbb{R}$, then $[T]_\beta$ is real, so $[T]_\beta^* = [T]_\beta^t$ and the right side says that $[T]_\beta$ is orthogonal. The equivalence holds for every orthonormal basis $\beta$ for $V$, so if the condition holds for &ldquo;some&rdquo; orthonormal basis, it holds for &ldquo;every&rdquo; orthonormal basis.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.27 ═══════════ -->
+
+<!-- S6.5 p27 Example 4 (rotation matrix is orthogonal) — 행·열은 사실 정규직교기저 -->
+<div class="card exam-card" id="c9-23">
+  <div class="card-head">
+    <span class="exam-num">EXAM 4</span>
+    <span class="exam-title">회전행렬은 직교행렬이다 <em>A Rotation Matrix Is Orthogonal</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 $\theta$만큼의 회전이라 하자. 단 $0 \lt \theta \lt \pi$이다.</p>
+        <p>그러면 표준순서기저에 대한 $T$의 행렬표현은 다음과 같다.</p>
+        <div class="math-display">$$\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}.$$</div>
+        <p>분명히 이 행렬은 직교행렬이다.</p>
+        <p>또한 이 행렬의 행들은 $\mathbb{R}^2$의 직교기저를 이룬다.</p>
+        <p>마찬가지로 이 행렬의 열들도 $\mathbb{R}^2$의 직교기저를 이룬다.</p>
+        <p><em>역주.</em> 이 행렬을 $A$라 하면 다음이 성립한다.</p>
+        <div class="math-display">$$AA^t = \begin{pmatrix}\cos^2\theta + \sin^2\theta &amp; \cos\theta\sin\theta - \sin\theta\cos\theta\\ \sin\theta\cos\theta - \cos\theta\sin\theta &amp; \sin^2\theta + \cos^2\theta\end{pmatrix} = I.$$</div>
+        <p>$A$는 정사각행렬이므로 $A^tA = I$도 성립한다. 행 $(\cos\theta, -\sin\theta)$, $(\sin\theta, \cos\theta)$와 열 $(\cos\theta, \sin\theta)$, $(-\sin\theta, \cos\theta)$는 서로 수직일 뿐 아니라 노름이 모두 $1$이므로, <a href="#c9-22">주의</a> (2)가 말하듯 실제로는 $\mathbb{R}^2$의 정규직교기저를 이룬다. 또는 $T$가 길이를 보존하므로(<a href="#c9-18">예 2</a>) <a href="#c9-22">주의</a> (3)에서도 $A$가 직교행렬임을 얻는다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be a rotation by $\theta$, where $0 \lt \theta \lt \pi$.</p>
+        <p>Thus the matrix representation of $T$ with respect to the standard ordered basis is</p>
+        <div class="math-display">$$\begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}.$$</div>
+        <p>Obviously, this matrix is orthogonal.</p>
+        <p>Also, the rows of this matrix form an orthogonal basis for $\mathbb{R}^2$.</p>
+        <p>Similarly, the columns of this matrix form an orthogonal basis for $\mathbb{R}^2$.</p>
+        <p><em>Note.</em> Writing $A$ for this matrix,</p>
+        <div class="math-display">$$AA^t = \begin{pmatrix}\cos^2\theta + \sin^2\theta &amp; \cos\theta\sin\theta - \sin\theta\cos\theta\\ \sin\theta\cos\theta - \cos\theta\sin\theta &amp; \sin^2\theta + \cos^2\theta\end{pmatrix} = I,$$</div>
+        <p>and $A^tA = I$ follows since $A$ is square. The rows $(\cos\theta, -\sin\theta)$, $(\sin\theta, \cos\theta)$ and the columns $(\cos\theta, \sin\theta)$, $(-\sin\theta, \cos\theta)$ are not only perpendicular but also of norm $1$, so they in fact form orthonormal bases for $\mathbb{R}^2$, as <a href="#c9-22">Remark</a> (2) says. Alternatively, $A$ is orthogonal by <a href="#c9-22">Remark</a> (3), because $T$ preserves length (<a href="#c9-18">Example 2</a>).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.28 ═══════════ -->
+
+<!-- S6.5 p28 Example 5 (standard matrix of a reflection) — 곱 검산 완료 -->
+<div class="card exam-card" id="c9-24">
+  <div class="card-head">
+    <span class="exam-num">EXAM 5</span>
+    <span class="exam-title">반사의 표준행렬 <em>The Standard Matrix of a Reflection</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$T : \mathbb{R}^2 \to \mathbb{R}^2$를 원점을 지나는 직선 $L$에 대한 반사라 하자.</p>
+        <p><strong>(1)</strong> $A := [T]_\beta$라 하자. 여기서 $\beta = \{e_1, e_2\}$는 $\mathbb{R}^2$의 표준기저이다. 따라서 $T = L_A$이다.</p>
+        <p>$T$가 직교연산자이고 $\beta$가 정규직교기저이므로</p>
+        <p>$A$는 직교행렬임에 주목하자.</p>
+        <p><strong>(2)</strong> $\theta$를 양의 $x$축에서 $L$까지의 각이라 하자.</p>
+        <p>$v_1 = (\cos\theta, \sin\theta)$, $v_2 = (-\sin\theta, \cos\theta)$라 하자.</p>
+        <p>그러면 $\|v_1\| = \|v_2\| = 1$이고 $v_1 \in L$, $v_2 \in L^\perp$이다.</p>
+        <p>따라서 $\gamma = \{v_1, v_2\}$는 $\mathbb{R}^2$의 정규직교기저이다.</p>
+        <p><strong>(3)</strong> $T(v_1) = v_1$이고 $T(v_2) = -v_2$이므로 $[T]_\gamma = [L_A]_\gamma = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}$이다.</p>
+        <p>그러면 $A = Q[L_A]_\gamma Q^{-1}$이다. 여기서 $Q = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$이다. ※ 정리 2.23 참조.</p>
+        <p>따라서</p>
+        <div class="math-display">$$\begin{aligned}A &amp;= \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}\begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}\begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}\\[4pt]
+                &amp;= \begin{pmatrix}\cos^2\theta - \sin^2\theta &amp; 2\sin\theta\cos\theta\\ 2\sin\theta\cos\theta &amp; -(\cos^2\theta - \sin^2\theta)\end{pmatrix}\\[4pt]
+                &amp;= \begin{pmatrix}\cos 2\theta &amp; \sin 2\theta\\ \sin 2\theta &amp; -\cos 2\theta\end{pmatrix}.\end{aligned}$$</div>
+        <p><em>역주.</em> (1) $T$가 직교연산자라는 것은 <a href="#c9-20">예 3</a>이고, 그로부터 $A$가 직교행렬이라는 것은 <a href="#c9-22">주의</a> (3)이다. (3) 정리 2.23(기저변환)에 따르면, $Q = [\operatorname{Id}]_\gamma^\beta = [v_1\ v_2]$는 $\gamma$-좌표를 $\beta$-좌표로 바꾸는 행렬이고 $[L_A]_\gamma = Q^{-1}[L_A]_\beta Q = Q^{-1}AQ$이다(<a href="ch02.html#c2-23">단원 02의 주의</a> 참조). 따라서 $A = Q[L_A]_\gamma Q^{-1}$이다. $Q$는 <a href="#c9-23">예 4</a>의 회전행렬이므로 직교행렬이고 $Q^{-1} = Q^t$이며, 이것이 계산의 셋째 인수이다. 마지막 등호는 배각공식 $\cos 2\theta = \cos^2\theta - \sin^2\theta$, $\sin 2\theta = 2\sin\theta\cos\theta$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be the reflection along a line $L$ through the origin.</p>
+        <p><strong>(1)</strong> Let $A := [T]_\beta$ where $\beta = \{e_1, e_2\}$ is the standard basis for $\mathbb{R}^2$. Thus $T = L_A$.</p>
+        <p>Note that $A$ is an orthogonal matrix</p>
+        <p>since $T$ is orthogonal and $\beta$ is an orthonormal basis.</p>
+        <p><strong>(2)</strong> Let $\theta$ be the angle from the positive $x$-axis to $L$.</p>
+        <p>Let $v_1 = (\cos\theta, \sin\theta)$ and $v_2 = (-\sin\theta, \cos\theta)$.</p>
+        <p>Then $\|v_1\| = \|v_2\| = 1$, $v_1 \in L$ and $v_2 \in L^\perp$.</p>
+        <p>Hence $\gamma = \{v_1, v_2\}$ is an orthonormal basis for $\mathbb{R}^2$.</p>
+        <p><strong>(3)</strong> Because $T(v_1) = v_1$ and $T(v_2) = -v_2$, we have $[T]_\gamma = [L_A]_\gamma = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}$.</p>
+        <p>Then $A = Q[L_A]_\gamma Q^{-1}$ where $Q = \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}$. ※ See Theorem 2.23.</p>
+        <p>Thus</p>
+        <div class="math-display">$$\begin{aligned}A &amp;= \begin{pmatrix}\cos\theta &amp; -\sin\theta\\ \sin\theta &amp; \cos\theta\end{pmatrix}\begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}\begin{pmatrix}\cos\theta &amp; \sin\theta\\ -\sin\theta &amp; \cos\theta\end{pmatrix}\\[4pt]
+        &amp;= \begin{pmatrix}\cos^2\theta - \sin^2\theta &amp; 2\sin\theta\cos\theta\\ 2\sin\theta\cos\theta &amp; -(\cos^2\theta - \sin^2\theta)\end{pmatrix}\\[4pt]
+        &amp;= \begin{pmatrix}\cos 2\theta &amp; \sin 2\theta\\ \sin 2\theta &amp; -\cos 2\theta\end{pmatrix}.\end{aligned}$$</div>
+        <p><em>Note.</em> (1) That $T$ is orthogonal is <a href="#c9-20">Example 3</a>; that $A$ is then an orthogonal matrix is <a href="#c9-22">Remark</a> (3). (3) Theorem 2.23 (change of basis): $Q = [\operatorname{Id}]_\gamma^\beta = [v_1\ v_2]$ changes $\gamma$-coordinates into $\beta$-coordinates, and $[L_A]_\gamma = Q^{-1}[L_A]_\beta Q = Q^{-1}AQ$ (compare <a href="ch02.html#c2-23">the Remark in Unit 02</a>); hence $A = Q[L_A]_\gamma Q^{-1}$. Here $Q$ is the rotation matrix of <a href="#c9-23">Example 4</a>, so it is orthogonal and $Q^{-1} = Q^t$, which is the third factor in the computation. The last equality is the double-angle formulas $\cos 2\theta = \cos^2\theta - \sin^2\theta$ and $\sin 2\theta = 2\sin\theta\cos\theta$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.29 ═══════════ -->
+
+<!-- S6.5 p29 Remark 1 (normal ⇒ unitarily equivalent to diagonal) -->
+<div class="card rem-card" id="c9-25">
+  <div class="card-head">
+    <span class="rem-num">REM 1</span>
+    <span class="rem-title">복소 정규행렬은 대각행렬과 유니타리 동치이다 <em>A Complex Normal Matrix Is Unitarily Equivalent to a Diagonal Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 복소 정규행렬이라 하자. 그러면</p>
+        <p>$A$의 고유벡터로 이루어진 $F^n$의 정규직교기저 $\beta = \{v_1, v_2, \ldots, v_n\}$이 존재한다.</p>
+        <p>따라서 $A$는 어떤 대각행렬 $D$와 닮았다.</p>
+        <p>즉,</p>
+        <div class="math-display">$$\text{어떤 } \lambda_i \in F \text{에 대하여 } Av_i = \lambda_iv_i$$</div>
+        <p>이고, 따라서</p>
+        <div class="math-display">$$A[v_1\ v_2\ \cdots\ v_n] = [\lambda_1v_1\ \lambda_2v_2\ \cdots\ \lambda_nv_n] = [v_1\ v_2\ \cdots\ v_n]D$$</div>
+        <p>이다. 여기서 $D$는 대각성분이 $\lambda_1, \lambda_2, \ldots, \lambda_n$인 대각행렬이다.</p>
+        <p>결과적으로 $Q = [v_1\ v_2\ \cdots\ v_n]$에 대하여 $A = QDQ^{-1}$이다.</p>
+        <p>$\beta$가 정규직교기저이므로 $QQ^* = I_n$도 성립하고, 따라서 $Q$는 유니타리이다.</p>
+        <p>이 경우 $A$가 $D$와 <strong>유니타리 동치</strong>(unitarily equivalent)라고 한다.</p>
+        <p><em>역주.</em> 여기서 $F = \mathbb{C}$이다. 정규직교 고유기저의 존재는 $\mathbb{C}^n$(표준내적) 위의 $L_A$에 <a href="ch08.html#c8-10">정리 6.16</a>을 적용한 것이다. <a href="ch07.html#c7-12">따름정리</a>에 의해 $(L_A)^* = L_{A^*}$이므로 $L_A(L_A)^* = L_{AA^*} = L_{A^*A} = (L_A)^*L_A$, 즉 $L_A$는 정규이다. $Q$의 열들이 기저를 이루므로 $Q$는 가역이다. 또 $(Q^*Q)_{ij} = \sum_k \overline{(v_i)_k}\,(v_j)_k = \langle v_j, v_i\rangle = \delta_{ij}$이므로 $Q^*Q = I_n$이고, $Q$가 정사각행렬이므로 $Q^* = Q^{-1}$, 즉 $QQ^* = I_n$이다. 따라서 $A = QDQ^{-1} = QDQ^*$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be a complex normal matrix. Then</p>
+        <p>there exists an orthonormal basis $\beta = \{v_1, v_2, \ldots, v_n\}$ for $F^n$</p>
+        <p>consisting of eigenvectors of $A$.</p>
+        <p>Hence $A$ is similar to a diagonal matrix, say $D$.</p>
+        <p>That is,</p>
+        <div class="math-display">$$Av_i = \lambda_iv_i \text{ for some } \lambda_i \in F$$</div>
+        <p>and hence</p>
+        <div class="math-display">$$A[v_1\ v_2\ \cdots\ v_n] = [\lambda_1v_1\ \lambda_2v_2\ \cdots\ \lambda_nv_n] = [v_1\ v_2\ \cdots\ v_n]D$$</div>
+        <p>where $D$ is the diagonal matrix whose diagonal entries are $\lambda_1, \lambda_2, \ldots, \lambda_n$.</p>
+        <p>In consequence, $A = QDQ^{-1}$ for $Q = [v_1\ v_2\ \cdots\ v_n]$.</p>
+        <p>Since $\beta$ is an orthonormal basis, it holds also that $QQ^* = I_n$ and so $Q$ is unitary.</p>
+        <p>In this case, we say that $A$ is <strong>unitarily equivalent</strong> to $D$.</p>
+        <p><em>Note.</em> Here $F = \mathbb{C}$. The orthonormal basis of eigenvectors comes from <a href="ch08.html#c8-10">Theorem 6.16</a> applied to $L_A$ on $\mathbb{C}^n$ with the standard inner product: by the <a href="ch07.html#c7-12">Corollary</a>, $(L_A)^* = L_{A^*}$, so $L_A(L_A)^* = L_{AA^*} = L_{A^*A} = (L_A)^*L_A$, i.e. $L_A$ is normal. The columns of $Q$ form a basis, so $Q$ is invertible. Also $(Q^*Q)_{ij} = \sum_k \overline{(v_i)_k}\,(v_j)_k = \langle v_j, v_i\rangle = \delta_{ij}$, so $Q^*Q = I_n$; as $Q$ is square, $Q^* = Q^{-1}$, i.e. $QQ^* = I_n$. Hence $A = QDQ^{-1} = QDQ^*$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.30 ═══════════ -->
+
+<!-- S6.5 p30 Remark 2 (unitarily equivalent to diagonal ⇒ orthonormal eigenbasis) -->
+<div class="card rem-card" id="c9-26">
+  <div class="card-head">
+    <span class="rem-num">REM 2</span>
+    <span class="rem-title">유니타리 동치에서 정규직교 고유기저로 <em>From Unitary Equivalence to an Orthonormal Basis of Eigenvectors</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 대각행렬 $D$와 유니타리 동치인 복소행렬이라 하자.</p>
+        <p>즉,</p>
+        <div class="math-display">$$A = QDQ^{-1}, \ \text{여기서 } Q \text{는 유니타리 행렬이고 따라서 } QQ^* = I_n\ (= Q^*Q).$$</div>
+        <p>$\beta = \{v_1, v_2, \ldots, v_n\}$을 $Q$의 열벡터들의 집합이라 하자.</p>
+        <p>그러면 조건 $Q^*Q = I_n$은 $\beta$가 $F^n$의 정규직교기저임을 보여 준다.</p>
+        <p>$\lambda_1, \ldots, \lambda_n$을 $D$의 대각성분이라 하자.</p>
+        <p>$A = QDQ^{-1}$로부터 $AQ = QD$를 얻는다.</p>
+        <p>이는 모든 $1 \le i \le n$에 대하여 $Av_i = \lambda_iv_i$임을 뜻한다.</p>
+        <p>즉, $\beta = \{v_1, v_2, \ldots, v_n\}$은 $A$의 고유벡터들로 이루어진다.</p>
+        <p>결과적으로,</p>
+        <p>$A$가 대각행렬과 유니타리 동치인 복소행렬이면 $A$의 고유벡터로 이루어진 정규직교기저가 존재한다.</p>
+        <p><em>역주.</em> $(Q^*Q)_{ij} = \langle v_j, v_i\rangle$이므로 $Q^*Q = I_n$은 $\{v_1, \ldots, v_n\}$이 정규직교집합이라는 뜻이고, $F^n$에서 $n$개의 벡터로 이루어진 정규직교집합은 일차독립이므로 기저이다(<a href="#c9-22">주의</a> (2) 참조). $AQ$의 $i$번째 열은 $Av_i$이고 $QD$의 $i$번째 열은 $\lambda_iv_i$이다. $\|v_i\| = 1$이므로 $v_i \neq 0$이고, 따라서 각 $v_i$는 고유벡터이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be a complex matrix which is unitarily equivalent to a diagonal matrix $D$.</p>
+        <p>That is,</p>
+        <div class="math-display">$$A = QDQ^{-1} \text{ where } Q \text{ is a unitary matrix and so } QQ^* = I_n\ (= Q^*Q).$$</div>
+        <p>Let $\beta = \{v_1, v_2, \ldots, v_n\}$ be the set of column vectors of $Q$.</p>
+        <p>Then the condition $Q^*Q = I_n$ shows that $\beta$ is an orthonormal basis for $F^n$.</p>
+        <p>Let $\lambda_1, \ldots, \lambda_n$ be the diagonal entries of $D$.</p>
+        <p>From $A = QDQ^{-1}$, we have $AQ = QD$.</p>
+        <p>This implies that $Av_i = \lambda_iv_i$ for all $1 \le i \le n$.</p>
+        <p>That is, $\beta = \{v_1, v_2, \ldots, v_n\}$ consists of eigenvectors of $A$.</p>
+        <p>In consequence,</p>
+        <p>if $A$ is a complex matrix which is unitarily equivalent to a diagonal matrix, then there is an orthonormal basis consisting of eigenvectors of $A$.</p>
+        <p><em>Note.</em> $(Q^*Q)_{ij} = \langle v_j, v_i\rangle$, so $Q^*Q = I_n$ means that $\{v_1, \ldots, v_n\}$ is an orthonormal set, and an orthonormal set of $n$ vectors in $F^n$ is linearly independent and hence a basis (see <a href="#c9-22">Remark</a> (2)). The $i$th column of $AQ$ is $Av_i$ and that of $QD$ is $\lambda_iv_i$. Since $\|v_i\| = 1$, $v_i \neq 0$, so each $v_i$ is an eigenvector.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.31 ═══════════ -->
+
+<!-- S6.5 p31 Remark 3 (℘1)–(℘3) for a complex matrix -->
+<div class="card rem-card" id="c9-27">
+  <div class="card-head">
+    <span class="rem-num">REM 3</span>
+    <span class="rem-title">복소행렬에 대한 세 성질의 동치 <em>Three Equivalent Properties of a Complex Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>복소행렬 $A$에 대하여 다음 세 성질을 생각하자.</p>
+        <p>$(\wp 1)$ $A$는 정규이다. 즉, $AA^* = A^*A$이다.</p>
+        <p>$(\wp 2)$ $A$의 고유벡터로 이루어진 정규직교기저가 존재한다.</p>
+        <p>$(\wp 3)$ $A$는 대각행렬과 유니타리 동치이다.</p>
+        <p>지금까지 다음이 증명되었다.</p>
+        <p>$(\wp 1) \Leftrightarrow (\wp 2)$ : §6.4의 <a href="ch08.html#c8-10">정리 6.16</a></p>
+        <p>$(\wp 2) \Rightarrow (\wp 3)$ : <a href="#c9-25">주의 1</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 2)$ : <a href="#c9-26">주의 2</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 1)$ : 다음 쪽의 <a href="#c9-28">정리 6.19</a></p>
+        <p>결과적으로 세 성질 $(\wp 1)$, $(\wp 2)$, $(\wp 3)$은 서로 동치이다.</p>
+        <p>가장 어려운 부분은 $(\wp 1)$이 $(\wp 2)$를 함의함을 보이는 것임에 주목하자.</p>
+        <p><em>역주.</em> 정리 6.16은 연산자에 대한 진술이므로 $\mathbb{C}^n$(표준내적) 위의 $L_A$에 적용한다. $(L_A)^* = L_{A^*}$(<a href="ch07.html#c7-12">따름정리</a>)이므로 $L_A$가 정규일 필요충분조건은 $A$가 정규인 것이고, $L_A$의 고유벡터는 곧 $A$의 고유벡터이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a complex matrix $A$, consider the following three properties;</p>
+        <p>$(\wp 1)$ $A$ is normal. That is, $AA^* = A^*A$.</p>
+        <p>$(\wp 2)$ There is an orthonormal basis consisting of eigenvectors of $A$.</p>
+        <p>$(\wp 3)$ $A$ is unitarily equivalent to a diagonal matrix.</p>
+        <p>Thus the followings are proved;</p>
+        <p>$(\wp 1) \Leftrightarrow (\wp 2)$ : <a href="ch08.html#c8-10">Theorem 6.16</a> in Section 6.4</p>
+        <p>$(\wp 2) \Rightarrow (\wp 3)$ : <a href="#c9-25">Remark 1</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 2)$ : <a href="#c9-26">Remark 2</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 1)$ : <a href="#c9-28">Theorem 6.19</a> in the next page</p>
+        <p>In consequence, the three properties $(\wp 1)$, $(\wp 2)$ and $(\wp 3)$ are equivalent.</p>
+        <p>Note that the most difficult part is to show that $(\wp 1)$ implies $(\wp 2)$.</p>
+        <p><em>Note.</em> Theorem 6.16 is stated for operators, so it is applied to $L_A$ on $\mathbb{C}^n$ with the standard inner product. Since $(L_A)^* = L_{A^*}$ (<a href="ch07.html#c7-12">Corollary</a>), $L_A$ is normal if and only if $A$ is normal, and the eigenvectors of $L_A$ are exactly those of $A$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.32 ═══════════ -->
+
+<!-- S6.5 p32 Theorem 6.19 + Proof — (PDP*)(PDP*)* = (PDP*)(PDP*)는 (PDP*)(PD*P*)이어야 함 -->
+<div class="card thm-card" id="c9-28">
+  <div class="card-head">
+    <span class="thm-num">THM 6.19</span>
+    <span class="thm-title">정규행렬과 유니타리 동치 <em>Normal Matrices and Unitary Equivalence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 $n \times n$ 복소행렬이라 하자.</p>
+        <p>그러면 $A$가 정규일 필요충분조건은 $A$가 대각행렬과 유니타리 동치인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>앞의 주의들에 의해 다음만 증명하면 된다.</p>
+        <p>$A$가 대각행렬과 유니타리 동치이면 $A$는 정규이다.</p>
+        <p>$P$는 유니타리 행렬이고 $D$는 대각행렬이며 $A = PDP^*$라 하자.</p>
+        <p>그러면 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}AA^* &amp;= (PDP^*)(PDP^*)^* = (PDP^*)(PD^*P^*)\\[2pt]
+                &amp;= PDID^*P^* = PDD^*P^*.\end{aligned}$$</div>
+        <p>마찬가지로 $A^*A = PD^*DP^*$이다.</p>
+        <p>또한 $D$와 $D^*$는 대각행렬이므로 $DD^* = D^*D$이다.</p>
+        <p>결과적으로 다음이 성립한다.</p>
+        <div class="math-display">$$AA^* = PDD^*P^* = PD^*DP^* = A^*A.$$</div>
+        <p><em>역주.</em> (1) 영문 패널의 셋째 식 $(PDP^*)(PDP^*)$는 $(PDP^*)(PD^*P^*)$의 오류이다. <a href="ch07.html#c7-16">따름정리</a> (3), (4)에 의해 $(PDP^*)^* = (P^*)^*D^*P^* = PD^*P^*$이고, 다음 등호는 $P^*P = I$에서 나온다. 한국어 본문은 바로잡아 옮겼다(영문 패널은 원문 그대로). 마찬가지로 $A^*A = (PD^*P^*)(PDP^*) = PD^*(P^*P)DP^* = PD^*DP^*$이다. (2) &ldquo;앞의 주의들&rdquo;은 <a href="#c9-27">주의 3</a>의 $(\wp 1) \Rightarrow (\wp 2) \Rightarrow (\wp 3)$을 가리킨다. 또 $P$가 유니타리이면 $P^{-1} = P^*$이므로, 유니타리 동치 $A = PDP^{-1}$은 $A = PDP^*$로 쓸 수 있다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be a complex $n \times n$ matrix.</p>
+        <p>Then $A$ is normal if and only if $A$ is unitarily equivalent to a diagonal matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>By the preceding remarks, we need only prove that</p>
+        <p>if $A$ is unitarily equivalent to a diagonal matrix, then $A$ is normal.</p>
+        <p>Suppose that $A = PDP^*$ where $P$ is a unitary matrix and $D$ is a diagonal matrix.</p>
+        <p>Then</p>
+        <div class="math-display">$$\begin{aligned}AA^* &amp;= (PDP^*)(PDP^*)^* = (PDP^*)(PDP^*)\\[2pt]
+        &amp;= PDID^*P^* = PDD^*P^*.\end{aligned}$$</div>
+        <p>Similarly, $A^*A = PD^*DP^*$.</p>
+        <p>Also, $DD^* = D^*D$ since $D$ and $D^*$ are diagonal matrices.</p>
+        <p>In consequence, it holds that</p>
+        <div class="math-display">$$AA^* = PDD^*P^* = PD^*DP^* = A^*A.$$</div>
+        <p><em>Note.</em> (1) The third expression $(PDP^*)(PDP^*)$ should read $(PDP^*)(PD^*P^*)$: by the <a href="ch07.html#c7-16">Corollary</a> (3), (4), $(PDP^*)^* = (P^*)^*D^*P^* = PD^*P^*$, and the next equality uses $P^*P = I$. Likewise $A^*A = (PD^*P^*)(PDP^*) = PD^*(P^*P)DP^* = PD^*DP^*$. (2) &ldquo;The preceding remarks&rdquo; are $(\wp 1) \Rightarrow (\wp 2) \Rightarrow (\wp 3)$ in <a href="#c9-27">Remark 3</a>. Since $P^{-1} = P^*$ for a unitary $P$, the unitary equivalence $A = PDP^{-1}$ can be written as $A = PDP^*$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.33 ═══════════ -->
+
+<!-- S6.5 p33–p34 Theorem 6.20 + Proof (⇒) (p33) + Proof (⇐) (p34; 진술 재수록은 한 번만 전사) -->
+<div class="card thm-card" id="c9-29">
+  <div class="card-head">
+    <span class="thm-num">THM 6.20</span>
+    <span class="thm-title">대칭행렬과 직교 동치 <em>Symmetric Matrices and Orthogonal Equivalence</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A$를 $n \times n$ 실행렬이라 하자.</p>
+        <p>그러면 $A$가 대칭일 필요충분조건은</p>
+        <p>$A$가 실 대각행렬과 직교 동치인 것이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p>$(\Rightarrow)$ $A$는 $n \times n$ 실대칭행렬이므로</p>
+        <p>$A$의 고유벡터로 이루어진 $\mathbb{R}^n$의 정규직교기저 $\beta = \{v_1, v_2, \ldots, v_n\}$이 존재한다.</p>
+        <p>즉,</p>
+        <div class="math-display">$$\text{어떤 } \lambda_i \in \mathbb{R} \text{에 대하여 } Av_i = \lambda_iv_i$$</div>
+        <p>이고, 따라서</p>
+        <div class="math-display">$$A[v_1\ v_2\ \cdots\ v_n] = [\lambda_1v_1\ \lambda_2v_2\ \cdots\ \lambda_nv_n] = [v_1\ v_2\ \cdots\ v_n]D$$</div>
+        <p>이다. 여기서 $D$는 대각성분이 $\lambda_1, \lambda_2, \ldots, \lambda_n$인 대각행렬이다.</p>
+        <p>따라서 $A$는 어떤 대각행렬 $D$와 닮았다.</p>
+        <p>결과적으로 $Q = [v_1\ v_2\ \cdots\ v_n]$에 대하여 $A = QDQ^{-1}$이다.</p>
+        <p>$\beta$가 정규직교이므로 $QQ^t = I_n$도 성립하고, 따라서 $Q$는 직교행렬이다.</p>
+        <p>이 경우 $A$가 $D$와 <strong>직교 동치</strong>(orthogonally equivalent)라고 한다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.34 ═══════════ -->
+        <p>$(\Leftarrow)$ $P$는 직교행렬이고 $D$는 대각행렬이며</p>
+        <p>$A = PDP^t$라 하자.</p>
+        <p>그러면 다음이 성립한다.</p>
+        <div class="math-display">$$A^t = (PDP^t)^t = PD^tP^t = PDP^t = A.$$</div>
+        <p>결과적으로 $A$는 대칭행렬이다.</p>
+        <p><em>역주.</em> (1) $(\Rightarrow)$에서 정규직교 고유기저의 존재는 $\mathbb{R}^n$(표준내적) 위의 $L_A$에 <a href="ch08.html#c8-15">정리 6.17</a>을 적용한 것이다. $A$가 실행렬이므로 $(L_A)^* = L_{A^*} = L_{A^t} = L_A$(<a href="ch07.html#c7-12">따름정리</a>), 즉 $L_A$는 자기수반이다. (2) $Q^tQ = I_n$은 $\beta$가 정규직교라는 것과 같고(<a href="#c9-22">주의</a> (2)), $Q$가 정사각행렬이므로 $QQ^t = I_n$이다. 따라서 $Q^{-1} = Q^t$이고 $A = QDQ^t$이며, $\lambda_i$가 실수이므로 $D$는 실 대각행렬이다. (3) $(\Leftarrow)$에서는 $(XYZ)^t = Z^tY^tX^t$, $(P^t)^t = P$, $D^t = D$를 썼다. (4) 슬라이드 p.34는 정리의 진술을 다시 싣고 있으며, 위에는 한 번만 옮겼다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A$ be a real $n \times n$ matrix.</p>
+        <p>Then $A$ is symmetric if and only if</p>
+        <p>$A$ is orthogonally equivalent to a real diagonal matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p>$(\Rightarrow)$ Since $A$ is a symmetric real $n \times n$ matrix,</p>
+        <p>there exists an orthonormal basis $\beta = \{v_1, v_2, \ldots, v_n\}$ for $\mathbb{R}^n$</p>
+        <p>consisting of eigenvectors of $A$.</p>
+        <p>That is,</p>
+        <div class="math-display">$$Av_i = \lambda_iv_i \text{ for some } \lambda_i \in \mathbb{R}$$</div>
+        <p>and hence</p>
+        <div class="math-display">$$A[v_1\ v_2\ \cdots\ v_n] = [\lambda_1v_1\ \lambda_2v_2\ \cdots\ \lambda_nv_n] = [v_1\ v_2\ \cdots\ v_n]D$$</div>
+        <p>where $D$ is the diagonal matrix whose diagonal entries are $\lambda_1, \lambda_2, \ldots, \lambda_n$.</p>
+        <p>Hence $A$ is similar to a diagonal matrix, say $D$.</p>
+        <p>In consequence, $A = QDQ^{-1}$ for $Q = [v_1\ v_2\ \cdots\ v_n]$.</p>
+        <p>Since $\beta$ is orthonormal, it holds also that $QQ^t = I_n$ and so $Q$ is orthogonal.</p>
+        <p>In this case, we say that $A$ is <strong>orthogonally equivalent</strong> to $D$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.34 ═══════════ -->
+        <p>$(\Leftarrow)$ Suppose that $A = PDP^t$</p>
+        <p>where $P$ is an orthogonal matrix and $D$ is a diagonal matrix.</p>
+        <p>Then</p>
+        <div class="math-display">$$A^t = (PDP^t)^t = PD^tP^t = PDP^t = A.$$</div>
+        <p>In consequence, $A$ is a symmetric matrix.</p>
+        <p><em>Note.</em> (1) In $(\Rightarrow)$, the orthonormal basis of eigenvectors comes from <a href="ch08.html#c8-15">Theorem 6.17</a> applied to $L_A$ on $\mathbb{R}^n$ with the standard inner product: since $A$ is real, $(L_A)^* = L_{A^*} = L_{A^t} = L_A$ (<a href="ch07.html#c7-12">Corollary</a>), so $L_A$ is self-adjoint. (2) $Q^tQ = I_n$ says that $\beta$ is orthonormal (<a href="#c9-22">Remark</a> (2)), and $QQ^t = I_n$ follows because $Q$ is square. Thus $Q^{-1} = Q^t$ and $A = QDQ^t$, and $D$ is a real diagonal matrix since the $\lambda_i$ are real. (3) $(\Leftarrow)$ uses $(XYZ)^t = Z^tY^tX^t$, $(P^t)^t = P$ and $D^t = D$. (4) Slide p.34 restates the theorem; the statement is transcribed once above.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.35 ═══════════ -->
+
+<!-- S6.5 p35 Remark 4 (℘1)–(℘3) for a real matrix -->
+<div class="card rem-card" id="c9-30">
+  <div class="card-head">
+    <span class="rem-num">REM 4</span>
+    <span class="rem-title">실행렬에 대한 세 성질의 동치 <em>Three Equivalent Properties of a Real Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>실행렬 $A$에 대하여 다음 세 성질을 생각하자.</p>
+        <p>$(\wp 1)$ $A$는 대칭이다.</p>
+        <p>$(\wp 2)$ $A$의 고유벡터로 이루어진 $\mathbb{R}^n$의 정규직교기저가 존재한다.</p>
+        <p>$(\wp 3)$ $A$는 실 대각행렬과 직교 동치이다.</p>
+        <p>지금까지 다음이 증명되었다.</p>
+        <p>$(\wp 1) \Leftrightarrow (\wp 2)$ : §6.4의 <a href="ch08.html#c8-15">정리 6.17</a></p>
+        <p>$(\wp 2) \Rightarrow (\wp 3)$ : <a href="#c9-29">정리 6.20</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 1)$ : <a href="#c9-29">정리 6.20</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 2)$ : <a href="#c9-26">주의 2</a>와 마찬가지</p>
+        <p>결과적으로 세 성질 $(\wp 1)$, $(\wp 2)$, $(\wp 3)$은 서로 동치이다.</p>
+        <p>가장 어려운 부분은 $(\wp 1)$이 $(\wp 2)$를 함의함을 보이는 것임에 주목하자.</p>
+        <p><em>역주.</em> $(\wp 1) \Leftrightarrow (\wp 2)$는 $\mathbb{R}^n$(표준내적) 위의 $L_A$에 정리 6.17을 적용한 것이다. $A$가 실행렬이면 $(L_A)^* = L_{A^t}$이므로 $L_A$가 자기수반일 필요충분조건은 $A$가 대칭인 것이다. $(\wp 2) \Rightarrow (\wp 3)$은 정리 6.20의 $(\Rightarrow)$ 증명에서 정규직교 고유기저를 얻은 뒤의 부분이고, $(\wp 3) \Rightarrow (\wp 1)$은 $(\Leftarrow)$이다. $(\wp 3) \Rightarrow (\wp 2)$는 주의 2의 논증에서 $Q^*$를 $Q^t$로 바꾸면 된다. 즉 $A = QDQ^t$ ($Q$는 직교행렬, $D$는 실 대각행렬)이면 $Q$의 열들은 $\mathbb{R}^n$의 정규직교기저를 이루고, $AQ = QD$에서 각 열 $v_i$에 대하여 $Av_i = \lambda_iv_i$이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>For a real matrix $A$, consider the following three properties;</p>
+        <p>$(\wp 1)$ $A$ is symmetric.</p>
+        <p>$(\wp 2)$ There is an orthonormal basis of $\mathbb{R}^n$ consisting of eigenvectors of $A$.</p>
+        <p>$(\wp 3)$ $A$ is orthogonally equivalent to a real diagonal matrix.</p>
+        <p>Thus the followings are proved;</p>
+        <p>$(\wp 1) \Leftrightarrow (\wp 2)$ : <a href="ch08.html#c8-15">Theorem 6.17</a> in Section 6.4</p>
+        <p>$(\wp 2) \Rightarrow (\wp 3)$ : <a href="#c9-29">Theorem 6.20</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 1)$ : <a href="#c9-29">Theorem 6.20</a></p>
+        <p>$(\wp 3) \Rightarrow (\wp 2)$ : Similar to <a href="#c9-26">Remark 2</a></p>
+        <p>In consequence, the three properties $(\wp 1)$, $(\wp 2)$ and $(\wp 3)$ are equivalent.</p>
+        <p>Note that the most difficult part is to show that $(\wp 1)$ implies $(\wp 2)$.</p>
+        <p><em>Note.</em> $(\wp 1) \Leftrightarrow (\wp 2)$ is Theorem 6.17 applied to $L_A$ on $\mathbb{R}^n$ with the standard inner product: for real $A$, $(L_A)^* = L_{A^t}$, so $L_A$ is self-adjoint if and only if $A$ is symmetric. $(\wp 2) \Rightarrow (\wp 3)$ is the part of the proof of Theorem 6.20 $(\Rightarrow)$ after the orthonormal basis of eigenvectors is obtained, and $(\wp 3) \Rightarrow (\wp 1)$ is $(\Leftarrow)$. For $(\wp 3) \Rightarrow (\wp 2)$, repeat Remark 2 with $Q^t$ in place of $Q^*$: if $A = QDQ^t$ with $Q$ orthogonal and $D$ real diagonal, then the columns $v_i$ of $Q$ form an orthonormal basis for $\mathbb{R}^n$, and $AQ = QD$ gives $Av_i = \lambda_iv_i$.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.36 ═══════════ -->
+
+<!-- S6.5 p36–p37 Example 6 Step 1–4 (orthogonal diagonalization) — Step 2의 "λ2 = 4"는 λ2 = 8 (계산 검산 완료) -->
+<div class="card exam-card" id="c9-31">
+  <div class="card-head">
+    <span class="exam-num">EXAM 6</span>
+    <span class="exam-title">대칭행렬의 직교 대각화 <em>Orthogonally Diagonalizing a Symmetric Matrix</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 행렬을 생각하자.</p>
+        <div class="math-display">$$A = \begin{pmatrix}4 &amp; 2 &amp; 2\\ 2 &amp; 4 &amp; 2\\ 2 &amp; 2 &amp; 4\end{pmatrix}.$$</div>
+        <p>$A$는 대칭이므로</p>
+        <p><a href="#c9-29">정리 6.20</a>에 의해 대각행렬과 직교 동치이다.</p>
+        <p>$A = PDP^t$가 되도록 직교행렬 $P$와 대각행렬 $D$를 구하라.</p>
+        <p><strong>1단계 :</strong> $A$의 특성다항식은 다음과 같다.</p>
+        <div class="math-display">$$\begin{aligned}\det(A - tI_3) &amp;= \det\begin{pmatrix}4-t &amp; 2 &amp; 2\\ 2 &amp; 4-t &amp; 2\\ 2 &amp; 2 &amp; 4-t\end{pmatrix}\\[2pt]
+                &amp;= -(t^3 - 12t^2 + 36t - 32) = -(t-2)^2(t-8).\end{aligned}$$</div>
+        <p>따라서 $A$의 고유값은 $2$와 $8$이다.</p>
+        <p><strong>2단계 :</strong></p>
+        <div class="math-display">$$\begin{aligned}\lambda_1 = 2 &amp;\Rightarrow \begin{pmatrix}2 &amp; 2 &amp; 2\\ 2 &amp; 2 &amp; 2\\ 2 &amp; 2 &amp; 2\end{pmatrix}\begin{pmatrix}x\\ y\\ z\end{pmatrix} = \begin{pmatrix}0\\ 0\\ 0\end{pmatrix} \Rightarrow x + y + z = 0\\[2pt]
+                &amp;\Rightarrow E_{\lambda_1} = \langle (1,-1,0), (1,0,-1)\rangle\end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned}\lambda_2 = 8 &amp;\Rightarrow \begin{pmatrix}-4 &amp; 2 &amp; 2\\ 2 &amp; -4 &amp; 2\\ 2 &amp; 2 &amp; -4\end{pmatrix}\begin{pmatrix}x\\ y\\ z\end{pmatrix} = \begin{pmatrix}0\\ 0\\ 0\end{pmatrix}\\[2pt]
+                &amp;\Rightarrow -2x + y + z = 0,\ x - 2y + z = 0 \Rightarrow E_{\lambda_2} = \langle (1,1,1)\rangle\end{aligned}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.37 ═══════════ -->
+        <p><strong>3단계 :</strong> 그람-슈미트 과정으로 $E_{\lambda_1}$의 직교기저 $\{v_1, v_2\}$를 얻는다. 여기서</p>
+        <div class="math-display">$$\begin{aligned}v_1 &amp;= (1,-1,0) \text{ 이고}\\[2pt]
+                v_2 &amp;= (1,0,-1) - \frac{1}{2}v_1 = (1,0,-1) - \frac{1}{2}(1,-1,0) = \left(\frac{1}{2}, \frac{1}{2}, -1\right).\end{aligned}$$</div>
+        <p>이어서 정규화 과정을 거치면 다음과 같은</p>
+        <p>$A$의 고유벡터로 이루어진 정규직교기저를 얻는다.</p>
+        <div class="math-display">$$\left\{u_1 = \frac{1}{\sqrt{2}}(1,-1,0),\ u_2 = \frac{1}{\sqrt{6}}(1,1,-2),\ u_3 = \frac{1}{\sqrt{3}}(1,1,1)\right\}$$</div>
+        <p><strong>4단계 :</strong> $Au_1 = 2u_1$, $Au_2 = 2u_2$, $Au_3 = 8u_3$이므로 다음을 얻는다.</p>
+        <div class="math-display">$$A[u_1\ u_2\ u_3] = [2u_1\ 2u_2\ 8u_3] = [u_1\ u_2\ u_3]\begin{pmatrix}2 &amp; 0 &amp; 0\\ 0 &amp; 2 &amp; 0\\ 0 &amp; 0 &amp; 8\end{pmatrix}.$$</div>
+        <p>그러므로</p>
+        <div class="math-display">$$A = PDP^t, \ \text{여기서 } P = \begin{pmatrix}\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\\[2pt] -\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\\[2pt] 0 &amp; -\frac{2}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\end{pmatrix} \text{ 이고 } D = \begin{pmatrix}2 &amp; 0 &amp; 0\\ 0 &amp; 2 &amp; 0\\ 0 &amp; 0 &amp; 8\end{pmatrix}.$$</div>
+        <p><em>역주.</em> (1) 영문 패널 2단계의 &ldquo;$\lambda_2 = 4$&rdquo;는 &ldquo;$\lambda_2 = 8$&rdquo;의 오류이다. 그 줄의 계수행렬은 $A - 8I_3$이며, $\det(A - 4I_3) = 16 \neq 0$이므로 $4$는 고유값이 아니다. 한국어 본문은 바로잡아 옮겼다(영문 패널은 원문 그대로). (2) $\langle \cdots \rangle$는 생성(span)을 나타낸다. (3) 3단계의 $\frac{1}{2}$은 그람-슈미트 계수 $\frac{\langle (1,0,-1), v_1\rangle}{\|v_1\|^2} = \frac{1}{2}$이고, $v_2 = \left(\frac{1}{2}, \frac{1}{2}, -1\right) = \frac{1}{2}(1,1,-2)$를 정규화한 것이 $u_2$이다. $u_3$은 다른 고유값에 대응하므로 <a href="ch08.html#c8-9">정리 6.15</a> $(d)$에 의해 $u_1$, $u_2$와 자동으로 수직이다. (4) 특성다항식, 두 고유공간, $P^tP = I_3$, $PDP^t = A$는 모두 직접 계산하여 확인할 수 있다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let</p>
+        <div class="math-display">$$A = \begin{pmatrix}4 &amp; 2 &amp; 2\\ 2 &amp; 4 &amp; 2\\ 2 &amp; 2 &amp; 4\end{pmatrix}.$$</div>
+        <p>Since $A$ is symmetric,</p>
+        <p>it is orthogonally equivalent to a diagonal matrix by <a href="#c9-29">Theorem 6.20</a>.</p>
+        <p>Find an orthogonal matrix $P$ and a diagonal matrix $D$ so that $A = PDP^t$.</p>
+        <p><strong>Step 1. :</strong> The characteristic polynomial of $A$ is</p>
+        <div class="math-display">$$\begin{aligned}\det(A - tI_3) &amp;= \det\begin{pmatrix}4-t &amp; 2 &amp; 2\\ 2 &amp; 4-t &amp; 2\\ 2 &amp; 2 &amp; 4-t\end{pmatrix}\\[2pt]
+        &amp;= -(t^3 - 12t^2 + 36t - 32) = -(t-2)^2(t-8).\end{aligned}$$</div>
+        <p>Thus the eigenvalues of $A$ are $2$ and $8$.</p>
+        <p><strong>Step 2. :</strong></p>
+        <div class="math-display">$$\begin{aligned}\lambda_1 = 2 &amp;\Rightarrow \begin{pmatrix}2 &amp; 2 &amp; 2\\ 2 &amp; 2 &amp; 2\\ 2 &amp; 2 &amp; 2\end{pmatrix}\begin{pmatrix}x\\ y\\ z\end{pmatrix} = \begin{pmatrix}0\\ 0\\ 0\end{pmatrix} \Rightarrow x + y + z = 0\\[2pt]
+        &amp;\Rightarrow E_{\lambda_1} = \langle (1,-1,0), (1,0,-1)\rangle\end{aligned}$$</div>
+        <div class="math-display">$$\begin{aligned}\lambda_2 = 4 &amp;\Rightarrow \begin{pmatrix}-4 &amp; 2 &amp; 2\\ 2 &amp; -4 &amp; 2\\ 2 &amp; 2 &amp; -4\end{pmatrix}\begin{pmatrix}x\\ y\\ z\end{pmatrix} = \begin{pmatrix}0\\ 0\\ 0\end{pmatrix}\\[2pt]
+        &amp;\Rightarrow -2x + y + z = 0,\ x - 2y + z = 0 \Rightarrow E_{\lambda_2} = \langle (1,1,1)\rangle\end{aligned}$$</div>
+        <!-- ═══════════ Section 6.5 notes · Slide p.37 ═══════════ -->
+        <p><strong>Step 3. :</strong> By Gram-Schmidt process, we obtain an orthogonal basis $\{v_1, v_2\}$ for $E_{\lambda_1}$ where</p>
+        <div class="math-display">$$\begin{aligned}v_1 &amp;= (1,-1,0) \text{ and}\\[2pt]
+        v_2 &amp;= (1,0,-1) - \frac{1}{2}v_1 = (1,0,-1) - \frac{1}{2}(1,-1,0) = \left(\frac{1}{2}, \frac{1}{2}, -1\right).\end{aligned}$$</div>
+        <p>Then, after normalizing process, we get the following</p>
+        <p>orthonormal basis of eigenvectors of $A$ :</p>
+        <div class="math-display">$$\left\{u_1 = \frac{1}{\sqrt{2}}(1,-1,0),\ u_2 = \frac{1}{\sqrt{6}}(1,1,-2),\ u_3 = \frac{1}{\sqrt{3}}(1,1,1)\right\}$$</div>
+        <p><strong>Step 4. :</strong> Since $Au_1 = 2u_1$, $Au_2 = 2u_2$, $Au_3 = 8u_3$, we have</p>
+        <div class="math-display">$$A[u_1\ u_2\ u_3] = [2u_1\ 2u_2\ 8u_3] = [u_1\ u_2\ u_3]\begin{pmatrix}2 &amp; 0 &amp; 0\\ 0 &amp; 2 &amp; 0\\ 0 &amp; 0 &amp; 8\end{pmatrix}.$$</div>
+        <p>Therefore</p>
+        <div class="math-display">$$A = PDP^t \text{ where } P = \begin{pmatrix}\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\\[2pt] -\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\\[2pt] 0 &amp; -\frac{2}{\sqrt{6}} &amp; \frac{1}{\sqrt{3}}\end{pmatrix} \text{ and } D = \begin{pmatrix}2 &amp; 0 &amp; 0\\ 0 &amp; 2 &amp; 0\\ 0 &amp; 0 &amp; 8\end{pmatrix}.$$</div>
+        <p><em>Note.</em> (1) In Step 2, &ldquo;$\lambda_2 = 4$&rdquo; should read &ldquo;$\lambda_2 = 8$&rdquo;: the coefficient matrix on that line is $A - 8I_3$, and $\det(A - 4I_3) = 16 \neq 0$, so $4$ is not an eigenvalue. (2) $\langle \cdots \rangle$ denotes the span. (3) The $\frac{1}{2}$ in Step 3 is the Gram&ndash;Schmidt coefficient $\frac{\langle (1,0,-1), v_1\rangle}{\|v_1\|^2} = \frac{1}{2}$, and $u_2$ is $v_2 = \left(\frac{1}{2}, \frac{1}{2}, -1\right) = \frac{1}{2}(1,1,-2)$ normalized. The vector $u_3$ belongs to a different eigenvalue, so it is automatically perpendicular to $u_1$ and $u_2$ by <a href="ch08.html#c8-9">Theorem 6.15</a> $(d)$. (4) The characteristic polynomial, both eigenspaces, $P^tP = I_3$ and $PDP^t = A$ can all be checked by direct computation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.38 ═══════════ -->
+
+<!-- S6.5 p38 상단 서술: 다음 정리는 슈어 정리의 행렬 형태 -->
+<div class="card note-card" id="note09-2">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>다음 정리는 <a href="ch08.html#c8-3">슈어 정리</a>의 행렬 형태이다.</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>The following theorem is the matrix form of <a href="ch08.html#c8-3">Schur's Theorem</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p38–p39 Theorem 6.21 (Schur, matrix form) + 상자: Theorem (Schur) 재수록 + Proof (p38) + 상자: Recall 가환도식 + 결론 (p39) — "A = PBP^t"는 F = C에서 A = PBP^* -->
+<div class="card thm-card" id="c9-32">
+  <div class="card-head">
+    <span class="thm-num">THM 6.21</span>
+    <span class="thm-title">슈어 정리 (행렬 형태) <em>Schur's Theorem (Matrix Form)</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>$A \in M_{n\times n}(F)$를 특성다항식이 $F$ 위에서 분해되는 행렬이라 하자. 그러면</p>
+        <p><strong>(1)</strong> $F = \mathbb{C}$이면 $A$는 복소 상삼각행렬과 유니타리 동치이다.</p>
+        <p><strong>(2)</strong> $F = \mathbb{R}$이면 $A$는 실 상삼각행렬과 직교 동치이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <div class="formal-box">
+          <p><strong><a href="ch08.html#c8-3">정리 (슈어)</a> :</strong> $T : V \to V$를 차원이 $n$인 내적공간 $V$ 위의 선형연산자라 하자. $T$의 특성다항식이 분해된다고 하자.</p>
+          <p>그러면 다음을 만족하는 $V$의 정규직교기저 $\beta$가 존재한다.</p>
+          <p>행렬 $[T]_\beta$는 상삼각행렬이다.</p>
+        </div>
+        <p>$B := [L_A]_\beta$가 상삼각행렬이 되도록 $F^n$의 정규직교기저 $\beta = \{v_1, \ldots, v_n\}$을 잡자.</p>
+        <p>$\gamma = \{e_1, e_2, \ldots, e_n\}$을 $F^n$의 표준기저라 하자.</p>
+        <p>그러면 $P := [v_1\ \cdots\ v_n]$은 $PP^* = I_n$을 만족한다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.39 ═══════════ -->
+        <div class="formal-box">
+          <p><strong>복습 :</strong> 다음 가환도식을 생각하자.</p>
+          <div class="math-display">$$\begin{array}{ccccccc} F^n &amp; \xrightarrow{\ \operatorname{Id}\ } &amp; F^n &amp; \xrightarrow{\ T\ } &amp; F^n &amp; \xrightarrow{\ \operatorname{Id}\ } &amp; F^n \\ {\scriptstyle \phi_\gamma}\Big\downarrow &amp; &amp; {\scriptstyle \phi_\beta}\Big\downarrow &amp; &amp; \Big\downarrow{\scriptstyle \phi_\beta} &amp; &amp; {\scriptstyle \phi_\gamma}\Big\downarrow \\ F^n &amp; \xrightarrow{\ L_Q\ } &amp; F^n &amp; \xrightarrow{\ L_{[T]_\beta}\ } &amp; F^n &amp; \xrightarrow{\ L_{Q'}\ } &amp; F^n \end{array}$$</div>
+          <div class="math-display">$$\text{여기서 } Q = [\operatorname{Id}_V]_\gamma^\beta \text{ 이고 } Q' = [\operatorname{Id}_V]_\beta^\gamma = Q^{-1}.$$</div>
+          <div class="math-display">$$\begin{array}{ccc} F^n &amp; \xrightarrow{\ T\ } &amp; F^n \\ {\scriptstyle \phi_\gamma}\Big\downarrow &amp; &amp; {\scriptstyle \phi_\gamma}\Big\downarrow \\ F^n &amp; \xrightarrow{\ L_{Q'}L_{[T]_\beta}L_Q\ =\ L_{Q'[T]_\beta Q}\ } &amp; F^n \end{array}$$</div>
+          <p>위의 도식으로부터 다음을 안다.</p>
+          <div class="math-display">$$L_{Q'[T]_\beta Q} = L_{[T]_\gamma} \text{ 이고 따라서 } [T]_\gamma = Q^{-1}[T]_\beta Q.$$</div>
+        </div>
+        <p>$[T]_\gamma = A$이고 $Q^{-1} = [\operatorname{Id}]_\beta^\gamma = [v_1\ \cdots\ v_n] = P$임에 주목하자.</p>
+        <p>따라서 $A = PBP^*$를 얻으며, 이는 다음을 보여 준다.</p>
+        <p>$F = \mathbb{C}$이면 $A$는 상삼각행렬 $B$와 유니타리 동치이고,</p>
+        <p>$F = \mathbb{R}$이면 $A$는 상삼각행렬 $B$와 직교 동치이다.</p>
+        <p><em>역주.</em> (1) $\beta$의 존재는 $F^n$(표준내적) 위의 $T = L_A$에 <a href="ch08.html#c8-3">슈어 정리</a>(정리 6.14)를 적용한 것이다. $L_A$의 특성다항식은 $A$의 특성다항식과 같으므로 분해된다. 이하 $T = L_A$, $V = F^n$이다. (2) $P^*P$의 $(i,j)$ 성분은 $\langle v_j, v_i\rangle = \delta_{ij}$이므로 $P^*P = I_n$이고, $P$가 정사각행렬이므로 $PP^* = I_n$, 즉 $P^{-1} = P^*$이다. (3) 도식에서 $\phi_\beta$는 좌표사상 $x \mapsto [x]_\beta$이다. $Q = [\operatorname{Id}_V]_\gamma^\beta$의 $j$번째 열은 $[e_j]_\beta$이므로 $[x]_\beta = Q[x]_\gamma$, 즉 왼쪽 사각형이 가환이다. 같은 이유로 오른쪽 사각형도 가환이고, 가운데 사각형은 $[T(x)]_\beta = [T]_\beta[x]_\beta$이다. (4) 영문 패널의 &ldquo;$A = PBP^t$&rdquo;는 $F = \mathbb{C}$에서는 $A = PBP^*$이어야 한다. $[T]_\gamma = Q^{-1}[T]_\beta Q$에 $Q^{-1} = P$를 넣으면 $A = PBP^{-1} = PBP^*$이다. $F = \mathbb{R}$이면 $P$는 실행렬이므로 $P^* = P^t$이고 $A = PBP^t$이며, 이때 $P$는 직교행렬이고 $B = P^tAP$는 실 상삼각행렬이다. 한국어 본문은 $A = PBP^*$로 바로잡아 옮겼다(영문 패널은 원문 그대로).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>Let $A \in M_{n\times n}(F)$ be a matrix whose characteristic polynomial splits over $F$. Then</p>
+        <p><strong>(1)</strong> If $F = \mathbb{C}$, then $A$ is unitarily equivalent to a complex upper triangular matrix.</p>
+        <p><strong>(2)</strong> If $F = \mathbb{R}$, then $A$ is orthogonally equivalent to a real upper triangular matrix.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <div class="formal-box">
+          <p><strong><a href="ch08.html#c8-3">Theorem (Schur)</a> :</strong> Let $T : V \to V$ be a linear operator on an inner product space $V$ of dimension $n$. Suppose that the characteristic polynomial of $T$ splits.</p>
+          <p>Then there exists an orthonormal basis $\beta$ for $V$ such that</p>
+          <p>the matrix $[T]_\beta$ is upper triangular.</p>
+        </div>
+        <p>Let $\beta = \{v_1, \ldots, v_n\}$ be an orthonormal basis for $F^n$ so that $B := [L_A]_\beta$ is upper triangular.</p>
+        <p>Let $\gamma = \{e_1, e_2, \ldots, e_n\}$ be the standard basis for $F^n$.</p>
+        <p>Then $P := [v_1\ \cdots\ v_n]$ is such that $PP^* = I_n$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.39 ═══════════ -->
+        <div class="formal-box">
+          <p><strong>Recall :</strong> Consider the following commutative diagrams :</p>
+          <div class="math-display">$$\begin{array}{ccccccc} F^n &amp; \xrightarrow{\ \operatorname{Id}\ } &amp; F^n &amp; \xrightarrow{\ T\ } &amp; F^n &amp; \xrightarrow{\ \operatorname{Id}\ } &amp; F^n \\ {\scriptstyle \phi_\gamma}\Big\downarrow &amp; &amp; {\scriptstyle \phi_\beta}\Big\downarrow &amp; &amp; \Big\downarrow{\scriptstyle \phi_\beta} &amp; &amp; {\scriptstyle \phi_\gamma}\Big\downarrow \\ F^n &amp; \xrightarrow{\ L_Q\ } &amp; F^n &amp; \xrightarrow{\ L_{[T]_\beta}\ } &amp; F^n &amp; \xrightarrow{\ L_{Q'}\ } &amp; F^n \end{array}$$</div>
+          <div class="math-display">$$\text{where } Q = [\operatorname{Id}_V]_\gamma^\beta \text{ and } Q' = [\operatorname{Id}_V]_\beta^\gamma = Q^{-1}.$$</div>
+          <div class="math-display">$$\begin{array}{ccc} F^n &amp; \xrightarrow{\ T\ } &amp; F^n \\ {\scriptstyle \phi_\gamma}\Big\downarrow &amp; &amp; {\scriptstyle \phi_\gamma}\Big\downarrow \\ F^n &amp; \xrightarrow{\ L_{Q'}L_{[T]_\beta}L_Q\ =\ L_{Q'[T]_\beta Q}\ } &amp; F^n \end{array}$$</div>
+          <p>From the above diagrams, we know that</p>
+          <div class="math-display">$$L_{Q'[T]_\beta Q} = L_{[T]_\gamma} \text{ and hence } [T]_\gamma = Q^{-1}[T]_\beta Q.$$</div>
+        </div>
+        <p>Note that $[T]_\gamma = A$ and $Q^{-1} = [\operatorname{Id}]_\beta^\gamma = [v_1\ \cdots\ v_n] = P$.</p>
+        <p>Thus we have $A = PBP^t$, which shows that</p>
+        <p>if $F = \mathbb{C}$, then $A$ is unitarily equivalent to the upper triangular matrix $B$,</p>
+        <p>and</p>
+        <p>if $F = \mathbb{R}$, then $A$ is orthogonally equivalent to the upper triangular matrix $B$.</p>
+        <p><em>Note.</em> (1) The basis $\beta$ comes from <a href="ch08.html#c8-3">Schur's Theorem</a> (Theorem 6.14) applied to $T = L_A$ on $F^n$ with the standard inner product; the characteristic polynomial of $L_A$ is that of $A$, so it splits. Throughout, $T = L_A$ and $V = F^n$. (2) The $(i,j)$ entry of $P^*P$ is $\langle v_j, v_i\rangle = \delta_{ij}$, so $P^*P = I_n$, and $PP^* = I_n$ because $P$ is square; that is, $P^{-1} = P^*$. (3) In the diagrams, $\phi_\beta$ is the coordinate map $x \mapsto [x]_\beta$. The $j$th column of $Q = [\operatorname{Id}_V]_\gamma^\beta$ is $[e_j]_\beta$, so $[x]_\beta = Q[x]_\gamma$, i.e. the left square commutes; the right square commutes for the same reason, and the middle one is $[T(x)]_\beta = [T]_\beta[x]_\beta$. (4) &ldquo;$A = PBP^t$&rdquo; should read $A = PBP^*$ when $F = \mathbb{C}$: substituting $Q^{-1} = P$ into $[T]_\gamma = Q^{-1}[T]_\beta Q$ gives $A = PBP^{-1} = PBP^*$. When $F = \mathbb{R}$, $P$ is real, so $P^* = P^t$ and $A = PBP^t$; then $P$ is orthogonal and $B = P^tAP$ is a real upper triangular matrix.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.40 ═══════════ -->
+
+<!-- S6.5 p40 상단 소제목: ※ A characterization of self-adjoint operators over C -->
+<div class="card note-card" id="note09-3">
+  <div class="card-head">
+    <span class="note-num">NOTE</span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>※ $\mathbb{C}$ 위의 자기수반연산자의 한 특성화</p>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p>※ A characterization of self-adjoint operators over $\mathbb{C}$</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6.5 p40 Recall (1) 반대칭 ⇔ <x,Ax> = 0 (p14 Claim), (2) 연산자판 — (2)는 증명 없음 → Note 보충, "vector space" → 내적공간 -->
+<div class="card rem-card" id="c9-33">
+  <div class="card-head">
+    <span class="rem-num">RECALL</span>
+    <span class="rem-title">반대칭성과 $\langle x, Ax\rangle = 0$ <em>Anti-Symmetry and $\langle x, Ax\rangle = 0$</em></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p><strong>(1)</strong> $A \in M_{n\times n}(\mathbb{R})$을 정사각행렬이라 하자. 그러면 다음은 서로 동치이다.</p>
+        <p>$(i)$ $A$는 반대칭이다.</p>
+        <p>$(ii)$ 모든 $x \in \mathbb{R}^n$에 대하여 $\langle x, Ax\rangle = 0$이다.</p>
+        <p><strong>(2)</strong> $T : V \to V$를 $\mathbb{R}$ 위의 $n$차원 내적공간 $V$ 위의 선형연산자라 하자.</p>
+        <p>그러면 다음은 서로 동치이다.</p>
+        <p>$(i)$ $T^* = -T$이다.</p>
+        <p>$(ii)$ 모든 $x \in V$에 대하여 $\langle x, Tx\rangle = 0$이다.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><em>역주.</em> (1)은 앞에서 증명한 <a href="#c9-11">주장</a>이다. (2)는 슬라이드에 증명이 없으므로 여기에 보충한다. 또한 $T^*$와 $\langle\,\cdot\,,\cdot\,\rangle$이 의미를 가지려면 $V$는 내적공간이어야 하므로, 영문 패널의 &ldquo;vector space&rdquo;를 한국어 본문에서는 내적공간으로 바로잡아 옮겼다. 실 내적공간에서는 모든 $u, w$에 대하여 $\langle u, w\rangle = \langle w, u\rangle$이다.</p>
+        <p>$(i) \Rightarrow (ii)$ : $\langle x, Tx\rangle = \langle T^*x, x\rangle = \langle -Tx, x\rangle = -\langle Tx, x\rangle = -\langle x, Tx\rangle$이므로 $\langle x, Tx\rangle = 0$이다.</p>
+        <p>$(ii) \Rightarrow (i)$ : $S = T + T^*$라 하자. <a href="ch07.html#c7-14">정리 6.11</a>에 의해 $S^* = T^* + T^{**} = T^* + T = S$이므로 $S$는 자기수반이다. 또 모든 $x \in V$에 대하여 다음이 성립한다.</p>
+        <div class="math-display">$$\langle x, S(x)\rangle = \langle x, Tx\rangle + \langle x, T^*x\rangle = \langle x, Tx\rangle + \langle Tx, x\rangle = 2\langle x, Tx\rangle = 0.$$</div>
+        <p>따라서 <a href="#c9-13">보조정리</a>에 의해 $S = T_0$, 즉 $T^* = -T$이다.</p>
+        <p>$V = \mathbb{R}^n$, $T = L_A$로 두면 $(L_A)^* = L_{A^t}$(<a href="ch07.html#c7-12">따름정리</a>)이므로 $T^* = -T$는 $A^t = -A$와 같다. 따라서 (1)은 (2)의 특수한 경우이기도 하다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><strong>(1)</strong> Let $A \in M_{n\times n}(\mathbb{R})$ be a square matrix. Then the followings are equivalent:</p>
+        <p>$(i)$ $A$ is anti-symmetric.</p>
+        <p>$(ii)$ $\langle x, Ax\rangle = 0$ for all $x \in \mathbb{R}^n$</p>
+        <p><strong>(2)</strong> Let $T : V \to V$ be a linear operator on an $n$-dimensional vector space $V$ over $\mathbb{R}$.</p>
+        <p>Then the followings are equivalent:</p>
+        <p>$(i)$ $T^* = -T$</p>
+        <p>$(ii)$ $\langle x, Tx\rangle = 0$ for all $x \in V$</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><em>Note.</em> (1) is the <a href="#c9-11">Claim</a> proved earlier. The slide gives no proof of (2), so we supply one. Also, $V$ must be an inner product space (not merely a vector space) for $T^*$ and $\langle\,\cdot\,,\cdot\,\rangle$ to make sense. In a real inner product space, $\langle u, w\rangle = \langle w, u\rangle$ for all $u, w$.</p>
+        <p>$(i) \Rightarrow (ii)$ : $\langle x, Tx\rangle = \langle T^*x, x\rangle = \langle -Tx, x\rangle = -\langle Tx, x\rangle = -\langle x, Tx\rangle$, so $\langle x, Tx\rangle = 0$.</p>
+        <p>$(ii) \Rightarrow (i)$ : Let $S = T + T^*$. By <a href="ch07.html#c7-14">Theorem 6.11</a>, $S^* = T^* + T^{**} = T^* + T = S$, so $S$ is self-adjoint. Moreover, for all $x \in V$,</p>
+        <div class="math-display">$$\langle x, S(x)\rangle = \langle x, Tx\rangle + \langle x, T^*x\rangle = \langle x, Tx\rangle + \langle Tx, x\rangle = 2\langle x, Tx\rangle = 0.$$</div>
+        <p>Hence $S = T_0$ by the <a href="#c9-13">Lemma</a>, i.e. $T^* = -T$.</p>
+        <p>Taking $V = \mathbb{R}^n$ and $T = L_A$, we have $(L_A)^* = L_{A^t}$ (<a href="ch07.html#c7-12">Corollary</a>), so $T^* = -T$ means $A^t = -A$; thus (1) is also a special case of (2).</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Section 6.5 notes · Slide p.41 ═══════════ -->
+
+<!-- S6.5 p41–p43 Exercise 11 in Section 6.5 (교재 화면 캡처) + (a) 풀이 (p41), (b) (p42; 문항 재수록), (c) (p43; 문항 재수록) — 재수록 문항은 한 번만 전사 -->
+<div class="card ex-card" id="c9-34">
+  <div class="card-head">
+    <span class="ex-num">EX 6.5-11</span>
+    <span class="ex-title">복소 내적공간에서 자기수반연산자의 판정 <em>Characterizing Self-Adjoint Operators on a Complex Inner Product Space</em><span class="src-ref">Friedberg §6.5 #11 · 강의 슬라이드 p.41–43</span></span>
+  </div>
+  <div class="card-body">
+    <div class="ko-panel">
+      <span class="panel-label ko-label">한국어</span>
+      <div class="formal">
+        <p>슬라이드는 교재의 연습문제 11을 그대로 옮겨 실었다. 아래는 그 내용을 다시 서술한 것이다.</p>
+        <p>$V$를 복소 내적공간(무한차원이어도 된다), $T$를 수반연산자 $T^*$가 존재하는 $V$ 위의 선형연산자라 하자.</p>
+        <p><strong>(a)</strong> $T = T^*$이면 모든 $x \in V$에서 $\langle T(x), x\rangle$의 값이 실수임을 보여라.</p>
+        <p><strong>(b)</strong> 모든 $x \in V$에서 $\langle T(x), x\rangle = 0$이면 $T$가 영사상 $T_0$임을 보여라. (힌트: $\langle T(x+y), x+y\rangle$와 $\langle T(x+iy), x+iy\rangle$를 전개해 비교한다.)</p>
+        <p><strong>(c)</strong> 모든 $x \in V$에서 $\langle T(x), x\rangle$가 실수이면 $T = T^*$임을 보여라.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="증명 보기" data-hide="증명 접기">
+        <span class="arrow">&#9654;</span> 증명 보기
+      </button>
+      <div class="proof-content">
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\langle Tx, x\rangle = \langle x, T^*x\rangle = \langle x, Tx\rangle = \overline{\langle Tx, x\rangle}$$</div>
+        <p>이는 모든 $x \in V$에 대하여 $\langle Tx, x\rangle$이 실수임을 증명한다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.42 ═══════════ -->
+        <p><strong>(b)</strong> 모든 $x, y \in V$에 대하여 $\langle Tx, y\rangle = 0$임을 보이겠다.</p>
+        <p>분명히 이로부터 모든 $x \in V$에 대하여 $Tx = 0$이고, 따라서 $T = T_0$이다.</p>
+        <p>실제로 다음이 성립한다.</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle T(x+y), x+y\rangle = \langle Tx, x\rangle + \langle Tx, y\rangle + \langle Ty, x\rangle + \langle Ty, y\rangle\\[2pt]
+                &amp;= \langle Tx, y\rangle + \langle Ty, x\rangle\end{aligned}$$</div>
+        <p>그리고</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle T(x+iy), x+iy\rangle = \langle Tx, x\rangle + \langle Tx, iy\rangle + \langle T(iy), x\rangle + \langle T(iy), iy\rangle\\[2pt]
+                &amp;= -i\langle Tx, y\rangle + i\langle Ty, x\rangle.\end{aligned}$$</div>
+        <p>그러면 $\langle Tx, y\rangle = -\langle Ty, x\rangle = \langle Ty, x\rangle$이 따르고, 따라서 $Tx = 0$이다.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.43 ═══════════ -->
+        <p><strong>(c)</strong> $\langle Tx, x\rangle = \langle x, T^*x\rangle = \overline{\langle T^*x, x\rangle}$가 실수이므로 다음이 성립한다.</p>
+        <div class="math-display">$$\text{모든 } x \in V \text{에 대하여 } \langle Tx, x\rangle = \langle T^*x, x\rangle.$$</div>
+        <p>다음으로 모든 $x, y \in V$에 대하여 $\langle Tx, y\rangle = \langle T^*x, y\rangle$임을 보이겠다.</p>
+        <p>분명히 이로부터 모든 $x \in V$에 대하여 $Tx = T^*x$이고, 따라서 $T = T^*$이다.</p>
+        <p>실제로</p>
+        <div class="math-display">$$\begin{array}{rcl}\langle T(x+y), x+y\rangle &amp;=&amp; \langle Tx, x\rangle + \langle Tx, y\rangle + \langle Ty, x\rangle + \langle Ty, y\rangle\\ \Vert &amp; &amp; \\ \langle T^*(x+y), x+y\rangle &amp;=&amp; \langle T^*x, x\rangle + \langle T^*x, y\rangle + \langle T^*y, x\rangle + \langle T^*y, y\rangle\end{array}$$</div>
+        <p>이므로 $\langle Tx, y\rangle + \langle Ty, x\rangle = \langle T^*x, y\rangle + \langle T^*y, x\rangle$이다.</p>
+        <p>$y$를 $iy$로 바꾸면 $-i\langle Tx, y\rangle + i\langle Ty, x\rangle = -i\langle T^*x, y\rangle + i\langle T^*y, x\rangle$이고,</p>
+        <p>따라서 $-\langle Tx, y\rangle + \langle Ty, x\rangle = -\langle T^*x, y\rangle + \langle T^*y, x\rangle$이다.</p>
+        <p>이를 위의 등식 $\langle Tx, y\rangle + \langle Ty, x\rangle = \langle T^*x, y\rangle + \langle T^*y, x\rangle$과 결합하면</p>
+        <p>원하는 등식 $\langle Tx, y\rangle = \langle T^*x, y\rangle$을 얻는다.</p>
+        <p><em>역주.</em> (1) (b)의 마지막 줄은 두 관계식 $\langle Tx, y\rangle = -\langle Ty, x\rangle$(첫째 전개)와 $\langle Tx, y\rangle = \langle Ty, x\rangle$(둘째 전개를 $i$로 나눈 것)을 한 줄로 묶어 쓴 것이다. 두 식을 더하면 모든 $x, y$에 대하여 $\langle Tx, y\rangle = 0$이고, $y = Tx$로 두면 $\|Tx\|^2 = 0$, 즉 $Tx = 0$이다. 둘째 전개에서는 $\langle Tx, iy\rangle = \overline{i}\langle Tx, y\rangle = -i\langle Tx, y\rangle$, $\langle T(iy), x\rangle = i\langle Ty, x\rangle$, $\langle T(iy), iy\rangle = i\overline{i}\langle Ty, y\rangle = 0$을 썼다. (2) (c)의 첫 줄: 실수 $\langle Tx, x\rangle$의 켤레가 $\langle T^*x, x\rangle$이므로 둘은 같다. 이 등식을 $x$, $y$에 쓰면 두 전개식의 첫째·넷째 항이 지워진다. 마지막 단계는 두 등식을 빼서 $2\langle Tx, y\rangle = 2\langle T^*x, y\rangle$을 얻는 것이고, $y = Tx - T^*x$로 두면 $Tx = T^*x$이다. ((b)를 $T - T^*$에 적용해도 된다.) (3) (b)에서 $x + iy$를 쓰는 단계에 $\mathbb{C}$가 필요하다. 실 내적공간에서는 (b)가 성립하지 않는다. 예를 들어 $\mathbb{R}^2$에서 $\frac{\pi}{2}$만큼의 회전 $T$는 모든 $x$에 대하여 $\langle T(x), x\rangle = 0$이지만 $T \neq T_0$이다(<a href="#c9-33">복습</a> (2) 참조). 세 증명 모두 $V$의 유한차원성을 쓰지 않는다.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+    <div class="en-panel" lang="en">
+      <span class="panel-label en-label">English</span>
+      <div class="en-formal">
+        <p><em>Exercise 11 in Section 6.5 :</em> the slide reproduces the textbook exercise; its content is restated below.</p>
+        <p>Let $V$ be a complex inner product space (possibly infinite-dimensional) and let $T$ be a linear operator on $V$ whose adjoint $T^*$ exists.</p>
+        <p><strong>(a)</strong> Show that if $T = T^*$, then $\langle T(x), x\rangle$ is a real number for every $x \in V$.</p>
+        <p><strong>(b)</strong> Show that if $\langle T(x), x\rangle = 0$ for every $x \in V$, then $T$ is the zero operator $T_0$. (Hint: expand $\langle T(x+y), x+y\rangle$ and $\langle T(x+iy), x+iy\rangle$ and compare.)</p>
+        <p><strong>(c)</strong> Show that if $\langle T(x), x\rangle$ is real for every $x \in V$, then $T = T^*$.</p>
+      </div>
+      <button class="proof-toggle" onclick="toggleProof(this)" data-show="Proof" data-hide="Hide Proof">
+        <span class="arrow">&#9654;</span> Proof
+      </button>
+      <div class="en-proof-content">
+        <p><strong>(a)</strong></p>
+        <div class="math-display">$$\langle Tx, x\rangle = \langle x, T^*x\rangle = \langle x, Tx\rangle = \overline{\langle Tx, x\rangle}$$</div>
+        <p>This proves that $\langle Tx, x\rangle$ is real for all $x \in V$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.42 ═══════════ -->
+        <p><strong>(b)</strong> We will show that $\langle Tx, y\rangle = 0$ for all $x, y \in V$.</p>
+        <p>Obviously, this implies that $Tx = 0$ for all $x \in V$ and hence $T = T_0$.</p>
+        <p>Indeed, we have</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle T(x+y), x+y\rangle = \langle Tx, x\rangle + \langle Tx, y\rangle + \langle Ty, x\rangle + \langle Ty, y\rangle\\[2pt]
+        &amp;= \langle Tx, y\rangle + \langle Ty, x\rangle\end{aligned}$$</div>
+        <p>and</p>
+        <div class="math-display">$$\begin{aligned}0 &amp;= \langle T(x+iy), x+iy\rangle = \langle Tx, x\rangle + \langle Tx, iy\rangle + \langle T(iy), x\rangle + \langle T(iy), iy\rangle\\[2pt]
+        &amp;= -i\langle Tx, y\rangle + i\langle Ty, x\rangle.\end{aligned}$$</div>
+        <p>Then, it follows that $\langle Tx, y\rangle = -\langle Ty, x\rangle = \langle Ty, x\rangle$ and so $Tx = 0$.</p>
+        <!-- ═══════════ Section 6.5 notes · Slide p.43 ═══════════ -->
+        <p><strong>(c)</strong> Since $\langle Tx, x\rangle = \langle x, T^*x\rangle = \overline{\langle T^*x, x\rangle}$ is real, it holds that</p>
+        <div class="math-display">$$\langle Tx, x\rangle = \langle T^*x, x\rangle \text{ for all } x \in V.$$</div>
+        <p>Next, we will show that $\langle Tx, y\rangle = \langle T^*x, y\rangle$ for all $x, y \in V$.</p>
+        <p>Obviously, this implies that $Tx = T^*x$ for all $x \in V$ and so $T = T^*$.</p>
+        <p>Indeed,</p>
+        <div class="math-display">$$\begin{array}{rcl}\langle T(x+y), x+y\rangle &amp;=&amp; \langle Tx, x\rangle + \langle Tx, y\rangle + \langle Ty, x\rangle + \langle Ty, y\rangle\\ \Vert &amp; &amp; \\ \langle T^*(x+y), x+y\rangle &amp;=&amp; \langle T^*x, x\rangle + \langle T^*x, y\rangle + \langle T^*y, x\rangle + \langle T^*y, y\rangle\end{array}$$</div>
+        <p>and so $\langle Tx, y\rangle + \langle Ty, x\rangle = \langle T^*x, y\rangle + \langle T^*y, x\rangle$.</p>
+        <p>By replacing $y$ with $iy$, we have $-i\langle Tx, y\rangle + i\langle Ty, x\rangle = -i\langle T^*x, y\rangle + i\langle T^*y, x\rangle$</p>
+        <p>and so $-\langle Tx, y\rangle + \langle Ty, x\rangle = -\langle T^*x, y\rangle + \langle T^*y, x\rangle$</p>
+        <p>By combining this with the above equality $\langle Tx, y\rangle + \langle Ty, x\rangle = \langle T^*x, y\rangle + \langle T^*y, x\rangle$,</p>
+        <p>we obtain the desired equality $\langle Tx, y\rangle = \langle T^*x, y\rangle$.</p>
+        <p><em>Note.</em> (1) The last line of (b) packs together two relations: $\langle Tx, y\rangle = -\langle Ty, x\rangle$ (first expansion) and $\langle Tx, y\rangle = \langle Ty, x\rangle$ (second expansion divided by $i$). Adding them gives $\langle Tx, y\rangle = 0$ for all $x, y$, and putting $y = Tx$ gives $\|Tx\|^2 = 0$, i.e. $Tx = 0$. The second expansion uses $\langle Tx, iy\rangle = \overline{i}\langle Tx, y\rangle = -i\langle Tx, y\rangle$, $\langle T(iy), x\rangle = i\langle Ty, x\rangle$ and $\langle T(iy), iy\rangle = i\overline{i}\langle Ty, y\rangle = 0$. (2) First line of (c): the real number $\langle Tx, x\rangle$ has conjugate $\langle T^*x, x\rangle$, so the two are equal; applying this to $x$ and to $y$ cancels the first and fourth terms of the two expansions. The last step subtracts the two equalities to get $2\langle Tx, y\rangle = 2\langle T^*x, y\rangle$, and putting $y = Tx - T^*x$ gives $Tx = T^*x$. (Alternatively, apply (b) to $T - T^*$.) (3) The step with $x + iy$ in (b) is where $\mathbb{C}$ is needed: over a real inner product space (b) fails, e.g. the rotation $T$ of $\mathbb{R}^2$ by $\frac{\pi}{2}$ satisfies $\langle T(x), x\rangle = 0$ for all $x$ but $T \neq T_0$ (compare <a href="#c9-33">Recall</a> (2)). None of the three proofs uses finite dimensionality of $V$.</p>
+        <div class="qed">□</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ad: before footer -->
+<div style="text-align:center; margin: 2rem 0;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1269032424784987" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="../index.html">홈</a>
+    <a href="../settheory/index.html">집합론</a>
+    <a href="../analysis2/index.html">해석학2</a>
+    <a href="../la1/index.html">선형대수학1</a>
+    <a href="index.html">선형대수학2 홈</a>
+    <a href="../numtheory/index.html">응용정수론</a>
+      <a href="../stewart/index.html">Stewart</a>
+    <a href="ch01.html">01</a>
+    <a href="ch02.html">02</a>
+    <a href="ch03.html">03</a>
+    <a href="ch04.html">04</a>
+    <a href="ch05.html">05</a>
+    <a href="ch06.html">06</a>
+    <a href="ch07.html">07</a>
+    <a href="ch08.html">08</a>
+    <a href="ch09.html">09</a>
+    <a href="midterm.html">기출문제</a>
+    <a href="practice.html">예상문제</a>
+    <a href="../about.html">소개 About</a>
+    <a href="../privacy.html">개인정보처리방침 Privacy</a>
+    <a href="../disclaimer.html">면책조항 Disclaimer</a>
+  </div>
+  <p class="footer-copy">&copy; 2025&ndash;2026 DDALKKAK. All rights reserved.</p>
+  <p class="footer-desc">본 사이트는 교육 목적으로 제작되었습니다. This site is for educational purposes only.</p>
+</footer>
+
+<script src="common.js" defer></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+</body>
+</html>

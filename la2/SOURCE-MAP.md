@@ -129,6 +129,26 @@
 66. **§6.4 p18 Example 1 (2)**: "Since $\langle v_1, v_2\rangle = 1$" — $v_1=(1,0,0)^t$, $v_2=(2,1,0)^t$이므로 $\langle v_1,v_2\rangle = 2$. 결론(직교 아님)은 불변. en verbatim + Note, ko 바른 값 + 역주. (c8-17)
     보충(오류 아님, Note/역주): c8-4 정리 6.10 인용; c8-9 정리 6.15 (c)는 (b)의 정규성에 (a) 적용·(d)는 (c) 사용; c8-12 예 3은 무한차원이라 정리 6.16의 유한차원 가정이 필요함을 보임·$U=T^*$는 기저에서 확인 후 반쌍선형으로 확장; note08-2 회전의 특성다항식 판별식 $4\cos^2\theta-4\lt0$; c8-14 보조정리 (a)는 정리 6.15 (c)·(b)는 $\det(A-tI_n)$의 복소 일차인수의 근이 실수, 정리 6.10과 $T_A$의 자기수반성; c8-15 "the lemma" = 보조정리 (b), (ii)⇒(i)의 $A$ 미정의($A:=[T]_\beta$); c8-18 대칭 ⇒ 분해·정규직교 고유기저는 보조정리 (b)·정리 6.17, 정규화 상수 검산.
     기타(수정 없이 verbatim): p8 정리 6.15 (c) 증명의 "$(T-\lambda I)(x) = 0$"(영벡터를 숫자 0으로), p10 "$\cdots dt := \cdots$"(정의 기호), p14 "Let $\lambda$ be an eigenvalue … , and suppose", p19 "the eigenvectors of $A$ consists of an orthonormal basis"(문법), p12 예 3 (계속)에서 $n, m$을 $\mathbb{Z}$ 첨자와 겹쳐 재사용. p5는 슈어 정리 진술, p15는 보조정리 진술, p16은 정리 6.17 진술을 재인쇄 → 한 번만 전사. p13 박스 = p7 Example 1 재수록(note08-2 안 formal-box). Example 번호가 p18에서 1로 다시 시작(EXAM 1·2 배지가 둘씩).
+67. **§6.5 p2 Recall 1**: "is call a linear transformation" → called (en verbatim, ko 바른 문장).
+68. **§6.5 p3 Recall 2**: 정리 6.16·6.17을 유한차원 가정 없이 재진술; "Definitions."는 정의 하나. Note/역주.
+69. **§6.5 p4 Definition**: "over F. such that" 마침표 군더더기.
+70. **§6.5 p4 Example (2)**: 무한차원 $H$에서 $T(f) = hf$를 유니타리라 부르나 정의는 유한차원만 — Note가 등거리·전사 구분과 $T^*$ = $\bar h$ 곱셈을 보충.
+71. **§6.5 p5 Example (2)**: "$v = e_1+e_2+e_3$ is an eigenvalue" → eigenvector.
+72. **§6.5 p6·p7–9·p15**: "orthonormal basis β is for V / Fⁿ" — "is" 군더더기.
+73. **§6.5 p7 Remarks (2)**: "linear operator Fⁿ" → on Fⁿ.
+74. **§6.5 p10 (v)⇒(i)**: "it is necessary to show"는 "it suffices"의 뜻; 증명이 $A^*A = I$에서 멈춤 → Note가 $AA^* = I$까지 완성.
+75. **§6.5 p11 행렬 보조정리 증명**: "$0_V$" → $0_{F^n}$.
+76. **§6.5 p12 Remark (2)**: "which is not self-adjoint which satisfies" 문장; "$m \ge 2$"(m = 1도 성립).
+77. **§6.5 p17**: "$a_1x_1 + \cdots a_nx_n$"에 "+" 누락(250dpi 확인).
+78. **§6.5 p21 Example**: "for all $x \in V$" → $\mathbb{R}^4$.
+79. **§6.5 p23 Corollary 2 (ii)⇒(i)**: "by Theorem 6.17" → 정리 6.16(복소, 유니타리 ⇒ 정규). en은 링크 없이 원문, Note가 6.16을 링크.
+80. **§6.5 p24 Example 2 (2)**: "For details, see Theorem 6.15" → 정리 6.17 앞 보조정리 (b)(c8-14)와 정리 6.17(c8-15).
+81. **§6.5 p32 정리 6.19 증명**: "$(PDP^*)(PDP^*)^* = (PDP^*)(PDP^*)$" → $(PDP^*)(PD^*P^*)$.
+82. **§6.5 p36 Example 6 Step 2**: "$\lambda_2 = 4$" → 8 (보인 행렬이 $A - 8I$이고 $\det(A - 4I) = 16 \ne 0$).
+83. **§6.5 p39 정리 6.21 증명**: "$A = PBP^t$" → $F = \mathbb{C}$에서는 $PBP^*$.
+84. **§6.5 p40 Recall (2)**: "n-dimensional vector space V over ℝ" → 내적공간.
+85. **§6.5 기타(Note/역주)**: p27 Example 4의 행들이 "orthogonal basis" → 정규직교; p42 (b) 두 관계를 한 줄에; 그 밖의 세부는 아래 인벤토리.
+86. **§6.5 p41 Exercise 11**: 슬라이드가 교재 연습문제 원문을 그대로 실음 → 규약 6대로 진술은 다시 서술(en·ko), 풀이(p41–43)는 원문 전사.
 
 ## 챕터별 인벤토리 (카드 id = 배지 번호; 슬라이드 페이지 = PDF 페이지)
 
@@ -504,6 +524,210 @@ Section 6.1 강의 노트, 22장 (p1 제목 제외). 카드 28 (DEF 6, THM 2, RE
 | c8-18 | EXAM 2 | p19 | 대칭행렬의 정규직교 고유기저 / An Orthonormal Basis of Eigenvectors for a Symmetric Matrix — Note/역주(보충) |  |
 
 **예제 변형 연습문제 (2026-11-16, 사용자 "6.4 예제 숫자 바꿔서 연습문제 만들어줘"):** 단원 끝 섹션 "연습문제 · 예제 변형" = note08-3(자작 안내) + v8-1~v8-7(배지 `변형 n`, src-ref `원본 p.N Example n`, 심화 표시는 v8-3·v8-4·v8-7). 원본: v8-1←p7 예 1(A=(3 −4;4 3)), v8-2←p7 예 2(반대칭 (0 3 0;−3 0 4;0 −4 0), 고유값 0·±5i), v8-3←p11–12 예 3(T(f)=f₃f, U(f)=(f₁+f₋₁)f 자기수반·고유벡터 없음), v8-4←p17 예 4(A=(1 i;i 2) 비정규, B=(1 i;i 1) 정규·비자기수반, C=(2 1+i;1−i 3) 자기수반), v8-5←p18 예 1((2 1 1;0 3 1;0 0 4)), v8-6←p19 예 2((2 0 2;0 3 0;2 0 5), 고유값 1·3·6), v8-7←p19 예 2 심화((2 1 1;1 2 1;1 1 2), 중복 고유값 GS). sympy 검산 + Opus 검증 1회(CRITICAL 0, MAJOR 1 = v8-7 특성다항식 계산 생략 → 보충, MINOR 반영). 규약 주석 12번.
+
+### ch09.html — 6.5 유니타리 연산자와 직교연산자 / §6.5 Unitary and Orthogonal Operators and Their Matrices
+Section 6.5 노트 43장(11/24 게시, HWP 조판 — 텍스트 추출 불가 → 110dpi 시각 전사). p1 표지(카드 없음). 메인 루프가 슬라이드를 읽고 경계(p23 Corollary 2 / p24 Example 2)를 정한 뒤 Opus 빌더 2개 병렬(A: p2–23 → c9-1~17·note09-1, B: p24–43 → c9-18~34·note09-2~3; en 전사와 ko 번역·Note/역주를 함께 작성), assemble.py로 조립. 카드 34(환경 33 + 연습문제 1), 토글 각 15. ERRATA 67–86. 정리 6.18은 진술 c9-6, 행렬판 증명(p8–10 박스)은 c9-7 REM 안, 연산자판 재진술·증명(p15–18)은 c9-12. 연습문제 11(c9-34)은 슬라이드가 교재 문장을 그대로 실어 진술만 다시 서술.
+같은 작업에서 기존 단원의 표시 버그 수정: aligned/gathered 바로 뒤의 대괄호 식(예: [TT*]_β)을 MathJax가 선택 인자로 먹어 사라짐(공백이 있어도 마찬가지) → ch02·ch04·ch06·ch08 12곳을 빈 그룹 {} 뒤로 옮김(커밋 a09ac97).
+
+<details><summary>빌더 A 인벤토리</summary>
+
+#### Builder A: inventory for slides 1–23 (§6.5 → ch09)
+
+##### Slide range
+The brief's split puts Corollary 2 on slide 22 and Example 2 on slide 23. The actual images are one slide later:
+- p.20 = Corollary 1
+- p.21 = Example on ℝ⁴
+- p.22 = Example on ℝⁿ (missing from the brief's list)
+- p.23 = Corollary 2 with its proof
+- p.24 = Example 2 (rotation by θ)
+
+I followed the brief's content boundary ("through Corollary 2 and its proof"), so frag-A covers p.2–p.23. frag-B already in s65/ starts at p.24 with Example 2 (c9-101), so nothing is missing and nothing is duplicated.
+
+The brief's "Known so far" list also left out p.15–p.19. Those slides restate Theorem 6.18 with a Proof Plan, prove it directly for operators (p.16–18) and give an operator Lemma (p.19). Corollary 1 is on p.20.
+
+p.1 is the title page and has no card. The red header on p.2, "Section 6.5. Unitary and orthogonal operators and their matrices", is the section title; the supervisor should add the `div.section-title`.
+
+##### Arrangement for Theorem 6.18
+The slides prove Theorem 6.18 twice:
+- matrix form for T = L_A: p.7–p.10, with the matrix Lemma on p.11
+- operator form: p.15–p.18, with the operator Lemma on p.19
+
+The supervisor suggested proving it in matrix form plus a Note. Because p.15–19 already contain a full operator proof, I did this instead:
+- **c9-6 (THM 6.18, p.6):** the statement. Its proof toggle holds only a pointer (Note/역주) to both proofs.
+- **c9-7 (REM, p.7):** Remarks (1) and (2). Its proof toggle holds the five boxed matrix implications from p.8–10, each as a `div.formal-box` followed by its proof. Slide comments p.8, p.9 and p.10 are inside the toggle in both panels.
+- **c9-12 (THM 6.18 again, p.15):** the restated theorem. The toggle holds the Proof Plan (as an `array`) and the five operator-version boxes and proofs from p.16–18, with slide comments inside.
+  - The TOC therefore lists THM 6.18 twice. The second entry is titled "정리 6.18 (다시 보기)와 증명 / Theorem 6.18 (Restated) and Its Proof", following the ch05 "(재방문)" and ch07 "(다시 보기)" precedent.
+  - I did not use the ch07/ch08 "state it once at the proof location" convention: moving the p.6 statement down to p.15 would push it nine slides down, below the Remarks that already cite it.
+- **Both lemmas (c9-8 matrix, c9-13 operator)** stay in slide order, after the proofs that cite them, with forward links.
+
+##### Card table
+
+| id | badge | slide(s) | content | proof status |
+|---|---|---|---|---|
+| c9-1 | RECALL 1 | p.2 | Linear transformation = preserves vector-space structure | no proof (recall) |
+| note09-1 | NOTE | p.2 | Guiding Problem of Section 6.5; statements (i) TT*=T*T=I, (ii) ⟨Tx,Ty⟩=⟨x,y⟩, (iii) ‖Tx‖=‖x‖ "are equivalent (see Theorem 6.18)" | n/a; our Note: finite-dim assumption; these are (i),(ii),(v) of Thm 6.18 |
+| c9-2 | RECALL 2 | p.3 | (1) Def normal + Thm 6.16 (F=ℂ); (2) Def self-adjoint + Thm 6.17 (F=ℝ) | recall, links to ch08 c8-5/c8-10/c8-13/c8-15; our Note on the omitted finite-dim hypothesis |
+| c9-3 | DEF | p.4 | unitary (F=ℂ) / orthogonal (F=ℝ) operator: ‖T(x)‖=‖x‖ on finite-dim V | definition |
+| c9-4 | EXAM | p.4 | (1) rotations and reflections in ℝ² are orthogonal; (2) T(f)=hf on H with h·h̄=1 is unitary | ours: Note adds the length computations for rotation and reflection, plus the infinite-dimensional caveat (isometry; T onto; T* = multiplication by h̄) |
+| c9-5 | EXAM | p.5 | T(e1)=e2, T(e2)=e3, T(e3)=e1: (1) preserves norm and inner product; (2) eigenvalue 1, f(t)=−(t−1)(t²+t+1); (3) [T][T]*=I₃ | original + our Note |
+| c9-6 | THM 6.18 | p.6 | (i)–(v) equivalent | toggle = pointer to c9-7/c9-8 and c9-12/c9-13 |
+| c9-7 | REM | p.7–p.10 | (1) [T*]_β=[T]*_β; (2) matrix version (i)–(v) for L_A; toggle: five boxed implications | (i)⇒(ii) Easy, (ii)⇒(iii) Easy, (iii)⇒(iv) Obvious → original + our Note; (iv)⇒(v) original + short Note; (v)⇒(i) original + our Note completing A*A=I ⇒ AA*=I |
+| c9-8 | LEM | p.11 | B self-adjoint matrix, ⟨x,Bx⟩=0 ∀x ⇒ B=O | original + our Note (why the eigenbasis exists over ℝ/ℂ, 0_V, columns) |
+| c9-9 | REM | p.12–p.13 | (1) rotation by 90°: ⟨v,Tv⟩=0, T≠0, not self-adjoint; (2) ℝ^{2m} analogue; (Continued) (3) anti-symmetric A ⇒ ⟨Ax,x⟩=0 | original + our Note |
+| c9-10 | REM | p.14 | real symmetric A: ⟨x,Ax⟩=0 ∀x ⇔ A=O | original + our Note |
+| c9-11 | CLAIM | p.14 | A real: anti-symmetric ⇔ ⟨x,Ax⟩=0 ∀x | (i)⇒(ii) "Okay." → our Note; (ii)⇒(i) original + Note |
+| c9-12 | THM 6.18 | p.15–p.18 | restated theorem + Proof Plan + operator proof (5 boxes) | (i)⇒(ii), (ii)⇒(iii), (iv)⇒(v), (v)⇒(i) original + Note; (iii)⇒(iv) "Obvious." → our Note |
+| c9-13 | LEM | p.19 | U self-adjoint operator, ⟨x,U(x)⟩=0 ∀x ⇒ U=T₀ | original + our Note |
+| c9-14 | COR 1 | p.20 | real V: orthonormal eigenbasis with abs-value-1 eigenvalues ⇔ T self-adjoint and orthogonal | original + our Note |
+| c9-15 | EXAM | p.21 | T on ℝ⁴ with eigenvalues 1,1,−1,−1 on an orthonormal γ; [T]_β = Q[T]_γQ^{-1} = Q[T]_γQ^t | original + our Note (why, QQ*=I, concrete example) |
+| c9-16 | EXAM | p.22 | general ℝⁿ: A=[T]_std = Q·diag(I_m, −I_{n−m})·Q^t | original + our Note |
+| c9-17 | COR 2 | p.23 | complex V: orthonormal eigenbasis with \|λ\|=1 ⇔ T unitary | original + our Note (corrects the theorem citation) |
+
+**Totals:** 17 cards (c9-1 … c9-17) and 1 note (note09-1); 17 TOC entries in toc-A.html.
+
+##### Source errors (en kept verbatim; ko corrected with 역주)
+
+| # | slide | quote | correction | handled in |
+|---|---|---|---|---|
+| 1 | p.2 | "T : V → W is call a linear transformation" | "is called" | c9-1 Note/역주 |
+| 2 | p.3 | Recall 2 states Theorems 6.16 / 6.17 for any inner product space V | both need V finite-dimensional (ch08 c8-10, c8-15) | c9-2 Note/역주 |
+| 3 | p.3 | "(2) Definitions. :" introducing one definition | singular (trivial) | c9-2 Note/역주 |
+| 4 | p.4 | "…inner product space V over F. such that ‖T(x)‖ = ‖x‖…" | stray period; one sentence | c9-3 Note/역주 |
+| 5 | p.4 | Example (2) calls T on H (infinite-dimensional) unitary, but the Definition is only for finite-dimensional V | in infinite dimension: isometry, and unitary only if also onto; T is onto (T(h̄f)=f), and T* = multiplication by h̄ | c9-4 Note/역주 |
+| 6 | p.5 | "v = e1+e2+e3 is an eigenvalue of T" | eigenvector | c9-5 Note/역주 |
+| 7 | p.6, p.15 | "(iv) There exists an orthonormal basis β is for V" | drop "is" | c9-6, c9-12 Note/역주 |
+| 8 | p.7, p.8, p.9 | matrix (iv) "β = {v1,…,vn} is for F^n" | drop "is" | c9-7 Note/역주 |
+| 9 | p.7 | "the corresponding linear operator F^n" | "linear operator on F^n" | c9-7 Note/역주 |
+| 10 | p.10 | "Thus, it is necessary to show that…" | means "it suffices to show"; the slide also stops before the last step A*A=I_n ⇒ AA*=I_n (square matrix) | c9-7 Note/역주 completes it |
+| 11 | p.11 | "Bx = 0_V for all x ∈ β" (V is not defined in the matrix lemma) | 0_{F^n} | c9-8 Note; ko writes 0_{F^n} |
+| 12 | p.12 | "which is not self-adjoint which satisfies" | "…and satisfies"; also "for each m ≥ 2", though the construction works for m = 1 too | c9-9 Note/역주 |
+| 13 | p.14 | Claim (ii) "⟨x,Ax⟩ = 0 for all x∈ℝⁿ" has no final period | trivial; inventory only | — |
+| 14 | p.17 | "⟨a1x1 +··· anxn, a1x1 +··· anxn⟩" (checked at 250 dpi) | missing "+" before a_nx_n | c9-12 Note/역주 |
+| 15 | p.21 | "(i.e., T = T* and ‖T(x)‖ = ‖x‖ for all x ∈ V.)" where the space is ℝ⁴ | V = ℝ⁴ | c9-15 Note; ko writes ℝ⁴ |
+| 16 | p.23 | Corollary 2, (ii)⇒(i): "Since T is unitary, by Theorem 6.17, V has an orthonormal basis…" | should be Theorem 6.16 (V complex; unitary ⇒ TT*=T*T=I by Thm 6.18 ⇒ normal) | c9-17 Note/역주 |
+
+On error 16: in the en panel I left "Theorem 6.17" unlinked so the link does not send readers to the wrong theorem. The Note links Theorem 6.16 (ch08#c8-10). The ko panel says 정리 6.16, linked.
+
+**Not errors, but filled in by Notes:**
+- p.8 "Easy." ×2, "Obvious."; p.14 "Okay."; p.16 "Obvious." — complete arguments added.
+- p.5 (3): "[T][T]* = I₃ and hence [T]*[T] = I₃" is justified by the one-sided-inverse fact.
+- p.21 and p.22: "QQ* = I since γ (β) is orthonormal". Orthonormal columns give Q*Q = I directly; QQ* = I then follows because Q is square.
+
+**Possible bug in deployed ch08, outside my scope.** ch08.html lines 453 and 472 (c8-4, both panels) contain `$$\begin{aligned}[TT^*]_\beta …`. MathJax's `aligned` takes an optional `[pos]` argument (AmsEqnArray calls GetBrackets), so `[TT^*]` is probably swallowed and "[TT*]" vanishes from the rendered line. I avoided this in frag-A with `\begin{aligned}{}[T]_\beta` (c9-15, both panels). The fix for ch08 would be the same `{}` insertion. I could not confirm this by rendering (see below).
+
+##### Arithmetic verified (sympy)
+- **p.5:**
+  - det([[−t,0,1],[1,−t,0],[0,1,−t]]) = 1 − t³ = −(t−1)(t²+t+1)
+  - M·Mᵗ = Mᵗ·M = I₃, and Mᵗ equals the second factor shown on the slide
+  - M(1,1,1)ᵗ = (1,1,1)ᵗ
+  - T(a,b,c) = (c,a,b), and ⟨Tx,Ty⟩ = ad+be+cf
+- **p.12:**
+  - ⟨(a,b), (−b,a)⟩ = 0
+  - for m = 3, Σ aᵢ·T(a)ᵢ = 0 with T(a) = (a2, −a1, a4, −a3, a6, −a5)
+- **p.4 Note:**
+  - ‖rotation(x)‖² = a²+b²
+  - ‖2⟨x,u⟩u − x‖² − ‖x‖² = 8ab·u1u2(u1²+u2²−1), which is 0 for a unit vector u
+- **p.21/p.22:** with Q the normalized 4×4 Hadamard matrix (columns ½(1,1,1,1), ½(1,−1,1,−1), ½(1,1,−1,−1), ½(1,−1,−1,1)) and D = diag(1,1,−1,−1):
+  - QᵗQ = QQᵗ = I and Q⁻¹ = Qᵗ
+  - A = QDQᵗ is symmetric, AAᵗ = I, and AQ = QD
+  - A = [[0,0,1,0],[0,0,0,1],[1,0,0,0],[0,1,0,0]] (used as the example in the c9-15 Note)
+- **p.13:** x^t(Ax) = (A^t x)^t x = −(Ax)^t x for A^t = −A, checked symbolically by hand (trivial).
+
+##### Static checks on frag-A.html
+- Tags (div, p, span, button, em, strong, a) are balanced.
+- No `<` + letter inside math, and no bare `&`.
+- `$` parity holds on every line.
+- Braces, `\left`/`\right` and `\begin`/`\end` are balanced in all 1451 math segments.
+- A MathJax render check was attempted but not completed: headless Chrome via print/node_modules/puppeteer-core could not load the MathJax CDN within 120 s (no network in the sandbox), and there is no local MathJax copy.
+
+##### Terminology choices
+- unitary operator = 유니타리 연산자 (spaced, as in ch06 "유니타리 행렬"); orthogonal operator = 직교연산자 (compound, like 정규연산자 and 자기수반연산자). Both match the GLOSSARY unit title "유니타리 연산자와 직교연산자".
+- T₀ / zero operator = 영사상 (la2 §5.4 glossary).
+- anti-symmetric = 반대칭행렬 (same as skew-symmetric).
+- isometry = 등거리사상 (new; appears only in c9-4's 역주).
+- Guiding Problem of Section 6.5 = 6.5절의 길잡이 문제.
+- Proof Plan = 증명 계획.
+- Remark (Continued) = 주의 (계속).
+- Easy. / Obvious. / Okay. = 쉽다. / 자명하다. / 바로 확인된다.
+- Badge CLAIM uses thm-card with `span.thm-num`, per the brief.
+
+</details>
+
+<details><summary>빌더 B 인벤토리 (id는 조립 후 번호)</summary>
+
+#### Builder B inventory: §6.5 slides p.24–43 (frag-B.html)
+
+##### Slide numbering vs. the brief
+The brief's "Known so far" list is one slide off from p.21 onward. The actual images are:
+p-21 = Example (T on ℝ⁴), p-22 = Example (general ℝⁿ, ±1 eigenvalues), **p-23 = Corollary 2 + proof**, p-24 = Example 2 (rotation).
+Builder A's frag-A.html (17:13 version) already has Corollary 2 as **c9-17 (COR 2, Slide p.23)**, including the "Theorem 6.17 → 6.16" fix. To avoid a duplicate card, frag-B **starts at p.24 (Example 2)**. My own Corollary 2 draft was dropped.
+
+##### Cards (ids before the supervisor renumbers them; the assembler maps c9-1NN → c9-(na+NN))
+
+| id | badge | slide(s) | content | proof status |
+|---|---|---|---|---|
+| c9-18 | EXAM 2 | p.24 | rotation by θ (0<θ<π): (1) preserves length/inner product via Thm 6.18, (2) matrix; not self-adjoint; no eigenvectors, (3) T* = rotation by −θ | original + our Note (algebraic checks for (1)–(3), citation fix) |
+| c9-19 | DEF | p.25 | reflection on ℝ² about a line L | original (definition) |
+| c9-20 | EXAM 3 | p.25 | reflection is orthogonal (Corollary 1 to Thm 6.18) | original + our Note (existence of v₁, v₂, basis) |
+| c9-21 | DEF | p.26 | orthogonal matrix / unitary matrix | original (definition) |
+| c9-22 | REM | p.26 | (1) real ⇒ A* = Aᵗ, (2) AA* = I ⇔ rows orthonormal basis, (3) T unitary ⇔ [T]_β unitary for some ONB β | (1)(2) original; (2) completed and (3) **ours** (toggle with Note only) |
+| c9-23 | EXAM 4 | p.27 | rotation matrix is orthogonal; rows and columns form an "orthogonal basis" | original + our Note (AAᵗ = I computed; they are in fact orthonormal) |
+| c9-24 | EXAM 5 | p.28 | standard matrix of a reflection = (cos2θ sin2θ; sin2θ −cos2θ) via A = Q[L_A]_γQ⁻¹ | original + our Note (Thm 2.23 explained, Q⁻¹ = Qᵗ, double-angle formulas) |
+| c9-25 | REM 1 | p.29 | complex normal ⇒ A = QDQ⁻¹, Q unitary; defines "unitarily equivalent" | original + our Note (Thm 6.16 applied to L_A, Q*Q = I) |
+| c9-26 | REM 2 | p.30 | unitarily equivalent to diagonal ⇒ ONB of eigenvectors | original + our Note |
+| c9-27 | REM 3 | p.31 | (℘1) normal, (℘2) ONB eigenvectors, (℘3) unitarily equivalent to diagonal: equivalent; implication table | original (summary) + our Note (Thm 6.16 via L_A) |
+| c9-28 | THM 6.19 | p.32 | complex A normal ⇔ unitarily equivalent to a diagonal matrix | original proof + our Note (**error fix**) |
+| c9-29 | THM 6.20 | p.33–34 | real A symmetric ⇔ orthogonally equivalent to a real diagonal matrix; (⇒) p.33, (⇐) p.34 (statement repeated on p.34, transcribed once) | original proof + our Note (Thm 6.17 via L_A, Qᵗ = Q⁻¹) |
+| c9-30 | REM 4 | p.35 | real analogue of Remark 3 | original (summary) + our Note |
+| c9-31 | EXAM 6 | p.36–37 | A = (4 2 2; 2 4 2; 2 2 4): Steps 1–4, A = PDPᵗ | original + our Note (**error fix**, all arithmetic verified) |
+| note09-2 | NOTE | p.38 | "The following theorem is the matrix form of Schur's Theorem." | narrative |
+| c9-32 | THM 6.21 | p.38–39 | Schur (matrix form): over ℂ unitarily equivalent to upper triangular; over ℝ orthogonally equivalent to real upper triangular. Proof toggle holds the boxed "Theorem (Schur)" recap (p.38) and the boxed "Recall" commutative diagrams (p.39) as div.formal-box, in slide order | original proof + our Note (**error fix**, Schur applied to L_A, PP* = I, diagram commutativity) |
+| note09-3 | NOTE | p.40 | "※ A characterization of self-adjoint operators over ℂ" (subsection heading) | narrative |
+| c9-33 | RECALL | p.40 | (1) real A anti-symmetric ⇔ ⟨x,Ax⟩ = 0 (= Claim p.14, A's c9-11); (2) operator version T* = −T ⇔ ⟨x,Tx⟩ = 0 | (1) proved earlier (link); (2) **ours** (toggle with Note only: (i)⇒(ii) direct, (ii)⇒(i) via S = T + T* and A's Lemma c9-13) |
+| c9-34 | EX 6.5-11 | p.41–43 | Friedberg §6.5 #11 (a)(b)(c): ⟨T(x),x⟩ real ⇔ T self-adjoint; ⟨T(x),x⟩ = 0 ⇒ T = T₀ over ℂ. Statement is a textbook screenshot on p.41; p.42/p.43 repeat (b)/(c), transcribed once | original solutions + our Note (unpacks (b)'s last line, (c)'s first and last steps, real counterexample) |
+
+17 cards in the TOC (toc-B.html) plus 2 note cards. No slide lists recommended textbook exercises. The deck ends at p.43 with no §6.6 announcement, so there is no closing note card.
+
+##### Links to Builder A cards (taken from frag-A.html as of 17:13)
+- `#c9-6` THM 6.18 (p.6): cited by Examples 2 and 4, Remark (3) Note
+- `#c9-14` COR 1 (p.20): cited by Example 3
+- `#c9-13` LEM (p.19, self-adjoint U with ⟨x,U(x)⟩ = 0 ⇒ U = T₀): used in the Recall (2) proof
+- `#c9-11` CLAIM (p.14, anti-symmetric ⇔ ⟨x,Ax⟩ = 0): Recall (1)
+
+If Builder A renumbers, these four hrefs need updating. They do not match the assembler's `c9-1(\d\d)` renumber pattern, so it leaves them alone.
+Other links: ch07 c7-11 (Thm 6.10), c7-12 (Cor (L_A)* = L_{A*}), c7-14 (Thm 6.11), c7-16 (Cor, conjugate transpose); ch08 c8-3 (Schur), c8-9 (Thm 6.15), c8-10 (Thm 6.16), c8-14 (Lemma), c8-15 (Thm 6.17); ch02 c2-23 (change of basis remark).
+
+##### Source errors found (en panel keeps the original; ko corrected with 역주; en Note explains)
+1. **p.24, Example 2 (2):** "For details, see Theorem 6.15." Theorem 6.15 (properties of normal operators) does not give eigenvectors. The relevant fact (a self-adjoint operator on a nonzero finite-dimensional real space has an eigenvector) is the Lemma (b) before Thm 6.17 (ch08 c8-14) together with Theorem 6.17 (c8-15). The en text is left unlinked, ko is corrected to 정리 6.17, and the Note links both. (Friedberg's own Example 1 may contain the same reference.)
+2. **p.32, Theorem 6.19 proof:** "AA* = (PDP*)(PDP*)* = **(PDP*)(PDP*)** = PDID*P*". The third expression should be (PDP*)(PD*P*), since (PDP*)* = PD*P*. Corrected in ko, explained in the Note.
+3. **p.36, Example 6 Step 2:** "**λ₂ = 4** ⇒ (−4 2 2; 2 −4 2; 2 2 −4)…" should be λ₂ = 8. The matrix shown is A − 8I, and det(A − 4I) = 16 ≠ 0. Corrected in ko, explained in the Note.
+4. **p.39, Theorem 6.21 proof:** "Thus we have **A = PBPᵗ**". For F = ℂ this should be A = PBP*: substituting Q⁻¹ = P into [T]_γ = Q⁻¹[T]_βQ gives A = PBP⁻¹, and P⁻¹ = P*. PBPᵗ is right only for F = ℝ. Corrected in ko to PBP*, explained in the Note.
+5. **p.40, Recall (2):** "a linear operator on an n-dimensional **vector space** V over ℝ". This should be an inner product space, since T* and ⟨·,·⟩ need one. Corrected in ko, explained in the Note.
+
+Imprecisions and typos (not errors; handled with a Note or kept verbatim):
+- p.27 Example 4: the rows/columns "form an orthogonal basis". This is true, but they are in fact orthonormal (Remark (2)). The Note says so; ko translates literally.
+- p.28 Example 5: "reflection **along** a line L", where the Definition says "about L". The meaning is clear from (3). The ko text is "L에 대한 반사", with no Note.
+- p.26 Remark (3): V is implicitly finite-dimensional. Stated in the Note.
+- p.42 (b): "⟨Tx,y⟩ = −⟨Ty,x⟩ = ⟨Ty,x⟩ and so Tx = 0" compresses two relations into one line. The Note unpacks it (add the relations, then put y = Tx).
+- p.38 proof: the existence of β (Schur applied to L_A) is not cited. Added in the Note.
+- "the followings" (p.31, p.35, p.40) and "Proof" without ■ at the end of (⇒) on p.33 are kept verbatim. The qed is placed after (⇐).
+- (Corollary 2 on p.23, "Theorem 6.17" → 6.16, is Builder A's; A has fixed it.)
+
+##### Arithmetic verified (sympy and by hand)
+- Example 6: det(A − tI) = −(t³ − 12t² + 36t − 32) = −(t−2)²(t−8); E₂ = span{(1,−1,0),(1,0,−1)}, E₈ = span{(1,1,1)}; det(A − 4I) = 16; Gram–Schmidt coefficient 1/2, v₂ = (1/2,1/2,−1); u₁,u₂,u₃ as on the slide; PᵗP = I₃, PDPᵗ = A with P exactly as printed.
+- Example 5: Q·diag(1,−1)·Qᵗ = (cos²θ−sin²θ, 2sinθcosθ; 2sinθcosθ, −(cos²θ−sin²θ)) = (cos2θ, sin2θ; sin2θ, −cos2θ). The result is orthogonal (MMᵗ = I).
+- Examples 2/4: the rotation R has RRᵗ = I and char poly t² − 2t cosθ + 1 (discriminant −4sin²θ < 0 for 0<θ<π); Rᵗ equals the rotation by −θ.
+- Theorem 6.19/6.20 identities, Remark (2) entry formula (AA*)_ij = Σ A_ik conj(A_jk), and the Exercise 11 expansions (⟨Tx,iy⟩ = −i⟨Tx,y⟩, ⟨T(iy),iy⟩ = ⟨Ty,y⟩) were all checked.
+- MathJax 3.2.2 render test of frag-B (same config as ch08): 1173 formulas, 0 errors, no unrendered `$`. HTML tag balance checked, no `<letter` inside math, no bare `&`.
+
+##### Choices to review
+- **Exercise 11 (p.41–43)** is built as an ex-card (badge EX 6.5-11, src-ref "Friedberg §6.5 #11 · 강의 슬라이드 p.41–43"; precedent ch07 c7-9/c7-10) because the lecture works it out in full. It is not a recommended-problem list. The statement on p.41 is a **screenshot of Friedberg's text**, and the en panel transcribes it verbatim per the brief. Convention 6 paraphrases textbook statements for chapter-end exercises, so the supervisor may want to paraphrase these 5 lines instead.
+- The toggle labels for Exercise 11 are 증명 보기/Proof with qed, since every part is "prove".
+- REM (p.26) and RECALL (p.40) get proof toggles that contain only our Note (for the unproved (3) and (2)), as the brief asks.
+- "Id" is typeset as `\operatorname{Id}` (ch02 precedent). The ℘ labels are `$(\wp 1)$` etc.
+- The en panel leaves wrong citations unlinked ("Theorem 6.15" on p.24). Correct citations are linked in the Notes and ko.
+
+</details>
 
 ### midterm.html — 2025 중간고사 기출 (2026-10-13)
 

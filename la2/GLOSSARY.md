@@ -193,5 +193,5 @@
 | ch06 | 6.2 그람-슈미트 과정과 직교여공간 | §6.2 The Gram–Schmidt Process and Orthogonal Complements | Section 6.2 노트 (10/8 게시) |
 | ch07 | 6.3 선형연산자의 수반 | §6.3 The Adjoint of a Linear Operator | Section 6.3 노트 (38장, 10/29 게시) |
 | ch08 | 6.4 정규연산자와 자기수반연산자 | §6.4 Normal and Self-Adjoint Operators | Section 6.4 노트 (19장, 11/10 게시) |
-| ch09 | 6.5 유니타리 연산자와 직교연산자 | §6.5 Unitary and Orthogonal Operators and Their Matrices | 예정 |
+| ch09 | 6.5 유니타리 연산자와 직교연산자 | §6.5 Unitary and Orthogonal Operators and Their Matrices | Section 6.5 노트 (43장, 11/24 게시) |
 | ch10 | 6.6 직교사영과 스펙트럼 정리 | §6.6 Orthogonal Projections and the Spectral Theorem | 예정 |
