@@ -5,6 +5,7 @@
 //   node print/make_pdf.mjs            # 4과목 전부
 //   node print/make_pdf.mjs la2 la1    # 일부만
 //   node print/make_pdf.mjs la2-practice   # 선형대수2 예상문제만 (문제 → 풀이 순)
+//   node print/make_pdf.mjs analysis2-final settheory-final la1-final la2-final calc2-final   # 기말고사 범위 단원만
 //
 // 각 과목의 chNN.html(+부록)을 한 문서로 합쳐 한국어 패널만 남기고 증명·풀이를 펼친 뒤
 // MathJax 조판이 끝나면 A4 PDF로 저장한다. 목차 쪽번호는 2패스(pdftotext로 단원 마커 탐지)로 채운다.
@@ -46,6 +47,28 @@ const SUBJECTS = {
          units: [{ file: 'practice.html', titleKo: '문제', titleEn: 'Problems' }], solutionsAtEnd: true,
          desc: '2025 기출 형식 · 참·거짓 60문항 · 서술형 12문항<br>문제 다음에 풀이를 모아 실음',
          note: '한국어만 실었습니다. 풀이는 뒤쪽 「풀이」 단원에 모았고, 각 문항 끝에 해당 풀이의 쪽번호를 적어 두었습니다.' },
+  // 기말고사 범위본: 범위 단원만 (목차 번호는 원래 단원 번호 유지)
+  'analysis2-final': { dir: 'analysis2', ko: '해석학2 기말고사 범위', en: 'Analysis II — Final Exam Scope', out: '해석학2-기말범위.pdf',
+         units: ['ch04.html', 'ch05.html', 'ch06.html', 'ch07.html'].map(file => ({ file })),
+         desc: '§2 리만-스틸체스 적분 · §3 함수열과 함수급수<br>단원 04–07 · 연습문제 풀이 포함' },
+  'settheory-final': { dir: 'settheory', ko: '집합론 기말고사 범위', en: 'Set Theory — Final Exam Scope', out: '집합론-기말범위.pdf',
+         units: ['ch06.html', 'ch07.html', 'ch08.html'].map(file => ({ file })),
+         desc: '§4 함수<br>단원 06–08 · 연습문제 풀이 포함' },
+  // 가안: 학기 진행 중이라 강의가 추가되면 units를 늘리고 다시 만든다
+  'la1-final': { dir: 'la1', ko: '선형대수학 1 기말고사 범위 (가안)', en: 'Linear Algebra I — Final Exam Scope (Draft)', out: '선형대수1-기말범위-가안.pdf',
+         units: ['ch05.html', 'ch06.html', 'ch07.html', 'ch08.html', 'ch09.html'].map(file => ({ file })),
+         desc: '2단원 선형변환: §2.1 선형사상 · §2.2 행렬과 선형사상 · §2.3 행렬표현 · §2.4 기저변환과 닮음<br>3단원: §3.1 연립일차방정식과 가우스 소거법<br>단원 05–09 · 가안 (11/24까지 올라온 자료, Lecture 21까지)',
+         note: '가안입니다. §3.1 뒷부분(가우스 소거 알고리즘)과 §3.2 이후, §4 행렬식은 강의 자료가 올라오는 대로 추가합니다. 한국어만 실었고 증명은 모두 펼쳤습니다.' },
+  'la2-final': { dir: 'la2', ko: '선형대수학 2 기말고사 범위 (가안)', en: 'Linear Algebra II — Final Exam Scope (Draft)', out: '선형대수2-기말범위-가안.pdf',
+         units: ['ch07.html', 'ch08.html'].map(file => ({ file })),
+         desc: '§6.3 선형연산자의 수반 · §6.4 정규연산자와 자기수반연산자<br>단원 07–08 · 가안 (§6.5–6.6은 강의 후 추가)',
+         note: '가안입니다. 기말 범위로 예정된 §6.5, §6.6은 강의 자료가 올라오는 대로 추가합니다. 한국어만 실었고 증명·풀이는 모두 펼쳤습니다.' },
+  // 미적분학2: Stewart 교재 노트(stewart/sNN-N.html). 연습문제 링크 한 줄(p.intro-text)은 인쇄본에서 뺀다.
+  'calc2-final': { dir: 'stewart', ko: '미적분학2 기말고사 범위', en: 'Calculus II — Final Exam Scope', out: '미적분학2-기말범위.pdf',
+         units: ['s15-9', 's16-1', 's16-2', 's16-3', 's16-4', 's16-5', 's16-6', 's16-7', 's16-8', 's16-9', 's16-10'].map(k => ({ file: `${k}.html` })),
+         drop: ['p.intro-text'],
+         desc: 'Stewart 9판 §15.9 중적분의 변수변환 · 16장 벡터 미적분 (§16.1–16.10)<br>11개 절 · 정의·정리·예제 풀이',
+         note: '한국어만 싣고 증명과 예제 풀이는 모두 펼쳐 두었습니다. 기말 범위 중 행렬(Matrix 1·2, 14–15주차 학습 자료)은 사이트에 아직 없어 이 인쇄본에 들어 있지 않습니다. 연습문제 해설은 사이트 각 절의 연습문제 페이지에 있습니다.' },
 };
 
 // ── 원본 페이지 읽기 ──────────────────────────────────────────────
@@ -120,9 +143,12 @@ function buildHtml(dir, { conf, units }) {
   const tocItems = units.map((u, i) => {
     const cls = u.appendix && firstAppendix ? ' class="t-appendix-start"' : '';
     if (u.appendix) firstAppendix = false;
-    const num = u.appendix ? '부록' : String(i + 1).padStart(2, '0');
+    // 단원 번호: chNN → NN, Stewart 절 sNN-N → NN.N(제목 앞의 §NN.N은 지운다)
+    const sec = u.key.match(/^s(\d+)-(\d+)$/);
+    const num = u.appendix ? '부록' : sec ? `${sec[1]}.${sec[2]}` : (u.key.match(/^ch(\d\d)$/)?.[1] ?? String(i + 1).padStart(2, '0'));
+    const titleKo = sec ? u.titleKo.replace(/^§[\d.]+\s*/, '') : u.titleKo;
     return `<li${cls}><a href="#${u.key}"><span class="t-num">${num}</span>`
-      + `<span class="t-title">${u.titleKo}<small>${u.titleEn}</small></span>`
+      + `<span class="t-title">${titleKo}<small>${u.titleEn}</small></span>`
       + `<span class="t-page" data-ch="${u.key}"></span></a></li>`;
   }).join('\n');
 
@@ -182,9 +208,10 @@ ${sections}
 }
 
 // ── 브라우저 안에서 실행: 화면용 요소 정리 (조판 전) ────────────────────
-function prepDom({ site, subject }) {
+function prepDom({ site, subject, drop }) {
   const stats = { ads: 0, enPanels: 0, toggles: 0, details: 0, solutions: 0, brokenLinks: [] };
   const sections = [...document.querySelectorAll('section.print-chapter')];
+  for (const sel of drop) document.querySelectorAll(`section.print-chapter ${sel}`).forEach(n => n.remove());
   const keys = new Set(sections.map(s => s.id));
 
   // 「풀이」 단원: 원래 단원의 카드마다 한국어 풀이(토글+내용)를 옮겨 오고, 문항 끝에 풀이 쪽번호 자리를 남긴다.
@@ -384,7 +411,7 @@ async function makeSubject(browser, subject) {
   // 조건식이 Promise를 돌려주면 puppeteer가 그 값을 기다리므로 boolean으로 바꿔 둔다
   await page.waitForFunction(() => !!(window.MathJax && MathJax.startup && MathJax.startup.promise), { timeout: 120000 });
 
-  const prep = await page.evaluate(prepDom, { site: SITE, subject: dir });
+  const prep = await page.evaluate(prepDom, { site: SITE, subject: dir, drop: conf.drop || [] });
   await page.evaluate(async () => { await MathJax.startup.promise; await MathJax.typesetPromise(); });
   await page.waitForNetworkIdle({ idleTime: 1000, timeout: 120000 }).catch(() => warnings.push('네트워크 유휴 대기 시간 초과'));
   await page.evaluate(() => document.fonts.ready);

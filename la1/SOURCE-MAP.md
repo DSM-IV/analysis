@@ -82,11 +82,11 @@
 34. L16 p2 Prop 2.22: 진술에 유한차원 가정이 없는데 증명은 "Pf when V, W f.d.: Exercise (use RN)"뿐 — 오류는 아니고 c5-32 자체 증명이 일반 경우(V f.d. ⟺ W f.d.)까지 다룸. ERRATA 23과 같은 유형.
 35. (오류 아님) L20 p5 Def 2.59 여백 "(so [T]_γ ∼ [T]_β)": 정의의 순서(A ∼ B ⟺ B = Q⁻¹AQ)대로면 Cor 2.57은 [T]_β ∼ [T]_γ를 준다 — 대칭성(Rmk 2.60(b))으로 같은 말. c8-9 (b) 증명에 명시.
 36. (오류 아님) L20 p5 Ex 2.58: "Cor 2.57"을 β, γ 역할을 바꿔 적용([T]_β = [I]_γ^β[T]_γ[I]_β^γ). c8-7 보충 증명에 명시.
+37. L20 p6 Rmk 2.60(a) 증명: Q⁻¹ = [I]_β^γ(Prop 2.54(b))와 A = [L_A]_β(c7-4 Rmk)를 인용 없이 사용 — c8-9 보충 증명에서 채움.
 38. L21 p1 (= Unit 3.1 p1) 좌표벡터 예시: 벡터 방정식에서 b, c의 계수 벡터를 β의 (1,1,0), (1,1,1) 대신 표준기저 e₂, e₃로 적음 — 바로 다음 연립방정식(a+b+c=4, b+c=2, c=1)과 계수행렬은 β대로 맞음. en verbatim, ko는 β의 벡터로, c9-2 풀이에 명시.
 39. L21 p3 (= Unit 3.1 p3) Def 3.4: "auguemented" → augmented (철자; en verbatim).
 40. L20 p7 "how algos … fits in this foundations", L21 p4 "These operations … changes" — 수 일치 문법 오류(en verbatim, ko는 바른 문장).
 41. (판본 차이, 오류 아님) Def 3.6 (2): L21 p5는 "(0≠)c ∈ ℝ"(괄호 — c = 0도 허용되나 무의미), Unit 3.1 노트 p5는 "0≠c ∈ ℝ". 강의본을 따르고 fig-note로 표시. c9-11 보충 증명 (2)는 c = 0이어도 성립함을 적음.
-37. L20 p6 Rmk 2.60(a) 증명: Q⁻¹ = [I]_β^γ(Prop 2.54(b))와 A = [L_A]_β(c7-4 Rmk)를 인용 없이 사용 — c8-9 보충 증명에서 채움.
 
 ## 챕터별 인벤토리 (빌드 시점 기록)
 
@@ -620,7 +620,7 @@ ERRATA 후보 없음. 표기만 주의: Def 2.28 "Visually"에서 v의 성분을
 
 ### Lecture 20 끝·Lecture 21 반영 (2026-11-24) — la1/ch09.html
 
-소스: `Lecture 20 on 221 F26.pdf` p.6 아래–p.7, `Lecture 21 on 221 F26.pdf` 7쪽(전사 원본), `Unit 3.1 … Notes at KU.pdf` 8쪽(대조). 메인 루프가 직접 전사·번역(카드 12개), Opus 적대적 검증 1회. 쪽 경계 주석은 Lecture 기준.
+소스: `Lecture 20 on 221 F26.pdf` p.6 아래–p.7, `Lecture 21 on 221 F26.pdf` 7쪽(전사 원본), `Unit 3.1 … Notes at KU.pdf` 8쪽(대조). 메인 루프가 직접 전사·번역(카드 12개), Opus 적대적 검증 1회(MUST 0, SHOULD 1 — c9-8 ko 그림 설명, NIT 9 반영). 렌더 점검 1280/916/390 merror 0·넘침 0(첨가행렬 6열 array는 \\small). 쪽 경계 주석은 Lecture 기준.
 
 | id | 배지 | 강의 쪽 | 내용 | 증명 |
 |---|---|---|---|---|
