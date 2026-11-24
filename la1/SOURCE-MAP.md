@@ -12,8 +12,8 @@
 - `Unit 2.3 of Linear Algebra I (non-math major) Notes at KU.pdf` (10쪽, p.10은 위쪽만) — 11/17 Desktop에 `…KU-1.pdf`로 추가 → 접미사 없이 복사. §2.3 행렬표현 Def 2.38–Ex 2.52. **ch07의 전사 원본**(pp.1–7 위쪽을 다룬 Lecture PDF는 없음).
 - `Unit 2.4 of Linear Algebra I (non-math major) Notes at KU.pdf` (1쪽) — 11/17 추가. §2.4 동기·Q·Def 2.53. **ch08의 전사 원본.**
 - `Lecture 19 on 221 F26.pdf` (5쪽) — 11/17 추가. p.1 Last Time(Def 2.38·Thm 2.41·Prop 2.39·Thm 2.45 복습, 카드 없음)·Today, p.1 아래–p.4 = Unit 2.3 pp.7–10("Isoms and Invertibility"부터), p.4 끝–p.5 = Unit 2.4. 내용 차이 없음 → 판독 대조용.
-- `Lecture 15/16/17/20/21 on 221 F26.pdf` (8 · 9 · 8 · 7 · 7쪽) — 11/21 Desktop에 추가. **L15** = Thm 2.12 증명의 WTS(pp.1–2)·Cor 2.13–Cor 2.20·≅ 동치관계(§2.1 합성·동형사상). **L16** pp.1–6 위 = Ex 2.21–Thm 2.27·Rmk(§2.1 끝), p.6 "§2.2" 제목부터 p.9 = Unit 2.2 노트 pp.1–4와 동일(대조 결과 차이 없음). **L17** = Prop 2.31 (c)(d) 증명·Lem 2.32–Prop 2.37·Warning(§2.2 끝). **L20** pp.1–6 = Prop 2.54–Rmk 2.60(§2.4 끝), p.6 아래부터 Unit 3 시작. **L21** = Unit 3 §3.1(사이트 미반영). **Lecture 14·18 파일은 없음** — L14는 L13→L15 사이(L15 Last Time이 L13의 R-N까지 복습하므로 빠진 번호 없음), L18은 Unit 2.3 노트 pp.1–7과 같은 내용으로 추정(번호 2.38–2.47이 연속).
-- `Unit 3.1 of Linear Algebra I (non-math major) Notes at KU.pdf` (8쪽, 11/19) — §3.1 연립일차방정식과 가우스 소거(Def 3.1–3.9). 사이트 미반영(다음 단원 ch09 후보).
+- `Lecture 15/16/17/20/21 on 221 F26.pdf` (8 · 9 · 8 · 7 · 7쪽) — 11/21 Desktop에 추가. **L15** = Thm 2.12 증명의 WTS(pp.1–2)·Cor 2.13–Cor 2.20·≅ 동치관계(§2.1 합성·동형사상). **L16** pp.1–6 위 = Ex 2.21–Thm 2.27·Rmk(§2.1 끝), p.6 "§2.2" 제목부터 p.9 = Unit 2.2 노트 pp.1–4와 동일(대조 결과 차이 없음). **L17** = Prop 2.31 (c)(d) 증명·Lem 2.32–Prop 2.37·Warning(§2.2 끝). **L20** pp.1–6 = Prop 2.54–Rmk 2.60(§2.4 끝), p.6 아래부터 Unit 3 시작. **L21** = Unit 3 §3.1(p.1 Last Time·Today + Unit 3.1 노트 p.1 "For Ex"–p.8과 같은 내용; Def 3.6 (2)만 "(0≠)c"로 괄호 — 2026-11-24 ch09 반영). **Lecture 14·18 파일은 없음** — L14는 L13→L15 사이(L15 Last Time이 L13의 R-N까지 복습하므로 빠진 번호 없음), L18은 Unit 2.3 노트 pp.1–7과 같은 내용으로 추정(번호 2.38–2.47이 연속).
+- `Unit 3.1 of Linear Algebra I (non-math major) Notes at KU.pdf` (8쪽, 11/19) — §3.1 연립일차방정식과 가우스 소거(Def 3.1–3.9). L20 p.6 아래–p.7·L21과 같은 내용 → ch09의 판독 대조용(전사 원본은 Lecture).
 - `Unit 1.x / 2.1 of Linear Algebra I (non-math major) Notes at KU*.pdf` — 강의자가 정리한 단원 노트(1.1 8쪽, 1.2 6쪽, 1.3 2쪽, 2.1 4쪽(p4 빈 쪽); 강의노트와 같은 손글씨).
   강의 슬라이드와 내용·번호 동일 → **전사 원본은 Lecture PDF**, Unit 노트는 판독 보조. Unit 1.3은 Def 1.30까지만 있음. Unit 2.1은 L12 pp.4–7과 같고 Ex 2.3(1)의 "Pf:" 뒤가 비어 있음(L12는 "Pf: Next Class!").
 
@@ -21,7 +21,8 @@
 **규칙 요약:** 각 강의 첫머리 "Last Time" 복습은 카드로 만들지 않음(새 내용이 있을 때만 RECALL 카드). 손그림은 `p.fig-note` 한 줄 설명. 증명 중간 끝 표시 ▨ = `span.part-end`. 노트에 증명이 없는 진술("Pf: Exercise", "See FIS", "Unit notes", "Math-Major Only", "Pf Idea")은 자체 증명(마커 → 증명 토글; 노트 증명이 이미 있으면 "보충 증명" 토글). en = verbatim(오타 포함), ko = 바른 뜻.
 **퀴즈 복습·기출:** `la1/quiz1.html` — Lecture 1–9 개념 복습·연습 13세트와 Fall 2025 Quiz 1·2 기출 4문항(소문항별 5블록). 영어 답안·한국어 해설, 원본 PDF 링크. MathJax 4.1.3.
 **중간고사 기출:** `la1/midterm.html` — Fall 2025·2024 중간고사 9문항(소문항별 11블록), quiz1과 같은 qs-block 형식. 영어 모범답안·한국어 해설·원본 해설 정정. 아래 "중간고사 기출 반영" 절 참조.
-**진행 상태 (2026-11-21):** Lecture 15·16·17·20 반영 — ch05에 Thm 2.12 증명 원문 완결(L15 pp.1–2; 보충 증명은 (i) 첫 단계·(ii) 무한차원만 남김)과 c5-20 Cor 2.13 – c5-41 Rmk(L15 전체, L16 pp.1–6 위: 합성·동형사상·좌표사상 φ_β·Thm 2.27) → 환경 41 · note 8 · 토글 각 34. ch06에 c6-4 Prop 2.31 (c)(d) 원문 증명(L17)과 c6-5 Lem 2.32 – c6-12 Warning(L17) → 환경 12 · note 4 · 토글 각 9. ch08에 c8-3 Prop 2.54 – c8-9 Rmk 2.60(L20 pp.1–6) → 환경 9 · note 4 · 토글 각 9. note06-1·note07-1의 추정 문단을 실제 카드 링크로 교체, ch07 보충 증명의 "§2.2 뒷부분 미수록" 문구를 Def 2.36·Prop 2.37 링크로 교체. **빈 구간 해소**(2.13–2.27, 2.32–2.37, §2.4 끝). 3개 단원을 병렬 에이전트가 전사·번역, Opus 적대적 검증 1회. Unit 3(§3.1, L20 p.6 아래·L21·Unit 3.1 노트)은 아직 미반영.
+**진행 상태 (2026-11-24):** Unit 3 시작 — 새 ch09 "3.1 연립일차방정식과 가우스 소거법"(L20 p.6 아래–p.7 + L21 전체; note09-1 Unit 3 도입, note09-2 목표, c9-1 예시(좌표벡터 = 연립방정식) … c9-12 Def 3.9 rref, note09-99) → 환경 12 · note 6 · 토글 각 5. ERRATA 38–41. 다음 강의(가우스 소거 알고리즘 등)는 ch09 끝(note09-99 앞).
+**이전 상태 (2026-11-21):** Lecture 15·16·17·20 반영 — ch05에 Thm 2.12 증명 원문 완결(L15 pp.1–2; 보충 증명은 (i) 첫 단계·(ii) 무한차원만 남김)과 c5-20 Cor 2.13 – c5-41 Rmk(L15 전체, L16 pp.1–6 위: 합성·동형사상·좌표사상 φ_β·Thm 2.27) → 환경 41 · note 8 · 토글 각 34. ch06에 c6-4 Prop 2.31 (c)(d) 원문 증명(L17)과 c6-5 Lem 2.32 – c6-12 Warning(L17) → 환경 12 · note 4 · 토글 각 9. ch08에 c8-3 Prop 2.54 – c8-9 Rmk 2.60(L20 pp.1–6) → 환경 9 · note 4 · 토글 각 9. note06-1·note07-1의 추정 문단을 실제 카드 링크로 교체, ch07 보충 증명의 "§2.2 뒷부분 미수록" 문구를 Def 2.36·Prop 2.37 링크로 교체. **빈 구간 해소**(2.13–2.27, 2.32–2.37, §2.4 끝). 3개 단원을 병렬 에이전트가 전사·번역, Opus 적대적 검증 1회. Unit 3(§3.1, L20 p.6 아래·L21·Unit 3.1 노트)은 아직 미반영.
 **이전 상태 (2026-11-17):** Unit 2.3·2.4 노트와 Lecture 19 반영 — 새 ch07 "2.3 일반 선형사상의 행렬표현"(편집 안내 note07-1, Def 2.38–Ex 2.52; 환경 20 · note 5 · 한·영 토글 각 14), 새 ch08 "2.4 기저변환과 닮음"(동기 note08-1, Q, Def 2.53; 환경 2 · note 2). **빈 구간이 하나 늘었다:** Unit 2.3이 §2.2 뒷부분의 2.32–2.37번 항목(행렬곱, 단위행렬, $L_{AB}=L_A L_B$, 정리 2.33 $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)\cong M_{m\times n}(\mathbb{R})$)과 §2.1 뒷부분의 명제 2.15·주의 2.16·좌표사상 $\phi_\beta$를 인용 → note07-1이 쓰임에서 읽히는 내용을 안내, note06-99에도 2.32–2.37 미수록을 적음. 자료가 오면: 2.13–2.27은 ch05 끝(note05-99 앞), 2.32–2.37은 ch06 끝(note06-99 앞)에 이어 붙이고 note06-1·note07-1의 추정 문단을 카드 링크로 바꾼다. ch08은 Def 2.53에서 멈춤(진행 중) — 다음 강의는 ch08 끝(note08-99 앞)에.
 **이전 상태 (2026-11-03):** Unit 2.2 노트 반영 — 새 ch06 "2.2 행렬과 ℝⁿ 사이의 선형사상"(편집 안내 note06-1, 동기 note06-2, Def 2.28 · Ex 2.29 · Def 2.30 · Prop 2.31, note06-99; 환경 4 · note 3 · 토글 각 2). **빈 구간:** Unit 2.2 동기가 Thm 2.27을 인용 → Thm 2.12 증명의 WTS 원문부터 2.27번 항목까지(Lecture 14 이후, 중간고사 뒤 강의)의 Lecture PDF·Unit 2.1 개정 노트가 아직 없음. note06-1이 노트의 쓰임에서 읽히는 Thm 2.27의 내용(기저의 상이 선형사상을 유일하게 결정·존재 — FIS Thm 2.6과 따름정리)을 근거와 함께 안내하고, ch05 note05-99에도 빈 구간을 적었다. 자료가 오면 ch05 끝(note05-99 앞)에 2.13–2.27번 항목을 이어 붙이고, note06-1의 추정 문단은 c5 카드 링크로 바꾼다.
 **진행 상태 (2026-10-19, 오후):** Lecture 13까지 반영 — ch05에 Ex 2.3(1) 원문 증명(L13 pp.1–2)과 Ex 2.3(2)–Thm 2.12(L13 pp.2–8) 추가: ch05 환경 19, note 5, 한·영 토글 각 17. Thm 2.12(계수-퇴화차수 정리) 증명은 노트에서 WTS 직전까지 → 보충 증명으로 완성. 중간고사 기출 페이지 신설.
@@ -40,6 +41,7 @@
 | ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | Unit 2.2 노트 pp.1–4 (= Lecture 16 pp.6–9) · Lecture 17 |
 | ch07 | 2.3 일반 선형사상의 행렬표현 | Unit 2.3 노트 pp.1–10 (pp.7–10 = Lecture 19 pp.1–4) |
 | ch08 | 2.4 기저변환과 닮음 | Unit 2.4 노트 p.1 (= Lecture 19 p.5) · Lecture 20 pp.1–6 |
+| ch09 | 3.1 연립일차방정식과 가우스 소거법 | Lecture 20 p.6 아래–p.7 · Lecture 21 (= Unit 3.1 노트 pp.1–8) |
 | quiz1 | 퀴즈 복습과 기출 연습 | Lecture 1–9 · Fall 2025 Quiz 1·2 |
 | midterm | 중간고사 기출 | Fall 2025·2024 Midterm + 공식 해설 |
 
@@ -80,6 +82,10 @@
 34. L16 p2 Prop 2.22: 진술에 유한차원 가정이 없는데 증명은 "Pf when V, W f.d.: Exercise (use RN)"뿐 — 오류는 아니고 c5-32 자체 증명이 일반 경우(V f.d. ⟺ W f.d.)까지 다룸. ERRATA 23과 같은 유형.
 35. (오류 아님) L20 p5 Def 2.59 여백 "(so [T]_γ ∼ [T]_β)": 정의의 순서(A ∼ B ⟺ B = Q⁻¹AQ)대로면 Cor 2.57은 [T]_β ∼ [T]_γ를 준다 — 대칭성(Rmk 2.60(b))으로 같은 말. c8-9 (b) 증명에 명시.
 36. (오류 아님) L20 p5 Ex 2.58: "Cor 2.57"을 β, γ 역할을 바꿔 적용([T]_β = [I]_γ^β[T]_γ[I]_β^γ). c8-7 보충 증명에 명시.
+38. L21 p1 (= Unit 3.1 p1) 좌표벡터 예시: 벡터 방정식에서 b, c의 계수 벡터를 β의 (1,1,0), (1,1,1) 대신 표준기저 e₂, e₃로 적음 — 바로 다음 연립방정식(a+b+c=4, b+c=2, c=1)과 계수행렬은 β대로 맞음. en verbatim, ko는 β의 벡터로, c9-2 풀이에 명시.
+39. L21 p3 (= Unit 3.1 p3) Def 3.4: "auguemented" → augmented (철자; en verbatim).
+40. L20 p7 "how algos … fits in this foundations", L21 p4 "These operations … changes" — 수 일치 문법 오류(en verbatim, ko는 바른 문장).
+41. (판본 차이, 오류 아님) Def 3.6 (2): L21 p5는 "(0≠)c ∈ ℝ"(괄호 — c = 0도 허용되나 무의미), Unit 3.1 노트 p5는 "0≠c ∈ ℝ". 강의본을 따르고 fig-note로 표시. c9-11 보충 증명 (2)는 c = 0이어도 성립함을 적음.
 37. L20 p6 Rmk 2.60(a) 증명: Q⁻¹ = [I]_β^γ(Prop 2.54(b))와 A = [L_A]_β(c7-4 Rmk)를 인용 없이 사용 — c8-9 보충 증명에서 채움.
 
 ## 챕터별 인벤토리 (빌드 시점 기록)
@@ -610,3 +616,39 @@ ERRATA 후보 없음. 표기만 주의: Def 2.28 "Visually"에서 v의 성분을
 **ch06** (L16 pp.6–9 대조, L17 전체): c6-4 Prop 2.31 (c)(d) 원문 증명 추가(보충은 (a) 전체·$L_{cA}=cL_A$만) · c6-5 LEM 2.32 · c6-6 THM 2.33 · c6-7 REM 2.34 · c6-8 EXAM 2.35 · [section Matrix Multiplication via Composition] note06-3 동기 · c6-9 DEF 2.36 ($A \in M_{m\times n}$, $B \in M_{p\times m}$, $(BA)_{ij} = \sum_k B_{ik}A_{kj}$, $L_{BA} = L_B \circ L_A$) · c6-10 EXAM 행렬곱 계산 · c6-11 PROP 2.37 · c6-12 REM(Warning, $UT \ne TU$). L17 수치 전부 python 검산 — 오류 없음.
 
 **ch08** (L20 pp.1–6): c8-3 PROP 2.54 · c8-4 EXAM 2.55(여백 "need to show work for Quizzes/Exams" 유지) · note08-2 · c8-5 THM 2.56 · c8-6 COR 2.57(자체 증명) · c8-7 EXAM 2.58(그림 fig-note) · note08-3 · c8-8 DEF 2.59 · c8-9 REM 2.60((b) 자체 증명). 수치(Ex 2.55, Ex 2.58) sympy 검산 일치.
+
+
+### Lecture 20 끝·Lecture 21 반영 (2026-11-24) — la1/ch09.html
+
+소스: `Lecture 20 on 221 F26.pdf` p.6 아래–p.7, `Lecture 21 on 221 F26.pdf` 7쪽(전사 원본), `Unit 3.1 … Notes at KU.pdf` 8쪽(대조). 메인 루프가 직접 전사·번역(카드 12개), Opus 적대적 검증 1회. 쪽 경계 주석은 Lecture 기준.
+
+| id | 배지 | 강의 쪽 | 내용 | 증명 |
+|---|---|---|---|---|
+| note09-1 | NOTE | L20 p.6–7 | Unit 3 도입(2주차부터 모든 계산이 연립일차방정식) | – |
+| note09-2 | NOTE | L20 p.7 | §3.1 목표 | – |
+| c9-1 | EXAM | L21 p.1 | v = (4,2,1), β = ((1,0,0),(1,1,0),(1,1,1)): [v]_β ⟺ 3×3 연립방정식 ⟺ Ax = u | – |
+| c9-2 | EX | L21 p.2 | Exercise: 해 x = (2,1,1) | 자체 풀이(역대입·검산) |
+| note09-3 | NOTE | L21 p.2 | "In gen'l, …" | – |
+| c9-3 | DEF 3.1 | L21 p.2 | m개 일차방정식, n개 미지수 | – |
+| c9-4 | DEF 3.2 | L21 p.2 | 행렬방정식 Ax = b, 계수행렬, consistent/inconsistent | – |
+| c9-5 | REM 3.3 | L21 p.3 | Ax = b의 해 = L_A⁻¹({b}), b = 0이면 ker | 자체(정의 2.30·역상) |
+| c9-6 | DEF 3.4 | L21 p.3 | 첨가행렬 [A│B] (m×(n+p)) | – |
+| c9-7 | CONVENTION 3.5 | L21 p.3 | [A│B] ≡ AX = B, p = 1이면 [A│b] ≡ Ax = b | – |
+| c9-8 | EXAM | L21 p.3–4 | 4x+3y=5, x+y=2 소거·역대입 → (x,y) = (−1,3) | – (본문 계산) |
+| note09-4 | NOTE | L21 p.4 | 한 번에 한 행만 바꿈, 맞바꾸기도 가능 ⇓ | – |
+| c9-9 | DEF 3.6 | L21 p.4–5 | 기본행연산 (1) cR_j (c ≠ 0,1) (2) R_j + cR_i (i ≠ j, (0≠)c) (3) R_i ↔ R_j | – |
+| c9-10 | REM 3.7 | L21 p.5 | 각 ERO는 같은 유형의 ERO로 되돌릴 수 있음 | 자체 |
+| c9-11 | PROP 3.8 | L21 p.6 | ERO는 해집합을 보존 | 원문((1) ▨, (2)(3) Exercise) + 보충((1)의 c ≠ 0, (2)(3) 증명) |
+| note09-5 | NOTE | L21 p.7 | 가장 좋은 방정식 I_mX = B, I_m을 일반화 | – |
+| c9-12 | DEF 3.9 | L21 p.7 | 기약행사다리꼴 (a)(b)(c), 피벗, 그림 3개 | – |
+| note09-99 | NOTE | – | 진행 안내 | – |
+
+#### Arithmetic check
+- c9-1/c9-2: 2(1,0,0)+1(1,1,0)+1(1,1,1) = (4,2,1) ✓.
+- c9-8: (3)=4(2): 4x+4y=8; (4)=(3)−(1): y=3; (5)=(1)−3(4): 4x=−4; (6)=¼(5): x=−1; 원식 4(−1)+3·3=5, −1+3=2 ✓.
+
+#### Transcription choices
+- 연립방정식 단계의 식 번호 라벨((1), (3) = 4(2) 등)은 노트에서 식 왼쪽에 있으나 좁은 화면 줄바꿈 때문에 aligned의 오른쪽 칸으로 옮기고 en fig-note로 적음. 각 단계의 첨가행렬은 별도 display.
+- 행렬 그림의 "— R_i —" 행은 \text{—} 로, 물결 화살표 ⇝는 \rightsquigarrow(위 첨자로 연산 표시)로 옮김. 빨간 행 위치 라벨은 fig-note.
+- 약어 위 주황 글씨(assoc, aug, rref)는 규약대로 옮기지 않음.
+

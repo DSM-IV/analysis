@@ -95,6 +95,7 @@
 | ch06 | 2.2 행렬과 ℝⁿ 사이의 선형사상 | §2.2 Matrices and Linear Maps of ℝⁿ |
 | ch07 | 2.3 일반 선형사상의 행렬표현 | §2.3 Matrix Representations of General Linear Maps |
 | ch08 | 2.4 기저변환과 닮음 | §2.4 Change of Basis and Similarity |
+| ch09 | 3.1 연립일차방정식과 가우스 소거법 | §3.1 Systems of Linear Equations and Gaussian Elimination |
 | identity map $I_V = \mathbb{1}_V$ | 항등사상 |
 | zero map $T_0$ (written $0 \in \mathcal{L}(V,W)$) | 영사상 |
 | linear operator ($T \in \mathcal{L}(V)$) | 선형연산자 |
@@ -139,3 +140,13 @@
 | identity matrix $I_k$ ($(I_k)_{ij} = \delta_{ij}$) | ($k \times k$) 단위행렬 |
 | similar matrices, $A \sim B$ | 닮은 행렬, $A$와 $B$는 닮았다 |
 | reflection along a line | 직선에 대한 대칭이동(반사) |
+| system of $m$ linear equations in $n$ unknowns | 미지수가 $n$개인 일차방정식 $m$개로 이루어진 연립방정식 (연립일차방정식) |
+| matrix equation $Ax = b$ / coefficient matrix | 행렬방정식 / 계수행렬 |
+| consistent / inconsistent | 해를 갖는 / 해를 갖지 않는 (첫 등장에 (consistent) 병기) |
+| solution set | 해집합 |
+| augmented matrix $[A \mid B]$ | 첨가행렬 |
+| elementary row operation (ERO) | 기본행연산 |
+| (preparing) elimination / back-substitution | 소거 (준비) / 역대입 |
+| Gaussian elimination | 가우스 소거법 |
+| reduced row echelon form (rref) / pivot | 기약행사다리꼴 / 피벗 |
+| span-membership check / independence test | 생성 여부 확인 / 일차독립 판정 |
